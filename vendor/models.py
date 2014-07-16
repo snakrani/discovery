@@ -33,9 +33,11 @@ class Pool(models.Model):
     id = models.CharField(primary_key=True, max_length=128)
     number = models.CharField(max_length=128)
     vehicle = models.CharField(choices=VEHICLE_CHOICES, max_length=7)
-    naics = models.CharField(max_length=128)
-    naics_description = models.TextField()
+    naics = models.ManyToManyField('Naics')
     threshold = models.CharField(null=True, max_length=128)
+
+    def __str__(self):
+        return "Pool {0} - {1}".format(self.number, self.get_vehicle_display())
 
 class PoolPIID(models.Model):
     vendor = models.ForeignKey('Vendor')
@@ -46,6 +48,14 @@ class SetAside(models.Model):
     code = models.CharField(unique=True, max_length=128)
     description = models.TextField()
     short_name = models.CharField(max_length=128)
+
+class Naics(models.Model):
+    code = models.CharField(max_length=128)
+    description = models.TextField()
+    short_code = models.CharField(unique=True, max_length=25)
+
+    def __str__(self):
+        return "{0} - {1}".format(self.code, self.description)
 
 class ContractRecord(models.Model):
     piid = models.CharField(unique=True, max_length=128)
