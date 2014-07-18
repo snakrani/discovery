@@ -77,8 +77,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-#try:
-from mirage.local_settings import *
-#except:
- #   pass
+#project specific
+VEHICLES = ('oasissb', )
+
+try:
+    from mirage.local_settings import *
+except:
+    pass
 
