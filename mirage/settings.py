@@ -80,6 +80,48 @@ STATIC_URL = '/static/'
 #project specific
 VEHICLES = ('oasissb', )
 
+SAM_API_URL = "https://api.data.gov/sam/v1/registrations/"
+USASPENDING_API_URL = ""
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'datefmt' : "%d/%b/%Y %H:%M:%S"
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'mirage.log',
+            'formatter': 'verbose'
+        },
+        'vendor_file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'logs/vendor.log',
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers':['file'],
+            'propagate': True,
+            'level':'DEBUG',
+        },
+            'vendors': {
+            'handlers': ['vendor_file'],
+            'level': 'DEBUG',
+        },
+    },
+}
+
 try:
     from mirage.local_settings import *
 except:
