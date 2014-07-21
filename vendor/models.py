@@ -15,8 +15,8 @@ STATUS_CHOICES = (
 class Vendor(models.Model):
 
     name = models.CharField(max_length=128)
-    duns = models.IntegerField()
-    duns_4 = models.IntegerField()
+    duns = models.CharField(max_length=9)
+    duns_4 = models.CharField(max_length=13)
     oasis_address = models.CharField(null=True, max_length=128)
     oasis_citystate = models.CharField(null=True, max_length=128)
     cm_name = models.CharField(null=True, max_length=128)
@@ -28,6 +28,8 @@ class Vendor(models.Model):
     pools = models.ManyToManyField('Pool', through='PoolPIID')
     setasides = models.ManyToManyField('SetAside', null=True)
     
+    def __str__(self):
+        return self.name
 
 class Pool(models.Model):
     id = models.CharField(primary_key=True, max_length=128)
