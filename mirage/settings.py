@@ -81,7 +81,7 @@ STATIC_URL = '/static/'
 VEHICLES = ('oasissb', )
 
 SAM_API_URL = "https://api.data.gov/sam/v1/registrations/"
-USASPENDING_API_URL = ""
+USASPENDING_API_URL = "www.usaspending.gov/fpds/fpds.php"
 
 LOGGING = {
     'version': 1,
@@ -108,6 +108,12 @@ LOGGING = {
             'filename': 'logs/vendor.log',
             'formatter': 'verbose'
         },
+        'sam_file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'logs/sam.log',
+            'formatter': 'verbose'
+        },
     },
     'loggers': {
         'django': {
@@ -115,8 +121,12 @@ LOGGING = {
             'propagate': True,
             'level':'DEBUG',
         },
-            'vendors': {
+        'vendors': {
             'handlers': ['vendor_file'],
+            'level': 'DEBUG',
+        },
+        'sam': {
+            'handlers': ['sam_file'],
             'level': 'DEBUG',
         },
     },

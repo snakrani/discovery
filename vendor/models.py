@@ -27,9 +27,15 @@ class Vendor(models.Model):
     pm_phone = models.CharField(null=True, max_length=128)
     pools = models.ManyToManyField('Pool', through='PoolPIID')
     setasides = models.ManyToManyField('SetAside', null=True)
-    
+    sam_status = models.CharField(null=True, max_length=128)
+    sam_exclusion = models.NullBooleanField(null=True)
+    sam_url = models.URLField(null=True)
+
+
     def __str__(self):
         return self.name
+
+    
 
 class Pool(models.Model):
     id = models.CharField(primary_key=True, max_length=128)
@@ -50,6 +56,9 @@ class SetAside(models.Model):
     code = models.CharField(unique=True, max_length=128)
     description = models.TextField()
     short_name = models.CharField(max_length=128)
+
+    def  __str__(self):
+        return self.description
 
 class Naics(models.Model):
     code = models.CharField(max_length=128)

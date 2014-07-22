@@ -1,4 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
+from django.core.management import call_command
 from vendor.models import Vendor, Pool
 import csv
 from django.conf import settings
@@ -6,14 +7,23 @@ import os
 import re
 import requests
 import logging
-
+import xmltodict
 
 class Command(BaseCommand):
     
     logger = logging.getLogger('vendors')
    
     def get_contract(piid):
-       return  
+        
+        resp = requests.get(USASPENDING_API_URL + "?piid=" + piid)
+        data = xmltodict.parse(resp.text)
+        try:
+            doc = data['usaspendingSearchResults']['result']['doc']
+            return doc
+
+        except KeyError:
+            self.logger.debug("PIID {0} did not return any results from USASpending".format(piid))
+            return None
         
     def replace_x(self, duns):
         return duns.replace('X', '0').replace('x', '0')
@@ -66,22 +76,8 @@ class Command(BaseCommand):
                         else:
                             print("Vendor {} already in database".format(new_obj.name))
 
-                        #get SAM.gov API response for this vendor
-                        uri = settings.SAM_API_URL + new_obj.duns_4 + '?api_key=' + settings.SAM_API_KEY
-                        sam_data = requests.get(uri).json()
-                
-                        if 'sam_data' in sam_data:
-                            if 'registration' in sam_data['sam_data']:
-                                reg = sam_data['sam_data']['registration']
-                            else:
-                                self.logger.debug("'registration' key is missing for {}".format(uri))
-                            
-                        elif 'Error' in sam_data:
-                            self.logger.debug("SAM API returned an error for {0}, and data {1}".format(uri, line ))    
-                        else:
-                            self.logger.debug("Could not load data from {} for unknown reason".format(uri))
-
-                        #Next Steps
+                                        #Next Steps
+                #        contract = self.get_contract(piid)
                         
                         #create contract record with piid, using fpds API
                         #use sam API to get addresses
@@ -97,4 +93,8 @@ class Command(BaseCommand):
 
                 except Pool.MultipleObjectsReturned:
                     print("More than one pool matched {}. Integrity error!".format(pool))
+
+            #call the sam check to fill in extra fields
+            call_command('check_sam')
+
 
