@@ -63,9 +63,9 @@ class Command(BaseCommand):
                         poolpiid, ppcreated = PoolPIID.objects.get_or_create(vendor=new_obj, pool=pool_obj, piid=piid)
 
                         if created:
-                            print("Successfully created {}".format(new_obj.name))
+                            self.logger.debug("Successfully created {}".format(new_obj.name))
                         else:
-                            print("Vendor {} already in database".format(new_obj.name))
+                            self.logger.debug("Vendor {} already in database".format(new_obj.name))
                         
 
                         #Need to document:
@@ -73,10 +73,10 @@ class Command(BaseCommand):
         
 
                 except Pool.DoesNotExist:
-                    print("Pool {} not found for spreadsheet".format(pool))
+                    self.logger.debug("Pool {} not found for spreadsheet".format(pool))
 
                 except Pool.MultipleObjectsReturned:
-                    print("More than one pool matched {}. Integrity error!".format(pool))
+                    self.logger.debug("More than one pool matched {}. Integrity error!".format(pool))
 
             #call the sam check to fill in extra fields
             call_command('check_sam')
