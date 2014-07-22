@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
-from vendor.models import Vendor, Pool
+from vendor.models import Vendor, Pool, SetAside
 from django.conf import settings
 import requests
 import logging
@@ -34,18 +34,24 @@ class Command(BaseCommand):
 
                     addr = self.get_value(reg, 'samAddress', v)
                     if addr:
-                        v.oasis_address = self.get_value(addr, 'Line1', v)
-                        v.oasis_citystate = "{0}, {1} {2}".format(self.get_value(addr, 'City', v), 
+                        v.sam_address = self.get_value(addr, 'Line1', v)
+                        v.sam_citystate = "{0}, {1} {2}".format(self.get_value(addr, 'City', v), 
                                                                   self.get_value(addr, 'stateorProvince', v), 
                                                                   self.get_value(addr, 'Zip', v))
                 
                     v.sam_url = self.get_value(reg, 'corporateUrl', v)
 
+                    setasides = self.get_value(reg, 'businessTypes', v)
+                    for code in setasides:
+                        try:
+                            sa = SetAside.objects.get(code__iexact=code)
+                            if sa not in v.setasides.all():
+                                v.setasides.add(sa)
+
+                        except SetAside.DoesNotExist:
+                            continue
                     v.save()
                     
-                    #TODO
-                    # fill out setasides
-
                 else:
                     self.logger.debug("'registration' key is missing for {}".format(uri))
 

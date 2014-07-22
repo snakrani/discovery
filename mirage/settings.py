@@ -81,7 +81,7 @@ STATIC_URL = '/static/'
 VEHICLES = ('oasissb', )
 
 SAM_API_URL = "https://api.data.gov/sam/v1/registrations/"
-USASPENDING_API_URL = "www.usaspending.gov/fpds/fpds.php"
+USASPENDING_API_URL = "http://www.usaspending.gov/fpds/fpds.php"
 
 LOGGING = {
     'version': 1,
