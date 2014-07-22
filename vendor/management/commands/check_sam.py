@@ -42,7 +42,8 @@ class Command(BaseCommand):
                     v.sam_url = self.get_value(reg, 'corporateUrl', v)
 
                     v.save()
-
+                    
+                    #TODO
                     # fill out setasides
 
                 else:

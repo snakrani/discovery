@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 from django.core.management import call_command
-from vendor.models import Vendor, Pool
+from vendor.models import Vendor, Pool, PoolPIID
 import csv
 from django.conf import settings
 import os
@@ -13,18 +13,6 @@ class Command(BaseCommand):
     
     logger = logging.getLogger('vendors')
    
-    def get_contract(piid):
-        
-        resp = requests.get(USASPENDING_API_URL + "?piid=" + piid)
-        data = xmltodict.parse(resp.text)
-        try:
-            doc = data['usaspendingSearchResults']['result']['doc']
-            return doc
-
-        except KeyError:
-            self.logger.debug("PIID {0} did not return any results from USASpending".format(piid))
-            return None
-        
     def replace_x(self, duns):
         return duns.replace('X', '0').replace('x', '0')
 
@@ -70,19 +58,15 @@ class Command(BaseCommand):
                             'pm_email': data[9]
                         }
                         new_obj, created = Vendor.objects.get_or_create(**attr_dict)
-                
+               
+                        #add pool relationship
+                        poolpiid, ppcreated = PoolPIID.objects.get_or_create(vendor=new_obj, pool=pool_obj, piid=piid)
+
                         if created:
                             print("Successfully created {}".format(new_obj.name))
                         else:
                             print("Vendor {} already in database".format(new_obj.name))
-
-                                        #Next Steps
-                #        contract = self.get_contract(piid)
                         
-                        #create contract record with piid, using fpds API
-                        #use sam API to get addresses
-                        #pre load setasides? 
-                        #use SAM API to get setaside statuses for a vendor
 
                         #Need to document:
                         #API key will need rate limiting restrictions removed probably

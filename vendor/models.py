@@ -52,6 +52,9 @@ class PoolPIID(models.Model):
     pool = models.ForeignKey('Pool')
     piid = models.CharField(max_length=128)
 
+    def __str__(self):
+        return "{0} - {1} - {2}".format(self.vendor.name, self.pool.id, self.piid)
+
 class SetAside(models.Model):
     code = models.CharField(unique=True, max_length=128)
     description = models.TextField()
