@@ -7,6 +7,6 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'mirage.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
-
+    url(r'^vendors/$', 'vendor.views.vendor_list'),
     url(r'^admin/', include(admin.site.urls)),
 )
