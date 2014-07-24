@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from vendor.models import Vendor
-from vendor.serializers import VendorSerializer
+from api.serializers import VendorSerializer
 from django.views.decorators.csrf import csrf_exempt
 
 class JSONResponse(HttpResponse):
