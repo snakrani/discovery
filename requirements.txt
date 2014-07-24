@@ -1,7 +1,6 @@
-Django==1.7c1
+-e git://github.com/django/django.git@78bff08341cfd5b729697c13a7478e83726782d1#egg=django_1.7c1
 django-hstore==1.2.3
 gnureadline==6.3.3
-ipython==2.1.0
 psycopg2==2.5.3
 requests==2.3.0
 xmltodict==0.9.0
