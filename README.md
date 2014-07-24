@@ -7,7 +7,8 @@ This project is in the very early stages. Right now it's a basic Django project.
  * Installing the python requirements with ```pip install -r requirements.txt```
  * Creating a postgresql database and storing the settings in a ```local_settings.py``` file, a sibling of ```settings.py```
  * Run ```manage.py syncdb```
-
+ 
+.
 
 
 
