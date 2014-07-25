@@ -18,7 +18,7 @@ class ListVendors(APIView):
         
         vendors = Vendor.objects.all()
         naics = self.request.QUERY_PARAMS.get('naics', None)
-        setasides = self.request.QUERY_PARAMS.get('setasides')
+        setasides = self.request.QUERY_PARAMS.get('setasides', None)
         
         if naics:
             naics_obj = Naics.objects.get(short_code=naics)
