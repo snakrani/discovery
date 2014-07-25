@@ -4,11 +4,10 @@
 <div id="layout" class="pure-g">
     
     <div class="sidebar pure-u-1 pure-u-md-1-4">
-        <div class="header">
-    
+        <div class="header">    
     
             <form id="naics-search" class="pure-form">
-                <input type="text" class="pure-input-rounded">
+                <input id="naics-code" type="text" placeholder="NAICS shortcode" class="pure-input-rounded">
                 <button type="submit" class="pure-button">Search</button>
             </form>
         </div>
@@ -24,8 +23,9 @@
 <script type="text/javascript">
 
     $("#naics-search").submit(function(event) {
-
-        $.getJSON('/api/vendors', function(data) {
+        var code = $('#naics-code').val();
+        
+        $.getJSON('/api/vendors?naics=' + code, function(data) {
             $("#results").append('<pre>' + JSON.stringify(data, null, 4) + '</pre>');
         });
 
