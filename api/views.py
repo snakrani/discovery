@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from vendor.models import Vendor, Naics, SetAside
-from api.serializers import VendorSerializer
+from api.serializers import VendorSerializer, NaicsSerializer
 
 
 class ListVendors(APIView):
@@ -31,3 +31,24 @@ class ListVendors(APIView):
 
 
         return vendors
+
+
+class ListNaics(APIView):
+
+        def get(self, request, format=None):
+            serializer = NaicsSerializer(self.get_queryset(), many=True)
+            return Response(serializer.data)
+
+        def get_queryset(self):
+            codes = Naics.objects.all()
+
+            #filters
+            q = self.request.QUERY_PARAMS.get('q', None)
+            print q
+
+            if q:
+                codes = Naics.objects.filter(description__contains=q)
+            else:
+                codes = Naics.objects.all()
+
+            return codes

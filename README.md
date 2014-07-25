@@ -17,6 +17,3 @@ This project is in the very early stages. Right now it's a basic Django project.
  For example:
  `http://localhost:8000/api/vendors/?setasides=A5,QF&naics=541330`
  will return vendors that have the setaside codes A5 and QF and also do business under the NAICS code 541330..
-
-
-
