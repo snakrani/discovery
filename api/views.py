@@ -49,5 +49,7 @@ class ListNaics(APIView):
 
             if q:
                 codes = Naics.objects.filter(description__contains=q)
+            else:
+                codes = Naics.objects.all()
 
             return codes
