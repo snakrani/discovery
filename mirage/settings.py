@@ -23,7 +23,10 @@ SECRET_KEY = '&%7l9-fvi7_9ykzb*kr1bhjfx%x=(vd0r8z4w#p154eb1o+t=o'
 DEBUG = True
 
 TEMPLATE_DEBUG = True
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'mirage_site/templates'),
 
+)
 ALLOWED_HOSTS = []
 
 
@@ -39,6 +42,7 @@ INSTALLED_APPS = (
     'vendor',
     'rest_framework',
     'api',
+    'mirage_site',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -78,6 +82,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 #project specific
 VEHICLES = ('oasissb', )
