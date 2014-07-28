@@ -14,9 +14,13 @@ def filter_vendors(obj):
     setasides = obj.request.QUERY_PARAMS.get('setasides', None)
     
     if naics:
-        naics_obj = Naics.objects.get(short_code=naics)
-        vendors = vendors.filter(pools__naics=naics_obj)
-   
+        try:
+            naics_obj = Naics.objects.get(short_code=naics)
+            vendors = vendors.filter(pools__naics=naics_obj)
+        except:
+            #return an empty list if no naics match
+            return Vendor.objects.none()
+
     if setasides:
         setasides = setasides.split(',')
         for sa in SetAside.objects.filter(code__in=setasides):
@@ -51,12 +55,13 @@ class ListVendors(APIView):
                 v_pools = v.pools.all()
                 for p in v_pools:
                     create_or_add_to_pool(resp_json['results'], p, v)
-            
+           
+            resp_json['num_results'] = vendors.count()
             return Response(resp_json)
 
         else:
             serializer = VendorSerializer(self.get_queryset(), many=True)
-            return  Response(serializer.data)
+            return  Response({ 'num_results': len(serializer.data), 'results': serializer.data } )
 
     def get_queryset(self):
         return filter_vendors(self)
@@ -66,7 +71,7 @@ class ListNaics(APIView):
 
     def get(self, request, format=None):
         serializer = NaicsSerializer(self.get_queryset(), many=True)
-        return Response(serializer.data)
+        return Response({'num_results': len(serializer.data), 'results': serializer.data})
 
     def get_queryset(self):
         codes = Naics.objects.all()
