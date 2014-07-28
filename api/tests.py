@@ -33,6 +33,7 @@ class VendorsTest(TestCase):
         resp = self.c.get(self.path, {'format': 'json', 'naics': '541330'})
         self.assertEqual(resp.status_code, 200)
 
-    def test_request_invalid_naics_returns_404(self):
+    def test_request_invalid_naics_returns_empty_list(self):
         resp = self.c.get(self.path, {'format': 'json', 'naics': 'dlasfjosdf'})
-        self.assertEqual(resp.status_code, 404)
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.data['num_results'], 0)
