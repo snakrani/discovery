@@ -6,13 +6,14 @@ class NaicsTest(TestCase):
 
     def setUp(self):
         self.c = Client()
+        self.path = '/api/naics/'
 
     def test_request_no_params(self):
-        resp = self.c.get('/api/naics/', {'format': 'json'})
+        resp = self.c.get(self.path, {'format': 'json'})
         self.assertEqual(resp.status_code, 200)
 
     def test_request_q_param(self):
-        resp = self.c.get('/api/naics/', {'q': 'test'})
+        resp = self.c.get(self.path, {'q': 'test'})
         self.assertEqual(resp.status_code, 200)
 
 
@@ -32,6 +33,6 @@ class VendorsTest(TestCase):
         resp = self.c.get(self.path, {'format': 'json', 'naics': '541330'})
         self.assertEqual(resp.status_code, 200)
 
-    def test_request_invalid_naics(self):
+    def test_request_invalid_naics_returns_404(self):
         resp = self.c.get(self.path, {'format': 'json', 'naics': 'dlasfjosdf'})
         self.assertEqual(resp.status_code, 404)
