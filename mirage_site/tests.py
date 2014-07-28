@@ -1,3 +1,13 @@
-from django.test import TestCase
+from django.test import Client, TestCase
 
-# Create your tests here.
+class SmokeTest(TestCase):
+    """smoke tests for mirage site"""
+
+    fixtures = ['naics.json', 'vendors.json', 'setasides.json', 'pools.json']
+
+    def setUp(self):
+        self.c = Client()
+
+    def test_index_page_loads(self):
+        resp = self.c.get('/')
+        self.assertEqual(resp.status_code, 200)
