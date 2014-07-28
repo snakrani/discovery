@@ -37,3 +37,12 @@ class VendorsTest(TestCase):
         resp = self.c.get(self.path, {'format': 'json', 'naics': 'dlasfjosdf'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.data['num_results'], 0)
+    
+    def test_request_num_results(self):
+        resp = self.c.get(self.path, {'format': 'json', 'naics': '541330'})
+        self.assertGreater(resp.data['num_results'], 0)
+
+    def test_request_results(self):
+        resp = self.c.get(self.path, {'format': 'json', 'naics': '541330'})
+        assert 'results' in resp.data
+
