@@ -2,4 +2,6 @@
 local_settings.py
 *.pyc
 venv
-*.log
+**.log
+.DS_Store
+
