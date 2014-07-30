@@ -1,38 +1,92 @@
 {% extends "base.html" %}
 
 {% block body %}
-<div id="layout" class="pure-g">
+
+
+<div id="container">
+
+    <div id="header">
     
-    <div class="sidebar pure-u-1 pure-u-md-1-4">
-        <div class="header">        
-        </div>
-        <div id="search" class="content">
+        <div id="search">
             <form id="naics-search" class="pure-form">
                 <select id="naics-code">
                     <option value="" disabled selected>Select NAICS code</option>
                 </select>
             </form>
-            <form id="setaside-filters" class="pure-form">
-                    <label class="pure-checkbox" for="vet"><input type="checkbox" id="vet" name="vet" value="A5" />Veteran Owned</label>
-                    <label class="pure-checkbox" for="smalldis"><input type="checkbox" id="smalldis" name="smalldis" value="27" />Small, Disadvantaged Business</label>
-                    <label class="pure-checkbox" for="disvet"><input type="checkbox" id="disvet" name="disvet" value="QF" />Service Disabled Veteran Owned</label>
-                    <label class="pure-checkbox" for="woman"><input type="checkbox" id="woman" name="woman" value="A2" />Woman Owned</label>
-                    <label class="pure-checkbox" for="hub"><input type="checkbox" id="hub" name="hub" value="XX" />HUBZone</label>
-                    <label class="pure-checkbox" for="8a"><input type="checkbox" id="8a" name="8a" value="A6" />8(a)</label>
-            </form>
-        </div>
-    </div>
+        </div><!--end search<!-->
+    </div><!--end header<!-->
 
-    <div class="content pure-u-1 pure-u-md-3-4">
-        <div id="results">
-    
-        </div>
-    </div>
-</div>
+    <div id="filter">
+        <form id="setaside-filters" class="pure-form">
+            <label class="pure-checkbox" for="vet"><input type="checkbox" id="vet" name="vet" value="A5" />Veteran Owned</label>
+            <label class="pure-checkbox" for="smalldis"><input type="checkbox" id="smalldis" name="smalldis" value="27" />Small, Disadvantaged Business</label>
+            <label class="pure-checkbox" for="disvet"><input type="checkbox" id="disvet" name="disvet" value="QF" />Service Disabled Veteran Owned</label>
+            <label class="pure-checkbox" for="woman"><input type="checkbox" id="woman" name="woman" value="A2" />Woman Owned</label>
+            <label class="pure-checkbox" for="hub"><input type="checkbox" id="hub" name="hub" value="XX" />HUBZone</label>
+            <label class="pure-checkbox" for="8a"><input type="checkbox" id="8a" name="8a" value="A6" />8(a)</label>
+        </form>
+    </div><!--end filter<!-->
+
+    <div id="results_container">
+
+        <div id="results_header">
+
+            <div id="select_vehicle">
+            </div><!--end select_vehicle<!-->
+
+            <div id="number_of_results">
+            </div><!--end number_of_results<!-->
+
+            <div id="breadcrumbs">
+            </div><!--end breadcrumbs<!-->
+
+        </div><!--end results_header<!-->
+
+            <div class="column post-header">
+                <h2 class="post-title">Pool</h2>
+                <p class="post-meta"># vendors</p>
+                <p class="vendor_names"><p>
+                <div id="results">
+                </div>
+
+
+
+            </div><!--end column<!-->
+
+            <div class="column post-header">
+                <h2 class="post-title">Pool</h2>
+                <p class="post-meta"># vendors</p>
+            </div><!--end column<!-->
+
+            <div class="column post-header">
+                <h2 class="post-title">Pool</h2>
+                <p class="post-meta"># vendors</p>
+            </div><!--end column<!-->
+
+            <div class="column post-header">
+                <h2 class="post-title">Pool</h2>
+                <p class="post-meta"># vendors</p>
+            </div><!--end column<!-->
+
+            <div class="column post-header">
+                <h2 class="post-title">Pool</h2>
+                <p class="post-meta"># vendors</p>
+            </div><!--end column<!-->
+
+            <div class="column post-header">
+                <h2 class="post-title">Pool</h2>
+                <p class="post-meta"># vendors</p>
+            </div><!--end column<!-->
+
+            <div id="results"><!-- temp results container --></div>        
+
+    </div><!--end results_container<!-->
+</div><!--end container<!-->
+
 <style>
-  #naics-code { width: 100%; }
+/*  #naics-code { width: 100%; }
   #search { margin-left: 0; }
-
+*/
 </style>
 
 <script type="text/javascript">
