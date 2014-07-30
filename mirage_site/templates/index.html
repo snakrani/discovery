@@ -5,10 +5,20 @@
     
     <div class="sidebar pure-u-1 pure-u-md-1-4">
         <div class="header">        
+        </div>
+        <div id="search" class="content">
             <form id="naics-search" class="pure-form">
                 <select id="naics-code">
                     <option value="" disabled selected>Select NAICS code</option>
                 </select>
+            </form>
+            <form id="setaside-filters" class="pure-form">
+                    <label class="pure-checkbox" for="vet"><input type="checkbox" id="vet" name="vet" value="A5" />Veteran Owned</label>
+                    <label class="pure-checkbox" for="smalldis"><input type="checkbox" id="smalldis" name="smalldis" value="27" />Small, Disadvantaged Business</label>
+                    <label class="pure-checkbox" for="disvet"><input type="checkbox" id="disvet" name="disvet" value="QF" />Service Disabled Veteran Owned</label>
+                    <label class="pure-checkbox" for="woman"><input type="checkbox" id="woman" name="woman" value="A2" />Woman Owned</label>
+                    <label class="pure-checkbox" for="hub"><input type="checkbox" id="hub" name="hub" value="XX" />HUBZone</label>
+                    <label class="pure-checkbox" for="8a"><input type="checkbox" id="8a" name="8a" value="A6" />8(a)</label>
             </form>
         </div>
     </div>
@@ -19,18 +29,49 @@
         </div>
     </div>
 </div>
+<style>
+  #naics-code { width: 100%; }
+  #search { margin-left: 0; }
+
+</style>
 
 <script type="text/javascript">
 
-    $("#naics-code").change(function(event) {
-        var code = $('#naics-code').val();
-        
-        $.getJSON('/api/vendors/?naics=' + code, function(data) {
-            $("#results").html('<pre>' + JSON.stringify(data, null, 4) + '</pre>');
+    var get_code = function () {
+        return $('#naics-code').val();
+    };
+   
+    var get_setasides = function(){
+        var setasides = [];
+        $("form#setaside-filters input:checked").each( function(index) {
+            setasides.push($(this).val());
         });
 
-        return false; 
-    });;
+        return setasides;
+    }
 
+    var refresh_data = function(event) {
+        var code = get_code();
+        var setasides = get_setasides(); 
+        var url = "/api/vendors/"
+        var query_data = {}
+    
+        if (code != 'null' && code != null) {
+            query_data["naics"] = code;
+        }
+        if (setasides.length > 0) {
+            query_data["setasides"] = setasides.join();
+        }
+        
+        $.getJSON(url, query_data,  function(data){
+            $("#results").html('<pre>' + JSON.stringify(data, null, 4) + '</pre>')
+        });
+
+        return false;
+    }
+
+    $("#naics-code").change(refresh_data);
+    $("#setaside-filters").change(refresh_data);
+    
 </script>
 {% endblock %}
