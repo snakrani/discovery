@@ -106,7 +106,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': 'mirage.log',
+            'filename': 'logs/mirage.log',
             'formatter': 'verbose'
         },
         'vendor_file': {
