@@ -1,4 +1,4 @@
-$( document ).ready(
+$( document ).ready( function() {
 	$.getJSON(
 		"/api/naics/",
 		{ format: "json" },
@@ -11,4 +11,5 @@ $( document ).ready(
 			})
 		}
 	)
-);
+	$("#naics-code").select2({ placeholder: "Select NAICS code", width: "off"});
+});
