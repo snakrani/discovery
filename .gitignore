@@ -4,4 +4,4 @@ local_settings.py
 venv
 *.DS_Store
 **.log
-
+logs/*.log
