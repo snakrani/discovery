@@ -11,11 +11,11 @@ html    {
     width:1100px;
     margin-left:auto;
     margin-right:auto;
-    background-color:#ffcc33;
+    background-color:#;
 }
 #header {
     width:100%;
-    background-color:#88cc33;
+    background-color:#;
 }
 #search {
     
@@ -23,20 +23,65 @@ html    {
 }
 #filter {
     width:180px;
-    background-color: #88cc33;
+    background-color: #ececec;
     float:left;
     height:600px;
 }
+.filter_title  {
+    margin-left:10px;
+    margin-bottom:0px;
+}
 #results_container  {
     float:left;
+    width:920px;
+    padding-left:10px;
 }
 #results_header {
-    width:70px;
-    background-color: #88
+    width:100%;
+    background-color: #cccccc;
+    height:37px;
+}
+#select_vehicle {
+    
+    width:auto;
+    float:left;
+}
+#number_of_results  {
+    width:auto;
+    float:right;
+    padding-right:10px;
+    font-size: 1.4em;
+    height:30px;
+    text-align: center;
+    margin-top:5px;
+}
+.matching_your_search   {
+
+}
+#filterbox   {
+    margin-left:20px;
+    line-height: 2em;
 }
 
-
-
+.column {
+    float:left;
+    margin-right:5%;
+    min-width:14%;
+    max-width:20%;
+    display:inline-block;
+    padding-bottom:40px;
+    min-height:200px;
+}
+.pool_title {
+    font-size: 2em;
+    color: #222;
+    margin-bottom: -0.2em;
+}
+.number_of_vendors_in_pool {   
+}
+.vendor_names {
+    font-size: 0.8em;
+}
 
 a {
     text-decoration: none;
@@ -50,6 +95,44 @@ a:focus {
 h3 {
     font-weight: 100;
 }
+
+
+/* Breadcrumbs */
+
+ul, li {
+    list-style-type:none;
+    padding:0;
+    margin:0;
+    }       
+#crumbs {
+    height:2.3em;
+    border:1px solid #dedede;
+    width:100%;
+    }
+#crumbs li {
+    float:left;
+    line-height:2.3em;
+    color:#777;
+    padding-left:.75em;
+    }       
+#crumbs li a {
+    background:url(/static/mirage_site/images/crumbs.gif) no-repeat right center;
+    display:block;
+    padding:0 15px 0 0;
+    }                           
+#crumbs li a:link,
+#crumbs li a:visited {
+    color:#777;
+    text-decoration:none;
+    }   
+a:link, a:visited,  
+#crumbs li a:hover,
+#crumbs li a:focus {
+    color:#dd2c0d;
+    }
+
+
+
 
 /* LAYOUT CSS */
 .pure-img-responsive {
