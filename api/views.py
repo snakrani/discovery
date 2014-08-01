@@ -47,7 +47,10 @@ class ListVendors(APIView):
     def get(self, request, format=None):
 
         group =  request.QUERY_PARAMS.get('group', None)
-        sam_load = SamLoad.objects.all().order_by('-sam_load')[:1]
+        
+        sam_load_results = SamLoad.objects.all().order_by('-sam_load')[:1]
+        sam_load = sam_load_results[0].sam_load if sam_load_results else None
+
         if group and group == 'pool':
             vendors = filter_vendors(self)
             resp_json = { 'results': [] }
@@ -63,7 +66,7 @@ class ListVendors(APIView):
 
         else:
             serializer = VendorSerializer(self.get_queryset(), many=True)
-            return  Response({ 'num_results': len(serializer.data), 'sam_load':sam_load[0].sam_load, 'results': serializer.data } )
+            return  Response({ 'num_results': len(serializer.data), 'sam_load':sam_load, 'results': serializer.data } )
 
     def get_queryset(self):
         return filter_vendors(self)

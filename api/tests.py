@@ -1,4 +1,8 @@
+import datetime
+
 from django.test import Client, TestCase
+
+from vendor.models import SamLoad
 
 class NaicsTest(TestCase):
     """tests for NAICS API endpoint"""
@@ -24,6 +28,8 @@ class VendorsTest(TestCase):
     def setUp(self):
         self.c = Client()
         self.path = '/api/vendors/'
+        sl = SamLoad(sam_load=datetime.datetime.now())
+        sl.save()
 
     def test_request_no_params(self):
         resp = self.c.get(self.path, {'format': 'json'})
@@ -40,9 +46,22 @@ class VendorsTest(TestCase):
     
     def test_request_num_results(self):
         resp = self.c.get(self.path, {'format': 'json', 'naics': '541330'})
+        self.assertEqual(resp.status_code, 200)
         self.assertGreater(resp.data['num_results'], 0)
 
     def test_request_results(self):
         resp = self.c.get(self.path, {'format': 'json', 'naics': '541330'})
+        self.assertEqual(resp.status_code, 200)
         assert 'results' in resp.data
 
+    def test_latest_sam_load_with_data(self):
+        sl = SamLoad(sam_load=datetime.datetime.now())
+        resp = self.c.get(self.path, {'format': 'json', 'naics': '541330'})
+        self.assertEqual(resp.status_code, 200)
+        assert 'sam_load' in resp.data
+
+    def test_sam_load_with_no_data(self):
+        SamLoad.objects.all().delete()
+        resp = self.c.get(self.path, {'format': 'json', 'naics': '541330'})
+        self.assertEqual(resp.status_code, 200)
+        assert 'sam_load' in resp.data
