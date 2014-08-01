@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from vendor.models import Vendor, Naics, SetAside
+from vendor.models import Vendor, Naics, SetAside, SamLoad
 from api.serializers import VendorSerializer, NaicsSerializer, PoolSerializer, ShortVendorSerializer
 
 
@@ -48,6 +48,10 @@ class ListVendors(APIView):
     def get(self, request, format=None):
 
         group =  request.QUERY_PARAMS.get('group', None)
+        
+        sam_load_results = SamLoad.objects.all().order_by('-sam_load')[:1]
+        sam_load = sam_load_results[0].sam_load if sam_load_results else None
+
         if group and group == 'pool':
             vendors, naics = filter_vendors(self)
             resp_json = { 'results': [] }
@@ -64,11 +68,12 @@ class ListVendors(APIView):
             
             resp_json['results'] = sorted(resp_json['results'], key=lambda k: k['number'])
             resp_json['num_results'] = vendors.count()
+            resp_json['sam_load'] = sam_load
             return Response(resp_json)
 
         else:
             serializer = VendorSerializer(self.get_queryset(), many=True)
-            return  Response({ 'num_results': len(serializer.data), 'results': serializer.data } )
+            return  Response({ 'num_results': len(serializer.data), 'sam_load':sam_load, 'results': serializer.data } )
 
     def get_queryset(self):
         vendors, naics = filter_vendors(self)
