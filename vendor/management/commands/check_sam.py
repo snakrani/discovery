@@ -1,14 +1,19 @@
-from django.core.management.base import BaseCommand, CommandError
-from vendor.models import Vendor, Pool, SetAside
-from django.conf import settings
+import datetime, logging
+
 import requests
-import logging
+
+from django.conf import settings
+from django.core.management.base import BaseCommand, CommandError
+
+from vendor.models import Vendor, Pool, SetAside, SamLoad
 
 
 class Command(BaseCommand):
+    """
+    Loops through each vendor in database and adds SAM information to its record
+    """
 
     logger = logging.getLogger('sam')
-
 
     def get_value(self, obj, key, vendor):
         try:
@@ -17,9 +22,9 @@ class Command(BaseCommand):
             self.logger.debug("There was a key error on {0}: {1}".format(vendor.duns, k))
             return None
 
-
     def handle(self, *args, **kwargs):
 
+        clean_load = True
         vendors = Vendor.objects.all()
         for v in vendors:
             #get SAM.gov API response for this vendor
@@ -56,8 +61,11 @@ class Command(BaseCommand):
                     self.logger.debug("'registration' key is missing for {}".format(uri))
 
             elif 'Error' in sam_data:
-                self.logger.debug("SAM API returned an error for {0}, and duns {1}".format(uri, v.duns ))    
+                self.logger.debug("SAM API returned an error for {0}, and duns {1}".format(uri, v.duns ))
             else:
                 self.logger.debug("Could not load data from {} for unknown reason".format(uri))
 
-
+        if clean_load:
+            #save timestamp of this SAM load
+            sam_load = SamLoad(sam_load=datetime.datetime.now())
+            sam_load.save()
