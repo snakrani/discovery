@@ -31,11 +31,9 @@ class Vendor(models.Model):
     sam_exclusion = models.NullBooleanField(null=True)
     sam_url = models.URLField(null=True)
 
-
     def __str__(self):
         return self.name
 
-    
 
 class Pool(models.Model):
     id = models.CharField(primary_key=True, max_length=128)
@@ -47,6 +45,7 @@ class Pool(models.Model):
     def __str__(self):
         return "Pool {0} - {1}".format(self.number, self.get_vehicle_display())
 
+
 class PoolPIID(models.Model):
     vendor = models.ForeignKey('Vendor')
     pool = models.ForeignKey('Pool')
@@ -54,6 +53,7 @@ class PoolPIID(models.Model):
 
     def __str__(self):
         return "{0} - {1} - {2}".format(self.vendor.name, self.pool.id, self.piid)
+
 
 class SetAside(models.Model):
     code = models.CharField(unique=True, max_length=128)
@@ -63,6 +63,7 @@ class SetAside(models.Model):
     def  __str__(self):
         return self.description
 
+
 class Naics(models.Model):
     code = models.CharField(max_length=128)
     description = models.TextField()
@@ -70,6 +71,7 @@ class Naics(models.Model):
 
     def __str__(self):
         return "{0} - {1}".format(self.code, self.description)
+
 
 class ContractRecord(models.Model):
     piid = models.CharField(unique=True, max_length=128)
@@ -86,3 +88,6 @@ class ContractRecord(models.Model):
     fapiis_name = models.CharField(null=True, max_length=128)
     vehicle = models.CharField(choices=VEHICLE_CHOICES, max_length=7, null=True)
 
+
+class SamLoad(models.Model):
+    sam_load = models.DateTimeField()
