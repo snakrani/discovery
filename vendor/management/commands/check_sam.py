@@ -24,7 +24,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
 
-        clean_load = True
         vendors = Vendor.objects.all()
         for v in vendors:
             #get SAM.gov API response for this vendor
@@ -65,7 +64,5 @@ class Command(BaseCommand):
             else:
                 self.logger.debug("Could not load data from {} for unknown reason".format(uri))
 
-        if clean_load:
-            #save timestamp of this SAM load
-            sam_load = SamLoad(sam_load=datetime.datetime.now())
-            sam_load.save()
+        sam_load = SamLoad(sam_load=datetime.datetime.now())
+        sam_load.save()
