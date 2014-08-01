@@ -1,9 +1,10 @@
-import datetime, logging
+import logging
 
 import requests
 
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
+from django.utils import timezone
 
 from vendor.models import Vendor, Pool, SetAside, SamLoad
 
@@ -64,5 +65,5 @@ class Command(BaseCommand):
             else:
                 self.logger.debug("Could not load data from {} for unknown reason".format(uri))
 
-        sam_load = SamLoad(sam_load=datetime.datetime.now())
+        sam_load = SamLoad(sam_load=timezone.now())
         sam_load.save()

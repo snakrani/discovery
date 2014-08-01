@@ -1,6 +1,5 @@
-import datetime
-
 from django.test import Client, TestCase
+from django.utils import timezone
 
 from vendor.models import SamLoad
 
@@ -28,7 +27,7 @@ class VendorsTest(TestCase):
     def setUp(self):
         self.c = Client()
         self.path = '/api/vendors/'
-        sl = SamLoad(sam_load=datetime.datetime.now())
+        sl = SamLoad(sam_load=timezone.now())
         sl.save()
 
     def test_request_no_params(self):
@@ -55,7 +54,6 @@ class VendorsTest(TestCase):
         assert 'results' in resp.data
 
     def test_latest_sam_load_with_data(self):
-        sl = SamLoad(sam_load=datetime.datetime.now())
         resp = self.c.get(self.path, {'format': 'json', 'naics': '541330'})
         self.assertEqual(resp.status_code, 200)
         assert 'sam_load' in resp.data
