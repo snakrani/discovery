@@ -11,6 +11,7 @@ from api.serializers import VendorSerializer, NaicsSerializer, PoolSerializer, S
 def filter_vendors(obj):
     vendors = Vendor.objects.all()
     naics = obj.request.QUERY_PARAMS.get('naics', None)
+    naics_obj = None
     setasides = obj.request.QUERY_PARAMS.get('setasides', None)
     
     if naics:
@@ -19,14 +20,14 @@ def filter_vendors(obj):
             vendors = vendors.filter(pools__naics=naics_obj)
         except:
             #return an empty list if no naics match
-            return Vendor.objects.none()
+            return (Vendor.objects.none(), None)
 
     if setasides:
         setasides = setasides.split(',')
         for sa in SetAside.objects.filter(code__in=setasides):
             vendors = vendors.filter(setasides=sa)                
     
-    return vendors
+    return (vendors, naics_obj)
 
 def create_or_add_to_pool(pool_array, pool, vendor):
 
@@ -52,14 +53,20 @@ class ListVendors(APIView):
         sam_load = sam_load_results[0].sam_load if sam_load_results else None
 
         if group and group == 'pool':
-            vendors = filter_vendors(self)
+            vendors, naics = filter_vendors(self)
             resp_json = { 'results': [] }
             
             for v in vendors:
                 v_pools = v.pools.all()
                 for p in v_pools:
-                    create_or_add_to_pool(resp_json['results'], p, v)
-           
+                    #if there is a naics code, only return pools relevant to that naics
+                    if naics: 
+                        if naics in p.naics.all():
+                            create_or_add_to_pool(resp_json['results'], p, v)
+                    else:
+                        create_or_add_to_pool(resp_json['results'], p, v)
+            
+            resp_json['results'] = sorted(resp_json['results'], key=lambda k: k['number'])
             resp_json['num_results'] = vendors.count()
             resp_json['sam_load'] = sam_load
             return Response(resp_json)
@@ -69,7 +76,8 @@ class ListVendors(APIView):
             return  Response({ 'num_results': len(serializer.data), 'sam_load':sam_load, 'results': serializer.data } )
 
     def get_queryset(self):
-        return filter_vendors(self)
+        vendors, naics = filter_vendors(self)
+        return vendors
 
 
 class ListNaics(APIView):
