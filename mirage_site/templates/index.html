@@ -16,17 +16,17 @@
         </div><!--end search<!-->
     </div><!--end header<!-->
 
-    <div id="filter">
+    <div id="filter_container">
         <h3 class="filter_title">Filters</h3>
-        <div id="filterbox">
-            <form id="setaside-filters" class="pure-form pure-form-stacked filterbox">
+        <div id="filter" class="filterbox">
+            <form id="setaside-filters" class="pure-form pure-form-stacked">
                 <fieldset>
-                    <label for="vet"><input type="checkbox" id="vet" name="vet" value="A5" />Veteran Owned</label>
-                    <label for="smalldis"><input type="checkbox" id="smalldis" name="smalldis" value="27" />Small, Disadvantaged Business</label>
-                    <label for="disvet"><input type="checkbox" id="disvet" name="disvet" value="QF" />Service Disabled Veteran Owned</label>
-                    <label for="woman"><input type="checkbox" id="woman" name="woman" value="A2" />Woman Owned</label>
-                    <label for="hub"><input type="checkbox" id="hub" name="hub" value="XX" />HUBZone</label>
-                    <label for="8a"><input type="checkbox" id="8a" name="8a" value="A6" />8(a)</label>
+                    <label class="pure-checkbox" for="vet"><input type="checkbox" id="vet" name="vet" value="A5" />Veteran Owned</label>
+                    <label class="pure-checkbox" for="smalldis"><input type="checkbox" id="smalldis" name="smalldis" value="27" />Small, Disadvantaged Business</label>
+                    <label class="pure-checkbox" for="disvet"><input type="checkbox" id="disvet" name="disvet" value="QF" />Service Disabled Veteran Owned</label>
+                    <label class="pure-checkbox" for="woman"><input type="checkbox" id="woman" name="woman" value="A2" />Woman Owned</label>
+                    <label class="pure-checkbox" for="hub"><input type="checkbox" id="hub" name="hub" value="XX" />HUBZone</label>
+                    <label class="pure-checkbox" for="8a"><input type="checkbox" id="8a" name="8a" value="A6" />8(a)</label>
                 </fieldset>
             </form>
         </div><!--end filterbox<!-->
@@ -56,6 +56,10 @@
             <li><a href="#">Sub section</a></li>
             <li>The page you are on right now</li>
             </ul>
+            <div id="sam_last_updated">
+                <span id="sam_load" class="sam_style"></span>
+            </div><!--end sam_last_updated<!-->
+
         </div><!--end breadcrumbs<!-->
 
     </div><!--end results_container<!-->
@@ -87,6 +91,10 @@
         var container = $("#results_container");
         var data = results['results'];
         var total = results['num_results'];
+
+        //load SAM update date
+        var date_obj = new Date(results['sam_load']);
+        $("#sam_load").text("SAM data updated: " + (date_obj.getMonth() + 1) + '/' + date_obj.getDate() + '/' + date_obj.getFullYear().toString().substring(2));
 
         //load title data
         $("#number_of_results span").text(total.toString() + " vendors in " + data.length.toString()  + " pools match your search");
