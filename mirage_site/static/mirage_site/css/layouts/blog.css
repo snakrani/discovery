@@ -21,7 +21,7 @@ html    {
     
     padding:15px;
 }
-#filter {
+#filter_container {
     width:180px;
     background-color: #ececec;
     float:left;
@@ -55,14 +55,31 @@ html    {
     text-align: center;
     margin-top:5px;
 }
-.matching_your_search   {
+#matching_your_search   {
 
 }
-#filterbox   {
+.filterbox   {
     margin-left:20px;
     line-height: 2em;
+    font-size:.9em;
 }
+#filter label input  {
+    padding-right:5px !important; 
+}
+#sam_last_updated   {
+    width:200px;
+    float:right;
+    margin-top:-27px;
+    display:inline;
 
+}
+#sam_load   {
+    font-color:#cccccc !important;
+    display:inline;
+}
+.sam_style  {
+    font-color:#cccccc !important;
+}
 .column {
     float:left;
     margin-right:5%;
@@ -99,6 +116,9 @@ h3 {
 
 /* Breadcrumbs */
 
+#breadcrumbs{
+    
+}
 ul, li {
     list-style-type:none;
     padding:0;
@@ -107,7 +127,7 @@ ul, li {
 #crumbs {
     height:2.3em;
     border:1px solid #dedede;
-    width:100%;
+    width:675px;
     }
 #crumbs li {
     float:left;
