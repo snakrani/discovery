@@ -106,19 +106,19 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': 'logs/mirage.log',
+            'filename': os.path.join(BASE_DIR, 'logs/mirage.log'),
             'formatter': 'verbose'
         },
         'vendor_file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': 'logs/vendor.log',
+            'filename': os.path.join(BASE_DIR, 'logs/vendor.log'),
             'formatter': 'verbose'
         },
         'sam_file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': 'logs/sam.log',
+            'filename': os.path.join(BASE_DIR, 'logs/sam.log'),
             'formatter': 'verbose'
         },
     },
