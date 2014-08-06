@@ -44,107 +44,150 @@
 
     </head>
     <body>
-        {% block body %} 
 
-<div id="container">
+        <div id="container">
 
-    <div id="header">
-        <div id="search">
-            <form id="naics-search" class="pure-form">
-                <input id="naics-code" type="text" placeholder="NAICS shortcode" class="pure-input-rounded">
-                <button type="submit" class="pure-button">Search</button>
-            </form>
-        </div><!--end search<!-->
-    </div><!--end header<!-->
+            <div id="header">
+            
+                <div id="search">
+                    <form id="naics-search" class="pure-form">
+                        <select id="naics-code">
+                            <option></option>
+                        </select>
+                    </form>
+                </div><!--end search<!-->
+            </div><!--end header<!-->
 
+            <div id="filter_container">
+                <h3 class="filter_title">Filters</h3>
+                <div id="filter" class="filterbox">
+                    <form id="setaside-filters" class="pure-form pure-form-stacked">
+                        <fieldset>
+                            <label class="pure-checkbox" for="vet"><input type="checkbox" id="vet" name="vet" value="A5" />Veteran Owned</label>
+                            <label class="pure-checkbox" for="smalldis"><input type="checkbox" id="smalldis" name="smalldis" value="27" />Small, Disadvantaged Business</label>
+                            <label class="pure-checkbox" for="disvet"><input type="checkbox" id="disvet" name="disvet" value="QF" />Service Disabled Veteran Owned</label>
+                            <label class="pure-checkbox" for="woman"><input type="checkbox" id="woman" name="woman" value="A2" />Woman Owned</label>
+                            <label class="pure-checkbox" for="hub"><input type="checkbox" id="hub" name="hub" value="XX" />HUBZone</label>
+                            <label class="pure-checkbox" for="8a"><input type="checkbox" id="8a" name="8a" value="A6" />8(a)</label>
+                        </fieldset>
+                    </form>
+                </div><!--end filterbox<!-->
+            </div><!--end filter<!-->
 
-    <div id="filter_container">
-    <h3 class="filter_title">Filters</h3>
-        <div id="filter" class="filterbox">
-            <form id="setaside-filters" class="pure-form pure-form-stacked">
-                <fieldset>
-                    <label class="pure-checkbox" for="vet"><input type="checkbox" id="vet" name="vet" value="A5" />Veteran Owned</label>
-                    <label class="pure-checkbox" for="smalldis"><input type="checkbox" id="smalldis" name="smalldis" value="27" />Small, Disadvantaged Business</label>
-                    <label class="pure-checkbox" for="disvet"><input type="checkbox" id="disvet" name="disvet" value="QF" />Service Disabled Veteran Owned</label>
-                    <label class="pure-checkbox" for="woman"><input type="checkbox" id="woman" name="woman" value="A2" />Woman Owned</label>
-                    <label class="pure-checkbox" for="hub"><input type="checkbox" id="hub" name="hub" value="XX" />HUBZone</label>
-                    <label class="pure-checkbox" for="8a"><input type="checkbox" id="8a" name="8a" value="A6" />8(a)</label>
-                </form>
-            </fieldset>
-        </div><!--end filter<!-->
-    </div><!--end filter_container<!-->
+            <div id="results_container">
 
+                <div id="results_header">
 
+                    <div id="select_vehicle">
+                        <div class="pure-menu pure-menu-open pure-menu-horizontal">
+                            <ul>
+                                <li class="pure-menu-selected"><a href="#">OASIS SB</a></li>      
+                            </ul>
+                        </div>
+                    </div><!--end select_vehicle<!-->
 
-    <div id="results_container">
+                    <div id="number_of_results">
+                        <span class="matching_your_search"></span>
+                    </div><!--end number_of_results<!-->
 
-        <div id="results_header">
-            <div id="select_vehicle">
-                <div class="pure-menu pure-menu-open pure-menu-horizontal">
-                    <ul>
-                        <li class="pure-menu-selected"><a href="#">OASIS SB</a></li>      
-                    </ul>
-                </div>
-            </div><!--end select_vehicle<!-->
-
-            <div id="number_of_results">
-                <span id="matching_your_search">123 vendors in 4 Pools match your search</span>
-            </div><!--end number_of_results<!-->
-
-        </div><!--end results_header<!-->
-
-            <div id="breadcrumbs">
-                <ul id="crumbs">
+                </div><!--end results_header<!-->
+                <div id="breadcrumbs">
+                    <ul id="crumbs">
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Main section</a></li>
                     <li><a href="#">Sub section</a></li>
                     <li>The page you are on right now</li>
-                </ul>
+                    </ul>
+                    <div id="sam_last_updated">
+                        <span id="sam_load" class="sam_style"></span>
+                    </div><!--end sam_last_updated<!-->
 
-                <div id="sam_last_updated">
-                    <span id="sam_load" class="sam_style">SAM data updated: 2/4/14</span>
-                </div><!--end sam_last_updated<!-->
+                </div><!--end breadcrumbs<!-->
 
-            </div><!--end breadcrumbs<!-->
+            </div><!--end results_container<!-->
+        </div><!--end container<!-->
 
+        <style>
+        /*  #naics-code { width: 100%; }
+          #search { margin-left: 0; }
+        */
+        </style>
 
-            <div class="column post-header">
-                <h2 class="pool_title">Pool 1</h2>
-                <p class="post-meta number_of_vendors_in_pool"># vendors</p>
-                <p class="vendor_names">Lockheed Martin </p>
-                <p class="vendor_names">Aerospace engineering company</p>
-            </div><!--end column<!-->
+        <script type="text/javascript">
 
-            <div class="column post-header">
-                <h2 class="pool_title">Pool 2</h2>
-                <p class="post-meta number_of_vendors_in_pool">2 vendors</p>
-                <p class="vendor_names">abc company </p>
-                <p class="vendor_names">abc company </p>
-            </div><!--end column<!-->
+            var get_code = function () {
+                return $('#naics-code').val();
+            };
+           
+            var get_setasides = function(){
+                var setasides = [];
+                $("form#setaside-filters input:checked").each( function(index) {
+                    setasides.push($(this).val());
+                });
 
-            <div class="column post-header">
-                <h2 class="pool_title">Pool 3</h2>
-                <p class="post-meta number_of_vendors_in_pool">2 vendors</p>
-                <p class="vendor_names">really long company name </p>
-                <p class="vendor_names">abc company name company info name lorem ipsum </p>
-            </div><!--end column<!-->
+                return setasides;
+            }
 
-            <div class="column post-header">
-                <h2 class="pool_title">Pool 4</h2>
-                <p class="post-meta number_of_vendors_in_pool">222 vendors</p>
-                <p class="vendor_names">reallylongsinglewordcompanyname  </p>
-                <p class="vendor_names">abc company </p>
-            </div><!--end column<!-->
+            var load_content = function(results) {
+            
+                var container = $("#results_container");
+                var data = results['results'];
+                var total = results['num_results'];
 
+                //load SAM update date
+                var date_obj = new Date(results['sam_load']);
+                $("#sam_load").text("SAM data updated: " + (date_obj.getMonth() + 1) + '/' + date_obj.getDate() + '/' + date_obj.getFullYear().toString().substring(2));
 
-        
+                //load title data
+                $("#number_of_results span").text(total.toString() + " vendors in " + data.length.toString()  + " pools match your search");
 
-    </div><!--end results_container<!-->
+                //load vendor data
+                for (var e in data) {
+                    var obj = data[e];
+                    
+                    var div = $(document.createElement('div'));
+                    div.addClass("column post-header");
+                    div.append( $(document.createElement('h2')).addClass("pool_title").text("Pool " + obj['number']));
+                    div.append( $(document.createElement('p')).addClass("post-meta number_of_vendors_in_pool").text(obj['vendors'].length.toString() + ' vendors'));
 
+                    for (var v in obj['vendors']){
+                        div.append( $(document.createElement('p')).addClass("vendor_names").text(obj['vendors'][v]['name']) );
+                    }
+                    container.append(div);
+                }
+            }
 
-</div><!--end container<!-->
+            var clear_content = function(){
+                $("#results_container").find("div.column").remove();
+            };
 
-        {% endblock body %}
+            var refresh_data = function(event) {
+                var code = get_code();
+                var setasides = get_setasides(); 
+                var url = "/api/vendors/"
+                var query_data = {'group': 'pool'}
+            
+                if (code != 'null' && code != null) {
+                    query_data["naics"] = code;
+                }
+                if (setasides.length > 0) {
+                    query_data["setasides"] = setasides.join();
+                }
+                
+                $.getJSON(url, query_data,  function(data){
+                    //$("#results").html('<pre>' + JSON.stringify(data, null, 4) + '</pre>')
+                    clear_content();
+                    load_content(data);
+                });
+
+                return false;
+            }
+
+            $("#naics-code").change(refresh_data);
+            $("#setaside-filters").change(refresh_data);
+            
+        </script>
+
     </body>
 
 </html>

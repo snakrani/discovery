@@ -15,8 +15,4 @@ urlpatterns = patterns('',
     url(r'^api/', include(api_urls)),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', TemplateView.as_view(template_name='index.html')),
-    url(r'^test/$', TemplateView.as_view(template_name='index2.html')),
-
-
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
