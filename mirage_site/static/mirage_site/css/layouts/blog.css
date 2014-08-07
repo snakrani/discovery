@@ -31,8 +31,13 @@ html    {
     margin-left:10px;
     margin-bottom:0px;
 }
-#results_container  {
+
+#main_container  {
     float:left;
+    width:920px;
+    
+}
+#results_container  {
     width:920px;
     padding-left:10px;
 }
