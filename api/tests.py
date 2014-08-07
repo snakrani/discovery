@@ -63,3 +63,13 @@ class VendorsTest(TestCase):
         resp = self.c.get(self.path, {'format': 'json', 'naics': '541330'})
         self.assertEqual(resp.status_code, 200)
         assert 'sam_load' in resp.data
+
+    def test_no_naics_returns_all(self):
+        resp = self.c.get(self.path, {'format': 'json', 'naics': ''})
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue(resp.data['num_results'] > 0)
+
+    def test_all_naics_returns_all(self):
+        resp = self.c.get(self.path, {'format': 'json', 'naics': "all"})
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue(resp.data['num_results'] > 0)

@@ -11,6 +11,8 @@ from api.serializers import VendorSerializer, NaicsSerializer, PoolSerializer, S
 def filter_vendors(obj):
     vendors = Vendor.objects.all()
     naics = obj.request.QUERY_PARAMS.get('naics', None)
+    if naics == "all":
+        naics = None
     naics_obj = None
     setasides = obj.request.QUERY_PARAMS.get('setasides', None)
     

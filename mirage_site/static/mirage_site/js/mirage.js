@@ -1,4 +1,8 @@
 $( document ).ready( function() {
+    $("#naics-code")
+         .append($("<option></option>")
+         .attr("value", "all")
+         .text("All NAICS codes")); 
 	$.getJSON(
 		"/api/naics/",
 		{ format: "json" },
