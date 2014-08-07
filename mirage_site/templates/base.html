@@ -94,10 +94,8 @@
                 </div><!--end results_header<!-->
                 <div id="breadcrumbs">
                     <ul id="crumbs">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Main section</a></li>
-                    <li><a href="#">Sub section</a></li>
-                    <li>The page you are on right now</li>
+                    {% block crumbs %}
+                    {% endblock %}
                     </ul>
                     <div id="sam_last_updated">
                         <span id="sam_load" class="sam_style"></span>
@@ -108,8 +106,10 @@
             </div><!--end main_container<!-->
 
          <!--CUSTOM PAGE CONTENT INSERTS HERE, E.G: !-->            
-            
+
             <div id="custom_page_content">
+            {% block content %}
+            {% endblock %}
             </div><!--end custom_page_content<!-->
 
         </div><!--end container<!-->
@@ -138,7 +138,7 @@
 
             var load_content = function(results) {
             
-                var container = $("#results_container");
+                var container = $("#custom_page_content");
                 var data = results['results'];
                 var total = results['num_results'];
 
@@ -166,7 +166,7 @@
             }
 
             var clear_content = function(){
-                $("#results_container").find("div.column").remove();
+                $("#custom_page_content").find("div.column").remove();
             };
 
             var refresh_data = function(event) {

@@ -12,7 +12,8 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'mirage.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
+    url(r'^$', TemplateView.as_view(template_name='index.html')),
     url(r'^api/', include(api_urls)),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', TemplateView.as_view(template_name='index.html')),
+    url(r'^pool/$', TemplateView.as_view(template_name='pool.html')),
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
