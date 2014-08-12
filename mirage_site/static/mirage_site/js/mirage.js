@@ -15,14 +15,21 @@ $( document ).ready( function() {
 			         .attr("value", result.short_code)
 			         .text(result.short_code + " - " + result.description)); 
 			})
+			if (getParameterByName("naics-code")) {
+				$("#naics-code").select2().select2("val", getParameterByName("naics-code"));
+			}
+			refresh_data();
 		}
 	)
-	$("#naics-code").select2({ placeholder: "Select NAICS code", width: "off"});
+	$("#naics-code").select2({ placeholder: "Select NAICS code", width: "off" });
 
 	//bind History
-	History.Adapter.bind(window, 'statechange', handleStateChange);
-
-	function handleStateChange() {
-	}
-
+	History.Adapter.bind(window, 'statechange', null);
 });
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
