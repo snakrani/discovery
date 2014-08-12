@@ -12,6 +12,8 @@
         <script type="text/javascript" src="{% static "mirage_site/js/jquery-2.1.1.min.js" %}"></script>
         <script type="text/javascript" src="{% static "mirage_site/js/mirage.js" %}"></script>
         <script type="text/javascript" src="{% static "mirage_site/js/select2.min.js" %}"></script>
+        <script type="text/javascript" src="{% static "mirage_site/js/history.js/scripts/bundled/html4+html5/jquery.history.js" %}"></script>
+
 
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/base-min.css">
@@ -207,7 +209,6 @@
                 }
                 
                 $.getJSON(url, query_data,  function(data){
-                    //$("#results").html('<pre>' + JSON.stringify(data, null, 4) + '</pre>')
                     clear_content();
                     load_content(data);
                 });
@@ -215,8 +216,19 @@
                 return false;
             }
 
-            $("#naics-code").change(refresh_data);
-            $("#setaside-filters").change(refresh_data);
+            var build_query_string = function(event) {
+                var qs = "?";
+                if (get_code() != 'Select an option') {
+                    qs += "naics-code=" + get_code() + "&";
+                }
+                qs += "setasides=" + get_setasides();
+                console.log(qs);
+                History.pushState(null, null, qs);
+                return refresh_data(event);
+            }
+
+            $("#naics-code").change(build_query_string);
+            $("#setaside-filters").change(build_query_string);
 
             
         </script>

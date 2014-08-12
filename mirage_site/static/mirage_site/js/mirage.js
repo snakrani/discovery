@@ -1,4 +1,6 @@
 $( document ).ready( function() {
+
+	//populate NAICS dropdown
     $("#naics-code")
          .append($("<option></option>")
          .attr("value", "all")
@@ -16,4 +18,11 @@ $( document ).ready( function() {
 		}
 	)
 	$("#naics-code").select2({ placeholder: "Select NAICS code", width: "off"});
+
+	//bind History
+	History.Adapter.bind(window, 'statechange', handleStateChange);
+
+	function handleStateChange() {
+	}
+
 });
