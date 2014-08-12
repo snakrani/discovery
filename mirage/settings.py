@@ -22,6 +22,16 @@ SECRET_KEY = '&%7l9-fvi7_9ykzb*kr1bhjfx%x=(vd0r8z4w#p154eb1o+t=o'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    'django.core.context_processors.request',
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages"
+)
 TEMPLATE_DEBUG = True
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'mirage_site/templates'),
@@ -39,10 +49,12 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'vendor',
+
     'rest_framework',
+
     'api',
     'mirage_site',
+    'vendor',
 )
 
 MIDDLEWARE_CLASSES = (
