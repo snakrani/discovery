@@ -196,6 +196,7 @@
             };
 
             var refresh_data = function(event) {
+                /* query api for search results based on current state of form elements */
                 var code = get_code();
                 var setasides = get_setasides(); 
                 var url = "/api/vendors/"
@@ -217,9 +218,13 @@
             }
 
             var build_query_string = function(event) {
+                /* build query string from search form and push to history stack */
                 var qs = "?";
                 if (get_code() != 'Select an option') {
                     qs += "naics-code=" + get_code() + "&";
+                } else {
+                    qs += "naics-code=all&";
+                    $("#naics-code").select2().select2("val", "all");
                 }
                 qs += "setasides=" + get_setasides();
                 History.pushState(null, null, qs);

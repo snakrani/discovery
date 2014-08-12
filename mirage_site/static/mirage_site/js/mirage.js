@@ -18,7 +18,10 @@ $( document ).ready( function() {
 			if (getParameterByName("naics-code")) {
 				$("#naics-code").select2().select2("val", getParameterByName("naics-code"));
 			}
-			refresh_data();
+			//load data if search criteria is defined in querystring
+			if (getParameterByName("naics-code") || getParameterByName("setasides")) {
+				refresh_data();
+			}
 		}
 	)
 	$("#naics-code").select2({ placeholder: "Select NAICS code", width: "off" });
