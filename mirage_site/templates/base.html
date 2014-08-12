@@ -7,6 +7,7 @@
         <meta name="viewport" content="width-device-width, initial-scale=1.0">
         
         <title>Mirage</title>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 
         <script type="text/javascript" src="{% static "mirage_site/js/jquery-2.1.1.min.js" %}"></script>
         <script type="text/javascript" src="{% static "mirage_site/js/mirage.js" %}"></script>
@@ -41,6 +42,11 @@
             <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.js"></script>
         <![endif]-->
 
+        <script>
+        $(document).ready(function() { 
+        $('#naics-code').select2({dropdownAutoWidth : true});
+        });
+        </script>
 
     </head>
     <body>
@@ -48,11 +54,15 @@
         <div id="container">
 
             <div id="header">
-            
+                <div id="page_title">
+                    <span class="oasis_title">OASIS Market Research Tool</span>
+                    <span class="oasis_subtitle">find vendors by NAICS with the set-asides you need</span>
+                </div><!--end page_title<!-->
+
                 <div id="search">
                     <form id="naics-search" class="pure-form">
                         <select id="naics-code">
-                            <option></option>
+                            <option>Select an option</option>
                         </select>
                     </form>
                 </div><!--end search<!-->
@@ -64,7 +74,7 @@
                     <form id="setaside-filters" class="pure-form pure-form-stacked">
                         <fieldset>
                             <label class="pure-checkbox" for="vet"><input type="checkbox" id="vet" name="vet" value="A5" />Veteran Owned</label>
-                            <label class="pure-checkbox" for="smalldis"><input type="checkbox" id="smalldis" name="smalldis" value="27" />Small, Disadvantaged Business</label>
+                            <label class="pure-checkbox labeltest" for="smalldis"><input type="checkbox" id="smalldis" name="smalldis" value="27" />Small, Disadvantaged Business</label>
                             <label class="pure-checkbox" for="disvet"><input type="checkbox" id="disvet" name="disvet" value="QF" />Service Disabled Veteran Owned</label>
                             <label class="pure-checkbox" for="woman"><input type="checkbox" id="woman" name="woman" value="A2" />Woman Owned</label>
                             <label class="pure-checkbox" for="hub"><input type="checkbox" id="hub" name="hub" value="XX" />HUBZone</label>
@@ -77,42 +87,56 @@
 
             <div id="main_container">
 
-                <div id="results_header">
+                <div id="tabs_container">
 
                     <div id="select_vehicle">
-                        <div class="pure-menu pure-menu-open pure-menu-horizontal">
-                            <ul>
-                                <li class="pure-menu-selected"><a href="#">OASIS SB</a></li>      
-                            </ul>
-                        </div>
+                        <a class="select_vehicle" href="#" title="OASIS SB">
+                          OASIS SB
+                        </a>
                     </div><!--end select_vehicle<!-->
 
-                    <div id="number_of_results">
-                        <span class="matching_your_search"></span>
-                    </div><!--end number_of_results<!-->
+                </div><!--end tabs_container<!-->
 
-                </div><!--end results_header<!-->
                 <div id="breadcrumbs">
                     <ul id="crumbs">
                     {% block crumbs %}
                     {% endblock %}
                     </ul>
+                </div><!--end breadcrumbs<!-->
+
+                <div id="results_sam_container">
+
+                    <div id="number_of_results">
+                        <span class="matching_your_search"></span>
+                    </div><!--end number_of_results<!-->
+
                     <div id="sam_last_updated">
                         <span id="sam_load" class="sam_style"></span>
                     </div><!--end sam_last_updated<!-->
 
-                </div><!--end breadcrumbs<!-->
+                <!--end results_sam_container<!-->
 
             </div><!--end main_container<!-->
 
-         <!--CUSTOM PAGE CONTENT INSERTS HERE, E.G: !-->            
 
-            <div id="custom_page_content">
-            {% block content %}
-            {% endblock %}
-            </div><!--end custom_page_content<!-->
+
+                <!--CUSTOM PAGE CONTENT HERE!-->            
+
+                    <div id="custom_page_content">
+                        {% block content %}
+                        {% endblock %}
+                    </div><!--end custom_page_content<!-->
+
+                <!--END CUSTOM PAGE CONTENT!-->  
 
         </div><!--end container<!-->
+
+
+      
+
+
+
+
 
 
         <style>
@@ -147,7 +171,7 @@
                 $("#sam_load").text("SAM data updated: " + (date_obj.getMonth() + 1) + '/' + date_obj.getDate() + '/' + date_obj.getFullYear().toString().substring(2));
 
                 //load title data
-                $("#number_of_results span").text(total.toString() + " vendors in " + data.length.toString()  + " pools match your search");
+                $("#number_of_results span").text(total.toString() + " vendors in " + data.length.toString()  + " pool(s) match your search");
 
                 //load vendor data
                 for (var e in data) {
@@ -193,6 +217,7 @@
 
             $("#naics-code").change(refresh_data);
             $("#setaside-filters").change(refresh_data);
+
             
         </script>
 
