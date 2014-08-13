@@ -59,27 +59,5 @@
                 new_crumb.append(crumb_anchor);
                 $('#crumbs').append(new_crumb);
             }
-
-            var refresh_data = function(event) {
-                /* query api for search results based on current state of form elements */
-                var code = get_code();
-                var setasides = get_setasides(); 
-                var url = "/api/vendors/"
-                var query_data = {'group': 'pool'}
-            
-                if (code != 'null' && code != null) {
-                    query_data["naics"] = code;
-                }
-                if (setasides.length > 0) {
-                    query_data["setasides"] = setasides.join();
-                }
-                
-                $.getJSON(url, query_data,  function(data){
-                    clear_content();
-                    load_content(data);
-                });
-
-                return false;
-            }
 		</script>
 {% endblock %}

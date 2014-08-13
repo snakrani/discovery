@@ -8,7 +8,7 @@
 
 {% block content %}
 <div id="pool_table" class="pooldetail">
-                <table >
+                <table id="pool_vendors">
                     <tr>
                         <td class="h_vendor_name">
                             Vendor Name
@@ -29,56 +29,122 @@
                             WOSB
                         </td>
                     </tr>
-                    <tr>
-                        <td class="vendor_name">
-                            ABC Professional Services, Inc.
-                        </td>
-                        <td class="vendor_location">
-                            Washington, DC
-                        </td>
-                        <td class="8a">
-                            X
-                        </td>
-                        <td class="hubzone">
-                            X
-                        </td>
-                        <td class="sdvosb">
-                            X
-                        </td>
-                        <td class="wosb">
-                            X
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="vendor_name">
-                            Awesome Service & Really Cool Stuff, LLC
-                        </td>
-                        <td class="vendor_location">
-                            Montgomery, AL
-                        </td>
-                        <td class="8a">
-                            X
-                        </td>
-                        <td class="hubzone">
-                            
-                        </td>
-                        <td class="sdvosb">
-                            X
-                        </td>
-                        <td class="wosb">
-                            
-                        </td>
-                    </tr>
-                   
                 </table>
             </div>
 {% endblock %}
 
 {% block page_js %}
 <script type="text/javascript">
-            var refresh_data = function(event) {
-                return false;
+            var load_content = function(results) {
+                alert("called");
+
+                var addRow = function(v) {
+                    t = $(document.getElementById('pool_vendors'));
+                    vendor_row = $(document.createElement('tr'));
+
+                    name_col = $(document.createElement('td'));
+                    name_col.attr('class', 'vendor_name');
+                    name_col.text(v.name);
+                    vendor_row.append(name_col);
+
+                    location_col = $(document.createElement('td'));
+                    location_col.attr('class', 'vendor_location');
+                    location_col.text(v.sam_citystate);
+                    vendor_row.append(location_col);
+
+                    eight_a_col = $(document.createElement('td'));
+                    eight_a_col.attr('class', '8a');
+                    vendor_row.append(eight_a_col);
+
+                    hubzone_col = $(document.createElement('td'));
+                    hubzone_col.attr('class', 'hubzone');
+                    vendor_row.append(hubzone_col);
+
+                    sdvosb_col = $(document.createElement('td'));
+                    sdvosb_col.attr('class', 'sdvosb');
+                    vendor_row.append(sdvosb_col);
+
+                    wosb_col = $(document.createElement('td'));
+                    wosb_col.attr('class', 'wosb');
+                    vendor_row.append(wosb_col);
+
+                    t.append(vendor_row);
+                }
+
+                var container = $("#custom_page_content");
+                var data = results['results'];
+                for (var e in data) {
+                    var obj = data[e];
+                    if (obj['id'] == '1_SB') {
+                        for (var v in obj['vendors']) {
+                            addRow(obj['vendors'][v]);
+                        }
+                        break;
+                    }
+                }
+                var total = obj['vendors'].length;
+
+
+                //load SAM update date
+                var date_obj = new Date(results['sam_load']);
+                $("#sam_load").text("SAM data updated: " + (date_obj.getMonth() + 1) + '/' + date_obj.getDate() + '/' + date_obj.getFullYear().toString().substring(2));
+
+
+                //load title data
+                $("#number_of_results span").text(total.toString() + " vendors match your search");
+
+                //remove all rows but first
+                $("#pool_vendors").find("tr:gt(0)").remove();
+
+                for (var e in data) {
+                    var obj = data[e];
+                    if (obj['id'] == '1_SB') {
+                        for (var v in obj['vendors']) {
+                            addRow(obj['vendors'][v]);
+                        }
+                        break;
+                    }
+                }
+
+
+                /*
+                //load vendor and pool data
+                for (var e in data) {
+                    var obj = data[e];
+                    
+                    var div = $(document.createElement('div'));
+                    div.addClass("column post-header");
+
+                    pool_link = $(document.createElement('a'));
+                    pool_link.attr('href', '/pool/' + obj['vehicle'].toLowerCase() + '/' + obj['number'] + '/');
+                    pool_link.attr('class', 'pool_link');
+                    pool_link.text("Pool " + obj['number']);
+                    
+                    pool_header = $(document.createElement('h2'));
+                    pool_header.addClass("pool_title");
+                    pool_header.append(pool_link);
+                    div.append(pool_header);
+                    
+                    div.append( $(document.createElement('p')).addClass("post-meta number_of_vendors_in_pool").text(obj['vendors'].length.toString() + ' vendors'));
+
+                    for (var v in obj['vendors']){
+                        div.append( $(document.createElement('p')).addClass("vendor_names").text(obj['vendors'][v]['name']) );
+                    }
+                    container.append(div);
+                }
+
+                //remove old seach results breadcrumb
+                $('#sr').remove();
+
+                //create new breadcrumb for search results
+                new_crumb = $(document.createElement('li'));
+                new_crumb.attr('id', 'sr');
+                crumb_anchor = $(document.createElement('a'));
+                crumb_anchor.attr('href', '#');
+                crumb_anchor.text('Search Results');
+                new_crumb.append(crumb_anchor);
+                $('#crumbs').append(new_crumb);
+                */
             }
 </script>
 {% endblock %}
