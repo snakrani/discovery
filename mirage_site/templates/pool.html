@@ -2,8 +2,16 @@
 
 {% block crumbs %}
     <li><a href="/">Home</a></li>
-    <li><a href="#">Pool</a></li>
+    <li><a href="/pool/{{ vehicle }}/{{ pool_number }}/">Pool {{ pool_number }}</a></li>
 {% endblock %}
 
 {% block content %}
+{% endblock %}
+
+{% block page_js %}
+<script type="text/javascript">
+            var refresh_data = function(event) {
+                return false;
+            }
+</script>
 {% endblock %}
