@@ -181,7 +181,17 @@
                     
                     var div = $(document.createElement('div'));
                     div.addClass("column post-header");
-                    div.append( $(document.createElement('h2')).addClass("pool_title").text("Pool " + obj['number']));
+
+                    pool_link = $(document.createElement('a'));
+                    pool_link.attr('href', '/pool/' + obj['vehicle'].toLowerCase() + '/' + obj['number'] + '/');
+                    pool_link.attr('class', 'pool_link');
+                    pool_link.text("Pool " + obj['number']);
+                    
+                    pool_header = $(document.createElement('h2'));
+                    pool_header.addClass("pool_title");
+                    pool_header.append(pool_link);
+                    div.append(pool_header);
+                    
                     div.append( $(document.createElement('p')).addClass("post-meta number_of_vendors_in_pool").text(obj['vendors'].length.toString() + ' vendors'));
 
                     for (var v in obj['vendors']){
