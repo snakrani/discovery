@@ -46,6 +46,18 @@
                     }
                     container.append(div);
                 }
+
+                //remove old seach results breadcrumb
+                $('#sr').remove();
+
+                //create new breadcrumb for search results
+                new_crumb = $(document.createElement('li'));
+                new_crumb.attr('id', 'sr');
+                crumb_anchor = $(document.createElement('a'));
+                crumb_anchor.attr('href', '#');
+                crumb_anchor.text('Search Results');
+                new_crumb.append(crumb_anchor);
+                $('#crumbs').append(new_crumb);
             }
 
             var refresh_data = function(event) {
