@@ -5,6 +5,69 @@
 {% endblock %}
 
 {% block content %}
+{% endblock %}
 
+{% block page_js %}
+		<script type="text/javascript">
+            var load_content = function(results) {
+            
+                var container = $("#custom_page_content");
+                var data = results['results'];
+                var total = results['num_results'];
 
+                //load SAM update date
+                var date_obj = new Date(results['sam_load']);
+                $("#sam_load").text("SAM data updated: " + (date_obj.getMonth() + 1) + '/' + date_obj.getDate() + '/' + date_obj.getFullYear().toString().substring(2));
+
+                //load title data
+                $("#number_of_results span").text(total.toString() + " vendors in " + data.length.toString()  + " pool(s) match your search");
+
+                //load vendor and pool data
+                for (var e in data) {
+                    var obj = data[e];
+                    
+                    var div = $(document.createElement('div'));
+                    div.addClass("column post-header");
+
+                    pool_link = $(document.createElement('a'));
+                    pool_link.attr('href', '/pool/' + obj['vehicle'].toLowerCase() + '/' + obj['number'] + '/');
+                    pool_link.attr('class', 'pool_link');
+                    pool_link.text("Pool " + obj['number']);
+                    
+                    pool_header = $(document.createElement('h2'));
+                    pool_header.addClass("pool_title");
+                    pool_header.append(pool_link);
+                    div.append(pool_header);
+                    
+                    div.append( $(document.createElement('p')).addClass("post-meta number_of_vendors_in_pool").text(obj['vendors'].length.toString() + ' vendors'));
+
+                    for (var v in obj['vendors']){
+                        div.append( $(document.createElement('p')).addClass("vendor_names").text(obj['vendors'][v]['name']) );
+                    }
+                    container.append(div);
+                }
+            }
+
+            var refresh_data = function(event) {
+                /* query api for search results based on current state of form elements */
+                var code = get_code();
+                var setasides = get_setasides(); 
+                var url = "/api/vendors/"
+                var query_data = {'group': 'pool'}
+            
+                if (code != 'null' && code != null) {
+                    query_data["naics"] = code;
+                }
+                if (setasides.length > 0) {
+                    query_data["setasides"] = setasides.join();
+                }
+                
+                $.getJSON(url, query_data,  function(data){
+                    clear_content();
+                    load_content(data);
+                });
+
+                return false;
+            }
+		</script>
 {% endblock %}
