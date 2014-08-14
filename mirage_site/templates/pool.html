@@ -68,6 +68,28 @@
                 }
 
                 var addRow = function(v) {
+
+                    var clean_location = function(location) {
+                        // from http://stackoverflow.com/questions/5097875/help-parsing-string-city-state-zip-with-javascript
+
+                        var to_title_case = function(str) {
+                            return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+                        }
+
+                        var location_obj = {};
+                        new_location = location;
+                        if (location) {
+                            location = location.trim();
+                            var comma = location.indexOf(',');
+                            location_obj.city = location.slice(0, comma);
+                            var after = location.substring(comma + 2);
+                            var space = after.lastIndexOf(' ');
+                            location_obj.state = after.slice(0, space).toUpperCase();
+                            new_location = to_title_case(location_obj.city) + ', ' + location_obj.state
+                        }
+                        return new_location
+                    }
+
                     //append search result to search results table
                     t = $(document.getElementById('pool_vendors'));
                     vendor_row = $(document.createElement('tr'));
@@ -79,7 +101,7 @@
 
                     location_col = $(document.createElement('td'));
                     location_col.attr('class', 'vendor_location');
-                    location_col.text(v.sam_citystate);
+                    location_col.text(clean_location(v.sam_citystate));
                     vendor_row.append(location_col);
 
                     //add socio-economic columns
