@@ -35,8 +35,6 @@ var build_query_string = function() {
 
 var refresh_data = function(event) {
     /* query api for search results based on current state of form elements */
-
-
     var code = get_code();
     if (code == 'all') {
         $("#naics-code").select2().select2("val", "all");
@@ -58,7 +56,10 @@ var refresh_data = function(event) {
         load_content(data);
     });
 
-    History.pushState(null, null, build_query_string());
+    //add current search status query string to url in address bar and push to history
+    qs = build_query_string();
+    History.pushState(null, null, qs);
+
     return false;
 }
 

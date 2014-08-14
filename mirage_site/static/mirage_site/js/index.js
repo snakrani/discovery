@@ -35,6 +35,15 @@ var load_content = function(results) {
         container.append(div);
     }
 
+    //add current search status query string to links to pools
+    qs = build_query_string();
+    $(".pool_link").each(function() {
+        var parser = document.createElement('a');
+        parser.href = this.href;
+        parser.search = qs;
+        $(this).attr('href', parser);  
+    });
+
     //remove old seach results breadcrumb
     $('#sr').remove();
 
