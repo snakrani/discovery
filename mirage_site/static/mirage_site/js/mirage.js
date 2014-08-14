@@ -28,6 +28,9 @@ $( document ).ready( function() {
 
 	//bind History
 	History.Adapter.bind(window, 'statechange', null);
+
+    $('#naics-code').select2({dropdownAutoWidth : true});
+
 });
 
 function getParameterByName(name) {
