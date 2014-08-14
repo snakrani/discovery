@@ -38,6 +38,7 @@
             var load_content = function(results) {
 
                 var get_pool_info = function() {
+                    //extract pool information from document url
                     var parser = document.createElement('a');
                     parser.href = document.URL;
                     path_arr = parser.pathname.split('/');
@@ -45,6 +46,7 @@
                 }
 
                 var addRow = function(v) {
+                    //append search result to search results table
                     t = $(document.getElementById('pool_vendors'));
                     vendor_row = $(document.createElement('tr'));
 
@@ -85,9 +87,10 @@
                 var date_obj = new Date(results['sam_load']);
                 $("#sam_load").text("SAM data updated: " + (date_obj.getMonth() + 1) + '/' + date_obj.getDate() + '/' + date_obj.getFullYear().toString().substring(2));
 
-                //remove all rows but first
+                //clear out old results (remove all rows but first)
                 $("#pool_vendors").find("tr:gt(0)").remove();
 
+                //load results and add them to table
                 var total = 0;
                 for (var e in data) {
                     var obj = data[e];
@@ -106,6 +109,7 @@
             }
 
             $(document).ready(function() {
+                //load results when page loads
                 build_query_string();
             })
 </script>
