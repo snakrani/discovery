@@ -16,17 +16,17 @@
                         <td class="h_vendor_location">
                             Location
                         </td>
-                        <td class="h_8a">
-                            8(a)
+                        <td class="h_vo">
+                            VO
                         </td>
-                        <td class="h_hubzone">
-                            HUBZone
+                        <td class="h_sdb">
+                            SDB
                         </td>
-                        <td class="h_sdvosb">
-                            SDVOSB
+                        <td class="h_sdvo">
+                            SDVO
                         </td>
-                        <td class="h_wosb">
-                            WOSB
+                        <td class="h_wo">
+                            WO
                         </td>
                     </tr>
                 </table>
@@ -60,21 +60,21 @@
                     location_col.text(v.sam_citystate);
                     vendor_row.append(location_col);
 
-                    eight_a_col = $(document.createElement('td'));
-                    eight_a_col.attr('class', '8a');
-                    vendor_row.append(eight_a_col);
+                    vo_col = $(document.createElement('td'));
+                    vo_col.attr('class', 'vo');
+                    vendor_row.append(vo_col);
 
-                    hubzone_col = $(document.createElement('td'));
-                    hubzone_col.attr('class', 'hubzone');
-                    vendor_row.append(hubzone_col);
+                    sdb_col = $(document.createElement('td'));
+                    sdb_col.attr('class', 'sdb');
+                    vendor_row.append(sdb_col);
 
-                    sdvosb_col = $(document.createElement('td'));
-                    sdvosb_col.attr('class', 'sdvosb');
-                    vendor_row.append(sdvosb_col);
+                    sdvo_col = $(document.createElement('td'));
+                    sdvo_col.attr('class', 'sdvo');
+                    vendor_row.append(sdvo_col);
 
-                    wosb_col = $(document.createElement('td'));
-                    wosb_col.attr('class', 'wosb');
-                    vendor_row.append(wosb_col);
+                    wo_col = $(document.createElement('td'));
+                    wo_col.attr('class', 'wo');
+                    vendor_row.append(wo_col);
 
                     t.append(vendor_row);
                 }
