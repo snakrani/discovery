@@ -36,7 +36,13 @@
 {% block page_js %}
 <script type="text/javascript">
             var load_content = function(results) {
-                alert("called");
+
+                var get_pool_info = function() {
+                    var parser = document.createElement('a');
+                    parser.href = document.URL;
+                    path_arr = parser.pathname.split('/');
+                    return {'vehicle': path_arr[2], 'pool_number': path_arr[3]}
+                }
 
                 var addRow = function(v) {
                     t = $(document.getElementById('pool_vendors'));
@@ -73,78 +79,34 @@
 
                 var container = $("#custom_page_content");
                 var data = results['results'];
-                for (var e in data) {
-                    var obj = data[e];
-                    if (obj['id'] == '1_SB') {
-                        for (var v in obj['vendors']) {
-                            addRow(obj['vendors'][v]);
-                        }
-                        break;
-                    }
-                }
-                var total = obj['vendors'].length;
-
+                var pool_info = get_pool_info();
 
                 //load SAM update date
                 var date_obj = new Date(results['sam_load']);
                 $("#sam_load").text("SAM data updated: " + (date_obj.getMonth() + 1) + '/' + date_obj.getDate() + '/' + date_obj.getFullYear().toString().substring(2));
 
-
-                //load title data
-                $("#number_of_results span").text(total.toString() + " vendors match your search");
-
                 //remove all rows but first
                 $("#pool_vendors").find("tr:gt(0)").remove();
 
+                var total = 0;
                 for (var e in data) {
                     var obj = data[e];
-                    if (obj['id'] == '1_SB') {
+                    if (obj['vehicle'].toUpperCase() == pool_info['vehicle'].toUpperCase() && obj['number'].toUpperCase() == pool_info['pool_number'].toUpperCase()) {
+                        console.log('okay');
                         for (var v in obj['vendors']) {
                             addRow(obj['vendors'][v]);
                         }
+                        total = obj['vendors'].length;
                         break;
                     }
                 }
-
-
-                /*
-                //load vendor and pool data
-                for (var e in data) {
-                    var obj = data[e];
-                    
-                    var div = $(document.createElement('div'));
-                    div.addClass("column post-header");
-
-                    pool_link = $(document.createElement('a'));
-                    pool_link.attr('href', '/pool/' + obj['vehicle'].toLowerCase() + '/' + obj['number'] + '/');
-                    pool_link.attr('class', 'pool_link');
-                    pool_link.text("Pool " + obj['number']);
-                    
-                    pool_header = $(document.createElement('h2'));
-                    pool_header.addClass("pool_title");
-                    pool_header.append(pool_link);
-                    div.append(pool_header);
-                    
-                    div.append( $(document.createElement('p')).addClass("post-meta number_of_vendors_in_pool").text(obj['vendors'].length.toString() + ' vendors'));
-
-                    for (var v in obj['vendors']){
-                        div.append( $(document.createElement('p')).addClass("vendor_names").text(obj['vendors'][v]['name']) );
-                    }
-                    container.append(div);
-                }
-
-                //remove old seach results breadcrumb
-                $('#sr').remove();
-
-                //create new breadcrumb for search results
-                new_crumb = $(document.createElement('li'));
-                new_crumb.attr('id', 'sr');
-                crumb_anchor = $(document.createElement('a'));
-                crumb_anchor.attr('href', '#');
-                crumb_anchor.text('Search Results');
-                new_crumb.append(crumb_anchor);
-                $('#crumbs').append(new_crumb);
-                */
+                
+                //load title data
+                $("#number_of_results span").text(total.toString() + " vendors match your search");
             }
+
+            $(document).ready(function() {
+                build_query_string();
+            })
 </script>
 {% endblock %}

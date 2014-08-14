@@ -170,7 +170,9 @@
                     qs += "naics-code=all&";
                     $("#naics-code").select2().select2("val", "all");
                 }
-                qs += "setasides=" + get_setasides();
+                if (get_setasides().length > 0) {
+                    qs += "setasides=" + get_setasides();
+                }
                 History.pushState(null, null, qs);
                 return refresh_data(event);
             }
