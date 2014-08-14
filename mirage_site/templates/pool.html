@@ -45,6 +45,28 @@
                     return {'vehicle': path_arr[2], 'pool_number': path_arr[3]}
                 }
 
+                var render_column = function(v, prefix, setaside_code) {
+                    //returns properly formatted column for vendor/socioeconomic indicator
+
+                    var vendor_indicator = function(v, prefix, setaside_code) {
+                        //returns X if vendor and socioeconomic indicator match
+                        if (v['setasides'].length > 0) {
+                            for (var i=0; i<v['setasides'].length; i++) {
+                                if (v['setasides'][i]['code'] == setaside_code) {
+                                    return 'X';
+                                }
+                            }
+                        } else {
+                            return '';
+                        }
+                    }
+
+                    col = $(document.createElement('td'));
+                    col.attr('class', prefix);
+                    col.text(vendor_indicator(v, prefix, setaside_code));
+                    return col
+                }
+
                 var addRow = function(v) {
                     //append search result to search results table
                     t = $(document.getElementById('pool_vendors'));
@@ -60,22 +82,13 @@
                     location_col.text(v.sam_citystate);
                     vendor_row.append(location_col);
 
-                    vo_col = $(document.createElement('td'));
-                    vo_col.attr('class', 'vo');
-                    vendor_row.append(vo_col);
+                    //add socio-economic columns
+                    vendor_row.append(render_column(v, 'vo', 'A5'));
+                    vendor_row.append(render_column(v, 'sdb', '27'));
+                    vendor_row.append(render_column(v, 'sdvo', 'QF'));
+                    vendor_row.append(render_column(v, 'wo', 'A2'));
 
-                    sdb_col = $(document.createElement('td'));
-                    sdb_col.attr('class', 'sdb');
-                    vendor_row.append(sdb_col);
-
-                    sdvo_col = $(document.createElement('td'));
-                    sdvo_col.attr('class', 'sdvo');
-                    vendor_row.append(sdvo_col);
-
-                    wo_col = $(document.createElement('td'));
-                    wo_col.attr('class', 'wo');
-                    vendor_row.append(wo_col);
-
+                    //add row to table
                     t.append(vendor_row);
                 }
 
@@ -95,7 +108,6 @@
                 for (var e in data) {
                     var obj = data[e];
                     if (obj['vehicle'].toUpperCase() == pool_info['vehicle'].toUpperCase() && obj['number'].toUpperCase() == pool_info['pool_number'].toUpperCase()) {
-                        console.log('okay');
                         for (var v in obj['vendors']) {
                             addRow(obj['vendors'][v]);
                         }
