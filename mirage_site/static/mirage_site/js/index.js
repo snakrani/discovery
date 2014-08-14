@@ -1,7 +1,4 @@
 var load_content = function(results) {
-
-
-    console.log(results['results'])
     var container = $("#custom_page_content");
     var data = results['results'];
     var total = results['num_results'];
@@ -15,7 +12,6 @@ var load_content = function(results) {
 
     //load vendor and pool data
     for (var e in data) {
-        console.log(data[e]);
         var obj = data[e];
         
         var div = $(document.createElement('div'));
