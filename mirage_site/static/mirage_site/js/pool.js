@@ -1,4 +1,4 @@
-var load_content = function(results) {
+var show_content = function(results) {
 
     var get_pool_info = function() {
         //extract pool information from document url

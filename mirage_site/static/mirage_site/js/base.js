@@ -2,7 +2,7 @@ var get_code = function () {
     /* returns naics-code from selected option in dropdown or 'all'
     if option is not selected */
     code = $('#naics-code').val();
-    if (code == 'Select an option') {
+    if (code == 'Select a NAICS code') {
         code = 'all';
     }
     return code
@@ -25,7 +25,7 @@ var clear_content = function(){
 var build_query_string = function() {
     /* build query string from search form and push to history stack */
     var qs = "?";
-    if (get_code() != 'Select an option') {
+    if (get_code() != 'Select a NAICS code') {
         qs += "naics-code=" + get_code() + "&";
     } else {
         qs += "naics-code=all&";
@@ -58,7 +58,7 @@ var refresh_data = function(event) {
     $.getJSON(url, query_data, function(data){
         /* when data loads clear content and rebuild results */
         clear_content();
-        load_content(data);
+        show_content(data);
     });
 
     //add current search status query string to url in address bar and push to history
