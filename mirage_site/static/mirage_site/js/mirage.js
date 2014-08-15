@@ -1,5 +1,4 @@
 $( document ).ready( function() {
-
 	//populate NAICS dropdown
     $("#naics-code")
          .append($("<option></option>")
@@ -24,12 +23,12 @@ $( document ).ready( function() {
 			}
 		}
 	)
-	$("#naics-code").select2({ placeholder: "Select NAICS code", width: "off" });
 
 	//bind History
 	History.Adapter.bind(window, 'statechange', null);
 
-    $('#naics-code').select2({dropdownAutoWidth : true});
+	//set naics dropdown width
+	$('#naics-code').select2({dropdownAutoWidth : true});
 
 });
 
