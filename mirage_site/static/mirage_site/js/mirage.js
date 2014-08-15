@@ -1,5 +1,4 @@
 $( document ).ready( function() {
-
 	//populate NAICS dropdown
     $("#naics-code")
          .append($("<option></option>")
@@ -24,16 +23,18 @@ $( document ).ready( function() {
 			}
 		}
 	)
-	$("#naics-code").select2({ placeholder: "Select NAICS code", width: "off" });
 
 	//bind History
 	History.Adapter.bind(window, 'statechange', null);
 
-    $('#naics-code').select2({dropdownAutoWidth : true});
+	//set naics dropdown width
+	$('#naics-code').select2({dropdownAutoWidth : true});
 
 });
 
+//from http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
 function getParameterByName(name) {
+	//return querystring value of given parameter
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
         results = regex.exec(location.search);

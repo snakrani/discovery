@@ -1,4 +1,6 @@
 var get_code = function () {
+    /* returns naics-code from selected option in dropdown or 'all'
+    if option is not selected */
     code = $('#naics-code').val();
     if (code == 'Select an option') {
         code = 'all';
@@ -7,6 +9,7 @@ var get_code = function () {
 };
 
 var get_setasides = function(){
+    /* returns array of setaside ids that are checked */
     var setasides = [];
     $("form#setaside-filters input:checked").each( function(index) {
         setasides.push($(this).val());
@@ -34,9 +37,8 @@ var build_query_string = function() {
 }
 
 var refresh_data = function(event) {
-    /* query api for search results based on current state of form elements */
-
-
+    /* query api for search results based on current state of form elements 
+    and display results */
     var code = get_code();
     if (code == 'all') {
         $("#naics-code").select2().select2("val", "all");
@@ -54,13 +56,20 @@ var refresh_data = function(event) {
     }
     
     $.getJSON(url, query_data, function(data){
+        /* when data loads clear content and rebuild results */
         clear_content();
         load_content(data);
     });
 
-    History.pushState(null, null, build_query_string());
+    //add current search status query string to url in address bar and push to history
+    qs = build_query_string();
+    History.pushState(null, null, qs);
+
+    $('#naics-code').select2({dropdownAutoWidth : true});
+
     return false;
 }
 
+//refresh data on page if search criteria changes 
 $("#naics-code").change(refresh_data);
 $("#setaside-filters").change(refresh_data);
