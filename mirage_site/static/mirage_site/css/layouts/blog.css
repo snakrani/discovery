@@ -196,7 +196,6 @@ ul, li {
     }       
 #crumbs {
     height:2.3em;
-    /* border:1px solid #dedede; */
     width:675px;
     }
 #crumbs li {
@@ -267,7 +266,7 @@ ul, li {
     margin-left:20px;
     margin-bottom:5px;
     font-weight: 700;
-    color:#c4feff;
+    color:#f5f7ca;
 }
 #filter_container input  {
     width: 13px;
@@ -327,13 +326,13 @@ a.vehicle_tab, {
     display:block;
 }
 a.select_vehicle {
-  color:#000;
+  color:#aaa;
   padding-top:4px;
 }
 .select_vehicle:hover {
-  background-color:#cccccc;
+  background-color:;
   text-decoration:none;
-  color:#FFFFFF;
+  color:#aaa;
 }
 .select_vehicle {
   cursor:pointer;
@@ -343,11 +342,20 @@ a.select_vehicle {
   margin-top:0px;
   width:90px;
   height:33px;
-  border-radius:0px;
+  border-radius:3px;
   border-width:1px;
   border-style:solid;
-  border-color:#fff;
+  border-color:#eeeeee;
   padding-top:4px;
+background: -moz-linear-gradient(top,  rgba(219,219,219,1) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(219,219,219,1)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(219,219,219,1) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(219,219,219,1) 0%,rgba(255,255,255,0) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(219,219,219,1) 0%,rgba(255,255,255,0) 100%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(219,219,219,1) 0%,rgba(255,255,255,0) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dbdbdb', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
+
+
 }
 /*a.vehicle_tab:hover {
     background-color:#166888;
@@ -410,12 +418,13 @@ a.select_vehicle {
     margin-bottom:5px;
     font-size:.8em;
     margin-top:1px;
+    border-bottom: 1px solid #eeeeee;
 }
 .your_search_grey   {
     color:#cccccc;
 }
 .your_search_blue   {
-    color:#4a84a3;
+    color:#71b2cd;
     margin-right:15px;
 }
 .column {
@@ -450,10 +459,10 @@ a.pool_link {
 
 }
 
-#custom_page_content .column h2.pool_title a:link{ color:#adc9cd; } 
-#custom_page_content .column h2.pool_title a:visited{ color:; } 
+#custom_page_content .column h2.pool_title a:link{ color:#3b6f92; } 
+#custom_page_content .column h2.pool_title a:visited{ color:#3b6f92; } 
 #custom_page_content .column h2.pool_title a:hover{ color:#7fc8cd; text-decoration: none;} 
-#custom_page_content .column h2.pool_title a:active{ color:#6FB25C}
+#custom_page_content .column h2.pool_title a:active{ color:#519acd}
 
 
 /* Pool Detail Styles */
