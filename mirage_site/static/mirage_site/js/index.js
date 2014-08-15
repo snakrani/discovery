@@ -1,4 +1,4 @@
-var load_content = function(results) {
+var show_content = function(results) {
     var container = $("#custom_page_content");
     var data = results['results'];
     var total = results['num_results'];
@@ -7,8 +7,15 @@ var load_content = function(results) {
     var date_obj = new Date(results['sam_load']);
     $("#sam_load").text("SAM data updated: " + (date_obj.getMonth() + 1) + '/' + date_obj.getDate() + '/' + date_obj.getFullYear().toString().substring(2));
 
-    //load title data
+    //show search information
     $("#number_of_results span").text(total.toString() + " vendors in " + data.length.toString()  + " pool(s) match your search");
+    $("#your_search").text($("#naics-code option:selected").text());
+    $("#your_filters").text(
+        $("#setaside-filters input:checkbox:checked").map(function() {
+            return $(this).parent().text();
+        }).get().join(', ')
+    );
+    $("#your_search_criteria").show();
 
     //load vendor and pool data
     for (var e in data) {

@@ -51,13 +51,13 @@
             <div id="header">
                 <div id="page_title">
                     <span class="oasis_title">OASIS Market Research Tool</span>
-                    <span class="oasis_subtitle">find vendors by NAICS with the set-asides you need</span>
+                    <span class="oasis_subtitle">find vendors by NAICS with the socioeconomic factors you need</span>
                 </div><!--end page_title<!-->
 
                 <div id="search">
                     <form id="naics-search" class="pure-form">
                         <select id="naics-code">
-                            <option>Select an option</option>
+                            <option>Select a NAICS code</option>
                         </select>
                     </form>
                 </div><!--end search<!-->
@@ -69,7 +69,7 @@
                     <form id="setaside-filters" class="pure-form pure-form-stacked">
                         <fieldset>
                             <label class="pure-checkbox" for="vet"><input type="checkbox" id="vet" name="vet" value="A5" {% if "A5" in request.GET.setasides %}checked{% endif %}/>Veteran Owned</label>
-                            <label class="pure-checkbox labeltest" for="smalldis"><input type="checkbox" id="smalldis" name="smalldis" value="27" {% if "27" in request.GET.setasides %}checked{% endif %}/>Small, Disadvantaged Business</label>
+                            <label class="pure-checkbox labeltest" for="smalldis"><input type="checkbox" id="smalldis" name="smalldis" value="27" {% if "27" in request.GET.setasides %}checked{% endif %}/>Small Disadvantaged Business</label>
                             <label class="pure-checkbox" for="disvet"><input type="checkbox" id="disvet" name="disvet" value="QF" {% if "QF" in request.GET.setasides %}checked{% endif %}/>Service Disabled Veteran Owned</label>
                             <label class="pure-checkbox" for="woman"><input type="checkbox" id="woman" name="woman" value="A2" {% if "A2" in request.GET.setasides %}checked{% endif %} />Woman Owned</label>
                         </fieldset>
