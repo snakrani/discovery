@@ -73,3 +73,20 @@ class VendorsTest(TestCase):
         resp = self.c.get(self.path, {'format': 'json', 'naics': "all"})
         self.assertEqual(resp.status_code, 200)
         self.assertTrue(resp.data['num_results'] > 0)
+
+    def test_group_by_pool(self):
+        resp = self.c.get(self.path, {'format': 'json', 'group': 'pool', 'naics': '541330'})
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue('number' in resp.data['results'][0])
+        self.assertTrue('vehicle' in resp.data['results'][0])
+
+    def test_one_pool_returned(self):
+        resp = self.c.get(self.path, {'format': 'json', 'naics': 'all', 'pool': '1_SB', 'group': 'pool' })
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue(len(resp.data['results']) == 1)
+        self.assertTrue(resp.data['results'][0]['id'] == '1_SB')
+
+
+
+
+
