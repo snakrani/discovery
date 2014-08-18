@@ -101,8 +101,15 @@ var show_content = function(results) {
         }
     }
     
-    //load title data
+    //show search information
     $("#number_of_results span").text(total.toString() + " vendors match your search");
+    $("#your_search").text($("#naics-code option:selected").text());
+    $("#your_filters").text(
+        $("#setaside-filters input:checkbox:checked").map(function() {
+            return $(this).parent().text();
+        }).get().join(', ')
+    );
+    $("#your_search_criteria").show();
 }
 
 $(document).ready(function() {
