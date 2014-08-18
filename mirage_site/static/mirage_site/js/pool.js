@@ -1,12 +1,12 @@
-var show_content = function(results) {
+var get_pool_info = function() {
+    //extract pool information from document url
+    var parser = document.createElement('a');
+    parser.href = document.URL;
+    path_arr = parser.pathname.split('/');
+    return {'vehicle': path_arr[2], 'pool_number': path_arr[3]}
+}
 
-    var get_pool_info = function() {
-        //extract pool information from document url
-        var parser = document.createElement('a');
-        parser.href = document.URL;
-        path_arr = parser.pathname.split('/');
-        return {'vehicle': path_arr[2], 'pool_number': path_arr[3]}
-    }
+var show_content = function(results) {
 
     var render_column = function(v, prefix, setaside_code) {
         //returns properly formatted column for vendor/socioeconomic indicator

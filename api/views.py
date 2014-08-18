@@ -4,18 +4,19 @@ from django.http import HttpResponse
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from vendor.models import Vendor, Naics, SetAside, SamLoad
+from vendor.models import Vendor, Naics, SetAside, SamLoad, Pool
 from api.serializers import VendorSerializer, NaicsSerializer, PoolSerializer, ShortVendorSerializer
 
 
 def filter_vendors(obj):
     vendors = Vendor.objects.all()
     naics = obj.request.QUERY_PARAMS.get('naics', None)
+    setasides = obj.request.QUERY_PARAMS.get('setasides', None)
+    
     if naics == "all":
         naics = None
     naics_obj = None
-    setasides = obj.request.QUERY_PARAMS.get('setasides', None)
-    
+
     if naics:
         try:
             naics_obj = Naics.objects.get(short_code=naics)
@@ -50,7 +51,18 @@ class ListVendors(APIView):
     def get(self, request, format=None):
 
         group =  request.QUERY_PARAMS.get('group', None)
-        
+        pool_id = request.QUERY_PARAMS.get('pool', None)
+
+        #check if request is limited by a pool (only used if naics not supplied)
+        if pool_id: 
+            pool_id = pool_id.upper()
+         
+        try:
+            pool_filter = Pool.objects.get(id=pool_id)
+        except Pool.DoesNotExist as e:
+            pool_id = None
+            pass #invalid pool id
+
         sam_load_results = SamLoad.objects.all().order_by('-sam_load')[:1]
         sam_load = sam_load_results[0].sam_load if sam_load_results else None
 
@@ -64,6 +76,9 @@ class ListVendors(APIView):
                     #if there is a naics code, only return pools relevant to that naics
                     if naics: 
                         if naics in p.naics.all():
+                            create_or_add_to_pool(resp_json['results'], p, v)
+                    elif pool_id:
+                        if p == pool_filter:
                             create_or_add_to_pool(resp_json['results'], p, v)
                     else:
                         create_or_add_to_pool(resp_json['results'], p, v)

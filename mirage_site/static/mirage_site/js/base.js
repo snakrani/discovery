@@ -18,6 +18,20 @@ var get_setasides = function(){
     return setasides;
 }
 
+var get_pool = function() {
+
+    if (typeof(get_pool_info) != "undefined"){
+        pool_data = get_pool_info();
+        if (pool_data['vehicle'] == 'oasissb'){
+            return pool_data['pool_number'] + '_' + 'SB';
+        } else {
+            return pool_data['pool_number']
+        }
+    } else {
+        return null 
+    }
+}
+
 var clear_content = function(){
     $("#custom_page_content").find("div.column").remove();
 };
@@ -31,8 +45,13 @@ var build_query_string = function() {
         qs += "naics-code=all&";
     }
     if (get_setasides().length > 0) {
-        qs += "setasides=" + get_setasides();
+        qs += "setasides=" + get_setasides() + "&";
     }
+
+    if (get_pool() != null) {
+        qs += "pool=" + get_pool();
+    }
+    
     return qs;
 }
 
@@ -53,6 +72,9 @@ var refresh_data = function(event) {
     }
     if (setasides.length > 0) {
         query_data["setasides"] = setasides.join();
+    }
+    if (get_pool() != null) {
+        query_data['pool'] = get_pool();
     }
     
     $.getJSON(url, query_data, function(data){
