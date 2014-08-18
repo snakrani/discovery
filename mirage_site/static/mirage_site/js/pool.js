@@ -114,5 +114,8 @@ var show_content = function(results) {
 
 $(document).ready(function() {
     //load results when page loads
-    refresh_data();
+    var code = get_code_from_dropdown();
+    if (code == 'all') {
+        $("#naics-code").select2().select2("val", "all");
+    }
 })

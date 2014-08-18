@@ -1,4 +1,4 @@
-var get_code = function () {
+var get_code_from_dropdown = function () {
     /* returns naics-code from selected option in dropdown or 'all'
     if option is not selected */
     code = $('#naics-code').val();
@@ -39,11 +39,7 @@ var clear_content = function(){
 var build_query_string = function() {
     /* build query string from search form and push to history stack */
     var qs = "?";
-    if (get_code() != 'Select a NAICS code') {
-        qs += "naics-code=" + get_code() + "&";
-    } else {
-        qs += "naics-code=all&";
-    }
+    qs += "naics-code=" + get_code_from_dropdown() + "&";
     if (get_setasides().length > 0) {
         qs += "setasides=" + get_setasides() + "&";
     }
@@ -58,13 +54,10 @@ var build_query_string = function() {
 var refresh_data = function(event) {
     /* query api for search results based on current state of form elements 
     and display results */
-    var code = get_code();
-    if (code == 'all') {
-        $("#naics-code").select2().select2("val", "all");
-    }
 
+    code = get_code_from_dropdown();
     var setasides = get_setasides();
-    var url = "/api/vendors/"
+    var url = "/api/vendors/";
     var query_data = {'group': 'pool'}
 
     if (code != 'null' && code != null) {
@@ -87,7 +80,7 @@ var refresh_data = function(event) {
     qs = build_query_string();
     History.pushState(null, null, qs);
 
-    $('#naics-code').select2({dropdownAutoWidth : true});
+    $('#naics-code').select2({placeholder:'Select a NAICS code', dropdownAutoWidth : true});
 
     return false;
 }
