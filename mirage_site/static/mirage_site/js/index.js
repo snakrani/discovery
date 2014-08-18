@@ -63,3 +63,11 @@ var show_content = function(results) {
     new_crumb.append(crumb_anchor);
     $('#crumbs').append(new_crumb);
 }
+
+$(document).ready(function() {
+    //load results when page loads
+    var code = get_code_from_dropdown();
+    if (code == 'all') {
+        $("#naics-code").select2().select2("val", "all");
+    }
+})

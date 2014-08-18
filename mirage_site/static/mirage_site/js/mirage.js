@@ -28,7 +28,7 @@ $( document ).ready( function() {
 	History.Adapter.bind(window, 'statechange', null);
 
 	//set naics dropdown width
-	$('#naics-code').select2({dropdownAutoWidth : true});
+	$('#naics-code').select2({placeholder:'Select a NAICS code', dropdownAutoWidth : true});
 
 });
 
