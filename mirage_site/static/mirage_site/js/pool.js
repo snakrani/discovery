@@ -117,6 +117,7 @@ var show_content = function(results) {
         }).get().join(', ')
     );
     $("#your_search_criteria").show();
+    $("#pool_table").show();
 }
 
 var refresh_data = function(event) {
