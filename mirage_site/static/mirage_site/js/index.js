@@ -1,7 +1,14 @@
 var show_content = function(results) {
+    console.log("show content");
     var container = $("#custom_page_content");
     var data = results['results'];
     var total = results['num_results'];
+
+    //add current search status query string to url in address bar and push to history
+    qs = build_query_string();
+    History.pushState(null, null, qs);
+
+    $('#naics-code').select2({placeholder:'Select a NAICS code', dropdownAutoWidth : true});
 
     //load SAM update date
     var date_obj = new Date(results['sam_load']);
@@ -62,6 +69,41 @@ var show_content = function(results) {
     crumb_anchor.text('Search Results');
     new_crumb.append(crumb_anchor);
     $('#crumbs').append(new_crumb);
+}
+
+var refresh_data = function(event) {
+    /* query api for search results based on current state of form elements 
+    and display results */
+
+    code = get_code_from_dropdown();
+    var setasides = get_setasides();
+    var url = "/api/vendors/";
+    var query_data = {'group': 'pool'}
+
+    if (code != 'null' && code != null) {
+        query_data["naics"] = code;
+    }
+    if (setasides.length > 0) {
+        query_data["setasides"] = setasides.join();
+    }
+    if (get_pool() != null) {
+        query_data['pool'] = get_pool();
+    }
+    
+    $.getJSON(url, query_data, function(data){
+        /* when data loads clear content and rebuild results */
+        if (data['results'].length == 1) {
+            obj = data['results'][0];
+            qs = build_query_string();
+            window.location.href = '/pool/' + obj['vehicle'].toLowerCase() + '/' + obj['number'] + '/' + qs;
+        } else {
+            clear_content();
+            show_content(data);
+        }
+
+    });
+
+    return false;
 }
 
 $(document).ready(function() {
