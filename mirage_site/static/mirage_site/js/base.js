@@ -43,10 +43,6 @@ var build_query_string = function() {
     if (get_setasides().length > 0) {
         qs += "setasides=" + get_setasides() + "&";
     }
-
-    if (get_pool() != null) {
-        qs += "pool=" + get_pool();
-    }
     
     return qs;
 }
