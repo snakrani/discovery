@@ -566,6 +566,9 @@ a.pool_link {
 .pooldetail tr:first-child td:last-child{
     border-width:0px 0px 1px 1px;
 }
+#pool_table {
+    display:none;
+}
 #pool_table .h_vendor_name {
     text-align: left;
 

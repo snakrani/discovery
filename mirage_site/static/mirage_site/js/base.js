@@ -47,40 +47,6 @@ var build_query_string = function() {
     return qs;
 }
 
-var refresh_data = function(event) {
-    /* query api for search results based on current state of form elements 
-    and display results */
-
-    code = get_code_from_dropdown();
-    var setasides = get_setasides();
-    var url = "/api/vendors/";
-    var query_data = {'group': 'pool'}
-
-    if (code != 'null' && code != null) {
-        query_data["naics"] = code;
-    }
-    if (setasides.length > 0) {
-        query_data["setasides"] = setasides.join();
-    }
-    if (get_pool() != null) {
-        query_data['pool'] = get_pool();
-    }
-    
-    $.getJSON(url, query_data, function(data){
-        /* when data loads clear content and rebuild results */
-        clear_content();
-        show_content(data);
-    });
-
-    //add current search status query string to url in address bar and push to history
-    qs = build_query_string();
-    History.pushState(null, null, qs);
-
-    $('#naics-code').select2({placeholder:'Select a NAICS code', dropdownAutoWidth : true});
-
-    return false;
-}
-
 //refresh data on page if search criteria changes 
 $("#naics-code").change(refresh_data);
 $("#setaside-filters").change(refresh_data);
