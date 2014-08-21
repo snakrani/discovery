@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+  <title>Test Suite</title>
+</head>
+<body>
+<table id="suiteTable" cellpadding="1" cellspacing="1" border="1" class="selenium"><tbody>
+<tr><td><b>Test Suite</b></td></tr>
+<tr><td><a href="001_check_titles">Check titles</a></td></tr>
+<tr><td><a href="002_veteran_owned_search">Veteran owned search</a></td></tr>
+<tr><td><a href="003_all_naics_codes">Search all NAICS codes</a></td></tr>
+<tr><td><a href="004_zero_results_indicator">Zero results indicator on search</a></td></tr>
+<tr><td><a href="005_breadcumbs_display_progress">Breadcrumbs display progress</a></td></tr>
+<tr><td><a href="link_to_pool_detail">Link to pool detail page</a></td></tr>
+<tr><td><a href="socioeconomic_indicators_in_pool_detail">Socioeconomic indicators in pool detail</a></td></tr>
+<tr><td><a href="pool_detail_result_count">Show count of results on pool detail</a></td></tr>
+<tr><td><a href="search_criteria_pool_detail">Search criteria on pool detail</a></td></tr>
+<tr><td><a href="search_criteria_on_search_results">Search criteria on search results</a></td></tr>
+</tbody></table>
+</body>
+</html>
