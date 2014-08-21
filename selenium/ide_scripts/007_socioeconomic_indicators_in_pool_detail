@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://demo.mirage.gsa.gov/" />
+<title>Socioeconomic indicators in pool detail</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Socioeconomic indicators in pool detail</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/pool/oasissb/1/?naics-code=&amp;setasides=A5&amp;pool=1_SB</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=vet</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=td.vo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=td.h_sdb</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=td.h_sdvo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=td.h_wo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=td.h_vo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=td.vo</td>
+	<td>X</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=td.sdvo</td>
+	<td>X</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>id=pool_vendors.10.5</td>
+	<td>X</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>id=pool_vendors.3.3</td>
+	<td>X</td>
+</tr>
+</tbody></table>
+</body>
+</html>
