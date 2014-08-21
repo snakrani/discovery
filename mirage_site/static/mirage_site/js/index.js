@@ -1,5 +1,4 @@
 var show_content = function(results) {
-    console.log("show content");
     var container = $("#custom_page_content");
     var data = results['results'];
     var total = results['num_results'];

@@ -82,7 +82,6 @@ var show_content = function(results) {
     var pool_info = get_pool_info();
 
     //add current search status query string to url in address bar and push to history
-    console.log("here");
     qs = build_query_string();
     History.pushState(null, null, qs);
 
