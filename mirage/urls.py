@@ -16,4 +16,5 @@ urlpatterns = patterns('',
     url(r'^api/', include(api_urls)),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^pool/(?P<vehicle>\w+)/(?P<pool_number>\w+)/$', TemplateView.as_view(template_name='pool.html')),
+    url(r'^vendor/(?P<vendor_duns>\w+)/$', TemplateView.as_view(template_name='vendor.html')),
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
