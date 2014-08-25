@@ -13,11 +13,13 @@
 <tr><td><a href="003_all_naics_codes">Search all NAICS codes</a></td></tr>
 <tr><td><a href="004_zero_results_indicator">Zero results indicator on search</a></td></tr>
 <tr><td><a href="005_breadcumbs_display_progress">Breadcrumbs display progress</a></td></tr>
-<tr><td><a href="link_to_pool_detail">Link to pool detail page</a></td></tr>
-<tr><td><a href="socioeconomic_indicators_in_pool_detail">Socioeconomic indicators in pool detail</a></td></tr>
-<tr><td><a href="pool_detail_result_count">Show count of results on pool detail</a></td></tr>
-<tr><td><a href="search_criteria_pool_detail">Search criteria on pool detail</a></td></tr>
-<tr><td><a href="search_criteria_on_search_results">Search criteria on search results</a></td></tr>
+<tr><td><a href="006_link_to_pool_detail">Link to pool detail page</a></td></tr>
+<tr><td><a href="007_socioeconomic_indicators_in_pool_detail">Socioeconomic indicators in pool detail</a></td></tr>
+<tr><td><a href="008_pool_detail_result_count">Show count of results on pool detail</a></td></tr>
+<tr><td><a href="009_search_criteria_pool_detail">Search criteria on pool detail</a></td></tr>
+<tr><td><a href="010_search_criteria_on_search_results">Search criteria on search results</a></td></tr>
+<tr><td><a href="011_sam_data_load_displayed">SAM data load date displayed</a></td></tr>
+<tr><td><a href="012_vendor_pool_count_search_results">Show vendor and pool count in search results</a></td></tr>
 </tbody></table>
 </body>
 </html>
