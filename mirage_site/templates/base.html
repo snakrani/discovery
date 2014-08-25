@@ -53,65 +53,13 @@
                     <span class="oasis_title">OASIS Market Research Tool</span>
                     <span class="oasis_subtitle">find vendors by NAICS with the socioeconomic factors you need</span>
                 </div><!--end page_title<!-->
-
-                <div id="search">
-                    <form id="naics-search" class="pure-form">
-                        <select id="naics-code">
-                            <option></option>
-                        </select>
-                    </form>
-                </div><!--end search<!-->
+                {% block header %}    
+                {% endblock header %}
             </div><!--end header<!-->
 
-            <div id="filter_container">
-                <h3 class="filter_title">Filters</h3>
-                <div id="filter" class="filterbox">
-                    <form id="setaside-filters" class="pure-form pure-form-stacked">
-                        <fieldset>
-                            <label class="pure-checkbox" for="vet"><input type="checkbox" id="vet" name="vet" value="A5" {% if "A5" in request.GET.setasides %}checked{% endif %}/>Veteran Owned</label>
-                            <label class="pure-checkbox labeltest" for="smalldis"><input type="checkbox" id="smalldis" name="smalldis" value="27" {% if "27" in request.GET.setasides %}checked{% endif %}/>Small Disadvantaged Business</label>
-                            <label class="pure-checkbox" for="disvet"><input type="checkbox" id="disvet" name="disvet" value="QF" {% if "QF" in request.GET.setasides %}checked{% endif %}/>Service Disabled Veteran Owned</label>
-                            <label class="pure-checkbox" for="woman"><input type="checkbox" id="woman" name="woman" value="A2" {% if "A2" in request.GET.setasides %}checked{% endif %} />Woman Owned</label>
-                        </fieldset>
-                    </form>
-                </div><!--end filterbox<!-->
-            </div><!--end filter<!-->
-
-
-            <div id="main_container">
-
-                <div id="tabs_container">
-
-                    <div id="select_vehicle">
-                        <a class="select_vehicle" href="#" title="OASIS SB">
-                          OASIS SB
-                        </a>
-                    </div><!--end select_vehicle<!-->
-
-                </div><!--end tabs_container<!-->
-
-                <div id="breadcrumbs">
-                    <ul id="crumbs">
-                    {% block crumbs %}
-                    {% endblock %}
-                    </ul>
-                </div><!--end breadcrumbs<!-->
-
-                <div id="results_sam_container">
-
-                    <div id="number_of_results">
-                        <span class="matching_your_search"></span>
-                    </div><!--end number_of_results<!-->
-
-                    <div id="sam_last_updated">
-                        <span id="sam_load" class="sam_style"></span>
-                    </div><!--end sam_last_updated<!-->
-
-                <!--end results_sam_container<!-->
-
-            </div><!--end main_container<!-->
-
-
+            
+            {% block body %}
+            {% endblock body %}
 
                 <!--CUSTOM PAGE CONTENT HERE!-->            
 
