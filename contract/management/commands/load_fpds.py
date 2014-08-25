@@ -3,6 +3,7 @@ from django.core.management import call_command
 from django.conf import settings
 from pyfpds import Contracts
 from vendor.models import Vendor
+from contract.models import FPDSContract
 from datetime import datetime, timedelta
 
 class Command(BaseCommand):
@@ -73,6 +74,13 @@ class Command(BaseCommand):
 
             for piid, records in by_piid.items():
                 by_piid[piid] = sorted(records, key=lambda x: (x['mod_number'], x['transaction_number']))
+
+                total = 0 # amount obligated
+                con = FPDSContract.objects.get_or_create(piid=piid)
+                
+                for mod in by_piid[piid]:
+                    total += mod['obligated_amount']
+                    con.date_signed = mod['signed_date']
 
                 print("================{0}====================\n".format(piid))
                 self.contracts.pretty_print(by_piid[piid])

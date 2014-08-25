@@ -22,7 +22,7 @@ PRICING_CHOICES = (
 
 class FPDSContract(models.Model):
     
-    piid = models.CharField(max_length=128)
+    piid = models.CharField(max_length=128, unique=True)
     date_signed = models.DateField()
     completion_date = models.DateField(null=True)
     agency_id = models.IntegerField()
