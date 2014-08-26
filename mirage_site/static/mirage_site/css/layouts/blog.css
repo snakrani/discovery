@@ -592,4 +592,17 @@ a.pool_link {
     padding-bottom:10px;
 }
 
+
+/* Vendor Detail Styles */
+#breadcrumb_container   {
+    border-top:1px solid #e3e5e9;
+    border-bottom:1px solid #e3e5e9;
+}
+#vendor_main_container  {
+    float:left;
+    width:1100px;
+    overflow: ;
+    border:1px solid #e9d453;
+}
+
 }
