@@ -1,5 +1,5 @@
 from django.db import models
-from vendor.models import Naics
+from vendor.models import Naics, Vendor
 
 PRICING_CHOICES = (
     ('A', 'Fixed Price Redetermination'),
@@ -20,16 +20,33 @@ PRICING_CHOICES = (
     ('3', 'Other'),
 )
 
+TERMINATION_CHOICES = (
+    ('C', 'Termination for Default'),
+    ('P', 'Termination for Cause'),
+
+)
+
 class FPDSContract(models.Model):
     
     piid = models.CharField(max_length=128, unique=True)
-    date_signed = models.DateField()
-    completion_date = models.DateField(null=True)
-    agency_id = models.IntegerField()
-    agency_name = models.CharField(max_length=128)
+    date_signed = models.DateTimeField(null=True)
+    completion_date = models.DateTimeField(null=True)
+    vendor = models.ForeignKey(Vendor)
+    agency_id = models.CharField(max_length=128, null=True)
+    agency_name = models.CharField(max_length=128, null=True)
     pricing_type = models.CharField(choices=PRICING_CHOICES, max_length=2, null=True)
     obligated_amount = models.DecimalField(max_digits=128, decimal_places=2, null=True)
     last_modified_by = models.EmailField(null=True)
-    NAICS = models.ForeignKey(Naics, null=True)
+    NAICS = models.CharField(max_length=128, null=True)
     PSC = models.CharField(max_length=128, null=True)
+
+
+class FAPIISRecord(models.Model):
+    
+    piid = models.CharField(max_length=128, db_index=True)
+    agency_id = models.CharField(max_length=128, null=True)
+    agency_name = models.CharField(max_length=128, null=True)
+    NAICS = models.CharField(max_length=128, null=True)
+    PSC = models.CharField(max_length=128, null=True)
+    record_type = models.CharField(choices=TERMINATION_CHOICES, max_length=2, null=True)
 

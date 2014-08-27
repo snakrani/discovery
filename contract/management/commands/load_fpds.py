@@ -17,7 +17,7 @@ class Command(BaseCommand):
         if key in obj:
             return obj[key]
         else:
-            return "" 
+            return None 
 
     def handle(self, *args, **kwargs):
     
@@ -56,16 +56,28 @@ class Command(BaseCommand):
                     'agency_id': award_id['awardContractID']['agencyID']['#text'],
                     'agency_name': award_id['awardContractID']['agencyID']['@name'],
                     'obligated_amount': award['dollarValues']['obligatedAmount'],
-                    'last_modified_by': award['transactionInformation']['lastModifiedBy'],
-                    'status': award['transactionInformation']['status']['@description'],
-                    'naics': self.try_key(self.try_key(award['productOrServiceInformation'], 'principalNAICSCode'), '#text'),
-                    'psc': award['productOrServiceInformation']['productOrServiceCode']['#text'],
                 }
 
-                if self.try_key(award['contractData'], 'typeOfContractPricing') != '':
-                    record['type_of_contract_pricing_name'] = award['contractData']['typeOfContractPricing']['@description']
-                    record['type_of_contract_pricing_id'] = award['contractData']['typeOfContractPricing']['#text']
+                if award.get('transactionInformation'):
+                    record['last_modified_by'] = award.get('transactionInformation').get('lastModifiedBy')
+                    record['status'] = award.get('transactionInformation').get('status').get('@description')
+
+                if award.get('contractData') and award.get('contractData').get('typeOfContractPricing'):
+                    if type(award.get('contractData').get('typeOfContractPricing')) == str:
+                        record['type_of_contract_pricing_name'] = award['contractData']['typeOfContractPricing']
+                    else: 
+                        record['type_of_contract_pricing_name'] = award['contractData']['typeOfContractPricing'].get('@description')
+                        record['type_of_contract_pricing_id'] = award['contractData']['typeOfContractPricing'].get('#text')
                
+                if award.get('productOrServiceInformation'):
+                    
+                    if type(award.get('productOrServiceInformation').get('principalNAICSCode')) == str:
+                        record['naics'] = award['productOrServiceInformation']['principalNAICSCode']
+                    elif award.get('productOrServiceInformation').get('principalNAICSCode'):
+                        record['naics'] = award['productOrServiceInformation']['principalNAICSCode'].get('#text')
+                    
+                    if award.get('productOrServiceInformation').get('productOrServiceCode'):
+                        record['psc'] = award['productOrServiceInformation']['productOrServiceCode'].get('#text')
 
                 if piid in by_piid:
                     by_piid[piid].append(record)
@@ -75,19 +87,40 @@ class Command(BaseCommand):
             for piid, records in by_piid.items():
                 by_piid[piid] = sorted(records, key=lambda x: (x['mod_number'], x['transaction_number']))
 
+               # try: 
                 total = 0 # amount obligated
-                con = FPDSContract.objects.get_or_create(piid=piid)
                 
-                for mod in by_piid[piid]:
-                    total += mod['obligated_amount']
-                    con.date_signed = mod['signed_date']
-
-                print("================{0}====================\n".format(piid))
+                print("================{0}===Vendor {1}=================\n".format(piid, v.duns))
                 self.contracts.pretty_print(by_piid[piid])
-                #self.contracts.pretty_print(vc)
+                
+                con, created = FPDSContract.objects.get_or_create(piid=piid, vendor=v)
+
+                for mod in by_piid[piid]:
+                    total += float(mod.get('obligated_amount'))
+                    con.date_signed = mod.get('signed_date') 
+                    con.completion_date = mod.get('current_completion_date') or mod.get('ultimate_completion_date')
+                    con.agency_id = mod.get('agency_id')
+                    con.agency_name = mod.get('agency_name')
+                    con.pricing_type = mod.get('type_of_contract_pricing_id')
+
+                    if mod.get('last_modified_by') and '@' in mod['last_modified_by'].lower():
+                        #only add if it's an actual email, make this a better regex
+                        con.last_modified_by = mod['last_modified_by']
+                    
+                    #ADD NAICS -- need to add other naics as objects to use foreignkey
+                    con.PSC = mod.get('psc')
+                    con.NAICS = mod.get('naics')
+
+                con.obligated_amount = total
+                
+                #debug
+               
+                con.save()
+
+            #except Exception as e:
+            #self.contracts.pretty_print(vc)
                 #break
                 #by_piid[
             #print(by_piid)
             #break
             #print(len(v_con))
-            break

@@ -1,3 +1,4 @@
 from django.contrib import admin
+from contract.models import FPDSContract
 
-# Register your models here.
+admin.site.register(FPDSContract)

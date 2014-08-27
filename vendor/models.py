@@ -15,8 +15,8 @@ STATUS_CHOICES = (
 class Vendor(models.Model):
 
     name = models.CharField(max_length=128)
-    duns = models.CharField(max_length=9)
-    duns_4 = models.CharField(max_length=13)
+    duns = models.CharField(max_length=9, unique=True)
+    duns_4 = models.CharField(max_length=13, unique=True)
     sam_address = models.CharField(null=True, max_length=128)
     sam_citystate = models.CharField(null=True, max_length=128)
     cm_name = models.CharField(null=True, max_length=128)
