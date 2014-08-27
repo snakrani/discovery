@@ -20,15 +20,16 @@ class Command(BaseCommand):
             return None 
 
     def handle(self, *args, **kwargs):
-    
+   
+        #TO DO make this smarter -- keep track of last load, only load modified since that date
         today = datetime.now()
         ten_years = timedelta(weeks=(52*10))
         ten_years_ago = today - ten_years
 
+        #for v in Vendor.objects.filter(duns='145454182'):
         for v in Vendor.objects.all():
-            
+
             by_piid = {} 
-            
             v_con = self.contracts.get(vendor_duns=v.duns, date_signed=self.date_format(ten_years_ago, today), num_records='all')
 
             for vc in v_con:
@@ -91,6 +92,9 @@ class Command(BaseCommand):
                 total = 0 # amount obligated
                 
                 print("================{0}===Vendor {1}=================\n".format(piid, v.duns))
+                print(v.duns)
+                print(v.id)
+
                 self.contracts.pretty_print(by_piid[piid])
                 
                 con, created = FPDSContract.objects.get_or_create(piid=piid, vendor=v)
