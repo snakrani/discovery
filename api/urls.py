@@ -5,6 +5,7 @@ from api import views
 urlpatterns = patterns('',
     url(r'^vendors/$', views.ListVendors.as_view()),
     url(r'^naics/$', views.ListNaics.as_view()),
+    url(r'^contracts/$', views.ListContracts.as_view()),
 )
 
 urlpatterns = format_suffix_patterns(urlpatterns)

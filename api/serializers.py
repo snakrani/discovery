@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from vendor.models import Vendor, Pool, Naics, SetAside
+from contract.models import Contract
 
 class SetAsideSerializer(serializers.ModelSerializer):
     class Meta:
@@ -43,3 +44,11 @@ class ShortVendorSerializer(serializers.ModelSerializer):
         model = Vendor
         fields = ('name', 'duns', 'duns_4', 'sam_address', 'sam_citystate',
             'setasides', 'sam_status', 'sam_exclusion', 'sam_url')
+
+class ContractSerializer(serializers.ModelSerializer):
+    
+    pricing_type = serializers.Field(source='get_pricing_type_display')
+
+    class Meta:
+        model = Contract
+        fields = ('piid', 'agency_name', 'NAICS', 'date_signed', 'status', 'obligated_amount', 'point_of_contact', 'pricing_type')
