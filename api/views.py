@@ -46,6 +46,13 @@ def create_or_add_to_pool(pool_array, pool, vendor):
     serial_pool['vendors'] = [ShortVendorSerializer(vendor).data]
     pool_array.append(serial_pool)
 
+class GetVendor(APIView):
+
+    def get(self, request, duns, format=None):
+        vendor = Vendor.objects.get(duns=duns) 
+        return Response(VendorSerializer(vendor).data) 
+
+
 
 class ListVendors(APIView):
     
