@@ -184,6 +184,7 @@ ul, li {
     margin-bottom:5px;
     font-weight: 700;
     color:#f5f7ca;
+    margin-top:15px;
 }
 #filter_container input  {
     width: 13px;
@@ -359,6 +360,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dbdbdb', end
     margin: 15px 0px 5px 0px;
     
     width:100;
+    background:url(/static/mirage_site/images/pool_arrows.png);
+    background-repeat: no-repeat;
+    background-position: 100px 16px;
 }
 .number_of_vendors_in_pool {   
     margin-top:-8px;
@@ -369,7 +373,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dbdbdb', end
     font-size: 0.8em;
     color:#777777;
     line-height: 1.3em;
-    padding-bottom:-3px;
+    padding-bottom:3px;
+    margin-bottom:0px;
+    
+
 }
 a.pool_link {
 }
