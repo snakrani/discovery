@@ -30,6 +30,9 @@ class Vendor(models.Model):
     sam_status = models.CharField(null=True, max_length=128)
     sam_exclusion = models.NullBooleanField(null=True)
     sam_url = models.URLField(null=True)
+    annual_revenue = models.CharField(null=True, max_length=128)
+    number_of_employees = models.IntegerField(null=True)
+
 
     def __str__(self):
         return self.name

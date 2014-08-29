@@ -34,7 +34,7 @@ class VendorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vendor
         fields = ('name', 'duns', 'duns_4', 'sam_address', 'sam_citystate',
-            'pools', 'setasides', 'sam_status', 'sam_exclusion', 'sam_url')
+            'pools', 'setasides', 'sam_status', 'sam_exclusion', 'sam_url', 'annual_revenue', 'number_of_employees')
 
 
 class ShortVendorSerializer(serializers.ModelSerializer):
