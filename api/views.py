@@ -1,11 +1,12 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from contract.models import Contract
 from vendor.models import Vendor, Naics, SetAside, SamLoad, Pool
-from api.serializers import VendorSerializer, NaicsSerializer, PoolSerializer, ShortVendorSerializer
+from api.serializers import VendorSerializer, NaicsSerializer, PoolSerializer, ShortVendorSerializer, ContractSerializer
 
 
 def filter_vendors(obj):
@@ -44,6 +45,13 @@ def create_or_add_to_pool(pool_array, pool, vendor):
     serial_pool = PoolSerializer(pool).data
     serial_pool['vendors'] = [ShortVendorSerializer(vendor).data]
     pool_array.append(serial_pool)
+
+class GetVendor(APIView):
+
+    def get(self, request, duns, format=None):
+        vendor = Vendor.objects.get(duns=duns) 
+        return Response(VendorSerializer(vendor).data) 
+
 
 
 class ListVendors(APIView):
@@ -115,3 +123,38 @@ class ListNaics(APIView):
             codes = Naics.objects.all()
 
         return codes
+
+class ListContracts(APIView):
+    
+    def get(self, request, format=None):
+        contracts = self.get_queryset()
+
+        if contracts == 1:
+            return HttpResponseBadRequest("You must provide a vendor DUNS to retrieve contracts.")
+
+        elif not contracts:
+            return Response({'num_results': 0, 'results': []})
+
+        else:
+            serializer = ContractSerializer(contracts)
+            return Response({'num_results': len(serializer.data), 'results': serializer.data})
+
+    def get_queryset(self):
+        
+        duns = self.request.QUERY_PARAMS.get('duns', None)
+        naics = self.request.QUERY_PARAMS.get('naics', None)
+
+        if not duns:
+            return 1
+
+        vendor = Vendor.objects.get(duns=duns)
+        contracts = Contract.objects.filter(vendor=vendor)
+
+        if naics:
+            #contracts = contracts.filter(NAICS=Naics.objects.filter(code=naics)[0])
+            contracts = contracts.filter(NAICS=naics)  #change to above when naics loaded right
+
+        return contracts
+
+
+

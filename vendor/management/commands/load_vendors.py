@@ -43,13 +43,15 @@ class Command(BaseCommand):
                         
                         #relevant columns
                         data = line[1:11]
-
                         piid = data[1]
+                        duns = self.replace_x(data[2])
+    
+                        new_obj, created = Vendor.objects.get_or_create(duns=duns)
 
                         attr_dict = {
                             'name': data[0],
                             'duns': self.replace_x(data[2]),
-                            'duns_4': self.duns_plus_4(data[2]),                            
+                            'duns_4': self.duns_plus_4(duns),                            
                             'cm_name': data[4],
                             'cm_phone': data[5],
                             'cm_email': data[6],
@@ -57,8 +59,13 @@ class Command(BaseCommand):
                             'pm_phone': data[8],
                             'pm_email': data[9]
                         }
-                        new_obj, created = Vendor.objects.get_or_create(**attr_dict)
-               
+                        
+                        for k, v in attr_dict.items(): 
+                            if v and v != '' and v != ' ':
+                                setattr(new_obj, k, v)
+
+                        new_obj.save()
+
                         #add pool relationship
                         poolpiid, ppcreated = PoolPIID.objects.get_or_create(vendor=new_obj, pool=pool_obj, piid=piid)
 
