@@ -15,8 +15,8 @@ STATUS_CHOICES = (
 class Vendor(models.Model):
 
     name = models.CharField(max_length=128)
-    duns = models.CharField(max_length=9)
-    duns_4 = models.CharField(max_length=13)
+    duns = models.CharField(max_length=9, unique=True)
+    duns_4 = models.CharField(max_length=13, unique=True)
     sam_address = models.CharField(null=True, max_length=128)
     sam_citystate = models.CharField(null=True, max_length=128)
     cm_name = models.CharField(null=True, max_length=128)
@@ -30,6 +30,9 @@ class Vendor(models.Model):
     sam_status = models.CharField(null=True, max_length=128)
     sam_exclusion = models.NullBooleanField(null=True)
     sam_url = models.URLField(null=True)
+    annual_revenue = models.CharField(null=True, max_length=128)
+    number_of_employees = models.IntegerField(null=True)
+
 
     def __str__(self):
         return self.name
