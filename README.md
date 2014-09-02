@@ -15,11 +15,13 @@ Next you'll need to load data so that you have something to query. Inside the `/
 
 `manage.py loaddata vendor/fixtures/naics.json`
 
-The vendors.json fixture is optional. You can either load the vendors fixture as stated above, or run the ```load_vendors``` manage command to get the most up-to-date information.
+Make sure to load naics.json, pools.json, and setasides.json (in that order).
+
+Now you can run the ```load_vendors``` manage command to get the most up-to-date information.
 
 ```manage.py load_vendors```
 
-Note that this manage command requires you to specify a ```SAM_API_KEY``` variable in your local settings file as shown in local_settings.example.py. This value should be a valid Data.gov API key.
+Note that this manage command requires you to specify a ```SAM_API_KEY``` variable in your local settings file as shown in local_settings.example.py. This value should be a valid Data.gov API key. The loader runs slightly faster than the rate limiting on api.data.gov, so you'll need to lift that limit on your key. Contact the OASIS development team for details. 
 
 Once the server is started you can query the api at
 `http://localhost:8000/api/vendors/`
