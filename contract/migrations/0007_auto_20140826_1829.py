@@ -11,7 +11,11 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterField(
+        migrations.RemoveField(
+            model_name='fpdscontract',
+            name='NAICS',
+        ),
+        migrations.AddField(
             model_name='fpdscontract',
             name='NAICS',
             field=models.CharField(max_length=128, null=True),
