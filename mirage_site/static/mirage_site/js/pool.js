@@ -58,8 +58,12 @@ var show_content = function(results) {
         vendor_row = $(document.createElement('tr'));
 
         name_col = $(document.createElement('td'));
+        name_a = $(document.createElement('a'));
+        name_a.text(v.name);
+        name_a.attr('href', '/vendor/' + v.duns + '/');
+        name_a.attr('class', 'link_style');
         name_col.attr('class', 'vendor_name');
-        name_col.text(v.name);
+        name_col.append(name_a);
         vendor_row.append(name_col);
 
         location_col = $(document.createElement('td'));
