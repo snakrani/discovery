@@ -59,6 +59,10 @@ var lower = function(str) {
     }
 }
 
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 //refresh data on page if search criteria changes 
 $("#naics-code").change(refresh_data);
 $("#setaside-filters").change(refresh_data);

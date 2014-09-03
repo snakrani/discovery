@@ -43,7 +43,7 @@ var show_content = function(results) {
 	$('.duns_number').html(results.duns);
 	$('.cage_code').html(results.cage);
 	$('.number_of_employees').html(results.number_of_employees ? results.number_of_employees : 'N/A');
-	$('.annual_revenue').html(results.annual_revenue ? '$' + results.annual_revenue : 'N/A');
+	$('.annual_revenue').html(results.annual_revenue ? '$' + numberWithCommas(results.annual_revenue) : 'N/A');
 
 	//load SAM expiration date
     var current_date = new Date();
@@ -89,7 +89,7 @@ var build_table = function(data){
         var td = tr.append($(document.createElement('td')).addClass('piid').text(results[item]['piid']));
         var td = tr.append($(document.createElement('td')).addClass('agency').text(to_title_case(results[item]['agency_name'])));
         var td = tr.append($(document.createElement('td')).addClass('type').text(results[item]['pricing_type']));
-        var td = tr.append($(document.createElement('td')).addClass('value').text(results[item]['obligated_amount']));
+        var td = tr.append($(document.createElement('td')).addClass('value').text(numberWithCommas(results[item]['obligated_amount'])));
         var td = tr.append($(document.createElement('td')).addClass('email_poc').text(lower(results[item]['point_of_contact'])));
         var td = tr.append($(document.createElement('td')).addClass('status').text(results[item]['status']));
         //more goes here
