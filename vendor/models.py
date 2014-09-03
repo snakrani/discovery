@@ -17,6 +17,7 @@ class Vendor(models.Model):
     name = models.CharField(max_length=128)
     duns = models.CharField(max_length=9, unique=True)
     duns_4 = models.CharField(max_length=13, unique=True)
+    cage = models.CharField(max_length=15, null=True)
     sam_address = models.CharField(null=True, max_length=128)
     sam_citystate = models.CharField(null=True, max_length=128)
     cm_name = models.CharField(null=True, max_length=128)
