@@ -47,12 +47,12 @@ var show_content = function(results) {
 	//socioeconomic indicators
     t = $(document.getElementById('socioeconomic_indicators'));
     indicators_row = $(document.createElement('tr'));
-	indicators_row.append(render_column(results, 'vo', 'A5'));
-	indicators_row.append(render_column(results, 'sdb', '27'));
-	indicators_row.append(render_column(results, 'sdvo', 'QF'));
-	indicators_row.append(render_column(results, 'wo', 'A2'));
 	indicators_row.append(render_column(results, '8a', 'A6'));
 	indicators_row.append(render_column(results, 'Hubz', 'XX'));
+	indicators_row.append(render_column(results, 'sdvo', 'QF'));
+	indicators_row.append(render_column(results, 'wo', 'A2'));
+	indicators_row.append(render_column(results, 'vo', 'A5'));
+	indicators_row.append(render_column(results, 'sdb', '27'));
 	t.append(indicators_row);
 
 	//breadcrumbs

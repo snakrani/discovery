@@ -72,13 +72,12 @@ var show_content = function(results) {
         vendor_row.append(location_col);
 
         //add socio-economic columns
-        vendor_row.append(render_column(v, 'vo', 'A5'));
-        vendor_row.append(render_column(v, 'sdb', '27'));
-        vendor_row.append(render_column(v, 'sdvo', 'QF'));
-        vendor_row.append(render_column(v, 'wo', 'A2'));
         vendor_row.append(render_column(v, '8a', 'A6'));
         vendor_row.append(render_column(v, 'Hubz', 'XX'));
-
+        vendor_row.append(render_column(v, 'sdvo', 'QF'));
+        vendor_row.append(render_column(v, 'wo', 'A2'));
+        vendor_row.append(render_column(v, 'vo', 'A5'));
+        vendor_row.append(render_column(v, 'sdb', '27'));
 
         //add row to table
         t.append(vendor_row);
