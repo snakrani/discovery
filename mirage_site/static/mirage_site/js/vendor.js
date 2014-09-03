@@ -84,7 +84,8 @@ var build_table = function(data){
     var results = data['results'];
     for (item in results) {
         var tr = $(document.createElement('tr'));
-        var td = tr.append($(document.createElement('td')).addClass('h_date_signed').text(results[item]['date_signed']));
+        var display_date = happy_date(new Date(results[item]['date_signed']));
+        var td = tr.append($(document.createElement('td')).addClass('h_date_signed').text(display_date));
         var td = tr.append($(document.createElement('td')).addClass('piid').text(results[item]['piid']));
         var td = tr.append($(document.createElement('td')).addClass('agency').text(results[item]['agency_name']));
         var td = tr.append($(document.createElement('td')).addClass('type').text(results[item]['pricing_type']));
@@ -126,5 +127,6 @@ var refresh_data = function(event) {
 }
 
 $(document).ready(function() {
+    refresh_data();
 	//refresh_data being called from somewhere else (i know, i know)
 })
