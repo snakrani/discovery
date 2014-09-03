@@ -85,12 +85,12 @@ var build_table = function(data){
     for (item in results) {
         var tr = $(document.createElement('tr'));
         var display_date = happy_date(new Date(results[item]['date_signed']));
-        var td = tr.append($(document.createElement('td')).addClass('h_date_signed').text(display_date));
+        var td = tr.append($(document.createElement('td')).addClass('date_signed').text(display_date));
         var td = tr.append($(document.createElement('td')).addClass('piid').text(results[item]['piid']));
-        var td = tr.append($(document.createElement('td')).addClass('agency').text(results[item]['agency_name']));
+        var td = tr.append($(document.createElement('td')).addClass('agency').text(to_title_case(results[item]['agency_name'])));
         var td = tr.append($(document.createElement('td')).addClass('type').text(results[item]['pricing_type']));
         var td = tr.append($(document.createElement('td')).addClass('value').text(results[item]['obligated_amount']));
-        var td = tr.append($(document.createElement('td')).addClass('email_poc').text(results[item]['point_of_contact']));
+        var td = tr.append($(document.createElement('td')).addClass('email_poc').text(lower(results[item]['point_of_contact'])));
         var td = tr.append($(document.createElement('td')).addClass('status').text(results[item]['status']));
         //more goes here
     
