@@ -1,6 +1,8 @@
+-e git+https://github.com/18F/pyfpds.git#egg=pyfpds
 -e git://github.com/django/django.git@78bff08341cfd5b729697c13a7478e83726782d1#egg=django_1.7c1
 django-hstore==1.2.3
 psycopg2==2.5.3
 requests==2.3.0
 xmltodict==0.9.0
 djangorestframework==2.3.14
+pytz==2014.4

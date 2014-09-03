@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 
 {% block header %}
 
@@ -9,7 +10,7 @@
     <li><a href="/">Home</a></li>
     <li><a href="#">Search Results</a></li>
     <li><a href="#">Pool {{ pool_number }}</a></li>
-    <li>ABC Professional Services</li>
+    <li id="vendor_breadcrumb"></li>
 
     </div><!--end breadcrumbs<!-->
  </div><!--end breadcrumb_container<!-->
@@ -20,7 +21,7 @@
  <div id="vendor_main_container">
         
         <div id="vendor_title_status_container">
-	        <div class="vendor_title">ABC Professional Services</div>
+	        <div class="vendor_title"></div>
 	        <div class="debarred_status"> <<< WARNING: DEBARRED!</div>
         </div><!--end vendor_title_status_container<!-->
 
@@ -35,13 +36,13 @@
 
         		<div id="vendor_socioeconomic_table_container">
         			<div class="vendor_detail_table" >
-                <table >
+                <table id="socioeconomic_indicators">
                     <tr>
                         <td>
-                            VO
+                            8(a)
                         </td>
-                        <td >
-                            SDB
+                        <td>
+                            HubZ
                         </td>
                         <td>
                             SDVO
@@ -50,33 +51,12 @@
                             WO
                         </td>
                         <td>
-                            8A
+                            VO
                         </td>
-                        <td>
-                            Hubz
+                        <td >
+                            SDB
                         </td>
-                    </tr>
-                    <tr>
-                        <td class="vo">
-                            
-                        </td>
-                        <td class="sdb">
-                            X
-                        </td>
-                        <td class="sdvo">
-                            
-                        </td>
-                        <td class="wo">
-                            
-                        </td>
-                        <td class="8a">
-                            X
-                        </td>
-                        <td class="Hubz">
-                            
-                        </td>
-                    </tr>
-                    
+                    </tr>                    
                 </table>
             </div>
             
@@ -86,20 +66,20 @@
         	<div id="vendor_admin_c2">
         		<div id="vendor_c1_info">
         			<p class="admin_title">Vendor Admin Information</p>
-        			<p class="lh"><span class="admin_label">DUNS:</span> <span class="duns_number admin_data">1234567</span></p>
-        			<p class="lh"><span class="admin_label">CAGE Code:</span> <span class="cage_code admin_data">1234567</span></p>
-        			<p class="lh"><span class="admin_label">Employees:</span> <span class="number_of_employees admin_data">160000</span></p>
-        			<p class="lh"><span class="admin_label">Annual Revenue:</span> <span class="annual_revenu admin_data">$340000</span></p>
+        			<p class="lh"><span class="admin_label">DUNS:</span> <span class="duns_number admin_data"></span></p>
+        			<p class="lh"><span class="admin_label">CAGE Code:</span> <span class="cage_code admin_data"></span></p>
+        			<p class="lh"><span class="admin_label">Employees:</span> <span class="number_of_employees admin_data"></span></p>
+        			<p class="lh"><span class="admin_label">Annual Revenue:</span> <span class="annual_revenue admin_data"></span></p>
         		</div><!--end vendor_c1_info<!-->
         	</div><!--end vendor_admin_c2<!-->
 
         	<div id="vendor_admin_c3">
         			<p class="admin_title">Vendor Contact Information</p>
-        		    <p class="lh"><span class="admin_label"></span><span class="vendor_address1 admin_data2">123 Contractor Springs Drive</span></p>
-        		    <p class="lh"><span class="admin_label"></span><span class="vendor_address2 admin_data2">Virginia Beach, VA 12345</span></p>
-        			<p class="lh"><span class="admin_label"></span><span class="vendor_poc_name admin_data2">Jerry "T-Bone" Contractorsen</span></p>
-        			<p class="lh"><span class="admin_label"></span><span class="vendor_poc_phone admin_data2">123-456-7890</span></p>
-        			<p class="lh"><span class="admin_label"></span><span class="vendor_poc_email admin_data2"><a href="mailto:jerry.tbone.contractorsen@hotmail.com">jerry.tbone.contractorsen@hotmail.com</a></span></p>
+        		    <p class="lh"><span class="admin_label"></span><span class="vendor_address1 admin_data2"></span></p>
+        		    <p class="lh"><span class="admin_label"></span><span class="vendor_address2 admin_data2"></span></p>
+        			<p class="lh"><span class="admin_label"></span><span class="vendor_poc_name admin_data2">*Jerry "T-Bone" Contractorsen</span></p>
+        			<p class="lh"><span class="admin_label"></span><span class="vendor_poc_phone admin_data2">*123-456-7890</span></p>
+        			<p class="lh"><span class="admin_label"></span><span class="vendor_poc_email admin_data2"><a href="mailto:jerry.tbone.contractorsen@hotmail.com">*jerry.tbone.contractorsen@hotmail.com</a></span></p>
         	</div><!--end vendor_admin_c3<!-->
 
         </div><!--end vendor_admin_container<!-->
@@ -194,5 +174,7 @@
 
 
  </div><!--end vendor_main_container<!-->
+
+<script src="{% static 'mirage_site/js/vendor.js' %}" type="text/javascript"></script>
 
 {% endblock body %}

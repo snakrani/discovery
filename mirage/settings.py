@@ -55,6 +55,7 @@ INSTALLED_APPS = (
     'api',
     'mirage_site',
     'vendor',
+    'contract',
 )
 
 MIDDLEWARE_CLASSES = (
