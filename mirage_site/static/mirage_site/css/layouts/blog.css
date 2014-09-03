@@ -515,6 +515,7 @@ a.pool_link {
     font-weight:bold;
 }
 .vendor_sam_expiration_notice   {
+    display: none;
     color:#d6000b;
     font-weight:bold;
 }
