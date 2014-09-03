@@ -40,6 +40,14 @@ var show_content = function(results) {
 	$('.number_of_employees').html(results.number_of_employees ? results.number_of_employees : 'N/A');
 	$('.annual_revenue').html(results.annual_revenue ? '$' + results.annual_revenue : 'N/A');
 
+	//load SAM expiration date
+    var current_date = new Date();
+    var date_obj = new Date(results['sam_expiration_date']);
+    $(".vendor_sam_expiration_date").text((date_obj.getMonth() + 1) + '/' + date_obj.getDate() + '/' + date_obj.getFullYear().toString().substring(2));
+    if (current_date > date_obj) {
+        $(".vendor_sam_expiration_notice").show();
+    }
+
 	//contact info
 	$('.vendor_address1').html(results.sam_address);
 	$('.vendor_address2').html(results.sam_citystate);
