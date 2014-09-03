@@ -35,10 +35,6 @@ var show_content = function(results) {
         var clean_location = function(location) {
             // from http://stackoverflow.com/questions/5097875/help-parsing-string-city-state-zip-with-javascript
 
-            var to_title_case = function(str) {
-                return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-            }
-
             var location_obj = {};
             new_location = location;
             if (location) {
