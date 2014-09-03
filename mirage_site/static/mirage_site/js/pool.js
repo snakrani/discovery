@@ -76,6 +76,9 @@ var show_content = function(results) {
         vendor_row.append(render_column(v, 'sdb', '27'));
         vendor_row.append(render_column(v, 'sdvo', 'QF'));
         vendor_row.append(render_column(v, 'wo', 'A2'));
+        vendor_row.append(render_column(v, '8a', 'A6'));
+        vendor_row.append(render_column(v, 'Hubz', 'XX'));
+
 
         //add row to table
         t.append(vendor_row);

@@ -36,6 +36,7 @@ var show_content = function(results) {
 			$('.debarred_status').show();
 	}
 	$('.duns_number').html(results.duns);
+	$('.cage_code').html(results.cage);
 	$('.number_of_employees').html(results.number_of_employees ? results.number_of_employees : 'N/A');
 	$('.annual_revenue').html(results.annual_revenue ? '$' + results.annual_revenue : 'N/A');
 
