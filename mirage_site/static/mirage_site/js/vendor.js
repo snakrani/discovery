@@ -127,6 +127,8 @@ var refresh_data = function(event) {
 }
 
 $(document).ready(function() {
-    refresh_data();
-	//refresh_data being called from somewhere else (i know, i know)
+	if (!getParameterByName("naics-code")) {
+		//load data if naics-code isn't defined. if it is defined, it's loaded elsewhere
+		refresh_data();
+	}
 })

@@ -3,13 +3,13 @@
 
 {% block crumbs %}
     <li><a href="/">Home</a></li>
-    <li><a href="#">Search Results</a></li>
+    <li class="crumb_nonactive">Search Results</li>
     <li>Pool {{ pool_number }}</li>
 {% endblock %}
 
 {% block content %}
 <div id="your_search_criteria">
-    <span class="your_search_grey">your search: </span><span id="your_search" class="your_search_blue">541330 - Engineering Services</span>
+    <span class="your_search_grey">showing vendors in: </span><span id="your_search" class="your_search_blue">541330 - Engineering Services</span>
 
     <span class="your_search_grey">filters: </span><span id="your_filters" class="your_search_blue">veteran owned, hubzone</span>
 </div>
