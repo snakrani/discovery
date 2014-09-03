@@ -29,10 +29,15 @@ var render_column = function(v, prefix, setaside_code) {
 }
 
 var show_content = function(results) {
+
+	//vendor info
 	$('.vendor_title').html(results.name);
+	if (results.sam_exclusion == true) {
+			$('.debarred_status').show();
+	}
 	$('.duns_number').html(results.duns);
 	$('.number_of_employees').html(results.number_of_employees ? results.number_of_employees : 'N/A');
-	$('.annual_revenue').html(results.annual_revenue ? results.annual_revenue : 'N/A');
+	$('.annual_revenue').html(results.annual_revenue ? '$' + results.annual_revenue : 'N/A');
 
 	//contact info
 	$('.vendor_address1').html(results.sam_address);

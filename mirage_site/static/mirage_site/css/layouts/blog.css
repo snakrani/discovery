@@ -486,6 +486,7 @@ a.pool_link {
     font-weight:600;
 }
 .debarred_status    {
+    display:none;
     font-size:1.6em;
     float:left;
     margin-left:10px;
