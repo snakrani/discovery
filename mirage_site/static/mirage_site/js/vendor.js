@@ -63,6 +63,40 @@ var show_content = function(results) {
 
 	//breadcrumbs
 	$('#vendor_breadcrumb').html(results.name);
+    get_contracts();
+}
+
+var build_table = function(data){
+    var table = $("div#ch_table table").clone();
+    var results = data['results'];
+    for (item in results) {
+        var tr = $(document.createElement('tr'));
+        var td = tr.append($(document.createElement('td')).addClass('h_date_signed').text(results[item]['date_signed']));
+        var td = tr.append($(document.createElement('td')).addClass('piid').text(results[item]['piid']));
+        var td = tr.append($(document.createElement('td')).addClass('agency').text(results[item]['agency_name']));
+        var td = tr.append($(document.createElement('td')).addClass('type').text(results[item]['pricing_type']));
+        var td = tr.append($(document.createElement('td')).addClass('value').text(results[item]['obligated_amount']));
+        var td = tr.append($(document.createElement('td')).addClass('email_poc').text(results[item]['point_of_contact']));
+        var td = tr.append($(document.createElement('td')).addClass('status').text(results[item]['status']));
+        //more goes here
+    
+        table.append(tr);
+    };
+
+    $("div#ch_table table").remove();
+    $("div#ch_table").append(table);
+};
+
+var get_contracts = function(){
+    var url = "/api/contracts/";
+    var params = {
+        'duns': get_duns(),
+        // put naics here
+    };
+    
+    $.getJSON(url, params, function(data){
+       build_table(data); 
+    });
 }
 
 var refresh_data = function(event) {
