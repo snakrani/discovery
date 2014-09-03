@@ -114,7 +114,7 @@ ul, li {
     }       
 #crumbs {
     height:2.3em;
-    width:675px;
+    width:100%;
     }
 #crumbs li {
     float:left;
