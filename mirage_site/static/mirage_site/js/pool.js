@@ -30,7 +30,7 @@ var show_content = function(results) {
         return col
     }
 
-    var addRow = function(v) {
+    var addRow = function(v, qs) {
 
         var clean_location = function(location) {
             // from http://stackoverflow.com/questions/5097875/help-parsing-string-city-state-zip-with-javascript
@@ -60,7 +60,7 @@ var show_content = function(results) {
         name_col = $(document.createElement('td'));
         name_a = $(document.createElement('a'));
         name_a.text(v.name);
-        name_a.attr('href', '/vendor/' + v.duns + '/');
+        name_a.attr('href', '/vendor/' + v.duns + '/' + qs);
         name_a.attr('class', 'link_style');
         name_col.attr('class', 'vendor_name');
         name_col.append(name_a);
@@ -106,7 +106,7 @@ var show_content = function(results) {
         var obj = data[e];
         if (obj['vehicle'].toUpperCase() == pool_info['vehicle'].toUpperCase() && obj['number'].toUpperCase() == pool_info['pool_number'].toUpperCase()) {
             for (var v in obj['vendors']) {
-                addRow(obj['vendors'][v]);
+                addRow(obj['vendors'][v], qs);
             }
             total = obj['vendors'].length;
             break;
