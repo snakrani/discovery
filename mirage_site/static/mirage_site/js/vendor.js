@@ -43,6 +43,12 @@ var show_content = function(results) {
 	//contact info
 	$('.vendor_address1').html(results.sam_address);
 	$('.vendor_address2').html(results.sam_citystate);
+	$('.vendor_poc_name').html(results.cm_name);
+	$('.vendor_poc_phone').html(results.cm_phone);
+	mailto = $(document.createElement('a'));
+	mailto.attr('href', 'mailto:' + results.cm_email);
+	mailto.text(results.cm_email);
+	$('.vendor_poc_email').html(mailto);
 
 	//socioeconomic indicators
     t = $(document.getElementById('socioeconomic_indicators'));
