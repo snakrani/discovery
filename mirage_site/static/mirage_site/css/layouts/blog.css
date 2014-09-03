@@ -126,6 +126,12 @@ ul, li {
     background:url(/static/mirage_site/images/crumbs.gif) no-repeat right center;
     display:block;
     padding:0 15px 0 0;
+    }  
+#crumbs .crumb_nonactive {
+    background:url(/static/mirage_site/images/crumbs.gif) no-repeat right center;
+    display:block;
+    padding:0 15px 0 0;
+    padding-left:15px;
     }                           
 #crumbs li a:link {color:#777;}
 #crumbs li a:visited { color:#777; text-decoration:none;}   
