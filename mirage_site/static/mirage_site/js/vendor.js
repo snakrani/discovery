@@ -6,6 +6,11 @@ var get_duns = function() {
     return path_arr[2]
 }
 
+var happy_date = function(date_obj) {
+	//returns (mm/dd/yyyy) string representation of a date object
+	return (date_obj.getMonth() + 1) + '/' + date_obj.getDate() + '/' + date_obj.getFullYear().toString().substring(2);
+}
+
 var render_column = function(v, prefix, setaside_code) {
     //returns properly formatted column for vendor/socioeconomic indicator
 
@@ -43,7 +48,7 @@ var show_content = function(results) {
 	//load SAM expiration date
     var current_date = new Date();
     var date_obj = new Date(results['sam_expiration_date']);
-    $(".vendor_sam_expiration_date").text((date_obj.getMonth() + 1) + '/' + date_obj.getDate() + '/' + date_obj.getFullYear().toString().substring(2));
+    $(".vendor_sam_expiration_date").text(happy_date(date_obj));
     if (current_date > date_obj) {
         $(".vendor_sam_expiration_notice").show();
     }
@@ -87,5 +92,5 @@ var refresh_data = function(event) {
 }
 
 $(document).ready(function() {
-    refresh_data();
+	//refresh_data being called from somewhere else (i know, i know)
 })
