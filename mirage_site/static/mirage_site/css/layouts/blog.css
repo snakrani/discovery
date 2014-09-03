@@ -114,7 +114,7 @@ ul, li {
     }       
 #crumbs {
     height:2.3em;
-    width:675px;
+    width:100%;
     }
 #crumbs li {
     float:left;
@@ -126,6 +126,12 @@ ul, li {
     background:url(/static/mirage_site/images/crumbs.gif) no-repeat right center;
     display:block;
     padding:0 15px 0 0;
+    }  
+#crumbs .crumb_nonactive {
+    background:url(/static/mirage_site/images/crumbs.gif) no-repeat right center;
+    display:block;
+    padding:0 15px 0 0;
+    padding-left:15px;
     }                           
 #crumbs li a:link {color:#777;}
 #crumbs li a:visited { color:#777; text-decoration:none;}   
@@ -286,20 +292,20 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dbdbdb', end
 #results_sam_container {
     width:100%;
     background-color:;
-    height:37px;
+    height:42px;
     border-top: 1px solid #eeeeee;
-    padding-top:7px;
+    padding-top:13px;
 }
 #number_of_results  {
-    max-width:650px;
+    width:650px;
     float:left;
     padding-right:10px;
     padding-left:10px;
-    font-size: 1.3em;
+    font-size: 1.5em;
     height:30px;
     padding-left:25px;
     background-color: ;
-    color:#4a84a3;
+    color:#410000;
     font-weight:600;
 }
 #matching_your_search   {
@@ -316,7 +322,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dbdbdb', end
     display:inline;   
 }
 .sam_style  {
-    color:#5eb183 !important;
+    color:#a0692a !important;
 }
 .filterbox   {
     margin-left:10px;
@@ -330,18 +336,18 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dbdbdb', end
 }
 #your_search_criteria{
     width:100%;
-    height:25px;
+    min-height:30px;
     margin-bottom:5px;
-    font-size:.8em;
-    margin-top:1px;
+    font-size:.9em;
+    margin-top:4px;
     border-bottom: 1px solid #eeeeee;
     display:none;
 }
 .your_search_grey   {
-    color:#cccccc;
+    color:#bbbbbb;
 }
 .your_search_blue   {
-    color:#71b2cd;
+    color:#b03115;
     margin-right:15px;
 }
 .column {
@@ -544,20 +550,13 @@ a.pool_link {
     margin:0em;
     font-size:1em;
     color:#8e919c;
-    border-bottom:1px solid #ede7f2;
 }
-
-
-
 #vendor_admin_c3    {
     min-width:300px;
     float:left;
     min-height:130px;
     margin-left:20px;
 }
-
-
-
 #vendor_contract_history_container  {
     width:100%;
     min-height:100px;
