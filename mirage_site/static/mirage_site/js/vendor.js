@@ -105,9 +105,16 @@ var get_contracts = function(){
     var url = "/api/contracts/";
     var params = {
         'duns': get_duns(),
-        // put naics here
     };
-    
+
+    var naics = getParameterByName('naics-code');
+    if (naics){ 
+        params['naics'] = naics; 
+        $("span.vendor_contract_history_naics").text(" NAICS " + naics + ":");
+    } else {
+       $("span.vendor_contract_history_naics").text(" All Contracts:"); 
+    }
+
     $.getJSON(url, params, function(data){
        build_table(data); 
     });
