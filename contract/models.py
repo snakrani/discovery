@@ -45,18 +45,20 @@ class FPDSContract(models.Model):
                 raise IntegrityError("FPDSContract already exists for that vendor and piid")
         except:
             super(FPDSContract, self).save(*args, **kwargs)
-"""
+
 class FAPIISRecord(models.Model):
     
-    piid = models.CharField(max_length=128, db_index=True)
+    piid = models.CharField(max_length=128, unique=True)
     agency_id = models.CharField(max_length=128, null=True)
     agency_name = models.CharField(max_length=128, null=True)
     NAICS = models.CharField(max_length=128, null=True)
     PSC = models.CharField(max_length=128, null=True)
     record_type = models.CharField(max_length=128, null=True)
     record_code = models.CharField(max_length=1, null=True)
-    vendor = models.ForeignKey(Vendor, null=True)
-"""
+    agency_poc_email = models.EmailField(null=True)
+    agency_poc_phone = models.CharField(max_length=30, null=True)
+    agency_poc_name = models.CharField(max_length=128, null=True)
+    duns = models.CharField(max_length=15, db_index=True)
 
 class Contract(models.Model):
 

@@ -81,6 +81,7 @@ class Command(BaseCommand):
 
                 except Pool.DoesNotExist:
                     self.logger.debug("Pool {} not found for spreadsheet".format(pool))
+                    print("Pool {0} not found. Did you load the pools fixture?".format(pool))
 
                 except Pool.MultipleObjectsReturned:
                     self.logger.debug("More than one pool matched {}. Integrity error!".format(pool))
