@@ -30,6 +30,7 @@ class Vendor(models.Model):
     setasides = models.ManyToManyField('SetAside', null=True)
     sam_status = models.CharField(null=True, max_length=128)
     sam_activation_date = models.DateTimeField(null=True)
+    sam_expiration_date = models.DateTimeField(null=True)
     sam_exclusion = models.NullBooleanField(null=True)
     sam_url = models.URLField(null=True)
     annual_revenue = models.CharField(null=True, max_length=128)

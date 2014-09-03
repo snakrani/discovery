@@ -36,6 +36,7 @@ class Command(BaseCommand):
                     reg = sam_data['sam_data']['registration']
                     v.sam_status = self.get_value(reg, 'status', v)
                     v.sam_activation_date = self.get_value(reg, 'activationDate', v)
+                    v.sam_expiration_date = self.get_value(reg, 'expirationDate', v)
                     v.sam_exclusion = self.get_value(reg, 'hasKnownExclusion', v)
                     v.cage = self.get_value(reg, 'cage', v)
                     addr = self.get_value(reg, 'samAddress', v)
