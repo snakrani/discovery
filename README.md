@@ -35,6 +35,12 @@ will return vendors that have the setaside codes A5 and QF and also do business 
 You can also add a `group` parameter to get the vendors grouped by pool, like so:
 `http://localhost:8000/api/vendors/?setasides=A5,QF&naics=541330&group=pool`
 
+Once you've loaded the basic data, you'll need to load the contract history records for the Vendor detail pages. These are also manage commands. They should be executed in the following order:
+`manage.py load_fpds`
+`manage.py load_fapiis`
+`manage.py merge_contracts`
+
+Currently the `load_fpds` command is configured to load ten years of contract history for each vendor so it takes some time. In future versions we will have smarter loading that only fetches recently added contracts.
 
 ### Public domain
 
