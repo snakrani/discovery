@@ -36,22 +36,29 @@ var show_content = function(results) {
 			$('.debarred_status').show();
 	}
 	$('.duns_number').html(results.duns);
+	$('.cage_code').html(results.cage);
 	$('.number_of_employees').html(results.number_of_employees ? results.number_of_employees : 'N/A');
 	$('.annual_revenue').html(results.annual_revenue ? '$' + results.annual_revenue : 'N/A');
 
 	//contact info
 	$('.vendor_address1').html(results.sam_address);
 	$('.vendor_address2').html(results.sam_citystate);
+	$('.vendor_poc_name').html(results.cm_name);
+	$('.vendor_poc_phone').html(results.cm_phone);
+	mailto = $(document.createElement('a'));
+	mailto.attr('href', 'mailto:' + results.cm_email);
+	mailto.text(results.cm_email);
+	$('.vendor_poc_email').html(mailto);
 
 	//socioeconomic indicators
     t = $(document.getElementById('socioeconomic_indicators'));
     indicators_row = $(document.createElement('tr'));
-	indicators_row.append(render_column(results, 'vo', 'A5'));
-	indicators_row.append(render_column(results, 'sdb', '27'));
-	indicators_row.append(render_column(results, 'sdvo', 'QF'));
-	indicators_row.append(render_column(results, 'wo', 'A2'));
 	indicators_row.append(render_column(results, '8a', 'A6'));
 	indicators_row.append(render_column(results, 'Hubz', 'XX'));
+	indicators_row.append(render_column(results, 'sdvo', 'QF'));
+	indicators_row.append(render_column(results, 'wo', 'A2'));
+	indicators_row.append(render_column(results, 'vo', 'A5'));
+	indicators_row.append(render_column(results, 'sdb', '27'));
 	t.append(indicators_row);
 
 	//breadcrumbs
