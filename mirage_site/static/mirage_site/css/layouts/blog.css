@@ -702,7 +702,7 @@ a.pool_link {
     background-color:#eeeeee;
 }
 
-#ch_table td.h_date_signed, #ch_table td.value {
+#ch_table td.date_signed, #ch_table td.value {
     text-align:right;
     padding-right: 15px;
 }
