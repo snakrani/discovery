@@ -6,7 +6,7 @@ var InputHandler = {
         this.$codeField.select2({placeholder:'Select a NAICS code', dropdownAutoWidth : true});
 
         // event bindings
-        this.$codeField.change(this.sendCodeChange);
+        this.$codeField.change(this.sendCodeChange.bind(InputHandler));
         $('#setaside-filters').change(this.sendFilterChange);
     },
     
@@ -40,7 +40,7 @@ var ResultsManager = {
         Events.subscribe('filtersChanged', this.load.bind(ResultsManager));
     },
 
-    buildRequestQS: function(naicsCode) {
+    buildRequestQS: function() {
         var setasides = InputHandler.getSetasides();
         var naicsCode = InputHandler.getNAICSCode();
         var queryData = {
