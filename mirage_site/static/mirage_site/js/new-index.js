@@ -16,17 +16,55 @@ var InputHandler = {
 
     sendFilterChange: function(e) {
         console.log(e);
+    },
+
+    getSetasides: function() {
+        /* returns array of setaside ids that are checked */
+        var setasides = [];
+        $("form#setaside-filters input:checked").each( function(index) {
+            setasides.push($(this).val());
+        });
+
+        return setasides;
     }
 };
 
 var ResultsManager = {
     init: function() {
-        Events.subscribe('naicsChanged', this.load);
+        Events.subscribe('naicsChanged', this.load.bind(ResultsManager));
+    },
+
+    buildRequestQS: function(naicsCode) {
+        var setasides = InputHandler.getSetasides();
+        var queryData = {
+            'group': 'pool',
+            'naics': naicsCode
+        };
+        var pool = this.getPool();
+
+        if (setasides.length > 0) {
+            queryData["setasides"] = setasides.join();
+        }
+        if (pool !== null) {
+            queryData['pool'] = pool;
+        }
+
+        return queryData;
     },
 
     load: function(naicsCode) {
-        console.log(naicsCode);
-    }
+        var url = "/api/vendors/";
+        var queryData = this.buildRequestQS(naicsCode);        
+
+        $.getJSON(url, queryData, function(data) {
+            console.log(data);
+        });
+    },
+
+    getPool: function() {
+        return null;
+    },
+
 };
 
 $(document).ready(function() {
