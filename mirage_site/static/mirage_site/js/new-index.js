@@ -11,11 +11,16 @@ var InputHandler = {
     },
     
     sendCodeChange: function(e) {
-        Events.publish('naicsChanged', e.val);
+        this.naicsCode = e.val;
+        Events.publish('naicsChanged');
     },
 
     sendFilterChange: function(e) {
-        console.log(e);
+        Events.publish('filtersChanged');
+    },
+
+    getNAICSCode: function() {
+        return this.naicsCode;
     },
 
     getSetasides: function() {
@@ -32,10 +37,12 @@ var InputHandler = {
 var ResultsManager = {
     init: function() {
         Events.subscribe('naicsChanged', this.load.bind(ResultsManager));
+        Events.subscribe('filtersChanged', this.load.bind(ResultsManager));
     },
 
     buildRequestQS: function(naicsCode) {
         var setasides = InputHandler.getSetasides();
+        var naicsCode = InputHandler.getNAICSCode();
         var queryData = {
             'group': 'pool',
             'naics': naicsCode
@@ -52,9 +59,9 @@ var ResultsManager = {
         return queryData;
     },
 
-    load: function(naicsCode) {
+    load: function() {
         var url = "/api/vendors/";
-        var queryData = this.buildRequestQS(naicsCode);        
+        var queryData = this.buildRequestQS();        
 
         $.getJSON(url, queryData, function(data) {
             console.log(data);
