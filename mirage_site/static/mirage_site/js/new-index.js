@@ -116,6 +116,31 @@ var LayoutManager = {
     },
 
     render: function(results) {
+        //load vendor and pool results.results
+        for (var i in results.results) {
+            var obj = results.results[i];
+            
+            var div = $(document.createElement('div'));
+            div.addClass("column post-header");
+
+            pool_link = $(document.createElement('a'));
+            pool_link.attr('href', '/pool/' + obj['vehicle'].toLowerCase() + '/' + obj['number'] + '/');
+            pool_link.attr('class', 'pool_link');
+            pool_link.text("Pool " + obj['number']);
+            
+            pool_header = $(document.createElement('h2'));
+            pool_header.addClass("pool_title");
+            pool_header.append(pool_link);
+            div.append(pool_header);
+            
+            div.append( $(document.createElement('p')).addClass("post-meta number_of_vendors_in_pool").text(obj['vendors'].length.toString() + ' vendors'));
+
+            for (var v in obj['vendors']){
+                div.append( $(document.createElement('p')).addClass("vendor_names").text(obj['vendors'][v]['name']) );
+            }
+        $('#custom_page_content').append(div);
+    }
+
         Events.publish('contentChanged', results);
     },
 
