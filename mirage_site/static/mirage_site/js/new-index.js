@@ -69,6 +69,8 @@ var ResultsManager = {
             resultsObj.vehicle = data['results'][0]['vehicle'].toLowerCase();
             resultsObj.poolNumber = data['results'][0]['number'];
             resultsObj.samLoad = data.sam_load;
+            resultsObj.total = data.num_results;
+            resultsObj.results = data.results;
 
             Events.publish('dataLoaded', resultsObj);
         });
@@ -110,6 +112,7 @@ var LayoutManager = {
     init: function() {
         Events.subscribe('dataLoaded', this.render.bind(LayoutManager));
         Events.subscribe('dataLoaded', this.updateSAM);
+        Events.subscribe('dataLoaded', this.updateResultsInfo);
     },
 
     render: function(results) {
@@ -119,6 +122,17 @@ var LayoutManager = {
     updateSAM: function(results) {
         var dateObj = new Date(results['samLoad']);
         $("#sam_load").text("SAM data updated: " + (dateObj.getMonth() + 1) + '/' + dateObj.getDate() + '/' + dateObj.getFullYear().toString().substring(2));
+    },
+
+    updateResultsInfo: function(results) {
+        $("#number_of_results span").text(results.total.toString() + " vendors in " + results.results.length + " pool(s) match your search");
+        $("#your_search").text($("#naics-code option:selected").text());
+        $("#your_filters").text(
+            $("#setaside-filters input:checkbox:checked").map(function() {
+                return $(this).parent().text();
+            }).get().join(', ')
+        );
+        $("#your_search_criteria").show();
     }
 };
 
