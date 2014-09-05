@@ -108,7 +108,7 @@ var get_contracts = function(){
     };
 
     var naics = getParameterByName('naics-code');
-    if (naics){ 
+    if (naics && naics != 'all'){ 
         params['naics'] = naics; 
         $("span.vendor_contract_history_naics").text(" NAICS " + naics + ":");
     } else {
