@@ -61,26 +61,21 @@ var ResultsManager = {
 
     load: function() {
         var url = "/api/vendors/";
-        var queryData = this.buildRequestQuery();        
+        var queryData = this.buildRequestQuery();
 
         $.getJSON(url, queryData, function(data) {
+            var resultsObj = {}; 
             console.log(data);
-            ResultsManager.vehicle = data['results'][0]['vehicle'].toLowerCase();
-            ResultsManager.poolNumber = data['results'][0]['number'];
-            Events.publish('dataLoaded');
+            resultsObj.vehicle = data['results'][0]['vehicle'].toLowerCase();
+            resultsObj.poolNumber = data['results'][0]['number'];
+            resultsObj.samLoad = data.sam_load;
+
+            Events.publish('dataLoaded', resultsObj);
         });
     },
 
     getPool: function() {
         return null;
-    },
-
-    getVehicle: function() {
-        return this.vehicle;
-    },
-
-    getPoolNumber: function() {
-        return this.poolNumber;
     }
 
 };
@@ -102,22 +97,28 @@ var URLManager = {
         return qs;
     },
 
-    update: function() {
+    update: function(results) {
         var qs = this.getQueryString();
-        var vehicle = ResultsManager.getVehicle();
-        var poolNumber = ResultsManager.getPoolNumber();
+        var vehicle = results.vehicle;
+        var poolNumber = results.poolNumber;
 
-        window.location.href = '/pool/' + vehicle + '/' + poolNumber + '/' + qs;
+        window.history.pushState(true, true, '/pool/' + vehicle + '/' + poolNumber + '/' + qs);
     }
 };
 
 var LayoutManager = {
     init: function() {
         Events.subscribe('dataLoaded', this.render.bind(LayoutManager));
+        Events.subscribe('dataLoaded', this.updateSAM);
     },
 
-    render: function() {
-        Events.publish('contentChanged');
+    render: function(results) {
+        Events.publish('contentChanged', results);
+    },
+
+    updateSAM: function(results) {
+        var dateObj = new Date(results['samLoad']);
+        $("#sam_load").text("SAM data updated: " + (dateObj.getMonth() + 1) + '/' + dateObj.getDate() + '/' + dateObj.getFullYear().toString().substring(2));
     }
 };
 
