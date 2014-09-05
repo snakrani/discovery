@@ -115,6 +115,7 @@ var LayoutManager = {
         Events.subscribe('dataLoaded', this.render.bind(LayoutManager));
         Events.subscribe('dataLoaded', this.updateSAM);
         Events.subscribe('dataLoaded', this.updateResultsInfo);
+        Events.subscribe('dataLoaded', this.updateBreadcrumb);
     },
 
     render: function(results) {
@@ -137,10 +138,19 @@ var LayoutManager = {
             for (var v in obj['vendors']){
                 $div.append('<p class="vendor_names">' + obj['vendors'][v]['name'] + '</p>');
             }
+
         $('#custom_page_content').append($div);
-    }
+        }
 
         Events.publish('contentChanged', results);
+    },
+
+    updateBreadcrumb: function(results) {
+        //remove old seach results breadcrumb
+        $('#sr').remove();
+
+        //create new breadcrumb for search results
+        $('#crumbs').append('<li id="sr"><a href="#">Search Results</a></li>');
     },
 
     updateSAM: function(results) {
