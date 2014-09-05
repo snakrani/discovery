@@ -119,7 +119,10 @@ var LayoutManager = {
     },
 
     render: function(results) {
-        //load vendor and pool results.results
+        var $container = $('#custom_page_content');
+        //clear out content
+        $container.find('.column').remove();
+
         for (var i in results.results) {
             var obj = results.results[i];
             var $poolLink, poolHeader; 
@@ -139,7 +142,7 @@ var LayoutManager = {
                 $div.append('<p class="vendor_names">' + obj['vendors'][v]['name'] + '</p>');
             }
 
-        $('#custom_page_content').append($div);
+        $container.append($div);
         }
 
         Events.publish('contentChanged', results);
