@@ -10,6 +10,19 @@ var InputHandler = {
         // event bindings
         this.$codeField.change(this.sendCodeChange.bind(InputHandler));
         $('#setaside-filters').change(this.sendFilterChange);
+
+        Events.subscribe('loadedWithData', this.updateFields.bind(InputHandler));
+    },
+
+    updateFields: function(obj) {
+        if (obj.naics !== null) {
+            this.$codeField.select2('val', obj.naics);
+        }
+
+        if (obj.setasides !== null) {
+            // break out setasides and loop
+            $('input[value=' + obj.setasides + ']').attr('checked', 'checked');
+        }
     },
     
     sendCodeChange: function(e) {
@@ -46,10 +59,13 @@ var ResultsManager = {
         var setasides = InputHandler.getSetasides();
         var naicsCode = InputHandler.getNAICSCode();
         var queryData = {
-            'group': 'pool',
-            'naics': naicsCode
+            'group': 'pool'
         };
         var pool = this.getPool();
+
+        if (typeof naicsCode !== 'undefined') {
+            queryData.naicsCode = naicsCode;
+        }
 
         if (setasides.length > 0) {
             queryData["setasides"] = setasides.join();
@@ -86,7 +102,15 @@ var ResultsManager = {
 
 var URLManager = {
     init: function() {
+        var naics = this.getParameterByName('naics-code');
+        var setasides = this.getParameterByName('setasides');
+
+        if (naics || setasides) {
+            Events.publish('loadedWithData', {'naics': naics, 'setasides': setasides});
+        }
+
         Events.subscribe('contentChanged', this.update.bind(URLManager));
+        Events.subscribe('goToPoolPage', this.loadPoolPage.bind(URLManager));
     },
 
     getQueryString: function() {
@@ -101,24 +125,89 @@ var URLManager = {
         return qs;
     },
 
-    update: function(results) {
+    getURL: function(results) {
         var qs = this.getQueryString();
         var vehicle = results.vehicle;
         var poolNumber = results.poolNumber;
 
-        window.history.pushState(true, true, '/pool/' + vehicle + '/' + poolNumber + '/' + qs);
+        return '/pool/' + vehicle + '/' + poolNumber + '/' + qs;
+    },
+
+    update: function(results) {
+        window.history.pushState(true, true, this.getURL(results));
+    },
+
+    loadPoolPage: function(results) {
+        window.location.href = this.getURL(results);
+    },
+
+    getParameterByName: function(name) {
+        // http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
 };
 
 var LayoutManager = {
     init: function() {
         Events.subscribe('dataLoaded', this.render.bind(LayoutManager));
-        Events.subscribe('dataLoaded', this.updateSAM);
-        Events.subscribe('dataLoaded', this.updateResultsInfo);
-        Events.subscribe('dataLoaded', this.updateBreadcrumb);
+        Events.subscribe('contentChanged', this.updateSAM);
+        Events.subscribe('contentChanged', this.updateResultsInfo);
+        Events.subscribe('contentChanged', this.updateBreadcrumb);
     },
 
     render: function(results) {
+        if (results.results.length > 1) {
+            this.renderPools(results);
+            Events.publish('contentChanged', results);
+        }
+        else {
+            Events.publish('goToPoolPage', results);
+        }
+    },
+
+    renderTable: function(results) {
+        var t = $('#pool_vendors');
+        var i, len = results.results.length - 1;
+
+        for (i = 0; i <= len; i++) {
+            t.append(this.renderRow(results.results[0].vendors[i]));
+        }
+    },
+
+    renderRow: function(v) {
+        var location_col;
+        var $vendorRow = $('<tr></tr>');
+
+        var name_col = $('<td class="vendor_name"></td>');
+        var name_a = $('<a href="/vendor/' + v.duns + '/" class="link_style">' + v.name + '</a>');
+        name_col.append(name_a);
+        $vendorRow.append(name_col);
+
+        location_col = $('<td class="vendor_location">' + v.sam_citystate + '</td>');
+        $vendorRow.append(location_col);
+
+        //add socio-economic columns
+        $vendorRow.append(this.renderColumn(v, 'vo', 'A5'));
+        $vendorRow.append(this.renderColumn(v, 'sdb', '27'));
+        $vendorRow.append(this.renderColumn(v, 'sdvo', 'QF'));
+        $vendorRow.append(this.renderColumn(v, 'wo', 'A2'));
+
+        return $vendorRow;
+    },
+
+    renderColumn: function(v, prefix, setasideCode) {
+        var $col = $('<td class="' + prefix + '"></td>');
+        if (this.findIndicatorMatch(v, prefix, setasideCode)) {
+            $col.text('X');
+        }
+
+        return $col;
+    },
+
+    renderPools: function(results) {
         var $container = $('#custom_page_content');
         //clear out content
         $container.find('.column').remove();
@@ -142,10 +231,22 @@ var LayoutManager = {
                 $div.append('<p class="vendor_names">' + obj['vendors'][v]['name'] + '</p>');
             }
 
-        $container.append($div);
+            $container.append($div);
+        }
+    },
+
+    findIndicatorMatch: function(v, prefix, setasideCode) {
+        var i, len = v['setasides'].length - 1;
+
+        if (v['setasides'].length > 0) {
+            for (var i=0; i <= len; i++) {
+                if (v['setasides'][i]['code'] == setasideCode) {
+                    return true;
+                }
+            }
         }
 
-        Events.publish('contentChanged', results);
+        return false;
     },
 
     updateBreadcrumb: function(results) {
@@ -179,6 +280,6 @@ $(document).ready(function() {
 
     InputHandler.init();
     ResultsManager.init();
-    URLManager.init();
     LayoutManager.init();
+    URLManager.init();
 });
