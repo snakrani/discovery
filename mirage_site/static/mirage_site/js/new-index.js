@@ -1,9 +1,12 @@
-'use strict;'
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
+'use strict';
 
 var InputHandler = {
     $codeField: $('#naics-code'),
 
     init: function() {
+        this.populateDropDown();
+
         // initialize special field lib
         this.$codeField.select2({placeholder:'Select a NAICS code', dropdownAutoWidth : true});
 
@@ -19,7 +22,7 @@ var InputHandler = {
             this.$codeField.select2('val', obj.naics);
         }
 
-        if (obj.setasides !== null) {
+        if (obj.setasides) {
             // break out setasides and loop
             $('input[value=' + obj.setasides + ']').attr('checked', 'checked');
         }
@@ -46,6 +49,32 @@ var InputHandler = {
         });
 
         return setasides;
+    },
+
+    populateDropDown: function() {
+        this.$codeField
+             .append($("<option></option>")
+             .attr("value", "all")
+             .text("All NAICS codes")); 
+        $.getJSON(
+            "/api/naics/",
+            { format: "json" },
+            function( data ) {
+                $.each(data.results, function(key, result) {   
+                    $("#naics-code")
+                         .append($("<option></option>")
+                         .attr("value", result.short_code)
+                         .text(result.short_code + " - " + result.description)); 
+                });
+                if (URLManager.getParameterByName("naics-code")) {
+                    $("#naics-code").select2().select2("val", getParameterByName("naics-code"));
+                }
+                //load data if search criteria is defined in querystring
+                if (URLManager.getParameterByName("naics-code") || URLManager.getParameterByName("setasides")) {
+                    Events.publish('loadData');
+                }
+            }
+        );
     }
 };
 
@@ -64,7 +93,7 @@ var ResultsManager = {
         var pool = this.getPool();
 
         if (typeof naicsCode !== 'undefined') {
-            queryData.naicsCode = naicsCode;
+            queryData['naics-code'] = naicsCode;
         }
 
         if (setasides.length > 0) {
@@ -95,7 +124,19 @@ var ResultsManager = {
     },
 
     getPool: function() {
-        return null;
+        var poolInfo = URLManager.getPoolInfo();
+
+        if (poolInfo !== null){
+            if (poolInfo['vehicle'] == 'oasissb'){
+                return poolInfo['pool_number'] + '_' + 'SB';
+            }
+            else {
+                return poolInfo['pool_number']
+            }
+        }
+        else {
+            return null 
+        }
     }
 
 };
@@ -139,6 +180,19 @@ var URLManager = {
 
     loadPoolPage: function(results) {
         window.location.href = this.getURL(results);
+    },
+
+    getPoolInfo: function() {
+        //extract pool information from document url
+        var pathArray = window.location.href.split('/');
+        var poolStart = $.inArray('pool', pathArray);
+
+        if (poolStart !== -1) {
+            return {'vehicle': pathArray[poolStart + 1], 'pool_number': pathArray[poolStart + 2]};
+        }
+        else {
+            return null;
+        }
     },
 
     getParameterByName: function(name) {
@@ -214,7 +268,7 @@ var LayoutManager = {
 
         for (var i in results.results) {
             var obj = results.results[i];
-            var $poolLink, poolHeader; 
+            var $poolLink, $poolHeader; 
             var $div = $('<div class="column post-header"></div>');
             var qs = URLManager.getQueryString();
 
