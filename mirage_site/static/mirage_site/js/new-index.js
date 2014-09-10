@@ -9,12 +9,13 @@ var InputHandler = {
         $('#naics-code').change(this.sendCodeChange.bind(InputHandler));
         $('#setaside-filters').change(this.sendFilterChange);
 
-        Events.subscribe('loadedWithData', this.updateFields.bind(InputHandler));
+        Events.subscribe('loadedWithQS', this.updateFields.bind(InputHandler));
     },
 
     updateFields: function(obj) {
         if (obj.naics !== null) {
             $('#naics-code').select2('val', obj.naics);
+            this.naicsCode = obj.naics;
         }
 
         if (obj.setasides) {
@@ -79,11 +80,12 @@ var ResultsManager = {
     init: function() {
         Events.subscribe('naicsChanged', this.load.bind(ResultsManager));
         Events.subscribe('filtersChanged', this.load.bind(ResultsManager));
+        Events.subscribe('loadedWithQS', this.load.bind(ResultsManager));
     },
 
     buildRequestQuery: function() {
         var setasides = InputHandler.getSetasides();
-        var naicsCode = InputHandler.getNAICSCode();
+        var naicsCode = InputHandler.getNAICSCode() || URLManager.getParameterByName('naics');
         var queryData = {'group':'pool'};
         var pool = this.getPool();
 
@@ -113,6 +115,7 @@ var ResultsManager = {
             resultsObj.samLoad = data.sam_load;
             resultsObj.total = data.num_results;
             resultsObj.results = data.results;
+            resultsObj.naics = queryData['naics'];
 
             Events.publish('dataLoaded', resultsObj);
         });
@@ -138,11 +141,11 @@ var ResultsManager = {
 
 var URLManager = {
     init: function() {
-        var naics = this.getParameterByName('naics-code');
+        var naics = this.getParameterByName('naics');
         var setasides = this.getParameterByName('setasides');
 
         if (naics || setasides) {
-            Events.publish('loadedWithData', {'naics': naics, 'setasides': setasides});
+            Events.publish('loadedWithQS', {'naics': naics, 'setasides': setasides});
         }
 
         Events.subscribe('contentChanged', this.update.bind(URLManager));
@@ -213,17 +216,25 @@ var LayoutManager = {
             Events.publish('contentChanged', results);
         }
         else {
-            Events.publish('goToPoolPage', results);
+            if (URLManager.getParameterByName('naics') === InputHandler.getNAICSCode()) {
+                this.renderTable(results);
+            }
+            else {
+                Events.publish('goToPoolPage', results);
+            }
         }
     },
 
     renderTable: function(results) {
         var t = $('#pool_vendors');
-        var i, len = results.results.length - 1;
+        var i, len = results.results[0].vendors.length - 1;
 
         for (i = 0; i <= len; i++) {
             t.append(this.renderRow(results.results[0].vendors[i]));
         }
+
+        $('#pool_table').show();
+        Events.publish('contentChanged', results);
     },
 
     renderRow: function(v) {
