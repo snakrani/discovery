@@ -10,15 +10,18 @@ var LayoutManager = {
     },
 
     render: function(results) {
+        // if multiple pools should be rendered
         if (results.results.length > 1) {
             this.renderPools(results);
             Events.publish('contentChanged', results);
         }
         else {
+            // if this is a vendor list page and the page has already been reloaded
             if (URLManager.getParameterByName('naics') === InputHandler.getNAICSCode()) {
                 this.renderTable(results);
             }
             else {
+                // if this is a vendor list page and we need to reload to get the template
                 Events.publish('goToPoolPage', results);
             }
         }
