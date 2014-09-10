@@ -5,8 +5,6 @@ var InputHandler = {
     init: function() {
         this.populateDropDown();
 
-        // initialize special field lib
-
         // event bindings
         $('#naics-code').change(this.sendCodeChange.bind(InputHandler));
         $('#setaside-filters').change(this.sendFilterChange);
@@ -64,8 +62,8 @@ var InputHandler = {
                          .attr("value", result.short_code)
                          .text(result.short_code + " - " + result.description)); 
                 });
-                if (URLManager.getParameterByName("naics-code")) {
-                    $("#naics-code").select2().select2("val", URLManager.getParameterByName("naics-code"));
+                if (URLManager.getParameterByName("naics")) {
+                    $("#naics-code").select2().select2("val", URLManager.getParameterByName("naics"));
                 }
                 //load data if search criteria is defined in querystring
                 if (URLManager.getParameterByName("naics-code") || URLManager.getParameterByName("setasides")) {
