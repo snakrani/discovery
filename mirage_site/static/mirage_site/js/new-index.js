@@ -2,16 +2,13 @@
 'use strict';
 
 var InputHandler = {
-    $codeField: $('#naics-code'),
-
     init: function() {
         this.populateDropDown();
 
         // initialize special field lib
-        this.$codeField.select2({placeholder:'Select a NAICS code', dropdownAutoWidth : true});
 
         // event bindings
-        this.$codeField.change(this.sendCodeChange.bind(InputHandler));
+        $('#naics-code').change(this.sendCodeChange.bind(InputHandler));
         $('#setaside-filters').change(this.sendFilterChange);
 
         Events.subscribe('loadedWithData', this.updateFields.bind(InputHandler));
@@ -19,7 +16,7 @@ var InputHandler = {
 
     updateFields: function(obj) {
         if (obj.naics !== null) {
-            this.$codeField.select2('val', obj.naics);
+            $('#naics-code').select2('val', obj.naics);
         }
 
         if (obj.setasides) {
@@ -52,7 +49,8 @@ var InputHandler = {
     },
 
     populateDropDown: function() {
-        this.$codeField
+        // can't seem to use cached jqobj, something goes wrong with select2
+        $('#naics-code')
              .append($("<option></option>")
              .attr("value", "all")
              .text("All NAICS codes")); 
@@ -67,7 +65,7 @@ var InputHandler = {
                          .text(result.short_code + " - " + result.description)); 
                 });
                 if (URLManager.getParameterByName("naics-code")) {
-                    $("#naics-code").select2().select2("val", getParameterByName("naics-code"));
+                    $("#naics-code").select2().select2("val", URLManager.getParameterByName("naics-code"));
                 }
                 //load data if search criteria is defined in querystring
                 if (URLManager.getParameterByName("naics-code") || URLManager.getParameterByName("setasides")) {
@@ -75,6 +73,7 @@ var InputHandler = {
                 }
             }
         );
+        $('#naics-code').select2({placeholder:'Select a NAICS code', dropdownAutoWidth : true});
     }
 };
 
@@ -87,13 +86,11 @@ var ResultsManager = {
     buildRequestQuery: function() {
         var setasides = InputHandler.getSetasides();
         var naicsCode = InputHandler.getNAICSCode();
-        var queryData = {
-            'group': 'pool'
-        };
+        var queryData = {'group':'pool'};
         var pool = this.getPool();
 
         if (typeof naicsCode !== 'undefined') {
-            queryData['naics-code'] = naicsCode;
+            queryData['naics'] = naicsCode;
         }
 
         if (setasides.length > 0) {
