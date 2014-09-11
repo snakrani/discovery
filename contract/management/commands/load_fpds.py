@@ -3,7 +3,7 @@ from django.core.management import call_command
 from django.conf import settings
 from pyfpds import Contracts
 from vendor.models import Vendor
-from contract.models import FPDSContract
+from contract.models import FPDSContract, FPDSLoad
 from contract import catch_key_error
 from datetime import datetime, timedelta
 
@@ -35,7 +35,6 @@ def get_current_completion_date(award):
 
 @catch_key_error
 def get_annual_revenue(award):
-    print (award['vendor']['vendorSiteDetails']['vendorOrganizationFactors']['annualRevenue'])
     return award['vendor']['vendorSiteDetails']['vendorOrganizationFactors']['annualRevenue']
 
 @catch_key_error
@@ -85,6 +84,19 @@ def get_psc(award):
     return award['productOrServiceInformation']['productOrServiceCode']['#text']
 
 
+def last_load():
+    load = FPDSLoad.objects.all().order_by('-load_date')
+    if len(load) > 0:
+        old_load = load[0].load_date
+        load[0].load_date = datetime.now()
+        load[0].save()
+        return old_load    
+    else: 
+        today = datetime.now()
+        new_load = FPDSLoad(load_date=today)
+        new_load.save()
+        return  today - timedelta(weeks=(52*10))
+
 class Command(BaseCommand):
     
     contracts = Contracts()
@@ -94,23 +106,17 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
    
-        #TO DO make this smarter -- keep track of last load, only load modified since that date
-        today = datetime.now()
-        ten_years = timedelta(weeks=(52*10))
-        ten_years_ago = today - ten_years
+        load_from = last_load()
+        load_to = datetime.now()
 
-        #for v in Vendor.objects.filter(duns='127222466'):
         for v in Vendor.objects.all():
 
             by_piid = {} 
-            v_con = self.contracts.get(vendor_duns=v.duns, date_signed=self.date_format(ten_years_ago, today), num_records='all')
+            v_con = self.contracts.get(vendor_duns=v.duns, last_modified_date=self.date_format(load_from, load_to), num_records='all')
 
-            #find some way to order by date so that ANNUAL REVENUT AND NUMBER OF EMPLOYEES IS CORRECT
-            
             for vc in v_con:
                 
                 con_type = ''
-                #self.contracts.pretty_print(vc)
                 if 'IDV' in vc['content']:
                     continue # don't get IDV records
 
@@ -137,21 +143,17 @@ class Command(BaseCommand):
                     'psc': get_psc(award),
                 }
 
-                
                 if piid in by_piid:
                     by_piid[piid].append(record)
                 else:
                     by_piid[piid] = [record, ]
 
             for piid, records in by_piid.items():
-                by_piid[piid] = sorted(records, key=lambda x: (x['mod_number'], x['transaction_number']))
 
-               # try: 
+                by_piid[piid] = sorted(records, key=lambda x: (x['mod_number'], x['transaction_number']))
                 total = 0 # amount obligated
                 
                 print("================{0}===Vendor {1}=================\n".format(piid, v.duns))
-                print(v.duns)
-                print(v.id)
 
                 self.contracts.pretty_print(by_piid[piid])
                 

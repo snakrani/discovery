@@ -19,7 +19,11 @@ PRICING_CHOICES = (
     ('2', 'Combination'),
     ('3', 'Other'),
 )
-    
+
+
+class FPDSLoad(models.Model):
+    load_date = models.DateField()
+
 class FPDSContract(models.Model):
     
     piid = models.CharField(max_length=128, db_index=True)
