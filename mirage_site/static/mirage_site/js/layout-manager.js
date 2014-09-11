@@ -115,8 +115,11 @@ var LayoutManager = {
         //remove old seach results breadcrumb
         $('#sr').remove();
 
-        //create new breadcrumb for search results
-        $('#crumbs').append('<li id="sr"><a href="#">Search Results</a></li>');
+        // pool pages load with breadcrumbs
+        if ($('#crumbs').children().length <= 1) {
+            //create new breadcrumb for search results
+            $('#crumbs').append('<li id="sr"><a href="#">Search Results</a></li>');
+        }
     },
 
     updateSAM: function(results) {
