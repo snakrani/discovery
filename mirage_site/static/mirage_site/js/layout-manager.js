@@ -48,7 +48,7 @@ var LayoutManager = {
         name_col.append(name_a);
         $vendorRow.append(name_col);
 
-        location_col = $('<td class="vendor_location">' + v.sam_citystate + '</td>');
+        location_col = $('<td class="vendor_location">' + this.cleanLocation(v.sam_citystate) + '</td>');
         $vendorRow.append(location_col);
 
         //add socio-economic columns
@@ -133,5 +133,26 @@ var LayoutManager = {
             }).get().join(', ')
         );
         $("#your_search_criteria").show();
+    },
+
+    cleanLocation: function(location) {
+        var location_obj = {};
+        var new_location = location;
+
+        if (location) {
+            location = location.trim();
+            var comma = location.indexOf(',');
+            location_obj.city = location.slice(0, comma);
+            var after = location.substring(comma + 2);
+            var space = after.lastIndexOf(' ');
+            location_obj.state = after.slice(0, space).toUpperCase();
+            new_location = this.toTitleCase(location_obj.city) + ', ' + location_obj.state
+        }
+        return new_location
+    }, 
+
+    toTitleCase: function(str) {
+        // from http://stackoverflow.com/questions/5097875/help-parsing-string-city-state-zip-with-javascript
+        return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
     }
 };
