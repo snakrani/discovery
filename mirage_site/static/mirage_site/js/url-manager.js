@@ -61,5 +61,11 @@ var URLManager = {
         var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
             results = regex.exec(location.search);
         return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    },
+
+    getDUNS: function() {
+        //extract pool information from document url
+        var pathArray = window.location.href.split('/');
+        return pathArray[pathArray.length - 1];
     }
 };
