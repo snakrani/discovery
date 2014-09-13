@@ -109,6 +109,7 @@ class Command(BaseCommand):
         load_from = last_load()
         load_to = datetime.now()
 
+
         for v in Vendor.objects.all():
 
             by_piid = {} 
