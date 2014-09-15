@@ -47,10 +47,14 @@ var show_content = function(results) {
 
 	//load SAM expiration date
     var current_date = new Date();
-    var date_obj = new Date(results['sam_expiration_date']);
-    $(".vendor_sam_expiration_date").text(happy_date(date_obj));
-    if (current_date > date_obj) {
-        $(".vendor_sam_expiration_notice").show();
+    if (results['sam_expiration_date'] != null) {
+        var date_obj = new Date(results['sam_expiration_date']);
+        $(".vendor_sam_expiration_date").text(happy_date(date_obj));
+        if (current_date > date_obj) {
+            $(".vendor_sam_expiration_notice").show();
+        }
+    } else {
+        $(".vendor_sam_expiration_date").text("Unavailable");
     }
 
 	//contact info
