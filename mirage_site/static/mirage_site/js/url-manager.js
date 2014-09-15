@@ -5,8 +5,10 @@ var URLManager = {
     init: function() {
         var naics = this.getParameterByName('naics');
         var setasides = this.getParameterByName('setasides');
+        var vendor = URLManager.isVendorPage();
 
-        if (naics || setasides) {
+        // this + LayoutManager.render() are acting as a kind of router. should probably be rethought. [TS]
+        if (naics || setasides || vendor) {
             Events.publish('loadedWithQS', {'naics': naics, 'setasides': setasides});
         }
 
@@ -66,6 +68,18 @@ var URLManager = {
     getDUNS: function() {
         //extract pool information from document url
         var pathArray = window.location.href.split('/');
+        pathArray = pathArray.removeEmpties();
         return pathArray[pathArray.length - 1];
-    }
+    },
+
+    isVendorPage: function() {
+        var pathArray =  window.location.href.split('/');
+
+        if ($.inArray('vendor', pathArray)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    } 
 };

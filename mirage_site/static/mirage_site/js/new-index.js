@@ -11,3 +11,14 @@ $(document).ready(function() {
     LayoutManager.init();
     URLManager.init();
 });
+
+// removes empty strings
+Array.prototype.removeEmpties = function() {
+  for (var i = 0; i < this.length; i++) {
+    if (this[i].length === 0) {         
+      this.splice(i, 1);
+      i--;
+    }
+  }
+  return this;
+};
