@@ -2,6 +2,7 @@
 'use strict';
 
 // for pool page and single pool list
+// anything with a url under /pool
 LayoutManager.render = function(results) {
     // this is turning into something of a router
     // should be refactored [TS]
@@ -25,7 +26,35 @@ LayoutManager.render = function(results) {
             Events.publish('goToPoolPage', results);
         }
     }
-}
+};
+
+LayoutManager.renderPools = function(results) {
+    var $container = $('#custom_page_content');
+    //clear out content
+    $container.find('.column').remove();
+
+    for (var i in results.results) {
+        var obj = results.results[i];
+        var $poolLink, $poolHeader; 
+        var $div = $('<div class="column post-header"></div>');
+        var qs = URLManager.getQueryString();
+
+        $poolLink = $('<a class="pool_link" href="/pool/' + obj['vehicle'].toLowerCase() + '/' + obj['number'] + '/' + qs + '">Pool' + obj['number'] + '</a>');
+        $poolLink.text();
+       
+        $poolHeader = $('<h2 class="pool_title"></h2>');
+        $poolHeader.append($poolLink);
+        $div.append($poolHeader);
+        
+        $div.append('<p class="post-meta number_of_vendors_in_pool">' + obj['vendors'].length.toString() + ' vendors</p>');
+
+        for (var v in obj['vendors']){
+            $div.append('<p class="vendor_names">' + obj['vendors'][v]['name'] + '</p>');
+        }
+
+        $container.append($div);
+    }
+};
 
 LayoutManager.renderTable = function(results) {
     var t = $('#pool_vendors');
@@ -37,7 +66,7 @@ LayoutManager.renderTable = function(results) {
 
     $('#pool_table').show();
     Events.publish('contentChanged', results);
-}
+};
 
 LayoutManager.renderRow = function(v) {
     var location_col;
@@ -58,7 +87,7 @@ LayoutManager.renderRow = function(v) {
     $vendorRow.append(this.renderColumn(v, 'wo', 'A2'));
 
     return $vendorRow;
-}
+};
 
 LayoutManager.renderColumn = function(v, prefix, setasideCode) {
     var $col = $('<td class="' + prefix + '"></td>');
@@ -67,7 +96,7 @@ LayoutManager.renderColumn = function(v, prefix, setasideCode) {
     }
 
     return $col;
-}
+};
 
 LayoutManager.findIndicatorMatch = function(v, prefix, setasideCode) {
     var i, len = v['setasides'].length - 1;
@@ -81,7 +110,7 @@ LayoutManager.findIndicatorMatch = function(v, prefix, setasideCode) {
     }
 
     return false;
-}
+};
 
 LayoutManager.cleanLocation = function(location) {
     var location_obj = {};
@@ -97,4 +126,4 @@ LayoutManager.cleanLocation = function(location) {
         new_location = this.toTitleCase(location_obj.city) + ', ' + location_obj.state
     }
     return new_location
-}
+};

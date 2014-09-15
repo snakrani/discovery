@@ -1,6 +1,8 @@
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
 'use strict';
 
+// for pool and vendor lists pages
+// anything under url /pool
 ResultsManager.load = function() {
     var url = "/api/vendors/";
     var queryData = this.buildRequestQuery();
