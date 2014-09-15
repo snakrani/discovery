@@ -1,4 +1,5 @@
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
+//
 'use strict';
 
 var URLManager = {
@@ -30,8 +31,17 @@ var URLManager = {
 
     getURL: function(results) {
         var qs = this.getQueryString();
-        var vehicle = results.vehicle;
-        var poolNumber = results.poolNumber;
+        var vehicle, poolNumber, pathArray;
+
+        if ($.isEmptyObject(results)) {
+            pathArray = window.location.href.split('/').removeEmpties();
+            vehicle = pathArray[3];
+            poolNumber = pathArray[4];
+        }
+        else {
+            vehicle = results.vehicle;
+            poolNumber = results.poolNumber;
+        }
 
         return '/pool/' + vehicle + '/' + poolNumber + '/' + qs;
     },
@@ -46,7 +56,7 @@ var URLManager = {
 
     getPoolInfo: function() {
         //extract pool information from document url
-        var pathArray = window.location.href.split('/');
+        var pathArray = window.location.href.split('/').removeEmpties();
         var poolStart = $.inArray('pool', pathArray);
 
         if (poolStart !== -1) {
@@ -75,7 +85,7 @@ var URLManager = {
     isVendorPage: function() {
         var pathArray =  window.location.href.split('/');
 
-        if ($.inArray('vendor', pathArray)) {
+        if ($.inArray('vendor', pathArray) !== -1) {
             return true;
         }
         else {

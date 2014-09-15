@@ -6,8 +6,6 @@ var ResultsManager = {
         Events.subscribe('naicsChanged', this.load.bind(ResultsManager));
         Events.subscribe('filtersChanged', this.load.bind(ResultsManager));
         Events.subscribe('loadedWithQS', this.load.bind(ResultsManager));
-        // default to {} because loadContracts isn't always defined
-        Events.subscribe('vendorInfoLoaded', this.loadContracts.bind(ResultsManager) || {});
     },
 
     buildRequestQuery: function() {

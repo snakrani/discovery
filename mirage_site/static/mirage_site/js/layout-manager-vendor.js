@@ -2,6 +2,20 @@
 'use strict';
 
 // for vendor pages
+LayoutManager.vendorInit = function(original) {
+    // binds events needed only in the vendor context on init and then
+    // calls original init function
+    Events.subscribe('contractDataLoaded', this.buildContractTable.bind(LayoutManager));
+
+    return function() {
+        original();
+    };
+};
+
+LayoutManager.init = function() {
+    LayoutManager.vendorInit(LayoutManager.init);
+};
+
 LayoutManager.render = function(results) {
     $('.vendor_title').html(results.name);
     if (results.sam_exclusion == true) {

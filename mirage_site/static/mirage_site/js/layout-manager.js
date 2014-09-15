@@ -7,7 +7,6 @@ var LayoutManager = {
         Events.subscribe('contentChanged', this.updateSAM);
         Events.subscribe('contentChanged', this.updateResultsInfo);
         Events.subscribe('contentChanged', this.updateBreadcrumb);
-        Events.subscribe('contractDataLoaded', this.buildContractTable.bind(LayoutManager));
     },
 
     renderPools: function(results) {
@@ -50,12 +49,24 @@ var LayoutManager = {
     },
 
     updateSAM: function(results) {
-        var dateObj = new Date(results['samLoad']);
-        $("#sam_load").text("SAM data updated: " + (dateObj.getMonth() + 1) + '/' + dateObj.getDate() + '/' + dateObj.getFullYear().toString().substring(2));
+        if ($.isEmptyObject(results) === false) {
+            var dateObj = new Date(results['samLoad']);
+            $("#sam_load").text("SAM data updated: " + (dateObj.getMonth() + 1) + '/' + dateObj.getDate() + '/' + dateObj.getFullYear().toString().substring(2));
+        }
     },
 
     updateResultsInfo: function(results) {
-        $("#number_of_results span").text(results.total.toString() + " vendors in " + results.results.length + " pool(s) match your search");
+        var totalResults, totalPools;
+        if ($.isEmptyObject(results)) {
+            totalResults = 0;
+            totalPools = 0;
+        }
+        else {
+            totalResults = results.total.toString();
+            totalPools = results.results.length;
+        }
+
+        $("#number_of_results span").text( totalResults + " vendors in " + totalPools + " pool(s) match your search");
         $("#your_search").text($("#naics-code option:selected").text());
         $("#your_filters").text(
             $("#setaside-filters input:checkbox:checked").map(function() {

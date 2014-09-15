@@ -1,3 +1,15 @@
+ResultsManager.vendorInit = function(original) {
+    Events.subscribe('vendorInfoLoaded', this.loadContracts.bind(ResultsManager));
+
+    return function() {
+        original();
+    }
+};
+
+ResultsManager.init = function() {
+    ResultsManager.vendorInit(ResultsManager.init);
+};
+
 ResultsManager.load = function() {
     /* get vendor info from api */
 
