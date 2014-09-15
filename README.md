@@ -15,11 +15,13 @@ Next you'll need to load data so that you have something to query. Inside the `/
 
 `manage.py loaddata vendor/fixtures/naics.json`
 
-The vendors.json fixture is optional. You can either load the vendors fixture as stated above, or run the ```load_vendors``` manage command to get the most up-to-date information.
+Make sure to load naics.json, pools.json, and setasides.json (in that order).
+
+Now you can run the ```load_vendors``` manage command to get the most up-to-date information.
 
 ```manage.py load_vendors```
 
-Note that this manage command requires you to specify a ```SAM_API_KEY``` variable in your local settings file as shown in local_settings.example.py. This value should be a valid Data.gov API key.
+Note that this manage command requires you to specify a ```SAM_API_KEY``` variable in your local settings file as shown in local_settings.example.py. This value should be a valid Data.gov API key. The loader runs slightly faster than the rate limiting on api.data.gov, so you'll need to lift that limit on your key. Contact the OASIS development team for details. 
 
 Once the server is started you can query the api at
 `http://localhost:8000/api/vendors/`
@@ -33,6 +35,12 @@ will return vendors that have the setaside codes A5 and QF and also do business 
 You can also add a `group` parameter to get the vendors grouped by pool, like so:
 `http://localhost:8000/api/vendors/?setasides=A5,QF&naics=541330&group=pool`
 
+Once you've loaded the basic data, you'll need to load the contract history records for the Vendor detail pages. These are also manage commands. They should be executed in the following order:
+`manage.py load_fpds`
+`manage.py load_fapiis`
+`manage.py merge_contracts`
+
+Currently the `load_fpds` command is configured to load ten years of contract history for each vendor so it takes some time. In future versions we will have smarter loading that only fetches recently added contracts.
 
 ### Public domain
 

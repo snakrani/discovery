@@ -8,9 +8,9 @@
         <ul id="crumbs">
 
     <li><a href="/">Home</a></li>
-    <li><a href="#">Search Results</a></li>
-    <li><a href="#">Pool {{ pool_number }}</a></li>
-    <li>ABC Professional Services</li>
+    <li class="crumb_nonactive">Search Results</a></li>
+    <li class="crumb_nonactive">Pool {{ pool_number }}</li>
+    <li id="vendor_breadcrumb"></li>
 
     </div><!--end breadcrumbs<!-->
  </div><!--end breadcrumb_container<!-->
@@ -21,7 +21,7 @@
  <div id="vendor_main_container">
         
         <div id="vendor_title_status_container">
-	        <div class="vendor_title">ABC Professional Services</div>
+	        <div class="vendor_title"></div>
 	        <div class="debarred_status"> <<< WARNING: DEBARRED!</div>
         </div><!--end vendor_title_status_container<!-->
 
@@ -30,19 +30,19 @@
         	<div id="vendor_admin_c1">
         		<div id="vendor_sam_expiration_container">
         			<span class="vendor_sam_expiration_text">SAM Registration Expires on:</span>
-        			<span class="vendor_sam_expiration_date">5/3/2014</span> 
+        			<span class="vendor_sam_expiration_date"></span> 
         			<span class="vendor_sam_expiration_notice">EXPIRED!</span>        			
         		</div><!--end vendor_sam_expiration_container<!-->
 
         		<div id="vendor_socioeconomic_table_container">
         			<div class="vendor_detail_table" >
-                <table >
+                <table id="socioeconomic_indicators">
                     <tr>
                         <td>
-                            VO
+                            8(a)
                         </td>
-                        <td >
-                            SDB
+                        <td>
+                            HubZ
                         </td>
                         <td>
                             SDVO
@@ -51,33 +51,12 @@
                             WO
                         </td>
                         <td>
-                            8A
+                            VO
                         </td>
-                        <td>
-                            Hubz
+                        <td >
+                            SDB
                         </td>
-                    </tr>
-                    <tr>
-                        <td class="vo">
-                            
-                        </td>
-                        <td class="sdb">
-                            X
-                        </td>
-                        <td class="sdvo">
-                            
-                        </td>
-                        <td class="wo">
-                            
-                        </td>
-                        <td class="8a">
-                            X
-                        </td>
-                        <td class="Hubz">
-                            
-                        </td>
-                    </tr>
-                    
+                    </tr>                    
                 </table>
             </div>
             
@@ -87,20 +66,20 @@
         	<div id="vendor_admin_c2">
         		<div id="vendor_c1_info">
         			<p class="admin_title">Vendor Admin Information</p>
-        			<p class="lh"><span class="admin_label">DUNS:</span> <span class="duns_number admin_data">1234567</span></p>
-        			<p class="lh"><span class="admin_label">CAGE Code:</span> <span class="cage_code admin_data">1234567</span></p>
-        			<p class="lh"><span class="admin_label">Employees:</span> <span class="number_of_employees admin_data">160000</span></p>
-        			<p class="lh"><span class="admin_label">Annual Revenue:</span> <span class="annual_revenu admin_data">$340000</span></p>
+        			<p class="lh"><span class="admin_label">DUNS:</span> <span class="duns_number admin_data"></span></p>
+        			<p class="lh"><span class="admin_label">CAGE Code:</span> <span class="cage_code admin_data"></span></p>
+        			<p class="lh"><span class="admin_label">Employees:</span> <span class="number_of_employees admin_data"></span></p>
+        			<p class="lh"><span class="admin_label">Annual Revenue:</span> <span class="annual_revenue admin_data"></span></p>
         		</div><!--end vendor_c1_info<!-->
         	</div><!--end vendor_admin_c2<!-->
 
         	<div id="vendor_admin_c3">
         			<p class="admin_title">Vendor Contact Information</p>
-        		    <p class="lh"><span class="admin_label"></span>Address: <span class="vendor_address1 admin_data2">123 Contractor Springs Drive</span></p>
-        		    <p class="lh"><span class="admin_label"></span><span class="vendor_address2 admin_data2">Virginia Beach, VA 12345</span></p>
-        			<p class="lh"><span class="admin_label"></span><span class="vendor_poc_name admin_data2">Jerry "T-Bone" Contractorsen</span></p>
-        			<p class="lh"><span class="admin_label"></span><span class="vendor_poc_phone admin_data2">123-456-7890</span></p>
-        			<p class="lh"><span class="admin_label"></span><span class="vendor_poc_email admin_data2"><a href="mailto:jerry.tbone.contractorsen@hotmail.com">jerry.tbone.contractorsen@hotmail.com</a></span></p>
+        		    <p class="lh"><span class="admin_label"></span><span class="vendor_address1 admin_data2"></span></p>
+        		    <p class="lh"><span class="admin_label"></span><span class="vendor_address2 admin_data2"></span></p>
+        			<p class="lh"><span class="admin_label"></span><span class="vendor_poc_name admin_data2"></span></p>
+        			<p class="lh"><span class="admin_label"></span><span class="vendor_poc_phone admin_data2"></span></p>
+        			<p class="lh"><span class="admin_label"></span><span class="vendor_poc_email admin_data2"></span></p>
         	</div><!--end vendor_admin_c3<!-->
 
         </div><!--end vendor_admin_container<!-->
@@ -108,8 +87,8 @@
 
         <div id="vendor_contract_history_container">
         	<div id="vendor_contract_history_title_container">
-        		<span class="vendor_contract_history_text">This vendor's contract history for</span>
-        		<span class="vendor_contract_history_naics">NAICS 123456:</span>
+        		<span class="vendor_contract_history_text">This vendor's contract history for </span>
+        		<span class="vendor_contract_history_naics"></span>
         	</div><!--end vendor_contract_history_title_container<!-->
 
         	
@@ -129,59 +108,13 @@
                             Type
                         </td>
                         <td class="h_value">
-                            Value
+                            Value ($)
                         </td>
                         <td class="h_email_poc">
                             Email POC
                         </td>
                         <td class="h_status">
                             Status
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="date_signed">
-                            11/11/2014
-                        </td>
-                        <td class="piid">
-                            123456
-                        </td>
-                        <td class="agency">
-                            National Oceanic and Atmospheric Administration
-                        </td>
-                        <td class="type">
-                            Price Fixed
-                        </td>
-                        <td class="value">
-                            $4500000
-                        </td>
-                        <td class="email_poc">
-                            jerry.tbone.contractorsen@hotmail.com
-                        </td>
-                        <td class="status">
-                            Terminated for cause
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="date_signed">
-                            11/11/2014
-                        </td>
-                        <td class="piid">
-                            123456
-                        </td>
-                        <td class="agency">
-                            National Oceanic and Atmospheric Administration
-                        </td>
-                        <td class="type">
-                            Price Fixed
-                        </td>
-                        <td class="value">
-                            $4500000
-                        </td>
-                        <td class="email_poc">
-                            jerry.tbone.contractorsen@hotmail.com
-                        </td>
-                        <td class="status">
-                            Terminated for cause
                         </td>
                     </tr>
                 </table>

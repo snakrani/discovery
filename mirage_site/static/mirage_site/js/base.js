@@ -47,6 +47,22 @@ var build_query_string = function() {
     return qs;
 }
 
+var to_title_case = function(str) {
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
+
+var lower = function(str) {
+    if (str) {
+        return str.toLowerCase();
+    } else {
+        return str
+    }
+}
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 //refresh data on page if search criteria changes 
 $("#naics-code").change(refresh_data);
 $("#setaside-filters").change(refresh_data);

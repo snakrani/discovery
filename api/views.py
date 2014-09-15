@@ -148,7 +148,7 @@ class ListContracts(APIView):
             return 1
 
         vendor = Vendor.objects.get(duns=duns)
-        contracts = Contract.objects.filter(vendor=vendor)
+        contracts = Contract.objects.filter(vendor=vendor).order_by('-date_signed')
 
         if naics:
             #contracts = contracts.filter(NAICS=Naics.objects.filter(code=naics)[0])

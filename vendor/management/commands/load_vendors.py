@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 from django.core.management import call_command
-from vendor.models import Vendor, Pool, PoolPIID
+from vendor.models import Vendor, Pool, PoolPIID, SetAside
 import csv
 from django.conf import settings
 import os
@@ -8,6 +8,7 @@ import re
 import requests
 import logging
 import xmltodict
+import csv
 
 class Command(BaseCommand):
     
@@ -18,6 +19,14 @@ class Command(BaseCommand):
 
     def duns_plus_4(self, duns):
         return self.replace_x(duns) + '0000'
+
+    def load_temp_setasides(self):
+        reader = csv.reader(open(os.path.join(settings.BASE_DIR, 'vendor/docs/temp_8a_hubzone.csv'))) 
+        for line in reader:
+            v = Vendor.objects.get(duns=line[1])
+            sa = SetAside.objects.get(code=line[2])
+            if sa not in v.setasides.all():
+                v.setasides.add(sa)
 
     def handle(self, *args, **kwargs):
         #read in setasides from yaml file
@@ -81,11 +90,12 @@ class Command(BaseCommand):
 
                 except Pool.DoesNotExist:
                     self.logger.debug("Pool {} not found for spreadsheet".format(pool))
+                    print("Pool {0} not found. Did you load the pools fixture?".format(pool))
 
                 except Pool.MultipleObjectsReturned:
                     self.logger.debug("More than one pool matched {}. Integrity error!".format(pool))
 
             #call the sam check to fill in extra fields
             call_command('check_sam')
-
+            self.load_temp_setasides()
 

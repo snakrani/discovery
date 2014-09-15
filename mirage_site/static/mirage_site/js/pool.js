@@ -30,14 +30,10 @@ var show_content = function(results) {
         return col
     }
 
-    var addRow = function(v) {
+    var addRow = function(v, qs) {
 
         var clean_location = function(location) {
             // from http://stackoverflow.com/questions/5097875/help-parsing-string-city-state-zip-with-javascript
-
-            var to_title_case = function(str) {
-                return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-            }
 
             var location_obj = {};
             new_location = location;
@@ -60,7 +56,7 @@ var show_content = function(results) {
         name_col = $(document.createElement('td'));
         name_a = $(document.createElement('a'));
         name_a.text(v.name);
-        name_a.attr('href', '/vendor/' + v.duns + '/');
+        name_a.attr('href', '/vendor/' + v.duns + '/' + qs);
         name_a.attr('class', 'link_style');
         name_col.attr('class', 'vendor_name');
         name_col.append(name_a);
@@ -72,10 +68,12 @@ var show_content = function(results) {
         vendor_row.append(location_col);
 
         //add socio-economic columns
-        vendor_row.append(render_column(v, 'vo', 'A5'));
-        vendor_row.append(render_column(v, 'sdb', '27'));
+        vendor_row.append(render_column(v, '8a', 'A6'));
+        vendor_row.append(render_column(v, 'Hubz', 'XX'));
         vendor_row.append(render_column(v, 'sdvo', 'QF'));
         vendor_row.append(render_column(v, 'wo', 'A2'));
+        vendor_row.append(render_column(v, 'vo', 'A5'));
+        vendor_row.append(render_column(v, 'sdb', '27'));
 
         //add row to table
         t.append(vendor_row);
@@ -104,7 +102,7 @@ var show_content = function(results) {
         var obj = data[e];
         if (obj['vehicle'].toUpperCase() == pool_info['vehicle'].toUpperCase() && obj['number'].toUpperCase() == pool_info['pool_number'].toUpperCase()) {
             for (var v in obj['vendors']) {
-                addRow(obj['vendors'][v]);
+                addRow(obj['vendors'][v], qs);
             }
             total = obj['vendors'].length;
             break;
