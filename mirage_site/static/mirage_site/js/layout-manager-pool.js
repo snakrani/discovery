@@ -3,6 +3,26 @@
 
 // for pool page
 LayoutManager.Pool = {
+    // this is turning into something of a router
+    // should be refactored [TS]
+    render: function(results) {
+        // if multiple pools should be rendered
+        if (results.results.length > 1) {
+            this.renderPools(results);
+            Events.publish('contentChanged', results);
+        }
+        else {
+            // if this is a vendor list page and the page has already been reloaded
+            if (URLManager.getParameterByName('naics') === InputHandler.getNAICSCode()) {
+                this.Pool.renderTable(results);
+            }
+            else {
+                // if this is a vendor list page and we need to reload to get the template
+                Events.publish('goToPoolPage', results);
+            }
+        }
+    },
+
     renderTable: function(results) {
         var t = $('#pool_vendors');
         var i, len = results.results[0].vendors.length - 1;
@@ -73,11 +93,5 @@ LayoutManager.Pool = {
             new_location = this.toTitleCase(location_obj.city) + ', ' + location_obj.state
         }
         return new_location
-    }, 
-
-    toTitleCase: function(str) {
-        // from http://stackoverflow.com/questions/5097875/help-parsing-string-city-state-zip-with-javascript
-        return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
     }
-
 };
