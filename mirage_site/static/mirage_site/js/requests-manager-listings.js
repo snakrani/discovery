@@ -9,7 +9,6 @@ ResultsManager.load = function() {
 
     $.getJSON(url, queryData, function(data) {
         var resultsObj = {}; 
-        console.log(data);
 
         if (data.num_results !== 0) {
             resultsObj.vehicle = data['results'][0]['vehicle'].toLowerCase();
