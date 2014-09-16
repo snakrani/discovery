@@ -17,6 +17,9 @@ LayoutManager.init = function() {
 };
 
 LayoutManager.render = function(results) {
+    var currentDate = new Date();
+    var mailto, t, indicatorsRow, formattedDate, dateObj;
+
     $('.vendor_title').html(results.name);
     if (results.sam_exclusion == true) {
             $('.debarred_status').show();
@@ -27,11 +30,16 @@ LayoutManager.render = function(results) {
     $('.annual_revenue').html(results.annual_revenue ? '$' + numberWithCommas(results.annual_revenue) : 'N/A');
 
     //load SAM expiration date
-    var current_date = new Date();
-    var date_obj = new Date(results['sam_expiration_date']);
-    var mailto, t, indicatorsRow;
-    $(".vendor_sam_expiration_date").text(this.formatDate(date_obj));
-    if (current_date > date_obj) {
+    if (results['sam_expiration_date']) {
+        dateObj = new Date(results['sam_expiration_date']);
+        formattedDate = this.formatDate(dateObj);
+    }
+    else {
+        formattedDate = 'unknown';
+    }
+
+    $(".vendor_sam_expiration_date").text(formattedDate);
+    if (currentDate > dateObj) {
         $(".vendor_sam_expiration_notice").show();
     }
 
@@ -67,22 +75,24 @@ LayoutManager.renderColumn = function(v, prefix, setasideCode) {
 LayoutManager.buildContractTable = function(data) {
     var table = $("div#ch_table table").clone();
     var results = data['results'];
-    var item, tr, displayDate;
+    var contract, tr, displayDate;
 
-    for (item in results) {
-        tr = $('<tr></tr>');
-        displayDate = this.formatDate(new Date(results[item]['date_signed']));
-        tr.append('<td class="date_signed">' + displayDate + '</td>');
-        tr.append('<td class="piid">' + results[item]['piid'] + '</td>');
-        tr.append('<td class="agency">' + this.toTitleCase(results[item]['agency_name']) + '</td>');
-        tr.append('<td class="type">' + results[item]['pricing_type'] + '</td>');
-        tr.append('<td class="value">' + numberWithCommas(results[item]['obligated_amount']) + '</td>');
-        tr.append('<td class="email_poc">' + lower(results[item]['point_of_contact']) + '</td>');
-        tr.append('<td class="status">' + results[item]['status'] + '</td>');
-        //more goes here
-    
-        table.append(tr);
-    };
+    for (contract in results) {
+        if (results.hasOwnProperty(contract)) {
+            tr = $('<tr></tr>');
+            displayDate = this.formatDate(new Date(results[contract]['date_signed']));
+            tr.append('<td class="date_signed">' + displayDate + '</td>');
+            tr.append('<td class="piid">' + results[contract]['piid'] + '</td>');
+            tr.append('<td class="agency">' + this.toTitleCase(results[contract]['agency_name']) + '</td>');
+            tr.append('<td class="type">' + results[contract]['pricing_type'] + '</td>');
+            tr.append('<td class="value">' + numberWithCommas(results[contract]['obligated_amount']) + '</td>');
+            tr.append('<td class="email_poc">' + lower(results[contract]['point_of_contact']) + '</td>');
+            tr.append('<td class="status">' + results[contract]['status'] + '</td>');
+            //more goes here
+        
+            table.append(tr);
+        }
+    }
 
     $("div#ch_table table").remove();
     $("div#ch_table").append(table);
@@ -101,7 +111,7 @@ LayoutManager.vendorIndicator = function(v, prefix, setaside_code) {
                 return 'X';
             }
         }
-    } else {
-        return '';
     }
+
+    return '';
 };

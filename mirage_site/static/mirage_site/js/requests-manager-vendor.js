@@ -8,7 +8,6 @@ ResultsManager.originalInit = ResultsManager.init;
 
 ResultsManager.init = function() {
     ResultsManager.vendorInit(ResultsManager.originalInit);
-    this.load();
 };
 
 ResultsManager.load = function() {
