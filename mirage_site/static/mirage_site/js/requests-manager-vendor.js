@@ -1,13 +1,14 @@
 ResultsManager.vendorInit = function(original) {
     Events.subscribe('vendorInfoLoaded', this.loadContracts.bind(ResultsManager));
 
-    return function() {
-        original();
-    }
+    original.bind(ResultsManager).call();
 };
 
+ResultsManager.originalInit = ResultsManager.init;
+
 ResultsManager.init = function() {
-    ResultsManager.vendorInit(ResultsManager.init);
+    ResultsManager.vendorInit(ResultsManager.originalInit);
+    this.load();
 };
 
 ResultsManager.load = function() {

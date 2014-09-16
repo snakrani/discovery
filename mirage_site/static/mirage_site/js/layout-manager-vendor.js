@@ -7,13 +7,13 @@ LayoutManager.vendorInit = function(original) {
     // calls original init function
     Events.subscribe('contractDataLoaded', this.buildContractTable.bind(LayoutManager));
 
-    return function() {
-        original();
-    };
+    original.bind(LayoutManager).call();
 };
 
+LayoutManager.originalInit = LayoutManager.init;
+
 LayoutManager.init = function() {
-    LayoutManager.vendorInit(LayoutManager.init);
+    LayoutManager.vendorInit(LayoutManager.originalInit);
 };
 
 LayoutManager.render = function(results) {
