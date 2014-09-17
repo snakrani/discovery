@@ -60,11 +60,11 @@ var show_content = function(results) {
 	//contact info
 	$('.vendor_address1').html(results.sam_address);
 	$('.vendor_address2').html(results.sam_citystate);
-	$('.vendor_poc_name').html(results.cm_name);
-	$('.vendor_poc_phone').html(results.cm_phone);
+	$('.vendor_poc_name').html(results.pm_name);
+	$('.vendor_poc_phone').html(results.pm_phone);
 	mailto = $(document.createElement('a'));
-	mailto.attr('href', 'mailto:' + results.cm_email);
-	mailto.text(results.cm_email);
+	mailto.attr('href', 'mailto:' + results.pm_email);
+	mailto.text(results.pm_email);
 	$('.vendor_poc_email').html(mailto);
 
 	//socioeconomic indicators
