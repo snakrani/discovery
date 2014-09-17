@@ -78,22 +78,5 @@ class Naics(models.Model):
     def __str__(self):
         return "{0} - {1}".format(self.code, self.description)
 
-
-class ContractRecord(models.Model):
-    piid = models.CharField(unique=True, max_length=128)
-    vendor = models.ForeignKey('Vendor')
-    status = models.CharField(choices=STATUS_CHOICES, max_length=3)
-    date_signed = models.DateField()
-    date_completed = models.DateField(null=True)
-    obligated_amount = models.DecimalField(decimal_places=2, max_digits=15, null=True)
-    description = models.TextField(null=True)
-    naics = models.CharField(null=True, max_length=25)
-    psc = models.CharField(null=True, max_length=25)
-    fpds_email = models.EmailField(null=True)
-    fapiis_email = models.EmailField(null=True)
-    fapiis_name = models.CharField(null=True, max_length=128)
-    vehicle = models.CharField(choices=VEHICLE_CHOICES, max_length=7, null=True)
-
-
 class SamLoad(models.Model):
-    sam_load = models.DateTimeField()
+    sam_load = models.DateField()

@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 
 from contract.models import Contract
 from vendor.models import Vendor, Naics, SetAside, SamLoad, Pool
-from api.serializers import VendorSerializer, NaicsSerializer, PoolSerializer, ShortVendorSerializer, ContractSerializer
+from api.serializers import VendorSerializer, NaicsSerializer, PoolSerializer, ShortVendorSerializer, ContractSerializer, Metadata, MetadataSerializer
 
 
 def filter_vendors(obj):
@@ -155,6 +155,12 @@ class ListContracts(APIView):
             contracts = contracts.filter(NAICS=naics)  #change to above when naics loaded right
 
         return contracts
+
+class MetadataView(APIView):
+    def get(self, request, format=None):
+       mds = MetadataSerializer(Metadata())
+       return Response(mds.data)
+        
 
 
 

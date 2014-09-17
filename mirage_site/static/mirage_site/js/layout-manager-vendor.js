@@ -46,10 +46,10 @@ LayoutManager.render = function(results) {
     //contact info
     $('.vendor_address1').html(results.sam_address);
     $('.vendor_address2').html(results.sam_citystate);
-    $('.vendor_poc_name').html(results.cm_name);
-    $('.vendor_poc_phone').html(results.cm_phone);
+    $('.vendor_poc_name').html(results.pm_name);
+    $('.vendor_poc_phone').html(results.pm_phone);
 
-    mailto = $('<a href="mailto:' + results.cm_email + '">' + results.cm_email + '</a>');
+    mailto = $('<a href="mailto:' + results.pm_email + '">' + results.pm_email + '</a>');
     $('.vendor_poc_email').html(mailto);
 
     //socioeconomic indicators
