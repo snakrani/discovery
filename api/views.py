@@ -158,9 +158,7 @@ class ListContracts(APIView):
 
 class MetadataView(APIView):
     def get(self, request, format=None):
-       md = Metadata()
-       mds = MetadataSerializer(md)
-       print(md.__dict__)
+       mds = MetadataSerializer(Metadata())
        return Response(mds.data)
         
 
