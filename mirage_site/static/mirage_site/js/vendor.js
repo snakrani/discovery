@@ -47,20 +47,24 @@ var show_content = function(results) {
 
 	//load SAM expiration date
     var current_date = new Date();
-    var date_obj = new Date(results['sam_expiration_date']);
-    $(".vendor_sam_expiration_date").text(happy_date(date_obj));
-    if (current_date > date_obj) {
-        $(".vendor_sam_expiration_notice").show();
+    if (results['sam_expiration_date'] != null) {
+        var date_obj = new Date(results['sam_expiration_date']);
+        $(".vendor_sam_expiration_date").text(happy_date(date_obj));
+        if (current_date > date_obj) {
+            $(".vendor_sam_expiration_notice").show();
+        }
+    } else {
+        $(".vendor_sam_expiration_date").text("Unavailable");
     }
 
 	//contact info
 	$('.vendor_address1').html(results.sam_address);
 	$('.vendor_address2').html(results.sam_citystate);
-	$('.vendor_poc_name').html(results.cm_name);
-	$('.vendor_poc_phone').html(results.cm_phone);
+	$('.vendor_poc_name').html(results.pm_name);
+	$('.vendor_poc_phone').html(results.pm_phone);
 	mailto = $(document.createElement('a'));
-	mailto.attr('href', 'mailto:' + results.cm_email);
-	mailto.text(results.cm_email);
+	mailto.attr('href', 'mailto:' + results.pm_email);
+	mailto.text(results.pm_email);
 	$('.vendor_poc_email').html(mailto);
 
 	//socioeconomic indicators
