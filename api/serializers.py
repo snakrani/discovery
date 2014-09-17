@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from vendor.models import Vendor, Pool, Naics, SetAside
-from contract.models import Contract
+from vendor.models import Vendor, Pool, Naics, SetAside, SamLoad
+from contract.models import Contract, FPDSLoad
 
 class SetAsideSerializer(serializers.ModelSerializer):
     class Meta:
@@ -33,7 +33,7 @@ class VendorSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Vendor
-        fields = ('name', 'duns', 'duns_4', 'cage', 'sam_address', 'sam_citystate', 'cm_name', 'cm_email', 'cm_phone', 'pools', 'setasides', 'sam_status', 'sam_expiration_date', 'sam_activation_date', 'sam_exclusion', 'sam_url', 'annual_revenue', 'number_of_employees')
+        fields = ('name', 'duns', 'duns_4', 'cage', 'sam_address', 'sam_citystate', 'pm_name', 'pm_email', 'pm_phone', 'pools', 'setasides', 'sam_status', 'sam_expiration_date', 'sam_activation_date', 'sam_exclusion', 'sam_url', 'annual_revenue', 'number_of_employees')
 
 
 class ShortVendorSerializer(serializers.ModelSerializer):
@@ -57,4 +57,22 @@ class ContractSerializer(serializers.ModelSerializer):
             return obj.piid.split('_')[1]
         return obj.piid
 
+class Metadata(object):
+    def __init__(self):
+        sam_md = SamLoad.objects.all().order_by('-sam_load')
+        fpds_md = FPDSLoad.objects.all().order_by('-load_date')
+        if len(sam_md) > 0:
+            self.sam_load_date = sam_md[0].sam_load
+        else: 
+            self.sam_load_date = None
+        if len(fpds_md) > 0:
+            self.fpds_load_date = fpds_md[0].load_date
+        else:
+            self.fpds_load_date = None
+
+
+class MetadataSerializer(serializers.Serializer):
+    sam_load_date = serializers.DateField()
+    fpds_load_date = serializers.DateField()
+    
 

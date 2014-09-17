@@ -79,4 +79,4 @@ class Naics(models.Model):
         return "{0} - {1}".format(self.code, self.description)
 
 class SamLoad(models.Model):
-    sam_load = models.DateTimeField()
+    sam_load = models.DateField()
