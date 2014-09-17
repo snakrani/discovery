@@ -27,7 +27,7 @@ LayoutManager.render = function(results) {
     $('.duns_number').html(results.duns);
     $('.cage_code').html(results.cage);
     $('.number_of_employees').html(results.number_of_employees ? results.number_of_employees : 'N/A');
-    $('.annual_revenue').html(results.annual_revenue ? '$' + numberWithCommas(results.annual_revenue) : 'N/A');
+    $('.annual_revenue').html(results.annual_revenue ? '$' + this.numberWithCommas(results.annual_revenue) : 'N/A');
 
     //load SAM expiration date
     if (results['sam_expiration_date']) {
@@ -75,18 +75,25 @@ LayoutManager.renderColumn = function(v, prefix, setasideCode) {
 LayoutManager.buildContractTable = function(data) {
     var table = $("div#ch_table table").clone();
     var results = data['results'];
-    var contract, tr, displayDate;
+    var contract, tr, displayDate, pointOfContact;
 
     for (contract in results) {
         if (results.hasOwnProperty(contract)) {
             tr = $('<tr></tr>');
             displayDate = this.formatDate(new Date(results[contract]['date_signed']));
+            if (typeof results[contract]['point_of_contact'] === 'string') {
+                pointOfContact = results[contract]['point_of_contact'].toLowerCase();
+            }
+            else {
+                pointOfContact = results[contract]['point_of_contact'];
+            }
+
             tr.append('<td class="date_signed">' + displayDate + '</td>');
             tr.append('<td class="piid">' + results[contract]['piid'] + '</td>');
             tr.append('<td class="agency">' + this.toTitleCase(results[contract]['agency_name']) + '</td>');
             tr.append('<td class="type">' + results[contract]['pricing_type'] + '</td>');
-            tr.append('<td class="value">' + numberWithCommas(results[contract]['obligated_amount']) + '</td>');
-            tr.append('<td class="email_poc">' + lower(results[contract]['point_of_contact']) + '</td>');
+            tr.append('<td class="value">' + this.numberWithCommas(results[contract]['obligated_amount']) + '</td>');
+            tr.append('<td class="email_poc">' + (pointOfContact ? pointOfContact : '&nbsp;') + '</td>');
             tr.append('<td class="status">' + results[contract]['status'] + '</td>');
             //more goes here
         
@@ -114,4 +121,8 @@ LayoutManager.vendorIndicator = function(v, prefix, setaside_code) {
     }
 
     return '';
+};
+
+LayoutManager.numberWithCommas = function(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
