@@ -42,14 +42,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Pool 1</td>
+	<td>selectWindow</td>
+	<td>null</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>link=Pool 1</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//ul[@id='crumbs']/li[3]</td>
+	<td>Pool 1</td>
 </tr>
 </tbody></table>
 </body>

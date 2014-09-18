@@ -27,9 +27,14 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertNotText</td>
+	<td>id=sam_load</td>
+	<td>SAM data updated: 12/31/69</td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>id=sam_load</td>
-	<td>SAM data updated: 8/15/14</td>
+	<td>SAM data updated: */*/*</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -46,7 +51,6 @@
 	<td>id=sam_load</td>
 	<td>SAM data updated: *</td>
 </tr>
-
 </tbody></table>
 </body>
 </html>
