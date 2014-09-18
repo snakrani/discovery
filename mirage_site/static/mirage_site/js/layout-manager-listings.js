@@ -34,25 +34,29 @@ LayoutManager.renderPools = function(results) {
     $container.find('.column').remove();
 
     for (var i in results.results) {
-        var obj = results.results[i];
-        var $poolLink, $poolHeader; 
-        var $div = $('<div class="column post-header"></div>');
-        var qs = URLManager.getQueryString();
+        if (results.results.hasOwnProperty(i)) {
+            var obj = results.results[i];
+            var $poolLink, $poolHeader; 
+            var $div = $('<div class="column post-header"></div>');
+            var qs = URLManager.getQueryString();
 
-        $poolLink = $('<a class="pool_link" href="/pool/' + obj['vehicle'].toLowerCase() + '/' + obj['number'] + '/' + qs + '">Pool' + obj['number'] + '</a>');
-        $poolLink.text();
-       
-        $poolHeader = $('<h2 class="pool_title"></h2>');
-        $poolHeader.append($poolLink);
-        $div.append($poolHeader);
-        
-        $div.append('<p class="post-meta number_of_vendors_in_pool">' + obj['vendors'].length.toString() + ' vendors</p>');
+            $poolLink = $('<a class="pool_link" href="/pool/' + obj['vehicle'].toLowerCase() + '/' + obj['number'] + '/' + qs + '">Pool' + obj['number'] + '</a>');
+            $poolLink.text();
+           
+            $poolHeader = $('<h2 class="pool_title"></h2>');
+            $poolHeader.append($poolLink);
+            $div.append($poolHeader);
+            
+            $div.append('<p class="post-meta number_of_vendors_in_pool">' + obj['vendors'].length.toString() + ' vendors</p>');
 
-        for (var v in obj['vendors']){
-            $div.append('<p class="vendor_names">' + obj['vendors'][v]['name'] + '</p>');
+            for (var v in obj['vendors']){
+                if (obj['vendors'].hasOwnProperty(v)) {
+                    $div.append('<p class="vendor_names">' + obj['vendors'][v]['name'] + '</p>');
+                }
+            }
+
+            $container.append($div);
         }
-
-        $container.append($div);
     }
 };
 
