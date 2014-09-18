@@ -81,10 +81,12 @@ LayoutManager.renderRow = function(v) {
     $vendorRow.append(location_col);
 
     //add socio-economic columns
-    $vendorRow.append(this.renderColumn(v, 'vo', 'A5'));
-    $vendorRow.append(this.renderColumn(v, 'sdb', '27'));
+    $vendorRow.append(this.renderColumn(v, '8a', 'A6'));
+    $vendorRow.append(this.renderColumn(v, 'Hubz', 'XX'));
     $vendorRow.append(this.renderColumn(v, 'sdvo', 'QF'));
     $vendorRow.append(this.renderColumn(v, 'wo', 'A2'));
+    $vendorRow.append(this.renderColumn(v, 'vo', 'A5'));
+    $vendorRow.append(this.renderColumn(v, 'sdb', '27'));
 
     return $vendorRow;
 };
