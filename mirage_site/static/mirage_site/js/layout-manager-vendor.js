@@ -24,8 +24,8 @@ LayoutManager.render = function(results) {
     if (results.sam_exclusion == true) {
             $('.debarred_status').show();
     }
-    $('.duns_number').html(results.duns);
-    $('.cage_code').html(results.cage);
+    $('.duns_number').html(results.duns ? results.duns : ' ');
+    $('.cage_code').html(results.cage ? results.cage : ' ');
     $('.number_of_employees').html(results.number_of_employees ? results.number_of_employees : 'N/A');
     $('.annual_revenue').html(results.annual_revenue ? '$' + this.numberWithCommas(results.annual_revenue) : 'N/A');
 
@@ -44,13 +44,15 @@ LayoutManager.render = function(results) {
     }
 
     //contact info
-    $('.vendor_address1').html(results.sam_address);
-    $('.vendor_address2').html(results.sam_citystate);
-    $('.vendor_poc_name').html(results.pm_name);
-    $('.vendor_poc_phone').html(results.pm_phone);
+    $('.vendor_address1').html(results.sam_address ? results.sam_address : ' ');
+    $('.vendor_address2').html(results.sam_citystate ? results.sam_citystate : ' ');
+    $('.vendor_poc_name').html(results.pm_name ? results.pm_name : ' ');
+    $('.vendor_poc_phone').html(results.pm_phone ? results.pm_phone : ' ');
 
-    mailto = $('<a href="mailto:' + results.pm_email + '">' + results.pm_email + '</a>');
-    $('.vendor_poc_email').html(mailto);
+    if (results.pm_email !== null) {
+        mailto = $('<a href="mailto:' + results.pm_email + '">' + results.pm_email + '</a>');
+        $('.vendor_poc_email').html(mailto);
+    }
 
     //socioeconomic indicators
     t = $('#socioeconomic_indicators');
@@ -75,26 +77,32 @@ LayoutManager.renderColumn = function(v, prefix, setasideCode) {
 LayoutManager.buildContractTable = function(data) {
     var table = $("div#ch_table table").clone();
     var results = data['results'];
-    var contract, tr, displayDate, pointOfContact;
+    var contract, tr, displayDate, pointOfContact, piid, agencyName, pricingType, obligatedAmount, status;
 
     for (contract in results) {
         if (results.hasOwnProperty(contract)) {
             tr = $('<tr></tr>');
-            displayDate = this.formatDate(new Date(results[contract]['date_signed']));
+            displayDate = (results[contract]['date_signed'] ? this.formatDate(new Date(results[contract]['date_signed'])) : ' ');
+            piid = (results[contract]['piid'] ? results[contract]['piid'] : ' ');
+            agencyName = (results[contract]['agency_name'] ? results[contract]['agency_name'] : ' ');
+            pricingType = (results[contract]['pricing_type'] ? results[contract]['pricing_type'] : ' ');
+            obligatedAmount = (results[contract]['obligated_amount'] ? this.numberWithCommas(results[contract]['obligated_amount']) : ' ');
+            status = (results[contract]['status'] ? results[contract]['status'] : ' ');
+
             if (typeof results[contract]['point_of_contact'] === 'string') {
                 pointOfContact = results[contract]['point_of_contact'].toLowerCase();
             }
             else {
-                pointOfContact = results[contract]['point_of_contact'];
+                pointOfContact = (results[contract]['point_of_contact'] ? results[contract]['point_of_contract'] : ' ');
             }
 
             tr.append('<td class="date_signed">' + displayDate + '</td>');
-            tr.append('<td class="piid">' + results[contract]['piid'] + '</td>');
-            tr.append('<td class="agency">' + this.toTitleCase(results[contract]['agency_name']) + '</td>');
-            tr.append('<td class="type">' + results[contract]['pricing_type'] + '</td>');
-            tr.append('<td class="value">' + this.numberWithCommas(results[contract]['obligated_amount']) + '</td>');
-            tr.append('<td class="email_poc">' + (pointOfContact ? pointOfContact : '&nbsp;') + '</td>');
-            tr.append('<td class="status">' + results[contract]['status'] + '</td>');
+            tr.append('<td class="piid">' + piid + '</td>');
+            tr.append('<td class="agency">' + agencyName + '</td>');
+            tr.append('<td class="type">' + pricingType + '</td>');
+            tr.append('<td class="value">' + obligatedAmount+ '</td>');
+            tr.append('<td class="email_poc">' + pointOfContact + '</td>');
+            tr.append('<td class="status">' + status + '</td>');
             //more goes here
         
             table.append(tr);
