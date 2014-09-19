@@ -3,7 +3,7 @@
 
 // for pool and vendor lists pages
 // anything under url /pool
-ResultsManager.load = function() {
+RequestsManager.load = function() {
     var url = "/api/vendors/";
     var queryData = this.buildRequestQuery();
 

@@ -18,7 +18,7 @@ var URLManager = {
     },
 
     getQueryString: function() {
-        var queryObject = ResultsManager.buildRequestQuery();
+        var queryObject = RequestsManager.buildRequestQuery();
         var qs = '?';
         var k;
 

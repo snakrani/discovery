@@ -1,11 +1,11 @@
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
 'use strict';
 
-var ResultsManager = {
+var RequestsManager = {
     init: function() {
-        Events.subscribe('naicsChanged', this.load.bind(ResultsManager));
-        Events.subscribe('filtersChanged', this.load.bind(ResultsManager));
-        Events.subscribe('loadedWithQS', this.load.bind(ResultsManager));
+        Events.subscribe('naicsChanged', this.load.bind(RequestsManager));
+        Events.subscribe('filtersChanged', this.load.bind(RequestsManager));
+        Events.subscribe('loadedWithQS', this.load.bind(RequestsManager));
     },
 
     buildRequestQuery: function() {

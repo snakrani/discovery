@@ -7,7 +7,7 @@ $(document).ready(function() {
     window.Events = new Mediator() || {};
 
     InputHandler.init();
-    ResultsManager.init();
+    RequestsManager.init();
     LayoutManager.init();
     URLManager.init();
 });

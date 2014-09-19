@@ -1,16 +1,16 @@
-ResultsManager.vendorInit = function(original) {
-    Events.subscribe('vendorInfoLoaded', this.loadContracts.bind(ResultsManager));
+RequestsManager.vendorInit = function(original) {
+    Events.subscribe('vendorInfoLoaded', this.loadContracts.bind(RequestsManager));
 
-    original.bind(ResultsManager).call();
+    original.bind(RequestsManager).call();
 };
 
-ResultsManager.originalInit = ResultsManager.init;
+RequestsManager.originalInit = RequestsManager.init;
 
-ResultsManager.init = function() {
-    ResultsManager.vendorInit(ResultsManager.originalInit);
+RequestsManager.init = function() {
+    RequestsManager.vendorInit(RequestsManager.originalInit);
 };
 
-ResultsManager.load = function() {
+RequestsManager.load = function() {
     /* get vendor info from api */
 
     var url = "/api/vendor/" + URLManager.getDUNS() + "/";
@@ -20,7 +20,7 @@ ResultsManager.load = function() {
     });
 };
 
-ResultsManager.loadContracts = function() {
+RequestsManager.loadContracts = function() {
     var url = "/api/contracts/";
     var params = {
         'duns': URLManager.getDUNS(),
