@@ -121,15 +121,15 @@ LayoutManager.findIndicatorMatch = function(v, prefix, setasideCode) {
     return false;
 };
 
-LayoutManager.cleanLocation = function(location) {
+LayoutManager.cleanLocation = function(loc) {
     var location_obj = {};
-    var new_location = location;
+    var new_location = loc;
 
-    if (location) {
-        location = location.trim();
-        var comma = location.indexOf(',');
-        location_obj.city = location.slice(0, comma);
-        var after = location.substring(comma + 2);
+    if (loc) {
+        loc = loc.trim();
+        var comma = loc.indexOf(',');
+        location_obj.city = loc.slice(0, comma);
+        var after = loc.substring(comma + 2);
         var space = after.lastIndexOf(' ');
         location_obj.state = after.slice(0, space).toUpperCase();
         new_location = this.toTitleCase(location_obj.city) + ', ' + location_obj.state
