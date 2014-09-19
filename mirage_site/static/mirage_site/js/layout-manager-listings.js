@@ -6,6 +6,7 @@
 LayoutManager.render = function(results) {
     // this is turning into something of a router
     // should be refactored [TS]
+
     // if multiple pools should be rendered
     if ($.isEmptyObject(results)) {
         //clear out content
@@ -61,11 +62,13 @@ LayoutManager.renderPools = function(results) {
 };
 
 LayoutManager.renderTable = function(results) {
-    var t = $('#pool_vendors');
+    var $t = $('#pool_vendors');
     var i, len = results.results[0].vendors.length - 1;
 
+    $t.find('tr').not(':first').remove();
+
     for (i = 0; i <= len; i++) {
-        t.append(this.renderRow(results.results[0].vendors[i]));
+        $t.append(this.renderRow(results.results[0].vendors[i]));
     }
 
     $('#pool_table').show();
