@@ -92,7 +92,7 @@ class ListVendors(APIView):
                         create_or_add_to_pool(resp_json['results'], p, v)
             
             resp_json['results'] = sorted(resp_json['results'], key=lambda k: k['number'])
-            resp_json['num_results'] = vendors.count()
+            resp_json['num_results'] = len(resp_json['results'][0]['vendors'])
             resp_json['sam_load'] = sam_load
             return Response(resp_json)
 
