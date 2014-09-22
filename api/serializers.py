@@ -18,13 +18,13 @@ class PoolSerializer(serializers.ModelSerializer):
     naics = NaicsSerializer(many=True)
     class Meta:
         model = Pool
-        fields = ('id', 'number', 'vehicle', 'naics', 'threshold')
+        fields = ('id', 'name', 'number', 'vehicle', 'naics', 'threshold')
 
 
 class ShortPoolSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pool
-        fields = ('id', 'number', 'vehicle')
+        fields = ('id', 'name', 'number', 'vehicle')
 
 
 class VendorSerializer(serializers.ModelSerializer):
