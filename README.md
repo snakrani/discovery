@@ -1,4 +1,4 @@
-# Mirage: For all your market research needs
+# Mirage: OASIS Market Research
 
 This project is in the very early stages. Right now it's a basic Django project. You can get started by:
 
