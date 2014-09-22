@@ -91,8 +91,8 @@ var show_content = function(results) {
     $("#naics-code").select2({placeholder: 'Select a NAICS code1', width: '400px' });
 
     //load SAM update date
-    var date_obj = new Date(results['sam_load']);
-    $("#sam_load").text("SAM data updated: " + (date_obj.getMonth() + 1) + '/' + date_obj.getDate() + '/' + date_obj.getFullYear().toString().substring(2));
+//    var date_obj = new Date(results['sam_load']);
+//    $("#sam_load").text("SAM data updated: " + (date_obj.getMonth() + 1) + '/' + date_obj.getDate() + '/' + date_obj.getFullYear().toString().substring(2));
 
     //clear out old results (remove all rows but first)
     $("#pool_vendors").find("tr:gt(0)").remove();
@@ -111,14 +111,14 @@ var show_content = function(results) {
     }
     
     //show search information
-    $("#number_of_results span").text(total.toString() + " vendors match your search");
-    $("#your_search").text($("#naics-code option:selected").text());
-    $("#your_filters").text(
-        $("#setaside-filters input:checkbox:checked").map(function() {
-            return $(this).parent().text();
-        }).get().join(', ')
-    );
-    $("#your_search_criteria").show();
+    $("#number_of_results span").text(total.toString() + " vendors match your search criteria");
+//    $("#your_search").text($("#naics-code option:selected").text());
+//    $("#your_filters").text(
+ //       $("#setaside-filters input:checkbox:checked").map(function() {
+ //           return $(this).parent().text();
+ //       }).get().join(', ')
+ //   );
+//    $("#your_search_criteria").show();
     $("#pool_table").show();
 }
 
