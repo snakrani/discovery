@@ -10,7 +10,7 @@ var RequestsManager = {
 
     buildRequestQuery: function() {
         var setasides = InputHandler.getSetasides();
-        var naicsCode = InputHandler.getNAICSCode() || URLManager.getParameterByName('naics');
+        var naicsCode = InputHandler.getNAICSCode() || URLManager.getParameterByName('naics-code');
         var queryData = {'group':'pool'};
         var pool = this.getPool();
 

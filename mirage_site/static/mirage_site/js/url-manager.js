@@ -4,13 +4,13 @@
 
 var URLManager = {
     init: function() {
-        var naics = this.getParameterByName('naics');
+        var naics = this.getParameterByName('naics-code');
         var setasides = this.getParameterByName('setasides');
         var vendor = URLManager.isVendorPage();
 
         // this + LayoutManager.render() are acting as a kind of router. should probably be rethought. [TS]
         if (naics || setasides || vendor) {
-            Events.publish('loadedWithQS', {'naics': naics, 'setasides': setasides});
+            Events.publish('loadedWithQS', {'naics-code': naics, 'setasides': setasides});
         }
 
         Events.subscribe('contentChanged', this.update.bind(URLManager));
@@ -31,7 +31,7 @@ var URLManager = {
 
     getURL: function(results) {
         var qs = this.getQueryString();
-        var vehicle, poolNumber, pathArray;
+        var vehicle, poolNumber, pathArray, numPools;
 
         if ($.isEmptyObject(results)) {
             pathArray = window.location.href.split('/').removeEmpties();
@@ -40,10 +40,21 @@ var URLManager = {
         }
         else {
             vehicle = results.vehicle;
-            poolNumber = results.poolNumber;
+            if (typeof results.poolNumber !== 'undefined') {
+                poolNumber = results.poolNumber;
+            }
+
+            if (typeof results.numPools !== 'undefined') {
+                numPools = results.numPools;
+            }
         }
 
-        return '/pool/' + vehicle + '/' + poolNumber + '/' + qs;
+        if (numPools) {
+            return qs;
+        }
+        else {
+            return '/pool/' + vehicle + '/' + poolNumber + '/' + qs;
+        }
     },
 
     update: function(results) {
