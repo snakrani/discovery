@@ -56,7 +56,7 @@ var LayoutManager = {
     },
 
     updateResultsInfo: function(results) {
-        var totalResults, totalPools;
+        var totalResults, totalPools, resultsStr;
         if ($.isEmptyObject(results)) {
             totalResults = 0;
             totalPools = 0;
@@ -66,7 +66,14 @@ var LayoutManager = {
             totalPools = results.results.length;
         }
 
-        $("#number_of_results span").text( totalResults + " vendors in " + totalPools + " pool(s) match your search");
+        if (totalPools === 1) {
+            resultsStr = totalResults + " vendors match your search";
+        } 
+        else {
+            resultsStr =  totalResults + " vendors in " + totalPools + " pool(s) match your search";
+        }
+
+        $("#number_of_results span").text(resultsStr);
         $("#your_search").text($("#naics-code option:selected").text());
         $("#your_filters").text(
             $("#setaside-filters input:checkbox:checked").map(function() {
