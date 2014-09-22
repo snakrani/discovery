@@ -1,9 +1,9 @@
 $( document ).ready( function() {
 	//populate NAICS dropdown
-    $("#naics-code")
-         .append($("<option></option>")
-         .attr("value", "all")
-         .text("All NAICS codes")); 
+    //$("#naics-code")
+    //     .append($("<option></option>")
+    //     .attr("value", "all")
+    //     .text("All NAICS codes")); 
 	$.getJSON(
 		"/api/naics/",
 		{ format: "json" },
@@ -28,7 +28,9 @@ $( document ).ready( function() {
 	History.Adapter.bind(window, 'statechange', null);
 
 	//set naics dropdown width
-	$('#naics-code').select2({placeholder:'Select a NAICS code', dropdownAutoWidth : true});
+	//$('#naics-code').select2({placeholder:'Select a NAICS code', dropdownAutoWidth : true});
+
+    $("#naics-code").select2({placeholder: 'Select a NAICS code', width: '400px' });
 
 });
 

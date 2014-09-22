@@ -87,7 +87,8 @@ var show_content = function(results) {
     qs = build_query_string();
     History.pushState(null, null, qs);
 
-    $('#naics-code').select2({placeholder:'Select a NAICS code', dropdownAutoWidth : true});
+    //$('#naics-code').select2({placeholder:'Select a NAICS code', dropdownAutoWidth : true});
+    $("#naics-code").select2({placeholder: 'Select a NAICS code1', width: '400px' });
 
     //load SAM update date
     var date_obj = new Date(results['sam_load']);
