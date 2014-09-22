@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8000/" />
+<title>Show contract info</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Show contract info</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/vendor/786997739/?naics-code=&amp;setasides=A6&amp;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#ch_table</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=#ch_table &gt; table.4.4</td>
+	<td>258,039.00</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=#ch_table &gt; table.12.6</td>
+	<td>Completed</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=#ch_table &gt; table.1.3</td>
+	<td>Firm Fixed Price</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=#ch_table &gt; table.3.6</td>
+	<td>Current</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

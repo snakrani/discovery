@@ -24,6 +24,8 @@
 <tr><td><a href="014_display_cage_code">Display CAGE code</a></td></tr>
 <tr><td><a href="015_show_all_contracts">Show all contracts</a></td></tr>
 <tr><td><a href="016_show_naics_contracts">Show NAICS contracts</a></td></tr>
+<tr><td><a href="017_show_contract_info">Show contract info</a></td></tr>
+<tr><td><a href="018_show_vendor_admin_info">Show vendor admin info</a></td></tr>
 </tbody></table>
 </body>
 </html>
