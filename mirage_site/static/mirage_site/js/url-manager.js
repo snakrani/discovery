@@ -22,6 +22,14 @@ var URLManager = {
         var qs = '?';
         var k;
 
+        // isn't needed for query string, included for requestquery. this should probably
+        // be fixed on the RequestsManager site [ts]
+        delete queryObject.group;
+
+        // the API wants "naics", the query string should have "naics-code"
+        queryObject['naics-code'] = queryObject.naics;
+        delete queryObject.naics;
+
         for (k in queryObject) {
             qs += k + '=' + queryObject[k] + '&';
         }

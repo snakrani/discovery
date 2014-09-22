@@ -19,7 +19,7 @@ LayoutManager.render = function(results) {
     }
     else {
         // if this is a vendor list page and the page has already been reloaded
-        if (URLManager.getParameterByName('naics') === InputHandler.getNAICSCode()) {
+        if (URLManager.getParameterByName('naics-code') === InputHandler.getNAICSCode()) {
             this.renderTable(results);
         }
         else {
