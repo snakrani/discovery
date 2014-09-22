@@ -39,12 +39,17 @@ var URLManager = {
 
     getURL: function(results) {
         var qs = this.getQueryString();
-        var vehicle, poolNumber, pathArray, numPools;
+        var vehicle, poolNumber, pathArray, numPools, empty;
 
         if ($.isEmptyObject(results)) {
             pathArray = window.location.href.split('/').removeEmpties();
-            vehicle = pathArray[3];
-            poolNumber = pathArray[4];
+            if (pathArray.length >= 3) {
+                vehicle = pathArray[3];
+                poolNumber = pathArray[4];
+            }
+            else {
+                empty = true;
+            }
         }
         else {
             vehicle = results.vehicle;
@@ -57,7 +62,7 @@ var URLManager = {
             }
         }
 
-        if (numPools) {
+        if (numPools || empty) {
             return qs;
         }
         else {
