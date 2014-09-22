@@ -4,58 +4,34 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:8000/" />
-<title>Display CAGE code</title>
+<title>Show NAICS contracts</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Display CAGE code</td></tr>
+<tr><td rowspan="1" colspan="3">Show NAICS contracts</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/</td>
+	<td>/vendor/182935002/?naics-code=541330&amp;</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Home</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=8a</td>
+	<td>pause</td>
+	<td>2000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Pool 1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Pool 1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Ikun</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Ikun</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>css=span.cage_code.admin_data</td>
+	<td>css=span.vendor_contract_history_naics</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=span.cage_code.admin_data</td>
-	<td>4UYY6</td>
+	<td>css=span.vendor_contract_history_naics</td>
+	<td>NAICS 541330:</td>
 </tr>
+
 </tbody></table>
 </body>
 </html>
