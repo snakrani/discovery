@@ -41,7 +41,7 @@ LayoutManager.renderPools = function(results) {
             var $div = $('<div class="column post-header"></div>');
             var qs = URLManager.getQueryString();
 
-            $poolLink = $('<a class="pool_link" href="/pool/' + obj['vehicle'].toLowerCase() + '/' + obj['number'] + '/' + qs + '">Pool' + obj['number'] + '</a>');
+            $poolLink = $('<a class="pool_link" href="/pool/' + obj['vehicle'].toLowerCase() + '/' + obj['number'] + '/' + qs + '">Pool ' + obj['number'] + '</a>');
             $poolLink.text();
            
             $poolHeader = $('<h2 class="pool_title"></h2>');
