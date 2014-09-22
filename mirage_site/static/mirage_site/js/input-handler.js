@@ -13,9 +13,9 @@ var InputHandler = {
     },
 
     updateFields: function(obj) {
-        if (obj.naics !== null) {
-            $('#naics-code').select2('val', obj.naics);
-            this.naicsCode = obj.naics;
+        if (obj['naics-code'] !== null) {
+            $('#naics-code').select2('val', obj['naics-code']);
+            this.naicsCode = obj['naics-code'];
         }
 
         if (obj.setasides) {
