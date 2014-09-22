@@ -4,16 +4,16 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://demo.mirage.gsa.gov/" />
-<title>Show vendor and pool count in search results</title>
+<title>Re-add 8(a) and HUBZone</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Show vendor and pool count in search results</td></tr>
+<tr><td rowspan="1" colspan="3">Re-add 8(a) and HUBZone</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/pool/oasissb/1/?naics-code=&amp;setasides=A5&amp;</td>
+	<td>/</td>
 	<td></td>
 </tr>
 <tr>
@@ -23,7 +23,37 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=vet</td>
+	<td>css=label.pure-checkbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=label.pure-checkbox</td>
+	<td>8(a)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//form[@id='setaside-filters']/fieldset/label[2]</td>
+	<td>HUBZone</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Pool 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=td.h_8a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=td.h_hubz</td>
 	<td></td>
 </tr>
 <tr>
@@ -32,10 +62,11 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>css=span.matching_your_search</td>
-	<td>* vendors in * pool(s) match your search</td>
+	<td>assertTable</td>
+	<td>id=pool_vendors.5.2</td>
+	<td>X</td>
 </tr>
+
 </tbody></table>
 </body>
 </html>
