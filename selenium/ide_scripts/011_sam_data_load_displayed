@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://demo.mirage.gsa.gov/" />
+<link rel="selenium.base" href="http://localhost:8000" />
 <title>SAM data load date displayed</title>
 </head>
 <body>
@@ -27,9 +27,14 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertNotText</td>
+	<td>id=sam_load</td>
+	<td>SAM data updated: 12/31/69</td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>id=sam_load</td>
-	<td>SAM data updated: 8/15/14</td>
+	<td>SAM data updated: */*/*</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -46,7 +51,6 @@
 	<td>id=sam_load</td>
 	<td>SAM data updated: *</td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

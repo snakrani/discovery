@@ -43,6 +43,7 @@ class Vendor(models.Model):
 
 class Pool(models.Model):
     id = models.CharField(primary_key=True, max_length=128)
+    name = models.CharField(max_length=128, default='Pool')
     number = models.CharField(max_length=128)
     vehicle = models.CharField(choices=VEHICLE_CHOICES, max_length=7)
     naics = models.ManyToManyField('Naics')
