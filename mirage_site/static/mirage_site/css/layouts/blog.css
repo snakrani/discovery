@@ -481,6 +481,25 @@ a.pool_link {
     float:left;
     min-height:90px;
 }
+#download_data  {
+    width: 340px;
+    min-height:20px;
+    padding-left:23px;
+    background:url(/static/mirage_site/images/download_icon.png);
+    background-repeat: no-repeat;
+    background-position: 0px 3px;
+    margin-left:10px;
+    margin-top:5px;
+}
+#download_data_results  {
+    margin-top:-21px;
+    min-height:20px;
+    padding-left:23px;
+    background:url(/static/mirage_site/images/download_icon.png);
+    background-repeat: no-repeat;
+    background-position: 0px 3px;
+    float:right;
+}
 #vendor_sam_expiration_container    {
     font-size:.9em;
     padding-bottom:6px;
