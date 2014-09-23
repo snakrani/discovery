@@ -23,7 +23,7 @@ RequestsManager.load = function() {
 RequestsManager.loadContracts = function() {
     var url = "/api/contracts/";
     var params = {
-        'duns': URLManager.getDUNS(),
+        'duns': URLManager.getDUNS()
     };
 
     var naics = URLManager.getParameterByName('naics-code');
