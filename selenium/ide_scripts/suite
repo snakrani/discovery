@@ -20,6 +20,13 @@
 <tr><td><a href="010_search_criteria_on_search_results">Search criteria on search results</a></td></tr>
 <tr><td><a href="011_sam_data_load_displayed">SAM data load date displayed</a></td></tr>
 <tr><td><a href="012_vendor_pool_count_search_results">Show vendor and pool count in search results</a></td></tr>
+<tr><td><a href="013_readd_8a_hubzone">Re-add 8(a) and HUBZone</a></td></tr>
+<tr><td><a href="014_display_cage_code">Display CAGE code</a></td></tr>
+<tr><td><a href="015_show_all_contracts">Show all contracts</a></td></tr>
+<tr><td><a href="016_show_naics_contracts">Show NAICS contracts</a></td></tr>
+<tr><td><a href="017_show_contract_info">Show contract info</a></td></tr>
+<tr><td><a href="018_show_vendor_admin_info">Show vendor admin info</a></td></tr>
+<tr><td><a href="019_dont_show_pool_count_search_results">Pool detail page doesn't show number of pools</a></td></tr>
 </tbody></table>
 </body>
 </html>
