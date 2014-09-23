@@ -43,7 +43,7 @@ var URLManager = {
 
         if ($.isEmptyObject(results)) {
             pathArray = window.location.href.split('/').removeEmpties();
-            if (pathArray.length >= 3) {
+            if (pathArray.length > 3) {
                 vehicle = pathArray[3];
                 poolNumber = pathArray[4];
             }
