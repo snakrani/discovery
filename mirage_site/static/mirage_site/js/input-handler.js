@@ -72,7 +72,6 @@ var InputHandler = {
                 }
             }
         );
-        //$('#naics-code').select2({placeholder:'Select a NAICS code', dropdownAutoWidth : true});
-        $('#naics-code').select2({placeholder: 'Select a NAICS code', width: '400px' });
+        $('#naics-code').select2({placeholder:'Select a NAICS code', width : '400px'});
     }
 };
