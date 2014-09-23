@@ -3,27 +3,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://localhost:8000" />
-<title>Show vendor and pool count in search results</title>
+<link rel="selenium.base" href="http://localhost:8000/" />
+<title>Pool detail page doesn't show number of pools</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Show vendor and pool count in search results</td></tr>
+<tr><td rowspan="1" colspan="3">Pool detail page doesn't show number of pools</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/pool/oasissb/1/?naics-code=&amp;setasides=A5&amp;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Home</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=vet</td>
+	<td>/pool/oasissb/1/?setasides=A6&amp;naics-code=&amp;</td>
 	<td></td>
 </tr>
 <tr>
@@ -34,8 +24,14 @@
 <tr>
 	<td>assertText</td>
 	<td>css=span.matching_your_search</td>
-	<td>* vendors in * pool(s) match your search</td>
+	<td>* vendors match your search</td>
 </tr>
+<tr>
+	<td>assertNotText</td>
+	<td>css=span.matching_your_search</td>
+	<td>*in * pool(s)*</td>
+</tr>
+
 </tbody></table>
 </body>
 </html>

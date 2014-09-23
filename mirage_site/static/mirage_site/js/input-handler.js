@@ -13,9 +13,9 @@ var InputHandler = {
     },
 
     updateFields: function(obj) {
-        if (obj.naics !== null) {
-            $('#naics-code').select2('val', obj.naics);
-            this.naicsCode = obj.naics;
+        if (obj['naics-code'] !== null) {
+            $('#naics-code').select2('val', obj['naics-code']);
+            this.naicsCode = obj['naics-code'];
         }
 
         if (obj.setasides) {
@@ -63,8 +63,8 @@ var InputHandler = {
                          .attr("value", result.short_code)
                          .text(result.short_code + " - " + result.description)); 
                 });
-                if (URLManager.getParameterByName("naics")) {
-                    $("#naics-code").select2().select2("val", URLManager.getParameterByName("naics"));
+                if (URLManager.getParameterByName("naics-code")) {
+                    $("#naics-code").select2().select2("val", URLManager.getParameterByName("naics-code"));
                 }
                 //load data if search criteria is defined in querystring
                 if (URLManager.getParameterByName("naics-code") || URLManager.getParameterByName("setasides")) {

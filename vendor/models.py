@@ -43,6 +43,7 @@ class Vendor(models.Model):
 
 class Pool(models.Model):
     id = models.CharField(primary_key=True, max_length=128)
+    name = models.CharField(max_length=128, default='Pool')
     number = models.CharField(max_length=128)
     vehicle = models.CharField(choices=VEHICLE_CHOICES, max_length=7)
     naics = models.ManyToManyField('Naics')
@@ -65,6 +66,7 @@ class SetAside(models.Model):
     code = models.CharField(unique=True, max_length=128)
     description = models.TextField()
     short_name = models.CharField(max_length=128)
+    far_order = models.IntegerField(null=True)
 
     def  __str__(self):
         return self.description

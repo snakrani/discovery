@@ -4,13 +4,13 @@
 
 var URLManager = {
     init: function() {
-        var naics = this.getParameterByName('naics');
+        var naics = this.getParameterByName('naics-code');
         var setasides = this.getParameterByName('setasides');
         var vendor = URLManager.isVendorPage();
 
         // this + LayoutManager.render() are acting as a kind of router. should probably be rethought. [TS]
         if (naics || setasides || vendor) {
-            Events.publish('loadedWithQS', {'naics': naics, 'setasides': setasides});
+            Events.publish('loadedWithQS', {'naics-code': naics, 'setasides': setasides});
         }
 
         Events.subscribe('contentChanged', this.update.bind(URLManager));
@@ -22,6 +22,14 @@ var URLManager = {
         var qs = '?';
         var k;
 
+        // these aren't needed for query string, included for requestquery.
+        delete queryObject.group;
+        delete queryObject.pool;
+
+        // the API wants "naics", the query string should have "naics-code"
+        queryObject['naics-code'] = queryObject.naics;
+        delete queryObject.naics;
+
         for (k in queryObject) {
             qs += k + '=' + queryObject[k] + '&';
         }
@@ -31,19 +39,35 @@ var URLManager = {
 
     getURL: function(results) {
         var qs = this.getQueryString();
-        var vehicle, poolNumber, pathArray;
+        var vehicle, poolNumber, pathArray, numPools, empty;
 
         if ($.isEmptyObject(results)) {
             pathArray = window.location.href.split('/').removeEmpties();
-            vehicle = pathArray[3];
-            poolNumber = pathArray[4];
+            if (pathArray.length >= 3) {
+                vehicle = pathArray[3];
+                poolNumber = pathArray[4];
+            }
+            else {
+                empty = true;
+            }
         }
         else {
             vehicle = results.vehicle;
-            poolNumber = results.poolNumber;
+            if (typeof results.poolNumber !== 'undefined') {
+                poolNumber = results.poolNumber;
+            }
+
+            if (typeof results.numPools !== 'undefined') {
+                numPools = results.numPools;
+            }
         }
 
-        return '/pool/' + vehicle + '/' + poolNumber + '/' + qs;
+        if (numPools || empty) {
+            return qs;
+        }
+        else {
+            return '/pool/' + vehicle + '/' + poolNumber + '/' + qs;
+        }
     },
 
     update: function(results) {
@@ -79,7 +103,15 @@ var URLManager = {
         //extract pool information from document url
         var pathArray = window.location.href.split('/');
         pathArray = pathArray.removeEmpties();
-        return pathArray[pathArray.length - 1];
+        var i = pathArray.length - 1;
+
+        while (i--) {
+            if (parseInt(pathArray[i], 10) !== NaN) {
+                return pathArray[i];
+            }
+        }
+
+        return false;
     },
 
     isVendorPage: function() {
