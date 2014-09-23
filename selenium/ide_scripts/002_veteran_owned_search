@@ -23,7 +23,7 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Search Results</td>
+	<td>css=span.results_pool_name_number_search</td>
 	<td></td>
 </tr>
 <tr>

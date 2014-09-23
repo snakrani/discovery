@@ -17,11 +17,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Home</td>
-	<td></td>
-</tr>
-<tr>
 	<td>click</td>
 	<td>css=label.pure-checkbox</td>
 	<td></td>
@@ -33,7 +28,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//form[@id='setaside-filters']/fieldset/label[2]</td>
+	<td>//div[@id='filter_c1']/label[2]</td>
 	<td>HUBZone</td>
 </tr>
 <tr>
@@ -66,7 +61,6 @@
 	<td>id=pool_vendors.5.2</td>
 	<td>X</td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

@@ -24,12 +24,12 @@
 <tr>
 	<td>assertText</td>
 	<td>css=span.oasis_title</td>
-	<td>OASIS Market Research Tool</td>
+	<td>MIRAGE</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>css=span.oasis_subtitle</td>
-	<td>find vendors by NAICS with the socioeconomic factors you need</td>
+	<td>OASIS Market Research</td>
 </tr>
 </tbody></table>
 </body>
