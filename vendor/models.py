@@ -66,6 +66,7 @@ class SetAside(models.Model):
     code = models.CharField(unique=True, max_length=128)
     description = models.TextField()
     short_name = models.CharField(max_length=128)
+    far_order = models.IntegerField(null=True)
 
     def  __str__(self):
         return self.description
