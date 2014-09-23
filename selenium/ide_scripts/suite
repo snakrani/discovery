@@ -26,6 +26,7 @@
 <tr><td><a href="016_show_naics_contracts">Show NAICS contracts</a></td></tr>
 <tr><td><a href="017_show_contract_info">Show contract info</a></td></tr>
 <tr><td><a href="018_show_vendor_admin_info">Show vendor admin info</a></td></tr>
+<tr><td><a href="019_dont_show_pool_count_search_results">Pool detail page doesn't show number of pools</a></td></tr>
 </tbody></table>
 </body>
 </html>
