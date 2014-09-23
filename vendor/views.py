@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest
 from vendor.models import Vendor, Pool, Naics, SetAside
+from contract.models import Contract
 import csv
 
 def pool_csv(request):
@@ -49,5 +50,42 @@ def pool_csv(request):
     return response
 
 
+def vendor_csv(request, vendor_duns):
+    vendor = Vendor.objects.get(duns=vendor_duns)
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="search_results.csv"'
+    writer = csv.writer(response)
+
+    writer.writerow((vendor.name,))
+    writer.writerow(('SAM registration expires: ', vendor.sam_expiration_date))
+    writer.writerow(('', ))
+    writer.writerow(('8(a)', 'HubZ', 'SDVO', 'WO', 'VO', 'SDB'))
+    
+    vendor_sa = []
+    for sa in  SetAside.objects.all().order_by('far_order'):
+        if sa in vendor.setasides.all():
+            vendor_sa.append('X')
+        else:
+            vendor_sa.append('')
+
+    writer.writerow(vendor_sa)
+    writer.writerow(('', ))
+    writer.writerow(('DUNS', vendor.duns, '', 'Address:', vendor.sam_address))
+    writer.writerow(('CAGE Code', vendor.cage, '', '', vendor.sam_citystate))
+    writer.writerow(('Employees', vendor.number_of_employees, '', 'OASIS POC:', vendor.pm_name))
+    writer.writerow(('Annual Revenue', vendor.annual_revenue, '', '', vendor.pm_phone))
+    writer.writerow(('', '', '', '', vendor.pm_email))
+    writer.writerow(('', ))
+    writer.writerow(('This vendor\'s contract history', ))
+    writer.writerow(('Date Signed', 'PIID', 'Agency', 'Type', 'Value ($)', 'Email POC', 'Status'))
+
+    for c in Contract.objects.filter(vendor=vendor).order_by('-date_signed'):
+        if '_' in c.piid:
+            piid = c.piid.split('_')[1]
+        else:
+            piid = c.piid
+        writer.writerow((c.date_signed, piid, c.agency_name, c.get_pricing_type_display(), c.obligated_amount, c.point_of_contact, c.status))
+
+    return response
 
 
