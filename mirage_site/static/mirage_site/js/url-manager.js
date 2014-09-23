@@ -71,7 +71,7 @@ var URLManager = {
     },
 
     update: function(results) {
-        History.pushState(this.getURL(results));
+        History.pushState('', 'Mirage', this.getURL(results));
     },
 
     loadPoolPage: function(results) {
