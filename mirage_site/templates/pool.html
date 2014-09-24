@@ -7,6 +7,19 @@
     <li>Pool {{ pool_number }}</li>
 {% endblock %}
 
+{% block search_info %}
+        <div id="results_pool_name_number">
+            <span class="results_pool_name_number_search">search results:</span><br>
+            <span class="results_pool_name_number_pool">Pool 1:</span>
+            <span class="results_pool_name_number_description">Research and Development in Space Vehicles and Guided Missiles...</span>
+
+        <div id="number_of_results">
+            <span class="matching_your_search"></span>
+        </div><!--end number_of_results<!-->
+             <a href="#"><div id="download_data_results">download data (CSV)</div></a>
+        </div><!--end results_pool_name_number<!-->
+{% endblock %}
+
 {% block content %}
 <div id="your_search_criteria">
     <span class="your_search_grey">showing vendors in: </span><span id="your_search" class="your_search_blue">541330 - Engineering Services</span>
