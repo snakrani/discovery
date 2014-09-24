@@ -13,14 +13,20 @@ var InputHandler = {
     },
 
     updateFields: function(obj) {
+        var setasides, i, len;
+
         if (obj['naics-code'] !== null) {
             $('#naics-code').select2('val', obj['naics-code']);
             this.naicsCode = obj['naics-code'];
         }
 
         if (obj.setasides) {
-            // break out setasides and loop
-            $('input[value=' + obj.setasides + ']').attr('checked', 'checked');
+            setasides = obj.setasides.split(',');
+            len = setasides.length - 1;
+
+            for (i = 0; i < len; i++) {            
+                $('input[value=' + setasides[i] + ']').attr('checked', 'checked');
+            }
         }
     },
     
