@@ -13,14 +13,20 @@ var InputHandler = {
     },
 
     updateFields: function(obj) {
+        var setasides, i, len;
+
         if (obj['naics-code'] !== null) {
             $('#naics-code').select2('val', obj['naics-code']);
             this.naicsCode = obj['naics-code'];
         }
 
         if (obj.setasides) {
-            // break out setasides and loop
-            $('input[value=' + obj.setasides + ']').attr('checked', 'checked');
+            setasides = obj.setasides.split(',');
+            len = setasides.length - 1;
+
+            for (i = 0; i < len; i++) {            
+                $('input[value=' + setasides[i] + ']').attr('checked', 'checked');
+            }
         }
     },
     
@@ -64,7 +70,7 @@ var InputHandler = {
                          .text(result.short_code + " - " + result.description)); 
                 });
                 if (URLManager.getParameterByName("naics-code")) {
-                    $("#naics-code").select2().select2("val", URLManager.getParameterByName("naics-code"));
+                    $("#naics-code").select2({placeholder:'Select a NAICS code', width : '400px'}).select2("val", URLManager.getParameterByName("naics-code"));
                 }
                 //load data if search criteria is defined in querystring
                 if (URLManager.getParameterByName("naics-code") || URLManager.getParameterByName("setasides")) {

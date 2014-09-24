@@ -86,7 +86,10 @@ class VendorsTest(TestCase):
         self.assertTrue(len(resp.data['results']) == 1)
         self.assertTrue(resp.data['results'][0]['id'] == '1_SB')
 
-
+    def test_result_length_pool_group(self):
+        resp = self.c.get(self.path, {'format': 'json', 'setasides': 'A2', 'group': 'pool', 'pool': '1_SB'})
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(len(resp.data['results'][0]['vendors']), resp.data['num_results'])
 
 
 
