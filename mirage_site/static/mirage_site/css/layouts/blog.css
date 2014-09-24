@@ -246,15 +246,57 @@ h3 {
 }
 #about_oasis    {
     float:left;
-    width:400px;
+    width:440px;
     margin-left:90px;
+}
+#about_oasis h3   {
+    font-weight: 600;
+}
+.about_oasis_text   {
+    margin-left:10px;
 }
 #data_sources   {
     float:left;
-    width:400px;
-    margin-left:90px;
+    width:450px;
+    margin-left:70px;
 }
+#data_sources_last_updated  {
+    width:100%;
+    text-align: right;
+    border-bottom: 1px solid #eeeeee;
+}
+.data_source_name   {
+    display:block;
+    color:#4a84a3;
+    font-weight: 600;
+    float:left;
 
+}
+.data_sources_row   {
+    
+    margin-top:20px;
+}
+.data_source_description    {
+    color:#999999;
+    display:block;
+    
+}
+#data_source_date_sam   {
+    float:right;
+    font-weight:600;
+    color:#009900;
+
+}
+#data_source_date_fpds   {
+    float:right;
+    font-weight:600;
+    color:#009900;
+}
+#data_source_date_fapiis   {
+    float:right;
+    font-weight:600;
+    color:#009900;
+}
 /* Initial Search Results Styles */
 #results_sam_container {
     width:1050px;
