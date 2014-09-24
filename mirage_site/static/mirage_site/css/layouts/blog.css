@@ -297,6 +297,11 @@ h3 {
     font-weight:600;
     color:#009900;
 }
+#footer {
+    min-height:150px;
+    background:url(/static/mirage_site/images/footer_bg.png);
+    background-repeat: repeat;
+}
 /* Initial Search Results Styles */
 #results_sam_container {
     width:1050px;
