@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseBadRequest
 from vendor.models import Vendor, Pool, Naics, SetAside
 from contract.models import Contract
 import csv
+from titlecase import titlecase
 
 def pool_csv(request):
     response = HttpResponse(content_type='text/csv')
@@ -32,7 +33,7 @@ def pool_csv(request):
 
     writer.writerow(('',))
     header_row = ['Vendor', 'Location']
-    header_row.extend([sa_obj.short_name for sa_obj in setasides_all])
+    header_row.extend([sa_obj.abbreviation for sa_obj in setasides_all])
     writer.writerow(header_row)
 
     for v in vendors: 
@@ -52,17 +53,20 @@ def pool_csv(request):
 
 def vendor_csv(request, vendor_duns):
     vendor = Vendor.objects.get(duns=vendor_duns)
+    setasides = SetAside.objects.all().order_by('far_order')
+
+    naics = request.GET.get('naics-code', None)
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="search_results.csv"'
     writer = csv.writer(response)
 
     writer.writerow((vendor.name,))
-    writer.writerow(('SAM registration expires: ', vendor.sam_expiration_date))
+    writer.writerow(('SAM registration expires: ', vendor.sam_expiration_date.strftime("%m/%d/%Y")))
     writer.writerow(('', ))
-    writer.writerow(('8(a)', 'HubZ', 'SDVO', 'WO', 'VO', 'SDB'))
-    
+    writer.writerow([sa_obj.abbreviation for sa_obj in setasides])
+
     vendor_sa = []
-    for sa in  SetAside.objects.all().order_by('far_order'):
+    for sa in  setasides:
         if sa in vendor.setasides.all():
             vendor_sa.append('X')
         else:
@@ -70,21 +74,29 @@ def vendor_csv(request, vendor_duns):
 
     writer.writerow(vendor_sa)
     writer.writerow(('', ))
-    writer.writerow(('DUNS', vendor.duns, '', 'Address:', vendor.sam_address))
-    writer.writerow(('CAGE Code', vendor.cage, '', '', vendor.sam_citystate))
+    writer.writerow(('DUNS', vendor.duns, '', 'Address:', titlecase(vendor.sam_address)))
+    writer.writerow(('CAGE Code', vendor.cage, '', '',  titlecase(vendor.sam_citystate[0:vendor.sam_citystate.index(',') + 1]) + vendor.sam_citystate[vendor.sam_citystate.index(',') + 1:]))
     writer.writerow(('Employees', vendor.number_of_employees, '', 'OASIS POC:', vendor.pm_name))
     writer.writerow(('Annual Revenue', vendor.annual_revenue, '', '', vendor.pm_phone))
-    writer.writerow(('', '', '', '', vendor.pm_email))
+    writer.writerow(('', '', '', '', vendor.pm_email.lower()))
     writer.writerow(('', ))
-    writer.writerow(('This vendor\'s contract history', ))
+    if naics:
+        writer.writerow(('This vendor\'s contract history for NAICS {0}'.format(naics), ))
+    else:
+        writer.writerow(('This vendor\'s contract history for all contracts', ))
+        
     writer.writerow(('Date Signed', 'PIID', 'Agency', 'Type', 'Value ($)', 'Email POC', 'Status'))
 
-    for c in Contract.objects.filter(vendor=vendor).order_by('-date_signed'):
+    if naics:
+        contracts = Contract.objects.filter(vendor=vendor, NAICS=naics).order_by('-date_signed')
+    else:
+        contracts = Contract.objects.filter(vendor=vendor).order_by('-date_signed')
+    for c in contracts:
         if '_' in c.piid:
             piid = c.piid.split('_')[1]
         else:
             piid = c.piid
-        writer.writerow((c.date_signed, piid, c.agency_name, c.get_pricing_type_display(), c.obligated_amount, c.point_of_contact, c.status))
+        writer.writerow((c.date_signed.strftime("%m/%d/%Y"), piid, titlecase(c.agency_name), c.get_pricing_type_display(), c.obligated_amount, (c.point_of_contact or "").lower(), c.status))
 
     return response
 

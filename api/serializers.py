@@ -5,7 +5,7 @@ from contract.models import Contract, FPDSLoad
 class SetAsideSerializer(serializers.ModelSerializer):
     class Meta:
         model = SetAside
-        fields = ('code', 'description')
+        fields = ('code', 'abbreviation')
 
 
 class NaicsSerializer(serializers.ModelSerializer):
