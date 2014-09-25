@@ -243,11 +243,12 @@ h3 {
     width:1100px;
     padding-left:30px;
     padding-right:30px;
+    display:block;
 }
 #about_oasis    {
     float:left;
-    width:440px;
-    margin-left:90px;
+    width:430px;
+    margin-left:40px;
 }
 #about_oasis h3   {
     font-weight: 600;
@@ -257,8 +258,8 @@ h3 {
 }
 #data_sources   {
     float:left;
-    width:450px;
-    margin-left:70px;
+    width:440px;
+    margin-left:40px;
 }
 #data_sources_last_updated  {
     width:100%;
@@ -304,17 +305,22 @@ h3 {
     background-repeat: repeat;
     margin-left:auto;
     margin-right:auto;
+    
    
 }
 #footer_nav {
     margin-left:100px;
-    padding-top:20px;
+    padding-top:24px;
     color:#FFF;
     list-style-type: none;
     float:left;
 
 }
 #footer_nav a {
+    color:#FFF;
+    list-style-type: none;
+}
+#footer_nav ul {
     color:#FFF;
     list-style-type: none;
 }
@@ -332,7 +338,23 @@ h3 {
     min-height:700px;
     width:1100px;
 }
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
 
+.cf:after {
+    clear: both;
+}
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.cf {
+    *zoom: 1;
+}
 /* Initial Search Results Styles */
 #results_sam_container {
     width:1050px;
