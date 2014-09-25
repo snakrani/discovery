@@ -1,8 +1,6 @@
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
 'use strict';
 
-// for pool page and single pool list
-// anything with a url under /pool
 LayoutManager.render = function(results) {
 
     if ($.isEmptyObject(results)) {
@@ -12,11 +10,10 @@ LayoutManager.render = function(results) {
         var dateStr = function(dateObj) {
             return ((dateObj.getMonth() + 1) + '/' + dateObj.getDate() + '/' + dateObj.getFullYear().toString().substring(2));
         }
-        //change data load dates
-            var samObj = new Date(results['sam_load_date']);
-            var fpdsObj = new Date(results['fpds_load_date']);
-
-            $("#data_source_date_sam").text(dateStr(samObj));
-            $("#data_source_date_fpds").text(dateStr(fpdsObj));
+        //render data load dates
+        var samObj = new Date(results['sam_load_date']);
+        var fpdsObj = new Date(results['fpds_load_date']);
+        $("#data_source_date_sam").text(dateStr(samObj));
+        $("#data_source_date_fpds").text(dateStr(fpdsObj));
     }
 };
