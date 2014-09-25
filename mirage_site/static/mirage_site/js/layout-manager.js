@@ -8,34 +8,6 @@ var LayoutManager = {
         Events.subscribe('contentChanged', this.updateResultsInfo);
     },
 
-    renderPools: function(results) {
-        var $container = $('#custom_page_content');
-        //clear out content
-        $container.find('.column').remove();
-
-        for (var i in results.results) {
-            var obj = results.results[i];
-            var $poolLink, $poolHeader; 
-            var $div = $('<div class="column post-header"></div>');
-            var qs = URLManager.getQueryString();
-
-            $poolLink = $('<a class="pool_link" href="/pool/' + obj['vehicle'].toLowerCase() + '/' + obj['number'] + '/' + qs + '">Pool' + obj['number'] + '</a>');
-            $poolLink.text();
-           
-            $poolHeader = $('<h2 class="pool_title"></h2>');
-            $poolHeader.append($poolLink);
-            $div.append($poolHeader);
-            
-            $div.append('<p class="post-meta number_of_vendors_in_pool">' + obj['vendors'].length.toString() + ' vendors</p>');
-
-            for (var v in obj['vendors']){
-                $div.append('<p class="vendor_names">' + obj['vendors'][v]['name'] + '</p>');
-            }
-
-            $container.append($div);
-        }
-    },
-
     updateSAM: function(results) {
         if ($.isEmptyObject(results) === false) {
             var dateObj = new Date(results['samLoad']);
@@ -68,6 +40,10 @@ var LayoutManager = {
                 return $(this).parent().text();
             }).get().join(', ')
         );
+
+        //remove about, show results
+        $('#about_oasis').remove();
+        $('#data_sources').remove();
         $("#your_search_criteria").show();
     },
 
