@@ -6,7 +6,6 @@ var LayoutManager = {
         Events.subscribe('dataLoaded', this.render.bind(LayoutManager));
         Events.subscribe('contentChanged', this.updateSAM);
         Events.subscribe('contentChanged', this.updateResultsInfo);
-        Events.subscribe('contentChanged', this.updateBreadcrumb);
     },
 
     renderPools: function(results) {
@@ -34,17 +33,6 @@ var LayoutManager = {
             }
 
             $container.append($div);
-        }
-    },
-
-    updateBreadcrumb: function(results) {
-        //remove old seach results breadcrumb
-        $('#sr').remove();
-
-        // pool pages load with breadcrumbs
-        if ($('#crumbs').children().length <= 1) {
-            //create new breadcrumb for search results
-            $('#crumbs').append('<li id="sr"><a href="#">Search Results</a></li>');
         }
     },
 

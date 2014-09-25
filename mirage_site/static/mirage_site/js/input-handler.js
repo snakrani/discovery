@@ -55,10 +55,6 @@ var InputHandler = {
 
     populateDropDown: function() {
         // can't seem to use cached jqobj, something goes wrong with select2
-        $('#naics-code')
-             .append($("<option></option>")
-             .attr("value", "all")
-             .text("All NAICS codes")); 
         $.getJSON(
             "/api/naics/",
             { format: "json" },
