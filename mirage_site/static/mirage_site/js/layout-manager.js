@@ -33,6 +33,8 @@ var LayoutManager = {
             resultsStr =  totalResults + " vendors in " + totalPools + " pool(s) match your search";
         }
 
+        $(".results_pool_name_number_pool").text("Pool " + results.results[0]['number'] + ": ");
+        $(".results_pool_name_number_description").text(results.results[0]['name']);
         $("#number_of_results span").text(resultsStr);
         $("#your_search").text($("#naics-code option:selected").text());
         $("#your_filters").text(
