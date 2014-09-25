@@ -41,9 +41,6 @@ var LayoutManager = {
             }).get().join(', ')
         );
 
-        //remove about, show results
-        $('#about_oasis').remove();
-        $('#data_sources').remove();
         $("#your_search_criteria").show();
     },
 
