@@ -13,10 +13,6 @@ LayoutManager.render = function(results) {
         $('#pool_vendors').find('tr').not(':first').remove();
         Events.publish('contentChanged', results);       
     }
-    else if (results.results.length > 1) {
-        this.renderPools(results);
-        Events.publish('contentChanged', results);
-    }
     else {
         // if this is a vendor list page and the page has already been reloaded
         if (URLManager.getParameterByName('naics-code') === InputHandler.getNAICSCode()) {
@@ -33,6 +29,7 @@ LayoutManager.renderPools = function(results) {
     var $container = $('#custom_page_content');
     //clear out content
     $container.find('.column').remove();
+
 
     for (var i in results.results) {
         if (results.results.hasOwnProperty(i)) {
