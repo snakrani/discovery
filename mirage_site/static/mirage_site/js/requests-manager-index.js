@@ -4,7 +4,7 @@
 RequestsManager.indexInit = function(original) {
     original.bind(RequestsManager).call();
     
-    this.load();
+    this.loadMetadata();
  
 };
  
@@ -14,7 +14,7 @@ RequestsManager.init = function() {
     RequestsManager.indexInit(RequestsManager.originalInit);
 };
  
-RequestsManager.load = function() {
+RequestsManager.loadMetadata = function() {
     var url = "/api/metadata/";
  
     $.getJSON(url, function(data) {
