@@ -11,7 +11,7 @@ LayoutManager.init = function() {
     LayoutManager.indexInit(LayoutManager.originalInit);
 };
 
-LayoutManager.renderMetadata = function(results) {
+LayoutManager.renderMetaData = function(results) {
 
     if ($.isEmptyObject(results)) {
         //clear out content
