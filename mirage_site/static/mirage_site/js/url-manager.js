@@ -69,14 +69,9 @@ var URLManager = {
             }
         }
 
-        // if its a multiple pool listing page
-        if (numPools || empty) {
-            return qs;
-        }
-        // if its a single pool/vendor listing page
-        else {
-            return '/pool/' + vehicle + '/' + poolNumber + '/' + qs;
-        }
+        
+        // its a single pool/vendor listing page
+        return '/pool/' + vehicle + '/' + poolNumber + '/' + qs;
     },
 
     updateCSVURL: function(results) {
