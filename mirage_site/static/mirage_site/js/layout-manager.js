@@ -4,7 +4,7 @@
 var LayoutManager = {
     init: function() {
         Events.subscribe('dataLoaded', this.render.bind(LayoutManager));
-        Events.subscribe('contentChanged', this.updateSAM);
+        Events.subscribe('contentChanged', this.updateSAM.bind(LayoutManager));
         Events.subscribe('contentChanged', this.updateResultsInfo);
         Events.subscribe('contentChanged', this.updateBreadcrumb);
     },
@@ -50,8 +50,8 @@ var LayoutManager = {
 
     updateSAM: function(results) {
         if ($.isEmptyObject(results) === false) {
-            var dateObj = new Date(results['samLoad']);
-            $("#sam_load").text("SAM data updated: " + (dateObj.getMonth() + 1) + '/' + dateObj.getDate() + '/' + dateObj.getFullYear().toString().substring(2));
+            var dateObj = this.createDate(results['samLoad']);
+            $("#sam_load").text("SAM data updated: " + (dateObj.getMonth()) + '/' + dateObj.getDate() + '/' + dateObj.getFullYear().toString().substring(2));
         }
     },
 
@@ -81,6 +81,20 @@ var LayoutManager = {
             }).get().join(', ')
         );
         $("#your_search_criteria").show();
+    },
+
+    createDate: function(date) {
+        // in IE + Safari, if we pass the date the api sends right
+        // into a date object, it outputs NaN
+        // http://biostall.com/javascript-new-date-returning-nan-in-ie-or-invalid-date-in-safari
+        var dateArray = date.split('-'),
+            i,
+            len = dateArray.length - 1;
+        for (i = 0; i <= len; i++) {
+            dateArray[i] = parseInt(dateArray[i], 10);
+        }
+
+        return new Date(dateArray[0], dateArray[1], dateArray[2]);
     },
 
     toTitleCase: function(str) {
