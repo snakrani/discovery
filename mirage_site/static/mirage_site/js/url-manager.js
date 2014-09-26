@@ -80,7 +80,7 @@ var URLManager = {
     },
 
     update: function(results) {
-        window.history.pushState(true, true, this.getURL(results));
+        History.pushState('', 'Mirage', this.getURL(results));
     },
 
     loadPoolPage: function(results) {
