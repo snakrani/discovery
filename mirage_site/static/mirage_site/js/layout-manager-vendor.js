@@ -31,7 +31,7 @@ LayoutManager.render = function(results) {
 
     //load SAM expiration date
     if (results['sam_expiration_date']) {
-        dateObj = new Date(results['sam_expiration_date']);
+        dateObj = this.createDate(results['sam_expiration_date']);
         formattedDate = this.formatDate(dateObj);
     }
     else {
@@ -82,7 +82,7 @@ LayoutManager.buildContractTable = function(data) {
     for (contract in results) {
         if (results.hasOwnProperty(contract)) {
             tr = $('<tr></tr>');
-            displayDate = (results[contract]['date_signed'] ? this.formatDate(new Date(results[contract]['date_signed'])) : ' ');
+            displayDate = (results[contract]['date_signed'] ? this.formatDate(this.createDate(results[contract]['date_signed'])) : ' ');
             piid = (results[contract]['piid'] ? results[contract]['piid'] : ' ');
             agencyName = (results[contract]['agency_name'] ? results[contract]['agency_name'] : ' ');
             pricingType = (results[contract]['pricing_type'] ? results[contract]['pricing_type'] : ' ');
