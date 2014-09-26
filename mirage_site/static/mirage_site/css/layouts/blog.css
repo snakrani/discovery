@@ -370,6 +370,7 @@ h3 {
     width:100%;
     padding-right:25px;
     border-bottom: 1px solid #eeeeee;
+    
 }
 .results_pool_name_number_search    {
     color:#CCCCCC;
@@ -385,6 +386,12 @@ h3 {
     font-weight:600;
     line-height: .9em;
     color:#666666;
+}
+.truncate {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 #number_of_results  {
     width:650px;
