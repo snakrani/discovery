@@ -1,7 +1,17 @@
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
 'use strict';
+LayoutManager.indexInit = function(original) {
+    Events.subscribe('metaDataLoaded', this.renderMetaData);
+    original.bind(LayoutManager).call();
+};
+ 
+LayoutManager.originalInit = LayoutManager.init;
+ 
+LayoutManager.init = function() {
+    LayoutManager.indexInit(LayoutManager.originalInit);
+};
 
-LayoutManager.render = function(results) {
+LayoutManager.renderMetadata = function(results) {
 
     if ($.isEmptyObject(results)) {
         //clear out content

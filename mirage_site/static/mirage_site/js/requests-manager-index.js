@@ -5,7 +5,6 @@ RequestsManager.indexInit = function(original) {
     original.bind(RequestsManager).call();
     
     this.loadMetadata();
- 
 };
  
 RequestsManager.originalInit = RequestsManager.init;
@@ -19,6 +18,6 @@ RequestsManager.loadMetadata = function() {
  
     $.getJSON(url, function(data) {
         var resultsObj = data; 
-        Events.publish('dataLoaded', resultsObj);
+        Events.publish('metaDataLoaded', resultsObj);
     });
 };
