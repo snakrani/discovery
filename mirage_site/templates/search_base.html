@@ -1,63 +1,70 @@
 {% extends "base.html" %}
 
 {% block header %}
-<div id="search">
-    <form id="naics-search" class="pure-form">
-        <select id="naics-code">
-            <option></option>
-        </select>
-    </form>
-</div><!--end search<!-->
+<div id="combined_search">
+
+    <div id="vehicle_select">
+            <span class="select_text">Select a vehicle</span>
+        <form id="naics-search" class="pure-form">
+            <select id="placeholder">
+                <option>OASIS SB</option>
+            </select>
+        </form>
+    </div><!--end vehicle_select<!-->
+
+    <div id="search">
+        <span class="select_text">Select a NAICS code or description</span>
+        <form id="naics-search" class="pure-form">
+            <select id="naics-code">
+                <option></option>
+            </select>
+        </form>
+    </div><!--end search<!-->
+
+
+    <div id="filter_container">
+        <span class="select_text">Choose filters (optional)</span>
+        <div id="filter" class="filterbox">
+            <form id="setaside-filters" class="pure-form pure-form-stacked">
+                <fieldset>
+                    <div id="filter_c1">
+                        <label class="pure-checkbox" for="8a"><input type="checkbox" id="8a" name="8a" value="A6" {% if "A6" in request.GET.setasides %}checked{% endif %} />8(a)</label>
+                        <label class="pure-checkbox" for="Hubz"><input type="checkbox" id="Hubz" name="Hubz" value="XX" {% if "XX" in request.GET.setasides %}checked{% endif %} />HUBZone</label>
+                        <label class="pure-checkbox" for="disvet"><input type="checkbox" id="disvet" name="disvet" value="QF" {% if "QF" in request.GET.setasides %}checked{% endif %}/>Service Disabled<br> Veteran Owned</label>
+                    </div>
+                    <div id="filter_c2">
+                        <label class="pure-checkbox" for="woman"><input type="checkbox" id="woman" name="woman" value="A2" {% if "A2" in request.GET.setasides %}checked{% endif %} />Woman Owned</label>
+                        <label class="pure-checkbox" for="vet"><input type="checkbox" id="vet" name="vet" value="A5" {% if "A5" in request.GET.setasides %}checked{% endif %}/>Veteran Owned</label>
+                        <label class="pure-checkbox labeltest" for="smalldis"><input type="checkbox" id="smalldis" name="smalldis" value="27" {% if "27" in request.GET.setasides %}checked{% endif %}/>Small Disadvantaged <br>Business</label>
+                    </div>
+                </fieldset>
+            </form>
+        </div><!--end filterbox<!-->
+    </div><!--end filter<!-->
+
+
+</div><!--end combined_search<!-->
 {% endblock header %}
 
 {% block body %}
-<div id="filter_container">
-    <h3 class="filter_title">Filters</h3>
-    <div id="filter" class="filterbox">
-        <form id="setaside-filters" class="pure-form pure-form-stacked">
-            <fieldset>
-                <label class="pure-checkbox" for="8a"><input type="checkbox" id="8a" name="8a" value="A6" {% if "A6" in request.GET.setasides %}checked{% endif %} />8(a)</label>
-                <label class="pure-checkbox" for="Hubz"><input type="checkbox" id="Hubz" name="Hubz" value="XX" {% if "XX" in request.GET.setasides %}checked{% endif %} />HUBZone</label>
-                <label class="pure-checkbox" for="disvet"><input type="checkbox" id="disvet" name="disvet" value="QF" {% if "QF" in request.GET.setasides %}checked{% endif %}/>Service Disabled Veteran Owned</label>
-                <label class="pure-checkbox" for="woman"><input type="checkbox" id="woman" name="woman" value="A2" {% if "A2" in request.GET.setasides %}checked{% endif %} />Woman Owned</label>
-                <label class="pure-checkbox" for="vet"><input type="checkbox" id="vet" name="vet" value="A5" {% if "A5" in request.GET.setasides %}checked{% endif %}/>Veteran Owned</label>
-                <label class="pure-checkbox labeltest" for="smalldis"><input type="checkbox" id="smalldis" name="smalldis" value="27" {% if "27" in request.GET.setasides %}checked{% endif %}/>Small Disadvantaged Business</label>
-            </fieldset>
-        </form>
-    </div><!--end filterbox<!-->
-</div><!--end filter<!-->
+
 
 
 <div id="main_container">
 
-    <div id="tabs_container">
-
-        <div id="select_vehicle">
-            <a class="select_vehicle" href="#" title="OASIS SB">
-              OASIS SB
-            </a>
-        </div><!--end select_vehicle<!-->
-
-    </div><!--end tabs_container<!-->
-
-    <div id="breadcrumbs">
-        <ul id="crumbs">
-        {% block crumbs %}
-        {% endblock %}
-        </ul>
-    </div><!--end breadcrumbs<!-->
-
     <div id="results_sam_container">
 
-        <div id="number_of_results">
-            <span class="matching_your_search"></span>
-        </div><!--end number_of_results<!-->
+    {% block search_info %}
+    {% endblock %}
 
-        <div id="sam_last_updated">
+
+
+<!--         <div id="sam_last_updated">
             <span id="sam_load" class="sam_style"></span>
-        </div><!--end sam_last_updated<!-->
+        </div><!end sam_last_updated<!--> 
 
     <!--end results_sam_container<!-->
+
 
 </div><!--end main_container<!-->
 
