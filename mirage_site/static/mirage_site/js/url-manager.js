@@ -79,6 +79,14 @@ var URLManager = {
         }
     },
 
+    updateCSVURL: function(results) {
+        var url = this.getURL(results);
+        //generate csv link (sloppy)
+        var pathArray = url.split('/');
+        pathArray.splice(2, 0, "csv");
+        $("#csv_link").attr("href", pathArray.join('/'));
+    },
+
     update: function(results) {
         History.pushState('', 'Mirage', this.getURL(results));
     },

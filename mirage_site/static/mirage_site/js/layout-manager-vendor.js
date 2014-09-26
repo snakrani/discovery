@@ -67,7 +67,6 @@ LayoutManager.render = function(results) {
 
     //breadcrumbs
     $('#vendor_breadcrumb').html(results.name);
-    Events.publish('vendorInfoLoaded');
 }; 
 
 LayoutManager.renderColumn = function(v, prefix, setasideCode) {

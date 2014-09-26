@@ -33,6 +33,11 @@ var LayoutManager = {
             resultsStr =  totalResults + " vendors in " + totalPools + " pool(s) match your search";
         }
 
+        $(".results_pool_name_number_pool").text("Pool " + results.results[0]['number'] + ": ");
+        $(".results_pool_name_number_description").text(results.results[0]['name']);
+
+        URLManager.updateCSVURL(results);
+
         $("#number_of_results span").text(resultsStr);
         $("#your_search").text($("#naics-code option:selected").text());
         $("#your_filters").text(
@@ -41,9 +46,6 @@ var LayoutManager = {
             }).get().join(', ')
         );
 
-        //remove about, show results
-        $('#about_oasis').remove();
-        $('#data_sources').remove();
         $("#your_search_criteria").show();
     },
 
