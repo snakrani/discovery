@@ -41,37 +41,49 @@ var URLManager = {
         var qs = this.getQueryString();
         var vehicle, poolNumber, pathArray, numPools, empty;
 
+        // an area that needs rethinking [TS]
+
+        // if the path bits we want aren't in the results object...
         if ($.isEmptyObject(results)) {
+            // get them from the current url...
             pathArray = window.location.href.split('/').removeEmpties();
-            if (pathArray.length >= 3) {
+            if (pathArray.length > 3) {
                 vehicle = pathArray[3];
                 poolNumber = pathArray[4];
             }
+            // or this is not a vendor listing/single pool listing page
             else {
                 empty = true;
             }
         }
         else {
             vehicle = results.vehicle;
+            // number of the single pool, if this is a single pool/vendor list page
             if (typeof results.poolNumber !== 'undefined') {
                 poolNumber = results.poolNumber;
             }
 
+            // if this is a multiple pool listing page
             if (typeof results.numPools !== 'undefined') {
                 numPools = results.numPools;
             }
         }
 
-        if (numPools || empty) {
-            return qs;
-        }
-        else {
-            return '/pool/' + vehicle + '/' + poolNumber + '/' + qs;
-        }
+        
+        // its a single pool/vendor listing page
+        return '/pool/' + vehicle + '/' + poolNumber + '/' + qs;
+    },
+
+    updateCSVURL: function(results) {
+        var url = this.getURL(results);
+        //generate csv link (sloppy)
+        var pathArray = url.split('/');
+        pathArray.splice(2, 0, "csv");
+        $("#csv_link").attr("href", pathArray.join('/'));
     },
 
     update: function(results) {
-        window.history.pushState(true, true, this.getURL(results));
+        History.pushState('', 'Mirage', this.getURL(results));
     },
 
     loadPoolPage: function(results) {

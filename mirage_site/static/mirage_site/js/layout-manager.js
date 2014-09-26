@@ -4,14 +4,14 @@
 var LayoutManager = {
     init: function() {
         Events.subscribe('dataLoaded', this.render.bind(LayoutManager));
-        Events.subscribe('contentChanged', this.updateSAM);
+        Events.subscribe('contentChanged', this.updateSAM.bind(LayoutManager));
         Events.subscribe('contentChanged', this.updateResultsInfo);
     },
 
     updateSAM: function(results) {
         if ($.isEmptyObject(results) === false) {
-            var dateObj = new Date(results['samLoad']);
-            $("#sam_load").text("SAM data updated: " + (dateObj.getMonth() + 1) + '/' + dateObj.getDate() + '/' + dateObj.getFullYear().toString().substring(2));
+            var dateObj = this.createDate(results['samLoad']);
+            $("#sam_load").text("SAM data updated: " + (dateObj.getMonth()) + '/' + dateObj.getDate() + '/' + dateObj.getFullYear().toString().substring(2));
         }
     },
 
@@ -33,6 +33,11 @@ var LayoutManager = {
             resultsStr =  totalResults + " vendors in " + totalPools + " pool(s) match your search";
         }
 
+        $(".results_pool_name_number_pool").text("Pool " + results.results[0]['number'] + ": ");
+        $(".results_pool_name_number_description").text(results.results[0]['name']);
+
+        URLManager.updateCSVURL(results);
+
         $("#number_of_results span").text(resultsStr);
         $("#your_search").text($("#naics-code option:selected").text());
         $("#your_filters").text(
@@ -41,10 +46,21 @@ var LayoutManager = {
             }).get().join(', ')
         );
 
-        //remove about, show results
-        $('#about_oasis').remove();
-        $('#data_sources').remove();
         $("#your_search_criteria").show();
+    },
+
+    createDate: function(date) {
+        // in IE + Safari, if we pass the date the api sends right
+        // into a date object, it outputs NaN
+        // http://biostall.com/javascript-new-date-returning-nan-in-ie-or-invalid-date-in-safari
+        var dateArray = date.split('-'),
+            i,
+            len = dateArray.length - 1;
+        for (i = 0; i <= len; i++) {
+            dateArray[i] = parseInt(dateArray[i], 10);
+        }
+
+        return new Date(dateArray[0], dateArray[1], dateArray[2]);
     },
 
     toTitleCase: function(str) {

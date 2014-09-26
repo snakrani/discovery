@@ -12,18 +12,19 @@ RequestsManager.init = function() {
 
 RequestsManager.load = function() {
     /* get vendor info from api */
-
+ 
     var url = "/api/vendor/" + URLManager.getDUNS() + "/";
     
     $.getJSON(url, function(data){
         Events.publish('dataLoaded', data);
+        Events.publish('vendorInfoLoaded');
     });
 };
 
 RequestsManager.loadContracts = function() {
     var url = "/api/contracts/";
     var params = {
-        'duns': URLManager.getDUNS(),
+        'duns': URLManager.getDUNS()
     };
 
     var naics = URLManager.getParameterByName('naics-code');
