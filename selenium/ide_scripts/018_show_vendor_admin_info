@@ -39,12 +39,12 @@
 <tr>
 	<td>assertText</td>
 	<td>css=span.number_of_employees.admin_data</td>
-	<td>6</td>
+	<td>95</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>css=span.annual_revenue.admin_data</td>
-	<td>$2,148,198</td>
+	<td>$11,595,009</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -66,7 +66,6 @@
 	<td>css=span.vendor_poc_phone.admin_data2</td>
 	<td>703-766-7714</td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

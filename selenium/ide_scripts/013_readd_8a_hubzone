@@ -37,11 +37,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Pool 1</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertElementPresent</td>
 	<td>css=td.h_8a</td>
 	<td></td>
