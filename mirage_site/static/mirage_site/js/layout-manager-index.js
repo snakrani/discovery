@@ -3,6 +3,7 @@
 LayoutManager.indexInit = function(original) {
     Events.subscribe('metaDataLoaded', this.renderMetaData);
     original.bind(LayoutManager).call();
+    this.disableFilters();
 };
  
 LayoutManager.originalInit = LayoutManager.init;
@@ -27,3 +28,8 @@ LayoutManager.renderMetaData = function(results) {
         $("#data_source_date_fpds").text(dateStr(fpdsObj));
     }
 };
+
+LayoutManager.disableFilters = function() {
+    //disable socioeconomic indicators until a naics is selected
+    $('.se_filter').attr("disabled", true);
+}
