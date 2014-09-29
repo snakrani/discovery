@@ -17,14 +17,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=your_search</td>
-	<td>541330 - Engineering Services</td>
-</tr>
-<tr>
 	<td>pause</td>
 	<td>2000</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=your_search</td>
+	<td>541330 - Engineering Services</td>
 </tr>
 <tr>
 	<td>assertText</td>

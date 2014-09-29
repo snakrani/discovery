@@ -13,18 +13,18 @@
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/?naics-code=541219&amp;setasides=QF,A2&amp;#</td>
+	<td>/pool/oasissb/1/?setasides=A6,A2,XX&amp;naics-code=541990&amp;</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>css=span.matching_your_search</td>
+	<td>pause</td>
+	<td>2000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>css=span.matching_your_search</td>
-	<td>0 vendors in 0 pool(s) match your search</td>
+	<td>0 vendors match your search</td>
 </tr>
 </tbody></table>
 </body>
