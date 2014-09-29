@@ -4,38 +4,34 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:8000" />
-<title>Search criteria on search results</title>
+<title>Filters disabled on index and enabled on results</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Search criteria on search results</td></tr>
+<tr><td rowspan="1" colspan="3">Filters disabled on index and enabled on results</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/?naics-code=541330&amp;setasides=A5&amp;</td>
+	<td>/</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=your_search</td>
-	<td>541330 - Engineering Services</td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>2000</td>
+	<td>assertNotEditable</td>
+	<td>css=.se_filter</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=your_filters</td>
-	<td>Veteran Owned</td>
+	<td>open</td>
+	<td>/pool/oasissb/1/?naics-code=541618&amp;</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=vet</td>
-	<td>on</td>
+	<td>assertEditable</td>
+	<td>css=.se_filter</td>
+	<td></td>
 </tr>
+
 </tbody></table>
 </body>
 </html>

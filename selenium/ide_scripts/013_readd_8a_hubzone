@@ -13,12 +13,7 @@
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=label.pure-checkbox</td>
+	<td>/pool/oasissb/1/?setasides=A6&amp;naics-code=541620&amp;</td>
 	<td></td>
 </tr>
 <tr>
@@ -34,11 +29,6 @@
 <tr>
 	<td>pause</td>
 	<td>2000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Pool 1</td>
 	<td></td>
 </tr>
 <tr>

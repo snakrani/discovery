@@ -10,14 +10,10 @@
 <tr><td><b>Test Suite</b></td></tr>
 <tr><td><a href="001_check_titles">Check titles</a></td></tr>
 <tr><td><a href="002_veteran_owned_search">Veteran owned search</a></td></tr>
-<tr><td><a href="003_all_naics_codes">Search all NAICS codes</a></td></tr>
 <tr><td><a href="004_zero_results_indicator">Zero results indicator on search</a></td></tr>
-<tr><td><a href="006_link_to_pool_detail">Link to pool detail page</a></td></tr>
 <tr><td><a href="007_socioeconomic_indicators_in_pool_detail">Socioeconomic indicators in pool detail</a></td></tr>
 <tr><td><a href="008_pool_detail_result_count">Show count of results on pool detail</a></td></tr>
 <tr><td><a href="009_search_criteria_pool_detail">Search criteria on pool detail</a></td></tr>
-<tr><td><a href="010_search_criteria_on_search_results">Search criteria on search results</a></td></tr>
-<tr><td><a href="011_sam_data_load_displayed">SAM data load date displayed</a></td></tr>
 <tr><td><a href="012_vendor_pool_count_search_results">Show vendor and pool count in search results</a></td></tr>
 <tr><td><a href="013_readd_8a_hubzone">Re-add 8(a) and HUBZone</a></td></tr>
 <tr><td><a href="014_display_cage_code">Display CAGE code</a></td></tr>
@@ -26,6 +22,10 @@
 <tr><td><a href="017_show_contract_info">Show contract info</a></td></tr>
 <tr><td><a href="018_show_vendor_admin_info">Show vendor admin info</a></td></tr>
 <tr><td><a href="019_dont_show_pool_count_search_results">Pool detail page doesn't show number of pools</a></td></tr>
+<tr><td><a href="020_data_load_dates_displayed">Data load dates dipslayed on front page</a></td></tr>
+<tr><td><a href="021_csv_links_exist">CSV links exist in pool detail and vendor detail</a></td></tr>
+<tr><td><a href="022_footer_links">Footer links</a></td></tr>
+<tr><td><a href="023_step_two_before_step_three">Filters disabled on index and enabled on results</a></td></tr>
 </tbody></table>
 </body>
 </html>

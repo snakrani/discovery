@@ -23,19 +23,19 @@
 
 
     <div id="filter_container">
-        <span class="select_text">Choose filters (optional)</span>
+        <span class="select_text" id="choose_filters">Choose filters (optional)</span>
         <div id="filter" class="filterbox">
             <form id="setaside-filters" class="pure-form pure-form-stacked">
                 <fieldset>
                     <div id="filter_c1">
-                        <label class="pure-checkbox" for="8a"><input type="checkbox" id="8a" name="8a" value="A6" {% if "A6" in request.GET.setasides %}checked{% endif %} />8(a)</label>
-                        <label class="pure-checkbox" for="Hubz"><input type="checkbox" id="Hubz" name="Hubz" value="XX" {% if "XX" in request.GET.setasides %}checked{% endif %} />HUBZone</label>
-                        <label class="pure-checkbox" for="disvet"><input type="checkbox" id="disvet" name="disvet" value="QF" {% if "QF" in request.GET.setasides %}checked{% endif %}/>Service Disabled<br> Veteran Owned</label>
+                        <label class="pure-checkbox" for="8a"><input class="se_filter" type="checkbox" id="8a" name="8a" value="A6" {% if "A6" in request.GET.setasides %}checked{% endif %} />8(a)</label>
+                        <label class="pure-checkbox" for="Hubz"><input class="se_filter" type="checkbox" id="Hubz" name="Hubz" value="XX" {% if "XX" in request.GET.setasides %}checked{% endif %} />HUBZone</label>
+                        <label class="pure-checkbox" for="disvet"><input class="se_filter" type="checkbox" id="disvet" name="disvet" value="QF" {% if "QF" in request.GET.setasides %}checked{% endif %}/>Service Disabled<br> Veteran Owned</label>
                     </div>
                     <div id="filter_c2">
-                        <label class="pure-checkbox" for="woman"><input type="checkbox" id="woman" name="woman" value="A2" {% if "A2" in request.GET.setasides %}checked{% endif %} />Woman Owned</label>
-                        <label class="pure-checkbox" for="vet"><input type="checkbox" id="vet" name="vet" value="A5" {% if "A5" in request.GET.setasides %}checked{% endif %}/>Veteran Owned</label>
-                        <label class="pure-checkbox labeltest" for="smalldis"><input type="checkbox" id="smalldis" name="smalldis" value="27" {% if "27" in request.GET.setasides %}checked{% endif %}/>Small Disadvantaged <br>Business</label>
+                        <label class="pure-checkbox" for="woman"><input class="se_filter" type="checkbox" id="woman" name="woman" value="A2" {% if "A2" in request.GET.setasides %}checked{% endif %} />Woman Owned</label>
+                        <label class="pure-checkbox" for="vet"><input class="se_filter" type="checkbox" id="vet" name="vet" value="A5" {% if "A5" in request.GET.setasides %}checked{% endif %}/>Veteran Owned</label>
+                        <label class="pure-checkbox labeltest" for="smalldis"><input class="se_filter" type="checkbox" id="smalldis" name="smalldis" value="27" {% if "27" in request.GET.setasides %}checked{% endif %}/>Small Disadvantaged <br>Business</label>
                     </div>
                 </fieldset>
             </form>
