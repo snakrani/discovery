@@ -384,7 +384,6 @@ h3 {
     width:100%;
     padding-right:25px;
     border-bottom: 1px solid #eeeeee;
-    
 }
 .results_pool_name_number_search    {
     color:#CCCCCC;
@@ -396,28 +395,27 @@ h3 {
     font-weight:600;
 }
 .results_pool_name_number_description    {
-    font-size:1.5em;
+    font-size:1.6em;
     font-weight:600;
     line-height: .9em;
     color:#666666;
-}
-.truncate {
-  width: 250px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    width: 750px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display:inline-block;
+    height:27px;
+    vertical-align: text-bottom;
+    
 }
 #number_of_results  {
     width:650px;
-    
     font-size: 1em;
     min-height:20px;
     background-color: ;
     color:#3d7190;
     font-weight:600;
     display:block;
-
-
 }
 .matching_your_search   {
 }
