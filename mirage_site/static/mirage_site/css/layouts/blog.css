@@ -120,8 +120,6 @@ h3 {
 #page_title {
     width:500px;
     padding-bottom:10px;
-    #7f7f7f
-    #959595
 }
 .oasis_title    {
     display:block;
@@ -147,7 +145,6 @@ h3 {
 #combined_search    {
     width:1100px;
     min-height:180px;
-    /*background:url(/static/mirage_site/images/filter_bg.jpg);*/
     padding-top:20px;
     background-color: #2d5872;
     border: 1px solid #000;
@@ -338,7 +335,6 @@ h3 {
 #footer {
     min-height:150px;
     width:1100px;
-    /*background:url(/static/mirage_site/images/footer_bg.png);*/
     background-repeat: repeat;
     margin-left:auto;
     margin-right:auto;
