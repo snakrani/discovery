@@ -74,11 +74,18 @@ var URLManager = {
         return '/pool/' + vehicle + '/' + poolNumber + '/' + qs;
     },
 
-    updateCSVURL: function(results) {
+    updateResultCSVURL: function(results) {
         var url = this.getURL(results);
         //generate csv link (sloppy)
         var pathArray = url.split('/');
         pathArray.splice(2, 0, "csv");
+        $("#csv_link").attr("href", pathArray.join('/'));
+    },
+
+    updateVendorCSVURL: function() {
+        var url = document.location.href;
+        var pathArray = url.split('/');
+        pathArray.splice(5, 0, "csv");
         $("#csv_link").attr("href", pathArray.join('/'));
     },
 
