@@ -17,6 +17,8 @@ LayoutManager.init = function() {
 };
 
 LayoutManager.render = function(results) {
+    URLManager.updateVendorCSVURL(results);
+
     var currentDate = new Date();
     var mailto, t, indicatorsRow, formattedDate, dateObj;
 
