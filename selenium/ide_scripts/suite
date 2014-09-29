@@ -24,6 +24,7 @@
 <tr><td><a href="019_dont_show_pool_count_search_results">Pool detail page doesn't show number of pools</a></td></tr>
 <tr><td><a href="020_data_load_dates_displayed">Data load dates dipslayed on front page</a></td></tr>
 <tr><td><a href="021_csv_links_exist">CSV links exist in pool detail and vendor detail</a></td></tr>
+<tr><td><a href="022_footer_links">Footer links</a></td></tr>
 </tbody></table>
 </body>
 </html>
