@@ -31,5 +31,8 @@ LayoutManager.renderMetaData = function(results) {
 
 LayoutManager.disableFilters = function() {
     //disable socioeconomic indicators until a naics is selected
+    var disabledColor = '#999999';
+    $('#choose_filters').css('color', disabledColor);
+    $('.pure-checkbox').css('color', disabledColor);
     $('.se_filter').attr("disabled", true);
 }
