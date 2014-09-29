@@ -152,10 +152,12 @@ h3 {
 #vendor_back_button   {
     float:left;
     margin-left:27px;
-    padding-left:44px;
+    padding-left:34px;
+    padding-top:7px;
     background:url(/static/mirage_site/images/back_arrow.png);
     background-repeat: no-repeat;
-    background-position: 0px 9px;
+    background-position: 0px 13px;
+
 }
 .back_text  {
     color:#FFF;
