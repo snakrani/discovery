@@ -3,42 +3,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://localhost:8000" />
-<title>Re-add 8(a) and HUBZone</title>
+<link rel="selenium.base" href="http://localhost:8000/" />
+<title>CSV links exist in pool detail and vendor detail</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Re-add 8(a) and HUBZone</td></tr>
+<tr><td rowspan="1" colspan="3">CSV links exist in pool detail and vendor detail</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/pool/oasissb/1/?setasides=A6&amp;naics-code=541620&amp;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=label.pure-checkbox</td>
-	<td>8(a)</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@id='filter_c1']/label[2]</td>
-	<td>HUBZone</td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>2000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>css=td.h_8a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>css=td.h_hubz</td>
+	<td>/pool/oasissb/1/?naics-code=541620&amp;</td>
 	<td></td>
 </tr>
 <tr>
@@ -47,10 +22,26 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTable</td>
-	<td>id=pool_vendors.5.2</td>
-	<td>X</td>
+	<td>assertAttribute</td>
+	<td>link=download data (CSV)@href</td>
+	<td>*/pool/csv*</td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/vendor/786997739/?naics-code=541620&amp;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>link=download vendor data (CSV)@href</td>
+	<td>*/vendor/*/csv*</td>
+</tr>
+
 </tbody></table>
 </body>
 </html>

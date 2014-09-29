@@ -22,6 +22,10 @@
 <tr><td><a href="017_show_contract_info">Show contract info</a></td></tr>
 <tr><td><a href="018_show_vendor_admin_info">Show vendor admin info</a></td></tr>
 <tr><td><a href="019_dont_show_pool_count_search_results">Pool detail page doesn't show number of pools</a></td></tr>
+<tr><td><a href="020_data_load_dates_displayed">Data load dates dipslayed on front page</a></td></tr>
+<tr><td><a href="021_csv_links_exist">CSV links exist in pool detail and vendor detail</a></td></tr>
+<tr><td><a href="022_footer_links">Footer links</a></td></tr>
+<tr><td><a href="023_step_two_before_step_three">Filters disabled on index and enabled on results</a></td></tr>
 </tbody></table>
 </body>
 </html>

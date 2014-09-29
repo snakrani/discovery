@@ -99,7 +99,7 @@ LayoutManager.buildContractTable = function(data) {
 
             tr.append('<td class="date_signed">' + displayDate + '</td>');
             tr.append('<td class="piid">' + piid + '</td>');
-            tr.append('<td class="agency">' + agencyName + '</td>');
+            tr.append('<td class="agency">' + this.toTitleCase(agencyName) + '</td>');
             tr.append('<td class="type">' + pricingType + '</td>');
             tr.append('<td class="value">' + obligatedAmount+ '</td>');
             tr.append('<td class="email_poc">' + pointOfContact + '</td>');
