@@ -120,6 +120,8 @@ h3 {
 #page_title {
     width:500px;
     padding-bottom:10px;
+    #7f7f7f
+    #959595
 }
 .oasis_title    {
     display:block;
@@ -132,6 +134,12 @@ h3 {
     font-size:1em;
     color:#bbbbbb;
     
+}
+#header_link    {
+    float:right;
+    font-size:.9em;
+    padding-right:10px;
+    padding-top:10px;
 }
 .widedrop   {
     width:600px;
