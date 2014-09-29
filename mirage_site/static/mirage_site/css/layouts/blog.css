@@ -133,14 +133,21 @@ h3 {
     color:#bbbbbb;
     
 }
+#header_link    {
+    float:right;
+    font-size:.9em;
+    padding-right:10px;
+    padding-top:10px;
+}
 .widedrop   {
     width:600px;
 }
 #combined_search    {
     width:1100px;
     min-height:180px;
-    background:url(/static/mirage_site/images/filter_bg.jpg);
     padding-top:20px;
+    background-color: #2d5872;
+    border: 1px solid #000;
 }
 #combined_search_pool    {
     width:1100px;
@@ -151,15 +158,17 @@ h3 {
 #vendor_back_button   {
     float:left;
     margin-left:27px;
-    padding-left:44px;
+    padding-left:34px;
+    padding-top:7px;
     background:url(/static/mirage_site/images/back_arrow.png);
     background-repeat: no-repeat;
-    background-position: 0px 9px;
+    background-position: 0px 13px;
+
 }
 .back_text  {
     color:#FFF;
-    font-size:2.1em;
-    font-weight:600;
+    font-size:1.4em;
+    font-weight:500;
 }
 .back_text a:hover {
     color:#FFF;
@@ -174,6 +183,31 @@ h3 {
     background:url(/static/mirage_site/images/1.png);
     background-repeat: no-repeat;
     background-position: 0px 5px;
+}
+.vehicle_select_style  {
+    color:#999;
+    padding: 0px 0px 0px 8px;
+    display: block;
+    height: 26px;
+    padding: 0 0 0 8px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #aaa;
+    white-space: nowrap;
+    line-height: 26px;
+    text-decoration: none;
+    border-radius: 4px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    background-clip: padding-box;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: #fff;
 }
 #search {
     float:left;
@@ -268,7 +302,7 @@ h3 {
 }
 .data_source_name   {
     display:block;
-    color:#4a84a3;
+    color:#640016;
     font-weight: 600;
     float:left;
 
@@ -301,20 +335,20 @@ h3 {
 #footer {
     min-height:150px;
     width:1100px;
-    background:url(/static/mirage_site/images/footer_bg.png);
     background-repeat: repeat;
     margin-left:auto;
     margin-right:auto;
     margin-top:30px;
-    
+    background-color: #1f323d;
    
 }
 #footer_nav {
-    margin-left:100px;
-    padding-top:24px;
+    margin-left:20px;
+    padding-top:34px;
     color:#FFF;
     list-style-type: none;
     float:left;
+    
 
 }
 #footer_nav a {
@@ -324,9 +358,10 @@ h3 {
 #footer_nav ul {
     color:#FFF;
     list-style-type: none;
+    font-weight:300;
 }
 .logo1   {
-    margin-left:400px;
+    margin-left:550px;
     float:left;
     padding-top:30px;
 }
@@ -335,6 +370,7 @@ h3 {
     float:left;
     padding-top:30px;
 }
+
 #landing    {
     min-height:700px;
     width:1100px;
@@ -381,22 +417,27 @@ h3 {
     font-weight:600;
 }
 .results_pool_name_number_description    {
-    font-size:1.5em;
+    font-size:1.6em;
     font-weight:600;
-    line-height: .9em;
-    color:#666666;
+    line-height: 1em;
+    color:#00;
+    width: 750px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display:inline-block;
+    height:27px;
+    vertical-align: text-bottom;
+    
 }
 #number_of_results  {
     width:650px;
-    
     font-size: 1em;
     min-height:20px;
     background-color: ;
-    color:#3d7190;
+    color:#7f7f7f;
     font-weight:600;
     display:block;
-
-
 }
 .matching_your_search   {
 }
