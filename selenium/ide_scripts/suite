@@ -25,6 +25,7 @@
 <tr><td><a href="020_data_load_dates_displayed">Data load dates dipslayed on front page</a></td></tr>
 <tr><td><a href="021_csv_links_exist">CSV links exist in pool detail and vendor detail</a></td></tr>
 <tr><td><a href="022_footer_links">Footer links</a></td></tr>
+<tr><td><a href="023_step_two_before_step_three">Filters disabled on index and enabled on results</a></td></tr>
 </tbody></table>
 </body>
 </html>
