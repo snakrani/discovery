@@ -67,9 +67,6 @@ LayoutManager.render = function(results) {
     indicatorsRow.append(this.renderColumn(results, 'vo', 'A5'));
     indicatorsRow.append(this.renderColumn(results, 'sdb', '27'));
     t.append(indicatorsRow);
-
-    //breadcrumbs
-    $('#vendor_breadcrumb').html(results.name);
     
     //update button value to have proper NAICS code
     $("#vendor_contract_history_title_container .contracts_button_active").text("NAICS " + InputHandler.naicsCode);  
