@@ -154,6 +154,7 @@ h3 {
     min-height:70px;
     background:url(/static/mirage_site/images/filter_bg.jpg);
     padding-top:10px;
+    background-color: #2d5872;
 }
 #vendor_back_button   {
     float:left;
@@ -169,6 +170,7 @@ h3 {
     color:#FFF;
     font-size:1.4em;
     font-weight:500;
+    text-decoration: underline;
 }
 .back_text a:hover {
     color:#FFF;
