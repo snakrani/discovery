@@ -6,6 +6,7 @@ LayoutManager.vendorInit = function(original) {
     // binds events needed only in the vendor context on init and then
     // calls original init function
     Events.subscribe('contractDataLoaded', this.buildContractTable.bind(LayoutManager));
+    Events.subscribe('contractsRefreshed', this.toggleButtons);
 
     original.bind(LayoutManager).call();
 };
@@ -69,17 +70,43 @@ LayoutManager.render = function(results) {
 
     //breadcrumbs
     $('#vendor_breadcrumb').html(results.name);
+    
+    //update button value to have proper NAICS code
+    $("#vendor_contract_history_title_container .contracts_button_active").text("NAICS " + InputHandler.naicsCode);  
 }; 
 
 LayoutManager.renderColumn = function(v, prefix, setasideCode) {
     return $('<td class="' + prefix + '">' + this.vendorIndicator(v, prefix, setasideCode) + '</td>');
 };
 
+LayoutManager.toggleButtons = function(){
+    var active = $("#vendor_contract_history_title_container .contracts_button_active");
+    var inactive = $("#vendor_contract_history_title_container .contracts_button");
+    active.removeClass("contracts_button_active").addClass("contracts_button");
+    inactive.removeClass("contracts_button").addClass("contracts_button_active");
+
+    var a = $("a#csv_link");
+    var csv_link = a.attr('href');
+
+    if (csv_link.indexOf('naics-code') > -1) {
+        //remove naics code if csv link has it, if not add it back in
+        a.attr('href', csv_link.substring(0, csv_link.indexOf("?")));
+    } else {
+        a.attr('href', csv_link + "?naics-code=" + $("#vendor_contract_history_title_container").find("div").first().text().replace("NAICS", '').trim());
+    }
+};
+
 LayoutManager.buildContractTable = function(data) {
-    var table = $("div#ch_table table").clone();
+
+    var headers = $("div#ch_table table tr").first().clone();
+    var table = $("<table></table>");
     var results = data['results'];
     var contract, tr, displayDate, pointOfContact, piid, agencyName, pricingType, obligatedAmount, status;
 
+
+    //append headers from existing html
+    table.append(headers);
+    
     for (contract in results) {
         if (results.hasOwnProperty(contract)) {
             tr = $('<tr></tr>');
