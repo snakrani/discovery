@@ -13,30 +13,24 @@
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/pool/oasissb/1/?naics-code=&amp;setasides=A6&amp;</td>
+	<td>/vendor/786997739/?naics-code=541620&amp;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Ikun</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Ikun</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>css=span.vendor_contract_history_naics</td>
+	<td>css=div.contracts_button_active</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=span.vendor_contract_history_naics</td>
-	<td>All Contracts:</td>
+	<td>css=div.contracts_button_active</td>
+	<td>All Contracts</td>
 </tr>
-
+<tr>
+	<td>assertText</td>
+	<td>css=div.contracts_button</td>
+	<td>NAICS 541620</td>
+</tr>
 </tbody></table>
 </body>
 </html>
