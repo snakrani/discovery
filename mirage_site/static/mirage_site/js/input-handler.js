@@ -9,6 +9,9 @@ var InputHandler = {
         $('#naics-code').change(this.sendCodeChange.bind(InputHandler));
         $('#setaside-filters').change(this.sendFilterChange);
 
+        //should this be bound to the InputHandler? KBD
+        $('#vendor_contract_history_title_container').on('click', 'div.contracts_button', this.changeContracts);
+
         Events.subscribe('loadedWithQS', this.updateFields.bind(InputHandler));
     },
 
@@ -29,7 +32,17 @@ var InputHandler = {
             }
         }
     },
-    
+
+    changeContracts: function(e) {
+        if(e.target.textContent == "All Contracts"){
+            this.naicsCode = 'all';
+        } else {
+            this.naicsCode = $("#vendor_contract_history_title_container").find("div").first().text().replace("NAICS", '').trim();
+        }
+        Events.publish('contractsRefreshed', this.naicsCode);
+        return false;
+    },
+
     sendCodeChange: function(e) {
         this.naicsCode = e.val;
         Events.publish('naicsChanged');
@@ -55,10 +68,6 @@ var InputHandler = {
 
     populateDropDown: function() {
         // can't seem to use cached jqobj, something goes wrong with select2
-        $('#naics-code')
-             .append($("<option></option>")
-             .attr("value", "all")
-             .text("All NAICS codes")); 
         $.getJSON(
             "/api/naics/",
             { format: "json" },
@@ -70,7 +79,7 @@ var InputHandler = {
                          .text(result.short_code + " - " + result.description)); 
                 });
                 if (URLManager.getParameterByName("naics-code")) {
-                    $("#naics-code").select2().select2("val", URLManager.getParameterByName("naics-code"));
+                    $("#naics-code").select2({placeholder:'Select a NAICS code', width : '400px'}).select2("val", URLManager.getParameterByName("naics-code"));
                 }
                 //load data if search criteria is defined in querystring
                 if (URLManager.getParameterByName("naics-code") || URLManager.getParameterByName("setasides")) {
@@ -78,6 +87,6 @@ var InputHandler = {
                 }
             }
         );
-        $('#naics-code').select2({placeholder:'Select a NAICS code', dropdownAutoWidth : true});
+        $('#naics-code').select2({placeholder:'Select a NAICS code', width : '400px'});
     }
 };

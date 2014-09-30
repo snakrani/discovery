@@ -2,18 +2,13 @@
 {% load staticfiles %}
 
 {% block header %}
+<div id="combined_search_pool">
 
-<div id="breadcrumb_container">
-    <div id="breadcrumbs">
-        <ul id="crumbs">
+    <a href="javascript:history.go(-1)"><div id="vendor_back_button">
+        <span class="back_text">Back to search results</span>
+    </div></a>
 
-    <li><a href="/">Home</a></li>
-    <li class="crumb_nonactive">Search Results</a></li>
-    <li class="crumb_nonactive">Pool {{ pool_number }}</li>
-    <li id="vendor_breadcrumb"></li>
-
-    </div><!--end breadcrumbs<!-->
- </div><!--end breadcrumb_container<!-->
+</div><!--end combined_search<!-->
 {% endblock header %}
 
 {% block body %}
@@ -61,11 +56,12 @@
             </div>
             
         		</div><!--end vendor_socioeconomic_table_container<!-->
+
+                <a id="csv_link" href="#"><div id="download_data">download vendor data (CSV)</div></a>
         	</div><!--end vendor_admin_c1<!-->
 
         	<div id="vendor_admin_c2">
         		<div id="vendor_c1_info">
-        			<p class="admin_title">Vendor Admin Information</p>
         			<p class="lh"><span class="admin_label">DUNS:</span> <span class="duns_number admin_data"></span></p>
         			<p class="lh"><span class="admin_label">CAGE Code:</span> <span class="cage_code admin_data"></span></p>
         			<p class="lh"><span class="admin_label">Employees:</span> <span class="number_of_employees admin_data"></span></p>
@@ -74,7 +70,7 @@
         	</div><!--end vendor_admin_c2<!-->
 
         	<div id="vendor_admin_c3">
-        			<p class="admin_title">Vendor Contact Information</p>
+        			<p class="admin_title">OASIS POC</p>
         		    <p class="lh"><span class="admin_label"></span><span class="vendor_address1 admin_data2"></span></p>
         		    <p class="lh"><span class="admin_label"></span><span class="vendor_address2 admin_data2"></span></p>
         			<p class="lh"><span class="admin_label"></span><span class="vendor_poc_name admin_data2"></span></p>
@@ -87,8 +83,11 @@
 
         <div id="vendor_contract_history_container">
         	<div id="vendor_contract_history_title_container">
-        		<span class="vendor_contract_history_text">This vendor's contract history for </span>
-        		<span class="vendor_contract_history_naics"></span>
+        		<span class="vendor_contract_history_text">Showing this vendor's contract history for: </span>
+        		<!-- <span class="vendor_contract_history_naics"></span> -->
+
+                    <a href="#"><div class="contracts_button_active">NAICS 12345</div></a>
+                    <a href="#"><div class="contracts_button">All Contracts</div></a>
         	</div><!--end vendor_contract_history_title_container<!-->
 
         	

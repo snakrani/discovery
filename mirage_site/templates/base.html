@@ -54,12 +54,15 @@
         <div id="container">
 
             <div id="header">
+            <div id="header_link"><a href="http://www.gsa.gov/oasis">OASIS Program Home</a></div>
                 <div id="page_title">
-                    <a href="/"><span class="oasis_title">OASIS Market Research Tool</span></a>
-                    <span class="oasis_subtitle">find vendors by NAICS with the socioeconomic factors you need</span>
+                    <a href="/"><span class="oasis_title">MIRAGE</span></a>
+                    <span class="oasis_subtitle">OASIS Market Research</span>
+
                 </div><!--end page_title<!-->
                 {% block header %}    
                 {% endblock header %}
+
             </div><!--end header<!-->
 
             
@@ -77,11 +80,29 @@
 
         </div><!--end container<!-->
 
+            <div class="cf"></div>
+
+            <div id="footer">
+                <div id="footer_nav">
+                <ul>
+                    <li><a href="http://www.gsa.gov/oasis">OASIS Program Home</a></li>  
+                    <li><a href="https://github.com/18F/mirage"><img src="/static/mirage_site/images/github_icon.png">
+                    Check out our code on GitHub</a></li>                  
+                </ul>
+
+                </div><!--end footer_nav<!-->
+
+
+                <a href="#"><div class="logo1"><img src="/static/mirage_site/images/logo-18f.png"></div></a>
+                <a href="#"><div class="logo2"><img src="/static/mirage_site/images/gsa_logo.jpg"></div></a>
+            </div><!--end footer<!-->
+
         <style>
         /*  #naics-code { width: 100%; }
           #search { margin-left: 0; }
         */
         </style>
+
 
 
         <script type="text/javascript" src="{% static "mirage_site/js/mediator.min.js" %}"></script>

@@ -13,7 +13,7 @@
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/</td>
+	<td>/pool/oasissb/1/?naics-code=541990&amp;</td>
 	<td></td>
 </tr>
 <tr>
@@ -23,7 +23,7 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Search Results</td>
+	<td>css=span.results_pool_name_number_search</td>
 	<td></td>
 </tr>
 <tr>
@@ -34,12 +34,7 @@
 <tr>
 	<td>assertText</td>
 	<td>css=span.matching_your_search</td>
-	<td>* vendors in * pool(s) match your search</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=sam_load</td>
-	<td>SAM data updated:*</td>
+	<td>* vendors match your search</td>
 </tr>
 </tbody></table>
 </body>

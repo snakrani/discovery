@@ -69,14 +69,24 @@ var URLManager = {
             }
         }
 
-        // if its a multiple pool listing page
-        if (numPools || empty) {
-            return qs;
-        }
-        // if its a single pool/vendor listing page
-        else {
-            return '/pool/' + vehicle + '/' + poolNumber + '/' + qs;
-        }
+        
+        // its a single pool/vendor listing page
+        return '/pool/' + vehicle + '/' + poolNumber + '/' + qs;
+    },
+
+    updateResultCSVURL: function(results) {
+        var url = this.getURL(results);
+        //generate csv link (sloppy)
+        var pathArray = url.split('/');
+        pathArray.splice(2, 0, "csv");
+        $("#csv_link").attr("href", pathArray.join('/'));
+    },
+
+    updateVendorCSVURL: function() {
+        var url = document.location.href;
+        var pathArray = url.split('/');
+        pathArray.splice(5, 0, "csv");
+        $("#csv_link").attr("href", pathArray.join('/'));
     },
 
     update: function(results) {

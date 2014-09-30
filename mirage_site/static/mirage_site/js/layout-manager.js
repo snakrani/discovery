@@ -6,46 +6,6 @@ var LayoutManager = {
         Events.subscribe('dataLoaded', this.render.bind(LayoutManager));
         Events.subscribe('contentChanged', this.updateSAM.bind(LayoutManager));
         Events.subscribe('contentChanged', this.updateResultsInfo);
-        Events.subscribe('contentChanged', this.updateBreadcrumb);
-    },
-
-    renderPools: function(results) {
-        var $container = $('#custom_page_content');
-        //clear out content
-        $container.find('.column').remove();
-
-        for (var i in results.results) {
-            var obj = results.results[i];
-            var $poolLink, $poolHeader; 
-            var $div = $('<div class="column post-header"></div>');
-            var qs = URLManager.getQueryString();
-
-            $poolLink = $('<a class="pool_link" href="/pool/' + obj['vehicle'].toLowerCase() + '/' + obj['number'] + '/' + qs + '">Pool' + obj['number'] + '</a>');
-            $poolLink.text();
-           
-            $poolHeader = $('<h2 class="pool_title"></h2>');
-            $poolHeader.append($poolLink);
-            $div.append($poolHeader);
-            
-            $div.append('<p class="post-meta number_of_vendors_in_pool">' + obj['vendors'].length.toString() + ' vendors</p>');
-
-            for (var v in obj['vendors']){
-                $div.append('<p class="vendor_names">' + obj['vendors'][v]['name'] + '</p>');
-            }
-
-            $container.append($div);
-        }
-    },
-
-    updateBreadcrumb: function(results) {
-        //remove old seach results breadcrumb
-        $('#sr').remove();
-
-        // pool pages load with breadcrumbs
-        if ($('#crumbs').children().length <= 1) {
-            //create new breadcrumb for search results
-            $('#crumbs').append('<li id="sr"><a href="#">Search Results</a></li>');
-        }
     },
 
     updateSAM: function(results) {
@@ -73,6 +33,11 @@ var LayoutManager = {
             resultsStr =  totalResults + " vendors in " + totalPools + " pool(s) match your search";
         }
 
+        $(".results_pool_name_number_pool").text("Pool " + results.results[0]['number'] + ": ");
+        $(".results_pool_name_number_description").text(results.results[0]['name']);
+
+        URLManager.updateResultCSVURL(results);
+
         $("#number_of_results span").text(resultsStr);
         $("#your_search").text($("#naics-code option:selected").text());
         $("#your_filters").text(
@@ -80,6 +45,7 @@ var LayoutManager = {
                 return $(this).parent().text();
             }).get().join(', ')
         );
+
         $("#your_search_criteria").show();
     },
 
