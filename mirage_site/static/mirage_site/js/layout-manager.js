@@ -33,8 +33,10 @@ var LayoutManager = {
             resultsStr =  totalResults + " vendors in " + totalPools + " pool(s) match your search";
         }
 
-        $(".results_pool_name_number_pool").text("Pool " + results.results[0]['number'] + ": ");
-        $(".results_pool_name_number_description").text(results.results[0]['name']);
+        if (results.results) {
+            $(".results_pool_name_number_pool").text("Pool " + results.results[0]['number'] + ": ");
+            $(".results_pool_name_number_description").text(results.results[0]['name']);
+        }
 
         URLManager.updateResultCSVURL(results);
 
