@@ -26,15 +26,13 @@ var LayoutManager = {
             totalPools = results.results.length;
         }
 
-        if (totalPools === 1) {
-            resultsStr = totalResults + " vendors match your search";
-        } 
-        else {
-            resultsStr =  totalResults + " vendors in " + totalPools + " pool(s) match your search";
-        }
+        resultsStr = totalResults + " vendors match your search";
 
-        $(".results_pool_name_number_pool").text("Pool " + results.results[0]['number'] + ": ");
-        $(".results_pool_name_number_description").text(results.results[0]['name']);
+
+        if (results.results) {
+            $(".results_pool_name_number_pool").text("Pool " + results.results[0]['number'] + ": ");
+            $(".results_pool_name_number_description").text(results.results[0]['name']);
+        }
 
         URLManager.updateResultCSVURL(results);
 
@@ -65,6 +63,6 @@ var LayoutManager = {
 
     toTitleCase: function(str) {
         // from http://stackoverflow.com/questions/5097875/help-parsing-string-city-state-zip-with-javascript
-        return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+        return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}).replace('U.s.', 'U.S.');
     }
 };
