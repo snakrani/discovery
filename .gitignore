@@ -9,3 +9,4 @@ logs/*.log
 mirage_venv/
 src/
 mvenv/
+.coverage
