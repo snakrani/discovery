@@ -26,12 +26,8 @@ var LayoutManager = {
             totalPools = results.results.length;
         }
 
-        if (totalPools === 1) {
-            resultsStr = totalResults + " vendors match your search";
-        } 
-        else {
-            resultsStr =  totalResults + " vendors in " + totalPools + " pool(s) match your search";
-        }
+        resultsStr = totalResults + " vendors match your search";
+
 
         if (results.results) {
             $(".results_pool_name_number_pool").text("Pool " + results.results[0]['number'] + ": ");
