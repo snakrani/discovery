@@ -13,7 +13,7 @@
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/vendor/786997739/?naics-code=541620&amp;</td>
+	<td>/vendor/786997739/?naics-code=541620</td>
 	<td></td>
 </tr>
 <tr>
@@ -22,19 +22,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>css=div.contracts_button_active</td>
+	<td>assertElementPresent</td>
+	<td>css=[id='naics_contracts_button'][class='contracts_button_active']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=div.contracts_button_active</td>
-	<td>NAICS 541620</td>
+	<td>id=all_contracts_button</td>
+	<td>All Contracts</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=div.contracts_button</td>
-	<td>All Contracts</td>
+	<td>id=naics_contracts_button</td>
+	<td>NAICS 541620</td>
 </tr>
 </tbody></table>
 </body>
