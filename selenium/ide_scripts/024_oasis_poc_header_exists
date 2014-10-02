@@ -3,39 +3,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://localhost:8000/" />
-<title>Show all contracts</title>
+<link rel="selenium.base" href="http://localhost:8000" />
+<title>OASIS POC header exists</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Show all contracts</td></tr>
+<tr><td rowspan="1" colspan="3">OASIS POC header exists</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/vendor/786997739/?naics-code=541620&amp;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>1000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>css=div.contracts_button_active</td>
+	<td>/vendor/786997739/?naics-code=541618&amp;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=div.contracts_button_active</td>
-	<td>All Contracts</td>
+	<td>css=p.admin_title</td>
+	<td>OASIS POC</td>
 </tr>
-<tr>
-	<td>assertText</td>
-	<td>css=div.contracts_button</td>
-	<td>NAICS 541620</td>
-</tr>
+
 </tbody></table>
 </body>
 </html>

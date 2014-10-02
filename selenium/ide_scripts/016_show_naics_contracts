@@ -13,25 +13,29 @@
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/vendor/182935002/?naics-code=541330&amp;</td>
+	<td>/vendor/786997739/?naics-code=541620&amp;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>pause</td>
-	<td>2000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>css=span.vendor_contract_history_naics</td>
+	<td>css=div.contracts_button_active</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=span.vendor_contract_history_naics</td>
-	<td>NAICS 541330:</td>
+	<td>css=div.contracts_button_active</td>
+	<td>NAICS 541620</td>
 </tr>
-
+<tr>
+	<td>assertText</td>
+	<td>css=div.contracts_button</td>
+	<td>All Contracts</td>
+</tr>
 </tbody></table>
 </body>
 </html>
