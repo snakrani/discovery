@@ -10,7 +10,7 @@ var InputHandler = {
         $('#setaside-filters').change(this.sendFilterChange);
 
         //should this be bound to the InputHandler? KBD
-        $('#vendor_contract_history_title_container').on('click', 'div.contracts_button', this.changeContracts);
+        $('#vendor_contract_history_title_container').on('click', 'div.contracts_button', this.sendContractsChange);
 
         Events.subscribe('loadedWithQS', this.updateFields.bind(InputHandler));
     },
@@ -33,13 +33,15 @@ var InputHandler = {
         }
     },
 
-    changeContracts: function(e) {
+    sendContractsChange: function(e) {
+        var listType = 'naics';
         if(e.target.textContent == "All Contracts"){
             this.naicsCode = 'all';
+            listType = 'all';
         } else {
             this.naicsCode = $("#vendor_contract_history_title_container").find("div").first().text().replace("NAICS", '').trim();
         }
-        Events.publish('contractsRefreshed', this.naicsCode);
+        Events.publish('contractsChanged', this.naicsCode, listType);
         return false;
     },
 
