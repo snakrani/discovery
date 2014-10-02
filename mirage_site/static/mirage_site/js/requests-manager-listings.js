@@ -10,16 +10,18 @@ RequestsManager.load = function() {
     $.getJSON(url, queryData, function(data) {
         var resultsObj = {}; 
 
+        resultsObj.poolNumber = data['pool']['number'];
+        resultsObj.poolName = data['pool']['name'];
+        resultsObj.samLoad = data.sam_load;
+        resultsObj.total = 0; //overwritten below if there are any
+
         if (data.num_results !== 0) {
-            resultsObj.vehicle = data['results'][0]['vehicle'].toLowerCase();
+            resultsObj.vehicle = data['pool']['vehicle'].toLowerCase();
             resultsObj.numPools = data.results.length;
-            resultsObj.poolNumber = data['results'][0]['number'];
-            resultsObj.samLoad = data.sam_load;
             resultsObj.total = data.num_results;
             resultsObj.results = data.results;
             resultsObj['naics-code'] = queryData['naics-code'];
-        }
-
+        }         
         Events.publish('dataLoaded', resultsObj);
     });
 };

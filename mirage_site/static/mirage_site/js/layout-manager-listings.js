@@ -26,12 +26,11 @@ LayoutManager.render = function(results) {
 
 LayoutManager.renderTable = function(results) {
     var $t = $('#pool_vendors');
-    var i, len = results.results[0].vendors.length - 1;
-
+    var i, len = results['total'] - 1;
     $t.find('tr').not(':first').remove();
 
     for (i = 0; i <= len; i++) {
-        $t.append(this.renderRow(results.results[0].vendors[i]));
+        $t.append(this.renderRow(results.results[i]));
     }
 
     $('#pool_table').show();

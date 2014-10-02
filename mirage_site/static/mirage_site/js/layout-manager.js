@@ -17,7 +17,7 @@ var LayoutManager = {
 
     updateResultsInfo: function(results) {
         var totalResults, totalPools, resultsStr;
-        if ($.isEmptyObject(results)) {
+        if (results['total'] == 0) {
             totalResults = 0;
             totalPools = 0;
         }
@@ -33,9 +33,9 @@ var LayoutManager = {
             resultsStr =  totalResults + " vendors in " + totalPools + " pool(s) match your search";
         }
 
-        $(".results_pool_name_number_pool").text("Pool " + results.results[0]['number'] + ": ");
-        $(".results_pool_name_number_description").text(results.results[0]['name']);
-
+        console.log(results);
+        $(".results_pool_name_number_pool").text("Pool " + results.poolNumber + ": ");
+        $(".results_pool_name_number_description").text(results.poolName);
         URLManager.updateResultCSVURL(results);
 
         $("#number_of_results span").text(resultsStr);

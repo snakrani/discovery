@@ -26,7 +26,7 @@ class FPDSLoad(models.Model):
 
 class FPDSContract(models.Model):
     
-    piid = models.CharField(max_length=128, db_index=True)
+    piid = models.CharField(max_length=128)
     date_signed = models.DateTimeField(null=True)
     completion_date = models.DateTimeField(null=True)
     vendor = models.ForeignKey(Vendor)
