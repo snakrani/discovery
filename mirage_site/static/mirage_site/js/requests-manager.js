@@ -11,7 +11,7 @@ var RequestsManager = {
     buildRequestQuery: function() {
         var setasides = InputHandler.getSetasides();
         var naicsCode = InputHandler.getNAICSCode() || URLManager.getParameterByName('naics-code');
-        var queryData = {'group':'pool'};
+        var queryData = {};
         var pool = this.getPool();
 
         if (typeof naicsCode !== 'undefined') {

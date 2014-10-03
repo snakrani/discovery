@@ -13,7 +13,7 @@
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/pool/oasissb/1/?naics-code=&amp;setasides=A5&amp;pool=1_SB</td>
+	<td>/pool/oasissb/1/?naics-code=541330&amp;setasides=A5&amp;pool=1_SB</td>
 	<td></td>
 </tr>
 <tr>
@@ -63,7 +63,7 @@
 </tr>
 <tr>
 	<td>assertTable</td>
-	<td>id=pool_vendors.3.4</td>
+	<td>id=pool_vendors.3.7</td>
 	<td>X</td>
 </tr>
 </tbody></table>
