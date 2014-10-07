@@ -6,7 +6,6 @@ LayoutManager.vendorInit = function(original) {
     // binds events needed only in the vendor context on init and then
     // calls original init function
     Events.subscribe('contractDataLoaded', this.buildContractTable.bind(LayoutManager));
-    Events.subscribe('contractsRefreshed', this.toggleButtons);
 
     original.bind(LayoutManager).call();
 };
@@ -69,18 +68,16 @@ LayoutManager.render = function(results) {
     t.append(indicatorsRow);
     
     //update button value to have proper NAICS code
-    $("#vendor_contract_history_title_container .contracts_button_active").text("NAICS " + InputHandler.naicsCode);  
+    $("#vendor_contract_history_title_container #naics_contracts_button").text("NAICS " + InputHandler.naicsCode);  
 }; 
 
 LayoutManager.renderColumn = function(v, prefix, setasideCode) {
     return $('<td class="' + prefix + '">' + this.vendorIndicator(v, prefix, setasideCode) + '</td>');
 };
 
-LayoutManager.toggleButtons = function(){
-    var active = $("#vendor_contract_history_title_container .contracts_button_active");
-    var inactive = $("#vendor_contract_history_title_container .contracts_button");
-    active.removeClass("contracts_button_active").addClass("contracts_button");
-    inactive.removeClass("contracts_button").addClass("contracts_button_active");
+LayoutManager.setButtonAndCSV = function(listType){
+    $("#vendor_contract_history_title_container .contracts_button_active").attr('class', 'contracts_button');
+    $("#" + listType + "_contracts_button").attr('class', 'contracts_button_active');
 
     var a = $("a#csv_link");
     var csv_link = a.attr('href');
@@ -93,13 +90,13 @@ LayoutManager.toggleButtons = function(){
     }
 };
 
-LayoutManager.buildContractTable = function(data) {
-
+LayoutManager.buildContractTable = function(data, listType) {
     var headers = $("div#ch_table table tr").first().clone();
     var table = $("<table></table>");
     var results = data['results'];
     var contract, tr, displayDate, pointOfContact, piid, agencyName, pricingType, obligatedAmount, status;
 
+    this.setButtonAndCSV(listType);
 
     //append headers from existing html
     table.append(headers);
