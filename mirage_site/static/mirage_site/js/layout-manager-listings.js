@@ -26,20 +26,21 @@ LayoutManager.render = function(results) {
 
 LayoutManager.renderTable = function(results) {
     var $t = $('#pool_vendors');
+    var qs = URLManager.getQueryString();
+    console.log(qs);
     var i, len = results['total'] - 1;
     $t.find('tr').not(':first').remove();
 
     for (i = 0; i <= len; i++) {
-        $t.append(this.renderRow(results.results[i]));
+        $t.append(this.renderRow(results.results[i], qs));
     }
 
     $('#pool_table').show();
     Events.publish('contentChanged', results);
 };
 
-LayoutManager.renderRow = function(v) {
+LayoutManager.renderRow = function(v, qs) {
     var location_col;
-    var qs = URLManager.getQueryString();
     var $vendorRow = $('<tr></tr>');
     var locationStr = (v.sam_citystate ? this.cleanLocation(v.sam_citystate) : ' ');
     var name_col = $('<td class="vendor_name"></td>');
