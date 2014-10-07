@@ -6,14 +6,16 @@ var URLManager = {
     init: function() {
         var naics = this.getParameterByName('naics-code');
         var setasides = this.getParameterByName('setasides');
+        var vehicle = this.getParameterByName('vehicle');
         var vendor = URLManager.isVendorPage();
 
         // this + LayoutManager.render() are acting as a kind of router. should probably be rethought. [TS]
-        if (naics || setasides || vendor) {
-            Events.publish('loadedWithQS', {'naics-code': naics, 'setasides': setasides});
+        if (naics || setasides || vendor || vehicle) {
+            Events.publish('loadedWithQS', {'naics-code': naics, 'setasides': setasides, 'vehicle': vehicle});
         }
 
         Events.subscribe('contentChanged', this.update.bind(URLManager));
+        Events.subscribe('vehicleChanged', this.update.bind(URLManager));
         Events.subscribe('goToPoolPage', this.loadPoolPage.bind(URLManager));
     },
 
@@ -27,8 +29,10 @@ var URLManager = {
         delete queryObject.pool;
 
         // the API wants "naics", the query string should have "naics-code"
-        queryObject['naics-code'] = queryObject.naics;
-        delete queryObject.naics;
+        if(typeof queryObject['naics-code'] !== undefined ) {
+            queryObject['naics-code'] = queryObject.naics;
+            delete queryObject.naics;
+        }
 
         for (k in queryObject) {
             qs += k + '=' + queryObject[k] + '&';
@@ -46,32 +50,10 @@ var URLManager = {
         // if the path bits we want aren't in the results object...
         if ($.isEmptyObject(results)) {
             // get them from the current url...
-            pathArray = window.location.href.split('/').removeEmpties();
-            if (pathArray.length > 3) {
-                vehicle = pathArray[3];
-                poolNumber = pathArray[4];
-            }
-            // or this is not a vendor listing/single pool listing page
-            else {
-                empty = true;
-            }
-        }
-        else {
-            vehicle = results.vehicle;
-            // number of the single pool, if this is a single pool/vendor list page
-            if (typeof results.poolNumber !== 'undefined') {
-                poolNumber = results.poolNumber;
-            }
-
-            // if this is a multiple pool listing page
-            if (typeof results.numPools !== 'undefined') {
-                numPools = results.numPools;
-            }
+            empty = true;
         }
 
-        
-        // its a single pool/vendor listing page
-        return '/pool/' + vehicle + '/' + poolNumber + '/' + qs;
+        return '/results' + qs;
     },
 
     updateResultCSVURL: function(results) {
