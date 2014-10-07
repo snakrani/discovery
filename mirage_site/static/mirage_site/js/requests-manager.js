@@ -30,7 +30,6 @@ var RequestsManager = {
         if (vehicle !== null) {
             queryData['vehicle'] = vehicle;
         }
-        //console.log(queryData);
         return queryData;
     },
 

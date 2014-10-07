@@ -27,7 +27,6 @@ LayoutManager.render = function(results) {
 LayoutManager.renderTable = function(results) {
     var $t = $('#pool_vendors');
     var qs = URLManager.getQueryString();
-    console.log(qs);
     var i, len = results['total'] - 1;
     $t.find('tr').not(':first').remove();
 
