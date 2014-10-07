@@ -184,31 +184,12 @@ h3 {
     background:url(/static/mirage_site/images/1.png);
     background-repeat: no-repeat;
     background-position: 0px 5px;
+
 }
 .vehicle_select_style  {
-    color:#999;
-    padding: 0px 0px 0px 8px;
-    display: block;
-    height: 26px;
-    padding: 0 0 0 8px;
-    overflow: hidden;
-    position: relative;
-    border: 1px solid #aaa;
-    white-space: nowrap;
-    line-height: 26px;
-    text-decoration: none;
-    border-radius: 4px;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
-    background-clip: padding-box;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    background-color: #fff;
+    color:#bfbfbf;
+    height:26px;
+    font-family: 'Open Sans', sans-serif;
 }
 #search {
     float:left;
@@ -237,8 +218,6 @@ h3 {
     padding-right:10px;
 }
 #filter_container input  {
-    width: 13px;
-    height: 13px;
     padding: 0;
     margin:0;
     vertical-align: middle;
@@ -313,7 +292,7 @@ h3 {
     margin-top:20px;
 }
 .data_source_description    {
-    color:#999999;
+    color:#6b6b6b;
     display:block;
     
 }
@@ -422,14 +401,6 @@ h3 {
     font-weight:600;
     line-height: 1em;
     color:#00;
-    width: 750px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display:inline-block;
-    height:27px;
-    vertical-align: text-bottom;
-    
 }
 #number_of_results  {
     width:650px;
@@ -738,6 +709,7 @@ a.pool_link {
     line-height: 30px;
     color: #595959;
     font-weight: bold;
+    max-width:140px;
 }
 .contracts_button {
     display: inline-block;
@@ -755,6 +727,7 @@ a.pool_link {
     line-height: 30px;
     color: #bfbfbf;
     font-weight: bold;
+       max-width:140px;
     
 }
 .contracts_button:hover {

@@ -36,14 +36,15 @@
             <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-core-min.css">
         <!--<![endif]-->
         
-        <!--[if lte IE 8]>
-            <link rel="stylesheet" href="{% static "mirage_site/css/layouts/blog-old-ie.css" %}">
-        <![endif]-->
+
         
-        <!--[if gt IE 8]><!-->
+        <!--[if gte IE 7]><!-->
             <link rel="stylesheet" href="{% static "mirage_site/css/layouts/blog.css" %}">
         <!--<![endif]-->
 
+        <!--[if lte IE 8]>
+            <link rel="stylesheet" href="{% static "mirage_site/css/layouts/blog-old-ie.css" %}">
+        <![endif]-->
 
         <!--[if lt IE 9]>
             <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.js"></script>
