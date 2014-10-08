@@ -187,7 +187,7 @@ class FunctionalTests(unittest.TestCase):
         #make sure naics is enabled
         self.assertTrue(driver.find_element_by_id("placeholder").is_enabled())
         #make sure filters are enabled
-        self.assertTrue(driver.find_element_by_css_selector(".se_filter").is_enabled())        #make sure naics dropdown is editable
+        self.assertTrue(driver.find_element_by_css_selector(".se_filter").is_enabled())        
 
     def test_poc_header_exists(self):
         driver = self.driver
