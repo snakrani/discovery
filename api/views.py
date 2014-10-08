@@ -23,7 +23,12 @@ class ListVendors(APIView):
 
         try: 
             naics =  Naics.objects.get(short_code=request.QUERY_PARAMS.get('naics'))
-            pool = Pool.objects.get(naics=naics)
+            vehicle = request.QUERY_PARAMS.get('vehicle', None)
+            if vehicle:
+                pool = [Pool.objects.get(naics=naics, vehicle=vehicle.upper()), ]
+            else:
+                pool = Pool.objects.filter(naics=naics)
+
             setasides = request.QUERY_PARAMS.get('setasides', None)
             if setasides:
                 setasides = setasides.split(',')
@@ -43,7 +48,7 @@ class ListVendors(APIView):
         #except goes here
 
     def get_queryset(self, pool, setasides):
-        vendors = Vendor.objects.filter(pools=pool)
+        vendors = Vendor.objects.filter(pools__in=pool)
         if setasides:
             for sa in SetAside.objects.filter(code__in=setasides):
                 vendors = vendors.filter(setasides=sa)
@@ -97,7 +102,7 @@ class ListContracts(APIView):
 
         vendor = Vendor.objects.get(duns=duns)
         contracts = Contract.objects.filter(vendor=vendor).order_by('-date_signed')
-
+        
         if naics:
             #contracts = contracts.filter(NAICS=Naics.objects.filter(code=naics)[0])
             contracts = contracts.filter(NAICS=naics)  #change to above when naics loaded right

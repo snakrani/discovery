@@ -95,7 +95,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 #project specific
-VEHICLES = ('oasissb', )
+VEHICLES = ('oasissb', 'oasis')
 
 SAM_API_URL = "https://api.data.gov/sam/v1/registrations/"
 USASPENDING_API_URL = "http://www.usaspending.gov/fpds/fpds.php"

@@ -8,7 +8,7 @@ var InputHandler = {
         // event bindings
         $('#naics-code').change(this.sendCodeChange.bind(InputHandler));
         $('#setaside-filters').change(this.sendFilterChange);
-
+        $('form#vehicle-select select').change(this.sendVehicleChange.bind(InputHandler));
         //should this be bound to the InputHandler? KBD
         $('#vendor_contract_history_title_container').on('click', 'div.contracts_button', this.sendContractsChange);
 
@@ -31,6 +31,11 @@ var InputHandler = {
                 $('input[value=' + setasides[i] + ']').attr('checked', 'checked');
             }
         }
+        
+        if(obj.vehicle){
+            this.vehicle = obj['vehicle'];
+            $('form#vehicle-select select').val(obj['vehicle']);
+        }
     },
 
     sendContractsChange: function(e) {
@@ -45,6 +50,11 @@ var InputHandler = {
         return false;
     },
 
+    sendVehicleChange: function(e) {
+        this.vehicle = $('form#vehicle-select select').val(); //to get the default
+        Events.publish('vehicleChanged', {'vehicle': this.vehicle, 'vehicleOnly': true});       
+    },
+
     sendCodeChange: function(e) {
         this.naicsCode = e.val;
         Events.publish('naicsChanged');
@@ -52,6 +62,10 @@ var InputHandler = {
 
     sendFilterChange: function(e) {
         Events.publish('filtersChanged');
+    },
+
+    getVehicle: function() {
+        return this.vehicle;
     },
 
     getNAICSCode: function() {

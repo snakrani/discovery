@@ -1,4 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
+from optparse import make_option
 from django.core.management import call_command
 from django.conf import settings
 from pyfpds import Contracts
@@ -84,9 +85,9 @@ def get_psc(award):
     return award['productOrServiceInformation']['productOrServiceCode']['#text']
 
 
-def last_load():
+def last_load(load_all=False):
     load = FPDSLoad.objects.all().order_by('-load_date')
-    if len(load) > 0:
+    if len(load) > 0 and not load_all:
         old_load = load[0].load_date
         load[0].load_date = datetime.now()
         load[0].save()
@@ -100,16 +101,22 @@ def last_load():
 class Command(BaseCommand):
     
     contracts = Contracts()
-   
+  
+    option_list = BaseCommand.option_list + (make_option('--load_all', action='store_true', dest='load_all', default=False, help="Force load of all contracts"), )
+
     def date_format(self, date1, date2):
         return "[{0},{1}]".format(date1.strftime("%Y/%m/%d"), date2.strftime("%Y/%m/%d"))
 
-    def handle(self, *args, **kwargs):
+    def handle(self, *args, **options):
    
-        load_from = last_load()
+        if 'load_all' in options:
+            load_from = last_load(options['load_all'])
+
+        else:
+            load_from = last_load()
+        
         load_to = datetime.now()
-
-
+        
         for v in Vendor.objects.all():
 
             by_piid = {} 
