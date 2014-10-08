@@ -42,9 +42,8 @@ var URLManager = {
     },
 
     getURL: function(results) {
-        var qs = this.getQueryString();
-        var vehicle, poolNumber, pathArray, numPools, empty;
-
+        var q = RequestsManager.buildRequestQuery();
+        var qs = this.getQueryString(results);
         // an area that needs rethinking [TS]
 
         // if the path bits we want aren't in the results object...
@@ -52,16 +51,17 @@ var URLManager = {
             // get them from the current url...
             empty = true;
         }
-
-        return '/results' + qs;
+        if (q['vehicle'] != '' && q['naics'] == ''){
+            return '/' + qs;
+        } else {
+            return '/results' + qs;
+        }
     },
 
     updateResultCSVURL: function(results) {
-        var url = this.getURL(results);
+        var qs = this.getQueryString(results);
         //generate csv link (sloppy)
-        var pathArray = url.split('/');
-        pathArray.splice(2, 0, "csv");
-        $("#csv_link").attr("href", pathArray.join('/'));
+        $("#csv_link").attr("href", "/results/csv/" + qs );
     },
 
     updateVendorCSVURL: function() {

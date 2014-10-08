@@ -144,7 +144,7 @@ class FunctionalTests(unittest.TestCase):
         #load search results
         driver.get(self.base_url + '/results?vehicle=oasissb&naics-code=541620&')
         #make sure csv link exists and is correct
-        self.assertRegexpMatches(driver.find_element_by_link_text("download data (CSV)").get_attribute("href"), r"^[\s\S]*/pool/csv[\s\S]*$")
+        self.assertRegexpMatches(driver.find_element_by_link_text("download data (CSV)").get_attribute("href"), r"^[\s\S]*/results/csv[\s\S]*$")
         #load vendor detail page
         driver.get(self.base_url + "/vendor/786997739/?naics-code=541620&")
         #make sure csv link exists and is correct
@@ -172,7 +172,7 @@ class FunctionalTests(unittest.TestCase):
     def test_vehicle_naics_filter_select_order_ensured(self):
         driver = self.driver
         #open landing page
-        driver.get(self.base_url + '/')
+        driver.get(self.base_url + '/?vehicle=oasissb')
         #if there's only one vehicle, make sure naics is enabled
         self.assertTrue(driver.find_element_by_id("naics-code").is_enabled())
         #make sure naics is enabled

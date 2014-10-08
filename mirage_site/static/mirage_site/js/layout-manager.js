@@ -6,6 +6,12 @@ var LayoutManager = {
         Events.subscribe('dataLoaded', this.render.bind(LayoutManager));
         Events.subscribe('contentChanged', this.updateSAM.bind(LayoutManager));
         Events.subscribe('contentChanged', this.updateResultsInfo);
+        Events.subscribe('vehicleChanged', this.enableNaics);
+    },
+    
+    enableNaics: function() {
+        $("div#search span.select_text").css('color', 'white');
+        $("div#search select").attr("disabled", false);
     },
 
     updateSAM: function(results) {
