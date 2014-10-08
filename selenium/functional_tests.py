@@ -13,11 +13,14 @@ class FunctionalTests(unittest.TestCase):
         self.driver = webdriver.Firefox()
 
     def test_titles_are_correct(self):
-        #checks document title and title and subtitle of page
         driver = self.driver
+        #open landing page
         driver.get(self.base_url + '/')
+        #make sure title of landing page is Mirage
         self.assertEqual('Mirage', driver.title)
+        #make sure title of page is MIRAGE
         self.assertEqual('MIRAGE', driver.find_element_by_css_selector("span.oasis_title").text)
+        #make sure subtitle of page is OASIS Market Research
         self.assertEqual('OASIS Market Research', driver.find_element_by_css_selector("span.oasis_subtitle").text)
 
     def test_veteran_owned_search(self):
@@ -125,46 +128,73 @@ class FunctionalTests(unittest.TestCase):
         #make sure format of result count is not '* vendors in * pool(s) match your search'
         self.assertNotRegexpMatches(driver.find_element_by_css_selector("span.matching_your_search").text, r"^[\s\S]*in [\s\S]* pool\(s\)[\s\S]*$")
 
-
     def test_data_load_dates_displayed_on_landing_page(self):
         driver = self.driver
+        #open landing page
+        driver.get(self.base_url + '/')
         #make sure SAM load date is displayed and not 12/31/69
+        self.assertRegexpMatches(driver.find_element_by_id("data_source_date_sam").text, r"^[\d]*/[\d]*/[\d]*$")
+        self.assertNotEqual(driver.find_element_by_id("data_source_date_sam").text, "12/31/69")
         #make sure FPDS load date is displayed and not 12/31/69
+        self.assertRegexpMatches(driver.find_element_by_id("data_source_date_fpds").text, r"^[\d]*/[\d]*/[\d]*$")
+        self.assertNotEqual(driver.find_element_by_id("data_source_date_sam").text, "12/31/69")
 
     def test_csv_links_exist(self):
         driver = self.driver
         #load search results
+        driver.get(self.base_url + '/results?vehicle=oasissb&naics-code=541620&')
         #make sure csv link exists and is correct
+        self.assertRegexpMatches(driver.find_element_by_link_text("download data (CSV)").get_attribute("href"), r"^[\s\S]*/pool/csv[\s\S]*$")
         #load vendor detail page
+        driver.get(self.base_url + "/vendor/786997739/?naics-code=541620&")
         #make sure csv link exists and is correct
+        self.assertRegexpMatches(driver.find_element_by_link_text("download vendor data (CSV)").get_attribute("href"), r"^[\s\S]*/vendor/[\s\S]*/csv[\s\S]*$")
 
     def test_footer_links(self):
         driver = self.driver
-        #load landing page
+        #open landing page
+        driver.get(self.base_url + '/')
         #check OASIS program home link text and href
+        self.assertEqual(driver.find_element_by_link_text("OASIS Program Home").get_attribute("href"), "http://www.gsa.gov/oasis")
         #check GitHub link text and href
+        self.assertEqual(driver.find_element_by_link_text("Check out our code on GitHub").get_attribute("href"), "https://github.com/18F/mirage")
         #load search results
         #check OASIS program home link text and href
+        self.assertEqual(driver.find_element_by_link_text("OASIS Program Home").get_attribute("href"), "http://www.gsa.gov/oasis")
         #check GitHub link text and href
+        self.assertEqual(driver.find_element_by_link_text("Check out our code on GitHub").get_attribute("href"), "https://github.com/18F/mirage")
         #load vendor detail page
         #check OASIS program home link text and href
+        self.assertEqual(driver.find_element_by_link_text("OASIS Program Home").get_attribute("href"), "http://www.gsa.gov/oasis")
         #check GitHub link text and href
+        self.assertEqual(driver.find_element_by_link_text("Check out our code on GitHub").get_attribute("href"), "https://github.com/18F/mirage")
 
     def test_vehicle_naics_filter_select_order_ensured(self):
         driver = self.driver
         #open landing page
-        #if there's only one vehicle, make sure naics is editable
-        #if there's more than one vehicle, make sure naics is not editable
-        #make sure filters are not editable
+        driver.get(self.base_url + '/')
+        #if there's only one vehicle, make sure naics is enabled
+        self.assertTrue(driver.find_element_by_id("naics-code").is_enabled())
+        #make sure naics is enabled
+        self.assertTrue(driver.find_element_by_id("placeholder").is_enabled())
+        #make sure filters are not enabled
+        self.assertFalse(driver.find_element_by_css_selector(".se_filter").is_enabled())
+
         #open search results
-        #make sure vehicle select is editable
-        #make sure naics dropdown is editable
-        #make sure filters are editable
+        driver.get(self.base_url + '/results?vehicle=oasissb&naics-code=541618&')
+        #make sure vehicle select is enabled
+        self.assertTrue(driver.find_element_by_id("naics-code").is_enabled())
+        #make sure naics is enabled
+        self.assertTrue(driver.find_element_by_id("placeholder").is_enabled())
+        #make sure filters are enabled
+        self.assertTrue(driver.find_element_by_css_selector(".se_filter").is_enabled())        #make sure naics dropdown is editable
 
     def test_poc_header_exists(self):
         driver = self.driver
         #open vendor detail page
+        driver.get(self.base_url + '/vendor/786997739/?naics-code=541618&')
         #make sure title of point of contact section in header is 'OASIS POC'
+        self.assertEqual(driver.find_element_by_css_selector('p.admin_title').text, 'OASIS POC')
 
     def tearDown(self):
         self.driver.quit()
