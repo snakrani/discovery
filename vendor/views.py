@@ -14,11 +14,12 @@ def pool_csv(request):
     setasides_all = SetAside.objects.all().order_by('far_order')
     filter_text = []
     #naics
-    if 'naics-code' in request.GET:
-        naics = request.GET['naics-code']
-        naics_obj = Naics.objects.get(short_code=naics)
-        vendors = vendors.filter(pools__naics=naics_obj)
-        filter_text.append("NAICS code {0}".format(naics))
+    naics = Naics.objects.get(short_code=request.GET['naics-code'])
+    vehicle = request.GET['vehicle'].upper()
+    pool = Pool.objects.get(naics=naics, vehicle=vehicle) 
+    vendors = vendors.filter(pools=pool)
+    filter_text.append("NAICS code {0}".format(naics))
+    
     #setasides
     if 'setasides' in request.GET:
         setasides = request.GET.getlist('setasides')[0].split(',')
@@ -28,6 +29,7 @@ def pool_csv(request):
 
         filter_text.append("Set Aside filters: {0}".format(", ".join(setasides)))
 
+    writer.writerow(("Vehicle: " + vehicle,))
     writer.writerow(("Search Results: {0} Vendors".format(len(vendors)),))
     writer.writerow(filter_text)
 
