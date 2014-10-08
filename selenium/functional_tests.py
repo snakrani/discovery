@@ -23,7 +23,7 @@ class FunctionalTests(unittest.TestCase):
     def test_veteran_owned_search(self):
         #on search results page, select veteran owned filter
         driver = self.driver
-        driver.get(self.base_url + "/pool/oasissb/1/?naics-code=541990&")
+        driver.get(self.base_url + "/results?vehicle=oasissb&naics-code=541990&")
         driver.find_element_by_id("vet").click()
         element = WebDriverWait(driver, 3).until(
             EC.text_to_be_present_in_element((By.ID, "your_filters"), 'Veteran Owned')
@@ -34,13 +34,13 @@ class FunctionalTests(unittest.TestCase):
     def test_zero_results_indicator_on_search(self):
         #perform a search with zero expected results and make sure that it is clear that there are no results
         driver = self.driver
-        driver.get(self.base_url + "/pool/oasissb/1/?setasides=A6,A2,XX&naics-code=541990&")
+        driver.get(self.base_url + "/results?vehicle=oasissb&setasides=A6,A2,XX&naics-code=541990&")
         self.assertEqual("0 vendors match your search", driver.find_element_by_css_selector("span.matching_your_search").text)
 
     def test_socioeconomic_indicators_in_search_results(self):
         driver = self.driver
         #on search results page for a veteran owned search
-        driver.get(self.base_url + "/pool/oasissb/1/?setasides=A5&naics-code=541330&")
+        driver.get(self.base_url + "/results?vehicle=oasissb&setasides=A5&naics-code=541330&")
         #make sure veteran owned filter is selected
         self.assertEqual("A5", driver.find_element_by_id("vet").get_attribute("value"))
         #make sure headers for each socioeconomic indicator exist
@@ -58,14 +58,14 @@ class FunctionalTests(unittest.TestCase):
     def test_result_count_on_search_results(self):
         driver = self.driver
         #load search results
-        driver.get(self.base_url + "/pool/oasissb/1/?naics-code=541330&setasides=A5&pool=1_SB")
+        driver.get(self.base_url + "/results?vehicle=oasissb&naics-code=541330&setasides=A5&pool=1_SB")
         #make sure number of search results are listed
         self.assertEqual("11 vendors match your search", driver.find_element_by_css_selector("span.matching_your_search").text)
 
     def test_search_criteria_on_search_results(self):
         driver = self.driver
         #load search results
-        driver.get(self.base_url + "/pool/oasissb/1/?naics-code=541330&setasides=A5&pool=1_SB")
+        driver.get(self.base_url + "/results?vehicle=oasissb&naics-code=541330&setasides=A5&pool=1_SB")
         #make sure selected naics is described above search results
         element = WebDriverWait(driver, 3).until(
             EC.text_to_be_present_in_element((By.ID, "your_filters"), 'Veteran Owned')
@@ -77,14 +77,14 @@ class FunctionalTests(unittest.TestCase):
     def test_vendor_count_in_search_results(self):
         driver = self.driver
         #load search results
-        driver.get(self.base_url + "/pool/oasissb/1/?naics-code=541330&setasides=A5&")
+        driver.get(self.base_url + "/results?vehicle=oasissb&naics-code=541330&setasides=A5&")
         #make sure a count of vendors matching search is listed
         self.assertRegexpMatches(driver.find_element_by_css_selector("span.matching_your_search").text, "\d+ vendors match your search")
 
     def test_8a_and_hubzone_added(self):
         driver = self.driver
         #load search results
-        driver.get(self.base_url + "/pool/oasissb/1/?setasides=A6&naics-code=541620&")
+        driver.get(self.base_url + "/results?vehicle=oasissb&setasides=A6&naics-code=541620&")
         #select 8(a) filter
         
         #make sure first few results are for 8(a) vendors
@@ -119,7 +119,7 @@ class FunctionalTests(unittest.TestCase):
     def test_number_of_pools_not_displayed_in_search_results(self):
         driver = self.driver
         #open search results
-        driver.get(self.base_url + "/pool/oasissb/1/?setasides=A6&naics-code=541330&")
+        driver.get(self.base_url + "/results?vehicle=oasissb&setasides=A6&naics-code=541330&")
         #make sure format of result count is '* vendors match your search'
         self.assertRegexpMatches(driver.find_element_by_css_selector("span.matching_your_search").text, r"^[\s\S]* vendors match your search$")
         #make sure format of result count is not '* vendors in * pool(s) match your search'
