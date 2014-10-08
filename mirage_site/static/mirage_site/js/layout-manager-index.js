@@ -2,7 +2,8 @@
 'use strict';
 LayoutManager.indexInit = function(original) {
     Events.subscribe('metaDataLoaded', this.renderMetaData);
-    original.bind(LayoutManager).call();
+    Events.subscribe('loadedWithQS', this.enableNaics);
+    original.bind(LayoutManager).call()
     this.disabledColor = '#999999';
     this.disableNaics();
     this.disableFilters();
