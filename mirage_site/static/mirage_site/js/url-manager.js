@@ -57,11 +57,9 @@ var URLManager = {
     },
 
     updateResultCSVURL: function(results) {
-        var url = this.getURL(results);
+        var qs = this.getQueryString(results);
         //generate csv link (sloppy)
-        var pathArray = url.split('/');
-        pathArray.splice(2, 0, "csv");
-        $("#csv_link").attr("href", pathArray.join('/'));
+        $("#csv_link").attr("href", "/results/csv/" + qs );
     },
 
     updateVendorCSVURL: function() {
