@@ -32,16 +32,15 @@ class VendorsTest(TestCase):
 
     def test_request_no_params(self):
         resp = self.c.get(self.path, {'format': 'json'})
-        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.status_code, 400)
 
     def test_request_valid_naics(self):
         resp = self.c.get(self.path, {'format': 'json', 'naics': '541330'})
         self.assertEqual(resp.status_code, 200)
 
-    def test_request_invalid_naics_returns_empty_list(self):
+    def test_request_invalid_naics_returns_400(self):
         resp = self.c.get(self.path, {'format': 'json', 'naics': 'dlasfjosdf'})
-        self.assertEqual(resp.status_code, 200)
-        self.assertEqual(resp.data['num_results'], 0)
+        self.assertEqual(resp.status_code, 400)
     
     def test_request_num_results(self):
         resp = self.c.get(self.path, {'format': 'json', 'naics': '541330'})
@@ -64,32 +63,16 @@ class VendorsTest(TestCase):
         self.assertEqual(resp.status_code, 200)
         assert 'sam_load' in resp.data
 
-    def test_no_naics_returns_all(self):
-        resp = self.c.get(self.path, {'format': 'json', 'naics': ''})
-        self.assertEqual(resp.status_code, 200)
-        self.assertTrue(resp.data['num_results'] > 0)
-
-    def test_all_naics_returns_all(self):
-        resp = self.c.get(self.path, {'format': 'json', 'naics': "all"})
-        self.assertEqual(resp.status_code, 200)
-        self.assertTrue(resp.data['num_results'] > 0)
-
-    def test_group_by_pool(self):
-        resp = self.c.get(self.path, {'format': 'json', 'group': 'pool', 'naics': '541330'})
-        self.assertEqual(resp.status_code, 200)
-        self.assertTrue('number' in resp.data['results'][0])
-        self.assertTrue('vehicle' in resp.data['results'][0])
-
     def test_one_pool_returned(self):
-        resp = self.c.get(self.path, {'format': 'json', 'naics': 'all', 'pool': '1_SB', 'group': 'pool' })
+        resp = self.c.get(self.path, {'format': 'json', 'vehicle': 'oasissb', 'naics': '541330' })
         self.assertEqual(resp.status_code, 200)
-        self.assertTrue(len(resp.data['results']) == 1)
-        self.assertTrue(resp.data['results'][0]['id'] == '1_SB')
+        self.assertEqual(len(resp.data['results']), resp.data['num_results'])
+        self.assertEqual(resp.data['pool'][0]['id'], '1_SB')
 
     def test_result_length_pool_group(self):
-        resp = self.c.get(self.path, {'format': 'json', 'setasides': 'A2', 'group': 'pool', 'pool': '1_SB'})
+        resp = self.c.get(self.path, {'format': 'json', 'setasides': 'A2', 'vehicle': 'oasissb', 'naics': '541330'})
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(len(resp.data['results'][0]['vendors']), resp.data['num_results'])
+        self.assertEqual(len(resp.data['results']), resp.data['num_results'])
 
 
 
