@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest
+from django.core.paginator import Paginator
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from contract.models import Contract
 from vendor.models import Vendor, Naics, SetAside, SamLoad, Pool
-from api.serializers import VendorSerializer, NaicsSerializer, PoolSerializer, ShortVendorSerializer, ContractSerializer, Metadata, MetadataSerializer, ShortPoolSerializer
+from api.serializers import VendorSerializer, NaicsSerializer, PoolSerializer, ShortVendorSerializer, ContractSerializer, PaginatedContractSerializer, Metadata, MetadataSerializer, ShortPoolSerializer
 
 
 class GetVendor(APIView):
@@ -89,8 +90,15 @@ class ListContracts(APIView):
             return Response({'num_results': 0, 'results': []})
 
         else:
-            serializer = ContractSerializer(contracts)
-            return Response({'num_results': len(serializer.data), 'results': serializer.data})
+            paginator = Paginator(contracts, 100)
+            page = request.QUERY_PARAMS.get('page', 1)
+            contracts = paginator.page(page)
+            
+            serializer = PaginatedContractSerializer(contracts, context={'request': request})
+            serializer.data['num_results'] = serializer.data['count']
+            del serializer.data['count']
+
+            return Response(serializer.data)
 
     def get_queryset(self):
         

@@ -1,4 +1,4 @@
-from rest_framework import serializers
+from rest_framework import serializers, pagination
 from vendor.models import Vendor, Pool, Naics, SetAside, SamLoad
 from contract.models import Contract, FPDSLoad
 
@@ -56,6 +56,11 @@ class ContractSerializer(serializers.ModelSerializer):
         if '_' in obj.piid:
             return obj.piid.split('_')[1]
         return obj.piid
+
+class PaginatedContractSerializer(pagination.PaginationSerializer):
+    
+    class Meta:
+        object_serializer_class = ContractSerializer
 
 class Metadata(object):
     def __init__(self):
