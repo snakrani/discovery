@@ -32,7 +32,7 @@ class FunctionalTests(unittest.TestCase):
             EC.text_to_be_present_in_element((By.ID, "your_filters"), 'Veteran Owned')
             )
         self.assertEqual('Veteran Owned', driver.find_element_by_id('your_filters').text)
-        self.assertRegexpMatches(driver.find_element_by_css_selector("span.matching_your_search").text, r"^[\s\S]* vendors match your search$")
+        self.assertRegex(driver.find_element_by_css_selector("span.matching_your_search").text, r"^[\s\S]* vendors match your search$")
 
     def test_zero_results_indicator_on_search(self):
         #perform a search with zero expected results and make sure that it is clear that there are no results
@@ -82,7 +82,7 @@ class FunctionalTests(unittest.TestCase):
         #load search results
         driver.get(self.base_url + "/results?vehicle=oasissb&naics-code=541330&setasides=A5&")
         #make sure a count of vendors matching search is listed
-        self.assertRegexpMatches(driver.find_element_by_css_selector("span.matching_your_search").text, "\d+ vendors match your search")
+        self.assertRegex(driver.find_element_by_css_selector("span.matching_your_search").text, "\d+ vendors match your search")
 
     def test_8a_and_hubzone_added(self):
         driver = self.driver
@@ -124,19 +124,19 @@ class FunctionalTests(unittest.TestCase):
         #open search results
         driver.get(self.base_url + "/results?vehicle=oasissb&setasides=A6&naics-code=541330&")
         #make sure format of result count is '* vendors match your search'
-        self.assertRegexpMatches(driver.find_element_by_css_selector("span.matching_your_search").text, r"^[\s\S]* vendors match your search$")
+        self.assertRegex(driver.find_element_by_css_selector("span.matching_your_search").text, r"^[\s\S]* vendors match your search$")
         #make sure format of result count is not '* vendors in * pool(s) match your search'
-        self.assertNotRegexpMatches(driver.find_element_by_css_selector("span.matching_your_search").text, r"^[\s\S]*in [\s\S]* pool\(s\)[\s\S]*$")
+        self.assertNotRegex(driver.find_element_by_css_selector("span.matching_your_search").text, r"^[\s\S]*in [\s\S]* pool\(s\)[\s\S]*$")
 
     def test_data_load_dates_displayed_on_landing_page(self):
         driver = self.driver
         #open landing page
         driver.get(self.base_url + '/')
         #make sure SAM load date is displayed and not 12/31/69
-        self.assertRegexpMatches(driver.find_element_by_id("data_source_date_sam").text, r"^[\d]*/[\d]*/[\d]*$")
+        self.assertRegex(driver.find_element_by_id("data_source_date_sam").text, r"^[\d]*/[\d]*/[\d]*$")
         self.assertNotEqual(driver.find_element_by_id("data_source_date_sam").text, "12/31/69")
         #make sure FPDS load date is displayed and not 12/31/69
-        self.assertRegexpMatches(driver.find_element_by_id("data_source_date_fpds").text, r"^[\d]*/[\d]*/[\d]*$")
+        self.assertRegex(driver.find_element_by_id("data_source_date_fpds").text, r"^[\d]*/[\d]*/[\d]*$")
         self.assertNotEqual(driver.find_element_by_id("data_source_date_sam").text, "12/31/69")
 
     def test_csv_links_exist(self):
@@ -144,11 +144,11 @@ class FunctionalTests(unittest.TestCase):
         #load search results
         driver.get(self.base_url + '/results?vehicle=oasissb&naics-code=541620&')
         #make sure csv link exists and is correct
-        self.assertRegexpMatches(driver.find_element_by_link_text("download data (CSV)").get_attribute("href"), r"^[\s\S]*/results/csv[\s\S]*$")
+        self.assertRegex(driver.find_element_by_link_text("download data (CSV)").get_attribute("href"), r"^[\s\S]*/results/csv[\s\S]*$")
         #load vendor detail page
         driver.get(self.base_url + "/vendor/786997739/?naics-code=541620&")
         #make sure csv link exists and is correct
-        self.assertRegexpMatches(driver.find_element_by_link_text("download vendor data (CSV)").get_attribute("href"), r"^[\s\S]*/vendor/[\s\S]*/csv[\s\S]*$")
+        self.assertRegex(driver.find_element_by_link_text("download vendor data (CSV)").get_attribute("href"), r"^[\s\S]*/vendor/[\s\S]*/csv[\s\S]*$")
 
     def test_footer_links(self):
         driver = self.driver
