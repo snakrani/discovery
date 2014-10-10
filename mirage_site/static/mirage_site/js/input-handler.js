@@ -95,7 +95,7 @@ var InputHandler = {
                          .text(result.short_code + " - " + result.description)); 
                 });
                 if (URLManager.getParameterByName("naics-code")) {
-                    $("#naics-code").select2({placeholder:'Select a NAICS code', width : '400px'}).select2("val", URLManager.getParameterByName("naics-code"));
+                    $("#naics-code").select2({placeholder:'Select a NAICS code', width : '380px'}).select2("val", URLManager.getParameterByName("naics-code"));
                 }
                 //load data if search criteria is defined in querystring
                 if (URLManager.getParameterByName("naics-code") || URLManager.getParameterByName("setasides")) {
@@ -103,6 +103,6 @@ var InputHandler = {
                 }
             }
         );
-        $('#naics-code').select2({placeholder:'Select a NAICS code', width : '400px'});
+        $('#naics-code').select2({placeholder:'Select a NAICS code', width : '380px'});
     }
 };
