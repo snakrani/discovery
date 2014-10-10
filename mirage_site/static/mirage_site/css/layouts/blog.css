@@ -805,6 +805,24 @@ a.pool_link {
 
 /* Contract History Styles */
 
+.arrow-up {
+    background:url(/static/mirage_site/images/arrow_up.png);
+    background-repeat: no-repeat;
+    background-position:right;
+    background-position: 93% 50%;
+}
+.arrow-down {
+    background:url(/static/mirage_site/images/arrow_down.png);
+    background-repeat: no-repeat;
+    background-position:right;
+    background-position: 93% 50%;
+}
+.arrow-sortable {
+    background:url(/static/mirage_site/images/arrow_sortable.png);
+    background-repeat: no-repeat;
+    background-position:right;
+    background-position: 93% 50%;
+}
 .contracthistory {
     margin:0px;padding:0px;
     width:100%;
