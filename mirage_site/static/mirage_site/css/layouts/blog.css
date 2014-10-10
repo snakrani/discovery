@@ -679,7 +679,15 @@ a.pool_link {
 
 
 
-
+#no_matching_contracts  {
+    font-size: 1.5em;
+    float:left;
+    font-weight:600;
+    margin-left:40px;
+    font-style: italic;
+    margin-top:5px;
+    color:#666666;
+}
 #vendor_contract_history_container  {
     width:100%;
     min-height:100px;
