@@ -670,6 +670,16 @@ a.pool_link {
     min-height:130px;
     margin-left:20px;
 }
+#sb_badge   {
+    float:right;
+}
+
+
+
+
+
+
+
 #vendor_contract_history_container  {
     width:100%;
     min-height:100px;
