@@ -198,7 +198,7 @@ h3 {
     background:url(/static/mirage_site/images/2.png);
     background-repeat: no-repeat;
     background-position: 0px 5px;
-    width:437px;
+    width:417px;
 
 }
 .select_text    {
@@ -585,6 +585,19 @@ a.pool_link {
     float:left;
     font-weight:600;
 }
+.vendor_website   {
+    float:left;
+    margin-left:10px;
+    padding-right:8px;
+    padding-top:10px;
+    background:url(/static/mirage_site/images/external_link.png);
+    background-repeat: no-repeat;
+    background-position: 64px 14px;
+    height:35px;
+    width:80px;
+    vertical-align: text-bottom;
+    color:#83b1d6;
+}
 .debarred_status    {
     display:none;
     font-size:1.6em;
@@ -669,6 +682,24 @@ a.pool_link {
     float:left;
     min-height:130px;
     margin-left:20px;
+}
+#sb_badge   {
+    float:right;
+}
+
+
+
+
+
+
+#no_matching_contracts  {
+    font-size: 1.5em;
+    float:left;
+    font-weight:600;
+    margin-left:40px;
+    font-style: italic;
+    margin-top:5px;
+    color:#666666;
 }
 #vendor_contract_history_container  {
     width:100%;
@@ -805,6 +836,24 @@ a.pool_link {
 
 /* Contract History Styles */
 
+.arrow-up {
+    background:url(/static/mirage_site/images/arrow_up.png);
+    background-repeat: no-repeat;
+    background-position:right;
+    background-position: 93% 50%;
+}
+.arrow-down {
+    background:url(/static/mirage_site/images/arrow_down.png);
+    background-repeat: no-repeat;
+    background-position:right;
+    background-position: 93% 50%;
+}
+.arrow-sortable {
+    background:url(/static/mirage_site/images/arrow_sortable.png);
+    background-repeat: no-repeat;
+    background-position:right;
+    background-position: 93% 50%;
+}
 .contracthistory {
     margin:0px;padding:0px;
     width:100%;
