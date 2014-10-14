@@ -94,7 +94,7 @@ LayoutManager.buildContractTable = function(data, listType) {
     var headers = $("div#ch_table table tr").first().clone();
     var table = $("<table></table>");
     var results = data['results'];
-    var contract, tr, displayDate, pointOfContact, piid, agencyName, pricingType, obligatedAmount, status;
+    var contract, tr, displayDate, pointOfContact, piid, agencyName, pricingType, obligatedAmount, status, naics;
 
     this.setButtonAndCSV(listType);
 
@@ -110,6 +110,7 @@ LayoutManager.buildContractTable = function(data, listType) {
             pricingType = (results[contract]['pricing_type'] ? results[contract]['pricing_type'] : ' ');
             obligatedAmount = (results[contract]['obligated_amount'] ? this.numberWithCommas(results[contract]['obligated_amount']) : ' ');
             status = (results[contract]['status'] ? results[contract]['status'] : ' ');
+            naics = (results[contract]['NAICS'] ? results[contract]['NAICS'] : ' ')
 
             if (typeof results[contract]['point_of_contact'] === 'string') {
                 pointOfContact = results[contract]['point_of_contact'].toLowerCase();
@@ -125,6 +126,7 @@ LayoutManager.buildContractTable = function(data, listType) {
             tr.append('<td class="value">' + obligatedAmount+ '</td>');
             tr.append('<td class="email_poc">' + pointOfContact + '</td>');
             tr.append('<td class="status">' + status + '</td>');
+            tr.append('<td class="naics">' + naics + '</td>');
             //more goes here
         
             table.append(tr);
