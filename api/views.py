@@ -34,7 +34,6 @@ class ListVendors(APIView):
             if setasides:
                 setasides = setasides.split(',')
             
-            #check if request is limited by a pool (only used if naics not supplied)
 
             sam_load_results = SamLoad.objects.all().order_by('-sam_load')[:1]
             sam_load = sam_load_results[0].sam_load if sam_load_results else None
@@ -104,12 +103,24 @@ class ListContracts(APIView):
         
         duns = self.request.QUERY_PARAMS.get('duns', None)
         naics = self.request.QUERY_PARAMS.get('naics', None)
+        dir_map = { 'desc': '-', 'asc': '' }
+        sort_map = { 'date': 'date_signed', 'status': 'status', 'agency': 'agency_name', 'amount': 'obligated_amount'}
 
         if not duns:
             return 1
 
         vendor = Vendor.objects.get(duns=duns)
-        contracts = Contract.objects.filter(vendor=vendor).order_by('-date_signed')
+        sort = self.request.QUERY_PARAMS.get('sort', None)
+        direction = self.request.QUERY_PARAMS.get('direction', None)
+
+        if sort and not direction:
+            direction = 'desc'
+        
+        if not sort or sort not in sort_map:
+            sort = 'date'
+            direction = 'desc'
+
+        contracts = Contract.objects.filter(vendor=vendor).order_by(dir_map[direction] + sort_map[sort])
         
         if naics:
             #contracts = contracts.filter(NAICS=Naics.objects.filter(code=naics)[0])
