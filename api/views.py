@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.core.paginator import Paginator
+from django.db.models import Count
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -38,7 +39,7 @@ class ListVendors(APIView):
             sam_load_results = SamLoad.objects.all().order_by('-sam_load')[:1]
             sam_load = sam_load_results[0].sam_load if sam_load_results else None
 
-            v_serializer = ShortVendorSerializer(self.get_queryset(pool, setasides), many=True)
+            v_serializer = ShortVendorSerializer(self.get_queryset(pool, setasides, naics), many=True)
             p_serializer = ShortPoolSerializer(pool)
 
             return  Response({ 'num_results': len(v_serializer.data), 'pool' : p_serializer.data , 'sam_load':sam_load, 'results': v_serializer.data } )
@@ -47,13 +48,13 @@ class ListVendors(APIView):
             return HttpResponseBadRequest("You must provide a valid naics code that maps to an OASIS pool")
         #except goes here
 
-    def get_queryset(self, pool, setasides):
+    def get_queryset(self, pool, setasides, naics):
         vendors = Vendor.objects.filter(pools__in=pool)
         if setasides:
             for sa in SetAside.objects.filter(code__in=setasides):
                 vendors = vendors.filter(setasides=sa)
 
-        #Also need to filter by vehicle here
+        vendors = sorted((ven for ven in vendors), key=lambda x: Contract.objects.filter(vendor=x, NAICS=naics.code).count(), reverse=True)
 
         return vendors
 
