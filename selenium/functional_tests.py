@@ -118,6 +118,10 @@ class FunctionalTests(unittest.TestCase):
         #load vendor page
         #check headers for contracts table
         #find way to verify contract data
+        #open vendor with naics subcategory
+        driver.get(self.base_url + "/vendor/102067378/?vehicle=oasissb&naics-code=541712B&")
+        #verify that contracts list isn't empty
+        self.assertFalse(driver.find_element_by_id('no_matching_contracts').is_displayed())
 
     def test_number_of_pools_not_displayed_in_search_results(self):
         driver = self.driver
