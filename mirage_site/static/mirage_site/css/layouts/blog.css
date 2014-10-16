@@ -886,6 +886,10 @@ a.pool_link {
     background-position:right;
     background-position: 93% 50%;
 }
+.active_sort    {
+    font-weight: 700;
+    color:#000 !important;
+}
 .contracthistory {
     margin:0px;padding:0px;
     width:100%;
