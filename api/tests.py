@@ -75,4 +75,40 @@ class VendorsTest(TestCase):
         self.assertEqual(len(resp.data['results']), resp.data['num_results'])
 
 
+class ContractsTest(TestCase):
+    """tests for Contracts API endpoint"""
+    fixtures = ['vendors.json', 'contracts.json']
+
+    def setUp(self):
+        self.c = Client()
+        self.path = '/api/contracts/'
+
+    def test_no_duns_400(self):
+        resp = self.c.get(self.path)
+        self.assertEqual(resp.status_code, 400)
+
+    def test_default_pagination(self):
+        resp = self.c.get(self.path, {'duns': '197138274'})
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(len(resp.data['results']), 100)
+        self.assertEqual(resp.data['previous'], None)
+        self.assertTrue('&page=2' in resp.data['next'])
+        self.assertEqual(resp.data['num_results'], 5157)
+
+    def test_naics_filter(self):
+        resp = self.c.get(self.path, {'duns': '197138274', 'naics': '541330'})
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.data['num_results'], 4083)
+
+    def test_sorting(self):
+        resp = self.c.get(self.path, {'duns': '197138274', 'sort': 'amount', 'direction': 'desc'})
+        self.assertEqual(resp.status_code, 200)
+        prev = resp.data['results'][0]['obligated_amount']
+        for item in resp.data['results']:
+            self.assertTrue(item['obligated_amount'] <= prev)
+            prev = item['obligated_amount']
+
+
+
+
 

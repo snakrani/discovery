@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.core.paginator import Paginator
+from django.db.models import Count
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -34,12 +35,11 @@ class ListVendors(APIView):
             if setasides:
                 setasides = setasides.split(',')
             
-            #check if request is limited by a pool (only used if naics not supplied)
 
             sam_load_results = SamLoad.objects.all().order_by('-sam_load')[:1]
             sam_load = sam_load_results[0].sam_load if sam_load_results else None
 
-            v_serializer = ShortVendorSerializer(self.get_queryset(pool, setasides), many=True)
+            v_serializer = ShortVendorSerializer(self.get_queryset(pool, setasides, naics), many=True)
             p_serializer = ShortPoolSerializer(pool)
 
             return  Response({ 'num_results': len(v_serializer.data), 'pool' : p_serializer.data , 'sam_load':sam_load, 'results': v_serializer.data } )
@@ -48,13 +48,13 @@ class ListVendors(APIView):
             return HttpResponseBadRequest("You must provide a valid naics code that maps to an OASIS pool")
         #except goes here
 
-    def get_queryset(self, pool, setasides):
+    def get_queryset(self, pool, setasides, naics):
         vendors = Vendor.objects.filter(pools__in=pool)
         if setasides:
             for sa in SetAside.objects.filter(code__in=setasides):
                 vendors = vendors.filter(setasides=sa)
 
-        #Also need to filter by vehicle here
+        vendors = sorted((ven for ven in vendors), key=lambda x: Contract.objects.filter(vendor=x, NAICS=naics.code).count(), reverse=True)
 
         return vendors
 
@@ -104,12 +104,24 @@ class ListContracts(APIView):
         
         duns = self.request.QUERY_PARAMS.get('duns', None)
         naics = self.request.QUERY_PARAMS.get('naics', None)
+        dir_map = { 'desc': '-', 'asc': '' }
+        sort_map = { 'date': 'date_signed', 'status': 'status', 'agency': 'agency_name', 'amount': 'obligated_amount'}
 
         if not duns:
             return 1
 
         vendor = Vendor.objects.get(duns=duns)
-        contracts = Contract.objects.filter(vendor=vendor).order_by('-date_signed')
+        sort = self.request.QUERY_PARAMS.get('sort', None)
+        direction = self.request.QUERY_PARAMS.get('direction', None)
+
+        if sort and not direction:
+            direction = 'desc'
+        
+        if not sort or sort not in sort_map:
+            sort = 'date'
+            direction = 'desc'
+
+        contracts = Contract.objects.filter(vendor=vendor).order_by(dir_map[direction] + sort_map[sort])
         
         if naics:
             #contracts = contracts.filter(NAICS=Naics.objects.filter(code=naics)[0])
