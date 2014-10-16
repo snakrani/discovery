@@ -196,6 +196,17 @@ class FunctionalTests(unittest.TestCase):
         #make sure title of point of contact section in header is 'OASIS POC'
         self.assertEqual(driver.find_element_by_css_selector('p.admin_title').text, 'OASIS POC')
 
+    def test_no_matching_contracts_indicator(self):
+        driver = self.driver
+        #open vendor detail page where naics contract total is zero
+        driver.get(self.base_url + '/vendor/799582379/?vehicle=oasissb&naics-code=541360&')
+        #make sure no matching contracts indicator is displayed
+        self.assertTrue(driver.find_element_by_id('no_matching_contracts').is_displayed())
+        #open vendor detail apge where naics contract total is one or more
+        driver.get(self.base_url + '/vendor/799582379/?vehicle=oasissb&naics-code=541330&')
+        #make sure no matching contracts indicator is not displayed
+        self.assertFalse(driver.find_element_by_id('no_matching_contracts').is_displayed())
+
     def tearDown(self):
         self.driver.quit()
 
