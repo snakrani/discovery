@@ -86,13 +86,20 @@ class FunctionalTests(unittest.TestCase):
 
     def test_8a_and_hubzone_added(self):
         driver = self.driver
-        #load search results
-        driver.get(self.base_url + "/results?vehicle=oasissb&setasides=A6&naics-code=541620&")
-        #select 8(a) filter
-        
+        #load 8(a) search results
+        driver.get(self.base_url + "/results?setasides=A6&vehicle=oasissb&naics-code=541330&")
         #make sure first few results are for 8(a) vendors
-        #uncheck 8(a) and select HubZone filter
+        time.sleep(1)
+        self.assertEqual("X", driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[2]/td[3]').text)
+        self.assertEqual("X", driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[3]/td[3]').text)
+        self.assertEqual("X", driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[4]/td[3]').text)
+        #load HubZone search results
+        driver.get(self.base_url + "/results?setasides=XX&vehicle=oasissb&naics-code=541330&")
+        time.sleep(1)
         #make sure first few results are for HubZ vendors
+        self.assertEqual("X", driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[2]/td[4]').text)
+        self.assertEqual("X", driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[3]/td[4]').text)
+        self.assertEqual("X", driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[4]/td[4]').text)
 
     def test_vendor_info(self):
         driver = self.driver
@@ -215,4 +222,4 @@ class FunctionalTests(unittest.TestCase):
         self.driver.quit()
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(warnings='ignore')
