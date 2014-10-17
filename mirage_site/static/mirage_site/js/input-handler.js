@@ -11,6 +11,7 @@ var InputHandler = {
         $('form#vehicle-select select').change(this.sendVehicleChange.bind(InputHandler));
         //should this be bound to the InputHandler? KBD
         $('#vendor_contract_history_title_container').on('click', 'div.contracts_button', this.sendContractsChange);
+        $('#ch_table').on('click', 'th.sortable', this.sortContracts);
 
         Events.subscribe('loadedWithQS', this.updateFields.bind(InputHandler));
     },
@@ -38,6 +39,44 @@ var InputHandler = {
         }
     },
 
+    sortContracts: function(e) {
+        var $target = $(e.target);    
+        var data = {
+            'naics': this.naicsCode,
+            'listType': 'naics',
+        }
+        var class_map = {
+            'h_date_signed': 'date',
+            'h_agency': 'agency',
+            'h_value': 'amount',
+            'h_status': 'status',
+        }
+
+        var classes = $target.attr('class').split(' ');
+        data['sort'] = class_map[classes[0]];
+        
+        if ($target.hasClass('arrow-down')) {
+            data['direction'] = 'asc'
+            $target.removeClass('arrow-down').addClass('arrow-up')
+        } else if ($target.hasClass('arrow-sortable')) {
+            data['direction'] = 'desc'
+            $target.removeClass('arrow-sortable').addClass('arrow-down');
+        } else {
+            data['direction'] = 'desc'
+            $target.removeClass('arrow-up').addClass('arrow-down')
+        }
+
+        //reset other ths that are sortable
+        $target.siblings('.sortable').removeClass('arrow-down').removeClass('arrow-up').addClass('arrow-sortable');
+
+        //prevent button flipping by selecting proper listType
+        var $button = $("#vendor_contract_history_title_container").find('.contracts_button_active');
+        if ($button.text() == "All Contracts") { data['listType'] = 'all'; }
+        else { data['listType'] = 'naics'; }
+
+        Events.publish('contractsChanged', data);
+    },
+
     sendContractsChange: function(e) {
         var listType = 'naics';
         if(e.target.textContent == "All Contracts"){
@@ -46,7 +85,13 @@ var InputHandler = {
         } else {
             this.naicsCode = $("#vendor_contract_history_title_container").find("div").first().text().replace("NAICS", '').trim();
         }
-        Events.publish('contractsChanged', this.naicsCode, listType);
+    
+        //reset date header column classes
+        var $date = $("div#ch_table th.h_date_signed");
+        $date.removeClass('arrow-sortable').addClass('arrow-down');
+        $date.siblings('.sortable').removeClass('arrow-down').removeClass('arrow-up').addClass('arrow-sortable');
+        
+        Events.publish('contractsChanged', {'naics': this.naicsCode, 'listType': listType});
         return false;
     },
 
