@@ -684,13 +684,9 @@ a.pool_link {
     margin-left:20px;
 }
 #sb_badge   {
+    display: none;
     float:right;
 }
-
-
-
-
-
 
 #no_matching_contracts  {
     font-size: 1.5em;
