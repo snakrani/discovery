@@ -135,6 +135,11 @@ LayoutManager.buildContractTable = function(data, listType) {
 
     $("div#ch_table table").remove();
     $("div#ch_table").append(table);
+
+    //reset date header column classes
+    var $date = $("div#ch_table th.h_date_signed");
+    $date.removeClass('arrow-sortable').addClass('arrow-down');
+    $date.siblings('.sortable').removeClass('arrow-down').removeClass('arrow-up').addClass('arrow-sortable');
 };
 
 LayoutManager.formatDate = function(dateObj) {
