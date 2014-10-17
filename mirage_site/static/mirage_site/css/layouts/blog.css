@@ -684,13 +684,9 @@ a.pool_link {
     margin-left:20px;
 }
 #sb_badge   {
+    display: none;
     float:right;
 }
-
-
-
-
-
 
 #no_matching_contracts  {
     font-size: 1.5em;
@@ -700,6 +696,7 @@ a.pool_link {
     font-style: italic;
     margin-top:5px;
     color:#666666;
+    display: none;
 }
 #vendor_contract_history_container  {
     width:100%;

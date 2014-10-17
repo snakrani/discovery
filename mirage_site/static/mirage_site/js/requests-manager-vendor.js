@@ -33,10 +33,10 @@ RequestsManager.loadContracts = function(listType) {
         'duns': URLManager.getDUNS()
     };
 
-    naics = URLManager.getParameterByName('naics-code');
+    naics = RequestsManager.stripSubCategories(URLManager.getParameterByName('naics-code'));
     
     if (naics && naics != 'all'){ 
-        params['naics'] = naics; 
+        params['naics'] = naics;
     }
 
     if (listType == 'all') {
@@ -73,3 +73,13 @@ RequestsManager.refreshContracts = function(data) {
         Events.publish('contractDataLoaded', resp_data, data['listType']);
     });
 };
+
+RequestsManager.stripSubCategories = function(naics_code) {
+    //if last character in naics code isn't a number, strip it out
+    if (isNaN(naics_code.slice(-1))) {
+        //strip it
+        naics_code = naics_code.substring(0, naics_code.length - 1);
+        console.log(naics_code);
+    }
+    return naics_code
+}

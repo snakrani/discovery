@@ -23,6 +23,11 @@ LayoutManager.render = function(results) {
     var mailto, t, indicatorsRow, formattedDate, dateObj;
 
     $('.vendor_title').html(results.name);
+    if (results.sam_url) {
+        $('#vendor_site_link').attr('href', results.sam_url);
+    } else {
+        $('#vendor_site_link').hide(); 
+    }
     if (results.sam_exclusion == true) {
             $('.debarred_status').show();
     }
@@ -54,6 +59,11 @@ LayoutManager.render = function(results) {
     if (results.pm_email !== null) {
         mailto = $('<a href="mailto:' + results.pm_email + '">' + results.pm_email + '</a>');
         $('.vendor_poc_email').html(mailto);
+    }
+
+    //small business badge
+    if (LayoutManager.showSbBadge(results['pools'])) {
+        $('#sb_badge').show();
     }
 
     //socioeconomic indicators
@@ -101,6 +111,13 @@ LayoutManager.buildContractTable = function(data, listType) {
     //append headers from existing html
     table.append(headers);
     
+    //show or hide 'no matching contracts' indicator
+    if (results.length == 0) {
+        $('#no_matching_contracts').show();
+    } else {
+        $('#no_matching_contracts').hide();
+    }
+
     for (contract in results) {
         if (results.hasOwnProperty(contract)) {
             tr = $('<tr></tr>');
@@ -159,3 +176,15 @@ LayoutManager.vendorIndicator = function(v, prefix, setaside_code) {
 LayoutManager.numberWithCommas = function(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
+
+LayoutManager.showSbBadge = function(pools) {
+    //return true if pool number is same in more than one pool
+    for (var i=0; i<pools.length; i++) {
+        for (var j=i+1; j<pools.length; j++) {
+            if (pools[i].number == pools[j].number) {
+                return true
+            }
+        }
+    }
+    return false
+}
