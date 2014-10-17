@@ -40,7 +40,6 @@ var InputHandler = {
     },
 
     sortContracts: function(e) {
-        console.log(e.target);
         var $target = $(e.target);    
         var data = {
             'naics': this.naicsCode,
@@ -69,6 +68,12 @@ var InputHandler = {
 
         //reset other ths that are sortable
         $target.siblings('.sortable').removeClass('arrow-down').removeClass('arrow-up').addClass('arrow-sortable');
+
+        //prevent button flipping by selecting proper listType
+        var $button = $("#vendor_contract_history_title_container").find('.contracts_button_active');
+        if ($button.text() == "All Contracts") { data['listType'] = 'all'; }
+        else { data['listType'] = 'naics'; }
+
         Events.publish('contractsChanged', data);
     },
 
@@ -80,6 +85,12 @@ var InputHandler = {
         } else {
             this.naicsCode = $("#vendor_contract_history_title_container").find("div").first().text().replace("NAICS", '').trim();
         }
+    
+        //reset date header column classes
+        var $date = $("div#ch_table th.h_date_signed");
+        $date.removeClass('arrow-sortable').addClass('arrow-down');
+        $date.siblings('.sortable').removeClass('arrow-down').removeClass('arrow-up').addClass('arrow-sortable');
+        
         Events.publish('contractsChanged', {'naics': this.naicsCode, 'listType': listType});
         return false;
     },
