@@ -42,6 +42,11 @@ Once you've loaded the basic data, you'll need to load the contract history reco
 
 Currently the `load_fpds` command is configured to load ten years of contract history for each vendor so it takes some time. In future versions we will have smarter loading that only fetches recently added contracts.
 
+### Selenium testing
+ * Install python testing requirements with ```pip install -r requirements-test.txt```
+ * Install [Phantom JS](http://phantomjs.org/download.html)
+ * From the project directory, run ```python ./selenium/functional_tests.py```
+
 ### Public domain
 
 This project is in the worldwide [public domain](LICENSE.md). As stated in [CONTRIBUTING](CONTRIBUTING.md):

@@ -696,6 +696,7 @@ a.pool_link {
     font-style: italic;
     margin-top:5px;
     color:#666666;
+    display: none;
 }
 #vendor_contract_history_container  {
     width:100%;

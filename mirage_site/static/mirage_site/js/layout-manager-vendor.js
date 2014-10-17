@@ -106,6 +106,13 @@ LayoutManager.buildContractTable = function(data, listType) {
     //append headers from existing html
     table.append(headers);
     
+    //show or hide 'no matching contracts' indicator
+    if (results.length == 0) {
+        $('#no_matching_contracts').show();
+    } else {
+        $('#no_matching_contracts').hide();
+    }
+
     for (contract in results) {
         if (results.hasOwnProperty(contract)) {
             tr = $('<tr></tr>');
