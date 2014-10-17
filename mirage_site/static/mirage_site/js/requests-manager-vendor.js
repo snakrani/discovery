@@ -33,10 +33,10 @@ RequestsManager.loadContracts = function(listType) {
         'duns': URLManager.getDUNS()
     };
 
-    naics = URLManager.getParameterByName('naics-code');
+    naics = RequestsManager.stripSubCategories(URLManager.getParameterByName('naics-code'));
     
     if (naics && naics != 'all'){ 
-        params['naics'] = naics; 
+        params['naics'] = naics;
     }
 
     if (listType == 'all') {
@@ -50,17 +50,36 @@ RequestsManager.loadContracts = function(listType) {
 };
 
 //no idea why, but if I integrate the updated_naics parameter into the above function it becomes an infinite loop -- KBD
-RequestsManager.refreshContracts = function(updated_naics, listType) {
+RequestsManager.refreshContracts = function(data) {
     var url = "/api/contracts/";
+
     var params = {
         'duns': URLManager.getDUNS()
     };
     
-    if (updated_naics && updated_naics != 'all'){ 
-        params['naics'] = naics; 
+    if (data['naics'] && data['naics'] != 'all'){ 
+        params['naics'] = data['naics']; 
     }
 
-    $.getJSON(url, params, function(data){
-        Events.publish('contractDataLoaded', data, listType);
+    if (data['direction']) { params['direction'] = data['direction'] }
+    if (data['sort']) { 
+        params['sort'] = data['sort'] 
+        if (!data['direction']) {
+            params['direction'] = 'desc'
+        }
+    }
+
+    $.getJSON(url, params, function(resp_data){
+        Events.publish('contractDataLoaded', resp_data, data['listType']);
     });
 };
+
+RequestsManager.stripSubCategories = function(naics_code) {
+    //if last character in naics code isn't a number, strip it out
+    if (isNaN(naics_code.slice(-1))) {
+        //strip it
+        naics_code = naics_code.substring(0, naics_code.length - 1);
+        console.log(naics_code);
+    }
+    return naics_code
+}
