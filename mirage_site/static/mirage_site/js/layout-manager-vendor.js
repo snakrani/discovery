@@ -23,6 +23,11 @@ LayoutManager.render = function(results) {
     var mailto, t, indicatorsRow, formattedDate, dateObj;
 
     $('.vendor_title').html(results.name);
+    if (results.sam_url) {
+        $('#vendor_site_link').attr('href', results.sam_url);
+    } else {
+        $('#vendor_site_link').hide(); 
+    }
     if (results.sam_exclusion == true) {
             $('.debarred_status').show();
     }

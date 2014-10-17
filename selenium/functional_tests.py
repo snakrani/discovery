@@ -254,6 +254,18 @@ class FunctionalTests(unittest.TestCase):
         driver.get(self.base_url + '/vendor/806849303/?setasides=XX&vehicle=oasissb&naics-code=541330&')
         self.assertFalse(driver.find_element_by_id('sb_badge').is_displayed())
 
+    def test_vendor_site(self):
+        driver = self.driver
+        #open page for vendor with site in SAM data
+        driver.get(self.base_url + '/vendor/786997739/?vehicle=oasissb&naics-code=541330&')
+        #make sure link to site is displayed and href is valid
+        self.assertTrue(driver.find_element_by_id('vendor_site_link').is_displayed())
+        self.assertEqual(driver.find_element_by_id('vendor_site_link').get_attribute("href"), 'http://www.ikun.com/')
+        #open vendor with no site in SAM data
+        driver.get(self.base_url + '/vendor/160062311/?vehicle=oasissb&naics-code=541330&')
+        #make sure link to site is NOT displayed
+        self.assertFalse(driver.find_element_by_id('vendor_site_link').is_displayed())
+
     def tearDown(self):
         self.driver.quit()
 
