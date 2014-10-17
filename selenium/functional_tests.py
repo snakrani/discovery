@@ -10,7 +10,7 @@ class FunctionalTests(unittest.TestCase):
 
     def setUp(self):
         self.base_url = 'http://localhost:8000'
-        self.driver = webdriver.Firefox()
+        self.driver = webdriver.PhantomJS()
 
     def test_titles_are_correct(self):
         driver = self.driver
