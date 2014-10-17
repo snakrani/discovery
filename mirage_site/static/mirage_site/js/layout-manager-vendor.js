@@ -56,6 +56,11 @@ LayoutManager.render = function(results) {
         $('.vendor_poc_email').html(mailto);
     }
 
+    //small business badge
+    if (LayoutManager.showSbBadge(results['pools'])) {
+        $('#sb_badge').show();
+    }
+
     //socioeconomic indicators
     t = $('#socioeconomic_indicators');
     indicatorsRow = $('<tr></tr>');
@@ -158,3 +163,15 @@ LayoutManager.vendorIndicator = function(v, prefix, setaside_code) {
 LayoutManager.numberWithCommas = function(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
+
+LayoutManager.showSbBadge = function(pools) {
+    //return true if pool number is same in more than one pool
+    for (var i=0; i<pools.length; i++) {
+        for (var j=i+1; j<pools.length; j++) {
+            if (pools[i].number == pools[j].number) {
+                return true
+            }
+        }
+    }
+    return false
+}

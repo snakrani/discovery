@@ -196,6 +196,15 @@ class FunctionalTests(unittest.TestCase):
         #make sure title of point of contact section in header is 'OASIS POC'
         self.assertEqual(driver.find_element_by_css_selector('p.admin_title').text, 'OASIS POC')
 
+    def test_small_business_badge(self):
+        driver = self.driver
+        #open vendor detail page where sb badge is expected
+        driver.get(self.base_url + '/vendor/075458455/?setasides=XX&vehicle=oasissb&naics-code=541330&')
+        self.assertTrue(driver.find_element_by_id('sb_badge').is_displayed())
+        #open vendor detail page when sb badge is not expected
+        driver.get(self.base_url + '/vendor/806849303/?setasides=XX&vehicle=oasissb&naics-code=541330&')
+        self.assertFalse(driver.find_element_by_id('sb_badge').is_displayed())
+
     def tearDown(self):
         self.driver.quit()
 
