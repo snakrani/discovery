@@ -863,6 +863,13 @@ a.pool_link {
 
 }
 .contracthistory table{
+    border-collapse: collapse;
+        border-spacing: 0;
+    width:1085px;
+    height:100%;
+    margin:0px;padding:0px;
+    table-layout: fixed;
+
 }
 .contracthistory tr:hover td{
     background-color:#eeeeee;
@@ -973,8 +980,15 @@ a.pool_link {
 }
 #ch_table th.h_naics {
     width:60px;
+        border:0px solid #e5e5e5;
+    text-align:center;
+    border-width:0px 1px 1px 1px;
 }
-
+#ch_table td.naics {
+    border:0px solid #e5e5e5;
+    text-align:center;
+    border-width:1px 1px 1px 1px;
+}
 
 
 
