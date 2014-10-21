@@ -853,11 +853,11 @@ a.pool_link {
 }
 .active_sort    {
     font-weight: 700;
-    color:#000 !important;
+    color:#002f63 !important;
 }
 .contracthistory {
     margin:0px;padding:0px;
-    width:100%;
+    
     border:1px solid #e5e5e5;
     margin-top:5px;
 
@@ -902,6 +902,16 @@ a.pool_link {
     font-weight:600;
     color:#ffffff;
 }
+.contracthistory th{
+    background-color:#aaaaaa;
+    border:0px solid #e5e5e5;
+    text-align:center;
+    border-width:0px 0px 1px 1px;
+    font-size:1em;
+    font-family:;
+    font-weight:600;
+    color:#ffffff;
+}
 .contracthistory tr:first-child:hover td{
     background-color:#aaaaaa;
 }
@@ -911,8 +921,19 @@ a.pool_link {
 .contracthistory tr:first-child td:last-child{
     border-width:0px 0px 1px 1px;
 }
+#ch_table table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: fixed;
+    width:1085px;
+    height:100%;
+    margin:0px;padding:0px;
+}
+
 #ch_table td {
     text-align: left;
+    overflow: hidden;
+    word-wrap:break-word;
 }
 #ch_table .contracthistory .vendor_name tr:hover td{
     background-color:#eeeeee;
@@ -920,8 +941,53 @@ a.pool_link {
 
 #ch_table td.date_signed, #ch_table td.value {
     text-align:right;
-    padding-right: 15px;
+    
 }
+#ch_table th.h_date_signed {
+    width:80px;
+    text-align: left;
+    padding-left:7px;
+}
+#ch_table th.h_piid {
+    width:125px;
+    text-align: left;
+    padding-left:7px;
+}
+#ch_table th.h_agency {
+    width:230px;
+    text-align: left;
+    padding-left:7px;
+}
+#ch_table th.h_type {
+    width:137px;
+    text-align: left;
+    padding-left:7px;
+}
+#ch_table th.h_value {
+    width:108px;
+    text-align: left;
+    padding-left:7px;
+}
+#ch_table th.h_email_poc {
+    width:253px;
+    text-align: left;
+    padding-left:7px;
+}
+#ch_table th.h_status {
+    width:91px;
+    text-align: left;
+    padding-left:7px;
+}
+#ch_table th.h_naics {
+    width:60px;
+        border:0px solid #e5e5e5;
+    text-align:center;
+    border-width:0px 1px 1px 1px;
+}
+#ch_table td.naics {
+    border:0px solid #e5e5e5;
+    text-align:center;
+    border-width:1px 1px 1px 1px;
 }
 
 
