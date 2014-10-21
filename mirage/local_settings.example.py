@@ -16,3 +16,4 @@ SECRET_KEY = '&%7l9-fvi7_9ykzb*kr1bhjfx%x=(vd0r8z4w#p154eb1o+t=o'
 SAUCE = False
 SAUCE_USERNAME = ''
 SAUCE_ACCESS_KEY = ''
+DOMAIN_TO_TEST = 'domain.of.your.mirage.installation.gov'
