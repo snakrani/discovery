@@ -172,9 +172,11 @@ class FunctionalTests(unittest.TestCase):
         #make sure SAM load date is displayed and not 12/31/69
         self.assertRegex(driver.find_element_by_id("data_source_date_sam").text, r"^[\d]*/[\d]*/[\d]*$")
         self.assertNotEqual(driver.find_element_by_id("data_source_date_sam").text, "12/31/69")
+        self.assertNotEqual(driver.find_element_by_id("data_source_date_sam").text, "NaN/NaN/NaN")
         #make sure FPDS load date is displayed and not 12/31/69
         self.assertRegex(driver.find_element_by_id("data_source_date_fpds").text, r"^[\d]*/[\d]*/[\d]*$")
         self.assertNotEqual(driver.find_element_by_id("data_source_date_sam").text, "12/31/69")
+        self.assertNotEqual(driver.find_element_by_id("data_source_date_sam").text, "NaN/NaN/NaN")
 
     def test_csv_links_exist(self):
         driver = self.driver
