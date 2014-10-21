@@ -43,9 +43,15 @@ Once you've loaded the basic data, you'll need to load the contract history reco
 Currently the `load_fpds` command is configured to load ten years of contract history for each vendor so it takes some time. In future versions we will have smarter loading that only fetches recently added contracts.
 
 ### Selenium testing
+#### Locally with PhantomJS
  * Install python testing requirements with ```pip install -r requirements-test.txt```
  * Install [Phantom JS](http://phantomjs.org/download.html)
- * From the project directory, run ```python ./selenium/functional_tests.py```
+ * From the project directory, run ```manage.py test selenium```
+
+ #### Remotely using Sauce Labs
+ * In `local_settings.py` change `SAUCE = False` to `SAUCE = True`
+ * Set `SAUCE_USERNAME` and `SAUCE_ACCESS_CODE` and `DOMAIN_TO_TEST` variables
+ * From the project directory, run ```manage.py test selenium```
 
 ### Public domain
 
