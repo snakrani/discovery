@@ -79,7 +79,7 @@ var InputHandler = {
 
     sendContractsChange: function(e) {
         var listType = 'naics';
-        if(e.target.textContent == "All Contracts"){
+        if(e.target.textContent == "All Contracts" || e.target.innerText == "All Contracts"){
             this.naicsCode = 'all';
             listType = 'all';
         } else {

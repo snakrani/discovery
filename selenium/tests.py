@@ -1,16 +1,29 @@
+from django.conf import settings
+from django.test import LiveServerTestCase
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time, unittest
 
 
-class FunctionalTests(unittest.TestCase): 
+class FunctionalTests(LiveServerTestCase): 
 
     def setUp(self):
-        self.base_url = 'http://localhost:8000'
-        self.driver = webdriver.PhantomJS()
+        if settings.SAUCE:
+            self.base_url = "http://%s" % settings.DOMAIN_TO_TEST
+            self.desired_capabilities=DesiredCapabilities.CHROME
+            sauce_url = "http://%s:%s@ondemand.saucelabs.com:80/wd/hub"
+            self.driver = webdriver.Remote(
+                desired_capabilities=self.desired_capabilities,
+                command_executor=sauce_url % (settings.SAUCE_USERNAME, settings.SAUCE_ACCESS_KEY)
+            )
+        else:
+            self.base_url = 'http://localhost:8000'
+            self.driver = webdriver.PhantomJS()
 
     def test_titles_are_correct(self):
         driver = self.driver
@@ -172,9 +185,11 @@ class FunctionalTests(unittest.TestCase):
         #make sure SAM load date is displayed and not 12/31/69
         self.assertRegex(driver.find_element_by_id("data_source_date_sam").text, r"^[\d]*/[\d]*/[\d]*$")
         self.assertNotEqual(driver.find_element_by_id("data_source_date_sam").text, "12/31/69")
+        self.assertNotEqual(driver.find_element_by_id("data_source_date_sam").text, "NaN/NaN/NaN")
         #make sure FPDS load date is displayed and not 12/31/69
         self.assertRegex(driver.find_element_by_id("data_source_date_fpds").text, r"^[\d]*/[\d]*/[\d]*$")
         self.assertNotEqual(driver.find_element_by_id("data_source_date_sam").text, "12/31/69")
+        self.assertNotEqual(driver.find_element_by_id("data_source_date_sam").text, "NaN/NaN/NaN")
 
     def test_csv_links_exist(self):
         driver = self.driver
