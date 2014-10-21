@@ -1,3 +1,6 @@
+from django.conf import settings
+from django.test import LiveServerTestCase
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -6,11 +9,18 @@ from selenium.webdriver.support import expected_conditions as EC
 import time, unittest
 
 
-class FunctionalTests(unittest.TestCase): 
+class FunctionalTests(LiveServerTestCase): 
 
     def setUp(self):
         self.base_url = 'http://localhost:8000'
-        self.driver = webdriver.PhantomJS()
+        if settings.SAUCE:
+            sauce_url = "http://%s:%s@ondemand.saucelabs.com:80/wd/hub"
+            self.driver = webdriver.Remote(
+                desired_capabilities=self.desired_capabilities,
+                command_executor=sauce_url % (settings.SAUCE_USERNAME, settings.SAUCE_ACCESS_KEY)
+            )
+        else:
+            self.driver = webdriver.PhantomJS()
 
     def test_titles_are_correct(self):
         driver = self.driver
