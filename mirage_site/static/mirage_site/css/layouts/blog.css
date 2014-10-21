@@ -911,6 +911,7 @@ a.pool_link {
 }
 #ch_table td {
     text-align: left;
+    overflow: hidden;
 }
 #ch_table .contracthistory .vendor_name tr:hover td{
     background-color:#eeeeee;
@@ -919,6 +920,31 @@ a.pool_link {
 #ch_table td.date_signed, #ch_table td.value {
     text-align:right;
     padding-right: 15px;
+}
+#ch_table td.date_signed {
+    width:40px;
+}
+#ch_table td.piid {
+    width:125px;
+
+}
+#ch_table td.agency {
+    width:240px;
+}
+#ch_table td.type {
+    width:137px;
+}
+#ch_table td.value {
+    width:108px;
+}
+#ch_table td.email_poc {
+    width:253px;
+}
+#ch_table td.status {
+    width:81px;
+}
+#ch_table td.naics {
+    width:56px;
 }
 }
 
