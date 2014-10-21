@@ -17,6 +17,7 @@ var URLManager = {
         Events.subscribe('contentChanged', this.update.bind(URLManager));
         Events.subscribe('vehicleChanged', this.update.bind(URLManager));
         Events.subscribe('goToPoolPage', this.loadPoolPage.bind(URLManager));
+        $('#combined_search_pool').on('click', 'a', function() { window.location = "/results/" + window.location.search.replace("#", ""); }); 
     },
 
     getQueryString: function() {
