@@ -1,4 +1,4 @@
 from django.contrib import admin
-from contract.models import FPDSContract
+from contract.models import Contract
 
-admin.site.register(FPDSContract)
+admin.site.register(Contract)
