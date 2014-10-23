@@ -160,7 +160,11 @@ LayoutManager.buildContractTable = function(data, listType) {
             itemsOnPage: 100,
             cssStyle: 'light-theme',
             onPageClick: function(pageNumber, e) {
-                alert(pageNumber);
+                var contract_data = {}
+                contract_data['page'] = pageNumber;
+                contract_data['naics'] = naics;
+                contract_data['listType'] = listType;
+                Events.publish("contractsChanged", contract_data);
             }
         });
     });

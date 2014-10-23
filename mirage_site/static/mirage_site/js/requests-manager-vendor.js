@@ -54,7 +54,8 @@ RequestsManager.refreshContracts = function(data) {
     var url = "/api/contracts/";
 
     var params = {
-        'duns': URLManager.getDUNS()
+        'duns': URLManager.getDUNS(),
+        'page': data['page'], 
     };
     
     if (data['naics'] && data['naics'] != 'all'){ 
