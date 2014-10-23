@@ -30,7 +30,8 @@ RequestsManager.loadContracts = function(listType) {
     var listType = typeof listType !== 'undefined' ? listType : 'naics';
     var url = "/api/contracts/";
     var params = {
-        'duns': URLManager.getDUNS()
+        'duns': URLManager.getDUNS(),
+        'page': 1, 
     };
 
     naics = RequestsManager.stripSubCategories(URLManager.getParameterByName('naics-code'));
@@ -44,7 +45,7 @@ RequestsManager.loadContracts = function(listType) {
     }
 
     $.getJSON(url, params, function(data){
-        Events.publish('contractDataLoaded', data, listType);
+        Events.publish('contractDataLoaded', data, listType, data['page']);
     });
 
 };
@@ -71,7 +72,7 @@ RequestsManager.refreshContracts = function(data) {
     }
 
     $.getJSON(url, params, function(resp_data){
-        Events.publish('contractDataLoaded', resp_data, data['listType']);
+        Events.publish('contractDataLoaded', resp_data, data['listType'], data['page']);
     });
 };
 

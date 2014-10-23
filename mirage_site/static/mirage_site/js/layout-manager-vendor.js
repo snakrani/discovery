@@ -100,7 +100,7 @@ LayoutManager.setButtonAndCSV = function(listType){
     }
 };
 
-LayoutManager.buildContractTable = function(data, listType) {
+LayoutManager.buildContractTable = function(data, listType, pageNumber) {
     var headers = $("div#ch_table table tr").first().clone();
     var table = $("<table></table>");
     var results = data['results'];
@@ -159,6 +159,7 @@ LayoutManager.buildContractTable = function(data, listType) {
             items: data['num_results'],
             itemsOnPage: 100,
             cssStyle: 'light-theme',
+            currentPage: pageNumber,
             onPageClick: function(pageNumber, e) {
                 var contract_data = {}
                 contract_data['page'] = pageNumber;
