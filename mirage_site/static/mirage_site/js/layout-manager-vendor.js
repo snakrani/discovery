@@ -162,8 +162,12 @@ LayoutManager.buildContractTable = function(data, listType, pageNumber) {
             currentPage: pageNumber,
             onPageClick: function(pageNumber, e) {
                 var contract_data = {}
+                if (listType == 'all') {
+                    contract_data['naics'] == 'all';
+                } else {
+                    contract_data['naics'] = naics;
+                }
                 contract_data['page'] = pageNumber;
-                contract_data['naics'] = naics;
                 contract_data['listType'] = listType;
                 Events.publish("contractsChanged", contract_data);
             }
