@@ -26,7 +26,7 @@ LayoutManager.render = function(results) {
     if (results.sam_url) {
         $('#vendor_site_link').attr('href', results.sam_url);
     } else {
-        $('#vendor_site_link').hide(); 
+        $('.vendor_website').hide(); 
     }
     if (results.sam_exclusion == true) {
             $('.debarred_status').show();
