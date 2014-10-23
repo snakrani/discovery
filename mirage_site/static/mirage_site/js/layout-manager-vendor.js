@@ -153,6 +153,18 @@ LayoutManager.buildContractTable = function(data, listType) {
     $("div#ch_table table").remove();
     $("div#ch_table").append(table);
 
+    //pagination
+    $(function() {
+        $("#pagination_container").pagination({
+            items: data['num_results'],
+            itemsOnPage: 100,
+            cssStyle: 'light-theme',
+            onPageClick: function(pageNumber, e) {
+                alert(pageNumber);
+            }
+        });
+    });
+
 };
 
 LayoutManager.formatDate = function(dateObj) {
