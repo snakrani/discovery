@@ -39,7 +39,8 @@ class ListVendors(APIView):
             sam_load_results = SamLoad.objects.all().order_by('-sam_load')[:1]
             sam_load = sam_load_results[0].sam_load if sam_load_results else None
 
-            v_serializer = ShortVendorSerializer(self.get_queryset(pool, setasides, naics), many=True)
+            v_serializer = ShortVendorSerializer(self.get_queryset(pool, setasides, naics), many=True, context={'naics': naics})
+            v_serializer.data.sort(key=lambda k: k['contracts_in_naics'], reverse=True)
             p_serializer = ShortPoolSerializer(pool)
 
             return  Response({ 'num_results': len(v_serializer.data), 'pool' : p_serializer.data , 'sam_load':sam_load, 'results': v_serializer.data } )
@@ -53,8 +54,6 @@ class ListVendors(APIView):
         if setasides:
             for sa in SetAside.objects.filter(code__in=setasides):
                 vendors = vendors.filter(setasides=sa)
-
-        vendors = sorted((ven for ven in vendors), key=lambda x: Contract.objects.filter(vendor=x, NAICS=naics.code).count(), reverse=True)
 
         return vendors
 
