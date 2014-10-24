@@ -61,7 +61,6 @@ class Contract(models.Model):
     vendor = models.ForeignKey(Vendor)
     pricing_type = models.CharField(choices=PRICING_CHOICES, max_length=2, null=True)
     obligated_amount = models.DecimalField(max_digits=128, decimal_places=2, null=True)
-    status = models.CharField(max_length=128, null=True)
     point_of_contact = models.EmailField(null=True)
     reason_for_modification = models.CharField(choices=REASON_FOR_MODIFICATION_CHOICES, max_length=2, null=True)
 

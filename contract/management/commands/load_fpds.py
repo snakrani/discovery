@@ -145,7 +145,6 @@ class Command(BaseCommand):
                     'annual_revenue': get_annual_revenue(award),
                     'number_of_employees': get_number_of_employees(award),
                     'last_modified_by': get_last_modified_by(award),
-                #    'status': get_status(award),
                     'reason_for_modification': get_reason_for_modification(award),
                     'type_of_contract_pricing_name': get_contract_pricing_name(award),
                     'type_of_contract_pricing_id': get_contract_pricing_id(award),
@@ -178,16 +177,18 @@ class Command(BaseCommand):
                     con.pricing_type = mod.get('type_of_contract_pricing_id')
                     con.pricing_type_name = mod.get('type_of_contract_pricing_name')
 
-                    if con.completion_date:
-                        date_obj =  datetime.strptime(con.completion_date, '%Y-%m-%d %H:%M:%S')
-                        if mod.get('reason_for_modification') in ['X', 'E', 'F']:
-                            con.status = mod.get('reason_for_modification')
-                        else:
+                    if mod.get('reason_for_modification') in ['X', 'E', 'F']:
+                        con.reason_for_modification = mod.get('reason_for_modification')
+                    else:
+                        if con.completion_date:
+                            date_obj = datetime.strptime(con.completion_date, '%Y-%m-%d %H:%M:%S')
+                            print(date_obj)
                             today = datetime.utcnow()
-                            if date_obj and date_obj > today:
-                                con.status = 'C2'
-                            elif date_obj and date_obj < today:
-                                con.status = 'C1'
+                            if date_obj:
+                                if date_obj > today:
+                                    con.reason_for_modification = 'C2'
+                                else:
+                                    con.reason_for_modification = 'C1'
 
                     if mod.get('last_modified_by') and '@' in mod['last_modified_by'].lower():
                         #only add if it's an actual email, make this a better regex
@@ -197,7 +198,7 @@ class Command(BaseCommand):
                     con.PSC = mod.get('psc')
                     con.NAICS = mod.get('naics')
 
-                    ar = mod.get('annual_revenu') or None
+                    ar = mod.get('annual_revenue') or None
                     ne = mod.get('number_of_employees') or None
                     if ar:
                         v.annual_revenue = int(ar)
