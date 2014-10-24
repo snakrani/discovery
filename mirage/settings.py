@@ -100,6 +100,13 @@ VEHICLES = ('oasissb', 'oasis')
 SAM_API_URL = "https://api.data.gov/sam/v1/registrations/"
 USASPENDING_API_URL = "http://www.usaspending.gov/fpds/fpds.php"
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'django_cache_table',
+    },
+}
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
