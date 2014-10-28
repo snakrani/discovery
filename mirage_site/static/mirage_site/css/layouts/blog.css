@@ -992,6 +992,10 @@ a.pool_link {
     text-align:center;
     border-width:1px 1px 1px 1px;
 }
-
-
+#pagination_container   {
+    margin-left: auto;
+    margin-right:auto;
+    text-align: center;
+    margin-top:15px;
+}
 
