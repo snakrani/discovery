@@ -26,7 +26,7 @@ LayoutManager.render = function(results) {
     if (results.sam_url) {
         $('#vendor_site_link').attr('href', results.sam_url);
     } else {
-        $('#vendor_site_link').hide(); 
+        $('.vendor_website').hide(); 
     }
     if (results.sam_exclusion == true) {
             $('.debarred_status').show();
@@ -100,7 +100,7 @@ LayoutManager.setButtonAndCSV = function(listType){
     }
 };
 
-LayoutManager.buildContractTable = function(data, listType) {
+LayoutManager.buildContractTable = function(data, listType, pageNumber) {
     var headers = $("div#ch_table table tr").first().clone();
     var table = $("<table></table>");
     var results = data['results'];
@@ -120,7 +120,7 @@ LayoutManager.buildContractTable = function(data, listType) {
 
     for (contract in results) {
         if (results.hasOwnProperty(contract)) {
-            tr = $('<tr></tr>');
+            tr = $('<tr scope="row"></tr>');
             displayDate = (results[contract]['date_signed'] ? this.formatDate(this.createDate(results[contract]['date_signed'])) : ' ');
             piid = (results[contract]['piid'] ? results[contract]['piid'] : ' ');
             agencyName = (results[contract]['agency_name'] ? results[contract]['agency_name'] : ' ');
@@ -152,6 +152,38 @@ LayoutManager.buildContractTable = function(data, listType) {
 
     $("div#ch_table table").remove();
     $("div#ch_table").append(table);
+
+
+    //pagination
+    if (pageNumber == undefined) {
+        var pageNumber = 1;
+    }
+    var itemsPerPage = 100;
+    var startnum = (pageNumber - 1) * itemsPerPage + 1;
+    var endnum = Math.min((pageNumber * itemsPerPage), data['num_results']);
+    $("#contracts_current").text(startnum + " - " + endnum);
+    $("#contracts_total").text(LayoutManager.numberWithCommas(data['num_results']));
+    $("#viewing_contracts").show();
+
+    $(function() {
+        $("#pagination_container").pagination({
+            items: data['num_results'],
+            itemsOnPage: itemsPerPage,
+            cssStyle: 'light-theme',
+            currentPage: pageNumber,
+            onPageClick: function(pageNumber, e) {
+                var contract_data = {}
+                if (listType == 'all') {
+                    contract_data['naics'] == 'all';
+                } else {
+                    contract_data['naics'] = naics;
+                }
+                contract_data['page'] = pageNumber;
+                contract_data['listType'] = listType;
+                Events.publish("contractsChanged", contract_data);
+            }
+        });
+    });
 
 };
 

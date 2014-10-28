@@ -53,6 +53,7 @@ var InputHandler = {
         }
 
         var classes = $target.attr('class').split(' ');
+        data['page'] = 1;
         data['sort'] = class_map[classes[0]];
         
         if ($target.hasClass('arrow-down')) {
@@ -91,7 +92,7 @@ var InputHandler = {
         $date.removeClass('arrow-sortable').addClass('arrow-down');
         $date.siblings('.sortable').removeClass('arrow-down').removeClass('arrow-up').addClass('arrow-sortable');
         
-        Events.publish('contractsChanged', {'naics': this.naicsCode, 'listType': listType});
+        Events.publish('contractsChanged', {'page': 1, 'naics': this.naicsCode, 'listType': listType});
         return false;
     },
 
@@ -139,13 +140,11 @@ var InputHandler = {
                          .attr("value", result.short_code)
                          .text(result.short_code + " - " + result.description)); 
                 });
-                if (URLManager.getParameterByName("naics-code")) {
-                    $("#naics-code").select2({placeholder:'Select a NAICS code', width : '380px'}).select2("val", URLManager.getParameterByName("naics-code"));
-                }
                 //load data if search criteria is defined in querystring
                 if (URLManager.getParameterByName("naics-code") || URLManager.getParameterByName("setasides")) {
                     Events.publish('loadData');
                 }
+                $("#naics-code").select2({placeholder:'Select a NAICS code', width : '380px'}).select2("val", URLManager.getParameterByName("naics-code"));
             }
         );
         $('#naics-code').select2({placeholder:'Select a NAICS code', width : '380px'});

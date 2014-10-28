@@ -504,6 +504,15 @@ a.pool_link {
 }.pooldetail tr:hover td{
     background-color:#eeeeee;
 }
+
+.pooldetail tr:hover td.unrestricted{
+    background-color:#ffffff;
+}
+
+.pooldetail td.unrestricted {
+    font-weight: bold;
+}
+
 .pooldetail td{
     vertical-align:middle;
     background-color:#ffffff;
@@ -545,6 +554,9 @@ a.pool_link {
     display:none;
 }
 #pool_table .h_vendor_name {
+    text-align: left;
+}
+#pool_table .h_naics_results {
     text-align: left;
 }
 #pool_table .vendor_name {
@@ -989,6 +1001,26 @@ a.pool_link {
     text-align:center;
     border-width:1px 1px 1px 1px;
 }
-
-
+#viewing_contracts  {
+    float:left;
+    width:100%;
+    padding:13px;
+    padding-left:0px;
+    color:#666;
+    display: none;
+}
+.viewing_contracts_current {
+    color:#000;
+    font-weight:600;
+}
+.viewing_contracts_total {
+    color:#000;
+    font-weight:600;
+}
+#pagination_container   {
+    margin-left: auto;
+    margin-right:auto;
+    text-align: center;
+    margin-top:15px;
+}
 
