@@ -547,6 +547,9 @@ a.pool_link {
 #pool_table .h_vendor_name {
     text-align: left;
 }
+#pool_table .h_naics_results {
+    text-align: left;
+}
 #pool_table .vendor_name {
     text-align: left;
 }
