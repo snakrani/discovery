@@ -100,7 +100,7 @@ LayoutManager.setButtonAndCSV = function(listType){
     }
 };
 
-LayoutManager.buildContractTable = function(data, listType) {
+LayoutManager.buildContractTable = function(data, listType, pageNumber) {
     var headers = $("div#ch_table table tr").first().clone();
     var table = $("<table></table>");
     var results = data['results'];
@@ -152,6 +152,27 @@ LayoutManager.buildContractTable = function(data, listType) {
 
     $("div#ch_table table").remove();
     $("div#ch_table").append(table);
+
+    //pagination
+    $(function() {
+        $("#pagination_container").pagination({
+            items: data['num_results'],
+            itemsOnPage: 100,
+            cssStyle: 'light-theme',
+            currentPage: pageNumber,
+            onPageClick: function(pageNumber, e) {
+                var contract_data = {}
+                if (listType == 'all') {
+                    contract_data['naics'] == 'all';
+                } else {
+                    contract_data['naics'] = naics;
+                }
+                contract_data['page'] = pageNumber;
+                contract_data['listType'] = listType;
+                Events.publish("contractsChanged", contract_data);
+            }
+        });
+    });
 
 };
 

@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
+{% block css %}
+    <link rel="stylesheet" href="{% static "mirage_site/css/simplePagination.css" %}" />
+{% endblock %}
+
 {% block header %}
 <div id="combined_search_pool">
 
@@ -125,6 +129,8 @@
         
         <div id="no_matching_contracts">There are no matching contracts to display</div>
 
+        <div id="pagination_container"></div>
+
         </div><!--end vendor_contract_history_container<!-->
 
 
@@ -135,6 +141,7 @@
 
 <script src="{% static 'mirage_site/js/layout-manager-vendor.js' %}" type="text/javascript"></script>
 <script src="{% static 'mirage_site/js/requests-manager-vendor.js' %}" type="text/javascript"></script>
+<script src="{% static 'mirage_site/js/jquery.simplePagination.js' %}" type="text/javascript"></script>
 
 
 {% endblock body %}
