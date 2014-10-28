@@ -31,14 +31,22 @@ LayoutManager.renderTable = function(results) {
     $t.find('tr').not(':first').remove();
 
     for (i = 0; i <= len; i++) {
-        $t.append(this.renderRow(results.results[i], qs));
+        $t.append(this.renderRow(results.results[i], qs, i));
     }
 
     $('#pool_table').show();
     Events.publish('contentChanged', results);
 };
 
-LayoutManager.renderRow = function(v, qs) {
+LayoutManager.getQSByName = function(qs, name) {
+        // http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(qs);
+        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+};
+
+LayoutManager.renderRow = function(v, qs, i) {
     var location_col, num_contracts_col;
     var $vendorRow = $('<tr scope="row"></tr>');
     var locationStr = (v.sam_citystate ? this.cleanLocation(v.sam_citystate) : ' ');
@@ -53,13 +61,24 @@ LayoutManager.renderRow = function(v, qs) {
     num_contracts_col = $('<td class="naics_results">' + v.contracts_in_naics + '</td>');
     $vendorRow.append(num_contracts_col);
 
+    var vehicle = this.getQSByName(qs, 'vehicle')
+    console.log(vehicle);
     //add socio-economic columns
-    $vendorRow.append(this.renderColumn(v, '8a', 'A6'));
-    $vendorRow.append(this.renderColumn(v, 'Hubz', 'XX'));
-    $vendorRow.append(this.renderColumn(v, 'sdvo', 'QF'));
-    $vendorRow.append(this.renderColumn(v, 'wo', 'A2'));
-    $vendorRow.append(this.renderColumn(v, 'vo', 'A5'));
-    $vendorRow.append(this.renderColumn(v, 'sdb', '27'));
+    if (vehicle == 'oasis') {
+        if (i==0) {
+            //if first row of content, create cell for "SB Only"
+            var unrestricted_setasides = $('<td colspan="6" rowspan="100" class="unrestricted">SB Only</td>');
+            $vendorRow.append(unrestricted_setasides)
+        }
+    } else {
+        //render socioeconomic indicators
+        $vendorRow.append(this.renderColumn(v, '8a', 'A6'));
+        $vendorRow.append(this.renderColumn(v, 'Hubz', 'XX'));
+        $vendorRow.append(this.renderColumn(v, 'sdvo', 'QF'));
+        $vendorRow.append(this.renderColumn(v, 'wo', 'A2'));
+        $vendorRow.append(this.renderColumn(v, 'vo', 'A5'));
+        $vendorRow.append(this.renderColumn(v, 'sdb', '27'));
+    }
 
     return $vendorRow;
 };
