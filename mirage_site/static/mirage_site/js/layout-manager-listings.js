@@ -62,7 +62,6 @@ LayoutManager.renderRow = function(v, qs, i) {
     $vendorRow.append(num_contracts_col);
 
     var vehicle = this.getQSByName(qs, 'vehicle')
-    console.log(vehicle);
     //add socio-economic columns
     if (vehicle == 'oasis') {
         if (i==0) {
