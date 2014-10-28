@@ -120,7 +120,7 @@ LayoutManager.buildContractTable = function(data, listType, pageNumber) {
 
     for (contract in results) {
         if (results.hasOwnProperty(contract)) {
-            tr = $('<tr></tr>');
+            tr = $('<tr scope="row"></tr>');
             displayDate = (results[contract]['date_signed'] ? this.formatDate(this.createDate(results[contract]['date_signed'])) : ' ');
             piid = (results[contract]['piid'] ? results[contract]['piid'] : ' ');
             agencyName = (results[contract]['agency_name'] ? results[contract]['agency_name'] : ' ');
