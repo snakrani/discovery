@@ -40,7 +40,7 @@ LayoutManager.renderTable = function(results) {
 
 LayoutManager.renderRow = function(v, qs) {
     var location_col;
-    var $vendorRow = $('<tr></tr>');
+    var $vendorRow = $('<tr scope="row"></tr>');
     var locationStr = (v.sam_citystate ? this.cleanLocation(v.sam_citystate) : ' ');
     var name_col = $('<td class="vendor_name"></td>');
     var name_a = $('<a href="/vendor/' + v.duns + '/' + qs + '" class="link_style">' + v.name + '</a>');

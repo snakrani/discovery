@@ -120,7 +120,7 @@ LayoutManager.buildContractTable = function(data, listType, pageNumber) {
 
     for (contract in results) {
         if (results.hasOwnProperty(contract)) {
-            tr = $('<tr></tr>');
+            tr = $('<tr scope="row"></tr>');
             displayDate = (results[contract]['date_signed'] ? this.formatDate(this.createDate(results[contract]['date_signed'])) : ' ');
             piid = (results[contract]['piid'] ? results[contract]['piid'] : ' ');
             agencyName = (results[contract]['agency_name'] ? results[contract]['agency_name'] : ' ');
@@ -153,11 +153,22 @@ LayoutManager.buildContractTable = function(data, listType, pageNumber) {
     $("div#ch_table table").remove();
     $("div#ch_table").append(table);
 
+
     //pagination
+    if (pageNumber == undefined) {
+        var pageNumber = 1;
+    }
+    var itemsPerPage = 100;
+    var startnum = (pageNumber - 1) * itemsPerPage + 1;
+    var endnum = Math.min((pageNumber * itemsPerPage), data['num_results']);
+    $("#contracts_current").text(startnum + " - " + endnum);
+    $("#contracts_total").text(LayoutManager.numberWithCommas(data['num_results']));
+    $("#viewing_contracts").show();
+
     $(function() {
         $("#pagination_container").pagination({
             items: data['num_results'],
-            itemsOnPage: 100,
+            itemsOnPage: itemsPerPage,
             cssStyle: 'light-theme',
             currentPage: pageNumber,
             onPageClick: function(pageNumber, e) {
