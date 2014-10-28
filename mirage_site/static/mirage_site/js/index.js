@@ -11,6 +11,9 @@ $(document).ready(function() {
     RequestsManager.init();
     LayoutManager.init();
     URLManager.init();
+
+    //fix for select2 IE disable bug
+    $('#naics-code').fireOnDisable().select2();
 });
 
 // removes empty strings
