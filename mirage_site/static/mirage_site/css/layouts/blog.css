@@ -504,6 +504,15 @@ a.pool_link {
 }.pooldetail tr:hover td{
     background-color:#eeeeee;
 }
+
+.pooldetail tr:hover td.unrestricted{
+    background-color:#ffffff;
+}
+
+.pooldetail td.unrestricted {
+    font-weight: bold;
+}
+
 .pooldetail td{
     vertical-align:middle;
     background-color:#ffffff;
