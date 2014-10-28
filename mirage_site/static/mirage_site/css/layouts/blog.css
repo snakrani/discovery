@@ -998,6 +998,7 @@ a.pool_link {
     padding:13px;
     padding-left:0px;
     color:#666;
+    display: none;
 }
 .viewing_contracts_current {
     color:#000;
