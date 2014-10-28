@@ -992,6 +992,21 @@ a.pool_link {
     text-align:center;
     border-width:1px 1px 1px 1px;
 }
+#viewing_contracts  {
+    float:left;
+    width:100%;
+    padding:13px;
+    padding-left:0px;
+    color:#666;
+}
+.viewing_contracts_current {
+    color:#000;
+    font-weight:600;
+}
+.viewing_contracts_total {
+    color:#000;
+    font-weight:600;
+}
 #pagination_container   {
     margin-left: auto;
     margin-right:auto;
