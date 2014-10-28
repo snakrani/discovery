@@ -40,7 +40,7 @@ LayoutManager.renderTable = function(results) {
 
 LayoutManager.renderRow = function(v, qs) {
     var location_col, num_contracts_col;
-    var $vendorRow = $('<tr></tr>');
+    var $vendorRow = $('<tr scope="row"></tr>');
     var locationStr = (v.sam_citystate ? this.cleanLocation(v.sam_citystate) : ' ');
     var name_col = $('<td class="vendor_name"></td>');
     var name_a = $('<a href="/vendor/' + v.duns + '/' + qs + '" class="link_style">' + v.name + '</a>');
@@ -50,7 +50,7 @@ LayoutManager.renderRow = function(v, qs) {
     location_col = $('<td class="vendor_location">' + locationStr + '</td>');
     $vendorRow.append(location_col);
 
-    num_contracts_col = $('<td scope="row" class="naics_results">' + v.contracts_in_naics + '</td>');
+    num_contracts_col = $('<td class="naics_results">' + v.contracts_in_naics + '</td>');
     $vendorRow.append(num_contracts_col);
 
     //add socio-economic columns
