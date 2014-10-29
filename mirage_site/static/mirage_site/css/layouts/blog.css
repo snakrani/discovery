@@ -629,6 +629,11 @@ a.pool_link {
     margin-left:10px;
     margin-top:5px;
 }
+
+#download_data_results:hover {
+    text-decoration: underline;
+}
+
 #download_data_results  {
     margin-top:-21px;
     min-height:20px;
