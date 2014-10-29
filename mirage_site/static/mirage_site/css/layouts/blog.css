@@ -1023,4 +1023,12 @@ a.pool_link {
     text-align: center;
     margin-top:15px;
 }
+.offscreen {
+    position:absolute;
+    left:-10000px;
+    top:auto;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+}
 
