@@ -121,6 +121,11 @@ h3 {
     width:500px;
     padding-bottom:10px;
 }
+.logo  {
+    float:left;
+    padding-right:7px;
+    padding-top:7px;
+}
 .oasis_title    {
     display:block;
     font-size:2.8em;
@@ -130,7 +135,7 @@ h3 {
 }
 .oasis_subtitle {
     font-size:1em;
-    color:#bbbbbb;
+    color:#AEAEAE;
     
 }
 #header_link    {
@@ -144,10 +149,12 @@ h3 {
 }
 #combined_search    {
     width:1100px;
-    min-height:180px;
+    min-height:209px;
     padding-top:20px;
     background-color: #2d5872;
     border: 1px solid #000;
+    background-image: url(/static/mirage_site/images/header_bg.png);
+    background-repeat: repeat-x;
 }
 #combined_search_pool    {
     width:1100px;
@@ -313,13 +320,15 @@ h3 {
     color:#009900;
 }
 #footer {
-    min-height:150px;
+    min-height:166px;
     width:1100px;
     background-repeat: repeat;
     margin-left:auto;
     margin-right:auto;
     margin-top:30px;
     background-color: #1f323d;
+    background-image: url(/static/mirage_site/images/footer_bg.png);
+    background-repeat: repeat-x;
    
 }
 #footer_nav {
@@ -505,8 +514,14 @@ a.pool_link {
     background-color:#eeeeee;
 }
 
+.pooldetail td.unrestricted{
+    background-color:#dadada;
+    vertical-align: top;
+    padding-top:10%;
+    color:#3f3f3f;
+}
 .pooldetail tr:hover td.unrestricted{
-    background-color:#ffffff;
+    background-color:#dadada;
 }
 
 .pooldetail td.unrestricted {

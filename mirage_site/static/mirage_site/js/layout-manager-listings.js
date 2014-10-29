@@ -66,7 +66,7 @@ LayoutManager.renderRow = function(v, qs, i) {
     if (vehicle == 'oasis') {
         if (i==0) {
             //if first row of content, create cell for "SB Only"
-            var unrestricted_setasides = $('<td colspan="6" rowspan="100" class="unrestricted">SB Only</td>');
+            var unrestricted_setasides = $('<td colspan="6" rowspan="100" class="unrestricted">Not Applicable </br>(OASIS SB Only)</td>');
             $vendorRow.append(unrestricted_setasides)
         }
     } else {
