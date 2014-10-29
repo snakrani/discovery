@@ -14,6 +14,12 @@ a:hover,
 a:focus {
     text-decoration: underline;
 }
+h1 {
+    font-family: 'Raleway', sans-serif;
+    font-weight:700;
+    font-size:2.8em;
+    border-bottom: 1px solid #d4d4d4;
+}
 h3 {
     font-weight: 100;
     margin:0em;
@@ -150,9 +156,9 @@ h3 {
 #combined_search    {
     width:1100px;
     min-height:209px;
-    padding-top:20px;
+    padding-top:15px;
     background-color: #2d5872;
-    border: 1px solid #000;
+    
     background-image: url(/static/mirage_site/images/header_bg.png);
     background-repeat: repeat-x;
 }
@@ -186,38 +192,49 @@ h3 {
 }
 #vehicle_select   {
     float:left;
-    margin-left:27px;
-    padding-left:37px;
+    margin-left:62px;
+    padding-top:57px;
     background:url(/static/mirage_site/images/1.png);
     background-repeat: no-repeat;
-    background-position: 0px 5px;
+    background-position: 0px 0px;
 
 }
 .vehicle_select_style  {
     color:#bfbfbf;
     height:26px;
     font-family: 'Open Sans', sans-serif;
+    margin-top:9px;
 }
 #search {
     float:left;
     margin-left:40px;
-    padding-left:37px;
+    padding-top:57px;
     background:url(/static/mirage_site/images/2.png);
     background-repeat: no-repeat;
-    background-position: 0px 5px;
+    background-position: 0px 0px;
     width:417px;
 
 }
 .select_text    {
     color:#FFF;
+    font-family: 'Raleway';
+    font-weight: 500;
+    font-size:1.1em;
+}
+.select2-container  {
+    margin-top:7px;
+}
+.pure-form .pure-checkbox  {
+    margin-top:5px;
+    padding-bottom:0px;
 }
 #filter_container   {
     float:left;
-    padding-left:37px;
+    padding-top:57px;
     margin-left:40px;
     background:url(/static/mirage_site/images/3.png);
     background-repeat: no-repeat;
-    background-position: 0px 5px;
+    background-position: 0px 0px;
 }
 #container #filter_container {
     float:left;
@@ -232,6 +249,7 @@ h3 {
     top: -1px;
     *overflow: hidden;
     margin-right:5px;
+
 }
 #filter_container label  {
     display: block;
