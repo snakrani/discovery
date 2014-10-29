@@ -99,28 +99,28 @@
         		<div id="ch_table" class="contracthistory">
                 <table>
                     <tr>
-                        <th class="h_date_signed arrow-down sortable">
+                        <th scope="col" class="h_date_signed arrow-down sortable">
                             Date Signed
                         </th>
-                        <th class="h_piid">
+                        <th scope="col" class="h_piid">
                             PIID
                         </th>
-                        <th class="h_agency arrow-sortable sortable">
+                        <th scope="col" class="h_agency arrow-sortable sortable">
                             Agency
                         </th>
-                        <th class="h_type">
+                        <th scope="col" class="h_type">
                             Type
                         </th>
-                        <th class="h_value arrow-sortable sortable">
+                        <th scope="col" class="h_value arrow-sortable sortable">
                             Value ($)
                         </th>
-                        <th class="h_email_poc">
+                        <th scope="col" class="h_email_poc">
                             Email POC
                         </th>
-                        <th class="h_status arrow-sortable sortable">
+                        <th scope="col" class="h_status arrow-sortable sortable">
                             Status
                         </th>
-                        <th class="h_naics">
+                        <th scope="col" class="h_naics">
                             NAICS
                         </th>
                     </tr>
@@ -131,9 +131,9 @@
 
         <div id="viewing_contracts">
             viewing 
-            <span class="viewing_contracts_current">700 - 799</span>
+            <span id="contracts_current" class="viewing_contracts_current"></span>
             of
-            <span class="viewing_contracts_total">4,356</span>
+            <span id="contracts_total" class="viewing_contracts_total"></span>
             total results
         </div><!--end viewing_contracts<!-->
         <div id="pagination_container"></div>
