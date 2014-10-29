@@ -281,6 +281,31 @@ class FunctionalTests(LiveServerTestCase):
         #make sure link to site is NOT displayed
         self.assertFalse(driver.find_element_by_id('vendor_site_link').is_displayed())
 
+    def test_unrestricted_socioeconomic_factors(self):
+        driver = self.driver
+        #open page for vendor list in OASIS Unrestricted
+        #make sure socioeconomic indicator headers exist
+        #make sure "OASIS SB Only" column exists in results table
+        #make sure socioeconomic columns *don't* exist
+        #make sure filter selection says "OASIS SB Only"
+        #make sure filter selection remains disabled after NAICS is selected
+
+    def test_number_of_contracts_column(self):
+        driver = self.driver
+        #open a search results page
+        #make sure header for number of results column exists
+        #make sure value for number of contracts in row 1 is greater than or equal to value in row 2
+
+    def test_contract_pagination(self):
+        driver = self.driver
+        #open a vendor page where vendor has more than 100 search results
+        #no more than 100 contracts are listed
+        #previous and next buttons exist
+        #total number of contracts is displayed
+        #number of contracts currently displayed is visible
+
+    
+
     def tearDown(self):
         self.driver.quit()
 
