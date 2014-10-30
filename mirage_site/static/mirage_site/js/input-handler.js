@@ -58,17 +58,17 @@ var InputHandler = {
         
         if ($target.hasClass('arrow-down')) {
             data['direction'] = 'asc'
-            $target.removeClass('arrow-down').addClass('arrow-up')
+            $target.removeClass('arrow-down').addClass('arrow-up').attr("title", "Sorted ascending");
         } else if ($target.hasClass('arrow-sortable')) {
             data['direction'] = 'desc'
-            $target.removeClass('arrow-sortable').addClass('arrow-down');
+            $target.removeClass('arrow-sortable').addClass('arrow-down').attr("title", "Sorted descending");
         } else {
             data['direction'] = 'desc'
-            $target.removeClass('arrow-up').addClass('arrow-down')
+            $target.removeClass('arrow-up').addClass('arrow-down').attr("title", "Sorted descending")
         }
 
         //reset other ths that are sortable
-        $target.siblings('.sortable').removeClass('arrow-down').removeClass('arrow-up').addClass('arrow-sortable');
+        $target.siblings('.sortable').removeClass('arrow-down').removeClass('arrow-up').addClass('arrow-sortable').attr("title", "Select to sort");
 
         //prevent button flipping by selecting proper listType
         var $button = $("#vendor_contract_history_title_container").find('.contracts_button_active');
@@ -89,8 +89,8 @@ var InputHandler = {
     
         //reset date header column classes
         var $date = $("div#ch_table th.h_date_signed");
-        $date.removeClass('arrow-sortable').addClass('arrow-down');
-        $date.siblings('.sortable').removeClass('arrow-down').removeClass('arrow-up').addClass('arrow-sortable');
+        $date.removeClass('arrow-sortable').addClass('arrow-down').attr("title", "Sorted descending");
+        $date.siblings('.sortable').removeClass('arrow-down').removeClass('arrow-up').addClass('arrow-sortable').attr("title", "Select to sort");
         
         Events.publish('contractsChanged', {'page': 1, 'naics': this.naicsCode, 'listType': listType});
         return false;
