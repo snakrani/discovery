@@ -8,7 +8,7 @@ html    {
 }
 a {
     text-decoration: none;
-    color: rgb(61, 146, 201);
+    color: #40748E;
 }
 a:hover,
 a:focus {
@@ -17,6 +17,14 @@ a:focus {
 h3 {
     font-weight: 100;
     margin:0em;
+}
+h4 {
+    display: inline-block;
+    float:left;
+    margin:0em;
+    font-weight: 700;
+    color:#4A84A3;
+
 }
 /* LAYOUT CSS */
 .pure-img-responsive {
@@ -281,10 +289,6 @@ h3 {
     border-bottom: 1px solid #eeeeee;
 }
 .data_source_name   {
-    display:block;
-    color:#640016;
-    font-weight: 600;
-    float:left;
 
 }
 .data_sources_row   {
@@ -299,18 +303,18 @@ h3 {
 #data_source_date_sam   {
     float:right;
     font-weight:600;
-    color:#009900;
+    color:#000000;
 
 }
 #data_source_date_fpds   {
     float:right;
     font-weight:600;
-    color:#009900;
+    color:#000000;
 }
 #data_source_date_fapiis   {
     float:right;
     font-weight:600;
-    color:#009900;
+    color:#000000;
 }
 #footer {
     min-height:150px;
@@ -502,7 +506,7 @@ a.pool_link {
     margin:0px;padding:0px;
 
 }.pooldetail tr:hover td{
-    background-color:#eeeeee;
+    background-color:#F1F1F1;
 }
 
 .pooldetail tr:hover td.unrestricted{
@@ -532,7 +536,7 @@ a.pool_link {
     border-width:0px 0px 0px 0px;
 }
 .pooldetail tr:first-child td{
-    background-color:#aaaaaa;
+    background-color:#4A85A3;
     border:0px solid #e5e5e5;
     text-align:center;
     border-width:0px 0px 1px 1px;
@@ -542,7 +546,7 @@ a.pool_link {
     color:#ffffff;
 }
 .pooldetail tr:first-child:hover td{
-    background-color:#aaaaaa;
+    background-color:#4A85A3;
 }
 .pooldetail tr:first-child td:first-child{
     border-width:0px 0px 1px 0px;
@@ -638,6 +642,11 @@ a.pool_link {
     margin-left:10px;
     margin-top:5px;
 }
+
+#download_data_results:hover {
+    text-decoration: underline;
+}
+
 #download_data_results  {
     margin-top:-21px;
     min-height:20px;
@@ -687,7 +696,8 @@ a.pool_link {
 .admin_title {
     margin:0em;
     font-size:1em;
-    color:#8e919c;
+    color:#333333;
+    font-weight:600;
 }
 #vendor_admin_c3    {
     min-width:300px;
@@ -822,7 +832,7 @@ a.pool_link {
     border-width:0px 0px 0px 0px;
 }
 .vendor_detail_table tr:first-child td{
-    background-color:#b2b2b2;
+    background-color:#4A85A3;
     border:0px solid #cecece;
     text-align:center;
     border-width:0px 0px 1px 1px;
@@ -832,7 +842,7 @@ a.pool_link {
     color:#ffffff;
 }
 .vendor_detail_table tr:first-child:hover td{
-    background-color:#b2b2b2;
+    background-color:#4A85A3;
 }
 .vendor_detail_table tr:first-child td:first-child{
     border-width:0px 0px 1px 0px;
@@ -915,7 +925,7 @@ a.pool_link {
     color:#ffffff;
 }
 .contracthistory th{
-    background-color:#aaaaaa;
+    background-color:#4A85A3;
     border:0px solid #e5e5e5;
     text-align:center;
     border-width:0px 0px 1px 1px;
@@ -925,7 +935,7 @@ a.pool_link {
     color:#ffffff;
 }
 .contracthistory tr:first-child:hover td{
-    background-color:#aaaaaa;
+    background-color:#4A85A3;
 }
 .contracthistory tr:first-child td:first-child{
     border-width:0px 0px 1px 0px;
@@ -1022,5 +1032,13 @@ a.pool_link {
     margin-right:auto;
     text-align: center;
     margin-top:15px;
+}
+.offscreen {
+    position:absolute;
+    left:-10000px;
+    top:auto;
+    width:1px;
+    height:1px;
+    overflow:hidden;
 }
 
