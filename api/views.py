@@ -104,7 +104,7 @@ class ListContracts(APIView):
         duns = self.request.QUERY_PARAMS.get('duns', None)
         naics = self.request.QUERY_PARAMS.get('naics', None)
         dir_map = { 'desc': '-', 'asc': '' }
-        sort_map = { 'date': 'date_signed', 'status': 'status', 'agency': 'agency_name', 'amount': 'obligated_amount'}
+        sort_map = { 'date': 'date_signed', 'status': 'reason_for_modification', 'agency': 'agency_name', 'amount': 'obligated_amount'}
 
         if not duns:
             return 1
