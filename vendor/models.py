@@ -33,7 +33,7 @@ class Vendor(models.Model):
     sam_expiration_date = models.DateTimeField(null=True)
     sam_exclusion = models.NullBooleanField(null=True)
     sam_url = models.URLField(null=True)
-    annual_revenue = models.CharField(null=True, max_length=128)
+    annual_revenue = models.BigIntegerField(null=True)
     number_of_employees = models.IntegerField(null=True)
 
 

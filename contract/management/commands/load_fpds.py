@@ -4,9 +4,10 @@ from django.core.management import call_command
 from django.conf import settings
 from pyfpds import Contracts
 from vendor.models import Vendor
-from contract.models import FPDSContract, FPDSLoad
+from contract.models import Contract, FPDSLoad
 from contract import catch_key_error
 from datetime import datetime, timedelta
+import pytz
 
 def get_award_id_obj(award):
     return award['awardID']
@@ -46,10 +47,6 @@ def get_number_of_employees(award):
 def get_last_modified_by(award):
     return award['transactionInformation']['lastModifiedBy']
 
-@catch_key_error
-def get_status(award):
-    return award['transactionInformation']['status']['@description']
-
 def get_contract_pricing_name(award):
     
     @catch_key_error
@@ -66,7 +63,11 @@ def get_contract_pricing_name(award):
 @catch_key_error
 def get_contract_pricing_id(award):
     return award['contractData']['typeOfContractPricing']['#text']
- 
+
+@catch_key_error
+def get_reason_for_modification(award):
+    return award['contractData']['reasonForModification']['#text']
+
 def get_naics(award):
     
     @catch_key_error
@@ -144,7 +145,7 @@ class Command(BaseCommand):
                     'annual_revenue': get_annual_revenue(award),
                     'number_of_employees': get_number_of_employees(award),
                     'last_modified_by': get_last_modified_by(award),
-                    'status': get_status(award),
+                    'reason_for_modification': get_reason_for_modification(award),
                     'type_of_contract_pricing_name': get_contract_pricing_name(award),
                     'type_of_contract_pricing_id': get_contract_pricing_id(award),
                     'naics' : get_naics(award),
@@ -165,7 +166,7 @@ class Command(BaseCommand):
 
                 self.contracts.pretty_print(by_piid[piid])
                 
-                con, created = FPDSContract.objects.get_or_create(piid=piid, vendor=v)
+                con, created = Contract.objects.get_or_create(piid=piid, vendor=v)
 
                 for mod in by_piid[piid]:
                     total += float(mod.get('obligated_amount'))
@@ -176,6 +177,19 @@ class Command(BaseCommand):
                     con.pricing_type = mod.get('type_of_contract_pricing_id')
                     con.pricing_type_name = mod.get('type_of_contract_pricing_name')
 
+                    if mod.get('reason_for_modification') in ['X', 'E', 'F']:
+                        con.reason_for_modification = mod.get('reason_for_modification')
+                    else:
+                        if con.completion_date:
+                            date_obj = datetime.strptime(con.completion_date, '%Y-%m-%d %H:%M:%S')
+                            print(date_obj)
+                            today = datetime.utcnow()
+                            if date_obj:
+                                if date_obj > today:
+                                    con.reason_for_modification = 'C2'
+                                else:
+                                    con.reason_for_modification = 'C1'
+
                     if mod.get('last_modified_by') and '@' in mod['last_modified_by'].lower():
                         #only add if it's an actual email, make this a better regex
                         con.last_modified_by = mod['last_modified_by']
@@ -184,11 +198,13 @@ class Command(BaseCommand):
                     con.PSC = mod.get('psc')
                     con.NAICS = mod.get('naics')
 
-                    if mod.get('annual_revenue'):
-                        v.annual_revenue = mod.get('annual_revenue')
+                    ar = mod.get('annual_revenue') or None
+                    ne = mod.get('number_of_employees') or None
+                    if ar:
+                        v.annual_revenue = int(ar)
 
-                    if mod.get('number_of_employees'):
-                        v.number_of_employees = mod.get('number_of_employees')
+                    if ne:
+                        v.number_of_employees = int(ne)
 
                 con.obligated_amount = total
                 con.save()
