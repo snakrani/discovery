@@ -608,9 +608,9 @@ a.pool_link {
     padding-top:10px;
     background:url(/static/mirage_site/images/external_link.png);
     background-repeat: no-repeat;
-    background-position: 64px 14px;
+    background-position: 118px 14px;
     height:35px;
-    width:80px;
+    width:140px;
     vertical-align: text-bottom;
     color:#83b1d6;
 }
