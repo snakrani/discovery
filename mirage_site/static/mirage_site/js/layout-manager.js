@@ -69,3 +69,16 @@ var LayoutManager = {
         return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}).replace('U.s.', 'U.S.');
     }
 };
+
+LayoutManager.disableFilters = function() {
+    //disable socioeconomic indicators until a naics is selected
+    $('#choose_filters').removeClass('filter_text').addClass('filter_text_disabled');
+    $('.pure-checkbox').addClass('pure-checkbox-disabled');
+    $('.se_filter').attr("disabled", true);
+}
+
+LayoutManager.enableFilters = function() {
+    $('#choose_filters').removeClass('filter_text_disabled').addClass('filter_text');
+    $('.pure-checkbox-disabled').removeClass('pure-checkbox-disabled');
+    $('.se_filter').attr("disabled", false); 
+}
