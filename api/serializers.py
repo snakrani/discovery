@@ -51,6 +51,7 @@ class ContractSerializer(serializers.ModelSerializer):
     
     pricing_type = serializers.Field(source='get_pricing_type_display')
     piid = serializers.SerializerMethodField('split_piid')
+    status = serializers.SerializerMethodField('get_status')
     class Meta:
         model = Contract
         fields = ('piid', 'agency_name', 'NAICS', 'date_signed', 'status', 'obligated_amount', 'point_of_contact', 'pricing_type')
@@ -59,6 +60,9 @@ class ContractSerializer(serializers.ModelSerializer):
         if '_' in obj.piid:
             return obj.piid.split('_')[1]
         return obj.piid
+
+    def get_status(self, obj):
+        return obj.get_reason_for_modification_display()
 
 class PaginatedContractSerializer(pagination.PaginationSerializer):
     
