@@ -103,7 +103,9 @@ class Command(BaseCommand):
     
     contracts = Contracts()
   
-    option_list = BaseCommand.option_list + (make_option('--load_all', action='store_true', dest='load_all', default=False, help="Force load of all contracts"), )
+    option_list = BaseCommand.option_list \
+                  + (make_option('--load_all', action='store_true', dest='load_all', default=False, help="Force load of all contracts"), ) \
+                  + (make_option('--id', action='store', type=int,  dest='id', default=1, help="load contracts for vendors greater or equal to this id"), )
 
     def date_format(self, date1, date2):
         return "[{0},{1}]".format(date1.strftime("%Y/%m/%d"), date2.strftime("%Y/%m/%d"))
@@ -112,13 +114,20 @@ class Command(BaseCommand):
    
         if 'load_all' in options:
             load_from = last_load(options['load_all'])
-
         else:
             load_from = last_load()
         
         load_to = datetime.now()
-        
-        for v in Vendor.objects.all():
+       
+        #allow to start from a certain vendor
+        if 'id' in options:
+            print(options['id'])
+            vendor_id = int(options['id'])
+            vendors = Vendor.objects.filter(id__gte=vendor_id).order_by('id')
+        else:
+            vendors = Vendor.objects.all().order_by('id')
+
+        for v in vendors:
 
             by_piid = {} 
             v_con = self.contracts.get(vendor_duns=v.duns, last_modified_date=self.date_format(load_from, load_to), num_records='all')
