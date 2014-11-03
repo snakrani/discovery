@@ -2,6 +2,7 @@ from django.conf import settings
 from django.test import LiveServerTestCase
 
 from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException        
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.keys import Keys
@@ -121,8 +122,8 @@ class FunctionalTests(LiveServerTestCase):
         #check CAGE code, DUNS number, employees, revenue, address, address2, poc_name, poc_phone
         self.assertEqual("4UYY6", driver.find_element_by_css_selector("span.cage_code.admin_data").text)
         self.assertEqual("786997739", driver.find_element_by_css_selector("span.duns_number.admin_data").text)
-        self.assertEqual("6", driver.find_element_by_css_selector("span.number_of_employees.admin_data").text)
-        self.assertEqual("$2,148,198", driver.find_element_by_css_selector("span.annual_revenue.admin_data").text)
+        self.assertEqual("11", driver.find_element_by_css_selector("span.number_of_employees.admin_data").text)
+        self.assertEqual("$2,876,591", driver.find_element_by_css_selector("span.annual_revenue.admin_data").text)
         self.assertEqual("13873 Park Center Rd Ste 400N", driver.find_element_by_css_selector("span.vendor_address1.admin_data2").text)
         self.assertEqual("Herndon, VA 20171", driver.find_element_by_css_selector("span.vendor_address2.admin_data2").text)
         self.assertEqual("Paul Kwiatkowski", driver.find_element_by_css_selector("span.vendor_poc_name.admin_data2").text)
@@ -280,6 +281,42 @@ class FunctionalTests(LiveServerTestCase):
         driver.get(self.base_url + '/vendor/160062311/?vehicle=oasissb&naics-code=541330&')
         #make sure link to site is NOT displayed
         self.assertFalse(driver.find_element_by_id('vendor_site_link').is_displayed())
+
+    def test_unrestricted_socioeconomic_factors(self):
+        driver = self.driver
+        #open page for vendor list in OASIS Unrestricted
+        driver.get(self.base_url + '/results?vehicle=oasis&naics-code=541330&')
+        #make sure socioeconomic indicator headers exist
+        self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/td[4]').text, '8(a)')
+        self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/td[5]').text, 'HubZ')
+        self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/td[6]').text, 'SDVO')
+        self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/td[7]').text, 'WO')
+        self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/td[8]').text, 'VO')
+        self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/td[9]').text, 'SDB')
+        #make sure "OASIS SB Only" column exists in results table
+        self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[2]/td[4]').text, 'SB Only')
+        #make sure filter selection says "OASIS SB Only"
+        self.assertEqual(driver.find_element_by_id('choose_filters').text, 'Choose filters (OASIS SB Only)')
+        #make sure filter selection remains disabled after NAICS is selected
+        self.assertFalse(driver.find_element_by_css_selector(".se_filter").is_enabled())
+
+    def test_number_of_contracts_column(self):
+        driver = self.driver
+        #open a search results page
+        driver.get(self.base_url + '/results?vehicle=oasissb&naics-code=541330&')
+        #make sure header for number of results column exists
+        self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/td[3]').text, 'No. of Contracts')
+        #make sure value for number of contracts in row 1 is greater than or equal to value in row 2
+        self.assertTrue(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[2]/td[3]').text > driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[3]/td[3]').text)
+
+    def test_contract_pagination(self):
+        driver = self.driver
+        #open a vendor page where vendor has more than 100 search results
+        driver.get(self.base_url + '/vendor/197138274/?vehicle=oasis&naics-code=541330&')
+        #no more than 100 contracts are listed
+        self.assertEqual(driver.find_element_by_id('contracts_current').text, '1 - 100')
+        #total number of contracts is displayed
+        self.assertEqual(driver.find_element_by_id('contracts_total').text, '4,096')
 
     def tearDown(self):
         self.driver.quit()
