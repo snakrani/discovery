@@ -14,6 +14,11 @@ $(document).ready(function() {
 
     //fix for select2 IE disable bug
     $('#naics-code').fireOnDisable().select2();
+    $('#placeholder').select2({ 
+        'placeholder': 'Select a vehicle', 
+        minimumResultsForSearch: -1,
+        width: "170px"
+    });
 });
 
 // removes empty strings
