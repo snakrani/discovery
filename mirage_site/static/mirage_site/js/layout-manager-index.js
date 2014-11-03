@@ -4,7 +4,6 @@ LayoutManager.indexInit = function(original) {
     Events.subscribe('metaDataLoaded', this.renderMetaData);
     Events.subscribe('loadedWithQS', this.enableNaics);
     original.bind(LayoutManager).call()
-    this.disabledColor = '#999999';
     this.disableNaics();
     this.disableFilters();
 };
@@ -34,13 +33,6 @@ LayoutManager.disableNaics = function() {
     $("div#search span.select_text").css('color', this.disabledColor);
     $("div#search select").attr("disabled", true);
 };
-
-LayoutManager.disableFilters = function() {
-    //disable socioeconomic indicators until a naics is selected
-    $('#choose_filters').css('color', this.disabledColor);
-    $('.pure-checkbox').css('color', this.disabledColor);
-    $('.se_filter').attr("disabled", true);
-}
 
 LayoutManager.convertDate = function(oldDate) {
     var dateArray = oldDate.split('-')

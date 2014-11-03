@@ -253,6 +253,15 @@ h4 {
 #filter label input  {
     padding-right:5px !important; 
 }
+
+.filter_text {
+    color: #ffffff;
+}
+
+.filter_text_disabled {
+    color: #999999;
+}
+
 .labeltest  {
     margin-left:px;
 }
@@ -575,9 +584,17 @@ a.pool_link {
 #pool_table .pooldetail .vendor_name tr:hover td{
     background-color:#eeeeee;
 }
-.pure-checkbox  {
+.pure-checkbox {
     padding-bottom:3px;
 }
+.pure-checkbox-enabled {
+    padding-bottom:3px;
+    color: #ffffff;
+}
+.pure-checkbox-disabled {
+    color: #999999;
+}
+
 /* Vendor Detail Styles */
 #breadcrumb_container   {
     border-top:1px solid #e3e5e9;
@@ -608,9 +625,9 @@ a.pool_link {
     padding-top:10px;
     background:url(/static/mirage_site/images/external_link.png);
     background-repeat: no-repeat;
-    background-position: 64px 14px;
+    background-position: 118px 14px;
     height:35px;
-    width:80px;
+    width:140px;
     vertical-align: text-bottom;
     color:#83b1d6;
 }

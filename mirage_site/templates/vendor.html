@@ -21,7 +21,7 @@
         
         <div id="vendor_title_status_container">
 	        <div class="vendor_title"></div>
-            <div class="vendor_website"><a id="vendor_site_link" href="#">website</a></div>
+            <div class="vendor_website"><a id="vendor_site_link" href="#">vendor website</a></div>
 	        <div class="debarred_status"> <<< WARNING: DEBARRED!</div>
         </div><!--end vendor_title_status_container<!-->
 
@@ -90,34 +90,33 @@
         	<div id="vendor_contract_history_title_container">
         		<span class="vendor_contract_history_text">Showing this vendor's contract history for: </span>
         		<!-- <span class="vendor_contract_history_naics"></span> -->
-
-                    <a href="#"><div id="naics_contracts_button" class="contracts_button">NAICS 12345</div></a>
-                    <a href="#"><div id="all_contracts_button" class="contracts_button">All Contracts</div></a>
+                <div tabindex="0" id="naics_contracts_button" class="contracts_button" title="load this vendor's contract history for this NAICS in the table below">NAICS 12345</div>
+                <div tabindex="0" id="all_contracts_button" class="contracts_button" title="load this vendor's contract history for all past contracts in the table below">All Contracts</div>
         	</div><!--end vendor_contract_history_title_container<!-->
 
         	
         		<div id="ch_table" class="contracthistory">
                 <table>
                     <tr>
-                        <th scope="col" class="h_date_signed arrow-down sortable">
+                        <th scope="col" class="h_date_signed arrow-down sortable" title="Sorted descending" tabindex="0">
                             Date Signed
                         </th>
                         <th scope="col" class="h_piid">
                             PIID
                         </th>
-                        <th scope="col" class="h_agency arrow-sortable sortable">
+                        <th scope="col" class="h_agency arrow-sortable sortable" title="Select to sort" tabindex="0">
                             Agency
                         </th>
                         <th scope="col" class="h_type">
                             Type
                         </th>
-                        <th scope="col" class="h_value arrow-sortable sortable">
+                        <th scope="col" class="h_value arrow-sortable sortable" title="Select to sort" tabindex="0">
                             Value ($)
                         </th>
                         <th scope="col" class="h_email_poc">
                             Email POC
                         </th>
-                        <th scope="col" class="h_status arrow-sortable sortable">
+                        <th scope="col" class="h_status arrow-sortable sortable" title="Select to sort" tabindex="0">
                             Status
                         </th>
                         <th scope="col" class="h_naics">
