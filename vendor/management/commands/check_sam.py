@@ -29,6 +29,7 @@ class Command(BaseCommand):
         for v in vendors:
             #get SAM.gov API response for this vendor
             uri = settings.SAM_API_URL + v.duns_4 + '?api_key=' + settings.SAM_API_KEY
+            print(uri)
             sam_data = requests.get(uri).json()
    
             if 'sam_data' in sam_data:

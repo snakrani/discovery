@@ -74,6 +74,18 @@ class VendorsTest(TestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(len(resp.data['results']), resp.data['num_results'])
 
+class VendorTest(TestCase):
+    """ tests single vendor endpoint """
+    fixtures = ['vendors.json'] 
+
+    def setUp(self):
+        self.c = Client()
+        self.path = '/api/vendor/075458455/'
+
+    def test_vendor_exists(self):
+        resp = self.c.get(self.path)
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.data['name'] , 'Dynetics, Inc.')
 
 class ContractsTest(TestCase):
     """tests for Contracts API endpoint"""
@@ -99,5 +111,35 @@ class ContractsTest(TestCase):
         resp = self.c.get(self.path, {'duns': '197138274', 'naics': '541330'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.data['num_results'], 4096)
+
+    def test_default_sort(self):
+        resp = self.c.get(self.path, {'duns': '197138274', 'sort': 'status'})
+        resp2 = self.c.get(self.path, {'duns': '197138274', 'sort': 'status', 'direction': 'desc'})
+        #responses should be equal because default sort is desc
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp2.status_code, 200)
+        self.assertEqual(resp.data['results'], resp2.data['results'])
+
+    def test_sort_with_all_params(self):
+        resp = self.c.get(self.path, {'duns': '197138274', 'sort': 'status', 'direction': 'asc'})
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.data['results'][0]['status'], 'Completed')
+
+class MetadataTest(TestCase):
+    """ Tests the metadata endpoint """
+    fixtures = ['metadata.json']
+
+    def setUp(self):
+        self.c = Client()
+        self.path = '/api/metadata/'
+
+    def test_metadata(self):
+        resp = self.c.get(self.path)
+        self.assertEqual(resp.status_code, 200)
+        self.assertNotEqual(None, resp.data['sam_load_date'])
+        self.assertNotEqual(None, resp.data['fpds_load_date'])
+
+
+
 
 

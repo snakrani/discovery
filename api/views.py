@@ -15,7 +15,7 @@ class GetVendor(APIView):
 
     def get(self, request, duns, format=None):
         vendor = Vendor.objects.get(duns=duns) 
-        return Response(VendorSerializer(vendor).data) 
+        return Response(VendorSerializer(vendor).data)  
 
 
 
@@ -47,7 +47,6 @@ class ListVendors(APIView):
 
         except Naics.DoesNotExist:
             return HttpResponseBadRequest("You must provide a valid naics code that maps to an OASIS pool")
-        #except goes here
 
     def get_queryset(self, pool, setasides, naics):
         vendors = Vendor.objects.filter(pools__in=pool)
@@ -85,9 +84,6 @@ class ListContracts(APIView):
         if contracts == 1:
             return HttpResponseBadRequest("You must provide a vendor DUNS to retrieve contracts.")
 
-        elif not contracts:
-            return Response({'num_results': 0, 'results': []})
-
         else:
             paginator = Paginator(contracts, 100)
             page = request.QUERY_PARAMS.get('page', 1)
@@ -114,7 +110,7 @@ class ListContracts(APIView):
         direction = self.request.QUERY_PARAMS.get('direction', None)
 
         if sort and not direction:
-            direction = 'desc'
+            direction = 'desc' 
         
         if not sort or sort not in sort_map:
             sort = 'date'
@@ -130,8 +126,8 @@ class ListContracts(APIView):
 
 class MetadataView(APIView):
     def get(self, request, format=None):
-       mds = MetadataSerializer(Metadata())
-       return Response(mds.data)
+       mds = MetadataSerializer(Metadata()) 
+       return Response(mds.data) 
         
 
 

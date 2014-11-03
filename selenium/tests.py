@@ -121,8 +121,8 @@ class FunctionalTests(LiveServerTestCase):
         #check CAGE code, DUNS number, employees, revenue, address, address2, poc_name, poc_phone
         self.assertEqual("4UYY6", driver.find_element_by_css_selector("span.cage_code.admin_data").text)
         self.assertEqual("786997739", driver.find_element_by_css_selector("span.duns_number.admin_data").text)
-        self.assertEqual("6", driver.find_element_by_css_selector("span.number_of_employees.admin_data").text)
-        self.assertEqual("$2,148,198", driver.find_element_by_css_selector("span.annual_revenue.admin_data").text)
+        self.assertEqual("11", driver.find_element_by_css_selector("span.number_of_employees.admin_data").text)
+        self.assertEqual("$2,876,591", driver.find_element_by_css_selector("span.annual_revenue.admin_data").text)
         self.assertEqual("13873 Park Center Rd Ste 400N", driver.find_element_by_css_selector("span.vendor_address1.admin_data2").text)
         self.assertEqual("Herndon, VA 20171", driver.find_element_by_css_selector("span.vendor_address2.admin_data2").text)
         self.assertEqual("Paul Kwiatkowski", driver.find_element_by_css_selector("span.vendor_poc_name.admin_data2").text)
