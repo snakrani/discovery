@@ -7,6 +7,13 @@ LayoutManager.render = function(results) {
     // this is turning into something of a router
     // should be refactored [TS]
 
+    if (this.getQSByName(document.location, 'vehicle') == "oasis") {
+        //disable filters for 'oasis unrestricted' results
+        this.disableFilters();
+    } else {
+        this.enableFilters();
+    }
+
     if ($.isEmptyObject(results)) {
         //clear out content
         $('#pool_vendors').find('tr').not(':first').remove();

@@ -60,7 +60,7 @@ RequestsManager.refreshContracts = function(data) {
     };
     
     if (data['naics'] && data['naics'] != 'all'){ 
-        params['naics'] = data['naics']; 
+        params['naics'] = RequestsManager.stripSubCategories(data['naics']); 
     }
 
     if (data['direction']) { params['direction'] = data['direction'] }
@@ -81,7 +81,6 @@ RequestsManager.stripSubCategories = function(naics_code) {
     if (isNaN(naics_code.slice(-1))) {
         //strip it
         naics_code = naics_code.substring(0, naics_code.length - 1);
-        console.log(naics_code);
     }
     return naics_code
 }

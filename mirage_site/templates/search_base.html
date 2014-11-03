@@ -6,7 +6,7 @@
     <div id="vehicle_select">
             <span class="select_text">Select a vehicle</span>
         <form id="vehicle-select">
-            <select id="placeholder" class="vehicle_select_style pure-form">
+            <select id="placeholder" class="vehicle_select_style pure-form" title="Select a Vehicle">
                 <option value="">Select a Vehicle</option>
                 <option value="oasissb">OASIS SB</option>
                 <option value="oasis">OASIS Unrestricted</option>
@@ -16,7 +16,7 @@
 
     <div id="search">
         <span class="select_text">Select a NAICS code or description</span>
-        <form id="naics-search" class="pure-form">
+        <form id="naics-search" class="pure-form" title="select_a_naics_code_or_description">
             <select id="naics-code">
                 <option></option>
             </select>
@@ -30,14 +30,14 @@
             <form id="setaside-filters" class="pure-form pure-form-stacked">
                 <fieldset>
                     <div id="filter_c1">
-                        <label class="pure-checkbox" for="8a"><input class="se_filter" type="checkbox" id="eight_a" name="8a" value="A6" {% if "A6" in request.GET.setasides %}checked{% endif %} />8(a)</label>
-                        <label class="pure-checkbox" for="Hubz"><input class="se_filter" type="checkbox" id="Hubz" name="Hubz" value="XX" {% if "XX" in request.GET.setasides %}checked{% endif %} />HUBZone</label>
-                        <label class="pure-checkbox" for="disvet"><input class="se_filter" type="checkbox" id="disvet" name="disvet" value="QF" {% if "QF" in request.GET.setasides %}checked{% endif %}/>Service Disabled<br> Veteran Owned</label>
+                        <label class="pure-checkbox" for="8a" title="choose_filter_8a"><input class="se_filter" type="checkbox" id="eight_a" name="8a" value="A6" aria-labeledby="choose_filters" {% if "A6" in request.GET.setasides %}checked{% endif %} />8(a)</label>
+                        <label class="pure-checkbox" for="Hubz" title="choose_filter_Hubzone"><input class="se_filter" type="checkbox" id="Hubz" name="Hubz" value="XX" aria-labeledby="choose_filters" {% if "XX" in request.GET.setasides %}checked{% endif %} />HUBZone</label>
+                        <label class="pure-checkbox" for="disvet" title="choose_filter_disabled_veteran"><input class="se_filter" type="checkbox" id="disvet" name="disvet" value="QF" aria-labeledby="choose_filters" {% if "QF" in request.GET.setasides %}checked{% endif %}/>Service Disabled<br> Veteran Owned</label>
                     </div>
                     <div id="filter_c2">
-                        <label class="pure-checkbox" for="woman"><input class="se_filter" type="checkbox" id="woman" name="woman" value="A2" {% if "A2" in request.GET.setasides %}checked{% endif %} />Woman Owned</label>
-                        <label class="pure-checkbox" for="vet"><input class="se_filter" type="checkbox" id="vet" name="vet" value="A5" {% if "A5" in request.GET.setasides %}checked{% endif %}/>Veteran Owned</label>
-                        <label class="pure-checkbox labeltest" for="smalldis"><input class="se_filter" type="checkbox" id="smalldis" name="smalldis" value="27" {% if "27" in request.GET.setasides %}checked{% endif %}/>Small Disadvantaged <br>Business</label>
+                        <label class="pure-checkbox" for="woman" title="choose_filter_woman_owned"><input class="se_filter" type="checkbox" id="woman" name="woman" value="A2" aria-labeledby="choose_filters" {% if "A2" in request.GET.setasides %}checked{% endif %} />Woman Owned</label>
+                        <label class="pure-checkbox" for="vet" title="choose_filter_veteran_owned"><input class="se_filter" type="checkbox" id="vet" name="vet" value="A5" aria-labeledby="choose_filters" {% if "A5" in request.GET.setasides %}checked{% endif %}/>Veteran Owned</label>
+                        <label class="pure-checkbox labeltest" for="smalldis" title="choose_filter_small_and_disabled_veteran_owned"><input class="se_filter" type="checkbox" id="smalldis" name="smalldis" value="27" aria-labeledby="choose_filters" {% if "27" in request.GET.setasides %}checked{% endif %}/>Small Disadvantaged <br>Business</label>
                     </div>
                 </fieldset>
             </form>
