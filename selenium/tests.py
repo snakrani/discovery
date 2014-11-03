@@ -307,7 +307,7 @@ class FunctionalTests(LiveServerTestCase):
         #make sure header for number of results column exists
         self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/td[3]').text, 'No. of Contracts')
         #make sure value for number of contracts in row 1 is greater than or equal to value in row 2
-        self.assertTrue(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[2]/td[3]').text > driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[3]/td[3]').text)
+        self.assertGreater(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[2]/td[3]').text, driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[3]/td[3]').text)
 
     def test_contract_pagination(self):
         driver = self.driver
