@@ -15,7 +15,7 @@ class GetVendor(APIView):
 
     def get(self, request, duns, format=None):
         vendor = Vendor.objects.get(duns=duns) 
-        return Response(VendorSerializer(vendor).data)  
+        return Response(VendorSerializer(vendor).data) 
 
 
 
@@ -110,7 +110,7 @@ class ListContracts(APIView):
         direction = self.request.QUERY_PARAMS.get('direction', None)
 
         if sort and not direction:
-            direction = 'desc' 
+            direction = 'desc'
         
         if not sort or sort not in sort_map:
             sort = 'date'
@@ -126,8 +126,8 @@ class ListContracts(APIView):
 
 class MetadataView(APIView):
     def get(self, request, format=None):
-       mds = MetadataSerializer(Metadata()) 
-       return Response(mds.data) 
+       mds = MetadataSerializer(Metadata())
+       return Response(mds.data)
         
 
 
