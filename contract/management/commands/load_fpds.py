@@ -89,15 +89,22 @@ def get_psc(award):
 def last_load(load_all=False):
     load = FPDSLoad.objects.all().order_by('-load_date')
     if len(load) > 0 and not load_all:
-        old_load = load[0].load_date
-        load[0].load_date = datetime.now()
-        load[0].save()
-        return old_load    
+        return load[0].load_date    
     else: 
         today = datetime.now()
-        new_load = FPDSLoad(load_date=today)
-        new_load.save()
         return  today - timedelta(weeks=(52*10))
+
+
+def create_load(load_date):
+    #overwrite the most recent load object to keep the table from growing 
+    load = FPDSLoad.objects.all().order_by('-load_date')
+    if len(load) > 0:
+        load_obj = load[0]
+    else:
+        load_obj = FPDSLoad()
+
+    load_obj.load_date = load_date
+    load_obj.save()
 
 class Command(BaseCommand):
     
@@ -220,3 +227,5 @@ class Command(BaseCommand):
 
             #save updates to annual revenue, number of employees
             v.save()
+            create_load(load_to)
+
