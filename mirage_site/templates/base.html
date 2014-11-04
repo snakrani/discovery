@@ -57,7 +57,7 @@
     </head>
     <body>
 
-        <div id="container">
+        <div id="page_top_container">
             <a href="#skip" class="offscreen">Skip Content</a>
             <div id="header">
             <div id="header_link"><a href="http://www.gsa.gov/oasis">OASIS Program Home</a></div>
@@ -67,10 +67,16 @@
                     <span class="oasis_subtitle">OASIS Market Research</span>
 
                 </div><!--end page_title<!-->
+            </div><!--end header<!-->
+        </div><!--end page_top_container<!-->
+
+
                 {% block header %}    
                 {% endblock header %}
 
-            </div><!--end header<!-->
+
+
+            <div id="container">
 
             <a name="skip" > </a >
             {% block body %}
@@ -89,20 +95,38 @@
 
             <div class="cf"></div>
 
-            <div id="footer">
-                <div id="footer_nav">
-                <ul>
-                    <li><a href="http://www.gsa.gov/oasis">OASIS Program Home</a></li>  
-                    <li><a href="https://github.com/18F/mirage"><img src="/static/mirage_site/images/github_icon.png">
-                    Check out our code on GitHub</a></li>                  
-                </ul>
+            <div id="footer_container">
+                <div id="footer">
+                    <div id="footer_nav">
+                    <ul>
+                        <li><a href="http://www.gsa.gov/oasis">OASIS Program Home</a></li>  
+                        <li><a href="https://github.com/18F/mirage"><img src="/static/mirage_site/images/github_icon.png">
+                        Check out our code on GitHub</a></li>                  
+                    </ul>
 
-                </div><!--end footer_nav<!-->
+                    </div><!--end footer_nav<!-->
 
+                    <div id="call_to_action">
+                        <div class="cta_title">Want to help develop Mirage?</div>
+                        <span class="cta_text">We are always looking for volunteers to try out prototypes.  Or drop us a line with your questions & comments.</span>
 
-                <a href="https://18f.gsa.gov"><div class="logo1"><img src="/static/mirage_site/images/logo-18f.png" alt="18F logo"></div></a>
-                <a href="http://www.gsa.gov" alt="GSA logo"><div class="logo2"><img src="/static/mirage_site/images/gsa_logo.jpg"></div></a>
-            </div><!--end footer<!-->
+                        <span class="cta_feedback">
+                        We'd love your feedback!
+                        </span>
+                        <div class="cta_spacer">
+                        <span class="cta_email">email:</span>
+                        <span class="cta_email_address">mirage-18f@gsa.gov</span>
+                        </div>
+                        </div>
+                    </div><!--end call_to_action<!-->
+
+                    <div class="logo_container">
+                        <div class="built_by">Built by:</div>
+                        <a href="https://18f.gsa.gov"><div class="logo1"><img src="/static/mirage_site/images/logo-18f.png" alt="18F logo"></div></a>
+                        <a href="http://www.gsa.gov" alt="GSA logo"><div class="logo2"><img src="/static/mirage_site/images/gsa_logo.jpg"></div></a>
+                    </div>
+                </div><!--end footer<!-->
+                <!--end footer_container<!-->
 
         <style>
         /*  #naics-code { width: 100%; }

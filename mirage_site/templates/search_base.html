@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 
 {% block header %}
+<div id="combined_search_container">
 <div id="combined_search">
 
     <div id="vehicle_select">
-            <span class="select_text">Select a vehicle</span>
+            <span class="select_text">Select vehicle</span>
         <form id="vehicle-select">
-            <select id="placeholder" class="vehicle_select_style pure-form" title="Select a Vehicle">
+            <select id="placeholder" class="vehicle_select_style" title="Select a Vehicle">
                 <option value="">Select a Vehicle</option>
                 <option value="oasissb">OASIS SB</option>
                 <option value="oasis">OASIS Unrestricted</option>
@@ -15,7 +16,7 @@
     </div><!--end vehicle_select<!-->
 
     <div id="search">
-        <span class="select_text">Select a NAICS code or description</span>
+        <span class="select_text">Select NAICS code or description</span>
         <form id="naics-search" class="pure-form" title="select_a_naics_code_or_description">
             <select id="naics-code">
                 <option></option>
@@ -46,6 +47,7 @@
 
 
 </div><!--end combined_search<!-->
+</div><!--end combined_search_container<!-->
 {% endblock header %}
 
 {% block body %}
@@ -54,20 +56,11 @@
 
 <div id="main_container">
 
-    <div id="results_sam_container">
-
     {% block search_info %}
     {% endblock %}
-
-
-
-<!--         <div id="sam_last_updated">
-            <span id="sam_load" class="sam_style"></span>
-        </div><!end sam_last_updated<!--> 
-
-    <!--end results_sam_container<!-->
-
-
+    <div id="results_sam_container">
+    </div>
+    
 </div><!--end main_container<!-->
 
 

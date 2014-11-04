@@ -23,6 +23,8 @@ h1 {
 h3 {
     font-weight: 100;
     margin:0em;
+    color:#4A84A3;
+
 }
 h4 {
     display: inline-block;
@@ -30,6 +32,7 @@ h4 {
     margin:0em;
     font-weight: 700;
     color:#4A84A3;
+    font-size:1.17em;
 
 }
 /* LAYOUT CSS */
@@ -120,6 +123,12 @@ h4 {
 
 /* Template Styles */
 
+#page_top_container  {
+    width:1100px;
+    margin-left:auto;
+    margin-right:auto;
+    background-color:#;
+}
 #container  {
     width:1100px;
     margin-left:auto;
@@ -161,14 +170,19 @@ h4 {
 .widedrop   {
     width:600px;
 }
+#combined_search_container    {
+    width:100%;
+    
+    background-image: url(/static/mirage_site/images/header_bg.png);
+    background-repeat: repeat-x;
+}
 #combined_search    {
     width:1100px;
     min-height:209px;
     padding-top:15px;
-    background-color: #2d5872;
-    
-    background-image: url(/static/mirage_site/images/header_bg.png);
-    background-repeat: repeat-x;
+    margin-left:auto;
+    margin-right:auto;
+
 }
 #combined_search_pool    {
     width:1100px;
@@ -227,7 +241,7 @@ h4 {
     color:#FFF;
     font-family: 'Raleway';
     font-weight: 500;
-    font-size:1.1em;
+    font-size:1.2em;
 }
 .select2-container  {
     margin-top:7px;
@@ -243,10 +257,10 @@ h4 {
     background:url(/static/mirage_site/images/3.png);
     background-repeat: no-repeat;
     background-position: 0px 0px;
+    color:#FFF;
 }
 #container #filter_container {
     float:left;
-    color:#fff;
     padding-right:10px;
 }
 #filter_container input  {
@@ -297,30 +311,32 @@ h4 {
 }
 #custom_page_content  {
     width:1100px;
-    padding-left:30px;
-    padding-right:30px;
+    padding-left:0px;
+    padding-right:0px;
     display:block;
 }
 #about_oasis    {
     float:left;
-    width:430px;
-    margin-left:60px;
+    width:440px;
+    margin-left:40px;
 }
 #about_oasis h3   {
     font-weight: 600;
 }
 .about_oasis_text   {
     margin-left:10px;
+    font-weight:300;
 }
 #data_sources   {
     float:left;
     width:440px;
-    margin-left:40px;
+    margin-left:60px;
 }
 #data_sources_last_updated  {
     width:100%;
     text-align: right;
     border-bottom: 1px solid #eeeeee;
+    font-size:1.17em;
 }
 .data_source_name   {
 
@@ -330,67 +346,131 @@ h4 {
     margin-top:20px;
 }
 .data_source_description    {
-    color:#6b6b6b;
-    display:block;
-    
+    color:#000;
+    display:inline-block;
+    margin-top:-1.2em;
+    font-weight:300;
+}
+#data_source_last_updated   {
+    float:right;
+    font-weight:400;
+    color:#666666;
+    padding-right:.5em;
+    font-style: italic;
+    font-size:1.17em;
+
 }
 #data_source_date_sam   {
     float:right;
     font-weight:600;
     color:#000000;
+    font-size:1.17em;
 
 }
 #data_source_date_fpds   {
     float:right;
     font-weight:600;
     color:#000000;
+    font-size:1.17em;
 }
 #data_source_date_fapiis   {
     float:right;
     font-weight:600;
     color:#000000;
+    font-size:1.17em;
+}
+#footer_container   {
+    background-image: url(/static/mirage_site/images/footer_bg.png);
+    
+    width:100%;
+    background-repeat: repeat;
+    min-height:170px;
+
 }
 #footer {
-    min-height:166px;
-    width:1100px;
-    background-repeat: repeat;
+    width:1140px;
     margin-left:auto;
     margin-right:auto;
     margin-top:30px;
-    background-color: #1f323d;
-    background-image: url(/static/mirage_site/images/footer_bg.png);
-    background-repeat: repeat-x;
-   
+    padding-top:30px;
 }
 #footer_nav {
-    margin-left:20px;
-    padding-top:34px;
+    margin-left:0px;
+    padding-top:5px;
     color:#FFF;
     list-style-type: none;
     float:left;
-    
-
 }
 #footer_nav a {
     color:#FFF;
     list-style-type: none;
+    font-weight:500;
 }
 #footer_nav ul {
     color:#FFF;
     list-style-type: none;
     font-weight:300;
 }
-.logo1   {
-    margin-left:550px;
+#call_to_action {
+    width:539px;
+    font-size:.9em;
     float:left;
-    padding-top:30px;
+    min-height:88px;
+    margin-left:35px;
+    padding-left:40px;
+    padding-right:30px;
+    background-image: url(/static/mirage_site/images/footer_cta_bg.png);
+    background-position: 50%;
+    background-repeat: no-repeat;
+    overflow:hidden;
+}
+.cta_title   {
+    color:#FFFC41;
+    font-size: 1.8em;
+    font-family: 'Raleway', sans-serif;
+    font-weight:600;
+}
+.cta_text  {
+    color:#FFFFFF;
+    font-weight:300;
+}
+.cta_feedback  {
+    color:#FFFFFF;
+    padding-left:4px;
+    font-weight:600;
+}
+.cta_email  {
+    margin-top:15px;
+    color:#CCCCCC;
+    font-size:1.5em;
+}
+.cta_email_address  {
+    padding-top:15px;
+    font-family: 'Raleway';
+    font-weight:500;
+    font-size:1.5em;
+    color:#FFFFFF;
+}
+.cta_spacer {
+    padding-top:10px;
+}
+.logo_container   {
+    margin-left:35px;
+    float:left;
+    margin-top:-10;
+}
+.built_by   {
+    width:100%;
+    color:#FFF;
+    font-size:.8em;
+}
+.logo1   {
+    display:inline-block;
 }
 .logo2   {
     margin-left:30px;
-    float:left;
-    padding-top:30px;
+    display:inline-block;
 }
-
 #landing    {
     min-height:700px;
     width:1100px;
@@ -400,11 +480,9 @@ h4 {
     content: " "; /* 1 */
     display: table; /* 2 */
 }
-
 .cf:after {
     clear: both;
 }
-
 /**
  * For IE 6/7 only
  * Include this rule to trigger hasLayout and contain floats.
@@ -414,42 +492,48 @@ h4 {
 }
 /* Initial Search Results Styles */
 #results_sam_container {
-    width:1050px;
+    width:1100px;
     background-color:;
-    border-top: 1px solid #eeeeee;
+    
     padding-top:13px;
-    margin-left:25px;
-
+    
 }
 #results_pool_name_number   {
-    padding-bottom:7px;
+    padding-bottom:10px;
     width:100%;
-    padding-right:25px;
+    padding-right:px;
     border-bottom: 1px solid #eeeeee;
 }
 .results_pool_name_number_search    {
-    color:#CCCCCC;
+    color:#666666;
     font-size:1.3em;
-    font-style: italic;
+    font-family: 'Raleway';
+    padding-bottom:4px;
+    display:inline-block;
 }
 .results_pool_name_number_pool    {
-    font-size:1.6em;
-    font-weight:600;
+    font-size:1.8em;
+    font-weight:700;
+    color:#4A84A3;
+    font-family: 'Raleway';
 }
 .results_pool_name_number_description    {
-    font-size:1.6em;
-    font-weight:600;
+    font-size:1.8em;
+    font-weight:700;
     line-height: 1em;
-    color:#00;
+    color:#4A84A3;
+    font-family: 'Raleway';
 }
 #number_of_results  {
     width:650px;
-    font-size: 1em;
+    font-size: 1.2em;
     min-height:20px;
     background-color: ;
-    color:#7f7f7f;
+    color:#333333;
     font-weight:600;
     display:block;
+    font-family: 'Raleway';
+    margin-top:5px;
 }
 .matching_your_search   {
 }
@@ -467,22 +551,24 @@ h4 {
 .sam_style  {
     color:#a0692a !important;
 }
-
 #your_search_criteria{
     width:100%;
     min-height:30px;
     margin-bottom:5px;
     font-size:.9em;
-    margin-top:4px;
-   
+    margin-top:7px;
     display:none;
 }
 .your_search_grey   {
-    color:#bbbbbb;
+    color:#666666;
+    font-family: 'Raleway';
+    font-size:1.2em;
 }
 .your_search_blue   {
-    color:#b03115;
+    color:#D60000;
     margin-right:15px;
+    font-family: 'Raleway';
+    font-size:1.2em;
 }
 .column {
     float:left;
@@ -531,7 +617,6 @@ a.pool_link {
 .pooldetail {
     margin:0px;padding:0px;
     width:100%;
-    border:1px solid #e5e5e5;
     margin-top:25px;
 
 }.pooldetail table{
@@ -565,8 +650,8 @@ a.pool_link {
     border:1px solid #e5e5e5;
     border-width:0px 1px 1px 0px;
     text-align:center;
-    padding:7px;
-    font-size:.8em;
+    padding:10px;
+    font-size:.9em;
     font-family:;
     font-weight:normal;
     color:#000000;
@@ -599,6 +684,9 @@ a.pool_link {
 #pool_table {
     display:none;
 }
+#pool_table .h_vendor_name .h_vendor_location .h_naics_results .h_8a .h_hubz .h_sdvo .h_wo .h_vo .h_sdb {
+    font-family: 'Raleway' !important;
+}
 #pool_table .h_vendor_name {
     text-align: left;
 }
@@ -629,10 +717,6 @@ a.pool_link {
 }
 
 /* Vendor Detail Styles */
-#breadcrumb_container   {
-    border-top:1px solid #e3e5e9;
-    border-bottom:1px solid #e3e5e9;
-}
 #vendor_main_container  {
     float:left;
     width:1100px;
