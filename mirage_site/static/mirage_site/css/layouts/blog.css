@@ -731,7 +731,7 @@ img.green_dot   {
 #vendor_title_status_container  {
     width:100%;
     border-bottom:1px solid #DDDDDD;
-    min-height:40px;
+    min-height:43px;
     background-color: ;
     margin-top:15px;
 }
@@ -764,7 +764,7 @@ img.green_dot   {
 }
 #vendor_admin_container {
     width:100%;
-    margin-top:10px;
+    margin-top:25px;
     min-height:140px;
 }
 #vendor_admin_c1    {
@@ -797,7 +797,7 @@ img.green_dot   {
     float:right;
 }
 #vendor_sam_expiration_container    {
-    font-size:.9em;
+    font-size:1em;
     padding-bottom:6px;
 }
 .vendor_sam_expiration_text {
@@ -816,7 +816,7 @@ img.green_dot   {
     min-width:260px;
     float:left;
     min-height:110px;
-    margin-left:60px;
+    margin-left:70px;
 }
 .admin_label    {
     display:inline-block;
@@ -1115,37 +1115,38 @@ img.green_dot   {
     width:80px;
     text-align: left;
     padding-left:7px;
+    padding:10px;
 
 }
 #ch_table th.h_piid {
     width:120px;
     text-align: left;
-    padding-left:7px;
+    padding-left:10px;
 }
 #ch_table th.h_agency {
     width:190px;
     text-align: left;
-    padding-left:7px;
+    padding-left:10px;
 }
 #ch_table th.h_type {
     width:137px;
     text-align: left;
-    padding-left:7px;
+    padding-left:10px;
 }
 #ch_table th.h_value {
     width:108px;
     text-align: left;
-    padding-left:7px;
+    padding-left:10px;
 }
 #ch_table th.h_email_poc {
     width:259px;
     text-align: left;
-    padding-left:7px;
+    padding-left:10px;
 }
 #ch_table th.h_status {
     width:95px;
     text-align: left;
-    padding-left:7px;
+    padding-left:10px;
 }
 #ch_table th.h_naics {
     width:70px;
