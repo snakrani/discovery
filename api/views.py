@@ -47,7 +47,6 @@ class ListVendors(APIView):
 
         except Naics.DoesNotExist:
             return HttpResponseBadRequest("You must provide a valid naics code that maps to an OASIS pool")
-        #except goes here
 
     def get_queryset(self, pool, setasides, naics):
         vendors = Vendor.objects.filter(pools__in=pool)
@@ -84,9 +83,6 @@ class ListContracts(APIView):
 
         if contracts == 1:
             return HttpResponseBadRequest("You must provide a vendor DUNS to retrieve contracts.")
-
-        elif not contracts:
-            return Response({'num_results': 0, 'results': []})
 
         else:
             paginator = Paginator(contracts, 100)
