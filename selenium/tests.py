@@ -68,9 +68,12 @@ class FunctionalTests(LiveServerTestCase):
         self.assertEqual(driver.find_element_by_css_selector("td.h_vo").text, "VO")
         self.assertEqual(driver.find_element_by_css_selector("td.h_sdb").text, "SDB")
         #make sure the first few results are all veteran owned
-        self.assertEqual("X", driver.find_element_by_xpath("//table//tr[2]/td[8]").text)
-        self.assertEqual("X", driver.find_element_by_xpath("//table//tr[3]/td[8]").text)
-        self.assertEqual("X", driver.find_element_by_xpath("//table//tr[4]/td[8]").text)
+        try:
+            self.assertTrue(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[2]/td[8]/img'))
+            self.assertTrue(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[3]/td[8]/img'))
+            self.assertTrue(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[4]/td[8]/img'))
+        except:
+            self.assertTrue(False)
 
     def test_result_count_on_search_results(self):
         driver = self.driver
@@ -104,16 +107,23 @@ class FunctionalTests(LiveServerTestCase):
         driver.get(self.base_url + "/results?setasides=A6&vehicle=oasissb&naics-code=541330&")
         #make sure first few results are for 8(a) vendors
         time.sleep(1)
-        self.assertEqual("X", driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[2]/td[4]').text)
-        self.assertEqual("X", driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[3]/td[4]').text)
-        self.assertEqual("X", driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[4]/td[4]').text)
+        try:
+            self.assertTrue(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[2]/td[4]/img'))
+            self.assertTrue(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[3]/td[4]/img'))
+            self.assertTrue(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[4]/td[4]/img'))
+        except Exception as e:
+            raise
+
         #load HubZone search results
         driver.get(self.base_url + "/results?setasides=XX&vehicle=oasissb&naics-code=541330&")
         time.sleep(1)
         #make sure first few results are for HubZ vendors
-        self.assertEqual("X", driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[2]/td[5]').text)
-        self.assertEqual("X", driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[3]/td[5]').text)
-        self.assertEqual("X", driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[4]/td[5]').text)
+        try:
+            self.assertTrue(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[2]/td[5]/img'))
+            self.assertTrue(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[3]/td[5]/img'))
+            self.assertTrue(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[4]/td[5]/img'))
+        except Exception as e:
+            raise
 
     def test_vendor_info(self):
         driver = self.driver
