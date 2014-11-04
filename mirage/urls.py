@@ -18,5 +18,6 @@ urlpatterns = patterns('',
     url(r'^results/$', TemplateView.as_view(template_name='pool.html')),
     url(r'^vendor/(?P<vendor_duns>\w+)/$', TemplateView.as_view(template_name='vendor.html')),
     url(r'^results/csv', 'vendor.views.pool_csv', name="pool-csv"),
+    url(r'^docs/', include('rest_framework_swagger.urls')),
     url(r'^vendor/(?P<vendor_duns>\w+)/csv/$', 'vendor.views.vendor_csv', name="vendor-csv")
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

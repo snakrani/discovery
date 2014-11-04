@@ -12,15 +12,20 @@ from api.serializers import VendorSerializer, NaicsSerializer, PoolSerializer, S
 
 
 class GetVendor(APIView):
-
+    """
+    This endpoint returns a single vendor by their 9 digit DUNS number
+    """
     def get(self, request, duns, format=None):
         vendor = Vendor.objects.get(duns=duns) 
         return Response(VendorSerializer(vendor).data) 
 
-
-
 class ListVendors(APIView):
-    
+    """
+    This endpoint returns a list of vendors filtered by a NAICS code. The NAICS code maps to an OASIS pool and is used to retrieve vendors in that pool only.
+    naics -- a six digit NAICS code (required)
+    setasides -- a comma delimited list of two character setaside codes to filter by. Choices are A6 (8(a)), XX (Hubzone), QF (service disabled veteran owned), A2 (women owned), A5 (veteran owned), and 27 (small disadvantaged business). Ex. setasides=A6,A5  will filter by 8a and veteran owned business.
+    vehicle -- Choices are eithe oasis or oasissb. Will filter vendors by their presence in either the OASIS unrestricted vehicle or the OASIS Small Business vehicle.
+    """
     def get(self, request, format=None):
 
         try: 
@@ -58,7 +63,9 @@ class ListVendors(APIView):
 
 
 class ListNaics(APIView):
-
+    """
+        This endpoint lists all of the NAICS codes that are relevant to the OASIS family of vehicles.
+    """
     def get(self, request, format=None):
         serializer = NaicsSerializer(self.get_queryset(), many=True)
         return Response({'num_results': len(serializer.data), 'results': serializer.data})
@@ -77,7 +84,15 @@ class ListNaics(APIView):
         return codes
 
 class ListContracts(APIView):
-    
+    """ 
+        This endpoint returns contract history for a vendor. 
+
+        duns -- DUNS number of the vendor (required)
+        naics -- six digit NAICS code used to filter contracts by certain categories
+        sort -- field to sort on. Choices are date, status, agency, and amount.
+        direction -- the sort direction. Choices are asc or desc.
+        page -- the page to start on. Results are returned in increments of 100
+    """
     def get(self, request, format=None):
         contracts = self.get_queryset()
 
@@ -125,6 +140,9 @@ class ListContracts(APIView):
         return contracts
 
 class MetadataView(APIView):
+    """
+        This endpoint returns metadata for the most recent data loads of SAM and FPDS data. It takes no parameters.
+    """
     def get(self, request, format=None):
        mds = MetadataSerializer(Metadata())
        return Response(mds.data)
