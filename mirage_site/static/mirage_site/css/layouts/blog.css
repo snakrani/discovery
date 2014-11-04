@@ -501,6 +501,11 @@ a.pool_link {
 
 
 /* Pool Detail Styles */
+
+img.green_dot   {
+    padding-top:3px;
+}
+
 .pooldetail {
     margin:0px;padding:0px;
     width:100%;
