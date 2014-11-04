@@ -2,7 +2,7 @@ from django.conf import settings
 from django.test import LiveServerTestCase
 
 from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException        
+from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException        
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.keys import Keys
@@ -25,6 +25,18 @@ class FunctionalTests(LiveServerTestCase):
         else:
             self.base_url = 'http://localhost:8000'
             self.driver = webdriver.PhantomJS()
+
+    #helper function courtesy of http://www.obeythetestinggoat.com/how-to-get-selenium-to-wait-for-page-load-after-a-click.html
+    def wait_for(self, condition_function):
+        start_time = time.time()
+        while time.time() < start_time + 3:
+            if condition_function():
+                return True
+            else:
+                time.sleep(0.1)
+        raise Exception(
+            'Timeout waiting for {}'.format(condition_function.__name__)
+        )
 
     def test_titles_are_correct(self):
         driver = self.driver
@@ -318,6 +330,33 @@ class FunctionalTests(LiveServerTestCase):
         self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/td[3]').text, 'No. of Contracts')
         #make sure value for number of contracts in row 1 is greater than or equal to value in row 2
         self.assertGreater(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[2]/td[3]').text, driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[3]/td[3]').text)
+
+    def test_contracts_sorting(self):
+        driver = self.driver
+        driver.get(self.base_url + '/vendor/197503212/?vehicle=oasissb&naics-code=541330&')
+        element = WebDriverWait(driver, 3).until(
+            EC.presence_of_element_located((By.CLASS_NAME, "h_value"))
+        )
+        second_row = driver.find_element_by_xpath('//*[@id="ch_table"]/table/tbody/tr[3]')
+        driver.find_element_by_class_name("h_value").click()
+    
+        def rows_are_stale():
+            try: 
+                text = second_row.get_attribute('text')
+            except StaleElementReferenceException: 
+                return True
+       
+        self.wait_for(rows_are_stale)
+        rows = driver.find_elements_by_xpath('//*[@id="ch_table"]/table/tbody/tr')
+        prev_value = None
+        for row in rows[1:]:
+            cell = row.find_element_by_class_name('value')
+            value = float(cell.get_attribute('innerText').replace(',', '').replace('$', ''))
+            if not prev_value:
+                prev_value = value
+            else:
+                self.assertTrue(value <= prev_value)
+                prev_value = value
 
     def test_contract_pagination(self):
         driver = self.driver

@@ -53,7 +53,7 @@ INSTALLED_APPS = (
     'mirage_site',
     'vendor',
     'contract',
-    'selenium',
+    'selenium_tests',
 )
 
 MIDDLEWARE_CLASSES = (
