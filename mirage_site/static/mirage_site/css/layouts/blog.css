@@ -8,15 +8,23 @@ html    {
 }
 a {
     text-decoration: none;
-    color: #40748E;
+    color: #0066CC;
 }
 a:hover,
 a:focus {
     text-decoration: underline;
 }
+h1 {
+    font-family: 'Raleway', sans-serif;
+    font-weight:700;
+    font-size:2.8em;
+    border-bottom: 1px solid #d4d4d4;
+}
 h3 {
     font-weight: 100;
     margin:0em;
+    color:#4A84A3;
+
 }
 h4 {
     display: inline-block;
@@ -24,6 +32,7 @@ h4 {
     margin:0em;
     font-weight: 700;
     color:#4A84A3;
+    font-size:1.17em;
 
 }
 /* LAYOUT CSS */
@@ -114,6 +123,12 @@ h4 {
 
 /* Template Styles */
 
+#page_top_container  {
+    width:1100px;
+    margin-left:auto;
+    margin-right:auto;
+    background-color:#;
+}
 #container  {
     width:1100px;
     margin-left:auto;
@@ -129,6 +144,11 @@ h4 {
     width:500px;
     padding-bottom:10px;
 }
+.logo  {
+    float:left;
+    padding-right:7px;
+    padding-top:7px;
+}
 .oasis_title    {
     display:block;
     font-size:2.8em;
@@ -138,7 +158,7 @@ h4 {
 }
 .oasis_subtitle {
     font-size:1em;
-    color:#bbbbbb;
+    color:#AEAEAE;
     
 }
 #header_link    {
@@ -150,79 +170,97 @@ h4 {
 .widedrop   {
     width:600px;
 }
+#combined_search_container    {
+    width:100%;
+    
+    background-image: url(/static/mirage_site/images/header_bg.png);
+    background-repeat: repeat-x;
+}
 #combined_search    {
     width:1100px;
-    min-height:180px;
-    padding-top:20px;
-    background-color: #2d5872;
-    border: 1px solid #000;
+    min-height:209px;
+    padding-top:15px;
+    margin-left:auto;
+    margin-right:auto;
 }
 #combined_search_pool    {
     width:1100px;
     min-height:70px;
-    padding-top:10px;
-    background-color: #2d5872;
+    padding-top:0px;
+    margin-left:auto;
+    margin-right:auto;
 }
 #vendor_back_button   {
-    float:left;
-    margin-left:27px;
-    padding-left:34px;
-    padding-top:7px;
-    background:url(/static/mirage_site/images/back_arrow.png);
+    padding-left:62px;
+    padding-top:13px;
+    background:url(/static/mirage_site/images/back_btn.png);
     background-repeat: no-repeat;
-    background-position: 0px 13px;
+    width:313px;
+    min-height:54px;
 
 }
 .back_text  {
     color:#FFF;
-    font-size:1.4em;
-    font-weight:500;
+    font-size:1.3em;
+    font-weight:400;
     text-decoration: underline;
 }
 .back_text a:hover {
     color:#FFF;
-    font-size:2.1em;
+    font-size:1.3em;
     font-weight:600;
     text-decoration: underline;
 }
 #vehicle_select   {
     float:left;
-    margin-left:27px;
-    padding-left:37px;
+    margin-left:60px;
+    padding-top:57px;
     background:url(/static/mirage_site/images/1.png);
     background-repeat: no-repeat;
-    background-position: 0px 5px;
+    background-position: 0px 0px;
 
 }
 .vehicle_select_style  {
     color:#bfbfbf;
     height:26px;
     font-family: 'Open Sans', sans-serif;
+    margin-top:9px;
 }
 #search {
     float:left;
-    margin-left:40px;
-    padding-left:37px;
+    margin-left:50px;
+    padding-top:57px;
     background:url(/static/mirage_site/images/2.png);
     background-repeat: no-repeat;
-    background-position: 0px 5px;
+    background-position: 0px 0px;
     width:417px;
 
 }
 .select_text    {
     color:#FFF;
+    font-family: 'Raleway';
+    font-weight: 500;
+    font-size:1.2em;
+}
+.select2-container  {
+    margin-top:7px;
+}
+.pure-form .pure-checkbox  {
+    margin-top:5px;
+    padding-bottom:0px;
 }
 #filter_container   {
     float:left;
-    padding-left:37px;
-    margin-left:40px;
+    padding-top:57px;
+    margin-left:37px;
     background:url(/static/mirage_site/images/3.png);
     background-repeat: no-repeat;
-    background-position: 0px 5px;
+    background-position: 0px 0px;
+    color:#FFF;
+    width:340px;
 }
 #container #filter_container {
     float:left;
-    color:#fff;
     padding-right:10px;
 }
 #filter_container input  {
@@ -233,6 +271,7 @@ h4 {
     top: -1px;
     *overflow: hidden;
     margin-right:5px;
+
 }
 #filter_container label  {
     display: block;
@@ -272,13 +311,13 @@ h4 {
 }
 #custom_page_content  {
     width:1100px;
-    padding-left:30px;
-    padding-right:30px;
+    padding-left:0px;
+    padding-right:0px;
     display:block;
 }
 #about_oasis    {
     float:left;
-    width:430px;
+    width:440px;
     margin-left:60px;
 }
 #about_oasis h3   {
@@ -286,16 +325,18 @@ h4 {
 }
 .about_oasis_text   {
     margin-left:10px;
+    font-weight:300;
 }
 #data_sources   {
     float:left;
     width:440px;
-    margin-left:40px;
+    margin-left:60px;
 }
 #data_sources_last_updated  {
     width:100%;
     text-align: right;
     border-bottom: 1px solid #eeeeee;
+    font-size:1.17em;
 }
 .data_source_name   {
 
@@ -305,65 +346,131 @@ h4 {
     margin-top:20px;
 }
 .data_source_description    {
-    color:#6b6b6b;
-    display:block;
-    
+    color:#000;
+    display:inline-block;
+    margin-top:-1.2em;
+    font-weight:300;
+}
+#data_source_last_updated   {
+    float:right;
+    font-weight:400;
+    color:#666666;
+    padding-right:.5em;
+    font-style: italic;
+    font-size:1.17em;
+
 }
 #data_source_date_sam   {
     float:right;
     font-weight:600;
     color:#000000;
+    font-size:1.17em;
 
 }
 #data_source_date_fpds   {
     float:right;
     font-weight:600;
     color:#000000;
+    font-size:1.17em;
 }
 #data_source_date_fapiis   {
     float:right;
     font-weight:600;
     color:#000000;
+    font-size:1.17em;
+}
+#footer_container   {
+    background-image: url(/static/mirage_site/images/footer_bg.png);
+    
+    width:100%;
+    background-repeat: repeat;
+    min-height:170px;
+
 }
 #footer {
-    min-height:150px;
-    width:1100px;
-    background-repeat: repeat;
+    width:1140px;
     margin-left:auto;
     margin-right:auto;
     margin-top:30px;
-    background-color: #1f323d;
-   
+    padding-top:30px;
 }
 #footer_nav {
-    margin-left:20px;
-    padding-top:34px;
+    margin-left:0px;
+    padding-top:5px;
     color:#FFF;
     list-style-type: none;
     float:left;
-    
-
 }
 #footer_nav a {
     color:#FFF;
     list-style-type: none;
+    font-weight:500;
 }
 #footer_nav ul {
     color:#FFF;
     list-style-type: none;
     font-weight:300;
 }
-.logo1   {
-    margin-left:550px;
+#call_to_action {
+    width:539px;
+    font-size:.9em;
     float:left;
-    padding-top:30px;
+    min-height:88px;
+    margin-left:35px;
+    padding-left:40px;
+    padding-right:30px;
+    background-image: url(/static/mirage_site/images/footer_cta_bg.png);
+    background-position: 50%;
+    background-repeat: no-repeat;
+    overflow:hidden;
+}
+.cta_title   {
+    color:#FFFC41;
+    font-size: 1.8em;
+    font-family: 'Raleway', sans-serif;
+    font-weight:600;
+}
+.cta_text  {
+    color:#FFFFFF;
+    font-weight:300;
+}
+.cta_feedback  {
+    color:#FFFFFF;
+    padding-left:4px;
+    font-weight:600;
+}
+.cta_email  {
+    margin-top:15px;
+    color:#CCCCCC;
+    font-size:1.5em;
+}
+.cta_email_address  {
+    padding-top:15px;
+    font-family: 'Raleway';
+    font-weight:500;
+    font-size:1.5em;
+    color:#FFFFFF;
+}
+.cta_spacer {
+    padding-top:10px;
+}
+.logo_container   {
+    margin-left:35px;
+    float:left;
+    margin-top:-15;
+}
+.built_by   {
+    width:100%;
+    color:#FFF;
+    font-size:.7em;
+}
+.logo1   {
+    display:inline-block;
 }
 .logo2   {
     margin-left:30px;
-    float:left;
-    padding-top:30px;
+    display:inline-block;
 }
-
 #landing    {
     min-height:700px;
     width:1100px;
@@ -373,11 +480,9 @@ h4 {
     content: " "; /* 1 */
     display: table; /* 2 */
 }
-
 .cf:after {
     clear: both;
 }
-
 /**
  * For IE 6/7 only
  * Include this rule to trigger hasLayout and contain floats.
@@ -387,42 +492,48 @@ h4 {
 }
 /* Initial Search Results Styles */
 #results_sam_container {
-    width:1050px;
+    width:1100px;
     background-color:;
-    border-top: 1px solid #eeeeee;
+    
     padding-top:13px;
-    margin-left:25px;
-
+    
 }
 #results_pool_name_number   {
-    padding-bottom:7px;
+    padding-bottom:10px;
     width:100%;
-    padding-right:25px;
+    padding-right:px;
     border-bottom: 1px solid #eeeeee;
 }
 .results_pool_name_number_search    {
-    color:#CCCCCC;
+    color:#666666;
     font-size:1.3em;
-    font-style: italic;
+    font-family: 'Raleway';
+    padding-bottom:4px;
+    display:inline-block;
 }
 .results_pool_name_number_pool    {
-    font-size:1.6em;
-    font-weight:600;
+    font-size:1.8em;
+    font-weight:700;
+    color:#4A84A3;
+    font-family: 'Raleway';
 }
 .results_pool_name_number_description    {
-    font-size:1.6em;
-    font-weight:600;
+    font-size:1.8em;
+    font-weight:700;
     line-height: 1em;
-    color:#00;
+    color:#4A84A3;
+    font-family: 'Raleway';
 }
 #number_of_results  {
     width:650px;
-    font-size: 1em;
+    font-size: 1.2em;
     min-height:20px;
     background-color: ;
-    color:#7f7f7f;
+    color:#333333;
     font-weight:600;
     display:block;
+    font-family: 'Raleway';
+    margin-top:5px;
 }
 .matching_your_search   {
 }
@@ -440,22 +551,24 @@ h4 {
 .sam_style  {
     color:#a0692a !important;
 }
-
 #your_search_criteria{
     width:100%;
     min-height:30px;
     margin-bottom:5px;
     font-size:.9em;
-    margin-top:4px;
-   
+    margin-top:7px;
     display:none;
 }
 .your_search_grey   {
-    color:#bbbbbb;
+    color:#666666;
+    font-family: 'Raleway';
+    font-size:1.2em;
 }
 .your_search_blue   {
-    color:#b03115;
+    color:#D60000;
     margin-right:15px;
+    font-family: 'Raleway';
+    font-size:1.2em;
 }
 .column {
     float:left;
@@ -509,7 +622,6 @@ img.green_dot   {
 .pooldetail {
     margin:0px;padding:0px;
     width:100%;
-    border:1px solid #e5e5e5;
     margin-top:25px;
 
 }.pooldetail table{
@@ -523,8 +635,14 @@ img.green_dot   {
     background-color:#F1F1F1;
 }
 
+.pooldetail td.unrestricted{
+    background-color:#e3e3e3;
+    vertical-align: top;
+    padding-top:13%;
+    color:#3f3f3f;
+}
 .pooldetail tr:hover td.unrestricted{
-    background-color:#ffffff;
+    background-color:#e3e3e3;
 }
 
 .pooldetail td.unrestricted {
@@ -535,19 +653,19 @@ img.green_dot   {
     vertical-align:middle;
     background-color:#ffffff;
     border:1px solid #e5e5e5;
-    border-width:0px 1px 1px 0px;
+    border-width:1px 1px 1px 1px;
     text-align:center;
-    padding:7px;
-    font-size:.8em;
+    padding:10px;
+    font-size:.9em;
     font-family:;
     font-weight:normal;
-    color:#000000;
+    color:#666666;
 }.pooldetail tr:last-child td{
-    border-width:0px 1px 0px 0px;
+    border-width:1px 1px 1px 1px;
 }.pooldetail tr td:last-child{
-    border-width:0px 0px 1px 0px;
+    border-width:1px 1px 1px 1px;
 }.pooldetail tr:last-child td:last-child{
-    border-width:0px 0px 0px 0px;
+    border-width:0px 0px 0px 1px;
 }
 .pooldetail tr:first-child td{
     background-color:#4A85A3;
@@ -571,17 +689,23 @@ img.green_dot   {
 #pool_table {
     display:none;
 }
+#pool_table .h_vendor_name .h_vendor_location .h_naics_results .h_8a .h_hubz .h_sdvo .h_wo .h_vo .h_sdb {
+    font-family: 'Raleway' !important;
+}
 #pool_table .h_vendor_name {
     text-align: left;
+    width:420px;
 }
 #pool_table .h_naics_results {
     text-align: left;
+    width:160px;
 }
 #pool_table .vendor_name {
     text-align: left;
 }
 #pool_table .h_vendor_location {
     text-align: left;
+    width:177px;
 }
 #pool_table .vendor_location {
     text-align: left;
@@ -601,31 +725,27 @@ img.green_dot   {
 }
 
 /* Vendor Detail Styles */
-#breadcrumb_container   {
-    border-top:1px solid #e3e5e9;
-    border-bottom:1px solid #e3e5e9;
-}
 #vendor_main_container  {
     float:left;
     width:1100px;
     overflow: ;
-    padding-left:15px;
 }
 #vendor_title_status_container  {
     width:100%;
     border-bottom:1px solid #DDDDDD;
-    height:33px;
+    min-height:43px;
     background-color: ;
-    margin-top:15px;
+    margin-top:35px;
 }
 .vendor_title{
-    font-size: 1.6em;
+    font-size: 1.9em;
     float:left;
     font-weight:600;
 }
 .vendor_website   {
     float:left;
     margin-left:10px;
+    margin-top:4px;
     padding-right:8px;
     padding-top:10px;
     background:url(/static/mirage_site/images/external_link.png);
@@ -646,7 +766,7 @@ img.green_dot   {
 }
 #vendor_admin_container {
     width:100%;
-    margin-top:10px;
+    margin-top:25px;
     min-height:140px;
 }
 #vendor_admin_c1    {
@@ -661,7 +781,7 @@ img.green_dot   {
     background:url(/static/mirage_site/images/download_icon.png);
     background-repeat: no-repeat;
     background-position: 0px 3px;
-    margin-left:10px;
+    margin-left:35px;
     margin-top:5px;
 }
 
@@ -679,11 +799,11 @@ img.green_dot   {
     float:right;
 }
 #vendor_sam_expiration_container    {
-    font-size:.9em;
+    font-size:1em;
     padding-bottom:6px;
 }
 .vendor_sam_expiration_text {
-   
+
 }
 .vendor_sam_expiration_date {
     color:#084b5a;
@@ -698,17 +818,20 @@ img.green_dot   {
     min-width:260px;
     float:left;
     min-height:110px;
-    margin-left:60px;
+    margin-left:70px;
 }
 .admin_label    {
     display:inline-block;
+    color:#666666;
 }
 .admin_data    {
     display:inline-block;
     font-weight:bold;
+    padding-left:2px;
 }
 .admin_data2    {
     display:inline-block;
+    color:#666666;
     
 }
 .lh{
@@ -737,7 +860,7 @@ img.green_dot   {
     float:left;
     font-weight:600;
     margin-left:40px;
-    font-style: italic;
+    
     margin-top:5px;
     color:#666666;
     display: none;
@@ -746,14 +869,16 @@ img.green_dot   {
     width:100%;
     min-height:100px;
     display:block;
-    margin-top:20px;
+    margin-top:25px;
+    
 }
 #vendor_contract_history_title_container  {
     width:100%;
     display:block;
 }
 .vendor_contract_history_text {
-    
+    font-family: 'Raleway';
+    font-weight:500;
     display:inline;
     font-size:1.4em;
 }
@@ -800,6 +925,7 @@ img.green_dot   {
     color: #bfbfbf;
     font-weight: bold;
        max-width:140px;
+       cursor: pointer;
     
 }
 .contracts_button:hover {
@@ -825,7 +951,7 @@ img.green_dot   {
 .vendor_detail_table {
     margin:0px;padding:0px;
     width:100%;
-    border:1px solid #cecece;
+
 }.vendor_detail_table table{
     border-collapse: collapse;
         border-spacing: 0;
@@ -839,28 +965,28 @@ img.green_dot   {
     vertical-align:middle; 
     background-color:#ffffff;
     border:1px solid #cecece;
-    border-width:0px 1px 1px 0px;
+    border-width:1px 1px 1px 1px;
     text-align:center;
-    padding:7px;
+    padding:10px;
     font-size:10px;
-    font-family:Arial;
-    font-weight:bold;
     color:#000000;
+    font-family: 'Raleway';
+    font-weight:600;
+}
+
 }.vendor_detail_table tr:last-child td{
-    border-width:0px 1px 0px 0px;
+    border-width:1px 1px 1px 1px;
 }.vendor_detail_table tr td:last-child{
-    border-width:0px 0px 1px 0px;
+    border-width:1px 1px 1px 1px;
 }.vendor_detail_table tr:last-child td:last-child{
-    border-width:0px 0px 0px 0px;
+    border-width:1px 1px 1px 1px;
 }
 .vendor_detail_table tr:first-child td{
     background-color:#4A85A3;
-    border:0px solid #cecece;
+    border:1px solid #cecece;
     text-align:center;
     border-width:0px 0px 1px 1px;
     font-size:14px;
-    font-family:Arial;
-    font-weight:bold;
     color:#ffffff;
 }
 .vendor_detail_table tr:first-child:hover td{
@@ -909,7 +1035,7 @@ img.green_dot   {
 .contracthistory table{
     border-collapse: collapse;
         border-spacing: 0;
-    width:1085px;
+    width:1100px;
     height:100%;
     margin:0px;padding:0px;
     table-layout: fixed;
@@ -924,11 +1050,11 @@ img.green_dot   {
     border:1px solid #e5e5e5;
     border-width:0px 1px 1px 0px;
     text-align:center;
-    padding:7px;
-    font-size:.8em;
+    padding:10px;
+    font-size:.9em;
     font-family:;
     font-weight:normal;
-    color:#000000;
+    color:#666666;
 }.contracthistory tr:last-child td{
     border-width:0px 1px 0px 0px;
 }.contracthistory tr td:last-child{
@@ -952,9 +1078,9 @@ img.green_dot   {
     text-align:center;
     border-width:0px 0px 1px 1px;
     font-size:1em;
-    font-family:;
-    font-weight:600;
     color:#ffffff;
+    font-family: 'Raleway';
+    font-weight:500;
 }
 .contracthistory tr:first-child:hover td{
     background-color:#4A85A3;
@@ -969,7 +1095,7 @@ img.green_dot   {
     border-collapse: collapse;
     border-spacing: 0;
     table-layout: fixed;
-    width:1085px;
+    width:1100px;
     height:100%;
     margin:0px;padding:0px;
 }
@@ -991,39 +1117,41 @@ img.green_dot   {
     width:80px;
     text-align: left;
     padding-left:7px;
+    padding:10px;
+
 }
 #ch_table th.h_piid {
-    width:125px;
+    width:120px;
     text-align: left;
-    padding-left:7px;
+    padding-left:10px;
 }
 #ch_table th.h_agency {
-    width:230px;
+    width:190px;
     text-align: left;
-    padding-left:7px;
+    padding-left:10px;
 }
 #ch_table th.h_type {
     width:137px;
     text-align: left;
-    padding-left:7px;
+    padding-left:10px;
 }
 #ch_table th.h_value {
     width:108px;
     text-align: left;
-    padding-left:7px;
+    padding-left:10px;
 }
 #ch_table th.h_email_poc {
-    width:253px;
+    width:259px;
     text-align: left;
-    padding-left:7px;
+    padding-left:10px;
 }
 #ch_table th.h_status {
-    width:91px;
+    width:95px;
     text-align: left;
-    padding-left:7px;
+    padding-left:10px;
 }
 #ch_table th.h_naics {
-    width:60px;
+    width:70px;
         border:0px solid #e5e5e5;
     text-align:center;
     border-width:0px 1px 1px 1px;
