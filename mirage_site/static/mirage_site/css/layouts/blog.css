@@ -694,15 +694,18 @@ img.green_dot   {
 }
 #pool_table .h_vendor_name {
     text-align: left;
+    width:420px;
 }
 #pool_table .h_naics_results {
     text-align: left;
+    width:160px;
 }
 #pool_table .vendor_name {
     text-align: left;
 }
 #pool_table .h_vendor_location {
     text-align: left;
+    width:177px;
 }
 #pool_table .vendor_location {
     text-align: left;
