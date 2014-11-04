@@ -214,7 +214,7 @@ h4 {
 }
 #vehicle_select   {
     float:left;
-    margin-left:62px;
+    margin-left:60px;
     padding-top:57px;
     background:url(/static/mirage_site/images/1.png);
     background-repeat: no-repeat;
@@ -229,7 +229,7 @@ h4 {
 }
 #search {
     float:left;
-    margin-left:40px;
+    margin-left:50px;
     padding-top:57px;
     background:url(/static/mirage_site/images/2.png);
     background-repeat: no-repeat;
@@ -253,11 +253,12 @@ h4 {
 #filter_container   {
     float:left;
     padding-top:57px;
-    margin-left:40px;
+    margin-left:37px;
     background:url(/static/mirage_site/images/3.png);
     background-repeat: no-repeat;
     background-position: 0px 0px;
     color:#FFF;
+    width:340px;
 }
 #container #filter_container {
     float:left;
@@ -462,7 +463,7 @@ h4 {
 .built_by   {
     width:100%;
     color:#FFF;
-    font-size:.8em;
+    font-size:.7em;
 }
 .logo1   {
     display:inline-block;
