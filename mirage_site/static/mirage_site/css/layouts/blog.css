@@ -8,7 +8,7 @@ html    {
 }
 a {
     text-decoration: none;
-    color: #40748E;
+    color: #0066CC;
 }
 a:hover,
 a:focus {
@@ -182,33 +182,32 @@ h4 {
     padding-top:15px;
     margin-left:auto;
     margin-right:auto;
-
 }
 #combined_search_pool    {
     width:1100px;
     min-height:70px;
-    padding-top:10px;
-    background-color: #2d5872;
+    padding-top:0px;
+    margin-left:auto;
+    margin-right:auto;
 }
 #vendor_back_button   {
-    float:left;
-    margin-left:27px;
-    padding-left:34px;
-    padding-top:7px;
-    background:url(/static/mirage_site/images/back_arrow.png);
+    padding-left:62px;
+    padding-top:13px;
+    background:url(/static/mirage_site/images/back_btn.png);
     background-repeat: no-repeat;
-    background-position: 0px 13px;
+    width:313px;
+    min-height:54px;
 
 }
 .back_text  {
     color:#FFF;
-    font-size:1.4em;
-    font-weight:500;
+    font-size:1.3em;
+    font-weight:400;
     text-decoration: underline;
 }
 .back_text a:hover {
     color:#FFF;
-    font-size:2.1em;
+    font-size:1.3em;
     font-weight:600;
     text-decoration: underline;
 }
@@ -632,13 +631,13 @@ a.pool_link {
 }
 
 .pooldetail td.unrestricted{
-    background-color:#dadada;
+    background-color:#e3e3e3;
     vertical-align: top;
-    padding-top:10%;
+    padding-top:13%;
     color:#3f3f3f;
 }
 .pooldetail tr:hover td.unrestricted{
-    background-color:#dadada;
+    background-color:#e3e3e3;
 }
 
 .pooldetail td.unrestricted {
@@ -649,19 +648,19 @@ a.pool_link {
     vertical-align:middle;
     background-color:#ffffff;
     border:1px solid #e5e5e5;
-    border-width:0px 1px 1px 0px;
+    border-width:1px 1px 1px 1px;
     text-align:center;
     padding:10px;
     font-size:.9em;
     font-family:;
     font-weight:normal;
-    color:#000000;
+    color:#666666;
 }.pooldetail tr:last-child td{
-    border-width:0px 1px 0px 0px;
+    border-width:1px 1px 1px 1px;
 }.pooldetail tr td:last-child{
-    border-width:0px 0px 1px 0px;
+    border-width:1px 1px 1px 1px;
 }.pooldetail tr:last-child td:last-child{
-    border-width:0px 0px 0px 0px;
+    border-width:0px 0px 0px 1px;
 }
 .pooldetail tr:first-child td{
     background-color:#4A85A3;
@@ -722,23 +721,24 @@ a.pool_link {
     float:left;
     width:1100px;
     overflow: ;
-    padding-left:15px;
+    padding-left:px;
 }
 #vendor_title_status_container  {
     width:100%;
     border-bottom:1px solid #DDDDDD;
-    height:33px;
+    min-height:40px;
     background-color: ;
     margin-top:15px;
 }
 .vendor_title{
-    font-size: 1.6em;
+    font-size: 1.9em;
     float:left;
     font-weight:600;
 }
 .vendor_website   {
     float:left;
     margin-left:10px;
+    margin-top:4px;
     padding-right:8px;
     padding-top:10px;
     background:url(/static/mirage_site/images/external_link.png);
@@ -774,7 +774,7 @@ a.pool_link {
     background:url(/static/mirage_site/images/download_icon.png);
     background-repeat: no-repeat;
     background-position: 0px 3px;
-    margin-left:10px;
+    margin-left:35px;
     margin-top:5px;
 }
 
@@ -796,7 +796,7 @@ a.pool_link {
     padding-bottom:6px;
 }
 .vendor_sam_expiration_text {
-   
+
 }
 .vendor_sam_expiration_date {
     color:#084b5a;
@@ -815,13 +815,16 @@ a.pool_link {
 }
 .admin_label    {
     display:inline-block;
+    color:#666666;
 }
 .admin_data    {
     display:inline-block;
     font-weight:bold;
+    padding-left:2px;
 }
 .admin_data2    {
     display:inline-block;
+    color:#666666;
     
 }
 .lh{
@@ -850,7 +853,7 @@ a.pool_link {
     float:left;
     font-weight:600;
     margin-left:40px;
-    font-style: italic;
+    
     margin-top:5px;
     color:#666666;
     display: none;
@@ -860,13 +863,15 @@ a.pool_link {
     min-height:100px;
     display:block;
     margin-top:20px;
+    
 }
 #vendor_contract_history_title_container  {
     width:100%;
     display:block;
 }
 .vendor_contract_history_text {
-    
+    font-family: 'Raleway';
+    font-weight:500;
     display:inline;
     font-size:1.4em;
 }
@@ -913,6 +918,7 @@ a.pool_link {
     color: #bfbfbf;
     font-weight: bold;
        max-width:140px;
+       cursor: pointer;
     
 }
 .contracts_button:hover {
@@ -938,7 +944,7 @@ a.pool_link {
 .vendor_detail_table {
     margin:0px;padding:0px;
     width:100%;
-    border:1px solid #cecece;
+
 }.vendor_detail_table table{
     border-collapse: collapse;
         border-spacing: 0;
@@ -952,28 +958,28 @@ a.pool_link {
     vertical-align:middle; 
     background-color:#ffffff;
     border:1px solid #cecece;
-    border-width:0px 1px 1px 0px;
+    border-width:1px 1px 1px 1px;
     text-align:center;
-    padding:7px;
+    padding:10px;
     font-size:10px;
-    font-family:Arial;
-    font-weight:bold;
     color:#000000;
+    font-family: 'Raleway';
+    font-weight:600;
+}
+
 }.vendor_detail_table tr:last-child td{
-    border-width:0px 1px 0px 0px;
+    border-width:1px 1px 1px 1px;
 }.vendor_detail_table tr td:last-child{
-    border-width:0px 0px 1px 0px;
+    border-width:1px 1px 1px 1px;
 }.vendor_detail_table tr:last-child td:last-child{
-    border-width:0px 0px 0px 0px;
+    border-width:1px 1px 1px 1px;
 }
 .vendor_detail_table tr:first-child td{
     background-color:#4A85A3;
-    border:0px solid #cecece;
+    border:1px solid #cecece;
     text-align:center;
     border-width:0px 0px 1px 1px;
     font-size:14px;
-    font-family:Arial;
-    font-weight:bold;
     color:#ffffff;
 }
 .vendor_detail_table tr:first-child:hover td{
@@ -1022,7 +1028,7 @@ a.pool_link {
 .contracthistory table{
     border-collapse: collapse;
         border-spacing: 0;
-    width:1085px;
+    width:1100px;
     height:100%;
     margin:0px;padding:0px;
     table-layout: fixed;
@@ -1037,11 +1043,11 @@ a.pool_link {
     border:1px solid #e5e5e5;
     border-width:0px 1px 1px 0px;
     text-align:center;
-    padding:7px;
-    font-size:.8em;
+    padding:10px;
+    font-size:.9em;
     font-family:;
     font-weight:normal;
-    color:#000000;
+    color:#666666;
 }.contracthistory tr:last-child td{
     border-width:0px 1px 0px 0px;
 }.contracthistory tr td:last-child{
@@ -1065,9 +1071,9 @@ a.pool_link {
     text-align:center;
     border-width:0px 0px 1px 1px;
     font-size:1em;
-    font-family:;
-    font-weight:600;
     color:#ffffff;
+    font-family: 'Raleway';
+    font-weight:500;
 }
 .contracthistory tr:first-child:hover td{
     background-color:#4A85A3;
@@ -1082,7 +1088,7 @@ a.pool_link {
     border-collapse: collapse;
     border-spacing: 0;
     table-layout: fixed;
-    width:1085px;
+    width:1100px;
     height:100%;
     margin:0px;padding:0px;
 }
@@ -1104,14 +1110,15 @@ a.pool_link {
     width:80px;
     text-align: left;
     padding-left:7px;
+
 }
 #ch_table th.h_piid {
-    width:125px;
+    width:120px;
     text-align: left;
     padding-left:7px;
 }
 #ch_table th.h_agency {
-    width:230px;
+    width:190px;
     text-align: left;
     padding-left:7px;
 }
@@ -1126,17 +1133,17 @@ a.pool_link {
     padding-left:7px;
 }
 #ch_table th.h_email_poc {
-    width:253px;
+    width:259px;
     text-align: left;
     padding-left:7px;
 }
 #ch_table th.h_status {
-    width:91px;
+    width:95px;
     text-align: left;
     padding-left:7px;
 }
 #ch_table th.h_naics {
-    width:60px;
+    width:70px;
         border:0px solid #e5e5e5;
     text-align:center;
     border-width:0px 1px 1px 1px;
