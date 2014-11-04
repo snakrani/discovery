@@ -44,8 +44,6 @@ class FunctionalTests(LiveServerTestCase):
         driver.get(self.base_url + '/')
         #make sure title of landing page is Mirage
         self.assertEqual('Mirage', driver.title)
-        #make sure title of page is MIRAGE
-        self.assertEqual('MIRAGE', driver.find_element_by_css_selector("span.oasis_title").text)
         #make sure subtitle of page is OASIS Market Research
         self.assertEqual('OASIS Market Research', driver.find_element_by_css_selector("span.oasis_subtitle").text)
 
@@ -316,7 +314,7 @@ class FunctionalTests(LiveServerTestCase):
         self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/td[8]').text, 'VO')
         self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/td[9]').text, 'SDB')
         #make sure "OASIS SB Only" column exists in results table
-        self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[2]/td[4]').text, 'SB Only')
+        self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[2]/td[4]').text, 'Not Applicable\n(OASIS SB Only)')
         #make sure filter selection says "OASIS SB Only"
         self.assertEqual(driver.find_element_by_id('choose_filters').text, 'Choose filters (OASIS SB Only)')
         #make sure filter selection remains disabled after NAICS is selected
