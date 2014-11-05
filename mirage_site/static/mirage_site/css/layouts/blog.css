@@ -192,6 +192,7 @@ h4 {
     padding-top:0px;
     margin-left:auto;
     margin-right:auto;
+
 }
 #vendor_back_button   {
     padding-left:62px;
@@ -200,13 +201,16 @@ h4 {
     background-repeat: no-repeat;
     width:313px;
     min-height:54px;
+    display:inline-block;
+
 
 }
 .back_text  {
     color:#FFF;
     font-size:1.3em;
     font-weight:400;
-    text-decoration: underline;
+    height:44px;
+    
 }
 .back_text a:hover {
     color:#FFF;
@@ -735,13 +739,13 @@ img.green_dot   {
 }
 #vendor_title_status_container  {
     width:100%;
-    border-bottom:1px solid #DDDDDD;
+    
     min-height:43px;
     background-color: ;
-    margin-top:35px;
+    margin-top:20px;
 }
 .vendor_title{
-    font-size: 1.9em;
+    font-size: 2em;
     float:left;
     font-weight:600;
 }
@@ -769,8 +773,11 @@ img.green_dot   {
 }
 #vendor_admin_container {
     width:100%;
-    margin-top:25px;
-    min-height:140px;
+    margin-top:0px;
+    min-height:200px;
+    border-bottom:1px solid #DDDDDD;
+    border-top:1px solid #DDDDDD;
+    padding-top:30px;
 }
 #vendor_admin_c1    {
     width:340px;
@@ -784,7 +791,7 @@ img.green_dot   {
     background:url(/static/mirage_site/images/download_icon.png);
     background-repeat: no-repeat;
     background-position: 0px 3px;
-    margin-left:35px;
+    
     margin-top:5px;
 }
 
@@ -822,6 +829,7 @@ img.green_dot   {
     float:left;
     min-height:110px;
     margin-left:70px;
+    
 }
 .admin_label    {
     display:inline-block;
@@ -851,7 +859,7 @@ img.green_dot   {
     min-width:300px;
     float:left;
     min-height:130px;
-    margin-left:20px;
+    
 }
 #sb_badge   {
     display: none;
@@ -863,7 +871,7 @@ img.green_dot   {
     float:left;
     font-weight:600;
     margin-left:40px;
-    
+    font-style: italic;
     margin-top:5px;
     color:#666666;
     display: none;
@@ -872,7 +880,7 @@ img.green_dot   {
     width:100%;
     min-height:100px;
     display:block;
-    margin-top:25px;
+    margin-top:15px;
     
 }
 #vendor_contract_history_title_container  {
@@ -1139,7 +1147,7 @@ img.green_dot   {
     padding-left:10px;
 }
 #ch_table th.h_value {
-    width:108px;
+    width:112px;
     text-align: left;
     padding-left:10px;
 }
