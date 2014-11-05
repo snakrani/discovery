@@ -2,6 +2,7 @@
 -e git://github.com/django/django.git@78bff08341cfd5b729697c13a7478e83726782d1#egg=django_1.7c1
 django-hstore==1.2.3
 djangorestframework==2.3.14
+django-rest-swagger==0.2.0
 psycopg2==2.5.3
 pytz==2014.4
 requests==2.3.0

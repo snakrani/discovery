@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     url(r'^naics/$', views.ListNaics.as_view()),
     url(r'^contracts/$', views.ListContracts.as_view()),
     url(r'^metadata/$', views.MetadataView.as_view()),
+
 )
 
 urlpatterns = format_suffix_patterns(urlpatterns)
