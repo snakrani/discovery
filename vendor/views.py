@@ -34,9 +34,11 @@ def pool_csv(request):
     writer.writerow(filter_text)
 
     writer.writerow(('',))
-    header_row = ['Vendor', 'Location']
+    header_row = ['Vendor', 'Location', 'No. of Contracts',]
     header_row.extend([sa_obj.abbreviation for sa_obj in setasides_all])
     writer.writerow(header_row)
+
+    lines = []
 
     for v in vendors: 
         setaside_list = []
@@ -46,9 +48,13 @@ def pool_csv(request):
             else:
                 setaside_list.append('')
 
-        v_row = [v.name, v.sam_citystate]
+        v_row = [v.name, v.sam_citystate, Contract.objects.filter(NAICS=naics.code, vendor=v).count()]
         v_row.extend(setaside_list)
-        writer.writerow(v_row)
+        lines.append(v_row)
+
+    lines.sort(key=lambda x: x[2], reverse=True)
+    for line in lines:
+        writer.writerow(line)
 
     return response
 
