@@ -3,6 +3,9 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+body    {
+    min-width: 1100px;
+}
 html    {
     font-family: 'Open Sans', sans-serif;
 }
@@ -381,18 +384,17 @@ h4 {
 }
 #footer_container   {
     background-image: url(/static/mirage_site/images/footer_bg.png);
-    
     width:100%;
     background-repeat: repeat;
     min-height:170px;
-
+    margin-top:30px;
 }
 #footer {
-    width:1140px;
+    width:1150px;
     margin-left:auto;
     margin-right:auto;
-    margin-top:30px;
     padding-top:30px;
+    min-height:170px;
 }
 #footer_nav {
     margin-left:0px;
@@ -410,6 +412,7 @@ h4 {
     color:#FFF;
     list-style-type: none;
     font-weight:300;
+    padding-left:0px;
 }
 #call_to_action {
     width:539px;
@@ -457,7 +460,7 @@ h4 {
 .logo_container   {
     margin-left:35px;
     float:left;
-    margin-top:-15;
+
 }
 .built_by   {
     width:100%;
