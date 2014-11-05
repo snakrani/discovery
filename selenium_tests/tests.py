@@ -364,6 +364,16 @@ class FunctionalTests(LiveServerTestCase):
         self.assertEqual(driver.find_element_by_id('contracts_current').text, '1 - 100')
         #total number of contracts is displayed
         self.assertEqual(driver.find_element_by_id('contracts_total').text, '4,096')
+        self.assertTrue(driver.find_element_by_id('pagination_container').is_displayed())
+        self.assertTrue(driver.find_element_by_id('viewing_contracts').is_displayed())
+
+        #open a vendor page where vendor has zero naics results
+        driver.get(self.base_url + '/vendor/611390592/?vehicle=oasissb&naics-code=541330&')
+        self.assertFalse(driver.find_element_by_id('pagination_container').is_displayed())
+        self.assertFalse(driver.find_element_by_id('viewing_contracts').is_displayed())
+
+    def test_back_button_doesnt_break_naics_select(self):
+        pass
 
     def tearDown(self):
         self.driver.quit()
