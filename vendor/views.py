@@ -104,7 +104,7 @@ def vendor_csv(request, vendor_duns):
             piid = c.piid.split('_')[1]
         else:
             piid = c.piid
-        writer.writerow((c.date_signed.strftime("%m/%d/%Y"), piid, titlecase(c.agency_name), c.get_pricing_type_display(), c.obligated_amount, (c.point_of_contact or "").lower(), c.status))
+        writer.writerow((c.date_signed.strftime("%m/%d/%Y"), piid, titlecase(c.agency_name), c.get_pricing_type_display(), c.obligated_amount, (c.point_of_contact or "").lower(), c.get_reason_for_modification_display()))
 
     return response
 
