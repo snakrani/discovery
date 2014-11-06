@@ -188,35 +188,37 @@ h4 {
 }
 #combined_search_pool    {
     width:1100px;
-    min-height:70px;
+    min-height:55px;
     padding-top:0px;
     margin-left:auto;
     margin-right:auto;
 
 }
 #vendor_back_button   {
-    padding-left:62px;
+    padding-left:32px;
     padding-top:13px;
     background:url(/static/mirage_site/images/back_btn.png);
     background-repeat: no-repeat;
     width:313px;
     min-height:54px;
     display:inline-block;
+    text-decoration: underline !important;
 
 
 }
 .back_text  {
-    color:#FFF;
+    
     font-size:1.3em;
     font-weight:400;
     height:44px;
     
+    
 }
 .back_text a:hover {
-    color:#FFF;
+    color:;
     font-size:1.3em;
     font-weight:600;
-    text-decoration: underline;
+    text-decoration: underline !important;
 }
 #vehicle_select   {
     float:left;
@@ -742,7 +744,7 @@ img.green_dot   {
     
     min-height:43px;
     background-color: ;
-    margin-top:20px;
+    margin-top:10px;
 }
 .vendor_title{
     font-size: 2em;
