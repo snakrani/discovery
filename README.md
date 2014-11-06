@@ -46,12 +46,12 @@ Currently the `load_fpds` command is configured to load ten years of contract hi
 #### Locally with PhantomJS
  * Install python testing requirements with ```pip install -r requirements-test.txt```
  * Install [Phantom JS](http://phantomjs.org/download.html)
- * From the project directory, run ```manage.py test selenium```
+ * From the project directory, run ```manage.py test selenium_tests```
 
  #### Remotely using Sauce Labs
  * In `local_settings.py` change `SAUCE = False` to `SAUCE = True`
  * Set `SAUCE_USERNAME` and `SAUCE_ACCESS_CODE` and `DOMAIN_TO_TEST` variables
- * From the project directory, run ```manage.py test selenium```
+ * From the project directory, run ```manage.py test selenium_tests```
 
 ### Public domain
 
