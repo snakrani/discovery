@@ -8,7 +8,7 @@
         <meta name="viewport" content="width-device-width, initial-scale=1.0">
         
         <title>Mirage</title>
-        <link href='http://fonts.googleapis.com/css?family=Raleway:400,500,600,700|Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600,700|Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
 
         <script type="text/javascript" src="{% static "mirage_site/js/jquery-1.11.1.min.js" %}"></script>
         <script type="text/javascript" src="{% static "mirage_site/js/select2.min.js" %}"></script>
@@ -23,22 +23,22 @@
         <script type="text/javascript" src="{% static "mirage_site/js/index.js" %}"></script>
 
 
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/base-min.css">
+        <link rel="stylesheet" href="{% static "mirage_site/css/pure-release-0.5.0/pure-min.css" %}" />
+        <link rel="stylesheet" href="{% static "mirage_site/css/pure-release-0.5.0/base-min.css" %}" />
         <link rel="stylesheet" href="{% static "mirage_site/css/select2.css" %}" />
         {% block css %}
         {% endblock %}
 
 
         <!--[if lte IE 8]>
-            <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+            <link rel="stylesheet" href="{% static "mirage_site/css/pure-release-0.5.0/grids-responsive-old-ie-min.css" %}">
         <![endif]-->
 
         <!--
-            <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">[if gt IE 8]><!-->
+            <link rel="stylesheet" href="{% static "mirage_site/css/pure-release-0.5.0/grids-responsive-min.css" %">[if gt IE 8]><!-->
 
          <!--[if gt IE 8]><!-->
-            <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-core-min.css">
+            <link rel="stylesheet" href="{% static "mirage_site/css/pure-release-0.5.0/grids-core-min.css" %}">
         <!--<![endif]-->
         
 
