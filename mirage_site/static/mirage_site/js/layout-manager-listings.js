@@ -26,7 +26,7 @@ LayoutManager.render = function(results) {
         }
         else {
             // if this is a vendor list page and we need to reload to get the template
-            //Events.publish('goToPoolPage', results);
+            Events.publish('goToPoolPage', results);
         }
     }
     //update document title
