@@ -29,6 +29,9 @@ LayoutManager.render = function(results) {
             Events.publish('goToPoolPage', results);
         }
     }
+    //update document title
+    $(document).prop('title', "Results - Mirage");
+
 };
 
 LayoutManager.renderTable = function(results) {

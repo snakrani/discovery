@@ -17,6 +17,9 @@ LayoutManager.init = function() {
 };
 
 LayoutManager.render = function(results) {
+    //update document title
+    $(document).prop('title', results.name + " - Mirage");
+
     URLManager.updateVendorCSVURL(results);
 
     var currentDate = new Date();
