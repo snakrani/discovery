@@ -167,7 +167,7 @@ class Command(BaseCommand):
                     'naics' : get_naics(award),
                     'psc': get_psc(award),
                 }
-
+                
                 if piid in by_piid:
                     by_piid[piid].append(record)
                 else:
@@ -227,5 +227,5 @@ class Command(BaseCommand):
 
             #save updates to annual revenue, number of employees
             v.save()
-            create_load(load_to)
+        create_load(load_to)
 
