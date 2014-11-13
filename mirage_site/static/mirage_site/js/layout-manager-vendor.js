@@ -120,7 +120,7 @@ LayoutManager.buildContractTable = function(data, listType, pageNumber) {
 
     for (contract in results) {
         if (results.hasOwnProperty(contract)) {
-            tr = $('<tr scope="row"></tr>');
+            tr = $('<tr"></tr>');
             displayDate = (results[contract]['date_signed'] ? this.formatDate(this.createDate(results[contract]['date_signed'])) : ' ');
             piid = (results[contract]['piid'] ? results[contract]['piid'] : ' ');
             agencyName = (results[contract]['agency_name'] ? results[contract]['agency_name'] : ' ');
@@ -137,7 +137,7 @@ LayoutManager.buildContractTable = function(data, listType, pageNumber) {
             }
 
             tr.append('<td class="date_signed">' + displayDate + '</td>');
-            tr.append('<td class="piid">' + piid + '</td>');
+            tr.append('<td class="piid" scope="row">' + piid + '</td>');
             tr.append('<td class="agency">' + this.toTitleCase(agencyName) + '</td>');
             tr.append('<td class="type">' + pricingType + '</td>');
             tr.append('<td class="value">' + obligatedAmount+ '</td>');
