@@ -1,10 +1,14 @@
--e git+https://github.com/18F/pyfpds.git#egg=pyfpds
--e git://github.com/django/django.git@78bff08341cfd5b729697c13a7478e83726782d1#egg=django_1.7c1
+-e git://github.com/django/django.git@78bff08341cfd5b729697c13a7478e83726782d1#egg=Django-dev
+PyYAML==3.11
+boto==2.34.0
+coverage==3.7.1
 django-hstore==1.2.3
-djangorestframework==2.3.14
 django-rest-swagger==0.2.0
+-e git+https://github.com/coagulant/django-storages-py3.git@73920742505b0c86b2fbc30274ff8b111e9b6f48#egg=django_storages-origin/py3
+djangorestframework==2.3.14
 psycopg2==2.5.3
 pytz==2014.4
 requests==2.3.0
+selenium==2.43.0
 titlecase==0.7.1
 xmltodict==0.9.0

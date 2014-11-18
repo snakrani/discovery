@@ -209,7 +209,7 @@ LayoutManager.vendorIndicator = function(v, prefix, setaside_code) {
     if (v['setasides'].length > 0) {
         for (var i=0; i<v['setasides'].length; i++) {
             if (v['setasides'][i]['code'] == setaside_code) {
-                return '<img alt="X" src="/static/mirage_site/images/green_dot.png" class="green_dot">';
+                return '<img alt="X" src="' + static_image_path  + '"/green_dot.png" class="green_dot">';
             }
         }
     }

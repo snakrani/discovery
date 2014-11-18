@@ -1,4 +1,5 @@
 import logging
+import time
 
 import requests
 
@@ -27,6 +28,8 @@ class Command(BaseCommand):
 
         vendors = Vendor.objects.all()
         for v in vendors:
+            #keep from bringing the SAM API down
+            time.sleep(2)
             #get SAM.gov API response for this vendor
             uri = settings.SAM_API_URL + v.duns_4 + '?api_key=' + settings.SAM_API_KEY
             print(uri)
