@@ -21,7 +21,9 @@
         <script type="text/javascript" src="{% static "mirage_site/js/url-manager.js" %}"></script>
 
         <script type="text/javascript" src="{% static "mirage_site/js/index.js" %}"></script>
-
+        <script type="text/javascript">
+            var static_image_path = "{% static "mirage_site/images/" %}";
+        </script>
 
         <link rel="stylesheet" href="{% static "mirage_site/css/pure-release-0.5.0/pure-min.css" %}" />
         <link rel="stylesheet" href="{% static "mirage_site/css/pure-release-0.5.0/base-min.css" %}" />
@@ -62,8 +64,8 @@
             <div id="header">
             <div id="header_link"><a href="http://www.gsa.gov/oasis">OASIS Program Home</a></div>
                 <div id="page_title">
-                    <div class="logo"><img src="/static/mirage_site/images/logo.png"></div>
-                    <a href="/"><div class="oasis_title"><img alt="Mirage Logo" src="/static/mirage_site/images/mirage.png"></div></a>
+                    <div class="logo"><img src="{% static "mirage_site/images/logo.png" %}"></div>
+                    <a href="/"><div class="oasis_title"><img alt="Mirage Logo" src="{% static "mirage_site/images/mirage.png" %}"></div></a>
                     <span class="oasis_subtitle">OASIS Market Research</span>
 
                 </div><!--end page_title<!-->
@@ -100,7 +102,7 @@
                     <div id="footer_nav">
                     <ul>
                         <li><a href="http://www.gsa.gov/oasis">OASIS Program Home</a></li>  
-                        <li><a href="https://github.com/18F/mirage"><img alt="GitHub Logo" src="/static/mirage_site/images/github_icon.png">
+                        <li><a href="https://github.com/18F/mirage"><img alt="GitHub Logo" src="{% static "mirage_site/images/github_icon.png" %}">
                         Check out our code on GitHub</a></li>                  
                     </ul>
 
@@ -121,8 +123,8 @@
 
                     <div class="logo_container">
                         <div class="built_by">Built by</div>
-                        <a href="https://18f.gsa.gov"><div class="logo1"><img src="/static/mirage_site/images/logo-18f.png" alt="18F logo"></div></a>
-                        <a href="http://www.gsa.gov"><div class="logo2"><img src="/static/mirage_site/images/gsa_logo.jpg" alt="GSA logo"></div></a>
+                        <a href="https://18f.gsa.gov"><div class="logo1"><img src="{% static "mirage_site/images/logo-18f.png"%} " alt="18F logo"></div></a>
+                        <a href="http://www.gsa.gov"><div class="logo2"><img src="{% static "mirage_site/images/gsa_logo.jpg" %} " alt="GSA logo"></div></a>
                     </div><!--end logo_container<!-->
                 </div><!--end footer<!-->
                 </div><!--end footer_container<!-->

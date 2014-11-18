@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from django.contrib.staticfiles import views
 from django.views.generic import TemplateView
 from django.conf.urls.static import static
 from django.conf import settings
@@ -20,4 +21,9 @@ urlpatterns = patterns('',
     url(r'^results/csv', 'vendor.views.pool_csv', name="pool-csv"),
     url(r'^docs/', include('rest_framework_swagger.urls')),
     url(r'^vendor/(?P<vendor_duns>\w+)/csv/$', 'vendor.views.vendor_csv', name="vendor-csv")
-) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+) #+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += [
+        url(r'^static/(?P<path>.*)$', views.serve),
+    ]

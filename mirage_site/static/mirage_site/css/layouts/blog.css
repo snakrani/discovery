@@ -176,7 +176,7 @@ h4 {
 #combined_search_container    {
     width:100%;
     
-    background-image: url(/static/mirage_site/images/header_bg.png);
+    background-image: url(../../images/header_bg.png);
     background-repeat: repeat-x;
 }
 #combined_search    {
@@ -197,7 +197,7 @@ h4 {
 #vendor_back_button   {
     padding-left:32px;
     padding-top:13px;
-    background:url(/static/mirage_site/images/back_btn.png);
+    background:url(../../images/back_btn.png);
     background-repeat: no-repeat;
     width:313px;
     min-height:54px;
@@ -224,7 +224,7 @@ h4 {
     float:left;
     margin-left:60px;
     padding-top:57px;
-    background:url(/static/mirage_site/images/1.png);
+    background:url(../../images/1.png);
     background-repeat: no-repeat;
     background-position: 0px 0px;
 
@@ -239,7 +239,7 @@ h4 {
     float:left;
     margin-left:50px;
     padding-top:57px;
-    background:url(/static/mirage_site/images/2.png);
+    background:url(../../images/2.png);
     background-repeat: no-repeat;
     background-position: 0px 0px;
     width:417px;
@@ -262,7 +262,7 @@ h4 {
     float:left;
     padding-top:57px;
     margin-left:37px;
-    background:url(/static/mirage_site/images/3.png);
+    background:url(../../images/3.png);
     background-repeat: no-repeat;
     background-position: 0px 0px;
     color:#FFF;
@@ -389,7 +389,7 @@ h4 {
     font-size:1.17em;
 }
 #footer_container   {
-    background-image: url(/static/mirage_site/images/footer_bg.png);
+    background-image: url(../../images/footer_bg.png);
     width:100%;
     background-repeat: repeat;
     min-height:170px;
@@ -428,7 +428,7 @@ h4 {
     margin-left:35px;
     padding-left:40px;
     padding-right:30px;
-    background-image: url(/static/mirage_site/images/footer_cta_bg.png);
+    background-image: url(../../images/footer_cta_bg.png);
     background-position: 50%;
     background-repeat: no-repeat;
     overflow:hidden;
@@ -595,7 +595,7 @@ h4 {
     margin: 15px 0px 5px 0px;
     
     width:100;
-    background:url(/static/mirage_site/images/pool_arrows.png);
+    background:url(../../images/pool_arrows.png);
     background-repeat: no-repeat;
     background-position: 100px 16px;
 }
@@ -757,7 +757,7 @@ img.green_dot   {
     margin-top:4px;
     padding-right:8px;
     padding-top:10px;
-    background:url(/static/mirage_site/images/external_link.png);
+    background:url(../../images/external_link.png);
     background-repeat: no-repeat;
     background-position: 118px 14px;
     height:35px;
@@ -790,7 +790,7 @@ img.green_dot   {
     width: 340px;
     min-height:20px;
     padding-left:23px;
-    background:url(/static/mirage_site/images/download_icon.png);
+    background:url(../../images/download_icon.png);
     background-repeat: no-repeat;
     background-position: 0px 3px;
     
@@ -805,7 +805,7 @@ img.green_dot   {
     margin-top:-21px;
     min-height:20px;
     padding-left:23px;
-    background:url(/static/mirage_site/images/download_icon.png);
+    background:url(../../images/download_icon.png);
     background-repeat: no-repeat;
     background-position: 0px 3px;
     float:right;
@@ -1017,19 +1017,19 @@ img.green_dot   {
 /* Contract History Styles */
 
 .arrow-up {
-    background:url(/static/mirage_site/images/arrow_up.png);
+    background:url(../../images/arrow_up.png);
     background-repeat: no-repeat;
     background-position:right;
     background-position: 93% 50%;
 }
 .arrow-down {
-    background:url(/static/mirage_site/images/arrow_down.png);
+    background:url(../../images/arrow_down.png);
     background-repeat: no-repeat;
     background-position:right;
     background-position: 93% 50%;
 }
 .arrow-sortable {
-    background:url(/static/mirage_site/images/arrow_sortable.png);
+    background:url(../../images/arrow_sortable.png);
     background-repeat: no-repeat;
     background-position:right;
     background-position: 93% 50%;

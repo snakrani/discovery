@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -38,6 +39,7 @@ ALLOWED_HOSTS = [
     '.gsa.gov',
     '127.0.0.1', 
     '.18f.us',
+    'localhost',
 ]
 
 
@@ -59,6 +61,7 @@ INSTALLED_APPS = (
     'contract',
     'selenium_tests',
     'rest_framework_swagger',
+    'storages',
 
 )
 
@@ -100,6 +103,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 
 #project specific
 VEHICLES = ('oasissb', 'oasis')

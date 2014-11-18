@@ -17,3 +17,13 @@ SAUCE = False
 SAUCE_USERNAME = ''
 SAUCE_ACCESS_KEY = ''
 DOMAIN_TO_TEST = 'domain.of.your.mirage.installation.gov'
+
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+AWS_ACCESS_KEY_ID = ''
+AWS_QUERYSTRING_AUTH = False
+AWS_SECRET_ACCESS_KEY = ''
+AWS_STORAGE_BUCKET_NAME = ''
+
