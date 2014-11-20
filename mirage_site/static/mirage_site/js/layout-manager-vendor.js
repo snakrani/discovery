@@ -36,7 +36,7 @@ LayoutManager.render = function(results) {
     }
     $('.duns_number').html(results.duns ? results.duns : ' ');
     $('.cage_code').html(results.cage ? results.cage : ' ');
-    $('.number_of_employees').html(results.number_of_employees ? results.number_of_employees : 'N/A');
+    $('.number_of_employees').html(results.number_of_employees ? this.numberWithCommas(results.number_of_employees) : 'N/A');
     $('.annual_revenue').html(results.annual_revenue ? '$' + this.numberWithCommas(results.annual_revenue) : 'N/A');
 
     //load SAM expiration date
