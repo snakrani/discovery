@@ -40,7 +40,12 @@ var LayoutManager = {
         URLManager.updateResultCSVURL(results);
 
         $("#number_of_results span").text(resultsStr);
-        $("#your_search").text($("#naics-code option:selected").text());
+
+        // Asynchronously get the selected NAICS text
+        InputHandler.getSelectedNAICS(function(text) {
+            $("#your_search").text(text);
+        });
+
         $("#your_filters").text(
             $("#setaside-filters input:checkbox:checked").map(function() {
                 return $(this).parent().text();
