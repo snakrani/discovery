@@ -18,9 +18,12 @@ SAUCE_USERNAME = ''
 SAUCE_ACCESS_KEY = ''
 DOMAIN_TO_TEST = 'domain.of.your.mirage.installation.gov'
 
+#The below settings turn on S3 bucket storage
+#Lines 25-26 are commented out to force the loading of static assets from the local dev server by default
+#uncomment them and fill in the extra AWS settings to hook it up to an S3 bucket
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+#DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+#STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 AWS_ACCESS_KEY_ID = ''
 AWS_QUERYSTRING_AUTH = False
