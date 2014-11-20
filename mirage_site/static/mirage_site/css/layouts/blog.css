@@ -403,7 +403,7 @@ h4 {
     min-height:170px;
 }
 #footer_nav {
-    margin-left:0px;
+    margin-left:26px;
     padding-top:5px;
     color:#FFF;
     list-style-type: none;
@@ -632,6 +632,7 @@ img.green_dot   {
     margin:0px;padding:0px;
     width:100%;
     margin-top:25px;
+    float:left;
 
 }.pooldetail table{
     border-collapse: collapse;
