@@ -311,12 +311,11 @@ h4 {
 }
 
 .labeltest  {
-    margin-left:px;
 }
 #main_container  {
     float:left;
     width:1100px;
-    overflow: ;
+    margin-top:25px;
 }
 #custom_page_content  {
     width:1100px;
@@ -403,7 +402,7 @@ h4 {
     min-height:170px;
 }
 #footer_nav {
-    margin-left:0px;
+    margin-left:26px;
     padding-top:5px;
     color:#FFF;
     list-style-type: none;
@@ -631,7 +630,8 @@ img.green_dot   {
 .pooldetail {
     margin:0px;padding:0px;
     width:100%;
-    margin-top:25px;
+    float:left;
+    margin-top:20px;
 
 }.pooldetail table{
     border-collapse: collapse;
@@ -674,7 +674,7 @@ img.green_dot   {
 }.pooldetail tr td:last-child{
     border-width:1px 1px 1px 1px;
 }.pooldetail tr:last-child td:last-child{
-    border-width:0px 0px 0px 1px;
+    border-width:0px 1px 1px 1px;
 }
 .pooldetail tr:first-child td{
     background-color:#4A85A3;
@@ -737,7 +737,6 @@ img.green_dot   {
 #vendor_main_container  {
     float:left;
     width:1100px;
-    overflow: ;
 }
 #vendor_title_status_container  {
     width:100%;
@@ -793,14 +792,14 @@ img.green_dot   {
     background:url(../../images/download_icon.png);
     background-repeat: no-repeat;
     background-position: 0px 3px;
-    
     margin-top:5px;
 }
-
 #download_data_results:hover {
     text-decoration: underline;
 }
-
+#csv_container  {
+    float:right;
+}
 #download_data_results  {
     margin-top:-21px;
     min-height:20px;
@@ -808,14 +807,13 @@ img.green_dot   {
     background:url(../../images/download_icon.png);
     background-repeat: no-repeat;
     background-position: 0px 3px;
-    float:right;
+    
 }
 #vendor_sam_expiration_container    {
     font-size:1em;
     padding-bottom:6px;
 }
 .vendor_sam_expiration_text {
-
 }
 .vendor_sam_expiration_date {
     color:#084b5a;
@@ -831,7 +829,6 @@ img.green_dot   {
     float:left;
     min-height:110px;
     margin-left:70px;
-    
 }
 .admin_label    {
     display:inline-block;
@@ -1162,6 +1159,10 @@ img.green_dot   {
     width:95px;
     text-align: left;
     padding-left:10px;
+    word-wrap:normal !important;
+}
+#ch_table td.status {
+    word-wrap:normal !important;
 }
 #ch_table th.h_naics {
     width:70px;
@@ -1204,4 +1205,29 @@ img.green_dot   {
     height:1px;
     overflow:hidden;
 }
+#skiptocontent a {
+    padding:6px;
+    position: absolute;
+    top:-40px;
+    left:0px;
+    color:white !important;
+    border-right:1px solid white;
+    border-bottom:1px solid white;
+    border-bottom-right-radius:8px;
+    background:transparent;
+    -webkit-transition: top 1s ease-out, background 1s linear;
+    transition: top 1s ease-out, background 1s linear;
+    z-index: 100;
+}
+
+#skiptocontent a:focus {
+    position:absolute;
+    left:0px;
+    top:0px;
+    background:#BF1722;
+    outline:0;  
+    -webkit-transition: top .1s ease-in, background .5s linear;
+    transition: top .1s ease-in, background .5s linear;
+}
+
 

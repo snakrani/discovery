@@ -8,10 +8,13 @@
             <span class="results_pool_name_number_pool"></span>
             <span class="results_pool_name_number_description"></span>
 
-        <div id="number_of_results">
-            <span class="matching_your_search"></span>
-        </div><!--end number_of_results<!-->
-             <a id="csv_link" href="#"><div id="download_data_results">download data (CSV)</div></a>
+            <div id="number_of_results">
+                <span class="matching_your_search"></span>
+            </div><!--end number_of_results<!-->
+            <div id="csv_container">
+                <a id="csv_link" href="#"><div id="download_data_results">download data (CSV)</div></a>
+            </div>
+
         </div><!--end results_pool_name_number<!-->
 
         <div id="your_search_criteria">
@@ -23,39 +26,39 @@
 
 {% block content %}
 
-<div id="pool_table" class="pooldetail">
-                <table id="pool_vendors">
-                    <tr>
-                        <td scope="col" class="h_vendor_name">
-                            Vendor Name
-                        </td>
-                        <td scope="col" class="h_vendor_location">
-                            Location
-                        </td>
-                        <td scope="col" class="h_naics_results">
-                            No. of Contracts
-                        </td>
-                        <td scope="col" class="h_8a">
-                            8(a)
-                        </td>
-                        <td scope="col" class="h_hubz">
-                            HubZ
-                        </td>
-                        <td scope="col" class="h_sdvo">
-                            SDVO
-                        </td>
-                        <td scope="col" class="h_wo">
-                            WO
-                        </td>
-                        <td scope="col" class="h_vo">
-                            VO
-                        </td>
-                        <td scope="col" class="h_sdb">
-                            SDB
-                        </td>
-                    </tr>
-                </table>
-            </div>
+    <div id="pool_table" class="pooldetail">
+        <table id="pool_vendors">
+            <tr>
+                <td scope="col" class="h_vendor_name">
+                    Vendor Name
+                </td>
+                <td scope="col" class="h_vendor_location">
+                    Location
+                </td>
+                <td scope="col" class="h_naics_results">
+                    No. of Contracts
+                </td>
+                <td scope="col" class="h_8a">
+                    8(a)
+                </td>
+                <td scope="col" class="h_hubz">
+                    HubZ
+                </td>
+                <td scope="col" class="h_sdvo">
+                    SDVO
+                </td>
+                <td scope="col" class="h_wo">
+                    WO
+                </td>
+                <td scope="col" class="h_vo">
+                    VO
+                </td>
+                <td scope="col" class="h_sdb">
+                    SDB
+                </td>
+            </tr>
+        </table>
+    </div>
 {% endblock %}
 
 {% block page_js %}
