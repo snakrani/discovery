@@ -139,7 +139,7 @@ var InputHandler = {
 
     populateDropDown: function() {
         // can't seem to use cached jqobj, something goes wrong with select2
-        $.getJSON(
+        this.populatePromise = $.getJSON(
             "/api/naics/",
             { format: "json" },
             function( data ) {
@@ -153,9 +153,26 @@ var InputHandler = {
                 if (URLManager.getParameterByName("naics-code") || URLManager.getParameterByName("setasides")) {
                     Events.publish('loadData');
                 }
-                $("#naics-code").select2({placeholder:'Select a NAICS code', width : '380px'}).select2("val", URLManager.getParameterByName("naics-code"));
+                $("#naics-code")
+                    .select2({placeholder:'Select a NAICS code', width : '380px'})
+                    .select2("val", URLManager.getParameterByName("naics-code"));
             }
         );
         $('#naics-code').select2({placeholder:'Select a NAICS code', width : '380px'});
+    },
+
+    /*
+     * This function is asynchronous because getting the selected NAICS text
+     * depends on having populated the dropdown via a JSON request. Usage:
+     *
+     * InputHandler.getSelectedNAICS(function(text) {
+     *   // do something with text here
+     * });
+     */
+    getSelectedNAICS: function(callback) {
+        this.populatePromise.done(function() {
+            var text = $("#naics-code option:selected").text();
+            callback(text);
+        });
     }
 };
