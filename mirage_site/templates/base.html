@@ -62,12 +62,14 @@
         <div id="page_top_container">
             <div id="skiptocontent"><a href="#skip" class="">skip to main content</a></div>
             <div id="header">
-            <div id="header_link"><a href="http://www.gsa.gov/oasis">OASIS Program Home</a></div>
+                <div id="header_link"><a href="http://www.gsa.gov/oasis">OASIS Program Home</a></div>
                 <div id="page_title">
                     <div class="logo"><img src="{% static "mirage_site/images/logo.png" %}"></div>
-                    <a href="/"><div class="oasis_title"><img alt="Mirage Logo" src="{% static "mirage_site/images/mirage.png" %}"></div></a>
+                    <a href="/">
+                        <div class="oasis_title"><img alt="Mirage Logo" src="{% static "mirage_site/images/mirage.png" %}" />
+                        </div>
+                    </a>
                     <span class="oasis_subtitle">OASIS Market Research</span>
-
                 </div><!--end page_title<!-->
             </div><!--end header<!-->
         </div><!--end page_top_container<!-->
@@ -80,55 +82,54 @@
 
         <div id="container">
 
-            <a name="skip" > </a >
+            <a name="skip" > </a>
             {% block body %}
             {% endblock body %}
 
-                <!--CUSTOM PAGE CONTENT HERE!-->            
+            <!--CUSTOM PAGE CONTENT HERE!-->            
 
-                    <div id="custom_page_content">
-                        {% block content %}
-                        {% endblock %}
-                    </div><!--end custom_page_content<!-->
+            <div id="custom_page_content">
+                {% block content %}
+                {% endblock %}
+            </div><!--end custom_page_content<!-->
 
-                <!--END CUSTOM PAGE CONTENT!-->  
+            <!--END CUSTOM PAGE CONTENT!-->  
 
         </div><!--end container<!-->
 
 
-            <div class="cf"></div>
+        <div class="cf"></div>
 
-            <div id="footer_container">
-                <div id="footer">
-                    <div id="footer_nav">
+        <div id="footer_container">
+            <div id="footer">
+                <div id="footer_nav">
                     <ul>
                         <li><a href="http://www.gsa.gov/oasis">OASIS Program Home</a></li>  
-                        <li><a href="https://github.com/18F/mirage"><img alt="GitHub Logo" src="{% static "mirage_site/images/github_icon.png" %}">
-                        Check out our code on GitHub</a></li>                  
+                        <li><a href="https://github.com/18F/mirage"><img alt="GitHub Logo" src="{% static "mirage_site/images/github_icon.png" %}" />Check out our code on GitHub</a></li>                  
                     </ul>
 
-                    </div><!--end footer_nav<!-->
+                </div><!--end footer_nav<!-->
 
-                    <div id="call_to_action">
-                        <div class="cta_title">Want to help develop Mirage?</div>
-                        <span class="cta_text">We are always looking for volunteers to try out prototypes.  Or drop us a line with your questions & comments.</span>
+                <div id="call_to_action">
+                    <div class="cta_title">Want to help develop Mirage?</div>
+                    <span class="cta_text">We are always looking for volunteers to try out prototypes.  Or drop us a line with your questions & comments.</span>
 
-                        <span class="cta_feedback">
-                        We'd love your feedback!
-                        </span>
-                        <div class="cta_spacer">
+                    <span class="cta_feedback">
+                    We'd love your feedback!
+                    </span>
+                    <div class="cta_spacer">
                         <span class="cta_email">email:</span>
                         <span class="cta_email_address">mirage-18f@gsa.gov</span>
-                        </div><!--end cta_spacer<!-->
-                    </div><!--end call_to_action<!-->
+                    </div><!--end cta_spacer<!-->
+                </div><!--end call_to_action<!-->
 
-                    <div class="logo_container">
-                        <div class="built_by">Built by</div>
-                        <a href="https://18f.gsa.gov"><div class="logo1"><img src="{% static "mirage_site/images/logo-18f.png"%} " alt="18F logo"></div></a>
-                        <a href="http://www.gsa.gov"><div class="logo2"><img src="{% static "mirage_site/images/gsa_logo.jpg" %} " alt="GSA logo"></div></a>
-                    </div><!--end logo_container<!-->
-                </div><!--end footer<!-->
-                </div><!--end footer_container<!-->
+                <div class="logo_container">
+                    <div class="built_by">Built by</div>
+                    <a href="https://18f.gsa.gov"><div class="logo1"><img src="{% static "mirage_site/images/logo-18f.png"%} " alt="18F logo" /></div></a>
+                    <a href="http://www.gsa.gov"><div class="logo2"><img src="{% static "mirage_site/images/gsa_logo.jpg" %} " alt="GSA logo" /></div></a>
+                </div><!--end logo_container<!-->
+            </div><!--end footer<!-->
+        </div><!--end footer_container<!-->
 
         <style>
         /*  #naics-code { width: 100%; }
