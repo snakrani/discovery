@@ -1159,6 +1159,10 @@ img.green_dot   {
     width:95px;
     text-align: left;
     padding-left:10px;
+    word-wrap:normal !important;
+}
+#ch_table td.status {
+    word-wrap:normal !important;
 }
 #ch_table th.h_naics {
     width:70px;
