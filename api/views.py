@@ -79,7 +79,7 @@ class ListNaics(APIView):
         codes = Naics.objects.all().order_by('description')
 
         if q:
-            codes = Naics.objects.filter(description__icontains=q)
+            codes = codes.filter(description__icontains=q)
 
         return codes
 
