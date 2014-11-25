@@ -76,10 +76,10 @@ class ListNaics(APIView):
         #filters
         q = self.request.QUERY_PARAMS.get('q', None)
 
+        codes = Naics.objects.all().order_by('description')
+
         if q:
-            codes = Naics.objects.filter(description__icontains=q)
-        else:
-            codes = Naics.objects.all()
+            codes = codes.filter(description__icontains=q)
 
         return codes
 
