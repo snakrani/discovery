@@ -13,7 +13,16 @@ from api.serializers import VendorSerializer, NaicsSerializer, PoolSerializer, S
 
 class GetVendor(APIView):
     """
+    Get a Single Vendor
+    ---
+
     This endpoint returns a single vendor by their 9 digit DUNS number
+    
+    type: 
+      DUNS number
+        required: true
+        type: string
+
     """
     def get(self, request, duns, format=None):
         vendor = Vendor.objects.get(duns=duns) 
@@ -22,9 +31,28 @@ class GetVendor(APIView):
 class ListVendors(APIView):
     """
     This endpoint returns a list of vendors filtered by a NAICS code. The NAICS code maps to an OASIS pool and is used to retrieve vendors in that pool only.
-    naics -- a six digit NAICS code (required)
-    setasides -- a comma delimited list of two character setaside codes to filter by. Choices are A6 (8(a)), XX (Hubzone), QF (service disabled veteran owned), A2 (women owned), A5 (veteran owned), and 27 (small disadvantaged business). Ex. setasides=A6,A5  will filter by 8a and veteran owned business.
-    vehicle -- Choices are eithe oasis or oasissb. Will filter vendors by their presence in either the OASIS unrestricted vehicle or the OASIS Small Business vehicle.
+
+    OASIS pools are groupings of NAICS codes that have the same small business size standard. Because contracts solicited to OASIS vendors can only be issued to one pool, much of the data is presented as part of a pool grouping. Using the NAICS code is a shortcut, so that you don't have to explicitly map the NAICS code to a pool in OASIS yourself.
+    ---
+    GET:
+
+        docExpansion: 'full'
+        parameters:
+          - name: NAICS Code
+            description: a six digit NAICS code (required)
+            required: true
+            type: string
+          - name: setasides  
+            paramType: query
+            allowMultiple: true
+            description: a comma delimited list of two character setaside codes to filter by. Choices are A6 (8(a)), XX (Hubzone), QF (service disabled veteran owned), A2 (women owned), A5 (veteran owned), and 27 (small disadvantaged business). Ex. setasides=A6,A5  will filter by 8a and veteran owned business.
+            required: false
+            type: string
+          - name: vehicle
+            description: Choices are eithe oasis or oasissb. Will filter vendors by their presence in either the OASIS unrestricted vehicle or the OASIS Small Business vehicle.
+            required: false
+            type: string
+
     """
     def get(self, request, format=None):
 
