@@ -184,7 +184,7 @@ SWAGGER_SETTINGS = {
     "info": {
         "contact": "mirage-18f@gsa.gov",
         "title": "Mirage Market Research API",
-        "description": markdown.markdown("""This API drives the [Mirage Market Ressearch Tool.](https://mirage.gsa.gov). It contains information on the vendors that are part of the OASIS and OASIS Small Business contracting vehicles, such as their contracting history, their elligibility for contract awards, and their small business designations. To learn more about the tool, please visit [Mirage](https://mirage.gsa.gov) or see the README on our [Github repository](https://github.com/18F/mirage)."""), #converts markdown description to HTML
+        "description": markdown.markdown("""This API drives the [Mirage Market Research Tool.](https://mirage.gsa.gov). It contains information on the vendors that are part of the OASIS and OASIS Small Business contracting vehicles, such as their contracting history, their elligibility for contract awards, and their small business designations. To learn more about the tool, please visit [Mirage](https://mirage.gsa.gov) or see the README on our [Github repository](https://github.com/18F/mirage)."""), #converts markdown description to HTML
     },
     "template_path": "api_theme/index.html",
 }
