@@ -13,7 +13,15 @@ from api.serializers import VendorSerializer, NaicsSerializer, PoolSerializer, S
 
 class GetVendor(APIView):
     """
-    This endpoint returns a single vendor by their 9 digit DUNS number
+    This endpoint returns a single vendor by their 9 digit DUNS number. DUNS numbers can be looked up in the [System for Award Management](https://www.sam.gov) by vendor name.
+    ---
+    GET:
+        parameters:
+          - name: duns
+            description: a nine digit DUNS number that uniquely identifies the vendor (required)
+            required: true
+            type: string
+            paramType: path
     """
     def get(self, request, duns, format=None):
         vendor = Vendor.objects.get(duns=duns) 
@@ -22,9 +30,38 @@ class GetVendor(APIView):
 class ListVendors(APIView):
     """
     This endpoint returns a list of vendors filtered by a NAICS code. The NAICS code maps to an OASIS pool and is used to retrieve vendors in that pool only.
-    naics -- a six digit NAICS code (required)
-    setasides -- a comma delimited list of two character setaside codes to filter by. Choices are A6 (8(a)), XX (Hubzone), QF (service disabled veteran owned), A2 (women owned), A5 (veteran owned), and 27 (small disadvantaged business). Ex. setasides=A6,A5  will filter by 8a and veteran owned business.
-    vehicle -- Choices are eithe oasis or oasissb. Will filter vendors by their presence in either the OASIS unrestricted vehicle or the OASIS Small Business vehicle.
+
+    OASIS pools are groupings of NAICS codes that have the same small business size standard. Because contracts solicited to OASIS vendors can only be issued to one pool, much of the data is presented as part of a pool grouping. Using the NAICS code is a shortcut, so that you don't have to explicitly map the NAICS code to a pool in OASIS yourself.
+    
+    Vendors can also be filtered by a particular setaside. Valid values for the setasides are two-character codes which include:
+
+    * A6 (8(a))
+    * XX (Hubzone)
+    * QF (service disabled veteran owned)
+    * A2 (women owned)
+    * A5 (veteran owned)
+    * 27 (small disadvantaged business).
+
+    ---
+    GET:
+        parameters:
+          - name: naics
+            paramType: query
+            description: a six digit NAICS code (required)
+            required: true
+            type: string
+          - name: setasides  
+            paramType: query
+            allowMultiple: true
+            description: a comma delimited list of two character setaside codes to filter by.  Ex. setasides=A6,A5  will filter by 8a and veteran owned business.
+            required: false
+            type: string
+          - name: vehicle
+            paramType: query
+            description: Choices are either oasis or oasissb. Will filter vendors by their presence in either the OASIS unrestricted vehicle or the OASIS Small Business vehicle.
+            required: false
+            type: string
+
     """
     def get(self, request, format=None):
 
@@ -64,7 +101,7 @@ class ListVendors(APIView):
 
 class ListNaics(APIView):
     """
-        This endpoint lists all of the NAICS codes that are relevant to the OASIS family of vehicles.
+        This endpoint lists all of the NAICS codes that are relevant to the OASIS family of vehicles. It takes no parameters.
     """
     def get(self, request, format=None):
         serializer = NaicsSerializer(self.get_queryset(), many=True)
@@ -85,13 +122,37 @@ class ListNaics(APIView):
 
 class ListContracts(APIView):
     """ 
-        This endpoint returns contract history for a vendor. 
+    
+    This endpoint returns contract history from FPDS for a specific vendor. The vendor's DUNS number is a required parameter. You can also filter contracts by their NAICS code to find contracts relevant to a particular category. 
+    
+    ---
+    GET:
+        parameters:
+          - name: duns
+            description: A 9-digit DUNS number that uniquely identifies a vendor (required).
+            required: true
+            type: string
+            paramType: query
+          - name: naics
+            description: a six digit NAICS code used to filter by contracts with a certain NAICS
+            type: string
+            required: false
+            paramType: query
+          - name: sort
+            description: a field to sort on. Choices are date, status, agency, and amount
+            type: string
+            required: false
+            paramType: query
+          - name: direction
+            description: The sort direction of the results. Choices are asc or desc.
+            type: string
+            required: false
+            paramType: query
+          - name: page
+            description: the page to start on. Results are paginated in increments of 100. Begins at page=1.
+            required: false
+            paramType: query
 
-        duns -- DUNS number of the vendor (required)
-        naics -- six digit NAICS code used to filter contracts by certain categories
-        sort -- field to sort on. Choices are date, status, agency, and amount.
-        direction -- the sort direction. Choices are asc or desc.
-        page -- the page to start on. Results are returned in increments of 100
     """
     def get(self, request, format=None):
         contracts = self.get_queryset()

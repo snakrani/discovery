@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import markdown
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -169,6 +170,7 @@ LOGGING = {
 
 
 SWAGGER_SETTINGS = {
+    "doc_expansion": "full",
     "exclude_namespaces": [], # List URL namespaces to ignore
     "api_version": '0.1',  # Specify your API's version
     "api_path": "/",  # Specify the path to your API not a root level
@@ -179,6 +181,12 @@ SWAGGER_SETTINGS = {
     "is_authenticated": False,  # Set to True to enforce user authentication,
     "is_superuser": False,  # Set to True to enforce admin only access
     "permission_denied_handler": None, # If user has no permisssion, raise 403 error
+    "info": {
+        "contact": "mirage-18f@gsa.gov",
+        "title": "Mirage Market Research API",
+        "description": markdown.markdown("""This API drives the [Mirage Market Research Tool.](https://mirage.gsa.gov). It contains information on the vendors that are part of the OASIS and OASIS Small Business contracting vehicles, such as their contracting history, their elligibility for contract awards, and their small business designations. To learn more about the tool, please visit [Mirage](https://mirage.gsa.gov) or see the README on our [Github repository](https://github.com/18F/mirage)."""), #converts markdown description to HTML
+    },
+    "template_path": "api_theme/index.html",
 }
 
 try:
