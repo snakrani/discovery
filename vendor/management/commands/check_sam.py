@@ -37,7 +37,10 @@ class Command(BaseCommand):
             
             #check and see if error code is forbidden -- exit because api key problem
             if req.status_code==403:
-                raise Exception('Data.gov API key is invalid')
+                if 'Message' in req.json():
+                    self.logger.debug("There was a 403 error on {0}. Registration information forbidden".format(uri))
+                else:
+                    raise Exception('Data.gov API key is invalid')
 
             sam_data = req.json()
    
