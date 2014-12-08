@@ -33,7 +33,16 @@ class Command(BaseCommand):
             #get SAM.gov API response for this vendor
             uri = settings.SAM_API_URL + v.duns_4 + '?api_key=' + settings.SAM_API_KEY
             print(uri)
-            sam_data = requests.get(uri).json()
+            req = requests.get(uri)
+            
+            #check and see if error code is forbidden -- exit because api key problem
+            if req.status_code==403:
+                if 'Message' in req.json():
+                    self.logger.debug("There was a 403 error on {0}. Registration information forbidden".format(uri))
+                else:
+                    raise Exception('Data.gov API key is invalid')
+
+            sam_data = req.json()
    
             if 'sam_data' in sam_data:
                 if 'registration' in sam_data['sam_data']:
