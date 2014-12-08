@@ -170,7 +170,7 @@ LOGGING = {
 
 
 SWAGGER_SETTINGS = {
-    "doc_expansion": "full",
+    "doc_expansion": "list",
     "exclude_namespaces": [], # List URL namespaces to ignore
     "api_version": '0.1',  # Specify your API's version
     "api_path": "/",  # Specify the path to your API not a root level
