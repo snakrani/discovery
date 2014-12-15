@@ -150,6 +150,12 @@ LOGGING = {
             'filename': os.path.join(BASE_DIR, 'logs/sam.log'),
             'formatter': 'verbose'
         },
+        'fpds_file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/fpds.log'),
+            'formatter': 'verbose'
+        },
     },
     'loggers': {
         'django': {
@@ -165,6 +171,11 @@ LOGGING = {
             'handlers': ['sam_file'],
             'level': 'DEBUG',
         },
+        'fpds': {
+            'handlers': ['fpds_file'],
+            'level': 'DEBUG',
+        },
+
     },
 }
 
