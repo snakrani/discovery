@@ -58,39 +58,37 @@
 
     $(function () {
       window.swaggerUi = new SwaggerUi({
-      url: "{{ swagger_settings.discovery_url }}",
-      apiKey: "{{ swagger_settings.api_key }}",
-      dom_id: "swagger-ui-container",
-      supportedSubmitMethods: {{ swagger_settings.enabled_methods }},
-      onComplete: function(swaggerApi, swaggerUi){
-        log("Loaded SwaggerUI")
-        $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
-      },
-      onFailure: function(data) {
-        log("Unable to Load SwaggerUI");
-      },
-      docExpansion: "{{ swagger_settings.doc_expansion }}",
+        url: "{{ swagger_settings.discovery_url }}",
+        apiKey: "{{ swagger_settings.api_key }}",
+        dom_id: "swagger-ui-container",
+        supportedSubmitMethods: {{ swagger_settings.enabled_methods }},
+        onComplete: function(swaggerApi, swaggerUi){
+          log("Loaded SwaggerUI")
+          $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
+        },
+        onFailure: function(data) {
+          log("Unable to Load SwaggerUI");
+        },
+        docExpansion: "{{ swagger_settings.doc_expansion }}",
+      });
+
+      $('#input_apiKey').change(function() {
+        var key = $('#input_apiKey')[0].value;
+        log("key: " + key);
+        if(key && key.trim() != "") {
+          console.log("added key " + key);
+          window.authorizations.add("key", new ApiKeyAuthorization("Authorization", "{{ swagger_settings.token_type }} " + key, "header"));
+        }
+      });
+
+      {% if swagger_settings.api_key %}
+      window.authorizations.add("key", new ApiKeyAuthorization("Authorization", "{{ swagger_settings.token_type }} " + "{{ swagger_settings.api_key }}", "header"));
+      {% endif %}
+
+      window.swaggerUi.load();
     });
-
-    $('#input_apiKey').change(function() {
-      var key = $('#input_apiKey')[0].value;
-      log("key: " + key);
-      if(key && key.trim() != "") {
-        console.log("added key " + key);
-        window.authorizations.add("key", new ApiKeyAuthorization("Authorization", "{{ swagger_settings.token_type }} " + key, "header"));
-      }
-    });
-
-    {% if swagger_settings.api_key %}
-    window.authorizations.add("key", new ApiKeyAuthorization("Authorization", "{{ swagger_settings.token_type }} " + "{{ swagger_settings.api_key }}", "header"));
-    {% endif %}
-
-    window.swaggerUi.load();
-  });
 
   </script>
-
 </body>
-
 </html>
 {% endspaceless %}
