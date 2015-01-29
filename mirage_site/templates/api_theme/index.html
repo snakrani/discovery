@@ -54,13 +54,14 @@
   <script src='{% static "rest_framework_swagger/lib/highlight.8.0.pack.js" %}'></script>
   <script>
 
-    $(function () {
+    $(function() {
+
       window.swaggerUi = new SwaggerUi({
         url: "{{ swagger_settings.discovery_url }}",
         apiKey: "{{ swagger_settings.api_key }}",
         dom_id: "swagger-ui-container",
         supportedSubmitMethods: {{ swagger_settings.enabled_methods }},
-        onComplete: function(swaggerApi, swaggerUi){
+        onComplete: function(swaggerApi, swaggerUi) {
           log("Loaded SwaggerUI")
           $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
         },
@@ -84,6 +85,7 @@
       {% endif %}
 
       window.swaggerUi.load();
+
     });
 
   </script>
