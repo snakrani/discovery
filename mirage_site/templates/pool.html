@@ -10,12 +10,12 @@
 
             <div id="number_of_results">
                 <span class="matching_your_search"></span>
-            </div><!--end number_of_results<!-->
+            </div><!-- end number_of_results -->
             <div id="csv_container">
                 <a id="csv_link" href="#"><div id="download_data_results">download data (CSV)</div></a>
             </div>
 
-        </div><!--end results_pool_name_number<!-->
+        </div><!-- end results_pool_name_number -->
 
         <div id="your_search_criteria">
             <span class="your_search_grey">showing vendors in: </span><span id="your_search" class="your_search_blue"></span>
@@ -62,6 +62,6 @@
 {% endblock %}
 
 {% block page_js %}
-    <script type="text/javascript" src="{% static "mirage_site/js/layout-manager-listings.js" %}"></script>
-    <script type="text/javascript" src="{% static "mirage_site/js/requests-manager-listings.js" %}"></script>
+    <script src="{% static 'mirage_site/js/layout-manager-listings.js' %}"></script>
+    <script src="{% static 'mirage_site/js/requests-manager-listings.js' %}"></script>
 {% endblock %}
