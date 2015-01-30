@@ -1,67 +1,65 @@
 {% load staticfiles %}
-<!doctype HTML>
+<!DOCTYPE HTML>
 <html lang="en">
-    
     <head>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta charset="utf-8">
-        <meta name="viewport" content="width-device-width, initial-scale=1.0">
-        
-        <title>Discovery</title>
+        <title>{% block title %}Discovery{% endblock %}</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600,700|Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
 
-        <script type="text/javascript" src="{% static "mirage_site/js/jquery-1.11.1.min.js" %}"></script>
-        <script type="text/javascript" src="{% static "mirage_site/js/select2.min.js" %}"></script>
-         <script type="text/javascript" src="{% static "mirage_site/js/jquery.fireOnDisable.js" %}"></script>
+        {% block scripts %}
+        <script src="{% static 'mirage_site/js/jquery-1.11.1.min.js' %}"></script>
+        <script src="{% static 'mirage_site/js/select2.min.js' %}"></script>
+        <script src="{% static 'mirage_site/js/jquery.fireOnDisable.js' %}"></script>
 
-        <script type="text/javascript" src="{% static "mirage_site/js/history.js/scripts/bundled/html4+html5/jquery.history.js" %}"></script>
-        <script type="text/javascript" src="{% static "mirage_site/js/input-handler.js" %}"></script>
-        <script type="text/javascript" src="{% static "mirage_site/js/requests-manager.js" %}"></script>
-        <script type="text/javascript" src="{% static "mirage_site/js/layout-manager.js" %}"></script>
-        <script type="text/javascript" src="{% static "mirage_site/js/url-manager.js" %}"></script>
+        <script src="{% static 'mirage_site/js/history.js/scripts/bundled/html4+html5/jquery.history.js' %}"></script>
+        <script src="{% static 'mirage_site/js/input-handler.js' %}"></script>
+        <script src="{% static 'mirage_site/js/requests-manager.js' %}"></script>
+        <script src="{% static 'mirage_site/js/layout-manager.js' %}"></script>
+        <script src="{% static 'mirage_site/js/url-manager.js' %}"></script>
 
-        <script type="text/javascript" src="{% static "mirage_site/js/index.js" %}"></script>
-        <script type="text/javascript">
-            var static_image_path = "{% static "mirage_site/images/" %}";
+        <script src="{% static 'mirage_site/js/index.js' %}"></script>
+        <script>
+        var static_image_path = "{% static 'mirage_site/images/' %}";
         </script>
+        {% endblock %}
 
-        <link rel="stylesheet" href="{% static "mirage_site/css/pure-release-0.5.0/pure-min.css" %}" />
-        <link rel="stylesheet" href="{% static "mirage_site/css/pure-release-0.5.0/base-min.css" %}" />
-        <link rel="stylesheet" href="{% static "mirage_site/css/select2.css" %}" />
+        <link rel="stylesheet" href="{% static 'mirage_site/css/pure-release-0.5.0/pure-min.css' %}">
+        <link rel="stylesheet" href="{% static 'mirage_site/css/pure-release-0.5.0/base-min.css' %}">
+        <link rel="stylesheet" href="{% static 'mirage_site/css/select2.css' %}">
+
         {% block css %}
         {% endblock %}
 
-
         <!--[if lte IE 8]>
-            <link rel="stylesheet" href="{% static "mirage_site/css/pure-release-0.5.0/grids-responsive-old-ie-min.css" %}">
+        <link rel="stylesheet" href="{% static 'mirage_site/css/pure-release-0.5.0/grids-responsive-old-ie-min.css' %}">
         <![endif]-->
 
-        <!--
-            <link rel="stylesheet" href="{% static "mirage_site/css/pure-release-0.5.0/grids-responsive-min.css" %}">[if gt IE 8]><!-->
+        <!-- <link rel="stylesheet" href="{% static 'mirage_site/css/pure-release-0.5.0/grids-responsive-min.css' %}"> -->
 
-         <!--[if gt IE 8]><!-->
-            <link rel="stylesheet" href="{% static "mirage_site/css/pure-release-0.5.0/grids-core-min.css" %}">
+        <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="{% static 'mirage_site/css/pure-release-0.5.0/grids-core-min.css' %}">
         <!--<![endif]-->
-        
 
-        
         <!--[if gte IE 7]><!-->
-            <link rel="stylesheet" href="{% static "mirage_site/css/layouts/blog.css" %}">
+        <link rel="stylesheet" href="{% static 'mirage_site/css/layouts/blog.css' %}">
         <!--<![endif]-->
 
         <!--[if lte IE 8]>
-            <link rel="stylesheet" href="{% static "mirage_site/css/layouts/blog-old-ie.css" %}">
+        <link rel="stylesheet" href="{% static 'mirage_site/css/layouts/blog-old-ie.css' %}">
         <![endif]-->
 
         <!--[if lt IE 9]>
-            <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.js"></script>
         <![endif]-->
     </head>
     <body>
-
+        {% block page_top %}
         <div id="page_top_container">
             <div id="skiptocontent"><a href="#skip" class="">skip to main content</a></div>
-            <div id="header">
+            <div id="mirage_header">
                 <div id="header_link"><a href="http://www.gsa.gov/oasis">OASIS Program Home</a></div>
                 <div id="page_title">
                     <a href="/">
@@ -71,12 +69,10 @@
                 </div><!--end page_title<!-->
             </div><!--end header<!-->
         </div><!--end page_top_container<!-->
+        {% endblock %}
 
-
-                {% block header %}    
-                {% endblock header %}
-
-
+        {% block header %}
+        {% endblock %}
 
         <div id="container">
 
@@ -84,14 +80,14 @@
             {% block body %}
             {% endblock body %}
 
-            <!--CUSTOM PAGE CONTENT HERE!-->            
+            <!--CUSTOM PAGE CONTENT HERE!-->
 
             <div id="custom_page_content">
                 {% block content %}
                 {% endblock %}
             </div><!--end custom_page_content<!-->
 
-            <!--END CUSTOM PAGE CONTENT!-->  
+            <!--END CUSTOM PAGE CONTENT!-->
 
         </div><!--end container<!-->
 
@@ -102,18 +98,19 @@
             <div id="footer">
                 <div id="footer_nav">
                     <ul>
-                        <li><a href="http://www.gsa.gov/oasis">OASIS Program Home</a></li>  
-                        <li><a href="https://github.com/18F/mirage"><img alt="GitHub Logo" src="{% static "mirage_site/images/github_icon.png" %}" />Check out our code on GitHub</a></li>                  
+                        <li><a href="http://www.gsa.gov/oasis">OASIS Program Home</a></li>
+                        <li><a href="https://github.com/18F/mirage"><img alt="GitHub Logo" src="{% static 'mirage_site/images/github_icon.png' %}"> Check out our code on GitHub</a></li>
+                        <li><a href="/docs/">Read the API documentation</a></li>
                     </ul>
 
                 </div><!--end footer_nav<!-->
 
                 <div id="call_to_action">
                     <div class="cta_title">Want to help develop Discovery?</div>
-                    <span class="cta_text">We are always looking for volunteers to try out prototypes.  Or drop us a line with your questions & comments.</span>
+                    <span class="cta_text">We are always looking for volunteers to try out prototypes.  Or drop us a line with your questions &amp; comments.</span>
 
                     <span class="cta_feedback">
-                    We'd love your feedback!
+                      We'd love your feedback!
                     </span>
                     <div class="cta_spacer">
                         <span class="cta_email">email:</span>
@@ -123,21 +120,13 @@
 
                 <div class="logo_container">
                     <div class="built_by">Built by</div>
-                    <a href="https://18f.gsa.gov"><div class="logo1"><img src="{% static "mirage_site/images/logo-18f.png"%} " alt="18F logo" /></div></a>
-                    <a href="http://www.gsa.gov"><div class="logo2"><img src="{% static "mirage_site/images/gsa_logo.jpg" %} " alt="GSA logo" /></div></a>
+                    <a href="https://18f.gsa.gov"><div class="logo1"><img src="{% static 'mirage_site/images/logo-18f.png' %} " alt="18F logo"></div></a>
+                    <a href="http://www.gsa.gov"><div class="logo2"><img src="{% static 'mirage_site/images/gsa_logo.jpg' %} " alt="GSA logo"></div></a>
                 </div><!--end logo_container<!-->
             </div><!--end footer<!-->
         </div><!--end footer_container<!-->
 
-        <style>
-        /*  #naics-code { width: 100%; }
-          #search { margin-left: 0; }
-        */
-        </style>
-
-
-
-        <script type="text/javascript" src="{% static "mirage_site/js/mediator.min.js" %}"></script>
+        <script src="{% static 'mirage_site/js/mediator.min.js' %}"></script>
         {% block page_js %}
         {% endblock %}
         <script>
@@ -151,13 +140,13 @@
 
         </script>
 
-        <script type="text/javascript" src="http://www.gsa.gov/resources/js/federated-analytics.js"></script>
+        <script src="http://www.gsa.gov/resources/js/federated-analytics.js"></script>
         <!-- for DAP -->
-        <script type="text/javascript" src="http://www.gsa.gov/resources/js/addLinkerEvents-std.js"></script>
-        <script type="text/javascript">
+        <script src="http://www.gsa.gov/resources/js/addLinkerEvents-std.js"></script>
+        <script>
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-28449919-1']);
-            //Commented as per sarah Hyder. It will stay commented for another 30 days from the day we deploy then it has to be removed. commented on 05/22/2012    
+            //Commented as per sarah Hyder. It will stay commented for another 30 days from the day we deploy then it has to be removed. commented on 05/22/2012
             //_gaq.push(['_setVisitorCookieTimeout', 0]);
             //_gaq.push(['_setSessionCookieTimeout', 0]);
             //_gaq.push(['_setCampaignCookieTimeout', 0]);
