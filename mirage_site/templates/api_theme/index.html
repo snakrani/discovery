@@ -76,20 +76,24 @@ API Documentation / Mirage Market Research
         dom_id: "swagger-ui-container",
         supportedSubmitMethods: {{ swagger_settings.enabled_methods }},
         onComplete: function(swaggerApi, swaggerUi) {
-          log("Loaded SwaggerUI")
-          $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
+          // log("Loaded SwaggerUI");
+          $('pre code').each(function(i, e) {
+            hljs.highlightBlock(e);
+          });
+          // kill the goofy-looking footer
+          $(".swagger-ui-wrap .footer").remove();
         },
         onFailure: function(data) {
-          log("Unable to Load SwaggerUI");
+          console.warn("Unable to Load SwaggerUI");
         },
         docExpansion: "{{ swagger_settings.doc_expansion }}",
       });
 
       $('#input_apiKey').change(function() {
-        var key = $('#input_apiKey')[0].value;
+        var key = this.value;
         log("key: " + key);
-        if(key && key.trim() != "") {
-          console.log("added key " + key);
+        if (key && key.trim() != "") {
+          console.log("added API key:", key);
           window.authorizations.add("key", new ApiKeyAuthorization("Authorization", "{{ swagger_settings.token_type }} " + key, "header"));
         }
       });
