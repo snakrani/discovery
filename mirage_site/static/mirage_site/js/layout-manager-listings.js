@@ -30,7 +30,7 @@ LayoutManager.render = function(results) {
         }
     }
     //update document title
-    $(document).prop('title', "Results - Mirage");
+    $(document).prop('title', "Results - " + URLManager.title);
 
 };
 

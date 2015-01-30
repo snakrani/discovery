@@ -3,6 +3,8 @@
 'use strict';
 
 var URLManager = {
+    title: 'Discovery',
+
     init: function() {
         var naics = this.getParameterByName('naics-code');
         var setasides = this.getParameterByName('setasides');
@@ -72,7 +74,7 @@ var URLManager = {
     },
 
     update: function(results) {
-        History.pushState('', 'Mirage', this.getURL(results));
+        History.pushState('', this.title, this.getURL(results));
     },
 
     loadPoolPage: function(results) {
