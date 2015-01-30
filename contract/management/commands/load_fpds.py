@@ -150,7 +150,12 @@ class Command(BaseCommand):
                     if 'IDV' in vc['content']:
                         continue # don't get IDV records
 
-                    award = vc['content']['award']
+                    try:
+                        award = vc['content']['award']
+                    
+                    except KeyError:
+                        award = vc['content']['OtherTransactionAwardID']
+                        
                     award_id = get_award_id_obj(award)
                     piid = get_piid(award_id)
 
@@ -235,7 +240,8 @@ class Command(BaseCommand):
 
         except Exception as e:
             print("MAJOR ERROR -- PROCESS ENDING EXCEPTION --  {0}".format(e))
-            traceback.print_tb()
+            import sys
+            traceback.print_tb(sys.exc_info()[2])
             self.logger.debug("MAJOR ERROR -- PROCESS ENDING EXCEPTION -- {0}".format(e))
         
         print("-------END LOAD_FPDS PROCESS-------")
