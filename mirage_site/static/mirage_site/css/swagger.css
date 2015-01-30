@@ -319,6 +319,13 @@ code,
   font-family: "Anonymous Pro", "Menlo", "Consolas", "Bitstream Vera Sans Mono", "Courier New", monospace;
 }
 
+#api_info code {
+  font-weight: normal;
+  padding: 2px 5px;
+  background: #f9f9f9;
+  border-radius: 5px;
+}
+
 .swagger-ui-wrap .markdown p code,
 .swagger-ui-wrap .markdown li code {
   background-color: #f0f0f0;
