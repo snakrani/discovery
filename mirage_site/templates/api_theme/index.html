@@ -1,20 +1,23 @@
+{% extends "base.html" %}
 {% load staticfiles %}
-{% spaceless %}
-<!DOCTYPE html>
-<html>
-<head>
-  <meta name="viewport" content="width=device-width initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <title>
-    Swagger UI
-  </title>
-  <link href='//fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
+
+{% block title %}
+API Documentation / Mirage Market Research
+{% endblock %}
+
+{% block css %}
+<!-- <link href='//fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'> -->
   <link href='{% static "rest_framework_swagger/css/highlight.default.css" %}' media='screen' rel='stylesheet' type='text/css'>
   <link href='{% static "rest_framework_swagger/css/atelier-dune.light.css" %}' media='screen' rel='stylesheet' type='text/css'>
   <link href='{% static "rest_framework_swagger/css/rest_framework_swagger.css" %}' media='screen' rel='stylesheet' type='text/css'>
-  <link href='{% static "rest_framework_swagger/css/screen.css" %}' media='screen' rel='stylesheet' type='text/css'>
-</head>
+  <link href='{% static "mirage_site/css/swagger.css" %}' media='screen' rel='stylesheet' type='text/css'>
+{% endblock %}
 
-<body>
+{% block scripts %}
+<!-- don't include base scripts -->
+{% endblock %}
+
+{% block _header %}
   <div id='header'>
     <div class="swagger-ui-wrap">
       <a id="logo" href="http://swagger.wordnik.com">swagger</a>
@@ -34,12 +37,20 @@
       <a href="https://github.com/marcgibbons/django-rest-swagger/">Django REST Swagger</a>
     </div>
   </div>
+{% endblock %}
 
+{% block body %}
   <div id="message-bar" class="swagger-ui-wrap">
+  </div>
+  <div id="api_key">
+    <label for="api_key">Enter your API key:</label>
+    <input id="input_apiKey" name="apiKey" type="text">
   </div>
   <div id="swagger-ui-container" class="swagger-ui-wrap">
   </div>
+{% endblock %}
 
+{% block page_js %}
   <script src="{% static 'rest_framework_swagger/lib/shred.bundle.js' %}"></script>
   <script src='{% static "rest_framework_swagger/lib/jquery-1.8.0.min.js" %}'></script>
   <script src='{% static "rest_framework_swagger/lib/jquery.slideto.min.js" %}'></script>
@@ -53,6 +64,9 @@
   <script src='{% static "rest_framework_swagger/swagger-ui.min.js" %}'></script>
   <script src='{% static "rest_framework_swagger/lib/highlight.8.0.pack.js" %}'></script>
   <script>
+
+    // because jQuery animations are annoying
+    $.fx.off = true;
 
     $(function() {
 
@@ -89,6 +103,4 @@
     });
 
   </script>
-</body>
-</html>
-{% endspaceless %}
+{% endblock %}
