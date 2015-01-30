@@ -170,7 +170,7 @@ LOGGING = {
 
 
 SWAGGER_SETTINGS = {
-    "doc_expansion": "list",
+    "doc_expansion": "full",
     "exclude_namespaces": [], # List URL namespaces to ignore
     "api_version": '0.1',  # Specify your API's version
     "api_path": "/",  # Specify the path to your API not a root level
@@ -191,8 +191,8 @@ To learn more about the tool, please visit [Mirage](https://mirage.gsa.gov) or s
 
 **Please note that the base path for this API is `https://api.data.gov/gsa/mirage/`.**
 
-It requires an api key, obtainable at [api.data.gov](http://api.data.gov/).
-It must be passed in the api_key parameter with each request.
+It requires an API key, obtainable at [api.data.gov](http://api.data.gov/).
+It must be passed in the `api_key` parameter with each request.
         """), #converts markdown description to HTML
     },
     "template_path": "api_theme/index.html",
