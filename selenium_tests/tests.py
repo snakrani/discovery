@@ -42,8 +42,8 @@ class FunctionalTests(LiveServerTestCase):
         driver = self.driver
         #open landing page
         driver.get(self.base_url + '/')
-        #make sure title of landing page is Mirage
-        self.assertEqual('Mirage', driver.title)
+        #make sure title of landing page is Discovery
+        self.assertEqual('Discovery', driver.title)
         #make sure subtitle of page is OASIS Market Research
         self.assertEqual('OASIS Market Research', driver.find_element_by_css_selector("span.oasis_subtitle").text)
 

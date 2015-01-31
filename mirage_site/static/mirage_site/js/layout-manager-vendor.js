@@ -18,7 +18,7 @@ LayoutManager.init = function() {
 
 LayoutManager.render = function(results) {
     //update document title
-    $(document).prop('title', results.name + " - Mirage");
+    $(document).prop('title', results.name + " - " + URLManager.title);
 
     URLManager.updateVendorCSVURL(results);
 
