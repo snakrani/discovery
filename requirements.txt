@@ -4,7 +4,7 @@ PyYAML==3.11
 boto==2.34.0
 coverage==3.7.1
 django-hstore==1.2.3
--e git+https://github.com/marcgibbons/django-rest-swagger.git#egg=django-rest-swagger
+-e git://github.com/18F/django-rest-swagger.git@fix-url-grouping#egg=django-rest-swagger
 djangorestframework==2.3.14
 psycopg2==2.5.3
 pytz==2014.4
