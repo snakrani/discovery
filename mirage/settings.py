@@ -22,6 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 DEBUG = False
 
 TEMPLATE_CONTEXT_PROCESSORS = (
+    "mirage.context_processors.api_host",
     "django.contrib.auth.context_processors.auth",
     "django.core.context_processors.debug",
     "django.core.context_processors.i18n",

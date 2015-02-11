@@ -9,6 +9,13 @@ var RequestsManager = {
         Events.subscribe('loadedWithQS', this.load.bind(RequestsManager));
     },
 
+
+    getAPIRequest: function(url, params, callback){
+        url = APIHOST + url;
+        params['api_key'] = APIKEY;
+        $.getJSON(url, params, callback);
+    },
+
     buildRequestQuery: function() {
         var setasides = InputHandler.getSetasides();
         var naicsCode = InputHandler.getNAICSCode() || URLManager.getParameterByName('naics-code');
