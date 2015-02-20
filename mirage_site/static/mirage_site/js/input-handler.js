@@ -139,7 +139,7 @@ var InputHandler = {
 
     populateDropDown: function() {
         // can't seem to use cached jqobj, something goes wrong with select2
-        this.populatePromise = $.getJSON(
+        this.populatePromise = RequestsManager.getAPIRequest(
             "/api/naics/",
             { format: "json" },
             function( data ) {
