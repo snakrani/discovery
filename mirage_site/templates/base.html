@@ -10,6 +10,10 @@
         <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600,700|Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
 
         {% block scripts %}
+        <script type="text/javascript">
+            var APIHOST = "{{API_HOST}}";
+            var APIKEY = "{{API_KEY}}";
+        </script>
         <script src="{% static 'mirage_site/js/jquery-1.11.1.min.js' %}"></script>
         <script src="{% static 'mirage_site/js/select2.min.js' %}"></script>
         <script src="{% static 'mirage_site/js/jquery.fireOnDisable.js' %}"></script>

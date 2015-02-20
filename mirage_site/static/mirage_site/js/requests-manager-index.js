@@ -15,8 +15,7 @@ RequestsManager.init = function() {
  
 RequestsManager.loadMetadata = function() {
     var url = "/api/metadata/";
- 
-    $.getJSON(url, function(data) {
+    RequestsManager.getAPIRequest(url, {}, function(data) {
         var resultsObj = data; 
         Events.publish('metaDataLoaded', resultsObj);
     });

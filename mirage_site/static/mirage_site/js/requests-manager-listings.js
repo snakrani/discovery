@@ -9,7 +9,7 @@ RequestsManager.load = function() {
    
     if (queryData['naics'] !== "") {
 
-        $.getJSON(url, queryData, function(data) {
+        RequestsManager.getAPIRequest(url, queryData, function(data) {
             var resultsObj = {}; 
 
             resultsObj.poolNumber = data['pool'][0]['number'];

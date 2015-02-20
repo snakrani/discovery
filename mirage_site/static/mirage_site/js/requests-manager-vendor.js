@@ -20,7 +20,7 @@ RequestsManager.load = function() {
         listType = 'all';
     }
     
-    $.getJSON(url, function(data){
+    RequestsManager.getAPIRequest(url, {}, function(data){
         Events.publish('dataLoaded', data);
         Events.publish('vendorInfoLoaded', listType);
     });
@@ -44,7 +44,7 @@ RequestsManager.loadContracts = function(listType) {
         params['naics'] = '';
     }
 
-    $.getJSON(url, params, function(data){
+    RequestsManager.getAPIRequest(url, params, function(data){
         Events.publish('contractDataLoaded', data, listType, data['page']);
     });
 
@@ -52,7 +52,7 @@ RequestsManager.loadContracts = function(listType) {
 
 //no idea why, but if I integrate the updated_naics parameter into the above function it becomes an infinite loop -- KBD
 RequestsManager.refreshContracts = function(data) {
-    var url = "/api/contracts/";
+    var url = apiHost + "/api/contracts/";
 
     var params = {
         'duns': URLManager.getDUNS(),
@@ -71,7 +71,7 @@ RequestsManager.refreshContracts = function(data) {
         }
     }
 
-    $.getJSON(url, params, function(resp_data){
+    RequestsManager.getAPIRequest(url, params, function(resp_data){
         Events.publish('contractDataLoaded', resp_data, data['listType'], data['page']);
     });
 };

@@ -22,6 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 DEBUG = False
 
 TEMPLATE_CONTEXT_PROCESSORS = (
+    "mirage.context_processors.api_host",
     "django.contrib.auth.context_processors.auth",
     "django.core.context_processors.debug",
     "django.core.context_processors.i18n",
@@ -150,6 +151,12 @@ LOGGING = {
             'filename': os.path.join(BASE_DIR, 'logs/sam.log'),
             'formatter': 'verbose'
         },
+        'fpds_file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/fpds.log'),
+            'formatter': 'verbose'
+        },
     },
     'loggers': {
         'django': {
@@ -165,6 +172,11 @@ LOGGING = {
             'handlers': ['sam_file'],
             'level': 'DEBUG',
         },
+        'fpds': {
+            'handlers': ['fpds_file'],
+            'level': 'DEBUG',
+        },
+
     },
 }
 
