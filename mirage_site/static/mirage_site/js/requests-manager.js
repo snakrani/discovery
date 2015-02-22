@@ -11,7 +11,7 @@ var RequestsManager = {
 
 
     getAPIRequest: function(url, params, callback){
-        url = APIHOST + url
+        url = APIHOST + url;
         params['api_key'] = APIKEY;
         $.getJSON(url, params, callback);
     },
