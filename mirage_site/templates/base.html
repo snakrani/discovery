@@ -12,6 +12,9 @@
         {% block scripts %}
         <script type="text/javascript">
             var APIHOST = "{{API_HOST}}";
+            if (APIHOST.substring(APIHOST.length - 1) == '/') {
+                APIHOST = APIHOST.substring(0, APIHOST.length - 1);
+            }
             var APIKEY = "{{API_KEY}}";
         </script>
         <script src="{% static 'mirage_site/js/jquery-1.11.1.min.js' %}"></script>
@@ -144,29 +147,8 @@
 
         </script>
 
-        <script src="http://www.gsa.gov/resources/js/federated-analytics.js"></script>
-        <!-- for DAP -->
-        <script src="http://www.gsa.gov/resources/js/addLinkerEvents-std.js"></script>
-        <script>
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-28449919-1']);
-            //Commented as per sarah Hyder. It will stay commented for another 30 days from the day we deploy then it has to be removed. commented on 05/22/2012
-            //_gaq.push(['_setVisitorCookieTimeout', 0]);
-            //_gaq.push(['_setSessionCookieTimeout', 0]);
-            //_gaq.push(['_setCampaignCookieTimeout', 0]);
-            //_gaq.push(['_setCustomVar',1,'title','GSA Home',3]);
-            _gaq.push(['_setCustomVar',2,'organization','OCM',3]);
-            _gaq.push(['_setCustomVar',3,'program','',3]);
-            _gaq.push(['_trackPageview', gaCrumb]);
-            _gaq.push(['_setDomainName', 'gsa.gov']);
-
-            (function() {
-              var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-              ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-              var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-            })();
-        </script>
-
+        <!-- Digital Analytics Program roll-up, see https://analytics.usa.gov for data -->
+        <script id="_fed_an_ua_tag" src="https://analytics.usa.gov/dap/dap.min.js"></script>
     </body>
 
 </html>
