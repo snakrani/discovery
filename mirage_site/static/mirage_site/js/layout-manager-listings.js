@@ -95,7 +95,7 @@ LayoutManager.renderRow = function(v, qs, i) {
 LayoutManager.renderColumn = function(v, prefix, setasideCode) {
     var $col = $('<td class="' + prefix + '"></td>');
     if (this.findIndicatorMatch(v, prefix, setasideCode)) {
-        $col.html('<img src="'+ static_image_path + '/green_dot.png" class="green_dot">');
+        $col.html('<img src="'+ static_image_path + 'green_dot.png" class="green_dot">');
     }
 
     return $col;
