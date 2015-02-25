@@ -52,7 +52,7 @@ RequestsManager.loadContracts = function(listType) {
 
 //no idea why, but if I integrate the updated_naics parameter into the above function it becomes an infinite loop -- KBD
 RequestsManager.refreshContracts = function(data) {
-    var url = apiHost + "/api/contracts/";
+    var url = "/api/contracts/";
 
     var params = {
         'duns': URLManager.getDUNS(),

@@ -12,20 +12,42 @@ import logging
 import traceback
 
 def get_award_id_obj(award):
-    return award['awardID']
+    if 'awardID' in award: 
+        return award['awardID']
+    else:
+        return award['OtherTransactionAwardID']['OtherTransactionAwardContractID']
+
 
 def get_piid(award_id):
     piid = ''
     if 'referencedIDVID' in award_id:
         #part of an IDIQ
         piid = award_id['referencedIDVID']['PIID'] + '_' 
+    elif 'PIID' in award_id:
+        return award_id['PIID']
+
     piid += award_id['awardContractID']['PIID']
 
     return piid
 
 def get_mod(award_id):
+    if 'modNumber' in award_id:
+        return award_id['modNumber']
     return award_id['awardContractID']['modNumber']
 
+def get_agency_id(award_id):
+    if 'awardContractID' in award_id:
+        return award_id['awardContractID']['agencyID']['#text']
+    else:
+        return award_id['agencyID']['#text']
+
+def get_agency_name(award_id):
+    if 'awardContractID' in award_id:
+        return award_id['awardContractID']['agencyID']['@name']
+    else:
+        return award_id['agencyID']['@name'] 
+
+@catch_key_error
 def get_transaction_number(award_id):
     return award_id['awardContractID']['transactionNumber']
 
@@ -154,10 +176,18 @@ class Command(BaseCommand):
                         award = vc['content']['award']
                     
                     except KeyError:
-                        award = vc['content']['OtherTransactionAwardID']
+                        try:
+                            award = vc['content']['OtherTransactionAward']
+                        except KeyError:
+                            print(vc)
+                            continue 
                         
+                    
                     award_id = get_award_id_obj(award)
                     piid = get_piid(award_id)
+
+                    if 'contractDetail' in award:
+                        award = award['contractDetail'] # for OtherTransactionAward, details are nested one more level
 
                     record = {
                         'mod_number': get_mod(award_id), 
@@ -165,8 +195,8 @@ class Command(BaseCommand):
                         'ultimate_completion_date': get_ultimate_completion_date(award), 
                         'current_completion_date': get_current_completion_date(award), 
                         'signed_date': award['relevantContractDates']['signedDate'],
-                        'agency_id': award_id['awardContractID']['agencyID']['#text'],
-                        'agency_name': award_id['awardContractID']['agencyID']['@name'],
+                        'agency_id': get_agency_id(award_id), #award_id['awardContractID']['agencyID']['#text'],
+                        'agency_name': get_agency_name(award_id), #award_id['awardContractID']['agencyID']['@name'],
                         'obligated_amount': award['dollarValues']['obligatedAmount'],
                         'annual_revenue': get_annual_revenue(award),
                         'number_of_employees': get_number_of_employees(award),
