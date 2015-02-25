@@ -1,13 +1,13 @@
-# Mirage: OASIS Market Research
+# Discovery: OASIS Market Research
 [![Circle CI](https://circleci.com/gh/18F/mirage.png?style=badge)](https://circleci.com/gh/18F/mirage)
 
 Welcome to the wonderful world of procurement, a mechanism by which the government buys goods and services from the private sector. The procurement process is made up of several stages, one of the earliest being market research. Market Research is an attempt to predict what qualified bidders your solicitation for goods or services will attract. It helps acquisition personnel make decisions regarding various aspects of their particular procurement. Ideally, a solicitation should be structured so that it attracts a enough experienced bidders to be truly competitive.
 
-After researching the marketplace, procurement officers may decide to break their solicitation up into smaller chunks, or choose one vehicle or schedule over another. Procurement vehicles and schedules are large umbrella contracts, with a set of vendors that have "pre-competed" for work in a general category. Mirage was developed to serve the [OASIS family of  vehicles](http://www.gsa.gov/portal/content/161367), which has many vendors capable of providing integrated professional services. OASIS is actually two vehicles, OASIS SB, which includes small businesses only, and OASIS unrestricted, which includes a wider array of vendors.
+After researching the marketplace, procurement officers may decide to break their solicitation up into smaller chunks, or choose one vehicle or schedule over another. Procurement vehicles and schedules are large umbrella contracts, with a set of vendors that have "pre-competed" for work in a general category. Discovery was developed to serve the [OASIS family of  vehicles](http://www.gsa.gov/portal/content/161367), which has many vendors capable of providing integrated professional services. OASIS is actually two vehicles, OASIS SB, which includes small businesses only, and OASIS unrestricted, which includes a wider array of vendors.
 
-Mirage is currently nearing our first release, or our minimum viable product. We are still actively soliciting suggestions and user feedback. You can file issues on this repo, or you can check out our [Trello board](https://trello.com/b/ZcWTRSP9/mirage), which contains our product backlog to see what we have planned in the future.
+Discovery is currently nearing our first release, or our minimum viable product. We are still actively soliciting suggestions and user feedback. You can file issues on this repo, or you can check out our [Trello board](https://trello.com/b/ZcWTRSP9/mirage), which contains our product backlog to see what we have planned in the future.
 
-Currently, Mirage makes use of vendor information from the System for Award Management (SAM) and historical contract information the Federal Procurement Data System (FPDS). There are a few management commands that load the initial data, but we also provide a SQL dump since the loading of data from FPDS for the past decade can take several hours.
+Currently, Discovery makes use of vendor information from the System for Award Management (SAM) and historical contract information the Federal Procurement Data System (FPDS). There are a few management commands that load the initial data, but we also provide a SQL dump since the loading of data from FPDS for the past decade can take several hours.
 
 This project is in the very early stages. Right now it's a basic Django project. You can get started by:
 

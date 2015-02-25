@@ -45,7 +45,8 @@ class FunctionalTests(LiveServerTestCase):
         #make sure title of landing page is Discovery
         self.assertEqual('Discovery', driver.title)
         #make sure subtitle of page is OASIS Market Research
-        self.assertEqual('OASIS Market Research', driver.find_element_by_css_selector("span.oasis_subtitle").text)
+        #this got removed when logo was updated
+        #self.assertEqual('OASIS Market Research', driver.find_element_by_css_selector("span.oasis_subtitle").text)
 
     def test_veteran_owned_search(self):
         #on search results page, select veteran owned filter
