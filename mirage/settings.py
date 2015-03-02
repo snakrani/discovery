@@ -77,7 +77,7 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'mirage.urls'
-
+APPEND_SLASH = True
 WSGI_APPLICATION = 'mirage.wsgi.application'
 
 
@@ -180,16 +180,21 @@ LOGGING = {
     },
 }
 
+try:
+    from mirage.local_settings import *
+except:
+    pass
 
 SWAGGER_SETTINGS = {
     "doc_expansion": "full",
     "exclude_namespaces": [], # List URL namespaces to ignore
     "api_version": '0.1',  # Specify your API's version
     "api_path": "/",  # Specify the path to your API not a root level
+    "api_host": API_HOST, #the data.gov api host
     "enabled_methods": [  # Specify which methods to enable in Swagger UI
         'get',
     ],
-    "api_key": '', # An API key
+    "api_key": API_KEY , # An API key
     "is_authenticated": False,  # Set to True to enforce user authentication,
     "is_superuser": False,  # Set to True to enforce admin only access
     "permission_denied_handler": None, # If user has no permisssion, raise 403 error
@@ -210,8 +215,4 @@ It must be passed in the `api_key` parameter with each request.
     "template_path": "api_theme/index.html",
 }
 
-try:
-    from mirage.local_settings import *
-except:
-    pass
 
