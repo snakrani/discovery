@@ -190,11 +190,11 @@ SWAGGER_SETTINGS = {
     "exclude_namespaces": [], # List URL namespaces to ignore
     "api_version": '0.1',  # Specify your API's version
     "api_path": "/",  # Specify the path to your API not a root level
-    "api_host": API_HOST, #the data.gov api host
+    "api_host": '', #comment out until fix swagger - API_HOST, #the data.gov api host
     "enabled_methods": [  # Specify which methods to enable in Swagger UI
         'get',
     ],
-    "api_key": API_KEY , # An API key
+    "api_key": '', #Acomment out until fix swagger PI_KEY , # An API key
     "is_authenticated": False,  # Set to True to enforce user authentication,
     "is_superuser": False,  # Set to True to enforce admin only access
     "permission_denied_handler": None, # If user has no permisssion, raise 403 error
