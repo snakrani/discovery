@@ -15,6 +15,10 @@ import dj_database_url
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+try:
+    SECRET_KEY = os.environ['SECRET_KEY']
+except:
+    pass #it will be set by local settings
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -106,6 +110,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+#STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 
 #project specific
@@ -188,6 +194,10 @@ try:
     from mirage.local_settings import *
 except:
     pass
+
+
+if 'API_HOST' not in locals(): API_HOST = os.getenv('API_HOST')
+if 'API_KEY' not in locals(): API_KEY = os.getenv('API_KEY')
 
 SWAGGER_SETTINGS = {
     "doc_expansion": "full",
