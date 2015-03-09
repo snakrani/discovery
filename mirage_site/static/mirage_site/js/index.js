@@ -2,6 +2,9 @@
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
 'use strict';
 
+// add support for cross-domain requests
+$.support.cors = true;
+
 // initializes the app
 $(document).ready(function() {
     // http://thejacklawson.com/Mediator.js/

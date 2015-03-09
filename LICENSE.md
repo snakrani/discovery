@@ -30,3 +30,14 @@ this deed makes no warranties about the work, and disclaims liability for
 all uses of the work, to the fullest extent permitted by applicable law.
 When using or citing the work, you should not imply endorsement by the
 author or the affirmer.
+
+## Exceptions
+- [jQuery], [Mediator.js], and [jQuery-ajaxTransport-XDomainRequest] are
+  licensed under the MIT License.
+- [History.js] is licensed under the New BSD License.
+
+
+[jQuery]: http://jquery.com
+[Mediator.js]: https://github.com/ajacksified/Mediator.js/
+[jQuery-ajaxTransport-XDomainRequest]: https://github.com/MoonScript/jQuery-ajaxTransport-XDomainRequest
+[History.js]: https://github.com/browserstate/history.js/

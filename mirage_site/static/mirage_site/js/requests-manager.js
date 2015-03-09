@@ -10,10 +10,20 @@ var RequestsManager = {
     },
 
 
-    getAPIRequest: function(url, params, callback){
+    getAPIRequest: function(url, params, callback) {
         url = APIHOST + url;
         params['api_key'] = APIKEY;
-        return $.getJSON(url, params, callback);
+        return $.ajax({
+              url: url,
+              dataType: 'json',
+              data: params
+            })
+            .done(callback)
+            .fail(function(req, status, error) {
+              if (!window.console) return;
+              console.log('failed to load: ', url);
+              console.log(error);
+            });
     },
 
     buildRequestQuery: function() {
