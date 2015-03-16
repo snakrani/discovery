@@ -1,4 +1,4 @@
--e git://github.com/django/django.git@78bff08341cfd5b729697c13a7478e83726782d1#egg=django_1.7c1
+django==1.7
 -e git+https://github.com/18F/pyfpds.git#egg=pyfpds
 PyYAML==3.11
 boto==2.34.0
