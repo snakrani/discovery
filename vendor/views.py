@@ -1,9 +1,20 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest
+from django.views.generic import TemplateView
 from vendor.models import Vendor, Pool, Naics, SetAside
 from contract.models import Contract
 import csv
 from titlecase import titlecase
+
+class VendorView(TemplateView):
+    def get_context_data(self, **kwargs):
+        context = super(TemplateView, self).get_context_data(**kwargs)
+        print(context)
+        context['has_capability_statement'] = self.has_statement()
+        return context
+
+    def has_statement(self):
+        return True
 
 def pool_csv(request):
     response = HttpResponse(content_type='text/csv')
