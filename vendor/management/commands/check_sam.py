@@ -1,6 +1,7 @@
 import logging
 import time
 import traceback
+import sys
 import warnings
 
 import requests
@@ -48,9 +49,13 @@ class Command(BaseCommand):
                         self.logger.debug("There was a 403 error on {0}. Registration information forbidden".format(log_uri))
                     else:
                         raise Exception('Data.gov API key is invalid')
+                try:
+                    sam_data = req.json()
+                except ValueError:
+                    #the api did not return anything. Sleep and try again
+                    time.sleep(5)
+                    sam_data = req.json()
 
-                sam_data = req.json()
-       
                 if 'sam_data' in sam_data:
                     if 'registration' in sam_data['sam_data']:
                         reg = sam_data['sam_data']['registration']
@@ -67,6 +72,8 @@ class Command(BaseCommand):
                                                                       self.get_value(addr, 'Zip', v))
                     
                         v.sam_url = self.get_value(reg, 'corporateUrl', v)
+                        if v.sam_url and v.sam_url[:3].lower() == "www" : 
+                            v.sam_url = 'http://' + v.sam_url
 
                         setasides = self.get_value(reg, 'businessTypes', v)
                         for code in setasides:
@@ -92,7 +99,7 @@ class Command(BaseCommand):
         
         except Exception as e:
             print("MAJOR ERROR -- PROCESS ENDING EXCEPTION --  {0}".format(e))
-            traceback.print_tb()
+            print (traceback.format_exc())
             self.logger.debug("MAJOR ERROR -- PROCESS ENDING EXCEPTION -- {0}".format(e))
         
         print("-------END CHECK_SAM PROCESS-------")

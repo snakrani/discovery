@@ -18,6 +18,9 @@
             var APIKEY = "{{API_KEY}}";
         </script>
         <script src="{% static 'mirage_site/js/jquery-1.11.1.min.js' %}"></script>
+        <!--[if lte IE 9]>
+        <script src="{% static 'mirage_site/js/jquery.xdomainrequest.min.js' %}"></script>
+        <![endif]-->
         <script src="{% static 'mirage_site/js/select2.min.js' %}"></script>
         <script src="{% static 'mirage_site/js/jquery.fireOnDisable.js' %}"></script>
 
@@ -106,8 +109,8 @@
                 <div id="footer_nav">
                     <ul>
                         <li><a href="http://www.gsa.gov/oasis">OASIS Program Home</a></li>
-                        <li><a href="https://github.com/18F/mirage"><img alt="GitHub Logo" src="{% static 'mirage_site/images/github_icon.png' %}"> Check out our code on GitHub</a></li>
-                        <li><a href="/docs/">Read the API documentation</a></li>
+                        <li><a href="https://github.com/18F/discovery"><img alt="GitHub Logo" src="{% static 'mirage_site/images/github_icon.png' %}"> Check out our code on GitHub</a></li>
+                    <!--    <li><a href="/docs/">Read the API documentation</a></li>-->
                     </ul>
 
                 </div><!--end footer_nav<!-->
@@ -149,6 +152,8 @@
 
         <!-- Digital Analytics Program roll-up, see https://analytics.usa.gov for data -->
         <script id="_fed_an_ua_tag" src="https://analytics.usa.gov/dap/dap.min.js"></script>
+        <!-- Ethnio Activation Code -->
+<script type="text/javascript" language="javascript" src="https://ethn.io/41979.js" async="true" charset="utf-8"></script>
     </body>
 
 </html>
