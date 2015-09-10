@@ -1,6 +1,13 @@
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 from vendor.models import Vendor
+from vendor.views import VendorView
 from django.core.management import call_command
+
+def make_view(view, request, *args, **kwargs):
+    view.request = request
+    view.args = args
+    view.kwargs = kwargs
+    return view
 
 class VendorLoadTest(TestCase):
     """Tests that the load_vendors management command works and loads all the correct fields"""
@@ -19,3 +26,19 @@ class VendorLoadTest(TestCase):
         null_vendors = Vendor.objects.filter(pm_email=None).count()
         self.assertEqual(null_vendors, 0)
 
+class VendorViewTest(TestCase):
+    def test_has_capability_statement_false(self):
+        request = RequestFactory().get('/vendor/0000')
+        view = VendorView(template_name='vendor.html')
+        view = make_view(view, request)
+        context = view.get_context_data(vendor_duns='0000')
+        self.assertFalse(context['has_capability_statement'])
+
+    def test_has_capability_statement(self):
+        request = RequestFactory().get('/vendor/805875718')
+        view = VendorView(template_name='vendor.html')
+        view = make_view(view, request)
+        context = view.get_context_data(vendor_duns='805875718')
+        self.assertTrue(context['has_capability_statement'])
+        self.assertEqual(context['capability_statement_url'],
+                         'mirage_site/capability_statements/805875718.pdf')

@@ -6,6 +6,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 from api import urls as api_urls
+from vendor.views import VendorView
 
 admin.autodiscover()
 
@@ -17,7 +18,7 @@ urlpatterns = patterns('',
     url(r'^api/', include(api_urls)),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^results/$', TemplateView.as_view(template_name='pool.html')),
-    url(r'^vendor/(?P<vendor_duns>\w+)/$', TemplateView.as_view(template_name='vendor.html')),
+    url(r'^vendor/(?P<vendor_duns>\w+)/$', VendorView.as_view(template_name='vendor.html')),
     url(r'^results/csv', 'vendor.views.pool_csv', name="pool-csv"),
     url(r'^docs/', include('rest_framework_swagger.urls')),
     url(r'^vendor/(?P<vendor_duns>\w+)/csv/$', 'vendor.views.vendor_csv', name="vendor-csv")
