@@ -13,7 +13,6 @@ class VendorView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(TemplateView, self).get_context_data(**kwargs)
-        dir(context)
         duns = context['vendor_duns']
         capability_statement = self.has_statement(duns)
         context['has_capability_statement'] = capability_statement
@@ -31,6 +30,7 @@ class VendorView(TemplateView):
         pdf_path += duns
         pdf_path += '.pdf'
         return pdf_path
+
 
 def pool_csv(request):
     response = HttpResponse(content_type='text/csv')
