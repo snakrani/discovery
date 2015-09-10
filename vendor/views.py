@@ -1,9 +1,36 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest
+from django.views.generic import TemplateView
 from vendor.models import Vendor, Pool, Naics, SetAside
 from contract.models import Contract
 import csv
+import os.path
 from titlecase import titlecase
+
+class VendorView(TemplateView):
+    pdf_dir = 'mirage_site/static/mirage_site/capability_statements/'
+    static_pdf_dir = 'mirage_site/capability_statements/'
+
+    def get_context_data(self, **kwargs):
+        context = super(TemplateView, self).get_context_data(**kwargs)
+        duns = context['vendor_duns']
+        capability_statement = self.has_statement(duns)
+        context['has_capability_statement'] = capability_statement
+        if capability_statement:
+            context['capability_statement_url'] = self.get_pdf_path(duns, self.static_pdf_dir) 
+        return context
+
+    def has_statement(self, duns):
+        if os.path.isfile(self.get_pdf_path(duns, self.pdf_dir)):
+            return True
+        return False
+
+    def get_pdf_path(self, duns, path):
+        pdf_path = path
+        pdf_path += duns
+        pdf_path += '.pdf'
+        return pdf_path
+
 
 def pool_csv(request):
     response = HttpResponse(content_type='text/csv')
