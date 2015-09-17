@@ -1,4 +1,5 @@
 *.swp
+*.swn
 local_settings.py
 *.pyc
 venv
