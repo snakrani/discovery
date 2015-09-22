@@ -69,6 +69,9 @@ The tests can be run using Django's built in testing infrastructure:
 
 You can test specific apps by passing in the app name to the testing command. Valid values are `api`, `vendor`, `contract`, `selenium_tests` (requires additional setup).
 
+### Deploying
+See [deploy.sh](https://github.com/18F/discovery/blob/master/deploy.sh).
+
 ### Selenium testing
 #### Locally with PhantomJS
  * Install python testing requirements with ```pip install -r requirements-test.txt```
