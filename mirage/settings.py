@@ -46,6 +46,7 @@ ALLOWED_HOSTS = [
     '.gsa.gov',
     '127.0.0.1', 
     '.18f.us',
+    '.18f.gov',
     'localhost',
 ]
 
@@ -199,6 +200,7 @@ except:
 
 if 'API_HOST' not in locals(): API_HOST = os.getenv('API_HOST')
 if 'API_KEY' not in locals(): API_KEY = os.getenv('API_KEY')
+if 'SAM_API_KEY' not in locals(): SAM_API_KEY = os.getenv('SAM_API_KEY')
 
 SWAGGER_SETTINGS = {
     "doc_expansion": "full",

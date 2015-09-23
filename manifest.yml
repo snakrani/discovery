@@ -1,8 +1,12 @@
 ---
 # all applications use these settings and services
-memory: 512M
+memory: 1G
 instances: 1
 applications:
 - name: discovery-staging
   path: .
-  timeout: 30
+  timeout: 180
+buildpack: https://github.com/18F/python-buildpack.git#no-proto
+services:
+  - oasis
+domain: 18f.gov
