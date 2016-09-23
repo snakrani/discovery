@@ -21,10 +21,18 @@ class Command(BaseCommand):
         return self.replace_x(duns) + '0000'
 
     def load_temp_setasides(self):
-        reader = csv.reader(open(os.path.join(settings.BASE_DIR, 'vendor/docs/temp_8a_hubzone.csv'))) 
+        reader = csv.reader(open(os.path.join(settings.BASE_DIR, 'vendor/docs/temp_8a_hubzone.csv')))
         for line in reader:
-            v = Vendor.objects.get(duns=line[1])
-            sa = SetAside.objects.get(code=line[2])
+            try:
+                v = Vendor.objects.get(duns=line[1])
+            except Vendor.DoesNotExist:
+                print 'Could not find the specified vendor.'
+
+            try:
+                sa = SetAside.objects.get(code=line[2])
+            except SetAside.DoesNotExist:
+                print 'Could not find the specified setaside.'
+
             if sa not in v.setasides.all():
                 v.setasides.add(sa)
 
@@ -39,34 +47,31 @@ class Command(BaseCommand):
             
             for f in os.listdir(doc_dir):
                 datafile = open(os.path.join(doc_dir, f), 'r')
-                pool = re.match('Pool (.*)-Table.*', f).group(1) 
+                pool = re.match('Pool (.*).csv', f).group(1)
                 reader = csv.reader(datafile)
+
+                # Skip header.
+                reader.next()
 
                 try:
                     pool_obj = Pool.objects.get(number=pool, vehicle__iexact=vehicle)
-                    for idx, line in enumerate(reader): 
-                        #skip header rows
-                        if idx < 2: continue
-                        #emtpy row
-                        if line[1] == '' or line[3] == '': continue
-                        
+                    for line in reader:
                         #relevant columns
-                        data = line[1:11]
-                        piid = data[1]
-                        duns = self.replace_x(data[2])
-    
+                        piid = line[1]
+                        duns = self.replace_x(line[2])
+
                         new_obj, created = Vendor.objects.get_or_create(duns=duns)
 
                         attr_dict = {
-                            'name': data[0],
-                            'duns': self.replace_x(data[2]),
+                            'name': line[0],
+                            'duns': self.replace_x(line[2]),
                             'duns_4': self.duns_plus_4(duns),                            
-                            'cm_name': data[4],
-                            'cm_phone': data[5],
-                            'cm_email': data[6],
-                            'pm_name': data[7],
-                            'pm_phone': data[8],
-                            'pm_email': data[9]
+                            'cm_name': line[3],
+                            'cm_phone': line[4],
+                            'cm_email': line[5],
+                            'pm_name': line[6],
+                            'pm_phone': line[7],
+                            'pm_email': line[8]
                         }
                         
                         for k, v in attr_dict.items(): 
@@ -95,7 +100,6 @@ class Command(BaseCommand):
                 except Pool.MultipleObjectsReturned:
                     self.logger.debug("More than one pool matched {}. Integrity error!".format(pool))
 
-            #call the sam check to fill in extra fields
-            call_command('check_sam')
-            self.load_temp_setasides()
-
+        #call the sam check to fill in extra fields
+        call_command('check_sam')
+        #self.load_temp_setasides()

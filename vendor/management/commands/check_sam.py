@@ -1,4 +1,6 @@
+import json
 import logging
+import os
 import time
 import traceback
 import sys
@@ -32,6 +34,8 @@ class Command(BaseCommand):
 
         print("-------BEGIN CHECK_SAM PROCESS-------")
         try:
+            vendors_list = []
+
             vendors = Vendor.objects.all()
             for v in vendors:
                 #keep from bringing the SAM API down
@@ -85,7 +89,7 @@ class Command(BaseCommand):
                             except SetAside.DoesNotExist:
                                 continue
                         v.save()
-                        
+
                     else:
                         self.logger.debug("'registration' key is missing for {}".format(log_uri))
 
@@ -93,6 +97,36 @@ class Command(BaseCommand):
                     self.logger.debug("SAM API returned an error for {0}, and duns {1}".format(log_uri, v.duns ))
                 else:
                     self.logger.debug("Could not load data from {} for unknown reason".format(log_uri))
+
+                vendors_list.append({
+                    'fields': {
+                        'name': v.name,
+                        'duns': v.duns,
+                        'duns_4': v.duns_4,
+                        'cm_name': v.cm_name,
+                        'cm_phone': v.cm_phone,
+                        'cm_email': v.cm_email,
+                        'pm_name': v.pm_name,
+                        'pm_phone': v.pm_phone,
+                        'pm_email': v.pm_email,
+                        'sam_status': v.sam_status,
+                        'sam_activation_date': v.sam_activation_date,
+                        'sam_expiration_date': v.sam_expiration_date,
+                        'sam_exclusion': v.sam_exclusion,
+                        'cage': v.cage,
+                        'sam_address': v.sam_address,
+                        'sam_citystate': v.sam_citystate,
+                        'sam_url': v.sam_url,
+                        'setasides': [sa.pk for sa in v.setasides.all()]
+                    },
+                    'model': 'vendor.vendor',
+                    'pk': v.pk
+                })
+
+            # Save vendors to a fixture.
+            fixture_file_name = os.path.join(settings.BASE_DIR, 'vendor/fixtures/vendors.json')
+            fixture_file = open(fixture_file_name, 'w')
+            json.dump(vendors_list, fixture_file)
 
             sam_load = SamLoad(sam_load=timezone.now())
             sam_load.save()
