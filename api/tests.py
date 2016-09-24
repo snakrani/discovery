@@ -22,7 +22,7 @@ class NaicsTest(TestCase):
 
 class VendorsTest(TestCase):
     """test for vendor API endpoint"""
-    fixtures = ['vendors.json']
+    fixtures = ['vendors-base.json', 'vendors.json']
  
     def setUp(self):
         self.c = Client()
@@ -76,7 +76,7 @@ class VendorsTest(TestCase):
 
 class VendorTest(TestCase):
     """ tests single vendor endpoint """
-    fixtures = ['vendors.json'] 
+    fixtures = ['vendors-base.json', 'vendors.json']
 
     def setUp(self):
         self.c = Client()
@@ -89,7 +89,7 @@ class VendorTest(TestCase):
 
 class ContractsTest(TestCase):
     """tests for Contracts API endpoint"""
-    fixtures = ['vendors.json', 'contracts.json']
+    fixtures = ['vendors-base.json', 'vendors.json', 'contracts.json']
 
     def setUp(self):
         self.c = Client()
