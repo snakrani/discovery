@@ -9,4 +9,4 @@
 
 # Load the new vendors fixture.
 
-./manage.py loaddata vendor/fixtures/vendors.json
+./manage.py loaddata api/fixtures/vendors.json

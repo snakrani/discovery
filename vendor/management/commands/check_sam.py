@@ -124,7 +124,7 @@ class Command(BaseCommand):
                 })
 
             # Save vendors to a fixture.
-            fixture_file_name = os.path.join(settings.BASE_DIR, 'vendor/fixtures/vendors.json')
+            fixture_file_name = os.path.join(settings.BASE_DIR, 'api/fixtures/vendors.json')
             fixture_file = open(fixture_file_name, 'w')
             json.dump(vendors_list, fixture_file)
 
