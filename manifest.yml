@@ -3,10 +3,9 @@
 memory: 1G
 instances: 1
 applications:
-- name: discovery-staging
+- name: discovery-prod
   path: .
   timeout: 180
-buildpack: https://github.com/18F/python-buildpack.git#no-proto
+  buildpack: https://github.com/cloudfoundry/python-buildpack
 services:
-  - oasis
-domain: 18f.gov
+  - discovery-db

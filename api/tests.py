@@ -1,7 +1,7 @@
 from django.test import Client, TestCase
 from django.utils import timezone
 
-from vendor.models import SamLoad
+from vendors.models import SamLoad
 
 class NaicsTest(TestCase):
     """tests for NAICS API endpoint"""

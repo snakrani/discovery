@@ -24,7 +24,7 @@ except:
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     "mirage.context_processors.api_host",
@@ -43,8 +43,9 @@ TEMPLATE_DIRS = (
 
 )
 ALLOWED_HOSTS = [
+    '.app.cloud.gov',
     '.gsa.gov',
-    '127.0.0.1', 
+    '127.0.0.1',
     '.18f.us',
     '.18f.gov',
     'localhost',
@@ -65,7 +66,7 @@ INSTALLED_APPS = (
 
     'api',
     'mirage_site',
-    'vendor',
+    'vendors',
     'contract',
     'selenium_tests',
     'rest_framework_swagger',
