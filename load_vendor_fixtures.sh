@@ -3,9 +3,9 @@
 
 # Load pre-existing fixtures in the prescribed order.
 
-./manage.py loaddata vendor/fixtures/naics.json
-./manage.py loaddata vendor/fixtures/pools.json
-./manage.py loaddata vendor/fixtures/setasides.json
+./manage.py loaddata vendors/fixtures/naics.json
+./manage.py loaddata vendors/fixtures/pools.json
+./manage.py loaddata vendors/fixtures/setasides.json
 
 # Load the new vendors fixture.
 
