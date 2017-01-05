@@ -11,9 +11,9 @@ import xmltodict
 import csv
 
 class Command(BaseCommand):
-    
+
     logger = logging.getLogger('vendors')
-   
+
     def replace_x(self, duns):
         return duns.replace('X', '0').replace('x', '0')
 
@@ -21,17 +21,17 @@ class Command(BaseCommand):
         return self.replace_x(duns) + '0000'
 
     def load_temp_setasides(self):
-        reader = csv.reader(open(os.path.join(settings.BASE_DIR, 'vendor/docs/temp_8a_hubzone.csv')))
+        reader = csv.reader(open(os.path.join(settings.BASE_DIR, 'vendors/docs/temp_8a_hubzone.csv')))
         for line in reader:
             try:
                 v = Vendor.objects.get(duns=line[1])
             except Vendor.DoesNotExist:
-                print 'Could not find the specified vendor.'
+                print('Could not find the specified vendor.')
 
             try:
                 sa = SetAside.objects.get(code=line[2])
             except SetAside.DoesNotExist:
-                print 'Could not find the specified setaside.'
+                print('Could not find the specified setaside.')
 
             if sa not in v.setasides.all():
                 v.setasides.add(sa)
@@ -39,19 +39,19 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         #read in setasides from yaml file
 
-        #read in vendors from csv files 
-        
+        #read in vendors from csv files
+
         for vehicle in settings.VEHICLES:
             #cycle through predefined set of vehicles
-            doc_dir = os.path.join(settings.BASE_DIR, 'vendor/docs/{0}/pools'.format(vehicle))
-            
+            doc_dir = os.path.join(settings.BASE_DIR, 'vendors/docs/{0}/pools'.format(vehicle))
+
             for f in os.listdir(doc_dir):
                 datafile = open(os.path.join(doc_dir, f), 'r')
                 pool = re.match('Pool (.*).csv', f).group(1)
                 reader = csv.reader(datafile)
 
                 # Skip header.
-                reader.next()
+                next(reader)
 
                 try:
                     pool_obj = Pool.objects.get(number=pool, vehicle__iexact=vehicle)
@@ -65,7 +65,7 @@ class Command(BaseCommand):
                         attr_dict = {
                             'name': line[0],
                             'duns': self.replace_x(line[2]),
-                            'duns_4': self.duns_plus_4(duns),                            
+                            'duns_4': self.duns_plus_4(duns),
                             'cm_name': line[3],
                             'cm_phone': line[4],
                             'cm_email': line[5],
@@ -73,8 +73,8 @@ class Command(BaseCommand):
                             'pm_phone': line[7],
                             'pm_email': line[8]
                         }
-                        
-                        for k, v in attr_dict.items(): 
+
+                        for k, v in list(attr_dict.items()):
                             if v and v != '' and v != ' ':
                                 setattr(new_obj, k, v)
 
@@ -87,11 +87,11 @@ class Command(BaseCommand):
                             self.logger.debug("Successfully created {}".format(new_obj.name))
                         else:
                             self.logger.debug("Vendor {} already in database".format(new_obj.name))
-                        
+
 
                         #Need to document:
                         #API key will need rate limiting restrictions removed probably
-        
+
 
                 except Pool.DoesNotExist:
                     self.logger.debug("Pool {} not found for spreadsheet".format(pool))
