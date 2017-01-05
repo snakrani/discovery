@@ -11,9 +11,14 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import markdown
+import dj_database_url
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+try:
+    SECRET_KEY = os.environ['SECRET_KEY']
+except:
+    pass #it will be set by local settings
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -38,9 +43,11 @@ TEMPLATE_DIRS = (
 
 )
 ALLOWED_HOSTS = [
+    '.app.cloud.gov',
     '.gsa.gov',
-    '127.0.0.1', 
+    '127.0.0.1',
     '.18f.us',
+    '.18f.gov',
     'localhost',
 ]
 
@@ -59,7 +66,7 @@ INSTALLED_APPS = (
 
     'api',
     'mirage_site',
-    'vendor',
+    'vendors',
     'contract',
     'selenium_tests',
     'rest_framework_swagger',
@@ -83,7 +90,8 @@ WSGI_APPLICATION = 'mirage.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config()
 
 
 # Internationalization
@@ -105,6 +113,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+#STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 
 #project specific
@@ -180,10 +190,18 @@ LOGGING = {
     },
 }
 
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config()
+
 try:
     from mirage.local_settings import *
 except:
     pass
+
+
+if 'API_HOST' not in locals(): API_HOST = os.getenv('API_HOST')
+if 'API_KEY' not in locals(): API_KEY = os.getenv('API_KEY')
+if 'SAM_API_KEY' not in locals(): SAM_API_KEY = os.getenv('SAM_API_KEY')
 
 SWAGGER_SETTINGS = {
     "doc_expansion": "full",

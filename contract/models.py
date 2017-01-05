@@ -1,5 +1,5 @@
 from django.db import models, IntegrityError
-from vendor.models import Naics, Vendor
+from vendors.models import Naics, Vendor
 
 PRICING_CHOICES = (
     ('A', 'Fixed Price Redetermination'),

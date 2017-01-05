@@ -1,5 +1,6 @@
+pyfpds
+rest_framework_swagger
 *.swp
-*.swn
 local_settings.py
 *.pyc
 venv
@@ -11,3 +12,5 @@ mirage_venv/
 src/
 mvenv/
 .coverage
+*.sql
+*.sql.gz
