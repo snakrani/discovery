@@ -43,12 +43,7 @@ TEMPLATE_DIRS = (
 
 )
 ALLOWED_HOSTS = [
-    '.app.cloud.gov',
-    '.gsa.gov',
-    '127.0.0.1',
-    '.18f.us',
-    '.18f.gov',
-    'localhost',
+    '*',
 ]
 
 
