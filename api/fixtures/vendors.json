@@ -20,7 +20,7 @@
       "sam_url": "http://www.act-i.com",
       "sam_expiration_date": "2017-08-25 12:07:14.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 1
   },
   {
@@ -44,7 +44,7 @@
       "sam_url": "http://www.amyx.com",
       "sam_expiration_date": "2017-04-01 13:00:03.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 3
   },
   {
@@ -68,7 +68,7 @@
       "sam_url": "HTTP://WWW.ANALYTICSTRATEGIES.COM",
       "sam_expiration_date": "2017-08-22 17:38:52.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 4
   },
   {
@@ -92,7 +92,7 @@
       "sam_url": "http://www.bbande.com",
       "sam_expiration_date": "2017-01-05 10:12:21.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 6
   },
   {
@@ -118,7 +118,7 @@
       "sam_url": "http://www.bwfed.com",
       "sam_expiration_date": "2017-03-30 11:59:16.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 8
   },
   {
@@ -144,7 +144,7 @@
       "sam_url": null,
       "sam_expiration_date": "2017-07-29 16:52:58.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 10
   },
   {
@@ -170,7 +170,7 @@
       "sam_url": "http://www.chevoconsulting.com",
       "sam_expiration_date": "2017-02-01 15:21:26.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 11
   },
   {
@@ -197,7 +197,7 @@
       "sam_url": "http://www.dakota-consulting.com",
       "sam_expiration_date": "2017-08-26 13:16:56.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 13
   },
   {
@@ -223,7 +223,7 @@
       "sam_url": "http://www.eaglerayinc.com",
       "sam_expiration_date": "2017-08-18 18:15:59.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 14
   },
   {
@@ -247,7 +247,7 @@
       "sam_url": "http://www.ecompex.com",
       "sam_expiration_date": "2016-12-14 09:31:53.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 15
   },
   {
@@ -275,7 +275,7 @@
       "sam_url": null,
       "sam_expiration_date": "2017-06-02 10:11:22.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 16
   },
   {
@@ -303,7 +303,7 @@
       "sam_url": null,
       "sam_expiration_date": "2017-02-28 11:37:07.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 20
   },
   {
@@ -329,7 +329,7 @@
       "sam_url": "http://www.insighttsi.com",
       "sam_expiration_date": "2017-06-02 10:31:57.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 21
   },
   {
@@ -356,7 +356,7 @@
       "sam_url": "http://www.e2zintegral.com",
       "sam_expiration_date": "2017-04-24 00:00:00.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 22
   },
   {
@@ -380,7 +380,7 @@
       "sam_url": "http://www.ibtci.com",
       "sam_expiration_date": "2017-03-04 12:26:15.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 23
   },
   {
@@ -408,7 +408,7 @@
       "sam_url": null,
       "sam_expiration_date": "2017-04-05 06:46:33.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 24
   },
   {
@@ -435,7 +435,7 @@
       "sam_url": "http://www.lochharbour.com/",
       "sam_expiration_date": "2017-06-17 16:50:50.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 26
   },
   {
@@ -461,7 +461,7 @@
       "sam_url": "http://www.msiuniversal.com",
       "sam_expiration_date": "2017-01-19 15:59:30.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 27
   },
   {
@@ -488,7 +488,7 @@
       "sam_url": "http://www.mcmanis-monsalve.com",
       "sam_expiration_date": "2017-07-14 16:08:30.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 28
   },
   {
@@ -515,7 +515,7 @@
       "sam_url": "http://www.msag.net",
       "sam_expiration_date": "2017-06-16 16:18:07.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 29
   },
   {
@@ -542,7 +542,7 @@
       "sam_url": "http://www.mosaicsgroup.com",
       "sam_expiration_date": "2017-07-22 13:19:43.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 31
   },
   {
@@ -566,7 +566,7 @@
       "sam_url": null,
       "sam_expiration_date": null
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 33
   },
   {
@@ -593,7 +593,7 @@
       "sam_url": "http://www.panum.com",
       "sam_expiration_date": "2016-12-30 18:47:39.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 34
   },
   {
@@ -620,7 +620,7 @@
       "sam_url": "http://www.performexcel.com",
       "sam_expiration_date": "2017-05-05 18:46:44.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 35
   },
   {
@@ -646,7 +646,7 @@
       "sam_url": null,
       "sam_expiration_date": "2017-08-21 07:37:50.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 36
   },
   {
@@ -672,7 +672,7 @@
       "sam_url": "http://www.miraclesystems.net",
       "sam_expiration_date": "2017-03-24 03:03:53.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 30
   },
   {
@@ -696,7 +696,7 @@
       "sam_url": "http://www.adstm.com",
       "sam_expiration_date": "2017-04-13 09:55:06.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 2
   },
   {
@@ -722,7 +722,7 @@
       "sam_url": null,
       "sam_expiration_date": "2017-08-30 14:26:33.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 9
   },
   {
@@ -749,7 +749,7 @@
       "sam_url": "http://www.brc2.com",
       "sam_expiration_date": "2016-11-23 10:16:40.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 7
   },
   {
@@ -775,7 +775,7 @@
       "sam_url": "http://www.ikun.com/",
       "sam_expiration_date": "2017-07-27 12:05:49.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 19
   },
   {
@@ -801,7 +801,7 @@
       "sam_url": "http://www.credence-llc.com",
       "sam_expiration_date": "2017-06-20 12:02:51.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 12
   },
   {
@@ -827,7 +827,7 @@
       "sam_url": "http://www.gemini-ind.com",
       "sam_expiration_date": "2016-11-02 11:59:35.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 18
   },
   {
@@ -853,7 +853,7 @@
       "sam_url": "http://www.niksoft.com",
       "sam_expiration_date": "2017-06-13 13:18:32.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 32
   },
   {
@@ -879,7 +879,7 @@
       "sam_url": "http://www.ascs-corp.com",
       "sam_expiration_date": "2017-08-24 17:27:25.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 5
   },
   {
@@ -903,7 +903,7 @@
       "sam_url": "http://www.RMCWEB.com",
       "sam_expiration_date": "2017-05-23 11:36:51.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 38
   },
   {
@@ -932,7 +932,7 @@
       "sam_url": "http://www.sawdeysolutionservices.com",
       "sam_expiration_date": "2017-07-14 18:43:00.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 39
   },
   {
@@ -958,7 +958,7 @@
       "sam_url": "HTTP://WWW.QUANTITECH.COM",
       "sam_expiration_date": "2017-02-02 19:59:37.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 37
   },
   {
@@ -985,7 +985,7 @@
       "sam_url": "http://www.ktc-ops.com",
       "sam_expiration_date": "2016-11-23 16:24:51.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 25
   },
   {
@@ -1009,7 +1009,7 @@
       "sam_url": "http://www.sev1tech.com",
       "sam_expiration_date": "2016-12-02 14:04:54.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 40
   },
   {
@@ -1035,7 +1035,7 @@
       "sam_url": "http://www.sti-tec.com",
       "sam_expiration_date": "2017-07-01 14:12:41.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 41
   },
   {
@@ -1059,7 +1059,7 @@
       "sam_url": "http://www.sysplus.com/",
       "sam_expiration_date": "2017-05-23 14:39:58.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 43
   },
   {
@@ -1086,7 +1086,7 @@
       "sam_url": "http://www.T3W.com",
       "sam_expiration_date": "2016-10-21 15:28:16.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 44
   },
   {
@@ -1110,7 +1110,7 @@
       "sam_url": null,
       "sam_expiration_date": "2016-12-13 12:20:44.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 46
   },
   {
@@ -1134,7 +1134,7 @@
       "sam_url": "http://www.FIConsulting.com",
       "sam_expiration_date": "2017-07-21 10:00:21.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 48
   },
   {
@@ -1158,7 +1158,7 @@
       "sam_url": "http://www.forsmarshgroup.com",
       "sam_expiration_date": "2017-07-05 12:15:43.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 17
   },
   {
@@ -1184,7 +1184,7 @@
       "sam_url": "http://www.usfti.com",
       "sam_expiration_date": "2017-06-10 10:45:44.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 49
   },
   {
@@ -1208,7 +1208,7 @@
       "sam_url": null,
       "sam_expiration_date": "2017-07-28 12:07:33.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 50
   },
   {
@@ -1232,7 +1232,7 @@
       "sam_url": null,
       "sam_expiration_date": "2017-02-03 16:48:53.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 51
   },
   {
@@ -1259,7 +1259,7 @@
       "sam_url": "http://www.addxcorp.com",
       "sam_expiration_date": "2017-08-10 11:14:18.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 45
   },
   {
@@ -1286,7 +1286,7 @@
       "sam_url": "http://www.ac4s.com",
       "sam_expiration_date": "2017-09-16 12:38:41.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 52
   },
   {
@@ -1310,7 +1310,7 @@
       "sam_url": "http://www.aptresearch.com",
       "sam_expiration_date": "2017-03-11 15:05:14.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 54
   },
   {
@@ -1336,7 +1336,7 @@
       "sam_url": "http://www.act-corp.com",
       "sam_expiration_date": "2017-06-09 11:07:28.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 55
   },
   {
@@ -1362,7 +1362,7 @@
       "sam_url": "https://www.atlas-tech.com",
       "sam_expiration_date": "2017-06-01 13:34:50.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 56
   },
   {
@@ -1389,7 +1389,7 @@
       "sam_url": "http://www.caelum.com",
       "sam_expiration_date": "2017-02-23 14:12:28.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 58
   },
   {
@@ -1415,7 +1415,7 @@
       "sam_url": "http://www.csaassociates.com",
       "sam_expiration_date": "2017-09-02 14:16:51.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 59
   },
   {
@@ -1439,7 +1439,7 @@
       "sam_url": "http://www.cse-corp.com",
       "sam_expiration_date": "2017-05-23 16:12:49.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 60
   },
   {
@@ -1463,7 +1463,7 @@
       "sam_url": "http://www.ddlomni.com",
       "sam_expiration_date": "2016-11-23 13:59:04.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 61
   },
   {
@@ -1490,7 +1490,7 @@
       "sam_url": "http://www.drtstrategies.com",
       "sam_expiration_date": "2017-05-12 20:01:59.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 47
   },
   {
@@ -1514,7 +1514,7 @@
       "sam_url": "http://www.forwardslope.com",
       "sam_expiration_date": "2016-10-19 17:06:55.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 62
   },
   {
@@ -1538,7 +1538,7 @@
       "sam_url": "http://www.futroninc.com",
       "sam_expiration_date": "2017-09-20 14:36:41.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 63
   },
   {
@@ -1562,7 +1562,7 @@
       "sam_url": "http://www.keylogic.com",
       "sam_expiration_date": "2016-12-20 14:58:29.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 64
   },
   {
@@ -1589,7 +1589,7 @@
       "sam_url": "http://www.kihomac.com",
       "sam_expiration_date": "2017-07-07 10:43:41.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 65
   },
   {
@@ -1616,7 +1616,7 @@
       "sam_url": "https://www.lcibest.com/",
       "sam_expiration_date": "2017-09-22 15:11:45.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 66
   },
   {
@@ -1642,7 +1642,7 @@
       "sam_url": "http://www.orbisinc.net",
       "sam_expiration_date": "2017-03-08 15:05:58.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 68
   },
   {
@@ -1666,7 +1666,7 @@
       "sam_url": "http://www.pccii.com",
       "sam_expiration_date": "2017-08-09 14:11:22.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 69
   },
   {
@@ -1694,7 +1694,7 @@
       "sam_url": "http://www.skyllaeng.com",
       "sam_expiration_date": "2016-11-12 16:30:01.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 71
   },
   {
@@ -1718,7 +1718,7 @@
       "sam_url": "http://www.teamscci.com",
       "sam_expiration_date": "2017-08-17 16:42:09.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 72
   },
   {
@@ -1744,7 +1744,7 @@
       "sam_url": "http://www.synecsolu.com",
       "sam_expiration_date": "2017-03-23 13:31:34.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 42
   },
   {
@@ -1770,7 +1770,7 @@
       "sam_url": "HTTP://WWW.TELEINC.COM",
       "sam_expiration_date": "2017-01-20 19:16:01.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 76
   },
   {
@@ -1798,7 +1798,7 @@
       "sam_url": "http://www.triumph-enterprises.com",
       "sam_expiration_date": "2017-02-21 18:05:25.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 77
   },
   {
@@ -1824,7 +1824,7 @@
       "sam_url": "HTTP://WWW.METICORP.COM",
       "sam_expiration_date": "2017-07-27 16:46:32.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 67
   },
   {
@@ -1848,7 +1848,7 @@
       "sam_url": "HTTP://WWW.SUBSYSTEM.COM",
       "sam_expiration_date": "2017-02-09 11:48:08.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 73
   },
   {
@@ -1872,7 +1872,7 @@
       "sam_url": null,
       "sam_expiration_date": "2017-05-13 15:14:04.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 75
   },
   {
@@ -1899,7 +1899,7 @@
       "sam_url": "HTTP://WWW.ASM-USA.COM",
       "sam_expiration_date": "2016-12-02 16:35:33.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 53
   },
   {
@@ -1925,7 +1925,7 @@
       "sam_url": "http://www.epeerless.com",
       "sam_expiration_date": "2017-05-17 11:35:03.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 70
   },
   {
@@ -1949,7 +1949,7 @@
       "sam_url": "http://www.sumaria.com",
       "sam_expiration_date": "2017-02-10 11:57:42.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 74
   },
   {
@@ -1973,7 +1973,7 @@
       "sam_url": "http://www.vectorcsp.com",
       "sam_expiration_date": "2017-04-12 14:35:55.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 78
   },
   {
@@ -1999,7 +1999,7 @@
       "sam_url": "http://www.x-technologies.com",
       "sam_expiration_date": "2017-04-05 11:46:50.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 79
   },
   {
@@ -2023,7 +2023,7 @@
       "sam_url": "http://www.assurtech.com/",
       "sam_expiration_date": "2017-07-11 15:08:01.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 82
   },
   {
@@ -2047,7 +2047,7 @@
       "sam_url": "http://www.dsainc.com",
       "sam_expiration_date": "2017-03-23 10:05:33.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 85
   },
   {
@@ -2074,7 +2074,7 @@
       "sam_url": "http://www.deltasands.com",
       "sam_expiration_date": "2017-01-10 18:46:33.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 87
   },
   {
@@ -2101,7 +2101,7 @@
       "sam_url": "http://www.ertcorp.com/",
       "sam_expiration_date": "2017-02-15 16:45:14.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 88
   },
   {
@@ -2125,7 +2125,7 @@
       "sam_url": "http://www.erg.com",
       "sam_expiration_date": "2017-06-28 14:38:18.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 89
   },
   {
@@ -2151,7 +2151,7 @@
       "sam_url": "http://www.gst.com",
       "sam_expiration_date": "2017-08-03 13:05:41.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 91
   },
   {
@@ -2175,7 +2175,7 @@
       "sam_url": "http://www.i3-corps.com",
       "sam_expiration_date": "2017-01-19 17:16:28.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 93
   },
   {
@@ -2201,7 +2201,7 @@
       "sam_url": "http://www.metricanet.com",
       "sam_expiration_date": "2017-07-18 18:49:15.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 97
   },
   {
@@ -2228,7 +2228,7 @@
       "sam_url": "http://www.microtech.net",
       "sam_expiration_date": "2017-05-09 17:24:00.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 98
   },
   {
@@ -2252,7 +2252,7 @@
       "sam_url": "http://www.pxi.com",
       "sam_expiration_date": "2017-06-24 15:58:33.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 102
   },
   {
@@ -2276,7 +2276,7 @@
       "sam_url": "http://www.riverside.com",
       "sam_expiration_date": "2017-07-05 17:42:06.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 105
   },
   {
@@ -2302,7 +2302,7 @@
       "sam_url": "http://www.sainc.com",
       "sam_expiration_date": "2017-07-25 10:16:47.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 108
   },
   {
@@ -2328,7 +2328,7 @@
       "sam_url": "http://www.zeltech.com",
       "sam_expiration_date": "2017-04-21 10:30:31.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 80
   },
   {
@@ -2352,7 +2352,7 @@
       "sam_url": "HTTP://WWW.FULCRUMCO.COM",
       "sam_expiration_date": "2017-04-26 17:54:45.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 90
   },
   {
@@ -2381,7 +2381,7 @@
       "sam_url": "http://www.hxfive.com",
       "sam_expiration_date": "2017-08-31 16:49:32.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 92
   },
   {
@@ -2405,7 +2405,7 @@
       "sam_url": null,
       "sam_expiration_date": null
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 95
   },
   {
@@ -2429,7 +2429,7 @@
       "sam_url": null,
       "sam_expiration_date": "2017-07-05 10:04:14.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 115
   },
   {
@@ -2453,7 +2453,7 @@
       "sam_url": "http://www.mtsi-va.com",
       "sam_expiration_date": "2017-09-14 14:47:55.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 116
   },
   {
@@ -2477,7 +2477,7 @@
       "sam_url": "http://www.torchtechnologies.com",
       "sam_expiration_date": "2016-11-24 10:06:33.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 110
   },
   {
@@ -2503,7 +2503,7 @@
       "sam_url": "http://www.sptrm.com",
       "sam_expiration_date": "2017-09-20 14:38:33.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 107
   },
   {
@@ -2527,7 +2527,7 @@
       "sam_url": null,
       "sam_expiration_date": "2017-02-28 10:57:55.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 109
   },
   {
@@ -2551,7 +2551,7 @@
       "sam_url": null,
       "sam_expiration_date": "2016-11-05 15:30:54.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 111
   },
   {
@@ -2578,7 +2578,7 @@
       "sam_url": "http://www.colsa.com",
       "sam_expiration_date": "2017-03-11 17:04:08.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 113
   },
   {
@@ -2602,7 +2602,7 @@
       "sam_url": "http://www.aegistg.com",
       "sam_expiration_date": "2017-06-21 15:46:49.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 81
   },
   {
@@ -2626,7 +2626,7 @@
       "sam_url": null,
       "sam_expiration_date": "2017-01-19 11:56:09.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 112
   },
   {
@@ -2650,7 +2650,7 @@
       "sam_url": null,
       "sam_expiration_date": null
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 57
   },
   {
@@ -2674,7 +2674,7 @@
       "sam_url": "http://www.irtc-hq.com",
       "sam_expiration_date": "2017-09-06 12:23:43.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 114
   },
   {
@@ -2700,7 +2700,7 @@
       "sam_url": null,
       "sam_expiration_date": "2017-04-08 09:19:25.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 84
   },
   {
@@ -2724,7 +2724,7 @@
       "sam_url": null,
       "sam_expiration_date": "2017-05-04 11:38:26.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 94
   },
   {
@@ -2751,7 +2751,7 @@
       "sam_url": "http://www.meitechinc.com",
       "sam_expiration_date": "2017-05-27 16:55:02.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 96
   },
   {
@@ -2775,7 +2775,7 @@
       "sam_url": "http://www.quantechserv.com",
       "sam_expiration_date": "2017-07-12 17:46:29.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 103
   },
   {
@@ -2799,7 +2799,7 @@
       "sam_url": "http://www.odysseyconsult.com",
       "sam_expiration_date": "2017-01-19 17:13:54.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 100
   },
   {
@@ -2823,7 +2823,7 @@
       "sam_url": "http://www.radiancetech.com",
       "sam_expiration_date": "2017-06-13 12:36:09.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 104
   },
   {
@@ -2847,7 +2847,7 @@
       "sam_url": "http://www.sigmatech.com",
       "sam_expiration_date": "2017-09-12 16:44:03.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 106
   },
   {
@@ -2873,7 +2873,7 @@
       "sam_url": "http://www.btas.com",
       "sam_expiration_date": "2017-06-28 16:48:19.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 83
   },
   {
@@ -2899,7 +2899,7 @@
       "sam_url": "http://www.dac.us",
       "sam_expiration_date": "2017-08-16 10:29:48.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 86
   },
   {
@@ -2925,7 +2925,7 @@
       "sam_url": "http://www.ssaihq.com",
       "sam_expiration_date": "2017-03-04 13:56:45.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 119
   },
   {
@@ -2949,7 +2949,7 @@
       "sam_url": "http://www.compass-sys-inc.com/",
       "sam_expiration_date": "2017-04-21 14:48:41.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 121
   },
   {
@@ -2973,7 +2973,7 @@
       "sam_url": null,
       "sam_expiration_date": "2017-05-05 15:28:43.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 124
   },
   {
@@ -2999,7 +2999,7 @@
       "sam_url": "http://www.itc-1.com/",
       "sam_expiration_date": "2017-06-28 10:05:54.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 125
   },
   {
@@ -3025,7 +3025,7 @@
       "sam_url": "http://www.integrity-apps.com",
       "sam_expiration_date": "2017-05-24 09:16:11.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 126
   },
   {
@@ -3051,7 +3051,7 @@
       "sam_url": "http://www.meicompany.com/",
       "sam_expiration_date": "2017-07-19 13:11:46.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 99
   },
   {
@@ -3078,7 +3078,7 @@
       "sam_url": "http://www.pesystems.com",
       "sam_expiration_date": "2017-07-06 11:45:09.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 101
   },
   {
@@ -3104,7 +3104,7 @@
       "sam_url": null,
       "sam_expiration_date": "2017-07-15 10:05:36.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 117
   },
   {
@@ -3128,7 +3128,7 @@
       "sam_url": "http://www.tecolote.com",
       "sam_expiration_date": "2017-04-07 15:17:37.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 118
   },
   {
@@ -3155,7 +3155,7 @@
       "sam_url": "http://www.usfalcon.com",
       "sam_expiration_date": "2017-06-28 13:55:12.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 129
   },
   {
@@ -3179,7 +3179,7 @@
       "sam_url": "http://www.amecfw.com",
       "sam_expiration_date": "2016-12-27 09:49:41.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 133
   },
   {
@@ -3203,7 +3203,7 @@
       "sam_url": "http://www.dcscorp.com",
       "sam_expiration_date": "2016-11-05 08:41:09.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 122
   },
   {
@@ -3227,7 +3227,7 @@
       "sam_url": "http://www.engilitycorp.com",
       "sam_expiration_date": "2017-02-22 17:11:29.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 144
   },
   {
@@ -3251,7 +3251,7 @@
       "sam_url": "http://www.battelle.org",
       "sam_expiration_date": "2017-06-23 07:44:29.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 135
   },
   {
@@ -3275,7 +3275,7 @@
       "sam_url": "FORMERLY KNOWN AS CSC GOVERNMENT SOLUTIONS LLC",
       "sam_expiration_date": "2017-07-21 17:11:02.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 140
   },
   {
@@ -3299,7 +3299,7 @@
       "sam_url": null,
       "sam_expiration_date": "2017-07-21 10:45:19.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 141
   },
   {
@@ -3323,7 +3323,7 @@
       "sam_url": "http://www.deloitte.com",
       "sam_expiration_date": "2017-08-29 18:47:22.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 143
   },
   {
@@ -3347,7 +3347,7 @@
       "sam_url": "http://www.icfi.com/",
       "sam_expiration_date": "2017-03-04 14:17:03.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 149
   },
   {
@@ -3371,7 +3371,7 @@
       "sam_url": "http://www.lockheedmartin.com",
       "sam_expiration_date": "2017-07-14 12:03:30.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 154
   },
   {
@@ -3395,7 +3395,7 @@
       "sam_url": "http://www.oasissystems.com/",
       "sam_expiration_date": "2017-02-09 09:48:33.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 127
   },
   {
@@ -3419,7 +3419,7 @@
       "sam_url": "http://www.boeing.com",
       "sam_expiration_date": "2017-03-30 22:32:14.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 136
   },
   {
@@ -3443,7 +3443,7 @@
       "sam_url": null,
       "sam_expiration_date": "2017-05-02 15:39:07.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 132
   },
   {
@@ -3467,7 +3467,7 @@
       "sam_url": "http://www.accenture.com",
       "sam_expiration_date": "2017-05-23 14:51:21.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 131
   },
   {
@@ -3491,7 +3491,7 @@
       "sam_url": "HTTP://WWW.BOOZALLEN.COM",
       "sam_expiration_date": "2017-09-15 09:47:31.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 137
   },
   {
@@ -3515,7 +3515,7 @@
       "sam_url": "http://www.cgifederal.com",
       "sam_expiration_date": "2017-08-04 12:30:34.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 139
   },
   {
@@ -3539,7 +3539,7 @@
       "sam_url": "http://www.camber.com",
       "sam_expiration_date": "2017-07-19 18:38:25.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 138
   },
   {
@@ -3563,7 +3563,7 @@
       "sam_url": "http://www.gdit.com",
       "sam_expiration_date": "2017-08-08 13:12:38.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 146
   },
   {
@@ -3587,7 +3587,7 @@
       "sam_url": "http://www.jacobstechnology.com",
       "sam_expiration_date": "2017-06-17 13:15:29.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 151
   },
   {
@@ -3611,7 +3611,7 @@
       "sam_url": null,
       "sam_expiration_date": "2017-09-14 13:47:43.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 145
   },
   {
@@ -3635,7 +3635,7 @@
       "sam_url": "http://www.caci.com",
       "sam_expiration_date": "2017-09-08 09:34:51.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 152
   },
   {
@@ -3659,7 +3659,7 @@
       "sam_url": "HTTP://WWW.HONEYWELL.COM",
       "sam_expiration_date": "2017-06-14 08:16:27.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 148
   },
   {
@@ -3683,7 +3683,7 @@
       "sam_url": "HTTP://WWW.HARRIS.COM/",
       "sam_expiration_date": "2017-07-05 10:31:21.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 147
   },
   {
@@ -3707,7 +3707,7 @@
       "sam_url": "http://ibm.com/easyaccess/gsa",
       "sam_expiration_date": "2017-08-11 10:59:28.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 150
   },
   {
@@ -3731,7 +3731,7 @@
       "sam_url": "http://www.ara.com",
       "sam_expiration_date": "2017-06-22 18:03:39.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 120
   },
   {
@@ -3755,7 +3755,7 @@
       "sam_url": "http://www.ballaerospace.com",
       "sam_expiration_date": "2017-03-14 17:57:43.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 134
   },
   {
@@ -3779,7 +3779,7 @@
       "sam_url": "http://www.leidos.com",
       "sam_expiration_date": "2017-03-08 15:45:29.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 153
   },
   {
@@ -3803,7 +3803,7 @@
       "sam_url": "http://www.dynetics.com",
       "sam_expiration_date": "2017-05-10 13:51:29.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 123
   },
   {
@@ -3827,7 +3827,7 @@
       "sam_url": null,
       "sam_expiration_date": "2017-01-14 14:12:49.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 130
   },
   {
@@ -3851,7 +3851,7 @@
       "sam_url": null,
       "sam_expiration_date": null
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 158
   },
   {
@@ -3875,7 +3875,7 @@
       "sam_url": "http://www.ecs-federal.com",
       "sam_expiration_date": "2017-06-03 14:32:39.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 174
   },
   {
@@ -3899,7 +3899,7 @@
       "sam_url": "http://www.grantthornton.com",
       "sam_expiration_date": "2017-08-11 18:17:38.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 175
   },
   {
@@ -3923,7 +3923,7 @@
       "sam_url": "http://www.kearneyco.com",
       "sam_expiration_date": "2017-02-10 11:33:15.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 176
   },
   {
@@ -3947,7 +3947,7 @@
       "sam_url": "http://www.norc.org/",
       "sam_expiration_date": "2017-06-07 18:21:13.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 177
   },
   {
@@ -3971,7 +3971,7 @@
       "sam_url": null,
       "sam_expiration_date": "2017-02-09 12:12:41.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 178
   },
   {
@@ -3995,7 +3995,7 @@
       "sam_url": "http://www.serco-na.com",
       "sam_expiration_date": "2017-04-12 10:55:57.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 162
   },
   {
@@ -4019,7 +4019,7 @@
       "sam_url": null,
       "sam_expiration_date": "2017-08-12 16:32:53.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 179
   },
   {
@@ -4043,7 +4043,7 @@
       "sam_url": "http://www.rti.org",
       "sam_expiration_date": "2017-07-01 10:11:30.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 180
   },
   {
@@ -4067,7 +4067,7 @@
       "sam_url": "http://www.wyle.com",
       "sam_expiration_date": "2017-07-26 10:51:22.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 172
   },
   {
@@ -4091,7 +4091,7 @@
       "sam_url": "http://www.csra.com",
       "sam_expiration_date": "2017-06-30 16:57:58.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 165
   },
   {
@@ -4115,7 +4115,7 @@
       "sam_url": "http://www.teksouth.com",
       "sam_expiration_date": "2017-02-11 15:32:21.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 181
   },
   {
@@ -4139,7 +4139,7 @@
       "sam_url": "http://www.terathink.com",
       "sam_expiration_date": "2017-06-15 11:17:38.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 182
   },
   {
@@ -4163,7 +4163,7 @@
       "sam_url": "http://www.milcorp.com",
       "sam_expiration_date": "2017-03-30 17:02:51.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 183
   },
   {
@@ -4187,7 +4187,7 @@
       "sam_url": "http://www.vencore.com/",
       "sam_expiration_date": "2017-08-24 15:41:30.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 170
   },
   {
@@ -4211,7 +4211,7 @@
       "sam_url": "http://www.westat.com",
       "sam_expiration_date": "2017-07-26 08:54:27.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 184
   },
   {
@@ -4235,7 +4235,7 @@
       "sam_url": "http://www.espus.com",
       "sam_expiration_date": "2017-05-25 10:13:15.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 187
   },
   {
@@ -4259,7 +4259,7 @@
       "sam_url": "http://www.harris.com",
       "sam_expiration_date": "2017-06-21 13:48:00.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 188
   },
   {
@@ -4283,7 +4283,7 @@
       "sam_url": "http://www.noblis.org",
       "sam_expiration_date": "2017-06-08 18:09:39.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 156
   },
   {
@@ -4307,7 +4307,7 @@
       "sam_url": null,
       "sam_expiration_date": "2017-08-22 13:25:36.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 161
   },
   {
@@ -4331,7 +4331,7 @@
       "sam_url": null,
       "sam_expiration_date": "2017-05-03 10:54:19.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 169
   },
   {
@@ -4355,7 +4355,7 @@
       "sam_url": "http://www.sgt-inc.com",
       "sam_expiration_date": "2017-06-08 14:57:55.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 163
   },
   {
@@ -4379,7 +4379,7 @@
       "sam_url": "http://www.swri.org",
       "sam_expiration_date": "2017-05-09 16:00:14.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 164
   },
   {
@@ -4403,7 +4403,7 @@
       "sam_url": "http://www.vencore.com/",
       "sam_expiration_date": "2017-05-05 16:13:39.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 189
   },
   {
@@ -4427,7 +4427,7 @@
       "sam_url": "http://www.sri.com",
       "sam_expiration_date": "2017-08-02 17:30:20.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 166
   },
   {
@@ -4451,7 +4451,7 @@
       "sam_url": "http://www.tetratech.com/",
       "sam_expiration_date": "2017-03-08 13:19:03.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 167
   },
   {
@@ -4475,7 +4475,7 @@
       "sam_url": "http://www.unisys.com",
       "sam_expiration_date": "2017-09-06 09:39:16.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 168
   },
   {
@@ -4499,7 +4499,7 @@
       "sam_url": "http://www.engilitycorp.com",
       "sam_expiration_date": "2017-02-21 10:41:36.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 173
   },
   {
@@ -4523,7 +4523,7 @@
       "sam_url": null,
       "sam_expiration_date": "2017-05-23 11:11:22.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 171
   },
   {
@@ -4547,7 +4547,7 @@
       "sam_url": "http://www.parsons.com",
       "sam_expiration_date": "2016-12-21 15:59:34.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 159
   },
   {
@@ -4571,7 +4571,7 @@
       "sam_url": null,
       "sam_expiration_date": "2017-09-12 11:09:42.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 185
   },
   {
@@ -4595,7 +4595,7 @@
       "sam_url": "http://WWW.CACI.COM",
       "sam_expiration_date": "2017-09-13 10:52:35.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 186
   },
   {
@@ -4619,7 +4619,7 @@
       "sam_url": "https://www.cubic.com",
       "sam_expiration_date": "2016-12-21 14:37:04.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 142
   },
   {
@@ -4643,7 +4643,7 @@
       "sam_url": "http://www.raytheon.com",
       "sam_expiration_date": "2017-06-09 11:14:25.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 160
   },
   {
@@ -4667,7 +4667,7 @@
       "sam_url": "http://www.scires.com",
       "sam_expiration_date": "2017-03-22 11:58:59.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 128
   },
   {
@@ -4691,7 +4691,7 @@
       "sam_url": "http://www.mantech.com",
       "sam_expiration_date": "2017-09-01 11:29:37.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 155
   },
   {
@@ -4715,7 +4715,7 @@
       "sam_url": "http://www.gtarc.gatech.edu",
       "sam_expiration_date": "2017-05-20 17:54:22.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 190
   },
   {
@@ -4739,7 +4739,7 @@
       "sam_url": "HTTP://WWW.LMI.ORG",
       "sam_expiration_date": "2017-07-26 14:41:23.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 191
   },
   {
@@ -4763,7 +4763,7 @@
       "sam_url": null,
       "sam_expiration_date": "2017-07-27 12:55:15.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 192
   },
   {
@@ -4787,7 +4787,7 @@
       "sam_url": null,
       "sam_expiration_date": "2017-05-19 08:13:10.0"
     },
-    "model": "vendor.vendor",
+    "model": "vendors.vendor",
     "pk": 157
   }
 ]

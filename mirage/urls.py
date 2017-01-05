@@ -6,7 +6,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 from api import urls as api_urls
-from vendor.views import VendorView
+from vendors.views import VendorView
 
 admin.autodiscover()
 

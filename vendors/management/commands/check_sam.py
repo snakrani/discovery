@@ -46,7 +46,7 @@ class Command(BaseCommand):
 
                 self.logger.debug("Fetching vendor at {0}".format(log_uri))
                 req = requests.get(uri)
-                
+
                 #check and see if error code is forbidden -- exit because api key problem
                 if req.status_code==403:
                     if 'Message' in req.json():
@@ -71,12 +71,12 @@ class Command(BaseCommand):
                         addr = self.get_value(reg, 'samAddress', v)
                         if addr:
                             v.sam_address = self.get_value(addr, 'Line1', v)
-                            v.sam_citystate = "{0}, {1} {2}".format(self.get_value(addr, 'City', v), 
-                                                                      self.get_value(addr, 'stateorProvince', v), 
+                            v.sam_citystate = "{0}, {1} {2}".format(self.get_value(addr, 'City', v),
+                                                                      self.get_value(addr, 'stateorProvince', v),
                                                                       self.get_value(addr, 'Zip', v))
-                    
+
                         v.sam_url = self.get_value(reg, 'corporateUrl', v)
-                        if v.sam_url and v.sam_url[:3].lower() == "www" : 
+                        if v.sam_url and v.sam_url[:3].lower() == "www" :
                             v.sam_url = 'http://' + v.sam_url
 
                         setasides = self.get_value(reg, 'businessTypes', v)
@@ -119,7 +119,7 @@ class Command(BaseCommand):
                         'sam_url': v.sam_url,
                         'setasides': [sa.pk for sa in v.setasides.all()]
                     },
-                    'model': 'vendor.vendor',
+                    'model': 'vendors.vendor',
                     'pk': v.pk
                 })
 
@@ -130,12 +130,10 @@ class Command(BaseCommand):
 
             sam_load = SamLoad(sam_load=timezone.now())
             sam_load.save()
-        
+
         except Exception as e:
             print("MAJOR ERROR -- PROCESS ENDING EXCEPTION --  {0}".format(e))
             print (traceback.format_exc())
             self.logger.debug("MAJOR ERROR -- PROCESS ENDING EXCEPTION -- {0}".format(e))
-        
+
         print("-------END CHECK_SAM PROCESS-------")
-
-
