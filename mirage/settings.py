@@ -24,7 +24,7 @@ except:
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     "mirage.context_processors.api_host",
@@ -227,5 +227,3 @@ It must be passed in the `api_key` parameter with each request.
     },
     "template_path": "api_theme/index.html",
 }
-
-
