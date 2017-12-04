@@ -11,3 +11,5 @@ mirage_venv/
 src/
 mvenv/
 .coverage
+.project
+.pydevproject
