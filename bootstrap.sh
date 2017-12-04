@@ -18,9 +18,13 @@ pip install -r /vagrant/requirements.txt
 
 #set up application
 source /vagrant/mirage_venv/bin/activate
-/vagrant/manage.py syncdb --noinput
-/vagrant/manage.py loaddata /vagrant/vendor/fixtures/naics.json
-/vagrant/manage.py loaddata /vagrant/vendor/fixtures/setasides.json
-/vagrant/manage.py loaddata /vagrant/vendor/fixtures/pools.json
+/vagrant/manage.py migrate --noinput
+/vagrant/manage.py createcachetable
+/vagrant/manage.py collectstatic --noinput
+
+/vagrant/manage.py loaddata /vagrant/vendors/fixtures/naics.json
+/vagrant/manage.py loaddata /vagrant/vendors/fixtures/setasides.json
+/vagrant/manage.py loaddata /vagrant/vendors/fixtures/pools.json
 /vagrant/manage.py load_vendors
-/vagrant/manage.py runserver 0.0.0.0:8000
+
+/vagrant/manage.py runserver 0.0.0.0:8000 &
