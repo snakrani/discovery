@@ -13,3 +13,4 @@ mvenv/
 .coverage
 .project
 .pydevproject
+.settings/
