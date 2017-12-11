@@ -57,16 +57,17 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'storages',
+    'selenium_tests',
     'rest_framework',
+    'rest_framework_swagger',
+    'django_celery_beat',
+    'django_celery_results',
 
     'api',
     'mirage_site',
     'vendors',
     'contract',
-    'selenium_tests',
-    'rest_framework_swagger',
-    'storages',
-
 )
 
 MIDDLEWARE_CLASSES = (
