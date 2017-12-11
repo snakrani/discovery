@@ -27,6 +27,5 @@ source /vagrant/mirage_venv/bin/activate
 /vagrant/manage.py loaddata /vagrant/vendors/fixtures/naics.json
 /vagrant/manage.py loaddata /vagrant/vendors/fixtures/setasides.json
 /vagrant/manage.py loaddata /vagrant/vendors/fixtures/pools.json
-/vagrant/manage.py load_vendors
 
 /vagrant/manage.py runserver 0.0.0.0:8000 &
