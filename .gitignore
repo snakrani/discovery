@@ -6,6 +6,7 @@ venv
 *.DS_Store
 **.log
 logs/*.log
+logs/*.csv
 .vagrant/
 mirage_venv/
 src/
