@@ -1,4 +1,4 @@
-django==1.8.18
+django==1.7.6
 -e git+https://github.com/adrianwebb/pyfpds.git@fixes#egg=pyfpds
 PyYAML==3.11
 boto==2.34.0
