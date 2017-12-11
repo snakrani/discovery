@@ -1,15 +1,64 @@
-from django.core.management.base import BaseCommand, CommandError
 from optparse import make_option
+from datetime import datetime, timedelta
+
+from django.core.management.base import BaseCommand, CommandError
 from django.core.management import call_command
 from django.conf import settings
+from django.db import connection
+
 from pyfpds import Contracts
+
 from vendors.models import Vendor
 from contract.models import Contract, FPDSLoad
 from contract import catch_key_error
-from datetime import datetime, timedelta
-import pytz
+from mirage_site.utils import csv_memory
+
+import os
+import sys
+import signal
 import logging
 import traceback
+import StringIO
+
+import pytz
+import json
+import csv
+
+
+def fpds_logger():
+    return logging.getLogger('fpds')
+
+def fpds_mem_logger():
+    return logging.getLogger('fpds_memory')
+
+def log_memory(message = "Memory"):
+    fpds_mem_logger().info(csv_memory(message))
+
+def fpds_data_logger():
+    return logging.getLogger('fpds_data')
+
+def log_data(*args):
+    line = StringIO.StringIO()
+    writer = csv.writer(line)
+    writer.writerow(args)
+    fpds_data_logger().info(line.getvalue().rstrip())
+
+
+def display_error(info):
+    print("MAJOR ERROR -- PROCESS ENDING EXCEPTION --  {0}".format(info))
+    traceback.print_tb(sys.exc_info()[2])
+    fpds_logger().debug("MAJOR ERROR -- PROCESS ENDING EXCEPTION -- {0}".format(info))
+    
+    
+def crash_handler(signum, frame):
+    if signum == 2: #user exit
+        print("SHUTDOWN -- USER TERMINATED PROCESS --")
+    else:
+        fpds_mem_logger().info("System Crash: {}".format(signum))
+        display_error(frame)
+    
+    sys.exit(1)
+
 
 def get_award_id_obj(award):
     if 'awardID' in award: 
@@ -30,10 +79,12 @@ def get_piid(award_id):
 
     return piid
 
+
 def get_mod(award_id):
     if 'modNumber' in award_id:
         return award_id['modNumber']
     return award_id['awardContractID']['modNumber']
+
 
 def get_agency_id(award_id):
     if 'awardContractID' in award_id:
@@ -41,35 +92,43 @@ def get_agency_id(award_id):
     else:
         return award_id['agencyID']['#text']
 
+
 def get_agency_name(award_id):
     if 'awardContractID' in award_id:
         return award_id['awardContractID']['agencyID']['@name']
     else:
         return award_id['agencyID']['@name'] 
 
+
 @catch_key_error
 def get_transaction_number(award_id):
     return award_id['awardContractID']['transactionNumber']
+
 
 @catch_key_error
 def get_ultimate_completion_date(award):
     return award['relevantContractDates']['ultimateCompletionDate']
 
+
 @catch_key_error
 def get_current_completion_date(award):
     return award['relevantContractDates']['currentCompletionDate']
+
 
 @catch_key_error
 def get_annual_revenue(award):
     return award['vendor']['vendorSiteDetails']['vendorOrganizationFactors']['annualRevenue']
 
+
 @catch_key_error
 def get_number_of_employees(award):
     return award['vendor']['vendorSiteDetails']['vendorOrganizationFactors']['numberOfEmployees']
 
+
 @catch_key_error
 def get_last_modified_by(award):
     return award['transactionInformation']['lastModifiedBy']
+
 
 def get_contract_pricing_name(award):
     
@@ -78,201 +137,323 @@ def get_contract_pricing_name(award):
         return award['contractData']['typeOfContractPricing']
 
     name = get_name(award) 
-    if name and type(name) == str:
+    if name and isinstance(name, basestring):
         return name
 
     elif name: 
         return award['contractData']['typeOfContractPricing']['@description']
 
+
 @catch_key_error
 def get_contract_pricing_id(award):
     return award['contractData']['typeOfContractPricing']['#text']
+
 
 @catch_key_error
 def get_reason_for_modification(award):
     return award['contractData']['reasonForModification']['#text']
 
+
 def get_naics(award):
-    
     @catch_key_error
     def get_name(award):
         return award['productOrServiceInformation']['principalNAICSCode']
-
-    name = get_name(award) 
-    if name and type(name) == str:
+    
+    name = get_name(award)
+    
+    if name and isinstance(name, basestring):
         return name
-
-    elif name: 
+    elif name:
         return award['productOrServiceInformation']['principalNAICSCode']['#text']
+
 
 @catch_key_error
 def get_psc(award):
     return award['productOrServiceInformation']['productOrServiceCode']['#text']
 
 
-def last_load(load_all=False):
-    load = FPDSLoad.objects.all().order_by('-load_date')
-    if len(load) > 0 and not load_all:
-        return load[0].load_date    
-    else: 
-        today = datetime.now()
-        return  today - timedelta(weeks=(52*10))
+def init_load(options):
+    if options['load_all'] and options['reinit']:
+        FPDSLoad.objects.all().update(initialized=False)
+        
+
+def last_load(vendor, options):
+    first_date = datetime.now() - timedelta(weeks=(52 * int(options['years'])))
+    
+    try:
+        load = FPDSLoad.objects.get(vendor_id=vendor.id)
+        load_date = first_date.date() if options['load_all'] and options['reinit'] else load.load_date 
+        
+        return {'load_date': load_date, 'initialized': load.initialized}
+        
+    except FPDSLoad.DoesNotExist:
+        pass
+    
+    return {'load_date': first_date.date(), 'initialized': False}
 
 
-def create_load(load_date):
-    #overwrite the most recent load object to keep the table from growing 
-    load = FPDSLoad.objects.all().order_by('-load_date')
-    if len(load) > 0:
-        load_obj = load[0]
-    else:
-        load_obj = FPDSLoad()
+def create_load(vendor, load_date):
+    #overwrite the most recent load object to keep the table from growing
+    try:
+        initialized = True if load_date >= datetime.now().date() else False
+        
+        load = FPDSLoad.objects.get(vendor_id=vendor.id)
+        load.load_date = load_date
+        load.initialized = initialized
+        load.save()
 
-    load_obj.load_date = load_date
-    load_obj.save()
+    except FPDSLoad.DoesNotExist:
+        FPDSLoad.objects.create(vendor_id=vendor.id, load_date=load_date, initialized=initialized)
+
 
 class Command(BaseCommand):
-    
-    logger = logging.getLogger('fpds')
-    contracts = Contracts(logger=logger.debug)
+
+    date_now = datetime.now()
 
     option_list = BaseCommand.option_list \
                   + (make_option('--load_all', action='store_true', dest='load_all', default=False, help="Force load of all contracts"), ) \
+                  + (make_option('--reinit', action='store_true', dest='reinit', default=False, help="Reinitialize all vendor contract data"), ) \
+                  + (make_option('--years', action='store', type=int, dest='years', default=10, help="Number of years back to populate database"), ) \
+                  + (make_option('--weeks', action='store', type=int, dest='weeks', default=26, help="Weekly interval to process incoming data"), ) \
                   + (make_option('--id', action='store', type=int,  dest='id', default=1, help="load contracts for vendors greater or equal to this id"), )
 
-    def date_format(self, date1, date2):
-        return "[{0},{1}]".format(date1.strftime("%Y/%m/%d"), date2.strftime("%Y/%m/%d"))
+
+    def init_contract(self, raw_entry):
+        fpds_contract = raw_entry['content']
+        last_modified = raw_entry['modified']
+        
+        #get contract award information
+        if 'IDV' in fpds_contract:
+            return None, {} # don't get IDV records
+
+        try:
+            award = fpds_contract['award']
+                    
+        except KeyError:
+            try:
+                award = fpds_contract['OtherTransactionAward']
+            except KeyError:
+                return None, {}
+                        
+        if 'contractDetail' in award:
+            award = award['contractDetail'] # for OtherTransactionAward, details are nested one more level
+    
+        award_id = get_award_id_obj(award)
+        piid = get_piid(award_id)
+    
+        record = {
+            'modified_date': last_modified.strftime("%Y-%m-%d %H:%M:%S"),
+            'mod_number': get_mod(award_id), 
+            'transaction_number': get_transaction_number(award_id),
+            'ultimate_completion_date': get_ultimate_completion_date(award), 
+            'current_completion_date': get_current_completion_date(award), 
+            'signed_date': award['relevantContractDates']['signedDate'],
+            'agency_id': get_agency_id(award_id),
+            'agency_name': get_agency_name(award_id),
+            'obligated_amount': award['dollarValues']['obligatedAmount'],
+            'annual_revenue': get_annual_revenue(award),
+            'number_of_employees': get_number_of_employees(award),
+            'last_modified_by': get_last_modified_by(award),
+            'reason_for_modification': get_reason_for_modification(award),
+            'type_of_contract_pricing_name': get_contract_pricing_name(award),
+            'type_of_contract_pricing_id': get_contract_pricing_id(award),
+            'naics' : get_naics(award),
+            'psc': get_psc(award),
+        }                        
+        return piid, record
+    
+    
+    def update_contract(self, piid, records, v):
+        records = sorted(records, key=lambda x: (x['mod_number'], x['transaction_number']))
+        con, created = Contract.objects.get_or_create(piid=piid, vendor=v)
+        total = 0 # amount obligated
+        
+        for mod in records:
+            total += float(mod.get('obligated_amount'))
+            
+            con.date_signed = mod.get('signed_date') 
+            con.completion_date = mod.get('current_completion_date') or mod.get('ultimate_completion_date')
+            con.agency_id = mod.get('agency_id')
+            con.agency_name = mod.get('agency_name')
+            con.pricing_type = mod.get('type_of_contract_pricing_id')
+            con.pricing_type_name = mod.get('type_of_contract_pricing_name')
+            
+            if mod.get('reason_for_modification') in ['X', 'E', 'F']:
+                con.reason_for_modification = mod.get('reason_for_modification')
+            else:
+                if con.completion_date:
+                    date_obj = datetime.strptime(con.completion_date, '%Y-%m-%d %H:%M:%S')
+                    today = datetime.utcnow()
+                    if date_obj:
+                        if date_obj > today:
+                            con.reason_for_modification = 'C2'
+                        else:
+                            con.reason_for_modification = 'C1'
+            
+            if mod.get('last_modified_by') and '@' in mod['last_modified_by'].lower():
+                #only add if it's an actual email, make this a better regex
+                con.last_modified_by = mod['last_modified_by']
+            
+            #ADD NAICS -- need to add other naics as objects to use foreignkey
+            con.PSC = mod.get('psc')
+            con.NAICS = mod.get('naics')
+
+            ar = mod.get('annual_revenue') or None
+            ne = mod.get('number_of_employees') or None
+            
+            if ar:
+                v.annual_revenue = int(ar)
+            if ne:
+                v.number_of_employees = int(ne)
+        
+        con.obligated_amount = total
+        con.save()
+        
+        return records    
+    
+    
+    def get_vendor_ids(self, starting_id=1):
+        return Vendor.objects.filter(id__gte=starting_id).order_by('id').values_list('id', flat=True)
+        
+    
+    def update_vendor(self, vid, load_to, options):
+        logger = fpds_logger()
+        
+        vendor = Vendor.objects.get(id=vid)
+        contracts = Contracts(logger=logger.debug)      
+        load_info = last_load(vendor, options)
+        
+        if load_to <= load_info['load_date']:
+            load_to = load_info['load_date'] + timedelta(weeks = int(options['weeks']))
+            
+        if not (options['load_all'] and load_info['initialized']):
+            print("[ {} ] - Updating vendor {} ({}) from {} to {}".format(vid, vendor.name, vendor.duns, load_info['load_date'], load_to))
+            log_memory('Starting Vendor')
+            
+            #---
+            v_con = contracts.get(vendor_duns=vendor.duns, last_modified_date=[load_info['load_date'], load_to], num_records='all')
+            by_piid = {}
+            
+            contracts_processed = 0
+            missing_modified = 0
+            
+            log_memory('Post Request')
+            
+            for vc in v_con:
+                piid, contract_record = self.init_contract(vc)
+                
+                if piid is None:
+                    continue
+                
+                contracts_processed += 1
+                if not contract_record['modified_date']:
+                    missing_modified += 1
+                
+                if piid in by_piid:
+                    by_piid[piid].append(contract_record)
+                else:
+                    by_piid[piid] = [contract_record, ]
+            #---
+            
+            for piid, records in by_piid.items():
+                logger.debug("================{0}===Vendor {1}=================\n".format(piid, vendor.duns))
+                logger.debug(contracts.pretty_print(by_piid[piid]))
+        
+                self.update_contract(piid, records, vendor)
+                
+            #save updates to annual revenue, number of employees
+            vendor.save()
+            create_load(vendor, load_to)
+            
+            print(" --- completed with: {} PIID(s), {} contract(s) processed".format(len(by_piid.keys()), contracts_processed))
+            log_memory('Final Vendor')
+            log_data(vid, vendor.duns, vendor.name, load_info['load_date'], load_to, contracts_processed, len(by_piid.keys()), missing_modified)
+    
+    
+    def update_vendors(self, vendor_ids, load_to, options):
+        success = True
+        
+        log_data("Vendor ID", "DUNS", "Name", "Start Date", "End Date", "Contracts", "PIIDs", "Missing Modified Timestamp")
+        
+        for vid in vendor_ids:
+            #why fork?
+            #
+            #short answer: Continuously free up memory and start vendor processing at a base of ~30M
+            #
+            #longer answer: This process can run for a long time and has shown a propensity
+            #to crash after running for a while.  All business logic and data access has been
+            #moved to a subprocess that has all of it's memory deallocated after it is finished.
+            #Each vendor processor is fully isolated and ready for concurrency in the future,
+            #which will allow greater speed while keeping memory usage in check over long durations.
+            #
+            #The biggest source of the memory issues is the data object returned from the pyfpds get
+            #method because it runs through all pages (which is needed) and the FPDS system is sending
+            #us data before the time period we are asking (which can be a lot).  TODO: figure out how
+            #to improve memory usage when getting data from pyfpds.  
+            #
+            update_pid = os.fork()
+            
+            if update_pid == 0:
+                #child signals
+                signal.signal(signal.SIGSEGV, crash_handler) #catch segmentation faults
+                signal.signal(signal.SIGINT, crash_handler) #catch user aborts (ctrl-c)
+                
+                try:
+                    connection.close() #reinitialize db connection
+                    self.update_vendor(vid, load_to, options)
+                    status = 0
+                except Exception as e:
+                    display_error(e)
+                    status = 1
+                
+                sys.exit(status)
+
+            pid, status = os.waitpid(update_pid, 0)
+            if status != 0:
+                success = False
+                break
+            
+        return success
+       
 
     def handle(self, *args, **options):
-  
         print("-------BEGIN LOAD_FPDS PROCESS-------")
+        log_memory('Start')
+        
+        signal.signal(signal.SIGSEGV, crash_handler) #catch segmentation faults
+        
         try:
-
-            if 'load_all' in options:
-                load_from = last_load(options['load_all'])
-            else:
-                load_from = last_load()
-            
-            load_to = datetime.now()
-           
             #allow to start from a certain vendor
-            if 'id' in options:
-                vendor_id = int(options['id'])
-                vendors = Vendor.objects.filter(id__gte=vendor_id).order_by('id')
+            vid = int(options['id'])
+            vendor_ids = self.get_vendor_ids(vid)
+            
+            #process vendor contracts
+            init_load(options)
+            
+            if options['load_all']:
+                #repeat every incrementally until end if load_all
+                first_date = self.date_now - timedelta(weeks=(52 * int(options['years'])))
+                load_to = first_date
+                
+                while self.date_now > load_to: #while load_to is in the past
+                    load_to = load_to + timedelta(weeks = int(options['weeks']))
+                    if self.date_now < load_to: #load_to can't be in the future
+                        load_to = self.date_now
+                 
+                    if not self.update_vendors(vendor_ids, load_to.date(), options):
+                        #if we died don't continue
+                        break
+                    
+                    if vid > 1:
+                        #reset vendor ids so we start processing at the beginning again
+                        vendor_ids = self.get_vendor_ids()
             else:
-                vendors = Vendor.objects.all().order_by('id')
-
-            for v in vendors:
-
-                by_piid = {} 
-                v_con = self.contracts.get(vendor_duns=v.duns, last_modified_date=self.date_format(load_from, load_to), num_records='all')
-
-                for vc in v_con:
-                    
-                    con_type = ''
-                    if 'IDV' in vc['content']:
-                        continue # don't get IDV records
-
-                    try:
-                        award = vc['content']['award']
-                    
-                    except KeyError:
-                        try:
-                            award = vc['content']['OtherTransactionAward']
-                        except KeyError:
-                            print(vc)
-                            continue 
-                        
-                    
-                    award_id = get_award_id_obj(award)
-                    piid = get_piid(award_id)
-
-                    if 'contractDetail' in award:
-                        award = award['contractDetail'] # for OtherTransactionAward, details are nested one more level
-
-                    record = {
-                        'mod_number': get_mod(award_id), 
-                        'transaction_number': get_transaction_number(award_id),
-                        'ultimate_completion_date': get_ultimate_completion_date(award), 
-                        'current_completion_date': get_current_completion_date(award), 
-                        'signed_date': award['relevantContractDates']['signedDate'],
-                        'agency_id': get_agency_id(award_id), #award_id['awardContractID']['agencyID']['#text'],
-                        'agency_name': get_agency_name(award_id), #award_id['awardContractID']['agencyID']['@name'],
-                        'obligated_amount': award['dollarValues']['obligatedAmount'],
-                        'annual_revenue': get_annual_revenue(award),
-                        'number_of_employees': get_number_of_employees(award),
-                        'last_modified_by': get_last_modified_by(award),
-                        'reason_for_modification': get_reason_for_modification(award),
-                        'type_of_contract_pricing_name': get_contract_pricing_name(award),
-                        'type_of_contract_pricing_id': get_contract_pricing_id(award),
-                        'naics' : get_naics(award),
-                        'psc': get_psc(award),
-                    }
-                    
-                    if piid in by_piid:
-                        by_piid[piid].append(record)
-                    else:
-                        by_piid[piid] = [record, ]
-
-                for piid, records in by_piid.items():
-
-                    by_piid[piid] = sorted(records, key=lambda x: (x['mod_number'], x['transaction_number']))
-                    total = 0 # amount obligated
-                    
-                    self.logger.debug("================{0}===Vendor {1}=================\n".format(piid, v.duns))
-
-                    self.logger.debug(self.contracts.pretty_print(by_piid[piid]))
-                    
-                    con, created = Contract.objects.get_or_create(piid=piid, vendor=v)
-
-                    for mod in by_piid[piid]:
-                        total += float(mod.get('obligated_amount'))
-                        con.date_signed = mod.get('signed_date') 
-                        con.completion_date = mod.get('current_completion_date') or mod.get('ultimate_completion_date')
-                        con.agency_id = mod.get('agency_id')
-                        con.agency_name = mod.get('agency_name')
-                        con.pricing_type = mod.get('type_of_contract_pricing_id')
-                        con.pricing_type_name = mod.get('type_of_contract_pricing_name')
-
-                        if mod.get('reason_for_modification') in ['X', 'E', 'F']:
-                            con.reason_for_modification = mod.get('reason_for_modification')
-                        else:
-                            if con.completion_date:
-                                date_obj = datetime.strptime(con.completion_date, '%Y-%m-%d %H:%M:%S')
-                                today = datetime.utcnow()
-                                if date_obj:
-                                    if date_obj > today:
-                                        con.reason_for_modification = 'C2'
-                                    else:
-                                        con.reason_for_modification = 'C1'
-
-                        if mod.get('last_modified_by') and '@' in mod['last_modified_by'].lower():
-                            #only add if it's an actual email, make this a better regex
-                            con.last_modified_by = mod['last_modified_by']
-                        
-                        #ADD NAICS -- need to add other naics as objects to use foreignkey
-                        con.PSC = mod.get('psc')
-                        con.NAICS = mod.get('naics')
-
-                        ar = mod.get('annual_revenue') or None
-                        ne = mod.get('number_of_employees') or None
-                        if ar:
-                            v.annual_revenue = int(ar)
-
-                        if ne:
-                            v.number_of_employees = int(ne)
-
-                    con.obligated_amount = total
-                    con.save()
-
-                #save updates to annual revenue, number of employees
-                v.save()
-            create_load(load_to)
-
+                #load everything since last update
+                self.update_vendors(vendor_ids, self.date_now.date(), options)
+            
         except Exception as e:
-            print("MAJOR ERROR -- PROCESS ENDING EXCEPTION --  {0}".format(e))
-            import sys
-            traceback.print_tb(sys.exc_info()[2])
-            self.logger.debug("MAJOR ERROR -- PROCESS ENDING EXCEPTION -- {0}".format(e))
+            display_error(e)
         
         print("-------END LOAD_FPDS PROCESS-------")
+        log_memory('End')
 
