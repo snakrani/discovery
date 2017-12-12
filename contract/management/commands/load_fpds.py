@@ -60,6 +60,7 @@ def crash_handler(signum, frame):
     sys.exit(1)
 
 
+@catch_key_error
 def get_award_id_obj(award):
     if 'awardID' in award: 
         return award['awardID']
@@ -241,6 +242,9 @@ class Command(BaseCommand):
             award = award['contractDetail'] # for OtherTransactionAward, details are nested one more level
     
         award_id = get_award_id_obj(award)
+        if award_id is None:
+            return None, {}
+        
         piid = get_piid(award_id)
     
         record = {
@@ -325,8 +329,10 @@ class Command(BaseCommand):
         contracts = Contracts(logger=logger.debug)      
         load_info = last_load(vendor, options)
         
-        if load_to <= load_info['load_date']:
+        if load_to <= load_info['load_date']: #already loaded more data than requested
             load_to = load_info['load_date'] + timedelta(weeks = int(options['weeks']))
+        if load_to > self.date_now.date(): #load_to can't be in the future
+            load_to = self.date_now.date()
             
         if not (options['load_all'] and load_info['initialized']):
             print("[ {} ] - Updating vendor {} ({}) from {} to {}".format(vid, vendor.name, vendor.duns, load_info['load_date'], load_to))
@@ -380,6 +386,8 @@ class Command(BaseCommand):
         success = True
         
         log_data("Vendor ID", "DUNS", "Name", "Start Date", "End Date", "Contracts", "PIIDs", "Missing Modified Timestamp")
+            
+        connection.close() #reinitialize db connection         
         
         for vid in vendor_ids:
             #why fork?
@@ -431,7 +439,9 @@ class Command(BaseCommand):
         try:
             #allow to start from a certain vendor
             vid = int(options['id'])
+            
             vendor_ids = self.get_vendor_ids(vid)
+            all_vendor_ids = self.get_vendor_ids() if vid > 1 else vendor_ids
             
             #process vendor contracts
             init_load(options)
@@ -445,14 +455,13 @@ class Command(BaseCommand):
                     load_to = load_to + timedelta(weeks = int(options['weeks']))
                     if self.date_now < load_to: #load_to can't be in the future
                         load_to = self.date_now
-                 
+                    
                     if not self.update_vendors(vendor_ids, load_to.date(), options):
                         #if we died don't continue
                         break
                     
-                    if vid > 1:
-                        #reset vendor ids so we start processing at the beginning again
-                        vendor_ids = self.get_vendor_ids()
+                    #reset vendor ids so we start processing at the beginning again
+                    vendor_ids = all_vendor_ids
             else:
                 #load everything since last update
                 self.update_vendors(vendor_ids, self.date_now.date(), options)
