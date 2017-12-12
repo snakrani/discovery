@@ -211,11 +211,13 @@ class Command(BaseCommand):
     date_now = datetime.now()
 
     option_list = BaseCommand.option_list \
+                  + (make_option('--id', action='store', type=int,  dest='id', default=1, help="load contracts for vendors greater or equal to this id"), ) \
                   + (make_option('--load_all', action='store_true', dest='load_all', default=False, help="Force load of all contracts"), ) \
                   + (make_option('--reinit', action='store_true', dest='reinit', default=False, help="Reinitialize all vendor contract data"), ) \
                   + (make_option('--years', action='store', type=int, dest='years', default=10, help="Number of years back to populate database"), ) \
                   + (make_option('--weeks', action='store', type=int, dest='weeks', default=26, help="Weekly interval to process incoming data"), ) \
-                  + (make_option('--id', action='store', type=int,  dest='id', default=1, help="load contracts for vendors greater or equal to this id"), )
+                  + (make_option('--count', action='store', type=int, dest='count', default=0, help="Number of records to return from each load of the FPDS_NG ATOM feed"), ) \
+                  + (make_option('--pause', action='store', type=int, dest='pause', default=0, help="Number of seconds to pause before each query to the FPDS-NG ATOM feed"), )
 
 
     def init_contract(self, raw_entry):
@@ -330,31 +332,35 @@ class Command(BaseCommand):
             print("[ {} ] - Updating vendor {} ({}) from {} to {}".format(vid, vendor.name, vendor.duns, load_info['load_date'], load_to))
             log_memory('Starting Vendor')
             
-            #---
-            v_con = contracts.get(vendor_duns=vendor.duns, last_modified_date=[load_info['load_date'], load_to], num_records='all')
             by_piid = {}
             
+            v_index = 0
             contracts_processed = 0
             missing_modified = 0
             
-            log_memory('Post Request')
+            while True:
+                v_con, v_index = contracts.get_page(v_index, int(options['count']), vendor_duns=vendor.duns, last_modified_date=[load_info['load_date'], load_to], _sleep=int(options['pause']))
             
-            for vc in v_con:
-                piid, contract_record = self.init_contract(vc)
+                log_memory('Post Request')
                 
-                if piid is None:
-                    continue
-                
-                contracts_processed += 1
-                if not contract_record['modified_date']:
-                    missing_modified += 1
-                
-                if piid in by_piid:
-                    by_piid[piid].append(contract_record)
-                else:
-                    by_piid[piid] = [contract_record, ]
-            #---
-            
+                for vc in v_con:
+                    piid, contract_record = self.init_contract(vc)
+                    
+                    if piid is None:
+                        continue
+                    
+                    contracts_processed += 1
+                    if not contract_record['modified_date']:
+                        missing_modified += 1
+                    
+                    if piid in by_piid:
+                        by_piid[piid].append(contract_record)
+                    else:
+                        by_piid[piid] = [contract_record, ]
+                                
+                if v_index == 0:
+                    break
+             
             for piid, records in by_piid.items():
                 logger.debug("================{0}===Vendor {1}=================\n".format(piid, vendor.duns))
                 logger.debug(contracts.pretty_print(by_piid[piid]))
@@ -368,7 +374,7 @@ class Command(BaseCommand):
             print(" --- completed with: {} PIID(s), {} contract(s) processed".format(len(by_piid.keys()), contracts_processed))
             log_memory('Final Vendor')
             log_data(vid, vendor.duns, vendor.name, load_info['load_date'], load_to, contracts_processed, len(by_piid.keys()), missing_modified)
-    
+
     
     def update_vendors(self, vendor_ids, load_to, options):
         success = True
@@ -456,4 +462,3 @@ class Command(BaseCommand):
         
         print("-------END LOAD_FPDS PROCESS-------")
         log_memory('End')
-
