@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+apt-get update
 apt-get install -y git
 apt-get install -y postgresql-9.3 pgadmin3
 apt-get install -y python-pip
