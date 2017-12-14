@@ -194,7 +194,6 @@ def last_load(vendor, options):
 
 
 def create_load(vendor, load_date):
-    #overwrite the most recent load object to keep the table from growing
     try:
         initialized = True if load_date >= datetime.now().date() else False
         
@@ -216,9 +215,9 @@ class Command(BaseCommand):
                   + (make_option('--load_all', action='store_true', dest='load_all', default=False, help="Force load of all contracts"), ) \
                   + (make_option('--reinit', action='store_true', dest='reinit', default=False, help="Reinitialize all vendor contract data"), ) \
                   + (make_option('--years', action='store', type=int, dest='years', default=10, help="Number of years back to populate database"), ) \
-                  + (make_option('--weeks', action='store', type=int, dest='weeks', default=26, help="Weekly interval to process incoming data"), ) \
-                  + (make_option('--count', action='store', type=int, dest='count', default=0, help="Number of records to return from each load of the FPDS_NG ATOM feed"), ) \
-                  + (make_option('--pause', action='store', type=int, dest='pause', default=0, help="Number of seconds to pause before each query to the FPDS-NG ATOM feed"), )
+                  + (make_option('--weeks', action='store', type=int, dest='weeks', default=520, help="Weekly interval to process incoming data"), ) \
+                  + (make_option('--count', action='store', type=int, dest='count', default=500, help="Number of records to return from each load of the FPDS_NG ATOM feed"), ) \
+                  + (make_option('--pause', action='store', type=int, dest='pause', default=1, help="Number of seconds to pause before each query to the FPDS-NG ATOM feed"), )
 
 
     def init_contract(self, raw_entry):
@@ -336,7 +335,7 @@ class Command(BaseCommand):
             
         if not (options['load_all'] and load_info['initialized']):
             print("[ {} ] - Updating vendor {} ({}) from {} to {}".format(vid, vendor.name, vendor.duns, load_info['load_date'], load_to))
-            log_memory('Starting Vendor')
+            log_memory("Starting [ {} ] {} - {}".format(vid, vendor.name, vendor.duns))
             
             by_piid = {}
             
@@ -347,7 +346,7 @@ class Command(BaseCommand):
             while True:
                 v_con, v_index = contracts.get_page(v_index, int(options['count']), vendor_duns=vendor.duns, last_modified_date=[load_info['load_date'], load_to], _sleep=int(options['pause']))
             
-                log_memory('Post Request')
+                log_memory("Loading [ {} ] {} - {}".format(vid, vendor.name, vendor.duns))
                 
                 for vc in v_con:
                     piid, contract_record = self.init_contract(vc)
@@ -378,7 +377,7 @@ class Command(BaseCommand):
             create_load(vendor, load_to)
             
             print(" --- completed with: {} PIID(s), {} contract(s) processed".format(len(by_piid.keys()), contracts_processed))
-            log_memory('Final Vendor')
+            log_memory("Final [ {} ] {} - {}".format(vid, vendor.name, vendor.duns))
             log_data(vid, vendor.duns, vendor.name, load_info['load_date'], load_to, contracts_processed, len(by_piid.keys()), missing_modified)
 
     
