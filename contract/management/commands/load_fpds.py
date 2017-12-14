@@ -208,7 +208,7 @@ def create_load(vendor, load_date):
 
 class Command(BaseCommand):
 
-    date_now = datetime.now()
+    date_now = datetime.now().date()
 
     option_list = BaseCommand.option_list \
                   + (make_option('--id', action='store', type=int,  dest='id', default=1, help="load contracts for vendors greater or equal to this id"), ) \
@@ -330,8 +330,10 @@ class Command(BaseCommand):
         
         if load_to <= load_info['load_date']: #already loaded more data than requested
             load_to = load_info['load_date'] + timedelta(weeks = int(options['weeks']))
-        if load_to > self.date_now.date(): #load_to can't be in the future
-            load_to = self.date_now.date()
+        if load_to > self.date_now: #load_to can't be in the future
+            load_to = self.date_now
+        if load_info['load_date'] == self.date_now: #need to request at least one day
+            load_info['load_date'] = load_info['load_date'] - timedelta(days = 1)
             
         if not (options['load_all'] and load_info['initialized']):
             print("[ {} ] - Updating vendor {} ({}) from {} to {}".format(vid, vendor.name, vendor.duns, load_info['load_date'], load_to))
@@ -455,7 +457,7 @@ class Command(BaseCommand):
                     if self.date_now < load_to: #load_to can't be in the future
                         load_to = self.date_now
                     
-                    if not self.update_vendors(vendor_ids, load_to.date(), options):
+                    if not self.update_vendors(vendor_ids, load_to, options):
                         #if we died don't continue
                         break
                     
@@ -463,7 +465,7 @@ class Command(BaseCommand):
                     vendor_ids = all_vendor_ids
             else:
                 #load everything since last update
-                self.update_vendors(vendor_ids, self.date_now.date(), options)
+                self.update_vendors(vendor_ids, self.date_now, options)
             
         except Exception as e:
             display_error(e)
