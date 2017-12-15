@@ -20,6 +20,7 @@ import logging
 import traceback
 import StringIO
 
+import re
 import pytz
 import json
 import csv
@@ -129,6 +130,22 @@ def get_number_of_employees(award):
 @catch_key_error
 def get_last_modified_by(award):
     return award['transactionInformation']['lastModifiedBy']
+
+@catch_key_error
+def get_created_by(award):
+    return award['transactionInformation']['createdBy']
+
+def poc_is_email(text):
+    if text and re.search('@', text):
+        return text
+    return None
+    
+def get_point_of_contact(award):
+    poc = get_last_modified_by(award)
+    if poc is None:
+        poc = get_created_by(award)
+        
+    return poc_is_email(poc)
 
 
 def get_contract_pricing_name(award):
@@ -259,6 +276,7 @@ class Command(BaseCommand):
             'annual_revenue': get_annual_revenue(award),
             'number_of_employees': get_number_of_employees(award),
             'last_modified_by': get_last_modified_by(award),
+            'point_of_contact': get_point_of_contact(award),
             'reason_for_modification': get_reason_for_modification(award),
             'type_of_contract_pricing_name': get_contract_pricing_name(award),
             'type_of_contract_pricing_id': get_contract_pricing_id(award),
@@ -298,6 +316,10 @@ class Command(BaseCommand):
             if mod.get('last_modified_by') and '@' in mod['last_modified_by'].lower():
                 #only add if it's an actual email, make this a better regex
                 con.last_modified_by = mod['last_modified_by']
+            
+            poc = poc_is_email(mod.get('point_of_contact'))    
+            if poc:
+                con.point_of_contact = poc
             
             #ADD NAICS -- need to add other naics as objects to use foreignkey
             con.PSC = mod.get('psc')
