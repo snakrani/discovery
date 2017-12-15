@@ -386,7 +386,15 @@ class Command(BaseCommand):
     def update_vendors(self, vendor_ids, load_to, options):
         success = True
         
-        log_data("Vendor ID", "DUNS", "Name", "Start Date", "End Date", "Contracts", "PIIDs", "Missing Modified Timestamp")
+        log_data("Vendor ID", 
+            "DUNS", 
+            "Name", 
+            "Start Date", 
+            "End Date", 
+            "Contracts", 
+            "PIIDs", 
+            "Missing Modified Timestamp"
+        )
             
         connection.close() #reinitialize db connection         
         
