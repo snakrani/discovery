@@ -12,3 +12,6 @@ src/
 mvenv/
 static/
 .coverage
+.project
+.pydevproject
+.settings/
