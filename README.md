@@ -60,6 +60,8 @@ The --load_all flag forces a load of all contracts, regardless of last load date
 ``` ./manage.py --id=ID  ```
 The --id parameter only loads contractors for vendors with an id greater than or equal to ID, where ID is the vendor's id in the vendor table. Contracts are loaded in order of vendor id.
 
+You will also need to generate the cache tables by running `./manage.py createcachetable`.
+
 ## Static Assets
 Assets can be loaded locally, or from an S3 bucket. The default settings in settings.py and local_settings.example.py are set to force local assets to be loaded. To use S3, update the AWS settings in the local_settings.py file, and uncomment the `DEFAULT_FILE_STORAGE` and `STATICFILES_STORAGE` lines.
 
