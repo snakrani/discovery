@@ -1,4 +1,6 @@
+import json
 import logging
+import os
 import time
 import traceback
 import sys
@@ -32,6 +34,8 @@ class Command(BaseCommand):
 
         print("-------BEGIN CHECK_SAM PROCESS-------")
         try:
+            vendors_list = []
+
             vendors = Vendor.objects.all()
             for v in vendors:
                 #keep from bringing the SAM API down
@@ -42,7 +46,7 @@ class Command(BaseCommand):
 
                 self.logger.debug("Fetching vendor at {0}".format(log_uri))
                 req = requests.get(uri)
-                
+
                 #check and see if error code is forbidden -- exit because api key problem
                 if req.status_code==403:
                     if 'Message' in req.json():
@@ -67,12 +71,12 @@ class Command(BaseCommand):
                         addr = self.get_value(reg, 'samAddress', v)
                         if addr:
                             v.sam_address = self.get_value(addr, 'Line1', v)
-                            v.sam_citystate = "{0}, {1} {2}".format(self.get_value(addr, 'City', v), 
-                                                                      self.get_value(addr, 'stateorProvince', v), 
+                            v.sam_citystate = "{0}, {1} {2}".format(self.get_value(addr, 'City', v),
+                                                                      self.get_value(addr, 'stateorProvince', v),
                                                                       self.get_value(addr, 'Zip', v))
-                    
+
                         v.sam_url = self.get_value(reg, 'corporateUrl', v)
-                        if v.sam_url and v.sam_url[:3].lower() == "www" : 
+                        if v.sam_url and v.sam_url[:3].lower() == "www" :
                             v.sam_url = 'http://' + v.sam_url
 
                         setasides = self.get_value(reg, 'businessTypes', v)
@@ -85,7 +89,7 @@ class Command(BaseCommand):
                             except SetAside.DoesNotExist:
                                 continue
                         v.save()
-                        
+
                     else:
                         self.logger.debug("'registration' key is missing for {}".format(log_uri))
 
@@ -94,14 +98,42 @@ class Command(BaseCommand):
                 else:
                     self.logger.debug("Could not load data from {} for unknown reason".format(log_uri))
 
+                vendors_list.append({
+                    'fields': {
+                        'name': v.name,
+                        'duns': v.duns,
+                        'duns_4': v.duns_4,
+                        'cm_name': v.cm_name,
+                        'cm_phone': v.cm_phone,
+                        'cm_email': v.cm_email,
+                        'pm_name': v.pm_name,
+                        'pm_phone': v.pm_phone,
+                        'pm_email': v.pm_email,
+                        'sam_status': v.sam_status,
+                        'sam_activation_date': v.sam_activation_date,
+                        'sam_expiration_date': v.sam_expiration_date,
+                        'sam_exclusion': v.sam_exclusion,
+                        'cage': v.cage,
+                        'sam_address': v.sam_address,
+                        'sam_citystate': v.sam_citystate,
+                        'sam_url': v.sam_url,
+                        'setasides': [sa.pk for sa in v.setasides.all()]
+                    },
+                    'model': 'vendors.vendor',
+                    'pk': v.pk
+                })
+
+            # Save vendors to a fixture.
+            fixture_file_name = os.path.join(settings.BASE_DIR, 'api/fixtures/vendors.json')
+            fixture_file = open(fixture_file_name, 'w')
+            # json.dump(vendors_list, fixture_file)
+
             sam_load = SamLoad(sam_load=timezone.now())
             sam_load.save()
-        
+
         except Exception as e:
             print("MAJOR ERROR -- PROCESS ENDING EXCEPTION --  {0}".format(e))
             print (traceback.format_exc())
             self.logger.debug("MAJOR ERROR -- PROCESS ENDING EXCEPTION -- {0}".format(e))
-        
+
         print("-------END CHECK_SAM PROCESS-------")
-
-

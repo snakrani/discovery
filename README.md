@@ -9,15 +9,17 @@ Discovery is live at (https://discovery.gsa.gov). You can file issues on this re
 
 Currently, Discovery makes use of vendor information from the System for Award Management (SAM) and historical contract information the Federal Procurement Data System (FPDS). There are a few management commands that load the initial data, but we also provide a SQL dump since the loading of data from FPDS for the past decade can take several hours.
 
-This project is in the very early stages. Right now it's a basic Django project. You can get started by:
+This project uses [Django](https://www.djangoproject.com/), a Python framework. You can get started by:
 
  * Installing PostgreSQL (installation guides [here](https://wiki.postgresql.org/wiki/Detailed_installation_guides))
  * Installing virtualenv and creating a virtual environment ([hitchhiker's guide to virtualenv](http://docs.python-guide.org/en/latest/dev/virtualenvs/))
  * Installing the python requirements with ```pip install -r requirements.txt```
+
  * Creating a postgresql database and storing the settings in a ```local_settings.py``` file, a sibling of ```settings.py```
  * Run ```manage.py migrate``` to set up the database and ```manage.py createcachetable``` to set up caching
+
  * Loading a [SQL dump](https://s3.amazonaws.com/mirage-gsa-gov/discovery.sql.gz) to get some data into the project
- * Run `manage.py runserver` to start the server
+ * Run `manage.py runserver` to start the server. Optionally specify a host and port to serve on. For example `0.0.0.0:8888`
 
 ## Requirements
 
@@ -105,6 +107,9 @@ The tests can be run using Django's built in testing infrastructure:
 ```
 
 You can test specific apps by passing in the app name to the testing command. Valid values are `api`, `vendor`, `contract`, `selenium_tests` (requires additional setup).
+
+### Deploying
+See [deploy.sh](https://github.com/18F/discovery/blob/master/deploy.sh).
 
 ### Selenium testing
 #### Locally with PhantomJS

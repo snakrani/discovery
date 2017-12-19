@@ -1,9 +1,36 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest
+from django.views.generic import TemplateView
 from vendors.models import Vendor, Pool, Naics, SetAside
 from contract.models import Contract
 import csv
+import os.path
 from titlecase import titlecase
+
+class VendorView(TemplateView):
+    pdf_dir = 'mirage_site/static/mirage_site/capability_statements/'
+    static_pdf_dir = 'mirage_site/capability_statements/'
+
+    def get_context_data(self, **kwargs):
+        context = super(TemplateView, self).get_context_data(**kwargs)
+        duns = context['vendor_duns']
+        capability_statement = self.has_statement(duns)
+        context['has_capability_statement'] = capability_statement
+        if capability_statement:
+            context['capability_statement_url'] = self.get_pdf_path(duns, self.static_pdf_dir)
+        return context
+
+    def has_statement(self, duns):
+        if os.path.isfile(self.get_pdf_path(duns, self.pdf_dir)):
+            return True
+        return False
+
+    def get_pdf_path(self, duns, path):
+        pdf_path = path
+        pdf_path += duns
+        pdf_path += '.pdf'
+        return pdf_path
+
 
 def pool_csv(request):
     response = HttpResponse(content_type='text/csv')
@@ -16,10 +43,10 @@ def pool_csv(request):
     #naics
     naics = Naics.objects.get(short_code=request.GET['naics-code'])
     vehicle = request.GET['vehicle'].upper()
-    pool = Pool.objects.get(naics=naics, vehicle=vehicle) 
+    pool = Pool.objects.get(naics=naics, vehicle=vehicle)
     vendors = vendors.filter(pools=pool)
     filter_text.append("NAICS code {0}".format(naics))
-    
+
     #setasides
     if 'setasides' in request.GET:
         setasides = request.GET.getlist('setasides')[0].split(',')
@@ -40,7 +67,7 @@ def pool_csv(request):
 
     lines = []
 
-    for v in vendors: 
+    for v in vendors:
         setaside_list = []
         for sa in setasides_all:
             if sa in v.setasides.all():
@@ -92,7 +119,7 @@ def vendor_csv(request, vendor_duns):
         writer.writerow(('This vendor\'s contract history for NAICS {0}'.format(naics), ))
     else:
         writer.writerow(('This vendor\'s contract history for all contracts', ))
-        
+
     writer.writerow(('Date Signed', 'PIID', 'Agency', 'Type', 'Value ($)', 'Email POC', 'Status'))
 
     if naics:
@@ -107,5 +134,3 @@ def vendor_csv(request, vendor_duns):
         writer.writerow((c.date_signed.strftime("%m/%d/%Y"), piid, titlecase(c.agency_name), c.get_pricing_type_display(), c.obligated_amount, (c.point_of_contact or "").lower(), c.get_reason_for_modification_display()))
 
     return response
-
-

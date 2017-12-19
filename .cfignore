@@ -1,5 +1,4 @@
 pyfpds
-rest_framework_swagger
 *.swp
 local_settings.py
 *.pyc
