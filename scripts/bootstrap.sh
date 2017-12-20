@@ -69,7 +69,7 @@ then
   cp -f utils/redis_init_script /etc/init.d/redis # listens at 6379
   update-rc.d redis defaults
 fi
-/etc/init.d/redis restart
+/etc/init.d/redis start
 
 #set up virtual environment
 if [ ! -d "$PROJ_DIR/venv" ]
