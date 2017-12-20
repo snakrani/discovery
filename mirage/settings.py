@@ -24,7 +24,7 @@ except:
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     "mirage.context_processors.api_host",
@@ -37,7 +37,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages"
 )
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'mirage_site/templates'),
 
@@ -57,16 +57,15 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'storages',
+    'selenium_tests',
     'rest_framework',
+    'rest_framework_swagger',
 
     'api',
     'mirage_site',
     'vendors',
     'contract',
-    'selenium_tests',
-    'rest_framework_swagger',
-    'storages',
-
 )
 
 MIDDLEWARE_CLASSES = (
@@ -116,7 +115,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 VEHICLES = ('oasissb', 'oasis')
 
 SAM_API_URL = "https://api.data.gov/sam/v1/registrations/"
-USASPENDING_API_URL = "http://www.usaspending.gov/fpds/fpds.php"
 
 CACHES = {
     'default': {
@@ -178,16 +176,28 @@ LOGGING = {
             'filename': os.path.join(BASE_DIR, 'logs/fpds.log'),
             'formatter': 'verbose'
         },
+        'fpds_memory_file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/fpds_memory.csv'),
+            'formatter': 'csv'
+        },
+        'fpds_data_file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/fpds_data.csv'),
+            'formatter': 'csv'
+        }
     },
     'loggers': {
         'django': {
             'handlers':['file'],
             'propagate': True,
-            'level':'DEBUG',
+            'level':'DEBUG'
         },
         'vendor': {
             'handlers': ['vendor_file'],
-            'level': 'DEBUG',
+            'level': 'DEBUG'
         },
         'vendor_memory': {
             'handlers': ['vendor_memory_file'],
@@ -203,14 +213,19 @@ LOGGING = {
         },
         'fpds': {
             'handlers': ['fpds_file'],
-            'level': 'DEBUG',
+            'level': 'DEBUG'
         },
-
+        'fpds_memory': {
+            'handlers': ['fpds_memory_file'],
+            'level': 'INFO'
+        },
+        'fpds_data': {
+            'handlers': ['fpds_data_file'],
+            'level': 'INFO'
+        }
     },
 }
 
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config()
 
 try:
     from mirage.local_settings import *
