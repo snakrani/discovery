@@ -1,11 +1,11 @@
 # Discovery: OASIS Market Research
-[![Circle CI](https://circleci.com/gh/18F/mirage.png?style=badge)](https://circleci.com/gh/18F/mirage)
+[![CircleCI](https://circleci.com/gh/PSHCDevOps/discovery/tree/master.svg?style=svg)](https://circleci.com/gh/PSHCDevOps/discovery/tree/master)
 
 Welcome to the wonderful world of procurement, a mechanism by which the government buys goods and services from the private sector. The procurement process is made up of several stages, one of the earliest being market research. Market Research is an attempt to predict what qualified bidders your solicitation for goods or services will attract. It helps acquisition personnel make decisions regarding various aspects of their particular procurement. Ideally, a solicitation should be structured so that it attracts a enough experienced bidders to be truly competitive.
 
 After researching the marketplace, procurement officers may decide to break their solicitation up into smaller chunks, or choose one vehicle or schedule over another. Procurement vehicles and schedules are large umbrella contracts, with a set of vendors that have "pre-competed" for work in a general category. Discovery was developed to serve the [OASIS family of  vehicles](http://www.gsa.gov/portal/content/161367), which has many vendors capable of providing integrated professional services. OASIS is actually two vehicles, OASIS SB, which includes small businesses only, and OASIS unrestricted, which includes a wider array of vendors.
 
-Discovery is live at (https://discovery.gsa.gov). You can file issues on this repo, or you can check out our [Trello board](https://trello.com/b/ZcWTRSP9/mirage), which contains our product backlog to see what we have planned in the future.
+Discovery is live at (https://discovery.gsa.gov). You can file issues on this repo, or you can check out our [Trello board](https://trello.com/b/AEoWtET7/discovery-20), which contains our product backlog to see what we have planned in the future.
 
 Currently, Discovery makes use of vendor information from the System for Award Management (SAM) and historical contract information the Federal Procurement Data System (FPDS). There are a few management commands that load the initial data, but we also provide a SQL dump since the loading of data from FPDS for the past decade can take several hours.
 
@@ -64,7 +64,7 @@ Currently the `load_fpds` command is configured to load ten years of contract hi
 The --load_all flag forces a load of all contracts, regardless of last load date
 
 ```
- ./manage.py --id=ID  
+ ./manage.py --id=ID
  ```
 The --id parameter only loads contractors for vendors with an id greater than or equal to ID, where ID is the vendor's id in the vendor table. Contracts are loaded in order of vendor id.
 
