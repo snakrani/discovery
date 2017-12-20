@@ -116,7 +116,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 VEHICLES = ('oasissb', 'oasis')
 
 SAM_API_URL = "https://api.data.gov/sam/v1/registrations/"
-USASPENDING_API_URL = "http://www.usaspending.gov/fpds/fpds.php"
 
 CACHES = {
     'default': {
@@ -135,6 +134,10 @@ LOGGING = {
         },
         'simple': {
             'format': '%(levelname)s %(message)s'
+        },
+        'csv': {
+            'format' : '"%(asctime)s","%(levelname)s",%(message)s',
+            'datefmt' : "%Y-%m-%d %H:%M:%S"
         },
     },
     'handlers': {
@@ -162,31 +165,51 @@ LOGGING = {
             'filename': os.path.join(BASE_DIR, 'logs/fpds.log'),
             'formatter': 'verbose'
         },
+        'fpds_memory_file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/fpds_memory.csv'),
+            'formatter': 'csv'
+        },
+        'fpds_data_file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/fpds_data.csv'),
+            'formatter': 'csv'
+        }
     },
     'loggers': {
         'django': {
             'handlers':['file'],
             'propagate': True,
-            'level':'DEBUG',
+            'level':'DEBUG'
         },
         'vendors': {
             'handlers': ['vendor_file'],
-            'level': 'DEBUG',
+            'level': 'DEBUG'
         },
         'sam': {
             'handlers': ['sam_file'],
-            'level': 'DEBUG',
+            'level': 'DEBUG'
         },
         'fpds': {
             'handlers': ['fpds_file'],
-            'level': 'DEBUG',
+            'level': 'DEBUG'
         },
-
+        'fpds_memory': {
+            'handlers': ['fpds_memory_file'],
+            'level': 'INFO'
+        },
+        'fpds_data': {
+            'handlers': ['fpds_data_file'],
+            'level': 'INFO'
+        }
     },
 }
 
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config()
+
 
 try:
     from mirage.local_settings import *
