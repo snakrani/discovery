@@ -62,7 +62,7 @@ jobs:
           name: Run tests
           command: |
             source venv/bin/activate
-            python manage.py test api vendors contract
+            python manage.py test api
 
       - store_artifacts:
           path: logs
