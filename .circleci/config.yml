@@ -20,9 +20,9 @@ jobs:
 
       - restore_cache:
           keys:
-            - python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
-            - python-dep-{{ checksum "requirements.txt" }}
-            - python-dep-
+            - 2-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
+            - 2-python-dep-{{ checksum "requirements.txt" }}
+            - 2-python-dep-
       - run:
           name: Install Python dependencies
           command: |
@@ -33,7 +33,7 @@ jobs:
       - save_cache:
           paths:
             - ./venv
-          key: python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
+          key: 2-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
 
       - restore_cache:
           key: 1-phantomjs-2-1-1
@@ -62,7 +62,7 @@ jobs:
           name: Run tests
           command: |
             source venv/bin/activate
-            python manage.py test api
+            python manage.py test api contract
 
       - store_artifacts:
           path: logs
