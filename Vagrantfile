@@ -12,7 +12,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.cpus = 2
   end
 
-  config.vm.provision :shell, path: "bootstrap.sh"
+  config.vm.provision :shell, path: "scripts/bootstrap.sh"
 
   config.vm.network "forwarded_port", guest: 8000, host: 8080 # Application
   config.vm.network "forwarded_port", guest: 5432, host: 5432 # Database
