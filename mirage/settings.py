@@ -61,6 +61,8 @@ INSTALLED_APPS = (
     'selenium_tests',
     'rest_framework',
     'rest_framework_swagger',
+    'django_celery_beat',
+    'django_celery_results',
 
     'api',
     'mirage_site',

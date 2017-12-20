@@ -27,7 +27,7 @@ class Vendor(models.Model):
     pm_email = models.CharField(null=True, max_length=128)
     pm_phone = models.CharField(null=True, max_length=128)
     pools = models.ManyToManyField('Pool', through='PoolPIID')
-    setasides = models.ManyToManyField('SetAside', null=True, blank=True)
+    setasides = models.ManyToManyField('SetAside', blank=True)
     sam_status = models.CharField(null=True, max_length=128)
     sam_activation_date = models.DateTimeField(null=True)
     sam_expiration_date = models.DateTimeField(null=True)
