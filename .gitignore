@@ -8,7 +8,7 @@ venv
 logs/*.log
 logs/*.csv
 .vagrant/
-mirage_venv/
+venv/
 src/
 mvenv/
 static/
