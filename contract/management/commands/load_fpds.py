@@ -4,8 +4,6 @@ from datetime import datetime, timedelta
 from django.core.management.base import BaseCommand, CommandError
 from django.core.management import call_command
 from django.conf import settings
-from django.db import connection
-
 from pyfpds import Contracts
 
 from vendors.models import Vendor
@@ -173,6 +171,7 @@ def get_reason_for_modification(award):
 
 
 def get_naics(award):
+    
     @catch_key_error
     def get_name(award):
         return award['productOrServiceInformation']['principalNAICSCode']
@@ -417,46 +416,9 @@ class Command(BaseCommand):
             "PIIDs", 
             "Missing Modified Timestamp"
         )
-            
-        connection.close() #reinitialize db connection         
         
         for vid in vendor_ids:
-            #why fork?
-            #
-            #short answer: Continuously free up memory and start vendor processing at a base of ~30M
-            #
-            #longer answer: This process can run for a long time and has shown a propensity
-            #to crash after running for a while.  All business logic and data access has been
-            #moved to a subprocess that has all of it's memory deallocated after it is finished.
-            #Each vendor processor is fully isolated and ready for concurrency in the future,
-            #which will allow greater speed while keeping memory usage in check over long durations.
-            #
-            #The biggest source of the memory issues is the data object returned from the pyfpds get
-            #method because it runs through all pages (which is needed) and the FPDS system is sending
-            #us data before the time period we are asking (which can be a lot).  TODO: figure out how
-            #to improve memory usage when getting data from pyfpds.  
-            #
-            update_pid = os.fork()
-            
-            if update_pid == 0:
-                #child signals
-                signal.signal(signal.SIGSEGV, crash_handler) #catch segmentation faults
-                signal.signal(signal.SIGINT, crash_handler) #catch user aborts (ctrl-c)
-                
-                try:
-                    connection.close() #reinitialize db connection
-                    self.update_vendor(vid, load_to, options)
-                    status = 0
-                except Exception as e:
-                    display_error(e)
-                    status = 1
-                
-                sys.exit(status)
-
-            pid, status = os.waitpid(update_pid, 0)
-            if status != 0:
-                success = False
-                break
+            self.update_vendor(vid, load_to, options)
             
         return success
        
@@ -487,9 +449,7 @@ class Command(BaseCommand):
                     if self.date_now < load_to: #load_to can't be in the future
                         load_to = self.date_now
                     
-                    if not self.update_vendors(vendor_ids, load_to, options):
-                        #if we died don't continue
-                        break
+                    self.update_vendors(vendor_ids, load_to, options)
                     
                     #reset vendor ids so we start processing at the beginning again
                     vendor_ids = all_vendor_ids

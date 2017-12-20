@@ -57,16 +57,15 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'storages',
+    'selenium_tests',
     'rest_framework',
+    'rest_framework_swagger',
 
     'api',
     'mirage_site',
     'vendors',
     'contract',
-    'selenium_tests',
-    'rest_framework_swagger',
-    'storages',
-
 )
 
 MIDDLEWARE_CLASSES = (
@@ -206,9 +205,6 @@ LOGGING = {
         }
     },
 }
-
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config()
 
 
 try:
