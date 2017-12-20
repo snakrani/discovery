@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 # Generate data for the GSA PSHC discovery application, per the README instructions.
 
+SCRIPT_DIR="$(cd "$(dirname "$([ `readlink "$0"` ] && echo "`readlink "$0"`" || echo "$0")")"; pwd -P)"
+cd "$SCRIPT_DIR/.."
+
 # Generate vendor related fixtures
 
 ./manage.py dumpdata vendors.naics --indent=2 > vendors/fixtures/naics.json
