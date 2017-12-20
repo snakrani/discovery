@@ -1,5 +1,5 @@
 # Discovery: OASIS Market Research
-[![Circle CI](https://circleci.com/gh/18F/mirage.png?style=badge)](https://circleci.com/gh/18F/mirage)
+[![CircleCI](https://circleci.com/gh/PSHCDevOps/discovery/tree/master.svg?style=svg)](https://circleci.com/gh/PSHCDevOps/discovery/tree/master)
 
 Welcome to the wonderful world of procurement, a mechanism by which the government buys goods and services from the private sector. The procurement process is made up of several stages, one of the earliest being market research. Market Research is an attempt to predict what qualified bidders your solicitation for goods or services will attract. It helps acquisition personnel make decisions regarding various aspects of their particular procurement. Ideally, a solicitation should be structured so that it attracts a enough experienced bidders to be truly competitive.
 
@@ -64,7 +64,7 @@ Currently the `load_fpds` command is configured to load ten years of contract hi
 The --load_all flag forces a load of all contracts, regardless of last load date
 
 ```
- ./manage.py --id=ID  
+ ./manage.py --id=ID
  ```
 The --id parameter only loads contractors for vendors with an id greater than or equal to ID, where ID is the vendor's id in the vendor table. Contracts are loaded in order of vendor id.
 
