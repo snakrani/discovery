@@ -9,4 +9,4 @@ DATABASES = {
 }
 
 SAUCE = False
-DOMAIN_TO_TEST = 'domain.of.your.mirage.installation.gov'
+DOMAIN_TO_TEST = 'domain.of.your.discovery.installation.gov'

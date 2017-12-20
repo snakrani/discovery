@@ -63,5 +63,5 @@ mv /tmp/phantomjs-2.1.1-linux-x86_64/bin/phantomjs "$PROJ_DIR"/venv/bin/phantomj
 #run application
 "$PROJ_DIR"/manage.py runserver 0.0.0.0:8000 &
 
-celery -A mirage worker --loglevel=info --concurrency=1 &
-celery -A mirage beat --loglevel=info &
+celery -A discovery worker --loglevel=info --concurrency=1 &
+celery -A discovery beat --loglevel=info &

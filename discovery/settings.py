@@ -1,5 +1,5 @@
 """
-Django settings for mirage project.
+Django settings for discovery project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -27,7 +27,7 @@ except:
 DEBUG = False
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-    "mirage.context_processors.api_host",
+    "discovery.context_processors.api_host",
     "django.contrib.auth.context_processors.auth",
     "django.core.context_processors.debug",
     "django.core.context_processors.i18n",
@@ -39,7 +39,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 TEMPLATE_DEBUG = False
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'mirage_site/templates'),
+    os.path.join(BASE_DIR, 'discovery_site/templates'),
 
 )
 ALLOWED_HOSTS = [
@@ -65,7 +65,7 @@ INSTALLED_APPS = (
     'django_celery_results',
 
     'api',
-    'mirage_site',
+    'discovery_site',
     'vendors',
     'contract',
 )
@@ -79,9 +79,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'mirage.urls'
+ROOT_URLCONF = 'discovery.urls'
 APPEND_SLASH = True
-WSGI_APPLICATION = 'mirage.wsgi.application'
+WSGI_APPLICATION = 'discovery.wsgi.application'
 
 
 # Database
@@ -145,7 +145,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs/mirage.log'),
+            'filename': os.path.join(BASE_DIR, 'logs/discovery.log'),
             'formatter': 'verbose'
         },
         'vendor_file': {
@@ -230,7 +230,7 @@ LOGGING = {
 
 
 try:
-    from mirage.local_settings import *
+    from discovery.local_settings import *
 except:
     pass
 
@@ -258,7 +258,7 @@ SWAGGER_SETTINGS = {
         "description": markdown.markdown("""
 This API drives the [Discovery Market Research Tool](https://discovery.gsa.gov).
 It contains information on the vendors that are part of the OASIS and OASIS Small Business contracting vehicles, such as their contracting history, their elligibility for contract awards, and their small business designations.
-To learn more about the tool, please visit [Discovery](https://discovery.gsa.gov) or see the README on our [GitHub repository](https://github.com/18F/mirage).
+To learn more about the tool, please visit [Discovery](https://discovery.gsa.gov) or see the README on our [GitHub repository](https://github.com/PSHCDevOps/discovery).
 
 **Please note that the base path for this API is `https://api.data.gov/gsa/discovery/`**
 

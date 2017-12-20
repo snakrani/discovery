@@ -25,7 +25,7 @@ CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 SAUCE = False
 SAUCE_USERNAME = ''
 SAUCE_ACCESS_KEY = ''
-DOMAIN_TO_TEST = 'domain.of.your.mirage.installation.gov'
+DOMAIN_TO_TEST = 'domain.of.your.discovery.installation.gov'
 
 #The below settings turn on S3 bucket storage
 #Lines 25-26 are commented out to force the loading of static assets from the local dev server by default

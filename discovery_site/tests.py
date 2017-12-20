@@ -1,7 +1,7 @@
 from django.test import Client, TestCase
 
 class SmokeTest(TestCase):
-    """smoke tests for mirage site"""
+    """smoke tests for discovery site"""
 
     fixtures = ['naics.json', 'vendors.json', 'setasides.json', 'pools.json']
 
