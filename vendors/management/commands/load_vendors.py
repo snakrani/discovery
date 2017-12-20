@@ -56,6 +56,7 @@ class Command(BaseCommand):
 
     option_list = BaseCommand.option_list \
                   + (make_option('--pause', action='store', type=int, dest='pause', default=1, help="Number of seconds to pause before each query to the SAM API"), ) \
+                  + (make_option('--vpp', action='store', type=int, dest='vpp', default=0, help="Number of vendors to load per pool (useful for creating fixtures)"), ) \
                   + (make_option('--tries', action='store', type=int, dest='tries', default=3, help="Number of tries to query the SAM API before exiting"), )
 
 
@@ -67,11 +68,13 @@ class Command(BaseCommand):
                 v = Vendor.objects.get(duns=line[1])      
             except Vendor.DoesNotExist:
                 print("Could not find vendor: {}".format(line[1]))
+                return
 
             try:
                 sa = SetAside.objects.get(code=line[2])
             except SetAside.DoesNotExist:
                 print("Could not find setaside: {}".format(line[2]))
+                return
 
             if sa not in v.setasides.all():
                 v.setasides.add(sa)
@@ -135,6 +138,8 @@ class Command(BaseCommand):
         
         print("[ {} ] - Updating pool vendors".format(pool))
         log_memory("Starting pool [ {} ]".format(pool))
+        
+        vendors_per_pool = int(options['vpp'])
 
         try:
             pool_data = Pool.objects.get(number=pool, vehicle__iexact=vehicle)
@@ -142,6 +147,9 @@ class Command(BaseCommand):
             for line in reader:
                 new_vendor_count += self.update_vendor(line, pool_data, options)
                 pool_count += 1
+                
+                if vendors_per_pool > 0 and pool_count == vendors_per_pool:
+                    break
 
         except Pool.DoesNotExist as e:
             logger.debug("Pool {} not found for spreadsheet".format(pool))
