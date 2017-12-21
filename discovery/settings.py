@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from discovery_site.cloud import cloud_config
+
 import os
 import markdown
 import dj_database_url
@@ -16,7 +18,7 @@ import dj_database_url
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 try:
-    SECRET_KEY = os.environ['SECRET_KEY']
+    SECRET_KEY = cloud_config('SECRET_KEY', '')
 except:
     pass #it will be set by local settings
 
@@ -89,6 +91,13 @@ WSGI_APPLICATION = 'discovery.wsgi.application'
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config()
 
+CELERY_BROKER_URL = cloud_config('uri', 'redis://localhost:6379', ['redis28', 'redis32'])
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -235,9 +244,10 @@ except:
     pass
 
 
-if 'API_HOST' not in locals(): API_HOST = os.getenv('API_HOST')
-if 'API_KEY' not in locals(): API_KEY = os.getenv('API_KEY')
-if 'SAM_API_KEY' not in locals(): SAM_API_KEY = os.getenv('SAM_API_KEY')
+if 'API_HOST' not in locals(): API_HOST = cloud_config('API_HOST', '')
+if 'API_KEY' not in locals(): API_KEY = cloud_config('API_KEY', '')
+if 'SAM_API_KEY' not in locals(): SAM_API_KEY = cloud_config('SAM_API_KEY', '')
+
 
 SWAGGER_SETTINGS = {
     "doc_expansion": "full",
