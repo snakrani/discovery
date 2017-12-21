@@ -5,28 +5,6 @@ PROJ_DIR="${1:-/vagrant}"
 
 #-------------------------------------------------------------------------------
 
-function keep_alive() {
-  PID_FILE="/tmp/$1.pid"
-  
-  if [ -f "$PID_FILE" ]
-  then
-      PID=`cat "$PID_FILE"`
-      
-      if ! kill -0 $PID 2>/dev/null
-      then
-        echo "Restarting: $1"
-        "${@:2}" &
-        echo "$!" > "$PID_FILE"        
-      fi
-  else
-    echo "Creating: $1"
-    "${@:2}" &
-    echo "$!" > "$PID_FILE"    
-  fi
-}
-
-#-------------------------------------------------------------------------------
-
 #install dependencies
 apt-get update
 apt-get install -y git
@@ -44,7 +22,6 @@ then
   touch /tmp/postgresql
 fi
 echo "CREATE USER oasis WITH password 'oasis'; ALTER USER oasis CREATEDB; CREATE DATABASE oasis ENCODING 'UTF8' OWNER oasis;" | sudo -u postgres psql
-service postgresql restart
 
 #set up redis queue
 if [ ! -f /etc/init.d/redis ]
@@ -69,7 +46,6 @@ then
   cp -f utils/redis_init_script /etc/init.d/redis # listens at 6379
   update-rc.d redis defaults
 fi
-/etc/init.d/redis start
 
 #set up virtual environment
 if [ ! -d "$PROJ_DIR/venv" ]
@@ -93,9 +69,24 @@ fi
 "$PROJ_DIR/manage.py" createcachetable
 "$PROJ_DIR/manage.py" collectstatic --noinput
 
+#create admin user
+echo "from django.contrib.auth.models import User; User.objects.filter(email='admin@example.com').delete(); User.objects.create_superuser('admin', 'admin@example.com', 'admin')" | "$PROJ_DIR/manage.py" shell
+
+#load starter data
 "$PROJ_DIR/scripts/load-fixtures.sh"
 
-#run application
-keep_alive site "$PROJ_DIR/manage.py" runserver 0.0.0.0:8000
-keep_alive processor celery -A discovery worker --loglevel=info --concurrency=1
-keep_alive scheduler celery -A discovery beat --loglevel=info
+#setup background processes
+cp -f "$PROJ_DIR/scripts/bootstrap/celery-vars.sh" /etc/default/celery
+cp -f "$PROJ_DIR/scripts/bootstrap/celery-init.sh" /etc/init.d/celery
+cp -f "$PROJ_DIR/scripts/bootstrap/celerybeat-vars.sh" /etc/default/celerybeat
+cp -f "$PROJ_DIR/scripts/bootstrap/celerybeat-init.sh" /etc/init.d/celerybeat
+
+#run applications and services
+/etc/init.d/postgresql restart
+
+/etc/init.d/redis stop
+/etc/init.d/redis start
+
+"$PROJ_DIR/manage.py" runserver "0.0.0.0:8000" &
+/etc/init.d/celery restart
+/etc/init.d/celerybeat restart
