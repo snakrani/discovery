@@ -4,7 +4,7 @@ applications:
   host: disc-test
   path: .
   buildpack: https://github.com/cloudfoundry/python-buildpack
-  command: python manage.py migrate --noinput && python manage.py createcachetable && python manage.py collectstatic --noinput && waitress-serve --expose-tracebacks --port=$PORT discovery.wsgi:application
+  command: scripts/init_server.sh && waitress-serve --expose-tracebacks --port=$PORT discovery.wsgi:application
   instances: 1
   memory: 128M
   disk_quota: 1G
