@@ -18,7 +18,7 @@ This project uses [Django](https://www.djangoproject.com/), a Python framework. 
  * Creating a postgresql database and storing the settings in a ```local_settings.py``` file, a sibling of ```settings.py```
  * Run ```manage.py migrate``` to set up the database and ```manage.py createcachetable``` to set up caching
 
- * Loading a [SQL dump](https://s3.amazonaws.com/mirage-gsa-gov/discovery.sql.gz) to get some data into the project
+ * Loading a [SQL dump](https://s3.amazonaws.com/discovery-gsa-gov/discovery.sql.gz) to get some data into the project
  * Run `manage.py runserver` to start the server. Optionally specify a host and port to serve on. For example `0.0.0.0:8888`
 
 ## Requirements
@@ -29,7 +29,7 @@ This project supports Python 2.7+. However for one package, there are different 
 
 The project comes with everything you need to get started, including fixtures for some static information, and management commands to load the rest of the data. The OASIS vehicles are broken out into categories or pools, which are enumerated in a fixture. The pools are defined by groups of [NAICS codes](http://www.naics.com/sic-codes-industry-drilldown/). Vendors in the OASIS SB vehicle may also have certain setasides, such as women owned, service disabled veteran owned, etc. These setaside codes are also included in their own fixture. All of these fixtures can be found in `vendors/fixtures/`.
 
-You have to options for getting the data. You can load the [SQL dump provided above](https://s3.amazonaws.com/mirage-gsa-gov/discovery.sql.gz) and get everything at once, or you can load the data manually.
+You have to options for getting the data. You can load the [SQL dump provided above](https://s3.amazonaws.com/discovery-gsa-gov/discovery.sql.gz) and get everything at once, or you can load the data manually.
 To load the data manually, load each of the fixtures inside the `/vendor/fixtures/` directory. You can load these using the `loaddata` manage command like so:
 
 `manage.py loaddata vendor/fixtures/naics.json`

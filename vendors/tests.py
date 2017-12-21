@@ -44,4 +44,4 @@ class VendorViewTest(TestCase):
         context = view.get_context_data(vendor_duns='805875718')
         self.assertTrue(context['has_capability_statement'])
         self.assertEqual(context['capability_statement_url'],
-                         'mirage_site/capability_statements/805875718.pdf')
+                         'discovery_site/capability_statements/805875718.pdf')

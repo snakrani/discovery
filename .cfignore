@@ -7,7 +7,7 @@ venv
 **.log
 logs/*.log
 .vagrant/
-mirage_venv/
+venv/
 src/
 mvenv/
 .coverage

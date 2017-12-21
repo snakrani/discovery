@@ -56,7 +56,7 @@ jobs:
       - run:
           name: Set CircleCI configuration
           command: |
-            cp mirage/local_settings.circle.py mirage/local_settings.py
+            cp discovery/local_settings.circle.py discovery/local_settings.py
 
       - run:
           name: Run tests

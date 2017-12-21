@@ -6,7 +6,7 @@ from django.core.management.base import BaseCommand, CommandError
 from django.utils import timezone
 
 from vendors.models import Vendor, Pool, SetAside, SamLoad
-from mirage_site.utils import csv_memory
+from discovery_site.utils import csv_memory
 
 import os
 import sys

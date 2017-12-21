@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 # Load data for the GSA PSHC discovery application, per the README instructions.
 
+SCRIPT_DIR="$(cd "$(dirname "$([ `readlink "$0"` ] && echo "`readlink "$0"`" || echo "$0")")"; pwd -P)"
+cd "$SCRIPT_DIR/.."
+
 # Load vendor related fixtures
 
 ./manage.py loaddata vendors/fixtures/naics.json

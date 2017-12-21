@@ -9,7 +9,7 @@ from pyfpds import Contracts
 from vendors.models import Vendor
 from contract.models import Contract, FPDSLoad
 from contract import catch_key_error
-from mirage_site.utils import csv_memory
+from discovery_site.utils import csv_memory
 
 import os
 import sys

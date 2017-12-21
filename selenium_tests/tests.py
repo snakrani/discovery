@@ -232,17 +232,17 @@ class FunctionalTests(LiveServerTestCase):
         #check OASIS program home link text and href
         self.assertEqual(driver.find_element_by_link_text("OASIS Program Home").get_attribute("href"), "http://www.gsa.gov/oasis")
         #check GitHub link text and href
-        self.assertEqual(driver.find_element_by_link_text("Check out our code on GitHub").get_attribute("href"), "https://github.com/18F/mirage")
+        self.assertEqual(driver.find_element_by_link_text("Check out our code on GitHub").get_attribute("href"), "https://github.com/PSHCDevOps/discovery")
         #load search results
         #check OASIS program home link text and href
         self.assertEqual(driver.find_element_by_link_text("OASIS Program Home").get_attribute("href"), "http://www.gsa.gov/oasis")
         #check GitHub link text and href
-        self.assertEqual(driver.find_element_by_link_text("Check out our code on GitHub").get_attribute("href"), "https://github.com/18F/mirage")
+        self.assertEqual(driver.find_element_by_link_text("Check out our code on GitHub").get_attribute("href"), "https://github.com/PSHCDevOps/discovery")
         #load vendor detail page
         #check OASIS program home link text and href
         self.assertEqual(driver.find_element_by_link_text("OASIS Program Home").get_attribute("href"), "http://www.gsa.gov/oasis")
         #check GitHub link text and href
-        self.assertEqual(driver.find_element_by_link_text("Check out our code on GitHub").get_attribute("href"), "https://github.com/18F/mirage")
+        self.assertEqual(driver.find_element_by_link_text("Check out our code on GitHub").get_attribute("href"), "https://github.com/PSHCDevOps/discovery")
 
     def test_vehicle_naics_filter_select_order_ensured(self):
         driver = self.driver

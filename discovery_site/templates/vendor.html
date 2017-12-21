@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block css %}
-    <link rel="stylesheet" href="{% static 'mirage_site/css/simplePagination.css' %}">
+    <link rel="stylesheet" href="{% static 'discovery_site/css/simplePagination.css' %}">
 {% endblock %}
 
 {% block header %}
@@ -84,7 +84,7 @@
             <p class="lh"><span class="admin_label"></span><span class="vendor_poc_phone admin_data2"></span></p>
             <p class="lh"><span class="admin_label"></span><span class="vendor_poc_email admin_data2"></span></p>
         </div><!-- end vendor_admin_c3 -->
-        <div id="sb_badge"><img src="{% static "mirage_site/images/sb_badge.png" %}"></div>
+        <div id="sb_badge"><img src="{% static "discovery_site/images/sb_badge.png" %}"></div>
     </div><!-- end vendor_admin_container -->
 
 
@@ -131,7 +131,7 @@
         <div id="no_matching_contracts">There are no matching contracts to display</div>
 
         <div id="viewing_contracts">
-            viewing 
+            viewing
             <span id="contracts_current" class="viewing_contracts_current"></span>
             of
             <span id="contracts_total" class="viewing_contracts_total"></span>
@@ -143,9 +143,9 @@
 
 </div><!-- end vendor_main_container -->
 
-<script src="{% static 'mirage_site/js/layout-manager-vendor.js' %}"></script>
-<script src="{% static 'mirage_site/js/requests-manager-vendor.js' %}"></script>
-<script src="{% static 'mirage_site/js/jquery.simplePagination.js' %}"></script>
+<script src="{% static 'discovery_site/js/layout-manager-vendor.js' %}"></script>
+<script src="{% static 'discovery_site/js/requests-manager-vendor.js' %}"></script>
+<script src="{% static 'discovery_site/js/jquery.simplePagination.js' %}"></script>
 
 
 {% endblock body %}
