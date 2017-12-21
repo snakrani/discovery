@@ -27,7 +27,7 @@ applications:
     - discovery-config
     - discovery-db
     - discovery-redis
-- name: discovery-celery-beat
+- name: discovery-celerybeat
   path: .
   no-route: true
   health-check-type: process
