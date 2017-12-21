@@ -5,5 +5,9 @@ from django.core.management import call_command
 
 
 @shared_task
-def update_vendors():
-    call_command('load_vendors')
+def update_vendors(vpp=0, tries=3, pause=1):
+    call_command('load_vendors',
+                 vpp=vpp,
+                 tries=tries,
+                 pause=pause
+    )
