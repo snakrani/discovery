@@ -1,11 +1,43 @@
 ---
-# all applications use these settings and services
-memory: 1G
-instances: 1
 applications:
 - name: discovery-prod
+  host: discovery
   path: .
-  timeout: 180
   buildpack: https://github.com/cloudfoundry/python-buildpack
-services:
-  - discovery-db
+  command: scripts/init_server.sh && waitress-serve --expose-tracebacks --port=$PORT discovery.wsgi:application
+  instances: 1
+  memory: 128M
+  disk_quota: 1G
+  timeout: 180
+  services:
+    - discovery-config
+    - discovery-db
+    - discovery-redis
+- name: discovery-celery
+  path: .
+  no-route: true
+  health-check-type: process
+  buildpack: https://github.com/cloudfoundry/python-buildpack
+  command: celery -A discovery worker --loglevel=info --concurrency=1
+  instances: 1
+  memory: 832M
+  disk_quota: 1G
+  timeout: 180
+  services:
+    - discovery-config
+    - discovery-db
+    - discovery-redis
+- name: discovery-celerybeat
+  path: .
+  no-route: true
+  health-check-type: process
+  buildpack: https://github.com/cloudfoundry/python-buildpack
+  command: celery -A discovery beat --loglevel=info
+  instances: 1
+  memory: 64M
+  disk_quota: 1G
+  timeout: 180
+  services:
+    - discovery-config
+    - discovery-db
+    - discovery-redis
