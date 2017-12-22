@@ -8,6 +8,7 @@ venv
 logs/*.log
 logs/*.csv
 .vagrant/
+vagrant-config.yml
 venv/
 src/
 mvenv/
