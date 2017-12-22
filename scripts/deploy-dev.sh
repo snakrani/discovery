@@ -15,15 +15,15 @@ cf_login() {
 }
 
 check_app_env() {
-  cf check-manifest discovery-test -f manifest-develop.yml
-  #cf check-manifest discovery-celerybeat -f manifest-develop.yml
-  #cf check-manifest discovery-celery -f manifest-develop.yml
+  cf check-manifest discovery-dev -f manifest-develop.yml
+  cf check-manifest discovery-celerybeat -f manifest-develop.yml
+  cf check-manifest discovery-celery -f manifest-develop.yml
 }
 
 deploy_app() {
-  cf zero-downtime-push discovery-test -f manifest-develop.yml
-  #cf push discovery-celerybeat -f manifest-develop.yml
-  #cf push discovery-celery -f manifest-develop.yml
+  cf zero-downtime-push discovery-dev -f manifest-develop.yml
+  cf push discovery-celerybeat -f manifest-develop.yml
+  cf push discovery-celery -f manifest-develop.yml
 }
 
 # Check and deploy
