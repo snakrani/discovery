@@ -18,5 +18,5 @@ echo "> Ensuring Django cache table"
 echo "> Collecting Django static files"
 ./manage.py collectstatic --noinput > /dev/null
 
-echo "> Loading basic Django category information"
+echo "> Loading basic category information"
 ./manage.py load_categories > /dev/null
