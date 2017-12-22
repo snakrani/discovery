@@ -79,6 +79,27 @@ jobs:
           command: |
             bash scripts/deploy-dev.sh
 
+  deploy-prod:
+    docker:
+      - image: circleci/python:2.7
+        environment:
+          LOGIN_URL: 'https://api.fr.cloud.gov'
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - run:
+          name: Setup CloudFoundry client CLI
+          command: |
+            bash scripts/setup-cf.sh
+
+      - run:
+          name: Deploy production applications
+          command: |
+            bash scripts/deploy-prod.sh
+
 workflows:
   version: 2
   test-and-deploy:
@@ -89,4 +110,10 @@ workflows:
             - test
           filters:
             branches:
-              only: cloud
+              only: develop
+      - deploy-prod:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
