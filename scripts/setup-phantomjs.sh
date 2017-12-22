@@ -9,12 +9,15 @@ if [ ! -f venv/bin/phantomjs ]
 then
   if [ ! -f /tmp/apt-update-complete ]
   then
-    sudo apt-get update
+    echo "> Updating OS package repositories"
+    sudo apt-get update > /dev/null
     touch /tmp/apt-update-complete 
   fi
-  sudo apt-get install -y fontconfig wget
+  echo "> Installing FontConfig library"
+  sudo apt-get install -y fontconfig > /dev/null
   
-  wget -O /tmp/phantomjs.tar.bz2 https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2
+  echo "> Downloading and installing PhantomJS"
+  wget --quiet -O /tmp/phantomjs.tar.bz2 https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2
   tar -xjf /tmp/phantomjs.tar.bz2 -C /tmp
   mv /tmp/phantomjs-2.1.1-linux-x86_64/bin/phantomjs venv/bin/phantomjs
 fi

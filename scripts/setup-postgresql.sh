@@ -9,18 +9,24 @@ if [ ! -f /tmp/postgresql ]
 then
   if [ ! -f /tmp/apt-update-complete ]
   then
-    sudo apt-get update
+    echo "> Updating OS package repositories"
+    sudo apt-get update > /dev/null
     touch /tmp/apt-update-complete 
   fi
-  sudo apt-get install -y postgresql-9.3 pgadmin3
   
+  echo "> Installing PostgreSQL 9.3 and CLI utilities"
+  sudo apt-get install -y postgresql-9.3 pgadmin3 > /dev/null 2>&1
+  
+  echo "> Modifying PostgreSQL configurations"
   sudo sed -i 's/^#listen_addresses.*/listen_addresses = '"'"'*'"'"'/' /etc/postgresql/9.3/main/postgresql.conf
   grep -q "0.0.0.0/0" /etc/postgresql/9.3/main/pg_hba.conf || echo "host  all  all  0.0.0.0/0  md5" | sudo tee --append /etc/postgresql/9.3/main/pg_hba.conf > /dev/null
   touch /tmp/postgresql
 fi
 
 #create oasis user and database and grant ability to create test databases
-echo "CREATE USER oasis WITH password 'oasis'; ALTER USER oasis CREATEDB; CREATE DATABASE oasis ENCODING 'UTF8' OWNER oasis;" | sudo -u postgres psql
+echo "> Ensuring oasis database and user exist"
+echo "CREATE USER oasis WITH password 'oasis'; ALTER USER oasis CREATEDB; CREATE DATABASE oasis ENCODING 'UTF8' OWNER oasis;" | sudo -u postgres psql > /dev/null 2>&1
 
 #start or restart PostgreSQL service
-sudo /etc/init.d/postgresql restart
+echo "> Starting the PostgreSQL database"
+sudo /etc/init.d/postgresql restart > /dev/null

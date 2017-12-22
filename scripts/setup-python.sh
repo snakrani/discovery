@@ -9,22 +9,26 @@ if ! which python >/dev/null
 then
   if [ ! -f /tmp/apt-update-complete ]
   then
-    sudo apt-get update
+    echo "> Updating OS package repositories"
+    sudo apt-get update > /dev/null
     touch /tmp/apt-update-complete 
   fi
   
-  sudo apt-get install -y python-pip
-  sudo apt-get install -y python-virtualenv
-  sudo apt-get install -y libpq-dev python-dev
+  echo "> Installing Python and CLI utilities"
+  sudo apt-get install -y python-pip > /dev/null
+  sudo apt-get install -y python-virtualenv > /dev/null
+  sudo apt-get install -y libpq-dev python-dev > /dev/null
 fi
 
 #create virtual environment if it does not exist and activate
 if [ ! -d venv ]
 then
-  virtualenv venv
+  echo "> Creating a Python project virtual environment"
+  virtualenv venv > /dev/null
 fi
 source venv/bin/activate
 
 #install Python application requirements
-pip install -r requirements.txt
-pip install -r requirements-test.txt
+echo "> Installing Python project requirements"
+pip install -r requirements.txt > /dev/null
+pip install -r requirements-test.txt > /dev/null

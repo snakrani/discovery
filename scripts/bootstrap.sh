@@ -1,17 +1,25 @@
 #!/usr/bin/env bash
 #-------------------------------------------------------------------------------
 
-PROJ_DIR="${1:-/vagrant}"
+PROJ_DIR="${1}" # Required!!
+ADMIN_USER="${2:-admin}"
+ADMIN_PASSWORD="${3:-admin}"
+ADMIN_EMAIL="${4:-admin@example.com}"
 
 #-------------------------------------------------------------------------------
 
 #install basic dependencies
 if [ ! -f /tmp/apt-update-complete ]
 then
-  sudo apt-get update
+  echo "> Updating OS package repositories"
+  sudo apt-get update > /dev/null
   touch /tmp/apt-update-complete 
 fi
-sudo apt-get install -y git
+if ! which git > /dev/null
+then
+  echo "> Installing Git version control"
+  sudo apt-get install -y git > /dev/null 2>&1
+fi
 
 #install CloudFoundry CLI
 "$PROJ_DIR/scripts/setup-cf.sh"
@@ -27,27 +35,27 @@ sudo apt-get install -y git
 
 #set up Python
 "$PROJ_DIR/scripts/setup-python.sh"
-source "$PROJ_DIR/venv/bin/activate"
 
 #set up Django application
-"$PROJ_DIR/manage.py" migrate --noinput
-"$PROJ_DIR/manage.py" createcachetable
-"$PROJ_DIR/manage.py" collectstatic --noinput
-
-#load starter data
-"$PROJ_DIR/scripts/load-fixtures.sh"
+"$PROJ_DIR/scripts/init-server.sh"
 
 #create admin user
-"$PROJ_DIR/scripts/create-admin.sh" admin admin
+"$PROJ_DIR/scripts/create-admin.sh" "$ADMIN_USER" "$ADMIN_PASSWORD" "$ADMIN_EMAIL"
 
 #setup background processes
+echo "> Copying Celery service configurations and scripts"
 sudo cp -f "$PROJ_DIR/scripts/celery/celery-vars.sh" /etc/default/celery
 sudo cp -f "$PROJ_DIR/scripts/celery/celery-init.sh" /etc/init.d/celery
 sudo cp -f "$PROJ_DIR/scripts/celery/celerybeat-vars.sh" /etc/default/celerybeat
 sudo cp -f "$PROJ_DIR/scripts/celery/celerybeat-init.sh" /etc/init.d/celerybeat
 
 #run applications and services
+echo "> Starting the Django web application"
+source "$PROJ_DIR/venv/bin/activate"
 "$PROJ_DIR/manage.py" runserver "0.0.0.0:8000" &
 
-sudo /etc/init.d/celery restart
-sudo /etc/init.d/celerybeat restart
+echo "> Starting the Celery worker"
+sudo /etc/init.d/celery restart > /dev/null
+  
+echo "> Starting the Celery scheduler"
+sudo /etc/init.d/celerybeat restart > /dev/null

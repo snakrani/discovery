@@ -65,4 +65,6 @@ fi
 
 #create admin user
 source venv/bin/activate
-echo "from django.contrib.auth.models import User; User.objects.filter(email='$ADMIN_EMAIL').delete(); User.objects.create_superuser('$ADMIN_USERNAME', '$ADMIN_EMAIL', '$ADMIN_PASSWORD')" | python manage.py shell
+
+echo "> Creating admin user $ADMIN_USERNAME ( $ADMIN_EMAIL )"
+echo "from django.contrib.auth.models import User; User.objects.filter(email='$ADMIN_EMAIL').delete(); User.objects.create_superuser('$ADMIN_USERNAME', '$ADMIN_EMAIL', '$ADMIN_PASSWORD')" | python manage.py shell > /dev/null 2>&1
