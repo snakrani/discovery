@@ -80,6 +80,7 @@ jobs:
             bash scripts/deploy-dev.sh
 
 workflows:
+  version: 2
   test-and-deploy:
     jobs:
       - test
