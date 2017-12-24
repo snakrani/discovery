@@ -13,6 +13,5 @@ memory_size: 2048
 web_port: 8080
 db_port: 5432
 queue_port: 6379
-django_admin: 'admin'
-django_admin_pw: 'admin'
-django_admin_email: 'admin@example.com'
+copy_ssh: false
+copy_gitconfig: true
