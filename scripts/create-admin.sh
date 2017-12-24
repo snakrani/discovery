@@ -2,9 +2,10 @@
 # Create a Django admin user
 
 SCRIPT_USAGE="
- Usage: <project-dir>/scripts/create-admin.sh [ -h ] <username> <password> [ <email-address> ]
- 
-   -h | --help  |  Display this help message
+ Usage: <project-dir>/scripts/create-admin.sh [ -hf ] <username> <password> [ <email-address> ]
+
+   -f | --force  |  Force the recreation of the admin user with the new information 
+   -h | --help   |  Display this help message
 "
 
 SCRIPT_DIR="$(cd "$(dirname "$([ `readlink "$0"` ] && echo "`readlink "$0"`" || echo "$0")")"; pwd -P)"
@@ -19,6 +20,7 @@ DEFAULT_ADMIN_EMAIL="admin@example.com"
 # Option / Argument parsing
 
 SCRIPT_ARGS=()
+FORCE_CREATE=''
 
 while [[ $# > 0 ]]
 do
@@ -28,6 +30,9 @@ do
     -h|--help)
       echo "$SCRIPT_USAGE"
       exit 0
+    ;;
+    -f|--force)
+      FORCE_CREATE='true'
     ;;
     *)
       # argument
@@ -64,7 +69,17 @@ fi
 # Execution
 
 #create admin user
-source venv/bin/activate
+if [ -d /venv ]
+then
+  alias python="/venv/bin/python"
+  source /venv/bin/activate
+fi
 
-echo "> Ensuring admin user: $ADMIN_USERNAME ( $ADMIN_EMAIL )"
-echo "from django.contrib.auth.models import User; User.objects.filter(email='$ADMIN_EMAIL').delete(); User.objects.create_superuser('$ADMIN_USERNAME', '$ADMIN_EMAIL', '$ADMIN_PASSWORD')" | python manage.py shell > /dev/null 2>&1
+if [ ! -z "$FORCE_CREATE" ]
+then
+  echo "> Recreating admin user: $ADMIN_USERNAME ( $ADMIN_EMAIL )"
+  echo "from django.contrib.auth.models import User; User.objects.filter(username='$ADMIN_USERNAME').delete(); User.objects.create_superuser('$ADMIN_USERNAME', '$ADMIN_EMAIL', '$ADMIN_PASSWORD')" | python manage.py shell
+else
+  echo "> Ensuring admin user: $ADMIN_USERNAME ( $ADMIN_EMAIL )"
+  echo "from django.contrib.auth.models import User; User.objects.filter(username='$ADMIN_USERNAME').first() or User.objects.create_superuser('$ADMIN_USERNAME', '$ADMIN_EMAIL', '$ADMIN_PASSWORD')" | python manage.py shell
+fi
