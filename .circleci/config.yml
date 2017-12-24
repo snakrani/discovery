@@ -26,7 +26,7 @@ jobs:
       - run:
           name: Install Python dependencies
           command: |
-            bash scripts/setup-python.sh /dev/stderr
+            bash -c "sudo scripts/setup-python.sh /dev/stderr"
       - save_cache:
           paths:
             - /venv
@@ -37,7 +37,7 @@ jobs:
       - run:
           name: Install PhantomJS
           command: |
-            bash scripts/setup-phantomjs.sh /dev/stderr
+            bash -c "sudo scripts/setup-phantomjs.sh /dev/stderr"
       - save_cache:
           key: 2-phantomjs-2-1-1
           paths:
