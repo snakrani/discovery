@@ -29,7 +29,7 @@ jobs:
             bash scripts/setup-python.sh
       - save_cache:
           paths:
-            - ./venv
+            - /venv
           key: 3-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
 
       - restore_cache:
@@ -41,7 +41,7 @@ jobs:
       - save_cache:
           key: 2-phantomjs-2-1-1
           paths:
-            - venv/bin/phantomjs
+            - /usr/local/bin/phantomjs
 
       - run:
           name: Set CircleCI configuration
@@ -51,8 +51,8 @@ jobs:
       - run:
           name: Run tests
           command: |
-            source venv/bin/activate
-            python manage.py test api vendors contract
+            source /venv/bin/activate
+            /venv/bin/python manage.py test api vendors contract
 
       - store_artifacts:
           path: logs
