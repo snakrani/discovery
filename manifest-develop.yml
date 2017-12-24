@@ -4,7 +4,7 @@ applications:
   host: discovery-dev
   path: .
   buildpack: https://github.com/cloudfoundry/python-buildpack
-  command: scripts/init-server.sh && waitress-serve --expose-tracebacks --port=$PORT discovery.wsgi:application
+  command: scripts/init-server.sh /dev/stderr && waitress-serve --expose-tracebacks --port=$PORT discovery.wsgi:application
   instances: 1
   memory: 128M
   disk_quota: 1G
