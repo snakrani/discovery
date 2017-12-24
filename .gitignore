@@ -17,3 +17,6 @@ static/
 .project
 .pydevproject
 .settings/
+docker/django-env.vars
+celerybeat.pid
+
