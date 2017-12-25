@@ -28,5 +28,6 @@ deploy_app() {
 
 # Check and deploy
 cf_login
+cf help
 check_app_env
 deploy_app
