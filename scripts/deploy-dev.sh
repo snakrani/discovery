@@ -11,6 +11,7 @@ set -e # Bomb if anything fails
 # > CloudFoundry (cloud.gov) with Autopilot and Antifreeze plugins
 
 cf_init_plugins() {
+  # In case we are running as a different user as the user who installed CF
   cf install-plugin -f /usr/local/bin/cf-autopilot
   cf install-plugin -f /usr/local/bin/cf-antifreeze
 }
@@ -31,9 +32,10 @@ deploy_app() {
   cf push discovery-celery -f manifest-develop.yml
 }
 
-# Check and deploy
+# Initialize
 cf_init_plugins
 cf_login
-cf plugins
+
+# Check and deploy
 check_app_env
 deploy_app
