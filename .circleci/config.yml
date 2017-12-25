@@ -72,7 +72,7 @@ jobs:
       - run:
           name: Setup CloudFoundry client CLI
           command: |
-            bash scripts/setup-cf.sh
+            bash scripts/setup-cf.sh /dev/stderr
 
       - run:
           name: Deploy development applications
@@ -93,7 +93,7 @@ jobs:
       - run:
           name: Setup CloudFoundry client CLI
           command: |
-            bash scripts/setup-cf.sh
+            bash scripts/setup-cf.sh /dev/stderr
 
       - run:
           name: Deploy production applications
