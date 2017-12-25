@@ -47,4 +47,4 @@ pip install -r /venv/requirements.txt >>"$LOG_FILE" 2>&1
 pip install -r /venv/requirements-test.txt >>"$LOG_FILE" 2>&1
 
 #remove all development packages
-apt-get purge -y --auto-remove gcc python-dev git >>"$LOG_FILE" 2>&1
+apt-get purge -y --auto-remove gcc python-dev >>"$LOG_FILE" 2>&1
