@@ -19,10 +19,7 @@ jobs:
 
     steps:
       - restore_cache:
-          keys:
-            - v1-source-{{ .Branch }}-{{ .Revision }}
-            - v1-source-{{ .Branch }}-
-            - v1-source-
+          key: v1-source-{{ .Branch }}-{{ .Revision }}
       - checkout
       - save_cache:
           key: v1-source-{{ .Branch }}-{{ .Revision }}
@@ -76,8 +73,7 @@ jobs:
 
     steps:
       - restore_cache:
-          keys:
-            - v1-source-{{ .Branch }}-{{ .Revision }}
+          key: v1-source-{{ .Branch }}-{{ .Revision }}
       - checkout
       - save_cache:
           key: v1-source-{{ .Branch }}-{{ .Revision }}
@@ -104,8 +100,7 @@ jobs:
 
     steps:
       - restore_cache:
-          keys:
-            - v1-source-{{ .Branch }}-{{ .Revision }}
+          key: v1-source-{{ .Branch }}-{{ .Revision }}
       - checkout
       - save_cache:
           key: v1-source-{{ .Branch }}-{{ .Revision }}
