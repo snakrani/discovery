@@ -2,6 +2,8 @@
 #
 # Check https://circleci.com/docs/2.0/language-python/ for more details
 #
+# TODO: Get rid of all this CircleCI caching in favor of extended Docker images
+#
 version: 2
 jobs:
   test:
@@ -16,21 +18,27 @@ jobs:
     working_directory: ~/repo
 
     steps:
-      - checkout
-
       - restore_cache:
           keys:
-            - v4-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
-            - v4-python-dep-{{ checksum "requirements.txt" }}
-            - v4-python-dep-
+            - v1-source-{{ .Branch }}-{{ .Revision }}
+            - v1-source-{{ .Branch }}-
+            - v1-source-
+      - checkout
+      - save_cache:
+          key: v1-source-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - ".git"
+
+      - restore_cache:
+          key: v4-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
       - run:
           name: Install Python dependencies
           command: |
             bash -c "sudo scripts/setup-python.sh /dev/stderr"
       - save_cache:
+          key: v4-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
           paths:
             - /venv
-          key: v4-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
 
       - restore_cache:
           key: v3-phantomjs-2-1-1
@@ -67,7 +75,14 @@ jobs:
     working_directory: ~/repo
 
     steps:
+      - restore_cache:
+          keys:
+            - v1-source-{{ .Branch }}-{{ .Revision }}
       - checkout
+      - save_cache:
+          key: v1-source-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - ".git"
 
       - run:
           name: Setup CloudFoundry client CLI
@@ -88,7 +103,14 @@ jobs:
     working_directory: ~/repo
 
     steps:
+      - restore_cache:
+          keys:
+            - v1-source-{{ .Branch }}-{{ .Revision }}
       - checkout
+      - save_cache:
+          key: v1-source-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - ".git"
 
       - run:
           name: Setup CloudFoundry client CLI
