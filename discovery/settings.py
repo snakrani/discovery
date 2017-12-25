@@ -1,53 +1,56 @@
 """
-Django settings for discovery project.
+Django settings for the Discovery project.
 
 For more information on this file, see
-https://docs.djangoproject.com/en/1.6/topics/settings/
+https://docs.djangoproject.com/en/1.8/topics/settings/
 
 For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.6/ref/settings/
+https://docs.djangoproject.com/en/1.8/ref/settings/
 """
+from discovery_site.cloud import cloud_config
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import markdown
 import dj_database_url
 
+#
+# General project variables
+#
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-try:
-    SECRET_KEY = os.environ['SECRET_KEY']
-except:
-    pass #it will be set by local settings
+# Django specific
+#------------------------------
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
+SECRET_KEY = cloud_config('SECRET_KEY', '')
+APPEND_SLASH = True
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-    "discovery.context_processors.api_host",
-    "django.contrib.auth.context_processors.auth",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.media",
-    'django.core.context_processors.request',
-    "django.core.context_processors.static",
-    "django.core.context_processors.tz",
-    "django.contrib.messages.context_processors.messages"
-)
 TEMPLATE_DEBUG = False
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'discovery_site/templates'),
 
-)
+DB_MUTEX_TTL_SECONDS = 86400 # 1 day (24 hours)
+
+# Application specific
+#------------------------------
+
+API_HOST = cloud_config('API_HOST', '')
+API_KEY = cloud_config('API_KEY', '')
+
+SAM_API_URL = "https://api.data.gov/sam/v1/registrations/"
+SAM_API_KEY = cloud_config('SAM_API_KEY', '')
+
+VEHICLES = ('oasissb', 'oasis')
+
+
+#
+# Application definitiona and scope
+#
+WSGI_APPLICATION = 'discovery.wsgi.application'
+ROOT_URLCONF = 'discovery.urls'
+
 ALLOWED_HOSTS = [
     '*',
 ]
-
-
-# Application definition
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -57,6 +60,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'db_mutex',
     'storages',
     'selenium_tests',
     'rest_framework',
@@ -69,7 +73,6 @@ INSTALLED_APPS = (
     'vendors',
     'contract',
 )
-
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -79,45 +82,65 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'discovery.urls'
-APPEND_SLASH = True
-WSGI_APPLICATION = 'discovery.wsgi.application'
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "discovery.context_processors.api_host",
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    'django.core.context_processors.request',
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages"
+)
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'discovery_site/templates'),
+)
 
 
-# Database
-# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
+#
+# Time and internationalization
+#
+TIME_ZONE = 'UTC'
+USE_TZ = True
+
+LANGUAGE_CODE = 'en-us'
+USE_I18N = True
+USE_L10N = True
+
+
+#
+# Database connections
+#
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config()
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/1.6/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
-
+#
+# Static file handling
+#
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+#The below settings turn on S3 bucket storage
+#Lines below are commented out to force the loading of static assets from the local dev server by default
+#uncomment them and fill in the extra AWS settings to hook it up to an S3 bucket
+
+#DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+#STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 #STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 #STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
+AWS_QUERYSTRING_AUTH = False
+AWS_ACCESS_KEY_ID = cloud_config('AWS_ACCESS_KEY_ID', '')
 
-#project specific
-VEHICLES = ('oasissb', 'oasis')
+AWS_SECRET_ACCESS_KEY = cloud_config('AWS_SECRET_ACCESS_KEY', '')
+AWS_STORAGE_BUCKET_NAME = cloud_config('AWS_STORAGE_BUCKET_NAME', '')
 
-SAM_API_URL = "https://api.data.gov/sam/v1/registrations/"
 
+#
+# Application logging
+#
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
@@ -229,16 +252,30 @@ LOGGING = {
 }
 
 
-try:
-    from discovery.local_settings import *
-except:
-    pass
+#
+# Celery processing and scheduling
+#
+CELERY_BROKER_URL = cloud_config('uri', 'redis://localhost:6379', ['redis28', 'redis32'])
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
 
-if 'API_HOST' not in locals(): API_HOST = os.getenv('API_HOST')
-if 'API_KEY' not in locals(): API_KEY = os.getenv('API_KEY')
-if 'SAM_API_KEY' not in locals(): SAM_API_KEY = os.getenv('SAM_API_KEY')
+#
+# Saucelabs testing
+#
+SAUCE = False
+SAUCE_USERNAME = cloud_config('SAUCE_USERNAME', '')
+SAUCE_ACCESS_KEY = cloud_config('SAUCE_ACCESS_KEY', '')
+DOMAIN_TO_TEST = cloud_config('SAUCE_DOMAIN', 'domain.of.your.discovery.installation.gov')
 
+
+#
+#  Swagger documentation configuration
+#
 SWAGGER_SETTINGS = {
     "doc_expansion": "full",
     "exclude_namespaces": [], # List URL namespaces to ignore
@@ -268,3 +305,10 @@ It must be passed in the `api_key` parameter with each request.
     },
     "template_path": "api_theme/index.html",
 }
+
+
+# Optionally override any configurations above
+try:
+    from discovery.local_settings import *
+except:
+    pass
