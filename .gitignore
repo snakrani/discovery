@@ -8,6 +8,7 @@ venv
 logs/*.log
 logs/*.csv
 .vagrant/
+vagrant-config.yml
 venv/
 src/
 mvenv/
@@ -16,3 +17,6 @@ static/
 .project
 .pydevproject
 .settings/
+docker/django-env.vars
+celerybeat.pid
+

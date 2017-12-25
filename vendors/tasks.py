@@ -8,6 +8,22 @@ import sys
 
 
 @shared_task
+def update_categories():
+    old_stdout = sys.stdout
+    sys.stdout = mystdout = StringIO()
+    
+    call_command('load_categories')
+    
+    sys.stdout = old_stdout
+        
+    return { 
+        "task": "update_categories",
+        "params": {},
+        "message": mystdout.getvalue() 
+    }
+
+
+@shared_task
 def update_vendors(vpp=0, tries=3, pause=1):
     old_stdout = sys.stdout
     sys.stdout = mystdout = StringIO()
