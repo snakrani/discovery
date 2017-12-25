@@ -77,7 +77,7 @@ jobs:
       - run:
           name: Deploy development applications
           command: |
-            bash -c "scripts/deploy-dev.sh"
+            bash -c "sudo scripts/deploy-dev.sh"
 
   deploy-prod:
     docker:
@@ -98,7 +98,7 @@ jobs:
       - run:
           name: Deploy production applications
           command: |
-            bash -c "scripts/deploy-prod.sh"
+            bash -c "sudo scripts/deploy-prod.sh"
 
 workflows:
   version: 2
