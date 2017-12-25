@@ -10,6 +10,11 @@ set -e # Bomb if anything fails
 #
 # > CloudFoundry (cloud.gov) with Autopilot and Antifreeze plugins
 
+cf_init_plugins() {
+  cf install-plugin -f /usr/local/bin/cf-autopilot
+  cf install-plugin -f /usr/local/bin/cf-antifreeze
+}
+
 cf_login() {
   cf login -a "$LOGIN_URL" -u "$DEV_SERVICE_ACCOUNT" -p "$DEV_SERVICE_ACCOUNT_PASSWORD" -o "$DEV_SERVICE_ORG" -s "$DEV_SERVICE_SPACE"  
 }
@@ -27,8 +32,8 @@ deploy_app() {
 }
 
 # Check and deploy
+cf_init_plugins
 cf_login
-ls -al /usr/local/bin
 cf plugins
 check_app_env
 deploy_app
