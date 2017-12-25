@@ -210,6 +210,7 @@ class Command(BaseCommand):
         
         except Exception as e:
             display_error(e)
+            raise
         
         print("New vendors: {}".format(new_vendor_count))
         print("-------END LOAD_VENDORS PROCESS-------")
