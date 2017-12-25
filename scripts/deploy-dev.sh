@@ -28,6 +28,7 @@ deploy_app() {
 
 # Check and deploy
 cf_login
-cf help
+ls -al /usr/local/bin
+cf plugins
 check_app_env
 deploy_app
