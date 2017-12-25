@@ -10,6 +10,9 @@ then
   rm -f "$LOG_FILE"
 fi
 
+PLUGIN_BIN_DIR="${1:-/usr/local/bin}"
+
+
 if [ ! -f /tmp/apt-update-complete ]
 then
   echo "> Updating OS package repositories" | tee -a "$LOG_FILE"
@@ -31,18 +34,10 @@ then
   rm -f /tmp/cf-cli_amd64.deb >>"$LOG_FILE" 2>&1
 fi
 
-if [ ! -f /usr/local/bin/cf-autopilot ]
+if [ ! -f "$PLUGIN_BIN_DIR/cf-autopilot" ]
 then
   echo "> Installing the CloudFoundry Autopilot plugin" | tee -a "$LOG_FILE"  
-  curl -L -o /usr/local/bin/cf-autopilot 'https://github.com/contraband/autopilot/releases/download/0.0.4/autopilot-linux' >>"$LOG_FILE" 2>&1
-  chmod 755 /usr/local/bin/cf-autopilot >>"$LOG_FILE" 2>&1
-  cf install-plugin -f /usr/local/bin/cf-autopilot >>"$LOG_FILE" 2>&1
-fi
-
-if [ ! -f /usr/local/bin/cf-antifreeze ]
-then
-  echo "> Installing the CloudFoundry Antifreeze plugin" | tee -a "$LOG_FILE"  
-  curl -L -o /usr/local/bin/cf-antifreeze 'https://github.com/odlp/antifreeze/releases/download/v0.3.0/antifreeze-linux' >>"$LOG_FILE" 2>&1
-  chmod 755 /usr/local/bin/cf-antifreeze >>"$LOG_FILE" 2>&1
-  cf install-plugin -f /usr/local/bin/cf-antifreeze >>"$LOG_FILE" 2>&1
+  curl -L -o "$PLUGIN_BIN_DIR/cf-autopilot" 'https://github.com/contraband/autopilot/releases/download/0.0.4/autopilot-linux' >>"$LOG_FILE" 2>&1
+  chmod 755 "$PLUGIN_BIN_DIR/cf-autopilot" >>"$LOG_FILE" 2>&1
+  cf install-plugin -f "$PLUGIN_BIN_DIR/cf-autopilot" >>"$LOG_FILE" 2>&1
 fi
