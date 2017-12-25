@@ -10,6 +10,8 @@ then
   rm -f "$LOG_FILE"
 fi
 
+BIN_DIR="${2:-/usr/local/bin}"
+
 #download and install PhantomJS if it does not exist
 if [ ! -f /usr/local/bin/phantomjs ]
 then
@@ -25,7 +27,7 @@ then
   echo "> Downloading and installing PhantomJS" | tee -a "$LOG_FILE"
   wget -O /tmp/phantomjs.tar.bz2 https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 >>"$LOG_FILE" 2>&1
   tar -xjf /tmp/phantomjs.tar.bz2 -C /tmp >>"$LOG_FILE" 2>&1
-  mv /tmp/phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin/phantomjs >>"$LOG_FILE" 2>&1
+  mv /tmp/phantomjs-2.1.1-linux-x86_64/bin/phantomjs "$BIN_DIR/phantomjs" >>"$LOG_FILE" 2>&1
   
   apt-get purge -y --auto-remove apt-utils bzip2 wget >>"$LOG_FILE" 2>&1
 fi

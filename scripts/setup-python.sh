@@ -10,6 +10,8 @@ then
   rm -f "$LOG_FILE"
 fi
 
+VENV_DIR="${2:-/venv}"
+
 #install Python if it is not installed already
 if [ ! -f /tmp/apt-update-complete ]
 then
@@ -24,27 +26,27 @@ rm -rf /var/lib/apt/lists/* >>"$LOG_FILE" 2>&1
 
 
 #create virtual environment if it does not exist and activate
-if [ ! -d /venv ]
+if [ ! -d "$VENV_DIR" ]
 then
   echo "> Creating a Python project virtual environment" | tee -a "$LOG_FILE"
   pip install virtualenv >>"$LOG_FILE" 2>&1
-  python -m virtualenv /venv >>"$LOG_FILE" 2>&1
+  python -m virtualenv "$VENV_DIR" >>"$LOG_FILE" 2>&1
   
   if [ -f requirements.txt ]
   then
-    cp requirements.txt /venv/requirements.txt >>"$LOG_FILE" 2>&1
+    cp requirements.txt "$VENV_DIR/requirements.txt" >>"$LOG_FILE" 2>&1
   fi
   if [ -f requirements-test.txt ]
   then
-    cp requirements-test.txt /venv/requirements-test.txt >>"$LOG_FILE" 2>&1
+    cp requirements-test.txt "$VENV_DIR/requirements-test.txt" >>"$LOG_FILE" 2>&1
   fi
 fi
-source /venv/bin/activate >>"$LOG_FILE" 2>&1
+source "$VENV_DIR/bin/activate" >>"$LOG_FILE" 2>&1
 
 #install Python application requirements
 echo "> Installing Python project requirements" | tee -a "$LOG_FILE"
-pip install -r /venv/requirements.txt >>"$LOG_FILE" 2>&1
-pip install -r /venv/requirements-test.txt >>"$LOG_FILE" 2>&1
+pip install -r "$VENV_DIR/requirements.txt" >>"$LOG_FILE" 2>&1
+pip install -r "$VENV_DIR/requirements-test.txt" >>"$LOG_FILE" 2>&1
 
 #remove all development packages
 apt-get purge -y --auto-remove gcc python-dev >>"$LOG_FILE" 2>&1
