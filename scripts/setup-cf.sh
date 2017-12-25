@@ -10,7 +10,7 @@ then
   rm -f "$LOG_FILE"
 fi
 
-PLUGIN_BIN_DIR="${1:-/usr/local/bin}"
+PLUGIN_BIN_DIR="${2:-/usr/local/bin}"
 
 
 if [ ! -f /tmp/apt-update-complete ]
