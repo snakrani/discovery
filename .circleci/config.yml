@@ -20,9 +20,9 @@ jobs:
 
       - restore_cache:
           keys:
-            - 3-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
-            - 3-python-dep-{{ checksum "requirements.txt" }}
-            - 3-python-dep-
+            - v4-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
+            - v4-python-dep-{{ checksum "requirements.txt" }}
+            - v4-python-dep-
       - run:
           name: Install Python dependencies
           command: |
@@ -30,16 +30,16 @@ jobs:
       - save_cache:
           paths:
             - /venv
-          key: 3-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
+          key: v4-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
 
       - restore_cache:
-          key: 2-phantomjs-2-1-1
+          key: v3-phantomjs-2-1-1
       - run:
           name: Install PhantomJS
           command: |
             bash -c "sudo scripts/setup-phantomjs.sh /dev/stderr"
       - save_cache:
-          key: 2-phantomjs-2-1-1
+          key: v3-phantomjs-2-1-1
           paths:
             - /usr/local/bin/phantomjs
 
