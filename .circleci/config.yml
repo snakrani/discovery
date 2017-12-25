@@ -24,29 +24,29 @@ jobs:
       - save_cache:
           key: v1-source-{{ .Branch }}-{{ .Revision }}
           paths:
-            - ".git"
+            - ~/.git
 
       - restore_cache:
-          key: v4-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
+          key: v5-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
       - run:
           name: Install Python dependencies
           command: |
-            bash -c "sudo scripts/setup-python.sh /dev/stderr"
+            bash -c "sudo scripts/setup-python.sh /dev/stderr ~/venv"
       - save_cache:
-          key: v4-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
+          key: v5-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
           paths:
-            - /venv
+            - ~/venv
 
       - restore_cache:
-          key: v3-phantomjs-2-1-1
+          key: v4-phantomjs-2-1-1
       - run:
           name: Install PhantomJS
           command: |
-            bash -c "sudo scripts/setup-phantomjs.sh /dev/stderr"
+            bash -c "sudo scripts/setup-phantomjs.sh /dev/stderr ~/venv/bin"
       - save_cache:
-          key: v3-phantomjs-2-1-1
+          key: v4-phantomjs-2-1-1
           paths:
-            - /usr/local/bin/phantomjs
+            - ~/venv/bin/phantomjs
 
       - run:
           name: Set CircleCI configuration
@@ -56,8 +56,8 @@ jobs:
       - run:
           name: Run tests
           command: |
-            source /venv/bin/activate
-            /venv/bin/python manage.py test api vendors contract
+            source ~/venv/bin/activate
+            ~/venv/bin/python manage.py test api vendors contract
 
       - store_artifacts:
           path: logs
@@ -78,7 +78,7 @@ jobs:
       - save_cache:
           key: v1-source-{{ .Branch }}-{{ .Revision }}
           paths:
-            - ".git"
+            - ~/.git
 
       - run:
           name: Setup CloudFoundry client CLI
@@ -105,7 +105,7 @@ jobs:
       - save_cache:
           key: v1-source-{{ .Branch }}-{{ .Revision }}
           paths:
-            - ".git"
+            - ~/.git
 
       - run:
           name: Setup CloudFoundry client CLI
