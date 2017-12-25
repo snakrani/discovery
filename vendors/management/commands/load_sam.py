@@ -222,6 +222,7 @@ class Command(BaseCommand):
 
         except Exception as e:
             display_error(e)
+            raise
 
         print("-------END LOAD_SAM PROCESS-------")
         log_memory('End')

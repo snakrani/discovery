@@ -28,6 +28,8 @@ APPEND_SLASH = True
 DEBUG = False
 TEMPLATE_DEBUG = False
 
+DB_MUTEX_TTL_SECONDS = 86400 # 1 day (24 hours)
+
 # Application specific
 #------------------------------
 
@@ -58,6 +60,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'db_mutex',
     'storages',
     'selenium_tests',
     'rest_framework',

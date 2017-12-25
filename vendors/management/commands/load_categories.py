@@ -38,5 +38,6 @@ class Command(BaseCommand):
 
         except Exception as e:
             display_error(e)
+            raise
 
         print("-------END LOAD_CATEGORIES PROCESS-------")

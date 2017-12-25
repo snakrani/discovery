@@ -1,26 +1,46 @@
 from __future__ import absolute_import, unicode_literals
 from celery import shared_task
+from celery.exceptions import TaskError
 
 from django.core.management import call_command
+from db_mutex import DBMutexError, DBMutexTimeoutError
+from db_mutex.db_mutex import db_mutex
 from StringIO import StringIO
 
 import sys
 
 
 @shared_task
-def update_fpds(years=10, weeks=520, count=500, pause=1):
+def update_contracts(years=10, weeks=520, count=500, pause=1):
+    success = True
+    
     old_stdout = sys.stdout
     sys.stdout = mystdout = StringIO()
     
-    #TODO: Return some data?
-    call_command('load_fpds', 
+    try:
+        with db_mutex('contract.update_contracts'):
+            # Commands don't return anything
+            call_command('load_fpds', 
                  years=years, 
                  weeks=weeks, 
                  count=count, 
                  pause=pause
-    )
+            )
+    
+    except DBMutexError:
+        success = False
+        print('update_contracts: Could not obtain lock')
+        
+    except DBMutexTimeoutError:
+        print('update_contracts: Task completed but the lock timed out')
+        
+    except Exception:
+        success = False
     
     sys.stdout = old_stdout
+    
+    if not success:
+        raise TaskError(mystdout.getvalue())
         
     return { 
         "task": "update_fpds",

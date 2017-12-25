@@ -1,3 +1,16 @@
+
+#
+# General project variables
+#
+DEBUG = True
+TEMPLATE_DEBUG = True
+
+SAUCE = False
+
+
+#
+# Database connections
+#
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -7,6 +20,3 @@ DATABASES = {
         'PASSWORD': 'circleci'
     }
 }
-
-SAUCE = False
-DOMAIN_TO_TEST = 'domain.of.your.discovery.installation.gov'
