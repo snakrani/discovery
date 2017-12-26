@@ -860,12 +860,15 @@ img.green_dot {
     min-height: 43px;
     background-color: ;
     margin-top: 10px;
+    margin-bottom: 10px;
+    overflow: auto;
 }
 
 .vendor_title {
     font-size: 2em;
     float: left;
     font-weight: 600;
+    margin-right: 20px;
 }
 
 .vendor_website {
