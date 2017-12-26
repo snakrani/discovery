@@ -12,7 +12,7 @@ vagrant-config.yml
 venv/
 src/
 mvenv/
-static/
+/static/
 .coverage
 .project
 .pydevproject
