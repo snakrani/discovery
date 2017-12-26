@@ -4,8 +4,20 @@ LayoutManager.indexInit = function(original) {
     Events.subscribe('metaDataLoaded', this.renderMetaData);
     Events.subscribe('loadedWithQS', this.enableNaics);
     original.bind(LayoutManager).call()
+
     this.disableNaics();
     this.disableFilters();
+
+    $('#discovery_vehicles').collapsible({
+        accordion: false,
+        accordionUpSpeed: 100,
+        accordionDownSpeed: 100,
+        collapseSpeed: 100,
+        contentOpen: 0,
+        arrowRclass: 'arrow-r',
+        arrowDclass: 'arrow-d',
+        animate: true
+    });
 };
 
 LayoutManager.originalInit = LayoutManager.init;
