@@ -49,7 +49,7 @@ REASON_FOR_MODIFICATION_CHOICES = (
 class FPDSLoad(models.Model):
     vendor = models.OneToOneField(Vendor, null=True)
     load_date = models.DateField()
-    initialized = models.BooleanField(default=False)
+
 
 class Contract(models.Model):
 

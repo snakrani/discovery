@@ -11,7 +11,7 @@ import sys
 
 
 @shared_task
-def update_contracts(years=10, weeks=520, count=500, pause=1):
+def update_contracts(period=520, load=520, count=500, pause=1):
     success = True
     
     old_stdout = sys.stdout
@@ -21,8 +21,8 @@ def update_contracts(years=10, weeks=520, count=500, pause=1):
         with db_mutex('contract.update_contracts'):
             # Commands don't return anything
             call_command('load_fpds', 
-                 years=years, 
-                 weeks=weeks, 
+                 period=period, 
+                 load=load, 
                  count=count, 
                  pause=pause
             )
@@ -45,8 +45,8 @@ def update_contracts(years=10, weeks=520, count=500, pause=1):
     return { 
         "task": "update_fpds",
         "params": { 
-                   "years": years, 
-                   "weeks": weeks,
+                   "period": period, 
+                   "load": load,
                    "count": count, 
                    "pause": pause
         },

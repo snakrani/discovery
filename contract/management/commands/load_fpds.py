@@ -190,36 +190,32 @@ def get_psc(award):
 
 
 def init_load(options):
-    if options['load_all'] and options['reinit']:
-        FPDSLoad.objects.all().update(initialized=False)
+    if options['reinit']:
+        FPDSLoad.objects.all().delete()
+        Contract.objects.all().delete()
         
 
 def last_load(vendor, options):
-    first_date = datetime.now() - timedelta(weeks=(52 * int(options['years'])))
+    first_date = datetime.now() - timedelta(weeks=(int(options['period'])))
     
     try:
         load = FPDSLoad.objects.get(vendor_id=vendor.id)
-        load_date = first_date.date() if options['load_all'] and options['reinit'] else load.load_date 
-        
-        return {'load_date': load_date, 'initialized': load.initialized}
+        return load.load_date
         
     except FPDSLoad.DoesNotExist:
         pass
     
-    return {'load_date': first_date.date(), 'initialized': False}
+    return first_date.date()
 
 
 def create_load(vendor, load_date):
     try:
-        initialized = True if load_date >= datetime.now().date() else False
-        
         load = FPDSLoad.objects.get(vendor_id=vendor.id)
         load.load_date = load_date
-        load.initialized = initialized
         load.save()
 
     except FPDSLoad.DoesNotExist:
-        FPDSLoad.objects.create(vendor_id=vendor.id, load_date=load_date, initialized=initialized)
+        FPDSLoad.objects.create(vendor_id=vendor.id, load_date=load_date)
 
 
 class Command(BaseCommand):
@@ -228,10 +224,9 @@ class Command(BaseCommand):
 
     option_list = BaseCommand.option_list \
                   + (make_option('--id', action='store', type=int,  dest='id', default=1, help="load contracts for vendors greater or equal to this id"), ) \
-                  + (make_option('--load_all', action='store_true', dest='load_all', default=False, help="Force load of all contracts"), ) \
                   + (make_option('--reinit', action='store_true', dest='reinit', default=False, help="Reinitialize all vendor contract data"), ) \
-                  + (make_option('--years', action='store', type=int, dest='years', default=10, help="Number of years back to populate database"), ) \
-                  + (make_option('--weeks', action='store', type=int, dest='weeks', default=520, help="Weekly interval to process incoming data"), ) \
+                  + (make_option('--period', action='store', type=int, dest='period', default=520, help="Number of weeks back to populate database (default 10 years)"), ) \
+                  + (make_option('--load', action='store', type=int, dest='load', default=520, help="Weekly interval to process incoming data (default 10 years)"), ) \
                   + (make_option('--count', action='store', type=int, dest='count', default=500, help="Number of records to return from each load of the FPDS_NG ATOM feed"), ) \
                   + (make_option('--pause', action='store', type=int, dest='pause', default=1, help="Number of seconds to pause before each query to the FPDS-NG ATOM feed"), )
 
@@ -347,61 +342,60 @@ class Command(BaseCommand):
         
         vendor = Vendor.objects.get(id=vid)
         contracts = Contracts(logger=logger.debug)      
-        load_info = last_load(vendor, options)
+        load_date = last_load(vendor, options)
         
-        if load_to <= load_info['load_date']: #already loaded more data than requested
-            load_to = load_info['load_date'] + timedelta(weeks = int(options['weeks']))
+        if load_to <= load_date: #already loaded more data than requested
+            load_to = load_date + timedelta(weeks = int(options['load']))
         if load_to > self.date_now: #load_to can't be in the future
             load_to = self.date_now
-        if load_info['load_date'] == self.date_now: #need to request at least one day
-            load_info['load_date'] = load_info['load_date'] - timedelta(days = 1)
+        if load_date == self.date_now: #need to request at least one day
+            load_date = load_date - timedelta(days = 1)
             
-        if not (options['load_all'] and load_info['initialized']):
-            print("[ {} ] - Updating vendor {} ({}) from {} to {}".format(vid, vendor.name, vendor.duns, load_info['load_date'], load_to))
-            log_memory("Starting [ {} ] {} - {}".format(vid, vendor.name, vendor.duns))
+        print("[ {} ] - Updating vendor {} ({}) from {} to {}".format(vid, vendor.name, vendor.duns, load_date, load_to))
+        log_memory("Starting [ {} ] {} - {}".format(vid, vendor.name, vendor.duns))
             
-            by_piid = {}
+        by_piid = {}
             
-            v_index = 0
-            contracts_processed = 0
-            missing_modified = 0
+        v_index = 0
+        contracts_processed = 0
+        missing_modified = 0
             
-            while True:
-                v_con, v_index = contracts.get_page(v_index, int(options['count']), vendor_duns=vendor.duns, last_modified_date=[load_info['load_date'], load_to], _sleep=int(options['pause']))
+        while True:
+            v_con, v_index = contracts.get_page(v_index, int(options['count']), vendor_duns=vendor.duns, last_modified_date=[load_date, load_to], _sleep=int(options['pause']))
             
-                log_memory("Loading [ {} ] {} - {}".format(vid, vendor.name, vendor.duns))
+            log_memory("Loading [ {} ] {} - {}".format(vid, vendor.name, vendor.duns))
                 
-                for vc in v_con:
-                    piid, contract_record = self.init_contract(vc)
+            for vc in v_con:
+                piid, contract_record = self.init_contract(vc)
                     
-                    if piid is None:
-                        continue
+                if piid is None:
+                    continue
                     
-                    contracts_processed += 1
-                    if not contract_record['modified_date']:
-                        missing_modified += 1
+                contracts_processed += 1
+                if not contract_record['modified_date']:
+                    missing_modified += 1
                     
-                    if piid in by_piid:
-                        by_piid[piid].append(contract_record)
-                    else:
-                        by_piid[piid] = [contract_record, ]
+                if piid in by_piid:
+                    by_piid[piid].append(contract_record)
+                else:
+                    by_piid[piid] = [contract_record, ]
                                 
-                if v_index == 0:
-                    break
+            if v_index == 0:
+                break
              
-            for piid, records in by_piid.items():
-                logger.debug("================{0}===Vendor {1}=================\n".format(piid, vendor.duns))
-                logger.debug(contracts.pretty_print(by_piid[piid]))
+        for piid, records in by_piid.items():
+            logger.debug("================{0}===Vendor {1}=================\n".format(piid, vendor.duns))
+            logger.debug(contracts.pretty_print(by_piid[piid]))
         
-                self.update_contract(piid, records, vendor)
+            self.update_contract(piid, records, vendor)
                 
-            #save updates to annual revenue, number of employees
-            vendor.save()
-            create_load(vendor, load_to)
+        #save updates to annual revenue, number of employees
+        vendor.save()
+        create_load(vendor, load_to)
             
-            print(" --- completed with: {} PIID(s), {} contract(s) processed".format(len(by_piid.keys()), contracts_processed))
-            log_memory("Final [ {} ] {} - {}".format(vid, vendor.name, vendor.duns))
-            log_data(vid, vendor.duns, vendor.name, load_info['load_date'], load_to, contracts_processed, len(by_piid.keys()), missing_modified)
+        print(" --- completed with: {} PIID(s), {} contract(s) processed".format(len(by_piid.keys()), contracts_processed))
+        log_memory("Final [ {} ] {} - {}".format(vid, vendor.name, vendor.duns))
+        log_data(vid, vendor.duns, vendor.name, load_date, load_to, contracts_processed, len(by_piid.keys()), missing_modified)
 
     
     def update_vendors(self, vendor_ids, load_to, options):
@@ -439,23 +433,19 @@ class Command(BaseCommand):
             #process vendor contracts
             init_load(options)
             
-            if options['load_all']:
-                #repeat every incrementally until end if load_all
-                first_date = self.date_now - timedelta(weeks=(52 * int(options['years'])))
-                load_to = first_date
+            #repeat every incrementally until end
+            first_date = self.date_now - timedelta(weeks = int(options['period']))
+            load_to = first_date
                 
-                while self.date_now > load_to: #while load_to is in the past
-                    load_to = load_to + timedelta(weeks = int(options['weeks']))
-                    if self.date_now < load_to: #load_to can't be in the future
-                        load_to = self.date_now
+            while self.date_now > load_to: #while load_to is in the past
+                load_to = load_to + timedelta(weeks = int(options['load']))
+                if self.date_now < load_to: #load_to can't be in the future
+                    load_to = self.date_now
                     
-                    self.update_vendors(vendor_ids, load_to, options)
+                self.update_vendors(vendor_ids, load_to, options)
                     
-                    #reset vendor ids so we start processing at the beginning again
-                    vendor_ids = all_vendor_ids
-            else:
-                #load everything since last update
-                self.update_vendors(vendor_ids, self.date_now, options)
+                #reset vendor ids so we start processing at the beginning again
+                vendor_ids = all_vendor_ids
             
         except Exception as e:
             display_error(e)
