@@ -210,13 +210,6 @@ h4.data {
     padding-bottom:  7px;
 }
 
-#header_link {
-    float: right;
-    font-size: .9em;
-    padding-right: 10px;
-    padding-top: 10px;
-}
-
 .widedrop {
     width: 600px;
 }
@@ -385,19 +378,60 @@ h4.data {
     display: block;
 }
 
-#about_oasis {
+#about_discovery {
     float: left;
     width: 440px;
     margin-left: 60px;
 }
 
-#about_oasis h3 {
+#about_discovery h3 {
     font-weight: 600;
+    margin-top: 35px;
 }
 
-.about_oasis_text {
+#about_discovery li {
+  padding-top: 0.3em;
+}
+
+.about_discovery_text {
     margin-left: 10px;
     font-weight: 300;
+}
+
+#discovery_vehicles {
+  margin-top: 25px;
+}
+
+#discovery_vehicles h1.vehicle {
+  font-size: 1.0em;
+  padding-bottom: 10px;
+}
+
+#discovery_vehicles .learn_more {
+  font-weight: 400;
+}
+
+.arrow-d {
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 7px solid #444;
+  margin-bottom: 1%;
+  margin-right: 7px;
+  margin-left: 3px;
+  display: inline-block;
+}
+
+.arrow-r {
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid #444;
+  margin-bottom: 6px;
+  margin-right: 5px;
+  display: inline-block;
 }
 
 #data_sources {
@@ -417,13 +451,13 @@ h4.data {
 }
 
 .data_sources_row {
-    margin-top: 20px;
+    margin-top: 35px;
 }
 
 .data_source_description {
     color: #000;
     display: inline-block;
-    margin-top: -1.2em;
+    margin-top: 1.0em;
     font-weight: 300;
 }
 
