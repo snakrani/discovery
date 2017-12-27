@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static %}
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
@@ -66,9 +66,18 @@
         <![endif]-->
     </head>
     <body>
+        <div id="banner">
+            <div class="container">
+                <a id="skiptocontent" href="#skip">skip to main content</a>
+                <p id="usa">
+                    <img src="{% static "discovery_site/images/flag_usa.png" %}" alt="USA flag" />
+                    An official website of the U.S. government
+                </p>
+                <p id="site-status">This website is in beta.</p>
+            </div>
+        </div>
         {% block page_top %}
         <div id="page_top_container">
-            <div id="skiptocontent"><a href="#skip" class="">skip to main content</a></div>
             <div id="discovery_header">
                 <div id="page_title">
                     <a href="/">
