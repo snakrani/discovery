@@ -113,7 +113,7 @@ class ContractsTest(TestCase):
         self.assertEqual(len(resp.data['results']), 100)
         self.assertEqual(resp.data['previous'], None)
         self.assertTrue('page=2' in resp.data['next'])
-        self.assertEqual(resp.data['num_results'], 905)
+        self.assertEqual(resp.data['num_results'], 502)
 
     def test_naics_filter(self):
         resp = self.c.get(self.path, {'duns': '807990382', 'naics': '541611'})

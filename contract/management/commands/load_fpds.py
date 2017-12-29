@@ -196,7 +196,7 @@ def init_load(options):
         
 
 def last_load(vendor, options):
-    first_date = datetime.now() - timedelta(weeks=(int(options['period'])))
+    first_date = datetime.now() - timedelta(weeks=(options['period']))
     
     try:
         load = FPDSLoad.objects.get(vendor_id=vendor.id)
@@ -223,11 +223,13 @@ class Command(BaseCommand):
     date_now = datetime.now().date()
 
     option_list = BaseCommand.option_list \
-                  + (make_option('--id', action='store', type=int,  dest='id', default=1, help="load contracts for vendors greater or equal to this id"), ) \
+                  + (make_option('--starting_id', action='store', type=int,  dest='starting_id', default=1, help="start loading contracts for vendors greater or equal to this id"), ) \
+                  + (make_option('--id', action='store', type=int,  dest='id', default=0, help="load contracts for only this vendor id"), ) \
                   + (make_option('--reinit', action='store_true', dest='reinit', default=False, help="Reinitialize all vendor contract data"), ) \
                   + (make_option('--period', action='store', type=int, dest='period', default=520, help="Number of weeks back to populate database (default 10 years)"), ) \
                   + (make_option('--load', action='store', type=int, dest='load', default=520, help="Weekly interval to process incoming data (default 10 years)"), ) \
                   + (make_option('--count', action='store', type=int, dest='count', default=500, help="Number of records to return from each load of the FPDS_NG ATOM feed"), ) \
+                  + (make_option('--max', action='store', type=int, dest='max', default=0, help="Maximum number of records to collect from each vendor (for generating fixtures)"), ) \
                   + (make_option('--pause', action='store', type=int, dest='pause', default=1, help="Number of seconds to pause before each query to the FPDS-NG ATOM feed"), )
 
 
@@ -345,7 +347,7 @@ class Command(BaseCommand):
         load_date = last_load(vendor, options)
         
         if load_to <= load_date: #already loaded more data than requested
-            load_to = load_date + timedelta(weeks = int(options['load']))
+            load_to = load_date + timedelta(weeks = options['load'])
         if load_to > self.date_now: #load_to can't be in the future
             load_to = self.date_now
         if load_date == self.date_now: #need to request at least one day
@@ -361,7 +363,7 @@ class Command(BaseCommand):
         missing_modified = 0
             
         while True:
-            v_con, v_index = contracts.get_page(v_index, int(options['count']), vendor_duns=vendor.duns, last_modified_date=[load_date, load_to], _sleep=int(options['pause']))
+            v_con, v_index = contracts.get_page(v_index, options['count'], vendor_duns=vendor.duns, last_modified_date=[load_date, load_to], _sleep=options['pause'])
             
             log_memory("Loading [ {} ] {} - {}".format(vid, vendor.name, vendor.duns))
                 
@@ -379,6 +381,10 @@ class Command(BaseCommand):
                     by_piid[piid].append(contract_record)
                 else:
                     by_piid[piid] = [contract_record, ]
+                    
+                if options['max'] > 0 and len(by_piid.keys()) >= options['max']:
+                    v_index = 0
+                    break
                                 
             if v_index == 0:
                 break
@@ -424,28 +430,36 @@ class Command(BaseCommand):
         signal.signal(signal.SIGSEGV, crash_handler) #catch segmentation faults
         
         try:
-            #allow to start from a certain vendor
-            vid = int(options['id'])
+            if options['id'] > 0:
+                try:
+                    FPDSLoad.objects.get(id=options['id']).delete()
+                except Exception:
+                    pass
+
+                self.update_vendor(options['id'], self.date_now, options)
+            else:
+                #allow to start from a certain vendor
+                vid = options['starting_id']
             
-            vendor_ids = self.get_vendor_ids(vid)
-            all_vendor_ids = self.get_vendor_ids() if vid > 1 else vendor_ids
+                vendor_ids = self.get_vendor_ids(vid)
+                all_vendor_ids = self.get_vendor_ids() if vid > 1 else vendor_ids
             
-            #process vendor contracts
-            init_load(options)
+                #process vendor contracts
+                init_load(options)
             
-            #repeat every incrementally until end
-            first_date = self.date_now - timedelta(weeks = int(options['period']))
-            load_to = first_date
+                #repeat every incrementally until end
+                first_date = self.date_now - timedelta(weeks = options['period'])
+                load_to = first_date
                 
-            while self.date_now > load_to: #while load_to is in the past
-                load_to = load_to + timedelta(weeks = int(options['load']))
-                if self.date_now < load_to: #load_to can't be in the future
-                    load_to = self.date_now
+                while self.date_now > load_to: #while load_to is in the past
+                    load_to = load_to + timedelta(weeks = options['load'])
+                    if self.date_now < load_to: #load_to can't be in the future
+                        load_to = self.date_now
                     
-                self.update_vendors(vendor_ids, load_to, options)
+                    self.update_vendors(vendor_ids, load_to, options)
                     
-                #reset vendor ids so we start processing at the beginning again
-                vendor_ids = all_vendor_ids
+                    #reset vendor ids so we start processing at the beginning again
+                    vendor_ids = all_vendor_ids
             
         except Exception as e:
             display_error(e)
