@@ -139,7 +139,7 @@ class Command(BaseCommand):
         print("[ {} ] - Updating pool vendors".format(pool))
         log_memory("Starting pool [ {} ]".format(pool))
         
-        vendors_per_pool = int(options['vpp'])
+        vendors_per_pool = options['vpp']
 
         try:
             pool_data = Pool.objects.get(number=pool, vehicle__iexact=vehicle)
