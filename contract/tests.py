@@ -7,7 +7,7 @@ class FPDSLoaderTest(TestCase):
     fixtures = ['naics.json', 'setasides.json', 'fpds_vendor.json']
 
     def test_load(self):
-        call_command('load_fpds', years=1, weeks=52, pause=0)        
+        call_command('load_fpds', period=52, load=52, pause=0)        
 
 
     #ToDO: methods to check values of certain contracts loaded from above command
