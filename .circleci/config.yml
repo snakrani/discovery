@@ -112,7 +112,7 @@ jobs:
           name: Run acceptance tests
           command: |
             source ~/venv/bin/activate
-            ~/venv/bin/python manage.py selenium_tests
+            ~/venv/bin/python manage.py test selenium_tests
 
       - store_artifacts:
           path: logs
