@@ -1081,14 +1081,6 @@
 },
 {
   "fields": {
-    "vendor": 136,
-    "load_date": "2017-12-29"
-  },
-  "model": "contract.fpdsload",
-  "pk": 136
-},
-{
-  "fields": {
     "vendor": 137,
     "load_date": "2017-12-29"
   },
@@ -1534,5 +1526,13 @@
   },
   "model": "contract.fpdsload",
   "pk": 192
+},
+{
+  "fields": {
+    "vendor": 136,
+    "load_date": "2017-12-29"
+  },
+  "model": "contract.fpdsload",
+  "pk": 193
 }
 ]
