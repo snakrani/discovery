@@ -112,6 +112,8 @@ jobs:
           name: Run acceptance tests
           command: |
             source ~/venv/bin/activate
+            git submodule update --init --recursive
+            scripts/wait-for-it/wait-for-it.sh --host="localhost" --port="8080"
             ~/venv/bin/python manage.py test selenium_tests
 
       - store_artifacts:
