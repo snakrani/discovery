@@ -223,7 +223,8 @@ class Command(BaseCommand):
     date_now = datetime.now().date()
 
     option_list = BaseCommand.option_list \
-                  + (make_option('--id', action='store', type=int,  dest='id', default=1, help="load contracts for vendors greater or equal to this id"), ) \
+                  + (make_option('--starting_id', action='store', type=int,  dest='starting_id', default=1, help="start loading contracts for vendors greater or equal to this id"), ) \
+                  + (make_option('--id', action='store', type=int,  dest='id', default=0, help="load contracts for only this vendor id"), ) \
                   + (make_option('--reinit', action='store_true', dest='reinit', default=False, help="Reinitialize all vendor contract data"), ) \
                   + (make_option('--period', action='store', type=int, dest='period', default=520, help="Number of weeks back to populate database (default 10 years)"), ) \
                   + (make_option('--load', action='store', type=int, dest='load', default=520, help="Weekly interval to process incoming data (default 10 years)"), ) \
@@ -429,28 +430,36 @@ class Command(BaseCommand):
         signal.signal(signal.SIGSEGV, crash_handler) #catch segmentation faults
         
         try:
-            #allow to start from a certain vendor
-            vid = options['id']
+            if options['id'] > 0:
+                try:
+                    FPDSLoad.objects.get(id=options['id']).delete()
+                except Exception:
+                    pass
+
+                self.update_vendor(options['id'], self.date_now, options)
+            else:
+                #allow to start from a certain vendor
+                vid = options['starting_id']
             
-            vendor_ids = self.get_vendor_ids(vid)
-            all_vendor_ids = self.get_vendor_ids() if vid > 1 else vendor_ids
+                vendor_ids = self.get_vendor_ids(vid)
+                all_vendor_ids = self.get_vendor_ids() if vid > 1 else vendor_ids
             
-            #process vendor contracts
-            init_load(options)
+                #process vendor contracts
+                init_load(options)
             
-            #repeat every incrementally until end
-            first_date = self.date_now - timedelta(weeks = options['period'])
-            load_to = first_date
+                #repeat every incrementally until end
+                first_date = self.date_now - timedelta(weeks = options['period'])
+                load_to = first_date
                 
-            while self.date_now > load_to: #while load_to is in the past
-                load_to = load_to + timedelta(weeks = options['load'])
-                if self.date_now < load_to: #load_to can't be in the future
-                    load_to = self.date_now
+                while self.date_now > load_to: #while load_to is in the past
+                    load_to = load_to + timedelta(weeks = options['load'])
+                    if self.date_now < load_to: #load_to can't be in the future
+                        load_to = self.date_now
                     
-                self.update_vendors(vendor_ids, load_to, options)
+                    self.update_vendors(vendor_ids, load_to, options)
                     
-                #reset vendor ids so we start processing at the beginning again
-                vendor_ids = all_vendor_ids
+                    #reset vendor ids so we start processing at the beginning again
+                    vendor_ids = all_vendor_ids
             
         except Exception as e:
             display_error(e)
