@@ -196,7 +196,7 @@ def init_load(options):
         
 
 def last_load(vendor, options):
-    first_date = datetime.now() - timedelta(weeks=(int(options['period'])))
+    first_date = datetime.now() - timedelta(weeks=(options['period']))
     
     try:
         load = FPDSLoad.objects.get(vendor_id=vendor.id)
@@ -228,6 +228,7 @@ class Command(BaseCommand):
                   + (make_option('--period', action='store', type=int, dest='period', default=520, help="Number of weeks back to populate database (default 10 years)"), ) \
                   + (make_option('--load', action='store', type=int, dest='load', default=520, help="Weekly interval to process incoming data (default 10 years)"), ) \
                   + (make_option('--count', action='store', type=int, dest='count', default=500, help="Number of records to return from each load of the FPDS_NG ATOM feed"), ) \
+                  + (make_option('--max', action='store', type=int, dest='max', default=0, help="Maximum number of records to collect from each vendor (for generating fixtures)"), ) \
                   + (make_option('--pause', action='store', type=int, dest='pause', default=1, help="Number of seconds to pause before each query to the FPDS-NG ATOM feed"), )
 
 
@@ -345,7 +346,7 @@ class Command(BaseCommand):
         load_date = last_load(vendor, options)
         
         if load_to <= load_date: #already loaded more data than requested
-            load_to = load_date + timedelta(weeks = int(options['load']))
+            load_to = load_date + timedelta(weeks = options['load'])
         if load_to > self.date_now: #load_to can't be in the future
             load_to = self.date_now
         if load_date == self.date_now: #need to request at least one day
@@ -361,7 +362,7 @@ class Command(BaseCommand):
         missing_modified = 0
             
         while True:
-            v_con, v_index = contracts.get_page(v_index, int(options['count']), vendor_duns=vendor.duns, last_modified_date=[load_date, load_to], _sleep=int(options['pause']))
+            v_con, v_index = contracts.get_page(v_index, options['count'], vendor_duns=vendor.duns, last_modified_date=[load_date, load_to], _sleep=options['pause'])
             
             log_memory("Loading [ {} ] {} - {}".format(vid, vendor.name, vendor.duns))
                 
@@ -379,6 +380,10 @@ class Command(BaseCommand):
                     by_piid[piid].append(contract_record)
                 else:
                     by_piid[piid] = [contract_record, ]
+                    
+                if options['max'] > 0 and len(by_piid.keys()) >= options['max']:
+                    v_index = 0
+                    break
                                 
             if v_index == 0:
                 break
@@ -425,7 +430,7 @@ class Command(BaseCommand):
         
         try:
             #allow to start from a certain vendor
-            vid = int(options['id'])
+            vid = options['id']
             
             vendor_ids = self.get_vendor_ids(vid)
             all_vendor_ids = self.get_vendor_ids() if vid > 1 else vendor_ids
@@ -434,11 +439,11 @@ class Command(BaseCommand):
             init_load(options)
             
             #repeat every incrementally until end
-            first_date = self.date_now - timedelta(weeks = int(options['period']))
+            first_date = self.date_now - timedelta(weeks = options['period'])
             load_to = first_date
                 
             while self.date_now > load_to: #while load_to is in the past
-                load_to = load_to + timedelta(weeks = int(options['load']))
+                load_to = load_to + timedelta(weeks = options['load'])
                 if self.date_now < load_to: #load_to can't be in the future
                     load_to = self.date_now
                     
