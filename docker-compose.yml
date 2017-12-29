@@ -24,7 +24,7 @@ services:
       file: docker/docker-compose.base.yml
       service: django
 
-  celery:
+  worker:
     command: bash -c "celery -A discovery worker --loglevel=info --concurrency=1"
     restart: always
     depends_on:
@@ -36,7 +36,7 @@ services:
       file: docker/docker-compose.base.yml
       service: django
 
-  celerybeat:
+  scheduler:
     command: bash -c "celery -A discovery beat --loglevel=info"
     restart: always
     depends_on:
