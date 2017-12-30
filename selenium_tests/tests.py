@@ -115,7 +115,7 @@ class FunctionalTests(LiveServerTestCase):
     def test_8a_and_hubzone_added(self):
         driver = self.driver
         #load 8(a) search results
-        driver.get(self.base_url + "/results?setasides=A6&vehicle=oasissb&naics-code=541330&")
+        driver.get(self.base_url + "/results?setasides=A6&vehicle=oasissb&naics-code=541330B&")
         #make sure first few results are for 8(a) vendors
         time.sleep(1)
         try:
@@ -194,7 +194,7 @@ class FunctionalTests(LiveServerTestCase):
     def test_number_of_pools_not_displayed_in_search_results(self):
         driver = self.driver
         #open search results
-        driver.get(self.base_url + "/results?vehicle=oasissb&setasides=A6&naics-code=541330&")
+        driver.get(self.base_url + "/results?setasides=A6&vehicle=oasissb&naics-code=541612&")
         #make sure format of result count is '* vendors match your search'
         self.assertRegexpMatches(driver.find_element_by_css_selector("span.matching_your_search").text, r"^[\s\S]* vendors match your search$")
         #make sure format of result count is not '* vendors in * pool(s) match your search'
