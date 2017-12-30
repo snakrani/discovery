@@ -29,13 +29,7 @@ jobs:
             apt-get update
             apt-get install -y git
 
-      - restore_cache:
-          key: d1-source-{{ .Branch }}-{{ .Revision }}
       - checkout
-      - save_cache:
-          key: d1-source-{{ .Branch }}-{{ .Revision }}
-          paths:
-            - .git
 
       - run:
           name: Install Python dependencies
@@ -80,13 +74,7 @@ jobs:
             apt-get update
             apt-get install -y git
 
-      - restore_cache:
-          key: d1-source-{{ .Branch }}-{{ .Revision }}
       - checkout
-      - save_cache:
-          key: d1-source-{{ .Branch }}-{{ .Revision }}
-          paths:
-            - .git
 
       - run:
           name: Install Python dependencies
@@ -96,7 +84,6 @@ jobs:
       - run:
           name: Install PhantomJS
           command: |
-            apt-get update
             scripts/setup-phantomjs.sh /dev/stderr
 
       - run:
@@ -140,13 +127,7 @@ jobs:
             apt-get update
             apt-get install -y git
 
-      - restore_cache:
-          key: d1-source-{{ .Branch }}-{{ .Revision }}
       - checkout
-      - save_cache:
-          key: d1-source-{{ .Branch }}-{{ .Revision }}
-          paths:
-            - .git
 
       - run:
           name: Setup CloudFoundry client CLI
@@ -173,13 +154,7 @@ jobs:
             apt-get update
             apt-get install -y git
 
-      - restore_cache:
-          key: d1-source-{{ .Branch }}-{{ .Revision }}
       - checkout
-      - save_cache:
-          key: d1-source-{{ .Branch }}-{{ .Revision }}
-          paths:
-            - .git
 
       - run:
           name: Setup CloudFoundry client CLI
