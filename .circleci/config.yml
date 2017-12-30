@@ -37,16 +37,10 @@ jobs:
           paths:
             - .git
 
-      - restore_cache:
-          key: d1-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
       - run:
           name: Install Python dependencies
           command: |
             scripts/setup-python.sh /dev/stderr
-      - save_cache:
-          key: d1-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
-          paths:
-            - /venv
 
       - run:
           name: Set CircleCI configuration
@@ -56,8 +50,6 @@ jobs:
       - run:
           name: Run unit tests
           command: |
-            echo "$PATH"
-            echo "`which python`"
             source /venv/bin/activate
             python manage.py test api vendors contract
 
@@ -96,28 +88,16 @@ jobs:
           paths:
             - .git
 
-      - restore_cache:
-          key: d1-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
       - run:
           name: Install Python dependencies
           command: |
             scripts/setup-python.sh /dev/stderr
-      - save_cache:
-          key: d1-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
-          paths:
-            - /venv
 
-      - restore_cache:
-          key: d1-phantomjs-2-1-1
       - run:
           name: Install PhantomJS
           command: |
             apt-get update
             scripts/setup-phantomjs.sh /dev/stderr
-      - save_cache:
-          key: d1-phantomjs-2-1-1
-          paths:
-            - /usr/local/bin/phantomjs
 
       - run:
           name: Set CircleCI configuration
@@ -136,9 +116,6 @@ jobs:
       - run:
           name: Run acceptance tests
           command: |
-            echo "$PATH"
-            echo "`which python`"
-            echo "`which phantomjs`"
             source /venv/bin/activate
             git submodule update --init --recursive
             scripts/wait-for-it/wait-for-it.sh --host="localhost" --port=8080 --timeout=300
