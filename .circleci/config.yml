@@ -8,34 +8,45 @@ version: 2
 jobs:
   unit-tests:
     docker:
-      - image: circleci/python:2.7
-      - image: circleci/postgres:9.3
+      - image: python:2.7-slim-stretch
         environment:
-          POSTGRES_DB: circle-test
+          PYTHONUNBUFFERED: 1
+
+      - image: postgres:9.3
+        environment:
           POSTGRES_USER: circleci
           POSTGRES_PASSWORD: circleci
+          POSTGRES_DB: circle-test
 
-    working_directory: ~/repo
+    working_directory: /var/local
 
     steps:
-      - restore_cache:
-          key: v1-source-{{ .Branch }}-{{ .Revision }}
-      - checkout
-      - save_cache:
-          key: v1-source-{{ .Branch }}-{{ .Revision }}
-          paths:
-            - ~/.git
+      - run: echo 'export PATH=/venv/bin:$PATH' >> $BASH_ENV
+
+      - run:
+          name: Install Git
+          command: |
+            apt-get update
+            apt-get install -y git
 
       - restore_cache:
-          key: v5-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
+          key: d1-source-{{ .Branch }}-{{ .Revision }}
+      - checkout
+      - save_cache:
+          key: d1-source-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - .git
+
+      - restore_cache:
+          key: d1-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
       - run:
           name: Install Python dependencies
           command: |
-            bash -c "sudo scripts/setup-python.sh /dev/stderr ~/venv"
+            scripts/setup-python.sh /dev/stderr
       - save_cache:
-          key: v5-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
+          key: d1-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
           paths:
-            - ~/venv
+            - /venv
 
       - run:
           name: Set CircleCI configuration
@@ -45,8 +56,10 @@ jobs:
       - run:
           name: Run unit tests
           command: |
-            source ~/venv/bin/activate
-            ~/venv/bin/python manage.py test api vendors contract
+            echo "$PATH"
+            echo "`which python`"
+            source /venv/bin/activate
+            python manage.py test api vendors contract
 
       - store_artifacts:
           path: logs
@@ -54,7 +67,7 @@ jobs:
 
   acceptance-tests:
     docker:
-      - image: python:2.7-slim-jessie
+      - image: python:2.7-slim-stretch
         environment:
           PYTHONUNBUFFERED: 1
 
@@ -123,6 +136,9 @@ jobs:
       - run:
           name: Run acceptance tests
           command: |
+            echo "$PATH"
+            echo "`which python`"
+            echo "`which phantomjs`"
             source /venv/bin/activate
             git submodule update --init --recursive
             scripts/wait-for-it/wait-for-it.sh --host="localhost" --port=8080 --timeout=300
@@ -134,57 +150,69 @@ jobs:
 
   deploy-dev:
     docker:
-      - image: circleci/python:2.7
+      - image: debian:stretch-slim
         environment:
           CF_LOGIN_URL: 'https://api.fr.cloud.gov'
 
-    working_directory: ~/repo
+    working_directory: /var/local
 
     steps:
+      - run:
+          name: Install Git
+          command: |
+            apt-get update
+            apt-get install -y git
+
       - restore_cache:
-          key: v1-source-{{ .Branch }}-{{ .Revision }}
+          key: d1-source-{{ .Branch }}-{{ .Revision }}
       - checkout
       - save_cache:
-          key: v1-source-{{ .Branch }}-{{ .Revision }}
+          key: d1-source-{{ .Branch }}-{{ .Revision }}
           paths:
-            - ~/.git
+            - .git
 
       - run:
           name: Setup CloudFoundry client CLI
           command: |
-            bash -c "sudo scripts/setup-cf.sh /dev/stderr"
+            scripts/setup-cf.sh /dev/stderr
 
       - run:
           name: Deploy development applications
           command: |
-            bash scripts/deploy-dev.sh
+            scripts/deploy-dev.sh
 
   deploy-prod:
     docker:
-      - image: circleci/python:2.7
+      - image: debian:stretch-slim
         environment:
           CF_LOGIN_URL: 'https://api.fr.cloud.gov'
 
-    working_directory: ~/repo
+    working_directory: /var/local
 
     steps:
+      - run:
+          name: Install Git
+          command: |
+            apt-get update
+            apt-get install -y git
+
       - restore_cache:
-          key: v1-source-{{ .Branch }}-{{ .Revision }}
+          key: d1-source-{{ .Branch }}-{{ .Revision }}
       - checkout
       - save_cache:
-          key: v1-source-{{ .Branch }}-{{ .Revision }}
+          key: d1-source-{{ .Branch }}-{{ .Revision }}
           paths:
-            - ~/.git
+            - .git
 
       - run:
           name: Setup CloudFoundry client CLI
           command: |
-            bash -c "sudo scripts/setup-cf.sh /dev/stderr"
+            scripts/setup-cf.sh /dev/stderr
 
       - run:
           name: Deploy production applications
           command: |
-            bash scripts/deploy-prod.sh
+            scripts/deploy-prod.sh
 
 workflows:
   version: 2
