@@ -10,17 +10,13 @@ then
   rm -f "$LOG_FILE"
 fi
 
-BIN_DIR="${2:-/usr/local/bin}"
+BIN_DIR="/usr/local/bin"
 
 #download and install PhantomJS if it does not exist
 if [ ! -f /usr/local/bin/phantomjs ]
 then
-  if [ ! -f /tmp/apt-update-complete ]
-  then
-    echo "> Updating OS package repositories" | tee -a "$LOG_FILE"
-    apt-get update >>"$LOG_FILE" 2>&1
-    touch /tmp/apt-update-complete >>"$LOG_FILE" 2>&1 
-  fi
+  apt-get update >>"$LOG_FILE" 2>&1 
+
   echo "> Installing PhantomJS dependencies" | tee -a "$LOG_FILE"
   apt-get install -y apt-utils bzip2 wget fontconfig >>"$LOG_FILE" 2>&1
   

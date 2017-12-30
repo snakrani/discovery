@@ -10,20 +10,14 @@ then
   rm -f "$LOG_FILE"
 fi
 
-VENV_DIR="${2:-/venv}"
+VENV_DIR="/venv"
 
 #install Python if it is not installed already
-if [ ! -f /tmp/apt-update-complete ]
-then
-  echo "> Updating OS package repositories" | tee -a "$LOG_FILE"
-  apt-get update >>"$LOG_FILE" 2>&1
-  touch /tmp/apt-update-complete >>"$LOG_FILE" 2>&1 
-fi
+apt-get update >>"$LOG_FILE" 2>&1
   
 echo "> Installing Python and CLI utilities" | tee -a "$LOG_FILE"
 apt-get install -y --no-install-recommends gcc libpq-dev python-dev git >>"$LOG_FILE" 2>&1
 rm -rf /var/lib/apt/lists/* >>"$LOG_FILE" 2>&1
-
 
 #create virtual environment if it does not exist and activate
 if [ ! -d "$VENV_DIR" ]
