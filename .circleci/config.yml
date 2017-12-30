@@ -58,16 +58,16 @@ jobs:
         environment:
           PYTHONUNBUFFERED: 1
 
-      - image: circleci/postgres:9.3
+      - image: postgres:9.3
         environment:
-          POSTGRES_DB: circle-test
           POSTGRES_USER: circleci
           POSTGRES_PASSWORD: circleci
+          POSTGRES_DB: circle-test
 
     working_directory: /var/local
 
     steps:
-      - run: echo 'export PATH=/venv/bin:$PATH' >> /root/.bashrc
+      - run: echo 'export PATH=/venv/bin:$PATH' >> $BASH_ENV
 
       - restore_cache:
           key: v1-source-{{ .Branch }}-{{ .Revision }}
@@ -75,14 +75,14 @@ jobs:
       - save_cache:
           key: v1-source-{{ .Branch }}-{{ .Revision }}
           paths:
-            - ~/.git
+            - .git
 
       - restore_cache:
           key: v5-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
       - run:
           name: Install Python dependencies
           command: |
-            bash -c "scripts/setup-python.sh /dev/stderr"
+            scripts/setup-python.sh /dev/stderr
       - save_cache:
           key: v5-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
           paths:
@@ -93,7 +93,7 @@ jobs:
       - run:
           name: Install PhantomJS
           command: |
-            bash -c "scripts/setup-phantomjs.sh /dev/stderr"
+            scripts/setup-phantomjs.sh /dev/stderr
       - save_cache:
           key: v4-phantomjs-2-1-1
           paths:
