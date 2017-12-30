@@ -24,7 +24,7 @@ class FunctionalTests(LiveServerTestCase):
             )
         else:
             self.base_url = 'http://localhost:8080'
-            self.driver = webdriver.PhantomJS()
+            self.driver = webdriver.PhantomJS(service_log_path='logs/ghostdriver.log')
 
     #helper function courtesy of http://www.obeythetestinggoat.com/how-to-get-selenium-to-wait-for-page-load-after-a-click.html
     def wait_for(self, condition_function):
