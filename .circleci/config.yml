@@ -82,9 +82,9 @@ jobs:
             scripts/setup-python.sh /dev/stderr
 
       - run:
-          name: Install PhantomJS
+          name: Install browser drivers
           command: |
-            scripts/setup-phantomjs.sh /dev/stderr
+            scripts/setup-browsers.sh /dev/stderr
 
       - run:
           name: Set CircleCI configuration
