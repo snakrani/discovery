@@ -56,7 +56,6 @@ jobs:
     docker:
       - image: python:2.7-slim-jessie
         environment:
-          BASH_ENV: ~/.bashrc
           PYTHONUNBUFFERED: 1
 
       - image: circleci/postgres:9.3
@@ -68,7 +67,7 @@ jobs:
     working_directory: /var/local
 
     steps:
-      - run: echo 'export PATH=/venv/bin:$PATH' >> $BASH_ENV
+      - run: echo 'export PATH=/venv/bin:$PATH' >> /root/.bashrc
 
       - restore_cache:
           key: v1-source-{{ .Branch }}-{{ .Revision }}
