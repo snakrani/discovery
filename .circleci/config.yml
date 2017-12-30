@@ -69,33 +69,40 @@ jobs:
     steps:
       - run: echo 'export PATH=/venv/bin:$PATH' >> $BASH_ENV
 
+      - run:
+          name: Install Git
+          command: |
+            apt-get update
+            apt-get install git
+
       - restore_cache:
-          key: v1-source-{{ .Branch }}-{{ .Revision }}
+          key: d1-source-{{ .Branch }}-{{ .Revision }}
       - checkout
       - save_cache:
-          key: v1-source-{{ .Branch }}-{{ .Revision }}
+          key: d1-source-{{ .Branch }}-{{ .Revision }}
           paths:
             - .git
 
       - restore_cache:
-          key: v5-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
+          key: d1-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
       - run:
           name: Install Python dependencies
           command: |
             scripts/setup-python.sh /dev/stderr
       - save_cache:
-          key: v5-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
+          key: d1-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
           paths:
             - /venv
 
       - restore_cache:
-          key: v4-phantomjs-2-1-1
+          key: d1-phantomjs-2-1-1
       - run:
           name: Install PhantomJS
           command: |
+            apt-get update
             scripts/setup-phantomjs.sh /dev/stderr
       - save_cache:
-          key: v4-phantomjs-2-1-1
+          key: d1-phantomjs-2-1-1
           paths:
             - /usr/local/bin/phantomjs
 
