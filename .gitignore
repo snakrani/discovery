@@ -19,4 +19,4 @@ mvenv/
 .settings/
 docker/django-env.vars
 celerybeat.pid
-
+docs/_build
