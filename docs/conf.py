@@ -159,4 +159,11 @@ texinfo_documents = [
 ]
 
 
+def resolve_md_url(url):
+    return url
 
+def setup(app):
+    app.add_config_value('recommonmark_config', {
+        'url_resolver': resolve_md_url,
+    }, True)
+    app.add_transform(AutoStructify)
