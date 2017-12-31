@@ -307,6 +307,8 @@ class FunctionalTests(LiveServerTestCase):
         driver = self.driver
         #open page for vendor list in OASIS Unrestricted
         driver.get(self.base_url + '/results?vehicle=oasis&naics-code=541618&')
+        print driver.page_source.encode("utf-8")
+        
         #make sure socioeconomic indicator headers exist
         self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/td[4]').text, '8(a)')
         self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/td[5]').text, 'HubZ')
@@ -325,10 +327,12 @@ class FunctionalTests(LiveServerTestCase):
         driver = self.driver
         #open a search results page
         driver.get(self.base_url + '/results?vehicle=oasissb&naics-code=541618&')
+        print driver.page_source.encode("utf-8")
+        
         #make sure header for number of results column exists
         self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/td[3]').text, 'No. of Contracts')
         #make sure value for number of contracts in row 1 is greater than or equal to value in row 2
-        self.assertGreater(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[2]/td[3]').text, driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[3]/td[3]').text)
+        self.assertGreater(int(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[2]/td[3]').text), int(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[3]/td[3]').text))
 
     def test_contracts_sorting(self):
         driver = self.driver
