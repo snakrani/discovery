@@ -1,4 +1,4 @@
 
 # Discovery setup and configuration
 
-**^** [**Documentation Outline**](docs/overview.md) | [About Discovery](docs/setup/about.md) **>**
+**^** [**Documentation Outline**](../overview.md) | [About Discovery](about.md) **>**

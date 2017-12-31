@@ -1,7 +1,7 @@
 
 # About Discovery
 
-**^** [**Setup Overview**](docs/setup/overview.md) | [Getting Started](docs/setup/getting_started.md) **>**
+**^** [**Setup Overview**](overview.md) | [Getting Started](getting_started.md) **>**
 
 
 ## Overview
