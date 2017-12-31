@@ -16,7 +16,7 @@ VENV_DIR="/venv"
 apt-get update >>"$LOG_FILE" 2>&1
   
 echo "> Installing Python and CLI utilities" | tee -a "$LOG_FILE"
-apt-get install -y --no-install-recommends gcc libpq-dev python-dev git >>"$LOG_FILE" 2>&1
+apt-get install -y --no-install-recommends make gcc libpq-dev python-dev git >>"$LOG_FILE" 2>&1
 rm -rf /var/lib/apt/lists/* >>"$LOG_FILE" 2>&1
 
 #create virtual environment if it does not exist and activate
@@ -30,9 +30,9 @@ then
   then
     cp requirements.txt "$VENV_DIR/requirements.txt" >>"$LOG_FILE" 2>&1
   fi
-  if [ -f requirements-test.txt ]
+  if [ -f requirements-dev.txt ]
   then
-    cp requirements-test.txt "$VENV_DIR/requirements-test.txt" >>"$LOG_FILE" 2>&1
+    cp requirements-dev.txt "$VENV_DIR/requirements-dev.txt" >>"$LOG_FILE" 2>&1
   fi
 fi
 source "$VENV_DIR/bin/activate" >>"$LOG_FILE" 2>&1
@@ -40,4 +40,4 @@ source "$VENV_DIR/bin/activate" >>"$LOG_FILE" 2>&1
 #install Python application requirements
 echo "> Installing Python project requirements" | tee -a "$LOG_FILE"
 pip install -r "$VENV_DIR/requirements.txt" >>"$LOG_FILE" 2>&1
-pip install -r "$VENV_DIR/requirements-test.txt" >>"$LOG_FILE" 2>&1
+pip install -r "$VENV_DIR/requirements-dev.txt" >>"$LOG_FILE" 2>&1
