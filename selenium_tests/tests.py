@@ -307,7 +307,9 @@ class FunctionalTests(LiveServerTestCase):
         driver = self.driver
         #open page for vendor list in OASIS Unrestricted
         driver.get(self.base_url + '/results?vehicle=oasis&naics-code=541618&')
-        print driver.page_source.encode("utf-8")
+        element = WebDriverWait(driver, 3).until(
+            EC.presence_of_all_elements_located((By.CLASS_NAME, "vendor_name"))
+        )   
         
         #make sure socioeconomic indicator headers exist
         self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/td[4]').text, '8(a)')
@@ -327,7 +329,9 @@ class FunctionalTests(LiveServerTestCase):
         driver = self.driver
         #open a search results page
         driver.get(self.base_url + '/results?vehicle=oasissb&naics-code=541618&')
-        print driver.page_source.encode("utf-8")
+        element = WebDriverWait(driver, 3).until(
+            EC.presence_of_all_elements_located((By.CLASS_NAME, "vendor_name"))
+        )  
         
         #make sure header for number of results column exists
         self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/td[3]').text, 'No. of Contracts')
