@@ -1,4 +1,4 @@
 
 # Getting started with Discovery
 
-**<** [About Discovery](setup/about.md) | **^** [**Setup Overview**](setup/overview.md) | [Vagrant Setup](setup/vagrant.md) **>**
+**<** [About Discovery](docs/setup/about.md) | **^** [**Setup Overview**](docs/setup/overview.md) | [Vagrant Setup](docs/setup/vagrant.md) **>**

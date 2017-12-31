@@ -1,4 +1,4 @@
 
 # Discovery requirements
 
-**<** [Docker Setup](setup/docker.md) | **^** [**Setup Overview**](setup/overview.md)
+**<** [Docker Setup](docs/setup/docker.md) | **^** [**Setup Overview**](docs/setup/overview.md)
