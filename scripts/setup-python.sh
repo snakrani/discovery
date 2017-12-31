@@ -41,6 +41,3 @@ source "$VENV_DIR/bin/activate" >>"$LOG_FILE" 2>&1
 echo "> Installing Python project requirements" | tee -a "$LOG_FILE"
 pip install -r "$VENV_DIR/requirements.txt" >>"$LOG_FILE" 2>&1
 pip install -r "$VENV_DIR/requirements-test.txt" >>"$LOG_FILE" 2>&1
-
-#remove all development packages
-apt-get purge -y --auto-remove gcc python-dev >>"$LOG_FILE" 2>&1
