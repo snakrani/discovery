@@ -22,12 +22,7 @@ fi
 #download and install Docker if it does not exist
 if ! which docker >/dev/null
 then
-  if [ ! -f /tmp/apt-update-complete ]
-  then
-    echo "> Updating OS package repositories" | tee -a "$LOG_FILE"
-    apt-get update >>"$LOG_FILE" 2>&1
-    touch /tmp/apt-update-complete >>"$LOG_FILE" 2>&1 
-  fi
+  apt-get update >>"$LOG_FILE" 2>&1
   
   echo "> Installing Docker dependencies" | tee -a "$LOG_FILE"
   apt-get install -y lxc wget bsdtar curl >>"$LOG_FILE" 2>&1

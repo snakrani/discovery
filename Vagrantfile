@@ -36,12 +36,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provision :shell do |s|
-    s.name = "Bootstrapping development server"
-    s.path = "scripts/bootstrap.sh"
-    s.args = [project_directory]
-  end
-
-  config.vm.provision :shell do |s|
     s.name = "Setting login path redirect"
     s.inline = <<-SHELL
       project_dir="${1}"
@@ -50,6 +44,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     s.args = [project_directory]
     s.env = {"HOME" => "/home/vagrant"}
+  end
+
+  config.vm.provision :shell do |s|
+    s.name = "Bootstrapping development server"
+    s.path = "scripts/bootstrap.sh"
+    s.args = [project_directory]
   end
 
   config.vm.network :forwarded_port, guest: 8080, host: vm_config["web_port"]

@@ -6,47 +6,35 @@
 #
 version: 2
 jobs:
-  test:
+  unit-tests:
     docker:
-      - image: circleci/python:2.7
-      - image: circleci/postgres:9.3
+      - image: python:2.7-slim-stretch
         environment:
-          POSTGRES_DB: circle-test
+          PYTHONUNBUFFERED: 1
+
+      - image: postgres:9.3
+        environment:
           POSTGRES_USER: circleci
           POSTGRES_PASSWORD: circleci
+          POSTGRES_DB: circle-test
 
-    working_directory: ~/repo
+    working_directory: /var/local
 
     steps:
-      - restore_cache:
-          key: v1-source-{{ .Branch }}-{{ .Revision }}
-      - checkout
-      - save_cache:
-          key: v1-source-{{ .Branch }}-{{ .Revision }}
-          paths:
-            - ~/.git
+      - run: echo 'export PATH=/venv/bin:$PATH' >> $BASH_ENV
 
-      - restore_cache:
-          key: v5-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
+      - run:
+          name: Install Git
+          command: |
+            apt-get update
+            apt-get install -y git
+
+      - checkout
+
       - run:
           name: Install Python dependencies
           command: |
-            bash -c "sudo scripts/setup-python.sh /dev/stderr ~/venv"
-      - save_cache:
-          key: v5-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
-          paths:
-            - ~/venv
-
-      - restore_cache:
-          key: v4-phantomjs-2-1-1
-      - run:
-          name: Install PhantomJS
-          command: |
-            bash -c "sudo scripts/setup-phantomjs.sh /dev/stderr ~/venv/bin"
-      - save_cache:
-          key: v4-phantomjs-2-1-1
-          paths:
-            - ~/venv/bin/phantomjs
+            scripts/setup-python.sh /dev/stderr
 
       - run:
           name: Set CircleCI configuration
@@ -54,83 +42,147 @@ jobs:
             cp discovery/local_settings.circle.py discovery/local_settings.py
 
       - run:
-          name: Run tests
+          name: Run unit tests
           command: |
-            source ~/venv/bin/activate
-            ~/venv/bin/python manage.py test api vendors contract
+            source /venv/bin/activate
+            python manage.py test api vendors contract
 
       - store_artifacts:
           path: logs
-          destination: test-reports
+          destination: unit-test-reports
+
+  acceptance-tests:
+    docker:
+      - image: python:2.7-slim-stretch
+        environment:
+          PYTHONUNBUFFERED: 1
+
+      - image: postgres:9.3
+        environment:
+          POSTGRES_USER: circleci
+          POSTGRES_PASSWORD: circleci
+          POSTGRES_DB: circle-test
+
+    working_directory: /var/local
+
+    steps:
+      - run: echo 'export PATH=/venv/bin:$PATH' >> $BASH_ENV
+
+      - run:
+          name: Install Git
+          command: |
+            apt-get update
+            apt-get install -y git
+
+      - checkout
+
+      - run:
+          name: Install Python dependencies
+          command: |
+            scripts/setup-python.sh /dev/stderr
+
+      - run:
+          name: Install PhantomJS web driver
+          command: |
+            scripts/setup-phantomjs.sh /dev/stderr
+
+      - run:
+          name: Set CircleCI configuration
+          command: |
+            cp discovery/local_settings.circle.py discovery/local_settings.py
+
+      - run:
+          name: Import fixtures and run test server
+          background: true
+          command: |
+            source /venv/bin/activate
+            scripts/init-server.sh /dev/stderr
+            scripts/load-fixtures.sh
+            waitress-serve --expose-tracebacks --port=8080 discovery.wsgi:application
+
+      - run:
+          name: Run acceptance tests
+          command: |
+            git submodule update --init --recursive
+            scripts/wait-for-it/wait-for-it.sh --host="localhost" --port=8080 --timeout=300
+            source /venv/bin/activate
+            python manage.py test selenium_tests
+
+      - store_artifacts:
+          path: logs
+          destination: acceptance-test-reports
 
   deploy-dev:
     docker:
-      - image: circleci/python:2.7
+      - image: debian:stretch-slim
         environment:
           CF_LOGIN_URL: 'https://api.fr.cloud.gov'
 
-    working_directory: ~/repo
+    working_directory: /var/local
 
     steps:
-      - restore_cache:
-          key: v1-source-{{ .Branch }}-{{ .Revision }}
+      - run:
+          name: Install Git
+          command: |
+            apt-get update
+            apt-get install -y git
+
       - checkout
-      - save_cache:
-          key: v1-source-{{ .Branch }}-{{ .Revision }}
-          paths:
-            - ~/.git
 
       - run:
           name: Setup CloudFoundry client CLI
           command: |
-            bash -c "sudo scripts/setup-cf.sh /dev/stderr"
+            scripts/setup-cf.sh /dev/stderr
 
       - run:
           name: Deploy development applications
           command: |
-            bash scripts/deploy-dev.sh
+            scripts/deploy-dev.sh
 
   deploy-prod:
     docker:
-      - image: circleci/python:2.7
+      - image: debian:stretch-slim
         environment:
           CF_LOGIN_URL: 'https://api.fr.cloud.gov'
 
-    working_directory: ~/repo
+    working_directory: /var/local
 
     steps:
-      - restore_cache:
-          key: v1-source-{{ .Branch }}-{{ .Revision }}
+      - run:
+          name: Install Git
+          command: |
+            apt-get update
+            apt-get install -y git
+
       - checkout
-      - save_cache:
-          key: v1-source-{{ .Branch }}-{{ .Revision }}
-          paths:
-            - ~/.git
 
       - run:
           name: Setup CloudFoundry client CLI
           command: |
-            bash -c "sudo scripts/setup-cf.sh /dev/stderr"
+            scripts/setup-cf.sh /dev/stderr
 
       - run:
           name: Deploy production applications
           command: |
-            bash scripts/deploy-prod.sh
+            scripts/deploy-prod.sh
 
 workflows:
   version: 2
   test-and-deploy:
     jobs:
-      - test
+      - unit-tests
+      - acceptance-tests
       - deploy-dev:
           requires:
-            - test
+            - unit-tests
+            - acceptance-tests
           filters:
             branches:
               only: develop
       - deploy-prod:
           requires:
-            - test
+            - unit-tests
+            - acceptance-tests
           filters:
             branches:
               only: master

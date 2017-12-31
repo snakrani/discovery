@@ -10,24 +10,18 @@ then
   rm -f "$LOG_FILE"
 fi
 
-BIN_DIR="${2:-/usr/local/bin}"
+BIN_DIR="/usr/local/bin"
+  
+apt-get update >>"$LOG_FILE" 2>&1 
+
+echo "> Installing web driver dependencies" | tee -a "$LOG_FILE"
+apt-get install -y apt-utils wget bzip2 libfontconfig1 >>"$LOG_FILE" 2>&1
 
 #download and install PhantomJS if it does not exist
-if [ ! -f /usr/local/bin/phantomjs ]
+if [ ! -f "$BIN_DIR/phantomjs" ]
 then
-  if [ ! -f /tmp/apt-update-complete ]
-  then
-    echo "> Updating OS package repositories" | tee -a "$LOG_FILE"
-    apt-get update >>"$LOG_FILE" 2>&1
-    touch /tmp/apt-update-complete >>"$LOG_FILE" 2>&1 
-  fi
-  echo "> Installing PhantomJS dependencies" | tee -a "$LOG_FILE"
-  apt-get install -y apt-utils bzip2 wget fontconfig >>"$LOG_FILE" 2>&1
-  
   echo "> Downloading and installing PhantomJS" | tee -a "$LOG_FILE"
   wget -O /tmp/phantomjs.tar.bz2 https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 >>"$LOG_FILE" 2>&1
   tar -xjf /tmp/phantomjs.tar.bz2 -C /tmp >>"$LOG_FILE" 2>&1
   mv /tmp/phantomjs-2.1.1-linux-x86_64/bin/phantomjs "$BIN_DIR/phantomjs" >>"$LOG_FILE" 2>&1
-  
-  apt-get purge -y --auto-remove apt-utils bzip2 wget >>"$LOG_FILE" 2>&1
 fi

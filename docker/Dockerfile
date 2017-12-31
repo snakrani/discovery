@@ -1,7 +1,7 @@
 #
-# See: https://github.com/docker-library/python/blob/master/2.7/jessie/slim/Dockerfile
+# See: https://github.com/docker-library/python/blob/master/2.7/stretch/slim/Dockerfile
 #
-FROM python:2.7-slim-jessie
+FROM python:2.7-slim-stretch
 
 #
 # Container environment variables

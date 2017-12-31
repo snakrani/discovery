@@ -10,15 +10,10 @@ then
   rm -f "$LOG_FILE"
 fi
 
-PLUGIN_BIN_DIR="${2:-/usr/local/bin}"
+PLUGIN_BIN_DIR="/usr/local/bin"
 
+apt-get update >>"$LOG_FILE" 2>&1
 
-if [ ! -f /tmp/apt-update-complete ]
-then
-  echo "> Updating OS package repositories" | tee -a "$LOG_FILE"
-  apt-get update >>"$LOG_FILE" 2>&1
-  touch /tmp/apt-update-complete >>"$LOG_FILE" 2>&1
-fi
 if ! which curl >/dev/null
 then
   echo "> Installing Cloudfoundry CLI setup dependencies" | tee -a "$LOG_FILE"
@@ -39,5 +34,7 @@ then
   echo "> Installing the CloudFoundry Autopilot plugin" | tee -a "$LOG_FILE"  
   curl -L -o "$PLUGIN_BIN_DIR/cf-autopilot" 'https://github.com/contraband/autopilot/releases/download/0.0.4/autopilot-linux' >>"$LOG_FILE" 2>&1
   chmod 755 "$PLUGIN_BIN_DIR/cf-autopilot" >>"$LOG_FILE" 2>&1
-  cf install-plugin -f "$PLUGIN_BIN_DIR/cf-autopilot" >>"$LOG_FILE" 2>&1
 fi
+
+echo "> Adding the CloudFoundry Autopilot plugin for current user" | tee -a "$LOG_FILE"
+cf install-plugin -f "$PLUGIN_BIN_DIR/cf-autopilot" >>"$LOG_FILE" 2>&1

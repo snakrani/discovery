@@ -23,8 +23,8 @@ class FunctionalTests(LiveServerTestCase):
                 command_executor=sauce_url % (settings.SAUCE_USERNAME, settings.SAUCE_ACCESS_KEY)
             )
         else:
-            self.base_url = 'http://localhost:8000'
-            self.driver = webdriver.PhantomJS()
+            self.base_url = 'http://localhost:8080'
+            self.driver = webdriver.PhantomJS(service_log_path='logs/ghostdriver.log')
 
     #helper function courtesy of http://www.obeythetestinggoat.com/how-to-get-selenium-to-wait-for-page-load-after-a-click.html
     def wait_for(self, condition_function):
@@ -57,7 +57,7 @@ class FunctionalTests(LiveServerTestCase):
             EC.text_to_be_present_in_element((By.ID, "your_filters"), 'Veteran Owned')
             )
         self.assertEqual('Veteran Owned', driver.find_element_by_id('your_filters').text)
-        self.assertRegex(driver.find_element_by_css_selector("span.matching_your_search").text, r"^[\s\S]* vendors match your search$")
+        self.assertRegexpMatches(driver.find_element_by_css_selector("span.matching_your_search").text, r"^[\s\S]* vendors match your search$")
 
     def test_zero_results_indicator_on_search(self):
         #perform a search with zero expected results and make sure that it is clear that there are no results
@@ -91,7 +91,7 @@ class FunctionalTests(LiveServerTestCase):
         #load search results
         driver.get(self.base_url + "/results?vehicle=oasissb&naics-code=541330&setasides=A5&pool=1_SB")
         #make sure number of search results are listed
-        self.assertEqual("11 vendors match your search", driver.find_element_by_css_selector("span.matching_your_search").text)
+        self.assertEqual("9 vendors match your search", driver.find_element_by_css_selector("span.matching_your_search").text)
 
     def test_search_criteria_on_search_results(self):
         driver = self.driver
@@ -110,12 +110,12 @@ class FunctionalTests(LiveServerTestCase):
         #load search results
         driver.get(self.base_url + "/results?vehicle=oasissb&naics-code=541330&setasides=A5&")
         #make sure a count of vendors matching search is listed
-        self.assertRegex(driver.find_element_by_css_selector("span.matching_your_search").text, "\d+ vendors match your search")
+        self.assertRegexpMatches(driver.find_element_by_css_selector("span.matching_your_search").text, "\d+ vendors match your search")
 
     def test_8a_and_hubzone_added(self):
         driver = self.driver
         #load 8(a) search results
-        driver.get(self.base_url + "/results?setasides=A6&vehicle=oasissb&naics-code=541330&")
+        driver.get(self.base_url + "/results?setasides=A6&vehicle=oasissb&naics-code=541330B&")
         #make sure first few results are for 8(a) vendors
         time.sleep(1)
         try:
@@ -147,9 +147,9 @@ class FunctionalTests(LiveServerTestCase):
         self.assertTrue(2876591 <= int(driver.find_element_by_css_selector("span.annual_revenue.admin_data").text.replace(',', '').replace('$', '')))
         self.assertEqual("13873 Park Center Rd Ste 400N", driver.find_element_by_css_selector("span.vendor_address1.admin_data2").text)
         self.assertEqual("Herndon, VA 20171", driver.find_element_by_css_selector("span.vendor_address2.admin_data2").text)
-        self.assertEqual("Paul Kwiatkowski", driver.find_element_by_css_selector("span.vendor_poc_name.admin_data2").text)
-        self.assertEqual("703-766-7714", driver.find_element_by_css_selector("span.vendor_poc_phone.admin_data2").text)
-        self.assertEqual("Paul.Kwiatkowski@Akima.com", driver.find_element_by_css_selector("span.vendor_poc_email.admin_data2").text)
+        self.assertEqual("Joanne O'Leary", driver.find_element_by_css_selector("span.vendor_poc_name.admin_data2").text)
+        self.assertEqual("571-482-5347", driver.find_element_by_css_selector("span.vendor_poc_phone.admin_data2").text)
+        self.assertEqual("GSA-OASIS@ikun.com", driver.find_element_by_css_selector("span.vendor_poc_email.admin_data2").text)
 
     def test_all_contracts_button(self):
         driver = self.driver
@@ -194,22 +194,22 @@ class FunctionalTests(LiveServerTestCase):
     def test_number_of_pools_not_displayed_in_search_results(self):
         driver = self.driver
         #open search results
-        driver.get(self.base_url + "/results?vehicle=oasissb&setasides=A6&naics-code=541330&")
+        driver.get(self.base_url + "/results?setasides=A6&vehicle=oasissb&naics-code=541612&")
         #make sure format of result count is '* vendors match your search'
-        self.assertRegex(driver.find_element_by_css_selector("span.matching_your_search").text, r"^[\s\S]* vendors match your search$")
+        self.assertRegexpMatches(driver.find_element_by_css_selector("span.matching_your_search").text, r"^[\s\S]* vendors match your search$")
         #make sure format of result count is not '* vendors in * pool(s) match your search'
-        self.assertNotRegex(driver.find_element_by_css_selector("span.matching_your_search").text, r"^[\s\S]*in [\s\S]* pool\(s\)[\s\S]*$")
+        self.assertNotRegexpMatches(driver.find_element_by_css_selector("span.matching_your_search").text, r"^[\s\S]*in [\s\S]* pool\(s\)[\s\S]*$")
 
     def test_data_load_dates_displayed_on_landing_page(self):
         driver = self.driver
         #open landing page
         driver.get(self.base_url + '/')
         #make sure SAM load date is displayed and not 12/31/69
-        self.assertRegex(driver.find_element_by_id("data_source_date_sam").text, r"^[\d]*/[\d]*/[\d]*$")
+        self.assertRegexpMatches(driver.find_element_by_id("data_source_date_sam").text, r"^[\d]*/[\d]*/[\d]*$")
         self.assertNotEqual(driver.find_element_by_id("data_source_date_sam").text, "12/31/69")
         self.assertNotEqual(driver.find_element_by_id("data_source_date_sam").text, "NaN/NaN/NaN")
         #make sure FPDS load date is displayed and not 12/31/69
-        self.assertRegex(driver.find_element_by_id("data_source_date_fpds").text, r"^[\d]*/[\d]*/[\d]*$")
+        self.assertRegexpMatches(driver.find_element_by_id("data_source_date_fpds").text, r"^[\d]*/[\d]*/[\d]*$")
         self.assertNotEqual(driver.find_element_by_id("data_source_date_sam").text, "12/31/69")
         self.assertNotEqual(driver.find_element_by_id("data_source_date_sam").text, "NaN/NaN/NaN")
 
@@ -219,11 +219,11 @@ class FunctionalTests(LiveServerTestCase):
         driver.get(self.base_url + '/results?vehicle=oasissb&naics-code=541620&')
         time.sleep(0.5)
         #make sure csv link exists and is correct
-        self.assertRegex(driver.find_element_by_link_text("download data (CSV)").get_attribute("href"), r"^[\s\S]*/results/csv[\s\S]*$")
+        self.assertRegexpMatches(driver.find_element_by_link_text("download data (CSV)").get_attribute("href"), r"^[\s\S]*/results/csv[\s\S]*$")
         #load vendor detail page
         driver.get(self.base_url + "/vendor/786997739/?naics-code=541620&")
         #make sure csv link exists and is correct
-        self.assertRegex(driver.find_element_by_link_text("download vendor data (CSV)").get_attribute("href"), r"^[\s\S]*/vendor/[\s\S]*/csv[\s\S]*$")
+        self.assertRegexpMatches(driver.find_element_by_link_text("Download vendor data (CSV)").get_attribute("href"), r"^[\s\S]*/vendor/[\s\S]*/csv[\s\S]*$")
 
     def test_footer_links(self):
         driver = self.driver
@@ -306,7 +306,11 @@ class FunctionalTests(LiveServerTestCase):
     def test_unrestricted_socioeconomic_factors(self):
         driver = self.driver
         #open page for vendor list in OASIS Unrestricted
-        driver.get(self.base_url + '/results?vehicle=oasis&naics-code=541330&')
+        driver.get(self.base_url + '/results?vehicle=oasis&naics-code=541618&')
+        element = WebDriverWait(driver, 3).until(
+            EC.presence_of_all_elements_located((By.CLASS_NAME, "vendor_name"))
+        )   
+        
         #make sure socioeconomic indicator headers exist
         self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/td[4]').text, '8(a)')
         self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/td[5]').text, 'HubZ')
@@ -317,18 +321,22 @@ class FunctionalTests(LiveServerTestCase):
         #make sure "OASIS SB Only" column exists in results table
         self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[2]/td[4]').text, 'Not Applicable\n(OASIS SB Only)')
         #make sure filter selection says "OASIS SB Only"
-        self.assertEqual(driver.find_element_by_id('choose_filters').text, 'Choose filters (OASIS SB Only)')
+        self.assertEqual(driver.find_element_by_id('choose_filters').text, 'Choose filters (SB Only)')
         #make sure filter selection remains disabled after NAICS is selected
         self.assertFalse(driver.find_element_by_css_selector(".se_filter").is_enabled())
 
     def test_number_of_contracts_column(self):
         driver = self.driver
         #open a search results page
-        driver.get(self.base_url + '/results?vehicle=oasissb&naics-code=541330&')
+        driver.get(self.base_url + '/results?vehicle=oasissb&naics-code=541618&')
+        element = WebDriverWait(driver, 3).until(
+            EC.presence_of_all_elements_located((By.CLASS_NAME, "vendor_name"))
+        )  
+        
         #make sure header for number of results column exists
         self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/td[3]').text, 'No. of Contracts')
         #make sure value for number of contracts in row 1 is greater than or equal to value in row 2
-        self.assertGreater(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[2]/td[3]').text, driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[3]/td[3]').text)
+        self.assertGreater(int(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[2]/td[3]').text), int(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[3]/td[3]').text))
 
     def test_contracts_sorting(self):
         driver = self.driver
@@ -360,11 +368,11 @@ class FunctionalTests(LiveServerTestCase):
     def test_contract_pagination(self):
         driver = self.driver
         #open a vendor page where vendor has more than 100 search results
-        driver.get(self.base_url + '/vendor/197138274/?vehicle=oasis&naics-code=541330&')
+        driver.get(self.base_url + '/vendor/007901598/?vehicle=oasis&')
         #no more than 100 contracts are listed
         self.assertEqual(driver.find_element_by_id('contracts_current').text, '1 - 100')
         #total number of contracts is displayed
-        self.assertTrue(int(driver.find_element_by_id('contracts_total').text.replace(',', '')) >=  4096)
+        self.assertTrue(int(driver.find_element_by_id('contracts_total').text.replace(',', '')) >=  500)
         self.assertTrue(driver.find_element_by_id('pagination_container').is_displayed())
         self.assertTrue(driver.find_element_by_id('viewing_contracts').is_displayed())
 
