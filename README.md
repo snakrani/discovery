@@ -19,7 +19,7 @@ All of Discovery's developer and maintenance documentation is located in the [do
 
 #### Getting set up with Discovery
 
-* [**Setup and configuration overview**](docs/setup/overview.md)
+* **[Setup and configuration overview](docs/setup/overview.md)**
   * [About Discovery](docs/setup/about.md)
   * [Getting Started](docs/setup/getting_started.md)
   * [Running with Vagrant](docs/setup/vagrant.md)
@@ -28,7 +28,7 @@ All of Discovery's developer and maintenance documentation is located in the [do
 
 #### Discovery architecture and design
 
-* [**Discovery architecture overview**](docs/architecture/overview.md)
+* **[Discovery architecture overview](docs/architecture/overview.md)**
   * [Technologies required](docs/architecture/technologies.md)
   * [System and interface design](docs/architecture/design.md)
   * [Discovery data](docs/architecture/data.md)
@@ -36,7 +36,7 @@ All of Discovery's developer and maintenance documentation is located in the [do
 
 #### Discovery related processes
 
-* [**Discovery process overview**](docs/process/overview.md)
+* **[Discovery process overview](docs/process/overview.md)**
   * [Development processes](docs/process/development.md)
   * [Testing processes](docs/process/testing.md)
   * [Deployment process](docs/process/deployment.md)
