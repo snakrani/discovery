@@ -306,7 +306,7 @@ class FunctionalTests(LiveServerTestCase):
     def test_unrestricted_socioeconomic_factors(self):
         driver = self.driver
         #open page for vendor list in OASIS Unrestricted
-        driver.get(self.base_url + '/results?vehicle=oasis&naics-code=541330&')
+        driver.get(self.base_url + '/results?vehicle=oasis&naics-code=541618&')
         #make sure socioeconomic indicator headers exist
         self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/td[4]').text, '8(a)')
         self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/td[5]').text, 'HubZ')
@@ -324,7 +324,7 @@ class FunctionalTests(LiveServerTestCase):
     def test_number_of_contracts_column(self):
         driver = self.driver
         #open a search results page
-        driver.get(self.base_url + '/results?vehicle=oasissb&naics-code=541330&')
+        driver.get(self.base_url + '/results?vehicle=oasissb&naics-code=541618&')
         #make sure header for number of results column exists
         self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/td[3]').text, 'No. of Contracts')
         #make sure value for number of contracts in row 1 is greater than or equal to value in row 2
