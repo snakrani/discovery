@@ -7,29 +7,29 @@ Discovery is a market research tool for GSA Contract Vehicles. Currently, it fea
 
 #### Getting set up with Discovery
 
-* [**Setup and configuration overview**](docs/setup/overview.md)
-  * [About Discovery](docs/setup/about.md)
-  * [Getting Started](docs/setup/getting_started.md)
-  * [Running with Vagrant](docs/setup/vagrant.md)
-  * [Running directly with Docker](docs/setup/docker.md)
-  * [Application requirements](docs/setup/requirements.md)
+* [**Setup and configuration overview**](setup/overview.md)
+  * [About Discovery](setup/about.md)
+  * [Getting Started](setup/getting_started.md)
+  * [Running with Vagrant](setup/vagrant.md)
+  * [Running directly with Docker](setup/docker.md)
+  * [Application requirements](setup/requirements.md)
 
 #### Discovery architecture and design
 
-* [**Discovery architecture overview**](docs/architecture/overview.md)
-  * [Technologies required](docs/architecture/technologies.md)
-  * [Application system and interface design](docs/architecture/design.md)
-  * [Discovery data](docs/architecture/data.md)
-  * [Static assets](docs/architecture/assets.md)
+* [**Discovery architecture overview**](architecture/overview.md)
+  * [Technologies required](architecture/technologies.md)
+  * [Application system and interface design](architecture/design.md)
+  * [Discovery data](architecture/data.md)
+  * [Static assets](architecture/assets.md)
 
 #### Discovery related processes
 
-* [**Discovery process overview**](docs/process/overview.md)
-  * [Development processes](docs/process/development.md)
-  * [Testing processes](docs/process/testing.md)
-  * [Deployment process](docs/process/deployment.md)
-  * [Discovery management](docs/process/management.md)
-  * [Contributing to Discovery](docs/process/contributing.md)
+* [**Discovery process overview**](process/overview.md)
+  * [Development processes](process/development.md)
+  * [Testing processes](process/testing.md)
+  * [Deployment process](process/deployment.md)
+  * [Discovery management](process/management.md)
+  * [Contributing to Discovery](process/contributing.md)
 
 #### Useful links
 
