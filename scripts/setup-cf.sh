@@ -34,5 +34,7 @@ then
   echo "> Installing the CloudFoundry Autopilot plugin" | tee -a "$LOG_FILE"  
   curl -L -o "$PLUGIN_BIN_DIR/cf-autopilot" 'https://github.com/contraband/autopilot/releases/download/0.0.4/autopilot-linux' >>"$LOG_FILE" 2>&1
   chmod 755 "$PLUGIN_BIN_DIR/cf-autopilot" >>"$LOG_FILE" 2>&1
-  cf install-plugin -f "$PLUGIN_BIN_DIR/cf-autopilot" >>"$LOG_FILE" 2>&1
 fi
+
+echo "> Adding the CloudFoundry Autopilot plugin for current user" | tee -a "$LOG_FILE"
+cf install-plugin -f "$PLUGIN_BIN_DIR/cf-autopilot" >>"$LOG_FILE" 2>&1
