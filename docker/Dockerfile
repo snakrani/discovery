@@ -29,7 +29,7 @@ RUN /usr/local/discovery/bin/setup-python.sh /dev/stderr \
 #
 # Javascript dependencies
 #
-COPY ./scripts/setup-browsers.sh /usr/local/discovery/bin/setup-browsers.sh
+COPY ./scripts/setup-phantomjs.sh /usr/local/discovery/bin/setup-phantomjs.sh
 
-RUN /usr/local/discovery/bin/setup-browsers.sh /dev/stderr \
+RUN /usr/local/discovery/bin/setup-phantomjs.sh /dev/stderr \
     && rm -rf /tmp/*
