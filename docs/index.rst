@@ -10,6 +10,15 @@ Welcome to GSA Discovery's documentation!
 
 .. toctree::
     :maxdepth: 2
+    :caption: Links
+
+    Discovery home <https://discovery.gsa.gov/>
+    Discovery development <https://discovery-dev.app.cloud.gov/>
+    GitHub project <https://github.com/PSHCDevOps/discovery/>
+    Trello board <https://trello.com/b/AEoWtET7/discovery-20/>
+
+.. toctree::
+    :maxdepth: 2
     :caption: Setup
 
     setup/readme
@@ -39,10 +48,3 @@ Welcome to GSA Discovery's documentation!
     process/deployment
     process/management
     process/contributing
-
-.. toctree::
-    :maxdepth: 2
-    :caption: Useful Links
-
-    Discovery home <https://discovery-dev.app.cloud.gov/>
-    GitHub project <https://github.com/PSHCDevOps/discovery>
