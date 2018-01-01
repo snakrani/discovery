@@ -6,13 +6,13 @@ Welcome to GSA Discovery's documentation!
 .. toctree::
     :hidden:
 
-    overview
+    readme
 
 .. toctree::
     :maxdepth: 2
     :caption: Setup
 
-    setup/overview
+    setup/readme
     setup/about
     setup/getting_started
     setup/vagrant
@@ -23,7 +23,7 @@ Welcome to GSA Discovery's documentation!
     :maxdepth: 2
     :caption: Architecture
 
-    architecture/overview
+    architecture/readme
     architecture/technologies
     architecture/design
     architecture/data
@@ -33,7 +33,7 @@ Welcome to GSA Discovery's documentation!
     :maxdepth: 2
     :caption: Processes
 
-    process/overview
+    process/readme
     process/development
     process/testing
     process/deployment
