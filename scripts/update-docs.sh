@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 # Update the GitHub pages documentation site
 #
+#
+# >> This script must be run within a Python virtualized environment
+#
 set -e
 
 SCRIPT_USAGE="
@@ -70,10 +73,13 @@ fi
 # in case there is unstaged work or untracked files we don't want to wipe
 # accidentally!!!!  This means we need to pull a fresh version to work with.
 
-if which git >/dev/null && which make >/dev/null && which sphinx-build >/dev/null
+if which git >/dev/null && which make >/dev/null
 then
-    # Fetch source repository
+    # Ensure a clean build
     rm -Rf "$BUILD_DIR"
+    rm -Rf "$SITE_TEMP_DIR"
+    
+    # Fetch source repository
     git clone -b "$SOURCE_BRANCH" "$GH_PAGES_REMOTE" "$BUILD_DIR"
     cd "$BUILD_DIR/docs"
     
@@ -92,7 +98,7 @@ then
     
     # Update Git repository and publish site updates
     git add -A
-    git commit -m "$PUB_DOCS_MESSAGE"
+    git commit -m "$DOC_UPDATE_MESSAGE"
     git push origin "$GH_PAGES_BRANCH"
     
     # Clean up after ourselves
@@ -100,6 +106,6 @@ then
     rm -Rf "$BUILD_DIR"    
 
 else
-    echo "The update-docs script requires git, make, and sphinx-build to be installed"
+    echo "The update-docs script requires git and make to be installed"
     exit 1  
 fi
