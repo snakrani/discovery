@@ -1,7 +1,0 @@
----
-inherit: base-manifest.yml
-
-command: celery -A discovery worker --loglevel=info --concurrency=4
-no-route: true
-health-check-type: process
-memory: 832M

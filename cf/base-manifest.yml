@@ -1,9 +1,0 @@
----
-path: ../
-buildpack: https://github.com/cloudfoundry/python-buildpack
-disk_quota: 1G
-timeout: 180
-services:
-  - discovery-config
-  - discovery-db
-  - discovery-redis
