@@ -7,12 +7,9 @@ cd "$PROJ_DIR"
 #-------------------------------------------------------------------------------
 
 #install basic dependencies
-if [ ! -f /tmp/apt-update-complete ]
-then
-  echo "> Updating OS package repositories"
-  sudo apt-get update >/dev/null
-  touch /tmp/apt-update-complete 
-fi
+echo "> Updating OS package repositories"
+sudo apt-get update >/dev/null
+
 if ! which git >/dev/null
 then
   echo "> Installing Git version control"
