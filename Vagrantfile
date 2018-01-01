@@ -29,12 +29,24 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   if vm_config["copy_ssh"]
-    config.vm.provision :file, source: "~/.ssh", destination: ".ssh"
+    # DO NOT overwrite the authorized_keys file on Vagrant
+    config.vm.provision :file, source: "~/.ssh/config", destination: ".ssh/config"
+
+    Dir.glob("#{Dir.home}/.ssh/id_*") do |key_file|
+      key_file = key_file.sub("#{Dir.home}/", '')
+      config.vm.provision :file, source: "~/#{key_file}", destination: key_file
+    end
   end
   if vm_config["copy_gitconfig"]
     config.vm.provision :file, source: "~/.gitconfig", destination: ".gitconfig"
   end
 
+  if vm_config["copy_profile"]
+    config.vm.provision :file, source: "~/.profile", destination: ".profile"
+  end
+  if vm_config["copy_bashrc"]
+    config.vm.provision :file, source: "~/.bashrc", destination: ".bashrc"
+  end
   config.vm.provision :shell do |s|
     s.name = "Setting login path redirect"
     s.inline = <<-SHELL
