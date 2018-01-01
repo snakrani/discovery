@@ -46,10 +46,3 @@ Welcome to GSA Discovery's documentation!
 
     Discovery home <https://discovery-dev.app.cloud.gov/>
     GitHub project <https://github.com/PSHCDevOps/discovery>
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`search`
