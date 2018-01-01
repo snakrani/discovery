@@ -12,7 +12,7 @@ Welcome to GSA Discovery's documentation!
     :maxdepth: 2
     :caption: Links
 
-    Discovery home <https://discovery.gsa.gov/>
+    Discovery live <https://discovery.gsa.gov/>
     Discovery development <https://discovery-dev.app.cloud.gov/>
     GitHub project <https://github.com/PSHCDevOps/discovery/>
     Trello board <https://trello.com/b/AEoWtET7/discovery-20/>
