@@ -98,7 +98,7 @@ then
     
     # Update Git repository and publish site updates
     git add -A
-    git commit -m "$DOC_UPDATE_MESSAGE"
+    git diff-index --quiet HEAD || git commit -m "$DOC_UPDATE_MESSAGE"
     git push origin "$GH_PAGES_BRANCH"
     
     # Clean up after ourselves
