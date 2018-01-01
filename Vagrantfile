@@ -48,6 +48,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.provision :file, source: "~/.bashrc", destination: ".bashrc"
   end
   config.vm.provision :shell do |s|
+    s.name = "Setting up Git prompt"
+    s.inline = <<-SHELL
+      curl -so "$HOME/.git-prompt.sh" https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
+      grep -q -F "source ~/.git-prompt.sh" "$HOME/.bashrc" 2>/dev/null || echo "source ~/.git-prompt.sh" >> "$HOME/.bashrc"
+    SHELL
+
+    s.env = {"HOME" => "/home/vagrant"}
+  end
+  config.vm.provision :shell do |s|
     s.name = "Setting login path redirect"
     s.inline = <<-SHELL
       project_dir="${1}"
