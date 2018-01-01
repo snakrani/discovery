@@ -41,7 +41,7 @@ source_suffix = ['.rst', '.md']
 master_doc = 'index'
 
 # General information about the project.
-project = 'Discovery'
+project = 'GSA Discovery'
 copyright = '2017, GSA Federal Acquisition Service'
 author = 'GSA FAS PSHC with 18F'
 
@@ -68,7 +68,7 @@ language = None
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This patterns also effect to html_static_path and html_extra_path
-exclude_patterns = ['_build', '.DS_Store']
+exclude_patterns = ['build', '.DS_Store']
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
@@ -95,12 +95,15 @@ html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = []
+html_static_path = ['images']
+html_logo = "images/discovery.png"
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
 #
 
+# Formatting options
+html_show_sourcelink = False
 
 # -- Options for HTMLHelp output ------------------------------------------
 
