@@ -16,6 +16,8 @@ services:
       - ..:/discovery
       - ~/.ssh:/root/.ssh
       - ~/.gitconfig:/root/.gitconfig
+      - ~/.bashrc:/root/.bashrc
+      - ~/.profile:/root/.profile
     environment:
       # What CloudFoundry gives us...
       DATABASE_URL: postgres://oasis:oasis@discovery-postgresql:5432/oasis
