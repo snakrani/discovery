@@ -17,6 +17,11 @@ VOLUME /discovery
 WORKDIR /discovery
 
 #
+# SSH configuration
+#
+RUN mkdir /root/.ssh
+
+#
 # Application requirements
 #
 COPY ./scripts/setup-python.sh /usr/local/discovery/bin/setup-python.sh
