@@ -41,8 +41,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.provision :file, source: "~/.gitconfig", destination: ".gitconfig"
   end
 
+  if vm_config["copy_vimrc"]
+    config.vm.provision :file, source: "~/.vimrc", destination: ".vimrc"
+  end
+
   if vm_config["copy_profile"]
     config.vm.provision :file, source: "~/.profile", destination: ".profile"
+  end
+  if vm_config["copy_bash_aliases"]
+    config.vm.provision :file, source: "~/.bash_aliases", destination: ".bash_aliases"
   end
   if vm_config["copy_bashrc"]
     config.vm.provision :file, source: "~/.bashrc", destination: ".bashrc"
