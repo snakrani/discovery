@@ -1,7 +1,7 @@
 
 # Discovery technologies
 
-**^** **[Architecture Overview](overview.md)** | [System and Interface Design](design.md) **>**
+**^** **[Architecture Overview](readme.md)** | [System and Interface Design](design.md) **>**
 
 ## Dockerized development
 

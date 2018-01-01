@@ -1,7 +1,7 @@
 
 # Discovery static assets
 
-**<** [Application Data](data.md) | **^** **[Architecture Overview](overview.md)**
+**<** [Application Data](data.md) | **^** **[Architecture Overview](readme.md)**
 
 ## Asset Types
 

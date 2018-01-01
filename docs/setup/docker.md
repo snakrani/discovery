@@ -1,7 +1,7 @@
 
 # Discovery on Docker
 
-**<** [Vagrant Setup](vagrant.md) | **^** **[Setup Overview](overview.md)** | [Discovery Requirements](requirements.md) **>**
+**<** [Vagrant Setup](vagrant.md) | **^** **[Setup Overview](readme.md)** | [Discovery Requirements](requirements.md) **>**
 
 ## Installation
 

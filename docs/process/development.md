@@ -1,7 +1,7 @@
 
 # Discovery development process
 
-**^** **[Process Overview](overview.md)** | [Testing Processes](testing.md) **>**
+**^** **[Process Overview](readme.md)** | [Testing Processes](testing.md) **>**
 
 ## Version control and branching strategy
 

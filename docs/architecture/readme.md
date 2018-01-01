@@ -1,7 +1,7 @@
 
 # Architecture and design
 
-**^** **[Documentation Outline](../overview.md)** | [Technologies Required](technologies.md) **>**
+**^** **[Documentation Outline](../readme.md)** | [Technologies Required](technologies.md) **>**
 
 ## Overview
 

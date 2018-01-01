@@ -1,7 +1,7 @@
 
 # Discovery system and frontend design
 
-**<** [Technologies Required](technologies.md) | **^** **[Architecture Overview](overview.md)** | [Application Data](data.md) **>**
+**<** [Technologies Required](technologies.md) | **^** **[Architecture Overview](readme.md)** | [Application Data](data.md) **>**
 
 ## Overview
 

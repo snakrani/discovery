@@ -1,7 +1,7 @@
 
 # Discovery requirements
 
-**<** [Docker Setup](docker.md) | **^** **[Setup Overview](overview.md)**
+**<** [Docker Setup](docker.md) | **^** **[Setup Overview](readme.md)**
 
 ## Environment
 

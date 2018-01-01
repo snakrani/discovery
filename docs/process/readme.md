@@ -1,7 +1,7 @@
 
 # Discovery processes
 
-**^** **[Documentation Outline](../overview.md)** | [Development Processes](development.md) **>**
+**^** **[Documentation Outline](../readme.md)** | [Development Processes](development.md) **>**
 
 ## Overview
 
