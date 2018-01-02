@@ -196,7 +196,7 @@ jobs:
             source /venv/bin/activate
             git config --global user.name "CircleCI ( ${CIRCLE_USERNAME} )"
             git config --global user.email "${CIRCLE_USERNAME}@${CIRCLE_BRANCH}"
-            scripts/update-docs.sh "${CIRCLE_BRANCH}"
+            scripts/deploy-docs.sh "${CIRCLE_BRANCH}"
 
       - store_artifacts:
           path: logs
