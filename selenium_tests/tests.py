@@ -369,6 +369,9 @@ class FunctionalTests(LiveServerTestCase):
         driver = self.driver
         #open a vendor page where vendor has more than 100 search results
         driver.get(self.base_url + '/vendor/007901598/?vehicle=oasis&')
+        element = WebDriverWait(driver, 3).until(
+            EC.presence_of_element_located((By.CLASS_NAME, "agency"))
+        )
         #no more than 100 contracts are listed
         self.assertEqual(driver.find_element_by_id('contracts_current').text, '1 - 100')
         #total number of contracts is displayed
