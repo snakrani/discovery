@@ -7,7 +7,7 @@ description: Market research tool for the OASIS procurement vehicle, which serve
   contracting specialists throughout the U.S. Federal Government.
 partners:
 - General Services Administration
-impact: 
+impact:
 stage: beta
 milestones:
 - 'May 2014: Initial Discovery stage began for task order generator project'
@@ -21,8 +21,8 @@ contact:
 stack: Python, JavaScript
 team: josh, kaitlin, brethauer, shawn
 licenses:
-  mirage: Public Domain (CC0)
+  discovery: Public Domain (CC0)
 links:
 - http://gsa.gov/oasis
 - https://discovery.gsa.gov
-status: 
+status:

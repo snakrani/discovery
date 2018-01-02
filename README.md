@@ -1,11 +1,11 @@
 # Discovery: OASIS Market Research
-[![Circle CI](https://circleci.com/gh/18F/mirage.png?style=badge)](https://circleci.com/gh/18F/mirage)
+[![CircleCI](https://circleci.com/gh/PSHCDevOps/discovery/tree/master.svg?style=svg)](https://circleci.com/gh/PSHCDevOps/discovery/tree/master)
 
 Welcome to the wonderful world of procurement, a mechanism by which the government buys goods and services from the private sector. The procurement process is made up of several stages, one of the earliest being market research. Market Research is an attempt to predict what qualified bidders your solicitation for goods or services will attract. It helps acquisition personnel make decisions regarding various aspects of their particular procurement. Ideally, a solicitation should be structured so that it attracts a enough experienced bidders to be truly competitive.
 
 After researching the marketplace, procurement officers may decide to break their solicitation up into smaller chunks, or choose one vehicle or schedule over another. Procurement vehicles and schedules are large umbrella contracts, with a set of vendors that have "pre-competed" for work in a general category. Discovery was developed to serve the [OASIS family of  vehicles](http://www.gsa.gov/portal/content/161367), which has many vendors capable of providing integrated professional services. OASIS is actually two vehicles, OASIS SB, which includes small businesses only, and OASIS unrestricted, which includes a wider array of vendors.
 
-Discovery is live at (https://discovery.gsa.gov). You can file issues on this repo, or you can check out our [Trello board](https://trello.com/b/ZcWTRSP9/mirage), which contains our product backlog to see what we have planned in the future.
+Discovery is live at (https://discovery.gsa.gov). You can file issues on this repo, or you can check out our [Trello board](https://trello.com/b/AEoWtET7/discovery-20), which contains our product backlog to see what we have planned in the future.
 
 Currently, Discovery makes use of vendor information from the System for Award Management (SAM) and historical contract information the Federal Procurement Data System (FPDS). There are a few management commands that load the initial data, but we also provide a SQL dump since the loading of data from FPDS for the past decade can take several hours.
 
@@ -18,7 +18,7 @@ This project uses [Django](https://www.djangoproject.com/), a Python framework. 
  * Creating a postgresql database and storing the settings in a ```local_settings.py``` file, a sibling of ```settings.py```
  * Run ```manage.py migrate``` to set up the database and ```manage.py createcachetable``` to set up caching
 
- * Loading a [SQL dump](https://s3.amazonaws.com/mirage-gsa-gov/discovery.sql.gz) to get some data into the project
+ * Loading a [SQL dump](https://s3.amazonaws.com/discovery-gsa-gov/discovery.sql.gz) to get some data into the project
  * Run `manage.py runserver` to start the server. Optionally specify a host and port to serve on. For example `0.0.0.0:8888`
 
 ## Requirements
@@ -29,7 +29,7 @@ This project supports Python 2.7+. However for one package, there are different 
 
 The project comes with everything you need to get started, including fixtures for some static information, and management commands to load the rest of the data. The OASIS vehicles are broken out into categories or pools, which are enumerated in a fixture. The pools are defined by groups of [NAICS codes](http://www.naics.com/sic-codes-industry-drilldown/). Vendors in the OASIS SB vehicle may also have certain setasides, such as women owned, service disabled veteran owned, etc. These setaside codes are also included in their own fixture. All of these fixtures can be found in `vendors/fixtures/`.
 
-You have to options for getting the data. You can load the [SQL dump provided above](https://s3.amazonaws.com/mirage-gsa-gov/discovery.sql.gz) and get everything at once, or you can load the data manually.
+You have to options for getting the data. You can load the [SQL dump provided above](https://s3.amazonaws.com/discovery-gsa-gov/discovery.sql.gz) and get everything at once, or you can load the data manually.
 To load the data manually, load each of the fixtures inside the `/vendor/fixtures/` directory. You can load these using the `loaddata` manage command like so:
 
 `manage.py loaddata vendor/fixtures/naics.json`
@@ -64,7 +64,7 @@ Currently the `load_fpds` command is configured to load ten years of contract hi
 The --load_all flag forces a load of all contracts, regardless of last load date
 
 ```
- ./manage.py --id=ID  
+ ./manage.py --id=ID
  ```
 The --id parameter only loads contractors for vendors with an id greater than or equal to ID, where ID is the vendor's id in the vendor table. Contracts are loaded in order of vendor id.
 

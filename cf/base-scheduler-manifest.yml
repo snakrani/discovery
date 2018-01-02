@@ -1,0 +1,5 @@
+---
+inherit: base-worker-manifest.yml
+
+command: celery -A discovery beat --loglevel=info
+memory: 64M

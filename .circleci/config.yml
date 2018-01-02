@@ -1,0 +1,188 @@
+# Python CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-python/ for more details
+#
+# TODO: Get rid of all this CircleCI caching in favor of extended Docker images
+#
+version: 2
+jobs:
+  unit-tests:
+    docker:
+      - image: python:2.7-slim-stretch
+        environment:
+          PYTHONUNBUFFERED: 1
+
+      - image: postgres:9.3
+        environment:
+          POSTGRES_USER: circleci
+          POSTGRES_PASSWORD: circleci
+          POSTGRES_DB: circle-test
+
+    working_directory: /var/local
+
+    steps:
+      - run: echo 'export PATH=/venv/bin:$PATH' >> $BASH_ENV
+
+      - run:
+          name: Install Git
+          command: |
+            apt-get update
+            apt-get install -y git
+
+      - checkout
+
+      - run:
+          name: Install Python dependencies
+          command: |
+            scripts/setup-python.sh /dev/stderr
+
+      - run:
+          name: Set CircleCI configuration
+          command: |
+            cp discovery/local_settings.circle.py discovery/local_settings.py
+
+      - run:
+          name: Run unit tests
+          command: |
+            source /venv/bin/activate
+            python manage.py test api vendors contract
+
+      - store_artifacts:
+          path: logs
+          destination: unit-test-reports
+
+  acceptance-tests:
+    docker:
+      - image: python:2.7-slim-stretch
+        environment:
+          PYTHONUNBUFFERED: 1
+
+      - image: postgres:9.3
+        environment:
+          POSTGRES_USER: circleci
+          POSTGRES_PASSWORD: circleci
+          POSTGRES_DB: circle-test
+
+    working_directory: /var/local
+
+    steps:
+      - run: echo 'export PATH=/venv/bin:$PATH' >> $BASH_ENV
+
+      - run:
+          name: Install Git
+          command: |
+            apt-get update
+            apt-get install -y git
+
+      - checkout
+
+      - run:
+          name: Install Python dependencies
+          command: |
+            scripts/setup-python.sh /dev/stderr
+
+      - run:
+          name: Install PhantomJS web driver
+          command: |
+            scripts/setup-phantomjs.sh /dev/stderr
+
+      - run:
+          name: Set CircleCI configuration
+          command: |
+            cp discovery/local_settings.circle.py discovery/local_settings.py
+
+      - run:
+          name: Import fixtures and run test server
+          background: true
+          command: |
+            source /venv/bin/activate
+            scripts/init-server.sh /dev/stderr
+            scripts/load-fixtures.sh
+            waitress-serve --expose-tracebacks --port=8080 discovery.wsgi:application
+
+      - run:
+          name: Run acceptance tests
+          command: |
+            git submodule update --init --recursive
+            scripts/wait-for-it/wait-for-it.sh --host="localhost" --port=8080 --timeout=300
+            source /venv/bin/activate
+            python manage.py test selenium_tests
+
+      - store_artifacts:
+          path: logs
+          destination: acceptance-test-reports
+
+  deploy-dev:
+    docker:
+      - image: debian:stretch-slim
+        environment:
+          CF_LOGIN_URL: 'https://api.fr.cloud.gov'
+
+    working_directory: /var/local
+
+    steps:
+      - run:
+          name: Install Git
+          command: |
+            apt-get update
+            apt-get install -y git
+
+      - checkout
+
+      - run:
+          name: Setup CloudFoundry client CLI
+          command: |
+            scripts/setup-cf.sh /dev/stderr
+
+      - run:
+          name: Deploy development applications
+          command: |
+            scripts/deploy-dev.sh
+
+  deploy-prod:
+    docker:
+      - image: debian:stretch-slim
+        environment:
+          CF_LOGIN_URL: 'https://api.fr.cloud.gov'
+
+    working_directory: /var/local
+
+    steps:
+      - run:
+          name: Install Git
+          command: |
+            apt-get update
+            apt-get install -y git
+
+      - checkout
+
+      - run:
+          name: Setup CloudFoundry client CLI
+          command: |
+            scripts/setup-cf.sh /dev/stderr
+
+      - run:
+          name: Deploy production applications
+          command: |
+            scripts/deploy-prod.sh
+
+workflows:
+  version: 2
+  test-and-deploy:
+    jobs:
+      - unit-tests
+      - acceptance-tests
+      - deploy-dev:
+          requires:
+            - unit-tests
+            - acceptance-tests
+          filters:
+            branches:
+              only: develop
+      - deploy-prod:
+          requires:
+            - unit-tests
+            - acceptance-tests
+          filters:
+            branches:
+              only: master

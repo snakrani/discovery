@@ -8,8 +8,8 @@ import os.path
 from titlecase import titlecase
 
 class VendorView(TemplateView):
-    pdf_dir = 'mirage_site/static/mirage_site/capability_statements/'
-    static_pdf_dir = 'mirage_site/capability_statements/'
+    pdf_dir = 'discovery_site/static/discovery_site/capability_statements/'
+    static_pdf_dir = 'discovery_site/capability_statements/'
 
     def get_context_data(self, **kwargs):
         context = super(TemplateView, self).get_context_data(**kwargs)
