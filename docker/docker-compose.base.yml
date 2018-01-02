@@ -14,7 +14,7 @@ services:
       - django-env.vars
     volumes:
       - ..:/discovery
-      - ~:/root
+      - /usr/local/discovery-docker-root:/root
     environment:
       # What CloudFoundry gives us...
       DATABASE_URL: postgres://oasis:oasis@discovery-postgresql:5432/oasis
