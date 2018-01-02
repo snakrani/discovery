@@ -11,6 +11,7 @@ vm_config = YAML.load_file("vagrant-config.default.yml")
 vm_config.merge!(YAML.load_file("vagrant-config.yml")) if File.exist?("vagrant-config.yml")
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  vagrant_home = "/home/vagrant"
   project_directory = "/vagrant"
 
   config.vm.box = vm_config["box_name"]
@@ -55,29 +56,22 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.provision :file, source: "~/.bashrc", destination: ".bashrc"
   end
   config.vm.provision :shell do |s|
-    s.name = "Setting up Git prompt"
+    s.name = "Bash startup additions (scripts/vagrant-bash)"
     s.inline = <<-SHELL
-      curl -so "$HOME/.git-prompt.sh" https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
-      grep -q -F "source ~/.git-prompt.sh" "$HOME/.bashrc" 2>/dev/null || echo "source ~/.git-prompt.sh" >> "$HOME/.bashrc"
+      if ! grep -q -F '#<<discovery>>' "${HOME}/.bashrc" 2>/dev/null
+      then
+        cat "${PROJECT_DIR}/scripts/vagrant-bash.sh" >> "${HOME}/.bashrc"
+      fi
+      mkdir -p /usr/local/discovery-docker-root
+      cp -fR $HOME/. /usr/local/discovery-docker-root/
     SHELL
-
-    s.env = {"HOME" => "/home/vagrant"}
-  end
-  config.vm.provision :shell do |s|
-    s.name = "Setting login path redirect"
-    s.inline = <<-SHELL
-      project_dir="${1}"
-      grep -q -F "cd '$project_dir'" "$HOME/.bashrc" 2>/dev/null || echo "cd '$project_dir'" >> "$HOME/.bashrc"
-    SHELL
-
-    s.args = [project_directory]
-    s.env = {"HOME" => "/home/vagrant"}
+    s.env = { "HOME" => vagrant_home, "PROJECT_DIR" => project_directory }
   end
 
   config.vm.provision :shell do |s|
     s.name = "Bootstrapping development server"
     s.path = "scripts/bootstrap.sh"
-    s.args = [project_directory]
+    s.args = [ project_directory ]
   end
 
   config.vm.network :forwarded_port, guest: 8080, host: vm_config["web_port"]
