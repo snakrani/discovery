@@ -9,7 +9,7 @@ The **Discovery** application by the United States **GSA** [Professional Service
 
 We have tried to make getting started with development, _and hopefully contributing back to the Discovery project_, quick and painless.  In this pursuit we are building off of trusted open source tools and frameworks, such as Vagrant, Docker, Django, Cloud Foundry, and many others.  Getting started with the platform requires almost no setup, and management of the system is designed to be easy through the use of virtualization, automation, and CI/CD practices.  All actions performed "should be" automated through Django commands and various scripts (located in the "[scripts](https://github.com/PSHCDevOps/discovery/tree/master/scripts)" directory).
 
-This guide will help you understand the motivations behind the Discovery effort, how to get set up on your machine and ready for development, and primers on working with Vagrant and Docker (particularly related to this project).  We will also cover what you need to know about environment setup needed to run this application with other services.
+This guide will help you understand the motivations behind the Discovery effort, how to get set up on your machine and ready for development, and primers on working with Vagrant and Docker (_particularly related to this project_).  We will also cover what you need to know about environment setup in order to run this application with other services.
 
 ## Topics
 
