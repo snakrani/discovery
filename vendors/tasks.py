@@ -4,6 +4,7 @@ from celery.exceptions import TaskError
 
 from django.core.management import call_command
 from db_mutex import DBMutexError, DBMutexTimeoutError
+from db_mutex.models import DBMutex
 from db_mutex.db_mutex import db_mutex
 from StringIO import StringIO
 
