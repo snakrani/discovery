@@ -13,12 +13,13 @@ import sys
 @shared_task
 def update_categories():
     success = True
+    lock_id = 'vendors.update_categories'
     
     old_stdout = sys.stdout
     sys.stdout = mystdout = StringIO()
     
     try:
-        with db_mutex('vendors.update_categories'):
+        with db_mutex(lock_id):
             # Commands don't return anything
             call_command('load_categories')
     
@@ -30,6 +31,7 @@ def update_categories():
         print('update_categories: Task completed but the lock timed out')
         
     except Exception:
+        DBMutex.objects.get(lock_id=lock_id).delete()
         success = False
  
     sys.stdout = old_stdout
@@ -47,12 +49,13 @@ def update_categories():
 @shared_task
 def update_vendors(vpp=0, tries=3, pause=1):
     success = True
+    lock_id = 'vendors.update_vendors'
     
     old_stdout = sys.stdout
     sys.stdout = mystdout = StringIO()
     
     try:
-        with db_mutex('vendors.update_vendors'):
+        with db_mutex(lock_id):
             # Commands don't return anything
             call_command('load_vendors',
                  vpp=vpp,
@@ -68,6 +71,7 @@ def update_vendors(vpp=0, tries=3, pause=1):
         print('update_vendors: Task completed but the lock timed out')
         
     except Exception:
+        DBMutex.objects.get(lock_id=lock_id).delete()
         success = False
    
     sys.stdout = old_stdout

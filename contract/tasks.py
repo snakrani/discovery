@@ -13,12 +13,13 @@ import sys
 @shared_task
 def update_contracts(period=520, load=520, count=500, pause=1):
     success = True
+    lock_id = 'contract.update_contracts'
     
     old_stdout = sys.stdout
     sys.stdout = mystdout = StringIO()
     
     try:
-        with db_mutex('contract.update_contracts'):
+        with db_mutex(lock_id):
             # Commands don't return anything
             call_command('load_fpds', 
                  period=period, 
@@ -35,6 +36,7 @@ def update_contracts(period=520, load=520, count=500, pause=1):
         print('update_contracts: Task completed but the lock timed out')
         
     except Exception:
+        DBMutex.objects.get(lock_id=lock_id).delete()
         success = False
     
     sys.stdout = old_stdout
