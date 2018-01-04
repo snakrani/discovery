@@ -6,4 +6,5 @@ timeout: 180
 services:
   - discovery-config
   - discovery-db
-  - discovery-redis
+  - discovery-tasks
+  - discovery-auth
