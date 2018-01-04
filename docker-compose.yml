@@ -10,30 +10,25 @@
 #
 version: '2.3'
 services:
-  haproxy:
-    image: eeacms/haproxy
-    restart: always
+  gateway:
     depends_on:
       - web
     ports:
       - "8080:5000"
       - "1936:1936"
-    environment:
-      FRONTEND_PORT: 5000
-      BACKENDS: "web"
-      BALANCE: "roundrobin"
-      DNS_ENABLED: "true"
-      LOG_LEVEL: "info"
+    extends:
+      file: docker/docker-compose.base.yml
+      service: lb
 
   web:
-    command: bash -c "scripts/init-server.sh /dev/stderr discovery-postgresql 5432 && waitress-serve --expose-tracebacks --port=80 discovery.wsgi:application"
+    command: bash -c "scripts/init-webserver.sh /dev/stderr && waitress-serve --expose-tracebacks --port=80 discovery.wsgi:application"
     scale: 3
     depends_on:
-      - postgresql
-      - redis
+      - scheduler
     links:
-      - postgresql:discovery-postgresql
-      - redis:discovery-redis
+      - data:discovery-db
+      - tasks:discovery-tasks
+      - auth:discovery-auth
     extends:
       file: docker/docker-compose.base.yml
       service: django
@@ -43,29 +38,31 @@ services:
     restart: always
     scale: 2
     depends_on:
-      - web
+      - scheduler
     links:
-      - postgresql:discovery-postgresql
-      - redis:discovery-redis
+      - data:discovery-db
+      - tasks:discovery-tasks
+      - auth:discovery-auth
     extends:
       file: docker/docker-compose.base.yml
       service: django
 
   scheduler:
-    command: bash -c "celery -A discovery beat --loglevel=info"
+    command: bash -c "scripts/init-db.sh /dev/stderr discovery-db 5432 && celery -A discovery beat --loglevel=info --pidfile=logs/celerybeat.pid"
     restart: always
     depends_on:
-      - web
+      - data
+      - tasks
+      - auth
     links:
-      - postgresql:discovery-postgresql
-      - redis:discovery-redis
+      - data:discovery-db
+      - tasks:discovery-tasks
+      - auth:discovery-auth
     extends:
       file: ./docker/docker-compose.base.yml
       service: django
 
-  postgresql:
-    image: postgres:9.3
-    restart: always
+  data:
     ports:
       - "5432:5432"
     volumes:
@@ -74,13 +71,20 @@ services:
       file: docker/docker-compose.base.yml
       service: db
 
-  redis:
-    image: redis:3.2
-    restart: always
+  tasks:
     ports:
       - "6379:6379"
     volumes:
-      - discovery-queue:/data
+      - discovery-tasks:/data
+    extends:
+      file: docker/docker-compose.base.yml
+      service: queue
+
+  auth:
+    ports:
+      - "6479:6379"
+    volumes:
+      - discovery-auth:/data
     extends:
       file: docker/docker-compose.base.yml
       service: queue
@@ -89,5 +93,8 @@ volumes:
   discovery-data:
     external: false
 
-  discovery-queue:
+  discovery-tasks:
+    external: false
+
+  discovery-auth:
     external: false

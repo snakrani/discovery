@@ -1,12 +1,26 @@
 version: '2.3'
 services:
+  lb:
+    image: eeacms/haproxy
+    restart: always
+    environment:
+      FRONTEND_PORT: 5000
+      BACKENDS: "web"
+      BALANCE: "roundrobin"
+      DNS_ENABLED: "true"
+      LOG_LEVEL: "info"
+
   db:
+    image: postgres:9.3
+    restart: always
     environment:
       POSTGRES_USER: discovery
       POSTGRES_PASSWORD: discovery
       POSTGRES_DB: discovery
 
   queue:
+    image: redis:3.2
+    restart: always
     command: redis-server --requirepass discovery
 
   django:
@@ -19,14 +33,14 @@ services:
       - ..:/discovery
     environment:
       # What CloudFoundry gives us...
-      DATABASE_URL: postgres://discovery:discovery@discovery-postgresql:5432/discovery
+      DATABASE_URL: postgres://discovery:discovery@discovery-db:5432/discovery
       VCAP_SERVICES: >-
         {
           "aws-rds": [
             {
               "credentials": {
-                "uri": "postgres://discovery:discovery@discovery-postgresql:5432/discovery",
-                "host": "discovery-postgresql",
+                "uri": "postgres://discovery:discovery@discovery-db:5432/discovery",
+                "host": "discovery-db",
                 "port": "5432",
                 "username": "discovery",
                 "password": "discovery",
@@ -44,13 +58,27 @@ services:
           "redis32": [
             {
               "credentials": {
-                "uri": "redis://:discovery@discovery-redis:6379",
-                "hostname": "discovery-redis",
+                "uri": "redis://:discovery@discovery-tasks:6379",
+                "hostname": "discovery-tasks",
                 "port": "6379",
                 "password": "discovery"
               },
               "label": "redis32",
-              "name": "discovery-redis",
+              "name": "discovery-tasks",
+              "tags": [
+                "redis32",
+                "redis"
+              ]
+            },
+            {
+              "credentials": {
+                "uri": "redis://:discovery@discovery-auth:6379",
+                "hostname": "discovery-auth",
+                "port": "6379",
+                "password": "discovery"
+              },
+              "label": "redis32",
+              "name": "discovery-auth",
               "tags": [
                 "redis32",
                 "redis"
