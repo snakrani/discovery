@@ -212,10 +212,12 @@
   <div class="section" id="getting-started-with-discovery">
 <span id="getting-started-with-discovery"></span><h1>Getting started with Discovery<a class="headerlink" href="#getting-started-with-discovery" title="Permalink to this headline">¶</a></h1>
 <p><strong>&lt;</strong> <a class="reference internal" href="about.html"><span class="doc">About Discovery</span></a> | <strong>^</strong> <strong><a class="reference internal" href="readme.html"><span class="doc">Setup Overview</span></a></strong> | <a class="reference internal" href="vagrant.html"><span class="doc">Vagrant Setup</span></a> <strong>&gt;</strong></p>
+<p><br/></p>
 <div class="section" id="overview">
 <span id="overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>So you&#8217;ve decided to try running your own copy of Discovery to play around with or contribute.  Great!  This document will walk you through the high level process to getting up and running with Discovery locally and point you in the direction of more specific information you might need during the process.</p>
 <p>You should find development through either of two options easy and straight forward.  If you encounter problems during setup or while managing your development environment please <a class="reference external" href="https://github.com/PSHCDevOps/discovery/issues">file an issue</a> and we will do our best to help troubleshoot.</p>
+<p><br/></p>
 </div>
 <div class="section" id="development-options">
 <span id="development-options"></span><h2>Development options<a class="headerlink" href="#development-options" title="Permalink to this headline">¶</a></h2>
@@ -244,6 +246,7 @@
 <li>Vagrant boxes take up valuable space on the local hard drive</li>
 <li>Provide an extra layer of complexity if you only use Docker</li>
 </ul>
+<p><br/></p>
 <p>It is best to use Vagrant over local Docker if you value complete isolation between Docker based projects, like to tightly manage resources and port mapping on a usually minimal desktop environment, are new to Docker and/or Cloud Foundry and don&#8217;t want to worry about installing the development dependencies, or because you just like working with Vagrant.</p>
 <p>If you are interested in learning more about how to set up the Discovery project with Vagrant then head on over to the <a class="reference internal" href="vagrant.html"><span class="doc">Vagrant guide</span></a> to start getting Vagrant running and the Discovery project building on your machine.  The process should not take long.</p>
 <p><br/></p>
@@ -267,10 +270,11 @@
 <ul class="simple">
 <li>Docker containers and other resources from multiple projects are harder to manage in one workspace</li>
 <li>High probability of port collisions (particularly for service ports)</li>
-<li>Grew out of Unix container technology and still works best in that environment</li>
+<li>Grew out of Linux container technology and still works best in that environment</li>
 <li>You have to install Docker and the CF CLI and related plugins (easy to do with bundled scripts)</li>
 <li>Harder to clear image and volume caches and start fresh when needed</li>
 </ul>
+<p><br/></p>
 <p>It is best to use local Docker over Vagrant if you use Docker in a minimal desktop environment that does not have many clashing Docker projects to manage, if Vagrant is not a technology you want to install and update periodically, if you have very little in processing, memory, or harddisk resources on your machine, or if you already have your own flow with local Docker.</p>
 <p>If you are interested in learning more about how to set up the Discovery project with local Docker then head on over to the <a class="reference internal" href="docker.html"><span class="doc">Docker guide</span></a> to start getting Docker running and the Discovery project building on your machine.  This process should also not take long.</p>
 <p><br/></p>

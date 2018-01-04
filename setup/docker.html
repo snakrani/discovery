@@ -112,7 +112,12 @@
 <li class="toctree-l1"><a class="reference internal" href="vagrant.html">Discovery on Vagrant</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Discovery on Docker</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#running-docker-containers">Running Docker containers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#application-configurations">Application configurations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#docker-user-environment">Docker user environment</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#running-the-docker-services">Running the Docker services</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#common-docker-commands">Common Docker commands</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#getting-help">Getting help</a></li>
 </ul>
@@ -201,17 +206,128 @@
   <div class="section" id="discovery-on-docker">
 <span id="discovery-on-docker"></span><h1>Discovery on Docker<a class="headerlink" href="#discovery-on-docker" title="Permalink to this headline">¶</a></h1>
 <p><strong>&lt;</strong> <a class="reference internal" href="vagrant.html"><span class="doc">Vagrant Setup</span></a> | <strong>^</strong> <strong><a class="reference internal" href="readme.html"><span class="doc">Setup Overview</span></a></strong> | <a class="reference internal" href="requirements.html"><span class="doc">Discovery Requirements</span></a> <strong>&gt;</strong></p>
+<p><br/></p>
 <div class="section" id="installation">
 <span id="installation"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>Docker installation is fairly easy.  Our use of Docker requires two systems; the core Docker server, and Docker Compose for orchestrating container clusters.  Docker Compose makes it easy to work with projects containing many interlocking systems.</p>
+<p>If you are using the Discovery Vagrant development environment you do not need to install Docker and Docker Compose.</p>
+<ol class="simple">
+<li><strong>Docker</strong> - Install Docker from: <a class="reference external" href="https://www.docker.com/community-edition">https://www.docker.com/community-edition</a>
+<em>- If running Debian or Ubuntu, you can install by running the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/scripts/setup-docker.sh">scripts/setup-docker.sh</a> script</em></li>
+<li><strong>Docker Compose</strong> - Install Docker Compose from: <a class="reference external" href="https://docs.docker.com/compose/install">https://docs.docker.com/compose/install</a>
+<em>- This is included in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/scripts/setup-docker.sh">scripts/setup-docker.sh</a> setup</em></li>
+</ol>
+<p><br/></p>
 </div>
-<div class="section" id="running-docker-containers">
-<span id="running-docker-containers"></span><h2>Running Docker containers<a class="headerlink" href="#running-docker-containers" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="configuration">
+<span id="configuration"></span><h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>You will need to ensure certain environment variables are set for the Discovery application containers.  We provide an example (<a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/docker/django-env.example.vars">docker/django-env.example.vars</a>) but you will need to create a file called <strong>docker/django-env.vars</strong> that has sensitive application information.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Fetch Discovery project</span>
+$ git clone https://github.com/PSHCDevOps/discovery.git <span class="o">{</span>project_directory<span class="o">}</span>
+$ <span class="nb">cd</span> <span class="o">{</span>project_directory<span class="o">}</span>
+
+<span class="c1"># docker/django-env.vars is ignored by Git so your configuration will not be versioned</span>
+$ cp docker/django-env.example.vars docker/django-env.vars
+</pre></div>
+</div>
+<p><em>See below for notes on the available configurations...</em></p>
+<p><br/></p>
+<div class="section" id="application-configurations">
+<span id="application-configurations"></span><h3>Application configurations<a class="headerlink" href="#application-configurations" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>API_HOST</strong> <em>default: http://localhost:8080</em></p>
+<p>Sets the API request location for the Discovery frontend. The Discovery application passes the host and port of the API interface to the frontend Javascript.  This enables the Javascript to make requests to the API which basically power the frontend displays.  If no data is loading in the interface, chances are that this value is wrong.</p>
+</li>
+<li><p class="first"><strong>API_KEY</strong> <em>default: <strong>REQUIRED!!!</strong></em></p>
+<p>Sets a <a class="reference external" href="https://api.data.gov/signup/">Data.gov API key</a> that is passed to the Discovery API by the frontend Javascript.</p>
+</li>
+</ul>
+<ul>
+<li><p class="first"><strong>SAM_API_KEY</strong> <em>default: <strong>REQUIRED!!!</strong></em></p>
+<p>Sets the <a class="reference external" href="https://api.data.gov/signup/">Data.gov API key</a> that is passed to requests to get SAM vendor registration information.</p>
+</li>
+</ul>
+<ul>
+<li><p class="first"><strong>SECRET_KEY</strong> <em>default: <strong>REQUIRED!!!</strong></em></p>
+<p>Sets a secret alpha-numeric key that is required by Django for certain operations.  This key can be anything you like but it should be lengthy and randomistic.</p>
+</li>
+</ul>
+<p><br/></p>
+</div>
+<div class="section" id="docker-user-environment">
+<span id="docker-user-environment"></span><h3>Docker user environment<a class="headerlink" href="#docker-user-environment" title="Permalink to this headline">¶</a></h3>
+<p>To make inspecting state and working within the Docker application containers easier the Discovery application is configured to create (<em>if it does not exit</em>) and share a host folder <strong>/usr/local/discovery-docker-root</strong> that can allow for the sharing of <strong>/root</strong> environment files, such as .bashrc, .profile, .gitconfig, etc...</p>
+<p>If you are running Docker within the Vagrant virtual machine, Vagrant has already copied all Vagrant user environment files to this folder and they are being shared with the Docker application containers already.</p>
+<p>Note that this has not been tested with Windows so please <a class="reference external" href="https://github.com/PSHCDevOps/discovery/issues">file an issue</a> if you experience issues with local Docker development and our Docker Compose configuration.  If you do have issues on an untested environment, Docker on the Discovery Vagrant instance should provide a short term alternative while we get it fixed.</p>
+<p><br/></p>
+</div>
+</div>
+<div class="section" id="running-the-docker-services">
+<span id="running-the-docker-services"></span><h2>Running the Docker services<a class="headerlink" href="#running-the-docker-services" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> <span class="o">{</span>project directory<span class="o">}</span>
+
+<span class="c1"># Ensure all Docker services are up to date and running if possible</span>
+$ docker-compose up -d
+
+<span class="c1"># You can verify all Docker services are running with</span>
+$ docker-compose ps
+<span class="c1">#</span>
+<span class="c1"># You should see 5 containers running</span>
+<span class="c1">#   1. web site</span>
+<span class="c1">#   2. scheduler</span>
+<span class="c1">#   3. worker</span>
+<span class="c1">#   4. PostgreSQL database</span>
+<span class="c1">#   5. Redis queue</span>
+
+<span class="c1"># &quot;SSH&quot; into a Docker container and have a look around</span>
+<span class="c1">#</span>
+<span class="c1"># full-container-name = {network}_{name}_{instance_num}</span>
+<span class="c1">#</span>
+<span class="c1"># ex;  discovery_web_1</span>
+<span class="c1">#      vagrant_worker_1</span>
+<span class="c1">#</span>
+$ docker <span class="nb">exec</span> -it <span class="o">{</span>full-container-name<span class="o">}</span> bash
+</pre></div>
+</div>
+<p>You are now in the shared project directory: <strong>/discovery</strong></p>
+<ul class="simple">
+<li><strong>/discovery</strong> live at <strong>localhost:8080</strong></li>
+<li><strong>http://localhost:8080/admin</strong><ul>
+<li>First user: <strong>admin</strong></li>
+<li>Password:   <strong>admin-changeme</strong> (<em>please change!</em>)</li>
+</ul>
+</li>
+</ul>
+<p><br/></p>
 </div>
 <div class="section" id="common-docker-commands">
 <span id="common-docker-commands"></span><h2>Common Docker commands<a class="headerlink" href="#common-docker-commands" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Run on either the <strong>host</strong> or <strong>vagrant</strong> machine (<em>if installed and used</em>)</li>
+<li>Run from the <strong>top level project</strong> directory</li>
+</ul>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ docker-compose ps                      <span class="c1"># List all running containers from the docker-compose images</span>
+
+$ docker logs discovery_web_1            <span class="c1"># Display recent log entries from the discovery_web_1 container</span>
+$ docker logs discovery_web_1 --follow   <span class="c1"># Follow log entries from the discovery_web_1 container</span>
+
+$ docker <span class="nb">exec</span> -it discovery_web_1 bash   <span class="c1"># &quot;SSH&quot; into the running discovery_web_1 container</span>
+
+$ docker-compose up -d                   <span class="c1"># Create and run all site containers/services in the background</span>
+$ docker-compose build                   <span class="c1"># Rebuild docker images for all docker-compose services</span>
+                                         <span class="c1"># - run &quot;docker-compose up -d&quot; after to update running services</span>
+
+$ docker-compose stop web                <span class="c1"># Stop the Discovery web service</span>
+$ docker-compose rm web                  <span class="c1"># Remove the Discovery web service</span>
+</pre></div>
+</div>
+<p>More on the <a class="reference external" href="https://docs.docker.com/engine/reference/commandline/cli/">docker commands</a></p>
+<p><br/></p>
 </div>
 <div class="section" id="getting-help">
 <span id="getting-help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline">¶</a></h2>
+<p>If you run into issues please <a class="reference external" href="https://github.com/PSHCDevOps/discovery/issues">file an issue</a> if you can not get them resolved through Docker documentation or help channels.  Docker has pretty <a class="reference external" href="https://docs.docker.com/">comprehensive documentation</a> available and there are plenty of tutorials available covering pretty much all aspects of Docker usage.  Being an open source project there is a lot of discussion and question/answers related to Docker and Docker Compose.</p>
+<p>Docker maintains <a class="reference external" href="https://forums.docker.com/">forums</a> you can discuss Docker related issues and there are many groups that meet to support those trying to dig deeper into the world of containerization.</p>
 </div>
 </div>
 

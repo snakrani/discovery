@@ -206,22 +206,24 @@
   <div class="section" id="discovery-on-vagrant">
 <span id="discovery-on-vagrant"></span><h1>Discovery on Vagrant<a class="headerlink" href="#discovery-on-vagrant" title="Permalink to this headline">¶</a></h1>
 <p><strong>&lt;</strong> <a class="reference internal" href="getting_started.html"><span class="doc">Getting Started</span></a> | <strong>^</strong> <strong><a class="reference internal" href="readme.html"><span class="doc">Setup Overview</span></a></strong> | <a class="reference internal" href="docker.html"><span class="doc">Docker Setup</span></a> <strong>&gt;</strong></p>
+<p><br/></p>
 <div class="section" id="installation">
 <span id="installation"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p>Vagrant installation is very easy.  It requires two things; a Virtual Machine provider, and the Vagrant application.</p>
 <p>Discovery comes packaged currently for Virtualbox so you will need to have Virtualbox installed.  See the Virtualbox install instructions below to install for your operating system.  They have an installer for most operating systems.</p>
 <ol class="simple">
-<li><strong>Virtualbox</strong> - Install Virtualbox from: https://www.virtualbox.org/wiki/Downloads</li>
+<li><strong>Virtualbox</strong> - Install Virtualbox from: <a class="reference external" href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/Downloads</a></li>
 </ol>
 <p>Vagrant is available as an executable installer for Windows, Mac, and Linux.</p>
 <ol class="simple">
-<li><strong>Vagrant</strong> - Install Vagrant from: https://www.vagrantup.com/downloads.html</li>
+<li><strong>Vagrant</strong> - Install Vagrant from: <a class="reference external" href="https://www.vagrantup.com/downloads.html">https://www.vagrantup.com/downloads.html</a></li>
 </ol>
+<p><br/></p>
 </div>
 <div class="section" id="configuration">
 <span id="configuration"></span><h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
 <p>The Discovery Vagrantfile is meant to be configurable depending on the needs of the developer.  To keep everything that needs to be versioned, we use a pattern of a default Vagrant configuration file that can be overridden if an override exists.</p>
-<p>You will also need to ensure certain environment variables are set for the Discovery application containers.  We provide an example (<a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/docker/django-env.example.vars">docker/django-env.example.vars</a>) but you will need to create a file called <strong>docker/django-env.vars</strong> that has sensative application information.</p>
+<p>You will also need to ensure certain environment variables are set for the Discovery application containers.  We provide an example (<a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/docker/django-env.example.vars">docker/django-env.example.vars</a>) but you will need to create a file called <strong>docker/django-env.vars</strong> that has sensitive application information.</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Fetch Discovery project</span>
 $ git clone https://github.com/PSHCDevOps/discovery.git <span class="o">{</span>project_directory<span class="o">}</span>
 $ <span class="nb">cd</span> <span class="o">{</span>project_directory<span class="o">}</span>
@@ -234,54 +236,82 @@ $ cp docker/django-env.example.vars docker/django-env.vars
 </pre></div>
 </div>
 <p><em>See the sections below for notes on the available configurations...</em></p>
+<p><br/></p>
 <div class="section" id="vagrant-configurations">
 <span id="vagrant-configurations"></span><h3>Vagrant configurations<a class="headerlink" href="#vagrant-configurations" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p class="first"><strong>server_name</strong> <em>default: discovery-dev</em></p>
 <p>Sets the internal hostname of the virtual machine.</p>
 </li>
+</ul>
+<ul>
 <li><p class="first"><strong>ip_address</strong> <em>default: system assigned</em></p>
 <p>Sets the host ip address by which the virtual machine can be reached.  If this is not set then the system automatically selects an available IP.  Set this if you need to ensure the virtual machine is listening at a particular address.</p>
 </li>
+</ul>
+<ul>
 <li><p class="first"><strong>box_name</strong> <em>default: ubuntu/trusty64</em></p>
 <p>Sets the box or image to use from the <a class="reference external" href="https://app.vagrantup.com/boxes/search">Vagrant Cloud</a> marketplace.</p>
 </li>
+</ul>
+<ul>
 <li><p class="first"><strong>cpus</strong> <em>default: 2</em></p>
 <p>Sets the number of virtual CPUs that should be used for the virtual machine.</p>
 </li>
+</ul>
+<ul>
 <li><p class="first"><strong>memory_size</strong> <em>default: 2048</em></p>
 <p>Sets the memory allocation for the virtual machine.  You may need to increase this depending upon how you load data.</p>
 </li>
+</ul>
+<ul>
 <li><p class="first"><strong>web_port</strong> <em>default: 8080</em></p>
-<p>Sets the host port for the Discovery web site.  By default this is 8080 and should not be changed unless you really need to and you know what you are doing.  Discovery Javascript receives an environment variable with the host and port to connect to to fetch data from the API.  If these do not align then there can be issues with the front end display.</p>
-<p>If this is changed, the <strong>API_HOST</strong> environment variable should also be updated in the <strong>docker/django-env.vars</strong> file covered in the <a class="reference internal" href="docker.html"><span class="doc">next section on Docker setup</span></a>.</p>
+<p>Sets the host port for the Discovery web site.  By default this is 8080 and should not be changed unless you really need to and you know what you are doing.  Discovery Javascript receives an environment variable with the host and port to connect to fetch data from the API.  If these do not align then there can be issues with the front end display.</p>
+<p>If this is changed, the <strong>API_HOST</strong> environment variable should also be updated in the <strong>docker/django-env.vars</strong> file covered below and in the <a class="reference internal" href="docker.html"><span class="doc">next section on Docker setup</span></a>.</p>
 </li>
+</ul>
+<ul>
 <li><p class="first"><strong>db_port</strong> <em>default: 5432</em></p>
 <p>Sets the host port that the cluster PostgreSQL database is available.  This is handy for connecting with the Docker database from the host machine through a <a class="reference external" href="https://www.postgresql.org/docs/10/static/reference-client.html">client command</a> or through a graphical management interface like <a class="reference external" href="https://dbeaver.jkiss.org/">DBeaver</a></p>
 </li>
+</ul>
+<ul>
 <li><p class="first"><strong>queue_port</strong> <em>default: 6379</em></p>
 <p>Sets the host port that the Redis queue is available.  This is handy if you already have tools for inspecting the queue on the host machine.</p>
 </li>
+</ul>
+<ul>
 <li><p class="first"><strong>copy_ssh</strong> <em>default: false</em></p>
 <p>Whether or not to share the host user <strong>.ssh</strong> information (<em>except the authorized_hosts file</em>) with the Vagrant virtual machine.  This is handy if you want to be able to push to remote repositories requiring SSH keys.  If this is shared the Docker environment will share with all of the Django containers, giving you pass through push ability of protected repositories.</p>
 </li>
+</ul>
+<ul>
 <li><p class="first"><strong>copy_gitconfig</strong> <em>default: true</em></p>
 <p>Whether or not to share the host user <strong>.gitconfig</strong> file with the Vagrant virtual machine.  This is handy if you want to be able to commit without resetting this information within the development environment.  If this is set, this file is shared with all Django containers giving you a consistent identity across the host, development machine, and application containers.</p>
 </li>
+</ul>
+<ul>
 <li><p class="first"><strong>copy_vimrc</strong> <em>default: false</em></p>
 <p>Whether or not to share a host user VIM editor configuration with the Vagrant virtual machine.  This can be useful if you use VIM for inspecting files.  If this is set it is shared with all Django Docker containers.</p>
 </li>
+</ul>
+<ul>
 <li><p class="first"><strong>copy_profile</strong> <em>default: false</em></p>
 <p>Whether or not to share the host user Bash <strong>.profile</strong> with the Vagrant machine.  This can allow you to align your environment more closely with your host environment if you use a Bash based shell (on a Mac or Linux).  If this is set it is shared with all Django Docker containers.</p>
 </li>
+</ul>
+<ul>
 <li><p class="first"><strong>copy_bash_aliases</strong> <em>default: false</em></p>
-<p>Whether or not to share a host user Bash <strong>.bash_aliases</strong> file with the Vagrant machine if it exists.  Sometimes this file can define handy aliases sourced into the <strong>.bashrc</strong> so we give a change to share with Vagrant and the Django containers as well.</p>
+<p>Whether or not to share a host user Bash <strong>.bash_aliases</strong> file with the Vagrant machine if it exists.  Sometimes this file can define handy aliases sourced into the <strong>.bashrc</strong> so we give a chance to share with Vagrant and the Django containers as well.</p>
 </li>
+</ul>
+<ul>
 <li><p class="first"><strong>copy_bashrc</strong> <em>default: false</em></p>
 <p>Whether or not to share the host user Bash <strong>.bashrc</strong> script with the Vagrant virtual machine.  This allows for a consistent environment across host, development machine, and application containers.</p>
 <p>Note that the contents of the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/scripts/vagrant-bash.sh">scripts/vagrant-bash.sh</a> script are appended to any shared <strong>.bashrc</strong> or the default box provided one during the Vagrant provision process.</p>
 </li>
 </ul>
+<p><br/></p>
 </div>
 <div class="section" id="application-configurations">
 <span id="application-configurations"></span><h3>Application configurations<a class="headerlink" href="#application-configurations" title="Permalink to this headline">¶</a></h3>
@@ -292,13 +322,18 @@ $ cp docker/django-env.example.vars docker/django-env.vars
 <li><p class="first"><strong>API_KEY</strong> <em>default: <strong>REQUIRED!!!</strong></em></p>
 <p>Sets a <a class="reference external" href="https://api.data.gov/signup/">Data.gov API key</a> that is passed to the Discovery API by the frontend Javascript.</p>
 </li>
+</ul>
+<ul>
 <li><p class="first"><strong>SAM_API_KEY</strong> <em>default: <strong>REQUIRED!!!</strong></em></p>
 <p>Sets the <a class="reference external" href="https://api.data.gov/signup/">Data.gov API key</a> that is passed to requests to get SAM vendor registration information.</p>
 </li>
+</ul>
+<ul>
 <li><p class="first"><strong>SECRET_KEY</strong> <em>default: <strong>REQUIRED!!!</strong></em></p>
 <p>Sets a secret alpha-numeric key that is required by Django for certain operations.  This key can be anything you like but it should be lengthy and randomistic.</p>
 </li>
 </ul>
+<p><br/></p>
 </div>
 </div>
 <div class="section" id="running-the-virtual-machine">
@@ -325,6 +360,7 @@ $ vagrant ssh
 <p><br/></p>
 <p>Using Vagrant, when SSHing into the virtual machine, you will be automatically redirected to the project root directory (<strong>/vagrant</strong>) and <strong>docker-compose up</strong> will be run to ensure Docker application containers are up to date.</p>
 <p><strong>Git</strong>, <strong>Cloud Foundry Client</strong> with the <strong>Autopliot plugin</strong>, <strong>Docker</strong>, and <strong>Docker Compose</strong> come installed on the Vagrant virtual environment initially.  The development environment is meant to bundle tooling necessary to running the Discovery application that might not make sense to install in the containers, and it provides a platform for running isolated Docker clusters in Docker Compose.</p>
+<p><br/></p>
 </div>
 <div class="section" id="common-vagrant-commands">
 <span id="common-vagrant-commands"></span><h2>Common Vagrant commands<a class="headerlink" href="#common-vagrant-commands" title="Permalink to this headline">¶</a></h2>
@@ -343,10 +379,11 @@ $ vagrant destroy      <span class="c1"># Completely destroy an existing virtual
 </pre></div>
 </div>
 <p>More on the available <a class="reference external" href="https://www.vagrantup.com/docs/cli/">vagrant commands</a></p>
+<p><br/></p>
 </div>
 <div class="section" id="getting-help">
 <span id="getting-help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline">¶</a></h2>
-<p>If you run into issues please <a class="reference external" href="https://github.com/PSHCDevOps/discovery/issues">file an issue</a> if you can not get it resolved through Vagrant documentation or help channels.  Vagrant has pretty <a class="reference external" href="https://www.vagrantup.com/docs/index.html">comprehensive documentation</a> available and there are plenty of tutorials available covering pretty much all aspects of Vagrant usage.  Being an open source project there is a lot of discussion and question/answers related to Vagrant.</p>
+<p>If you run into issues please <a class="reference external" href="https://github.com/PSHCDevOps/discovery/issues">file an issue</a> if you can not get them resolved through Vagrant documentation or help channels.  Vagrant has pretty <a class="reference external" href="https://www.vagrantup.com/docs/index.html">comprehensive documentation</a> available and there are plenty of tutorials available covering pretty much all aspects of Vagrant usage.  Being an open source project there is a lot of discussion and question/answers related to Vagrant.</p>
 <p>There is a <a class="reference external" href="https://groups.google.com/forum/#!forum/vagrant-up">Vagrant Google group</a> you can join and you can chat with folks about Vagrant on <a class="reference external" href="https://gitter.im/mitchellh/vagrant">Gitter</a>.</p>
 </div>
 </div>
