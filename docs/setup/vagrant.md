@@ -9,18 +9,18 @@ Vagrant installation is very easy.  It requires two things; a Virtual Machine pr
 
 Discovery comes packaged currently for Virtualbox so you will need to have Virtualbox installed.  See the Virtualbox install instructions below to install for your operating system.  They have an installer for most operating systems.
 
-1. **Virtualbox** - Install Virtualbox from: https://www.virtualbox.org/wiki/Downloads
+1. **Virtualbox** - Install Virtualbox from: [https://www.virtualbox.org/wiki/Downloads](https://www.virtualbox.org/wiki/Downloads)
 
 Vagrant is available as an executable installer for Windows, Mac, and Linux.
 
-2. **Vagrant** - Install Vagrant from: https://www.vagrantup.com/downloads.html
+2. **Vagrant** - Install Vagrant from: [https://www.vagrantup.com/downloads.html](https://www.vagrantup.com/downloads.html)
 
 
 ## Configuration
 
 The Discovery Vagrantfile is meant to be configurable depending on the needs of the developer.  To keep everything that needs to be versioned, we use a pattern of a default Vagrant configuration file that can be overridden if an override exists.
 
-You will also need to ensure certain environment variables are set for the Discovery application containers.  We provide an example ([docker/django-env.example.vars](https://github.com/PSHCDevOps/discovery/blob/master/docker/django-env.example.vars)) but you will need to create a file called **docker/django-env.vars** that has sensative application information.
+You will also need to ensure certain environment variables are set for the Discovery application containers.  We provide an example ([docker/django-env.example.vars](https://github.com/PSHCDevOps/discovery/blob/master/docker/django-env.example.vars)) but you will need to create a file called **docker/django-env.vars** that has sensitive application information.
 
 ```bash
 # Fetch Discovery project
@@ -43,21 +43,26 @@ _See the sections below for notes on the available configurations..._
 
     Sets the internal hostname of the virtual machine.
 
+
  * **ip_address** _default: system assigned_
 
     Sets the host ip address by which the virtual machine can be reached.  If this is not set then the system automatically selects an available IP.  Set this if you need to ensure the virtual machine is listening at a particular address.
+
 
  * **box_name** _default: ubuntu/trusty64_
 
     Sets the box or image to use from the [Vagrant Cloud](https://app.vagrantup.com/boxes/search) marketplace.
 
+
  * **cpus** _default: 2_
 
     Sets the number of virtual CPUs that should be used for the virtual machine.
 
+
  * **memory_size** _default: 2048_
 
     Sets the memory allocation for the virtual machine.  You may need to increase this depending upon how you load data.
+
 
  * **web_port** _default: 8080_
 
@@ -65,33 +70,41 @@ _See the sections below for notes on the available configurations..._
 
     If this is changed, the **API_HOST** environment variable should also be updated in the **docker/django-env.vars** file covered in the [next section on Docker setup](docker.md).
 
+
  * **db_port** _default: 5432_
 
     Sets the host port that the cluster PostgreSQL database is available.  This is handy for connecting with the Docker database from the host machine through a [client command](https://www.postgresql.org/docs/10/static/reference-client.html) or through a graphical management interface like [DBeaver](https://dbeaver.jkiss.org/)
+
 
  * **queue_port** _default: 6379_
 
     Sets the host port that the Redis queue is available.  This is handy if you already have tools for inspecting the queue on the host machine.
 
+
  * **copy_ssh** _default: false_
 
     Whether or not to share the host user **.ssh** information (_except the authorized_hosts file_) with the Vagrant virtual machine.  This is handy if you want to be able to push to remote repositories requiring SSH keys.  If this is shared the Docker environment will share with all of the Django containers, giving you pass through push ability of protected repositories.
+
 
  * **copy_gitconfig** _default: true_
 
     Whether or not to share the host user **.gitconfig** file with the Vagrant virtual machine.  This is handy if you want to be able to commit without resetting this information within the development environment.  If this is set, this file is shared with all Django containers giving you a consistent identity across the host, development machine, and application containers.
 
+
  * **copy_vimrc** _default: false_
 
     Whether or not to share a host user VIM editor configuration with the Vagrant virtual machine.  This can be useful if you use VIM for inspecting files.  If this is set it is shared with all Django Docker containers.
+
 
  * **copy_profile** _default: false_
 
     Whether or not to share the host user Bash **.profile** with the Vagrant machine.  This can allow you to align your environment more closely with your host environment if you use a Bash based shell (on a Mac or Linux).  If this is set it is shared with all Django Docker containers.
 
+
  * **copy_bash_aliases** _default: false_
 
     Whether or not to share a host user Bash **.bash_aliases** file with the Vagrant machine if it exists.  Sometimes this file can define handy aliases sourced into the **.bashrc** so we give a change to share with Vagrant and the Django containers as well.
+
 
  * **copy_bashrc** _default: false_
 
@@ -110,9 +123,11 @@ _See the sections below for notes on the available configurations..._
 
     Sets a [Data.gov API key](https://api.data.gov/signup/) that is passed to the Discovery API by the frontend Javascript.
 
+
  * **SAM_API_KEY** _default: **REQUIRED!!!**_
 
     Sets the [Data.gov API key](https://api.data.gov/signup/) that is passed to requests to get SAM vendor registration information.
+
 
  * **SECRET_KEY** _default: **REQUIRED!!!**_
 
