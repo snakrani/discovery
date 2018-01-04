@@ -19,12 +19,12 @@ All of Discovery's developer and maintenance documentation is located in the [do
 
 #### Getting set up with Discovery
 
-* **[Setup and configuration overview](docs/setup/readme.md)**
-  * [About Discovery](docs/setup/about.md)
-  * [Getting Started](docs/setup/getting_started.md)
-  * [Running with Vagrant](docs/setup/vagrant.md)
-  * [Running directly with Docker](docs/setup/docker.md)
-  * [Application requirements](docs/setup/requirements.md)
+* **[Getting Started](docs/start/readme.md)**
+  * [About Discovery](docs/start/about.md)
+  * [Development options](docs/start/development.md)
+  * [Running with Vagrant](docs/start/vagrant.md)
+  * [Discovery on Docker](docs/start/docker.md)
+  * [Application setup](docs/start/setup.md)
 
 #### Discovery architecture and design
 

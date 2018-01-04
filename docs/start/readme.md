@@ -1,5 +1,5 @@
 
-# Discovery setup and configuration
+# Getting started with Discovery
 
 **^** **[Documentation Outline](../readme.md)** | [About Discovery](about.md) **>**
 
@@ -18,9 +18,9 @@ This guide will help you understand the motivations behind the Discovery effort,
 ## Topics
 
 * [About Discovery](about.md)
-* [Getting Started](getting_started.md)
-* [Discovery on Vagrant](vagrant.md)
+* [Development options](development.md)
+* [Running with Vagrant](vagrant.md)
 * [Discovery on Docker](docker.md)
-* [Discovery Requirements](requirements.md)
+* [Application setup](setup.md)
 
 <br/>

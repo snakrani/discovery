@@ -1,7 +1,7 @@
 
-# Getting started with Discovery
+# Discovery development options
 
-**<** [About Discovery](about.md) | **^** **[Setup Overview](readme.md)** | [Vagrant Setup](vagrant.md) **>**
+**<** [About Discovery](about.md) | **^** **[Getting Started](readme.md)** | [Running with Vagrant](vagrant.md) **>**
 
 <br/>
 
