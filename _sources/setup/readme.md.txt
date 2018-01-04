@@ -22,3 +22,5 @@ This guide will help you understand the motivations behind the Discovery effort,
 * [Discovery on Vagrant](vagrant.md)
 * [Discovery on Docker](docker.md)
 * [Discovery Requirements](requirements.md)
+
+<br/>

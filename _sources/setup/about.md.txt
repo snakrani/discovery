@@ -26,3 +26,5 @@ Discovery is currently live at (https://discovery.gsa.gov).
 ## Future plans
 
 You can check out our [Trello board](https://trello.com/b/AEoWtET7/discovery-20), which contains our product backlog to see what we have planned in the future.
+
+<br/>
