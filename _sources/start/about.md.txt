@@ -1,7 +1,7 @@
 
 # About Discovery
 
-**^** **[Setup Overview](readme.md)** | [Getting Started](getting_started.md) **>**
+**^** **[Getting Started](readme.md)** | [Development options](development.md) **>**
 
 <br/>
 

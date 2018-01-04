@@ -38,7 +38,7 @@
     <link rel="top" title="GSA Discovery 2.0.1 documentation" href="../index.html"/>
         <link rel="up" title="Discovery overview" href="../readme.html"/>
         <link rel="next" title="Discovery on Docker" href="docker.html"/>
-        <link rel="prev" title="Getting started with Discovery" href="getting_started.html"/> 
+        <link rel="prev" title="Discovery development options" href="development.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -104,11 +104,11 @@
 <li class="toctree-l1"><a class="reference external" href="https://github.com/PSHCDevOps/discovery/">GitHub project</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://trello.com/b/AEoWtET7/discovery-20/">Trello board</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Setup</span></p>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="readme.html">Discovery setup and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html">Getting started with Discovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About Discovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started with Discovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Discovery development options</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Discovery on Vagrant</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a><ul>
@@ -122,7 +122,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="docker.html">Discovery on Docker</a></li>
-<li class="toctree-l1"><a class="reference internal" href="requirements.html">Discovery requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Discovery requirements</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Architecture</span></p>
 <ul>
@@ -205,19 +205,19 @@
             
   <div class="section" id="discovery-on-vagrant">
 <span id="discovery-on-vagrant"></span><h1>Discovery on Vagrant<a class="headerlink" href="#discovery-on-vagrant" title="Permalink to this headline">¶</a></h1>
-<p><strong>&lt;</strong> <a class="reference internal" href="getting_started.html"><span class="doc">Getting Started</span></a> | <strong>^</strong> <strong><a class="reference internal" href="readme.html"><span class="doc">Setup Overview</span></a></strong> | <a class="reference internal" href="docker.html"><span class="doc">Docker Setup</span></a> <strong>&gt;</strong></p>
+<p><strong>&lt;</strong> <a class="reference internal" href="development.html"><span class="doc">Development options</span></a> | <strong>^</strong> <strong><a class="reference internal" href="readme.html"><span class="doc">Getting Started</span></a></strong> | <a class="reference internal" href="docker.html"><span class="doc">Discovery on Docker</span></a> <strong>&gt;</strong></p>
 <p><br/></p>
 <div class="section" id="installation">
 <span id="installation"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p>Vagrant installation is very easy.  It requires two things; a Virtual Machine provider, and the Vagrant application.</p>
 <p>Discovery comes packaged currently for Virtualbox so you will need to have Virtualbox installed.  See the Virtualbox install instructions below to install for your operating system.  They have an installer for most operating systems.</p>
-<ol class="simple">
+<ul class="simple">
 <li><strong>Virtualbox</strong> - Install Virtualbox from: <a class="reference external" href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/Downloads</a></li>
-</ol>
+</ul>
 <p>Vagrant is available as an executable installer for Windows, Mac, and Linux.</p>
-<ol class="simple">
+<ul class="simple">
 <li><strong>Vagrant</strong> - Install Vagrant from: <a class="reference external" href="https://www.vagrantup.com/downloads.html">https://www.vagrantup.com/downloads.html</a></li>
-</ol>
+</ul>
 <p><br/></p>
 </div>
 <div class="section" id="configuration">
@@ -319,6 +319,8 @@ $ cp docker/django-env.example.vars docker/django-env.vars
 <li><p class="first"><strong>API_HOST</strong> <em>default: http://localhost:8080</em></p>
 <p>Sets the API request location for the Discovery frontend. The Discovery application passes the host and port of the API interface to the frontend Javascript.  This enables the Javascript to make requests to the API which basically power the frontend displays.  If no data is loading in the interface, chances are that this value is wrong.</p>
 </li>
+</ul>
+<ul>
 <li><p class="first"><strong>API_KEY</strong> <em>default: <strong>REQUIRED!!!</strong></em></p>
 <p>Sets a <a class="reference external" href="https://api.data.gov/signup/">Data.gov API key</a> that is passed to the Discovery API by the frontend Javascript.</p>
 </li>
@@ -402,7 +404,7 @@ $ vagrant destroy      <span class="c1"># Completely destroy an existing virtual
         <a href="docker.html" class="btn btn-neutral float-right" title="Discovery on Docker" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="getting_started.html" class="btn btn-neutral" title="Getting started with Discovery" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="development.html" class="btn btn-neutral" title="Discovery development options" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

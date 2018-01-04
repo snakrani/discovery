@@ -19,14 +19,14 @@ Welcome to GSA Discovery's documentation!
 
 .. toctree::
     :maxdepth: 2
-    :caption: Setup
+    :caption: Getting Started
 
-    setup/readme
-    setup/about
-    setup/getting_started
-    setup/vagrant
-    setup/docker
-    setup/requirements
+    start/readme
+    start/about
+    start/development
+    start/vagrant
+    start/docker
+    start/setup
 
 .. toctree::
     :maxdepth: 2

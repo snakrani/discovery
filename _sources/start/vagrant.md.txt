@@ -1,7 +1,7 @@
 
 # Discovery on Vagrant
 
-**<** [Getting Started](getting_started.md) | **^** **[Setup Overview](readme.md)** | [Docker Setup](docker.md) **>**
+**<** [Development options](development.md) | **^** **[Getting Started](readme.md)** | [Discovery on Docker](docker.md) **>**
 
 <br/>
 
@@ -11,11 +11,11 @@ Vagrant installation is very easy.  It requires two things; a Virtual Machine pr
 
 Discovery comes packaged currently for Virtualbox so you will need to have Virtualbox installed.  See the Virtualbox install instructions below to install for your operating system.  They have an installer for most operating systems.
 
-1. **Virtualbox** - Install Virtualbox from: [https://www.virtualbox.org/wiki/Downloads](https://www.virtualbox.org/wiki/Downloads)
+ * **Virtualbox** - Install Virtualbox from: [https://www.virtualbox.org/wiki/Downloads](https://www.virtualbox.org/wiki/Downloads)
 
 Vagrant is available as an executable installer for Windows, Mac, and Linux.
 
-2. **Vagrant** - Install Vagrant from: [https://www.vagrantup.com/downloads.html](https://www.vagrantup.com/downloads.html)
+ * **Vagrant** - Install Vagrant from: [https://www.vagrantup.com/downloads.html](https://www.vagrantup.com/downloads.html)
 
 <br/>
 
@@ -123,6 +123,7 @@ _See the sections below for notes on the available configurations..._
  * **API_HOST** _default: http://localhost:8080_
 
     Sets the API request location for the Discovery frontend. The Discovery application passes the host and port of the API interface to the frontend Javascript.  This enables the Javascript to make requests to the API which basically power the frontend displays.  If no data is loading in the interface, chances are that this value is wrong.
+
 
  * **API_KEY** _default: **REQUIRED!!!**_
 

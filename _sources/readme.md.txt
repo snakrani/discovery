@@ -9,12 +9,12 @@ Discovery is a market research tool for GSA Contract Vehicles. Currently, it fea
 
 #### Getting set up with Discovery
 
-* **[Setup and configuration overview](setup/readme.md)**
-  * [About Discovery](setup/about.md)
-  * [Getting Started](setup/getting_started.md)
-  * [Running with Vagrant](setup/vagrant.md)
-  * [Running directly with Docker](setup/docker.md)
-  * [Application requirements](setup/requirements.md)
+* **[Getting Started](start/readme.md)**
+  * [About Discovery](start/about.md)
+  * [Development options](start/development.md)
+  * [Running with Vagrant](start/vagrant.md)
+  * [Discovery on Docker](start/docker.md)
+  * [Application setup](start/setup.md)
 
 #### Discovery architecture and design
 

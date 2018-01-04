@@ -1,7 +1,7 @@
 
 # Discovery on Docker
 
-**<** [Vagrant Setup](vagrant.md) | **^** **[Setup Overview](readme.md)** | [Discovery Requirements](requirements.md) **>**
+**<** [Running with Vagrant](vagrant.md) | **^** **[Getting Started](readme.md)** | [Application setup](setup.md) **>**
 
 <br/>
 
@@ -13,6 +13,7 @@ If you are using the Discovery Vagrant development environment you do not need t
 
 1. **Docker** - Install Docker from: [https://www.docker.com/community-edition](https://www.docker.com/community-edition)
               _- If running Debian or Ubuntu, you can install by running the [scripts/setup-docker.sh](https://github.com/PSHCDevOps/discovery/blob/master/scripts/setup-docker.sh) script_
+
 
 2. **Docker Compose** - Install Docker Compose from: [https://docs.docker.com/compose/install](https://docs.docker.com/compose/install)
                       _- This is included in the [scripts/setup-docker.sh](https://github.com/PSHCDevOps/discovery/blob/master/scripts/setup-docker.sh) setup_
@@ -41,6 +42,7 @@ _See below for notes on the available configurations..._
  * **API_HOST** _default: http://localhost:8080_
 
     Sets the API request location for the Discovery frontend. The Discovery application passes the host and port of the API interface to the frontend Javascript.  This enables the Javascript to make requests to the API which basically power the frontend displays.  If no data is loading in the interface, chances are that this value is wrong.
+
 
  * **API_KEY** _default: **REQUIRED!!!**_
 
