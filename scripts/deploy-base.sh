@@ -33,8 +33,9 @@ get_manifest_config() {
 
 deploy_app() {
   local branch="$1"
-    
-  cf zero-downtime-push discovery-web -f "`get_manifest_config web ${branch}`"
+  
   cf push discovery-scheduler -f "`get_manifest_config scheduler ${branch}`"
   cf push discovery-worker -f "`get_manifest_config worker ${branch}`"
+  
+  cf zero-downtime-push discovery-web -f "`get_manifest_config web ${branch}`"
 }
