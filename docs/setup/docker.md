@@ -137,3 +137,5 @@ More on the [docker commands](https://docs.docker.com/engine/reference/commandli
 If you run into issues please [file an issue](https://github.com/PSHCDevOps/discovery/issues) if you can not get them resolved through Docker documentation or help channels.  Docker has pretty [comprehensive documentation](https://docs.docker.com/) available and there are plenty of tutorials available covering pretty much all aspects of Docker usage.  Being an open source project there is a lot of discussion and question/answers related to Docker and Docker Compose.
 
 Docker maintains [forums](https://forums.docker.com/) you can discuss Docker related issues and there are many groups that meet to support those trying to dig deeper into the world of containerization.
+
+<br/>

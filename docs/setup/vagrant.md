@@ -196,3 +196,5 @@ More on the available [vagrant commands](https://www.vagrantup.com/docs/cli/)
 If you run into issues please [file an issue](https://github.com/PSHCDevOps/discovery/issues) if you can not get them resolved through Vagrant documentation or help channels.  Vagrant has pretty [comprehensive documentation](https://www.vagrantup.com/docs/index.html) available and there are plenty of tutorials available covering pretty much all aspects of Vagrant usage.  Being an open source project there is a lot of discussion and question/answers related to Vagrant.
 
 There is a [Vagrant Google group](https://groups.google.com/forum/#!forum/vagrant-up) you can join and you can chat with folks about Vagrant on [Gitter](https://gitter.im/mitchellh/vagrant).
+
+<br/>

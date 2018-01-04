@@ -83,3 +83,5 @@ If you are interested in learning more about how to set up the Discovery project
 ## Getting help
 
 If you run into problems along the way submit an issue in our [issue queue](https://github.com/PSHCDevOps/discovery/issues) and we will do our best to help out.
+
+<br/>
