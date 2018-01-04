@@ -33,9 +33,19 @@ get_manifest_config() {
 
 deploy_app() {
   local branch="$1"
+  local fail=0
   
-  cf push discovery-scheduler -f "`get_manifest_config scheduler ${branch}`"
-  cf push discovery-worker -f "`get_manifest_config worker ${branch}`"
+  # Background services
+  cf push discovery-scheduler -f "`get_manifest_config scheduler ${branch}`" &
+  cf push discovery-worker -f "`get_manifest_config worker ${branch}`" &
   
-  cf zero-downtime-push discovery-web -f "`get_manifest_config web ${branch}`"
+  # User focused display
+  cf zero-downtime-push discovery-web -f "`get_manifest_config web ${branch}`" &
+  
+  # Wait on everything to complete
+  for job in `jobs -p`
+  do
+    wait $job || let "fail+=1"
+  done
+  exit "$fail"
 }
