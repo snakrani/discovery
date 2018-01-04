@@ -62,7 +62,7 @@ At the root of the project directory is a Docker Compose configuration that can 
 
  * Docker containers and other resources from multiple projects are harder to manage in one workspace
  * High probability of port collisions (particularly for service ports)
- * Grew out of Unix container technology and still works best in that environment
+ * Grew out of Linux container technology and still works best in that environment
  * You have to install Docker and the CF CLI and related plugins (easy to do with bundled scripts)
  * Harder to clear image and volume caches and start fresh when needed
 
