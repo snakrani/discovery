@@ -66,9 +66,9 @@ _See the sections below for notes on the available configurations..._
 
  * **web_port** _default: 8080_
 
-    Sets the host port for the Discovery web site.  By default this is 8080 and should not be changed unless you really need to and you know what you are doing.  Discovery Javascript receives an environment variable with the host and port to connect to to fetch data from the API.  If these do not align then there can be issues with the front end display.
+    Sets the host port for the Discovery web site.  By default this is 8080 and should not be changed unless you really need to and you know what you are doing.  Discovery Javascript receives an environment variable with the host and port to connect to fetch data from the API.  If these do not align then there can be issues with the front end display.
 
-    If this is changed, the **API_HOST** environment variable should also be updated in the **docker/django-env.vars** file covered in the [next section on Docker setup](docker.md).
+    If this is changed, the **API_HOST** environment variable should also be updated in the **docker/django-env.vars** file covered below and in the [next section on Docker setup](docker.md).
 
 
  * **db_port** _default: 5432_
@@ -103,7 +103,7 @@ _See the sections below for notes on the available configurations..._
 
  * **copy_bash_aliases** _default: false_
 
-    Whether or not to share a host user Bash **.bash_aliases** file with the Vagrant machine if it exists.  Sometimes this file can define handy aliases sourced into the **.bashrc** so we give a change to share with Vagrant and the Django containers as well.
+    Whether or not to share a host user Bash **.bash_aliases** file with the Vagrant machine if it exists.  Sometimes this file can define handy aliases sourced into the **.bashrc** so we give a chance to share with Vagrant and the Django containers as well.
 
 
  * **copy_bashrc** _default: false_
