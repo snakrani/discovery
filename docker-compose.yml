@@ -39,7 +39,7 @@ services:
       service: django
 
   worker:
-    command: bash -c "celery -A discovery worker --loglevel=info --concurrency=1"
+    command: bash -c "celery -A discovery worker --loglevel=info --concurrency=2"
     restart: always
     scale: 2
     depends_on:
