@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Prepare a python enabled server for application hosting.
+# Prepare a Django database for application hosting.
 
 set -e
 
@@ -38,9 +38,6 @@ python manage.py migrate --noinput >>"$LOG_FILE" 2>&1
 
 echo "> Ensuring Django cache table" | tee -a "$LOG_FILE"
 python manage.py createcachetable >>"$LOG_FILE" 2>&1
-
-echo "> Collecting Django static files" | tee -a "$LOG_FILE"
-python manage.py collectstatic --noinput >>"$LOG_FILE" 2>&1
 
 echo "> Loading basic category information" | tee -a "$LOG_FILE"
 python manage.py load_categories >>"$LOG_FILE" 2>&1

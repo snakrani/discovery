@@ -2,7 +2,7 @@ import os
 import json
 
 
-def cloud_config(name, default=None, types='user-provided'):
+def cloud_config(name, default=None, types='user-provided', instance=None):
     # Order of precedence
     # 1. Cloud configurations coming in through VCAP_SERVICES
     # 2. Local environment variable if it exists
@@ -32,6 +32,9 @@ def cloud_config(name, default=None, types='user-provided'):
                 continue
             
             for service in services[type]:
+                if instance and service['name'] != instance:
+                    continue
+                
                 data = service['credentials']
                 
                 if name in data:
