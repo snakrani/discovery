@@ -20,6 +20,7 @@ psutil==5.4.2
 celery==4.1.0
 celery-once==1.2.0
 redis==2.10.5
+django-redis-sessions==0.6.1
 django-celery-beat==1.1.0
 django-celery-results==1.0.1
 django-db-mutex==1.0.0
