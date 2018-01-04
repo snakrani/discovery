@@ -3,6 +3,8 @@
 
 **<** [Getting Started](getting_started.md) | **^** **[Setup Overview](readme.md)** | [Docker Setup](docker.md) **>**
 
+<br/>
+
 ## Installation
 
 Vagrant installation is very easy.  It requires two things; a Virtual Machine provider, and the Vagrant application.
@@ -15,6 +17,7 @@ Vagrant is available as an executable installer for Windows, Mac, and Linux.
 
 2. **Vagrant** - Install Vagrant from: [https://www.vagrantup.com/downloads.html](https://www.vagrantup.com/downloads.html)
 
+<br/>
 
 ## Configuration
 
@@ -36,6 +39,7 @@ $ cp docker/django-env.example.vars docker/django-env.vars
 
 _See the sections below for notes on the available configurations..._
 
+<br/>
 
 ### Vagrant configurations
 
@@ -112,6 +116,7 @@ _See the sections below for notes on the available configurations..._
 
     Note that the contents of the [scripts/vagrant-bash.sh](https://github.com/PSHCDevOps/discovery/blob/master/scripts/vagrant-bash.sh) script are appended to any shared **.bashrc** or the default box provided one during the Vagrant provision process.
 
+<br/>
 
 ### Application configurations
 
@@ -133,6 +138,7 @@ _See the sections below for notes on the available configurations..._
 
     Sets a secret alpha-numeric key that is required by Django for certain operations.  This key can be anything you like but it should be lengthy and randomistic.
 
+<br/>
 
 ## Running the virtual machine
 
@@ -163,6 +169,7 @@ Using Vagrant, when SSHing into the virtual machine, you will be automatically r
 
 **Git**, **Cloud Foundry Client** with the **Autopliot plugin**, **Docker**, and **Docker Compose** come installed on the Vagrant virtual environment initially.  The development environment is meant to bundle tooling necessary to running the Discovery application that might not make sense to install in the containers, and it provides a platform for running isolated Docker clusters in Docker Compose.
 
+<br/>
 
 ## Common Vagrant commands
 
@@ -182,9 +189,10 @@ $ vagrant destroy      # Completely destroy an existing virtual machine
 
 More on the available [vagrant commands](https://www.vagrantup.com/docs/cli/)
 
+<br/>
 
 ## Getting help
 
-If you run into issues please [file an issue](https://github.com/PSHCDevOps/discovery/issues) if you can not get it resolved through Vagrant documentation or help channels.  Vagrant has pretty [comprehensive documentation](https://www.vagrantup.com/docs/index.html) available and there are plenty of tutorials available covering pretty much all aspects of Vagrant usage.  Being an open source project there is a lot of discussion and question/answers related to Vagrant.
+If you run into issues please [file an issue](https://github.com/PSHCDevOps/discovery/issues) if you can not get them resolved through Vagrant documentation or help channels.  Vagrant has pretty [comprehensive documentation](https://www.vagrantup.com/docs/index.html) available and there are plenty of tutorials available covering pretty much all aspects of Vagrant usage.  Being an open source project there is a lot of discussion and question/answers related to Vagrant.
 
 There is a [Vagrant Google group](https://groups.google.com/forum/#!forum/vagrant-up) you can join and you can chat with folks about Vagrant on [Gitter](https://gitter.im/mitchellh/vagrant).
