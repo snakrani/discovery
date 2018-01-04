@@ -8,12 +8,26 @@
 # into "docker/django-env.vars" and update the necessary environment variables
 # accordingly.
 #
-version: '2'
+version: '2.3'
 services:
-  web:
-    command: bash -c "scripts/init-server.sh /dev/stderr discovery-postgresql 5432 && waitress-serve --expose-tracebacks --port=8080 discovery.wsgi:application"
+  haproxy:
+    image: eeacms/haproxy
+    restart: always
+    depends_on:
+      - web
     ports:
-      - "8080:8080"
+      - "8080:5000"
+      - "1936:1936"
+    environment:
+      FRONTEND_PORT: 5000
+      BACKENDS: "web"
+      BALANCE: "roundrobin"
+      DNS_ENABLED: "true"
+      LOG_LEVEL: "info"
+
+  web:
+    command: bash -c "scripts/init-server.sh /dev/stderr discovery-postgresql 5432 && waitress-serve --expose-tracebacks --port=80 discovery.wsgi:application"
+    scale: 3
     depends_on:
       - postgresql
       - redis
@@ -27,6 +41,7 @@ services:
   worker:
     command: bash -c "celery -A discovery worker --loglevel=info --concurrency=1"
     restart: always
+    scale: 2
     depends_on:
       - web
     links:
@@ -66,6 +81,9 @@ services:
       - "6379:6379"
     volumes:
       - discovery-queue:/data
+    extends:
+      file: docker/docker-compose.base.yml
+      service: queue
 
 volumes:
   discovery-data:

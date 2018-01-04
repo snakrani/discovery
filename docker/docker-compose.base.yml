@@ -1,10 +1,13 @@
-version: '2'
+version: '2.3'
 services:
   db:
     environment:
-      POSTGRES_USER: oasis
-      POSTGRES_PASSWORD: oasis
-      POSTGRES_DB: oasis
+      POSTGRES_USER: discovery
+      POSTGRES_PASSWORD: discovery
+      POSTGRES_DB: discovery
+
+  queue:
+    command: redis-server --requirepass discovery
 
   django:
     build:
@@ -16,18 +19,18 @@ services:
       - ..:/discovery
     environment:
       # What CloudFoundry gives us...
-      DATABASE_URL: postgres://oasis:oasis@discovery-postgresql:5432/oasis
+      DATABASE_URL: postgres://discovery:discovery@discovery-postgresql:5432/discovery
       VCAP_SERVICES: >-
         {
           "aws-rds": [
             {
               "credentials": {
-                "uri": "postgres://oasis:oasis@discovery-postgresql:5432/oasis",
+                "uri": "postgres://discovery:discovery@discovery-postgresql:5432/discovery",
                 "host": "discovery-postgresql",
                 "port": "5432",
-                "username": "oasis",
-                "password": "oasis",
-                "db_name": "oasis"
+                "username": "discovery",
+                "password": "discovery",
+                "db_name": "discovery"
               },
               "label": "aws-rds",
               "name": "discovery-db",
@@ -41,10 +44,10 @@ services:
           "redis32": [
             {
               "credentials": {
-                "uri": "redis://discovery-redis:6379",
+                "uri": "redis://:discovery@discovery-redis:6379",
                 "hostname": "discovery-redis",
                 "port": "6379",
-                "password": "junk"
+                "password": "discovery"
               },
               "label": "redis32",
               "name": "discovery-redis",
