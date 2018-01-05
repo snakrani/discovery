@@ -253,9 +253,24 @@ LOGGING = {
 
 
 #
+# Administrative session handling
+#
+SESSION_ENGINE = 'redis_sessions.session'
+
+SESSION_REDIS = {
+    'host': cloud_config('hostname', 'localhost', ['redis28', 'redis32'], 'discovery-auth'),
+    'port': cloud_config('port', '6379', ['redis28', 'redis32'], 'discovery-auth'),
+    'db': 0,
+    'password': cloud_config('password', 'discovery', ['redis28', 'redis32'], 'discovery-auth'),
+    'prefix': 'session',
+    'socket_timeout': 1
+}
+
+
+#
 # Celery processing and scheduling
 #
-CELERY_BROKER_URL = cloud_config('uri', 'redis://localhost:6379', ['redis28', 'redis32'])
+CELERY_BROKER_URL = cloud_config('uri', 'redis://:discovery@localhost:6379', ['redis28', 'redis32'], 'discovery-tasks')
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'

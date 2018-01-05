@@ -1,5 +1,5 @@
 ---
 inherit: base-worker-manifest.yml
 
-command: celery -A discovery beat --loglevel=info
+command: scripts/init-db.sh /dev/stderr && celery -A discovery beat --loglevel=info
 memory: 64M
