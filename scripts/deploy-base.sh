@@ -33,6 +33,7 @@ get_manifest_config() {
 
 deploy_app() {
   local branch="$1"
+  local hostname="$2"
   local fail=0
   
   # Background services
@@ -40,7 +41,12 @@ deploy_app() {
   cf push discovery-worker -f "`get_manifest_config worker ${branch}`" &
   
   # User focused display
-  cf zero-downtime-push discovery-web -f "`get_manifest_config web ${branch}`" &
+  if [ "$hostname" ]
+  then
+    cf push -n "$hostname" discovery-web -f "`get_manifest_config web ${branch}`" &
+  else
+    cf zero-downtime-push discovery-web -f "`get_manifest_config web ${branch}`" &
+  fi
   
   # Wait on everything to complete
   for job in `jobs -p`
