@@ -8,4 +8,4 @@ cd "$SCRIPT_DIR/.."
 compliance-masonry get
 
 # Generate security documentation
-compliance-masonry docs gitbook --markdowns compliance/markdowns --exports opencontrols/exports
+compliance-masonry docs gitbook --markdowns compliance/markdown --exports opencontrols/exports
