@@ -1,0 +1,23 @@
+schema_version: "1.0.0"
+name: Discovery
+metadata:
+  description: >
+    The GSA Discovery application is a tool that helps contracting professionals
+    and other interested parties conduct market research on GSA contract vehicles
+    and their suppliers. Users can search for available vendors by contract and
+    NAICS code.  The results can be further filtered down by vendor set-aside
+    classifications.  While the current version of Discovery is somewhat
+    limited in vendor scope and available data, this system is expected to
+    evolve to encompass a wide range of contracting vehicles and vendor related
+    information.
+components:
+  - ./compliance
+dependencies:
+  certifications:
+    # LATO
+    - url: https://github.com/18F/GSA-Certifications
+      revision: master
+  systems:
+    # Cloud.gov
+    - url: https://github.com/18F/cg-compliance
+      revision: master
