@@ -4,13 +4,15 @@
 SCRIPT_DIR="$(cd "$(dirname "$([ `readlink "$0"` ] && echo "`readlink "$0"`" || echo "$0")")"; pwd -P)"
 cd "$SCRIPT_DIR/.."
 
-LOG_FILE="${1:-./logs/discovery-cm.log}"
+LOG_FILE="${1:-$SCRIPT_DIR/../logs/discovery-cm.log}"
 if [ "$LOG_FILE" != "/dev/stdout" -a "$LOG_FILE" != "/dev/stderr" ]
 then
   rm -f "$LOG_FILE"
 fi
 
 BIN_DIR="/usr/local/bin"
+
+cd /tmp
 
 echo "> Ensuring Compliance Masonry setup dependencies" | tee -a "$LOG_FILE"
 apt-get install -y curl build-essential calibre >>"$LOG_FILE" 2>&1
@@ -19,7 +21,6 @@ apt-get install -y curl build-essential calibre >>"$LOG_FILE" 2>&1
 if ! which compliance-masonry >/dev/null
 then
   echo "> Installing the Compliance Masonry CLI" | tee -a "$LOG_FILE"
-  cf /tmp
   curl -L https://github.com/opencontrol/compliance-masonry/releases/download/v1.1.2/compliance-masonry_1.1.2_linux_amd64.tar.gz -o compliance-masonry.tar.gz >>"$LOG_FILE" 2>&1
   tar -xf compliance-masonry.tar.gz >>"$LOG_FILE" 2>&1
   cp compliance-masonry_1.1.2_linux_amd64/compliance-masonry "$BIN_DIR" >>"$LOG_FILE" 2>&1
