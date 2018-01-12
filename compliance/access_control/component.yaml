@@ -1,0 +1,38 @@
+schema_version: "3.0.0"
+name: Access Control Policies for Discovery
+documentation_complete: false
+satisfies:
+- standard_key: NIST-800-53
+  control_key: AC-2   # Account Management
+  implementation_statuses:
+    - Implemented
+  references:
+    - verification_key: django
+  narrative:
+    - key: AC-2a
+      text: |
+        Identifies and selects the following types of information system accounts to support organizational missions/business functions: individual, group, system, application, guest/anonymous, and temporary accounts
+    - key: AC-2b
+      text: |
+        Assigns account managers for information system accounts
+    - key: AC-2c
+      text: |
+        Establishes conditions for group and role membership
+    - key: AC-2e
+      text: |
+        Requires approvals by GSA S/SO or Contractor recommendation to be approved and accepted by the GSA AO for requests to create information system accounts
+    - key: AC-2f
+      text: |
+        Creates, enables, modifies, disables, and removes information system accounts in accordance with GSA S/SO or Contractor recommendation to be approved and accepted by the GSA AO
+    - key: AC-2j
+      text: |
+        Reviews accounts for compliance with account management requirements quarterly
+verifications:
+- key: circle
+  name: Repository's Circle CI
+  path: https://circleci.com/gh/PSHCDevOps/discovery
+  type: URL
+- key: django
+  name: Django
+  path: https://docs.djangoproject.com/en/1.8/
+  type: URL
