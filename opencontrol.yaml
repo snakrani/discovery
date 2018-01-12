@@ -1,7 +1,7 @@
 schema_version: "1.0.0"
 name: Discovery
 metadata:
-  description: >
+  description: |
     The GSA Discovery application is a tool that helps contracting professionals
     and other interested parties conduct market research on GSA contract vehicles
     and their suppliers. Users can search for available vendors by contract and
@@ -11,7 +11,16 @@ metadata:
     evolve to encompass a wide range of contracting vehicles and vendor related
     information.
 components:
-  - ./compliance
+  - ./compliance/access_control # AC
+  - ./compliance/audit_accountability # AU
+  - ./compliance/security_assessment_authorization # CA
+  - ./compliance/configuration_management # CM
+  - ./compliance/identification_authentication # IA
+  - ./compliance/security_planning # PL
+  - ./compliance/risk_assessment # RA
+  - ./compliance/system_services_acquisition # SA
+  - ./compliance/system_communications_protection # SC
+  - ./compliance/system_information_integrity # SI
 dependencies:
   certifications:
     # LATO
