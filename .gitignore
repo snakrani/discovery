@@ -20,3 +20,5 @@ mvenv/
 docker/django-env.vars
 celerybeat.pid
 opencontrols/
+_book
+
