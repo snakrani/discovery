@@ -77,3 +77,15 @@ satisfies:
         All Cloud.gov system access is handled according to policies outlined in the AC-2 controls and Cloud.gov's implemented security controls.  All access to hosting environments (production and development) are fully self contained and access must be individually granted to each environment.
 
         All GitHub, CircleCI, and related service accounts provide accounts especially tailored to their service offerings and do not interfere with one another.  As stated in AC-2, the Discovery management team may grant GSA staff and current contractors access to these services as needed.
+
+- standard_key: NIST-800-53
+  control_key: AC-6 # Least Privilege
+  implementation_statuses:
+    - Implemented
+  narrative:
+    - text: |
+        _Control:_ **The organization employs the principle of least privilege, allowing only authorized accesses for users (or processes acting on behalf of users) which are necessary to accomplish assigned tasks in accordance with organizational missions and business functions**
+
+        The Discovery management team adheres to the principle of least privilege by assigning only the requisite role access needed to perform the functions of the GSA staff member of current contractor.  Users inhabit a role only as long as they need that role to perform their functions.
+
+        Role membership is revoked either when the GSA staff member or contractor leaves the project, the Discovery management team deems it necessary, or if the role capabilities are no longer needed by the current GSA staff member or contractor.  When role membership is needed again it is regranted under the direction of the Discovery management team.
