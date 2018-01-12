@@ -17,7 +17,9 @@ dependencies:
     # LATO
     - url: https://github.com/18F/GSA-Certifications
       revision: master
-  systems:
-    # Cloud.gov
-    - url: https://github.com/18F/cg-compliance
+    # FedRAMP Low, Moderate, High
+    - url: https://github.com/opencontrol/FedRAMP-Certifications
+      revision: master
+  standards:
+    - url: https://github.com/opencontrol/NIST-800-53-Standards
       revision: master
