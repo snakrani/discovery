@@ -1,6 +1,38 @@
 schema_version: "3.0.0"
 name: System and Services Acquisition Policies for Discovery
 documentation_complete: false
-satisfies:
 
 verifications:
+- key: repo
+  name: Discovery Github repository
+  path: https://github.com/PSHCDevOps/discovery
+  type: URL
+
+- key: circle
+  name: Discovery Circle CI
+  path: https://circleci.com/gh/PSHCDevOps/discovery
+  type: URL
+
+- key: django
+  name: Django
+  path: https://docs.djangoproject.com/en/1.8/
+  type: URL
+
+satisfies:
+- standard_key: NIST-800-53
+  control_key: SA-11 (1) # Developer Security Testing and Evaluation - Static Code Analysis
+  implementation_statuses:
+    - Implemented
+  narrative:
+    - text: |
+        _Control:_ **The organization requires the developer of the information system, system component, or information system service to employ static code analysis tools to identify common flaws and document the results of the analysis**
+
+
+- standard_key: NIST-800-53
+  control_key: SA-22 (1) # Unsupported System Components - Alternative Sources for Continued Support
+  implementation_statuses:
+    - Implemented
+  narrative:
+    - text: |
+        _Control:_ **The organization; 1) Replaces information system components when support for the components is no longer available from the developer, vendor, or manufacturer; and 2) Provides justification and documents approval for the continued use of unsupported system components required to satisfy mission/business needs**
+
