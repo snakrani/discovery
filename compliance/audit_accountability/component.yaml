@@ -22,45 +22,62 @@ satisfies:
 - standard_key: NIST-800-53
   control_key: AU-2 # Audit Events
   implementation_statuses:
-    - Implemented
+    - partial
   narrative:
     - key: AU-2a
       text: |
-        _Control:_ **Determines that the information system is capable of auditing the following events: Successful and unsuccessful account logon events, account management events, object access, policy change, privilege functions, process tracking, and system events.  For Web applications: all administrator activity, authentication checks, authorization checks, data deletions, data access, data changes, and permission changes**
+        _Control:_ **The organization determines that the information system is capable of auditing the following events: Successful and unsuccessful account logon events, account management events, object access, policy change, privilege functions, process tracking, and system events.  For Web applications: all administrator activity, authentication checks, authorization checks, data deletions, data access, data changes, and permission changes**
 
+        The Discovery application currently logs basic events from Django, such as errors, page loads, data loading requests, scheduling updates, content changes, but does not have granular logging of authentication attempts by users.  We can track authentication to the system by filtering in Logstash/Kibana on login access.  In the future there will be more granular logging around authentication and account management.
+
+        All Cloud.gov and application level events (requests, failures, and warnings) are available at https://logs.fr.cloud.gov.
 
 
     - key: AU-2b
       text: |
-        _Control:_ **Coordinates the security audit function with other organizational entities requiring audit-related information to enhance mutual support and to help guide the selection of auditable events**
+        _Control:_ **The organization coordinates the security audit function with other organizational entities requiring audit-related information to enhance mutual support and to help guide the selection of auditable events**
 
+        The Discovery management team coordinates with relevant officials within GSA (OCIO, CISO, TTS, etc...) as needed to ensure the application is operating securely and in compliance with applicable regulations and guidelines.
 
 
     - key: AU-2c
       text: |
-        _Control:_ **Provides a rationale for why the auditable events are deemed to be adequate to support after-the-fact investigations of security incidents**
+        _Control:_ **The organization provides a rationale for why the auditable events are deemed to be adequate to support after-the-fact investigations of security incidents**
 
+        The Discovery management team is constantly striving to improve the quality and responsiveness of the monitoring of auditable events.  The organization follows the guidelines as closely as possible, is willing to make changes based on advice and a more detailed assessment from GSA security officials, and will provide a rationale for all event related audit decisions when asked.
+
+        In the future a more comprehensive audit policy will be drafted to ensure the commonly requested information is available in a handy format for security professionals and auditors.
 
 
     - key: AU-2d
       text: |
-        _Control:_ **Determines that the following events are to be audited within the information system: Successful and unsuccessful account logon events, account management events, object access, policy change, privilege functions, process tracking, and system events.  For Web applications: all administrator activity, authentication checks, authorization checks, data deletions, data access, data changes, and permission changes.  Settings to be audited continually for each identified event**
+        _Control:_ **The organization determines that the following events are to be audited within the information system: Successful and unsuccessful account logon events, account management events, object access, policy change, privilege functions, process tracking, and system events.  For Web applications: all administrator activity, authentication checks, authorization checks, data deletions, data access, data changes, and permission changes.  Settings to be audited continually for each identified event**
+
+        The Discovery application records requests for data, modifications, and removal.  We can track authentication and other information through request submissions, and collect all Cloud.gov related information.
+
+        The administrative logging mechanism is not complete.  More granular event track is still needed to encompass the guidelines outlined within this control.  This logging system is in the Discovery backlog.
+
 
 - standard_key: NIST-800-53
   control_key: AU-6 # Audit Review, Analysis, and Reporting
   implementation_statuses:
-    - Implemented
+    - complete
   narrative:
     - key: AU-6a
       text: |
-        _Control:_ **Reviews and analyzes information system audit records at least weekly for indications of GSA S/SO or Contractor recommendation to be approved and accepted by the GSA AO**
+        _Control:_ **The organization reviews and analyzes information system audit records at least weekly for indications of GSA S/SO or Contractor recommendations to be approved and accepted by the GSA AO**
 
+        All application and hosting provider related log entries are stored within Logstash, available through a Kibana interface at https://logs.fr.cloud.gov.  Logs are continuously checked for abnormalities, and GSA staff and current contractors working on the system can file issues on the Discovery Trello board (https://trello.com/b/AEoWtET7/discovery-20) for implementation prioritization.
+
+        In the future more granluar logging and monitoring logic and systems may be employed to ensure that errors and system issues can be caught in the most secure and timeliest fashion.
 
 
     - key: AU-6b
       text: |
-        _Control:_ **Reports findings to ISSO, ISSM, Helpdesk, and the GSA Office of the Chief Information Security Officer following the Incident Reporting Procedures in GSA IT Security Procedural Guide 01-02, Incident Response**
+        _Control:_ **The organization reports findings to ISSO, ISSM, Helpdesk, and the GSA Office of the Chief Information Security Officer following the Incident Reporting Procedures in GSA IT Security Procedural Guide 01-02, Incident Response**
 
+        The Discovery management team is just relaunching the Discovery application system into production so does not have much history with the reporting needs outlined in this control.  However, the Discovery management team is committed to following all established and recommended practices around reporting when the application goes live.
 
+        All members of the Discovery team are responsible for timely reporting of site issues and potential security vulnerabilities.  In the future an issue reporting policy will be drafted and referenced in this documentation.
 
 
