@@ -1,6 +1,66 @@
 schema_version: "3.0.0"
 name: Audit and Accountability Policies for Discovery
 documentation_complete: false
-satisfies:
 
 verifications:
+- key: repo
+  name: Discovery Github repository
+  path: https://github.com/PSHCDevOps/discovery
+  type: URL
+
+- key: circle
+  name: Discovery Circle CI
+  path: https://circleci.com/gh/PSHCDevOps/discovery
+  type: URL
+
+- key: django
+  name: Django
+  path: https://docs.djangoproject.com/en/1.8/
+  type: URL
+
+satisfies:
+- standard_key: NIST-800-53
+  control_key: AU-2 # Audit Events
+  implementation_statuses:
+    - Implemented
+  narrative:
+    - key: AU-2a
+      text: |
+        _Control:_ **Determines that the information system is capable of auditing the following events: Successful and unsuccessful account logon events, account management events, object access, policy change, privilege functions, process tracking, and system events.  For Web applications: all administrator activity, authentication checks, authorization checks, data deletions, data access, data changes, and permission changes**
+
+
+
+    - key: AU-2b
+      text: |
+        _Control:_ **Coordinates the security audit function with other organizational entities requiring audit-related information to enhance mutual support and to help guide the selection of auditable events**
+
+
+
+    - key: AU-2c
+      text: |
+        _Control:_ **Provides a rationale for why the auditable events are deemed to be adequate to support after-the-fact investigations of security incidents**
+
+
+
+    - key: AU-2d
+      text: |
+        _Control:_ **Determines that the following events are to be audited within the information system: Successful and unsuccessful account logon events, account management events, object access, policy change, privilege functions, process tracking, and system events.  For Web applications: all administrator activity, authentication checks, authorization checks, data deletions, data access, data changes, and permission changes.  Settings to be audited continually for each identified event**
+
+- standard_key: NIST-800-53
+  control_key: AU-6 # Audit Review, Analysis, and Reporting
+  implementation_statuses:
+    - Implemented
+  narrative:
+    - key: AU-6a
+      text: |
+        _Control:_ **Reviews and analyzes information system audit records at least weekly for indications of GSA S/SO or Contractor recommendation to be approved and accepted by the GSA AO**
+
+
+
+    - key: AU-6b
+      text: |
+        _Control:_ **Reports findings to ISSO, ISSM, Helpdesk, and the GSA Office of the Chief Information Security Officer following the Incident Reporting Procedures in GSA IT Security Procedural Guide 01-02, Incident Response**
+
+
+
+
