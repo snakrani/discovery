@@ -2,22 +2,6 @@ schema_version: "3.0.0"
 name: Audit and Accountability Policies for Discovery
 documentation_complete: false
 
-verifications:
-- key: repo
-  name: Discovery Github repository
-  path: https://github.com/PSHCDevOps/discovery
-  type: URL
-
-- key: circle
-  name: Discovery Circle CI
-  path: https://circleci.com/gh/PSHCDevOps/discovery
-  type: URL
-
-- key: django
-  name: Django
-  path: https://docs.djangoproject.com/en/1.8/
-  type: URL
-
 satisfies:
 - standard_key: NIST-800-53
   control_key: AU-2 # Audit Events
