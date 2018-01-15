@@ -22,8 +22,9 @@ satisfies:
 - standard_key: NIST-800-53
   control_key: CA-8 # Penetration Testing
   implementation_statuses:
-    - Implemented
+    - complete
   narrative:
     - text: |
         _Control:_ **The organization conducts penetration testing annually on internet accessible components**
 
+        The Discovery management team requests a Penetration Test to be conducted by an independent team under the management of the GSA Information Security team or via an accredited FedRAMP third-party assessment organization annually.
