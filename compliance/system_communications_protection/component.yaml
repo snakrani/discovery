@@ -1,6 +1,57 @@
 schema_version: "3.0.0"
 name: System and Communications Protection Policies for Discovery
 documentation_complete: false
-satisfies:
 
 verifications:
+- key: repo
+  name: Discovery Github repository
+  path: https://github.com/PSHCDevOps/discovery
+  type: URL
+
+- key: circle
+  name: Discovery Circle CI
+  path: https://circleci.com/gh/PSHCDevOps/discovery
+  type: URL
+
+- key: django
+  name: Django
+  path: https://docs.djangoproject.com/en/1.8/
+  type: URL
+
+satisfies:
+- standard_key: NIST-800-53
+  control_key: SC-7 # Boundary Protection
+  implementation_statuses:
+    - Implemented
+  narrative:
+    - key: SC-7a
+      text: |
+        _Control:_ **The information system monitors and controls communications at the external boundary of the system and at key internal boundaries within the system**
+
+
+    - key: SC-7b
+      text: |
+        _Control:_ **The information system implements subnetworks for publicly accessible system components that are physically and/or logically separated from internal organizational networks**
+
+
+    - key: SC-7c
+      text: |
+        _Control:_ **The information system connects to external networks or information systems only through managed interfaces consisting of boundary protection devices arranged in accordance with organizational security architecture**
+
+
+- standard_key: NIST-800-53
+  control_key: SC-13 # Cryptographic Protection
+  implementation_statuses:
+    - Implemented
+  narrative:
+    - text: |
+        _Control:_ **The information system implements FIPS 140-2 validated encryption modules for digital media stored outside of controlled areas; e-mail; for data on portable storages devices; web sites (internal and public) with logon functions (must also implement TLS); and all sensitive information such as Personally Identifiable Information (as deemed by the data owner) transmitted outside the GSA firewall in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards**
+
+
+- standard_key: NIST-800-53
+  control_key: SC-28 (1) # Protection of Information at Rest - Cryptographic Protection
+  implementation_statuses:
+    - Implemented
+  narrative:
+    - text: |
+        _Control:_ **The information system implements cryptographic mechanisms to prevent unauthorized disclosure and modification of Personally Identifiable Information and all sensitive information (as deemed by the data owner) on stored data (e.g., database)**
