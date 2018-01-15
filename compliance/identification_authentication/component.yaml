@@ -1,6 +1,55 @@
 schema_version: "3.0.0"
 name: Identification and Authentication Policies for Discovery
 documentation_complete: false
-satisfies:
 
 verifications:
+- key: repo
+  name: Discovery Github repository
+  path: https://github.com/PSHCDevOps/discovery
+  type: URL
+
+- key: circle
+  name: Discovery Circle CI
+  path: https://circleci.com/gh/PSHCDevOps/discovery
+  type: URL
+
+- key: django
+  name: Django
+  path: https://docs.djangoproject.com/en/1.8/
+  type: URL
+
+satisfies:
+- standard_key: NIST-800-53
+  control_key: IA-2 # Identification and Authentication (Organizational Users)
+  implementation_statuses:
+    - Implemented
+  narrative:
+    - text: |
+        _Control:_ **The information system uniquely identifies and authenticates organizational users (or processes acting on behalf of organizational users)**
+
+
+- standard_key: NIST-800-53
+  control_key: IA-2 (1) # Identification and Authentication (Organizational Users) - Network Access to Privileged Accounts
+  implementation_statuses:
+    - Implemented
+  narrative:
+    - text: |
+        _Control:_ **The information system implements multifactor authentication for network access to privileged accounts**
+
+
+- standard_key: NIST-800-53
+  control_key: IA-2 (2) # Identification and Authentication (Organizational Users) - Network Access to Non-Privileged Accounts
+  implementation_statuses:
+    - Implemented
+  narrative:
+    - text: |
+        _Control:_ **The information system implements multifactor authentication for network access to non-privileged accounts**
+
+
+- standard_key: NIST-800-53
+  control_key: IA-2 (12) # Identification and Authentication (Organizational Users) - Acceptance of PIV Credentials
+  implementation_statuses:
+    - None
+  narrative:
+    - text: |
+        _Control:_ **The information system accepts and electronically verifies Personal Identity Verification (PIV) credentials**
