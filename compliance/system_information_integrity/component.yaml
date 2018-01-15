@@ -1,6 +1,94 @@
 schema_version: "3.0.0"
 name: System and Information Integrity Policies for Discovery
 documentation_complete: false
-satisfies:
 
 verifications:
+- key: repo
+  name: Discovery Github repository
+  path: https://github.com/PSHCDevOps/discovery
+  type: URL
+
+- key: circle
+  name: Discovery Circle CI
+  path: https://circleci.com/gh/PSHCDevOps/discovery
+  type: URL
+
+- key: django
+  name: Django
+  path: https://docs.djangoproject.com/en/1.8/
+  type: URL
+
+satisfies:
+- standard_key: NIST-800-53
+  control_key: SI-2 # Flaw Remediation
+  implementation_statuses:
+    - Implemented
+  narrative:
+    - key: SI-2a
+      text: |
+        _Control:_ **The organization identifies, reports, and corrects information system flaws**
+
+
+    - key: SI-2b
+      text: |
+        _Control:_ **The organization tests software and firmware updates related to flaw remediation for effectiveness and potential side effects before installation**
+
+
+    - key: SI-2c
+      text: |
+        _Control:_ **The organization installs security-relevant software and firmware updates within scheduled monthly patching maintenance windows following change control processes (including testing) with the ability to push emergency patches on demand from either the direction of the CISO or the AO. In terms of vulnerability remediation, High-risk vulnerabilities shall be mitigated within thirty days; moderate risk vulnerabilities mitigated within ninety days of the release of the updates**
+
+
+    - key: SI-2d
+      text: |
+        _Control:_ **The organization incorporates flaw remediation into the organizational configuration management process**
+
+
+- standard_key: NIST-800-53
+  control_key: SI-4 # Information System Monitoring
+  implementation_statuses:
+    - Implemented
+  narrative:
+    - key: SI-4a
+      text: |
+        _Control:_ **The organization monitors the information system to detect; 1) Attacks and indicators of potential attacks in accordance with GSA S/SO or Contractor recommendation to be approved and accepted by the GSA AO; and 2) Unauthorized local, network, and remote connections**
+
+
+    - key: SI-4b
+      text: |
+        _Control:_ **The organization identifies unauthorized use of the information system through GSA S/SO or Contractor recommendation to be approved and accepted by the GSA AO**
+
+
+    - key: SI-4c
+      text: |
+        _Control:_ **The organization deploys monitoring devices: (i) strategically within the information system to collect organization-determined essential information; and (ii) at ad hoc locations within the system to track specific types of transactions of interest to the organization**
+
+
+    - key: SI-4d
+      text: |
+        _Control:_ **The organization protects information obtained from intrusion-monitoring tools from unauthorized access, modification, and deletion**
+
+
+    - key: SI-4e
+      text: |
+        _Control:_ **The organization heightens the level of information system monitoring activity whenever there is an indication of increased risk to organizational operations and assets, individuals, other organizations, or the Nation based on law enforcement information, intelligence information, or other credible sources of information**
+
+
+    - key: SI-4f
+      text: |
+        _Control:_ **The organization obtains legal opinion with regard to information system monitoring activities in accordance with applicable federal laws, Executive Orders, directives, policies, or regulations**
+
+
+    - key: SI-4g
+      text: |
+        _Control:_ **The organization provides GSA S/SO or Contractor recommendation to be approved and accepted by the GSA AO**
+
+
+- standard_key: NIST-800-53
+  control_key: SI-10 # Information Input Validation
+  implementation_statuses:
+    - Implemented
+  narrative:
+    - text: |
+        _Control:_ **The information system checks the validity of inputs. They shall be validated for correct syntax and semantics (e.g., character set, length, numerical range, and acceptable values) to ensure they match specified definitions for format and content. Input validation protections will be tested through monthly operating system and web application vulnerability scanning as defined in control RA-5**
+
