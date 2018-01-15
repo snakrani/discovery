@@ -1,6 +1,118 @@
 schema_version: "3.0.0"
 name: Configuration Management Policies for Discovery
 documentation_complete: false
-satisfies:
 
 verifications:
+- key: repo
+  name: Discovery Github repository
+  path: https://github.com/PSHCDevOps/discovery
+  type: URL
+
+- key: circle
+  name: Discovery Circle CI
+  path: https://circleci.com/gh/PSHCDevOps/discovery
+  type: URL
+
+- key: django
+  name: Django
+  path: https://docs.djangoproject.com/en/1.8/
+  type: URL
+
+- key: usgcb
+  name: USGCB Checklists
+  path: http://usgcb.nist.gov/usgcb_faq.html#usgcbfaq_usgcbfdcc
+  type: URL
+
+- key: scap
+  name: SCAP Information
+  path: http://scap.nist.gov/
+  type: URL
+
+satisfies:
+- standard_key: NIST-800-53
+  control_key: CM-2 # Baseline Configuration
+  implementation_statuses:
+    - Implemented
+  narrative:
+    - text: |
+        _Control:_ **The organization develops, documents, and maintains under configuration control, a current baseline configuration of the information system**
+
+
+- standard_key: NIST-800-53
+  control_key: CM-3 # Configuration Change Control
+  implementation_statuses:
+    - Implemented
+  narrative:
+    - key: CM-3a
+      text: |
+        _Control:_ **Determines the types of changes to the information system that are configuration-controlled**
+
+
+    - key: CM-3b
+      text: |
+        _Control:_ **Reviews proposed configuration-controlled changes to the information system and approves or disapproves such changes with explicit consideration for security impact analyses**
+
+
+    - key: CM-3c
+      text: |
+        _Control:_ **Documents configuration change decisions associated with the information system**
+
+
+    - key: CM-3d
+      text: |
+        _Control:_ **Implements approved configuration-controlled changes to the information system**
+
+
+    - key: CM-3e
+      text: |
+        _Control:_ **Retains records of configuration-controlled changes to the information system for a period of not less than 1 year or in accordance with record retention policies and procedures; whichever is greater**
+
+
+    - key: CM-3f
+      text: |
+        _Control:_ **Audits and reviews activities associated with configuration-controlled changes to the information system**
+
+
+    - key: CM-3g
+      text: |
+        _Control:_ **Coordinates and provides oversight for configuration change control activities through GSA S/SO or Contractor recommendation to be approved and accepted by the GSA AO.  Systems shall establish a central means (bulletin, status page, etc) of communicating major changes/development affecting services**
+
+
+- standard_key: NIST-800-53
+  control_key: CM-6 # Configuration Settings
+  implementation_statuses:
+    - Implemented
+  narrative:
+    - key: CM-6a
+      text: |
+        _Control:_ **Establishes and documents configuration settings for information technology products employed within the information system using GSA technical guidelines, NIST guidelines, Center for Internet Security guidelines (Level 1), or industry best practice guidelines in hardening their systems, as deemed appropriate by the GSA Authorizing Official. Implemented checklists must be integrated with Security Content Automation Protocol (SCAP) content (if available and/or to the greatest extent possible.)**
+
+
+    - key: CM-6b
+      text: |
+        _Control:_ **Implements the configuration settings**
+
+
+    - key: CM-6c
+      text: |
+        _Control:_ **Identifies, documents, and approves any deviations from established configuration settings for all information system components based on GSA S/SO or Contractor recommendation to be approved and accepted by the GSA AO**
+
+
+    - key: CM-6d
+      text: |
+        _Control:_ **Monitors and controls changes to the configuration settings in accordance with organizational policies and procedures**
+
+
+- standard_key: NIST-800-53
+  control_key: CM-8 # Information System Component Inventory
+  implementation_statuses:
+    - Implemented
+  narrative:
+    - key: CM-8a
+      text: |
+        _Control:_ **Develops and documents an inventory of information system components that; 1) Accurately reflects the current information system; 2) Includes all components within the authorization boundary of the information system; 3) Is at the level of granularity deemed necessary for tracking and reporting; and 4) Includes GSA S/SO or Contractor recommended information deemed necessary to ensure property accountability that must be approved and accepted by the GSA AO.  List may include hardware inventory specifications (manufacturer, type, model, serial number, physical location), software license information, information system/component owner, and for a networked component/device, the machine name and network address**
+
+
+    - key: CM-8b
+      text: |
+        _Control:_ **Reviews and updates the information system component inventory after every change**
