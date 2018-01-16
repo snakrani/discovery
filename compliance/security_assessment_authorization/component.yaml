@@ -1,12 +1,20 @@
 schema_version: "3.0.0"
 name: Security Assessment Policies for Discovery
-documentation_complete: false
+
+references:
+- name: Discovery Github repository
+  path: https://github.com/PSHCDevOps/discovery
+  type: URL
+
+- name: Discovery Circle CI
+  path: https://circleci.com/gh/PSHCDevOps/discovery
+  type: URL
+
 
 satisfies:
 - standard_key: NIST-800-53
   control_key: CA-8 # Penetration Testing
-  implementation_statuses:
-    - complete
+  implementation_status: complete
   narrative:
     - text: |
         _Control:_ **The organization conducts penetration testing annually on internet accessible components**
