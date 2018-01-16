@@ -1,6 +1,15 @@
 schema_version: "3.0.0"
 name: Configuration Management Policies for Discovery
-documentation_complete: false
+
+references:
+- name: Discovery Github repository
+  path: https://github.com/PSHCDevOps/discovery
+  type: URL
+
+- name: Discovery Circle CI
+  path: https://circleci.com/gh/PSHCDevOps/discovery
+  type: URL
+
 
 verifications:
 - key: usgcb
@@ -13,11 +22,51 @@ verifications:
   path: http://scap.nist.gov/
   type: URL
 
+- key: cloudgov
+  name: Cloud.gov Hosting
+  path: https://cloud.gov/docs/apps/production-ready
+  type: URL
+
+- key: circleci
+  name: CircleCI - Documentation
+  path: https://circleci.com/docs/2.0/
+  type: URL
+
+- key: django
+  name: Django Documentation
+  path: https://docs.djangoproject.com/en/1.8/
+  type: URL
+
+- key: vagrant
+  name: Vagrant Documentation
+  path: https://www.vagrantup.com/docs/
+  type: URL
+
+- key: docker
+  name: Docker Documentation
+  path: https://docs.docker.com/
+  type: URL
+
+- key: scripts
+  name: Discovery Scripts
+  path: https://github.com/PSHCDevOps/discovery/tree/master/scripts
+  type: URL
+
+- key: trello
+  name: Discovery Trello Board
+  path: https://trello.com/b/AEoWtET7/discovery-20
+  type: URL
+
+
 satisfies:
 - standard_key: NIST-800-53
   control_key: CM-2 # Baseline Configuration
-  implementation_statuses:
-    - complete
+  implementation_status: complete
+  covered_by:
+    - verification_key: scripts
+    - verification_key: cloudgov
+    - verification_key: django
+    - verification_key: circleci
   narrative:
     - text: |
         _Control:_ **The organization develops, documents, and maintains under configuration control, a current baseline configuration of the information system**
@@ -31,8 +80,12 @@ satisfies:
 
 - standard_key: NIST-800-53
   control_key: CM-3 # Configuration Change Control
-  implementation_statuses:
-    - complete
+  implementation_status: complete
+  covered_by:
+    - verification_key: cloudgov
+    - verification_key: django
+    - verification_key: circleci
+    - verification_key: trello
   narrative:
     - key: CM-3a
       text: |
@@ -56,7 +109,7 @@ satisfies:
       text: |
         _Control:_ **The organization documents configuration change decisions associated with the information system**
 
-        The Discovery management team maintains a Trello board (https://trello.com/b/AEoWtET7/discovery-20) and an application level issue queue that prioritizes all work conducted on the Discovery system.  Documents may be created for certain features or fixes that outline in various levels of detail configuration changes to the system, depending upon the nature of the change.  GitHub/Git maintains a log of all committers and the changes they have made so finding the source of a change is trivial.
+        The Discovery management team maintains a [Trello board](https://trello.com/b/AEoWtET7/discovery-20) and an application level issue queue that prioritizes all work conducted on the Discovery system.  Documents may be created for certain features or fixes that outline in various levels of detail configuration changes to the system, depending upon the nature of the change.  GitHub/Git maintains a log of all committers and the changes they have made so finding the source of a change is trivial.
 
         Changes made to configurations within a service boundary, such as Cloud.gov, CircleCI, or GitHub are not versioned and there is currently no way to see consistently who changed configurations and why.  However, discussions are conducted with Discovery management before any configuration change in a service environment.
 
@@ -95,11 +148,11 @@ satisfies:
 
 - standard_key: NIST-800-53
   control_key: CM-6 # Configuration Settings
-  implementation_statuses:
-    - complete
+  implementation_status: complete
   covered_by:
     - verification_key: usgcb
     - verification_key: scap
+    - verification_key: trello
   narrative:
     - key: CM-6a
       text: |
@@ -137,8 +190,13 @@ satisfies:
 
 - standard_key: NIST-800-53
   control_key: CM-8 # Information System Component Inventory
-  implementation_statuses:
-    - complete
+  implementation_status: complete
+  covered_by:
+    - verification_key: cloudgov
+    - verification_key: django
+    - verification_key: circleci
+    - verification_key: vagrant
+    - verification_key: docker
   narrative:
     - key: CM-8a
       text: |
