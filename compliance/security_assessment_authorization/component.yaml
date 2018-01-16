@@ -2,12 +2,16 @@ schema_version: "3.0.0"
 name: Security Assessment Policies for Discovery
 
 references:
-- name: Discovery Github repository
+- name: Discovery Github Repository
   path: https://github.com/PSHCDevOps/discovery
   type: URL
 
 - name: Discovery Circle CI
   path: https://circleci.com/gh/PSHCDevOps/discovery
+  type: URL
+
+- name: Discovery Documentation Site
+  path: http://pshcdevops.github.io/discovery/
   type: URL
 
 
