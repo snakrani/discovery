@@ -1,12 +1,47 @@
 schema_version: "3.0.0"
 name: Identification and Authentication Policies for Discovery
-documentation_complete: false
+
+references:
+- name: Discovery Github repository
+  path: https://github.com/PSHCDevOps/discovery
+  type: URL
+
+- name: Discovery Circle CI
+  path: https://circleci.com/gh/PSHCDevOps/discovery
+  type: URL
+
+
+verifications:
+- key: cloudgov
+  name: Cloud.gov Hosting
+  path: https://cloud.gov/docs/apps/production-ready
+  type: URL
+
+- key: circleci
+  name: CircleCI - Documentation
+  path: https://circleci.com/docs/2.0/
+  type: URL
+
+- key: django
+  name: Django Documentation
+  path: https://docs.djangoproject.com/en/1.8/
+  type: URL
+
+- key: github
+  name: GitHub Documentation
+  path: https://help.github.com/
+  type: URL
+
 
 satisfies:
 - standard_key: NIST-800-53
   control_key: IA-2 # Identification and Authentication (Organizational Users)
-  implementation_statuses:
-    - complete
+  implementation_status: complete
+  covered_by:
+    - verification_key: cloudgov
+    - verification_key: django
+    - verification_key: circleci
+    - verification_key: github
   narrative:
     - text: |
         _Control:_ **The information system uniquely identifies and authenticates organizational users (or processes acting on behalf of organizational users)**
@@ -20,8 +55,10 @@ satisfies:
 
 - standard_key: NIST-800-53
   control_key: IA-2 (1) # Identification and Authentication (Organizational Users) - Network Access to Privileged Accounts
-  implementation_statuses:
-    - partial
+  implementation_status: partial
+  covered_by:
+    - verification_key: cloudgov
+    - verification_key: github
   narrative:
     - text: |
         _Control:_ **The information system implements multifactor authentication for network access to privileged accounts**
@@ -33,8 +70,10 @@ satisfies:
 
 - standard_key: NIST-800-53
   control_key: IA-2 (2) # Identification and Authentication (Organizational Users) - Network Access to Non-Privileged Accounts
-  implementation_statuses:
-    - partial
+  implementation_status: partial
+  covered_by:
+    - verification_key: cloudgov
+    - verification_key: github
   narrative:
     - text: |
         _Control:_ **The information system implements multifactor authentication for network access to non-privileged accounts**
@@ -46,8 +85,7 @@ satisfies:
 
 - standard_key: NIST-800-53
   control_key: IA-2 (12) # Identification and Authentication (Organizational Users) - Acceptance of PIV Credentials
-  implementation_statuses:
-    - none
+  implementation_status: none
   narrative:
     - text: |
         _Control:_ **The information system accepts and electronically verifies Personal Identity Verification (PIV) credentials**
