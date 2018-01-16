@@ -2,41 +2,35 @@ schema_version: "3.0.0"
 name: Security Planning Policies for Discovery
 documentation_complete: false
 
-verifications:
-- key: repo
-  name: Discovery Github repository
-  path: https://github.com/PSHCDevOps/discovery
-  type: URL
-
-- key: circle
-  name: Discovery Circle CI
-  path: https://circleci.com/gh/PSHCDevOps/discovery
-  type: URL
-
-- key: django
-  name: Django
-  path: https://docs.djangoproject.com/en/1.8/
-  type: URL
-
 satisfies:
 - standard_key: NIST-800-53
   control_key: PL-8 # Information Security Architecture
   implementation_statuses:
-    - Implemented
+    - partial
   narrative:
     - key: PL-8a
       text: |
-        _Control:_ **Develops an information security architecture for the information system that; 1) Describes the overall philosophy, requirements, and approach to be taken with regard to protecting the confidentiality, integrity, and availability of organizational information; 2) Describes how the information security architecture is integrated into and supports the enterprise architecture; and 3) Describes any information security assumptions about, and dependencies on, external services**
+        _Control:_ **The organization develops an information security architecture for the information system that; 1) Describes the overall philosophy, requirements, and approach to be taken with regard to protecting the confidentiality, integrity, and availability of organizational information; 2) Describes how the information security architecture is integrated into and supports the enterprise architecture; and 3) Describes any information security assumptions about, and dependencies on, external services**
 
+        The Discovery management team, GSA staff, and contractors currently working on the system take the security of the platform seriously, which is why we have automated and employed the practice of least privilege when possible in the operations of the Discovery application.  The Discovery system relies upon security provided by Cloud.gov and provides a mostly anonymous browsing experience for our users that is protected from malicious injection of information or commands.
+
+        The Discovery system is just now coming back online after a lengthy period offline.  The team is currently working through compliance related documentation, and have the drafing of a formal Information Security Architecture document in the project backlog.  The draft of this document can be prioritized by the Discovery management team in coordination with the GSA Authorizing Official.
 
 
     - key: PL-8b
       text: |
-        _Control:_ **Reviews and updates the information security architecture at least annually to reflect updates in the enterprise architecture**
+        _Control:_ **The organization reviews and updates the information security architecture at least annually to reflect updates in the enterprise architecture**
 
+        Since there is no current version of the Information Security Architecture for the Discovery application system, we still need to create the first version.  The creation of an initial Information Security Architecture that is in alignment with GSA enterprise architecture is currently in the project backlog and expected to be completed within the year.
+
+        Once the first draft of the Information Security Architecture document is created, it will be continuously reviewed at least monthly for changes based on new research into security practices, discussions with GSA and other federal security professionals, and concerns and audits conducted by the Discovery team.
 
 
     - key: PL-8c
       text: |
-        _Control:_ **Ensures that planned information security architecture changes are reflected in the security plan, the security Concept of Operations (CONOPS), and organizational procurements/acquisitions**
+        _Control:_ **The organization ensures that planned information security architecture changes are reflected in the security plan, the security Concept of Operations (CONOPS), and organizational procurements/acquisitions**
+
+        The Discovery team will maintain a security status, prioritized backlog of security issues, information security architecture, that will be integrated into a holistic security plan, which will include CONOPS documentation, and information on organizational procurements/acquisitions.
+
+        This documentation will live in the GitHub source repository and be available through a comprehensive Discovery documentation site, located at: http://pshcdevops.github.io/discovery/
 
