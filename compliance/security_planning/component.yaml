@@ -11,10 +11,25 @@ references:
   type: URL
 
 
+verifications:
+- key: github
+  name: GitHub Documentation
+  path: https://help.github.com/
+  type: URL
+
+- key: docs
+  name: Discovery Documentation
+  path: http://pshcdevops.github.io/discovery/
+  type: URL
+
+
 satisfies:
 - standard_key: NIST-800-53
   control_key: PL-8 # Information Security Architecture
   implementation_status: partial
+  covered_by:
+    - verification_key: github
+    - verification_key: docs
   narrative:
     - key: PL-8a
       text: |
