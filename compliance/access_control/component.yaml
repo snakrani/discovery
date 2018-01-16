@@ -1,12 +1,47 @@
 schema_version: "3.0.0"
 name: Access Control Policies for Discovery
-documentation_complete: false
+
+references:
+- name: Discovery Github repository
+  path: https://github.com/PSHCDevOps/discovery
+  type: URL
+
+- name: Discovery Circle CI
+  path: https://circleci.com/gh/PSHCDevOps/discovery
+  type: URL
+
+
+verifications:
+- key: cloudteam
+  name: Cloud.gov - Managing Team Members
+  path: https://cloud.gov/docs/apps/managing-teammates
+  type: URL
+
+- key: gitteam
+  name: GitHub - Managing Organization Teams
+  path: https://help.github.com/categories/setting-up-and-managing-organizations-and-teams
+  type: URL
+
+- key: circleci
+  name: CircleCI - GitHub Integration
+  path: https://circleci.com/docs/2.0/
+  type: URL
+
+- key: django
+  name: Django Documentation
+  path: https://docs.djangoproject.com/en/1.8/
+  type: URL
+
 
 satisfies:
 - standard_key: NIST-800-53
   control_key: AC-2 # Account Management
-  implementation_statuses:
-    - complete
+  implementation_status: complete
+  covered_by:
+    - verification_key: cloudteam
+    - verification_key: gitteam
+    - verification_key: circleci
+    - verification_key: django
   narrative:
     - key: AC-2a
       text: |
@@ -50,13 +85,17 @@ satisfies:
 
 - standard_key: NIST-800-53
   control_key: AC-3 # Access Enforcement
-  implementation_statuses:
-    - complete
+  implementation_status: complete
+  covered_by:
+    - verification_key: cloudteam
+    - verification_key: gitteam
+    - verification_key: circleci
+    - verification_key: django
   narrative:
     - text: |
         _Control:_ **The information system enforces approved authorizations for logical access to information and system resources in accordance with applicable access control policies**
 
-        All vendor and contract data within the Discovery repository is openly available to the public so no access control is required.  Discovery site administrators granted according to AC-2 must authenticate through a Django authentication, authorization, and session management system.
+        All vendor and contract data within the [Discovery repository](https://github.com/PSHCDevOps/discovery) is openly available to the public so no access control is required.  Discovery site administrators granted according to AC-2 must authenticate through a Django authentication, authorization, and session management system.
 
         All Cloud.gov system access is handled according to policies outlined in the AC-2 controls and Cloud.gov's implemented security controls.  All access to hosting environments (production and development) are fully self contained and access must be individually granted to each environment.
 
@@ -64,8 +103,7 @@ satisfies:
 
 - standard_key: NIST-800-53
   control_key: AC-6 # Least Privilege
-  implementation_statuses:
-    - complete
+  implementation_status: complete
   narrative:
     - text: |
         _Control:_ **The organization employs the principle of least privilege, allowing only authorized accesses for users (or processes acting on behalf of users) which are necessary to accomplish assigned tasks in accordance with organizational missions and business functions**
