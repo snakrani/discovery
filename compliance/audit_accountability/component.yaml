@@ -1,12 +1,40 @@
 schema_version: "3.0.0"
 name: Audit and Accountability Policies for Discovery
-documentation_complete: false
+
+references:
+- name: Discovery Github repository
+  path: https://github.com/PSHCDevOps/discovery
+  type: URL
+
+- name: Discovery Circle CI
+  path: https://circleci.com/gh/PSHCDevOps/discovery
+  type: URL
+
+
+verifications:
+- key: cloudlogs
+  name: Cloud.gov - Log Search Interface
+  path: https://logs.fr.cloud.gov
+  type: URL
+
+- key: django
+  name: Django Documentation
+  path: https://docs.djangoproject.com/en/1.8/
+  type: URL
+
+- key: trello
+  name: Discovery Trello Board
+  path: https://trello.com/b/AEoWtET7/discovery-20
+  type: URL
+
 
 satisfies:
 - standard_key: NIST-800-53
   control_key: AU-2 # Audit Events
-  implementation_statuses:
-    - partial
+  implementation_status: partial
+  covered_by:
+    - verification_key: cloudlogs
+    - verification_key: django
   narrative:
     - key: AU-2a
       text: |
@@ -14,7 +42,7 @@ satisfies:
 
         The Discovery application currently logs basic events from Django, such as errors, page loads, data loading requests, scheduling updates, content changes, but does not have granular logging of authentication attempts by users.  We can track authentication to the system by filtering in Logstash/Kibana on login access.  In the future there will be more granular logging around authentication and account management.
 
-        All Cloud.gov and application level events (requests, failures, and warnings) are available at https://logs.fr.cloud.gov.
+        All Cloud.gov and application level events (requests, failures, and warnings) are available at [https://logs.fr.cloud.gov](https://logs.fr.cloud.gov).
 
 
     - key: AU-2b
@@ -44,14 +72,16 @@ satisfies:
 
 - standard_key: NIST-800-53
   control_key: AU-6 # Audit Review, Analysis, and Reporting
-  implementation_statuses:
-    - complete
+  implementation_status: complete
+  covered_by:
+    - verification_key: cloudlogs
+    - verification_key: trello
   narrative:
     - key: AU-6a
       text: |
         _Control:_ **The organization reviews and analyzes information system audit records at least weekly for indications of GSA S/SO or Contractor recommendations to be approved and accepted by the GSA AO**
 
-        All application and hosting provider related log entries are stored within Logstash, available through a Kibana interface at https://logs.fr.cloud.gov.  Logs are continuously checked for abnormalities, and GSA staff and current contractors working on the system can file issues on the Discovery Trello board (https://trello.com/b/AEoWtET7/discovery-20) for implementation prioritization.
+        All application and hosting provider related log entries are stored within Logstash, available through a Kibana interface at [https://logs.fr.cloud.gov](https://logs.fr.cloud.gov).  Logs are continuously checked for abnormalities, and GSA staff and current contractors working on the system can file issues on the [Discovery Trello board](https://trello.com/b/AEoWtET7/discovery-20) for implementation prioritization.
 
         In the future more granluar logging and monitoring logic and systems may be employed to ensure that errors and system issues can be caught in the most secure and timeliest fashion.
 
