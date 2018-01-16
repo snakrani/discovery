@@ -1,18 +1,41 @@
 schema_version: "3.0.0"
 name: Risk Assessment Policies for Discovery
-documentation_complete: false
+
+references:
+- name: Discovery Github repository
+  path: https://github.com/PSHCDevOps/discovery
+  type: URL
+
+- name: Discovery Circle CI
+  path: https://circleci.com/gh/PSHCDevOps/discovery
+  type: URL
+
+
+verifications:
+- key: circleci
+  name: CircleCI Documentation
+  path: https://circleci.com/docs/2.0/
+  type: URL
+
+- key: trello
+  name: Discovery Trello Board
+  path: https://trello.com/b/AEoWtET7/discovery-20
+  type: URL
+
 
 satisfies:
 - standard_key: NIST-800-53
   control_key: RA-5 # Vulnerability Scanning
-  implementation_statuses:
-    - partial
+  implementation_status: partial
+  covered_by:
+    - verification_key: circleci
+    - verification_key: trello
   narrative:
     - key: RA-5a
       text: |
         _Control:_ **The organization scans for vulnerabilities in the information system and hosted applications monthly for Operating System (OS) and web application scanning; quarterly Database scanning (as applicable); and, OS and Web application scanning with every code release, and when new vulnerabilities potentially affecting the system/applications are identified and reported**
 
-        The Discovery application is currently getting ready for relaunch onto the production environment, available to the public.  The site has been dormant for months and scans are just starting to be conducted to detect vulnerabilities before it goes live.  Once the initial penetration testing is completed, we will begin a regular routine of internal vulnerability scanning through OWASP ZAP and static code analysis, using a tool, such as Bandit (an open source static analysis tool).  Any vulnerabilities or code issues found will be added to the project backlog for prioritization by the Discovery management team and the GSA Authorizing Official.
+        The Discovery application is currently getting ready for relaunch in the production environment, and will be available to the public.  The site has been dormant for months and scans are just starting to be conducted to detect vulnerabilities before it goes live.  Once the initial penetration testing is completed, we will begin a regular routine of internal vulnerability scanning through OWASP ZAP and static code analysis, using a tool, such as Bandit (an open source static analysis tool).  Any vulnerabilities or code issues found will be added to the project backlog for prioritization by the Discovery management team and the GSA Authorizing Official.
 
         Currently before any code gets deployed through CircleCI, unit and acceptance tests for the codebase must pass, which helps us catch potential issues before they wind up on the site.  In the future we will add more automated testing to this process to further reduce the potential for introduction of code vulnerabilities in a live environment.
 
