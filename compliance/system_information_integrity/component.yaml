@@ -1,12 +1,74 @@
 schema_version: "3.0.0"
 name: System and Information Integrity Policies for Discovery
-documentation_complete: false
+
+references:
+- name: Discovery Github repository
+  path: https://github.com/PSHCDevOps/discovery
+  type: URL
+
+- name: Discovery Circle CI
+  path: https://circleci.com/gh/PSHCDevOps/discovery
+  type: URL
+
+
+verifications:
+- key: githubissues
+  name: GitHub Project Issues
+  path: https://github.com/PSHCDevOps/discovery/issues
+  type: URL
+
+- key: trello
+  name: Discovery Trello Board
+  path: https://trello.com/b/AEoWtET7/discovery-20
+  type: URL
+
+- key: googleanalytics
+  name: Google Analytics Documentation
+  path: https://developers.google.com/analytics/
+  type: URL
+
+- key: cloudlogs
+  name: Cloud.gov Log Search Interface
+  path: https://logs.fr.cloud.gov
+  type: URL
+
+- key: cloudgov
+  name: Cloud.gov Hosting
+  path: https://cloud.gov/docs/apps/production-ready
+  type: URL
+
+- key: circleci
+  name: CircleCI - Documentation
+  path: https://circleci.com/docs/2.0/
+  type: URL
+
+- key: vagrant
+  name: Vagrant Documentation
+  path: https://www.vagrantup.com/docs/
+  type: URL
+
+- key: docker
+  name: Docker Documentation
+  path: https://docs.docker.com/
+  type: URL
+
+- key: django
+  name: Django Documentation
+  path: https://docs.djangoproject.com/en/1.8/
+  type: URL
+
 
 satisfies:
 - standard_key: NIST-800-53
   control_key: SI-2 # Flaw Remediation
-  implementation_statuses:
-    - complete
+  implementation_status: complete
+  covered_by:
+    - verification_key: githubissues
+    - verification_key: trello
+    - verification_key: cloudgov
+    - verification_key: circleci
+    - verification_key: vagrant
+    - verification_key: docker
   narrative:
     - key: SI-2a
       text: |
@@ -46,8 +108,12 @@ satisfies:
 
 - standard_key: NIST-800-53
   control_key: SI-4 # Information System Monitoring
-  implementation_statuses:
-    - complete
+  implementation_status: complete
+  covered_by:
+    - verification_key: cloudgov
+    - verification_key: cloudlogs
+    - verification_key: googleanalytics
+    - verification_key: trello
   narrative:
     - key: SI-4a
       text: |
@@ -106,8 +172,9 @@ satisfies:
 
 - standard_key: NIST-800-53
   control_key: SI-10 # Information Input Validation
-  implementation_statuses:
-    - complete
+  implementation_status: complete
+  covered_by:
+    - verification_key: django
   narrative:
     - text: |
         _Control:_ **The information system checks the validity of inputs. They shall be validated for correct syntax and semantics (e.g., character set, length, numerical range, and acceptable values) to ensure they match specified definitions for format and content. Input validation protections will be tested through monthly operating system and web application vulnerability scanning as defined in control RA-5**
