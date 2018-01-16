@@ -2,37 +2,30 @@ schema_version: "3.0.0"
 name: System and Services Acquisition Policies for Discovery
 documentation_complete: false
 
-verifications:
-- key: repo
-  name: Discovery Github repository
-  path: https://github.com/PSHCDevOps/discovery
-  type: URL
-
-- key: circle
-  name: Discovery Circle CI
-  path: https://circleci.com/gh/PSHCDevOps/discovery
-  type: URL
-
-- key: django
-  name: Django
-  path: https://docs.djangoproject.com/en/1.8/
-  type: URL
-
 satisfies:
 - standard_key: NIST-800-53
   control_key: SA-11 (1) # Developer Security Testing and Evaluation - Static Code Analysis
   implementation_statuses:
-    - Implemented
+    - complete
   narrative:
     - text: |
         _Control:_ **The organization requires the developer of the information system, system component, or information system service to employ static code analysis tools to identify common flaws and document the results of the analysis**
+
+        Currently the Discovery application maintains a process of routine unit and acceptance testing upon pushing to the official source repository or merges to the develop or master branches, but static code analysis is not yet implemented as an automatic tool that runs as part of the CircleCI CI/CD process.
+
+        There is currently a task in the Discovery project backlog to implement CI/CD based static code analysis on pushes to the official GitHub repository or merges to protected branches awaiting prioritization by the Discovery management team in coordination with the GSA Authorizing Official.
 
 
 - standard_key: NIST-800-53
   control_key: SA-22 (1) # Unsupported System Components - Alternative Sources for Continued Support
   implementation_statuses:
-    - Implemented
+    - complete
   narrative:
     - text: |
         _Control:_ **The organization; 1) Replaces information system components when support for the components is no longer available from the developer, vendor, or manufacturer; and 2) Provides justification and documents approval for the continued use of unsupported system components required to satisfy mission/business needs**
 
+        The Discovery application is built using an Agile process and components can be added and removed in a relatively short amount of time.  When a component is not being used it is promptly removed from the system and the application is redeployed as soon as is feasable.
+
+        When a needed component is not actively maintained and we need fixes or features, the Discovery team has the ability to fork the project, update to our needs, and submit a pull request back to the upstream repository.  We have employed this approach with two dependency libraries so far.  If the changes are integrated back upstream we can eliminate our fork and start using the upstream project again to gain the community contributions that the upstream project may benefit from.
+
+        Occasionally the Discovery team under the direction of Discovery management, may replace a working and supported component due to a superior component becoming available.  This may allow us to take advantage of newer features that benefit the application users in ways not originally envisioned.
