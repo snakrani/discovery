@@ -1,5 +1,5 @@
 
-# Discovery requirements
+# Discovery Setup
 
 **<** [Discovery on Docker](docker.md) | **^** **[Getting Started](readme.md)**
 
