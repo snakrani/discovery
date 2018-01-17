@@ -32,12 +32,13 @@ When using or citing the work, you should not imply endorsement by the
 author or the affirmer.
 
 ## Exceptions
-- [jQuery], [Mediator.js], and [jQuery-ajaxTransport-XDomainRequest] are
+- [jQuery], [Mediator.js], [jQuery-ajaxTransport-XDomainRequest], and [Wait-For-It Script] are
   licensed under the MIT License.
 - [History.js] is licensed under the New BSD License.
 
 
 [jQuery]: http://jquery.com
-[Mediator.js]: https://github.com/ajacksified/Mediator.js/
+[Mediator.js]: https://github.com/ajacksified/Mediator.js
 [jQuery-ajaxTransport-XDomainRequest]: https://github.com/MoonScript/jQuery-ajaxTransport-XDomainRequest
-[History.js]: https://github.com/browserstate/history.js/
+[History.js]: https://github.com/browserstate/history.js
+[Wait-For-It Script]: https://github.com/vishnubob/wait-for-it
