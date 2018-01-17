@@ -112,8 +112,24 @@
 <li class="toctree-l1"><a class="reference internal" href="vagrant.html">Discovery on Vagrant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docker.html">Discovery on Docker</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Discovery Setup</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#user-management">User management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data-loading">Data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#user-management">User management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#user-related-scripts">User related scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#user-management-interface">User management interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data-loading">Data loading</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#loading-from-packaged-fixtures">1. Loading from packaged fixtures</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#fixture-related-scripts">Fixture related scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#loading-from-remote-apis">2. Loading from remote APIs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#data-loading-related-scripts-and-commands">Data loading related scripts and commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scheduled-data-updates">Scheduled data updates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#task-scheduling-interface">Task scheduling interface</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#testing-changes">Testing changes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#deployment-information">Deployment information</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#documentation-generation">Documentation generation</a></li>
@@ -205,11 +221,110 @@
 <p><br/></p>
 <div class="section" id="user-management">
 <span id="user-management"></span><h2>User management<a class="headerlink" href="#user-management" title="Permalink to this headline">¶</a></h2>
+<p>When up and running with the Discovery application, the first thing you will need to do is to ensure there is at least one administrative user for the system that can handle scheduling data update tasks in the system, and monitor their progress over time.</p>
+<p>Both the local Docker environment and Cloud Foundry based buildpack deployments ensure an initial <em>super user</em> with the username <strong>admin</strong>.  By default the password for this user is <strong>admin-changeme</strong>, but this can be reset through the administrative interface after logging in.  This account also has a dummy email by default, which should be changed.</p>
+<p><em>Note:</em> The Discovery application does not currently send emails, so the user email entry is not currently used.</p>
 <p><br/></p>
+<div class="section" id="user-related-scripts">
+<span id="user-related-scripts"></span><h3>User related scripts<a class="headerlink" href="#user-related-scripts" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Initialize the Django database and ensure an administrative user with the username admin</span>
+<span class="c1">#</span>
+<span class="c1"># This script is called on initialization of a new Django Celery Beat Scheduler, as there</span>
+<span class="c1"># should only ever be a single Scheduler for a Discovery application cluster</span>
+<span class="c1">#</span>
+$ scripts/init-db.sh  <span class="c1"># Has no options</span>
+
+<span class="c1"># Update or create an administrative user</span>
+$ scripts/create-admin.sh --help
+</pre></div>
+</div>
+<p><br/></p>
+</div>
+<div class="section" id="user-management-interface">
+<span id="user-management-interface"></span><h3>User management interface<a class="headerlink" href="#user-management-interface" title="Permalink to this headline">¶</a></h3>
+<p>The user management interface can be found at: http://localhost:8080/admin/auth/user <em>(change port if different)</em></p>
+<p><img alt="Discovery user management" src="https://raw.githubusercontent.com/PSHCDevOps/discovery/docs/docs/images/User-Management.png" /></p>
+<p><br/></p>
+</div>
 </div>
 <div class="section" id="data-loading">
 <span id="data-loading"></span><h2>Data loading<a class="headerlink" href="#data-loading" title="Permalink to this headline">¶</a></h2>
+<p>After the site is running and you have an administrative user that can login, you need to populate the site with data.  For most purposes a limited set of data useful for debugging and development of new features is preferable to complete repositories of information spanning potentially 10 years or longer.</p>
+<p>When running the Discovery application you have two options; load data from packaged fixtures, or load data directly from the remote APIs that provide the source data for the production Discovery system.</p>
 <p><br/></p>
+<div class="section" id="loading-from-packaged-fixtures">
+<span id="loading-from-packaged-fixtures"></span><h3>1. Loading from packaged fixtures<a class="headerlink" href="#loading-from-packaged-fixtures" title="Permalink to this headline">¶</a></h3>
+<p>Pros                                            | Cons
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211; | &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;
+Loading from fixtures is fast                   | Data loaded is not up to date
+Guaranteed to get same data as other developers | Incomplete data available
+Not very memory or resource intensive           | Does not test update process</p>
+<div class="section" id="fixture-related-scripts">
+<span id="fixture-related-scripts"></span><h4>Fixture related scripts<a class="headerlink" href="#fixture-related-scripts" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Loads all fixture data into the Discovery application</span>
+$ scripts/load-fixtures.sh  <span class="c1"># Has no options</span>
+
+<span class="c1"># Generate new fixture data with the data currently in the Discovery application</span>
+$ scripts/gen-fixtures.sh  <span class="c1"># Has no options</span>
+</pre></div>
+</div>
+<p><br/></p>
+</div>
+</div>
+<div class="section" id="loading-from-remote-apis">
+<span id="loading-from-remote-apis"></span><h3>2. Loading from remote APIs<a class="headerlink" href="#loading-from-remote-apis" title="Permalink to this headline">¶</a></h3>
+<p>Pros                                                   | Cons
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212; | &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;
+Control the data you want <em>(to some degree)</em>           | Loading from remote APIs can be slow
+Data is up to date and may have parity with production | Not good for standardized tests <em>(eg; unit tests)</em>
+Data is complete and authoritive                       | Harder for collaborative development
+Allows for testing of the update process               | Requires a stable internet connection</p>
+<div class="section" id="data-loading-related-scripts-and-commands">
+<span id="data-loading-related-scripts-and-commands"></span><h4>Data loading related scripts and commands<a class="headerlink" href="#data-loading-related-scripts-and-commands" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Helper script that fetches all production time period data into the Discovery application</span>
+$ scripts/fetch-data.sh  <span class="c1"># Has no options</span>
+
+<span class="c1"># Load all classification information into Discovery (currently these are all local file based)</span>
+<span class="c1"># - included in fetch-data.sh</span>
+$ manage.py load_categories  <span class="c1"># Has no options</span>
+
+<span class="c1"># Load all acquisition vehicle vendor information into Discovery</span>
+<span class="c1"># - included in fetch-data.sh</span>
+$ manage.py load_vendors --help
+
+<span class="c1"># Load all contract awards and modification for all vendors in the Discovery database</span>
+<span class="c1"># - included in fetch-data.sh</span>
+$ manage.py load_fpds --help
+</pre></div>
+</div>
+</div>
+<div class="section" id="scheduled-data-updates">
+<span id="scheduled-data-updates"></span><h4>Scheduled data updates<a class="headerlink" href="#scheduled-data-updates" title="Permalink to this headline">¶</a></h4>
+<p>The Discovery application is built to periodically check for updates from remote sources based upon a schedule determined by a site administrator.  All data can be loaded initially through this mechanism as well, which is useful for testing the update mechanism.</p>
+<p>This Django application uses the well documented, extensible, and popular background task processor called <a class="reference external" href="http://docs.celeryproject.org/en/latest/django/first-steps-with-django.html">Celery</a> and an addon scheduling application built on a Celery extension; <a class="reference external" href="http://django-celery-beat.readthedocs.io/en/latest/">Celery Beat</a>.  These libraries provide an administrative interface that allows us to change the periodic schedule of updates, and audit background task results.</p>
+<p>To schedule content updates, navigate to: http://localhost:8080/admin/django_celery_beat  <em>(change port if different)</em></p>
+<p><em>You will notice four sections:</em></p>
+<ol class="simple">
+<li><strong>Crontabs</strong> - Very flexible schedule built on the <a class="reference external" href="https://en.wikipedia.org/wiki/Cron">Cron scheduling format</a></li>
+<li><strong>Intervals</strong> - Simple scheduling format with an interval and unit of time <em>(e.g., 3 days)</em></li>
+<li><strong>Solar Events</strong> - Scheduling based on position of sun in relation to earth at geo coordinates <em>(you probably won&#8217;t need this)</em></li>
+</ol>
+<hr class="docutils" />
+<ol class="simple">
+<li><strong>Periodic Tasks</strong> - Management of scheduled tasks that use the periods scheduled above <em>(a task can only have one scheduling event)</em></li>
+</ol>
+</div>
+<div class="section" id="task-scheduling-interface">
+<span id="task-scheduling-interface"></span><h4>Task scheduling interface<a class="headerlink" href="#task-scheduling-interface" title="Permalink to this headline">¶</a></h4>
+<p>The task scheduling interface can be found at: http://localhost:8080/admin/django_celery_beat/periodictask <em>(change port if different)</em></p>
+<p><img alt="Discovery scheduling interface" src="../_images/Task-Scheduling.png" /></p>
+<p><em>Creating a new scheduled task that <strong>updates contracts</strong> at <strong>10:05AM UTC</strong> everyday</em></p>
+<p><img alt="Discovery periodic task interface" src="../_images/Periodic-Task.png" /></p>
+<p>You can check on the results of executed tasks at http://localhost:8080/admin/django_celery_results/taskresult <em>(change port if different)</em></p>
+<p><img alt="Discovery task result interface" src="../_images/Task-Results.png" /></p>
+<p><br/></p>
+</div>
+</div>
 </div>
 <div class="section" id="testing-changes">
 <span id="testing-changes"></span><h2>Testing changes<a class="headerlink" href="#testing-changes" title="Permalink to this headline">¶</a></h2>
