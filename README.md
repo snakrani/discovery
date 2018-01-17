@@ -13,9 +13,15 @@
 
 Discovery is a market research tool for GSA Contract Vehicles. Currently, it features GSA IDIQ vehicles, with more contracts coming in the future. Use Discovery to search vendor history for the awarded contractors and NAICs of the various IDIQs. Each contract is separated into Unrestricted and Small Business (SB) to make it easy to reserve task orders for small business categories.
 
+<br/>
+
 ## Documentation
 
-All of Discovery's developer and maintenance documentation is located in the [docs](docs/overview.md) directory.  To get started, you'll probably want to either read through the [Setup guide](docs/setup/readme.md) or the [Architecture guide](docs/architecture/readme.md), depending on your preference.
+All of Discovery's developer and maintenance documentation is located in the [docs](docs/overview.md) directory.  If you are new to the Discovery application, you'll probably want to read through the [Getting Started guide](docs/start/readme.md) first.
+
+The [Architecture guide](docs/architecture/readme.md) provides a high level summary of the application design and the data available, and the [Process guide](docs/process/readme.md) covers various development and administrative processes required for continued operations of the Discovery application.
+
+<br/>
 
 #### Getting set up with Discovery
 
@@ -43,11 +49,21 @@ All of Discovery's developer and maintenance documentation is located in the [do
   * [Discovery management](docs/process/management.md)
   * [Contributing to Discovery](docs/process/contributing.md)
 
+<br/>
+
 #### Useful links
 
 * [Trello board](https://trello.com/b/AEoWtET7/discovery-20)
 * [OASIS information](https://www.gsa.gov/acquisition/products-services/professional-services/one-acquisition-solution-for-integrated-services-oasis)
 
+<br/>
+
 ## Related projects
 
 * [PyFPDS library](https://github.com/18f/pyfpds)
+
+<br/>
+
+## License information
+
+This source code and all related application assets are released under CC0 1.0 Universal public domain, with the exception of some libraries the Discovery application depends on.  See the [LICENSE](LICENSE.md) for more details.
