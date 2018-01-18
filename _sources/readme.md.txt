@@ -33,6 +33,12 @@ Discovery is a market research tool for GSA Contract Vehicles. Currently, it fea
   * [Discovery management](process/management.md)
   * [Contributing to Discovery](process/contributing.md)
 
+#### Discovery security documentation
+
+* [Discovery SSP reference](files/Discovery-Controls-LATO.pdf)
+
+<br/>
+
 #### Useful links
 
 * [Development site](https://discovery-dev.app.cloud.gov)
