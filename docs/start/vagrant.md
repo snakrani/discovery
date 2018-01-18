@@ -155,7 +155,7 @@ $ vagrant ssh
 
 You are now in the shared project directory: **/vagrant**
 
-When the Vagrant machine is first created all Docker containers specified in the docker-compose configuration are created and started.  The Discovery application cluster consists of a **Django web site**, a **Celery scheduler**, a **Celery worker**, **PostgreSQL database**, and **Redis queue**.
+When the Vagrant machine is first created all Docker containers specified in the docker-compose configuration are created and started.  The Discovery application cluster consists of a **HAProxy load balancer**, **Django web servers**, a **Celery scheduler**, **Celery workers**, a **PostgreSQL database**, and two **Redis queues**.
 
 * **/vagrant** live at **localhost:8080** (_if you didn't change **web_port** configuration_)
 
