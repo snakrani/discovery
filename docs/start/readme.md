@@ -21,6 +21,6 @@ This guide will help you understand the motivations behind the Discovery effort,
 * [Development options](development.md)
 * [Running with Vagrant](vagrant.md)
 * [Discovery on Docker](docker.md)
-* [Application setup](setup.md)
+* [Discovery setup](setup.md)
 
 <br/>

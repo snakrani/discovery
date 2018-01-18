@@ -1,5 +1,5 @@
 
-# Discovery Setup
+# Discovery setup
 
 **<** [Discovery on Docker](docker.md) | **^** **[Getting Started](readme.md)**
 
