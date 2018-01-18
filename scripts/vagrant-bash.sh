@@ -24,3 +24,9 @@ then
     docker-compose up -d
   fi
 fi
+
+# Activate Python virtual environment if present
+if [ -d /venv ]
+then
+  source /venv/bin/activate
+fi

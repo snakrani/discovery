@@ -2,16 +2,13 @@
 *.swn
 local_settings.py
 *.pyc
-venv
 *.DS_Store
 **.log
 logs/*.log
 logs/*.csv
 .vagrant/
 vagrant-config.yml
-venv/
 src/
-mvenv/
 /static/
 .coverage
 .project
@@ -22,4 +19,3 @@ celerybeat.pid
 docs/build
 opencontrols/
 _book
-
