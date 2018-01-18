@@ -6,8 +6,9 @@ cd "$PROJ_DIR"
 
 #-------------------------------------------------------------------------------
 
+#install basic dependencies
 echo "> Updating OS package repositories"
-sudo apt-get update >/dev/null 
+sudo apt-get update >/dev/null
 
 #install basic dependencies
 if ! which git >/dev/null
