@@ -170,6 +170,7 @@ The Discovery application is currently designed with two types of automated test
 
 The Discovery [CircleCI environment](https://circleci.com/docs/2.0/) is currently configured to run both unit tests and acceptance tests on pushes to branches and merges on the official PSHCDevOps source repository.
 
+<br/>
 
 #### Testing related scripts and commands
 
@@ -197,6 +198,8 @@ $ manage.py test selenium_tests  # Has no options
 The Discovery application is hosted on Cloud.gov, a Cloud Foundry Platform as a Service provider.  All deployments to official staging and production spaces should be executed through the CircleCI CI/CD environment, but there is the occasional need to test aspects of the deployment in a non automated fashion.
 
 The Discovery source repository contains various scripts useful for working with Cloud Foundry deployments when necessary.
+
+<br/>
 
 #### Deployment related scripts
 
@@ -232,11 +235,15 @@ $ scripts/delete-cf-space.sh --help
 
 ## Documentation generation
 
+<br/>
+
 ### Developer / Administrator documentation
 
 The Discovery application generates a [documentation site](http://pshcdevops.github.io/discovery/index.html) created with Sphinx that gets automatically rebuilt on pushes to a **docs** branch or merges to **master** over time.
 
 The root documentation folder is: **docs**.
+
+<br/>
 
 #### Development documentation related scripts
 
@@ -249,12 +256,15 @@ The root documentation folder is: **docs**.
 $ scripts/deploy-docs.sh --help
 ```
 
+<br/>
+
 ### Compliance documentation
 
 The Discovery application requires a government ATO to serve the public, so it requires compliance documentation that signifies how the information system or managing organization aheres to the relevant NIST standards and controls.  This documentation is currently housed in the **compliance** directory with a top level **opencontrol.yaml** file.
 
 We use the [Compliance Masonry project](https://github.com/opencontrol/compliance-masonry) using the [Open Control schemas](https://github.com/opencontrol/schemas) to generate a Gitbook of the required control documentation.
 
+<br/>
 
 #### Compliance documentation related scripts
 

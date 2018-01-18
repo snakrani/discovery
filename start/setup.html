@@ -392,6 +392,7 @@ $ manage.py load_fpds --help
 <span id="testing-changes"></span><h2>Testing changes<a class="headerlink" href="#testing-changes" title="Permalink to this headline">¶</a></h2>
 <p>The Discovery application is currently designed with two types of automated testing; unit tests and <a class="reference external" href="http://www.seleniumhq.org/docs/01_introducing_selenium.jsp">Selenium</a> based acceptance testing through <a class="reference external" href="http://phantomjs.org/documentation">PhantomJS</a>.</p>
 <p>The Discovery <a class="reference external" href="https://circleci.com/docs/2.0/">CircleCI environment</a> is currently configured to run both unit tests and acceptance tests on pushes to branches and merges on the official PSHCDevOps source repository.</p>
+<p><br/></p>
 <div class="section" id="testing-related-scripts-and-commands">
 <span id="testing-related-scripts-and-commands"></span><h3>Testing related scripts and commands<a class="headerlink" href="#testing-related-scripts-and-commands" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
@@ -418,6 +419,7 @@ $ manage.py <span class="nb">test</span> selenium_tests  <span class="c1"># Has 
 <span id="deployment-information"></span><h2>Deployment information<a class="headerlink" href="#deployment-information" title="Permalink to this headline">¶</a></h2>
 <p>The Discovery application is hosted on Cloud.gov, a Cloud Foundry Platform as a Service provider.  All deployments to official staging and production spaces should be executed through the CircleCI CI/CD environment, but there is the occasional need to test aspects of the deployment in a non automated fashion.</p>
 <p>The Discovery source repository contains various scripts useful for working with Cloud Foundry deployments when necessary.</p>
+<p><br/></p>
 <div class="section" id="deployment-related-scripts">
 <span id="deployment-related-scripts"></span><h3>Deployment related scripts<a class="headerlink" href="#deployment-related-scripts" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
@@ -453,10 +455,12 @@ $ scripts/delete-cf-space.sh --help
 </div>
 <div class="section" id="documentation-generation">
 <span id="documentation-generation"></span><h2>Documentation generation<a class="headerlink" href="#documentation-generation" title="Permalink to this headline">¶</a></h2>
+<p><br/></p>
 <div class="section" id="developer-administrator-documentation">
 <span id="developer-administrator-documentation"></span><h3>Developer / Administrator documentation<a class="headerlink" href="#developer-administrator-documentation" title="Permalink to this headline">¶</a></h3>
 <p>The Discovery application generates a <a class="reference external" href="http://pshcdevops.github.io/discovery/index.html">documentation site</a> created with Sphinx that gets automatically rebuilt on pushes to a <strong>docs</strong> branch or merges to <strong>master</strong> over time.</p>
 <p>The root documentation folder is: <strong>docs</strong>.</p>
+<p><br/></p>
 <div class="section" id="development-documentation-related-scripts">
 <span id="development-documentation-related-scripts"></span><h4>Development documentation related scripts<a class="headerlink" href="#development-documentation-related-scripts" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
@@ -468,12 +472,14 @@ $ scripts/delete-cf-space.sh --help
 $ scripts/deploy-docs.sh --help
 </pre></div>
 </div>
+<p><br/></p>
 </div>
 </div>
 <div class="section" id="compliance-documentation">
 <span id="compliance-documentation"></span><h3>Compliance documentation<a class="headerlink" href="#compliance-documentation" title="Permalink to this headline">¶</a></h3>
 <p>The Discovery application requires a government ATO to serve the public, so it requires compliance documentation that signifies how the information system or managing organization aheres to the relevant NIST standards and controls.  This documentation is currently housed in the <strong>compliance</strong> directory with a top level <strong>opencontrol.yaml</strong> file.</p>
 <p>We use the <a class="reference external" href="https://github.com/opencontrol/compliance-masonry">Compliance Masonry project</a> using the <a class="reference external" href="https://github.com/opencontrol/schemas">Open Control schemas</a> to generate a Gitbook of the required control documentation.</p>
+<p><br/></p>
 <div class="section" id="compliance-documentation-related-scripts">
 <span id="compliance-documentation-related-scripts"></span><h4>Compliance documentation related scripts<a class="headerlink" href="#compliance-documentation-related-scripts" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
