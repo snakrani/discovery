@@ -17,6 +17,10 @@ _Note:_ The Discovery application does not currently send emails, so the user em
 
 ### User related scripts
 
+* Runs automatically on Scheduler deployment
+* Run locally on any Django container top level project directory: **/discovery**, or through **docker exec**
+* Run on Cloud Foundry with **cf run-task**
+
 ```bash
 # Initialize the Django database and ensure an administrative user with the username admin
 #
@@ -35,7 +39,7 @@ $ scripts/create-admin.sh --help
 
 The user management interface can be found at: http://localhost:8080/admin/auth/user _(change port if different)_
 
-![Discovery user management](https://raw.githubusercontent.com/PSHCDevOps/discovery/docs/docs/images/User-Management.png)
+![Discovery user management](../images/User-Management.png)
 
 <br/>
 
@@ -49,14 +53,26 @@ When running the Discovery application you have two options; load data from pack
 
 ### 1. Loading from packaged fixtures
 
- Pros                                            | Cons
- ----------------------------------------------- | -----------------------------
- Loading from fixtures is fast                   | Data loaded is not up to date
- Guaranteed to get same data as other developers | Incomplete data available
- Not very memory or resource intensive           | Does not test update process
+<br/>
 
+###### Pros
+
+ * Loading from fixtures is fast
+ * Guaranteed to get same data as other developers
+ * Not very memory or resource intensive
+
+###### Cons
+
+ * Data loaded is not up to date
+ * Incomplete data available
+ * Does not test update process
+
+<br/>
 
 #### Fixture related scripts
+
+* Run locally on any Django container top level project directory: **/discovery**, or through **docker exec**
+* Run on Cloud Foundry with **cf run-task**
 
 ```bash
 # Loads all fixture data into the Discovery application
@@ -70,14 +86,28 @@ $ scripts/gen-fixtures.sh  # Has no options
 
 ### 2. Loading from remote APIs
 
- Pros                                                   | Cons
- ------------------------------------------------------ | --------------------------------------------------
- Control the data you want _(to some degree)_           | Loading from remote APIs can be slow
- Data is up to date and may have parity with production | Not good for standardized tests _(eg; unit tests)_
- Data is complete and authoritive                       | Harder for collaborative development
- Allows for testing of the update process               | Requires a stable internet connection
+<br/>
+
+###### Pros
+
+ * Control the data you want _(to some degree)_
+ * Data is up to date and may have parity with production
+ * Data is complete and authoritive
+ * Allows for testing of the update process
+
+###### Cons
+
+ * Loading from remote APIs can be slow
+ * Not good for standardized tests _(eg; unit tests)_
+ * Harder for collaborative development
+ * Requires a stable internet connection
+
+<br/>
 
 #### Data loading related scripts and commands
+
+* Run locally on any Django container top level project directory: **/discovery**, or through **docker exec**
+* Run on Cloud Foundry with **cf run-task**
 
 ```bash
 # Helper script that fetches all production time period data into the Discovery application
@@ -95,6 +125,8 @@ $ manage.py load_vendors --help
 # - included in fetch-data.sh
 $ manage.py load_fpds --help
 ```
+
+<br/>
 
 #### Scheduled data updates
 
@@ -114,6 +146,7 @@ _You will notice four sections:_
 
  4. **Periodic Tasks** - Management of scheduled tasks that use the periods scheduled above _(a task can only have one scheduling event)_
 
+<br/>
 
 #### Task scheduling interface
 
@@ -133,18 +166,108 @@ You can check on the results of executed tasks at http://localhost:8080/admin/dj
 
 ## Testing changes
 
+The Discovery application is currently designed with two types of automated testing; unit tests and [Selenium](http://www.seleniumhq.org/docs/01_introducing_selenium.jsp) based acceptance testing through [PhantomJS](http://phantomjs.org/documentation).
 
+The Discovery [CircleCI environment](https://circleci.com/docs/2.0/) is currently configured to run both unit tests and acceptance tests on pushes to branches and merges on the official PSHCDevOps source repository.
+
+
+#### Testing related scripts and commands
+
+* Run locally on any Django container top level project directory: **/discovery**, or through **docker exec**
+* Run on Cloud Foundry with **cf run-task**
+
+```bash
+# Install PhantomJS on the machine (only tested on Debian and Ubuntu for the Vagrant machine and CI containers)
+#  - Already installed on Docker Django images
+$ scripts/setup-phantomjs.sh  # Has no options
+
+# Run all defined unit tests from Django api, vendors, and contract applications
+#  - See CircleCI configuration for full usage example
+$ manage.py test api vendors contract  # Has no options
+
+# Run all defined Selenium acceptance tests (must have a Discovery site running at localhost:8080)
+#  - See CircleCI configuration for full usage example
+$ manage.py test selenium_tests  # Has no options
+```
 
 <br/>
 
 ## Deployment information
 
+The Discovery application is hosted on Cloud.gov, a Cloud Foundry Platform as a Service provider.  All deployments to official staging and production spaces should be executed through the CircleCI CI/CD environment, but there is the occasional need to test aspects of the deployment in a non automated fashion.
 
+The Discovery source repository contains various scripts useful for working with Cloud Foundry deployments when necessary.
+
+#### Deployment related scripts
+
+* Run on either the **host** or **vagrant** machine (_if installed and used_)
+* Run from the **top level project** directory
+
+```bash
+# Setup the Cloud Foundry CLI on the machine with necessary plugins for the Discovery deployment (only tested on Ubuntu and Debian)
+#  - This is included on the Vagrant development machine
+$ scripts/setup-cf.sh # No options
+
+# Create and setup a space with a running Discovery application system from nothing
+#  - This script can also update an existing space (e.g, configurations, service accounts, etc...)
+#  - Need to be logged in to Cloud Foundry
+$ scripts/setup-cf-space.sh  --help
+
+# Contains functions used for deploying the Discovery application to Cloud Foundry, such as deploy_app
+$ source scripts/deploy-base.sh
+
+# Uses DEV environment variables with the deploy-base.sh functions to deploy to development environment
+#  - Used by the CircleCI deployment process
+$ scripts/deploy-dev.sh # No options
+
+# Uses PROD environment variables with the deploy-base.sh functions to deploy to production environment
+#  - Used by the CircleCI deployment process
+$ scripts/deploy-prod.sh # No options
+
+# Delete all Discovery application components and remove the specified Cloud Foundry space
+$ scripts/delete-cf-space.sh --help
+```
 
 <br/>
 
 ## Documentation generation
 
+### Developer / Administrator documentation
 
+The Discovery application generates a [documentation site](http://pshcdevops.github.io/discovery/index.html) created with Sphinx that gets automatically rebuilt on pushes to a **docs** branch or merges to **master** over time.
+
+The root documentation folder is: **docs**.
+
+#### Development documentation related scripts
+
+* Run locally on any Django container top level project directory: **/discovery**, or through **docker exec**
+* Run on Cloud Foundry with **cf run-task**
+
+```bash
+# Deploy documentation site changes to GitHub site, via the gh-pages GitHub branch
+#  - Used by the CircleCI deployment process
+$ scripts/deploy-docs.sh --help
+```
+
+### Compliance documentation
+
+The Discovery application requires a government ATO to serve the public, so it requires compliance documentation that signifies how the information system or managing organization aheres to the relevant NIST standards and controls.  This documentation is currently housed in the **compliance** directory with a top level **opencontrol.yaml** file.
+
+We use the [Compliance Masonry project](https://github.com/opencontrol/compliance-masonry) using the [Open Control schemas](https://github.com/opencontrol/schemas) to generate a Gitbook of the required control documentation.
+
+
+#### Compliance documentation related scripts
+
+* Run on either the **host** or **vagrant** machine (_if installed and used_)
+* Run from the **top level project** directory
+
+```bash
+# Setup the Compliance Masonry CLI on the machine (only tested on Ubuntu and Debian)
+#  - This is included on the Vagrant development machine
+$ scripts/setup-cm.sh # No options
+
+# Generate a Gitbook formatted PDF with the included compliance documentation
+$ scripts/create-security-docs.sh {../path/to/controls.pdf}
+```
 
 <br/>
