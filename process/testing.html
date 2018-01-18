@@ -146,7 +146,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#code-evaluation">Code evaluation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#unit-testing">Unit testing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#acceptance-testing">Acceptance testing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#testing-locally">Testing locally</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#testing-on-circleci">Testing on CircleCI</a></li>
 </ul>
 </li>
@@ -219,20 +218,44 @@
   <div class="section" id="discovery-testing-process">
 <span id="discovery-testing-process"></span><h1>Discovery testing process<a class="headerlink" href="#discovery-testing-process" title="Permalink to this headline">¶</a></h1>
 <p><strong>&lt;</strong> <a class="reference internal" href="development.html"><span class="doc">Development Processes</span></a> | <strong>^</strong> <strong><a class="reference internal" href="readme.html"><span class="doc">Process Overview</span></a></strong> | <a class="reference internal" href="deployment.html"><span class="doc">Deployment Process</span></a> <strong>&gt;</strong></p>
+<p><br/></p>
 <div class="section" id="code-evaluation">
 <span id="code-evaluation"></span><h2>Code evaluation<a class="headerlink" href="#code-evaluation" title="Permalink to this headline">¶</a></h2>
+<p>Currently there are no code evaluation tools in use within the Discovery application.  As soon as a suitable tool is chosen it will be integrated into the development environment and CircleCI CI/CD configuration for manual and automated testing.</p>
+<p>All updates are reviewed however by maintainers and/or the Discovery management team before being merged into the staging branch, giving us the chance to catch glaring errors, omissions, or formatting issues during the life of the pull request.</p>
+<p><br/></p>
 </div>
 <div class="section" id="unit-testing">
 <span id="unit-testing"></span><h2>Unit testing<a class="headerlink" href="#unit-testing" title="Permalink to this headline">¶</a></h2>
+<p>The Discovery application currently implements unit testing for three Django application components; <strong>API</strong>, <strong>vendors</strong>, and <strong>contracts</strong>.</p>
+<ol>
+<li><p class="first"><strong>API</strong> unit tests</p>
+<p>Take fixture data bundled with the application source code and run tests against the API endpoints checking for proper result data given specified inputs.</p>
+</li>
+<li><p class="first"><strong>Vendor</strong> unit tests</p>
+<p>Run various tests related to loading data from remote sources, vendor information checks, and capability statements.</p>
+</li>
+<li><p class="first"><strong>Contract</strong> unit tests</p>
+<p>Run various tests related to loading data from remote sources, and in the near future contract information checks.</p>
+</li>
+</ol>
+<p><br/></p>
+<p>More unit testing coverage is needed to fully leverage the unit testing framework.  Areas that need special attention include the Vendor and Contract application components.</p>
+<p>To learn more about executing Discovery unit tests see testing section of the <a class="reference internal" href="../start/setup.html"><span class="doc">Discovery setup guide</span></a></p>
+<p><br/></p>
 </div>
 <div class="section" id="acceptance-testing">
 <span id="acceptance-testing"></span><h2>Acceptance testing<a class="headerlink" href="#acceptance-testing" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="testing-locally">
-<span id="testing-locally"></span><h2>Testing locally<a class="headerlink" href="#testing-locally" title="Permalink to this headline">¶</a></h2>
+<p>The Discovery application currently implements <a class="reference external" href="http://www.seleniumhq.org/">Selenium</a> based acceptance testing through the <a class="reference external" href="http://phantomjs.org/">PhantomJS</a> library.  This library is installed by default on the Discovery Docker image.</p>
+<p>Acceptance testing requires a Discovery application server running at http://localhost:8080</p>
+<p>To learn more about executing Discovery acceptance tests see testing section of the <a class="reference internal" href="../start/setup.html"><span class="doc">Discovery setup guide</span></a></p>
+<p><br/></p>
 </div>
 <div class="section" id="testing-on-circleci">
 <span id="testing-on-circleci"></span><h2>Testing on CircleCI<a class="headerlink" href="#testing-on-circleci" title="Permalink to this headline">¶</a></h2>
+<p>All testing performed in the CircleCI CI/CD platform is defined within the configuration in the <strong>.circleci</strong> directory.</p>
+<p>Currently we run unit tests and acceptance testing on all pushes or merges to branches on the official source repository.  Due to security issues CircleCI jobs are not available on pull requests from external forked repositories.</p>
+<p><br/></p>
 </div>
 </div>
 
