@@ -152,9 +152,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#fpds-records">FPDS records</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#scheduling-updates">Scheduling updates</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#monitoring-update-process">Monitoring update process</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#adding-new-data">Adding new data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scheduling-updates-and-monitoring-progress">Scheduling updates and monitoring progress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#a-look-at-how-discovery-data-fits-together">A look at how Discovery data fits together</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="assets.html">Discovery static assets</a></li>
@@ -233,47 +232,86 @@
   <div class="section" id="discovery-data">
 <span id="discovery-data"></span><h1>Discovery data<a class="headerlink" href="#discovery-data" title="Permalink to this headline">¶</a></h1>
 <p><strong>&lt;</strong> <a class="reference internal" href="design.html"><span class="doc">System and Interface Design</span></a> | <strong>^</strong> <strong><a class="reference internal" href="readme.html"><span class="doc">Architecture Overview</span></a></strong> | <a class="reference internal" href="assets.html"><span class="doc">Static Assets</span></a> <strong>&gt;</strong></p>
+<p><br/></p>
 <div class="section" id="overview">
 <span id="overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The Discovery application system pulls in all available data from external API&#8217;s.  These API&#8217;s help us stay up to date with events happening in the federal contracting space related to vehicles that are followed by Discovery.  The updates occur on a periodic basis, at least once a day.</p>
+<p>Currently the OASIS and OASIS Small Business vehicles are supported but there are plans to add more vehicles in the near future.</p>
+<p>Below is a diagram representing the flow of information for the Discovery system from the various API&#8217;s we fetch data from.</p>
+<p><img alt="Discovery data" src="../_images/Discovery-DataFlow-APIs.png" /></p>
+<p>As you can see an internal worker server constantly polls for tasks, the updates data from the appropriate API, and writes that data to the PostgreSQL database, as well as the task results for audit purposes.</p>
+<p><br/></p>
 </div>
 <div class="section" id="classification-information">
 <span id="classification-information"></span><h2>Classification information<a class="headerlink" href="#classification-information" title="Permalink to this headline">¶</a></h2>
+<p>The basic information that holds everything together in the system is classification information.  This data is currently stored as fixtures in the application source code, and are updated with releases of the Discovery application.</p>
+<p>The <strong>manage.py load_categories</strong> command is executed on every deployment of the Discovery scheduler.</p>
+<p>There is a Celery task wrapper for this command in case it ever pulls data from a remote API on a periodic basis, but it also comes in handy for testing the scheduler and worker processes ocassionally, due to it&#8217;s speed of execution.</p>
+<p><br/></p>
 <div class="section" id="naics-codes">
 <span id="naics-codes"></span><h3>NAICS codes<a class="headerlink" href="#naics-codes" title="Permalink to this headline">¶</a></h3>
+<p>NAICS codes are the foundation of how vendors and contracts are categorized in the Discovery system.</p>
+<p>You can find a list of all the available NAICS codes in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/naics.json">NAICS fixture data</a>.</p>
+<p><br/></p>
 </div>
 <div class="section" id="vendor-setaside-categories">
 <span id="vendor-setaside-categories"></span><h3>Vendor setaside categories<a class="headerlink" href="#vendor-setaside-categories" title="Permalink to this headline">¶</a></h3>
+<p>Certain small businesses have certain regulated advantageds over others in the proceurement process.  These are known as setasides or classifications that a business may have, such as veteran owned, minority owned, 8a, HUBZone, etc...</p>
+<p>You can find a list of all the available setasides in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/setasides.json">setaside fixture data</a>.</p>
+<p><br/></p>
 </div>
 <div class="section" id="vendor-pools">
 <span id="vendor-pools"></span><h3>Vendor pools<a class="headerlink" href="#vendor-pools" title="Permalink to this headline">¶</a></h3>
+<p>The Discovery application maintains pools of vendors for each vehicle.  Each pool is then used to classify vendors in the system in filtered queries.</p>
+<p>You can find a list of all the available vendor pools in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/pools.json">vendor pool fixture data</a>.</p>
+<p><br/></p>
 </div>
 </div>
 <div class="section" id="vendor-information">
 <span id="vendor-information"></span><h2>Vendor information<a class="headerlink" href="#vendor-information" title="Permalink to this headline">¶</a></h2>
+<p>Vendors make up the core data type in the Discovery system.  All related data displays are grouped around vendors currently.  Vendor information is provided both through CSV file information provided by GSA PSHC staff in the <strong>vendors/docs</strong> directory and through SAM API registration data that is returned for the DUNS number of the vendor in the SAM system.</p>
+<p>You can find examples of vendor data elements in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/vendors.json">vendor fixture data</a>.</p>
+<p><br/></p>
 <div class="section" id="pool-membership">
 <span id="pool-membership"></span><h3>Pool membership<a class="headerlink" href="#pool-membership" title="Permalink to this headline">¶</a></h3>
+<p>Each vendor is classified into different pools using a PIID value which serves as a unique identifier for the vendor.</p>
+<p>You can find examples of vendor PIID mapping data elements in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/poolpiids.json">vendor PIID fixture data</a>.</p>
+<p><br/></p>
 </div>
 <div class="section" id="sam-registrations">
 <span id="sam-registrations"></span><h3>SAM registrations<a class="headerlink" href="#sam-registrations" title="Permalink to this headline">¶</a></h3>
+<p>We collect vendor information from the <a class="reference external" href="https://gsa.github.io/sam_api/sam/">SAM API</a>.  This service provides information such as status, location, CAGE code, setasides granted, etc...</p>
+<p>See the <strong>vendors/management/commands/load_sam.py</strong> command for more detailed information.</p>
+<p><br/></p>
 </div>
 <div class="section" id="capability-statements">
 <span id="capability-statements"></span><h3>Capability statements<a class="headerlink" href="#capability-statements" title="Permalink to this headline">¶</a></h3>
+<p>Any Vendor Capability Statements that are added to <a class="reference external" href="https://github.com/PSHCDevOps/discovery/tree/master/discovery_site/static/discovery_site/capability_statements">this folder</a> will automatically be linked to on the vendor&#8217;s page. The file must be a PDF, and its name must be only the vendor&#8217;s DUNS number.</p>
+<p>There will be more work on tighter integration of vendor capability statements in future Discovery application development.</p>
+<p><br/></p>
 </div>
 </div>
 <div class="section" id="contract-information">
 <span id="contract-information"></span><h2>Contract information<a class="headerlink" href="#contract-information" title="Permalink to this headline">¶</a></h2>
+<p>The Discovery application collects information on contracts in order to generate information for vendors in the followed acquisition vehicle vendor pools.  The Discovery application looks primarily at contract awards and modifications, which amend contract information in our system as they occur.</p>
+<p>You can find examples of contract data elements in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/contract/fixtures/contracts.json">contract fixture data</a>.</p>
+<p><br/></p>
 <div class="section" id="fpds-records">
 <span id="fpds-records"></span><h3>FPDS records<a class="headerlink" href="#fpds-records" title="Permalink to this headline">¶</a></h3>
+<p>We collect contract information from the <a class="reference external" href="https://www.fpds.gov/wiki/index.php/ATOM_Feed_FAQ">FPDS ATOM Feeds</a>.  This service provides all of our contract data, of which we use contract dates, amounts, contact information, revenue and employee figures, and agency information.</p>
+<p>See the <strong>contract/management/commands/load_fpds.py</strong> command for more detailed information.</p>
+<p><br/></p>
 </div>
 </div>
-<div class="section" id="scheduling-updates">
-<span id="scheduling-updates"></span><h2>Scheduling updates<a class="headerlink" href="#scheduling-updates" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="scheduling-updates-and-monitoring-progress">
+<span id="scheduling-updates-and-monitoring-progress"></span><h2>Scheduling updates and monitoring progress<a class="headerlink" href="#scheduling-updates-and-monitoring-progress" title="Permalink to this headline">¶</a></h2>
+<p>See the scheduling section in the <a class="reference internal" href="../start/setup.html"><span class="doc">Discovery setup documentation</span></a> for more information on how to schedule data updates in the Discovery system through the administrative interface.</p>
+<p><br/></p>
 </div>
-<div class="section" id="monitoring-update-process">
-<span id="monitoring-update-process"></span><h2>Monitoring update process<a class="headerlink" href="#monitoring-update-process" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="adding-new-data">
-<span id="adding-new-data"></span><h2>Adding new data<a class="headerlink" href="#adding-new-data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="a-look-at-how-discovery-data-fits-together">
+<span id="a-look-at-how-discovery-data-fits-together"></span><h2>A look at how Discovery data fits together<a class="headerlink" href="#a-look-at-how-discovery-data-fits-together" title="Permalink to this headline">¶</a></h2>
+<p><img alt="Discovery schema" src="../_images/Discovery-DB-Schema.png" /></p>
+<p><br/></p>
 </div>
 </div>
 
