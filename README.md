@@ -1,4 +1,4 @@
-![Discovery image](https://discovery-dev.app.cloud.gov/static/discovery_site/images/discovery.png)
+![Discovery image](https://raw.githubusercontent.com/PSHCDevOps/discovery/master/discovery_site/static/discovery_site/images/discovery.png)
 
 <br/>
 
@@ -20,6 +20,8 @@ Discovery is a market research tool for GSA Contract Vehicles. Currently, it fea
 All of Discovery's developer and maintenance documentation is located in the [docs](docs/overview.md) directory.  If you are new to the Discovery application, you'll probably want to read through the [Getting Started guide](docs/start/readme.md) first.
 
 The [Architecture guide](docs/architecture/readme.md) provides a high level summary of the application design and the data available, and the [Process guide](docs/process/readme.md) covers various development and administrative processes required for continued operations of the Discovery application.
+
+All Discovery related documentation is available as a mobile friendly [documentation site](http://pshcdevops.github.io/discovery).
 
 <br/>
 
