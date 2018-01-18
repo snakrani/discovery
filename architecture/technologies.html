@@ -38,7 +38,7 @@
     <link rel="top" title="GSA Discovery 2.0.1 documentation" href="../index.html"/>
         <link rel="up" title="Discovery overview" href="../readme.html"/>
         <link rel="next" title="Discovery system and frontend design" href="design.html"/>
-        <link rel="prev" title="Discovery Setup" href="../start/setup.html"/> 
+        <link rel="prev" title="Discovery setup" href="../start/setup.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -94,8 +94,24 @@
               
             
             
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="../readme.html">Discovery overview</a></li>
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../readme.html">Discovery overview</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../readme.html#documentation-outline">Documentation outline</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../readme.html#getting-set-up-with-discovery">Getting set up with Discovery</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../readme.html#discovery-architecture-and-design">Discovery architecture and design</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Technologies required</a></li>
+<li class="toctree-l4"><a class="reference internal" href="design.html">Application system and interface design</a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html">Discovery data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="assets.html">Static assets</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../readme.html#discovery-related-processes">Discovery related processes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../readme.html#useful-links">Useful links</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../readme.html#related-projects">Related projects</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption"><span class="caption-text">Links</span></p>
 <ul>
@@ -111,19 +127,49 @@
 <li class="toctree-l1"><a class="reference internal" href="../start/development.html">Discovery development options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../start/vagrant.html">Discovery on Vagrant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../start/docker.html">Discovery on Docker</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../start/setup.html">Discovery Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/setup.html">Discovery setup</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Architecture</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="readme.html">Architecture and design</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Discovery technologies</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#dockerized-development">Dockerized development</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#cloudfoundry-hosting">CloudFoundry hosting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#circleci-integration-and-deployment">CircleCI integration and deployment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#django-web-framework">Django web framework</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#celery-task-scheduling-and-management">Celery task scheduling and management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#postgresql-database">PostgreSQL database</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#redis-queue">Redis queue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dockerized-development">Dockerized development</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#benefits-that-docker-provides">Benefits that Docker provides</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-we-use-docker">How we use Docker</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cloud-foundry-hosting">Cloud Foundry hosting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#benefits-that-cloud-gov-provides">Benefits that Cloud.gov provides</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-we-use-cloud-foundry">How we use Cloud Foundry</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#circleci-integration-and-deployment">CircleCI integration and deployment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#benefits-that-circleci-provides">Benefits that CircleCI provides</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-we-use-circleci">How we use CircleCI</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#django-web-framework">Django web framework</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#benefits-that-django-provides">Benefits that Django provides</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-we-use-django">How we use Django</a><ul>
+<li class="toctree-l4"><a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/requirements.txt">requirements.txt</a></li>
+<li class="toctree-l4"><a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/requirements-dev.txt">requirements-dev.txt</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#celery-task-scheduling-and-management">Celery task scheduling and management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#benefits-that-celery-provides">Benefits that Celery provides</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-we-use-celery">How we use Celery</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#postgresql-database">PostgreSQL database</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#how-we-use-postgresql">How we use PostgreSQL</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#redis-datastore">Redis datastore</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#how-we-use-redis">How we use Redis</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="design.html">Discovery system and frontend design</a></li>
@@ -204,26 +250,165 @@
   <div class="section" id="discovery-technologies">
 <span id="discovery-technologies"></span><h1>Discovery technologies<a class="headerlink" href="#discovery-technologies" title="Permalink to this headline">¶</a></h1>
 <p><strong>^</strong> <strong><a class="reference internal" href="readme.html"><span class="doc">Architecture Overview</span></a></strong> | <a class="reference internal" href="design.html"><span class="doc">System and Interface Design</span></a> <strong>&gt;</strong></p>
+<p><br/></p>
 <div class="section" id="dockerized-development">
 <span id="dockerized-development"></span><h2>Dockerized development<a class="headerlink" href="#dockerized-development" title="Permalink to this headline">¶</a></h2>
+<p>It has long been a dream of developers, administrators, and other involved in the application creation process to avoid having discrepencies in the various operating environments hosting the applications, which can often cause lengthy delays in delivering the services to stakeholders due to potential troubles diagnosing issues.  It is also increasingly common now to host on scalable resources, which require a different mode of thinking about providing application services than the historical server as an asset model.</p>
+<p>Containers and the Docker engine allow us to reach for the goal of a unified architecture across development, continuous integration and deployment, and production hosting environments.  Docker provides a lightweight application packaging system through layered images, and a dynamic runtime that is the core of many emerging scalability technologies.</p>
+<div class="section" id="benefits-that-docker-provides">
+<span id="benefits-that-docker-provides"></span><h3>Benefits that Docker provides<a class="headerlink" href="#benefits-that-docker-provides" title="Permalink to this headline">¶</a></h3>
+<ol>
+<li><p class="first"><strong>Portability across machines</strong></p>
+<p>All application dependencies can easily be bundled into layered images that are easy to create, extend, and run collectively through technologies like Docker Compose, Kubernetes, and Cloud Foundry.</p>
+</li>
+<li><p class="first"><strong>Extremely lightweight execution environment</strong></p>
+<p>Docker container images are very small compared to virtual machine images and take considerably less time to provision than systems built on configuration management systems, such as Puppet, Chef, and Ansible.  Configuration management systems can still be used to provision containers, but the Docker image architecture provides a handy caching mechanism that can prevent unnessesary time consuming provisioning.  This makes spinning up and runnind larger Docker clusters very fast, which is good for productivity.</p>
+</li>
+<li><p class="first"><strong>Easy to share images</strong></p>
+<p>Docker is the most popular Linux container packaging system and runtime environment out there.  Many technologies have sprung up to create a vibrant ecosystem, and it is easy to create image marketplaces and repositories that can be reused and extended by others.  This makes it easy to build off of established work of others and contribute back upstream when it makes sense.</p>
+</li>
+<li><p class="first"><strong>Container images easy to version control</strong></p>
+<p>You can track successive versions of a container, and even deploy new images through CI/CD processes.  It is easy to rollback to previous versions of a container, inspect differences, and rebuild select parts of the image hierarchy depending on the changes found.  This makes it easy to audit all changes to the underlying infrastructure and pursue a fully automated deployment mechanism that can update the underlying dependencies in a <em>&#8220;smart&#8221;</em> way.</p>
+</li>
+</ol>
 </div>
-<div class="section" id="cloudfoundry-hosting">
-<span id="cloudfoundry-hosting"></span><h2>CloudFoundry hosting<a class="headerlink" href="#cloudfoundry-hosting" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="how-we-use-docker">
+<span id="how-we-use-docker"></span><h3>How we use Docker<a class="headerlink" href="#how-we-use-docker" title="Permalink to this headline">¶</a></h3>
+<p>We currently use Docker for local development through Docker Compose, a tool for creating easily managed clusters of Docker containers.  We then use the same base Debian Slim container images in our CircleCI environment and build our dependencies through setup scripts, housed in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/tree/master/scripts">scripts directory</a>.  This ensures that our local development environments and continuous integration and deployment environments are exactly the same, and easier to debug should issues arise.</p>
+<p>Right now for our hosted applications, we use <a class="reference external" href="https://cloud.gov/">Cloud.gov</a> (built on Cloud Foundry) and use the popular Python buildpack, which gets installed on Cloud.gov managed base container images during deployment.  In the future, when we get access to a Docker image marketplace, we are going to switch to building and using Marketplace containers as our base images for local development, CI/CD, and remote hosting on Cloud.gov.  This will allow us to align all environments behind a common architecture through Docker images.</p>
+<p>For information about getting started with Docker for Discovery, check out our <a class="reference internal" href="../start/docker.html"><span class="doc">getting started guide</span></a>.</p>
+<p><br/></p>
+</div>
+</div>
+<div class="section" id="cloud-foundry-hosting">
+<span id="cloud-foundry-hosting"></span><h2>Cloud Foundry hosting<a class="headerlink" href="#cloud-foundry-hosting" title="Permalink to this headline">¶</a></h2>
+<p>We host the Discovery staging environment and production infrastructure on <a class="reference external" href="https://cloud.gov/">Cloud.gov</a> to reap the benefits of a supported open source Platform as a Service with the compliance benefits of a FedRAMP JAB authorization, which lightens our paperwork to develop the application.</p>
+<p>Cloud.gov is built on <a class="reference external" href="https://www.cloudfoundry.org/">Cloud Foundry</a>, which is a popular PaaS used by enterprises across the globe, large and small.  Cloud.gov allows us to focus on developing just the application and leaves the infrastructure development and maintenance to those best qualified to handle that task.</p>
+<div class="section" id="benefits-that-cloud-gov-provides">
+<span id="benefits-that-cloud-gov-provides"></span><h3>Benefits that Cloud.gov provides<a class="headerlink" href="#benefits-that-cloud-gov-provides" title="Permalink to this headline">¶</a></h3>
+<ol>
+<li><p class="first"><strong>Easy to create controlled access services</strong></p>
+<p>Within Cloud.gov, with a simple command we can create the backend services we need, be they PostgreSQL databases, Redis servers, or even service accounts for CI/CD.  All services come with machine generated randomistic credentials that are easy to rotate when needed.  These services can easily be bound to the applications that depend on them.  This is handy for us since we have multiple types of applications running depending on the same backend services.</p>
+</li>
+<li><p class="first"><strong>Easy to update applications</strong></p>
+<p>Pushing applications in a zero downtime deployment is easy with Cloud Foundry, and helps us focus on developing the meat of the application instead of troubleshooting deployment issues.</p>
+</li>
+<li><p class="first"><strong>Easy user and access management across siloed application spaces</strong></p>
+<p>Cloud Foundry makes managing users and access easy and we can create test spaces to try out application features and updates that can not interfere with existing production and staging environments.  This allows us to sleep at night.</p>
+</li>
+<li><p class="first"><strong>Supports Docker image based deployments</strong></p>
+<p>Although we are not taking advantage of this feature yet, the latest FedRAMP&#8217;d Cloud.gov hosting environment supports deploying applications from publicly available marketplace images.  As soon we we find a suitable Docker marketplace we will start taking advantage of this system to unify our infrastructure environments.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="how-we-use-cloud-foundry">
+<span id="how-we-use-cloud-foundry"></span><h3>How we use Cloud Foundry<a class="headerlink" href="#how-we-use-cloud-foundry" title="Permalink to this headline">¶</a></h3>
+<p>We currently use Cloud.gov combined with a popular <a class="reference external" href="https://github.com/cloudfoundry/python-buildpack">Python Cloud Foundry buildpack</a> to host both staging and production environments.  In each space we run multiple Django web servers, a Django Celery scheduler, some Django Celery task processors, with Redis and PostgreSQL services providing shared data stores for different purposes.</p>
+<p>In the future, as mentioned above, we will be migrating from the current buildpack architecture for Cloud Foundry to the deployment of Docker images for all Cloud.gov applications.</p>
+<p>For information about getting started with Cloud Foundry with Discovery, get access to a Cloud.gov account and organization capable of deploying applications with PostgreSQL and Redis, then check out the Deployment section in our <a class="reference internal" href="../start/setup.html"><span class="doc">getting started guide</span></a>.</p>
+<p><br/></p>
+</div>
 </div>
 <div class="section" id="circleci-integration-and-deployment">
 <span id="circleci-integration-and-deployment"></span><h2>CircleCI integration and deployment<a class="headerlink" href="#circleci-integration-and-deployment" title="Permalink to this headline">¶</a></h2>
+<p>We use a GSA approved CI/CD service called <a class="reference external" href="https://circleci.com/">CircleCI</a> to perform automated testing, builds, and deployment to our various hosting environments.  CircleCI is nice because it allows us to build off of Docker to create specific runtimes that have just the tooling we need to execute our jobs.  The newer 2.0 architecture also provides an easy way to create workflows which are easy to visualize, update, and track over time.</p>
+<div class="section" id="benefits-that-circleci-provides">
+<span id="benefits-that-circleci-provides"></span><h3>Benefits that CircleCI provides<a class="headerlink" href="#benefits-that-circleci-provides" title="Permalink to this headline">¶</a></h3>
+<ol>
+<li><p class="first"><strong>Configuration language is pretty flexible</strong></p>
+<p>CircleCI provides a pretty comprehensive syntax for orchestrating jobs in their remote container environment.  When paired with the entry of environment variables with their project interface this creates a powerful layered system where we can create workflows that respond to different events on different branches without much redundant definition of jobs.</p>
+</li>
+<li><p class="first"><strong>Support for Dockerized tasks</strong></p>
+<p>Version 2.0 of the CircleCI service depends on Docker to provide the runtimes for jobs executed.  This allows us to reuse our packaging for development to execute remote jobs based on events in our source repository.</p>
+</li>
+<li><p class="first"><strong>Easy concurrency of unrelated jobs</strong></p>
+<p>CircleCI provides an easy means of running jobs in parallel with full dependency management.  This makes it easy to speed up the response of the CI/CD checks on pushes or merges to project branches.  We can have a development deployment that depends on unit testing and acceptance testing, which each run in parallel.  Combined with parallel deployment to the hosting environment, this makes CI/CD must quicker and easier to work with in higher volume settings.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="how-we-use-circleci">
+<span id="how-we-use-circleci"></span><h3>How we use CircleCI<a class="headerlink" href="#how-we-use-circleci" title="Permalink to this headline">¶</a></h3>
+<p>Currently we make all deployments to our staging and production environments via CircleCI jobs run on merges to the <strong>develop</strong> and <strong>master</strong> branches.</p>
+<p>We also have CircleCI run acceptance and unit tests on all pushes to branches in the official project source repository.</p>
+<p>Finally, we use CircleCI to autogenerate our documentation site that you may be reading right now on pushes to a <strong>docs</strong> branch or merges to <strong>master</strong> branch.</p>
+<p><br/></p>
+</div>
 </div>
 <div class="section" id="django-web-framework">
 <span id="django-web-framework"></span><h2>Django web framework<a class="headerlink" href="#django-web-framework" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://www.djangoproject.com/">Django</a> is a popular Python web framework that is flexible enough to provide capable API services and rudimentary Content Management System like features with a lightweight footprint.  Django is meant to providea pluggable architecture that is easy to extend to our needs.</p>
+<div class="section" id="benefits-that-django-provides">
+<span id="benefits-that-django-provides"></span><h3>Benefits that Django provides<a class="headerlink" href="#benefits-that-django-provides" title="Permalink to this headline">¶</a></h3>
+<ol>
+<li><p class="first"><strong>Python is one of the most popular programming languages and easy to learn</strong></p>
+<p>Building in Python allows us to tap into a potentially wide range of developer talent.  Python is known to be easy to learn for those new to programming, it is a high level language with a vibrant contributor community, and is a very versatile programing language; being used for everything from infrastructure automation, data analytics, and web application development.</p>
+</li>
+<li><p class="first"><strong>Django is lightweight and fast</strong></p>
+<p>When you know exactly what you are trying to build, starting with a web framework makes sense over a more full featured (and often slower and more reesource intensive) CMS system.  Discovery is built in layers, starting with a lightweight API, a structural Python template and view layer, and a foundational Javascript application that uses the API to render the application according to the Python views and templates.  This system gives us just enough to provide the services while keeping our runtime small and fast.  This also allows us to scale horizontally with demand with limited resources available.</p>
+</li>
+<li><p class="first"><strong>Django is extensible</strong></p>
+<p>It is relatively easy to hook into Django and add needed functionality.  Django builds off of the popular Model, View, Controller design pattern so it is easy for developers coming from other systems to understand the extension points and hit the ground running fast.</p>
+</li>
+<li><p class="first"><strong>Django is secure</strong></p>
+<p>Django makes a point of building security into the architecture so we can rely upon a lot of that underlying logic.  Since Django has many eyes looking through the code constantly security issues can be identifies easier and updates integrated into the Discovery application in a timely manner.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="how-we-use-django">
+<span id="how-we-use-django"></span><h3>How we use Django<a class="headerlink" href="#how-we-use-django" title="Permalink to this headline">¶</a></h3>
+<p>All of our web application servers, scheduling instances, and task processors are built on Django <em>(currently version 1.8)</em>.  We integrate other libraries into this system through two top level requirements files:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/requirements.txt">requirements.txt</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/requirements-dev.txt">requirements-dev.txt</a></li>
+</ul>
+</div>
+<p><br/></p>
+</div>
 </div>
 <div class="section" id="celery-task-scheduling-and-management">
 <span id="celery-task-scheduling-and-management"></span><h2>Celery task scheduling and management<a class="headerlink" href="#celery-task-scheduling-and-management" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://www.celeryproject.org/">Celery</a> is a distributed task processing system, and is the most popular and extensible task execution system for Django currently.  The system is widely supported and has many task queue and result reporting backends that are available.  This makes it ideal for Discovery so we can change underlying technologies in the future if we need to and still keep a standardized background task execution and scheduling interface.</p>
+<div class="section" id="benefits-that-celery-provides">
+<span id="benefits-that-celery-provides"></span><h3>Benefits that Celery provides<a class="headerlink" href="#benefits-that-celery-provides" title="Permalink to this headline">¶</a></h3>
+<ol>
+<li><p class="first"><strong>Celery is extensible</strong></p>
+<p>Rather than being built for a single technology or type of user, Celery tries to create a more modular architecture that can be plugged into with different capabilities.  This allows us to extend our task processing and scheduling capabilities easier over time.</p>
+</li>
+<li><p class="first"><strong>Celery is well documented and used frequently with Django</strong></p>
+<p>There is a large amount of documentation, examples, and discussion about the Celery system online.  We can tap into this knowledge to build our own capabilities.  Celery was first designed for Python web frameworks like Django and Flask, so it is easy to integrate into our system.  It also provides a handy administrative interface for scheduling tasks and viewing results <em>(alright it is not pretty, but it is somewhat functional)</em></p>
+</li>
+<li><p class="first"><strong>Celery is easy to scale as needed</strong></p>
+<p>Celery workers are easy to scale when needed with popular data queues, like Redis, which happens to be available in our Cloud Foundry hosting environment.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="how-we-use-celery">
+<span id="how-we-use-celery"></span><h3>How we use Celery<a class="headerlink" href="#how-we-use-celery" title="Permalink to this headline">¶</a></h3>
+<p>We use two primary Celery related systems; Celery workers that pull tasks from a Redis queue, and a <a class="reference external" href="https://github.com/celery/django-celery-beat">Celery Beat</a> scheduler that queries periodic tasks set through the administrative interface.</p>
+<p><br/></p>
+</div>
 </div>
 <div class="section" id="postgresql-database">
 <span id="postgresql-database"></span><h2>PostgreSQL database<a class="headerlink" href="#postgresql-database" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://www.postgresql.org/">PostgreSQL database</a> is a popular choice with Django projects, and is widely used at <a class="reference external" href="https://18f.gsa.gov/">18f</a>, the original developers of this Django application.  It is also available within the Cloud.gov hosting environment and approved for use at GSA.</p>
+<p>Since we do not write queries as much as access obect models through methods in the code, which translate queries, the syntax of the database is not as important to us as the availability, security, and performance of the underlying database engine.</p>
+<div class="section" id="how-we-use-postgresql">
+<span id="how-we-use-postgresql"></span><h3>How we use PostgreSQL<a class="headerlink" href="#how-we-use-postgresql" title="Permalink to this headline">¶</a></h3>
+<p>In the Discovery application, we currently use the PostgreSQL database for all development, staging, and production databases required for Django operations.</p>
+<p><br/></p>
 </div>
-<div class="section" id="redis-queue">
-<span id="redis-queue"></span><h2>Redis queue<a class="headerlink" href="#redis-queue" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="redis-datastore">
+<span id="redis-datastore"></span><h2>Redis datastore<a class="headerlink" href="#redis-datastore" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://redis.io/">Redis datastore</a> is a popular structured in-memory data store that is commonly used as a object database, cache, and message broker.  It supports many data types, and is built for high traffic applications.  Redis is also used frequently at GSA, and is readily available within the Cloud.gov hosting environment, making it an easy choice for our object store and queueing needs.</p>
+<div class="section" id="how-we-use-redis">
+<span id="how-we-use-redis"></span><h3>How we use Redis<a class="headerlink" href="#how-we-use-redis" title="Permalink to this headline">¶</a></h3>
+<p>We currently use Redis for two types of data storage that allow for different capabilities within the Discovery application.</p>
+<p>First, we use Redis as a task queue for storing tasks for Celery task processing servers to fetch and execute jobs.  Celery workers are constantly pulling tasks from this queue, and our Celery Beat scheduler adds them periodically based on configurations in the administrative interface for periodic tasks needing to be run during normal operations.</p>
+<p>We also use Redis as a session object store that allows for authentication across a load balanced collection of Django web servers.  All web servers store and retrieve session information from the Redis system so that state information for our administrative users can persist across connections in a round robin load balancing process.</p>
+<p><br/></p>
+</div>
 </div>
 </div>
 
@@ -240,7 +425,7 @@
         <a href="design.html" class="btn btn-neutral float-right" title="Discovery system and frontend design" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../start/setup.html" class="btn btn-neutral" title="Discovery Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../start/setup.html" class="btn btn-neutral" title="Discovery setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
