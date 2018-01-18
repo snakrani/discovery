@@ -11,6 +11,7 @@ vm_config = YAML.load_file("vagrant-config.default.yml")
 vm_config.merge!(YAML.load_file("vagrant-config.yml")) if File.exist?("vagrant-config.yml")
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  vagrant_home = "/home/vagrant"
   project_directory = "/vagrant"
 
   config.vm.box = vm_config["box_name"]
@@ -29,27 +30,48 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   if vm_config["copy_ssh"]
-    config.vm.provision :file, source: "~/.ssh", destination: ".ssh"
+    # DO NOT overwrite the authorized_keys file on Vagrant
+    config.vm.provision :file, source: "~/.ssh/config", destination: ".ssh/config"
+
+    Dir.glob("#{Dir.home}/.ssh/id_*") do |key_file|
+      key_file = key_file.sub("#{Dir.home}/", '')
+      config.vm.provision :file, source: "~/#{key_file}", destination: key_file
+    end
   end
   if vm_config["copy_gitconfig"]
     config.vm.provision :file, source: "~/.gitconfig", destination: ".gitconfig"
   end
 
-  config.vm.provision :shell do |s|
-    s.name = "Setting login path redirect"
-    s.inline = <<-SHELL
-      project_dir="${1}"
-      grep -q -F "cd '$project_dir'" "$HOME/.bashrc" 2>/dev/null || echo "cd '$project_dir'" >> "$HOME/.bashrc"
-    SHELL
+  if vm_config["copy_vimrc"]
+    config.vm.provision :file, source: "~/.vimrc", destination: ".vimrc"
+  end
 
-    s.args = [project_directory]
-    s.env = {"HOME" => "/home/vagrant"}
+  if vm_config["copy_profile"]
+    config.vm.provision :file, source: "~/.profile", destination: ".profile"
+  end
+  if vm_config["copy_bash_aliases"]
+    config.vm.provision :file, source: "~/.bash_aliases", destination: ".bash_aliases"
+  end
+  if vm_config["copy_bashrc"]
+    config.vm.provision :file, source: "~/.bashrc", destination: ".bashrc"
+  end
+  config.vm.provision :shell do |s|
+    s.name = "Bash startup additions (scripts/vagrant-bash)"
+    s.inline = <<-SHELL
+      if ! grep -q -F '#<<discovery>>' "${HOME}/.bashrc" 2>/dev/null
+      then
+        cat "${PROJECT_DIR}/scripts/vagrant-bash.sh" >> "${HOME}/.bashrc"
+      fi
+      mkdir -p /usr/local/discovery-docker-root
+      cp -fR $HOME/. /usr/local/discovery-docker-root/
+    SHELL
+    s.env = { "HOME" => vagrant_home, "PROJECT_DIR" => project_directory }
   end
 
   config.vm.provision :shell do |s|
     s.name = "Bootstrapping development server"
     s.path = "scripts/bootstrap.sh"
-    s.args = [project_directory]
+    s.args = [ project_directory ]
   end
 
   config.vm.network :forwarded_port, guest: 8080, host: vm_config["web_port"]

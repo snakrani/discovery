@@ -15,3 +15,7 @@ db_port: 5432
 queue_port: 6379
 copy_ssh: false
 copy_gitconfig: true
+copy_vimrc: false
+copy_profile: false
+copy_bash_aliases: false
+copy_bashrc: false

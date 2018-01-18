@@ -1,0 +1,26 @@
+schema_version: "3.0.0"
+name: Security Assessment Policies for Discovery
+
+references:
+- name: Discovery Github Repository
+  path: https://github.com/PSHCDevOps/discovery
+  type: URL
+
+- name: Discovery Circle CI
+  path: https://circleci.com/gh/PSHCDevOps/discovery
+  type: URL
+
+- name: Discovery Documentation Site
+  path: http://pshcdevops.github.io/discovery/
+  type: URL
+
+
+satisfies:
+- standard_key: NIST-800-53
+  control_key: CA-8 # Penetration Testing
+  implementation_status: complete
+  narrative:
+    - text: |
+        _Control:_ **The organization conducts penetration testing annually on internet accessible components**
+
+        The Discovery management team requests a Penetration Test to be conducted by an independent team under the management of the GSA Information Security team or via an accredited FedRAMP third-party assessment organization annually.

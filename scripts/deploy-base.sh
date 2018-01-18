@@ -53,5 +53,6 @@ deploy_app() {
   do
     wait $job || let "fail+=1"
   done
-  exit "$fail"
+  
+  return "$fail"
 }

@@ -1,0 +1,98 @@
+schema_version: "3.0.0"
+name: Identification and Authentication Policies for Discovery
+
+references:
+- name: Discovery Github Repository
+  path: https://github.com/PSHCDevOps/discovery
+  type: URL
+
+- name: Discovery Circle CI
+  path: https://circleci.com/gh/PSHCDevOps/discovery
+  type: URL
+
+- name: Discovery Documentation Site
+  path: http://pshcdevops.github.io/discovery/
+  type: URL
+
+
+verifications:
+- key: cloudgov
+  name: Cloud.gov Hosting
+  path: https://cloud.gov/docs/apps/production-ready
+  type: URL
+
+- key: circleci
+  name: CircleCI - Documentation
+  path: https://circleci.com/docs/2.0/
+  type: URL
+
+- key: django
+  name: Django Documentation
+  path: https://docs.djangoproject.com/en/1.8/
+  type: URL
+
+- key: github
+  name: GitHub Documentation
+  path: https://help.github.com/
+  type: URL
+
+
+satisfies:
+- standard_key: NIST-800-53
+  control_key: IA-2 # Identification and Authentication (Organizational Users)
+  implementation_status: complete
+  covered_by:
+    - verification_key: cloudgov
+    - verification_key: django
+    - verification_key: circleci
+    - verification_key: github
+  narrative:
+    - text: |
+        _Control:_ **The information system uniquely identifies and authenticates organizational users (or processes acting on behalf of organizational users)**
+
+        The Discovery application system uses quite a few systems to provide the capabilities to the public.  Each system has different authentication mechanisms, but all are commonly used at GSA and 18F currently.  These authentication systems include; GitHub, CircleCI, Cloud.gov, and native Django authentication.
+
+        All external services the Discovery application uses are approved for use at GSA and are covered by those respective authorizations.  Cloud.gov is well documented for FedRAMP JAB authorization.
+
+        Currently we authenticate and manage a very small group of Django administrative users through the default Django authentication system using Redis based sessions stored across a cluster of web servers.  These users have a unique username, email, and securely stored/hashed password.
+
+
+- standard_key: NIST-800-53
+  control_key: IA-2 (1) # Identification and Authentication (Organizational Users) - Network Access to Privileged Accounts
+  implementation_status: partial
+  covered_by:
+    - verification_key: cloudgov
+    - verification_key: github
+  narrative:
+    - text: |
+        _Control:_ **The information system implements multifactor authentication for network access to privileged accounts**
+
+        All lower level host environment access for the Discovery application system utilizes multifactor authentication for all organization managers, and space managers/developers.  Services such as GitHub also provide multifactor authentication.
+
+        The application does not currently implement multifactor authentication, but in the future it is possible to use the Cloud.gov UAA authentication and access system to login to Django as an administrative user.  This is currently in the Discovery backlog.
+
+
+- standard_key: NIST-800-53
+  control_key: IA-2 (2) # Identification and Authentication (Organizational Users) - Network Access to Non-Privileged Accounts
+  implementation_status: partial
+  covered_by:
+    - verification_key: cloudgov
+    - verification_key: github
+  narrative:
+    - text: |
+        _Control:_ **The information system implements multifactor authentication for network access to non-privileged accounts**
+
+        All lower level host environment access roles (including auditors for organizations and spaces) utilize multifactor authentication.  Services such as GitHub also provide multifactor authentication.
+
+        The application does not currently define non-privileged users, as all of the content hosted on the Discovery platform is freely available to the public through anonymous access.
+
+
+- standard_key: NIST-800-53
+  control_key: IA-2 (12) # Identification and Authentication (Organizational Users) - Acceptance of PIV Credentials
+  implementation_status: none
+  narrative:
+    - text: |
+        _Control:_ **The information system accepts and electronically verifies Personal Identity Verification (PIV) credentials**
+
+        The Discovery application system is not designed for PIV access, and most likely will not be unless prioritized by the Discovery management team with the GSA Authorizing Official and other relevant GSA security officials.
+
