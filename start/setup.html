@@ -119,10 +119,14 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#data-loading">Data loading</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#loading-from-packaged-fixtures">1. Loading from packaged fixtures</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pros">Pros</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cons">Cons</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#fixture-related-scripts">Fixture related scripts</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#loading-from-remote-apis">2. Loading from remote APIs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pros">Pros</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cons">Cons</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#data-loading-related-scripts-and-commands">Data loading related scripts and commands</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#scheduled-data-updates">Scheduled data updates</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#task-scheduling-interface">Task scheduling interface</a></li>
@@ -130,9 +134,25 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#testing-changes">Testing changes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#deployment-information">Deployment information</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#documentation-generation">Documentation generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-changes">Testing changes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#testing-related-scripts-and-commands">Testing related scripts and commands</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#deployment-information">Deployment information</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#deployment-related-scripts">Deployment related scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#documentation-generation">Documentation generation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#developer-administrator-documentation">Developer / Administrator documentation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#development-documentation-related-scripts">Development documentation related scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#compliance-documentation">Compliance documentation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#compliance-documentation-related-scripts">Compliance documentation related scripts</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -227,6 +247,11 @@
 <p><br/></p>
 <div class="section" id="user-related-scripts">
 <span id="user-related-scripts"></span><h3>User related scripts<a class="headerlink" href="#user-related-scripts" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Runs automatically on Scheduler deployment</li>
+<li>Run locally on any Django container top level project directory: <strong>/discovery</strong>, or through <strong>docker exec</strong></li>
+<li>Run on Cloud Foundry with <strong>cf run-task</strong></li>
+</ul>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Initialize the Django database and ensure an administrative user with the username admin</span>
 <span class="c1">#</span>
 <span class="c1"># This script is called on initialization of a new Django Celery Beat Scheduler, as there</span>
@@ -243,7 +268,7 @@ $ scripts/create-admin.sh --help
 <div class="section" id="user-management-interface">
 <span id="user-management-interface"></span><h3>User management interface<a class="headerlink" href="#user-management-interface" title="Permalink to this headline">¶</a></h3>
 <p>The user management interface can be found at: http://localhost:8080/admin/auth/user <em>(change port if different)</em></p>
-<p><img alt="Discovery user management" src="https://raw.githubusercontent.com/PSHCDevOps/discovery/docs/docs/images/User-Management.png" /></p>
+<p><img alt="Discovery user management" src="../_images/User-Management.png" /></p>
 <p><br/></p>
 </div>
 </div>
@@ -254,13 +279,30 @@ $ scripts/create-admin.sh --help
 <p><br/></p>
 <div class="section" id="loading-from-packaged-fixtures">
 <span id="loading-from-packaged-fixtures"></span><h3>1. Loading from packaged fixtures<a class="headerlink" href="#loading-from-packaged-fixtures" title="Permalink to this headline">¶</a></h3>
-<p>Pros                                            | Cons
-&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211; | &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;
-Loading from fixtures is fast                   | Data loaded is not up to date
-Guaranteed to get same data as other developers | Incomplete data available
-Not very memory or resource intensive           | Does not test update process</p>
+<p><br/></p>
+<div class="section" id="pros">
+<span id="pros"></span><h4>Pros<a class="headerlink" href="#pros" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Loading from fixtures is fast</li>
+<li>Guaranteed to get same data as other developers</li>
+<li>Not very memory or resource intensive</li>
+</ul>
+</div>
+<div class="section" id="cons">
+<span id="cons"></span><h4>Cons<a class="headerlink" href="#cons" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Data loaded is not up to date</li>
+<li>Incomplete data available</li>
+<li>Does not test update process</li>
+</ul>
+<p><br/></p>
+</div>
 <div class="section" id="fixture-related-scripts">
 <span id="fixture-related-scripts"></span><h4>Fixture related scripts<a class="headerlink" href="#fixture-related-scripts" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Run locally on any Django container top level project directory: <strong>/discovery</strong>, or through <strong>docker exec</strong></li>
+<li>Run on Cloud Foundry with <strong>cf run-task</strong></li>
+</ul>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Loads all fixture data into the Discovery application</span>
 $ scripts/load-fixtures.sh  <span class="c1"># Has no options</span>
 
@@ -273,14 +315,32 @@ $ scripts/gen-fixtures.sh  <span class="c1"># Has no options</span>
 </div>
 <div class="section" id="loading-from-remote-apis">
 <span id="loading-from-remote-apis"></span><h3>2. Loading from remote APIs<a class="headerlink" href="#loading-from-remote-apis" title="Permalink to this headline">¶</a></h3>
-<p>Pros                                                   | Cons
-&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212; | &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;
-Control the data you want <em>(to some degree)</em>           | Loading from remote APIs can be slow
-Data is up to date and may have parity with production | Not good for standardized tests <em>(eg; unit tests)</em>
-Data is complete and authoritive                       | Harder for collaborative development
-Allows for testing of the update process               | Requires a stable internet connection</p>
+<p><br/></p>
+<div class="section" id="pros">
+<span id="id1"></span><h4>Pros<a class="headerlink" href="#pros" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Control the data you want <em>(to some degree)</em></li>
+<li>Data is up to date and may have parity with production</li>
+<li>Data is complete and authoritive</li>
+<li>Allows for testing of the update process</li>
+</ul>
+</div>
+<div class="section" id="cons">
+<span id="id2"></span><h4>Cons<a class="headerlink" href="#cons" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Loading from remote APIs can be slow</li>
+<li>Not good for standardized tests <em>(eg; unit tests)</em></li>
+<li>Harder for collaborative development</li>
+<li>Requires a stable internet connection</li>
+</ul>
+<p><br/></p>
+</div>
 <div class="section" id="data-loading-related-scripts-and-commands">
 <span id="data-loading-related-scripts-and-commands"></span><h4>Data loading related scripts and commands<a class="headerlink" href="#data-loading-related-scripts-and-commands" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Run locally on any Django container top level project directory: <strong>/discovery</strong>, or through <strong>docker exec</strong></li>
+<li>Run on Cloud Foundry with <strong>cf run-task</strong></li>
+</ul>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Helper script that fetches all production time period data into the Discovery application</span>
 $ scripts/fetch-data.sh  <span class="c1"># Has no options</span>
 
@@ -297,6 +357,7 @@ $ manage.py load_vendors --help
 $ manage.py load_fpds --help
 </pre></div>
 </div>
+<p><br/></p>
 </div>
 <div class="section" id="scheduled-data-updates">
 <span id="scheduled-data-updates"></span><h4>Scheduled data updates<a class="headerlink" href="#scheduled-data-updates" title="Permalink to this headline">¶</a></h4>
@@ -313,6 +374,7 @@ $ manage.py load_fpds --help
 <ol class="simple">
 <li><strong>Periodic Tasks</strong> - Management of scheduled tasks that use the periods scheduled above <em>(a task can only have one scheduling event)</em></li>
 </ol>
+<p><br/></p>
 </div>
 <div class="section" id="task-scheduling-interface">
 <span id="task-scheduling-interface"></span><h4>Task scheduling interface<a class="headerlink" href="#task-scheduling-interface" title="Permalink to this headline">¶</a></h4>
@@ -328,15 +390,107 @@ $ manage.py load_fpds --help
 </div>
 <div class="section" id="testing-changes">
 <span id="testing-changes"></span><h2>Testing changes<a class="headerlink" href="#testing-changes" title="Permalink to this headline">¶</a></h2>
+<p>The Discovery application is currently designed with two types of automated testing; unit tests and <a class="reference external" href="http://www.seleniumhq.org/docs/01_introducing_selenium.jsp">Selenium</a> based acceptance testing through <a class="reference external" href="http://phantomjs.org/documentation">PhantomJS</a>.</p>
+<p>The Discovery <a class="reference external" href="https://circleci.com/docs/2.0/">CircleCI environment</a> is currently configured to run both unit tests and acceptance tests on pushes to branches and merges on the official PSHCDevOps source repository.</p>
+<div class="section" id="testing-related-scripts-and-commands">
+<span id="testing-related-scripts-and-commands"></span><h3>Testing related scripts and commands<a class="headerlink" href="#testing-related-scripts-and-commands" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Run locally on any Django container top level project directory: <strong>/discovery</strong>, or through <strong>docker exec</strong></li>
+<li>Run on Cloud Foundry with <strong>cf run-task</strong></li>
+</ul>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Install PhantomJS on the machine (only tested on Debian and Ubuntu for the Vagrant machine and CI containers)</span>
+<span class="c1">#  - Already installed on Docker Django images</span>
+$ scripts/setup-phantomjs.sh  <span class="c1"># Has no options</span>
+
+<span class="c1"># Run all defined unit tests from Django api, vendors, and contract applications</span>
+<span class="c1">#  - See CircleCI configuration for full usage example</span>
+$ manage.py <span class="nb">test</span> api vendors contract  <span class="c1"># Has no options</span>
+
+<span class="c1"># Run all defined Selenium acceptance tests (must have a Discovery site running at localhost:8080)</span>
+<span class="c1">#  - See CircleCI configuration for full usage example</span>
+$ manage.py <span class="nb">test</span> selenium_tests  <span class="c1"># Has no options</span>
+</pre></div>
+</div>
 <p><br/></p>
+</div>
 </div>
 <div class="section" id="deployment-information">
 <span id="deployment-information"></span><h2>Deployment information<a class="headerlink" href="#deployment-information" title="Permalink to this headline">¶</a></h2>
+<p>The Discovery application is hosted on Cloud.gov, a Cloud Foundry Platform as a Service provider.  All deployments to official staging and production spaces should be executed through the CircleCI CI/CD environment, but there is the occasional need to test aspects of the deployment in a non automated fashion.</p>
+<p>The Discovery source repository contains various scripts useful for working with Cloud Foundry deployments when necessary.</p>
+<div class="section" id="deployment-related-scripts">
+<span id="deployment-related-scripts"></span><h3>Deployment related scripts<a class="headerlink" href="#deployment-related-scripts" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Run on either the <strong>host</strong> or <strong>vagrant</strong> machine (<em>if installed and used</em>)</li>
+<li>Run from the <strong>top level project</strong> directory</li>
+</ul>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Setup the Cloud Foundry CLI on the machine with necessary plugins for the Discovery deployment (only tested on Ubuntu and Debian)</span>
+<span class="c1">#  - This is included on the Vagrant development machine</span>
+$ scripts/setup-cf.sh <span class="c1"># No options</span>
+
+<span class="c1"># Create and setup a space with a running Discovery application system from nothing</span>
+<span class="c1">#  - This script can also update an existing space (e.g, configurations, service accounts, etc...)</span>
+<span class="c1">#  - Need to be logged in to Cloud Foundry</span>
+$ scripts/setup-cf-space.sh  --help
+
+<span class="c1"># Contains functions used for deploying the Discovery application to Cloud Foundry, such as deploy_app</span>
+$ <span class="nb">source</span> scripts/deploy-base.sh
+
+<span class="c1"># Uses DEV environment variables with the deploy-base.sh functions to deploy to development environment</span>
+<span class="c1">#  - Used by the CircleCI deployment process</span>
+$ scripts/deploy-dev.sh <span class="c1"># No options</span>
+
+<span class="c1"># Uses PROD environment variables with the deploy-base.sh functions to deploy to production environment</span>
+<span class="c1">#  - Used by the CircleCI deployment process</span>
+$ scripts/deploy-prod.sh <span class="c1"># No options</span>
+
+<span class="c1"># Delete all Discovery application components and remove the specified Cloud Foundry space</span>
+$ scripts/delete-cf-space.sh --help
+</pre></div>
+</div>
 <p><br/></p>
+</div>
 </div>
 <div class="section" id="documentation-generation">
 <span id="documentation-generation"></span><h2>Documentation generation<a class="headerlink" href="#documentation-generation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="developer-administrator-documentation">
+<span id="developer-administrator-documentation"></span><h3>Developer / Administrator documentation<a class="headerlink" href="#developer-administrator-documentation" title="Permalink to this headline">¶</a></h3>
+<p>The Discovery application generates a <a class="reference external" href="http://pshcdevops.github.io/discovery/index.html">documentation site</a> created with Sphinx that gets automatically rebuilt on pushes to a <strong>docs</strong> branch or merges to <strong>master</strong> over time.</p>
+<p>The root documentation folder is: <strong>docs</strong>.</p>
+<div class="section" id="development-documentation-related-scripts">
+<span id="development-documentation-related-scripts"></span><h4>Development documentation related scripts<a class="headerlink" href="#development-documentation-related-scripts" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Run locally on any Django container top level project directory: <strong>/discovery</strong>, or through <strong>docker exec</strong></li>
+<li>Run on Cloud Foundry with <strong>cf run-task</strong></li>
+</ul>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Deploy documentation site changes to GitHub site, via the gh-pages GitHub branch</span>
+<span class="c1">#  - Used by the CircleCI deployment process</span>
+$ scripts/deploy-docs.sh --help
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="compliance-documentation">
+<span id="compliance-documentation"></span><h3>Compliance documentation<a class="headerlink" href="#compliance-documentation" title="Permalink to this headline">¶</a></h3>
+<p>The Discovery application requires a government ATO to serve the public, so it requires compliance documentation that signifies how the information system or managing organization aheres to the relevant NIST standards and controls.  This documentation is currently housed in the <strong>compliance</strong> directory with a top level <strong>opencontrol.yaml</strong> file.</p>
+<p>We use the <a class="reference external" href="https://github.com/opencontrol/compliance-masonry">Compliance Masonry project</a> using the <a class="reference external" href="https://github.com/opencontrol/schemas">Open Control schemas</a> to generate a Gitbook of the required control documentation.</p>
+<div class="section" id="compliance-documentation-related-scripts">
+<span id="compliance-documentation-related-scripts"></span><h4>Compliance documentation related scripts<a class="headerlink" href="#compliance-documentation-related-scripts" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Run on either the <strong>host</strong> or <strong>vagrant</strong> machine (<em>if installed and used</em>)</li>
+<li>Run from the <strong>top level project</strong> directory</li>
+</ul>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Setup the Compliance Masonry CLI on the machine (only tested on Ubuntu and Debian)</span>
+<span class="c1">#  - This is included on the Vagrant development machine</span>
+$ scripts/setup-cm.sh <span class="c1"># No options</span>
+
+<span class="c1"># Generate a Gitbook formatted PDF with the included compliance documentation</span>
+$ scripts/create-security-docs.sh <span class="o">{</span>../path/to/controls.pdf<span class="o">}</span>
+</pre></div>
+</div>
 <p><br/></p>
+</div>
+</div>
 </div>
 </div>
 

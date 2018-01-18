@@ -81,12 +81,13 @@ $ docker-compose up -d
 # You can verify all Docker services are running with
 $ docker-compose ps
 #
-# You should see 5 containers running
-#   1. web site
-#   2. scheduler
-#   3. worker
-#   4. PostgreSQL database
-#   5. Redis queue
+# You should see 10 containers running
+#   1 load balancer
+#   3 web servers
+#   1 scheduler
+#   2 workers
+#   1 PostgreSQL database
+#   2 Redis instances (tasks and shared sessions)
 
 # "SSH" into a Docker container and have a look around
 #
