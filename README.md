@@ -49,6 +49,10 @@ The [Architecture guide](docs/architecture/readme.md) provides a high level summ
   * [Discovery management](docs/process/management.md)
   * [Contributing to Discovery](docs/process/contributing.md)
 
+#### Discovery security documentation
+
+* [Discovery SSP reference](docs/files/Discovery-Controls-LATO.pdf)
+
 <br/>
 
 #### Useful links
