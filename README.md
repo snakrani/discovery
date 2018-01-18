@@ -5,7 +5,7 @@
 | Branch       | Site        | CircleCI Status   |
 | :---------   | :---------  | :-----------------|
 | **Develop** | [discovery-dev.app.cloud.gov](https://discovery-dev.app.cloud.gov)  | [![CircleCI](https://circleci.com/gh/PSHCDevOps/discovery/tree/develop.svg?style=svg)](https://circleci.com/gh/PSHCDevOps/discovery/tree/develop) |
-| **Master**  | [discovery.gsa.gov](https://discovery-dev.app.cloud.gov) | [![CircleCI](https://circleci.com/gh/PSHCDevOps/discovery/tree/master.svg?style=svg)](https://circleci.com/gh/PSHCDevOps/discovery/tree/master) |
+| **Master**  | [discovery.gsa.gov](https://discovery.app.cloud.gov) | [![CircleCI](https://circleci.com/gh/PSHCDevOps/discovery/tree/master.svg?style=svg)](https://circleci.com/gh/PSHCDevOps/discovery/tree/master) |
 
 <br/>
 
@@ -17,7 +17,7 @@ Discovery is a market research tool for GSA Contract Vehicles. Currently, it fea
 
 ## Documentation
 
-All of Discovery's developer and maintenance documentation is located in the [docs](docs/overview.md) directory.  If you are new to the Discovery application, you'll probably want to read through the [Getting Started guide](docs/start/readme.md) first.
+All of Discovery's developer and maintenance documentation is located in the [docs](docs/readme.md) directory.  If you are new to the Discovery application, you'll probably want to read through the [Getting Started guide](docs/start/readme.md) first.
 
 The [Architecture guide](docs/architecture/readme.md) provides a high level summary of the application design and the data available, and the [Process guide](docs/process/readme.md) covers various development and administrative processes required for continued operations of the Discovery application.
 
