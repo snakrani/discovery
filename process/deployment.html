@@ -146,8 +146,6 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Discovery deployment process</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#deployment-locally">Deployment locally</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#deployment-on-circleci">Deployment on CircleCI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#development-environment">Development environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#production-environment">Production environment</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="management.html">Discovery management</a></li>
@@ -218,17 +216,19 @@
   <div class="section" id="discovery-deployment-process">
 <span id="discovery-deployment-process"></span><h1>Discovery deployment process<a class="headerlink" href="#discovery-deployment-process" title="Permalink to this headline">¶</a></h1>
 <p><strong>&lt;</strong> <a class="reference internal" href="testing.html"><span class="doc">Testing Processes</span></a> | <strong>^</strong> <strong><a class="reference internal" href="readme.html"><span class="doc">Process Overview</span></a></strong> | <a class="reference internal" href="management.html"><span class="doc">Discovery Management</span></a> <strong>&gt;</strong></p>
+<p><br/></p>
 <div class="section" id="deployment-locally">
 <span id="deployment-locally"></span><h2>Deployment locally<a class="headerlink" href="#deployment-locally" title="Permalink to this headline">¶</a></h2>
+<p>The Discovery application system is easy to run locally on your own machine provided you have an active internet connection to download dependencies during setup.</p>
+<p>You can either install locally through <a class="reference internal" href="../start/vagrant.html"><span class="doc">Vagrant</span></a> or directly run the <a class="reference internal" href="../start/docker.html"><span class="doc">Docker</span></a> cluster on your machine.  To get started running Discovery locally, check out the <a class="reference internal" href="../start/readme.html"><span class="doc">Discovery getting started guide</span></a>.</p>
+<p><br/></p>
 </div>
 <div class="section" id="deployment-on-circleci">
 <span id="deployment-on-circleci"></span><h2>Deployment on CircleCI<a class="headerlink" href="#deployment-on-circleci" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="development-environment">
-<span id="development-environment"></span><h2>Development environment<a class="headerlink" href="#development-environment" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="production-environment">
-<span id="production-environment"></span><h2>Production environment<a class="headerlink" href="#production-environment" title="Permalink to this headline">¶</a></h2>
+<p>Deployments to the development staging and production environments should only be made through the CircleCI platform.  This ensures that all updates flow through our Git branching and review process, which should lessen the change of cataclysmic catastrophe <em>(hopefully)</em>.</p>
+<p>All deployments executed in the CircleCI CI/CD platform are defined within the configuration in the <strong>.circleci</strong> directory.</p>
+<p>See the <a class="reference internal" href="../start/setup.html"><span class="doc">Discovery setup guide</span></a> for more information on deployment related commands used by CircleCI.</p>
+<p><br/></p>
 </div>
 </div>
 
