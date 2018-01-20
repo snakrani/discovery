@@ -17,6 +17,13 @@ then
   sudo apt-get install -y git >/dev/null 2>&1
 fi
 
+#install Python with virtual environment
+rm -Rf /venv
+./scripts/setup-python.sh
+
+#install PhantomJS
+./scripts/setup-phantomjs.sh
+
 #install CloudFoundry CLI
 ./scripts/setup-cf.sh
 
@@ -28,4 +35,10 @@ fi
 
 #run Docker applications
 echo "> Running all Docker services"
+
+# Ensure Scheduler can start if we have run before (Scheduler checks for PID file)
+docker-compose stop scheduler
+rm -f "$PROJ_DIR/logs/celerybeat.pid"
+
+docker-compose build    
 docker-compose up -d
