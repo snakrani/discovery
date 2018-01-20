@@ -17,6 +17,7 @@
                         <li>Specifically designed for the acquisition of professional services</li>
                         <li>Enables the use of ANY contract type</li>
                         <li>All vendors have DCAA-vetted financial systems</li>
+                        <li><a href="https://www.gsa.gov/cdnstatic/NAICS%20Code%20Definitions%20for%20OASIS.pdf" target="_blank">Download the NAICS description document showing NAICS Codes per pool</a></li>
                         <li><a class="learn_more" href="https://www.gsa.gov/acquisition/products-services/professional-services/one-acquisition-solution-for-integrated-services-oasis">Learn more about OASIS</a></li>
                     </ul>
                 </div>
@@ -25,27 +26,30 @@
             <h3>What are Pools?</h3>
             <ul class="about_discovery_text">
                 <li>Discovery’s IDIQs are divided into functional categories that are referred to as pools.</li>
-                <li>Each pool is it’s own IDIQ contract: Therefore you may only publish a solicitation to one of these categories.</li>
-                <li>If your contracting need spans multiple categories, choose the one that contains the preponderance of your work. Selecting the most relevant NAICS code above will guide you to the correct pool.</li>
+                <li>Each pool is it’s own IDIQ contract, which may contain multiple NAICS codes.</li>
+                <li>You may only issue a solicitation to one of these pools.</li>
+                <li>The size standard of a pool applies to all NAICS within it.</li>
+                <li>If your contracting need spans multiple categories, select the most relevant NAICS code for your requirement.</li>
             </ul>
         </div><!-- end about_discovery -->
 
         <div id="data_sources">
             <h1>Data Sources</h1>
 
-            <div class="data_sources_row">
+            <div id="data_source_sam" class="data_sources_row">
                 <h4 class="data data_source_name">SAM</h4>
 
                 <span id="data_source_date_sam"></span>
                 <span id="data_source_last_updated">last updated</span>
-                <span class="data_source_description">We pull SAM data directly from the System for Award Management (SAM) to provide supplemental information on all of the vendors on the included contracts, including their SAM registration date, any potential suspensions or debarments, and the NAICS codes that a vendor may contract under.</span>
+                <span id="data_source_description_sam" class="data_source_description">We pull SAM data directly from the System for Award Management (SAM) to provide supplemental information on all of the vendors on the included contracts, including their SAM registration date, any potential suspensions or debarments, and the NAICS codes that a vendor may contract under. Set aside information is based on current SAM registration and may not be consistent with the contract vehicle being researched. <a href="#data_sources" id="data_source_more_info_sam">More Info</a></span>
+                <div id="data_source_dialog_sam" style="display: none"><span>Contractors are required to re-certify size/socioeconimic at least annually in SAM in accordance with <a href="https://www.acquisition.gov/sites/default/files/current/far/html/Subpart%204_12.html#wp1073667" target="_blank">FAR 4.120(b)(1)</a>. Contrast that with the contract frequency every five years (or Novation/merger) in accordance with <a href="https://www.acquisition.gov/sites/default/files/current/far/html/52_217_221.html#wp1139913" target="_blank">FAR 52.219-28</a>. Hence the size/socioeconomic status shown in SAM may differ from the contract and thus cannot be relied upon for orders issued under the contract which default to the size/socioeconomic status in the contract. Refer to the contract vehicle website to determine the current size/socioeconomic status of a particular contractor under that contract vehicle. )</span></div>
             </div><!-- end data_sources_row -->
 
-            <div class="data_sources_row">
+            <div id="data_source_fpds"  class="data_sources_row">
                 <h4 class="data data_source_name">FPDS</h4>
                 <span id="data_source_date_fpds"></span>
                 <span id="data_source_last_updated">last updated</span>
-                <span class="data_source_description">Discovery loads data from the Federal Procurement Data System (FPDS) to automatically provide you with a context-rich contract history for each vendor, including the amount of the contract, the primary NAICS code and the pricing type.</span>
+                <span id="data_source_description_fpds"  class="data_source_description">Discovery loads data from the Federal Procurement Data System (FPDS) to automatically provide you with a context-rich contract history for each vendor, including the amount of the contract, the primary NAICS code and the pricing type.</span>
             </div><!-- end data_sources_row -->
         </div><!-- end data_sources -->
     <!-- END LANDING HTML -->
