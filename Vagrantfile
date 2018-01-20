@@ -74,7 +74,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     s.args = [ project_directory ]
   end
 
+  config.vm.network :forwarded_port, guest: 1936, host: vm_config["haproxy_port"]
   config.vm.network :forwarded_port, guest: 8080, host: vm_config["web_port"]
   config.vm.network :forwarded_port, guest: 5432, host: vm_config["db_port"]
   config.vm.network :forwarded_port, guest: 6379, host: vm_config["queue_port"]
+  config.vm.network :forwarded_port, guest: 6479, host: vm_config["auth_port"]
 end
