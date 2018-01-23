@@ -20,12 +20,10 @@ LayoutManager.indexInit = function(original) {
     });
 
     $("#data_source_dialog_sam").dialog({
-        modal: false,
+        modal: true,
         position: {
-          my: "left top",
-          at: "left top",
-          of: "#data_source_fpds",
-          collision: "none"
+          my: "center",
+          at: "center"
         },
         resizable: false,
         autoOpen: false,
@@ -40,6 +38,7 @@ LayoutManager.indexInit = function(original) {
 
     $("#data_source_more_info_sam").click(function () {
       $('#data_source_dialog_sam').dialog('open');
+      $('#data_source_dialog_sam_wrapper').css({ "display": "block" });
     });
     $(document).mouseup(function(e) {
       var container = $("#data_source_dialog_sam");
@@ -47,6 +46,7 @@ LayoutManager.indexInit = function(original) {
       // if the target of the click isn't the container or a descendant of the container
       if (!container.is(e.target) && container.has(e.target).length === 0) {
         container.dialog('close');
+        $('#data_source_dialog_sam_wrapper').css({ "display": "none" });
       }
     });
 };
