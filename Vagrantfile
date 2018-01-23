@@ -31,7 +31,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   if vm_config["copy_ssh"]
     # DO NOT overwrite the authorized_keys file on Vagrant
-    config.vm.provision :file, source: "~/.ssh/config", destination: ".ssh/config"
+    if File.exist?("~/.ssh/config")
+      config.vm.provision :file, source: "~/.ssh/config", destination: ".ssh/config"
+    end
 
     Dir.glob("#{Dir.home}/.ssh/id_*") do |key_file|
       key_file = key_file.sub("#{Dir.home}/", '')
