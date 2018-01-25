@@ -67,17 +67,17 @@ class VendorsTest(TestCase):
     def test_default_pagination(self):
         resp = self.c.get(self.path, {'format': 'json', 'vehicle': 'oasissb'})
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(len(resp.data['data']['results']), 100)
-        self.assertEqual(resp.data['data']['previous'], None)
-        self.assertTrue('page=2' in resp.data['data']['next'])
+        self.assertEqual(len(resp.data['page']['results']), 100)
+        self.assertEqual(resp.data['page']['previous'], None)
+        self.assertTrue('page=2' in resp.data['page']['next'])
         self.assertEqual(resp.data['num_results'], 130)
         
     def test_custom_pagination(self):
         resp = self.c.get(self.path, {'format': 'json', 'vehicle': 'oasis', 'count': 15})
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(len(resp.data['data']['results']), 15)
-        self.assertEqual(resp.data['data']['previous'], None)
-        self.assertTrue('page=2' in resp.data['data']['next'])
+        self.assertEqual(len(resp.data['page']['results']), 15)
+        self.assertEqual(resp.data['page']['previous'], None)
+        self.assertTrue('page=2' in resp.data['page']['next'])
         self.assertEqual(resp.data['num_results'], 77)
    
     def test_request_num_results(self):
@@ -88,7 +88,7 @@ class VendorsTest(TestCase):
     def test_request_results(self):
         resp = self.c.get(self.path, {'format': 'json', 'naics': '541330'})
         self.assertEqual(resp.status_code, 200)
-        assert 'data' in resp.data
+        assert 'page' in resp.data
 
     def test_latest_last_updated_with_data(self):
         resp = self.c.get(self.path, {'format': 'json', 'naics': '541330'})
@@ -104,27 +104,27 @@ class VendorsTest(TestCase):
     def test_one_pool_returned(self):
         resp = self.c.get(self.path, {'format': 'json', 'vehicle': 'oasissb', 'naics': '541330'})
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(len(resp.data['data']['results']), resp.data['num_results'])
+        self.assertEqual(len(resp.data['page']['results']), resp.data['num_results'])
         self.assertEqual(resp.data['pools'][0]['id'], '1_SB')
 
     def test_result_length_pool_group(self):
         resp = self.c.get(self.path, {'format': 'json', 'setasides': 'A2', 'vehicle': 'oasissb', 'naics': '541330'})
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(len(resp.data['data']['results']), resp.data['num_results'])
+        self.assertEqual(len(resp.data['page']['results']), resp.data['num_results'])
 
     def test_default_sort(self):
         resp = self.c.get(self.path, {'format': 'json', 'vehicle': 'oasis'})
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(resp.data['data']['results'][0]['num_contracts'], 502)
+        self.assertEqual(resp.data['page']['results'][0]['num_contracts'], 502)
 
     def test_sort_with_all_params(self):
         resp = self.c.get(self.path, {'format': 'json', 'vehicle': 'oasis', 'sort': 'name', 'direction': 'asc'})
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(resp.data['data']['results'][0]['name'] , "Accenture Federal Services, LLC")
+        self.assertEqual(resp.data['page']['results'][0]['name'] , "Accenture Federal Services, LLC")
         
         resp = self.c.get(self.path, {'format': 'json', 'vehicle': 'oasis', 'sort': 'name', 'direction': 'desc'})
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(resp.data['data']['results'][0]['name'] , "Wyle Laboratories, Inc.")
+        self.assertEqual(resp.data['page']['results'][0]['name'] , "Wyle Laboratories, Inc.")
 
 
 class VendorTest(TestCase):

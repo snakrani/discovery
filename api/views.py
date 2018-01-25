@@ -159,7 +159,7 @@ class ListVendors(APIView):
             'num_results': vendor_serializer.data['num_results'],
             'last_updated': sam_load_results[0].sam_load if sam_load_results else None,
             'pools' : ShortPoolSerializer(pools).data,  
-            'data': vendor_serializer.data
+            'page': vendor_serializer.data
         })
                  
     def get_results(self, pools, setasides):
@@ -177,10 +177,13 @@ class ListNaics(APIView):
         This endpoint lists all of the NAICS codes that are relevant to the OASIS family of vehicles. It takes no parameters.
     """
     def get(self, request, format=None):
-        serializer = NaicsSerializer(self.get_queryset(), many=True)
-        return Response({'num_results': len(serializer.data), 'results': serializer.data})
+        serializer = NaicsSerializer(self.get_results(), many=True)
+        return Response({
+            'num_results': len(serializer.data), 
+            'results': serializer.data
+        })
 
-    def get_queryset(self):
+    def get_results(self):
         codes = Naics.objects.all()
 
         #filters
