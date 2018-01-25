@@ -36,7 +36,6 @@ class Vendor(models.Model):
     annual_revenue = models.BigIntegerField(null=True)
     number_of_employees = models.IntegerField(null=True)
 
-
     def __str__(self):
         return self.name
 
@@ -79,6 +78,7 @@ class Naics(models.Model):
 
     def __str__(self):
         return "{0} - {1}".format(self.code, self.description)
+
 
 class SamLoad(models.Model):
     sam_load = models.DateField()
