@@ -1,6 +1,7 @@
 from django.test import Client, TestCase
 from django.utils import timezone
 import json
+import datetime
 
 from vendors.models import SamLoad
 
@@ -160,6 +161,14 @@ class ContractsTest(TestCase):
         self.assertEqual(resp.data['page']['previous'], None)
         self.assertTrue('page=2' in resp.data['page']['next'])
         self.assertEqual(resp.data['num_results'], 502)
+    
+    def test_custom_pagination(self):
+        resp = self.c.get(self.path, {'duns': '007901598', 'count': 25})
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(len(resp.data['page']['results']), 25)
+        self.assertEqual(resp.data['page']['previous'], None)
+        self.assertTrue('page=2' in resp.data['page']['next'])
+        self.assertEqual(resp.data['num_results'], 502)
 
     def test_naics_filter(self):
         resp = self.c.get(self.path, {'duns': '807990382', 'naics': '541611'})
@@ -167,17 +176,18 @@ class ContractsTest(TestCase):
         self.assertEqual(resp.data['num_results'], 1)
 
     def test_default_sort(self):
-        resp = self.c.get(self.path, {'duns': '807990382', 'sort': 'status'})
-        resp2 = self.c.get(self.path, {'duns': '807990382', 'sort': 'status', 'direction': 'desc'})
-        #responses should be equal because default sort is desc
+        resp = self.c.get(self.path, {'duns': '807990382'})
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(resp2.status_code, 200)
-        self.assertEqual(resp.data['page']['results'], resp2.data['page']['results'])
+        self.assertEqual(resp.data['page']['results'][0]['date_signed'].strftime('%Y-%m-%dT%H:%M:%SZ'), "2017-09-13T00:00:00Z")
 
     def test_sort_with_all_params(self):
         resp = self.c.get(self.path, {'duns': '807990382', 'sort': 'status', 'direction': 'asc'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.data['page']['results'][0]['status'], 'Completed')
+        
+        resp = self.c.get(self.path, {'duns': '807990382', 'sort': 'status', 'direction': 'desc'})
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.data['page']['results'][0]['status'], 'Terminated for Convenience')
 
 
 class MetadataTest(TestCase):
