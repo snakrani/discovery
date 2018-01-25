@@ -3,12 +3,66 @@ from django.http import HttpResponse, HttpResponseBadRequest
 from django.core.paginator import Paginator
 from django.db.models import Count
 
+from rest_framework.pagination import PaginationSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from contract.models import Contract
 from vendors.models import Vendor, Naics, SetAside, SamLoad, Pool
 from api.serializers import VendorSerializer, NaicsSerializer, PoolSerializer, ShortVendorSerializer, ContractSerializer, PaginatedContractSerializer, Metadata, MetadataSerializer, ShortPoolSerializer
+
+
+def get_page(items, request):
+    paginator = Paginator(items, 100)
+    items = paginator.page(request.QUERY_PARAMS.get('page', 1))
+           
+    serializer = PaginationSerializer(items, context={'request': request})       
+    serializer.data['num_results'] = serializer.data['count']       
+    del serializer.data['count']
+    
+    return serializer
+
+
+def get_naics(request):
+    naics = request.QUERY_PARAMS.get('naics', None)
+    
+    if naics: 
+        return Naics.objects.get(short_code=naics)
+    
+    return None
+
+
+def get_pools(vehicle=None, naics=None):
+    if vehicle and naics:
+        return [Pool.objects.get(naics=naics, vehicle=vehicle.upper())]
+    elif vehicle:
+        return Pool.objects.filter(vehicle=vehicle.upper())
+    elif naics:
+        return Pool.objects.filter(naics=naics)
+    else:
+        return Pool.objects.all()
+
+
+def get_setasides(request):
+    setasides = request.QUERY_PARAMS.get('setasides', None)
+    
+    if setasides:
+        return setasides.split(',')
+    
+    return None
+
+
+def get_ordered_results(queryset, request, serializer_class):
+    descending = False if serializer_class.sort_direction() == 'asc' else True
+    
+    if request.QUERY_PARAMS.get('direction', None):
+        descending = False if request.QUERY_PARAMS.get('direction', 'desc') == 'asc' else True
+    
+    sort = serializer_class.sort_field(request.QUERY_PARAMS.get('sort', None))  
+
+    items = serializer_class(queryset, context={'request': request})
+    items.data.sort(key=lambda k: k[sort], reverse=descending)
+    return items.data
 
 
 class GetVendor(APIView):
@@ -27,9 +81,10 @@ class GetVendor(APIView):
         vendor = Vendor.objects.get(duns=duns) 
         return Response(VendorSerializer(vendor).data) 
 
+
 class ListVendors(APIView):
     """
-    This endpoint returns a list of vendors filtered by a NAICS code. The NAICS code maps to an OASIS pool and is used to retrieve vendors in that pool only.
+    This endpoint returns a list of vendors potentially filtered by a NAICS code. The NAICS code maps to an OASIS pool and is used to retrieve vendors in that pool only.
 
     OASIS pools are groupings of NAICS codes that have the same small business size standard. Because contracts solicited to OASIS vendors can only be issued to one pool, much of the data is presented as part of a pool grouping. Using the NAICS code is a shortcut, so that you don't have to explicitly map the NAICS code to a pool in OASIS yourself.
     
@@ -47,8 +102,8 @@ class ListVendors(APIView):
         parameters:
           - name: naics
             paramType: query
-            description: a six digit NAICS code (required)
-            required: true
+            description: a six digit NAICS code
+            required: false
             type: string
           - name: setasides  
             paramType: query
@@ -61,42 +116,49 @@ class ListVendors(APIView):
             description: Choices are either oasis or oasissb. Will filter vendors by their presence in either the OASIS unrestricted vehicle or the OASIS Small Business vehicle.
             required: false
             type: string
-
+          - name: sort
+            paramType: query
+            required: false
+            description: a field to sort on. Choices are date, status, agency, and amount
+            type: string
+          - name: direction
+            paramType: query
+            description: The sort direction of the results. Choices are asc or desc.
+            type: string
+            required: false
     """
     def get(self, request, format=None):
+        vendors, pools = self.get_results()
+        
+        vendor_serializer = get_page(vendors, request)
+        
+        sam_load_results = SamLoad.objects.all().order_by('-sam_load')[:1]
+        sam_load = sam_load_results[0].sam_load if sam_load_results else None
 
-        try: 
-            naics =  Naics.objects.get(short_code=request.QUERY_PARAMS.get('naics'))
-            vehicle = request.QUERY_PARAMS.get('vehicle', None)
-            if vehicle:
-                pool = [Pool.objects.get(naics=naics, vehicle=vehicle.upper()), ]
-            else:
-                pool = Pool.objects.filter(naics=naics)
-
-            setasides = request.QUERY_PARAMS.get('setasides', None)
-            if setasides:
-                setasides = setasides.split(',')
-            
-
-            sam_load_results = SamLoad.objects.all().order_by('-sam_load')[:1]
-            sam_load = sam_load_results[0].sam_load if sam_load_results else None
-
-            v_serializer = ShortVendorSerializer(self.get_queryset(pool, setasides, naics), many=True, context={'naics': naics})
-            v_serializer.data.sort(key=lambda k: k['contracts_in_naics'], reverse=True)
-            p_serializer = ShortPoolSerializer(pool)
-
-            return  Response({ 'num_results': len(v_serializer.data), 'pool' : p_serializer.data , 'sam_load':sam_load, 'results': v_serializer.data } )
-
-        except Naics.DoesNotExist:
-            return HttpResponseBadRequest("You must provide a valid naics code that maps to an OASIS pool")
-
-    def get_queryset(self, pool, setasides, naics):
-        vendors = Vendor.objects.filter(pools__in=pool)
+        return Response({ 
+            'num_results': vendor_serializer.data['num_results'],
+            'last_updated': sam_load,
+            'pools' : ShortPoolSerializer(pools).data,  
+            'results': vendor_serializer.data
+        })
+                 
+    def get_results(self):
+        vehicle = self.request.QUERY_PARAMS.get('vehicle', None)
+        naics = get_naics(self.request)
+        pools = get_pools(vehicle, naics)
+        setasides = get_setasides(self.request)
+        
+        vendors = Vendor.objects.filter(pools__in=pools).distinct()
+        
+        if naics:
+            vendors = vendors.filter(NAICS=naics)
+        
         if setasides:
             for sa in SetAside.objects.filter(code__in=setasides):
                 vendors = vendors.filter(setasides=sa)
 
-        return vendors
+        results = get_ordered_results(vendors, self.request, ShortVendorSerializer)       
+        return results, pools
 
 
 class ListNaics(APIView):
@@ -119,6 +181,7 @@ class ListNaics(APIView):
             codes = codes.filter(description__icontains=q)
 
         return codes
+
 
 class ListContracts(APIView):
     """ 
@@ -157,7 +220,7 @@ class ListContracts(APIView):
     def get(self, request, format=None):
         contracts = self.get_queryset()
 
-        if contracts == 1:
+        if not contracts:
             return HttpResponseBadRequest("You must provide a vendor DUNS to retrieve contracts.")
 
         else:
@@ -171,15 +234,19 @@ class ListContracts(APIView):
 
             return Response(serializer.data)
 
-    def get_queryset(self):
-        
+    def get_queryset(self):        
         duns = self.request.QUERY_PARAMS.get('duns', None)
         naics = self.request.QUERY_PARAMS.get('naics', None)
         dir_map = { 'desc': '-', 'asc': '' }
-        sort_map = { 'date': 'date_signed', 'status': 'reason_for_modification', 'agency': 'agency_name', 'amount': 'obligated_amount'}
+        sort_map = { 
+            'date': 'date_signed', 
+            'status': 'reason_for_modification', 
+            'agency': 'agency_name', 
+            'amount': 'obligated_amount'
+        }
 
         if not duns:
-            return 1
+            return None
 
         vendor = Vendor.objects.get(duns=duns)
         sort = self.request.QUERY_PARAMS.get('sort', None)
@@ -195,10 +262,10 @@ class ListContracts(APIView):
         contracts = Contract.objects.filter(vendor=vendor).order_by(dir_map[direction] + sort_map[sort])
         
         if naics:
-            #contracts = contracts.filter(NAICS=Naics.objects.filter(code=naics)[0])
             contracts = contracts.filter(NAICS=naics)  #change to above when naics loaded right
 
         return contracts
+
 
 class MetadataView(APIView):
     """
