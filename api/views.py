@@ -8,9 +8,9 @@ from rest_framework.pagination import PaginationSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from contract.models import Contract
+from contract.models import Contract, FPDSLoad
 from vendors.models import Vendor, Naics, SetAside, SamLoad, Pool
-from api.serializers import VendorSerializer, NaicsSerializer, PoolSerializer, ShortVendorSerializer, ContractSerializer, PaginatedContractSerializer, Metadata, MetadataSerializer, ShortPoolSerializer
+from api.serializers import VendorSerializer, NaicsSerializer, PoolSerializer, ShortVendorSerializer, ContractSerializer, Metadata, MetadataSerializer, ShortPoolSerializer
 
 
 def get_page(items, request):
@@ -80,6 +80,7 @@ def get_ordered_results(queryset, request, serializer_class):
 class GetVendor(APIView):
     """
     This endpoint returns a single vendor by their 9 digit DUNS number. DUNS numbers can be looked up in the [System for Award Management](https://www.sam.gov) by vendor name.
+    
     ---
     GET:
         parameters:
@@ -90,8 +91,13 @@ class GetVendor(APIView):
             paramType: path
     """
     def get(self, request, duns, format=None):
-        vendor = Vendor.objects.get(duns=duns) 
-        return Response(VendorSerializer(vendor).data) 
+        try:
+            serializer = VendorSerializer(Vendor.objects.get(duns=duns)) 
+        
+        except Exception as error:
+            return HttpResponseBadRequest(error)
+        
+        return Response(serializer.data) 
 
 
 class ListVendors(APIView):
@@ -131,34 +137,41 @@ class ListVendors(APIView):
           - name: sort
             paramType: query
             required: false
-            description: a field to sort on. Choices are date, status, agency, and amount
+            description: A field to sort on. Choices are date, status, agency, and amount
             type: string
           - name: direction
             paramType: query
             description: The sort direction of the results. Choices are asc or desc.
             type: string
             required: false
+          - name: page
+            paramType: query
+            description: The page (starting from 1) to access. Results are paginated in default increments of 100.
+            type: string
+            required: false
           - name: count
             paramType: query
-            description: The number of vendors to return per page (max 100)
+            description: The number of vendors to return per page (default/max 100)
             type: string
             required: false
     """
     def get(self, request, format=None):  
         try:
             pools = get_pools(request, get_naics(request))
-            setasides = get_setasides(request)
+            
+            pool_serializer = ShortPoolSerializer(pools)
+            vendor_serializer = get_page(self.get_results(pools, get_setasides(request)), request)
+            
+            sam_load_results = SamLoad.objects.all().order_by('-sam_load')[:1]
+            last_updated = sam_load_results[0].sam_load if sam_load_results else None
         
         except Exception as error:
             return HttpResponseBadRequest(error)
         
-        vendor_serializer = get_page(self.get_results(pools, setasides), request)
-        sam_load_results = SamLoad.objects.all().order_by('-sam_load')[:1]
-        
         return Response({ 
             'num_results': vendor_serializer.data['num_results'],
-            'last_updated': sam_load_results[0].sam_load if sam_load_results else None,
-            'pools' : ShortPoolSerializer(pools).data,  
+            'last_updated': last_updated,
+            'pools' : pool_serializer.data,  
             'page': vendor_serializer.data
         })
                  
@@ -174,32 +187,40 @@ class ListVendors(APIView):
 
 class ListNaics(APIView):
     """
-        This endpoint lists all of the NAICS codes that are relevant to the OASIS family of vehicles. It takes no parameters.
+    This endpoint lists all of the NAICS codes that are relevant to the OASIS family of vehicles.
+
+    ---
+    GET:
+        parameters:
+          - name: q
+            paramType: query
+            description: Text to search within NAICS description
+            required: false
+            type: string
     """
     def get(self, request, format=None):
-        serializer = NaicsSerializer(self.get_results(), many=True)
+        try:
+            serializer = NaicsSerializer(self.get_results(request.QUERY_PARAMS.get('q', None)), many=True)
+        
+        except Exception as error:
+            return HttpResponseBadRequest(error)
+        
         return Response({
             'num_results': len(serializer.data), 
             'results': serializer.data
         })
 
-    def get_results(self):
-        codes = Naics.objects.all()
-
-        #filters
-        q = self.request.QUERY_PARAMS.get('q', None)
-
+    def get_results(self, query):
         codes = Naics.objects.all().order_by('description')
 
-        if q:
-            codes = codes.filter(description__icontains=q)
+        if query:
+            codes = codes.filter(description__icontains=query)
 
         return codes
 
 
 class ListContracts(APIView):
-    """ 
-    
+    """   
     This endpoint returns contract history from FPDS for a specific vendor. The vendor's DUNS number is a required parameter. You can also filter contracts by their NAICS code to find contracts relevant to a particular category. 
     
     ---
@@ -211,84 +232,72 @@ class ListContracts(APIView):
             type: string
             paramType: query
           - name: naics
-            description: a six digit NAICS code used to filter by contracts with a certain NAICS
+            description: A six digit NAICS code used to filter by contracts with a certain NAICS
             type: string
             required: false
             paramType: query
           - name: sort
-            description: a field to sort on. Choices are date, status, agency, and amount
-            type: string
-            required: false
             paramType: query
+            required: false
+            description: A field to sort on. Choices are date, status, agency, and amount
+            type: string
           - name: direction
+            paramType: query
             description: The sort direction of the results. Choices are asc or desc.
             type: string
             required: false
-            paramType: query
           - name: page
-            description: the page to start on. Results are paginated in increments of 100. Begins at page=1.
-            required: false
             paramType: query
-
+            description: The page (starting from 1) to access. Results are paginated in default increments of 100.
+            type: string
+            required: false
+          - name: count
+            paramType: query
+            description: The number of vendors to return per page (default/max 100)
+            type: string
+            required: false
     """
     def get(self, request, format=None):
-        contracts = self.get_queryset()
-
-        if not contracts:
-            return HttpResponseBadRequest("You must provide a vendor DUNS to retrieve contracts.")
-
-        else:
-            paginator = Paginator(contracts, 100)
-            page = request.QUERY_PARAMS.get('page', 1)
-            contracts = paginator.page(page)
+        try:
+            duns = self.request.QUERY_PARAMS.get('duns', None)
+            if not duns:
+                raise Exception("Vendor DUNS required to retrieve contracts")
             
-            serializer = PaginatedContractSerializer(contracts, context={'request': request})
-            serializer.data['num_results'] = serializer.data['count']
-            del serializer.data['count']
-
-            return Response(serializer.data)
-
-    def get_queryset(self):        
-        duns = self.request.QUERY_PARAMS.get('duns', None)
-        naics = self.request.QUERY_PARAMS.get('naics', None)
-        dir_map = { 'desc': '-', 'asc': '' }
-        sort_map = { 
-            'date': 'date_signed', 
-            'status': 'reason_for_modification', 
-            'agency': 'agency_name', 
-            'amount': 'obligated_amount'
-        }
-
-        if not duns:
-            return None
-
-        vendor = Vendor.objects.get(duns=duns)
-        sort = self.request.QUERY_PARAMS.get('sort', None)
-        direction = self.request.QUERY_PARAMS.get('direction', None)
-
-        if sort and not direction:
-            direction = 'desc'
+            vendor = Vendor.objects.get(duns=duns)
+            contract_serializer = get_page(self.get_results(vendor, 
+                                                            request.QUERY_PARAMS.get('naics', None)), 
+                                           request)
+            
+            fpds_load_results = FPDSLoad.objects.filter(vendor=vendor)
+            last_updated = fpds_load_results[0].load_date if fpds_load_results else None
         
-        if not sort or sort not in sort_map:
-            sort = 'date'
-            direction = 'desc'
+        except Exception as error:
+            return HttpResponseBadRequest(error)
+        
+        return Response({ 
+            'num_results': contract_serializer.data['num_results'],
+            'last_updated': last_updated,
+            'page': contract_serializer.data
+        })
 
-        contracts = Contract.objects.filter(vendor=vendor).order_by(dir_map[direction] + sort_map[sort])
+    def get_results(self, vendor, naics):
+        contracts = Contract.objects.filter(vendor=vendor)
         
         if naics:
-            contracts = contracts.filter(NAICS=naics)  #change to above when naics loaded right
+            contracts = contracts.filter(NAICS=naics)
 
-        return contracts
+        return get_ordered_results(contracts, self.request, ContractSerializer)
 
 
 class MetadataView(APIView):
     """
-        This endpoint returns metadata for the most recent data loads of SAM and FPDS data. It takes no parameters.
+    This endpoint returns metadata for the most recent data loads of SAM and FPDS data. It takes no parameters.
     """
     def get(self, request, format=None):
-       mds = MetadataSerializer(Metadata())
-       return Response(mds.data)
+        try:
+            mds = MetadataSerializer(Metadata())
         
-
-
-
+        except Exception as error:
+            return HttpResponseBadRequest(error)
+        
+        return Response(mds.data)
