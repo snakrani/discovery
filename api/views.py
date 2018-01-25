@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.core.paginator import Paginator
@@ -13,7 +14,7 @@ from api.serializers import VendorSerializer, NaicsSerializer, PoolSerializer, S
 
 
 def get_page(items, request):
-    paginator = Paginator(items, 100)
+    paginator = Paginator(items, min(int(request.QUERY_PARAMS.get('count', 100)), 100))
     items = paginator.page(request.QUERY_PARAMS.get('page', 1))
            
     serializer = PaginationSerializer(items, context={'request': request})       
@@ -26,13 +27,18 @@ def get_page(items, request):
 def get_naics(request):
     naics = request.QUERY_PARAMS.get('naics', None)
     
-    if naics: 
+    if naics:
         return Naics.objects.get(short_code=naics)
     
     return None
 
 
-def get_pools(vehicle=None, naics=None):
+def get_pools(request, naics=None):
+    vehicle = request.QUERY_PARAMS.get('vehicle', None)
+    
+    if vehicle and vehicle.lower() not in settings.VEHICLES:
+        raise Exception("Acquisition vehicle {} not found".format(vehicle))
+    
     if vehicle and naics:
         return [Pool.objects.get(naics=naics, vehicle=vehicle.upper())]
     elif vehicle:
@@ -44,10 +50,16 @@ def get_pools(vehicle=None, naics=None):
 
 
 def get_setasides(request):
-    setasides = request.QUERY_PARAMS.get('setasides', None)
+    setaside_str = request.QUERY_PARAMS.get('setasides', None)
     
-    if setasides:
-        return setasides.split(',')
+    if setaside_str:
+        setasides = [sa.strip() for sa in setaside_str.split(',')]
+        results = SetAside.objects.filter(code__in=setasides)
+        
+        if len(setasides) != len(results):
+            raise Exception("Invalid setasides specified: {}".format(setaside_str))
+        
+        return results
     
     return None
 
@@ -100,6 +112,11 @@ class ListVendors(APIView):
     ---
     GET:
         parameters:
+          - name: vehicle
+            paramType: query
+            description: Choices are either oasis or oasissb. Will filter vendors by their presence in either the OASIS unrestricted vehicle or the OASIS Small Business vehicle.
+            required: false
+            type: string
           - name: naics
             paramType: query
             description: a six digit NAICS code
@@ -109,11 +126,6 @@ class ListVendors(APIView):
             paramType: query
             allowMultiple: true
             description: a comma delimited list of two character setaside codes to filter by.  Ex. setasides=A6,A5  will filter by 8a and veteran owned business.
-            required: false
-            type: string
-          - name: vehicle
-            paramType: query
-            description: Choices are either oasis or oasissb. Will filter vendors by their presence in either the OASIS unrestricted vehicle or the OASIS Small Business vehicle.
             required: false
             type: string
           - name: sort
@@ -126,39 +138,38 @@ class ListVendors(APIView):
             description: The sort direction of the results. Choices are asc or desc.
             type: string
             required: false
+          - name: count
+            paramType: query
+            description: The number of vendors to return per page (max 100)
+            type: string
+            required: false
     """
-    def get(self, request, format=None):
-        vendors, pools = self.get_results()
+    def get(self, request, format=None):  
+        try:
+            pools = get_pools(request, get_naics(request))
+            setasides = get_setasides(request)
         
-        vendor_serializer = get_page(vendors, request)
+        except Exception as error:
+            return HttpResponseBadRequest(error)
         
+        vendor_serializer = get_page(self.get_results(pools, setasides), request)
         sam_load_results = SamLoad.objects.all().order_by('-sam_load')[:1]
-        sam_load = sam_load_results[0].sam_load if sam_load_results else None
-
+        
         return Response({ 
             'num_results': vendor_serializer.data['num_results'],
-            'last_updated': sam_load,
+            'last_updated': sam_load_results[0].sam_load if sam_load_results else None,
             'pools' : ShortPoolSerializer(pools).data,  
-            'results': vendor_serializer.data
+            'data': vendor_serializer.data
         })
                  
-    def get_results(self):
-        vehicle = self.request.QUERY_PARAMS.get('vehicle', None)
-        naics = get_naics(self.request)
-        pools = get_pools(vehicle, naics)
-        setasides = get_setasides(self.request)
-        
+    def get_results(self, pools, setasides):
         vendors = Vendor.objects.filter(pools__in=pools).distinct()
         
-        if naics:
-            vendors = vendors.filter(NAICS=naics)
-        
         if setasides:
-            for sa in SetAside.objects.filter(code__in=setasides):
+            for sa in setasides:
                 vendors = vendors.filter(setasides=sa)
 
-        results = get_ordered_results(vendors, self.request, ShortVendorSerializer)       
-        return results, pools
+        return get_ordered_results(vendors, self.request, ShortVendorSerializer)
 
 
 class ListNaics(APIView):
