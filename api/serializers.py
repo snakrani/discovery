@@ -69,7 +69,7 @@ class ShortVendorSerializer(OrderedSerializer):
     class Meta:
         model = Vendor
         fields = ('id', 'name', 'duns', 'duns_4', 'sam_address', 'sam_citystate',
-            'setasides', 'sam_status', 'sam_exclusion', 'sam_url', 'num_contracts')
+                  'setasides', 'sam_status', 'sam_exclusion', 'sam_url', 'num_contracts')
 
     def get_vendor_contracts(self, item):
         if 'naics' in self.context:
@@ -82,28 +82,28 @@ class ShortVendorSerializer(OrderedSerializer):
         return 'num_contracts' 
 
 
-class ContractSerializer(serializers.ModelSerializer):
+class ContractSerializer(OrderedSerializer):
     
     pricing_type = serializers.Field(source='get_pricing_type_display')
     piid = serializers.SerializerMethodField('split_piid')
     status = serializers.SerializerMethodField('get_status')
-    class Meta:
-        model = Contract
-        fields = ('piid', 'agency_name', 'NAICS', 'date_signed', 'status', 'obligated_amount', 'point_of_contact', 'pricing_type')
-        
-    def split_piid(self, obj):
-        if '_' in obj.piid:
-            return obj.piid.split('_')[1]
-        return obj.piid
-
-    def get_status(self, obj):
-        return obj.get_reason_for_modification_display()
-
-
-class PaginatedContractSerializer(pagination.PaginationSerializer):
     
     class Meta:
-        object_serializer_class = ContractSerializer
+        model = Contract
+        fields = ('piid', 'agency_name', 'NAICS', 'date_signed', 'status', 'obligated_amount', 
+                  'point_of_contact', 'pricing_type')
+        
+    def split_piid(self, item):
+        if '_' in item.piid:
+            return item.piid.split('_')[1]
+        return item.piid
+
+    def get_status(self, item):
+        return item.get_reason_for_modification_display()
+    
+    @classmethod
+    def default_sort(cls):
+        return 'date_signed' 
 
 
 class Metadata(object):
