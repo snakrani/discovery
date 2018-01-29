@@ -5,6 +5,14 @@
 // add support for cross-domain requests
 $.support.cors = true;
 
+$.fn.exists = function(callback) {
+  if (this.length) {
+    var args = [].slice.call(arguments, 1);
+    callback.call(this, args);
+  }
+  return this;
+};
+
 // initializes the app
 $(document).ready(function() {
     // http://thejacklawson.com/Mediator.js/
@@ -17,8 +25,8 @@ $(document).ready(function() {
 
     //fix for select2 IE disable bug
     $('#naics-code').fireOnDisable().select2();
-    $('#placeholder').select2({ 
-        'placeholder': 'Select a vehicle', 
+    $('#placeholder').select2({
+        'placeholder': 'Select a vehicle',
         minimumResultsForSearch: -1,
         width: "170px"
     });
@@ -27,7 +35,7 @@ $(document).ready(function() {
 // removes empty strings
 Array.prototype.removeEmpties = function() {
   for (var i = 0; i < this.length; i++) {
-    if (this[i].length === 0) {         
+    if (this[i].length === 0) {
       this.splice(i, 1);
       i--;
     }
@@ -45,8 +53,8 @@ Function.prototype.bind = function (oThis) {
         throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
     }
 
-    var aArgs = Array.prototype.slice.call(arguments, 1), 
-        fToBind = this, 
+    var aArgs = Array.prototype.slice.call(arguments, 1),
+        fToBind = this,
         fNOP = function () {},
         fBound = function () {
           return fToBind.apply(this instanceof fNOP && oThis
