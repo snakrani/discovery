@@ -72,12 +72,12 @@ class FunctionalTests(LiveServerTestCase):
         #make sure veteran owned filter is selected
         self.assertEqual("A5", driver.find_element_by_id("vet").get_attribute("value"))
         #make sure headers for each socioeconomic indicator exist
-        self.assertEqual(driver.find_element_by_css_selector("td.h_8a").text, "8(a)")
-        self.assertEqual(driver.find_element_by_css_selector("td.h_hubz").text, "HubZ")
-        self.assertEqual(driver.find_element_by_css_selector("td.h_sdvo").text, "SDVO")
-        self.assertEqual(driver.find_element_by_css_selector("td.h_wo").text, "WO")
-        self.assertEqual(driver.find_element_by_css_selector("td.h_vo").text, "VO")
-        self.assertEqual(driver.find_element_by_css_selector("td.h_sdb").text, "SDB")
+        self.assertEqual(driver.find_element_by_css_selector("th.h_8a").text, "8(a)")
+        self.assertEqual(driver.find_element_by_css_selector("th.h_hubz").text, "HubZ")
+        self.assertEqual(driver.find_element_by_css_selector("th.h_sdvo").text, "SDVO")
+        self.assertEqual(driver.find_element_by_css_selector("th.h_wo").text, "WO")
+        self.assertEqual(driver.find_element_by_css_selector("th.h_vo").text, "VO")
+        self.assertEqual(driver.find_element_by_css_selector("th.h_sdb").text, "SDB")
         #make sure the first few results are all veteran owned
         try:
             self.assertTrue(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[2]/td[8]/img'))
@@ -312,12 +312,12 @@ class FunctionalTests(LiveServerTestCase):
         )   
         
         #make sure socioeconomic indicator headers exist
-        self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/td[4]').text, '8(a)')
-        self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/td[5]').text, 'HubZ')
-        self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/td[6]').text, 'SDVO')
-        self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/td[7]').text, 'WO')
-        self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/td[8]').text, 'VO')
-        self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/td[9]').text, 'SDB')
+        self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/th[4]').text, '8(a)')
+        self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/th[5]').text, 'HubZ')
+        self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/th[6]').text, 'SDVO')
+        self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/th[7]').text, 'WO')
+        self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/th[8]').text, 'VO')
+        self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/th[9]').text, 'SDB')
         #make sure "OASIS SB Only" column exists in results table
         self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[2]/td[4]').text, 'Not Applicable\n(OASIS SB Only)')
         #make sure filter selection says "OASIS SB Only"
@@ -334,7 +334,7 @@ class FunctionalTests(LiveServerTestCase):
         )  
         
         #make sure header for number of results column exists
-        self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/td[3]').text, 'No. of Contracts')
+        self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/th[3]').text, 'Contracts')
         #make sure value for number of contracts in row 1 is greater than or equal to value in row 2
         self.assertGreater(int(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[2]/td[3]').text), int(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[3]/td[3]').text))
 
