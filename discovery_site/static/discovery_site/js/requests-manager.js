@@ -2,17 +2,24 @@
 'use strict';
 
 var RequestsManager = {
+    initializers: {},
+
     init: function() {
         Events.subscribe('naicsChanged', this.load.bind(RequestsManager));
         Events.subscribe('vehicleChanged', this.load.bind(RequestsManager));
         Events.subscribe('filtersChanged', this.load.bind(RequestsManager));
         Events.subscribe('loadedWithQS', this.load.bind(RequestsManager));
-    },
 
+        for(var handler in this.initializers){
+            this.initializers[handler].call(this);
+        }
+    },
 
     getAPIRequest: function(url, params, callback) {
         url = (APIHOST == 'None' ? '' : APIHOST) + url;
+
         params['api_key'] = APIKEY;
+
         return $.ajax({
               url: url,
               dataType: 'json',
@@ -42,7 +49,7 @@ var RequestsManager = {
         }
         if (pool !== null) {
             queryData['pool'] = pool[0];
-            queryData['vehicle'] = pool[1]
+            queryData['vehicle'] = pool[1];
         }
         if (vehicle !== null) {
             queryData['vehicle'] = vehicle;
@@ -62,7 +69,7 @@ var RequestsManager = {
             }
         }
         else {
-            return null
+            return null;
         }
     }
 
