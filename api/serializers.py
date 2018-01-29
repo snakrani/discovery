@@ -72,7 +72,7 @@ class ShortVendorSerializer(OrderedSerializer):
                   'setasides', 'sam_status', 'sam_exclusion', 'sam_url', 'num_contracts')
 
     def get_vendor_contracts(self, item):
-        if 'naics' in self.context:
+        if 'naics' in self.context and self.context['naics']:
             return Contract.objects.filter(NAICS=self.context['naics'].code, vendor=item).count()
         else:
             return Contract.objects.filter(vendor=item).count()
