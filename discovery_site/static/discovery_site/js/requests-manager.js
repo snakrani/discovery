@@ -16,7 +16,7 @@ var RequestsManager = {
     },
 
     getAPIRequest: function(url, params, callback) {
-        url = (APIHOST == 'None' ? '' : APIHOST) + url;
+        url = APIHOST + url;
 
         params['api_key'] = APIKEY;
 
@@ -28,7 +28,7 @@ var RequestsManager = {
             .done(callback)
             .fail(function(req, status, error) {
               if (!window.console) return;
-              console.log('failed to load: ', url);
+              console.log('Failed to load: ', url);
               console.log(error);
             });
     },
