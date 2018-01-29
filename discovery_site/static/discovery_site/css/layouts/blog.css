@@ -901,7 +901,7 @@ img.green_dot {
     border-width: 0 1px 1px 1px;
 }
 
-.pooldetail tr:first-child td {
+.pooldetail tr:first-child th {
     background-color: #4A85A3;
     border: 0 solid #e5e5e5;
     text-align: center;
@@ -910,17 +910,18 @@ img.green_dot {
     font-family: ;
     font-weight: 600;
     color: #fff;
+    padding: 5px;
 }
 
-.pooldetail tr:first-child:hover td {
+.pooldetail tr:first-child:hover th {
     background-color: #4A85A3;
 }
 
-.pooldetail tr:first-child td:first-child {
+.pooldetail tr:first-child th:first-child {
     border-width: 0 0 1px 0;
 }
 
-.pooldetail tr:first-child td:last-child {
+.pooldetail tr:first-child th:last-child {
     border-width: 0 0 1px 1px;
 }
 
@@ -955,9 +956,44 @@ img.green_dot {
     text-align: left;
 }
 
-#pool_table .pooldetail .vendor_name tr:hover td {
+#pool_table .pooldetail .vendor_name tr:hover th {
     background-color: #eeeeee;
 }
+
+
+#no_matching_vendors {
+    font-size: 1.5em;
+    float: left;
+    font-weight: 600;
+    margin-left: 40px;
+    font-style: italic;
+    margin-top: 5px;
+    color: #666;
+    display: none;
+}
+
+
+#viewing_vendors {
+    float: left;
+    width: 100%;
+    padding: 13px;
+    padding-left: 0;
+    color: #666;
+    display: none;
+}
+
+.viewing_vendors_current {
+    color: #000;
+    font-weight: 600;
+}
+
+.viewing_vendors_total {
+    color: #000;
+    font-weight: 600;
+}
+
+
+
 
 .pure-checkbox {
     padding-bottom: 3px;
@@ -1218,11 +1254,6 @@ img.green_dot {
     -moz-box-shadow: 0 1px 5px 0 #808080 inset;
     box-shadow: 0 1px 5px 0 #808080 inset;
 }
-
-
-
-
-
 
 
 /* Vendor Detail  Socioeconomic Factors Table Styles */

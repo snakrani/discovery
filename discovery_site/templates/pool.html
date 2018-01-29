@@ -1,6 +1,10 @@
 {% extends "search_base.html" %}
 {% load staticfiles %}
 
+{% block css %}
+    <link rel="stylesheet" href="{% static 'discovery_site/css/simplePagination.css' %}">
+{% endblock %}
+
 {% block search_info %}
 
         <div id="results_pool_name_number">
@@ -29,39 +33,52 @@
     <div id="pool_table" class="pooldetail">
         <table id="pool_vendors">
             <tr>
-                <td scope="col" class="h_vendor_name">
+                <th scope="col" class="h_vendor_name arrow-sortable sortable" title="Select to sort">
                     Vendor Name
-                </td>
-                <td scope="col" class="h_vendor_location">
+                </th>
+                <th scope="col" class="h_vendor_location arrow-sortable sortable" title="Select to sort">
                     Location
-                </td>
-                <td scope="col" class="h_naics_results">
-                    No. of Contracts
-                </td>
-                <td scope="col" class="h_8a">
+                </th>
+                <th scope="col" class="h_naics_results arrow-down sortable" title="Sorted descending">
+                    Contracts
+                </th>
+                <th scope="col" class="h_8a">
                     8(a)
-                </td>
-                <td scope="col" class="h_hubz">
+                </th>
+                <th scope="col" class="h_hubz">
                     HubZ
-                </td>
-                <td scope="col" class="h_sdvo">
+                </th>
+                <th scope="col" class="h_sdvo">
                     SDVO
-                </td>
-                <td scope="col" class="h_wo">
+                </th>
+                <th scope="col" class="h_wo">
                     WO
-                </td>
-                <td scope="col" class="h_vo">
+                </th>
+                <th scope="col" class="h_vo">
                     VO
-                </td>
-                <td scope="col" class="h_sdb">
+                </th>
+                <th scope="col" class="h_sdb">
                     SDB
-                </td>
+                </th>
             </tr>
         </table>
     </div>
+
+    <div id="no_matching_vendors">There are no matching vendors to display</div>
+
+    <div id="viewing_vendors">
+        viewing
+    <span id="vendors_current" class="viewing_vendors_current"></span>
+        of
+    <span id="vendors_total" class="viewing_vendors_total"></span>
+        total results
+    </div><!-- end viewing_vendors -->
+    <div id="pagination_container"></div>
+
 {% endblock %}
 
 {% block page_js %}
     <script src="{% static 'discovery_site/js/layout-manager-listings.js' %}"></script>
     <script src="{% static 'discovery_site/js/requests-manager-listings.js' %}"></script>
+    <script src="{% static 'discovery_site/js/jquery.simplePagination.js' %}"></script>
 {% endblock %}

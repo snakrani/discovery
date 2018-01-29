@@ -1,6 +1,7 @@
 from django.test import Client, TestCase
 from django.utils import timezone
 import json
+import datetime
 
 from vendors.models import SamLoad
 
@@ -28,7 +29,7 @@ class NaicsTest(TestCase):
 
 class VendorsTest(TestCase):
     """test for vendor API endpoint"""
-    fixtures = ['naics.json', 'setasides.json', 'pools.json', 'vendors.json', 'poolpiids.json']
+    fixtures = ['naics.json', 'setasides.json', 'pools.json', 'vendors.json', 'poolpiids.json', 'contracts.json']
  
     def setUp(self):
         self.c = Client()
@@ -38,8 +39,16 @@ class VendorsTest(TestCase):
 
     def test_request_no_params(self):
         resp = self.c.get(self.path, {'format': 'json'})
-        self.assertEqual(resp.status_code, 400)
+        self.assertEqual(resp.status_code, 200)
 
+    def test_request_valid_vehicle(self):
+        resp = self.c.get(self.path, {'format': 'json', 'vehicle': 'oasissb'})
+        self.assertEqual(resp.status_code, 200)
+
+    def test_request_invalid_vehicle_returns_400(self):
+        resp = self.c.get(self.path, {'format': 'json', 'vehicle': 'dlasfjosdf'})
+        self.assertEqual(resp.status_code, 400)
+ 
     def test_request_valid_naics(self):
         resp = self.c.get(self.path, {'format': 'json', 'naics': '541330'})
         self.assertEqual(resp.status_code, 200)
@@ -47,7 +56,31 @@ class VendorsTest(TestCase):
     def test_request_invalid_naics_returns_400(self):
         resp = self.c.get(self.path, {'format': 'json', 'naics': 'dlasfjosdf'})
         self.assertEqual(resp.status_code, 400)
-    
+   
+    def test_request_valid_setasides(self):
+        resp = self.c.get(self.path, {'format': 'json', 'setasides': 'A6'})
+        self.assertEqual(resp.status_code, 200)
+   
+    def test_request_invalid_setasides_returns_400(self):
+        resp = self.c.get(self.path, {'format': 'json', 'setasides': 'A25,27'})
+        self.assertEqual(resp.status_code, 400)
+
+    def test_default_pagination(self):
+        resp = self.c.get(self.path, {'format': 'json', 'vehicle': 'oasissb'})
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(len(resp.data['page']['results']), 100)
+        self.assertEqual(resp.data['page']['previous'], None)
+        self.assertTrue('page=2' in resp.data['page']['next'])
+        self.assertEqual(resp.data['num_results'], 130)
+        
+    def test_custom_pagination(self):
+        resp = self.c.get(self.path, {'format': 'json', 'vehicle': 'oasis', 'count': 15})
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(len(resp.data['page']['results']), 15)
+        self.assertEqual(resp.data['page']['previous'], None)
+        self.assertTrue('page=2' in resp.data['page']['next'])
+        self.assertEqual(resp.data['num_results'], 77)
+   
     def test_request_num_results(self):
         resp = self.c.get(self.path, {'format': 'json', 'naics': '541330'})
         self.assertEqual(resp.status_code, 200)
@@ -56,29 +89,43 @@ class VendorsTest(TestCase):
     def test_request_results(self):
         resp = self.c.get(self.path, {'format': 'json', 'naics': '541330'})
         self.assertEqual(resp.status_code, 200)
-        assert 'results' in resp.data
+        assert 'page' in resp.data
 
-    def test_latest_sam_load_with_data(self):
+    def test_latest_last_updated_with_data(self):
         resp = self.c.get(self.path, {'format': 'json', 'naics': '541330'})
         self.assertEqual(resp.status_code, 200)
-        assert 'sam_load' in resp.data
+        assert 'last_updated' in resp.data
 
-    def test_sam_load_with_no_data(self):
+    def test_last_updated_with_no_data(self):
         SamLoad.objects.all().delete()
         resp = self.c.get(self.path, {'format': 'json', 'naics': '541330'})
         self.assertEqual(resp.status_code, 200)
-        assert 'sam_load' in resp.data
+        assert 'last_updated' in resp.data
 
     def test_one_pool_returned(self):
-        resp = self.c.get(self.path, {'format': 'json', 'vehicle': 'oasissb', 'naics': '541330' })
+        resp = self.c.get(self.path, {'format': 'json', 'vehicle': 'oasissb', 'naics': '541330'})
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(len(resp.data['results']), resp.data['num_results'])
-        self.assertEqual(resp.data['pool'][0]['id'], '1_SB')
+        self.assertEqual(len(resp.data['page']['results']), resp.data['num_results'])
+        self.assertEqual(resp.data['pools'][0]['id'], '1_SB')
 
     def test_result_length_pool_group(self):
         resp = self.c.get(self.path, {'format': 'json', 'setasides': 'A2', 'vehicle': 'oasissb', 'naics': '541330'})
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(len(resp.data['results']), resp.data['num_results'])
+        self.assertEqual(len(resp.data['page']['results']), resp.data['num_results'])
+
+    def test_default_sort(self):
+        resp = self.c.get(self.path, {'format': 'json', 'vehicle': 'oasis'})
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.data['page']['results'][0]['num_contracts'], 502)
+
+    def test_sort_with_all_params(self):
+        resp = self.c.get(self.path, {'format': 'json', 'vehicle': 'oasis', 'sort': 'name', 'direction': 'asc'})
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.data['page']['results'][0]['name'] , "Accenture Federal Services, LLC")
+        
+        resp = self.c.get(self.path, {'format': 'json', 'vehicle': 'oasis', 'sort': 'name', 'direction': 'desc'})
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.data['page']['results'][0]['name'] , "Wyle Laboratories, Inc.")
 
 
 class VendorTest(TestCase):
@@ -110,9 +157,17 @@ class ContractsTest(TestCase):
     def test_default_pagination(self):
         resp = self.c.get(self.path, {'duns': '007901598'})
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(len(resp.data['results']), 100)
-        self.assertEqual(resp.data['previous'], None)
-        self.assertTrue('page=2' in resp.data['next'])
+        self.assertEqual(len(resp.data['page']['results']), 100)
+        self.assertEqual(resp.data['page']['previous'], None)
+        self.assertTrue('page=2' in resp.data['page']['next'])
+        self.assertEqual(resp.data['num_results'], 502)
+    
+    def test_custom_pagination(self):
+        resp = self.c.get(self.path, {'duns': '007901598', 'count': 25})
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(len(resp.data['page']['results']), 25)
+        self.assertEqual(resp.data['page']['previous'], None)
+        self.assertTrue('page=2' in resp.data['page']['next'])
         self.assertEqual(resp.data['num_results'], 502)
 
     def test_naics_filter(self):
@@ -121,17 +176,18 @@ class ContractsTest(TestCase):
         self.assertEqual(resp.data['num_results'], 1)
 
     def test_default_sort(self):
-        resp = self.c.get(self.path, {'duns': '807990382', 'sort': 'status'})
-        resp2 = self.c.get(self.path, {'duns': '807990382', 'sort': 'status', 'direction': 'desc'})
-        #responses should be equal because default sort is desc
+        resp = self.c.get(self.path, {'duns': '807990382'})
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(resp2.status_code, 200)
-        self.assertEqual(resp.data['results'], resp2.data['results'])
+        self.assertEqual(resp.data['page']['results'][0]['date_signed'].strftime('%Y-%m-%dT%H:%M:%SZ'), "2017-09-13T00:00:00Z")
 
     def test_sort_with_all_params(self):
         resp = self.c.get(self.path, {'duns': '807990382', 'sort': 'status', 'direction': 'asc'})
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(resp.data['results'][0]['status'], 'Completed')
+        self.assertEqual(resp.data['page']['results'][0]['status'], 'Completed')
+        
+        resp = self.c.get(self.path, {'duns': '807990382', 'sort': 'status', 'direction': 'desc'})
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.data['page']['results'][0]['status'], 'Terminated for Convenience')
 
 
 class MetadataTest(TestCase):

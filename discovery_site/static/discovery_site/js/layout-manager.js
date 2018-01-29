@@ -2,11 +2,17 @@
 'use strict';
 
 var LayoutManager = {
+    initializers: {},
+
     init: function() {
         Events.subscribe('dataLoaded', this.render.bind(LayoutManager));
         Events.subscribe('contentChanged', this.updateSAM.bind(LayoutManager));
         Events.subscribe('contentChanged', this.updateResultsInfo);
         Events.subscribe('vehicleChanged', this.enableNaics);
+
+        for(var handler in this.initializers){
+            this.initializers[handler].call(this);
+        }
     },
 
     enableNaics: function() {
@@ -16,7 +22,7 @@ var LayoutManager = {
 
     updateSAM: function(results) {
         if ($.isEmptyObject(results) === false) {
-            var dateObj = this.createDate(results['samLoad']);
+            var dateObj = this.createDate(results['lastUpdated']);
             $("#sam_load").text("SAM data updated: " + (dateObj.getMonth()) + '/' + dateObj.getDate() + '/' + dateObj.getFullYear().toString().substring(2));
         }
     },
@@ -80,10 +86,34 @@ LayoutManager.disableFilters = function() {
     $('#choose_filters').removeClass('filter_text').addClass('filter_text_disabled');
     $('.pure-checkbox').addClass('pure-checkbox-disabled');
     $('.se_filter').attr("disabled", true);
-}
+};
 
 LayoutManager.enableFilters = function() {
     $('#choose_filters').removeClass('filter_text_disabled').addClass('filter_text');
     $('.pure-checkbox-disabled').removeClass('pure-checkbox-disabled');
     $('.se_filter').attr("disabled", false);
-}
+};
+
+LayoutManager.currentSortParams = function() {
+    var data = {};
+    var class_map = LayoutManager.sortClassMap();
+
+    $('th.arrow-down').exists(function() {
+        data['sort'] = class_map[this.attr('class').split(' ')[0]];
+        data['direction'] = 'desc';
+    });
+    $('th.arrow-up').exists(function() {
+        data['sort'] = class_map[this.attr('class').split(' ')[0]];
+        data['direction'] = 'asc';
+    });
+    return data;
+};
+
+LayoutManager.formatDate = function(dateObj) {
+  //returns (mm/dd/yyyy) string representation of a date object
+  return (dateObj.getMonth() + 1) + '/' + dateObj.getDate() + '/' + dateObj.getFullYear().toString().substring(2);
+};
+
+LayoutManager.numberWithCommas = function(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
