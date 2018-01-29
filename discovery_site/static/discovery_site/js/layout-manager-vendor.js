@@ -1,19 +1,15 @@
- // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
-'use strict';
 
-// for vendor pages
-LayoutManager.vendorInit = function(original) {
-    // binds events needed only in the vendor context on init and then
-    // calls original init function
-    Events.subscribe('contractDataLoaded', this.buildContractTable.bind(LayoutManager));
-
-    original.bind(LayoutManager).call();
+LayoutManager.initializers.vendor = function() {
+    Events.subscribe('contractDataLoaded', this.renderTable.bind(LayoutManager));
 };
 
-LayoutManager.originalInit = LayoutManager.init;
-
-LayoutManager.init = function() {
-    LayoutManager.vendorInit(LayoutManager.originalInit);
+LayoutManager.sortClassMap = function() {
+    return {
+        'h_date_signed': 'date_signed',
+        'h_agency': 'agency_name',
+        'h_value': 'obligated_amount',
+        'h_status': 'status',
+    };
 };
 
 LayoutManager.render = function(results) {
@@ -29,10 +25,10 @@ LayoutManager.render = function(results) {
     if (results.sam_url) {
         $('#vendor_site_link').attr('href', results.sam_url);
     } else {
-        $('.vendor_website').hide(); 
+        $('.vendor_website').hide();
     }
     if (results.sam_exclusion == true) {
-            $('.debarred_status').show();
+        $('.debarred_status').show();
     }
     $('.duns_number').html(results.duns ? results.duns : ' ');
     $('.cage_code').html(results.cage ? results.cage : ' ');
@@ -79,16 +75,52 @@ LayoutManager.render = function(results) {
     indicatorsRow.append(this.renderColumn(results, 'vo', 'A5'));
     indicatorsRow.append(this.renderColumn(results, 'sdb', '27'));
     t.append(indicatorsRow);
-    
+
     //update button value to have proper NAICS code
-    $("#vendor_contract_history_title_container #naics_contracts_button").text("NAICS " + InputHandler.naicsCode);  
-}; 
+    $("#vendor_contract_history_title_container #naics_contracts_button").text("NAICS " + InputHandler.naicsCode);
+};
+
+LayoutManager.showSbBadge = function(pools) {
+    //return true if pool number is same in more than one pool
+    for (var i=0; i<pools.length; i++) {
+        for (var j=i+1; j<pools.length; j++) {
+            if (pools[i].number == pools[j].number) {
+                return true;
+            }
+        }
+    }
+    return false;
+};
 
 LayoutManager.renderColumn = function(v, prefix, setasideCode) {
     return $('<td class="' + prefix + '">' + this.vendorIndicator(v, prefix, setasideCode) + '</td>');
 };
 
-LayoutManager.setButtonAndCSV = function(listType){
+LayoutManager.renderTable = function(results, listType, pageNumber, itemsPerPage) {
+    var $table = $('#vendor_contracts');
+    var len = results['count'] - 1;
+
+    this.renderButtonAndCSV(listType);
+
+    $table.find('tr').not(':first').remove();
+
+    //show or hide 'no matching contracts' indicator
+    if (results['total'] == 0) {
+        $('#no_matching_contracts').show();
+    } else {
+        $('#no_matching_contracts').hide();
+    }
+
+    for (var i = 0; i <= len; i++) {
+        $table.append(this.renderRow(results['results'][i], i));
+    }
+
+    $("#ch_table").show();
+
+    LayoutManager.renderPager(listType, results, pageNumber, itemsPerPage);
+};
+
+LayoutManager.renderButtonAndCSV = function(listType){
     $("#vendor_contract_history_title_container .contracts_button_active").attr('class', 'contracts_button');
     $("#" + listType + "_contracts_button").attr('class', 'contracts_button_active');
 
@@ -103,80 +135,60 @@ LayoutManager.setButtonAndCSV = function(listType){
     }
 };
 
-LayoutManager.buildContractTable = function(data, listType, pageNumber) {
-    var headers = $("div#ch_table table tr").first().clone();
-    var table = $("<table></table>");
-    var results = data['results'];
-    var contract, tr, displayDate, pointOfContact, piid, agencyName, pricingType, obligatedAmount, status, naics;
+LayoutManager.renderRow = function(contract, i) {
+    var $contractRow = $('<tr></tr>');
 
-    this.setButtonAndCSV(listType);
+    var displayDate = (contract['date_signed'] ? this.formatDate(this.createDate(contract['date_signed'])) : ' ');
+    var piid = (contract['piid'] ? contract['piid'] : ' ');
+    var agencyName = (contract['agency_name'] ? contract['agency_name'] : ' ');
+    var pricingType = (contract['pricing_type'] ? contract['pricing_type'] : ' ');
+    var obligatedAmount = (contract['obligated_amount'] ? this.numberWithCommas(contract['obligated_amount']) : ' ');
+    var status = (contract['status'] ? contract['status'] : ' ');
+    var naics = (contract['NAICS'] ? contract['NAICS'] : ' ');
+    var pointOfContact;
 
-    //append headers from existing html
-    table.append(headers);
-    
-    //show or hide 'no matching contracts' indicator
-    if (results.length == 0) {
-        $('#no_matching_contracts').show();
-    } else {
-        $('#no_matching_contracts').hide();
+    if (typeof contract['point_of_contact'] === 'string') {
+        pointOfContact = contract['point_of_contact'].toLowerCase();
+    }
+    else {
+        pointOfContact = (contract['point_of_contact'] ? contract['point_of_contract'] : ' ');
     }
 
-    for (contract in results) {
-        if (results.hasOwnProperty(contract)) {
-            tr = $('<tr></tr>');
-            displayDate = (results[contract]['date_signed'] ? this.formatDate(this.createDate(results[contract]['date_signed'])) : ' ');
-            piid = (results[contract]['piid'] ? results[contract]['piid'] : ' ');
-            agencyName = (results[contract]['agency_name'] ? results[contract]['agency_name'] : ' ');
-            pricingType = (results[contract]['pricing_type'] ? results[contract]['pricing_type'] : ' ');
-            obligatedAmount = (results[contract]['obligated_amount'] ? this.numberWithCommas(results[contract]['obligated_amount']) : ' ');
-            status = (results[contract]['status'] ? results[contract]['status'] : ' ');
-            naics = (results[contract]['NAICS'] ? results[contract]['NAICS'] : ' ')
+    $contractRow.append('<td class="date_signed">' + displayDate + '</td>');
+    $contractRow.append('<td class="piid" scope="row">' + piid + '</td>');
+    $contractRow.append('<td class="agency">' + this.toTitleCase(agencyName) + '</td>');
+    $contractRow.append('<td class="type">' + pricingType + '</td>');
+    $contractRow.append('<td class="value">' + obligatedAmount+ '</td>');
+    $contractRow.append('<td class="email_poc">' + pointOfContact + '</td>');
+    $contractRow.append('<td class="status">' + status + '</td>');
+    $contractRow.append('<td class="naics">' + naics + '</td>');
 
-            if (typeof results[contract]['point_of_contact'] === 'string') {
-                pointOfContact = results[contract]['point_of_contact'].toLowerCase();
-            }
-            else {
-                pointOfContact = (results[contract]['point_of_contact'] ? results[contract]['point_of_contract'] : ' ');
-            }
+    return $contractRow;
+};
 
-            tr.append('<td class="date_signed">' + displayDate + '</td>');
-            tr.append('<td class="piid" scope="row">' + piid + '</td>');
-            tr.append('<td class="agency">' + this.toTitleCase(agencyName) + '</td>');
-            tr.append('<td class="type">' + pricingType + '</td>');
-            tr.append('<td class="value">' + obligatedAmount+ '</td>');
-            tr.append('<td class="email_poc">' + pointOfContact + '</td>');
-            tr.append('<td class="status">' + status + '</td>');
-            tr.append('<td class="naics">' + naics + '</td>');
-            //more goes here
-        
-            table.append(tr);
-        }
-    }
-
-    $("div#ch_table table").remove();
-    $("div#ch_table").append(table);
-
-
-    //pagination
-    if (data['num_results'] > 0) {
-
+LayoutManager.renderPager = function(listType, results, pageNumber, itemsPerPage) {
+    if (results['total'] > 0) {
         if (pageNumber == undefined) {
             var pageNumber = 1;
         }
-        var itemsPerPage = 100;
+
         var startnum = (pageNumber - 1) * itemsPerPage + 1;
-        var endnum = Math.min((pageNumber * itemsPerPage), data['num_results']);
+        var endnum = Math.min((pageNumber * itemsPerPage), results['total']);
+
         $("#contracts_current").text(startnum + " - " + endnum);
-        $("#contracts_total").text(LayoutManager.numberWithCommas(data['num_results']));
+        $("#contracts_total").text(LayoutManager.numberWithCommas(results['total']));
 
         $(function() {
             $("#pagination_container").pagination({
-                items: data['num_results'],
+                items: results['total'],
                 itemsOnPage: itemsPerPage,
                 cssStyle: 'light-theme',
                 currentPage: pageNumber,
                 onPageClick: function(pageNumber, e) {
-                    var contract_data = {}
+                    var contract_data = LayoutManager.currentSortParams();
+
+                    contract_data['duns'] = results['duns'];
+
                     if (listType == 'all') {
                         contract_data['naics'] == 'all';
                     } else {
@@ -184,24 +196,22 @@ LayoutManager.buildContractTable = function(data, listType, pageNumber) {
                     }
                     contract_data['page'] = pageNumber;
                     contract_data['listType'] = listType;
+
                     Events.publish("contractsChanged", contract_data);
                 }
             });
         });
-        $('#pagination_container').show();
+        if (results['count'] < results['total']) {
+            $('#pagination_container').show();
+        } else {
+            $('#pagination_container').hide();
+        }
         $("#viewing_contracts").show();
 
     } else {
         $('#pagination_container').hide();
         $("#viewing_contracts").hide();
     }
-
-
-};
-
-LayoutManager.formatDate = function(dateObj) {
-	//returns (mm/dd/yyyy) string representation of a date object
-	return (dateObj.getMonth() + 1) + '/' + dateObj.getDate() + '/' + dateObj.getFullYear().toString().substring(2);
 };
 
 LayoutManager.vendorIndicator = function(v, prefix, setaside_code) {
@@ -213,22 +223,5 @@ LayoutManager.vendorIndicator = function(v, prefix, setaside_code) {
             }
         }
     }
-
     return '';
 };
-
-LayoutManager.numberWithCommas = function(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-};
-
-LayoutManager.showSbBadge = function(pools) {
-    //return true if pool number is same in more than one pool
-    for (var i=0; i<pools.length; i++) {
-        for (var j=i+1; j<pools.length; j++) {
-            if (pools[i].number == pools[j].number) {
-                return true
-            }
-        }
-    }
-    return false
-}
