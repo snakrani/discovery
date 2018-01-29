@@ -12,7 +12,6 @@ from contract.models import Contract, FPDSLoad
 from vendors.models import Vendor, Naics, SetAside, SamLoad, Pool
 from api.serializers import VendorSerializer, NaicsSerializer, PoolSerializer, ShortVendorSerializer, ContractSerializer, Metadata, MetadataSerializer, ShortPoolSerializer
 
-
 def get_page(items, request):
     paginator = Paginator(items, min(int(request.QUERY_PARAMS.get('count', 100)), 100))
     items = paginator.page(request.QUERY_PARAMS.get('page', 1))
@@ -27,7 +26,7 @@ def get_page(items, request):
 def get_naics(request):
     naics = request.QUERY_PARAMS.get('naics', None)
     
-    if naics:
+    if naics and naics != 'all':
         return Naics.objects.get(short_code=naics)
     
     return None
@@ -64,15 +63,17 @@ def get_setasides(request):
     return None
 
 
-def get_ordered_results(queryset, request, serializer_class):
+def get_ordered_results(queryset, request, serializer_class, context = {}):
     descending = False if serializer_class.sort_direction() == 'asc' else True
+    
+    context.update({'request': request})
     
     if request.QUERY_PARAMS.get('direction', None):
         descending = False if request.QUERY_PARAMS.get('direction', 'desc') == 'asc' else True
     
     sort = serializer_class.sort_field(request.QUERY_PARAMS.get('sort', None))  
 
-    items = serializer_class(queryset, context={'request': request})
+    items = serializer_class(queryset, context=context)
     items.data.sort(key=lambda k: k[sort], reverse=descending)
     return items.data
 
@@ -157,10 +158,11 @@ class ListVendors(APIView):
     """
     def get(self, request, format=None):  
         try:
-            pools = get_pools(request, get_naics(request))
+            naics = get_naics(request)
+            pools = get_pools(request, naics)
             
             pool_serializer = ShortPoolSerializer(pools)
-            vendor_serializer = get_page(self.get_results(pools, get_setasides(request)), request)
+            vendor_serializer = get_page(self.get_results(pools, get_setasides(request), naics), request)
             
             sam_load_results = SamLoad.objects.all().order_by('-sam_load')[:1]
             last_updated = sam_load_results[0].sam_load if sam_load_results else None
@@ -175,14 +177,14 @@ class ListVendors(APIView):
             'page': vendor_serializer.data
         })
                  
-    def get_results(self, pools, setasides):
+    def get_results(self, pools, setasides, naics):
         vendors = Vendor.objects.filter(pools__in=pools).distinct()
         
         if setasides:
             for sa in setasides:
                 vendors = vendors.filter(setasides=sa)
 
-        return get_ordered_results(vendors, self.request, ShortVendorSerializer)
+        return get_ordered_results(vendors, self.request, ShortVendorSerializer, {'naics': naics})
 
 
 class ListNaics(APIView):
@@ -265,7 +267,7 @@ class ListContracts(APIView):
             
             vendor = Vendor.objects.get(duns=duns)
             contract_serializer = get_page(self.get_results(vendor, 
-                                                            request.QUERY_PARAMS.get('naics', None)), 
+                                                            get_naics(request)), 
                                            request)
             
             fpds_load_results = FPDSLoad.objects.filter(vendor=vendor)
@@ -284,8 +286,8 @@ class ListContracts(APIView):
         contracts = Contract.objects.filter(vendor=vendor)
         
         if naics:
-            contracts = contracts.filter(NAICS=naics)
-
+            contracts = contracts.filter(NAICS=naics.code)
+        
         return get_ordered_results(contracts, self.request, ContractSerializer)
 
 
