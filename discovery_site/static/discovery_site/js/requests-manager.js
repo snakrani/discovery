@@ -20,6 +20,7 @@ var RequestsManager = {
 
         params['api_key'] = APIKEY;
 
+        console.log("URL: %s %o", url, params);
         return $.ajax({
               url: url,
               dataType: 'json',
