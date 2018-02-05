@@ -6,7 +6,10 @@ LayoutManager.initializers.vendor = function() {
 LayoutManager.sortClassMap = function() {
     return {
         'h_date_signed': 'date_signed',
+        'h_piid': 'piid',
         'h_agency': 'agency_name',
+        'h_type': 'pricing_type',
+        'h_location': 'place_of_performance,location',
         'h_value': 'obligated_amount',
         'h_status': 'status',
     };
@@ -50,8 +53,8 @@ LayoutManager.render = function(results) {
     }
 
     //contact info
-    $('.vendor_address1').html(results.sam_address ? results.sam_address : ' ');
-    $('.vendor_address2').html(results.sam_citystate ? results.sam_citystate : ' ');
+    $('.vendor_address1').html(results.sam_location ? results.sam_location.address : ' ');
+    $('.vendor_address2').html(results.sam_location ? results.sam_location.citystate : ' ');
     $('.vendor_poc_name').html(results.pm_name ? results.pm_name : ' ');
     $('.vendor_poc_phone').html(results.pm_phone ? results.pm_phone : ' ');
 
@@ -142,6 +145,7 @@ LayoutManager.renderRow = function(contract, i) {
     var piid = (contract['piid'] ? contract['piid'] : ' ');
     var agencyName = (contract['agency_name'] ? contract['agency_name'] : ' ');
     var pricingType = (contract['pricing_type'] ? contract['pricing_type'] : ' ');
+    var location = (contract['place_of_performance'] ? contract['place_of_performance']['location'] : ' ');
     var obligatedAmount = (contract['obligated_amount'] ? this.numberWithCommas(contract['obligated_amount']) : ' ');
     var status = (contract['status'] ? contract['status'] : ' ');
     var naics = (contract['NAICS'] ? contract['NAICS'] : ' ');
@@ -158,8 +162,8 @@ LayoutManager.renderRow = function(contract, i) {
     $contractRow.append('<td class="piid" scope="row">' + piid + '</td>');
     $contractRow.append('<td class="agency">' + this.toTitleCase(agencyName) + '</td>');
     $contractRow.append('<td class="type">' + pricingType + '</td>');
+    $contractRow.append('<td class="location">' + location + '</td>');
     $contractRow.append('<td class="value">' + obligatedAmount+ '</td>');
-    $contractRow.append('<td class="email_poc">' + pointOfContact + '</td>');
     $contractRow.append('<td class="status">' + status + '</td>');
     $contractRow.append('<td class="naics">' + naics + '</td>');
 
