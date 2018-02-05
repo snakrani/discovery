@@ -295,6 +295,10 @@ class FunctionalTests(LiveServerTestCase):
         driver = self.driver
         #open page for vendor with site in SAM data
         driver.get(self.base_url + '/vendor/786997739/?vehicle=oasissb&naics-code=541330&')
+        element = WebDriverWait(driver, 3).until(
+            EC.presence_of_all_elements_located((By.CLASS_NAME, "table_row_data"))
+        )
+        
         #make sure link to site is displayed and href is valid
         self.assertTrue(driver.find_element_by_id('vendor_site_link').is_displayed())
         self.assertEqual(driver.find_element_by_id('vendor_site_link').get_attribute("href"), 'http://www.ikun.com/')
