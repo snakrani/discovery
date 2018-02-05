@@ -12,6 +12,23 @@ from contract.models import Contract, FPDSLoad
 from vendors.models import Vendor, Naics, SetAside, SamLoad, Pool
 from api.serializers import VendorSerializer, NaicsSerializer, PoolSerializer, ShortVendorSerializer, ContractSerializer, Metadata, MetadataSerializer, ShortPoolSerializer
 
+import json
+
+
+def get_nested_value(data, keys):
+    try:
+        if keys and data:
+            element  = keys[0]
+            if element:
+                value = data.get(element)
+                return value if len(keys) == 1 else get_nested_value(value, keys[1:])
+    
+    except Exception:
+        pass
+    
+    return None
+
+
 def get_page(items, request):
     paginator = Paginator(items, min(int(request.QUERY_PARAMS.get('count', 100)), 100))
     items = paginator.page(request.QUERY_PARAMS.get('page', 1))
@@ -71,10 +88,10 @@ def get_ordered_results(queryset, request, serializer_class, context = {}):
     if request.QUERY_PARAMS.get('direction', None):
         descending = False if request.QUERY_PARAMS.get('direction', 'desc') == 'asc' else True
     
-    sort = serializer_class.sort_field(request.QUERY_PARAMS.get('sort', None))  
-
+    sort = serializer_class.sort_field(request.QUERY_PARAMS.get('sort', None))
+ 
     items = serializer_class(queryset, context=context)
-    items.data.sort(key=lambda k: k[sort], reverse=descending)
+    items.data.sort(key=lambda k: get_nested_value(k, sort), reverse=descending)
     return items.data
 
 
@@ -138,7 +155,7 @@ class ListVendors(APIView):
           - name: sort
             paramType: query
             required: false
-            description: A field to sort on. Choices are date, status, agency, and amount
+            description: A field to sort on. Can sort by any result field.  Nested fields can be sorted with keys separated by a comma.
             type: string
           - name: direction
             paramType: query
@@ -241,7 +258,7 @@ class ListContracts(APIView):
           - name: sort
             paramType: query
             required: false
-            description: A field to sort on. Choices are date, status, agency, and amount
+            description: A field to sort on. Can sort by any result field.  Nested fields can be sorted with keys separated by a comma.
             type: string
           - name: direction
             paramType: query
