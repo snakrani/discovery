@@ -29,7 +29,7 @@ class NaicsTest(TestCase):
 
 class VendorsTest(TestCase):
     """test for vendor API endpoint"""
-    fixtures = ['naics.json', 'setasides.json', 'pools.json', 'vendors.json', 'poolpiids.json', 'contracts.json']
+    fixtures = ['naics.json', 'setasides.json', 'pools.json', 'locations.json', 'vendors.json', 'poolpiids.json', 'placesofperformance.json', 'contracts.json']
  
     def setUp(self):
         self.c = Client()
@@ -130,7 +130,7 @@ class VendorsTest(TestCase):
 
 class VendorTest(TestCase):
     """ tests single vendor endpoint """
-    fixtures = ['setasides.json', 'vendors.json']
+    fixtures = ['setasides.json', 'locations.json', 'vendors.json', 'placesofperformance.json', 'contracts.json']
 
     def setUp(self):
         self.c = Client()
@@ -144,7 +144,7 @@ class VendorTest(TestCase):
 
 class ContractsTest(TestCase):
     """tests for Contracts API endpoint"""
-    fixtures = ['naics.json', 'setasides.json', 'pools.json', 'vendors.json', 'poolpiids.json', 'contracts.json']
+    fixtures = ['naics.json', 'setasides.json', 'pools.json', 'locations.json', 'vendors.json', 'poolpiids.json', 'placesofperformance.json', 'contracts.json']
 
     def setUp(self):
         self.c = Client()
@@ -192,7 +192,7 @@ class ContractsTest(TestCase):
 
 class MetadataTest(TestCase):
     """ Tests the metadata endpoint """
-    fixtures = ['samloads.json', 'setasides.json', 'vendors.json', 'fpdsloads.json']
+    fixtures = ['samloads.json', 'setasides.json', 'locations.json', 'vendors.json', 'fpdsloads.json']
 
     def setUp(self):
         self.c = Client()
