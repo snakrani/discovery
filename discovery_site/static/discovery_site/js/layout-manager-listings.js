@@ -68,7 +68,7 @@ LayoutManager.renderTable = function(results, pageNumber, itemsPerPage) {
 
 LayoutManager.renderRow = function(vendor, qs, i) {
     var location_col, num_contracts_col;
-    var $vendorRow = $('<tr></tr>');
+    var $vendorRow = $('<tr class="table_row_data"></tr>');
 
     var locationStr = (vendor.sam_location ? this.cleanLocation(vendor.sam_location.citystate) : ' ');
     var name_col = $('<td class="vendor_name" scope="row"></td>');

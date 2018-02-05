@@ -139,7 +139,7 @@ LayoutManager.renderButtonAndCSV = function(listType){
 };
 
 LayoutManager.renderRow = function(contract, i) {
-    var $contractRow = $('<tr></tr>');
+    var $contractRow = $('<tr class="table_row_data"></tr>');
 
     var displayDate = (contract['date_signed'] ? this.formatDate(this.createDate(contract['date_signed'])) : ' ');
     var piid = (contract['piid'] ? contract['piid'] : ' ');
