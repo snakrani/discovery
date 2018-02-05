@@ -5,7 +5,7 @@ from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 from django.utils import timezone
 
-from vendors.models import Vendor, Pool, SetAside, SamLoad
+from vendors.models import Vendor, Location, Pool, SetAside, SamLoad
 from discovery_site.utils import csv_memory
 
 import os
@@ -18,6 +18,7 @@ import StringIO
 import requests
 import json
 import csv
+import re
 
 
 warnings.filterwarnings('ignore')
@@ -48,13 +49,13 @@ def display_error(info):
     vendor_logger().debug("MAJOR ERROR -- PROCESS ENDING EXCEPTION -- {}".format(info))
 
 
-def get_value(obj, key, vendor):
+def get_value(obj, key, vendor, default=None):
     try:
         return obj[key]
 
     except KeyError as e:
         vendor_logger().debug("There was a key error on {}: {}".format(vendor.duns, e))
-        return None
+        return default
 
 
 def get_root_sam_url(duns_4):
@@ -143,10 +144,14 @@ class Command(BaseCommand):
             
             addr = get_value(reg, 'samAddress', vendor)
             if addr:
-                vendor.sam_address = get_value(addr, 'Line1', vendor)
-                vendor.sam_citystate = "{}, {} {}".format(get_value(addr, 'City', vendor),
-                                                          get_value(addr, 'stateorProvince', vendor),
-                                                          get_value(addr, 'Zip', vendor))
+                location, created = Location.objects.get_or_create(
+                    address = get_value(addr, 'Line1', vendor, '').strip().title(),
+                    city = get_value(addr, 'City', vendor, '').strip().title(),
+                    state = get_value(addr, 'stateorProvince', vendor, '').strip().upper(),
+                    zipcode = get_value(addr, 'Zip', vendor).strip(),
+                    congressional_district = re.sub(r'[^\d]+', '', get_value(reg, 'congressionalDistrict', vendor, ''))
+                )                
+                vendor.sam_location = location
 
             vendor.sam_url = get_value(reg, 'corporateUrl', vendor)
             if vendor.sam_url and vendor.sam_url[:3].lower() == "www" :
@@ -179,8 +184,11 @@ class Command(BaseCommand):
                 vendor.sam_expiration_date,
                 vendor.sam_exclusion,
                 vendor.cage,
-                vendor.sam_address,
-                vendor.sam_citystate,
+                vendor.sam_location.address,
+                vendor.sam_location.city,
+                vendor.sam_location.state,
+                vendor.sam_location.zipcode,
+                vendor.sam_location.congressional_district,
                 vendor.sam_url,
                 ":".join([str(sa.pk) for sa in vendor.setasides.all()])
             )
@@ -206,7 +214,10 @@ class Command(BaseCommand):
             'SAM Exclusion', 
             'Cage Code', 
             'SAM Address', 
-            'SAM Citystate', 
+            'SAM City',
+            'SAM State',
+            'SAM Zipcode',
+            'SAM Congressional District', 
             'SAM URL', 
             'Setasides'
         )
