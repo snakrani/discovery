@@ -113,6 +113,9 @@ $ scripts/gen-fixtures.sh  # Has no options
 # Helper script that fetches all production time period data into the Discovery application
 $ scripts/fetch-data.sh  # Has no options
 
+# Helper script that fetches updated fixture data (to standardize the data collection)
+$ scripts/fetch-fixture-data.sh  # Has no options
+
 # Load all classification information into Discovery (currently these are all local file based)
 # - included in fetch-data.sh
 $ manage.py load_categories  # Has no options
