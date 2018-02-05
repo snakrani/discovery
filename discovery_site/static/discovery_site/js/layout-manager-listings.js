@@ -6,7 +6,7 @@ LayoutManager.initializers.listings = function() {
 LayoutManager.sortClassMap = function() {
     return {
         'h_vendor_name': 'name',
-        'h_vendor_location': 'sam_citystate',
+        'h_vendor_location': 'sam_location,citystate',
         'h_naics_results': 'num_contracts',
     };
 };
@@ -69,7 +69,8 @@ LayoutManager.renderTable = function(results, pageNumber, itemsPerPage) {
 LayoutManager.renderRow = function(vendor, qs, i) {
     var location_col, num_contracts_col;
     var $vendorRow = $('<tr></tr>');
-    var locationStr = (vendor.sam_citystate ? this.cleanLocation(vendor.sam_citystate) : ' ');
+
+    var locationStr = (vendor.sam_location ? this.cleanLocation(vendor.sam_location.citystate) : ' ');
     var name_col = $('<td class="vendor_name" scope="row"></td>');
     var name_a = $('<a href="/vendor/' + vendor.duns + '/' + qs + '" class="link_style">' + vendor.name + '</a>');
     var vehicle = this.getQSByName(qs, 'vehicle');
