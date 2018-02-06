@@ -36,8 +36,10 @@ def update_contracts(period=520, load=520, count=500, pause=1):
     except DBMutexTimeoutError:
         print('update_contracts: Task completed but the lock timed out')
         
-    except Exception:
-        DBMutex.objects.get(lock_id=lock_id).delete()
+    except Exception as error:
+        print(error)
+        
+        DBMutex.objects.filter(lock_id=lock_id).delete()
         success = False
     
     sys.stdout = old_stdout
