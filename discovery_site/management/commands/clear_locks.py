@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from db_mutex.models import DBMutex
 
+import sys
 import logging
 import traceback
 import warnings
@@ -11,6 +12,7 @@ warnings.filterwarnings('ignore')
 
 def system_logger():
     return logging.getLogger('django')
+
 
 def display_error(info):
     print("MAJOR ERROR -- PROCESS ENDING EXCEPTION --  {}".format(info))
