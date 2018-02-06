@@ -61,7 +61,7 @@ class Command(BaseCommand):
 
 
     def load_temp_setasides(self):
-        reader = csv.reader(open(os.path.join(settings.BASE_DIR, 'vendors/docs/temp_8a_hubzone.csv')))
+        reader = csv.reader(open(os.path.join(settings.BASE_DIR, 'vendors/data/temp_8a_hubzone.csv')))
         
         for line in reader:
             try:
@@ -169,12 +169,12 @@ class Command(BaseCommand):
 
 
     def update_vehicle(self, vehicle, options):
-        vehicle_dir = os.path.join(settings.BASE_DIR, 'vendors/docs/{0}/pools'.format(vehicle))
+        vehicle_dir = os.path.join(settings.BASE_DIR, 'vendors/data/{0}'.format(vehicle))
         new_vendor_count = 0
         
         for pool_file in os.listdir(vehicle_dir):
             data_path = os.path.join(vehicle_dir, pool_file)
-            pool = re.match('Pool (.*).csv', pool_file).group(1)
+            pool = re.match('pool-(.*).csv', pool_file).group(1)
             
             new_vendor_count += self.update_pool(vehicle, pool, data_path, options)
         
