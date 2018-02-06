@@ -1,16 +1,9 @@
 [
 {
   "fields": {
-    "sam_load": "2018-02-05"
+    "sam_load": "2018-02-06"
   },
   "model": "vendors.samload",
   "pk": 1
-},
-{
-  "fields": {
-    "sam_load": "2018-02-05"
-  },
-  "model": "vendors.samload",
-  "pk": 2
 }
 ]
