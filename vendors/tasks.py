@@ -71,8 +71,9 @@ def update_vendors(vpp=0, tries=3, pause=1):
     except DBMutexTimeoutError:
         print('update_vendors: Task completed but the lock timed out')
         
-    except Exception:
-        DBMutex.objects.get(lock_id=lock_id).delete()
+    except Exception as error:
+        print(error)
+        DBMutex.objects.filter(lock_id=lock_id).delete()
         success = False
    
     sys.stdout = old_stdout
