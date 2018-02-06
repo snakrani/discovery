@@ -53,7 +53,7 @@ class FunctionalTests(LiveServerTestCase):
         driver = self.driver
         driver.get(self.base_url + "/results?vehicle=oasissb&naics-code=541990&")
         driver.find_element_by_id("vet").click()
-        element = WebDriverWait(driver, 3).until(
+        element = WebDriverWait(driver, 5).until(
             EC.text_to_be_present_in_element((By.ID, "your_filters"), 'Veteran Owned')
             )
         self.assertEqual('Veteran Owned', driver.find_element_by_id('your_filters').text)
@@ -98,7 +98,7 @@ class FunctionalTests(LiveServerTestCase):
         #load search results
         driver.get(self.base_url + "/results?vehicle=oasissb&naics-code=541330&setasides=A5&pool=1_SB")
         #make sure selected naics is described above search results
-        element = WebDriverWait(driver, 3).until(
+        element = WebDriverWait(driver, 5).until(
             EC.text_to_be_present_in_element((By.ID, "your_filters"), 'Veteran Owned')
             )        
         #make sure selected filters are described above search results
@@ -155,6 +155,10 @@ class FunctionalTests(LiveServerTestCase):
         driver = self.driver
         #load vendor page with showall=true
         driver.get(self.base_url + "/vendor/786997739/?vehicle=oasissb&naics-code=541330&showall=true")
+        element = WebDriverWait(driver, 5).until(
+            EC.presence_of_all_elements_located((By.CLASS_NAME, "table_row_data"))
+        )
+        
         #make sure text of all contracts button is 'All Contracts'
         all_contracts_button = driver.find_element_by_id('all_contracts_button')
         self.assertEqual("All Contracts", all_contracts_button.text)
@@ -162,7 +166,7 @@ class FunctionalTests(LiveServerTestCase):
         self.assertEqual("NAICS 541330", driver.find_element_by_id('naics_contracts_button').text)
         #click and make sure all contracts button is active
         all_contracts_button.click()
-        self.assertTrue("active" in all_contracts_button.get_attribute("class"))
+        self.assertTrue("contracts_button_active" in all_contracts_button.get_attribute("class"))
 
     def test_naics_contracts_button(self):
         driver = self.driver
@@ -295,7 +299,7 @@ class FunctionalTests(LiveServerTestCase):
         driver = self.driver
         #open page for vendor with site in SAM data
         driver.get(self.base_url + '/vendor/786997739/?vehicle=oasissb&naics-code=541330&')
-        element = WebDriverWait(driver, 3).until(
+        element = WebDriverWait(driver, 5).until(
             EC.presence_of_all_elements_located((By.CLASS_NAME, "table_row_data"))
         )
         
@@ -304,6 +308,10 @@ class FunctionalTests(LiveServerTestCase):
         self.assertEqual(driver.find_element_by_id('vendor_site_link').get_attribute("href"), 'http://www.ikun.com/')
         #open vendor with no site in SAM data
         driver.get(self.base_url + '/vendor/160062311/?vehicle=oasissb&naics-code=541330&')
+        element = WebDriverWait(driver, 5).until(
+            EC.presence_of_all_elements_located((By.CLASS_NAME, "table_row_data"))
+        )
+        
         #make sure link to site is NOT displayed
         self.assertFalse(driver.find_element_by_id('vendor_site_link').is_displayed())
 
@@ -311,7 +319,7 @@ class FunctionalTests(LiveServerTestCase):
         driver = self.driver
         #open page for vendor list in OASIS Unrestricted
         driver.get(self.base_url + '/results?vehicle=oasis&naics-code=541618&')
-        element = WebDriverWait(driver, 3).until(
+        element = WebDriverWait(driver, 5).until(
             EC.presence_of_all_elements_located((By.CLASS_NAME, "vendor_name"))
         )   
         
@@ -333,7 +341,7 @@ class FunctionalTests(LiveServerTestCase):
         driver = self.driver
         #open a search results page
         driver.get(self.base_url + '/results?vehicle=oasissb&naics-code=541618&')
-        element = WebDriverWait(driver, 3).until(
+        element = WebDriverWait(driver, 5).until(
             EC.presence_of_all_elements_located((By.CLASS_NAME, "vendor_name"))
         )  
         
@@ -345,10 +353,10 @@ class FunctionalTests(LiveServerTestCase):
     def test_contracts_sorting(self):
         driver = self.driver
         driver.get(self.base_url + '/vendor/197503212/?vehicle=oasissb&naics-code=541330&')
-        element = WebDriverWait(driver, 3).until(
+        element = WebDriverWait(driver, 5).until(
             EC.presence_of_element_located((By.CLASS_NAME, "h_value"))
         )
-        second_row = driver.find_element_by_xpath('//*[@id="ch_table"]/table/tbody/tr[3]')
+        second_row = driver.find_element_by_xpath('//*[@id="ch_table"]/table/tbody/tr[4]')
         driver.find_element_by_class_name("h_value").click()
     
         def rows_are_stale():
@@ -373,7 +381,7 @@ class FunctionalTests(LiveServerTestCase):
         driver = self.driver
         #open a vendor page where vendor has more than 100 search results
         driver.get(self.base_url + '/vendor/007901598/?vehicle=oasis&')
-        element = WebDriverWait(driver, 3).until(
+        element = WebDriverWait(driver, 5).until(
             EC.presence_of_element_located((By.CLASS_NAME, "agency"))
         )
         #no more than 100 contracts are listed
