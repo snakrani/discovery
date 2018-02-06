@@ -18,7 +18,7 @@ src/
 docker/
 docker-compose.yml
 celerybeat.pid
-docs/
+/docs/
 compliance/
 opencontrols/
 opencontrol.yml
