@@ -6,8 +6,8 @@ from django.core.management import call_command
 from django.conf import settings
 from pyfpds import Contracts
 
-from vendors.models import Vendor
-from contract.models import Contract, FPDSLoad
+from vendors.models import Vendor, Location
+from contract.models import Contract, PlaceOfPerformance, FPDSLoad
 from contract import catch_key_error
 from discovery_site.utils import csv_memory
 
@@ -189,10 +189,54 @@ def get_psc(award):
     return award['productOrServiceInformation']['productOrServiceCode']['#text']
 
 
+@catch_key_error
+def get_phone(award):
+    return "{}-{}-{}".format(
+        award['vendor']['vendorSiteDetails']['vendorLocation']['phoneNo'][:3],
+        award['vendor']['vendorSiteDetails']['vendorLocation']['phoneNo'][3:6],
+        award['vendor']['vendorSiteDetails']['vendorLocation']['phoneNo'][6:]
+    )
+
+
+@catch_key_error
+def get_location(award):
+    loc = award['vendor']['vendorSiteDetails']['vendorLocation']
+    return {
+        'address': loc['streetAddress'].strip().title(),
+        'city': loc['city'].strip().title(),
+        'state': loc['state']['#text'].strip().upper(),
+        'zipcode': loc['ZIPCode'].strip()[:5],
+        'congressional_district': '{:02d}'.format(int(loc['congressionalDistrictCode']))
+    }
+
+
+@catch_key_error
+def get_place_of_performance(award):
+    pop = award['placeOfPerformance']['principalPlaceOfPerformance']
+    info = {
+        'country_code': pop['countryCode']['#text'].strip().upper(),
+        'country_name': pop['countryCode']['@name'].strip().title(),
+        'state': None,
+        'zipcode': None
+    }
+    
+    if 'stateCode' in pop:
+        info['state'] = pop['stateCode']['#text'].strip().upper()
+        
+    if 'placeOfPerformanceZIPCode' in award['placeOfPerformance']:
+        info['zipcode'] = award['placeOfPerformance']['placeOfPerformanceZIPCode']['#text'].strip()[:5]
+        
+    return info
+
+
 def init_load(options):
     if options['reinit']:
-        FPDSLoad.objects.all().delete()
-        Contract.objects.all().delete()
+        if options['id']:
+            FPDSLoad.objects.filter(vendor=options['id']).delete()
+            Contract.objects.filter(vendor=options['id']).delete()
+        else:
+            FPDSLoad.objects.all().delete()
+            Contract.objects.all().delete()
         
 
 def last_load(vendor, options):
@@ -258,7 +302,9 @@ class Command(BaseCommand):
             return None, {}
         
         piid = get_piid(award_id)
-    
+        location = get_location(award)
+        pop = get_place_of_performance(award)
+        
         record = {
             'modified_date': last_modified.strftime("%Y-%m-%d %H:%M:%S"),
             'mod_number': get_mod(award_id), 
@@ -278,7 +324,21 @@ class Command(BaseCommand):
             'type_of_contract_pricing_id': get_contract_pricing_id(award),
             'naics' : get_naics(award),
             'psc': get_psc(award),
-        }                        
+            'vendor_phone': get_phone(award)
+        }
+        if location:
+            record['vendor_address'] = location['address']
+            record['vendor_city'] = location['city']
+            record['vendor_state'] = location['state']
+            record['vendor_zipcode'] = location['zipcode']
+            record['vendor_congressional_district'] = location['congressional_district']
+        
+        if pop:
+            record['pop_country_code'] = pop['country_code']
+            record['pop_country_name'] = pop['country_name']
+            record['pop_state'] = pop['state']
+            record['pop_zipcode'] = pop['zipcode']
+        
         return piid, record
     
     
@@ -317,6 +377,27 @@ class Command(BaseCommand):
             if poc:
                 con.point_of_contact = poc
             
+            con.vendor_phone = mod.get('vendor_phone')
+            
+            if mod.get('vendor_address'):
+                location, created = Location.objects.get_or_create(
+                    address = mod.get('vendor_address'),
+                    city = mod.get('vendor_city'),
+                    state = mod.get('vendor_state'),
+                    zipcode = mod.get('vendor_zipcode'),
+                    congressional_district = mod.get('vendor_congressional_district')
+                )                
+                con.vendor_location = location
+            
+            if mod.get('pop_country_code'):
+                pop, created = PlaceOfPerformance.objects.get_or_create(
+                    country_code = mod.get('pop_country_code'),
+                    country_name = mod.get('pop_country_name'),
+                    state = mod.get('pop_state'),
+                    zipcode = mod.get('pop_zipcode')
+                )
+                con.place_of_performance = pop
+            
             #ADD NAICS -- need to add other naics as objects to use foreignkey
             con.PSC = mod.get('psc')
             con.NAICS = mod.get('naics')
@@ -325,14 +406,12 @@ class Command(BaseCommand):
             ne = mod.get('number_of_employees') or None
             
             if ar:
-                v.annual_revenue = int(ar)
+                con.annual_revenue = int(ar)
             if ne:
-                v.number_of_employees = int(ne)
+                con.number_of_employees = int(ne)
         
         con.obligated_amount = total
-        con.save()
-        
-        return records    
+        con.save()  
     
     
     def get_vendor_ids(self, starting_id=1):
@@ -395,8 +474,7 @@ class Command(BaseCommand):
         
             self.update_contract(piid, records, vendor)
                 
-        #save updates to annual revenue, number of employees
-        vendor.save()
+        #save load time
         create_load(vendor, load_to)
             
         print(" --- completed with: {} PIID(s), {} contract(s) processed".format(len(by_piid.keys()), contracts_processed))
@@ -430,6 +508,8 @@ class Command(BaseCommand):
         signal.signal(signal.SIGSEGV, crash_handler) #catch segmentation faults
         
         try:
+            init_load(options)
+            
             if options['id'] > 0:
                 try:
                     FPDSLoad.objects.get(id=options['id']).delete()
@@ -443,9 +523,6 @@ class Command(BaseCommand):
             
                 vendor_ids = self.get_vendor_ids(vid)
                 all_vendor_ids = self.get_vendor_ids() if vid > 1 else vendor_ids
-            
-                #process vendor contracts
-                init_load(options)
             
                 #repeat every incrementally until end
                 first_date = self.date_now - timedelta(weeks = options['period'])

@@ -1,15 +1,21 @@
 from rest_framework import serializers, pagination
-from vendors.models import Vendor, Pool, Naics, SetAside, SamLoad
-from contract.models import Contract, FPDSLoad
+from vendors.models import Vendor, Location, Pool, Naics, SetAside, SamLoad
+from contract.models import Contract, PlaceOfPerformance, FPDSLoad
+
+import json
 
 
 class OrderedSerializer(serializers.ModelSerializer):
     @classmethod
-    def sort_field(cls, sort): 
-        if sort in cls.Meta.fields:
-            return sort
-        else:
-            return cls.default_sort()
+    def sort_field(cls, sort):
+        if sort: 
+            if isinstance(sort, basestring):
+                sort = sort.split(',')
+             
+            if sort[0] in cls.Meta.fields:
+                return sort
+        
+        return [cls.default_sort()]
 
     @classmethod
     def default_sort(cls):
@@ -45,13 +51,34 @@ class ShortPoolSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'number', 'vehicle')
 
 
+class LocationSerializer(serializers.ModelSerializer):
+    citystate = serializers.SerializerMethodField('get_citystate')
+    
+    class Meta:
+        model = Location
+        fields = ('address', 'city', 'state', 'zipcode', 'congressional_district', 'citystate')
+    
+    def get_citystate(self, item):
+        return "{}, {} {}".format(item.city, item.state, item.zipcode)
+
+
 class VendorSerializer(OrderedSerializer):
     setasides = SetAsideSerializer(many=True)
     pools = ShortPoolSerializer(many=True)
+    sam_location = LocationSerializer(many=False)
+    
+    annual_revenue = serializers.SerializerMethodField('get_annual_revenue')
+    number_of_employees = serializers.SerializerMethodField('get_number_of_employees')
     
     class Meta:
         model = Vendor
-        fields = ('id', 'name', 'duns', 'duns_4', 'cage', 'sam_address', 'sam_citystate', 'pm_name', 'pm_email', 'pm_phone', 'pools', 'setasides', 'sam_status', 'sam_expiration_date', 'sam_activation_date', 'sam_exclusion', 'sam_url', 'annual_revenue', 'number_of_employees')
+        fields = ('id', 'name', 'duns', 'duns_4', 'cage', 'sam_location', 'pm_name', 'pm_email', 'pm_phone', 'pools', 'setasides', 'sam_status', 'sam_expiration_date', 'sam_activation_date', 'sam_exclusion', 'sam_url', 'annual_revenue', 'number_of_employees')
+    
+    def get_annual_revenue(self, item):
+        return Contract.objects.filter(vendor=item).latest('date_signed').annual_revenue
+    
+    def get_number_of_employees(self, item):
+        return Contract.objects.filter(vendor=item).latest('date_signed').number_of_employees
     
     @classmethod
     def default_sort(cls):
@@ -64,11 +91,12 @@ class VendorSerializer(OrderedSerializer):
 
 class ShortVendorSerializer(OrderedSerializer):
     setasides = SetAsideSerializer(many=True)
-    num_contracts = serializers.SerializerMethodField('get_vendor_contracts')    
+    num_contracts = serializers.SerializerMethodField('get_vendor_contracts')
+    sam_location = LocationSerializer(many=False)    
 
     class Meta:
         model = Vendor
-        fields = ('id', 'name', 'duns', 'duns_4', 'sam_address', 'sam_citystate',
+        fields = ('id', 'name', 'duns', 'duns_4', 'sam_location',
                   'setasides', 'sam_status', 'sam_exclusion', 'sam_url', 'num_contracts')
 
     def get_vendor_contracts(self, item):
@@ -82,16 +110,32 @@ class ShortVendorSerializer(OrderedSerializer):
         return 'num_contracts' 
 
 
+class PlaceOfPerformanceSerializer(serializers.ModelSerializer):
+    location = serializers.SerializerMethodField('get_location')
+    
+    class Meta:
+        model = PlaceOfPerformance
+        fields = ('country_code', 'country_name', 'state', 'zipcode', 'location')
+    
+    def get_location(self, item):
+        state = item.state if item.state else ''
+        return "{} {}".format(item.country_name, state)
+
+
 class ContractSerializer(OrderedSerializer):
     
     pricing_type = serializers.Field(source='get_pricing_type_display')
     piid = serializers.SerializerMethodField('split_piid')
     status = serializers.SerializerMethodField('get_status')
     
+    vendor_location = LocationSerializer(many=False)
+    place_of_performance = PlaceOfPerformanceSerializer(many=False)   
+    
     class Meta:
         model = Contract
         fields = ('piid', 'agency_name', 'NAICS', 'date_signed', 'status', 'obligated_amount', 
-                  'point_of_contact', 'pricing_type')
+                  'point_of_contact', 'pricing_type', 'vendor_location', 'place_of_performance',
+                  'annual_revenue', 'number_of_employees')
         
     def split_piid(self, item):
         if '_' in item.piid:
@@ -123,5 +167,3 @@ class Metadata(object):
 class MetadataSerializer(serializers.Serializer):
     sam_load_date = serializers.DateField()
     fpds_load_date = serializers.DateField()
-    
-

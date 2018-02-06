@@ -1465,17 +1465,16 @@ img.green_dot {
     text-align: left;
     padding-left: 7px;
     padding: 10px;
-
 }
 
 #ch_table th.h_piid {
-    width: 120px;
+    width: 200px;
     text-align: left;
     padding-left: 10px;
 }
 
 #ch_table th.h_agency {
-    width: 190px;
+    width: 245px;
     text-align: left;
     padding-left: 10px;
 }
@@ -1486,14 +1485,14 @@ img.green_dot {
     padding-left: 10px;
 }
 
-#ch_table th.h_value {
-    width: 112px;
+#ch_table th.h_location {
+    width: 150px;
     text-align: left;
     padding-left: 10px;
 }
 
-#ch_table th.h_email_poc {
-    width: 259px;
+#ch_table th.h_value {
+    width: 112px;
     text-align: left;
     padding-left: 10px;
 }
@@ -1510,7 +1509,7 @@ img.green_dot {
 }
 
 #ch_table th.h_naics {
-    width: 70px;
+    width: 80px;
     border: 0 solid #e5e5e5;
     text-align: center;
     border-width: 0 1px 1px 1px;

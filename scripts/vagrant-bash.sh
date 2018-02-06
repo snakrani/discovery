@@ -21,8 +21,8 @@ then
   # Refresh Docker Compose cluster
   if which docker-compose >/dev/null
   then
-    # Ensure Scheduler can start if we have run before (Scheduler checks for PID file)
-    docker-compose stop scheduler
+    # Remove any previously running containers and start fresh for the session
+    docker-compose rm --stop --force web scheduler worker
     rm -f logs/celerybeat.pid
     
     # Ensure all containers are up and running (if possible)

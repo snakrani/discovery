@@ -36,8 +36,8 @@ rm -Rf /venv
 #run Docker applications
 echo "> Running all Docker services"
 
-# Ensure Scheduler can start if we have run before (Scheduler checks for PID file)
-docker-compose stop scheduler
+# Remove any previously running containers and start fresh
+docker-compose rm --stop --force web scheduler worker
 rm -f "$PROJ_DIR/logs/celerybeat.pid"
 
 docker-compose build    
