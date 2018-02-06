@@ -116,7 +116,7 @@ class VendorsTest(TestCase):
     def test_default_sort(self):
         resp = self.c.get(self.path, {'format': 'json', 'vehicle': 'oasis'})
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(resp.data['page']['results'][0]['num_contracts'], 502)
+        self.assertEqual(resp.data['page']['results'][0]['num_contracts'], 500)
 
     def test_sort_with_all_params(self):
         resp = self.c.get(self.path, {'format': 'json', 'vehicle': 'oasis', 'sort': 'name', 'direction': 'asc'})
@@ -160,7 +160,7 @@ class ContractsTest(TestCase):
         self.assertEqual(len(resp.data['page']['results']), 100)
         self.assertEqual(resp.data['page']['previous'], None)
         self.assertTrue('page=2' in resp.data['page']['next'])
-        self.assertEqual(resp.data['num_results'], 502)
+        self.assertEqual(resp.data['num_results'], 500)
     
     def test_custom_pagination(self):
         resp = self.c.get(self.path, {'duns': '007901598', 'count': 25})
@@ -168,7 +168,7 @@ class ContractsTest(TestCase):
         self.assertEqual(len(resp.data['page']['results']), 25)
         self.assertEqual(resp.data['page']['previous'], None)
         self.assertTrue('page=2' in resp.data['page']['next'])
-        self.assertEqual(resp.data['num_results'], 502)
+        self.assertEqual(resp.data['num_results'], 500)
 
     def test_naics_filter(self):
         resp = self.c.get(self.path, {'duns': '807990382', 'naics': '541611'})
