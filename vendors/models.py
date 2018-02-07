@@ -1,8 +1,10 @@
 from django.db import models
 
 VEHICLE_CHOICES = (
-    ('OASISSB', 'OASIS Small Business'),
-    ('OASIS', 'OASIS Unrestricted')
+    ('OASIS_SB', 'OASIS Small Business'),
+    ('OASIS', 'OASIS Unrestricted'),
+    ('HCATS_SB', 'HCATS Small Business'),
+    ('HCATS', 'HCATS Unrestricted')
 )
 
 STATUS_CHOICES = (
@@ -39,7 +41,7 @@ class Pool(models.Model):
     id = models.CharField(primary_key=True, max_length=128)
     name = models.CharField(max_length=128, default='Pool')
     number = models.CharField(max_length=128)
-    vehicle = models.CharField(choices=VEHICLE_CHOICES, max_length=7)
+    vehicle = models.CharField(choices=VEHICLE_CHOICES, max_length=20)
     naics = models.ManyToManyField(Naics)
     threshold = models.CharField(null=True, max_length=128)
 
@@ -57,7 +59,7 @@ class Location(models.Model):
     congressional_district = models.CharField(null=True, max_length=50)
     
     def __str__(self):
-        return "{}, {}".format(self.address, self.citystate)
+        return "{}, {}, {} {}".format(self.address, self.city, self.state, self.zipcode)
 
 
 class Vendor(models.Model):
@@ -65,7 +67,15 @@ class Vendor(models.Model):
     duns = models.CharField(max_length=9, unique=True)
     duns_4 = models.CharField(max_length=13, unique=True)
     cage = models.CharField(max_length=15, null=True)
+
+    sam_status = models.CharField(null=True, max_length=128)
+    sam_activation_date = models.DateTimeField(null=True)
+    sam_expiration_date = models.DateTimeField(null=True)
+    sam_exclusion = models.NullBooleanField(null=True)
     
+    sam_url = models.URLField(null=True)
+    sam_location = models.ForeignKey(Location, null=True)
+            
     cm_name = models.CharField(null=True, max_length=128)
     cm_email = models.CharField(null=True, max_length=128)
     cm_phone = models.CharField(null=True, max_length=128)
@@ -74,14 +84,6 @@ class Vendor(models.Model):
     pm_email = models.CharField(null=True, max_length=128)
     pm_phone = models.CharField(null=True, max_length=128)
   
-    sam_status = models.CharField(null=True, max_length=128)
-    sam_activation_date = models.DateTimeField(null=True)
-    sam_expiration_date = models.DateTimeField(null=True)
-    sam_exclusion = models.NullBooleanField(null=True)
-    
-    sam_location = models.ForeignKey(Location, null=True)
-    sam_url = models.URLField(null=True)
-    
     pools = models.ManyToManyField(Pool, through='PoolPIID')
     setasides = models.ManyToManyField(SetAside, blank=True)
   
