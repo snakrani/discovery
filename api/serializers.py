@@ -1,5 +1,5 @@
 from rest_framework import serializers, pagination
-from vendors.models import Vendor, Location, Pool, Naics, SetAside, SamLoad
+from vendors.models import Vendor, Manager, Location, Pool, Naics, SetAside, SamLoad
 from contract.models import Contract, PlaceOfPerformance, FPDSLoad
 
 import json
@@ -29,26 +29,27 @@ class OrderedSerializer(serializers.ModelSerializer):
 class SetAsideSerializer(serializers.ModelSerializer):
     class Meta:
         model = SetAside
-        fields = ('code', 'abbreviation')
+        fields = ('code', 'name', 'description')
 
 
 class NaicsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Naics
-        fields = ('code', 'description', 'short_code')
+        fields = ('code', 'root_code', 'description')
 
 
 class PoolSerializer(serializers.ModelSerializer):
     naics = NaicsSerializer(many=True)
+    
     class Meta:
         model = Pool
-        fields = ('id', 'name', 'number', 'vehicle', 'naics', 'threshold')
+        fields = ('id', 'name', 'number', 'vehicle', 'threshold', 'naics')
 
 
 class ShortPoolSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pool
-        fields = ('id', 'name', 'number', 'vehicle')
+        fields = ('name', 'number', 'vehicle')
 
 
 class LocationSerializer(serializers.ModelSerializer):
@@ -62,17 +63,34 @@ class LocationSerializer(serializers.ModelSerializer):
         return "{}, {} {}".format(item.city, item.state, item.zipcode)
 
 
+class ManagerSerializer(serializers.ModelSerializer):
+    phone = serializers.SerializerMethodField('get_phone')
+    email = serializers.SerializerMethodField('get_email')
+    
+    class Meta:
+        model = Manager
+        fields = ('name', 'type', 'phone', 'email')
+        
+    def get_phone(self, item):
+        return item.phone()
+    
+    def get_email(self, item):
+        return item.email()
+
+
 class VendorSerializer(OrderedSerializer):
     setasides = SetAsideSerializer(many=True)
     pools = ShortPoolSerializer(many=True)
     sam_location = LocationSerializer(many=False)
+    
+    managers = ManagerSerializer(many=True)
     
     annual_revenue = serializers.SerializerMethodField('get_annual_revenue')
     number_of_employees = serializers.SerializerMethodField('get_number_of_employees')
     
     class Meta:
         model = Vendor
-        fields = ('id', 'name', 'duns', 'duns_4', 'cage', 'sam_location', 'pm_name', 'pm_email', 'pm_phone', 'pools', 'setasides', 'sam_status', 'sam_expiration_date', 'sam_activation_date', 'sam_exclusion', 'sam_url', 'annual_revenue', 'number_of_employees')
+        fields = ('id', 'name', 'duns', 'duns_4', 'cage', 'sam_status', 'sam_expiration_date', 'sam_activation_date', 'sam_exclusion', 'sam_url', 'sam_location', 'managers', 'pools', 'setasides', 'annual_revenue', 'number_of_employees')
     
     def get_annual_revenue(self, item):
         return Contract.objects.filter(vendor=item).latest('date_signed').annual_revenue
@@ -94,10 +112,12 @@ class ShortVendorSerializer(OrderedSerializer):
     num_contracts = serializers.SerializerMethodField('get_vendor_contracts')
     sam_location = LocationSerializer(many=False)    
 
+    managers = ManagerSerializer(many=True)
+    
     class Meta:
         model = Vendor
-        fields = ('id', 'name', 'duns', 'duns_4', 'sam_location',
-                  'setasides', 'sam_status', 'sam_exclusion', 'sam_url', 'num_contracts')
+        fields = ('id', 'name', 'duns', 'duns_4', 'sam_status', 'sam_exclusion', 'sam_url',
+                  'sam_location', 'managers', 'setasides', 'num_contracts')
 
     def get_vendor_contracts(self, item):
         if 'naics' in self.context and self.context['naics']:
