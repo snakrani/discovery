@@ -60,26 +60,6 @@ class Command(BaseCommand):
                   + (make_option('--tries', action='store', type=int, dest='tries', default=3, help="Number of tries to query the SAM API before exiting"), )
 
 
-    def load_temp_setasides(self):
-        reader = csv.reader(open(os.path.join(settings.BASE_DIR, 'vendors/data/temp_8a_hubzone.csv')))
-        
-        for line in reader:
-            try:
-                v = Vendor.objects.get(duns=line[1])      
-            except Vendor.DoesNotExist:
-                print("Could not find vendor: {}".format(line[1]))
-                return
-
-            try:
-                sa = SetAside.objects.get(code=line[2])
-            except SetAside.DoesNotExist:
-                print("Could not find setaside: {}".format(line[2]))
-                return
-
-            if sa not in v.setasides.all():
-                v.setasides.add(sa)
-
-
     def update_vendor(self, record, pool_data, options):
         logger = vendor_logger()
         
@@ -203,11 +183,7 @@ class Command(BaseCommand):
 
             #load extra SAM fields
             call_command('load_sam', **options)
-            
-            #load extra setaside information after vendors are initialized?
-            #TODO: need to figure out what this is about.
-            self.load_temp_setasides()
-        
+
         except Exception as e:
             display_error(e)
             raise
