@@ -44,7 +44,7 @@ def get_naics(request):
     naics = request.QUERY_PARAMS.get('naics', None)
     
     if naics and naics != 'all':
-        return Naics.objects.get(short_code=naics)
+        return Naics.objects.get(code=naics)
     
     return None
 
@@ -124,14 +124,14 @@ class ListVendors(APIView):
 
     OASIS pools are groupings of NAICS codes that have the same small business size standard. Because contracts solicited to OASIS vendors can only be issued to one pool, much of the data is presented as part of a pool grouping. Using the NAICS code is a shortcut, so that you don't have to explicitly map the NAICS code to a pool in OASIS yourself.
     
-    Vendors can also be filtered by a particular setaside. Valid values for the setasides are two-character codes which include:
+    Vendors can also be filtered by a particular setaside. Valid values for the setasides are short codes which include:
 
-    * A6 (8(a))
-    * XX (Hubzone)
-    * QF (service disabled veteran owned)
-    * A2 (women owned)
-    * A5 (veteran owned)
-    * 27 (small disadvantaged business).
+    * 8(A) (8(a))
+    * HubZ (Hubzone)
+    * SDVO (service disabled veteran owned)
+    * WO (women owned)
+    * VO (veteran owned)
+    * SDB (small disadvantaged business).
 
     ---
     GET:
@@ -149,7 +149,7 @@ class ListVendors(APIView):
           - name: setasides  
             paramType: query
             allowMultiple: true
-            description: a comma delimited list of two character setaside codes to filter by.  Ex. setasides=A6,A5  will filter by 8a and veteran owned business.
+            description: a comma delimited list of two character setaside identifiers to filter by.  Ex. setasides=8(A),VO will filter by 8a and veteran owned businesses.
             required: false
             type: string
           - name: sort
