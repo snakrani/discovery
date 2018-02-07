@@ -40,9 +40,9 @@ SAM_API_URL = "https://api.data.gov/sam/v1/registrations/"
 SAM_API_KEY = cloud_config('SAM_API_KEY', '')
 
 VEHICLES = (
-    'oasis-sb', 
+    'oasis_sb', 
     'oasis', 
-    'hcats-sb', 
+    'hcats_sb', 
     'hcats'
 )
 
