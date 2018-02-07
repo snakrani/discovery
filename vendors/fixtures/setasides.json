@@ -1,9 +1,9 @@
 [
 {
   "fields": {
-    "abbreviation": "VO",
     "code": "A5",
-    "short_name": "Veteran Owned",
+    "name": "VO",
+    "description": "Veteran Owned",
     "far_order": 5
   },
   "model": "vendors.setaside",
@@ -11,9 +11,9 @@
 },
 {
   "fields": {
-    "abbreviation": "SDVO",
     "code": "QF",
-    "short_name": "Service Disabled Vet Owned",
+    "name": "SDVO",
+    "description": "Service Disabled Vet Owned",
     "far_order": 3
   },
   "model": "vendors.setaside",
@@ -21,9 +21,9 @@
 },
 {
   "fields": {
-    "abbreviation": "WO",
     "code": "A2",
-    "short_name": "Woman Owned",
+    "name": "WO",
+    "description": "Woman Owned",
     "far_order": 4
   },
   "model": "vendors.setaside",
@@ -31,32 +31,32 @@
 },
 {
   "fields": {
-    "abbreviation": "SDB",
     "code": "27",
-    "short_name": "Small Disadvantaged Business",
+    "name": "SDB",
+    "description": "Small Disadvantaged Business",
     "far_order": 6
   },
   "model": "vendors.setaside",
-  "pk": 15
+  "pk": 4
 },
 {
   "fields": {
-    "abbreviation": "8(A)",
     "code": "A6",
-    "short_name": "8(A)",
+    "name": "8(A)",
+    "description": "8(A)",
     "far_order": 1
   },
   "model": "vendors.setaside",
-  "pk": 16
+  "pk": 5
 },
 {
   "fields": {
-    "abbreviation": "HubZ",
     "code": "XX",
-    "short_name": "HUBZone",
+    "name": "HubZ",
+    "description": "HUBZone",
     "far_order": 2
   },
   "model": "vendors.setaside",
-  "pk": 18
+  "pk": 6
 }
 ]
