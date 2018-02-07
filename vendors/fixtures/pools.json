@@ -2,7 +2,7 @@
 {
   "fields": {
     "threshold": "$14 million",
-    "vehicle": "OASISSB",
+    "vehicle": "OASIS_SB",
     "naics": [
       1,
       2,
@@ -30,7 +30,7 @@
     "number": "1"
   },
   "model": "vendors.pool",
-  "pk": "1_SB"
+  "pk": "OASIS_SB_1"
 },
 {
   "fields": {
@@ -63,12 +63,12 @@
     "number": "1"
   },
   "model": "vendors.pool",
-  "pk": "1_UR"
+  "pk": "OASIS_1"
 },
 {
   "fields": {
     "threshold": "$19 million",
-    "vehicle": "OASISSB",
+    "vehicle": "OASIS_SB",
     "naics": [
       22,
       23,
@@ -80,7 +80,7 @@
     "number": "2"
   },
   "model": "vendors.pool",
-  "pk": "2_SB"
+  "pk": "OASIS_SB_2"
 },
 {
   "fields": {
@@ -97,12 +97,12 @@
     "number": "2"
   },
   "model": "vendors.pool",
-  "pk": "2_UR"
+  "pk": "OASIS_2"
 },
 {
   "fields": {
     "threshold": "$35.5 million",
-    "vehicle": "OASISSB",
+    "vehicle": "OASIS_SB",
     "naics": [
       27,
       28,
@@ -112,7 +112,7 @@
     "number": "3"
   },
   "model": "vendors.pool",
-  "pk": "3_SB"
+  "pk": "OASIS_SB_3"
 },
 {
   "fields": {
@@ -127,12 +127,12 @@
     "number": "3"
   },
   "model": "vendors.pool",
-  "pk": "3_UE"
+  "pk": "OASIS_3"
 },
 {
   "fields": {
     "threshold": "500 Employee",
-    "vehicle": "OASISSB",
+    "vehicle": "OASIS_SB",
     "naics": [
       30,
       31
@@ -141,7 +141,7 @@
     "number": "4"
   },
   "model": "vendors.pool",
-  "pk": "4_SB"
+  "pk": "OASIS_SB_4"
 },
 {
   "fields": {
@@ -155,12 +155,12 @@
     "number": "4"
   },
   "model": "vendors.pool",
-  "pk": "4_UR"
+  "pk": "OASIS_4"
 },
 {
   "fields": {
     "threshold": "1000 Employee",
-    "vehicle": "OASISSB",
+    "vehicle": "OASIS_SB",
     "naics": [
       32
     ],
@@ -168,7 +168,7 @@
     "number": "5A"
   },
   "model": "vendors.pool",
-  "pk": "5A_SB"
+  "pk": "OASIS_SB_5A"
 },
 {
   "fields": {
@@ -181,12 +181,12 @@
     "number": "5A"
   },
   "model": "vendors.pool",
-  "pk": "5A_UR"
+  "pk": "OASIS_5A"
 },
 {
   "fields": {
     "threshold": "1000 Employee",
-    "vehicle": "OASISSB",
+    "vehicle": "OASIS_SB",
     "naics": [
       33
     ],
@@ -194,7 +194,7 @@
     "number": "5B"
   },
   "model": "vendors.pool",
-  "pk": "5B_SB"
+  "pk": "OASIS_SB_5B"
 },
 {
   "fields": {
@@ -207,12 +207,12 @@
     "number": "5B"
   },
   "model": "vendors.pool",
-  "pk": "5B_UR"
+  "pk": "OASIS_5B"
 },
 {
   "fields": {
     "threshold": "1500 Employee ",
-    "vehicle": "OASISSB",
+    "vehicle": "OASIS_SB",
     "naics": [
       34
     ],
@@ -220,7 +220,7 @@
     "number": "6"
   },
   "model": "vendors.pool",
-  "pk": "6_SB"
+  "pk": "OASIS_SB_6"
 },
 {
   "fields": {
@@ -233,6 +233,54 @@
     "number": "6"
   },
   "model": "vendors.pool",
-  "pk": "6_UR"
+  "pk": "OASIS_6"
+},
+{
+  "fields": {
+    "threshold": "NA",
+    "vehicle": "HCATS_SB",
+    "naics": [
+    ],
+    "name": "HCATS Small Business Pool 1",
+    "number": "1"
+  },
+  "model": "vendors.pool",
+  "pk": "HCATS_SB_1"
+},
+{
+  "fields": {
+    "threshold": "NA",
+    "vehicle": "HCATS",
+    "naics": [
+    ],
+    "name": "HCATS Unrestricted Pool 1",
+    "number": "1"
+  },
+  "model": "vendors.pool",
+  "pk": "HCATS_1"
+},
+{
+  "fields": {
+    "threshold": "NA",
+    "vehicle": "HCATS_SB",
+    "naics": [
+    ],
+    "name": "HCATS Small Business Pool 2",
+    "number": "1"
+  },
+  "model": "vendors.pool",
+  "pk": "HCATS_SB_1"
+},
+{
+  "fields": {
+    "threshold": "NA",
+    "vehicle": "HCATS",
+    "naics": [
+    ],
+    "name": "HCATS Unrestricted Pool 2",
+    "number": "1"
+  },
+  "model": "vendors.pool",
+  "pk": "HCATS_1"
 }
 ]
