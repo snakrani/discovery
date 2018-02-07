@@ -24,22 +24,22 @@ class SamLoad(models.Model):
 
 
 class Naics(models.Model):
-    code = models.CharField(max_length=128)
+    code = models.CharField(unique=True, max_length=25)
+    root_code = models.CharField(max_length=25, null=True)
     description = models.TextField()
-    short_code = models.CharField(unique=True, max_length=25)
-
+    
     def __str__(self):
         return "{0} - {1}".format(self.code, self.description)
 
 
 class SetAside(models.Model):
-    code = models.CharField(unique=True, max_length=128)
-    short_name = models.CharField(max_length=128)
-    abbreviation = models.CharField(max_length=10, null=True)
+    code = models.CharField(unique=True, max_length=25)
+    name = models.CharField(unique=True, max_length=25, null=True)
+    description = models.CharField(max_length=128)
     far_order = models.IntegerField(null=True)
 
     def  __str__(self):
-        return self.short_name
+        return self.name
 
 
 class Pool(models.Model):
