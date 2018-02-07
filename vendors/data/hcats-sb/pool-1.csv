@@ -1,12 +1,12 @@
-"HCaTS Company Name ","HCATS Pool 1- Contract Number","DUNS NUMBER","COCM","COCM Phone No","COCM e-mail","COPM","COPM Phone No","COPM e-mail","Zone","Small Business"
-"A P Ventures, LLC","GS02Q16DCR0073",005752289,"Estelle Sarricks","443-542-9188","HCaTS-SB@apvit.com","Theresa Boyle","HCaTS-SB@apvit.com","443-542-9188","All","8(A)"
-"Abrams Learning and Information Systems, Inc.","GS02Q17DCR0007",169830200,"Noel Naylor","703-740-5718","nnaylor@alisinc.com","Elizabeth Bauernshub","ebauernshub@alisinc.com","703-740-5719","All","VO, SDVO, "
-"AE Strategies, LLC","GS02Q16DCR0074",136483547,"Meghan Collins","703-286-0880","HCATS@aestrategies.com, mcollins@aestrategies.com","Mary Loechler","HCATS@aestrategies.com, mloechler@aestrategies.com","703-286-0880","All",
-"Atlas Research","GS02Q16DCR0075",827560744,"David Seelke","202.717.8710","dseelke@atlasresearch.us","Ryung Suh","rsuh@atlasresearch.us","202-717-8710","All","VO, SDVO, "
-"Colleague Consulting, LLC","GS02Q17DCR0010",137058413,"Michael S Cook","301-277-0255 x101","mcook@colleagueconsulting.com","Jauwaun Terri Fleuriot","jfleuriot@colleagueconsulting.com","301-277-0255 x114","All",
-"Deepmile Networks, LLC","GS02Q16DCR0076",790984186,"Michael Neville","703-735-6025","hcats_sb@deepmile.com, mneville@deepmile.com","Brian O'Neill","hcats_sb@deepmile.com, broneill@deepmile.com","703-635-7983","All",
-"METIS Solutions","GS02Q16DCR0077",833266500,"Jennifer Sammons","240-383-5768","hcats@metisolutions.com, jsammons@metisolutions.com","Chris Wynes","hcats@metisolutions.com, cwynes@metisolutions.com","703-350-5855","All",
-"Pherson Associates, LLC.","GS02Q16DCR0078",136659054,"Diana Pittman","703-391-6071","HCaTS@pherson.org, dpittman@pherson.org","Alysa Gander","JFriedman@pherson.org, Agander@pherson.org","703-390-9946","All","WO, EDWO, "
-"Piton Science & Technology llc","GS02Q16DCR0079",786931050,"Willam S Murphy Jr","703-349-3878","murphyw@pitonscience.com","Charles Pate","patec@pitonscience.com","703-309-6922","All","VO, SDVO, "
-"PowerTrain, Inc.","GS02Q16DCR0080",837788223,"Lisa Sergent","606-780-0196","sbhcats@powertrain.com, lsergent@powertrain.com","Lisa Cox","sbhcats@powertrain.com, lcox@powertrain.com","410-544-8369","All","WO, "
-"Rigil Corporation","GS02Q16DCR0081",786713599,"Rakhi Sharma","703-944-8685","rakhi@rigil.com","Brian Lewis","brianlewis@rigil.com","(703) 232 3750","All","WO, EDWO, 8(A)"
+Company Name ,Contract Number,DUNS,COCM,COCM Phone,COCM Email,COPM,COPM Email,COPM Phone,Zone,Small Business
+"A P Ventures, LLC",GS02Q16DCR0073,5752289,Estelle Sarricks,443-542-9188,HCaTS-SB@apvit.com,Theresa Boyle,HCaTS-SB@apvit.com,443-542-9188,All,8(A)
+"Abrams Learning and Information Systems, Inc.",GS02Q17DCR0007,169830200,Noel Naylor,703-740-5718,nnaylor@alisinc.com,Elizabeth Bauernshub,ebauernshub@alisinc.com,703-740-5719,All,"VO,SDVO"
+"AE Strategies, LLC",GS02Q16DCR0074,136483547,Meghan Collins,703-286-0880,"HCATS@aestrategies.com, mcollins@aestrategies.com",Mary Loechler,"HCATS@aestrategies.com, mloechler@aestrategies.com",703-286-0880,All,
+Atlas Research,GS02Q16DCR0075,827560744,David Seelke,202-717-8710,dseelke@atlasresearch.us,Ryung Suh,rsuh@atlasresearch.us,202-717-8710,All,"VO,SDVO "
+"Colleague Consulting, LLC",GS02Q17DCR0010,137058413,Michael S Cook,301-277-0255 x 101,mcook@colleagueconsulting.com,Jauwaun Terri Fleuriot,jfleuriot@colleagueconsulting.com,301-277-0255 x 114,All,
+"Deepmile Networks, LLC",GS02Q16DCR0076,790984186,Michael Neville,703-735-6025,"hcats_sb@deepmile.com, mneville@deepmile.com",Brian O'Neill,"hcats_sb@deepmile.com, broneill@deepmile.com",703-635-7983,All,
+METIS Solutions,GS02Q16DCR0077,833266500,Jennifer Sammons,240-383-5768,"hcats@metisolutions.com, jsammons@metisolutions.com",Chris Wynes,"hcats@metisolutions.com, cwynes@metisolutions.com",703-350-5855,All,
+"Pherson Associates, LLC.",GS02Q16DCR0078,136659054,Diana Pittman,703-391-6071,"HCaTS@pherson.org, dpittman@pherson.org",Alysa Gander,"JFriedman@pherson.org, Agander@pherson.org",703-390-9946,All,"WO,EDWO"
+Piton Science & Technology llc,GS02Q16DCR0079,786931050,Willam S Murphy Jr,703-349-3878,murphyw@pitonscience.com,Charles Pate,patec@pitonscience.com,703-309-6922,All,"VO,SDVO"
+"PowerTrain, Inc.",GS02Q16DCR0080,837788223,Lisa Sergent,606-780-0196,"sbhcats@powertrain.com, lsergent@powertrain.com",Lisa Cox,"sbhcats@powertrain.com, lcox@powertrain.com",410-544-8369,All,WO
+Rigil Corporation,GS02Q16DCR0081,786713599,Rakhi Sharma,703-944-8685,rakhi@rigil.com,Brian Lewis,brianlewis@rigil.com,703-232-3750,All,"WO,EDWO,8(A)"
