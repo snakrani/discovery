@@ -68,21 +68,21 @@ class Location(models.Model):
 
 
 class Vendor(models.Model):
-    name = models.CharField(max_length=128)
-    duns = models.CharField(max_length=9, unique=True)
-    duns_4 = models.CharField(max_length=13, unique=True)
-    cage = models.CharField(max_length=15, null=True)
+    name = models.CharField(max_length=128) # from CSV
+    duns = models.CharField(max_length=9, unique=True) # from CSV
+    duns_4 = models.CharField(max_length=13, unique=True) # generated from CSV
+    cage = models.CharField(max_length=15, null=True) #from SAM
 
-    sam_status = models.CharField(null=True, max_length=128)
-    sam_activation_date = models.DateTimeField(null=True)
-    sam_expiration_date = models.DateTimeField(null=True)
-    sam_exclusion = models.NullBooleanField(null=True)
+    sam_status = models.CharField(null=True, max_length=128) # from SAM
+    sam_activation_date = models.DateTimeField(null=True) # from SAM
+    sam_expiration_date = models.DateTimeField(null=True) # from SAM
+    sam_exclusion = models.NullBooleanField(null=True) # from SAM
     
-    sam_url = models.URLField(null=True)
-    sam_location = models.ForeignKey(Location, null=True)
+    sam_url = models.URLField(null=True) # from SAM
+    sam_location = models.ForeignKey(Location, null=True) # from SAM
   
-    pools = models.ManyToManyField(Pool, through='PoolPIID')
-    setasides = models.ManyToManyField(SetAside, blank=True)
+    pools = models.ManyToManyField(Pool, through='PoolPIID') # from CSV
+    setasides = models.ManyToManyField(SetAside, blank=True) # from CSV
   
     def __str__(self):
         return self.name
@@ -124,6 +124,7 @@ class PoolPIID(models.Model):
     vendor = models.ForeignKey(Vendor)
     pool = models.ForeignKey(Pool)
     piid = models.CharField(max_length=128)
+    zone = models.CharField(max_length=128, null=True)
 
     def __str__(self):
-        return "{0} - {1} - {2}".format(self.vendor.name, self.pool.id, self.piid)
+        return "{0} - {1}/{2} ({3})".format(self.vendor.name, self.pool.id, self.zone, self.piid)
