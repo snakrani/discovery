@@ -157,28 +157,12 @@ class Command(BaseCommand):
             if vendor.sam_url and vendor.sam_url[:3].lower() == "www" :
                 vendor.sam_url = 'http://' + vendor.sam_url
 
-            setasides = get_value(reg, 'businessTypes', vendor)
-            for code in setasides:
-                try:
-                    sa = SetAside.objects.get(code__iexact=code)
-                    if sa not in vendor.setasides.all():
-                        vendor.setasides.add(sa)
-
-                except SetAside.DoesNotExist:
-                    continue
-            
             vendor.save()           
             
             log_memory("Final vendor [ {} | {} ]".format(vid, vendor.name))
             log_data(vendor.name,
                 vendor.duns,
                 vendor.duns_4,
-                vendor.cm_name,
-                vendor.cm_phone,
-                vendor.cm_email,
-                vendor.pm_name,
-                vendor.pm_phone,
-                vendor.pm_email,
                 vendor.sam_status,
                 vendor.sam_activation_date,
                 vendor.sam_expiration_date,
@@ -189,8 +173,7 @@ class Command(BaseCommand):
                 vendor.sam_location.state,
                 vendor.sam_location.zipcode,
                 vendor.sam_location.congressional_district,
-                vendor.sam_url,
-                ":".join([str(sa.pk) for sa in vendor.setasides.all()])
+                vendor.sam_url
             )
         else:
             logger.debug("'registration' key is missing for {} / {}".format(vid, vendor.duns_4))
@@ -202,12 +185,6 @@ class Command(BaseCommand):
         log_data('Name', 
             'DUNS', 
             'DUNS+4', 
-            'CM Name', 
-            'CM Phone', 
-            'CM Email', 
-            'PM Name', 
-            'PM Phone', 
-            'PM Email', 
             'SAM Status', 
             'SAM Activation Date', 
             'SAM Expiration Date', 
@@ -218,8 +195,7 @@ class Command(BaseCommand):
             'SAM State',
             'SAM Zipcode',
             'SAM Congressional District', 
-            'SAM URL', 
-            'Setasides'
+            'SAM URL'
         )
 
         try:
