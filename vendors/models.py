@@ -13,6 +13,11 @@ STATUS_CHOICES = (
     ('F', 'Cancelled') 
 )
 
+MANAGEMENT_TYPES = (
+    ('CM', 'Contract Manager'),
+    ('PM', 'Project Manager')
+)
+
 
 class SamLoad(models.Model):
     sam_load = models.DateField()
@@ -75,14 +80,6 @@ class Vendor(models.Model):
     
     sam_url = models.URLField(null=True)
     sam_location = models.ForeignKey(Location, null=True)
-            
-    cm_name = models.CharField(null=True, max_length=128)
-    cm_email = models.CharField(null=True, max_length=128)
-    cm_phone = models.CharField(null=True, max_length=128)
-    
-    pm_name = models.CharField(null=True, max_length=128)
-    pm_email = models.CharField(null=True, max_length=128)
-    pm_phone = models.CharField(null=True, max_length=128)
   
     pools = models.ManyToManyField(Pool, through='PoolPIID')
     setasides = models.ManyToManyField(SetAside, blank=True)
@@ -90,6 +87,38 @@ class Vendor(models.Model):
     def __str__(self):
         return self.name
 
+
+class Manager(models.Model):
+    vendor = models.ForeignKey(Vendor, null=True, related_name='managers')
+    name = models.CharField(null=True, max_length=128)
+    type = models.CharField(choices=MANAGEMENT_TYPES, max_length=10)
+    
+    def phone(self):
+        return self.phones.values_list('number', flat=True)
+    
+    def email(self):
+        return self.emails.values_list('address', flat=True)
+
+    def __str__(self):
+        info = "{0} {1}".format(self.vendor.name, self.pool.id, self.piid)
+        return "{0} ({1} / {2})".format(info, ", ".join(self.phone()), ", ".join(self.email()))
+
+
+class ManagerPhoneNumber(models.Model):
+    manager = models.ForeignKey(Manager, null=True, related_name='phones')
+    number = models.CharField(null=True, max_length=128)
+
+    def __str__(self):
+        return "{0} ({1})".format(self.manager.name, self.number)
+
+
+class ManagerEmail(models.Model):
+    manager = models.ForeignKey(Manager, null=True, related_name='emails')
+    address = models.CharField(null=True, max_length=128)
+
+    def __str__(self):
+        return "{0} ({1})".format(self.manager.name, self.address)
+    
 
 class PoolPIID(models.Model):
     vendor = models.ForeignKey(Vendor)
