@@ -1,8 +1,8 @@
 [
 {
   "fields": {
-    "short_code": "541330",
     "code": "541330",
+    "root_code": "541330",
     "description": "Engineering Services"
   },
   "model": "vendors.naics",
@@ -10,8 +10,8 @@
 },
 {
   "fields": {
-    "short_code": "541360",
     "code": "541360",
+    "root_code": "541360",
     "description": "Geophysical Surveying and Mapping Services"
   },
   "model": "vendors.naics",
@@ -19,8 +19,8 @@
 },
 {
   "fields": {
-    "short_code": "541370",
     "code": "541370",
+    "root_code": "541370",
     "description": "Surveying and Mapping (except Geophysical) Services"
   },
   "model": "vendors.naics",
@@ -28,8 +28,8 @@
 },
 {
   "fields": {
-    "short_code": "541380",
     "code": "541380",
+    "root_code": "541380",
     "description": "Testing Laboratories"
   },
   "model": "vendors.naics",
@@ -37,8 +37,8 @@
 },
 {
   "fields": {
-    "short_code": "541611",
     "code": "541611",
+    "root_code": "541611",
     "description": "Administrative Management and General Management Consulting Services"
   },
   "model": "vendors.naics",
@@ -46,8 +46,8 @@
 },
 {
   "fields": {
-    "short_code": "541612",
     "code": "541612",
+    "root_code": "541612",
     "description": "Human Resources Consulting Services"
   },
   "model": "vendors.naics",
@@ -55,8 +55,8 @@
 },
 {
   "fields": {
-    "short_code": "541613",
     "code": "541613",
+    "root_code": "541613",
     "description": "Marketing Consulting Services"
   },
   "model": "vendors.naics",
@@ -64,8 +64,8 @@
 },
 {
   "fields": {
-    "short_code": "541614",
     "code": "541614",
+    "root_code": "541614",
     "description": "Process, Physical Distribution, and Logistics Consulting Services"
   },
   "model": "vendors.naics",
@@ -73,8 +73,8 @@
 },
 {
   "fields": {
-    "short_code": "541618",
     "code": "541618",
+    "root_code": "541618",
     "description": "Other Management Consulting Services"
   },
   "model": "vendors.naics",
@@ -82,8 +82,8 @@
 },
 {
   "fields": {
-    "short_code": "541620",
     "code": "541620",
+    "root_code": "541620",
     "description": "Environmental Consulting Services"
   },
   "model": "vendors.naics",
@@ -91,8 +91,8 @@
 },
 {
   "fields": {
-    "short_code": "541690",
     "code": "541690",
+    "root_code": "541690",
     "description": "Other Scientific and Technical Consulting Services"
   },
   "model": "vendors.naics",
@@ -100,8 +100,8 @@
 },
 {
   "fields": {
-    "short_code": "541810",
     "code": "541810",
+    "root_code": "541810",
     "description": "Advertising Agencies"
   },
   "model": "vendors.naics",
@@ -109,8 +109,8 @@
 },
 {
   "fields": {
-    "short_code": "541820",
     "code": "541820",
+    "root_code": "541820",
     "description": "Public Relations Agencies"
   },
   "model": "vendors.naics",
@@ -118,8 +118,8 @@
 },
 {
   "fields": {
-    "short_code": "541830",
     "code": "541830",
+    "root_code": "541830",
     "description": "Media Buying Agencies"
   },
   "model": "vendors.naics",
@@ -127,8 +127,8 @@
 },
 {
   "fields": {
-    "short_code": "541840",
     "code": "541840",
+    "root_code": "541840",
     "description": "Media Representatives"
   },
   "model": "vendors.naics",
@@ -136,8 +136,8 @@
 },
 {
   "fields": {
-    "short_code": "541850",
     "code": "541850",
+    "root_code": "541850",
     "description": "Outdoor Advertising"
   },
   "model": "vendors.naics",
@@ -145,8 +145,8 @@
 },
 {
   "fields": {
-    "short_code": "541860",
     "code": "541860",
+    "root_code": "541860",
     "description": "Direct Mail Advertising"
   },
   "model": "vendors.naics",
@@ -154,8 +154,8 @@
 },
 {
   "fields": {
-    "short_code": "541870",
     "code": "541870",
+    "root_code": "541870",
     "description": "Advertising Material Distribution Services"
   },
   "model": "vendors.naics",
@@ -163,8 +163,8 @@
 },
 {
   "fields": {
-    "short_code": "541890",
     "code": "541890",
+    "root_code": "541890",
     "description": "Other Services Related to Advertising"
   },
   "model": "vendors.naics",
@@ -172,8 +172,8 @@
 },
 {
   "fields": {
-    "short_code": "541910",
     "code": "541910",
+    "root_code": "541910",
     "description": "Marketing Research and Public Opinion Polling"
   },
   "model": "vendors.naics",
@@ -181,8 +181,8 @@
 },
 {
   "fields": {
-    "short_code": "541990",
     "code": "541990",
+    "root_code": "541990",
     "description": "All Other Professional, Scientific, and Technical Services"
   },
   "model": "vendors.naics",
@@ -190,8 +190,8 @@
 },
 {
   "fields": {
-    "short_code": "541211",
     "code": "541211",
+    "root_code": "541211",
     "description": "Offices of Certified Public Accountants"
   },
   "model": "vendors.naics",
@@ -199,8 +199,8 @@
 },
 {
   "fields": {
-    "short_code": "541213",
     "code": "541213",
+    "root_code": "541213",
     "description": "Tax Preparation Services"
   },
   "model": "vendors.naics",
@@ -208,8 +208,8 @@
 },
 {
   "fields": {
-    "short_code": "541214",
     "code": "541214",
+    "root_code": "541214",
     "description": "Payroll Services"
   },
   "model": "vendors.naics",
@@ -217,8 +217,8 @@
 },
 {
   "fields": {
-    "short_code": "541219",
     "code": "541219",
+    "root_code": "541219",
     "description": "Other Accounting Services"
   },
   "model": "vendors.naics",
@@ -226,8 +226,8 @@
 },
 {
   "fields": {
-    "short_code": "541720",
     "code": "541720",
+    "root_code": "541720",
     "description": "Research and Development in the Social Sciences and Humanities"
   },
   "model": "vendors.naics",
@@ -235,8 +235,8 @@
 },
 {
   "fields": {
-    "short_code": "541330A",
-    "code": "541330",
+    "code": "541330A",
+    "root_code": "541330",
     "description": "Engineering for Military and Aerospace Equipment and Military Weapons"
   },
   "model": "vendors.naics",
@@ -244,8 +244,8 @@
 },
 {
   "fields": {
-    "short_code": "541330B",
-    "code": "541330",
+    "code": "541330B",
+    "root_code": "541330",
     "description": "Engineering for Contracts and Subcontracts for Engineering Services Awarded Under the National Energy Policy Act of 1992"
   },
   "model": "vendors.naics",
@@ -253,8 +253,8 @@
 },
 {
   "fields": {
-    "short_code": "541330C",
-    "code": "541330",
+    "code": "541330C",
+    "root_code": "541330",
     "description": "Engineering for Marine Engineering and Naval Architecture"
   },
   "model": "vendors.naics",
@@ -262,8 +262,8 @@
 },
 {
   "fields": {
-    "short_code": "541711",
     "code": "541711",
+    "root_code": "541711",
     "description": "Research and Development in Biotechnology\r\n"
   },
   "model": "vendors.naics",
@@ -271,8 +271,8 @@
 },
 {
   "fields": {
-    "short_code": "541712",
     "code": "541712",
+    "root_code": "541712",
     "description": "Research and Development in the Physical, Engineering, and Life Sciences (except Biotechnology)"
   },
   "model": "vendors.naics",
@@ -280,8 +280,8 @@
 },
 {
   "fields": {
-    "short_code": "541712B",
-    "code": "541712",
+    "code": "541712B",
+    "root_code": "541712",
     "description": "Research and Development in Aircraft Parts, and Auxiliary Equipment, and Aircraft Engine Parts"
   },
   "model": "vendors.naics",
@@ -289,8 +289,8 @@
 },
 {
   "fields": {
-    "short_code": "541712C",
-    "code": "541712",
+    "code": "541712C",
+    "root_code": "541712",
     "description": "Research and Development in Space Vehicles and Guided Missiles, their Propulsion Units, and their Auxiliary Equipment Parts"
   },
   "model": "vendors.naics",
@@ -298,8 +298,8 @@
 },
 {
   "fields": {
-    "short_code": "541712A",
-    "code": "541712",
+    "code": "541712A",
+    "root_code": "541712",
     "description": "Research and Development in Aircraft"
   },
   "model": "vendors.naics",
