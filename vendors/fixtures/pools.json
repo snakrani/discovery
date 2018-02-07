@@ -266,10 +266,10 @@
     "naics": [
     ],
     "name": "HCATS Small Business Pool 2",
-    "number": "1"
+    "number": "2"
   },
   "model": "vendors.pool",
-  "pk": "HCATS_SB_1"
+  "pk": "HCATS_SB_2"
 },
 {
   "fields": {
@@ -278,9 +278,9 @@
     "naics": [
     ],
     "name": "HCATS Unrestricted Pool 2",
-    "number": "1"
+    "number": "2"
   },
   "model": "vendors.pool",
-  "pk": "HCATS_1"
+  "pk": "HCATS_2"
 }
 ]
