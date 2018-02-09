@@ -90,7 +90,10 @@ class VendorSerializer(OrderedSerializer):
     
     class Meta:
         model = Vendor
-        fields = ('id', 'name', 'duns', 'duns_4', 'cage', 'sam_status', 'sam_expiration_date', 'sam_activation_date', 'sam_exclusion', 'sam_url', 'sam_location', 'managers', 'pools', 'setasides', 'annual_revenue', 'number_of_employees')
+        fields = ('id', 'name', 'duns', 'duns_4', 'cage', 'sam_status', 
+                  'sam_expiration_date', 'sam_activation_date', 'sam_exclusion', 
+                  'sam_url', 'sam_location', 'managers', 'pools', 'setasides', 
+                  'annual_revenue', 'number_of_employees')
     
     def get_annual_revenue(self, item):
         return Contract.objects.filter(vendor=item).latest('date_signed').annual_revenue
