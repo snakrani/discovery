@@ -79,7 +79,7 @@ class Vendor(models.Model):
     sam_exclusion = models.NullBooleanField(null=True) # from SAM
     
     sam_url = models.URLField(null=True) # from SAM
-    sam_location = models.ForeignKey(Location, null=True) # from SAM
+    sam_location = models.ForeignKey(Location, null=True, on_delete=models.CASCADE) # from SAM
   
     pools = models.ManyToManyField(Pool, through='PoolPIID') # from CSV
     setasides = models.ManyToManyField(SetAside, blank=True) # from CSV
@@ -89,7 +89,7 @@ class Vendor(models.Model):
 
 
 class Manager(models.Model):
-    vendor = models.ForeignKey(Vendor, null=True, related_name='managers')
+    vendor = models.ForeignKey(Vendor, null=True, related_name='managers', on_delete=models.CASCADE)
     name = models.CharField(null=True, max_length=128)
     type = models.CharField(choices=MANAGEMENT_TYPES, max_length=10)
     
@@ -105,7 +105,7 @@ class Manager(models.Model):
 
 
 class ManagerPhoneNumber(models.Model):
-    manager = models.ForeignKey(Manager, null=True, related_name='phones')
+    manager = models.ForeignKey(Manager, null=True, related_name='phones', on_delete=models.CASCADE)
     number = models.CharField(null=True, max_length=128)
 
     def __str__(self):
@@ -113,7 +113,7 @@ class ManagerPhoneNumber(models.Model):
 
 
 class ManagerEmail(models.Model):
-    manager = models.ForeignKey(Manager, null=True, related_name='emails')
+    manager = models.ForeignKey(Manager, null=True, related_name='emails', on_delete=models.CASCADE)
     address = models.CharField(null=True, max_length=128)
 
     def __str__(self):
@@ -121,8 +121,8 @@ class ManagerEmail(models.Model):
     
 
 class PoolPIID(models.Model):
-    vendor = models.ForeignKey(Vendor)
-    pool = models.ForeignKey(Pool)
+    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
+    pool = models.ForeignKey(Pool, on_delete=models.CASCADE)
     piid = models.CharField(max_length=128)
     zone = models.CharField(max_length=128, null=True)
 
