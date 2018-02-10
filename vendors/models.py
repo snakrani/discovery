@@ -1,5 +1,6 @@
 from django.db import models
 
+
 VEHICLE_CHOICES = (
     ('OASIS_SB', 'OASIS Small Business'),
     ('OASIS', 'OASIS Unrestricted'),
@@ -51,7 +52,24 @@ class Pool(models.Model):
     threshold = models.CharField(null=True, max_length=128)
 
     def __str__(self):
-        return "Pool {0} - {1}".format(self.number, self.get_vehicle_display())
+        return "Pool {0} - {1}".format(self.number, self.vehicle, ",".join(naics))
+
+
+class Zone(models.Model):
+
+    def states(self):
+        return self.state.values_list('state', flat=True)
+    
+    def __str__(self):
+        return "Zone {0} - {1}".format(self.id, ",".join(self.states()))
+
+
+class ZoneState(models.Model):
+    zone = models.ForeignKey(Zone, null=True, related_name='state', on_delete=models.CASCADE)
+    state = models.CharField(max_length=50)
+
+    def __str__(self):
+        return "{0} - {1}".format(self.zone.id, self.state)
 
 
 class Location(models.Model):
@@ -83,7 +101,7 @@ class Vendor(models.Model):
   
     pools = models.ManyToManyField(Pool, through='PoolPIID') # from CSV
     setasides = models.ManyToManyField(SetAside, blank=True) # from CSV
-  
+
     def __str__(self):
         return self.name
 
@@ -93,19 +111,19 @@ class Manager(models.Model):
     name = models.CharField(null=True, max_length=128)
     type = models.CharField(choices=MANAGEMENT_TYPES, max_length=10)
     
-    def phone(self):
-        return self.phones.values_list('number', flat=True)
+    def phones(self):
+        return self.phone.values_list('number', flat=True)
     
-    def email(self):
-        return self.emails.values_list('address', flat=True)
+    def emails(self):
+        return self.email.values_list('address', flat=True)
 
     def __str__(self):
         info = "{0} {1}".format(self.vendor.name, self.pool.id, self.piid)
-        return "{0} ({1} / {2})".format(info, ", ".join(self.phone()), ", ".join(self.email()))
+        return "{0} ({1} / {2})".format(info, ", ".join(self.phones()), ", ".join(self.emails()))
 
 
 class ManagerPhoneNumber(models.Model):
-    manager = models.ForeignKey(Manager, null=True, related_name='phones', on_delete=models.CASCADE)
+    manager = models.ForeignKey(Manager, null=True, related_name='phone', on_delete=models.CASCADE)
     number = models.CharField(null=True, max_length=128)
 
     def __str__(self):
@@ -113,7 +131,7 @@ class ManagerPhoneNumber(models.Model):
 
 
 class ManagerEmail(models.Model):
-    manager = models.ForeignKey(Manager, null=True, related_name='emails', on_delete=models.CASCADE)
+    manager = models.ForeignKey(Manager, null=True, related_name='email', on_delete=models.CASCADE)
     address = models.CharField(null=True, max_length=128)
 
     def __str__(self):
@@ -122,9 +140,9 @@ class ManagerEmail(models.Model):
 
 class PoolPIID(models.Model):
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
-    pool = models.ForeignKey(Pool, on_delete=models.CASCADE)
+    pool = models.ForeignKey(Pool)
     piid = models.CharField(max_length=128)
-    zone = models.CharField(max_length=128, null=True)
+    zone = models.ForeignKey(Zone, null=True)
 
     def __str__(self):
         return "{0} - {1}/{2} ({3})".format(self.vendor.name, self.pool.id, self.zone, self.piid)
