@@ -242,12 +242,15 @@ def init_load(options):
 def last_load(vendor, options):
     first_date = datetime.now() - timedelta(weeks=(options['period']))
     
-    try:
-        load = FPDSLoad.objects.get(vendor_id=vendor.id)
-        return load.load_date
+    if len(options['starting_date']) == 0:
+        try:
+            load = FPDSLoad.objects.get(vendor_id=vendor.id)
+            return load.load_date
         
-    except FPDSLoad.DoesNotExist:
-        pass
+        except FPDSLoad.DoesNotExist:
+            pass
+    else:
+        first_date = datetime.strptime(options['starting_date'], "%Y-%m-%d")
     
     return first_date.date()
 
@@ -269,6 +272,7 @@ class Command(BaseCommand):
     option_list = BaseCommand.option_list \
                   + (make_option('--starting_id', action='store', type=int,  dest='starting_id', default=1, help="start loading contracts for vendors greater or equal to this id"), ) \
                   + (make_option('--id', action='store', type=int,  dest='id', default=0, help="load contracts for only this vendor id"), ) \
+                  + (make_option('--starting_date', action='store', type=str,  dest='starting_date', default='', help="start loading contracts starting from a specific date"), ) \
                   + (make_option('--reinit', action='store_true', dest='reinit', default=False, help="Reinitialize all vendor contract data"), ) \
                   + (make_option('--period', action='store', type=int, dest='period', default=520, help="Number of weeks back to populate database (default 10 years)"), ) \
                   + (make_option('--load', action='store', type=int, dest='load', default=520, help="Weekly interval to process incoming data (default 10 years)"), ) \
