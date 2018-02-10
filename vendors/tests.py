@@ -13,7 +13,7 @@ def make_view(view, request, *args, **kwargs):
 
 class VendorLoadTest(TestCase):
     """Tests that the load_vendors management command works and loads all the correct fields"""
-    fixtures = ['naics.json', 'setasides.json', 'pools.json']
+    fixtures = ['naics.json', 'setasides.json', 'pools.json', 'zones.json', 'zonestates.json']
 
     def test_load(self):
         call_command('load_vendors', vpp=1)
@@ -24,9 +24,14 @@ class VendorLoadTest(TestCase):
         self.assertEqual(null_vendors, 0)
 
 
+    def test_cm_not_null(self):
+        for vendor in Vendor.objects.all():
+            self.assertNotEqual(vendor.managers.filter(type='CM').first().phones().count(), 0)
+
+
     def test_pm_not_null(self):
-        null_vendors = Vendor.objects.filter(pm_email=None).count()
-        self.assertEqual(null_vendors, 0)
+        for vendor in Vendor.objects.all():
+            self.assertNotEqual(vendor.managers.filter(type='PM').first().phones().count(), 0)
 
 
 class VendorViewTest(TestCase):
