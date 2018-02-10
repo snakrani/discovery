@@ -35,6 +35,10 @@ class Command(BaseCommand):
             
             print('> Loading vendor pools')
             call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'vendors/fixtures/pools.json'))
+            
+            print('> Loading zones')
+            call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'vendors/fixtures/zones.json'))
+            call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'vendors/fixtures/zonestates.json'))          
 
         except Exception as e:
             display_error(e)

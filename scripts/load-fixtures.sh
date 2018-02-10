@@ -4,14 +4,19 @@
 SCRIPT_DIR="$(cd "$(dirname "$([ `readlink "$0"` ] && echo "`readlink "$0"`" || echo "$0")")"; pwd -P)"
 cd "$SCRIPT_DIR/.."
 
+# Load category fixtures
+
+./manage.py load_categories
+
 # Load vendor related fixtures
 
-./manage.py loaddata vendors/fixtures/naics.json
-./manage.py loaddata vendors/fixtures/setasides.json
-./manage.py loaddata vendors/fixtures/pools.json # reqs: naics
 ./manage.py loaddata vendors/fixtures/locations.json
 ./manage.py loaddata vendors/fixtures/vendors.json # reqs: locations, setasides
-./manage.py loaddata vendors/fixtures/poolpiids.json # reqs: pool, vendor
+./manage.py loaddata vendors/fixtures/managers.json # reqs: vendors
+./manage.py loaddata vendors/fixtures/managerphonenumbers.json # reqs: managers
+./manage.py loaddata vendors/fixtures/manageremails.json # reqs: managers
+
+./manage.py loaddata vendors/fixtures/poolpiids.json # reqs: pool, vendor, zone
 ./manage.py loaddata vendors/fixtures/samloads.json
 
 # Load contract related fixtures
