@@ -1,5 +1,5 @@
 from rest_framework import serializers, pagination
-from vendors.models import Vendor, Manager, Location, Pool, Naics, SetAside, SamLoad
+from vendors.models import Vendor, Manager, Zone, Location, Pool, Naics, SetAside, SamLoad
 from contract.models import Contract, PlaceOfPerformance, FPDSLoad
 
 import json
@@ -49,7 +49,18 @@ class PoolSerializer(serializers.ModelSerializer):
 class ShortPoolSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pool
-        fields = ('name', 'number', 'vehicle')
+        fields = ('id', 'name', 'number', 'vehicle')
+
+
+class ZoneSerializer(serializers.ModelSerializer):
+    states = serializers.SerializerMethodField('get_states')
+    
+    class Meta:
+        model = Zone
+        fields = ('id', 'states')
+        
+    def get_states(self, item):
+        return item.states()
 
 
 class LocationSerializer(serializers.ModelSerializer):
@@ -64,18 +75,18 @@ class LocationSerializer(serializers.ModelSerializer):
 
 
 class ManagerSerializer(serializers.ModelSerializer):
-    phone = serializers.SerializerMethodField('get_phone')
-    email = serializers.SerializerMethodField('get_email')
+    phones = serializers.SerializerMethodField('get_phones')
+    emails = serializers.SerializerMethodField('get_emails')
     
     class Meta:
         model = Manager
-        fields = ('name', 'type', 'phone', 'email')
+        fields = ('name', 'type', 'phones', 'emails')
         
-    def get_phone(self, item):
-        return item.phone()
+    def get_phones(self, item):
+        return item.phones()
     
-    def get_email(self, item):
-        return item.email()
+    def get_emails(self, item):
+        return item.emails()
 
 
 class VendorSerializer(OrderedSerializer):
@@ -96,10 +107,18 @@ class VendorSerializer(OrderedSerializer):
                   'annual_revenue', 'number_of_employees')
     
     def get_annual_revenue(self, item):
-        return Contract.objects.filter(vendor=item).latest('date_signed').annual_revenue
+        try:
+            return Contract.objects.filter(vendor=item).latest('date_signed').annual_revenue
+        
+        except Exception:
+            return 'NA'
     
     def get_number_of_employees(self, item):
-        return Contract.objects.filter(vendor=item).latest('date_signed').number_of_employees
+        try:
+            return Contract.objects.filter(vendor=item).latest('date_signed').number_of_employees
+        
+        except Exception:
+            return 'NA'
     
     @classmethod
     def default_sort(cls):
@@ -124,7 +143,7 @@ class ShortVendorSerializer(OrderedSerializer):
 
     def get_vendor_contracts(self, item):
         if 'naics' in self.context and self.context['naics']:
-            return Contract.objects.filter(NAICS=self.context['naics'].code, vendor=item).count()
+            return Contract.objects.filter(NAICS=self.context['naics'].root_code, vendor=item).count()
         else:
             return Contract.objects.filter(vendor=item).count()
     
