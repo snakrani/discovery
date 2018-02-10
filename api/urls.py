@@ -7,6 +7,7 @@ urlpatterns = patterns('',
     url(r'^vendors/$', cache_page(60*60*12)(views.ListVendors.as_view())),
     url(r'^vendor/(?P<duns>\w+)', views.GetVendor.as_view()),
     url(r'^naics/$', views.ListNaics.as_view()),
+    url(r'^zones/$', views.ListZones.as_view()),
     url(r'^contracts/$', views.ListContracts.as_view()),
     url(r'^metadata/$', views.MetadataView.as_view()),
 )
