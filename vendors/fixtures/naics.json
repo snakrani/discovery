@@ -264,7 +264,7 @@
   "fields": {
     "code": "541711",
     "root_code": "541711",
-    "description": "Research and Development in Biotechnology\r\n"
+    "description": "Research and Development in Biotechnology"
   },
   "model": "vendors.naics",
   "pk": 30
@@ -304,5 +304,194 @@
   },
   "model": "vendors.naics",
   "pk": 34
+},
+{
+  "fields": {
+    "code": "611430",
+    "root_code": "611430",
+    "description": "Professional and Management Development Training"
+  },
+  "model": "vendors.naics",
+  "pk": 35
+},
+{
+  "fields": {
+    "code": "611699",
+    "root_code": "611699",
+    "description": "All Other Miscellaneous Schools and Instruction"
+  },
+  "model": "vendors.naics",
+  "pk": 36
+},
+{
+  "fields": {
+    "code": "624310",
+    "root_code": "624310",
+    "description": "Vocational Rehabilitation Services"
+  },
+  "model": "vendors.naics",
+  "pk": 37
+},
+{
+  "fields": {
+    "code": "611710",
+    "root_code": "611710",
+    "description": "Educational Support Services"
+  },
+  "model": "vendors.naics",
+  "pk": 38
+},
+{
+  "fields": {
+    "code": "561210",
+    "root_code": "561210",
+    "description": "Facilities Support Services / Operations and Maintenance"
+  },
+  "model": "vendors.naics",
+  "pk": 39
+},
+{
+  "fields": {
+    "code": "236220",
+    "root_code": "236220",
+    "description": "Architectural and Framework Building Maintenance Services"
+  },
+  "model": "vendors.naics",
+  "pk": 40
+},
+{
+  "fields": {
+    "code": "238160",
+    "root_code": "238160",
+    "description": "Roofing Services"
+  },
+  "model": "vendors.naics",
+  "pk": 41
+},
+{
+  "fields": {
+    "code": "238210",
+    "root_code": "238210",
+    "description": "Electrical Maintenance"
+  },
+  "model": "vendors.naics",
+  "pk": 42
+},
+{
+  "fields": {
+    "code": "238220A",
+    "root_code": "238220",
+    "description": "HVAC Maintenance"
+  },
+  "model": "vendors.naics",
+  "pk": 43
+},
+{
+  "fields": {
+    "code": "238220B",
+    "root_code": "238220",
+    "description": "Plumbing and Pipefitting"
+  },
+  "model": "vendors.naics",
+  "pk": 44
+},
+{
+  "fields": {
+    "code": "238220C",
+    "root_code": "238220",
+    "description": "Fire Suppression (Water Based) System Preventative Maintenance and Repair"
+  },
+  "model": "vendors.naics",
+  "pk": 45
+},
+{
+  "fields": {
+    "code": "238290",
+    "root_code": "238290",
+    "description": "Elevator Maintenance"
+  },
+  "model": "vendors.naics",
+  "pk": 46
+},
+{
+  "fields": {
+    "code": "531312",
+    "root_code": "531312",
+    "description": "Building Management Services"
+  },
+  "model": "vendors.naics",
+  "pk": 47
+},
+{
+  "fields": {
+    "code": "541330D",
+    "root_code": "541330",
+    "description": "Commissioning Services"
+  },
+  "model": "vendors.naics",
+  "pk": 48
+},
+{
+  "fields": {
+    "code": "541350",
+    "root_code": "541350",
+    "description": "Elevator Inspection Services"
+  },
+  "model": "vendors.naics",
+  "pk": 49
+},
+{
+  "fields": {
+    "code": "561621",
+    "root_code": "561621",
+    "description": "Fire Alarm System Maintenance and Repair"
+  },
+  "model": "vendors.naics",
+  "pk": 50
+},
+{
+  "fields": {
+    "code": "561710",
+    "root_code": "561710",
+    "description": "Pest Control"
+  },
+  "model": "vendors.naics",
+  "pk": 51
+},
+{
+  "fields": {
+    "code": "561720",
+    "root_code": "561720",
+    "description": "Janitorial"
+  },
+  "model": "vendors.naics",
+  "pk": 52
+},
+{
+  "fields": {
+    "code": "561730A",
+    "root_code": "561730",
+    "description": "Landscaping/Grounds Maintenance"
+  },
+  "model": "vendors.naics",
+  "pk": 53
+},
+{
+  "fields": {
+    "code": "561730B",
+    "root_code": "561730",
+    "description": "Cemetery Maintenance"
+  },
+  "model": "vendors.naics",
+  "pk": 54
+},
+{
+  "fields": {
+    "code": "562111",
+    "root_code": "562111",
+    "description": "Waste Management and Recycling Services"
+  },
+  "model": "vendors.naics",
+  "pk": 55
 }
 ]
