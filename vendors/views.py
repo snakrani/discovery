@@ -41,7 +41,7 @@ def pool_csv(request):
     setasides_all = SetAside.objects.all().order_by('far_order')
     filter_text = []
     #naics
-    naics = Naics.objects.get(short_code=request.GET['naics-code'])
+    naics = Naics.objects.get(code=request.GET['naics-code'])
     vehicle = request.GET['vehicle'].upper()
     pool = Pool.objects.get(naics=naics, vehicle=vehicle)
     vendors = vendors.filter(pools=pool)
