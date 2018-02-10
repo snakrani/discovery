@@ -1,0 +1,5130 @@
+[
+{
+  "fields": {
+    "manager": 1,
+    "address": "OASIS@act-i.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 1
+},
+{
+  "fields": {
+    "manager": 2,
+    "address": "OASIS@act-i.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 2
+},
+{
+  "fields": {
+    "manager": 3,
+    "address": "OASIS@adstm.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 3
+},
+{
+  "fields": {
+    "manager": 4,
+    "address": "OASIS@adstm.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 4
+},
+{
+  "fields": {
+    "manager": 5,
+    "address": "rkadasi@amyx.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 5
+},
+{
+  "fields": {
+    "manager": 6,
+    "address": "OASISBD@amyx.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 6
+},
+{
+  "fields": {
+    "manager": 7,
+    "address": "gsa@planetrisk.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 7
+},
+{
+  "fields": {
+    "manager": 8,
+    "address": "gsa@planetrisk.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 8
+},
+{
+  "fields": {
+    "manager": 9,
+    "address": "OASISPOOL1@apogeemail.net"
+  },
+  "model": "vendors.manageremail",
+  "pk": 9
+},
+{
+  "fields": {
+    "manager": 10,
+    "address": "OASISPOOL1@apogeemail.net"
+  },
+  "model": "vendors.manageremail",
+  "pk": 10
+},
+{
+  "fields": {
+    "manager": 11,
+    "address": "OASIS@asrcfederal.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 11
+},
+{
+  "fields": {
+    "manager": 12,
+    "address": "OASIS@asrcfederal.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 12
+},
+{
+  "fields": {
+    "manager": 13,
+    "address": "OASISSB@bbande.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 13
+},
+{
+  "fields": {
+    "manager": 14,
+    "address": "OASISSB@bbande.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 14
+},
+{
+  "fields": {
+    "manager": 15,
+    "address": "BRC_OASIS@brc2.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 15
+},
+{
+  "fields": {
+    "manager": 16,
+    "address": "BRC_OASIS@brc2.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 16
+},
+{
+  "fields": {
+    "manager": 17,
+    "address": "OASISSB@bwfed.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 17
+},
+{
+  "fields": {
+    "manager": 18,
+    "address": "emendez@bwfed.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 18
+},
+{
+  "fields": {
+    "manager": 19,
+    "address": "OASIS-SB@bowheadsupport.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 19
+},
+{
+  "fields": {
+    "manager": 20,
+    "address": "OASIS-SB@bowheadsupport.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 20
+},
+{
+  "fields": {
+    "manager": 21,
+    "address": "OASIS-SB@cn-bus.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 21
+},
+{
+  "fields": {
+    "manager": 22,
+    "address": "OASIS-SB@cn-bus.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 22
+},
+{
+  "fields": {
+    "manager": 23,
+    "address": "OASIS-Contracts@chevoconsulting.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 23
+},
+{
+  "fields": {
+    "manager": 24,
+    "address": "OASIS-PM@chevoconsulting.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 24
+},
+{
+  "fields": {
+    "manager": 25,
+    "address": "contracts@credence-llc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 25
+},
+{
+  "fields": {
+    "manager": 26,
+    "address": "OASIS@credence-llc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 26
+},
+{
+  "fields": {
+    "manager": 27,
+    "address": "OASIS-COCM@Dakota-Consulting.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 27
+},
+{
+  "fields": {
+    "manager": 28,
+    "address": "OASIS-COPM@Dakota-Consulting.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 28
+},
+{
+  "fields": {
+    "manager": 29,
+    "address": "OASISSB@eaglerayinc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 29
+},
+{
+  "fields": {
+    "manager": 30,
+    "address": "OASISSB@eaglerayinc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 30
+},
+{
+  "fields": {
+    "manager": 31,
+    "address": "OASIS@ecompex.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 31
+},
+{
+  "fields": {
+    "manager": 32,
+    "address": "OASIS@ecompex.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 32
+},
+{
+  "fields": {
+    "manager": 33,
+    "address": "dphipps@eleit-tech.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 33
+},
+{
+  "fields": {
+    "manager": 34,
+    "address": "OASISSB@eleit-tech.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 34
+},
+{
+  "fields": {
+    "manager": 35,
+    "address": "OASISSB@forsmarshgroup.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 35
+},
+{
+  "fields": {
+    "manager": 36,
+    "address": "OASISSB@forsmarshgroup.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 36
+},
+{
+  "fields": {
+    "manager": 37,
+    "address": "OASIS@gemini-ind.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 37
+},
+{
+  "fields": {
+    "manager": 38,
+    "address": "OASIS@gemini-ind.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 38
+},
+{
+  "fields": {
+    "manager": 39,
+    "address": "Sanjeev.Hirani@Akima.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 39
+},
+{
+  "fields": {
+    "manager": 40,
+    "address": "GSA-OASIS@ikun.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 40
+},
+{
+  "fields": {
+    "manager": 41,
+    "address": "OASIS@itllc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 41
+},
+{
+  "fields": {
+    "manager": 42,
+    "address": "OASIS@itllc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 42
+},
+{
+  "fields": {
+    "manager": 43,
+    "address": "OASISSB@insighttsi.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 43
+},
+{
+  "fields": {
+    "manager": 44,
+    "address": "OASISSB@insighttsi.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 44
+},
+{
+  "fields": {
+    "manager": 45,
+    "address": "OASIS@e2zintegral.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 45
+},
+{
+  "fields": {
+    "manager": 46,
+    "address": "OASIS@e2zintegral.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 46
+},
+{
+  "fields": {
+    "manager": 47,
+    "address": "ekabir@ibtci.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 47
+},
+{
+  "fields": {
+    "manager": 48,
+    "address": "BD.OASIS@ibtci.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 48
+},
+{
+  "fields": {
+    "manager": 49,
+    "address": "mcarlson@ita-intl.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 49
+},
+{
+  "fields": {
+    "manager": 50,
+    "address": "ITA-OASIS@ita-intl.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 50
+},
+{
+  "fields": {
+    "manager": 51,
+    "address": "kterrell@ktc-inc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 51
+},
+{
+  "fields": {
+    "manager": 52,
+    "address": "kterrell@ktc-inc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 52
+},
+{
+  "fields": {
+    "manager": 53,
+    "address": "OASISSB@lochharbour.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 53
+},
+{
+  "fields": {
+    "manager": 54,
+    "address": "OASISSB@lochharbour.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 54
+},
+{
+  "fields": {
+    "manager": 55,
+    "address": "OASIS@msiuniversal.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 55
+},
+{
+  "fields": {
+    "manager": 56,
+    "address": "OASIS@msiuniversal.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 56
+},
+{
+  "fields": {
+    "manager": 57,
+    "address": "OASIS@mcmanis-monsalve.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 57
+},
+{
+  "fields": {
+    "manager": 58,
+    "address": "OASIS@mcmanis-monsalve.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 58
+},
+{
+  "fields": {
+    "manager": 59,
+    "address": "dscali@msag.net"
+  },
+  "model": "vendors.manageremail",
+  "pk": 59
+},
+{
+  "fields": {
+    "manager": 60,
+    "address": "lvalentini@msag.net"
+  },
+  "model": "vendors.manageremail",
+  "pk": 60
+},
+{
+  "fields": {
+    "manager": 61,
+    "address": "ssharda@miraclesystems.net"
+  },
+  "model": "vendors.manageremail",
+  "pk": 61
+},
+{
+  "fields": {
+    "manager": 62,
+    "address": "dstack@miraclesystems.net"
+  },
+  "model": "vendors.manageremail",
+  "pk": 62
+},
+{
+  "fields": {
+    "manager": 63,
+    "address": "contracts@mosaicsgroup.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 63
+},
+{
+  "fields": {
+    "manager": 64,
+    "address": "mgrier@mosaicsgroup.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 64
+},
+{
+  "fields": {
+    "manager": 65,
+    "address": "OASIS@niksoft.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 65
+},
+{
+  "fields": {
+    "manager": 66,
+    "address": "OASIS@niksoft.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 66
+},
+{
+  "fields": {
+    "manager": 67,
+    "address": "OASIS@obxtek.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 67
+},
+{
+  "fields": {
+    "manager": 68,
+    "address": "OASIS@obxtek.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 68
+},
+{
+  "fields": {
+    "manager": 69,
+    "address": "OASIS@panum.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 69
+},
+{
+  "fields": {
+    "manager": 70,
+    "address": "OASIS@panum.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 70
+},
+{
+  "fields": {
+    "manager": 71,
+    "address": "OASIS@potomacwave.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 71
+},
+{
+  "fields": {
+    "manager": 72,
+    "address": "OASIS@potomacwave.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 72
+},
+{
+  "fields": {
+    "manager": 73,
+    "address": "OASISSB@quantitech.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 73
+},
+{
+  "fields": {
+    "manager": 74,
+    "address": "OASISSB@quantitech.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 74
+},
+{
+  "fields": {
+    "manager": 75,
+    "address": "mvodzak@rmcweb.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 75
+},
+{
+  "fields": {
+    "manager": 76,
+    "address": "kcooley@rmcweb.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 76
+},
+{
+  "fields": {
+    "manager": 77,
+    "address": "OASIS@sawdeysolutionservices.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 77
+},
+{
+  "fields": {
+    "manager": 78,
+    "address": "OASIS@sawdeysolutionservices.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 78
+},
+{
+  "fields": {
+    "manager": 79,
+    "address": "OASISPOOL1@sev1tech.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 79
+},
+{
+  "fields": {
+    "manager": 80,
+    "address": "OASISPOOL1@sev1tech.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 80
+},
+{
+  "fields": {
+    "manager": 81,
+    "address": "OASISSB@sti-tec.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 81
+},
+{
+  "fields": {
+    "manager": 82,
+    "address": "OASISSB@sti-tec.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 82
+},
+{
+  "fields": {
+    "manager": 83,
+    "address": "OASISSB@synecticsolutions.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 83
+},
+{
+  "fields": {
+    "manager": 84,
+    "address": "ldines@synecsolu.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 84
+},
+{
+  "fields": {
+    "manager": 85,
+    "address": "contract@sysplus.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 85
+},
+{
+  "fields": {
+    "manager": 86,
+    "address": "OASISSB@sysplus.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 86
+},
+{
+  "fields": {
+    "manager": 87,
+    "address": "dwest@t3w.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 87
+},
+{
+  "fields": {
+    "manager": 88,
+    "address": "lcarman@t3w.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 88
+},
+{
+  "fields": {
+    "manager": 89,
+    "address": "lhood@addxcorp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 89
+},
+{
+  "fields": {
+    "manager": 90,
+    "address": "jmillward@addxcorp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 90
+},
+{
+  "fields": {
+    "manager": 91,
+    "address": "eke@de-a.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 91
+},
+{
+  "fields": {
+    "manager": 92,
+    "address": "eke@de-a.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 92
+},
+{
+  "fields": {
+    "manager": 93,
+    "address": "gmcdermott@drtstrategies.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 93
+},
+{
+  "fields": {
+    "manager": 94,
+    "address": "mduffy@drtstrategies.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 94
+},
+{
+  "fields": {
+    "manager": 95,
+    "address": "eastman@ficonsulting.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 95
+},
+{
+  "fields": {
+    "manager": 96,
+    "address": "cavallomiller@ficonsulting.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 96
+},
+{
+  "fields": {
+    "manager": 97,
+    "address": "Nazim.Hamilton@usfti.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 97
+},
+{
+  "fields": {
+    "manager": 98,
+    "address": "Nazim.Hamilton@usfti.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 98
+},
+{
+  "fields": {
+    "manager": 99,
+    "address": "john.lacey@rmadvisory.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 99
+},
+{
+  "fields": {
+    "manager": 100,
+    "address": "johnglass@rmadvisory.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 100
+},
+{
+  "fields": {
+    "manager": 101,
+    "address": "info@ruchman.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 101
+},
+{
+  "fields": {
+    "manager": 102,
+    "address": "info@ruchman.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 102
+},
+{
+  "fields": {
+    "manager": 103,
+    "address": "OASIS@aegistg.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 103
+},
+{
+  "fields": {
+    "manager": 104,
+    "address": "jvaughan@aegistg.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 104
+},
+{
+  "fields": {
+    "manager": 105,
+    "address": "bala@asm-usa.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 105
+},
+{
+  "fields": {
+    "manager": 106,
+    "address": "junnam@asm-usa.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 106
+},
+{
+  "fields": {
+    "manager": 107,
+    "address": "ARA_OASIS_SB@ara.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 107
+},
+{
+  "fields": {
+    "manager": 108,
+    "address": "ARA_OASIS_SB@ara.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 108
+},
+{
+  "fields": {
+    "manager": 109,
+    "address": "bskinn@appliedres.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 109
+},
+{
+  "fields": {
+    "manager": 110,
+    "address": "gwittlinger@appliedres.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 110
+},
+{
+  "fields": {
+    "manager": 111,
+    "address": "OASIS@avioninc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 111
+},
+{
+  "fields": {
+    "manager": 112,
+    "address": "OASIS@avioninc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 112
+},
+{
+  "fields": {
+    "manager": 113,
+    "address": "BTASGSAOASIS@btas.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 113
+},
+{
+  "fields": {
+    "manager": 114,
+    "address": "BTASGSAOASIS@btas.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 114
+},
+{
+  "fields": {
+    "manager": 115,
+    "address": "cdickens@colsa.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 115
+},
+{
+  "fields": {
+    "manager": 116,
+    "address": "sgilson@colsa.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 116
+},
+{
+  "fields": {
+    "manager": 117,
+    "address": "OASIS@compass-sys-inc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 117
+},
+{
+  "fields": {
+    "manager": 118,
+    "address": "OASIS@compass-sys-inc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 118
+},
+{
+  "fields": {
+    "manager": 119,
+    "address": "contracts@cssiinc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 119
+},
+{
+  "fields": {
+    "manager": 120,
+    "address": "OASIS@cssiinc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 120
+},
+{
+  "fields": {
+    "manager": 121,
+    "address": "DCS_OASIS_SB@dcscorp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 121
+},
+{
+  "fields": {
+    "manager": 122,
+    "address": "DCS_OASIS_SB@dcscorp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 122
+},
+{
+  "fields": {
+    "manager": 123,
+    "address": "Dana.Ho@dac.us"
+  },
+  "model": "vendors.manageremail",
+  "pk": 123
+},
+{
+  "fields": {
+    "manager": 124,
+    "address": "Shawn.Shanley@dac.us"
+  },
+  "model": "vendors.manageremail",
+  "pk": 124
+},
+{
+  "fields": {
+    "manager": 125,
+    "address": "OASIS@dynetics.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 125
+},
+{
+  "fields": {
+    "manager": 126,
+    "address": "OASIS@dynetics.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 126
+},
+{
+  "fields": {
+    "manager": 127,
+    "address": "OASISCM@erc-incorporated.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 127
+},
+{
+  "fields": {
+    "manager": 128,
+    "address": "OASISPM@erc-incorporated.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 128
+},
+{
+  "fields": {
+    "manager": 129,
+    "address": "OASIS-SB@FulcrumCO.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 129
+},
+{
+  "fields": {
+    "manager": 130,
+    "address": "OASIS-SB@FulcrumCO.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 130
+},
+{
+  "fields": {
+    "manager": 131,
+    "address": "Todd.Burkhardt@hxfive.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 131
+},
+{
+  "fields": {
+    "manager": 132,
+    "address": "Michael.Gendron@hxfive.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 132
+},
+{
+  "fields": {
+    "manager": 133,
+    "address": "irishs@itc-1.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 133
+},
+{
+  "fields": {
+    "manager": 134,
+    "address": "canterc@itc-1.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 134
+},
+{
+  "fields": {
+    "manager": 135,
+    "address": "OASISSB@integrity-apps.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 135
+},
+{
+  "fields": {
+    "manager": 136,
+    "address": "OASISSB@integrity-apps.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 136
+},
+{
+  "fields": {
+    "manager": 137,
+    "address": "OASIS@intrepidinc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 137
+},
+{
+  "fields": {
+    "manager": 138,
+    "address": "OASIS@intrepidinc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 138
+},
+{
+  "fields": {
+    "manager": 139,
+    "address": "OASIS@irtc-hq.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 139
+},
+{
+  "fields": {
+    "manager": 140,
+    "address": "OASIS@irtc-hq.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 140
+},
+{
+  "fields": {
+    "manager": 141,
+    "address": "Londa.Phillips@linquest.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 141
+},
+{
+  "fields": {
+    "manager": 142,
+    "address": "Matt.Redling@linquest.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 142
+},
+{
+  "fields": {
+    "manager": 143,
+    "address": "OASIS.COCM@mcri.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 143
+},
+{
+  "fields": {
+    "manager": 144,
+    "address": "OASIS.COPM@mcri.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 144
+},
+{
+  "fields": {
+    "manager": 145,
+    "address": "OASIS@meitechinc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 145
+},
+{
+  "fields": {
+    "manager": 146,
+    "address": "OASIS@meitechinc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 146
+},
+{
+  "fields": {
+    "manager": 147,
+    "address": "OASIS@meicompany.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 147
+},
+{
+  "fields": {
+    "manager": 148,
+    "address": "OASIS@meicompany.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 148
+},
+{
+  "fields": {
+    "manager": 149,
+    "address": "OASIS@mtsi-va.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 149
+},
+{
+  "fields": {
+    "manager": 150,
+    "address": "OASIS@mtsi-va.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 150
+},
+{
+  "fields": {
+    "manager": 151,
+    "address": "GSAOASIS@OasisSystems.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 151
+},
+{
+  "fields": {
+    "manager": 152,
+    "address": "GSAOASIS@OasisSystems.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 152
+},
+{
+  "fields": {
+    "manager": 153,
+    "address": "daericoskren@odysseyconsult.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 153
+},
+{
+  "fields": {
+    "manager": 154,
+    "address": "OASISmail@odysseyconsult.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 154
+},
+{
+  "fields": {
+    "manager": 155,
+    "address": "OASIS@pesystems.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 155
+},
+{
+  "fields": {
+    "manager": 156,
+    "address": "OASIS@pesystems.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 156
+},
+{
+  "fields": {
+    "manager": 157,
+    "address": "OASIS-Contracts@epeerless.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 157
+},
+{
+  "fields": {
+    "manager": 158,
+    "address": "OASIS-Contracts@epeerless.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 158
+},
+{
+  "fields": {
+    "manager": 159,
+    "address": "Quantech-C-OASIS@quantechserv.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 159
+},
+{
+  "fields": {
+    "manager": 160,
+    "address": "Quantech-C-OASIS@quantechserv.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 160
+},
+{
+  "fields": {
+    "manager": 161,
+    "address": "OASIS@radiancetech.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 161
+},
+{
+  "fields": {
+    "manager": 162,
+    "address": "OASIS@radiancetech.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 162
+},
+{
+  "fields": {
+    "manager": 163,
+    "address": "OASIS@scires.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 163
+},
+{
+  "fields": {
+    "manager": 164,
+    "address": "OASIS@scires.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 164
+},
+{
+  "fields": {
+    "manager": 165,
+    "address": "OASIS@sierralobo.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 165
+},
+{
+  "fields": {
+    "manager": 166,
+    "address": "OASIS@sierralobo.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 166
+},
+{
+  "fields": {
+    "manager": 167,
+    "address": "Jackie.Hicks@Sigmatech.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 167
+},
+{
+  "fields": {
+    "manager": 168,
+    "address": "OASISMANAGEMENT@sigmatech.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 168
+},
+{
+  "fields": {
+    "manager": 169,
+    "address": "OASIS@sptrm.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 169
+},
+{
+  "fields": {
+    "manager": 170,
+    "address": "OASIS@sptrm.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 170
+},
+{
+  "fields": {
+    "manager": 171,
+    "address": "OASIS-SB@sumaria.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 171
+},
+{
+  "fields": {
+    "manager": 172,
+    "address": "OASIS-SB@sumaria.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 172
+},
+{
+  "fields": {
+    "manager": 173,
+    "address": "jhamilton@ssai.org"
+  },
+  "model": "vendors.manageremail",
+  "pk": 173
+},
+{
+  "fields": {
+    "manager": 174,
+    "address": "mreynolds@ssai.org"
+  },
+  "model": "vendors.manageremail",
+  "pk": 174
+},
+{
+  "fields": {
+    "manager": 175,
+    "address": "OASIS@survice.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 175
+},
+{
+  "fields": {
+    "manager": 176,
+    "address": "OASIS@survice.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 176
+},
+{
+  "fields": {
+    "manager": 177,
+    "address": "ehawes@tecolote.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 177
+},
+{
+  "fields": {
+    "manager": 178,
+    "address": "ghigdon@tecolote.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 178
+},
+{
+  "fields": {
+    "manager": 179,
+    "address": "Kenneth.Lones@torchtechnologies.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 179
+},
+{
+  "fields": {
+    "manager": 180,
+    "address": "Clay.Hagan@torchtechnologies.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 180
+},
+{
+  "fields": {
+    "manager": 181,
+    "address": "jsciabica@utcdayton.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 181
+},
+{
+  "fields": {
+    "manager": 182,
+    "address": "bhack@utcdayton.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 182
+},
+{
+  "fields": {
+    "manager": 183,
+    "address": "Valerie.Piazza@usfalcon.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 183
+},
+{
+  "fields": {
+    "manager": 184,
+    "address": "Bob.Hamsik@usfalcon.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 184
+},
+{
+  "fields": {
+    "manager": 185,
+    "address": "OASIS.LG-WBB@wbbinc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 185
+},
+{
+  "fields": {
+    "manager": 186,
+    "address": "OASIS.LG-WBB@wbbinc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 186
+},
+{
+  "fields": {
+    "manager": 187,
+    "address": "foreman@assurtech.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 187
+},
+{
+  "fields": {
+    "manager": 188,
+    "address": "magnuson@assurtech.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 188
+},
+{
+  "fields": {
+    "manager": 189,
+    "address": "Paul.Shiffka@dsainc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 189
+},
+{
+  "fields": {
+    "manager": 190,
+    "address": "Bob.Strom@dsainc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 190
+},
+{
+  "fields": {
+    "manager": 191,
+    "address": "kbain@deltasands.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 191
+},
+{
+  "fields": {
+    "manager": 192,
+    "address": "gbain@deltasands.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 192
+},
+{
+  "fields": {
+    "manager": 193,
+    "address": "ERT-OASIS@ertcorp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 193
+},
+{
+  "fields": {
+    "manager": 194,
+    "address": "ERT-OASIS@ertcorp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 194
+},
+{
+  "fields": {
+    "manager": 195,
+    "address": "Kelly.Loomis@erg.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 195
+},
+{
+  "fields": {
+    "manager": 196,
+    "address": "Amanda.Pedersen@erg.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 196
+},
+{
+  "fields": {
+    "manager": 197,
+    "address": "Sandra.Stewart@gst.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 197
+},
+{
+  "fields": {
+    "manager": 198,
+    "address": "Chris.Moren@gst.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 198
+},
+{
+  "fields": {
+    "manager": 199,
+    "address": "OASIS@i3-corps.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 199
+},
+{
+  "fields": {
+    "manager": 200,
+    "address": "OASIS@i3-corps.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 200
+},
+{
+  "fields": {
+    "manager": 201,
+    "address": "contracts@meticorp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 201
+},
+{
+  "fields": {
+    "manager": 202,
+    "address": "bd@meticorp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 202
+},
+{
+  "fields": {
+    "manager": 203,
+    "address": "pschildt@metricanet.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 203
+},
+{
+  "fields": {
+    "manager": 204,
+    "address": "OASIS@metricanet.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 204
+},
+{
+  "fields": {
+    "manager": 205,
+    "address": "sscott@microtech.net"
+  },
+  "model": "vendors.manageremail",
+  "pk": 205
+},
+{
+  "fields": {
+    "manager": 206,
+    "address": "bedgar@microtech.net"
+  },
+  "model": "vendors.manageremail",
+  "pk": 206
+},
+{
+  "fields": {
+    "manager": 207,
+    "address": "alexandria-OASIS@tsc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 207
+},
+{
+  "fields": {
+    "manager": 208,
+    "address": "alexandria-OASIS@tsc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 208
+},
+{
+  "fields": {
+    "manager": 209,
+    "address": "OASIS@riverside.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 209
+},
+{
+  "fields": {
+    "manager": 210,
+    "address": "OASIS@riverside.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 210
+},
+{
+  "fields": {
+    "manager": 211,
+    "address": "OASIS@sainc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 211
+},
+{
+  "fields": {
+    "manager": 212,
+    "address": "OASIS@sainc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 212
+},
+{
+  "fields": {
+    "manager": 213,
+    "address": "OASIS@subsystem.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 213
+},
+{
+  "fields": {
+    "manager": 214,
+    "address": "tiveson@subsystem.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 214
+},
+{
+  "fields": {
+    "manager": 215,
+    "address": "OASIS@zeltech.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 215
+},
+{
+  "fields": {
+    "manager": 216,
+    "address": "OASIS@zeltech.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 216
+},
+{
+  "fields": {
+    "manager": 217,
+    "address": "OASIS@ac4s.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 217
+},
+{
+  "fields": {
+    "manager": 218,
+    "address": "OASIS@ac4s.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 218
+},
+{
+  "fields": {
+    "manager": 219,
+    "address": "contracts@agile-defense.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 219
+},
+{
+  "fields": {
+    "manager": 220,
+    "address": "OASISSB@agile-defense.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 220
+},
+{
+  "fields": {
+    "manager": 221,
+    "address": "contracts@apt-research.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 221
+},
+{
+  "fields": {
+    "manager": 222,
+    "address": "OASIS@apt-research.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 222
+},
+{
+  "fields": {
+    "manager": 223,
+    "address": "tridgeway@act-corp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 223
+},
+{
+  "fields": {
+    "manager": 224,
+    "address": "OASIS@act-corp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 224
+},
+{
+  "fields": {
+    "manager": 225,
+    "address": "OASIS@atlas-tech.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 225
+},
+{
+  "fields": {
+    "manager": 226,
+    "address": "OASIS@atlas-tech.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 226
+},
+{
+  "fields": {
+    "manager": 227,
+    "address": "OASIS-SB@caelum.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 227
+},
+{
+  "fields": {
+    "manager": 228,
+    "address": "OASIS-SB@caelum.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 228
+},
+{
+  "fields": {
+    "manager": 229,
+    "address": "CSA-GSA-OASIS@csaassociates.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 229
+},
+{
+  "fields": {
+    "manager": 230,
+    "address": "CSA-GSA-OASIS@csaassociates.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 230
+},
+{
+  "fields": {
+    "manager": 231,
+    "address": "Chris.Holtery@cse-corp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 231
+},
+{
+  "fields": {
+    "manager": 232,
+    "address": "OASIS-PM@cse-corp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 232
+},
+{
+  "fields": {
+    "manager": 233,
+    "address": "OASIS@ddlomni.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 233
+},
+{
+  "fields": {
+    "manager": 234,
+    "address": "OASIS@ddlomni.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 234
+},
+{
+  "fields": {
+    "manager": 235,
+    "address": "jmcclean@forwardslope.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 235
+},
+{
+  "fields": {
+    "manager": 236,
+    "address": "njohnson@forwardslope.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 236
+},
+{
+  "fields": {
+    "manager": 237,
+    "address": "OASISSB@futroninc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 237
+},
+{
+  "fields": {
+    "manager": 238,
+    "address": "OASISSB@futroninc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 238
+},
+{
+  "fields": {
+    "manager": 239,
+    "address": "msmith@keylogic.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 239
+},
+{
+  "fields": {
+    "manager": 240,
+    "address": "gcopen@keylogic.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 240
+},
+{
+  "fields": {
+    "manager": 241,
+    "address": "OASIS@kihomac.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 241
+},
+{
+  "fields": {
+    "manager": 242,
+    "address": "OASIS@kihomac.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 242
+},
+{
+  "fields": {
+    "manager": 243,
+    "address": "contract.administration@lcibest.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 243
+},
+{
+  "fields": {
+    "manager": 244,
+    "address": "OASISPMO@lcibest.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 244
+},
+{
+  "fields": {
+    "manager": 245,
+    "address": "OASISSB@orbisinc.net"
+  },
+  "model": "vendors.manageremail",
+  "pk": 245
+},
+{
+  "fields": {
+    "manager": 246,
+    "address": "OASISSB@orbisinc.net"
+  },
+  "model": "vendors.manageremail",
+  "pk": 246
+},
+{
+  "fields": {
+    "manager": 247,
+    "address": "burban@pccii.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 247
+},
+{
+  "fields": {
+    "manager": 248,
+    "address": "thudon@pccii.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 248
+},
+{
+  "fields": {
+    "manager": 249,
+    "address": "cardenase@skyllaeng.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 249
+},
+{
+  "fields": {
+    "manager": 250,
+    "address": "muizersc@skyllaeng.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 250
+},
+{
+  "fields": {
+    "manager": 251,
+    "address": "OASIS@teamscci.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 251
+},
+{
+  "fields": {
+    "manager": 252,
+    "address": "OASIS@teamscci.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 252
+},
+{
+  "fields": {
+    "manager": 253,
+    "address": "tcicontracts@teleinc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 253
+},
+{
+  "fields": {
+    "manager": 254,
+    "address": "crenshaw@teleinc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 254
+},
+{
+  "fields": {
+    "manager": 255,
+    "address": "OASISSB@vectorcsp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 255
+},
+{
+  "fields": {
+    "manager": 256,
+    "address": "OASISSB@vectorcsp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 256
+},
+{
+  "fields": {
+    "manager": 257,
+    "address": "OASISSB-XTI@x-technologies.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 257
+},
+{
+  "fields": {
+    "manager": 258,
+    "address": "OASISSB-XTI@x-technologies.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 258
+},
+{
+  "fields": {
+    "manager": 259,
+    "address": "gwac_pmo@ssaihq.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 259
+},
+{
+  "fields": {
+    "manager": 260,
+    "address": "jeffrey.shull@ssaihq.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 260
+},
+{
+  "fields": {
+    "manager": 261,
+    "address": "OASIS@accenturefederal.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 261
+},
+{
+  "fields": {
+    "manager": 262,
+    "address": "OASIS@accenturefederal.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 262
+},
+{
+  "fields": {
+    "manager": 263,
+    "address": "OASIS@aceinfosolutions.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 263
+},
+{
+  "fields": {
+    "manager": 264,
+    "address": "OASIS@aceinfosolutions.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 264
+},
+{
+  "fields": {
+    "manager": 265,
+    "address": "OASIS-PMO@alionscience.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 265
+},
+{
+  "fields": {
+    "manager": 266,
+    "address": "OASIS-PMO@alionscience.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 266
+},
+{
+  "fields": {
+    "manager": 267,
+    "address": "OASIS@amecfw.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 267
+},
+{
+  "fields": {
+    "manager": 268,
+    "address": "Peter.Baker@amecfw.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 268
+},
+{
+  "fields": {
+    "manager": 269,
+    "address": "gashton@ball.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 269
+},
+{
+  "fields": {
+    "manager": 270,
+    "address": "cemmeric@ball.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 270
+},
+{
+  "fields": {
+    "manager": 271,
+    "address": "OASIS@battelle.org"
+  },
+  "model": "vendors.manageremail",
+  "pk": 271
+},
+{
+  "fields": {
+    "manager": 272,
+    "address": "chauhan@battelle.org"
+  },
+  "model": "vendors.manageremail",
+  "pk": 272
+},
+{
+  "fields": {
+    "manager": 273,
+    "address": "OASIS@boeing.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 273
+},
+{
+  "fields": {
+    "manager": 274,
+    "address": "OASIS@boeing.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 274
+},
+{
+  "fields": {
+    "manager": 275,
+    "address": "BAHOASISContract@bah.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 275
+},
+{
+  "fields": {
+    "manager": 276,
+    "address": "BAHOASISContract@bah.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 276
+},
+{
+  "fields": {
+    "manager": 277,
+    "address": "CACIOASIS@caci.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 277
+},
+{
+  "fields": {
+    "manager": 278,
+    "address": "CACIOASIS@caci.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 278
+},
+{
+  "fields": {
+    "manager": 279,
+    "address": "OASIS@hii-tsd.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 279
+},
+{
+  "fields": {
+    "manager": 280,
+    "address": "rchen@hii.tsd.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 280
+},
+{
+  "fields": {
+    "manager": 281,
+    "address": "GSAOASIS@cgifederal.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 281
+},
+{
+  "fields": {
+    "manager": 282,
+    "address": "GSAOASIS@cgifederal.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 282
+},
+{
+  "fields": {
+    "manager": 283,
+    "address": "OASISPM@csra.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 283
+},
+{
+  "fields": {
+    "manager": 284,
+    "address": "OASISPM@csra.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 284
+},
+{
+  "fields": {
+    "manager": 285,
+    "address": "OASIS@ctc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 285
+},
+{
+  "fields": {
+    "manager": 286,
+    "address": "OASIS@ctc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 286
+},
+{
+  "fields": {
+    "manager": 287,
+    "address": "OASIS@cubic.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 287
+},
+{
+  "fields": {
+    "manager": 288,
+    "address": "OASIS@cubic.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 288
+},
+{
+  "fields": {
+    "manager": 289,
+    "address": "OASIS@deloitte.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 289
+},
+{
+  "fields": {
+    "manager": 290,
+    "address": "OASIS@deloitte.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 290
+},
+{
+  "fields": {
+    "manager": 291,
+    "address": "OASIS@ecs-federal.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 291
+},
+{
+  "fields": {
+    "manager": 292,
+    "address": "OASIS@ecs-federal.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 292
+},
+{
+  "fields": {
+    "manager": 293,
+    "address": "OASIS@engilitycorp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 293
+},
+{
+  "fields": {
+    "manager": 294,
+    "address": "OASIS@engilitycorp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 294
+},
+{
+  "fields": {
+    "manager": 295,
+    "address": "Janet.Skahill@gdit.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 295
+},
+{
+  "fields": {
+    "manager": 296,
+    "address": "GDITGSA@gdit.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 296
+},
+{
+  "fields": {
+    "manager": 297,
+    "address": "OASIS@harris.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 297
+},
+{
+  "fields": {
+    "manager": 298,
+    "address": "OASIS@harris.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 298
+},
+{
+  "fields": {
+    "manager": 299,
+    "address": "ICF-OASIS@icfi.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 299
+},
+{
+  "fields": {
+    "manager": 300,
+    "address": "ICF-OASIS@icfi.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 300
+},
+{
+  "fields": {
+    "manager": 301,
+    "address": "GSAOASIS@us.ibm.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 301
+},
+{
+  "fields": {
+    "manager": 302,
+    "address": "GSAOASIS@us.ibm.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 302
+},
+{
+  "fields": {
+    "manager": 303,
+    "address": "OASIS@jacobs.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 303
+},
+{
+  "fields": {
+    "manager": 304,
+    "address": "OASIS@jacobs.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 304
+},
+{
+  "fields": {
+    "manager": 305,
+    "address": "KTS-OASIS@kbrwyle.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 305
+},
+{
+  "fields": {
+    "manager": 306,
+    "address": "KTS-OASIS@kbrwyle.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 306
+},
+{
+  "fields": {
+    "manager": 307,
+    "address": "OASISCOCM@leidos.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 307
+},
+{
+  "fields": {
+    "manager": 308,
+    "address": "OASISCOPM@leidos.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 308
+},
+{
+  "fields": {
+    "manager": 309,
+    "address": "OASIS-PMO.GR-ISGS@lmco.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 309
+},
+{
+  "fields": {
+    "manager": 310,
+    "address": "OASIS-PMO.GR-ISGS@lmco.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 310
+},
+{
+  "fields": {
+    "manager": 311,
+    "address": "OASIS@lmi.org"
+  },
+  "model": "vendors.manageremail",
+  "pk": 311
+},
+{
+  "fields": {
+    "manager": 312,
+    "address": "OASIS@lmi.org"
+  },
+  "model": "vendors.manageremail",
+  "pk": 312
+},
+{
+  "fields": {
+    "manager": 313,
+    "address": "OASIS@mantech.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 313
+},
+{
+  "fields": {
+    "manager": 314,
+    "address": "OASIS@mantech.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 314
+},
+{
+  "fields": {
+    "manager": 315,
+    "address": "German.Lopez@noblis.org"
+  },
+  "model": "vendors.manageremail",
+  "pk": 315
+},
+{
+  "fields": {
+    "manager": 316,
+    "address": "OASIS@noblis.org"
+  },
+  "model": "vendors.manageremail",
+  "pk": 316
+},
+{
+  "fields": {
+    "manager": 317,
+    "address": "CONTRACTOASIS@ngc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 317
+},
+{
+  "fields": {
+    "manager": 318,
+    "address": "Jana.Haas@ngc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 318
+},
+{
+  "fields": {
+    "manager": 319,
+    "address": "Daniel.Lebeaux@pae.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 319
+},
+{
+  "fields": {
+    "manager": 320,
+    "address": "PAE-OASIS@pae.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 320
+},
+{
+  "fields": {
+    "manager": 321,
+    "address": "OASIS-CO@parsons.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 321
+},
+{
+  "fields": {
+    "manager": 322,
+    "address": "OASIS-PM@parsons.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 322
+},
+{
+  "fields": {
+    "manager": 323,
+    "address": "GSA_OASIS@raytheon.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 323
+},
+{
+  "fields": {
+    "manager": 324,
+    "address": "GSA_OASIS@raytheon.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 324
+},
+{
+  "fields": {
+    "manager": 325,
+    "address": "Sarah.L.Getty@saic.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 325
+},
+{
+  "fields": {
+    "manager": 326,
+    "address": "Belinda.B.Pellegrino@saic.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 326
+},
+{
+  "fields": {
+    "manager": 327,
+    "address": "OASIS@scires.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 327
+},
+{
+  "fields": {
+    "manager": 328,
+    "address": "OASIS@Serco-NA.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 328
+},
+{
+  "fields": {
+    "manager": 329,
+    "address": "OASIS@Serco-NA.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 329
+},
+{
+  "fields": {
+    "manager": 330,
+    "address": "OASIS@sgt-inc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 330
+},
+{
+  "fields": {
+    "manager": 331,
+    "address": "OASIS@sgt-inc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 331
+},
+{
+  "fields": {
+    "manager": 332,
+    "address": "OASIS@swri.org"
+  },
+  "model": "vendors.manageremail",
+  "pk": 332
+},
+{
+  "fields": {
+    "manager": 333,
+    "address": "OASIS@swri.org"
+  },
+  "model": "vendors.manageremail",
+  "pk": 333
+},
+{
+  "fields": {
+    "manager": 334,
+    "address": "OASIS@sra.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 334
+},
+{
+  "fields": {
+    "manager": 335,
+    "address": "OASIS@sra.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 335
+},
+{
+  "fields": {
+    "manager": 336,
+    "address": "OASIS@tetratech.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 336
+},
+{
+  "fields": {
+    "manager": 337,
+    "address": "Bill.Brownlie@tetratech.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 337
+},
+{
+  "fields": {
+    "manager": 338,
+    "address": "OASIS@unisys.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 338
+},
+{
+  "fields": {
+    "manager": 339,
+    "address": "OASIS@unisys.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 339
+},
+{
+  "fields": {
+    "manager": 340,
+    "address": "FS.OASIS.COCM@aecom.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 340
+},
+{
+  "fields": {
+    "manager": 341,
+    "address": "FS.OASIS.COPM@aecom.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 341
+},
+{
+  "fields": {
+    "manager": 342,
+    "address": "GSAOASIS@vencore.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 342
+},
+{
+  "fields": {
+    "manager": 343,
+    "address": "GSAOASIS@vencore.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 343
+},
+{
+  "fields": {
+    "manager": 344,
+    "address": "OASIS@wyle.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 344
+},
+{
+  "fields": {
+    "manager": 345,
+    "address": "OASIS@wyle.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 345
+},
+{
+  "fields": {
+    "manager": 346,
+    "address": "OASIS@ecs-federal.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 346
+},
+{
+  "fields": {
+    "manager": 347,
+    "address": "OASIS@ecs-federal.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 347
+},
+{
+  "fields": {
+    "manager": 348,
+    "address": "GPSGSAOASIS@us.gt.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 348
+},
+{
+  "fields": {
+    "manager": 349,
+    "address": "GPSGSAOASIS@us.gt.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 349
+},
+{
+  "fields": {
+    "manager": 350,
+    "address": "OASIS-COCM@kearneyco.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 350
+},
+{
+  "fields": {
+    "manager": 351,
+    "address": "OASIS@kearneyco.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 351
+},
+{
+  "fields": {
+    "manager": 352,
+    "address": "Kaplan-David@norc.org"
+  },
+  "model": "vendors.manageremail",
+  "pk": 352
+},
+{
+  "fields": {
+    "manager": 353,
+    "address": "Hackett-Jeffrey@norc.org"
+  },
+  "model": "vendors.manageremail",
+  "pk": 353
+},
+{
+  "fields": {
+    "manager": 354,
+    "address": "OASIS@navigant.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 354
+},
+{
+  "fields": {
+    "manager": 355,
+    "address": "OASIS@navigant.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 355
+},
+{
+  "fields": {
+    "manager": 356,
+    "address": "GSA_OASIS@us.pwc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 356
+},
+{
+  "fields": {
+    "manager": 357,
+    "address": "GSA_OASIS@us.pwc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 357
+},
+{
+  "fields": {
+    "manager": 358,
+    "address": "OASIS-Pool2@rti.org"
+  },
+  "model": "vendors.manageremail",
+  "pk": 358
+},
+{
+  "fields": {
+    "manager": 359,
+    "address": "OASIS-Pool2@rti.org"
+  },
+  "model": "vendors.manageremail",
+  "pk": 359
+},
+{
+  "fields": {
+    "manager": 360,
+    "address": "COCM.OASIS@Teksouth.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 360
+},
+{
+  "fields": {
+    "manager": 361,
+    "address": "COPM.OASIS@Teksouth.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 361
+},
+{
+  "fields": {
+    "manager": 362,
+    "address": "OASIS@terathink.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 362
+},
+{
+  "fields": {
+    "manager": 363,
+    "address": "OASIS@terathink.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 363
+},
+{
+  "fields": {
+    "manager": 364,
+    "address": "contracts@milcorp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 364
+},
+{
+  "fields": {
+    "manager": 365,
+    "address": "jhannah@milcorp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 365
+},
+{
+  "fields": {
+    "manager": 366,
+    "address": "OASISCOCM@westat.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 366
+},
+{
+  "fields": {
+    "manager": 367,
+    "address": "OASISCOPM@westat.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 367
+},
+{
+  "fields": {
+    "manager": 368,
+    "address": "COLSAOASIS@colsa.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 368
+},
+{
+  "fields": {
+    "manager": 369,
+    "address": "sgilson@colsa.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 369
+},
+{
+  "fields": {
+    "manager": 121,
+    "address": "DCS_OASIS_FO@dcscorp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 370
+},
+{
+  "fields": {
+    "manager": 122,
+    "address": "DCS_OASIS_FO@dcscorp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 371
+},
+{
+  "fields": {
+    "manager": 370,
+    "address": "OASIS@engilitycorp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 372
+},
+{
+  "fields": {
+    "manager": 371,
+    "address": "OASIS@engilitycorp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 373
+},
+{
+  "fields": {
+    "manager": 372,
+    "address": "Lakita.Brooks@osp.gatech.edu"
+  },
+  "model": "vendors.manageremail",
+  "pk": 374
+},
+{
+  "fields": {
+    "manager": 373,
+    "address": "Doug.Nation@gtri.gatech.edu"
+  },
+  "model": "vendors.manageremail",
+  "pk": 375
+},
+{
+  "fields": {
+    "manager": 374,
+    "address": "OASIS@macb.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 376
+},
+{
+  "fields": {
+    "manager": 375,
+    "address": "OASIS@macb.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 377
+},
+{
+  "fields": {
+    "manager": 159,
+    "address": "QUANTECH-C-OASIS@quantechserv.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 378
+},
+{
+  "fields": {
+    "manager": 160,
+    "address": "QUANTECH-C-OASIS@quantechserv.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 379
+},
+{
+  "fields": {
+    "manager": 167,
+    "address": "Jackie.Hicks@sigmatech.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 380
+},
+{
+  "fields": {
+    "manager": 171,
+    "address": "OASIS-LB@Sumaria.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 381
+},
+{
+  "fields": {
+    "manager": 172,
+    "address": "OASIS-LB@Sumaria.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 382
+},
+{
+  "fields": {
+    "manager": 376,
+    "address": "OASIS.LG-WBB@wbbinc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 383
+},
+{
+  "fields": {
+    "manager": 377,
+    "address": "OASISPMO@americansystems.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 384
+},
+{
+  "fields": {
+    "manager": 378,
+    "address": "OASISPMO@americansystems.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 385
+},
+{
+  "fields": {
+    "manager": 379,
+    "address": "CACIOASIS@caci.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 386
+},
+{
+  "fields": {
+    "manager": 380,
+    "address": "CACIOASIS@caci.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 387
+},
+{
+  "fields": {
+    "manager": 381,
+    "address": "OASIS@engilitycorp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 388
+},
+{
+  "fields": {
+    "manager": 382,
+    "address": "OASIS@engilitycorp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 389
+},
+{
+  "fields": {
+    "manager": 383,
+    "address": "Brandon.Gravett@sri.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 390
+},
+{
+  "fields": {
+    "manager": 384,
+    "address": "David.Scott@sri.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 391
+},
+{
+  "fields": {
+    "manager": 385,
+    "address": "GSAOASIS@vencore.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 392
+},
+{
+  "fields": {
+    "manager": 386,
+    "address": "GSAOASIS@vencore.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 393
+},
+{
+  "fields": {
+    "manager": 387,
+    "address": "OASIS@espus.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 394
+},
+{
+  "fields": {
+    "manager": 388,
+    "address": "OASIS@espus.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 395
+},
+{
+  "fields": {
+    "manager": 389,
+    "address": "vbourlan@harris.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 396
+},
+{
+  "fields": {
+    "manager": 390,
+    "address": "dwilley@harris.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 397
+},
+{
+  "fields": {
+    "manager": 391,
+    "address": "HCaTS-SB@apvit.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 398
+},
+{
+  "fields": {
+    "manager": 392,
+    "address": "HCaTS-SB@apvit.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 399
+},
+{
+  "fields": {
+    "manager": 393,
+    "address": "nnaylor@alisinc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 400
+},
+{
+  "fields": {
+    "manager": 394,
+    "address": "ebauernshub@alisinc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 401
+},
+{
+  "fields": {
+    "manager": 395,
+    "address": "HCATS@aestrategies.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 402
+},
+{
+  "fields": {
+    "manager": 395,
+    "address": "mcollins@aestrategies.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 403
+},
+{
+  "fields": {
+    "manager": 396,
+    "address": "HCATS@aestrategies.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 404
+},
+{
+  "fields": {
+    "manager": 396,
+    "address": "mloechler@aestrategies.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 405
+},
+{
+  "fields": {
+    "manager": 397,
+    "address": "dseelke@atlasresearch.us"
+  },
+  "model": "vendors.manageremail",
+  "pk": 406
+},
+{
+  "fields": {
+    "manager": 398,
+    "address": "rsuh@atlasresearch.us"
+  },
+  "model": "vendors.manageremail",
+  "pk": 407
+},
+{
+  "fields": {
+    "manager": 399,
+    "address": "mcook@colleagueconsulting.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 408
+},
+{
+  "fields": {
+    "manager": 400,
+    "address": "jfleuriot@colleagueconsulting.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 409
+},
+{
+  "fields": {
+    "manager": 401,
+    "address": "hcats_sb@deepmile.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 410
+},
+{
+  "fields": {
+    "manager": 401,
+    "address": "mneville@deepmile.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 411
+},
+{
+  "fields": {
+    "manager": 402,
+    "address": "hcats_sb@deepmile.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 412
+},
+{
+  "fields": {
+    "manager": 402,
+    "address": "broneill@deepmile.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 413
+},
+{
+  "fields": {
+    "manager": 403,
+    "address": "hcats@metisolutions.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 414
+},
+{
+  "fields": {
+    "manager": 403,
+    "address": "jsammons@metisolutions.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 415
+},
+{
+  "fields": {
+    "manager": 404,
+    "address": "hcats@metisolutions.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 416
+},
+{
+  "fields": {
+    "manager": 404,
+    "address": "cwynes@metisolutions.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 417
+},
+{
+  "fields": {
+    "manager": 405,
+    "address": "HCaTS@pherson.org"
+  },
+  "model": "vendors.manageremail",
+  "pk": 418
+},
+{
+  "fields": {
+    "manager": 405,
+    "address": "dpittman@pherson.org"
+  },
+  "model": "vendors.manageremail",
+  "pk": 419
+},
+{
+  "fields": {
+    "manager": 406,
+    "address": "JFriedman@pherson.org"
+  },
+  "model": "vendors.manageremail",
+  "pk": 420
+},
+{
+  "fields": {
+    "manager": 406,
+    "address": "Agander@pherson.org"
+  },
+  "model": "vendors.manageremail",
+  "pk": 421
+},
+{
+  "fields": {
+    "manager": 407,
+    "address": "murphyw@pitonscience.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 422
+},
+{
+  "fields": {
+    "manager": 408,
+    "address": "patec@pitonscience.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 423
+},
+{
+  "fields": {
+    "manager": 409,
+    "address": "sbhcats@powertrain.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 424
+},
+{
+  "fields": {
+    "manager": 409,
+    "address": "lsergent@powertrain.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 425
+},
+{
+  "fields": {
+    "manager": 410,
+    "address": "sbhcats@powertrain.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 426
+},
+{
+  "fields": {
+    "manager": 410,
+    "address": "lcox@powertrain.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 427
+},
+{
+  "fields": {
+    "manager": 411,
+    "address": "rakhi@rigil.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 428
+},
+{
+  "fields": {
+    "manager": 412,
+    "address": "brianlewis@rigil.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 429
+},
+{
+  "fields": {
+    "manager": 413,
+    "address": "jack.zeigler@goaclc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 430
+},
+{
+  "fields": {
+    "manager": 414,
+    "address": "hcats@goaclc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 431
+},
+{
+  "fields": {
+    "manager": 414,
+    "address": "KCox@goaclc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 432
+},
+{
+  "fields": {
+    "manager": 415,
+    "address": "hcats@arcaspicio.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 433
+},
+{
+  "fields": {
+    "manager": 415,
+    "address": "tdf@arcaspicio.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 434
+},
+{
+  "fields": {
+    "manager": 416,
+    "address": "lac@arcaspicio.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 435
+},
+{
+  "fields": {
+    "manager": 417,
+    "address": "HCaTS@barbaricum.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 436
+},
+{
+  "fields": {
+    "manager": 417,
+    "address": "brandon.bloodworth@barbaricum.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 437
+},
+{
+  "fields": {
+    "manager": 418,
+    "address": "Noah.Albro@barbaricum.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 438
+},
+{
+  "fields": {
+    "manager": 419,
+    "address": "rachel.heckel@cn-bus.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 439
+},
+{
+  "fields": {
+    "manager": 420,
+    "address": "patricia.saintjohn@cn-bus.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 440
+},
+{
+  "fields": {
+    "manager": 421,
+    "address": "amy.cowart@cgstrategy.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 441
+},
+{
+  "fields": {
+    "manager": 422,
+    "address": "Allison.Gurnitz@cgstrategy.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 442
+},
+{
+  "fields": {
+    "manager": 423,
+    "address": "frank.vanbalen@dsfederal.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 443
+},
+{
+  "fields": {
+    "manager": 424,
+    "address": "hcats@dsfederal.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 444
+},
+{
+  "fields": {
+    "manager": 424,
+    "address": "maggie.lin@dsfederal.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 445
+},
+{
+  "fields": {
+    "manager": 425,
+    "address": "jen.smiley@dutyfirst.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 446
+},
+{
+  "fields": {
+    "manager": 426,
+    "address": "kevin.waugh@dutyfirst.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 447
+},
+{
+  "fields": {
+    "manager": 427,
+    "address": "hcats@dynamis.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 448
+},
+{
+  "fields": {
+    "manager": 428,
+    "address": "rsherrill@dynamis.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 449
+},
+{
+  "fields": {
+    "manager": 429,
+    "address": "hcatssb@e-paga.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 450
+},
+{
+  "fields": {
+    "manager": 429,
+    "address": "sni@e-paga.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 451
+},
+{
+  "fields": {
+    "manager": 430,
+    "address": "hcatssb@e-paga.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 452
+},
+{
+  "fields": {
+    "manager": 430,
+    "address": "jcheek@e-paga.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 453
+},
+{
+  "fields": {
+    "manager": 431,
+    "address": "HCATS@eaglehillconsulting.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 454
+},
+{
+  "fields": {
+    "manager": 431,
+    "address": "bmcelroy@eaglehillconsulting.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 455
+},
+{
+  "fields": {
+    "manager": 432,
+    "address": "HCATS@eaglehillconsulting.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 456
+},
+{
+  "fields": {
+    "manager": 432,
+    "address": "nweinman@eaglehillconsulting.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 457
+},
+{
+  "fields": {
+    "manager": 433,
+    "address": "HCATSSB@ForsMarshGroup.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 458
+},
+{
+  "fields": {
+    "manager": 433,
+    "address": "bgarthwaite@forsmarshgroup.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 459
+},
+{
+  "fields": {
+    "manager": 434,
+    "address": "HCATSSB@ForsMarshGroup.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 460
+},
+{
+  "fields": {
+    "manager": 434,
+    "address": "psamsel@forsmarshgroup.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 461
+},
+{
+  "fields": {
+    "manager": 435,
+    "address": "rhkaiser@fyinfo.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 462
+},
+{
+  "fields": {
+    "manager": 436,
+    "address": "dgodbout@fyinfo.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 463
+},
+{
+  "fields": {
+    "manager": 437,
+    "address": "HCaTS@mahernet.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 464
+},
+{
+  "fields": {
+    "manager": 437,
+    "address": "rmaher@mahernet.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 465
+},
+{
+  "fields": {
+    "manager": 438,
+    "address": "bjacques@mahernet.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 466
+},
+{
+  "fields": {
+    "manager": 439,
+    "address": "hcats@jeffersonconsulting.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 467
+},
+{
+  "fields": {
+    "manager": 439,
+    "address": "aburman@jeffersonconsulting.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 468
+},
+{
+  "fields": {
+    "manager": 440,
+    "address": "jarensdorf@jeffersonconsulting.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 469
+},
+{
+  "fields": {
+    "manager": 441,
+    "address": "drosenthal@jps-usa.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 470
+},
+{
+  "fields": {
+    "manager": 442,
+    "address": "jkramer@jps-usa.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 471
+},
+{
+  "fields": {
+    "manager": 443,
+    "address": "hcats@knowledgebank.us.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 472
+},
+{
+  "fields": {
+    "manager": 443,
+    "address": "mborg@knowledgebank.us.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 473
+},
+{
+  "fields": {
+    "manager": 444,
+    "address": "hcats@knowledgebank.us.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 474
+},
+{
+  "fields": {
+    "manager": 444,
+    "address": "jwhitcup@knowledgebank.us.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 475
+},
+{
+  "fields": {
+    "manager": 445,
+    "address": "kmoody@linkvisum.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 476
+},
+{
+  "fields": {
+    "manager": 446,
+    "address": "ljohnson@linkvisum.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 477
+},
+{
+  "fields": {
+    "manager": 447,
+    "address": "hcats@mscginc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 478
+},
+{
+  "fields": {
+    "manager": 447,
+    "address": "kburks@mscginc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 479
+},
+{
+  "fields": {
+    "manager": 448,
+    "address": "hcats@mscginc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 480
+},
+{
+  "fields": {
+    "manager": 448,
+    "address": "shughes@mscginc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 481
+},
+{
+  "fields": {
+    "manager": 449,
+    "address": "pnagrod@msag.net"
+  },
+  "model": "vendors.manageremail",
+  "pk": 482
+},
+{
+  "fields": {
+    "manager": 450,
+    "address": "dscali@msag.net"
+  },
+  "model": "vendors.manageremail",
+  "pk": 483
+},
+{
+  "fields": {
+    "manager": 451,
+    "address": "hcats@oban-corp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 484
+},
+{
+  "fields": {
+    "manager": 451,
+    "address": "rirondi@oban-corp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 485
+},
+{
+  "fields": {
+    "manager": 452,
+    "address": "nazubike@oban-corp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 486
+},
+{
+  "fields": {
+    "manager": 453,
+    "address": "cembert@pal-tech.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 487
+},
+{
+  "fields": {
+    "manager": 454,
+    "address": "chaskins@pal-tech.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 488
+},
+{
+  "fields": {
+    "manager": 455,
+    "address": "malherek@parkertide.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 489
+},
+{
+  "fields": {
+    "manager": 456,
+    "address": "mal@parkertide.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 490
+},
+{
+  "fields": {
+    "manager": 457,
+    "address": "jramirez@performexcel.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 491
+},
+{
+  "fields": {
+    "manager": 458,
+    "address": "dmentzer@performexcel.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 492
+},
+{
+  "fields": {
+    "manager": 459,
+    "address": "sbhcats@powertrain.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 493
+},
+{
+  "fields": {
+    "manager": 459,
+    "address": "JDeCore@powertrain.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 494
+},
+{
+  "fields": {
+    "manager": 460,
+    "address": "stacey@pqcworks.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 495
+},
+{
+  "fields": {
+    "manager": 461,
+    "address": "psidey@pqcworks.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 496
+},
+{
+  "fields": {
+    "manager": 462,
+    "address": "kberry@r3consulting.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 497
+},
+{
+  "fields": {
+    "manager": 463,
+    "address": "ghartung@r3consulting.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 498
+},
+{
+  "fields": {
+    "manager": 464,
+    "address": "manny.rivera@rividium.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 499
+},
+{
+  "fields": {
+    "manager": 465,
+    "address": "xio.smith@rividium.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 500
+},
+{
+  "fields": {
+    "manager": 466,
+    "address": "jedgar@teamconsult.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 501
+},
+{
+  "fields": {
+    "manager": 467,
+    "address": "ljanifer@teamconsult.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 502
+},
+{
+  "fields": {
+    "manager": 468,
+    "address": "ajayb@mckinleygroup.net"
+  },
+  "model": "vendors.manageremail",
+  "pk": 503
+},
+{
+  "fields": {
+    "manager": 469,
+    "address": "clintw@mckinleygroup.net"
+  },
+  "model": "vendors.manageremail",
+  "pk": 504
+},
+{
+  "fields": {
+    "manager": 470,
+    "address": "HCaTS-Contracts@tmgi.net"
+  },
+  "model": "vendors.manageremail",
+  "pk": 505
+},
+{
+  "fields": {
+    "manager": 470,
+    "address": "julie.coccari@tmgi.net"
+  },
+  "model": "vendors.manageremail",
+  "pk": 506
+},
+{
+  "fields": {
+    "manager": 471,
+    "address": "HCaTS@tmgi.net"
+  },
+  "model": "vendors.manageremail",
+  "pk": 507
+},
+{
+  "fields": {
+    "manager": 471,
+    "address": "jeffrocha@tmgi.net"
+  },
+  "model": "vendors.manageremail",
+  "pk": 508
+},
+{
+  "fields": {
+    "manager": 472,
+    "address": "hcats@accenturefederal.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 509
+},
+{
+  "fields": {
+    "manager": 472,
+    "address": "sandi.lacroix@accenturefederal.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 510
+},
+{
+  "fields": {
+    "manager": 473,
+    "address": "tania.h.koles@accenturefederal.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 511
+},
+{
+  "fields": {
+    "manager": 474,
+    "address": "bids@afsc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 512
+},
+{
+  "fields": {
+    "manager": 474,
+    "address": "slgreen@afsc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 513
+},
+{
+  "fields": {
+    "manager": 475,
+    "address": "skim@afsc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 514
+},
+{
+  "fields": {
+    "manager": 476,
+    "address": "dcraven@allencorp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 515
+},
+{
+  "fields": {
+    "manager": 477,
+    "address": "wcline@allencorp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 516
+},
+{
+  "fields": {
+    "manager": 478,
+    "address": "hcats@atlasresearch.us"
+  },
+  "model": "vendors.manageremail",
+  "pk": 517
+},
+{
+  "fields": {
+    "manager": 478,
+    "address": "rsuh@atlasresearch.us"
+  },
+  "model": "vendors.manageremail",
+  "pk": 518
+},
+{
+  "fields": {
+    "manager": 479,
+    "address": "dseelke@atlasresearch.us"
+  },
+  "model": "vendors.manageremail",
+  "pk": 519
+},
+{
+  "fields": {
+    "manager": 480,
+    "address": "HCaTS@bah.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 520
+},
+{
+  "fields": {
+    "manager": 480,
+    "address": "moussessian_moses@bah.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 521
+},
+{
+  "fields": {
+    "manager": 481,
+    "address": "heffernan_tobias@bah.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 522
+},
+{
+  "fields": {
+    "manager": 482,
+    "address": "dnicholls@c2ti.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 523
+},
+{
+  "fields": {
+    "manager": 483,
+    "address": "sgill@c2ti.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 524
+},
+{
+  "fields": {
+    "manager": 484,
+    "address": "HCaTS@calibresys.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 525
+},
+{
+  "fields": {
+    "manager": 484,
+    "address": "Philip.Rizzi@calibresys.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 526
+},
+{
+  "fields": {
+    "manager": 485,
+    "address": "CONTRACTSHelpdesk@calibresys.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 527
+},
+{
+  "fields": {
+    "manager": 485,
+    "address": "Contracts@calibresys.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 528
+},
+{
+  "fields": {
+    "manager": 486,
+    "address": "rob.chen@hii-tsd.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 529
+},
+{
+  "fields": {
+    "manager": 487,
+    "address": "hcats@camber.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 530
+},
+{
+  "fields": {
+    "manager": 488,
+    "address": "pfarkas@carleycorp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 531
+},
+{
+  "fields": {
+    "manager": 489,
+    "address": "contracts@carleycorp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 532
+},
+{
+  "fields": {
+    "manager": 489,
+    "address": "dbrunetti@carleycorp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 533
+},
+{
+  "fields": {
+    "manager": 490,
+    "address": "hcats@teamcarney.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 534
+},
+{
+  "fields": {
+    "manager": 490,
+    "address": "kerrie.mccabe@teamcarney.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 535
+},
+{
+  "fields": {
+    "manager": 491,
+    "address": "hcats@teamcarney.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 536
+},
+{
+  "fields": {
+    "manager": 492,
+    "address": "jhadnot@creativecorrections.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 537
+},
+{
+  "fields": {
+    "manager": 493,
+    "address": "tfitzgerald@creativecorrectionsdc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 538
+},
+{
+  "fields": {
+    "manager": 494,
+    "address": "HCaTS@cubic.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 539
+},
+{
+  "fields": {
+    "manager": 494,
+    "address": "Robert.Davis@cubic.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 540
+},
+{
+  "fields": {
+    "manager": 495,
+    "address": "HCaTS@cubic.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 541
+},
+{
+  "fields": {
+    "manager": 495,
+    "address": "robin.amburngrob@cubic.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 542
+},
+{
+  "fields": {
+    "manager": 496,
+    "address": "usgsahcats@deloitte.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 543
+},
+{
+  "fields": {
+    "manager": 496,
+    "address": "lheinzer@deloitte.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 544
+},
+{
+  "fields": {
+    "manager": 497,
+    "address": "usgsahcats@deloitte.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 545
+},
+{
+  "fields": {
+    "manager": 498,
+    "address": "HCaTS@engilitycorp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 546
+},
+{
+  "fields": {
+    "manager": 498,
+    "address": "Steven.Taylor@engilitycorp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 547
+},
+{
+  "fields": {
+    "manager": 499,
+    "address": "victoria.nguyen@engilitycorp.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 548
+},
+{
+  "fields": {
+    "manager": 500,
+    "address": "HCATS@apprioinc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 549
+},
+{
+  "fields": {
+    "manager": 501,
+    "address": "HCATS@apprioinc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 550
+},
+{
+  "fields": {
+    "manager": 502,
+    "address": "GDITGSA@gdit.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 551
+},
+{
+  "fields": {
+    "manager": 503,
+    "address": "Janet.Skahill@gdit.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 552
+},
+{
+  "fields": {
+    "manager": 504,
+    "address": "eloposullivan@gpstrategies.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 553
+},
+{
+  "fields": {
+    "manager": 505,
+    "address": "btaylor@gpstrategies.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 554
+},
+{
+  "fields": {
+    "manager": 506,
+    "address": "gfarrell@us.ibm.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 555
+},
+{
+  "fields": {
+    "manager": 506,
+    "address": "ibmhcats@us.ibm.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 556
+},
+{
+  "fields": {
+    "manager": 507,
+    "address": "pbury@us.ibm.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 557
+},
+{
+  "fields": {
+    "manager": 508,
+    "address": "ICF-HCaTS@icf.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 558
+},
+{
+  "fields": {
+    "manager": 508,
+    "address": "Rebecca.Mulvaney@icfi.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 559
+},
+{
+  "fields": {
+    "manager": 509,
+    "address": "ICF-HCaTS@icf.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 560
+},
+{
+  "fields": {
+    "manager": 509,
+    "address": "paula.cooke@icf.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 561
+},
+{
+  "fields": {
+    "manager": 510,
+    "address": "HCaTS@keybridgeti.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 562
+},
+{
+  "fields": {
+    "manager": 510,
+    "address": "Simon.Hsu@KeyBridgeTI.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 563
+},
+{
+  "fields": {
+    "manager": 511,
+    "address": "Contracts@keybridgeti.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 564
+},
+{
+  "fields": {
+    "manager": 512,
+    "address": "rupal.u.patel@lmco.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 565
+},
+{
+  "fields": {
+    "manager": 513,
+    "address": "deirdre.t.johnson@lmco.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 566
+},
+{
+  "fields": {
+    "manager": 514,
+    "address": "dsmith@lmi.org"
+  },
+  "model": "vendors.manageremail",
+  "pk": 567
+},
+{
+  "fields": {
+    "manager": 515,
+    "address": "LMIHCaTS@lmi.org"
+  },
+  "model": "vendors.manageremail",
+  "pk": 568
+},
+{
+  "fields": {
+    "manager": 515,
+    "address": "croxbrough@lmi.org"
+  },
+  "model": "vendors.manageremail",
+  "pk": 569
+},
+{
+  "fields": {
+    "manager": 516,
+    "address": "MShapiro@ManagementConcepts.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 570
+},
+{
+  "fields": {
+    "manager": 516,
+    "address": "ssimpson@managementconcepts.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 571
+},
+{
+  "fields": {
+    "manager": 517,
+    "address": "RDombrowski@ManagementConcepts.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 572
+},
+{
+  "fields": {
+    "manager": 518,
+    "address": "HCaTS.PM@nttdatafed.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 573
+},
+{
+  "fields": {
+    "manager": 519,
+    "address": "HCATS.Contracts@nttdatafed.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 574
+},
+{
+  "fields": {
+    "manager": 520,
+    "address": "gary.carter@pdri.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 575
+},
+{
+  "fields": {
+    "manager": 521,
+    "address": "macie.paynter@pdri.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 576
+},
+{
+  "fields": {
+    "manager": 522,
+    "address": "HCATS-U@pitonscience.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 577
+},
+{
+  "fields": {
+    "manager": 522,
+    "address": "murphyw@pitonscience.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 578
+},
+{
+  "fields": {
+    "manager": 523,
+    "address": "hcats@powertrain.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 579
+},
+{
+  "fields": {
+    "manager": 523,
+    "address": "JDeCore@powertrain.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 580
+},
+{
+  "fields": {
+    "manager": 410,
+    "address": "hcats@powertrain.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 581
+},
+{
+  "fields": {
+    "manager": 524,
+    "address": "GSA_HCATS@us.pwc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 582
+},
+{
+  "fields": {
+    "manager": 524,
+    "address": "frank.a.durso@us.pwc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 583
+},
+{
+  "fields": {
+    "manager": 525,
+    "address": "brett.j.surbey@us.pwc.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 584
+},
+{
+  "fields": {
+    "manager": 526,
+    "address": "Michelle.L.Matthews@saic.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 585
+},
+{
+  "fields": {
+    "manager": 527,
+    "address": "sarah.l.getty@saic.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 586
+},
+{
+  "fields": {
+    "manager": 528,
+    "address": "HCATS@SERCO-NA.COM"
+  },
+  "model": "vendors.manageremail",
+  "pk": 587
+},
+{
+  "fields": {
+    "manager": 528,
+    "address": "Diana.Platt@Serco-na.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 588
+},
+{
+  "fields": {
+    "manager": 529,
+    "address": "HCATS@SERCO-NA.COM"
+  },
+  "model": "vendors.manageremail",
+  "pk": 589
+},
+{
+  "fields": {
+    "manager": 529,
+    "address": "Sharon.Tran@serco-na.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 590
+},
+{
+  "fields": {
+    "manager": 530,
+    "address": "brian.simmons@sigmatech.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 591
+},
+{
+  "fields": {
+    "manager": 531,
+    "address": "Jackie.Hicks@sigmatech.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 592
+},
+{
+  "fields": {
+    "manager": 532,
+    "address": "HCATS@csra.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 593
+},
+{
+  "fields": {
+    "manager": 532,
+    "address": "karen.popular-lawhorn@csra.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 594
+},
+{
+  "fields": {
+    "manager": 335,
+    "address": "HCATS@csra.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 595
+},
+{
+  "fields": {
+    "manager": 335,
+    "address": "mark.mcneely@csra.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 596
+},
+{
+  "fields": {
+    "manager": 533,
+    "address": "lmcgee@Center4oe.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 597
+},
+{
+  "fields": {
+    "manager": 534,
+    "address": "robert.schildwachter@center4oe.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 598
+},
+{
+  "fields": {
+    "manager": 535,
+    "address": "HCaTS@northhighland.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 599
+},
+{
+  "fields": {
+    "manager": 535,
+    "address": "Dave.Potts@northhighland.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 600
+},
+{
+  "fields": {
+    "manager": 536,
+    "address": "HCaTS@northhighland.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 601
+},
+{
+  "fields": {
+    "manager": 536,
+    "address": "Jacinta.Green@northhighland.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 602
+},
+{
+  "fields": {
+    "manager": 537,
+    "address": "chendrickson@air.org"
+  },
+  "model": "vendors.manageremail",
+  "pk": 603
+},
+{
+  "fields": {
+    "manager": 538,
+    "address": "ndasilva@air.org"
+  },
+  "model": "vendors.manageremail",
+  "pk": 604
+},
+{
+  "fields": {
+    "manager": 539,
+    "address": "HCaTSPMO@AmericanSystems.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 605
+},
+{
+  "fields": {
+    "manager": 539,
+    "address": "Page.Nowland@AmericanSystems.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 606
+},
+{
+  "fields": {
+    "manager": 540,
+    "address": "HCaTSPMO@AmericanSystems.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 607
+},
+{
+  "fields": {
+    "manager": 540,
+    "address": "John.Baker@AmericanSystems.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 608
+},
+{
+  "fields": {
+    "manager": 481,
+    "address": "heffernan_tobias@bah.com)"
+  },
+  "model": "vendors.manageremail",
+  "pk": 609
+},
+{
+  "fields": {
+    "manager": 541,
+    "address": "hcats@xceleratesolutions.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 610
+},
+{
+  "fields": {
+    "manager": 541,
+    "address": "cjames@xceleratesolutions.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 611
+},
+{
+  "fields": {
+    "manager": 542,
+    "address": "kramesh@xceleratesolutions.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 612
+},
+{
+  "fields": {
+    "manager": 543,
+    "address": "kyoung@censeoconsulting.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 613
+},
+{
+  "fields": {
+    "manager": 543,
+    "address": "bmahdi@censeoconsulting.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 614
+},
+{
+  "fields": {
+    "manager": 544,
+    "address": "mmarchigiani@censeoconsulting.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 615
+},
+{
+  "fields": {
+    "manager": 544,
+    "address": "dmoreira@censeoconsulting.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 616
+},
+{
+  "fields": {
+    "manager": 545,
+    "address": "CNTS.HCaTS@cn-bus.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 617
+},
+{
+  "fields": {
+    "manager": 545,
+    "address": "james.rosacker@cn-bus.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 618
+},
+{
+  "fields": {
+    "manager": 546,
+    "address": "patricia.saintjohn@cn-bus.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 619
+},
+{
+  "fields": {
+    "manager": 433,
+    "address": "HCATS@ForsMarshGroup.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 620
+},
+{
+  "fields": {
+    "manager": 434,
+    "address": "HCATS@ForsMarshGroup.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 621
+},
+{
+  "fields": {
+    "manager": 547,
+    "address": "mrathmann@gapsi.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 622
+},
+{
+  "fields": {
+    "manager": 548,
+    "address": "econtreras@gapsi.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 623
+},
+{
+  "fields": {
+    "manager": 549,
+    "address": "bbrewer@goldenkeygroup.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 624
+},
+{
+  "fields": {
+    "manager": 550,
+    "address": "jcowles@goldenkeygroup.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 625
+},
+{
+  "fields": {
+    "manager": 551,
+    "address": "hcats@humrro.org"
+  },
+  "model": "vendors.manageremail",
+  "pk": 626
+},
+{
+  "fields": {
+    "manager": 551,
+    "address": "stsacoumis@humrro.org"
+  },
+  "model": "vendors.manageremail",
+  "pk": 627
+},
+{
+  "fields": {
+    "manager": 552,
+    "address": "contracts@humrro.org"
+  },
+  "model": "vendors.manageremail",
+  "pk": 628
+},
+{
+  "fields": {
+    "manager": 553,
+    "address": "us-hcats@kpmg.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 629
+},
+{
+  "fields": {
+    "manager": 553,
+    "address": "qkaizer@kpmg.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 630
+},
+{
+  "fields": {
+    "manager": 554,
+    "address": "hcats@kpmg.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 631
+},
+{
+  "fields": {
+    "manager": 554,
+    "address": "danielmsmith@kpmg.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 632
+},
+{
+  "fields": {
+    "manager": 555,
+    "address": "tim.lagan@monster.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 633
+},
+{
+  "fields": {
+    "manager": 556,
+    "address": "meg.prior@monster.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 634
+},
+{
+  "fields": {
+    "manager": 409,
+    "address": "hcats@powertrain.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 635
+},
+{
+  "fields": {
+    "manager": 557,
+    "address": "HCaTS@suntiva.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 636
+},
+{
+  "fields": {
+    "manager": 557,
+    "address": "ebartola@suntiva.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 637
+},
+{
+  "fields": {
+    "manager": 558,
+    "address": "contracts@suntiva.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 638
+},
+{
+  "fields": {
+    "manager": 558,
+    "address": "dmckeen@suntiva.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 639
+},
+{
+  "fields": {
+    "manager": 559,
+    "address": "hjaeger@yrci.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 640
+},
+{
+  "fields": {
+    "manager": 560,
+    "address": "mtomasulo@yrci.com"
+  },
+  "model": "vendors.manageremail",
+  "pk": 641
+}
+]
