@@ -84,19 +84,19 @@ class Command(BaseCommand):
         cm, cm_created = vendor.managers.get_or_create(type='CM', name=record[3].strip())
         
         for number in filter(None, "".join(record[4].split()).split(',')):
-            cm.phones.get_or_create(number=number)
+            cm.phone.get_or_create(number=number)
         
         for address in filter(None, "".join(record[5].split()).split(',')):
-            cm.emails.get_or_create(address=address)
+            cm.email.get_or_create(address=address)
         
         # Add project manager
         pm, pm_created = vendor.managers.get_or_create(type='PM', name=record[6].strip())
         
         for number in filter(None, "".join(record[7].split()).split(',')):
-            pm.phones.get_or_create(number=number)
+            pm.phone.get_or_create(number=number)
         
         for address in filter(None, "".join(record[8].split()).split(',')):
-            pm.emails.get_or_create(address=address)
+            pm.email.get_or_create(address=address)
         
         # Add setaside information (if it exists)
         if (len(record) == 11 and len(record[10])):
@@ -112,6 +112,11 @@ class Command(BaseCommand):
         vendor.save()
         
         # Update pool relationship
+        if zone and zone.lower() != 'all':
+            zone = Zone.objects.get(id=int(zone))
+        else:
+            zone = None
+        
         poolpiid, ppcreated = PoolPIID.objects.get_or_create(vendor=vendor, pool=pool_data, piid=piid, zone=zone)
         
         log_memory("Final vendor [ {} - {} ]".format(pool_data.id, vendor.id))
@@ -120,11 +125,11 @@ class Command(BaseCommand):
             vendor.duns, 
             vendor.duns_4,
             cm.name,
-            ":".join(cm.phone()),
-            ":".join(cm.email()),
+            ":".join(cm.phones()),
+            ":".join(cm.emails()),
             pm.name,
-            ":".join(pm.phone()),
-            ":".join(pm.email()),
+            ":".join(pm.phones()),
+            ":".join(pm.emails()),
             zone,
             ":".join([str(sa.pk) for sa in vendor.setasides.all()])
         )
