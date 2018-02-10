@@ -6,9 +6,38 @@ import datetime
 from vendors.models import SamLoad
 
 
+def get_category_fixtures():
+    return [
+        'naics.json', 
+        'setasides.json', 
+        'pools.json',
+        'zones.json',
+        'zonestates.json'
+    ]
+
+def get_vendor_fixtures():
+    return get_category_fixtures() + [
+        'locations.json', 
+        'vendors.json', 
+        'poolpiids.json'
+    ]
+
+def get_contract_fixtures():
+    return get_vendor_fixtures() + [
+        'placesofperformance.json', 
+        'contracts.json'
+    ]
+    
+def get_metadata_fixtures():
+    return get_vendor_fixtures() + [
+        'samloads.json',
+        'fpdsloads.json'
+    ]
+
+
 class NaicsTest(TestCase):
     """tests for NAICS API endpoint"""
-    fixtures = ['naics.json']
+    fixtures = get_category_fixtures()
 
     def setUp(self):
         self.c = Client()
@@ -17,7 +46,7 @@ class NaicsTest(TestCase):
     def test_request_no_params(self):
         resp = self.c.get(self.path, {'format': 'json'})
         
-        self.assertEqual(resp.data['num_results'], 34)
+        self.assertEqual(resp.data['num_results'], 55)
         self.assertEqual(resp.status_code, 200)
 
     def test_request_q_param(self):
@@ -27,9 +56,30 @@ class NaicsTest(TestCase):
         self.assertEqual(resp.status_code, 200)
 
 
+class ZonesTest(TestCase):
+    """tests for Zones API endpoint"""
+    fixtures = get_category_fixtures()
+
+    def setUp(self):
+        self.c = Client()
+        self.path = '/api/zones/'
+
+    def test_request_no_params(self):
+        resp = self.c.get(self.path, {'format': 'json'})
+        
+        self.assertEqual(resp.data['num_results'], 6)
+        self.assertEqual(resp.status_code, 200)
+
+    def test_request_state_param(self):
+        resp = self.c.get(self.path, {'state': 'NC'})
+        
+        self.assertEqual(resp.data['num_results'], 1)
+        self.assertEqual(resp.status_code, 200)
+
+
 class VendorsTest(TestCase):
     """test for vendor API endpoint"""
-    fixtures = ['naics.json', 'setasides.json', 'pools.json', 'locations.json', 'vendors.json', 'poolpiids.json', 'placesofperformance.json', 'contracts.json']
+    fixtures = get_contract_fixtures()
  
     def setUp(self):
         self.c = Client()
@@ -42,7 +92,7 @@ class VendorsTest(TestCase):
         self.assertEqual(resp.status_code, 200)
 
     def test_request_valid_vehicle(self):
-        resp = self.c.get(self.path, {'format': 'json', 'vehicle': 'oasissb'})
+        resp = self.c.get(self.path, {'format': 'json', 'vehicle': 'oasis_sb'})
         self.assertEqual(resp.status_code, 200)
 
     def test_request_invalid_vehicle_returns_400(self):
@@ -66,7 +116,7 @@ class VendorsTest(TestCase):
         self.assertEqual(resp.status_code, 400)
 
     def test_default_pagination(self):
-        resp = self.c.get(self.path, {'format': 'json', 'vehicle': 'oasissb'})
+        resp = self.c.get(self.path, {'format': 'json', 'vehicle': 'oasis_sb'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(len(resp.data['page']['results']), 100)
         self.assertEqual(resp.data['page']['previous'], None)
@@ -103,13 +153,13 @@ class VendorsTest(TestCase):
         assert 'last_updated' in resp.data
 
     def test_one_pool_returned(self):
-        resp = self.c.get(self.path, {'format': 'json', 'vehicle': 'oasissb', 'naics': '541330'})
+        resp = self.c.get(self.path, {'format': 'json', 'vehicle': 'oasis_sb', 'naics': '541330'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(len(resp.data['page']['results']), resp.data['num_results'])
-        self.assertEqual(resp.data['pools'][0]['id'], '1_SB')
+        self.assertEqual(resp.data['pools'][0]['id'], 'OASIS_SB_1')
 
     def test_result_length_pool_group(self):
-        resp = self.c.get(self.path, {'format': 'json', 'setasides': 'A2', 'vehicle': 'oasissb', 'naics': '541330'})
+        resp = self.c.get(self.path, {'format': 'json', 'setasides': 'A2', 'vehicle': 'oasis_sb', 'naics': '541330'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(len(resp.data['page']['results']), resp.data['num_results'])
 
@@ -121,7 +171,7 @@ class VendorsTest(TestCase):
     def test_sort_with_all_params(self):
         resp = self.c.get(self.path, {'format': 'json', 'vehicle': 'oasis', 'sort': 'name', 'direction': 'asc'})
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(resp.data['page']['results'][0]['name'] , "Accenture Federal Services, LLC")
+        self.assertEqual(resp.data['page']['results'][0]['name'] , "Accenture Federal Services LLC")
         
         resp = self.c.get(self.path, {'format': 'json', 'vehicle': 'oasis', 'sort': 'name', 'direction': 'desc'})
         self.assertEqual(resp.status_code, 200)
@@ -130,7 +180,7 @@ class VendorsTest(TestCase):
 
 class VendorTest(TestCase):
     """ tests single vendor endpoint """
-    fixtures = ['setasides.json', 'locations.json', 'vendors.json', 'placesofperformance.json', 'contracts.json']
+    fixtures = get_vendor_fixtures()
 
     def setUp(self):
         self.c = Client()
@@ -144,7 +194,7 @@ class VendorTest(TestCase):
 
 class ContractsTest(TestCase):
     """tests for Contracts API endpoint"""
-    fixtures = ['naics.json', 'setasides.json', 'pools.json', 'locations.json', 'vendors.json', 'poolpiids.json', 'placesofperformance.json', 'contracts.json']
+    fixtures = get_contract_fixtures()
 
     def setUp(self):
         self.c = Client()
@@ -155,7 +205,7 @@ class ContractsTest(TestCase):
         self.assertEqual(resp.status_code, 400)
 
     def test_default_pagination(self):
-        resp = self.c.get(self.path, {'duns': '007901598'})
+        resp = self.c.get(self.path, {'duns': '926451519'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(len(resp.data['page']['results']), 100)
         self.assertEqual(resp.data['page']['previous'], None)
@@ -163,7 +213,7 @@ class ContractsTest(TestCase):
         self.assertEqual(resp.data['num_results'], 500)
     
     def test_custom_pagination(self):
-        resp = self.c.get(self.path, {'duns': '007901598', 'count': 25})
+        resp = self.c.get(self.path, {'duns': '926451519', 'count': 25})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(len(resp.data['page']['results']), 25)
         self.assertEqual(resp.data['page']['previous'], None)
@@ -178,7 +228,7 @@ class ContractsTest(TestCase):
     def test_default_sort(self):
         resp = self.c.get(self.path, {'duns': '807990382'})
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(resp.data['page']['results'][0]['date_signed'].strftime('%Y-%m-%dT%H:%M:%SZ'), "2017-09-13T00:00:00Z")
+        self.assertEqual(resp.data['page']['results'][0]['date_signed'].strftime('%Y-%m-%dT%H:%M:%SZ'), "2017-11-08T00:00:00Z")
 
     def test_sort_with_all_params(self):
         resp = self.c.get(self.path, {'duns': '807990382', 'sort': 'status', 'direction': 'asc'})
@@ -192,7 +242,7 @@ class ContractsTest(TestCase):
 
 class MetadataTest(TestCase):
     """ Tests the metadata endpoint """
-    fixtures = ['samloads.json', 'setasides.json', 'locations.json', 'vendors.json', 'fpdsloads.json']
+    fixtures = get_metadata_fixtures()
 
     def setUp(self):
         self.c = Client()
