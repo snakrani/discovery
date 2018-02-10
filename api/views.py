@@ -9,8 +9,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from contract.models import Contract, FPDSLoad
-from vendors.models import Vendor, Naics, SetAside, SamLoad, Pool
-from api.serializers import VendorSerializer, NaicsSerializer, PoolSerializer, ShortVendorSerializer, ContractSerializer, Metadata, MetadataSerializer, ShortPoolSerializer
+from vendors.models import Vendor, Naics, Zone, SetAside, SamLoad, Pool
+from api.serializers import VendorSerializer, NaicsSerializer, ZoneSerializer, PoolSerializer, ShortVendorSerializer, ContractSerializer, Metadata, MetadataSerializer, ShortPoolSerializer
 
 import json
 
@@ -238,6 +238,40 @@ class ListNaics(APIView):
         return codes
 
 
+class ListZones(APIView):
+    """
+    This endpoint lists all of the acquisition vehicle zones.
+
+    ---
+    GET:
+        parameters:
+          - name: state
+            paramType: query
+            description: State code within zone
+            required: false
+            type: string
+    """
+    def get(self, request, format=None):
+        try:
+            serializer = ZoneSerializer(self.get_results(request.QUERY_PARAMS.get('state', None)), many=True)
+        
+        except Exception as error:
+            return HttpResponseBadRequest(error)
+        
+        return Response({
+            'num_results': len(serializer.data), 
+            'results': serializer.data
+        })
+
+    def get_results(self, state):
+        zones = Zone.objects.all().order_by('id')
+
+        if state:
+            zones = zones.filter(state__state=state)
+
+        return zones
+
+
 class ListContracts(APIView):
     """   
     This endpoint returns contract history from FPDS for a specific vendor. The vendor's DUNS number is a required parameter. You can also filter contracts by their NAICS code to find contracts relevant to a particular category. 
@@ -303,7 +337,7 @@ class ListContracts(APIView):
         contracts = Contract.objects.filter(vendor=vendor)
         
         if naics:
-            contracts = contracts.filter(NAICS=naics.code)
+            contracts = contracts.filter(NAICS=naics.root_code)
         
         return get_ordered_results(contracts, self.request, ContractSerializer)
 
