@@ -172,8 +172,8 @@ var InputHandler = {
                 $.each(data.results, function(key, result) {
                     $("#naics-code")
                          .append($("<option></option>")
-                         .attr("value", result.short_code)
-                         .text(result.short_code + " - " + result.description));
+                         .attr("value", result.code)
+                         .text(result.code + " - " + result.description));
                 });
                 //load data if search criteria is defined in querystring
                 if (URLManager.getParameterByName("naics-code") || URLManager.getParameterByName("setasides")) {
