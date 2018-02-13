@@ -1,7 +1,9 @@
 from django.test import TestCase, RequestFactory
+from django.core.management import call_command
+
+from discovery.fixtures import get_category_fixtures
 from vendors.models import Vendor
 from vendors.views import VendorView
-from django.core.management import call_command
 
 
 def make_view(view, request, *args, **kwargs):
@@ -13,7 +15,7 @@ def make_view(view, request, *args, **kwargs):
 
 class VendorLoadTest(TestCase):
     """Tests that the load_vendors management command works and loads all the correct fields"""
-    fixtures = ['naics.json', 'setasides.json', 'pools.json', 'zones.json', 'zonestates.json']
+    fixtures = get_category_fixtures()
 
     def test_load(self):
         call_command('load_vendors', vpp=1)
@@ -43,10 +45,10 @@ class VendorViewTest(TestCase):
         self.assertFalse(context['has_capability_statement'])
 
     def test_has_capability_statement(self):
-        request = RequestFactory().get('/vendor/805875718')
+        request = RequestFactory().get('/vendor/625694500')
         view = VendorView(template_name='vendor.html')
         view = make_view(view, request)
-        context = view.get_context_data(vendor_duns='805875718')
+        context = view.get_context_data(vendor_duns='625694500')
         self.assertTrue(context['has_capability_statement'])
         self.assertEqual(context['capability_statement_url'],
-                         'discovery_site/capability_statements/805875718.pdf')
+                         'discovery_site/capability_statements/625694500.pdf')

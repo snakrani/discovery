@@ -5,8 +5,9 @@ from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 from django.utils import timezone
 
-from vendors.models import Vendor, Location, Pool, SetAside, SamLoad
-from discovery_site.utils import csv_memory
+from discovery.utils import csv_memory
+from categories.models import SetAside, Pool
+from vendors.models import Vendor, Location, SamLoad
 
 import os
 import sys

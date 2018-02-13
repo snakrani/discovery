@@ -5,8 +5,9 @@ from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 from django.core.management import call_command
 
-from vendors.models import Vendor, Manager, Pool, PoolPIID, SetAside
-from discovery_site.utils import csv_memory
+from discovery.utils import csv_memory
+from categories.models import SetAside, Pool, Zone
+from vendors.models import Vendor, Manager, PoolPIID
 
 import os
 import sys
@@ -186,7 +187,7 @@ class Command(BaseCommand):
 
 
     def update_vehicle(self, vehicle, options, pools):
-        vehicle_dir = os.path.join(settings.BASE_DIR, 'vendors/data/{0}'.format(vehicle))
+        vehicle_dir = os.path.join(settings.BASE_DIR, 'data/pools/{0}'.format(vehicle))
         new_vendor_count = 0
         
         for pool_file in os.listdir(vehicle_dir):

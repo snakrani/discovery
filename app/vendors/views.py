@@ -1,14 +1,19 @@
+from titlecase import titlecase
+
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.generic import TemplateView
-from vendors.models import Vendor, Pool, Naics, SetAside
-from contract.models import Contract
+
+from categories.models import Naics, SetAside, Pool
+from vendors.models import Vendor
+from contracts.models import Contract
+
 import csv
 import os.path
-from titlecase import titlecase
+
 
 class VendorView(TemplateView):
-    pdf_dir = 'discovery_site/static/discovery_site/capability_statements/'
+    pdf_dir = 'static/discovery_site/capability_statements/'
     static_pdf_dir = 'discovery_site/capability_statements/'
 
     def get_context_data(self, **kwargs):
@@ -62,7 +67,7 @@ def pool_csv(request):
 
     writer.writerow(('',))
     header_row = ['Vendor', 'Location', 'No. of Contracts',]
-    header_row.extend([sa_obj.abbreviation for sa_obj in setasides_all])
+    header_row.extend([sa_obj.name for sa_obj in setasides_all])
     writer.writerow(header_row)
 
     lines = []
@@ -75,7 +80,7 @@ def pool_csv(request):
             else:
                 setaside_list.append('')
 
-        v_row = [v.name, v.sam_citystate, Contract.objects.filter(NAICS=naics.code, vendor=v).count()]
+        v_row = [v.name, v.sam_location.citystate, Contract.objects.filter(NAICS=naics.code, vendor=v).count()]
         v_row.extend(setaside_list)
         lines.append(v_row)
 
@@ -98,7 +103,7 @@ def vendor_csv(request, vendor_duns):
     writer.writerow((vendor.name,))
     writer.writerow(('SAM registration expires: ', vendor.sam_expiration_date.strftime("%m/%d/%Y")))
     writer.writerow(('', ))
-    writer.writerow([sa_obj.abbreviation for sa_obj in setasides])
+    writer.writerow([sa_obj.name for sa_obj in setasides])
 
     vendor_sa = []
     for sa in  setasides:
@@ -106,14 +111,28 @@ def vendor_csv(request, vendor_duns):
             vendor_sa.append('X')
         else:
             vendor_sa.append('')
+            
+    pm = vendor.managers.filter(type='PM').first()
+    
+    if pm:
+        pm_name = pm.name
+        pm_phones = ",".join(pm.phones())
+        pm_emails = ",".join(pm.emails())
+    else:
+        pm_name = 'NA'
+        pm_phones = 'NA'
+        pm_emails = 'NA'
+    
+    number_of_employees = Contract.objects.filter(vendor=vendor).latest('date_signed').number_of_employees    
+    annual_revenue = Contract.objects.filter(vendor=vendor).latest('date_signed').annual_revenue
 
     writer.writerow(vendor_sa)
     writer.writerow(('', ))
-    writer.writerow(('DUNS', vendor.duns, '', 'Address:', titlecase(vendor.sam_address)))
-    writer.writerow(('CAGE Code', vendor.cage, '', '',  titlecase(vendor.sam_citystate[0:vendor.sam_citystate.index(',') + 1]) + vendor.sam_citystate[vendor.sam_citystate.index(',') + 1:]))
-    writer.writerow(('Employees', vendor.number_of_employees, '', 'OASIS POC:', vendor.pm_name))
-    writer.writerow(('Annual Revenue', vendor.annual_revenue, '', '', vendor.pm_phone))
-    writer.writerow(('', '', '', '', vendor.pm_email.lower()))
+    writer.writerow(('DUNS', vendor.duns, '', 'Address:', titlecase(vendor.sam_location.address)))
+    writer.writerow(('CAGE Code', vendor.cage, '', '',  titlecase(vendor.sam_location.state) + ', ' + vendor.sam_location.zipcode))
+    writer.writerow(('Employees', number_of_employees, '', 'OASIS POC:', pm_name))
+    writer.writerow(('Annual Revenue', annual_revenue, '', '', pm_phones))
+    writer.writerow(('', '', '', '', pm_emails))
     writer.writerow(('', ))
     if naics:
         writer.writerow(('This vendor\'s contract history for NAICS {0}'.format(naics), ))
