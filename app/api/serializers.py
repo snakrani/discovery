@@ -1,6 +1,8 @@
 from rest_framework import serializers, pagination
-from vendors.models import Vendor, Manager, Zone, Location, Pool, Naics, SetAside, SamLoad
-from contract.models import Contract, PlaceOfPerformance, FPDSLoad
+
+from categories.models import Naics, SetAside, Pool, Zone
+from vendors.models import Vendor, Manager, Location, SamLoad
+from contracts.models import Contract, PlaceOfPerformance, FPDSLoad
 
 import json
 
@@ -80,7 +82,7 @@ class ManagerSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Manager
-        fields = ('name', 'type', 'phones', 'emails')
+        fields = ('name', 'phones', 'emails')
         
     def get_phones(self, item):
         return item.phones()
@@ -91,10 +93,13 @@ class ManagerSerializer(serializers.ModelSerializer):
 
 class VendorSerializer(OrderedSerializer):
     setasides = SetAsideSerializer(many=True)
-    pools = ShortPoolSerializer(many=True)
+    pools = PoolSerializer(many=True)
     sam_location = LocationSerializer(many=False)
     
     managers = ManagerSerializer(many=True)
+    
+    cms = serializers.SerializerMethodField('get_cms')
+    pms = serializers.SerializerMethodField('get_pms')
     
     annual_revenue = serializers.SerializerMethodField('get_annual_revenue')
     number_of_employees = serializers.SerializerMethodField('get_number_of_employees')
@@ -103,8 +108,23 @@ class VendorSerializer(OrderedSerializer):
         model = Vendor
         fields = ('id', 'name', 'duns', 'duns_4', 'cage', 'sam_status', 
                   'sam_expiration_date', 'sam_activation_date', 'sam_exclusion', 
-                  'sam_url', 'sam_location', 'managers', 'pools', 'setasides', 
+                  'sam_url', 'sam_location', 'cms', 'pms', 'pools', 'setasides', 
                   'annual_revenue', 'number_of_employees')
+           
+    def get_cms(self, item):
+        try:
+            return ManagerSerializer(item.managers.filter(type='CM')).data
+            
+        except Exception:
+            return []
+       
+    def get_pms(self, item):
+        try:
+            return ManagerSerializer(item.managers.filter(type='PM')).data
+            
+        except Exception:
+            return []
+    
     
     def get_annual_revenue(self, item):
         try:

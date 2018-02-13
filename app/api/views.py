@@ -8,8 +8,9 @@ from rest_framework.pagination import PaginationSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from contract.models import Contract, FPDSLoad
-from vendors.models import Vendor, Naics, Zone, SetAside, SamLoad, Pool
+from categories.models import Naics, SetAside, Pool, Zone
+from vendors.models import Vendor, SamLoad
+from contracts.models import Contract, FPDSLoad
 from api.serializers import VendorSerializer, NaicsSerializer, ZoneSerializer, PoolSerializer, ShortVendorSerializer, ContractSerializer, Metadata, MetadataSerializer, ShortPoolSerializer
 
 import json
@@ -178,7 +179,7 @@ class ListVendors(APIView):
             naics = get_naics(request)
             pools = get_pools(request, naics)
             
-            pool_serializer = ShortPoolSerializer(pools)
+            pool_serializer = PoolSerializer(pools)
             vendor_serializer = get_page(self.get_results(pools, get_setasides(request), naics), request)
             
             sam_load_results = SamLoad.objects.all().order_by('-sam_load')[:1]

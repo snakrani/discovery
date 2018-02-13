@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.views.decorators.cache import cache_page
 from rest_framework.urlpatterns import format_suffix_patterns
+
 from api import views
 
 urlpatterns = patterns('',
