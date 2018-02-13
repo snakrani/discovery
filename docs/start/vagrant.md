@@ -21,7 +21,7 @@ Vagrant is available as an executable installer for Windows, Mac, and Linux.
 
 ## Configuration
 
-The Discovery Vagrantfile is meant to be configurable depending on the needs of the developer.  To keep everything that needs to be versioned, we use a pattern of a default Vagrant configuration file that can be overridden if an override exists.
+The Discovery Vagrantfile is meant to be configurable depending on the needs of the developer.  To keep everything that needs to be versioned, we use a pattern of a default Vagrant configuration file that can be overridden if an override exists.  All Vagrant related configurations are in the **vagrant** directory.
 
 You will also need to ensure certain environment variables are set for the Discovery application containers.  We provide an example ([docker/django-env.example.vars](https://github.com/PSHCDevOps/discovery/blob/master/docker/django-env.example.vars)) but you will need to create a file called **docker/django-env.vars** that has sensitive application information.
 
@@ -31,7 +31,7 @@ $ git clone https://github.com/PSHCDevOps/discovery.git {project_directory}
 $ cd {project_directory}
 
 # vagrant-config.yml is ignored by Git so your configurations will not be versioned
-$ cp vagrant-config.default.yml vagrant-config.yml
+$ cp vagrant/config.default.yml vagrant/config.yml
 
 # docker/django-env.vars is ignored by Git so your configuration will not be versioned
 $ cp docker/django-env.example.vars docker/django-env.vars
@@ -168,7 +168,7 @@ When the Vagrant machine is first created all Docker containers specified in the
 
 Using Vagrant, when SSHing into the virtual machine, you will be automatically redirected to the project root directory (**/vagrant**) and **docker-compose up** will be run to ensure Docker application containers are up to date.
 
-**Git**, **Cloud Foundry Client** with the **Autopliot plugin**, **Docker**, and **Docker Compose** come installed on the Vagrant virtual environment initially.  The development environment is meant to bundle tooling necessary to running the Discovery application that might not make sense to install in the containers, and it provides a platform for running isolated Docker clusters in Docker Compose.
+**Git**, **Cloud Foundry Client** with the **Autopilot** and **Service Connect** plugins, **Docker**, and **Docker Compose** come installed on the Vagrant virtual environment initially.  The development environment is meant to bundle tooling necessary to running the Discovery application that might not make sense to install in the containers, and it provides a platform for running isolated Docker clusters in Docker Compose.
 
 <br/>
 
