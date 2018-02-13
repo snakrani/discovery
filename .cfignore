@@ -3,10 +3,12 @@
 *.pyc
 *.DS_Store
 **.log
+db/*.sql
 logs/*.log
 logs/*.csv
 Vagrantfile
 .vagrant/
+vagrant/
 vagrant-config.*.yml
 vagrant-config.yml
 src/
