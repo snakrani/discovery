@@ -28,17 +28,17 @@ class Command(BaseCommand):
         
         try:
             print('> Loading NAICS codes')
-            call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'vendors/fixtures/naics.json'))
+            call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/naics.json'))
             
             print('> Loading vendor setaside categories')
-            call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'vendors/fixtures/setasides.json'))
+            call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/setasides.json'))
             
             print('> Loading vendor pools')
-            call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'vendors/fixtures/pools.json'))
+            call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/pools.json'))
             
             print('> Loading zones')
-            call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'vendors/fixtures/zones.json'))
-            call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'vendors/fixtures/zonestates.json'))          
+            call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/zones.json'))
+            call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/zonestates.json'))          
 
         except Exception as e:
             display_error(e)
