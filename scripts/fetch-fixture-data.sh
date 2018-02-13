@@ -3,7 +3,7 @@
 #
 
 SCRIPT_DIR="$(cd "$(dirname "$([ `readlink "$0"` ] && echo "`readlink "$0"`" || echo "$0")")"; pwd -P)"
-cd "$SCRIPT_DIR/.."
+cd "$SCRIPT_DIR/../app"
 
 ./manage.py load_categories
 ./manage.py load_vendors --vpp=0 --tries=3 --pause=1
