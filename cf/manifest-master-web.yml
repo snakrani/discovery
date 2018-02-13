@@ -3,5 +3,5 @@ inherit: base-web-manifest.yml
 
 applications:
 - name: discovery-web
-  host: discovery
+  host: discovery-prod
   instances: 3
