@@ -7,7 +7,7 @@ https://docs.djangoproject.com/en/1.8/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.8/ref/settings/
 """
-from discovery_site.cloud import cloud_config
+from discovery.utils import config_value
 
 import os
 import markdown
@@ -17,11 +17,12 @@ import dj_database_url
 # General project variables
 #
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+PROJ_DIR = os.path.dirname(BASE_DIR)
 
 # Django specific
 #------------------------------
 
-SECRET_KEY = cloud_config('SECRET_KEY', '')
+SECRET_KEY = config_value('SECRET_KEY', '')
 APPEND_SLASH = True
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -33,11 +34,11 @@ DB_MUTEX_TTL_SECONDS = 86400 # 1 day (24 hours)
 # Application specific
 #------------------------------
 
-API_HOST = cloud_config('API_HOST', '')
-API_KEY = cloud_config('API_KEY', '')
+API_HOST = config_value('API_HOST', '')
+API_KEY = config_value('API_KEY', '')
 
 SAM_API_URL = "https://api.data.gov/sam/v1/registrations/"
-SAM_API_KEY = cloud_config('SAM_API_KEY', '')
+SAM_API_KEY = config_value('SAM_API_KEY', '')
 
 VEHICLES = (
     'oasis_sb', 
@@ -67,16 +68,20 @@ INSTALLED_APPS = (
 
     'db_mutex',
     'storages',
-    'selenium_tests',
+    
     'rest_framework',
     'rest_framework_swagger',
+    
     'django_celery_beat',
     'django_celery_results',
 
+    'discovery',
     'api',
-    'discovery_site',
+    'categories',
     'vendors',
-    'contract',
+    'contracts',
+    
+    'tests',
 )
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -99,7 +104,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.messages.context_processors.messages"
 )
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'discovery_site/templates'),
+    os.path.join(BASE_DIR, 'discovery/templates'),
 )
 
 
@@ -137,10 +142,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 #STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 AWS_QUERYSTRING_AUTH = False
-AWS_ACCESS_KEY_ID = cloud_config('AWS_ACCESS_KEY_ID', '')
+AWS_ACCESS_KEY_ID = config_value('AWS_ACCESS_KEY_ID', '')
 
-AWS_SECRET_ACCESS_KEY = cloud_config('AWS_SECRET_ACCESS_KEY', '')
-AWS_STORAGE_BUCKET_NAME = cloud_config('AWS_STORAGE_BUCKET_NAME', '')
+AWS_SECRET_ACCESS_KEY = config_value('AWS_SECRET_ACCESS_KEY', '')
+AWS_STORAGE_BUCKET_NAME = config_value('AWS_STORAGE_BUCKET_NAME', '')
 
 
 #
@@ -150,7 +155,7 @@ CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
         'LOCATION': 'django_cache_table',
-    },
+    }
 }
 
 LOGGING = {
@@ -173,49 +178,49 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs/discovery.log'),
+            'filename': os.path.join(PROJ_DIR, 'logs/discovery.log'),
             'formatter': 'verbose'
         },
         'vendor_file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs/vendor.log'),
+            'filename': os.path.join(PROJ_DIR, 'logs/vendor.log'),
             'formatter': 'verbose'
         },
         'vendor_memory_file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs/vendor_memory.csv'),
+            'filename': os.path.join(PROJ_DIR, 'logs/vendor_memory.csv'),
             'formatter': 'csv'
         },
         'vendor_data_file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs/vendor_data.csv'),
+            'filename': os.path.join(PROJ_DIR, 'logs/vendor_data.csv'),
             'formatter': 'csv'
         },
         'sam_data_file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs/sam_data.csv'),
+            'filename': os.path.join(PROJ_DIR, 'logs/sam_data.csv'),
             'formatter': 'csv'
         },
         'fpds_file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs/fpds.log'),
+            'filename': os.path.join(PROJ_DIR, 'logs/fpds.log'),
             'formatter': 'verbose'
         },
         'fpds_memory_file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs/fpds_memory.csv'),
+            'filename': os.path.join(PROJ_DIR, 'logs/fpds_memory.csv'),
             'formatter': 'csv'
         },
         'fpds_data_file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs/fpds_data.csv'),
+            'filename': os.path.join(PROJ_DIR, 'logs/fpds_data.csv'),
             'formatter': 'csv'
         }
     },
@@ -263,10 +268,10 @@ LOGGING = {
 SESSION_ENGINE = 'redis_sessions.session'
 
 SESSION_REDIS = {
-    'host': cloud_config('hostname', 'localhost', ['redis28', 'redis32'], 'discovery-auth'),
-    'port': cloud_config('port', '6379', ['redis28', 'redis32'], 'discovery-auth'),
+    'host': config_value('hostname', 'localhost', ['redis28', 'redis32'], 'discovery-auth'),
+    'port': config_value('port', '6379', ['redis28', 'redis32'], 'discovery-auth'),
     'db': 0,
-    'password': cloud_config('password', 'discovery', ['redis28', 'redis32'], 'discovery-auth'),
+    'password': config_value('password', 'discovery', ['redis28', 'redis32'], 'discovery-auth'),
     'prefix': 'session',
     'socket_timeout': 1
 }
@@ -275,7 +280,7 @@ SESSION_REDIS = {
 #
 # Celery processing and scheduling
 #
-CELERY_BROKER_URL = cloud_config('uri', 'redis://:discovery@localhost:6379', ['redis28', 'redis32'], 'discovery-tasks')
+CELERY_BROKER_URL = config_value('uri', 'redis://:discovery@localhost:6379', ['redis28', 'redis32'], 'discovery-tasks')
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
@@ -288,9 +293,9 @@ CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 # Saucelabs testing
 #
 SAUCE = False
-SAUCE_USERNAME = cloud_config('SAUCE_USERNAME', '')
-SAUCE_ACCESS_KEY = cloud_config('SAUCE_ACCESS_KEY', '')
-DOMAIN_TO_TEST = cloud_config('SAUCE_DOMAIN', 'domain.of.your.discovery.installation.gov')
+SAUCE_USERNAME = config_value('SAUCE_USERNAME', '')
+SAUCE_ACCESS_KEY = config_value('SAUCE_ACCESS_KEY', '')
+DOMAIN_TO_TEST = config_value('SAUCE_DOMAIN', 'domain.of.your.discovery.installation.gov')
 
 
 #

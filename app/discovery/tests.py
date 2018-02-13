@@ -1,9 +1,11 @@
 from django.test import Client, TestCase
 
+from discovery.fixtures import get_vendor_fixtures
+
+
 class SmokeTest(TestCase):
     """smoke tests for discovery site"""
-
-    fixtures = ['naics.json', 'vendors.json', 'setasides.json', 'pools.json']
+    fixtures = get_vendor_fixtures()
 
     def setUp(self):
         self.c = Client()
