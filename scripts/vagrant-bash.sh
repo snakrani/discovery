@@ -38,6 +38,10 @@ then
     source docker/django-env.vars
     export $(grep -o '^[^ #]*' docker/django-env.vars | cut -d= -f1 -)
   fi
+  
+  # Ensure CF plugins are installed
+  cf install-plugin -f "/usr/local/bin/cf-autopilot"
+  cf install-plugin -f "/usr/local/bin/cf-service-connect"
 fi
 
 # Activate Python virtual environment if present
