@@ -31,7 +31,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   if vm_config["copy_ssh"]
     # DO NOT overwrite the authorized_keys file on Vagrant
-    config.vm.provision :file, source: "~/.ssh/config", destination: ".ssh/config"
+    if File.exist?("~/.ssh/config")
+      config.vm.provision :file, source: "~/.ssh/config", destination: ".ssh/config"
+    end
 
     Dir.glob("#{Dir.home}/.ssh/id_*") do |key_file|
       key_file = key_file.sub("#{Dir.home}/", '')
@@ -74,7 +76,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     s.args = [ project_directory ]
   end
 
+  config.vm.network :forwarded_port, guest: 1936, host: vm_config["haproxy_port"]
   config.vm.network :forwarded_port, guest: 8080, host: vm_config["web_port"]
   config.vm.network :forwarded_port, guest: 5432, host: vm_config["db_port"]
   config.vm.network :forwarded_port, guest: 6379, host: vm_config["queue_port"]
+  config.vm.network :forwarded_port, guest: 6479, host: vm_config["auth_port"]
 end

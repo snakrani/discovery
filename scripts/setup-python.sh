@@ -16,7 +16,7 @@ VENV_DIR="/venv"
 apt-get update >>"$LOG_FILE" 2>&1
   
 echo "> Installing Python and CLI utilities" | tee -a "$LOG_FILE"
-apt-get install -y --no-install-recommends make gcc libpq-dev python-dev git ssh vim >>"$LOG_FILE" 2>&1
+apt-get install -y make gcc libpq-dev python-dev python-pip git ssh vim >>"$LOG_FILE" 2>&1
 rm -rf /var/lib/apt/lists/* >>"$LOG_FILE" 2>&1
 
 #create virtual environment if it does not exist and activate
