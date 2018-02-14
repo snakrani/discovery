@@ -28,16 +28,16 @@ class OrderedSerializer(serializers.ModelSerializer):
         return 'desc'
 
 
-class SetAsideSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SetAside
-        fields = ('code', 'name', 'description')
-
-
 class NaicsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Naics
         fields = ('code', 'root_code', 'description')
+
+
+class SetAsideSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SetAside
+        fields = ('code', 'name', 'description')
 
 
 class PoolSerializer(serializers.ModelSerializer):
@@ -123,8 +123,7 @@ class VendorSerializer(OrderedSerializer):
             return ManagerSerializer(item.managers.filter(type='PM')).data
             
         except Exception:
-            return []
-    
+            return []   
     
     def get_annual_revenue(self, item):
         try:
