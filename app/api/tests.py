@@ -28,6 +28,33 @@ class NaicsTest(TestCase):
         self.assertEqual(resp.status_code, 200)
 
 
+class PoolsTest(TestCase):
+    """tests for Pools API endpoint"""
+    fixtures = get_category_fixtures()
+
+    def setUp(self):
+        self.c = Client()
+        self.path = '/api/pools/'
+
+    def test_request_no_params(self):
+        resp = self.c.get(self.path, {'format': 'json'})
+        
+        self.assertEqual(resp.data['num_results'], 18)
+        self.assertEqual(resp.status_code, 200)
+
+    def test_request_vehicle_param(self):
+        resp = self.c.get(self.path, {'vehicle': 'HCATS_SB'})
+        
+        self.assertEqual(resp.data['num_results'], 2)
+        self.assertEqual(resp.status_code, 200)
+
+    def test_request_naics_param(self):
+        resp = self.c.get(self.path, {'naics': 541611})
+        
+        self.assertEqual(resp.data['num_results'], 4)
+        self.assertEqual(resp.status_code, 200)
+
+
 class ZonesTest(TestCase):
     """tests for Zones API endpoint"""
     fixtures = get_category_fixtures()
