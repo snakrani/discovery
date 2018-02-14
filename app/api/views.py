@@ -96,6 +96,119 @@ def get_ordered_results(queryset, request, serializer_class, context = {}):
     return items.data
 
 
+class ListNaics(APIView):
+    """
+    This endpoint lists all of the NAICS codes that are relevant to the OASIS family of vehicles.
+
+    ---
+    GET:
+        parameters:
+          - name: q
+            paramType: query
+            description: Text to search within NAICS description
+            required: false
+            type: string
+    """
+    def get(self, request, format=None):
+        try:
+            serializer = NaicsSerializer(self.get_results(request.QUERY_PARAMS.get('q', None)), many=True)
+        
+        except Exception as error:
+            return HttpResponseBadRequest(error)
+        
+        return Response({
+            'num_results': len(serializer.data), 
+            'results': serializer.data
+        })
+
+    def get_results(self, query):
+        codes = Naics.objects.all().order_by('description')
+
+        if query:
+            codes = codes.filter(description__icontains=query)
+
+        return codes
+
+
+class ListPools(APIView):
+    """
+    This endpoint lists all of the acquisition vehicle pools.
+
+    ---
+    GET:
+        parameters:
+          - name: vehicle
+            paramType: query
+            description: Filter pools by vehicle.  Choices are; oasis, oasis_sb, hcats, hcats_sb. Will filter vendors by their presence in either the OASIS unrestricted vehicle or the OASIS Small Business vehicle.
+            required: false
+            type: string
+          - name: naics
+            paramType: query
+            description: NAICS code that pool services
+            required: false
+            type: string
+    """
+    def get(self, request, format=None):
+        try:
+            serializer = PoolSerializer(self.get_results(
+                request.QUERY_PARAMS.get('vehicle', None),
+                get_naics(request)
+            ), many=True)
+        
+        except Exception as error:
+            return HttpResponseBadRequest(error)
+        
+        return Response({
+            'num_results': len(serializer.data), 
+            'results': serializer.data
+        })
+
+    def get_results(self, vehicle, naics):
+        pools = Pool.objects.all().order_by('id')
+
+        if vehicle:
+            pools = pools.filter(vehicle=vehicle)
+
+        if naics:
+            pools = pools.filter(naics__code=naics.code)
+
+        return pools
+
+
+class ListZones(APIView):
+    """
+    This endpoint lists all of the acquisition vehicle zones.
+
+    ---
+    GET:
+        parameters:
+          - name: state
+            paramType: query
+            description: State code within zone
+            required: false
+            type: string
+    """
+    def get(self, request, format=None):
+        try:
+            serializer = ZoneSerializer(self.get_results(request.QUERY_PARAMS.get('state', None)), many=True)
+        
+        except Exception as error:
+            return HttpResponseBadRequest(error)
+        
+        return Response({
+            'num_results': len(serializer.data), 
+            'results': serializer.data
+        })
+
+    def get_results(self, state):
+        zones = Zone.objects.all().order_by('id')
+
+        if state:
+            zones = zones.filter(state__state=state)
+
+        return zones
+
+
 class GetVendor(APIView):
     """
     This endpoint returns a single vendor by their 9 digit DUNS number. DUNS numbers can be looked up in the [System for Award Management](https://www.sam.gov) by vendor name.
@@ -139,7 +252,7 @@ class ListVendors(APIView):
         parameters:
           - name: vehicle
             paramType: query
-            description: Choices are either oasis or oasissb. Will filter vendors by their presence in either the OASIS unrestricted vehicle or the OASIS Small Business vehicle.
+            description: Choices are; oasis, oasis_sb, hacts, hcats_sb. Will filter vendors by their presence in either the OASIS unrestricted vehicle or the OASIS Small Business vehicle.
             required: false
             type: string
           - name: naics
@@ -179,7 +292,7 @@ class ListVendors(APIView):
             naics = get_naics(request)
             pools = get_pools(request, naics)
             
-            pool_serializer = PoolSerializer(pools)
+            pool_serializer = ShortPoolSerializer(pools)
             vendor_serializer = get_page(self.get_results(pools, get_setasides(request), naics), request)
             
             sam_load_results = SamLoad.objects.all().order_by('-sam_load')[:1]
@@ -203,74 +316,6 @@ class ListVendors(APIView):
                 vendors = vendors.filter(setasides=sa)
 
         return get_ordered_results(vendors, self.request, ShortVendorSerializer, {'naics': naics})
-
-
-class ListNaics(APIView):
-    """
-    This endpoint lists all of the NAICS codes that are relevant to the OASIS family of vehicles.
-
-    ---
-    GET:
-        parameters:
-          - name: q
-            paramType: query
-            description: Text to search within NAICS description
-            required: false
-            type: string
-    """
-    def get(self, request, format=None):
-        try:
-            serializer = NaicsSerializer(self.get_results(request.QUERY_PARAMS.get('q', None)), many=True)
-        
-        except Exception as error:
-            return HttpResponseBadRequest(error)
-        
-        return Response({
-            'num_results': len(serializer.data), 
-            'results': serializer.data
-        })
-
-    def get_results(self, query):
-        codes = Naics.objects.all().order_by('description')
-
-        if query:
-            codes = codes.filter(description__icontains=query)
-
-        return codes
-
-
-class ListZones(APIView):
-    """
-    This endpoint lists all of the acquisition vehicle zones.
-
-    ---
-    GET:
-        parameters:
-          - name: state
-            paramType: query
-            description: State code within zone
-            required: false
-            type: string
-    """
-    def get(self, request, format=None):
-        try:
-            serializer = ZoneSerializer(self.get_results(request.QUERY_PARAMS.get('state', None)), many=True)
-        
-        except Exception as error:
-            return HttpResponseBadRequest(error)
-        
-        return Response({
-            'num_results': len(serializer.data), 
-            'results': serializer.data
-        })
-
-    def get_results(self, state):
-        zones = Zone.objects.all().order_by('id')
-
-        if state:
-            zones = zones.filter(state__state=state)
-
-        return zones
 
 
 class ListContracts(APIView):
