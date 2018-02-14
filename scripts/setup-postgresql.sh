@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Setup PhantomJS.
+# Setup PostgreSQL client.
 
 SCRIPT_DIR="$(cd "$(dirname "$([ `readlink "$0"` ] && echo "`readlink "$0"`" || echo "$0")")"; pwd -P)"
 cd "$SCRIPT_DIR/.."
