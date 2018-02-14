@@ -1,0 +1,202 @@
+[
+{
+  "fields": {
+    "state": "DE",
+    "zone": 1
+  },
+  "model": "categories.zonestate",
+  "pk": 1
+},
+{
+  "fields": {
+    "state": "MD",
+    "zone": 1
+  },
+  "model": "categories.zonestate",
+  "pk": 2
+},
+{
+  "fields": {
+    "state": "NJ",
+    "zone": 1
+  },
+  "model": "categories.zonestate",
+  "pk": 3
+},
+{
+  "fields": {
+    "state": "NY",
+    "zone": 1
+  },
+  "model": "categories.zonestate",
+  "pk": 4
+},
+{
+  "fields": {
+    "state": "PA",
+    "zone": 1
+  },
+  "model": "categories.zonestate",
+  "pk": 5
+},
+{
+  "fields": {
+    "state": "VA",
+    "zone": 1
+  },
+  "model": "categories.zonestate",
+  "pk": 6
+},
+{
+  "fields": {
+    "state": "CT",
+    "zone": 2
+  },
+  "model": "categories.zonestate",
+  "pk": 7
+},
+{
+  "fields": {
+    "state": "ME",
+    "zone": 2
+  },
+  "model": "categories.zonestate",
+  "pk": 8
+},
+{
+  "fields": {
+    "state": "MA",
+    "zone": 2
+  },
+  "model": "categories.zonestate",
+  "pk": 9
+},
+{
+  "fields": {
+    "state": "NH",
+    "zone": 2
+  },
+  "model": "categories.zonestate",
+  "pk": 10
+},
+{
+  "fields": {
+    "state": "RI",
+    "zone": 2
+  },
+  "model": "categories.zonestate",
+  "pk": 11
+},
+{
+  "fields": {
+    "state": "VT",
+    "zone": 2
+  },
+  "model": "categories.zonestate",
+  "pk": 12
+},
+{
+  "fields": {
+    "state": "FL",
+    "zone": 3
+  },
+  "model": "categories.zonestate",
+  "pk": 13
+},
+{
+  "fields": {
+    "state": "GA",
+    "zone": 3
+  },
+  "model": "categories.zonestate",
+  "pk": 14
+},
+{
+  "fields": {
+    "state": "NC",
+    "zone": 3
+  },
+  "model": "categories.zonestate",
+  "pk": 15
+},
+{
+  "fields": {
+    "state": "SC",
+    "zone": 3
+  },
+  "model": "categories.zonestate",
+  "pk": 16
+},
+{
+  "fields": {
+    "state": "OK",
+    "zone": 4
+  },
+  "model": "categories.zonestate",
+  "pk": 17
+},
+{
+  "fields": {
+    "state": "TX",
+    "zone": 4
+  },
+  "model": "categories.zonestate",
+  "pk": 18
+},
+{
+  "fields": {
+    "state": "CA",
+    "zone": 5
+  },
+  "model": "categories.zonestate",
+  "pk": 19
+},
+{
+  "fields": {
+    "state": "NV",
+    "zone": 5
+  },
+  "model": "categories.zonestate",
+  "pk": 20
+},
+{
+  "fields": {
+    "state": "IL",
+    "zone": 6
+  },
+  "model": "categories.zonestate",
+  "pk": 21
+},
+{
+  "fields": {
+    "state": "IA",
+    "zone": 6
+  },
+  "model": "categories.zonestate",
+  "pk": 22
+},
+{
+  "fields": {
+    "state": "KS",
+    "zone": 6
+  },
+  "model": "categories.zonestate",
+  "pk": 23
+},
+{
+  "fields": {
+    "state": "MO",
+    "zone": 6
+  },
+  "model": "categories.zonestate",
+  "pk": 24
+},
+{
+  "fields": {
+    "state": "NE",
+    "zone": 6
+  },
+  "model": "categories.zonestate",
+  "pk": 25
+}
+]

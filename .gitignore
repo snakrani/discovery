@@ -4,10 +4,11 @@ local_settings.py
 *.pyc
 *.DS_Store
 **.log
+db/*.sql
 logs/*.log
 logs/*.csv
 .vagrant/
-vagrant-config.yml
+vagrant/config.yml
 src/
 /static/
 .coverage

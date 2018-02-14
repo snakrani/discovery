@@ -21,7 +21,7 @@ services:
       service: lb
 
   web:
-    command: bash -c "scripts/init-webserver.sh /dev/stderr && waitress-serve --expose-tracebacks --port=80 discovery.wsgi:application"
+    command: bash -c "scripts/init-webserver.sh /dev/stderr && cd app && waitress-serve --expose-tracebacks --port=80 discovery.wsgi:application"
     scale: 3
     depends_on:
       - scheduler
@@ -34,7 +34,7 @@ services:
       service: django
 
   worker:
-    command: bash -c "celery -A discovery worker --loglevel=info --concurrency=2"
+    command: bash -c "celery --workdir=app --app=discovery worker --loglevel=info --concurrency=2"
     restart: always
     scale: 2
     depends_on:
@@ -48,7 +48,7 @@ services:
       service: django
 
   scheduler:
-    command: bash -c "scripts/init-db.sh /dev/stderr discovery-db 5432 && celery -A discovery beat --loglevel=info --pidfile=logs/celerybeat.pid"
+    command: bash -c "scripts/init-db.sh /dev/stderr discovery-db 5432 && celery --workdir=app --app=discovery beat --loglevel=info --pidfile=../logs/celerybeat.pid"
     restart: always
     depends_on:
       - data

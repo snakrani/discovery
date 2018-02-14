@@ -21,6 +21,9 @@ fi
 rm -Rf /venv
 ./scripts/setup-python.sh
 
+#install PostgreSQL client
+./scripts/setup-postgresql.sh
+
 #install PhantomJS
 ./scripts/setup-phantomjs.sh
 

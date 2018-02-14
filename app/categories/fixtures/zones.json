@@ -1,0 +1,32 @@
+[
+{
+  "fields": {},
+  "model": "categories.zone",
+  "pk": 1
+},
+{
+  "fields": {},
+  "model": "categories.zone",
+  "pk": 2
+},
+{
+  "fields": {},
+  "model": "categories.zone",
+  "pk": 3
+},
+{
+  "fields": {},
+  "model": "categories.zone",
+  "pk": 4
+},
+{
+  "fields": {},
+  "model": "categories.zone",
+  "pk": 5
+},
+{
+  "fields": {},
+  "model": "categories.zone",
+  "pk": 6
+}
+]

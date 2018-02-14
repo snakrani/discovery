@@ -4,7 +4,7 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "$([ `readlink "$0"` ] && echo "`readlink "$0"`" || echo "$0")")"; pwd -P)"
-cd "$SCRIPT_DIR/.."
+cd "$SCRIPT_DIR/../app"
 
 LOG_FILE="${1:-./logs/discovery-init.log}"
 if [ "$LOG_FILE" != "/dev/stdout" -a "$LOG_FILE" != "/dev/stderr" ]
@@ -28,7 +28,7 @@ then
   then
     git submodule update --init --recursive
   fi
-  ./scripts/wait-for-it/wait-for-it.sh --host="$DB_HOST" --port="$DB_PORT"
+  "$SCRIPT_DIR/wait-for-it/wait-for-it.sh" --host="$DB_HOST" --port="$DB_PORT"
 fi
 
 #run application setup commands
@@ -46,4 +46,4 @@ echo "> Clearing outdated locks" | tee -a "$LOG_FILE"
 python manage.py clear_locks >>"$LOG_FILE" 2>&1
 
 # Create admin user ONLY IF it doesn't exist yet
-./scripts/create-admin.sh admin admin-changeme >>"$LOG_FILE" 2>&1
+"$SCRIPT_DIR/create-admin.sh" admin admin-changeme >>"$LOG_FILE" 2>&1

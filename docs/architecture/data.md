@@ -55,7 +55,7 @@ You can find a list of all the available vendor pools in the [vendor pool fixtur
 
 ## Vendor information
 
-Vendors make up the core data type in the Discovery system.  All related data displays are grouped around vendors currently.  Vendor information is provided both through CSV file information provided by GSA PSHC staff in the **vendors/docs** directory and through SAM API registration data that is returned for the DUNS number of the vendor in the SAM system.
+Vendors make up the core data type in the Discovery system.  All related data displays are grouped around vendors currently.  Vendor information is provided both through CSV file information provided by GSA PSHC staff in the **vendors/data** directory and through SAM API registration data that is returned for the DUNS number of the vendor in the SAM system.
 
 You can find examples of vendor data elements in the [vendor fixture data](https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/vendors.json).
 

@@ -5,4 +5,7 @@ delete from vendors_samload;
 delete from vendors_vendor_setasides;
 delete from vendors_poolpiid;
 delete from vendors_location;
+delete from vendors_managerphonenumber;
+delete from vendors_manageremail;
+delete from vendors_manager;
 delete from vendors_vendor;

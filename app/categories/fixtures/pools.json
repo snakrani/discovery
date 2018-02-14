@@ -1,0 +1,302 @@
+[
+{
+  "fields": {
+    "threshold": "$11 million",
+    "vehicle": "HCATS",
+    "naics": [
+      35,
+      36,
+      37
+    ],
+    "name": "HCATS Unrestricted Pool 1",
+    "number": "1"
+  },
+  "model": "categories.pool",
+  "pk": "HCATS_1"
+},
+{
+  "fields": {
+    "threshold": "$15 million",
+    "vehicle": "HCATS",
+    "naics": [
+      5,
+      6,
+      7,
+      9,
+      38
+    ],
+    "name": "HCATS Unrestricted Pool 2",
+    "number": "2"
+  },
+  "model": "categories.pool",
+  "pk": "HCATS_2"
+},
+{
+  "fields": {
+    "threshold": "$11 million",
+    "vehicle": "HCATS_SB",
+    "naics": [
+      35,
+      36,
+      37
+    ],
+    "name": "HCATS Small Business Pool 1",
+    "number": "1"
+  },
+  "model": "categories.pool",
+  "pk": "HCATS_SB_1"
+},
+{
+  "fields": {
+    "threshold": "$15 million",
+    "vehicle": "HCATS_SB",
+    "naics": [
+      5,
+      6,
+      7,
+      9,
+      38
+    ],
+    "name": "HCATS Small Business Pool 2",
+    "number": "2"
+  },
+  "model": "categories.pool",
+  "pk": "HCATS_SB_2"
+},
+{
+  "fields": {
+    "threshold": "$14 million",
+    "vehicle": "OASIS",
+    "naics": [
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "name": "Management, Scientific, and Technical Services",
+    "number": "1"
+  },
+  "model": "categories.pool",
+  "pk": "OASIS_1"
+},
+{
+  "fields": {
+    "threshold": "$19 million",
+    "vehicle": "OASIS",
+    "naics": [
+      22,
+      23,
+      24,
+      25,
+      26
+    ],
+    "name": "Financial and Accounting Services",
+    "number": "2"
+  },
+  "model": "categories.pool",
+  "pk": "OASIS_2"
+},
+{
+  "fields": {
+    "threshold": "$35.5 million",
+    "vehicle": "OASIS",
+    "naics": [
+      27,
+      28,
+      29
+    ],
+    "name": "Military, Marine, and Energy Engineering",
+    "number": "3"
+  },
+  "model": "categories.pool",
+  "pk": "OASIS_3"
+},
+{
+  "fields": {
+    "threshold": "500 employee",
+    "vehicle": "OASIS",
+    "naics": [
+      30,
+      31
+    ],
+    "name": "Scientific Research and Development",
+    "number": "4"
+  },
+  "model": "categories.pool",
+  "pk": "OASIS_4"
+},
+{
+  "fields": {
+    "threshold": "1000 employee",
+    "vehicle": "OASIS",
+    "naics": [
+      32
+    ],
+    "name": "Aircraft Parts and Engines Research and Development",
+    "number": "5A"
+  },
+  "model": "categories.pool",
+  "pk": "OASIS_5A"
+},
+{
+  "fields": {
+    "threshold": "1000 employee",
+    "vehicle": "OASIS",
+    "naics": [
+      33
+    ],
+    "name": "Space and Missiles Research and Development",
+    "number": "5B"
+  },
+  "model": "categories.pool",
+  "pk": "OASIS_5B"
+},
+{
+  "fields": {
+    "threshold": "1500 employee",
+    "vehicle": "OASIS",
+    "naics": [
+      34
+    ],
+    "name": "Aircraft Research and Development",
+    "number": "6"
+  },
+  "model": "categories.pool",
+  "pk": "OASIS_6"
+},
+{
+  "fields": {
+    "threshold": "$14 million",
+    "vehicle": "OASIS_SB",
+    "naics": [
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "name": "Management, Scientific, and Technical Services",
+    "number": "1"
+  },
+  "model": "categories.pool",
+  "pk": "OASIS_SB_1"
+},
+{
+  "fields": {
+    "threshold": "$19 million",
+    "vehicle": "OASIS_SB",
+    "naics": [
+      22,
+      23,
+      24,
+      25,
+      26
+    ],
+    "name": "Financial and Accounting Services",
+    "number": "2"
+  },
+  "model": "categories.pool",
+  "pk": "OASIS_SB_2"
+},
+{
+  "fields": {
+    "threshold": "$35.5 million",
+    "vehicle": "OASIS_SB",
+    "naics": [
+      27,
+      28,
+      29
+    ],
+    "name": "Military, Marine, and Energy Engineering",
+    "number": "3"
+  },
+  "model": "categories.pool",
+  "pk": "OASIS_SB_3"
+},
+{
+  "fields": {
+    "threshold": "500 employee",
+    "vehicle": "OASIS_SB",
+    "naics": [
+      30,
+      31
+    ],
+    "name": "Scientific Research and Development",
+    "number": "4"
+  },
+  "model": "categories.pool",
+  "pk": "OASIS_SB_4"
+},
+{
+  "fields": {
+    "threshold": "1000 employee",
+    "vehicle": "OASIS_SB",
+    "naics": [
+      32
+    ],
+    "name": "Aircraft Parts and Engines Research and Development",
+    "number": "5A"
+  },
+  "model": "categories.pool",
+  "pk": "OASIS_SB_5A"
+},
+{
+  "fields": {
+    "threshold": "1000 employee",
+    "vehicle": "OASIS_SB",
+    "naics": [
+      33
+    ],
+    "name": "Space and Missiles Research and Development",
+    "number": "5B"
+  },
+  "model": "categories.pool",
+  "pk": "OASIS_SB_5B"
+},
+{
+  "fields": {
+    "threshold": "1500 employee",
+    "vehicle": "OASIS_SB",
+    "naics": [
+      34
+    ],
+    "name": "Aircraft Research and Development",
+    "number": "6"
+  },
+  "model": "categories.pool",
+  "pk": "OASIS_SB_6"
+}
+]
