@@ -26,13 +26,13 @@ then
   pip install virtualenv >>"$LOG_FILE" 2>&1
   python -m virtualenv "$VENV_DIR" >>"$LOG_FILE" 2>&1
   
-  if [ -f app/req/requirements.txt ]
+  if [ -f requirements.txt ]
   then
-    cp app/req/requirements.txt "$VENV_DIR/requirements.txt" >>"$LOG_FILE" 2>&1
+    cp requirements.txt "$VENV_DIR/requirements.txt" >>"$LOG_FILE" 2>&1
   fi
-  if [ -f app/req/requirements-dev.txt ]
+  if [ -f requirements-dev.txt ]
   then
-    cp app/req/requirements-dev.txt "$VENV_DIR/requirements-dev.txt" >>"$LOG_FILE" 2>&1
+    cp requirements-dev.txt "$VENV_DIR/requirements-dev.txt" >>"$LOG_FILE" 2>&1
   fi
 fi
 source "$VENV_DIR/bin/activate" >>"$LOG_FILE" 2>&1
