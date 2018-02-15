@@ -93,7 +93,7 @@ class Command(BaseCommand):
         if (len(record) == 10 and len(record[9])):
             for name in filter(None, "".join(record[9].split()).split(',')):
                 try:
-                    sa = SetAside.objects.get(name__iexact=name)
+                    sa = SetAside.objects.get(abbreviation__iexact=name)
                     if sa not in vendor.setasides.all():
                         vendor.setasides.add(sa)
 
