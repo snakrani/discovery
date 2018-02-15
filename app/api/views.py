@@ -167,7 +167,7 @@ class ListPools(APIView):
         pools = Pool.objects.all().order_by('id')
 
         if vehicle:
-            pools = pools.filter(vehicle=vehicle)
+            pools = pools.filter(vehicle=vehicle.upper())
 
         if naics:
             pools = pools.filter(naics__code=naics.code)
