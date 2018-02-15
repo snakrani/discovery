@@ -45,11 +45,11 @@ def display_error(info):
     vendor_logger().debug("MAJOR ERROR -- PROCESS ENDING EXCEPTION -- {0}".format(info))
 
 
-def replace_x(duns):
-    return duns.replace('X', '0').replace('x', '0')
+def format_duns(duns):
+    return duns.replace('X', '0').replace('x', '0').zfill(9)
 
 def duns_plus_4(duns):
-    return replace_x(duns) + '0000'
+    return format_duns(duns) + '0000'
 
 
 class Command(BaseCommand):
@@ -65,7 +65,7 @@ class Command(BaseCommand):
         
         name = record[0]
         piid = record[1]
-        duns = replace_x(record[2])
+        duns = format_duns(record[2].strip())
         
         vendor, created = Vendor.objects.get_or_create(duns=duns)
          
