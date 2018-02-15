@@ -3,8 +3,6 @@
 
 var InputHandler = {
     init: function() {
-        this.populateDropDown();
-
         // event bindings
         $('#naics-code').change(this.sendCodeChange.bind(InputHandler));
         $('#setaside-filters').change(this.sendFilterChange);
@@ -19,7 +17,12 @@ var InputHandler = {
         $('#ch_table').on('click', 'th.sortable', this.sortContracts);
         $('#ch_table').on('keypress', 'th.sortable', this.sortContracts);
 
+        // event subscriptions
         Events.subscribe('loadedWithQS', this.updateFields.bind(InputHandler));
+
+        Events.subscribe('fieldsUpdated', this.loadPools.bind(InputHandler));
+        Events.subscribe('vehicleChanged', this.loadPools.bind(InputHandler));
+        Events.subscribe('poolDataLoaded', this.populateNaicsDropDown.bind(InputHandler));
     },
 
     updateFields: function(obj) {
@@ -43,6 +46,8 @@ var InputHandler = {
             this.vehicle = obj['vehicle'];
             $('form#vehicle-select select').val(obj['vehicle']);
         }
+
+        Events.publish('fieldsUpdated');
     },
 
     sortVendors: function(e) {
@@ -163,25 +168,63 @@ var InputHandler = {
         return setasides;
     },
 
-    populateDropDown: function() {
+    loadPools: function() {
+        var vehicle = this.getVehicle();
+        var url = "/api/pools/";
+        var queryData = {};
+
+        if (vehicle !== null) {
+            queryData['vehicle'] = vehicle;
+        }
+
+        RequestsManager.getAPIRequest(url, queryData, function(data) {
+            var naicsMap = {};
+            var pool;
+            var naics;
+
+            for (var poolIndex = 0; poolIndex < data.results.length; poolIndex++) {
+                pool = data.results[poolIndex];
+
+                if (vehicle !== null || pool.vehicle == vehicle.toUpperCase()) {
+                    for (var naicsIndex = 0; naicsIndex < pool.naics.length; naicsIndex++) {
+                        naics = pool.naics[naicsIndex].code;
+
+                        if (!(naics in naicsMap)) {
+                            naicsMap[naics] = [];
+                        }
+                        naicsMap[naics].push(pool.number);
+                    }
+                }
+            }
+            Events.publish('poolDataLoaded', {"vehicle": vehicle, "naics": naicsMap});
+        });
+    },
+
+    populateNaicsDropDown: function(data) {
+        var vehicle = (data !== undefined ? data.vehicle : null);
+        var naicsMap = (data !== undefined ? data.naics : {});
+        var naics = URLManager.getParameterByName('naics-code');
+
+        $("#naics-code").empty();
+
         // can't seem to use cached jqobj, something goes wrong with select2
         this.populatePromise = RequestsManager.getAPIRequest(
             "/api/naics/",
             { format: "json" },
             function( data ) {
                 $.each(data.results, function(key, result) {
-                    $("#naics-code")
-                         .append($("<option></option>")
-                         .attr("value", result.code)
-                         .text(result.code + " - " + result.description));
+                    if ($.isEmptyObject(naicsMap) || (result.code in naicsMap)) {
+                        $("#naics-code")
+                            .append($("<option></option>")
+                            .attr("value", result.code)
+                            .text(result.code + " - " + result.description));
+                    }
                 });
                 //load data if search criteria is defined in querystring
                 if (URLManager.getParameterByName("naics-code") || URLManager.getParameterByName("setasides")) {
                     Events.publish('loadData');
                 }
-                $("#naics-code")
-                    .select2({placeholder:'Select a NAICS code', width : '380px'})
-                    .select2("val", URLManager.getParameterByName("naics-code"));
+                $("#naics-code").select2({placeholder:'Select a NAICS code', width : '380px'}).select2("val", naics);
             }
         );
         $('#naics-code').select2({placeholder:'Select a NAICS code', width : '380px'});
