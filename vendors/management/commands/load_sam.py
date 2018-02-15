@@ -152,16 +152,6 @@ class Command(BaseCommand):
             if vendor.sam_url and vendor.sam_url[:3].lower() == "www" :
                 vendor.sam_url = 'http://' + vendor.sam_url
 
-            setasides = get_value(reg, 'businessTypes', vendor)
-            for code in setasides:
-                try:
-                    sa = SetAside.objects.get(code__iexact=code)
-                    if sa not in vendor.setasides.all():
-                        vendor.setasides.add(sa)
-
-                except SetAside.DoesNotExist:
-                    continue
-            
             vendor.save()           
             
             log_memory("Final vendor [ {} | {} ]".format(vid, vendor.name))
@@ -181,8 +171,7 @@ class Command(BaseCommand):
                 vendor.cage,
                 vendor.sam_address,
                 vendor.sam_citystate,
-                vendor.sam_url,
-                ":".join([str(sa.pk) for sa in vendor.setasides.all()])
+                vendor.sam_url
             )
         else:
             logger.debug("'registration' key is missing for {} / {}".format(vid, vendor.duns_4))
@@ -207,8 +196,7 @@ class Command(BaseCommand):
             'Cage Code', 
             'SAM Address', 
             'SAM Citystate', 
-            'SAM URL', 
-            'Setasides'
+            'SAM URL'
         )
 
         try:
