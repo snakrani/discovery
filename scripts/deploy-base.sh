@@ -37,6 +37,9 @@ deploy_app() {
   local hostname="$2"
   local fail=0
   
+  # Update Git project dependencies
+  git submodule update --init --recursive
+  
   # Background services
   cf push discovery-scheduler -f "`get_manifest_config scheduler ${branch}`" &
   cf push discovery-worker -f "`get_manifest_config worker ${branch}`" &

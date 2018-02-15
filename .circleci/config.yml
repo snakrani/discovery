@@ -95,6 +95,7 @@ jobs:
           name: Import fixtures and run test server
           background: true
           command: |
+            git submodule update --init --recursive
             source /venv/bin/activate
             scripts/init-db.sh /dev/stderr
             scripts/init-webserver.sh /dev/stderr

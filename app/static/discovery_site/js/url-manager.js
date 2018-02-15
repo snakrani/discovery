@@ -6,6 +6,14 @@ var URLManager = {
     title: 'Discovery',
 
     init: function() {
+        Events.subscribe('contentChanged', this.update.bind(URLManager));
+        Events.subscribe('vehicleChanged', this.update.bind(URLManager));
+        Events.subscribe('goToPoolPage', this.loadPoolPage.bind(URLManager));
+
+        this.loadFromQS();
+    },
+
+    loadFromQS: function() {
         var naics = this.getParameterByName('naics-code');
         var setasides = this.getParameterByName('setasides');
         var vehicle = this.getParameterByName('vehicle');
@@ -15,10 +23,6 @@ var URLManager = {
         if (naics || setasides || vendor || vehicle) {
             Events.publish('loadedWithQS', {'naics-code': naics, 'setasides': setasides, 'vehicle': vehicle});
         }
-
-        Events.subscribe('contentChanged', this.update.bind(URLManager));
-        Events.subscribe('vehicleChanged', this.update.bind(URLManager));
-        Events.subscribe('goToPoolPage', this.loadPoolPage.bind(URLManager));
     },
 
     getQueryString: function() {
@@ -126,5 +130,5 @@ var URLManager = {
         else {
             return false;
         }
-    } 
+    }
 };

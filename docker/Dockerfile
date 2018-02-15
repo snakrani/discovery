@@ -25,8 +25,8 @@ RUN mkdir /root/.ssh
 # Application requirements
 #
 COPY ./scripts/setup-python.sh /usr/local/discovery/bin/setup-python.sh
-COPY ./app/req/requirements.txt /usr/local/discovery/app/req/requirements.txt
-COPY ./app/req/requirements-dev.txt /usr/local/discovery/app/req/requirements-dev.txt
+COPY ./requirements.txt /usr/local/discovery/requirements.txt
+COPY ./requirements-dev.txt /usr/local/discovery/requirements-dev.txt
 
 RUN /usr/local/discovery/bin/setup-python.sh /dev/stderr \
     && rm -rf /tmp/*
