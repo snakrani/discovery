@@ -21,5 +21,5 @@ fi
 
 #run application setup commands
 
-#echo "> Collecting Django static files" | tee -a "$LOG_FILE"
-#python manage.py collectstatic --noinput >>"$LOG_FILE" 2>&1
+echo "> Collecting Django static files" | tee -a "$LOG_FILE"
+python manage.py collectstatic --noinput >>"$LOG_FILE" 2>&1
