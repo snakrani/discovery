@@ -10,7 +10,7 @@ logs/*.csv
 .vagrant/
 vagrant/config.yml
 src/
-/static/
+app/static/
 .coverage
 .project
 .pydevproject
