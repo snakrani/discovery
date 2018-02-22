@@ -61,7 +61,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
                 ('piid', models.CharField(max_length=128)),
-                ('pool', models.ForeignKey(to='vendors.Pool')),
+                ('pool', models.ForeignKey(to='vendors.Pool', on_delete=models.DO_NOTHING)),
             ],
             options={
             },
@@ -102,13 +102,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='poolpiid',
             name='vendor',
-            field=models.ForeignKey(to='vendors.Vendor'),
+            field=models.ForeignKey(to='vendors.Vendor', on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='contractrecord',
             name='vendor',
-            field=models.ForeignKey(to='vendors.Vendor'),
+            field=models.ForeignKey(to='vendors.Vendor', on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AddField(
