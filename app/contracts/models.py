@@ -50,7 +50,7 @@ REASON_FOR_MODIFICATION_CHOICES = (
 
 
 class FPDSLoad(models.Model):
-    vendor = models.OneToOneField(Vendor, null=True)
+    vendor = models.OneToOneField(Vendor, null=True, on_delete=models.CASCADE)
     load_date = models.DateField()
 
 
@@ -76,7 +76,7 @@ class Contract(models.Model):
     agency_id = models.CharField(max_length=128, null=True)
     agency_name = models.CharField(max_length=128, null=True)
     
-    vendor = models.ForeignKey(Vendor)
+    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
     point_of_contact = models.EmailField(null=True)
     
     pricing_type = models.CharField(choices=PRICING_CHOICES, max_length=2, null=True)
@@ -88,9 +88,9 @@ class Contract(models.Model):
     number_of_employees = models.IntegerField(null=True)
     
     vendor_phone = models.CharField(null=True, max_length=128)
-    vendor_location = models.ForeignKey(Location, null=True)
+    vendor_location = models.ForeignKey(Location, null=True, on_delete=models.DO_NOTHING)
     
-    place_of_performance = models.ForeignKey(PlaceOfPerformance, null=True)
+    place_of_performance = models.ForeignKey(PlaceOfPerformance, null=True, on_delete=models.DO_NOTHING)
 
     def save(self, *args, **kwargs):    
         try:
