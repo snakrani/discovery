@@ -40,8 +40,11 @@ then
   fi
   
   # Ensure CF plugins are installed
-  cf install-plugin -f "/usr/local/bin/cf-autopilot"
-  cf install-plugin -f "/usr/local/bin/cf-service-connect"
+  if which cf >/dev/null
+  then
+    cf install-plugin -f "/usr/local/bin/cf-autopilot"
+    cf install-plugin -f "/usr/local/bin/cf-service-connect"
+  fi
 fi
 
 # Activate Python virtual environment if present
