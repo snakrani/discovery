@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 #-------------------------------------------------------------------------------
 
+export DEBIAN_FRONTEND=noninteractive
+
 PROJ_DIR="${1}" # Required!!
 cd "$PROJ_DIR"
 
