@@ -52,7 +52,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('state', models.CharField(max_length=50)),
-                ('zone', models.ForeignKey(related_name='state', to='categories.Zone', null=True)),
+                ('zone', models.ForeignKey(related_name='state', to='categories.Zone', null=True, on_delete=models.CASCADE)),
             ],
         ),
     ]
