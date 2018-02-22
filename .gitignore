@@ -20,3 +20,4 @@ celerybeat.pid
 docs/build
 opencontrols/
 _book
+/tmp/
