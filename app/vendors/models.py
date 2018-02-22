@@ -81,9 +81,9 @@ class ManagerEmail(models.Model):
 
 class PoolPIID(models.Model):
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
-    pool = models.ForeignKey(Pool)
+    pool = models.ForeignKey(Pool, on_delete=models.DO_NOTHING)
     piid = models.CharField(max_length=128)
-    zone = models.ForeignKey(Zone, null=True)
+    zone = models.ForeignKey(Zone, null=True, on_delete=models.DO_NOTHING)
 
     def __str__(self):
         return "{0} - {1}/{2} ({3})".format(self.vendor.name, self.pool.id, self.zone, self.piid)
