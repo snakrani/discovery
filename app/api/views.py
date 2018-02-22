@@ -4,7 +4,6 @@ from django.http import HttpResponse, HttpResponseBadRequest
 from django.core.paginator import Paginator
 from django.db.models import Count
 
-from rest_framework.pagination import PaginationSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -12,6 +11,7 @@ from categories.models import Naics, SetAside, Pool, Zone
 from vendors.models import Vendor, SamLoad
 from contracts.models import Contract, FPDSLoad
 from api.serializers import VendorSerializer, NaicsSerializer, ZoneSerializer, PoolSerializer, ShortVendorSerializer, ContractSerializer, Metadata, MetadataSerializer, ShortPoolSerializer
+from api.pagination import PaginationSerializer
 
 import json
 
