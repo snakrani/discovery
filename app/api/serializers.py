@@ -153,12 +153,10 @@ class ShortVendorSerializer(OrderedSerializer):
     num_contracts = serializers.SerializerMethodField('get_vendor_contracts')
     sam_location = LocationSerializer(many=False)    
 
-    managers = ManagerSerializer(many=True)
-    
     class Meta:
         model = Vendor
         fields = ('id', 'name', 'duns', 'duns_4', 'sam_status', 'sam_exclusion', 'sam_url',
-                  'sam_location', 'managers', 'setasides', 'num_contracts')
+                  'sam_location', 'setasides', 'num_contracts')
 
     def get_vendor_contracts(self, item):
         if 'naics' in self.context and self.context['naics']:
