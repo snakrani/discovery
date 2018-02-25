@@ -2,10 +2,10 @@
 Django settings for the Discovery project.
 
 For more information on this file, see
-https://docs.djangoproject.com/en/1.8/topics/settings/
+https://docs.djangoproject.com/en/2.0/topics/settings/
 
 For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.8/ref/settings/
+https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 from discovery.utils import config_value
 
@@ -13,33 +13,27 @@ import os
 import markdown
 import dj_database_url
 
+#-------------------------------------------------------------------------------
+# Global settings
+
 #
-# General project variables
+# Directories
 #
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJ_DIR = os.path.dirname(BASE_DIR)
 
-# Django specific
-#------------------------------
-
-SECRET_KEY = config_value('SECRET_KEY', '')
-APPEND_SLASH = True
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-TEMPLATE_DEBUG = False
-
-DB_MUTEX_TTL_SECONDS = 86400 # 1 day (24 hours)
-
-# Application specific
-#------------------------------
-
+#
+# API settings
+#
 API_HOST = config_value('API_HOST', '')
 API_KEY = config_value('API_KEY', '')
 
 SAM_API_URL = "https://api.data.gov/sam/v1/registrations/"
 SAM_API_KEY = config_value('SAM_API_KEY', '')
 
+#
+# Discovery related settings
+#
 VEHICLES = (
     'oasis_sb', 
     'oasis', 
@@ -47,9 +41,36 @@ VEHICLES = (
     'hcats'
 )
 
+#-------------------------------------------------------------------------------
+# Core Django settings
 
 #
-# Application definitiona and scope
+# Debugging
+#
+DEBUG = True
+TEMPLATE_DEBUG = True
+
+#
+# General configurations
+#
+SECRET_KEY = '123456789' #config_value('SECRET_KEY', '')
+APPEND_SLASH = True
+
+#
+# Time configuration
+#
+TIME_ZONE = 'UTC'
+USE_TZ = True
+
+#
+# Language configurations
+#
+LANGUAGE_CODE = 'en-us'
+USE_I18N = True
+USE_L10N = True
+
+#
+# Server configurations
 #
 WSGI_APPLICATION = 'discovery.wsgi.application'
 ROOT_URLCONF = 'discovery.urls'
@@ -58,7 +79,16 @@ ALLOWED_HOSTS = [
     '*',
 ]
 
-INSTALLED_APPS = (
+#
+# Database configurations
+#
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config()
+
+#
+# Applications and libraries
+#
+INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -82,74 +112,68 @@ INSTALLED_APPS = (
     'contracts',
     
     'tests',
-)
-MIDDLEWARE_CLASSES = (
+]
+
+MIDDLEWARE_CLASSES = [
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-)
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-    "discovery.context_processors.api_host",
-    "django.contrib.auth.context_processors.auth",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.media",
-    'django.core.context_processors.request',
-    "django.core.context_processors.static",
-    "django.core.context_processors.tz",
-    "django.contrib.messages.context_processors.messages"
-)
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'discovery/templates'),
-)
-
+]
 
 #
-# Time and internationalization
+# Authentication configuration
 #
-TIME_ZONE = 'UTC'
-USE_TZ = True
-
-LANGUAGE_CODE = 'en-us'
-USE_I18N = True
-USE_L10N = True
-
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
 
 #
-# Database connections
+# Templating configuration
 #
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config()
-
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.contrib.auth.context_processors.auth',
+                'django.core.context_processors.debug',
+                'django.core.context_processors.i18n',
+                'django.core.context_processors.media',
+                'django.core.context_processors.request',
+                'django.core.context_processors.static',
+                'django.core.context_processors.tz',
+                'django.contrib.messages.context_processors.messages',
+                'discovery.context_processors.api_host',
+            ],
+        },
+    },
+]
 
 #
-# Static file handling
+# Static file configurations
 #
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-#The below settings turn on S3 bucket storage
-#Lines below are commented out to force the loading of static assets from the local dev server by default
-#uncomment them and fill in the extra AWS settings to hook it up to an S3 bucket
-
-#DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-#STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-#STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-#STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
-
-AWS_QUERYSTRING_AUTH = False
-AWS_ACCESS_KEY_ID = config_value('AWS_ACCESS_KEY_ID', '')
-
-AWS_SECRET_ACCESS_KEY = config_value('AWS_SECRET_ACCESS_KEY', '')
-AWS_STORAGE_BUCKET_NAME = config_value('AWS_STORAGE_BUCKET_NAME', '')
-
-
 #
-# Application logging
+# Caching configuration
 #
 CACHES = {
     'default': {
@@ -158,6 +182,9 @@ CACHES = {
     }
 }
 
+#
+# Logging configuration
+#
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -261,6 +288,13 @@ LOGGING = {
     },
 }
 
+#-------------------------------------------------------------------------------
+# Django Addons
+
+#
+# Mutex locking configuration
+#
+DB_MUTEX_TTL_SECONDS = 86400 # 1 day (24 hours)
 
 #
 # Administrative session handling
@@ -276,7 +310,6 @@ SESSION_REDIS = {
     'socket_timeout': 1
 }
 
-
 #
 # Celery processing and scheduling
 #
@@ -287,7 +320,6 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'UTC'
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
-
 
 #
 # Saucelabs testing
@@ -331,8 +363,10 @@ It must be passed in the `api_key` parameter with each request.
     "template_path": "api_theme/index.html",
 }
 
-
-# Optionally override any configurations above
+#-------------------------------------------------------------------------------
+#
+# Local settings overrides
+#
 try:
     from discovery.local_settings import *
 except:

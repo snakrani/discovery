@@ -1,16 +1,21 @@
 
+#-------------------------------------------------------------------------------
+# Core Django settings
+
 #
-# General project variables
+# Debugging
 #
 DEBUG = True
 TEMPLATE_DEBUG = True
 
-SAUCE = False
-
+#
+# Caching configuration
+#
 if DEBUG:
     CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
     }
 }
-    
+
+#SAUCE = False
