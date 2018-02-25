@@ -13,7 +13,7 @@ import os
 import sys
 import logging
 import traceback
-import StringIO
+import io
 
 import requests
 import re
@@ -34,7 +34,7 @@ def vendor_data_logger():
     return logging.getLogger('vendor_data')
 
 def log_data(*args):
-    line = StringIO.StringIO()
+    line = io.StringIO()
     writer = csv.writer(line)
     writer.writerow(args)
     vendor_data_logger().info(line.getvalue().rstrip())

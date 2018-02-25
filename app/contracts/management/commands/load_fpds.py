@@ -17,7 +17,7 @@ import sys
 import signal
 import logging
 import traceback
-import StringIO
+import io
 
 import re
 import pytz
@@ -38,7 +38,7 @@ def fpds_data_logger():
     return logging.getLogger('fpds_data')
 
 def log_data(*args):
-    line = StringIO.StringIO()
+    line = io.StringIO()
     writer = csv.writer(line)
     writer.writerow(args)
     fpds_data_logger().info(line.getvalue().rstrip())

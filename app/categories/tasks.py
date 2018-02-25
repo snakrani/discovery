@@ -7,9 +7,9 @@ from django.core.management import call_command
 from db_mutex import DBMutexError, DBMutexTimeoutError
 from db_mutex.models import DBMutex
 from db_mutex.db_mutex import db_mutex
-from StringIO import StringIO
 
 import sys
+import io
 
 
 @shared_task
@@ -18,7 +18,7 @@ def update_categories():
     lock_id = 'categories.update_categories'
     
     old_stdout = sys.stdout
-    sys.stdout = mystdout = StringIO()
+    sys.stdout = mystdout = io.StringIO()
     
     try:
         with db_mutex(lock_id):

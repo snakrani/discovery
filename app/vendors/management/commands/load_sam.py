@@ -14,7 +14,7 @@ import sys
 import logging
 import traceback
 import warnings
-import StringIO
+import io
 
 import requests
 import json
@@ -38,7 +38,7 @@ def sam_data_logger():
     return logging.getLogger('sam_data')
 
 def log_data(*args):
-    line = StringIO.StringIO()
+    line = io.StringIO()
     writer = csv.writer(line)
     writer.writerow([unicode(s).encode("utf-8") for s in args])
     sam_data_logger().info(line.getvalue().rstrip())
