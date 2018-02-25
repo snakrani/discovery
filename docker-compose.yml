@@ -22,9 +22,11 @@ services:
 
   web:
     command: bash -c "scripts/init-webserver.sh /dev/stderr && cd app && waitress-serve --expose-tracebacks --port=80 discovery.wsgi:application"
-    scale: 3
+    scale: 1
     depends_on:
       - scheduler
+    ports:
+      - "8000:80"
     links:
       - data:discovery-db
       - tasks:discovery-tasks
@@ -36,7 +38,7 @@ services:
   worker:
     command: bash -c "celery --workdir=app --app=discovery worker --loglevel=info --concurrency=2"
     restart: always
-    scale: 2
+    scale: 1
     depends_on:
       - scheduler
     links:
