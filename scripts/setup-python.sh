@@ -33,16 +33,17 @@ if [ ! -d "$VENV_DIR" ]
 then
   echo "> Creating a Python project virtual environment" | tee -a "$LOG_FILE"
   python3 -m venv "$VENV_DIR" >>"$LOG_FILE" 2>&1
-  
-  if [ -f requirements.txt ]
-  then
-    cp requirements.txt "$VENV_DIR/requirements.txt" >>"$LOG_FILE" 2>&1
-  fi
-  if [ -f requirements-dev.txt ]
-  then
-    cp requirements-dev.txt "$VENV_DIR/requirements-dev.txt" >>"$LOG_FILE" 2>&1
-  fi
 fi
+  
+if [ -f requirements.txt ]
+then
+  cp requirements.txt "$VENV_DIR/requirements.txt" >>"$LOG_FILE" 2>&1
+fi
+if [ -f requirements-dev.txt ]
+then
+  cp requirements-dev.txt "$VENV_DIR/requirements-dev.txt" >>"$LOG_FILE" 2>&1
+fi
+
 source "$VENV_DIR/bin/activate" >>"$LOG_FILE" 2>&1
 
 #install Python application requirements
