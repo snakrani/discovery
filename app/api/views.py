@@ -31,8 +31,8 @@ def get_nested_value(data, keys):
 
 
 def get_page(items, request):
-    paginator = Paginator(items, min(int(request.QUERY_PARAMS.get('count', 100)), 100))
-    items = paginator.page(request.QUERY_PARAMS.get('page', 1))
+    paginator = Paginator(items, min(int(request.query_params.get('count', 100)), 100))
+    items = paginator.page(request.query_params.get('page', 1))
            
     serializer = PaginationSerializer(items, context={'request': request})       
     serializer.data['num_results'] = serializer.data['count']       
@@ -42,7 +42,7 @@ def get_page(items, request):
 
 
 def get_naics(request):
-    naics = request.QUERY_PARAMS.get('naics', None)
+    naics = request.query_params.get('naics', None)
     
     if naics and naics != 'all':
         return Naics.objects.get(code=naics)
@@ -51,7 +51,7 @@ def get_naics(request):
 
 
 def get_pools(request, naics=None):
-    vehicle = request.QUERY_PARAMS.get('vehicle', None)
+    vehicle = request.query_params.get('vehicle', None)
     
     if vehicle and vehicle.lower() not in settings.VEHICLES:
         raise Exception("Acquisition vehicle {} not found".format(vehicle))
@@ -67,7 +67,7 @@ def get_pools(request, naics=None):
 
 
 def get_setasides(request):
-    setaside_str = request.QUERY_PARAMS.get('setasides', None)
+    setaside_str = request.query_params.get('setasides', None)
     
     if setaside_str:
         setasides = [sa.strip() for sa in setaside_str.split(',')]
@@ -86,10 +86,10 @@ def get_ordered_results(queryset, request, serializer_class, context = {}):
     
     context.update({'request': request})
     
-    if request.QUERY_PARAMS.get('direction', None):
-        descending = False if request.QUERY_PARAMS.get('direction', 'desc') == 'asc' else True
+    if request.query_params.get('direction', None):
+        descending = False if request.query_params.get('direction', 'desc') == 'asc' else True
     
-    sort = serializer_class.sort_field(request.QUERY_PARAMS.get('sort', None))
+    sort = serializer_class.sort_field(request.query_params.get('sort', None))
  
     items = serializer_class(queryset, context=context)
     items.data.sort(key=lambda k: get_nested_value(k, sort), reverse=descending)
@@ -111,7 +111,7 @@ class ListNaics(APIView):
     """
     def get(self, request, format=None):
         try:
-            serializer = NaicsSerializer(self.get_results(request.QUERY_PARAMS.get('q', None)), many=True)
+            serializer = NaicsSerializer(self.get_results(request.query_params.get('q', None)), many=True)
         
         except Exception as error:
             return HttpResponseBadRequest(error)
@@ -151,7 +151,7 @@ class ListPools(APIView):
     def get(self, request, format=None):
         try:
             serializer = PoolSerializer(self.get_results(
-                request.QUERY_PARAMS.get('vehicle', None),
+                request.query_params.get('vehicle', None),
                 get_naics(request)
             ), many=True)
         
@@ -190,7 +190,7 @@ class ListZones(APIView):
     """
     def get(self, request, format=None):
         try:
-            serializer = ZoneSerializer(self.get_results(request.QUERY_PARAMS.get('state', None)), many=True)
+            serializer = ZoneSerializer(self.get_results(request.query_params.get('state', None)), many=True)
         
         except Exception as error:
             return HttpResponseBadRequest(error)
@@ -358,7 +358,7 @@ class ListContracts(APIView):
     """
     def get(self, request, format=None):
         try:
-            duns = self.request.QUERY_PARAMS.get('duns', None)
+            duns = self.request.query_params.get('duns', None)
             if not duns:
                 raise Exception("Vendor DUNS required to retrieve contracts")
             
