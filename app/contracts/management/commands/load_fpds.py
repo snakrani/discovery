@@ -154,7 +154,7 @@ def get_contract_pricing_name(award):
         return award['contractData']['typeOfContractPricing']
 
     name = get_name(award) 
-    if name and isinstance(name, basestring):
+    if name and isinstance(name, str):
         return name
 
     elif name: 
@@ -179,7 +179,7 @@ def get_naics(award):
     
     name = get_name(award)
     
-    if name and isinstance(name, basestring):
+    if name and isinstance(name, str):
         return name
     elif name:
         return award['productOrServiceInformation']['principalNAICSCode']['#text']

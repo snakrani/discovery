@@ -11,7 +11,7 @@ class OrderedSerializer(serializers.ModelSerializer):
     @classmethod
     def sort_field(cls, sort):
         if sort: 
-            if isinstance(sort, basestring):
+            if isinstance(sort, str):
                 sort = sort.split(',')
              
             if sort[0] in cls.Meta.fields:
