@@ -100,7 +100,7 @@ INSTALLED_APPS = [
     'storages',
     
     'rest_framework',
-    'rest_framework_swagger',
+    'django_filters',
     
     'django_celery_beat',
     'django_celery_results',
@@ -322,46 +322,30 @@ CELERY_TIMEZONE = 'UTC'
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
 #
+# REST configuration 
+#
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'api.schemas.DiscoverySchema',
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+    ],
+    
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ],
+    'SEARCH_PARAM': 'q',
+    
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 100,
+}
+
+#
 # Saucelabs testing
 #
 SAUCE = False
 SAUCE_USERNAME = config_value('SAUCE_USERNAME', '')
 SAUCE_ACCESS_KEY = config_value('SAUCE_ACCESS_KEY', '')
 DOMAIN_TO_TEST = config_value('SAUCE_DOMAIN', 'domain.of.your.discovery.installation.gov')
-
-
-#
-#  Swagger documentation configuration
-#
-SWAGGER_SETTINGS = {
-    "doc_expansion": "full",
-    "exclude_namespaces": [], # List URL namespaces to ignore
-    "api_version": '0.1',  # Specify your API's version
-    "api_path": "/",  # Specify the path to your API not a root level
-    "api_host": '', #comment out until fix swagger - API_HOST, #the data.gov api host
-    "enabled_methods": [  # Specify which methods to enable in Swagger UI
-        'get',
-    ],
-    "api_key": '', #Acomment out until fix swagger PI_KEY , # An API key
-    "is_authenticated": False,  # Set to True to enforce user authentication,
-    "is_superuser": False,  # Set to True to enforce admin only access
-    "permission_denied_handler": None, # If user has no permisssion, raise 403 error
-    "info": {
-        "contact": "discovery-18f@gsa.gov",
-        "title": "Discovery Market Research API",
-        "description": markdown.markdown("""
-This API drives the [Discovery Market Research Tool](https://discovery.gsa.gov).
-It contains information on the vendors that are part of the OASIS and OASIS Small Business contracting vehicles, such as their contracting history, their elligibility for contract awards, and their small business designations.
-To learn more about the tool, please visit [Discovery](https://discovery.gsa.gov) or see the README on our [GitHub repository](https://github.com/PSHCDevOps/discovery).
-
-**Please note that the base path for this API is `https://api.data.gov/gsa/discovery/`**
-
-It requires an API key, obtainable at [api.data.gov](http://api.data.gov/).
-It must be passed in the `api_key` parameter with each request.
-        """), #converts markdown description to HTML
-    },
-    "template_path": "api_theme/index.html",
-}
 
 #-------------------------------------------------------------------------------
 #
