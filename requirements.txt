@@ -10,8 +10,11 @@ django-redis-sessions==0.6.1
 django-celery-beat==1.1.1
 django-celery-results==1.0.1
 django-db-mutex==1.0.0
-django-rest-swagger==2.1.2
 djangorestframework==3.7.7
+django-filter==2.0.0.dev1
+django-crispy-forms==1.7.0
+coreapi==2.3.3
+coreschema==0.0.4
 dj-database-url==0.4.2
 waitress==1.1.0
 
