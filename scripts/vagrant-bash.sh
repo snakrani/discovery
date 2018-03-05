@@ -31,8 +31,8 @@ then
   # Ensure CF plugins are installed
   if which cf >/dev/null
   then
-    cf install-plugin "/usr/local/bin/cf-autopilot"
-    cf install-plugin "/usr/local/bin/cf-service-connect"
+    cf install-plugin -f "/usr/local/bin/cf-autopilot"
+    cf install-plugin -f "/usr/local/bin/cf-service-connect"
   fi
 fi
 
