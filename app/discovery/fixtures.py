@@ -14,7 +14,7 @@ def get_vendor_fixtures():
     return get_category_fixtures() + [
         'locations.json', 
         'vendors.json', 
-        'poolpiids.json'
+        'poolmembership.json'
     ]
 
 

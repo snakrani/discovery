@@ -11,7 +11,8 @@ cd "$SCRIPT_DIR/../app"
 ./manage.py dumpdata vendors.managerphonenumber --indent=2 > vendors/fixtures/managerphonenumbers.json # reqs: managers
 ./manage.py dumpdata vendors.manageremail --indent=2 > vendors/fixtures/manageremails.json # reqs: managers
 ./manage.py dumpdata vendors.vendor --indent=2 > vendors/fixtures/vendors.json # reqs: locations, managers, setasides
-./manage.py dumpdata vendors.poolpiid --indent=2 > vendors/fixtures/poolpiids.json # reqs: pool, vendor, zone
+./manage.py dumpdata vendors.poolmembership --indent=2 > vendors/fixtures/poolmemberships.json # reqs: pool, vendor
+./manage.py dumpdata vendors.poolmembershipzone --indent=2 > vendors/fixtures/poolmembershipzones.json # reqs: poolmembership, zone
 ./manage.py dumpdata vendors.samload --indent=2 > vendors/fixtures/samloads.json
 
 # Generate contract related fixtures
