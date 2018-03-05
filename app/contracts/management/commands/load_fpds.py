@@ -269,17 +269,79 @@ def create_load(vendor, load_date):
 class Command(BaseCommand):
 
     date_now = datetime.now().date()
-
-    option_list = BaseCommand.option_list \
-                  + (make_option('--starting_id', action='store', type=int,  dest='starting_id', default=1, help="start loading contracts for vendors greater or equal to this id"), ) \
-                  + (make_option('--id', action='store', type=int,  dest='id', default=0, help="load contracts for only this vendor id"), ) \
-                  + (make_option('--starting_date', action='store', type=str,  dest='starting_date', default='', help="start loading contracts starting from a specific date"), ) \
-                  + (make_option('--reinit', action='store_true', dest='reinit', default=False, help="Reinitialize all vendor contract data"), ) \
-                  + (make_option('--period', action='store', type=int, dest='period', default=520, help="Number of weeks back to populate database (default 10 years)"), ) \
-                  + (make_option('--load', action='store', type=int, dest='load', default=520, help="Weekly interval to process incoming data (default 10 years)"), ) \
-                  + (make_option('--count', action='store', type=int, dest='count', default=500, help="Number of records to return from each load of the FPDS_NG ATOM feed"), ) \
-                  + (make_option('--max', action='store', type=int, dest='max', default=0, help="Maximum number of records to collect from each vendor (for generating fixtures)"), ) \
-                  + (make_option('--pause', action='store', type=int, dest='pause', default=1, help="Number of seconds to pause before each query to the FPDS-NG ATOM feed"), )
+    
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '--pause',
+            action='store_true',
+            type=int,
+            default=1,
+            dest='pause',
+            help='Number of seconds to pause before each query to the FPDS-NG ATOM feed',
+        )
+        parser.add_argument(
+            '--starting_id',
+            action='store_true',
+            type=int,
+            default=1,
+            dest='starting_id',
+            help='Start loading contracts for vendors greater or equal to this id',
+        )
+        parser.add_argument(
+            '--id',
+            action='store_true',
+            type=int,
+            default=0,
+            dest='id',
+            help='Load contracts for only this vendor id',
+        )
+        parser.add_argument(
+            '--starting_date',
+            action='store_true',
+            type=str,
+            default='',
+            dest='starting_date',
+            help='Start loading contracts starting from a specific date',
+        )
+        parser.add_argument(
+            '--reinit',
+            action='store_true',
+            default=False,
+            dest='reinit',
+            help='Reinitialize all vendor contract data',
+        )
+        parser.add_argument(
+            '--period',
+            action='store_true',
+            type=int,
+            default=520,
+            dest='period',
+            help='Number of weeks back to populate database (default 10 years)',
+        )
+        parser.add_argument(
+            '--load',
+            action='store_true',
+            type=int,
+            default=520,
+            dest='load',
+            help='Weekly interval to process incoming data (default 10 years)',
+        )
+        parser.add_argument(
+            '--count',
+            action='store_true',
+            type=int,
+            default=500,
+            dest='count',
+            help='Number of records to return from each load of the FPDS_NG ATOM feed',
+        )
+        parser.add_argument(
+            '--max',
+            action='store_true',
+            type=int,
+            default=0,
+            dest='max',
+            help='Maximum number of records to collect from each vendor (for generating fixtures)',
+        )
 
 
     def init_contract(self, raw_entry):
@@ -359,20 +421,19 @@ class Command(BaseCommand):
             con.completion_date = mod.get('current_completion_date') or mod.get('ultimate_completion_date')
             con.agency_id = mod.get('agency_id')
             con.agency_name = mod.get('agency_name')
-            con.pricing_type = mod.get('type_of_contract_pricing_id')
-            con.pricing_type_name = mod.get('type_of_contract_pricing_name')
+            con.pricing_type_id = mod.get('type_of_contract_pricing_id')
             
             if mod.get('reason_for_modification') in ['X', 'E', 'F']:
-                con.reason_for_modification = mod.get('reason_for_modification')
+                con.status_id = mod.get('reason_for_modification')
             else:
                 if con.completion_date:
                     date_obj = datetime.strptime(con.completion_date, '%Y-%m-%d %H:%M:%S')
                     today = datetime.utcnow()
                     if date_obj:
                         if date_obj > today:
-                            con.reason_for_modification = 'C2'
+                            con.status_id = 'C2'
                         else:
-                            con.reason_for_modification = 'C1'
+                            con.status_id = 'C1'
             
             if mod.get('last_modified_by') and '@' in mod['last_modified_by'].lower():
                 #only add if it's an actual email, make this a better regex
@@ -514,6 +575,12 @@ class Command(BaseCommand):
         
         try:
             init_load(options)
+            
+            print('> Loading contract status codes')
+            call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'contracts/fixtures/contractstatuses.json'))
+            
+            print('> Loading contract pricing structure codes')
+            call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'contracts/fixtures/pricingstructures.json'))
             
             if options['id'] > 0:
                 try:
