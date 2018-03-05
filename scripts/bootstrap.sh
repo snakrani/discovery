@@ -45,5 +45,4 @@ echo "> Running all Docker services"
 docker-compose rm --stop --force web scheduler worker
 rm -f "$PROJ_DIR/logs/celerybeat.pid"
 
-docker-compose build    
-docker-compose up -d
+docker-compose build
