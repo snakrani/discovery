@@ -5,6 +5,7 @@ django==2.0.2                # Django web framework
 psycopg2-binary==2.7.4       # PostgreSQL database library
 dj-database-url==0.5.0       # Django database connection configuration
 django-redis-sessions==0.6.1 # Django shared session support
+django-storages==1.6.5       # Django storage backend support
 django-db-mutex==1.0.0       # Django mutex locking
 django-filter==2.0.0.dev1    # Django query filtering
 django-crispy-forms==1.7.0   # Django advanced forms
