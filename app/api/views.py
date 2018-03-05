@@ -1,4 +1,5 @@
-from django.db.models import Subquery, OuterRef, Count
+from django.db.models import Subquery, OuterRef, Value
+from django.db.models.functions import Concat, Coalesce
 
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.viewsets import ReadOnlyModelViewSet
@@ -189,17 +190,23 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
     filter_class = filters.ContractFilter
     search_fields = ['id', 'name', 'duns']
     ordering_fields = [
-        'piid', 'agency_name', 'NAICS', 'date_signed', 'status', 'obligated_amount', 
-        'point_of_contact', 'pricing_type', 'vendor_location', 'place_of_performance',
-        'annual_revenue', 'number_of_employees'
+        'id', 'piid', 'agency_id', 'agency_name', 'NAICS', 
+        'date_signed', 'completion_date', 'obligated_amount' 
+        'point_of_contact', 'status__name', 'pricing_type__name',
+        'place_of_performance_location'
     ]
-    ordering = '-number_of_contracts'
+    ordering = '-date_signed'
     
     pagination_class = pagination.ResultSetPagination
     action_serializers =  { 
         'list': serializers.ShortContractSerializer, 
         'retrieve': serializers.ContractSerializer 
     }
+    
+    def get_queryset(self):
+        return self.queryset.annotate(
+            place_of_performance_location = Concat('place_of_performance__country_name', Value(' '), Coalesce('place_of_performance__state', Value('')))
+        )
 
 '''
 class ListContracts(APIView):
