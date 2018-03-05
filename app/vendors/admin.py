@@ -1,9 +1,6 @@
 from django.contrib import admin
 
-from vendors.models import Location, Manager, Vendor, PoolPIID
+from vendors.models import Vendor
 
 
 admin.site.register(Vendor)
-admin.site.register(Manager)
-admin.site.register(Location)
-admin.site.register(PoolPIID)
