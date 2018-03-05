@@ -54,14 +54,48 @@ def duns_plus_4(duns):
 
 
 class Command(BaseCommand):
-
-    option_list = BaseCommand.option_list \
-                  + (make_option('--pause', action='store', type=int, dest='pause', default=1, help="Number of seconds to pause before each query to the SAM API"), ) \
-                  + (make_option('--vehicles', action='store', type=str, dest='vehicles', default='', help="Comma separated list of vehicles to load (lowercase)"), ) \
-                  + (make_option('--pools', action='store', type=str, dest='pools', default='', help="Comma separated list of pool numbers to load from each vehicle"), ) \
-                  + (make_option('--vpp', action='store', type=int, dest='vpp', default=0, help="Number of vendors to load per pool (useful for creating fixtures)"), ) \
-                  + (make_option('--tries', action='store', type=int, dest='tries', default=3, help="Number of tries to query the SAM API before exiting"), )
-
+    
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '--pause',
+            action='store_true',
+            type=int,
+            default=1,
+            dest='pause',
+            help='Number of seconds to pause before each query to the SAM API',
+        )
+        parser.add_argument(
+            '--tries',
+            action='store_true',
+            type=int,
+            default=3,
+            dest='tries',
+            help='Number of tries to query the SAM API before exiting',
+        )
+        parser.add_argument(
+            '--vehicles',
+            action='store_true',
+            type=str,
+            default='',
+            dest='vehicles',
+            help='Comma separated list of vehicles to load (lowercase)',
+        )
+        parser.add_argument(
+            '--pools',
+            action='store_true',
+            type=str,
+            default='',
+            dest='pools',
+            help='Comma separated list of pool numbers to load from each vehicle',
+        )
+        parser.add_argument(
+            '--vpp',
+            action='store_true',
+            type=int,
+            default=0,
+            dest='vpp',
+            help='Number of vendors to load per pool (useful for creating fixtures)',
+        )
 
     def update_vendor(self, record, pool_data, options):
         logger = vendor_logger()
