@@ -10,7 +10,6 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 from discovery.utils import config_value
 
 import os
-import markdown
 import dj_database_url
 
 #-------------------------------------------------------------------------------
@@ -47,13 +46,13 @@ VEHICLES = (
 #
 # Debugging
 #
-DEBUG = True
-TEMPLATE_DEBUG = True
+DEBUG = False
+TEMPLATE_DEBUG = False
 
 #
 # General configurations
 #
-SECRET_KEY = '123456789' #config_value('SECRET_KEY', '')
+SECRET_KEY = config_value('SECRET_KEY', '')
 APPEND_SLASH = True
 
 #
@@ -89,6 +88,14 @@ DATABASES['default'] = dj_database_url.config()
 # Applications and libraries
 #
 INSTALLED_APPS = [
+    'discovery',
+    'api',
+    'categories',
+    'vendors',
+    'contracts',
+    
+    'tests',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -97,25 +104,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'db_mutex',
-    'storages',
     
     'rest_framework',
     'django_filters',
     
     'django_celery_beat',
-    'django_celery_results',
-
-    'discovery',
-    'api',
-    'categories',
-    'vendors',
-    'contracts',
-    
-    'tests',
+    'django_celery_results'
 ]
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -326,6 +325,7 @@ CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 #
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'api.schemas.DiscoverySchema',
+    
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
     ],
@@ -338,14 +338,6 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 100,
 }
-
-#
-# Saucelabs testing
-#
-SAUCE = False
-SAUCE_USERNAME = config_value('SAUCE_USERNAME', '')
-SAUCE_ACCESS_KEY = config_value('SAUCE_ACCESS_KEY', '')
-DOMAIN_TO_TEST = config_value('SAUCE_DOMAIN', 'domain.of.your.discovery.installation.gov')
 
 #-------------------------------------------------------------------------------
 #
