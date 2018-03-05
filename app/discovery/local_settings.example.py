@@ -17,5 +17,3 @@ if DEBUG:
             'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
     }
 }
-
-#SAUCE = False
