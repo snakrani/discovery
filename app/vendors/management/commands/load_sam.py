@@ -68,9 +68,23 @@ def get_sam_url(duns_4):
 
 class Command(BaseCommand):
 
-    option_list = BaseCommand.option_list \
-                  + (make_option('--pause', action='store', type=int, dest='pause', default=1, help="Number of seconds to pause before each query to the SAM API"), ) \
-                  + (make_option('--tries', action='store', type=int, dest='tries', default=3, help="Number of tries to query the SAM API before exiting"), )
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '--pause',
+            action='store_true',
+            type=int,
+            default=1,
+            dest='pause',
+            help='Number of seconds to pause before each query to the SAM API',
+        )
+        parser.add_argument(
+            '--tries',
+            action='store_true',
+            type=int,
+            default=3,
+            dest='tries',
+            help='Number of tries to query the SAM API before exiting',
+        )
     
     
     def get_vendor_ids(self):
