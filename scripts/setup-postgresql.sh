@@ -11,10 +11,10 @@ then
 fi
 
 echo "> Installing PostgreSQL package repositories" | tee -a "$LOG_FILE"
-echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" > /etc/apt/sources.list.d/pgdg.list
+echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" > /etc/apt/sources.list.d/pgdg.list
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - >"$LOG_FILE" 2>&1
 apt-get update >>"$LOG_FILE" 2>&1
 
-#download and install PhantomJS if it does not exist
+#download and install PostgreSQL client if it does not exist
 echo "> Installing PostgreSQL client" | tee -a "$LOG_FILE"
-apt-get install -y postgresql-client-9.4 >"$LOG_FILE" 2>&1
+apt-get install -y postgresql-client-9.6 >"$LOG_FILE" 2>&1
