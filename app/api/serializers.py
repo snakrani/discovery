@@ -1,4 +1,5 @@
-from rest_framework.serializers import ModelSerializer, Field, IntegerField, SerializerMethodField
+from rest_framework.fields import CharField, IntegerField
+from rest_framework.serializers import ModelSerializer, SerializerMethodField
 
 from categories import models as categories
 from vendors import models as vendors
@@ -112,7 +113,7 @@ class PlaceOfPerformanceSerializer(ModelSerializer):
     
     class Meta:
         model = contracts.PlaceOfPerformance
-        fields = ('country_code', 'country_name', 'state', 'zipcode', 'location')
+        fields = ['country_code', 'country_name', 'state', 'zipcode', 'location']
     
     def get_location(self, item):
         state = item.state if item.state else ''
@@ -120,27 +121,28 @@ class PlaceOfPerformanceSerializer(ModelSerializer):
 
 
 class ContractSerializer(ModelSerializer):
-    
-    pricing_type = Field(source='get_pricing_type_display')
-    piid = SerializerMethodField()
-    status = SerializerMethodField()
-    
+    place_of_performance = PlaceOfPerformanceSerializer(many=False)
     vendor_location = LocationSerializer(many=False)
-    place_of_performance = PlaceOfPerformanceSerializer(many=False)   
     
-    class Meta:
-        model = Contract
-        fields = ('piid', 'agency_name', 'NAICS', 'date_signed', 'status', 'obligated_amount', 
-                  'point_of_contact', 'pricing_type', 'vendor_location', 'place_of_performance',
-                  'annual_revenue', 'number_of_employees')
+    vendor = ShortVendorSerializer(many=False)
         
-    def get_piid(self, item):
-        if '_' in item.piid:
-            return item.piid.split('_')[1]
-        return item.piid
+    class Meta:
+        model = contracts.Contract
+        fields = ['id', 'piid', 'agency_id', 'agency_name', 'NAICS', 
+                  'date_signed', 'completion_date', 'pricing_type__name', 'obligated_amount', 'status__name', 
+                  'point_of_contact', 'place_of_performance', 'vendor_location', 'vendor_phone', 'vendor',
+                  'annual_revenue', 'number_of_employees']
 
-    def get_status(self, item):
-        return item.get_reason_for_modification_display()
+
+class ShortContractSerializer(ModelSerializer):
+    place_of_performance_location = CharField()
+        
+    class Meta:
+        model = contracts.Contract
+        fields = ['id', 'piid', 'agency_id', 'agency_name', 'NAICS', 
+                  'date_signed', 'completion_date', 'pricing_type__name', 'obligated_amount', 'status__name', 
+                  'point_of_contact', 'place_of_performance_location']
+
 
 '''
 class Metadata(object):
