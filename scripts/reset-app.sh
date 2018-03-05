@@ -8,8 +8,7 @@ SCRIPT_DIR="$(cd "$(dirname "$([ `readlink "$0"` ] && echo "`readlink "$0"`" || 
 cd "$SCRIPT_DIR/.."
 
 # Destroy current environment
-docker-compose rm --stop --force web scheduler worker
-docker-compose down --volumes
+"$SCRIPT_DIR/destroy-app.sh"
 
 # Ensure a fresh Docker environment
 docker-compose build
