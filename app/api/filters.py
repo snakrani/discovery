@@ -21,21 +21,21 @@ EQUALITY_BOOL_FILTERS = [
 ]
 
 EQUALITY_CHAR_FILTERS = [
+    'iexact',
     'exact', 
-    'iexact', 
-    'not_exact',
     'inot_exact',
+    'not_exact'
 ]
 
 FUZZY_CHAR_FILTERS = [
-    'contains',
     'icontains',
+    'contains',
+    'inot_contains',
     'not_contains',
-    'inot_contains', 
+    'istartswith', 
     'startswith',
-    'istartswith',
-    'endswith',
-    'iendswith'
+    'iendswith',
+    'endswith'
 ]
 
 NUM_FILTERS = [
@@ -64,14 +64,14 @@ def filter_queryset(queryset, field_name, value):
 class PoolFilter(FilterSet):
     
     id = CharFilter(field_name="id", label="Pool ID", lookup_expr=EQUALITY_CHAR_FILTERS)
-    name = CharFilter(field_name="name", label="Pool name", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
+    name = CharFilter(field_name="name", label="Pool name", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
     number = NumberFilter(field_name="number", label="Pool number", lookup_expr=NUM_FILTERS)
-    vehicle = CharFilter(field_name="vehicle", label="Pool vehicle ID", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
-    threshold = CharFilter(field_name="threshold", label="Pool threshold", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)   
+    vehicle = CharFilter(field_name="vehicle", label="Pool vehicle ID", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
+    threshold = CharFilter(field_name="threshold", label="Pool threshold", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)   
     
     naics_code = CharFilter(field_name='naics__code', label="Pool NAICS code", lookup_expr=EQUALITY_CHAR_FILTERS)
     naics_root_code = CharFilter(field_name='naics__root_code', label="Pool NAICS root code", lookup_expr=EQUALITY_CHAR_FILTERS)
-    naics_description = CharFilter(field_name='naics__description', label="Pool NAICS description", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
+    naics_description = CharFilter(field_name='naics__description', label="Pool NAICS description", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
     
     class Meta:
         model = categories.Pool
@@ -94,46 +94,46 @@ class ZoneFilter(FilterSet):
 class VendorFilter(FilterSet):
     
     id = CharFilter(field_name="id", label="Vendor ID", lookup_expr=EQUALITY_CHAR_FILTERS)
-    name = CharFilter(field_name="name", label="Vendor name", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
+    name = CharFilter(field_name="name", label="Vendor name", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
     duns = NumberFilter(field_name="duns", label="Vendor DUNS number", lookup_expr=NUM_FILTERS)
-    cage = CharFilter(field_name="cage", label="Vendor CAGE code", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
+    cage = CharFilter(field_name="cage", label="Vendor CAGE code", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
     
     sam_status = CharFilter(field_name="sam_status", label="Vendor SAM status", lookup_expr=EQUALITY_CHAR_FILTERS)
     sam_activation_date = DateFilter(field_name="sam_activation_date", label="Vendor SAM activation date", lookup_expr=NUM_FILTERS)
     sam_expiration_date = DateFilter(field_name="sam_expiration_date", label="Vendor SAM expiration date", lookup_expr=NUM_FILTERS)
     sam_exclusion = BooleanFilter(field_name="sam_exclusion", label="Vendor SAM exclusion", lookup_expr=EQUALITY_BOOL_FILTERS)
-    sam_url = CharFilter(field_name="sam_url", label="Vendor SAM URL", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
+    sam_url = CharFilter(field_name="sam_url", label="Vendor SAM URL", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
     
     annual_revenue = NumberFilter(field_name="annual_revenue", label="Annual revenue (most recent)", lookup_expr=NUM_FILTERS)
     number_of_employees = NumberFilter(field_name="number_of_employees", label="Employee count (most recent)", lookup_expr=NUM_FILTERS)
     number_of_contracts = NumberFilter(field_name="number_of_contracts", label="Contract count (total or filtered by NAICS if pools naics root code specified)", lookup_expr=NUM_FILTERS)
     
-    sam_address = CharFilter(field_name="sam_location__address", label="SAM address", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
-    sam_city = CharFilter(field_name="sam_location__city", label="SAM city", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
+    sam_address = CharFilter(field_name="sam_location__address", label="SAM address", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
+    sam_city = CharFilter(field_name="sam_location__city", label="SAM city", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
     sam_state = CharFilter(field_name="sam_location__state", label="SAM state", lookup_expr=EQUALITY_CHAR_FILTERS)
     sam_zipcode = NumberFilter(field_name="sam_location__zipcode", label="SAM zipcode", lookup_expr=NUM_FILTERS)
     sam_congressional_district = CharFilter(field_name="sam_location__congressional_district", label="SAM congressional district", lookup_expr=EQUALITY_CHAR_FILTERS)
      
-    cm_name = CharFilter(field_name='managers__name', method='filter_cm', label="Contract manager name", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
-    cm_phone = CharFilter(field_name='managers__phone', method='filter_cm', label="Contract manager phone", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
-    cm_email = CharFilter(field_name='managers__email', method='filter_cm', label="Contract manager email", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
+    cm_name = CharFilter(field_name='managers__name', method='filter_cm', label="Contract manager name", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
+    cm_phone = CharFilter(field_name='managers__phone', method='filter_cm', label="Contract manager phone", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
+    cm_email = CharFilter(field_name='managers__email', method='filter_cm', label="Contract manager email", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
     
-    pm_name = CharFilter(field_name='managers__name', method='filter_pm', label="Project manager name", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
-    pm_phone = CharFilter(field_name='managers__phone', method='filter_pm', label="Project manager phone", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
-    pm_email = CharFilter(field_name='managers__email', method='filter_pm', label="Project manager email", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
+    pm_name = CharFilter(field_name='managers__name', method='filter_pm', label="Project manager name", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
+    pm_phone = CharFilter(field_name='managers__phone', method='filter_pm', label="Project manager phone", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
+    pm_email = CharFilter(field_name='managers__email', method='filter_pm', label="Project manager email", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
     
     pool_id = CharFilter(field_name='pools__id', label="Pool ID", lookup_expr=EQUALITY_CHAR_FILTERS)
-    pool_name = CharFilter(field_name='pools__name', label="Pool name", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
+    pool_name = CharFilter(field_name='pools__name', label="Pool name", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
     pool_number = NumberFilter(field_name="pools__number", label="Pool number", lookup_expr=NUM_FILTERS)
-    pool_vehicle = CharFilter(field_name='pools__vehicle', label="Pool vehicle", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
-    pool_threshold = CharFilter(field_name='pools__threshold', label="Pool threshold", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
+    pool_vehicle = CharFilter(field_name='pools__vehicle', label="Pool vehicle", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
+    pool_threshold = CharFilter(field_name='pools__threshold', label="Pool threshold", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
     pool_naics_code = CharFilter(field_name='pools__naics__code', label="Pool NAICS code", lookup_expr=EQUALITY_CHAR_FILTERS)
     pool_naics_root_code = CharFilter(field_name='pools__naics__root_code', label="Pool NAICS root code", lookup_expr=EQUALITY_CHAR_FILTERS)
-    pool_naics_description = CharFilter(field_name='pools__naics__description', label="Pool NAICS description", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
+    pool_naics_description = CharFilter(field_name='pools__naics__description', label="Pool NAICS description", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
     
     setaside_code = CharFilter(field_name='setasides__code', label="Setaside code", lookup_expr=EQUALITY_CHAR_FILTERS)
-    setaside_name = CharFilter(field_name='setasides__name', label="Setaside name", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
-    setaside_description = CharFilter(field_name='setasides__description', label="Setaside description", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
+    setaside_name = CharFilter(field_name='setasides__name', label="Setaside name", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
+    setaside_description = CharFilter(field_name='setasides__description', label="Setaside description", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
          
     class Meta:
         model = vendors.Vendor
@@ -162,7 +162,7 @@ class ContractFilter(FilterSet):
     id = NumberFilter(field_name="id", label="Internal contract ID", lookup_expr=NUM_FILTERS)
     piid = NumberFilter(field_name="piid", label="Vendor PIID", lookup_expr=NUM_FILTERS)
     agency_id = CharFilter(field_name="agency_id", label="Agency ID", lookup_expr=EQUALITY_CHAR_FILTERS)
-    agency_name = CharFilter(field_name="agency_name", label="Agency name", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
+    agency_name = CharFilter(field_name="agency_name", label="Agency name", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
     
     naics = CharFilter(field_name='NAICS', label="Contract NAICS code", lookup_expr=EQUALITY_CHAR_FILTERS)
     psc = CharFilter(field_name='PSC', label="Contract NAICS code", lookup_expr=EQUALITY_CHAR_FILTERS)
@@ -171,36 +171,36 @@ class ContractFilter(FilterSet):
     completion_date = DateFilter(field_name='completion_date', label="Contract completed date", lookup_expr=EQUALITY_CHAR_FILTERS)
 
     pricing_type_code = CharFilter(field_name='pricing_type__code', label="Pricing structure code", lookup_expr=EQUALITY_CHAR_FILTERS)
-    pricing_type_name = CharFilter(field_name='pricing_type__name', label="Pricing structure name", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
+    pricing_type_name = CharFilter(field_name='pricing_type__name', label="Pricing structure name", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
     obligated_amount = NumberFilter(field_name="obligated_amount", label="Obligated amount", lookup_expr=NUM_FILTERS)
-    point_of_contact = CharFilter(field_name="point_of_contact", label="Point of contact", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
+    point_of_contact = CharFilter(field_name="point_of_contact", label="Point of contact", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
     
     vendor_id = NumberFilter(field_name="vendor__id", label="Internal vendor ID", lookup_expr=NUM_FILTERS)
-    vendor_name = CharFilter(field_name="vendor__name", label="Vendor name", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
+    vendor_name = CharFilter(field_name="vendor__name", label="Vendor name", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
     vendor_duns = NumberFilter(field_name="vendor__duns", label="Vendor DUNS number", lookup_expr=NUM_FILTERS)
     vendor_cage = CharFilter(field_name="vendor__cage", label="Vendor CAGE code", lookup_expr=EQUALITY_CHAR_FILTERS)
     vendor_sam_status = CharFilter(field_name='vendor__sam_status', label="Vendor SAM status", lookup_expr=EQUALITY_CHAR_FILTERS)
     vendor_sam_activation_date = DateFilter(field_name='vendor__sam_activation_date', label="Vendor SAM activation date", lookup_expr=EQUALITY_CHAR_FILTERS)
     vendor_sam_expiration_date = DateFilter(field_name='vendor__sam_expiration_date', label="Vendor SAM expiration date", lookup_expr=EQUALITY_CHAR_FILTERS)
     
-    vendor_phone = CharFilter(field_name="vendor_phone", label="Vendor phone", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS) 
+    vendor_phone = CharFilter(field_name="vendor_phone", label="Vendor phone", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS) 
     
     annual_revenue = NumberFilter(field_name="annual_revenue", label="Annual revenue (at time of contract)", lookup_expr=NUM_FILTERS)
     number_of_employees = NumberFilter(field_name="number_of_employees", label="Employee count (at time of contract)", lookup_expr=NUM_FILTERS)
     
-    vendor_address = CharFilter(field_name="vendor_location__address", label="Vendor address", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
-    vendor_city = CharFilter(field_name="vendor_location__city", label="Vendor city", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
+    vendor_address = CharFilter(field_name="vendor_location__address", label="Vendor address", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
+    vendor_city = CharFilter(field_name="vendor_location__city", label="Vendor city", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
     vendor_state = CharFilter(field_name="vendor_location__state", label="Vendor state", lookup_expr=EQUALITY_CHAR_FILTERS)
     vendor_zipcode = NumberFilter(field_name="vendor_location__zipcode", label="Vendor zipcode", lookup_expr=NUM_FILTERS)
     vendor_congressional_district = CharFilter(field_name="vendor_location__congressional_district", label="Vendor congressional district", lookup_expr=EQUALITY_CHAR_FILTERS)
     
     pop_country_code = CharFilter(field_name="place_of_performance__country_code", label="Primary place of performance country code", lookup_expr=EQUALITY_CHAR_FILTERS)
-    pop_country_name = CharFilter(field_name="place_of_performance__country_name", label="Primary place of performance country name", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
+    pop_country_name = CharFilter(field_name="place_of_performance__country_name", label="Primary place of performance country name", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
     pop_state = CharFilter(field_name="place_of_performance__state", label="Primary place of performance state", lookup_expr=EQUALITY_CHAR_FILTERS)
     pop_zipcode = NumberFilter(field_name="place_of_performance__zipcode", label="Primary place of performance zipcode", lookup_expr=NUM_FILTERS)
     
     status_id = NumberFilter(field_name="status__id", label="Contract status ID", lookup_expr=NUM_FILTERS)
-    status_name = CharFilter(field_name="status__name", label="Contract status name", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
+    status_name = CharFilter(field_name="status__name", label="Contract status name", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
          
     class Meta:
         model = contracts.Contract
