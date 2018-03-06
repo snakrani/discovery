@@ -121,16 +121,19 @@ class PlaceOfPerformanceSerializer(ModelSerializer):
 
 
 class ContractSerializer(ModelSerializer):
+    vendor = ShortVendorSerializer(many=False)
+    
     place_of_performance = PlaceOfPerformanceSerializer(many=False)
     vendor_location = LocationSerializer(many=False)
-    
-    vendor = ShortVendorSerializer(many=False)
+        
+    place_of_performance_location = CharField()
         
     class Meta:
         model = contracts.Contract
-        fields = ['id', 'piid', 'agency_id', 'agency_name', 'NAICS', 
+        fields = ['id', 'piid', 'agency_id', 'agency_name', 'NAICS', 'PSC', 
                   'date_signed', 'completion_date', 'pricing_type__name', 'obligated_amount', 'status__name', 
-                  'point_of_contact', 'place_of_performance', 'vendor_location', 'vendor_phone', 'vendor',
+                  'point_of_contact', 'place_of_performance', 'place_of_performance_location', 'vendor_location', 
+                  'vendor_phone', 'vendor',
                   'annual_revenue', 'number_of_employees']
 
 
@@ -139,7 +142,7 @@ class ShortContractSerializer(ModelSerializer):
         
     class Meta:
         model = contracts.Contract
-        fields = ['id', 'piid', 'agency_id', 'agency_name', 'NAICS', 
+        fields = ['id', 'piid', 'agency_id', 'agency_name', 'NAICS', 'PSC', 
                   'date_signed', 'completion_date', 'pricing_type__name', 'obligated_amount', 'status__name', 
                   'point_of_contact', 'place_of_performance_location']
 
