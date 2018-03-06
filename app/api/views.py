@@ -190,7 +190,7 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
     filter_class = filters.ContractFilter
     search_fields = ['id', 'name', 'duns']
     ordering_fields = [
-        'id', 'piid', 'agency_id', 'agency_name', 'NAICS', 
+        'id', 'piid', 'agency_id', 'agency_name', 'NAICS', 'PSC',
         'date_signed', 'completion_date', 'obligated_amount' 
         'point_of_contact', 'status__name', 'pricing_type__name',
         'place_of_performance_location'
@@ -209,56 +209,6 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
         )
 
 '''
-class ListContracts(APIView):
-    """   
-    This endpoint returns contract history from FPDS for a specific vendor. The vendor's DUNS number is a required parameter. You can also filter contracts by their NAICS code to find contracts relevant to a particular category. 
-    
-    ---
-    GET:
-        parameters:
-          - name: duns
-            description: A 9-digit DUNS number that uniquely identifies a vendor (required).
-            required: true
-            type: string
-            paramType: query
-          - name: naics
-            description: A six digit NAICS code used to filter by contracts with a certain NAICS
-            type: string
-            required: false
-            paramType: query
-    """
-    def get(self, request, format=None):
-        try:
-            duns = self.request.query_params.get('duns', None)
-            if not duns:
-                raise Exception("Vendor DUNS required to retrieve contracts")
-            
-            vendor = Vendor.objects.get(duns=duns)
-            contract_serializer = get_page(self.get_results(vendor, 
-                                                            get_naics(request)), 
-                                           request)
-            
-            fpds_load_results = FPDSLoad.objects.filter(vendor=vendor)
-            last_updated = fpds_load_results[0].load_date if fpds_load_results else None
-        
-        except Exception as error:
-            return HttpResponseBadRequest(error)
-        
-        return Response({ 
-            'num_results': contract_serializer.data['num_results'],
-            'last_updated': last_updated,
-            'page': contract_serializer.data
-        })
-
-    def get_results(self, vendor, naics):
-        contracts = Contract.objects.filter(vendor=vendor)
-        
-        if naics:
-            contracts = contracts.filter(NAICS=naics.root_code)
-        
-        return get_ordered_results(contracts, self.request, ContractSerializer)
-
-
 class MetadataView(APIView):
     """
     This endpoint returns metadata for the most recent data loads of SAM and FPDS data. It takes no parameters.
