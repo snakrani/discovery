@@ -215,5 +215,3 @@ class ContractFilter(FilterSet):
             'pop_country_code', 'pop_country_name', 'pop_state', 'pop_zipcode',
             'status_id', 'status_name'
         ]
-       
-
