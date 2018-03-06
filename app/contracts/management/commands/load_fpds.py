@@ -273,7 +273,7 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument(
             '--pause',
-            action='store_true',
+            action='store',
             type=int,
             default=1,
             dest='pause',
@@ -281,7 +281,7 @@ class Command(BaseCommand):
         )
         parser.add_argument(
             '--starting_id',
-            action='store_true',
+            action='store',
             type=int,
             default=1,
             dest='starting_id',
@@ -289,7 +289,7 @@ class Command(BaseCommand):
         )
         parser.add_argument(
             '--id',
-            action='store_true',
+            action='store',
             type=int,
             default=0,
             dest='id',
@@ -297,7 +297,7 @@ class Command(BaseCommand):
         )
         parser.add_argument(
             '--starting_date',
-            action='store_true',
+            action='store',
             type=str,
             default='',
             dest='starting_date',
@@ -312,7 +312,7 @@ class Command(BaseCommand):
         )
         parser.add_argument(
             '--period',
-            action='store_true',
+            action='store',
             type=int,
             default=520,
             dest='period',
@@ -320,7 +320,7 @@ class Command(BaseCommand):
         )
         parser.add_argument(
             '--load',
-            action='store_true',
+            action='store',
             type=int,
             default=520,
             dest='load',
@@ -328,7 +328,7 @@ class Command(BaseCommand):
         )
         parser.add_argument(
             '--count',
-            action='store_true',
+            action='store',
             type=int,
             default=500,
             dest='count',
@@ -336,7 +336,7 @@ class Command(BaseCommand):
         )
         parser.add_argument(
             '--max',
-            action='store_true',
+            action='store',
             type=int,
             default=0,
             dest='max',
