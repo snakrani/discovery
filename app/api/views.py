@@ -7,6 +7,7 @@ from rest_framework.viewsets import ReadOnlyModelViewSet
 from django_filters.rest_framework import DjangoFilterBackend
 
 from discovery import query
+from discovery import metadata
 from categories import models as categories
 from vendors import models as vendors
 from contracts import models as contracts
@@ -208,17 +209,11 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
             place_of_performance_location = Concat('place_of_performance__country_name', Value(' '), Coalesce('place_of_performance__state', Value('')))
         )
 
-'''
-class MetadataView(APIView):
+
+class ListMetadataView(APIView):
     """
     This endpoint returns metadata for the most recent data loads of SAM and FPDS data. It takes no parameters.
     """
     def get(self, request, format=None):
-        try:
-            mds = MetadataSerializer(Metadata())
-        
-        except Exception as error:
-            return HttpResponseBadRequest(error)
-        
+        mds = serializers.MetadataSerializer(metadata.DiscoveryMetadata())
         return Response(mds.data)
-'''
