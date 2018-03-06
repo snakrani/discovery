@@ -1,5 +1,5 @@
-from rest_framework.fields import CharField, IntegerField
-from rest_framework.serializers import ModelSerializer, SerializerMethodField
+from rest_framework.fields import CharField, IntegerField, DateField
+from rest_framework.serializers import Serializer, ModelSerializer, SerializerMethodField
 
 from categories import models as categories
 from vendors import models as vendors
@@ -147,22 +147,6 @@ class ShortContractSerializer(ModelSerializer):
                   'point_of_contact', 'place_of_performance_location']
 
 
-'''
-class Metadata(object):
-    def __init__(self):
-        sam_md = SamLoad.objects.all().order_by('-sam_load')
-        fpds_md = FPDSLoad.objects.all().order_by('-load_date')
-        if len(sam_md) > 0:
-            self.sam_load_date = sam_md[0].sam_load
-        else: 
-            self.sam_load_date = None
-        if len(fpds_md) > 0:
-            self.fpds_load_date = fpds_md[0].load_date
-        else:
-            self.fpds_load_date = None
-
-
-class MetadataSerializer(serializers.Serializer):
-    sam_load_date = serializers.DateField()
-    fpds_load_date = serializers.DateField()
-'''
+class MetadataSerializer(Serializer):
+    sam_load_date = DateField()
+    fpds_load_date = DateField()
