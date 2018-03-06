@@ -26,12 +26,6 @@ class PoolSerializer(ModelSerializer):
         fields = ['id', 'name', 'number', 'vehicle', 'threshold', 'naics']
 
 
-class ShortPoolSerializer(ModelSerializer):
-    class Meta:
-        model = categories.Pool
-        fields = ['id', 'name', 'number', 'vehicle']
-
-
 class ZoneSerializer(ModelSerializer):
     states = SerializerMethodField()
     

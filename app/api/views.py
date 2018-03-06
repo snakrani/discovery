@@ -4,6 +4,7 @@ from django.db.models.functions import Concat, Coalesce
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.views import APIView
 from rest_framework.viewsets import ReadOnlyModelViewSet
+from rest_framework.response import Response
 
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -92,10 +93,7 @@ class PoolViewSet(DiscoveryReadOnlyModelViewSet):
     ordering = 'name'
     
     pagination_class = pagination.ResultSetPagination
-    action_serializers =  { 
-        'list': serializers.ShortPoolSerializer, 
-        'retrieve': serializers.PoolSerializer 
-    }
+    serializer_class = serializers.PoolSerializer
 
 
 class ZoneViewSet(DiscoveryReadOnlyModelViewSet):
