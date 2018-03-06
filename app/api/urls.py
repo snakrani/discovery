@@ -9,6 +9,9 @@ router.register(r'pools', views.PoolViewSet)
 router.register(r'zones', views.ZoneViewSet)
 router.register(r'vendors', views.VendorViewSet)
 router.register(r'contracts', views.ContractViewSet)
-#router.register(r'metadata', views.MetadataViewSet)
 
-urlpatterns = router.urls
+urlpatterns = [
+    url(r'^metadata/$', views.ListMetadataView.as_view()),
+]
+
+urlpatterns += router.urls
