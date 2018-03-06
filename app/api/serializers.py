@@ -103,38 +103,65 @@ class ShortVendorSerializer(ModelSerializer):
                   'sam_location', 'setasides', 'annual_revenue', 'number_of_employees', 'number_of_contracts']
 
 
+class CoreVendorSerializer(ModelSerializer):
+    sam_location = LocationSerializer(many=False)
+    setasides = SetAsideSerializer(many=True)
+     
+    class Meta:
+        model = vendors.Vendor
+        fields = ['id', 'name', 'duns', 'duns_4', 
+                  'sam_status', 'sam_exclusion', 'sam_url',
+                  'sam_location', 'setasides']
+
+
+class ContractStatusSerializer(ModelSerializer):
+    class Meta:
+        model = contracts.ContractStatus
+        fields = ['code', 'name']
+
+
+class PricingStructureSerializer(ModelSerializer):
+    class Meta:
+        model = contracts.PricingStructure
+        fields = ['code', 'name']
+
+
 class PlaceOfPerformanceSerializer(ModelSerializer):
-    location = SerializerMethodField()
-    
     class Meta:
         model = contracts.PlaceOfPerformance
         fields = ['country_code', 'country_name', 'state', 'zipcode']
 
 
 class ContractSerializer(ModelSerializer):
-    vendor = ShortVendorSerializer(many=False)
+    vendor = CoreVendorSerializer(many=False)
     
     place_of_performance = PlaceOfPerformanceSerializer(many=False)
     vendor_location = LocationSerializer(many=False)
+    
+    status = ContractStatusSerializer(many=False)
+    pricing_type = PricingStructureSerializer(many=False)
         
     place_of_performance_location = CharField()
         
     class Meta:
         model = contracts.Contract
         fields = ['id', 'piid', 'agency_id', 'agency_name', 'NAICS', 'PSC', 
-                  'date_signed', 'completion_date', 'pricing_type__name', 'obligated_amount', 'status__name', 
+                  'date_signed', 'completion_date', 'pricing_type', 'obligated_amount', 'status', 
                   'point_of_contact', 'place_of_performance', 'place_of_performance_location', 'vendor_location', 
                   'vendor_phone', 'vendor',
                   'annual_revenue', 'number_of_employees']
 
 
 class ShortContractSerializer(ModelSerializer):
+    status = ContractStatusSerializer(many=False)
+    pricing_type = PricingStructureSerializer(many=False)
+    
     place_of_performance_location = CharField()
         
     class Meta:
         model = contracts.Contract
         fields = ['id', 'piid', 'agency_id', 'agency_name', 'NAICS', 'PSC', 
-                  'date_signed', 'completion_date', 'pricing_type__name', 'obligated_amount', 'status__name', 
+                  'date_signed', 'completion_date', 'pricing_type', 'obligated_amount', 'status', 
                   'point_of_contact', 'place_of_performance_location']
 
 
