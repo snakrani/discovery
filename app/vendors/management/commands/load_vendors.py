@@ -7,7 +7,7 @@ from django.core.management import call_command
 
 from discovery.utils import csv_memory
 from categories.models import SetAside, Pool, Zone
-from vendors.models import Vendor, Manager, PoolPIID
+from vendors.models import Vendor, Manager, PoolMembership, PoolMembershipZone
 
 import os
 import sys
@@ -58,7 +58,7 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument(
             '--pause',
-            action='store_true',
+            action='store',
             type=int,
             default=1,
             dest='pause',
@@ -66,7 +66,7 @@ class Command(BaseCommand):
         )
         parser.add_argument(
             '--tries',
-            action='store_true',
+            action='store',
             type=int,
             default=3,
             dest='tries',
@@ -74,7 +74,7 @@ class Command(BaseCommand):
         )
         parser.add_argument(
             '--vehicles',
-            action='store_true',
+            action='store',
             type=str,
             default='',
             dest='vehicles',
@@ -82,7 +82,7 @@ class Command(BaseCommand):
         )
         parser.add_argument(
             '--pools',
-            action='store_true',
+            action='store',
             type=str,
             default='',
             dest='pools',
@@ -90,7 +90,7 @@ class Command(BaseCommand):
         )
         parser.add_argument(
             '--vpp',
-            action='store_true',
+            action='store',
             type=int,
             default=0,
             dest='vpp',
@@ -103,7 +103,7 @@ class Command(BaseCommand):
         name = record[0].strip()
         piid = record[1].strip()
         duns = format_duns(record[2].strip())
-        zone = record[9].strip()
+        zones = record[9].strip()
         
         # Get vendor object
         vendor, created = Vendor.objects.get_or_create(duns=duns)
@@ -146,13 +146,14 @@ class Command(BaseCommand):
         
         vendor.save()
         
-        # Update pool relationship
-        if zone and zone.lower() != 'all':
-            zone = Zone.objects.get(id=int(zone))
-        else:
-            zone = None
+        # Update pool membership information
+        membership, ppcreated = PoolMembership.objects.get_or_create(vendor=vendor, pool=pool_data, piid=piid)
         
-        poolpiid, ppcreated = PoolPIID.objects.get_or_create(vendor=vendor, pool=pool_data, piid=piid, zone=zone)
+        if zones and zones.lower() != 'all':
+            for zone in [x.strip() for x in zones.split(',')]:
+                PoolMembershipZone.objects.get_or_create(membership=membership, zone=Zone.objects.get(id=int(zone)))
+        else:
+            zone = None    
         
         log_memory("Final vendor [ {} - {} ]".format(pool_data.id, vendor.id))
         log_data(
@@ -165,7 +166,7 @@ class Command(BaseCommand):
             pm.name,
             ":".join(pm.phones()),
             ":".join(pm.emails()),
-            zone,
+            zones,
             ":".join([str(sa.pk) for sa in vendor.setasides.all()])
         )
         
@@ -252,12 +253,12 @@ class Command(BaseCommand):
             'PM Name', 
             'PM Phones', 
             'PM Emails',
-            'Zone',
+            'Zones',
             'SetAsides'
         )
         
-        vehicles = filter(None, "".join(options['vehicles'].lower().split()).split(','))
-        pools = filter(None, "".join(options['pools'].split()).split(','))
+        vehicles = [x.strip() for x in options['vehicles'].lower().split(',') if x != '']
+        pools = [x.strip() for x in options['pools'].lower().split(',') if x != '']
         
         try:
             for vehicle in settings.VEHICLES:
@@ -265,7 +266,7 @@ class Command(BaseCommand):
                     new_vendor_count += self.update_vehicle(vehicle, options, pools)
 
             #load extra SAM fields
-            call_command('load_sam', **options)
+            call_command('load_sam', **{k: options[k] for k in ('pause', 'tries')})
 
         except Exception as e:
             display_error(e)
