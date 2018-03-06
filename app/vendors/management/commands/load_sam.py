@@ -40,7 +40,7 @@ def sam_data_logger():
 def log_data(*args):
     line = io.StringIO()
     writer = csv.writer(line)
-    writer.writerow([unicode(s).encode("utf-8") for s in args])
+    writer.writerow([str(s).encode("utf-8") for s in args])
     sam_data_logger().info(line.getvalue().rstrip())
 
 
@@ -71,7 +71,7 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument(
             '--pause',
-            action='store_true',
+            action='store',
             type=int,
             default=1,
             dest='pause',
@@ -79,7 +79,7 @@ class Command(BaseCommand):
         )
         parser.add_argument(
             '--tries',
-            action='store_true',
+            action='store',
             type=int,
             default=3,
             dest='tries',
