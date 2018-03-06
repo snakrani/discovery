@@ -45,6 +45,7 @@ jobs:
           name: Run unit tests
           command: |
             source /venv/bin/activate
+            scripts/init-webserver.sh /dev/stderr
             ./run test discovery api categories vendors contracts
 
       - store_artifacts:
