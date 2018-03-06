@@ -1,8 +1,6 @@
-from django.conf import settings
 from django.conf.urls import include, url
 from django.views.generic import TemplateView
 from django.contrib import admin
-from django.contrib.staticfiles import views as static_views
 
 from rest_framework.documentation import include_docs_urls
 
@@ -25,8 +23,3 @@ urlpatterns = [
     url(r'^vendor/(?P<vendor_duns>\w+)/$', vendors.VendorView.as_view(template_name='vendor.html')),
     url(r'^vendor/(?P<vendor_duns>\w+)/csv/$', vendors.VendorCSV, name="vendor-csv"),
 ]
-
-if settings.DEBUG:
-    urlpatterns += [
-        url(r'^static/(?P<path>.*)$', static_views.serve),
-    ]
