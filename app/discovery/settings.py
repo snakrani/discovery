@@ -256,6 +256,11 @@ LOGGING = {
             'propagate': True,
             'level':'DEBUG'
         },
+        'django.template': {
+            'handlers': ['file'],
+            'propagate': True,
+            'level': 'INFO',
+        },
         'vendor': {
             'handlers': ['vendor_file'],
             'level': 'DEBUG'
@@ -327,7 +332,7 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'api.schemas.DiscoverySchema',
     
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ],
     
     'DEFAULT_FILTER_BACKENDS': [
