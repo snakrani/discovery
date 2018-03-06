@@ -59,8 +59,7 @@ class Manager(models.Model):
         return self.email.values_list('address', flat=True)
 
     def __str__(self):
-        info = "{0} {1}".format(self.vendor.name, self.pool.id, self.piid)
-        return "{0} ({1} / {2})".format(info, ", ".join(self.phones()), ", ".join(self.emails()))
+        return "{0}: {1} ({2})".format(self.type, self.name, self.vendor.name)
 
 
 class ManagerPhoneNumber(models.Model):
