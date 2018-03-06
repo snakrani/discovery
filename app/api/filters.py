@@ -7,7 +7,7 @@ from django_filters.rest_framework import (
     BooleanFilter,
     NumberFilter,
     CharFilter,
-    DateTimeFilter
+    DateFilter
 )
 
 from categories import models as categories
@@ -82,6 +82,7 @@ class PoolFilter(FilterSet):
 
 
 class ZoneFilter(FilterSet):
+    
     id = NumberFilter(field_name="id", label="Zone ID", lookup_expr=NUM_FILTERS)
     state = CharFilter(field_name="state__state", label="Zone state", lookup_expr=EQUALITY_CHAR_FILTERS)
      
@@ -98,8 +99,8 @@ class VendorFilter(FilterSet):
     cage = CharFilter(field_name="cage", label="Vendor CAGE code", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
     
     sam_status = CharFilter(field_name="sam_status", label="Vendor SAM status", lookup_expr=EQUALITY_CHAR_FILTERS)
-    sam_activation_date = DateTimeFilter(field_name="sam_activation_date", label="Vendor SAM activation date", lookup_expr=NUM_FILTERS)
-    sam_expiration_date = NumberFilter(field_name="sam_expiration_date", label="Vendor SAM expiration date", lookup_expr=NUM_FILTERS)
+    sam_activation_date = DateFilter(field_name="sam_activation_date", label="Vendor SAM activation date", lookup_expr=NUM_FILTERS)
+    sam_expiration_date = DateFilter(field_name="sam_expiration_date", label="Vendor SAM expiration date", lookup_expr=NUM_FILTERS)
     sam_exclusion = BooleanFilter(field_name="sam_exclusion", label="Vendor SAM exclusion", lookup_expr=EQUALITY_BOOL_FILTERS)
     sam_url = CharFilter(field_name="sam_url", label="Vendor SAM URL", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
     
@@ -157,4 +158,62 @@ class VendorFilter(FilterSet):
 
 
 class ContractFilter(FilterSet):
-    pass
+    
+    id = NumberFilter(field_name="id", label="Internal contract ID", lookup_expr=NUM_FILTERS)
+    piid = NumberFilter(field_name="piid", label="Vendor PIID", lookup_expr=NUM_FILTERS)
+    agency_id = CharFilter(field_name="agency_id", label="Agency ID", lookup_expr=EQUALITY_CHAR_FILTERS)
+    agency_name = CharFilter(field_name="agency_name", label="Agency name", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
+    
+    naics = CharFilter(field_name='NAICS', label="Contract NAICS code", lookup_expr=EQUALITY_CHAR_FILTERS)
+    psc = CharFilter(field_name='PSC', label="Contract NAICS code", lookup_expr=EQUALITY_CHAR_FILTERS)
+    
+    date_signed = DateFilter(field_name='date_signed', label="Contract signed date", lookup_expr=EQUALITY_CHAR_FILTERS)
+    completion_date = DateFilter(field_name='completion_date', label="Contract completed date", lookup_expr=EQUALITY_CHAR_FILTERS)
+
+    pricing_type_code = CharFilter(field_name='pricing_type__code', label="Pricing structure code", lookup_expr=EQUALITY_CHAR_FILTERS)
+    pricing_type_name = CharFilter(field_name='pricing_type__name', label="Pricing structure name", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
+    obligated_amount = NumberFilter(field_name="obligated_amount", label="Obligated amount", lookup_expr=NUM_FILTERS)
+    point_of_contact = CharFilter(field_name="point_of_contact", label="Point of contact", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
+    
+    vendor_id = NumberFilter(field_name="vendor__id", label="Internal vendor ID", lookup_expr=NUM_FILTERS)
+    vendor_name = CharFilter(field_name="vendor__name", label="Vendor name", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
+    vendor_duns = NumberFilter(field_name="vendor__duns", label="Vendor DUNS number", lookup_expr=NUM_FILTERS)
+    vendor_cage = CharFilter(field_name="vendor__cage", label="Vendor CAGE code", lookup_expr=EQUALITY_CHAR_FILTERS)
+    vendor_sam_status = CharFilter(field_name='vendor__sam_status', label="Vendor SAM status", lookup_expr=EQUALITY_CHAR_FILTERS)
+    vendor_sam_activation_date = DateFilter(field_name='vendor__sam_activation_date', label="Vendor SAM activation date", lookup_expr=EQUALITY_CHAR_FILTERS)
+    vendor_sam_expiration_date = DateFilter(field_name='vendor__sam_expiration_date', label="Vendor SAM expiration date", lookup_expr=EQUALITY_CHAR_FILTERS)
+    
+    vendor_phone = CharFilter(field_name="vendor_phone", label="Vendor phone", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS) 
+    
+    annual_revenue = NumberFilter(field_name="annual_revenue", label="Annual revenue (at time of contract)", lookup_expr=NUM_FILTERS)
+    number_of_employees = NumberFilter(field_name="number_of_employees", label="Employee count (at time of contract)", lookup_expr=NUM_FILTERS)
+    
+    vendor_address = CharFilter(field_name="vendor_location__address", label="Vendor address", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
+    vendor_city = CharFilter(field_name="vendor_location__city", label="Vendor city", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
+    vendor_state = CharFilter(field_name="vendor_location__state", label="Vendor state", lookup_expr=EQUALITY_CHAR_FILTERS)
+    vendor_zipcode = NumberFilter(field_name="vendor_location__zipcode", label="Vendor zipcode", lookup_expr=NUM_FILTERS)
+    vendor_congressional_district = CharFilter(field_name="vendor_location__congressional_district", label="Vendor congressional district", lookup_expr=EQUALITY_CHAR_FILTERS)
+    
+    pop_country_code = CharFilter(field_name="place_of_performance__country_code", label="Primary place of performance country code", lookup_expr=EQUALITY_CHAR_FILTERS)
+    pop_country_name = CharFilter(field_name="place_of_performance__country_name", label="Primary place of performance country name", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
+    pop_state = CharFilter(field_name="place_of_performance__state", label="Primary place of performance state", lookup_expr=EQUALITY_CHAR_FILTERS)
+    pop_zipcode = NumberFilter(field_name="place_of_performance__zipcode", label="Primary place of performance zipcode", lookup_expr=NUM_FILTERS)
+    
+    status_id = NumberFilter(field_name="status__id", label="Contract status ID", lookup_expr=NUM_FILTERS)
+    status_name = CharFilter(field_name="status__name", label="Contract status name", lookup_expr=EQUALITY_CHAR_FILTERS + FUZZY_CHAR_FILTERS)
+         
+    class Meta:
+        model = contracts.Contract
+        fields = [
+            'id', 'piid', 'agency_id', 'agency_name', 'naics', 'psc',
+            'date_signed', 'completion_date',
+            'pricing_type_code', 'pricing_type_name', 'obligated_amount',
+            'point_of_contact', 'vendor_phone', 'vendor_id', 'vendor_name', 'vendor_duns', 'vendor_cage',   
+            'vendor_sam_status', 'vendor_sam_activation_date', 'vendor_sam_expiration_date', 
+            'annual_revenue', 'number_of_employees',
+            'vendor_address', 'vendor_city', 'vendor_state', 'vendor_zipcode', 'vendor_congressional_district', 
+            'pop_country_code', 'pop_country_name', 'pop_state', 'pop_zipcode',
+            'status_id', 'status_name'
+        ]
+       
+
