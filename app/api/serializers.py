@@ -18,17 +18,18 @@ class SetAsideSerializer(ModelSerializer):
         fields = ['code', 'name', 'description']
 
 
-class ShortPoolSerializer(ModelSerializer):
-    class Meta:
-        model = categories.Pool
-        fields = ['id', 'name', 'number', 'vehicle']
-
 class PoolSerializer(ModelSerializer):
     naics = NaicsSerializer(many=True)
     
     class Meta:
         model = categories.Pool
         fields = ['id', 'name', 'number', 'vehicle', 'threshold', 'naics']
+
+
+class ShortPoolSerializer(ModelSerializer):
+    class Meta:
+        model = categories.Pool
+        fields = ['id', 'name', 'number', 'vehicle']
 
 
 class ZoneSerializer(ModelSerializer):
@@ -113,11 +114,7 @@ class PlaceOfPerformanceSerializer(ModelSerializer):
     
     class Meta:
         model = contracts.PlaceOfPerformance
-        fields = ['country_code', 'country_name', 'state', 'zipcode', 'location']
-    
-    def get_location(self, item):
-        state = item.state if item.state else ''
-        return "{} {}".format(item.country_name, state)
+        fields = ['country_code', 'country_name', 'state', 'zipcode']
 
 
 class ContractSerializer(ModelSerializer):
