@@ -1,21 +1,21 @@
 [
 {
   "model": "vendors.vendor",
-  "pk": 17,
+  "pk": 24,
   "fields": {
-    "name": "ELEIT Technology, Inc.",
-    "duns": "160062311",
-    "duns_4": "1600623110000",
-    "cage": "1DET1",
+    "name": "KT Consulting, Inc.",
+    "duns": "089072826",
+    "duns_4": "0890728260000",
+    "cage": "1X2F2",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-01-23T11:00:15Z",
-    "sam_expiration_date": "2019-01-23T10:48:49Z",
+    "sam_activation_date": "2017-10-26T10:29:24Z",
+    "sam_expiration_date": "2018-10-26T10:20:31Z",
     "sam_exclusion": false,
-    "sam_url": null,
-    "sam_location": 17,
+    "sam_url": "http://www.ktc-inc.com",
+    "sam_location": 24,
     "setasides": [
-      3,
-      18
+      1,
+      2
     ]
   }
 }
