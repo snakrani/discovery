@@ -54,6 +54,7 @@ class FunctionalTests(LiveServerTestCase):
         #perform a search with zero expected results and make sure that it is clear that there are no results
         driver = self.driver
         driver.get(self.base_url + "/results?vehicle=oasis_sb&setasides=A6,A2,XX&naics-code=541990&")
+        time.sleep(2)
         self.assertEqual("0 vendors match your search", driver.find_element_by_css_selector("span.matching_your_search").text)
 
     def test_socioeconomic_indicators_in_search_results(self):
@@ -88,7 +89,7 @@ class FunctionalTests(LiveServerTestCase):
             EC.presence_of_all_elements_located((By.CLASS_NAME, "table_row_data"))
         )
         #make sure number of search results are listed
-        self.assertEqual("8 vendors match your search", driver.find_element_by_css_selector("span.matching_your_search").text)
+        self.assertEqual("9 vendors match your search", driver.find_element_by_css_selector("span.matching_your_search").text)
 
     def test_search_criteria_on_search_results(self):
         driver = self.driver
@@ -174,6 +175,9 @@ class FunctionalTests(LiveServerTestCase):
         driver = self.driver
         #load vendor page
         driver.get(self.base_url + "/vendor/786997739/?vehicle=oasis_sb&naics-code=541330")
+        element = WebDriverWait(driver, 5).until(
+            EC.presence_of_all_elements_located((By.CLASS_NAME, "table_row_data"))
+        )
         #make sure text of NAICS button is 'NAICS <naics-code>'
         naics_contracts_button = driver.find_element_by_id('naics_contracts_button')
         self.assertEqual("NAICS 541330", naics_contracts_button.text)
@@ -187,13 +191,18 @@ class FunctionalTests(LiveServerTestCase):
         driver = self.driver
         #load vendor page
         driver.get(self.base_url + "/vendor/786997739/?vehicle=oasis_sb&naics-code=541330&")
+        element = WebDriverWait(driver, 5).until(
+            EC.presence_of_all_elements_located((By.CLASS_NAME, "table_row_data"))
+        )
         #verify that contracts list isn't empty
         self.assertFalse(driver.find_element_by_id('no_matching_contracts').is_displayed())
         #make sure at least one row exists
         self.assertTrue(driver.find_element_by_xpath('//*[@id="ch_table"]/table/tbody/tr[2]'))
         #open vendor with naics subcategory
         driver.get(self.base_url + "/vendor/102067378/?vehicle=oasis_sb&naics-code=541712B&")
-        time.sleep(0.5)
+        element = WebDriverWait(driver, 5).until(
+            EC.presence_of_all_elements_located((By.CLASS_NAME, "table_row_data"))
+        )
         #make sure at least one row exists
         self.assertTrue(driver.find_element_by_xpath('//*[@id="ch_table"]/table/tbody/tr[2]'))
 
@@ -226,11 +235,14 @@ class FunctionalTests(LiveServerTestCase):
         driver = self.driver
         #load search results
         driver.get(self.base_url + '/results?vehicle=oasis_sb&naics-code=541620&')
-        time.sleep(0.5)
+        element = WebDriverWait(driver, 5).until(
+            EC.presence_of_all_elements_located((By.CLASS_NAME, "table_row_data"))
+        )
         #make sure csv link exists and is correct
         self.assertRegexpMatches(driver.find_element_by_link_text("download data (CSV)").get_attribute("href"), r"^[\s\S]*/results/csv[\s\S]*$")
         #load vendor detail page
         driver.get(self.base_url + "/vendor/786997739/?naics-code=541620&")
+        time.sleep(2)
         #make sure csv link exists and is correct
         self.assertRegexpMatches(driver.find_element_by_link_text("Download vendor data (CSV)").get_attribute("href"), r"^[\s\S]*/vendor/[\s\S]*/csv[\s\S]*$")
 
@@ -284,6 +296,7 @@ class FunctionalTests(LiveServerTestCase):
         driver = self.driver
         #open vendor detail page where naics contract total is zero
         driver.get(self.base_url + '/vendor/799582379/?vehicle=oasis_sb&naics-code=541360&')
+        time.sleep(2)
         #make sure no matching contracts indicator is displayed
         self.assertTrue(driver.find_element_by_id('no_matching_contracts').is_displayed())
         #open vendor detail apge where naics contract total is one or more
@@ -295,9 +308,15 @@ class FunctionalTests(LiveServerTestCase):
         driver = self.driver
         #open vendor detail page where sb badge is expected
         driver.get(self.base_url + '/vendor/075458455/?setasides=XX&vehicle=oasis_sb&naics-code=541330&')
+        element = WebDriverWait(driver, 5).until(
+            EC.presence_of_all_elements_located((By.CLASS_NAME, "table_row_data"))
+        )
         self.assertTrue(driver.find_element_by_id('sb_badge').is_displayed())
         #open vendor detail page when sb badge is not expected
-        driver.get(self.base_url + '/vendor/806849303/?setasides=XX&vehicle=oasis_sb&naics-code=541330&')
+        driver.get(self.base_url + '/vendor/045224250/?vehicle=oasis&naics-code=541620&')
+        element = WebDriverWait(driver, 5).until(
+            EC.presence_of_all_elements_located((By.CLASS_NAME, "table_row_data"))
+        )
         self.assertFalse(driver.find_element_by_id('sb_badge').is_displayed())
 
     def test_vendor_site(self):
