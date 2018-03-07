@@ -18,7 +18,10 @@ var RequestsManager = {
     getAPIRequest: function(url, params, callback) {
         url = APIHOST + url;
 
-        params['api_key'] = APIKEY;
+        var responder = function(data) {
+          console.log(" > results: %s %o -> %o", url, params, data);
+          return callback(data);
+        };
 
         console.log("URL: %s %o", url, params);
         return $.ajax({
@@ -26,7 +29,7 @@ var RequestsManager = {
               dataType: 'json',
               data: params
             })
-            .done(callback)
+            .done(responder)
             .fail(function(req, status, error) {
               if (!window.console) return;
               console.log('Failed to load: ', url);
@@ -46,7 +49,7 @@ var RequestsManager = {
         }
 
         if (setasides.length > 0) {
-            queryData["setasides"] = setasides.join();
+            queryData["setasides"] = setasides.join(',');
         }
         if (pool !== null) {
             queryData['pool'] = pool[0];
@@ -57,6 +60,21 @@ var RequestsManager = {
         }
         return queryData;
     },
+
+
+    currentSortParams: function() {
+        var data = {};
+        var class_map = RequestsManager.sortClassMap();
+
+        $('th.arrow-down').exists(function() {
+            data['ordering'] = "-" + class_map[this.attr('class').split(' ')[0]];
+        });
+        $('th.arrow-up').exists(function() {
+            data['ordering'] = class_map[this.attr('class').split(' ')[0]];
+        });
+        return data;
+    },
+
 
     getPool: function() {
         var poolInfo = URLManager.getPoolInfo();
