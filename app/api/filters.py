@@ -1,4 +1,5 @@
 from django.db.models import Q
+from django.forms import CheckboxSelectMultiple
 
 from django_filters.constants import EMPTY_VALUES
 from django_filters.fields import Lookup
@@ -7,7 +8,8 @@ from django_filters.rest_framework import (
     BooleanFilter,
     NumberFilter,
     CharFilter,
-    DateFilter
+    DateFilter,
+    ModelMultipleChoiceFilter
 )
 
 from categories import models as categories
@@ -131,8 +133,8 @@ class VendorFilter(FilterSet):
     pool_naics_root_code = CharFilter(field_name='pools__naics__root_code', label="Pool NAICS root code (pool_naics_root_code)", lookup_expr=EQUALITY_CHAR_FILTERS)
     pool_naics_description = CharFilter(field_name='pools__naics__description', label="Pool NAICS description (pool_naics_description)", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
     
-    setaside_code = CharFilter(field_name='setasides__code', label="Setaside code (setaside_code)", lookup_expr=EQUALITY_CHAR_FILTERS)
-    setaside_name = CharFilter(field_name='setasides__name', label="Setaside name (setaside_name)", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
+    setaside_code = ModelMultipleChoiceFilter(field_name='setasides__code', label="Setaside code (setaside_code)", queryset=categories.SetAside.objects.all(), to_field_name="code", conjoined=True, distinct=True, widget=CheckboxSelectMultiple)
+    setaside_name = ModelMultipleChoiceFilter(field_name='setasides__name', label="Setaside name (setaside_name)", queryset=categories.SetAside.objects.all(), to_field_name="name", conjoined=True, distinct=True, widget=CheckboxSelectMultiple)
     setaside_description = CharFilter(field_name='setasides__description', label="Setaside description (setaside_description)", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
          
     class Meta:
@@ -177,7 +179,7 @@ class ContractFilter(FilterSet):
     
     vendor_id = NumberFilter(field_name="vendor__id", label="Internal vendor ID (vendor_id)", lookup_expr=NUM_FILTERS)
     vendor_name = CharFilter(field_name="vendor__name", label="Vendor name (vendor_name)", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
-    vendor_duns = NumberFilter(field_name="vendor__duns", label="Vendor DUNS number (vendor_duns)", lookup_expr=NUM_FILTERS)
+    vendor_duns = CharFilter(field_name="vendor__duns", label="Vendor DUNS number (vendor_duns)", lookup_expr=NUM_FILTERS)
     vendor_cage = CharFilter(field_name="vendor__cage", label="Vendor CAGE code (vendor_cage)", lookup_expr=EQUALITY_CHAR_FILTERS)
     vendor_sam_status = CharFilter(field_name='vendor__sam_status', label="Vendor SAM status (vendor_sam_status)", lookup_expr=EQUALITY_CHAR_FILTERS)
     vendor_sam_activation_date = DateFilter(field_name='vendor__sam_activation_date', label="Vendor SAM activation date (vendor_sam_activation_date)", lookup_expr=EQUALITY_CHAR_FILTERS)
