@@ -5,6 +5,9 @@
 // add support for cross-domain requests
 $.support.cors = true;
 
+// process querystrings traditionally
+$.ajaxSettings.traditional = true;
+
 $.fn.exists = function(callback) {
   if (this.length) {
     var args = [].slice.call(arguments, 1);

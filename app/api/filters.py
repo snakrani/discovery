@@ -1,4 +1,5 @@
 from django.db.models import Q
+from django.forms import CheckboxSelectMultiple
 
 from django_filters.constants import EMPTY_VALUES
 from django_filters.fields import Lookup
@@ -7,7 +8,8 @@ from django_filters.rest_framework import (
     BooleanFilter,
     NumberFilter,
     CharFilter,
-    DateFilter
+    DateFilter,
+    ModelMultipleChoiceFilter
 )
 
 from categories import models as categories
@@ -131,8 +133,8 @@ class VendorFilter(FilterSet):
     pool_naics_root_code = CharFilter(field_name='pools__naics__root_code', label="Pool NAICS root code (pool_naics_root_code)", lookup_expr=EQUALITY_CHAR_FILTERS)
     pool_naics_description = CharFilter(field_name='pools__naics__description', label="Pool NAICS description (pool_naics_description)", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
     
-    setaside_code = CharFilter(field_name='setasides__code', label="Setaside code (setaside_code)", lookup_expr=EQUALITY_CHAR_FILTERS)
-    setaside_name = CharFilter(field_name='setasides__name', label="Setaside name (setaside_name)", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
+    setaside_code = ModelMultipleChoiceFilter(field_name='setasides__code', label="Setaside code (setaside_code)", queryset=categories.SetAside.objects.all(), to_field_name="code", conjoined=True, distinct=True, widget=CheckboxSelectMultiple)
+    setaside_name = ModelMultipleChoiceFilter(field_name='setasides__name', label="Setaside name (setaside_name)", queryset=categories.SetAside.objects.all(), to_field_name="name", conjoined=True, distinct=True, widget=CheckboxSelectMultiple)
     setaside_description = CharFilter(field_name='setasides__description', label="Setaside description (setaside_description)", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
          
     class Meta:

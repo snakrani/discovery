@@ -1,6 +1,18 @@
 
 RequestsManager.contractsPageCount = 100;
 
+RequestsManager.sortClassMap = function() {
+    return {
+        'h_date_signed': 'date_signed',
+        'h_piid': 'piid',
+        'h_agency': 'agency_name',
+        'h_type': 'pricing_type__name',
+        'h_location': 'place_of_performance_location',
+        'h_value': 'obligated_amount',
+        'h_status': 'status__name',
+    };
+};
+
 RequestsManager.initializers.vendor = function() {
     Events.subscribe('vendorInfoLoaded', this.refreshContracts.bind(RequestsManager));
     Events.subscribe('contractsChanged', this.refreshContracts.bind(RequestsManager));
@@ -8,7 +20,7 @@ RequestsManager.initializers.vendor = function() {
 
 RequestsManager.loadVendor = function(callback) {
     var duns = URLManager.getDUNS();
-    var url = "/api/vendor/" + duns + "/";
+    var url = "/api/vendors/" + duns + "/";
 
     RequestsManager.getAPIRequest(url, {}, function(response){
         callback(duns, response);
@@ -18,22 +30,19 @@ RequestsManager.loadVendor = function(callback) {
 RequestsManager.loadContracts = function(data, callback) {
     var duns = URLManager.getDUNS();
     var url = "/api/contracts";
-    var queryData = $.extend(data, {'duns': duns, 'count': RequestsManager.contractsPageCount});
+    var queryData = $.extend(data, {'vendor_duns': duns, 'vendor_duns_lookup': 'exact', 'count': RequestsManager.contractsPageCount});
+
+    if (queryData['naics'] == 'all') {
+        delete queryData['naics'];
+    }
+    else {
+        queryData['naics_lookup'] = 'exact';
+    }
+
+    delete queryData['listType'];
 
     RequestsManager.getAPIRequest(url, queryData, function(response){
-        var resultsObj = {};
-
-        resultsObj.lastUpdated = response['last_updated'];
-        resultsObj.total = 0; //overwritten below if there are any
-
-        if (response['num_results'] !== 0) {
-            resultsObj.duns = queryData['duns'];
-            resultsObj.total = response['num_results'];
-            resultsObj.count = response['page']['results'].length;
-            resultsObj.results = response['page']['results'];
-        }
-
-        callback(queryData, response, resultsObj);
+        callback(queryData, response);
     });
 };
 
@@ -70,16 +79,12 @@ RequestsManager.refreshContracts = function(data) {
         }
     }
 
-    if (data['sort'] && !data['direction']) {
-        data['direction'] = 'desc';
-    }
-
     if (!data['page']) {
         data['page'] = 1;
     }
 
-    RequestsManager.loadContracts(data, function(queryData, response, results) {
-        Events.publish('contractDataLoaded', results, data['listType'], data['page'], RequestsManager.contractsPageCount);
+    RequestsManager.loadContracts(data, function(queryData, response) {
+        Events.publish('contractDataLoaded', response, data['listType'], data['page'], RequestsManager.contractsPageCount);
     });
 };
 

@@ -1,48 +1,54 @@
 
 RequestsManager.vendorsPageCount = 25;
 
+RequestsManager.sortClassMap = function() {
+    return {
+        'h_vendor_name': 'name',
+        'h_vendor_location': 'sam_location_citystate',
+        'h_naics_results': 'number_of_contracts',
+    };
+};
+
 RequestsManager.initializers.listings = function() {
     Events.subscribe('vendorsChanged', this.refreshVendors.bind(RequestsManager));
 };
 
 RequestsManager.loadVendors = function(data, callback) {
     var url = "/api/vendors/";
-    var queryData = $.extend(data, this.buildRequestQuery(), {'count': RequestsManager.vendorsPageCount});
 
-    if (queryData['naics'] !== "") {
+    var requestVars = this.buildRequestQuery();
+    var queryData = $.extend(data, {'count': RequestsManager.vendorsPageCount});
+
+    if (requestVars['naics'] !== "") {
+        queryData['pool_naics_code'] = requestVars['naics'];
+        queryData['pool_naics_code_lookup'] = 'exact';
+
+        if ('vehicle' in requestVars) {
+            queryData['pool_vehicle'] = requestVars['vehicle'];
+            queryData['pool_vehicle_lookup'] = 'iexact';
+        }
+        if ('pool' in requestVars) {
+            queryData['pool_number'] = requestVars['pool'];
+            queryData['pool_number_lookup'] = 'exact';
+        }
+        if ('setasides' in requestVars) {
+            queryData['setaside_code'] = requestVars['setasides'].split(',');
+        }
+
         RequestsManager.getAPIRequest(url, queryData, function(response) {
-            var resultsObj = {};
-
-            resultsObj.poolNumber = response['pools'][0]['number'];
-            resultsObj.poolName = response['pools'][0]['name'];
-            resultsObj.lastUpdated = response['last_updated'];
-            resultsObj.total = 0; //overwritten below if there are any
-
-            if (response['num_results'] !== 0) {
-                resultsObj.naics = queryData['naics'];
-                resultsObj.vehicle = response['pools'][0]['vehicle'].toLowerCase();
-                resultsObj.total = response['num_results'];
-                resultsObj.count = response['page']['results'].length;
-                resultsObj.results = response['page']['results'];
-            }
-
-            callback(queryData, response, resultsObj);
+            callback(queryData, response);
         });
     };
 };
 
 RequestsManager.load = function() {
-    RequestsManager.loadVendors(LayoutManager.currentSortParams(), function(queryData, response, results) {
-        Events.publish('dataLoaded', results);
+    RequestsManager.loadVendors(RequestsManager.currentSortParams(), function(queryData, response) {
+        Events.publish('dataLoaded', response);
     });
 };
 
 RequestsManager.refreshVendors = function(data) {
-    if (data['sort'] && !data['direction']) {
-        data['direction'] = 'desc';
-    }
-
-    RequestsManager.loadVendors(data, function(queryData, response, results) {
-        Events.publish('vendorDataLoaded', results, data['page'], RequestsManager.vendorsPageCount);
+    RequestsManager.loadVendors(data, function(queryData, response) {
+        Events.publish('vendorDataLoaded', response, data['page'], RequestsManager.vendorsPageCount);
     });
 };

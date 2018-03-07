@@ -3,19 +3,11 @@ LayoutManager.initializers.listings = function() {
     Events.subscribe('vendorDataLoaded', this.renderTable.bind(LayoutManager));
 };
 
-LayoutManager.sortClassMap = function() {
-    return {
-        'h_vendor_name': 'name',
-        'h_vendor_location': 'sam_location,citystate',
-        'h_naics_results': 'num_contracts',
-    };
-};
-
 LayoutManager.render = function(results) {
     // this is turning into something of a router
     // should be refactored [TS]
 
-    if (this.getQSByName(document.location, 'vehicle') == "oasis") {
+    if (this.getQSByName(document.location, 'vehicle').indexOf("_sb") == -1) {
         //disable filters for 'oasis unrestricted' results
         this.disableFilters();
     } else {
@@ -29,7 +21,8 @@ LayoutManager.render = function(results) {
     }
     else {
         // if this is a vendor list page and the page has already been reloaded
-        if (URLManager.getParameterByName('naics-code') === InputHandler.getNAICSCode()) {
+        if (window.location.pathname == "/results"
+            || URLManager.getParameterByName('naics-code') === InputHandler.getNAICSCode()) {
             Events.publish('vendorDataLoaded', results, 1, RequestsManager.vendorsPageCount);
         }
         else {
@@ -44,18 +37,18 @@ LayoutManager.render = function(results) {
 LayoutManager.renderTable = function(results, pageNumber, itemsPerPage) {
     var $table = $('#pool_vendors');
     var qs = URLManager.getQueryString();
-    var len = results['count'] - 1;
+    var len = results['results'].length;
 
     $table.find('tr').not(':first').remove();
 
     //show or hide 'no matching vendors' indicator
-    if (results['total'] == 0) {
+    if (results['count'] == 0) {
         $('#no_matching_vendors').show();
     } else {
         $('#no_matching_vendors').hide();
     }
 
-    for (var i = 0; i <= len; i++) {
+    for (var i = 0; i < len; i++) {
         $table.append(this.renderRow(results['results'][i], qs, i));
     }
 
@@ -81,11 +74,11 @@ LayoutManager.renderRow = function(vendor, qs, i) {
     location_col = $('<td class="vendor_location">' + locationStr + '</td>');
     $vendorRow.append(location_col);
 
-    num_contracts_col = $('<td class="naics_results">' + vendor.num_contracts + '</td>');
+    num_contracts_col = $('<td class="naics_results">' + vendor.number_of_contracts + '</td>');
     $vendorRow.append(num_contracts_col);
 
     //add socio-economic columns
-    if (vehicle == 'oasis') {
+    if (vehicle.indexOf("_sb") == -1) {
         if (i==0) {
             //if first row of content, create cell for "SB Only"
             var unrestricted_setasides = $('<td colspan="6" rowspan="100" class="unrestricted">Not Applicable </br>(OASIS SB Only)</td>');
@@ -131,7 +124,7 @@ LayoutManager.renderPager = function(results, pageNumber, itemsPerPage) {
                 cssStyle: 'light-theme',
                 currentPage: pageNumber,
                 onPageClick: function(pageNumber, e) {
-                    var vendor_data = LayoutManager.currentSortParams();
+                    var vendor_data = RequestsManager.currentSortParams();
 
                     vendor_data['page'] = pageNumber;
 

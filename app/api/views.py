@@ -33,7 +33,7 @@ class NaicsViewSet(DiscoveryReadOnlyModelViewSet):
     list:
     Returns all of the NAICS codes that are relevant to the acquisition vehicles in the Discovery universe.
     """
-    queryset = categories.Naics.objects.all()
+    queryset = categories.Naics.objects.all().distinct()
     lookup_field = 'code'
     
     action_filters = {
@@ -57,7 +57,7 @@ class SetAsideViewSet(DiscoveryReadOnlyModelViewSet):
     list:
     Returns all of the business setasides that are relevant to the acquisition vehicles in the Discovery universe.
     """
-    queryset = categories.SetAside.objects.all()
+    queryset = categories.SetAside.objects.all().distinct()
     lookup_field = 'code'
     
     action_filters = {
@@ -81,7 +81,7 @@ class PoolViewSet(DiscoveryReadOnlyModelViewSet):
     list:
     Returns all of the vendor pools that are relevant to the acquisition vehicles in the Discovery universe.
     """
-    queryset = categories.Pool.objects.all()
+    queryset = categories.Pool.objects.all().distinct()
     lookup_field = 'id'
     
     action_filters = {
@@ -106,7 +106,7 @@ class ZoneViewSet(DiscoveryReadOnlyModelViewSet):
     list:
     Returns all of the vendor pool zones that are relevant to the acquisition vehicles in the Discovery universe.
     """
-    queryset = categories.Zone.objects.all()
+    queryset = categories.Zone.objects.all().distinct()
     lookup_field = 'id'
     
     action_filters = {
@@ -130,7 +130,7 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
     list:
     Returns all of the vendors that contract through the acquisition vehicles in the Discovery universe.
     """
-    queryset = vendors.Vendor.objects.all()
+    queryset = vendors.Vendor.objects.all().distinct()
     lookup_field = 'duns'
     
     action_filters = {
@@ -141,7 +141,7 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
     ordering_fields = [
         'id', 'name', 'duns', 'sam_status', 'sam_exclusion', 'sam_url',
         'sam_location__address', 'sam_location__city', 'sam_location__state', 
-        'sam_location__zipcode', 'sam_location__congressional_district',
+        'sam_location__zipcode', 'sam_location__congressional_district', 'sam_location_citystate',
         'annual_revenue', 'number_of_employees', 'number_of_contracts'
     ]
     ordering = '-number_of_contracts'
@@ -161,7 +161,8 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
             ),
             number_of_employees=Subquery(
                 contracts.Contract.objects.filter(vendor=OuterRef('pk')).order_by('-date_signed').values('number_of_employees')[:1]
-            )
+            ),
+            sam_location_citystate = Concat('sam_location__city', Value(', '), 'sam_location__state')
         )
         if naics_param_name in self.request.query_params and self.request.query_params[naics_param_name]:
             contract_list = contracts.Contract.objects.filter(NAICS=self.request.query_params[naics_param_name], vendor=OuterRef('pk')).values('pk')
@@ -181,7 +182,7 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
     list:
     Returns all of the contracts for vendors in the Discovery universe.
     """
-    queryset = contracts.Contract.objects.all()
+    queryset = contracts.Contract.objects.all().distinct()
     lookup_field = 'id'
     
     action_filters = {

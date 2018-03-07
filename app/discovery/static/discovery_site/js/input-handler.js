@@ -1,8 +1,8 @@
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
-'use strict';
 
 var InputHandler = {
     init: function() {
+        this.populateNaicsDropDown();
+
         // event bindings
         $('#naics-code').change(this.sendCodeChange.bind(InputHandler));
         $('#setaside-filters').change(this.sendFilterChange);
@@ -20,8 +20,10 @@ var InputHandler = {
         // event subscriptions
         Events.subscribe('loadedWithQS', this.updateFields.bind(InputHandler));
 
-        Events.subscribe('fieldsUpdated', this.loadPools.bind(InputHandler));
-        Events.subscribe('vehicleChanged', this.loadPools.bind(InputHandler));
+        Events.subscribe('fieldsUpdated', this.loadPool.bind(InputHandler));
+        Events.subscribe('naicsChanged', this.loadPool.bind(InputHandler));
+        Events.subscribe('fieldsUpdated', this.loadVehiclePools.bind(InputHandler));
+        Events.subscribe('vehicleChanged', this.loadVehiclePools.bind(InputHandler));
         Events.subscribe('poolDataLoaded', this.populateNaicsDropDown.bind(InputHandler));
     },
 
@@ -29,7 +31,7 @@ var InputHandler = {
         var setasides, i, len;
 
         if (obj['naics-code'] !== null) {
-            $('#naics-code').select2('val', obj['naics-code']);
+            $('#naics-code').val(obj['naics-code']).trigger('change');
             this.naicsCode = obj['naics-code'];
         }
 
@@ -55,20 +57,19 @@ var InputHandler = {
         if ((e.type == "keypress" && e.charCode == 13) || e.type == "click") {
             var $target = $(e.target);
             var data = {};
-            var class_map = LayoutManager.sortClassMap();
+            var class_map = RequestsManager.sortClassMap();
 
             var classes = $target.attr('class').split(' ');
-            data['sort'] = class_map[classes[0]];
+            data['ordering'] = class_map[classes[0]];
             data['page'] = 1;
 
             if ($target.hasClass('arrow-down')) {
-                data['direction'] = 'asc';
                 $target.removeClass('arrow-down').addClass('arrow-up').attr("title", "Sorted ascending");
             } else if ($target.hasClass('arrow-sortable')) {
-                data['direction'] = 'desc';
+                data['ordering'] = "-" + data['ordering'];
                 $target.removeClass('arrow-sortable').addClass('arrow-down').attr("title", "Sorted descending");
             } else {
-                data['direction'] = 'desc';
+                data['ordering'] = "-" + data['ordering'];
                 $target.removeClass('arrow-up').addClass('arrow-down').attr("title", "Sorted descending");
             }
 
@@ -87,20 +88,19 @@ var InputHandler = {
                 'naics': this.naicsCode,
                 'listType': 'naics',
             };
-            var class_map = LayoutManager.sortClassMap();
+            var class_map = RequestsManager.sortClassMap();
             var classes = $target.attr('class').split(' ');
 
-            data['sort'] = class_map[classes[0]];
+            data['ordering'] = class_map[classes[0]];
             data['page'] = 1;
 
             if ($target.hasClass('arrow-down')) {
-                data['direction'] = 'asc';
                 $target.removeClass('arrow-down').addClass('arrow-up').attr("title", "Sorted ascending");
             } else if ($target.hasClass('arrow-sortable')) {
-                data['direction'] = 'desc';
+                data['ordering'] = "-" + data['ordering'];
                 $target.removeClass('arrow-sortable').addClass('arrow-down').attr("title", "Sorted descending");
             } else {
-                data['direction'] = 'desc';
+                data['ordering'] = "-" + data['ordering'];
                 $target.removeClass('arrow-up').addClass('arrow-down').attr("title", "Sorted descending");
             }
 
@@ -136,17 +136,17 @@ var InputHandler = {
         }
     },
 
-    sendVehicleChange: function(e) {
+    sendVehicleChange: function() {
         this.vehicle = $('form#vehicle-select select').val(); //to get the default
         Events.publish('vehicleChanged', {'vehicle': this.vehicle, 'vehicleOnly': true});
     },
 
     sendCodeChange: function(e) {
-        this.naicsCode = e.val;
+        this.naicsCode = $('#naics-code').val();
         Events.publish('naicsChanged');
     },
 
-    sendFilterChange: function(e) {
+    sendFilterChange: function() {
         Events.publish('filtersChanged');
     },
 
@@ -158,23 +158,49 @@ var InputHandler = {
         return this.naicsCode;
     },
 
+    getPool: function() {
+        return this.pool;
+    },
+
     getSetasides: function() {
         /* returns array of setaside ids that are checked */
         var setasides = [];
-        $("form#setaside-filters input:checked").each( function(index) {
+        $("form#setaside-filters input:checked").each(function(index) {
             setasides.push($(this).val());
         });
 
         return setasides;
     },
 
-    loadPools: function() {
+    loadPool: function() {
+        var vehicle = this.getVehicle();
+        var naics = this.getNAICSCode();
+        var url = "/api/pools/";
+        var queryData = {};
+
+        if (vehicle !== null && naics !== null) {
+            queryData['vehicle'] = vehicle;
+            queryData['vehicle_lookup'] = 'iexact';
+
+            queryData['naics_code'] = naics;
+            queryData['naics_code_lookup'] = 'exact';
+
+            RequestsManager.getAPIRequest(url, queryData, function(data) {
+                if (data['results'].length == 1) {
+                    Events.publish('poolUpdated', data['results'][0]);
+                }
+            });
+        }
+    },
+
+    loadVehiclePools: function() {
         var vehicle = this.getVehicle();
         var url = "/api/pools/";
         var queryData = {};
 
         if (vehicle !== null) {
             queryData['vehicle'] = vehicle;
+            queryData['vehicle_lookup'] = 'iexact';
         }
 
         RequestsManager.getAPIRequest(url, queryData, function(data) {
@@ -205,13 +231,15 @@ var InputHandler = {
         var naicsMap = (data !== undefined ? data.naics : {});
         var naics = URLManager.getParameterByName('naics-code');
 
-        $("#naics-code").empty();
+        $('#naics-code').select2({placeholder:'Select a NAICS code', width: '380px'});
 
         // can't seem to use cached jqobj, something goes wrong with select2
         this.populatePromise = RequestsManager.getAPIRequest(
             "/api/naics/",
             { format: "json" },
             function( data ) {
+                $("#naics-code").empty().append($("<option></option>"));
+
                 $.each(data.results, function(key, result) {
                     if ($.isEmptyObject(naicsMap) || (result.code in naicsMap)) {
                         $("#naics-code")
@@ -220,14 +248,9 @@ var InputHandler = {
                             .text(result.code + " - " + result.description));
                     }
                 });
-                //load data if search criteria is defined in querystring
-                if (URLManager.getParameterByName("naics-code") || URLManager.getParameterByName("setasides")) {
-                    Events.publish('loadData');
-                }
-                $("#naics-code").select2({placeholder:'Select a NAICS code', width : '380px'}).select2("val", naics);
+                $("#naics-code").select2({placeholder:'Select a NAICS code', width: '380px'}).val(naics).trigger('change');
             }
         );
-        $('#naics-code').select2({placeholder:'Select a NAICS code', width : '380px'});
     },
 
     /*

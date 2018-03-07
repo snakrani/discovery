@@ -3,18 +3,6 @@ LayoutManager.initializers.vendor = function() {
     Events.subscribe('contractDataLoaded', this.renderTable.bind(LayoutManager));
 };
 
-LayoutManager.sortClassMap = function() {
-    return {
-        'h_date_signed': 'date_signed',
-        'h_piid': 'piid',
-        'h_agency': 'agency_name',
-        'h_type': 'pricing_type',
-        'h_location': 'place_of_performance,location',
-        'h_value': 'obligated_amount',
-        'h_status': 'status',
-    };
-};
-
 LayoutManager.render = function(results) {
     //update document title
     $(document).prop('title', results.name + " - " + URLManager.title);
@@ -89,12 +77,9 @@ LayoutManager.render = function(results) {
 };
 
 LayoutManager.showSbBadge = function(pools) {
-    //return true if pool number is same in more than one pool
-    for (var i=0; i<pools.length; i++) {
-        for (var j=i+1; j<pools.length; j++) {
-            if (pools[i].number == pools[j].number) {
-                return true;
-            }
+    for (var i = 0; i < pools.length; i++) {
+        if (pools[i].id.indexOf("_SB") != -1) {
+            return true;
         }
     }
     return false;
@@ -106,20 +91,20 @@ LayoutManager.renderColumn = function(v, prefix, setasideCode) {
 
 LayoutManager.renderTable = function(results, listType, pageNumber, itemsPerPage) {
     var $table = $('#vendor_contracts');
-    var len = results['count'] - 1;
+    var len = results['results'].length;
 
     this.renderButtonAndCSV(listType);
 
     $table.find('tr').not(':first').remove();
 
     //show or hide 'no matching contracts' indicator
-    if (results['total'] == 0) {
+    if (results['count'] == 0) {
         $('#no_matching_contracts').show();
     } else {
         $('#no_matching_contracts').hide();
     }
 
-    for (var i = 0; i <= len; i++) {
+    for (var i = 0; i < len; i++) {
         $table.append(this.renderRow(results['results'][i], i));
     }
 
@@ -149,10 +134,10 @@ LayoutManager.renderRow = function(contract, i) {
     var displayDate = (contract['date_signed'] ? this.formatDate(this.createDate(contract['date_signed'])) : ' ');
     var piid = (contract['piid'] ? contract['piid'] : ' ');
     var agencyName = (contract['agency_name'] ? contract['agency_name'] : ' ');
-    var pricingType = (contract['pricing_type'] ? contract['pricing_type'] : ' ');
-    var location = (contract['place_of_performance'] ? contract['place_of_performance']['location'] : ' ');
+    var pricingType = (contract['pricing_type'] ? contract['pricing_type'].name : ' ');
+    var location = (contract['place_of_performance_location'] ? contract['place_of_performance_location'] : ' ');
     var obligatedAmount = (contract['obligated_amount'] ? this.numberWithCommas(contract['obligated_amount']) : ' ');
-    var status = (contract['status'] ? contract['status'] : ' ');
+    var status = (contract['status'] ? contract['status'].name : ' ');
     var naics = (contract['NAICS'] ? contract['NAICS'] : ' ');
     var pointOfContact;
 
@@ -176,25 +161,25 @@ LayoutManager.renderRow = function(contract, i) {
 };
 
 LayoutManager.renderPager = function(listType, results, pageNumber, itemsPerPage) {
-    if (results['total'] > 0) {
+    if (results['count'] > 0) {
         if (pageNumber == undefined) {
             var pageNumber = 1;
         }
 
         var startnum = (pageNumber - 1) * itemsPerPage + 1;
-        var endnum = Math.min((pageNumber * itemsPerPage), results['total']);
+        var endnum = Math.min((pageNumber * itemsPerPage), results['count']);
 
         $("#contracts_current").text(startnum + " - " + endnum);
-        $("#contracts_total").text(LayoutManager.numberWithCommas(results['total']));
+        $("#contracts_total").text(LayoutManager.numberWithCommas(results['count']));
 
         $(function() {
             $("#pagination_container").pagination({
-                items: results['total'],
+                items: results['count'],
                 itemsOnPage: itemsPerPage,
                 cssStyle: 'light-theme',
                 currentPage: pageNumber,
                 onPageClick: function(pageNumber, e) {
-                    var contract_data = LayoutManager.currentSortParams();
+                    var contract_data = RequestsManager.currentSortParams();
 
                     contract_data['duns'] = results['duns'];
 
@@ -210,7 +195,7 @@ LayoutManager.renderPager = function(listType, results, pageNumber, itemsPerPage
                 }
             });
         });
-        if (results['count'] < results['total']) {
+        if (results['results'].length < results['count']) {
             $('#pagination_container').show();
         } else {
             $('#pagination_container').hide();
