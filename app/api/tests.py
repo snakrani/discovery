@@ -39,7 +39,7 @@ class PoolsTest(TestCase):
     def test_request_no_params(self):
         resp = self.c.get(self.path, {'format': 'json'})
         
-        self.assertEqual(resp.data['count'], 18)
+        self.assertEqual(resp.data['count'], 52)
         self.assertEqual(resp.status_code, 200)
 
     def test_request_vehicle_param(self):
@@ -186,7 +186,7 @@ class ContractsTest(TestCase):
         self.path = '/api/contracts/'
 
     def test_default_pagination(self):
-        resp = self.c.get(self.path, {'vendor_duns': '926451519', 'vendor_duns_lookup': 'exact'})
+        resp = self.c.get(self.path, {'vendor_duns': '007901598', 'vendor_duns_lookup': 'exact'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(len(resp.data['results']), 100)
         self.assertEqual(resp.data['previous'], None)
@@ -194,7 +194,7 @@ class ContractsTest(TestCase):
         self.assertEqual(resp.data['count'], 500)
     
     def test_custom_pagination(self):
-        resp = self.c.get(self.path, {'vendor_duns': '926451519', 'vendor_duns_lookup': 'exact', 'count': 25})
+        resp = self.c.get(self.path, {'vendor_duns': '007901598', 'vendor_duns_lookup': 'exact', 'count': 25})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(len(resp.data['results']), 25)
         self.assertEqual(resp.data['previous'], None)
