@@ -177,7 +177,7 @@ class ContractFilter(FilterSet):
     
     vendor_id = NumberFilter(field_name="vendor__id", label="Internal vendor ID (vendor_id)", lookup_expr=NUM_FILTERS)
     vendor_name = CharFilter(field_name="vendor__name", label="Vendor name (vendor_name)", lookup_expr=FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS)
-    vendor_duns = NumberFilter(field_name="vendor__duns", label="Vendor DUNS number (vendor_duns)", lookup_expr=NUM_FILTERS)
+    vendor_duns = CharFilter(field_name="vendor__duns", label="Vendor DUNS number (vendor_duns)", lookup_expr=NUM_FILTERS)
     vendor_cage = CharFilter(field_name="vendor__cage", label="Vendor CAGE code (vendor_cage)", lookup_expr=EQUALITY_CHAR_FILTERS)
     vendor_sam_status = CharFilter(field_name='vendor__sam_status', label="Vendor SAM status (vendor_sam_status)", lookup_expr=EQUALITY_CHAR_FILTERS)
     vendor_sam_activation_date = DateFilter(field_name='vendor__sam_activation_date', label="Vendor SAM activation date (vendor_sam_activation_date)", lookup_expr=EQUALITY_CHAR_FILTERS)
