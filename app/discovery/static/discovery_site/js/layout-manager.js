@@ -6,7 +6,8 @@ var LayoutManager = {
 
     init: function() {
         Events.subscribe('dataLoaded', this.render.bind(LayoutManager));
-        Events.subscribe('contentChanged', this.updateSAM.bind(LayoutManager));
+        //Events.subscribe('contentChanged', this.updateSAM.bind(LayoutManager));
+        Events.subscribe('poolUpdated', this.updatePoolInfo);
         Events.subscribe('contentChanged', this.updateResultsInfo);
         Events.subscribe('vehicleChanged', this.enableNaics);
 
@@ -20,28 +21,24 @@ var LayoutManager = {
         $("div#search select").attr("disabled", false);
     },
 
-    updateSAM: function(results) {
-        if ($.isEmptyObject(results) === false) {
-            var dateObj = this.createDate(results['lastUpdated']);
-            $("#sam_load").text("SAM data updated: " + (dateObj.getMonth()) + '/' + dateObj.getDate() + '/' + dateObj.getFullYear().toString().substring(2));
-        }
-    },
+    //updateSAM: function(results) {
+    //    if ($.isEmptyObject(results) === false) {
+    //        var dateObj = this.createDate(results['lastUpdated']);
+    //        $("#sam_load").text("SAM data updated: " + (dateObj.getMonth()) + '/' + dateObj.getDate() + '/' + dateObj.getFullYear().toString().substring(2));
+    //    }
+    //},
 
     updateResultsInfo: function(results) {
         var totalResults, totalPools, resultsStr;
-        if (results['total'] == 0) {
+        if (results['count'] == 0) {
             totalResults = 0;
             totalPools = 0;
         }
         else {
-            totalResults = results.total.toString();
-            totalPools = results.results.length;
+            totalResults = results['count'].toString();
+            totalPools = results['results'].length;
         }
-
         resultsStr = totalResults + " vendors match your search";
-
-        $(".results_pool_name_number_pool").text("Pool " + results.poolNumber + ": ");
-        $(".results_pool_name_number_description").text(results.poolName);
 
         URLManager.updateResultCSVURL(results);
 
@@ -59,6 +56,11 @@ var LayoutManager = {
         );
 
         $("#your_search_criteria").show();
+    },
+
+    updatePoolInfo: function(data) {
+        $(".results_pool_name_number_pool").text("Pool " + data['number'] + ": ");
+        $(".results_pool_name_number_description").text(data['name']);
     },
 
     createDate: function(date) {
@@ -92,21 +94,6 @@ LayoutManager.enableFilters = function() {
     $('#choose_filters').removeClass('filter_text_disabled').addClass('filter_text');
     $('.pure-checkbox-disabled').removeClass('pure-checkbox-disabled');
     $('.se_filter').attr("disabled", false);
-};
-
-LayoutManager.currentSortParams = function() {
-    var data = {};
-    var class_map = LayoutManager.sortClassMap();
-
-    $('th.arrow-down').exists(function() {
-        data['sort'] = class_map[this.attr('class').split(' ')[0]];
-        data['direction'] = 'desc';
-    });
-    $('th.arrow-up').exists(function() {
-        data['sort'] = class_map[this.attr('class').split(' ')[0]];
-        data['direction'] = 'asc';
-    });
-    return data;
 };
 
 LayoutManager.formatDate = function(dateObj) {
