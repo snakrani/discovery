@@ -38,9 +38,6 @@ RequestsManager.loadContracts = function(data, callback) {
     else {
         queryData['naics_lookup'] = 'exact';
     }
-
-    delete queryData['listType'];
-
     RequestsManager.getAPIRequest(url, queryData, function(response){
         callback(queryData, response);
     });
