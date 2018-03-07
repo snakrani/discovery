@@ -298,5 +298,447 @@
   },
   "model": "categories.pool",
   "pk": "OASIS_SB_6"
+},
+{
+  "fields": {
+    "threshold": "$15 million",
+    "vehicle": "BMO",
+    "naics": [
+      43
+    ],
+    "name": "HVAC Mainentance",
+    "number": "1"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_1"
+},
+{
+  "fields": {
+    "threshold": "$15 million",
+    "vehicle": "BMO",
+    "naics": [
+      44
+    ],
+    "name": "Plumbing and Pipefitting",
+    "number": "2"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_2"
+},
+{
+  "fields": {
+    "threshold": "$7.5 million",
+    "vehicle": "BMO",
+    "naics": [
+      46
+    ],
+    "name": "Elevator Maintenance",
+    "number": "3"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_3"
+},
+{
+  "fields": {
+    "threshold": "$15 million",
+    "vehicle": "BMO",
+    "naics": [
+      42
+    ],
+    "name": "Electrical Maintenance",
+    "number": "4"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_4"
+},
+{
+  "fields": {
+    "threshold": "$18 million",
+    "vehicle": "BMO",
+    "naics": [
+      52
+    ],
+    "name": "Janitorial",
+    "number": "5"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_5"
+},
+{
+  "fields": {
+    "threshold": "$7.5 million",
+    "vehicle": "BMO",
+    "naics": [
+      53
+    ],
+    "name": "Landscaping / Grounds Maintenance",
+    "number": "6"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_6"
+},
+{
+  "fields": {
+    "threshold": "$20.5 million",
+    "vehicle": "BMO",
+    "naics": [
+      50
+    ],
+    "name": "Fire Alarm System Maintenance and Repair",
+    "number": "7"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_7"
+},
+{
+  "fields": {
+    "threshold": "$15 million",
+    "vehicle": "BMO",
+    "naics": [
+      45
+    ],
+    "name": "Fire Supression System Preventative Maintenance and Repair Services",
+    "number": "8"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_8"
+},
+{
+  "fields": {
+    "threshold": "$15 million",
+    "vehicle": "BMO",
+    "naics": [
+      41
+    ],
+    "name": "Roofing Services",
+    "number": "9"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_9"
+},
+{
+  "fields": {
+    "threshold": "$7.5 million",
+    "vehicle": "BMO",
+    "naics": [
+      47
+    ],
+    "name": "Building Management Services",
+    "number": "10"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_10"
+},
+{
+  "fields": {
+    "threshold": "$36.5 million",
+    "vehicle": "BMO",
+    "naics": [
+      40
+    ],
+    "name": "Architectural and Framework Building Maintenance Services",
+    "number": "11"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_11"
+},
+{
+  "fields": {
+    "threshold": "$15 million",
+    "vehicle": "BMO",
+    "naics": [
+      48
+    ],
+    "name": "Commissioning Services",
+    "number": "12"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_12"
+},
+{
+  "fields": {
+    "threshold": "$7.5 million",
+    "vehicle": "BMO",
+    "naics": [
+      49
+    ],
+    "name": "Elevator Inspection Services",
+    "number": "13"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_13"
+},
+{
+  "fields": {
+    "threshold": "$38.5 million",
+    "vehicle": "BMO",
+    "naics": [
+      39
+    ],
+    "name": "Other Facility Management Related Services",
+    "number": "14"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_14"
+},
+{
+  "fields": {
+    "threshold": "$11 million",
+    "vehicle": "BMO",
+    "naics": [
+      51
+    ],
+    "name": "Pest Control",
+    "number": "15"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_15"
+},
+{
+  "fields": {
+    "threshold": "$38.5 million",
+    "vehicle": "BMO",
+    "naics": [
+      55
+    ],
+    "name": "Waste Management and Recycling Services",
+    "number": "16"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_16"
+},
+{
+  "fields": {
+    "threshold": "$7.5 million",
+    "vehicle": "BMO",
+    "naics": [
+      54
+    ],
+    "name": "Cemetery Maintenance",
+    "number": "17"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_17"
+},
+{
+  "fields": {
+    "threshold": "$15 million",
+    "vehicle": "BMO_SB",
+    "naics": [
+      43
+    ],
+    "name": "HVAC Mainentance",
+    "number": "1"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_SB_1"
+},
+{
+  "fields": {
+    "threshold": "$15 million",
+    "vehicle": "BMO_SB",
+    "naics": [
+      44
+    ],
+    "name": "Plumbing and Pipefitting",
+    "number": "2"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_SB_2"
+},
+{
+  "fields": {
+    "threshold": "$7.5 million",
+    "vehicle": "BMO_SB",
+    "naics": [
+      46
+    ],
+    "name": "Elevator Maintenance",
+    "number": "3"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_SB_3"
+},
+{
+  "fields": {
+    "threshold": "$15 million",
+    "vehicle": "BMO_SB",
+    "naics": [
+      42
+    ],
+    "name": "Electrical Maintenance",
+    "number": "4"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_SB_4"
+},
+{
+  "fields": {
+    "threshold": "$18 million",
+    "vehicle": "BMO_SB",
+    "naics": [
+      52
+    ],
+    "name": "Janitorial",
+    "number": "5"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_SB_5"
+},
+{
+  "fields": {
+    "threshold": "$7.5 million",
+    "vehicle": "BMO_SB",
+    "naics": [
+      53
+    ],
+    "name": "Landscaping / Grounds Maintenance",
+    "number": "6"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_SB_6"
+},
+{
+  "fields": {
+    "threshold": "$20.5 million",
+    "vehicle": "BMO_SB",
+    "naics": [
+      50
+    ],
+    "name": "Fire Alarm System Maintenance and Repair",
+    "number": "7"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_SB_7"
+},
+{
+  "fields": {
+    "threshold": "$15 million",
+    "vehicle": "BMO_SB",
+    "naics": [
+      45
+    ],
+    "name": "Fire Supression System Preventative Maintenance and Repair Services",
+    "number": "8"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_SB_8"
+},
+{
+  "fields": {
+    "threshold": "$15 million",
+    "vehicle": "BMO_SB",
+    "naics": [
+      41
+    ],
+    "name": "Roofing Services",
+    "number": "9"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_SB_9"
+},
+{
+  "fields": {
+    "threshold": "$7.5 million",
+    "vehicle": "BMO_SB",
+    "naics": [
+      47
+    ],
+    "name": "Building Management Services",
+    "number": "10"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_SB_10"
+},
+{
+  "fields": {
+    "threshold": "$36.5 million",
+    "vehicle": "BMO_SB",
+    "naics": [
+      40
+    ],
+    "name": "Architectural and Framework Building Maintenance Services",
+    "number": "11"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_SB_11"
+},
+{
+  "fields": {
+    "threshold": "$15 million",
+    "vehicle": "BMO_SB",
+    "naics": [
+      48
+    ],
+    "name": "Commissioning Services",
+    "number": "12"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_SB_12"
+},
+{
+  "fields": {
+    "threshold": "$7.5 million",
+    "vehicle": "BMO_SB",
+    "naics": [
+      49
+    ],
+    "name": "Elevator Inspection Services",
+    "number": "13"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_SB_13"
+},
+{
+  "fields": {
+    "threshold": "$38.5 million",
+    "vehicle": "BMO_SB",
+    "naics": [
+      39
+    ],
+    "name": "Other Facility Management Related Services",
+    "number": "14"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_SB_14"
+},
+{
+  "fields": {
+    "threshold": "$11 million",
+    "vehicle": "BMO_SB",
+    "naics": [
+      51
+    ],
+    "name": "Pest Control",
+    "number": "15"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_SB_15"
+},
+{
+  "fields": {
+    "threshold": "$38.5 million",
+    "vehicle": "BMO_SB",
+    "naics": [
+      55
+    ],
+    "name": "Waste Management and Recycling Services",
+    "number": "16"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_SB_16"
+},
+{
+  "fields": {
+    "threshold": "$7.5 million",
+    "vehicle": "BMO_SB",
+    "naics": [
+      54
+    ],
+    "name": "Cemetery Maintenance",
+    "number": "17"
+  },
+  "model": "categories.pool",
+  "pk": "BMO_SB_17"
 }
 ]
