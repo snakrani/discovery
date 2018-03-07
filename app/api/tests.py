@@ -112,10 +112,9 @@ class VendorsTest(TestCase):
         resp = self.c.get(self.path, {'format': 'json', 'setaside_code': 'A6', 'setaside_code_lookup': 'exact'})
         self.assertEqual(resp.status_code, 200)
    
-    def test_request_invalid_setasides_returns_empty(self):
+    def test_request_invalid_setasides_returns_404(self):
         resp = self.c.get(self.path, {'format': 'json', 'setaside_code': 'A25,27', 'setaside_code_lookup': 'exact'})
-        self.assertEqual(resp.status_code, 200)
-        self.assertEqual(resp.data['count'], 0)
+        self.assertEqual(resp.status_code, 400)
 
     def test_default_pagination(self):
         resp = self.c.get(self.path, {'format': 'json', 'pool_vehicle': 'oasis_sb', 'pool_vehicle_lookup': 'iexact'})
