@@ -13,13 +13,19 @@ def get_category_fixtures():
 def get_vendor_fixtures():
     return get_category_fixtures() + [
         'locations.json', 
-        'vendors.json', 
-        'poolpiids.json'
+        'vendors.json',
+        'managers.json',
+        'managerphonenumbers.json',
+        'manageremails.json', 
+        'poolmemberships.json',
+        'poolmembershipzones.json'
     ]
 
 
 def get_contract_fixtures():
     return get_vendor_fixtures() + [
+        'contractstatuses.json',
+        'pricingstructures.json',
         'placesofperformance.json', 
         'contracts.json'
     ]

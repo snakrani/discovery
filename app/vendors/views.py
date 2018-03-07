@@ -37,7 +37,7 @@ class VendorView(TemplateView):
         return pdf_path
 
 
-def pool_csv(request):
+def PoolCSV(request):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="search_results.csv"'
     writer = csv.writer(response)
@@ -91,7 +91,7 @@ def pool_csv(request):
     return response
 
 
-def vendor_csv(request, vendor_duns):
+def VendorCSV(request, vendor_duns):
     vendor = Vendor.objects.get(duns=vendor_duns)
     setasides = SetAside.objects.all().order_by('far_order')
 

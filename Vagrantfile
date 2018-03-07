@@ -70,7 +70,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     s.env = { "HOME" => vagrant_home, "PROJECT_DIR" => project_directory }
   end
 
-  config.vm.provision :shell do |s|
+  config.vm.provision :shell, run: "always" do |s|
     s.name = "Bootstrapping development server"
     s.path = "scripts/bootstrap.sh"
     s.args = [ project_directory ]

@@ -1,12 +1,11 @@
-#
-# See: https://github.com/docker-library/python/blob/master/2.7/stretch/slim/Dockerfile
-#
-FROM python:2.7-slim-stretch
+
+FROM debian:stretch-slim
 
 #
 # Container environment variables
 #
 ENV PATH /venv/bin:$PATH
+ENV LANG C.UTF-8
 ENV PYTHONUNBUFFERED 1
 
 #
@@ -38,3 +37,8 @@ COPY ./scripts/setup-phantomjs.sh /usr/local/discovery/bin/setup-phantomjs.sh
 
 RUN /usr/local/discovery/bin/setup-phantomjs.sh /dev/stderr \
     && rm -rf /tmp/*
+
+#
+# Initial command
+#
+CMD ["python3"]

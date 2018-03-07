@@ -65,7 +65,7 @@ You can find examples of vendor data elements in the [vendor fixture data](https
 
 Each vendor is classified into different pools using a PIID value which serves as a unique identifier for the vendor.
 
-You can find examples of vendor PIID mapping data elements in the [vendor PIID fixture data](https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/poolpiids.json).
+You can find examples of vendor PIID mapping data elements in the [vendor pool membership fixture data](https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/poolmemberships.json).
 
 <br/>
 

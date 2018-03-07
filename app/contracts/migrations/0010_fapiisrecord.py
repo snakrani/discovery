@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ('PSC', models.CharField(max_length=128, null=True)),
                 ('record_type', models.CharField(max_length=128, null=True)),
                 ('record_code', models.CharField(max_length=1, null=True)),
-                ('vendor', models.ForeignKey(to='vendors.Vendor', null=True)),
+                ('vendor', models.ForeignKey(to='vendors.Vendor', null=True, on_delete=models.CASCADE)),
             ],
             options={
             },

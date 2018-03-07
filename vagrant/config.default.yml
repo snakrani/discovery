@@ -7,7 +7,7 @@
 # vagrant up or reload.
 #
 server_name: 'discovery-dev'
-box_name: 'ubuntu/trusty64'
+box_name: 'debian/contrib-stretch64'
 cpus: 2
 memory_size: 2048
 haproxy_port: 1936

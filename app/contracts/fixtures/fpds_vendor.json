@@ -1,22 +1,22 @@
 [
 {
+  "model": "vendors.vendor",
+  "pk": 17,
   "fields": {
+    "name": "ELEIT Technology, Inc.",
+    "duns": "160062311",
+    "duns_4": "1600623110000",
+    "cage": "1DET1",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-01-23T11:00:15Z",
+    "sam_expiration_date": "2019-01-23T10:48:49Z",
+    "sam_exclusion": false,
+    "sam_url": null,
     "sam_location": 17,
     "setasides": [
       3,
-      6
-    ],
-    "name": "ELEIT Technology, Inc.",
-    "sam_exclusion": false,
-    "sam_url": null,
-    "cage": "1DET1",
-    "sam_activation_date": "2018-01-23T11:00:15Z",
-    "duns_4": "1600623110000",
-    "duns": "160062311",
-    "sam_status": "ACTIVE",
-    "sam_expiration_date": "2019-01-23T10:48:49Z"
-  },
-  "model": "vendors.vendor",
-  "pk": 17
+      18
+    ]
+  }
 }
 ]

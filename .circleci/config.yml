@@ -8,11 +8,11 @@ version: 2
 jobs:
   unit-tests:
     docker:
-      - image: python:2.7-slim-stretch
+      - image: debian:stretch-slim
         environment:
           PYTHONUNBUFFERED: 1
 
-      - image: postgres:9.3
+      - image: postgres:9.4
         environment:
           POSTGRES_USER: circleci
           POSTGRES_PASSWORD: circleci
@@ -45,6 +45,7 @@ jobs:
           name: Run unit tests
           command: |
             source /venv/bin/activate
+            scripts/init-webserver.sh /dev/stderr
             ./run test discovery api categories vendors contracts
 
       - store_artifacts:
@@ -53,11 +54,11 @@ jobs:
 
   acceptance-tests:
     docker:
-      - image: python:2.7-slim-stretch
+      - image: debian:stretch-slim
         environment:
           PYTHONUNBUFFERED: 1
 
-      - image: postgres:9.3
+      - image: postgres:9.4
         environment:
           POSTGRES_USER: circleci
           POSTGRES_PASSWORD: circleci
@@ -171,7 +172,7 @@ jobs:
 
   deploy-docs:
     docker:
-      - image: python:2.7-slim-stretch
+      - image: debian:stretch-slim
         environment:
           PYTHONUNBUFFERED: 1
 

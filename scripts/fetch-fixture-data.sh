@@ -2,6 +2,8 @@
 # Fetch site data from remote sources (just enough to generate effective fixtures)
 #
 
+set -e
+
 SCRIPT_DIR="$(cd "$(dirname "$([ `readlink "$0"` ] && echo "`readlink "$0"`" || echo "$0")")"; pwd -P)"
 cd "$SCRIPT_DIR/../app"
 

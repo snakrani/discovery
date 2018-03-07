@@ -10,7 +10,7 @@ SCRIPT_USAGE="
 
    -h | --help                |  Display this help message
    -p | --port                |  PostgreSQL port to connect to (default $DB_PORT) 
-   -u | --username            |  Database username to connect with (default <dbname>)
+   -u | --user                |  Database username to connect with (default <dbname>)
 "
 
 SCRIPT_DIR="$(cd "$(dirname "$([ `readlink "$0"` ] && echo "`readlink "$0"`" || echo "$0")")"; pwd -P)"

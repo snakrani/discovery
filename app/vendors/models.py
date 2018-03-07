@@ -40,7 +40,7 @@ class Vendor(models.Model):
     sam_url = models.URLField(null=True) # from SAM
     sam_location = models.ForeignKey(Location, null=True, on_delete=models.CASCADE) # from SAM
   
-    pools = models.ManyToManyField(Pool, through='PoolPIID') # from CSV
+    pools = models.ManyToManyField(Pool, through='PoolMembership') # from CSV
     setasides = models.ManyToManyField(SetAside, blank=True) # from CSV
 
     def __str__(self):
@@ -59,8 +59,7 @@ class Manager(models.Model):
         return self.email.values_list('address', flat=True)
 
     def __str__(self):
-        info = "{0} {1}".format(self.vendor.name, self.pool.id, self.piid)
-        return "{0} ({1} / {2})".format(info, ", ".join(self.phones()), ", ".join(self.emails()))
+        return "{0}: {1} ({2})".format(self.type, self.name, self.vendor.name)
 
 
 class ManagerPhoneNumber(models.Model):
@@ -79,11 +78,21 @@ class ManagerEmail(models.Model):
         return "{0} ({1})".format(self.manager.name, self.address)
     
 
-class PoolPIID(models.Model):
+class PoolMembership(models.Model):
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
-    pool = models.ForeignKey(Pool)
+    pool = models.ForeignKey(Pool, on_delete=models.DO_NOTHING)
     piid = models.CharField(max_length=128)
-    zone = models.ForeignKey(Zone, null=True)
-
+    
+    def zones(self):
+        return self.zone.values_list('zone', flat=True)
+    
     def __str__(self):
         return "{0} - {1}/{2} ({3})".format(self.vendor.name, self.pool.id, self.zone, self.piid)
+
+
+class PoolMembershipZone(models.Model):
+    membership = models.ForeignKey(PoolMembership, null=True, related_name='zone', on_delete=models.CASCADE)
+    zone = models.ForeignKey(Zone, null=True, on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        return "{0} ({1} | {2})".format(self.membership.vendor.name, self.pool.name, self.zone)

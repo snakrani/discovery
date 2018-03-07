@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='fpdsload',
             name='vendor',
-            field=models.OneToOneField(null=True, to='vendors.Vendor'),
+            field=models.OneToOneField(null=True, to='vendors.Vendor', on_delete=models.CASCADE),
             preserve_default=True,
         ),
     ]

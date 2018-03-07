@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='contract',
             name='vendor_location',
-            field=models.ForeignKey(to='vendors.Location', null=True),
+            field=models.ForeignKey(to='vendors.Location', null=True, on_delete=models.DO_NOTHING),
         ),
         migrations.AddField(
             model_name='contract',
@@ -51,6 +51,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='contract',
             name='place_of_performance',
-            field=models.ForeignKey(to='contracts.PlaceOfPerformance', null=True),
+            field=models.ForeignKey(to='contracts.PlaceOfPerformance', null=True, on_delete=models.DO_NOTHING),
         ),
     ]

@@ -5,8 +5,6 @@
 DEBUG = True
 TEMPLATE_DEBUG = True
 
-SAUCE = False
-
 
 #
 # Database connections

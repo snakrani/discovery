@@ -1,26 +1,29 @@
-django==1.8.18
+redis==2.10.6                # Redis object store library
+waitress==1.1.0              # Waitress web server
+
+django==2.0.2                # Django web framework
+psycopg2-binary==2.7.4       # PostgreSQL database library
+dj-database-url==0.5.0       # Django database connection configuration
+django-redis-sessions==0.6.1 # Django shared session support
+django-storages==1.6.5       # Django storage backend support
+django-db-mutex==1.0.0       # Django mutex locking
+django-filter==2.0.0.dev1    # Django query filtering
+django-crispy-forms==1.7.0   # Django advanced forms
+whitenoise==4.0b4            # Static file handling
+
+djangorestframework==3.7.7   # Django REST framework
+coreapi==2.3.3               # API schema generation (CoreAPI schema format)
+coreschema==0.0.4            # API schema generation
+
+celery==4.1.0                # Celery task manager
+django-celery-beat==1.1.1    # Celery task scheduler
+django-celery-results==1.0.1 # Celery task result storage
+
+pytz==2018.3                 # Timezones
+titlecase==0.12.0            # String processing
+PyYAML==3.12                 # YAML parsing/generation
+markdown==2.6.11             # Markdown parsing/generation
+
+psutil==5.4.3                # System utilities
+
 -e git+https://github.com/PSHCDevOps/pyfpds.git@integration#egg=pyfpds
-PyYAML==3.11
-boto==2.34.0
-coverage==3.7.1
-django-hstore==1.2.3
--e git://github.com/PSHCDevOps/django-rest-swagger.git@integration#egg=django-rest-swagger
-djangorestframework==2.3.14
-psycopg2==2.5.3
-pytz==2014.4
-requests==2.18.4
-titlecase==0.7.1
-xmltodict==0.9.0
-markdown==2.5.2
-whitenoise==1.0.6  #manages static assets
-dj-database-url==0.3.0 #grabs environment variables and dumps them into a Django settings file
-waitress==0.8.9 #a pure python WSGI server that is a replacement for gunicorn
-django-storages==1.1.8
-psutil==5.4.2
-celery==4.1.0
-celery-once==1.2.0
-redis==2.10.5
-django-redis-sessions==0.6.1
-django-celery-beat==1.1.0
-django-celery-results==1.0.1
-django-db-mutex==1.0.0
