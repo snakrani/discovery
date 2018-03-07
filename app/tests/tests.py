@@ -14,17 +14,8 @@ import time, unittest
 class FunctionalTests(LiveServerTestCase): 
 
     def setUp(self):
-        if settings.SAUCE:
-            self.base_url = "http://%s" % settings.DOMAIN_TO_TEST
-            self.desired_capabilities=DesiredCapabilities.CHROME
-            sauce_url = "http://%s:%s@ondemand.saucelabs.com:80/wd/hub"
-            self.driver = webdriver.Remote(
-                desired_capabilities=self.desired_capabilities,
-                command_executor=sauce_url % (settings.SAUCE_USERNAME, settings.SAUCE_ACCESS_KEY)
-            )
-        else:
-            self.base_url = 'http://localhost:8080'
-            self.driver = webdriver.PhantomJS(service_log_path='../logs/ghostdriver.log')
+        self.base_url = 'http://localhost:8080'
+        self.driver = webdriver.PhantomJS(service_log_path='../logs/ghostdriver.log')
 
     #helper function courtesy of http://www.obeythetestinggoat.com/how-to-get-selenium-to-wait-for-page-load-after-a-click.html
     def wait_for(self, condition_function):
