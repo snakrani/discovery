@@ -18,20 +18,19 @@
             }
             var APIKEY = "{{API_KEY}}";
         </script>
-        <script src="{% static 'discovery_site/js/jquery-3.3.1.min.js' %}"></script>
-        <script src="{% static 'discovery_site/js/jquery-ui-1.12.1.min.js' %}"></script>
+        <script src="{% static 'discovery_site/js/contrib/jquery-3.3.1.min.js' %}"></script>
+        <script src="{% static 'discovery_site/js/contrib/jquery-ui-1.12.1.min.js' %}"></script>
         <!--[if lte IE 9]>
-        <script src="{% static 'discovery_site/js/jquery.xdomainrequest.min.js' %}"></script>
+        <script src="{% static 'discovery_site/js/contrib/jquery.xdomainrequest.min.js' %}"></script>
         <![endif]-->
-        <script src="{% static 'discovery_site/js/select2.min.js' %}"></script>
-        <script src="{% static 'discovery_site/js/jquery.fireOnDisable.js' %}"></script>
+        <script src="{% static 'discovery_site/js/contrib/select2.min.js' %}"></script>
+        <script src="{% static 'discovery_site/js/contrib/jquery.fireOnDisable.js' %}"></script>
+        <script src="{% static 'discovery_site/js/contrib/jquery.history.js' %}"></script>
 
-        <script src="{% static 'discovery_site/js/history.js/scripts/bundled/html4+html5/jquery.history.js' %}"></script>
         <script src="{% static 'discovery_site/js/input-handler.js' %}"></script>
         <script src="{% static 'discovery_site/js/requests-manager.js' %}"></script>
         <script src="{% static 'discovery_site/js/layout-manager.js' %}"></script>
         <script src="{% static 'discovery_site/js/url-manager.js' %}"></script>
-
         <script src="{% static 'discovery_site/js/index.js' %}"></script>
         <script>
         var static_image_path = "{% static 'discovery_site/images/' %}";
@@ -146,7 +145,7 @@
             </div><!--end footer<!-->
         </div><!--end footer_container<!-->
 
-        <script src="{% static 'discovery_site/js/mediator.min.js' %}"></script>
+        <script src="{% static 'discovery_site/js/contrib/mediator.min.js' %}"></script>
         {% block page_js %}
         {% endblock %}
         <script>
