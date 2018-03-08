@@ -125,11 +125,6 @@ _See the sections below for notes on the available configurations..._
     Sets the API request location for the Discovery frontend. The Discovery application passes the host and port of the API interface to the frontend Javascript.  This enables the Javascript to make requests to the API which basically power the frontend displays.  If no data is loading in the interface, chances are that this value is wrong.
 
 
- * **API_KEY** _default: **REQUIRED!!!**_
-
-    Sets a [Data.gov API key](https://api.data.gov/signup/) that is passed to the Discovery API by the frontend Javascript.
-
-
  * **SAM_API_KEY** _default: **REQUIRED!!!**_
 
     Sets the [Data.gov API key](https://api.data.gov/signup/) that is passed to requests to get SAM vendor registration information.
