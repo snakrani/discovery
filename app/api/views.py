@@ -9,7 +9,7 @@ from rest_framework.views import APIView
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.response import Response
 
-from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework_filters.backends import DjangoFilterBackend
 
 from discovery import query
 from discovery import metadata
@@ -17,6 +17,8 @@ from categories import models as categories
 from vendors import models as vendors
 from contracts import models as contracts
 from api import mixins, filters, serializers, pagination
+
+import re
 
 
 class DiscoveryReadOnlyModelViewSet(
@@ -160,13 +162,10 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
     ordering = '-number_of_contracts'
     
     pagination_class = pagination.ResultSetPagination
-    action_serializers =  { 
-        'list': serializers.ShortVendorSerializer, 
-        'retrieve': serializers.VendorSerializer 
-    }
+    serializer_class = serializers.VendorSerializer
     
     def get_queryset(self):
-        naics_param_name = 'pool_naics_code'
+        naics_param_name = 'pools__naics__code'
         
         queryset = self.queryset.annotate(
             annual_revenue=Subquery(
@@ -178,7 +177,7 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
             sam_location_citystate = Concat('sam_location__city', Value(', '), 'sam_location__state')
         )
         if naics_param_name in self.request.query_params and self.request.query_params[naics_param_name]:
-            contract_list = contracts.Contract.objects.filter(NAICS=self.request.query_params[naics_param_name], vendor=OuterRef('pk')).values('pk')
+            contract_list = contracts.Contract.objects.filter(NAICS=re.sub(r'[^\d]+$', '', self.request.query_params[naics_param_name]), vendor=OuterRef('pk')).values('pk')
         else:
             contract_list = contracts.Contract.objects.filter(vendor=OuterRef('pk')).values('pk')
         
@@ -207,17 +206,14 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
     search_fields = ['id', 'name', 'duns']
     ordering_fields = [
         'id', 'piid', 'agency_id', 'agency_name', 'NAICS', 'PSC',
-        'date_signed', 'completion_date', 'obligated_amount' 
+        'date_signed', 'completion_date', 'obligated_amount',
         'point_of_contact', 'status__name', 'pricing_type__name',
         'place_of_performance_location'
     ]
     ordering = '-date_signed'
     
     pagination_class = pagination.ResultSetPagination
-    action_serializers =  { 
-        'list': serializers.ShortContractSerializer, 
-        'retrieve': serializers.ContractSerializer 
-    }
+    serializer_class = serializers.ContractSerializer
     
     def get_queryset(self):
         return self.queryset.annotate(
