@@ -12,11 +12,17 @@ class FPDSLoad(models.Model):
 class ContractStatus(models.Model):
     code = models.CharField(max_length=5, null=False, primary_key=True)
     name = models.CharField(max_length=128, null=False)
+    
+    def __str__(self):
+        return "{} ({})".format(self.name, self.code)
 
 
 class PricingStructure(models.Model):
     code = models.CharField(max_length=5, null=False, primary_key=True)
     name = models.CharField(max_length=128, null=False)
+    
+    def __str__(self):
+        return "{} ({})".format(self.name, self.code)
 
 
 class PlaceOfPerformance(models.Model):
