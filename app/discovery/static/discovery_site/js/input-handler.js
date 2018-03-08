@@ -179,11 +179,8 @@ var InputHandler = {
         var queryData = {};
 
         if (vehicle !== null && naics !== null) {
-            queryData['vehicle'] = vehicle;
-            queryData['vehicle_lookup'] = 'iexact';
-
-            queryData['naics_code'] = naics;
-            queryData['naics_code_lookup'] = 'exact';
+            queryData['vehicle__iexact'] = vehicle;
+            queryData['naics__code'] = naics;
 
             RequestsManager.getAPIRequest(url, queryData, function(data) {
                 if (data['results'].length == 1) {
@@ -199,8 +196,7 @@ var InputHandler = {
         var queryData = {};
 
         if (vehicle !== null) {
-            queryData['vehicle'] = vehicle;
-            queryData['vehicle_lookup'] = 'iexact';
+            queryData['vehicle__iexact'] = vehicle;
         }
 
         RequestsManager.getAPIRequest(url, queryData, function(data) {

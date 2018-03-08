@@ -30,13 +30,13 @@ RequestsManager.loadVendor = function(callback) {
 RequestsManager.loadContracts = function(data, callback) {
     var duns = URLManager.getDUNS();
     var url = "/api/contracts";
-    var queryData = $.extend(data, {'vendor_duns': duns, 'vendor_duns_lookup': 'exact', 'count': RequestsManager.contractsPageCount});
+    var queryData = $.extend(data, {'vendor__duns': duns, 'count': RequestsManager.contractsPageCount});
 
-    if (queryData['naics'] == 'all') {
-        delete queryData['naics'];
-    }
-    else {
-        queryData['naics_lookup'] = 'exact';
+    queryData['NAICS'] = queryData['naics'];
+    delete queryData['naics'];
+
+    if (queryData['NAICS'] == 'all') {
+        delete queryData['NAICS'];
     }
     RequestsManager.getAPIRequest(url, queryData, function(response){
         callback(queryData, response);

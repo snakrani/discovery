@@ -20,19 +20,16 @@ RequestsManager.loadVendors = function(data, callback) {
     var queryData = $.extend(data, {'count': RequestsManager.vendorsPageCount});
 
     if (requestVars['naics'] !== "") {
-        queryData['pool_naics_code'] = requestVars['naics'];
-        queryData['pool_naics_code_lookup'] = 'exact';
+        queryData['pools__naics__code'] = requestVars['naics'];
 
         if ('vehicle' in requestVars) {
-            queryData['pool_vehicle'] = requestVars['vehicle'];
-            queryData['pool_vehicle_lookup'] = 'iexact';
+            queryData['pools__vehicle__iexact'] = requestVars['vehicle'];
         }
         if ('pool' in requestVars) {
-            queryData['pool_number'] = requestVars['pool'];
-            queryData['pool_number_lookup'] = 'exact';
+            queryData['pools__number'] = requestVars['pool'];
         }
         if ('setasides' in requestVars) {
-            queryData['setaside_code'] = requestVars['setasides'].split(',');
+            queryData['setasides__code'] = requestVars['setasides'].split(',');
         }
 
         RequestsManager.getAPIRequest(url, queryData, function(response) {
