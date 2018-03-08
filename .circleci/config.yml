@@ -107,8 +107,7 @@ jobs:
       - run:
           name: Run acceptance tests
           command: |
-            git submodule update --init --recursive
-            scripts/wait-for-it/wait-for-it.sh --host="localhost" --port=8080 --timeout=300
+            scripts/wait-for-it.sh --host="localhost" --port=8080 --timeout=300
             source /venv/bin/activate
             ./run test tests
 

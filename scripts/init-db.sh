@@ -25,11 +25,7 @@ DB_PORT="${3:-5432}"
 
 if [ "$DB_HOST" != "none" ]
 then
-  if which git >/dev/null
-  then
-    git submodule update --init --recursive
-  fi
-  "$SCRIPT_DIR/wait-for-it/wait-for-it.sh" --host="$DB_HOST" --port="$DB_PORT"
+  "$SCRIPT_DIR/wait-for-it.sh" --host="$DB_HOST" --port="$DB_PORT"
 fi
 
 #run application setup commands
