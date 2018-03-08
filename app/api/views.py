@@ -1,5 +1,8 @@
+from django.conf import settings
 from django.db.models import Subquery, OuterRef, Value
 from django.db.models.functions import Concat, Coalesce
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.views import APIView
@@ -23,6 +26,8 @@ class DiscoveryReadOnlyModelViewSet(
 ): pass
     
 
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='retrieve')
 class NaicsViewSet(DiscoveryReadOnlyModelViewSet):
     """
     API endpoint that allows for access to Discovery related NAICS code information.
@@ -47,6 +52,8 @@ class NaicsViewSet(DiscoveryReadOnlyModelViewSet):
     serializer_class = serializers.NaicsSerializer
 
 
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='retrieve')
 class SetAsideViewSet(DiscoveryReadOnlyModelViewSet):
     """
     API endpoint that allows for access to Discovery related business setaside information.
@@ -71,6 +78,8 @@ class SetAsideViewSet(DiscoveryReadOnlyModelViewSet):
     serializer_class = serializers.SetAsideSerializer
 
 
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='retrieve')
 class PoolViewSet(DiscoveryReadOnlyModelViewSet):
     """
     API endpoint that allows for access to Discovery related vendor pool information.
@@ -96,6 +105,8 @@ class PoolViewSet(DiscoveryReadOnlyModelViewSet):
     serializer_class = serializers.PoolSerializer
 
 
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='retrieve')
 class ZoneViewSet(DiscoveryReadOnlyModelViewSet):
     """
     API endpoint that allows for access to Discovery vendor pool zone information.
@@ -120,6 +131,8 @@ class ZoneViewSet(DiscoveryReadOnlyModelViewSet):
     serializer_class = serializers.ZoneSerializer
 
 
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='retrieve')
 class VendorViewSet(DiscoveryReadOnlyModelViewSet):
     """
     API endpoint that allows for access to vendor information in the Discovery universe.
@@ -172,6 +185,8 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
         return queryset.annotate(number_of_contracts = query.QueryCount(contract_list))
 
 
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='retrieve')
 class ContractViewSet(DiscoveryReadOnlyModelViewSet):
     """
     API endpoint that allows for access to contract information for vendors in the Discovery universe.
@@ -210,6 +225,7 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
         )
 
 
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='get')
 class ListMetadataView(APIView):
     """
     This endpoint returns metadata for the most recent data loads of SAM and FPDS data. It takes no parameters.
