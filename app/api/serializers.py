@@ -89,20 +89,6 @@ class VendorSerializer(ModelSerializer):
         return ManagerSerializer(item.managers.filter(type='PM'), many=True).data
 
 
-class ShortVendorSerializer(ModelSerializer):
-    sam_location = LocationSerializer(many=False)
-    setasides = SetAsideSerializer(many=True)
-        
-    annual_revenue = IntegerField()
-    number_of_employees = IntegerField()
-    number_of_contracts = IntegerField()
-    
-    class Meta:
-        model = vendors.Vendor
-        fields = ['id', 'name', 'duns', 'duns_4', 'sam_status', 'sam_exclusion', 'sam_url',
-                  'sam_location', 'setasides', 'annual_revenue', 'number_of_employees', 'number_of_contracts']
-
-
 class CoreVendorSerializer(ModelSerializer):
     sam_location = LocationSerializer(many=False)
     setasides = SetAsideSerializer(many=True)
@@ -150,19 +136,6 @@ class ContractSerializer(ModelSerializer):
                   'point_of_contact', 'place_of_performance', 'place_of_performance_location', 'vendor_location', 
                   'vendor_phone', 'vendor',
                   'annual_revenue', 'number_of_employees']
-
-
-class ShortContractSerializer(ModelSerializer):
-    status = ContractStatusSerializer(many=False)
-    pricing_type = PricingStructureSerializer(many=False)
-    
-    place_of_performance_location = CharField()
-        
-    class Meta:
-        model = contracts.Contract
-        fields = ['id', 'piid', 'agency_id', 'agency_name', 'NAICS', 'PSC', 
-                  'date_signed', 'completion_date', 'pricing_type', 'obligated_amount', 'status', 
-                  'point_of_contact', 'place_of_performance_location']
 
 
 class MetadataSerializer(Serializer):
