@@ -27,7 +27,6 @@ PROJ_DIR = os.path.dirname(BASE_DIR)
 API_CACHE_LIFETIME = 24 # in hours
 
 API_HOST = config_value('API_HOST', '')
-API_KEY = config_value('API_KEY', '')
 
 SAM_API_URL = "https://api.data.gov/sam/v1/registrations/"
 SAM_API_KEY = config_value('SAM_API_KEY', '')
@@ -109,6 +108,7 @@ INSTALLED_APPS = [
     
     'rest_framework',
     'django_filters',
+    'rest_framework_filters',
     'crispy_forms',
     
     'django_celery_beat',
@@ -341,7 +341,7 @@ REST_FRAMEWORK = {
     ],
     
     'DEFAULT_FILTER_BACKENDS': [
-        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework_filters.backends.DjangoFilterBackend',
     ],
     'SEARCH_PARAM': 'q',
     
