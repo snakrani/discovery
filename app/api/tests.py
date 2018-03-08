@@ -43,13 +43,13 @@ class PoolsTest(TestCase):
         self.assertEqual(resp.status_code, 200)
 
     def test_request_vehicle_param(self):
-        resp = self.c.get(self.path, {'vehicle': 'HCATS_SB', 'vehicle_lookup': 'exact'})
+        resp = self.c.get(self.path, {'vehicle': 'HCATS_SB'})
         
         self.assertEqual(resp.data['count'], 2)
         self.assertEqual(resp.status_code, 200)
 
     def test_request_naics_param(self):
-        resp = self.c.get(self.path, {'naics_code': 541611, 'naics_code_lookup': 'exact'})
+        resp = self.c.get(self.path, {'naics__code': 541611})
         
         self.assertEqual(resp.data['count'], 4)
         self.assertEqual(resp.status_code, 200)
@@ -70,7 +70,7 @@ class ZonesTest(TestCase):
         self.assertEqual(resp.status_code, 200)
 
     def test_request_state_param(self):
-        resp = self.c.get(self.path, {'state': 'NC', 'state_lookup': 'exact'})
+        resp = self.c.get(self.path, {'state': 'NC'})
         
         self.assertEqual(resp.data['count'], 1)
         self.assertEqual(resp.status_code, 200)
@@ -91,33 +91,34 @@ class VendorsTest(TestCase):
         self.assertEqual(resp.status_code, 200)
 
     def test_request_valid_vehicle(self):
-        resp = self.c.get(self.path, {'format': 'json', 'pool_vehicle': 'oasis_sb', 'pool_vehicle_lookup': 'iexact'})
+        resp = self.c.get(self.path, {'format': 'json', 'pools__vehicle__iexact': 'oasis_sb'})
         self.assertEqual(resp.status_code, 200)
 
     def test_request_invalid_vehicle_returns_empty(self):
-        resp = self.c.get(self.path, {'format': 'json', 'pool_vehicle': 'dlasfjosdf', 'pool_vehicle_lookup': 'iexact'})
+        resp = self.c.get(self.path, {'format': 'json', 'pools__vehicle': 'dlasfjosdf'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.data['count'], 0)
  
     def test_request_valid_naics(self):
-        resp = self.c.get(self.path, {'format': 'json', 'pool_naics_code': '541330', 'pool_naics_code_lookup': 'exact'})
+        resp = self.c.get(self.path, {'format': 'json', 'pools__naics__code': '541330'})
         self.assertEqual(resp.status_code, 200)
 
     def test_request_invalid_naics_returns_empty(self):
-        resp = self.c.get(self.path, {'format': 'json', 'pool_naics_code': 'dlasfjosdf', 'pool_naics_code_lookup': 'exact'})
+        resp = self.c.get(self.path, {'format': 'json', 'pools__naics__code': 'dlasfjosdf'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.data['count'], 0)
    
     def test_request_valid_setasides(self):
-        resp = self.c.get(self.path, {'format': 'json', 'setaside_code': 'A6', 'setaside_code_lookup': 'exact'})
+        resp = self.c.get(self.path, {'format': 'json', 'setasides__code': 'A6'})
         self.assertEqual(resp.status_code, 200)
    
-    def test_request_invalid_setasides_returns_404(self):
-        resp = self.c.get(self.path, {'format': 'json', 'setaside_code': 'A25,27', 'setaside_code_lookup': 'exact'})
-        self.assertEqual(resp.status_code, 400)
+    def test_request_invalid_setasides_returns_empty(self):
+        resp = self.c.get(self.path, {'format': 'json', 'setasides__code': 'A25,27'})
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.data['count'], 0)
 
     def test_default_pagination(self):
-        resp = self.c.get(self.path, {'format': 'json', 'pool_vehicle': 'oasis_sb', 'pool_vehicle_lookup': 'iexact'})
+        resp = self.c.get(self.path, {'format': 'json', 'pools__vehicle__iexact': 'oasis_sb'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(len(resp.data['results']), 100)
         self.assertEqual(resp.data['previous'], None)
@@ -125,7 +126,7 @@ class VendorsTest(TestCase):
         self.assertEqual(resp.data['count'], 130)
         
     def test_custom_pagination(self):
-        resp = self.c.get(self.path, {'format': 'json', 'pool_vehicle': 'oasis', 'pool_vehicle_lookup': 'iexact', 'count': 15})
+        resp = self.c.get(self.path, {'format': 'json', 'pools__vehicle__iexact': 'oasis', 'count': 15})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(len(resp.data['results']), 15)
         self.assertEqual(resp.data['previous'], None)
@@ -133,31 +134,31 @@ class VendorsTest(TestCase):
         self.assertEqual(resp.data['count'], 77)
    
     def test_request_num_results(self):
-        resp = self.c.get(self.path, {'format': 'json', 'pool_naics_code': '541330', 'pool_naics_code_lookup': 'exact'})
+        resp = self.c.get(self.path, {'format': 'json', 'pools__naics__code': '541330'})
         self.assertEqual(resp.status_code, 200)
         self.assertGreater(resp.data['count'], 0)
 
     def test_request_results(self):
-        resp = self.c.get(self.path, {'format': 'json', 'pool_naics_code': '541330', 'pool_naics_code_lookup': 'exact'})
+        resp = self.c.get(self.path, {'format': 'json', 'pools__naics__code': '541330'})
         self.assertEqual(resp.status_code, 200)
         assert 'results' in resp.data
 
     def test_result_length_pool_group(self):
-        resp = self.c.get(self.path, {'format': 'json', 'setaside_code': 'A2', 'pool_vehicle': 'oasis_sb', 'pool_vehicle_lookup': 'iexact', 'pool_naics_code': '541330', 'pool_naics_code_lookup': 'exact'})
+        resp = self.c.get(self.path, {'format': 'json', 'setasides__code': 'A2', 'pools__vehicle__iexact': 'oasis_sb', 'pools__naics__code': '541330'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(len(resp.data['results']), resp.data['count'])
 
     def test_default_sort(self):
-        resp = self.c.get(self.path, {'format': 'json', 'pool_vehicle': 'oasis', 'pool_vehicle_lookup': 'iexact'})
+        resp = self.c.get(self.path, {'format': 'json', 'pools__vehicle__iexact': 'oasis'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.data['results'][0]['number_of_contracts'], 500)
 
     def test_sort_with_all_params(self):
-        resp = self.c.get(self.path, {'format': 'json', 'pool_vehicle': 'oasis', 'pool_vehicle_lookup': 'iexact', 'ordering': 'name'})
+        resp = self.c.get(self.path, {'format': 'json', 'pools__vehicle__iexact': 'oasis', 'ordering': 'name'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.data['results'][0]['name'] , "Accenture Federal Services LLC")
         
-        resp = self.c.get(self.path, {'format': 'json', 'pool_vehicle': 'oasis', 'pool_vehicle_lookup': 'iexact', 'ordering': '-name'})
+        resp = self.c.get(self.path, {'format': 'json', 'pools__vehicle__iexact': 'oasis', 'ordering': '-name'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.data['results'][0]['name'] , "Wyle Laboratories, Inc.")
 
@@ -185,7 +186,7 @@ class ContractsTest(TestCase):
         self.path = '/api/contracts/'
 
     def test_default_pagination(self):
-        resp = self.c.get(self.path, {'vendor_duns': '926451519', 'vendor_duns_lookup': 'exact'})
+        resp = self.c.get(self.path, {'vendor__duns': '926451519'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(len(resp.data['results']), 100)
         self.assertEqual(resp.data['previous'], None)
@@ -193,7 +194,7 @@ class ContractsTest(TestCase):
         self.assertEqual(resp.data['count'], 500)
     
     def test_custom_pagination(self):
-        resp = self.c.get(self.path, {'vendor_duns': '926451519', 'vendor_duns_lookup': 'exact', 'count': 25})
+        resp = self.c.get(self.path, {'vendor__duns': '926451519', 'count': 25})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(len(resp.data['results']), 25)
         self.assertEqual(resp.data['previous'], None)
@@ -201,21 +202,21 @@ class ContractsTest(TestCase):
         self.assertEqual(resp.data['count'], 500)
 
     def test_naics_filter(self):
-        resp = self.c.get(self.path, {'vendor_duns': '807990382', 'vendor_duns_lookup': 'exact', 'naics': '541611', 'naics_lookup': 'exact'})
+        resp = self.c.get(self.path, {'vendor__duns': '807990382', 'NAICS': '541611'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.data['count'], 1)
 
     def test_default_sort(self):
-        resp = self.c.get(self.path, {'vendor_duns': '807990382', 'vendor_duns_lookup': 'exact'})
+        resp = self.c.get(self.path, {'vendor__duns': '807990382'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.data['results'][0]['date_signed'], "2017-11-17T00:00:00Z")
 
     def test_sort_with_all_params(self):
-        resp = self.c.get(self.path, {'vendor_duns': '807990382', 'vendor_duns_lookup': 'exact', 'ordering': 'status__name'})
+        resp = self.c.get(self.path, {'vendor__duns': '807990382', 'ordering': 'status__name'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.data['results'][0]['status']['name'], 'Completed')
         
-        resp = self.c.get(self.path, {'vendor_duns': '807990382', 'vendor_duns_lookup': 'exact', 'ordering': '-status__name'})
+        resp = self.c.get(self.path, {'vendor__duns': '807990382', 'ordering': '-status__name'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.data['results'][0]['status']['name'], 'Terminated for Convenience')
 
