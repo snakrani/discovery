@@ -1,21 +1,35 @@
 from django.conf import settings
 from django.test import LiveServerTestCase
 
+from selenium.common.exceptions import TimeoutException, NoSuchElementException, StaleElementReferenceException
+
 from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException        
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options
+
+import os
 import time, unittest
 
 
 class FunctionalTests(LiveServerTestCase): 
 
     def setUp(self):
+        self.screenshot_dir = "{}/{}/{}".format(settings.PROJ_DIR, 'logs', 'screenshots')
+        
+        chrome_options = Options()
+        chrome_options.add_experimental_option("excludeSwitches",["ignore-certificate-errors"])
+        chrome_options.add_argument('--disable-gpu')
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--no-sandbox")
+
         self.base_url = 'http://localhost:8080'
-        self.driver = webdriver.PhantomJS(service_log_path='../logs/ghostdriver.log')
+        self.driver = webdriver.Chrome(chrome_options=chrome_options)
+        
+        self.driver.set_page_load_timeout(60)
 
     #helper function courtesy of http://www.obeythetestinggoat.com/how-to-get-selenium-to-wait-for-page-load-after-a-click.html
     def wait_for(self, condition_function):
@@ -143,6 +157,9 @@ class FunctionalTests(LiveServerTestCase):
         driver = self.driver
         #load vendor page
         driver.get(self.base_url + "/vendor/786997739/?setasides=A6&vehicle=oasis_sb&naics-code=541330&")
+        element = WebDriverWait(driver, 5).until(
+            EC.presence_of_all_elements_located((By.CLASS_NAME, "table_row_data"))
+        )
         #check CAGE code, DUNS number, employees, revenue, address, address2, poc_name, poc_phone
         self.assertEqual("4UYY6", driver.find_element_by_css_selector("span.cage_code.admin_data").text)
         self.assertEqual("786997739", driver.find_element_by_css_selector("span.duns_number.admin_data").text)

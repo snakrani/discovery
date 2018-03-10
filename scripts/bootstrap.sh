@@ -26,8 +26,8 @@ rm -Rf /venv
 #install PostgreSQL client
 ./scripts/setup-postgresql.sh
 
-#install PhantomJS
-./scripts/setup-phantomjs.sh
+#install Chrome (for acceptance testing)
+./scripts/setup-chrome.sh
 
 #install CloudFoundry CLI
 ./scripts/setup-cf.sh
