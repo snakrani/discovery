@@ -95,7 +95,7 @@ class VendorsTest(TestCase):
         self.assertEqual(resp.status_code, 200)
 
     def test_request_invalid_vehicle_returns_empty(self):
-        resp = self.c.get(self.path, {'format': 'json', 'pools__vehicle': 'dlasfjosdf'})
+        resp = self.c.get(self.path, {'format': 'json', 'pools__vehicle__iexact': 'dlasfjosdf'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.data['count'], 0)
  
