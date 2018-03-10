@@ -33,9 +33,9 @@ RUN /usr/local/discovery/bin/setup-python.sh /dev/stderr \
 #
 # Javascript dependencies
 #
-COPY ./scripts/setup-phantomjs.sh /usr/local/discovery/bin/setup-phantomjs.sh
+COPY ./scripts/setup-chrome.sh /usr/local/discovery/bin/setup-chrome.sh
 
-RUN /usr/local/discovery/bin/setup-phantomjs.sh /dev/stderr \
+RUN /usr/local/discovery/bin/setup-chrome.sh /dev/stderr \
     && rm -rf /tmp/*
 
 #

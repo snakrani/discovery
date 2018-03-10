@@ -83,9 +83,9 @@ jobs:
             scripts/setup-python.sh /dev/stderr
 
       - run:
-          name: Install PhantomJS web driver
+          name: Install Chrome web driver
           command: |
-            scripts/setup-phantomjs.sh /dev/stderr
+            scripts/setup-chrome.sh /dev/stderr
 
       - run:
           name: Set CircleCI configuration
@@ -93,10 +93,13 @@ jobs:
             cp app/discovery/local_settings.circle.py app/discovery/local_settings.py
 
       - run:
+          background: true
+          command: Xvfb -ac :99 -screen 0 1280x1024x16 +extension RANDR > /dev/null 2>&1
+
+      - run:
           name: Import fixtures and run test server
           background: true
           command: |
-            git submodule update --init --recursive
             source /venv/bin/activate
             scripts/init-db.sh /dev/stderr
             scripts/init-webserver.sh /dev/stderr
@@ -109,7 +112,7 @@ jobs:
           command: |
             scripts/wait-for-it.sh --host="localhost" --port=8080 --timeout=300
             source /venv/bin/activate
-            ./run test tests
+            ./run test --failfast tests
 
       - store_artifacts:
           path: logs
