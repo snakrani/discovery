@@ -18,6 +18,7 @@ RequestsManager.loadVendors = function(data, callback) {
 
     var requestVars = this.buildRequestQuery();
     var queryData = $.extend(data, {'count': RequestsManager.vendorsPageCount});
+    var setasideFilters = [];
 
     if (requestVars['naics'] !== "") {
         queryData['pools__naics__code'] = requestVars['naics'];
@@ -28,8 +29,13 @@ RequestsManager.loadVendors = function(data, callback) {
         if ('pool' in requestVars) {
             queryData['pools__number'] = requestVars['pool'];
         }
+
         if ('setasides' in requestVars) {
-            queryData['setasides__code'] = requestVars['setasides'].split(',');
+            var setasides = requestVars['setasides'].split(',');
+            for (var index = 0; index < setasides.length; index++) {
+                setasideFilters.push('(' + 'setasides__code' + '=' + setasides[index] + ')');
+            }
+            queryData['filters'] = encodeURIComponent(setasideFilters.join('&'));
         }
 
         RequestsManager.getAPIRequest(url, queryData, function(response) {
