@@ -169,7 +169,7 @@ You can check on the results of executed tasks at http://localhost:8080/admin/dj
 
 ## Testing changes
 
-The Discovery application is currently designed with two types of automated testing; unit tests and [Selenium](http://www.seleniumhq.org/docs/01_introducing_selenium.jsp) based acceptance testing through [PhantomJS](http://phantomjs.org/documentation).
+The Discovery application is currently designed with two types of automated testing; unit tests and [Selenium](http://www.seleniumhq.org/docs/01_introducing_selenium.jsp) based acceptance testing through [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/getting-started).
 
 The Discovery [CircleCI environment](https://circleci.com/docs/2.0/) is currently configured to run both unit tests and acceptance tests on pushes to branches and merges on the official PSHCDevOps source repository.
 
@@ -181,9 +181,9 @@ The Discovery [CircleCI environment](https://circleci.com/docs/2.0/) is currentl
 * Run on Cloud Foundry with **cf run-task**
 
 ```bash
-# Install PhantomJS on the machine (only tested on Debian and Ubuntu for the Vagrant machine and CI containers)
+# Install Chrome with webdriver on the machine (only tested on Debian and Ubuntu for the Vagrant machine and CI containers)
 #  - Already installed on Docker Django images
-$ scripts/setup-phantomjs.sh  # Has no options
+$ scripts/setup-chrome.sh  # Has no options
 
 # Run all defined unit tests from Django api, vendors, and contract applications
 #  - See CircleCI configuration for full usage example
