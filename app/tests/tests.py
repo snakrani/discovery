@@ -24,7 +24,7 @@ class FunctionalTests(LiveServerTestCase):
         chrome_options.add_experimental_option("excludeSwitches",["ignore-certificate-errors"])
         chrome_options.add_argument('--disable-gpu')
         chrome_options.add_argument("--headless")
-        chrome_options.add_argument("--window-size=1920x1080")
+        chrome_options.add_argument("--no-sandbox")
 
         self.base_url = 'http://localhost:8080'
         self.driver = webdriver.Chrome(chrome_options=chrome_options)
