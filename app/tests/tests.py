@@ -290,7 +290,7 @@ class FunctionalTests(LiveServerTestCase):
         #open vendor detail page
         driver.get(self.base_url + '/vendor/786997739/?naics-code=541618&')
         #make sure title of point of contact section in header is 'OASIS POC'
-        self.assertEqual(driver.find_element_by_css_selector('p.admin_title').text, 'OASIS POC')
+        self.assertEqual(driver.find_element_by_css_selector('p.admin_title').text, 'POC')
 
     def test_no_matching_contracts_indicator(self):
         driver = self.driver
