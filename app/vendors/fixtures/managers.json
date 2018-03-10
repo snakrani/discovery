@@ -5956,5 +5956,23 @@
     "name": "Connor Shea",
     "type": "PM"
   }
+},
+{
+  "model": "vendors.manager",
+  "pk": 663,
+  "fields": {
+    "vendor": 262,
+    "name": "Noel 'Ziggy' Phipps",
+    "type": "PM"
+  }
+},
+{
+  "model": "vendors.manager",
+  "pk": 664,
+  "fields": {
+    "vendor": 291,
+    "name": "Tim O'Rourke",
+    "type": "PM"
+  }
 }
 ]

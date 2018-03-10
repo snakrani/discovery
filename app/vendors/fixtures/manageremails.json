@@ -5894,5 +5894,21 @@
     "manager": 662,
     "address": "cshea@sj-services.com"
   }
+},
+{
+  "model": "vendors.manageremail",
+  "pk": 738,
+  "fields": {
+    "manager": 663,
+    "address": "nphipps@ceepco.com"
+  }
+},
+{
+  "model": "vendors.manageremail",
+  "pk": 739,
+  "fields": {
+    "manager": 664,
+    "address": "torourke@gms-hvac.com"
+  }
 }
 ]

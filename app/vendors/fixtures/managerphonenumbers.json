@@ -5342,5 +5342,21 @@
     "manager": 642,
     "number": "270.874.2233"
   }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 669,
+  "fields": {
+    "manager": 663,
+    "number": "301-931-1600x122"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 670,
+  "fields": {
+    "manager": 664,
+    "number": "410-349-4070"
+  }
 }
 ]
