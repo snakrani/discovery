@@ -9,7 +9,7 @@ from rest_framework.views import APIView
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.response import Response
 
-from rest_framework_filters.backends import DjangoFilterBackend
+from rest_framework_filters.backends import RestFrameworkFilterBackend
 
 from discovery import query
 from discovery import metadata
@@ -96,7 +96,7 @@ class PoolViewSet(DiscoveryReadOnlyModelViewSet):
     lookup_field = 'id'
     
     action_filters = {
-        'list': (DjangoFilterBackend, SearchFilter, OrderingFilter),
+        'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
     }
     filter_class = filters.PoolFilter
     search_fields = ['id', 'name', 'number', 'vehicle']
@@ -123,7 +123,7 @@ class ZoneViewSet(DiscoveryReadOnlyModelViewSet):
     lookup_field = 'id'
     
     action_filters = {
-        'list': (DjangoFilterBackend, OrderingFilter),
+        'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, OrderingFilter),
     }
     filter_class = filters.ZoneFilter
     ordering_fields = ['id']
@@ -149,7 +149,7 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
     lookup_field = 'duns'
     
     action_filters = {
-        'list': (DjangoFilterBackend, SearchFilter, OrderingFilter),
+        'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, OrderingFilter),
     }
     filter_class = filters.VendorFilter
     search_fields = ['id', 'name', 'duns']
@@ -200,7 +200,7 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
     lookup_field = 'id'
     
     action_filters = {
-        'list': (DjangoFilterBackend, SearchFilter, OrderingFilter),
+        'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, OrderingFilter),
     }
     filter_class = filters.ContractFilter
     search_fields = ['id', 'name', 'duns']
