@@ -1,5 +1,10 @@
+from django.db.models.query import QuerySet
+
+from rest_framework.fields import CharField, IntegerField
+
 from rest_framework_filters.filterset import FilterSet
 from rest_framework_filters.filters import NumberFilter, CharFilter, RelatedFilter
+from rest_framework_filters.backends import ComplexFilterBackend
 
 from categories import models as categories
 from vendors import models as vendors
@@ -36,6 +41,7 @@ DATE_FILTERS = [
     'week',
     'week_day',
     'quarter',
+    'range',
     'in'
 ]
 
@@ -45,8 +51,17 @@ NUM_FILTERS = [
     'lte', 
     'gt', 
     'gte',
+    'range',
     'in'
 ]
+
+
+class DiscoveryComplexFilterBackend(ComplexFilterBackend):
+    operators = {
+        '&': QuerySet.intersection,
+        '|': QuerySet.union,
+        '-': QuerySet.difference,
+    }
 
 
 class NaicsFilter(FilterSet):
@@ -71,7 +86,7 @@ class SetAsideFilter(FilterSet):
 
 
 class PoolFilter(FilterSet):
-    naics = RelatedFilter(NaicsFilter, name='naics', queryset=categories.Naics.objects.all())
+    naics = RelatedFilter(NaicsFilter)
     
     class Meta:
         model = categories.Pool
@@ -85,7 +100,7 @@ class PoolFilter(FilterSet):
 
 
 class ZoneFilter(FilterSet):
-    state = CharFilter(name="state__state")
+    state = CharFilter(field_name="state__state")
      
     class Meta:
         model = categories.Zone
@@ -108,8 +123,8 @@ class LocationFilter(FilterSet):
 
 
 class ManagerFilter(FilterSet):
-    phone = CharFilter(name='phone__number')
-    email = CharFilter(name='email__address')
+    phone = CharFilter(field_name='phone__number')
+    email = CharFilter(field_name='email__address')
     
     class Meta:
         model = vendors.Manager
@@ -122,12 +137,12 @@ class ManagerFilter(FilterSet):
 
 
 class VendorFilter(FilterSet):
-    sam_location = RelatedFilter(LocationFilter, name='sam_location', queryset=vendors.Location.objects.all())
+    sam_location = RelatedFilter(LocationFilter)
     
-    setasides = RelatedFilter(SetAsideFilter, name='setasides', queryset=categories.SetAside.objects.all())
-    pools = RelatedFilter(PoolFilter, name='pools', queryset=categories.Pool.objects.all())
+    setasides = RelatedFilter(SetAsideFilter)
+    pools = RelatedFilter(PoolFilter)
     
-    managers = RelatedFilter(ManagerFilter, name='managers', queryset=vendors.Manager.objects.all())
+    managers = RelatedFilter(ManagerFilter)
     
     class Meta:
         model = vendors.Vendor
@@ -174,13 +189,13 @@ class PlaceOfPerformanceFilter(FilterSet):
 
 
 class ContractFilter(FilterSet): 
-    status = RelatedFilter(ContractStatusFilter, name='status', queryset=contracts.ContractStatus.objects.all())
-    pricing_type = RelatedFilter(PricingStructureFilter, name='pricing_type', queryset=contracts.PricingStructure.objects.all())
+    status = RelatedFilter(ContractStatusFilter)
+    pricing_type = RelatedFilter(PricingStructureFilter)
     
-    place_of_performance = RelatedFilter(PlaceOfPerformanceFilter, name='place_of_performance', queryset=contracts.PlaceOfPerformance.objects.all())
-    vendor_location = RelatedFilter(LocationFilter, name='vendor_location', queryset=vendors.Location.objects.all())
+    place_of_performance = RelatedFilter(PlaceOfPerformanceFilter)
+    vendor_location = RelatedFilter(LocationFilter)
     
-    vendor = RelatedFilter(VendorFilter, name='vendor', queryset=vendors.Vendor.objects.all())
+    vendor = RelatedFilter(VendorFilter)
     
     class Meta:
         model = contracts.Contract
