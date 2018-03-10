@@ -378,7 +378,7 @@ class FunctionalTests(LiveServerTestCase):
         driver = self.driver
         driver.get(self.base_url + '/vendor/197503212/?vehicle=oasis_sb&naics-code=541330&')
         element = WebDriverWait(driver, 5).until(
-            EC.presence_of_element_located((By.CLASS_NAME, "h_value"))
+            EC.presence_of_element_located((By.CLASS_NAME, "table_row_data"))
         )
         second_row = driver.find_element_by_xpath('//*[@id="ch_table"]/table/tbody/tr[4]')
         driver.find_element_by_class_name("h_value").click()
@@ -394,12 +394,15 @@ class FunctionalTests(LiveServerTestCase):
         prev_value = None
         for row in rows[1:]:
             cell = row.find_element_by_class_name('value')
-            value = float(cell.get_attribute('innerText').replace(',', '').replace('$', ''))
-            if not prev_value:
-                prev_value = value
-            else:
-                self.assertTrue(value <= prev_value)
-                prev_value = value
+            value = cell.get_attribute('innerText').replace(',', '').replace('$', '')
+            
+            if value:
+                value = float(cell.get_attribute('innerText').replace(',', '').replace('$', ''))
+                if not prev_value:
+                    prev_value = value
+                else:
+                    self.assertTrue(value <= prev_value)
+                    prev_value = value
 
     def test_contract_pagination(self):
         driver = self.driver
