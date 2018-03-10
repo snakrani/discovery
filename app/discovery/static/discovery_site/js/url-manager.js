@@ -107,7 +107,7 @@ var URLManager = {
         //extract pool information from document url
         var pathArray = window.location.href.split('/');
         pathArray = pathArray.removeEmpties();
-        var i = pathArray.length - 1;
+        var i = pathArray.length;
 
         while (i--) {
             if (parseInt(pathArray[i], 10) !== NaN) {
