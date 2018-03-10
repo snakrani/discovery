@@ -1,29 +1,30 @@
-redis==2.10.6                # Redis object store library
-waitress==1.1.0              # Waitress web server
+redis==2.10.6                       # Redis object store library
+waitress==1.1.0                     # Waitress web server
 
-django==2.0.2                # Django web framework
-psycopg2-binary==2.7.4       # PostgreSQL database library
-dj-database-url==0.5.0       # Django database connection configuration
-django-redis-sessions==0.6.1 # Django shared session support
-django-storages==1.6.5       # Django storage backend support
-django-db-mutex==1.0.0       # Django mutex locking
-django-filter==2.0.0.dev1    # Django query filtering
-django-crispy-forms==1.7.0   # Django advanced forms
-whitenoise==4.0b4            # Static file handling
+django==2.0.2                       # Django web framework
+psycopg2-binary==2.7.4              # PostgreSQL database library
+dj-database-url==0.5.0              # Django database connection configuration
+django-redis-sessions==0.6.1        # Django shared session support
+django-storages==1.6.5              # Django storage backend support
+django-db-mutex==1.0.0              # Django mutex locking
+django-filter==2.0.0.dev1           # Django query filtering
+django-crispy-forms==1.7.0          # Django advanced forms
+whitenoise==4.0b4                   # Static file handling
 
-djangorestframework==3.7.7   # Django REST framework
-coreapi==2.3.3               # API schema generation (CoreAPI schema format)
-coreschema==0.0.4            # API schema generation
+djangorestframework==3.7.7          # Django REST framework
+coreapi==2.3.3                      # API schema generation (CoreAPI schema format)
+coreschema==0.0.4                   # API schema generation
 
-celery==4.1.0                # Celery task manager
-django-celery-beat==1.1.1    # Celery task scheduler
-django-celery-results==1.0.1 # Celery task result storage
+celery==4.1.0                       # Celery task manager
+django-celery-beat==1.1.1           # Celery task scheduler
+django-celery-results==1.0.1        # Celery task result storage
 
-pytz==2018.3                 # Timezones
-titlecase==0.12.0            # String processing
-PyYAML==3.12                 # YAML parsing/generation
-markdown==2.6.11             # Markdown parsing/generation
+pytz==2018.3                        # Timezones
+titlecase==0.12.0                   # String processing
+PyYAML==3.12                        # YAML parsing/generation
+markdown==2.6.11                    # Markdown parsing/generation
 
-psutil==5.4.3                # System utilities
+psutil==5.4.3                       # System utilities
 
+-e git+https://github.com/philipn/django-rest-framework-filters.git@master#egg=djangorestframework-filters
 -e git+https://github.com/PSHCDevOps/pyfpds.git@integration#egg=pyfpds

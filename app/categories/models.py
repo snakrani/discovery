@@ -39,7 +39,7 @@ class Pool(models.Model):
     threshold = models.CharField(null=True, max_length=128)
 
     def __str__(self):
-        return "Pool {0} - {1}".format(self.number, self.vehicle, ",".join(naics))
+        return "{0} - Pool {1}".format(self.vehicle, self.number)
 
 
 class Zone(models.Model):

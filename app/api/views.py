@@ -1,12 +1,15 @@
+from django.conf import settings
 from django.db.models import Subquery, OuterRef, Value
 from django.db.models.functions import Concat, Coalesce
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.views import APIView
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.response import Response
 
-from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework_filters.backends import RestFrameworkFilterBackend
 
 from discovery import query
 from discovery import metadata
@@ -14,6 +17,8 @@ from categories import models as categories
 from vendors import models as vendors
 from contracts import models as contracts
 from api import mixins, filters, serializers, pagination
+
+import re
 
 
 class DiscoveryReadOnlyModelViewSet(
@@ -23,6 +28,8 @@ class DiscoveryReadOnlyModelViewSet(
 ): pass
     
 
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='retrieve')
 class NaicsViewSet(DiscoveryReadOnlyModelViewSet):
     """
     API endpoint that allows for access to Discovery related NAICS code information.
@@ -47,6 +54,8 @@ class NaicsViewSet(DiscoveryReadOnlyModelViewSet):
     serializer_class = serializers.NaicsSerializer
 
 
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='retrieve')
 class SetAsideViewSet(DiscoveryReadOnlyModelViewSet):
     """
     API endpoint that allows for access to Discovery related business setaside information.
@@ -71,6 +80,8 @@ class SetAsideViewSet(DiscoveryReadOnlyModelViewSet):
     serializer_class = serializers.SetAsideSerializer
 
 
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='retrieve')
 class PoolViewSet(DiscoveryReadOnlyModelViewSet):
     """
     API endpoint that allows for access to Discovery related vendor pool information.
@@ -85,7 +96,7 @@ class PoolViewSet(DiscoveryReadOnlyModelViewSet):
     lookup_field = 'id'
     
     action_filters = {
-        'list': (DjangoFilterBackend, SearchFilter, OrderingFilter),
+        'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
     }
     filter_class = filters.PoolFilter
     search_fields = ['id', 'name', 'number', 'vehicle']
@@ -96,6 +107,8 @@ class PoolViewSet(DiscoveryReadOnlyModelViewSet):
     serializer_class = serializers.PoolSerializer
 
 
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='retrieve')
 class ZoneViewSet(DiscoveryReadOnlyModelViewSet):
     """
     API endpoint that allows for access to Discovery vendor pool zone information.
@@ -110,7 +123,7 @@ class ZoneViewSet(DiscoveryReadOnlyModelViewSet):
     lookup_field = 'id'
     
     action_filters = {
-        'list': (DjangoFilterBackend, OrderingFilter),
+        'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, OrderingFilter),
     }
     filter_class = filters.ZoneFilter
     ordering_fields = ['id']
@@ -120,6 +133,8 @@ class ZoneViewSet(DiscoveryReadOnlyModelViewSet):
     serializer_class = serializers.ZoneSerializer
 
 
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='retrieve')
 class VendorViewSet(DiscoveryReadOnlyModelViewSet):
     """
     API endpoint that allows for access to vendor information in the Discovery universe.
@@ -134,7 +149,7 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
     lookup_field = 'duns'
     
     action_filters = {
-        'list': (DjangoFilterBackend, SearchFilter, OrderingFilter),
+        'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, OrderingFilter),
     }
     filter_class = filters.VendorFilter
     search_fields = ['id', 'name', 'duns']
@@ -147,13 +162,10 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
     ordering = '-number_of_contracts'
     
     pagination_class = pagination.ResultSetPagination
-    action_serializers =  { 
-        'list': serializers.ShortVendorSerializer, 
-        'retrieve': serializers.VendorSerializer 
-    }
+    serializer_class = serializers.VendorSerializer
     
     def get_queryset(self):
-        naics_param_name = 'pool_naics_code'
+        naics_param_name = 'pools__naics__code'
         
         queryset = self.queryset.annotate(
             annual_revenue=Subquery(
@@ -165,13 +177,15 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
             sam_location_citystate = Concat('sam_location__city', Value(', '), 'sam_location__state')
         )
         if naics_param_name in self.request.query_params and self.request.query_params[naics_param_name]:
-            contract_list = contracts.Contract.objects.filter(NAICS=self.request.query_params[naics_param_name], vendor=OuterRef('pk')).values('pk')
+            contract_list = contracts.Contract.objects.filter(NAICS=re.sub(r'[^\d]+$', '', self.request.query_params[naics_param_name]), vendor=OuterRef('pk')).values('pk')
         else:
             contract_list = contracts.Contract.objects.filter(vendor=OuterRef('pk')).values('pk')
         
         return queryset.annotate(number_of_contracts = query.QueryCount(contract_list))
 
 
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='retrieve')
 class ContractViewSet(DiscoveryReadOnlyModelViewSet):
     """
     API endpoint that allows for access to contract information for vendors in the Discovery universe.
@@ -186,23 +200,20 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
     lookup_field = 'id'
     
     action_filters = {
-        'list': (DjangoFilterBackend, SearchFilter, OrderingFilter),
+        'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, OrderingFilter),
     }
     filter_class = filters.ContractFilter
     search_fields = ['id', 'name', 'duns']
     ordering_fields = [
         'id', 'piid', 'agency_id', 'agency_name', 'NAICS', 'PSC',
-        'date_signed', 'completion_date', 'obligated_amount' 
+        'date_signed', 'completion_date', 'obligated_amount',
         'point_of_contact', 'status__name', 'pricing_type__name',
         'place_of_performance_location'
     ]
     ordering = '-date_signed'
     
     pagination_class = pagination.ResultSetPagination
-    action_serializers =  { 
-        'list': serializers.ShortContractSerializer, 
-        'retrieve': serializers.ContractSerializer 
-    }
+    serializer_class = serializers.ContractSerializer
     
     def get_queryset(self):
         return self.queryset.annotate(
@@ -210,6 +221,7 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
         )
 
 
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='get')
 class ListMetadataView(APIView):
     """
     This endpoint returns metadata for the most recent data loads of SAM and FPDS data. It takes no parameters.

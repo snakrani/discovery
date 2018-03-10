@@ -24,8 +24,9 @@ PROJ_DIR = os.path.dirname(BASE_DIR)
 #
 # API settings
 #
+API_CACHE_LIFETIME = 24 # in hours
+
 API_HOST = config_value('API_HOST', '')
-API_KEY = config_value('API_KEY', '')
 
 SAM_API_URL = "https://api.data.gov/sam/v1/registrations/"
 SAM_API_KEY = config_value('SAM_API_KEY', '')
@@ -109,6 +110,7 @@ INSTALLED_APPS = [
     
     'rest_framework',
     'django_filters',
+    'rest_framework_filters',
     'crispy_forms',
     
     'django_celery_beat',
@@ -117,6 +119,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -124,6 +127,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware'
 ]
 
 #
@@ -337,14 +341,17 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ],
-    
-    'DEFAULT_FILTER_BACKENDS': [
-        'django_filters.rest_framework.DjangoFilterBackend',
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
     ],
+    
+    'DEFAULT_FILTER_BACKENDS': [],
     'SEARCH_PARAM': 'q',
     
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 100,
+    
+    'COERCE_DECIMAL_TO_STRING': False,
 }
 
 #-------------------------------------------------------------------------------
