@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
                 ('obligated_amount', models.DecimalField(decimal_places=2, null=True, max_digits=128)),
                 ('status', models.CharField(max_length=128, null=True)),
                 ('point_of_contact', models.EmailField(max_length=75, null=True)),
-                ('vendor', models.ForeignKey(to='vendors.Vendor')),
+                ('vendor', models.ForeignKey(to='vendors.Vendor', on_delete=models.CASCADE)),
             ],
             options={
             },

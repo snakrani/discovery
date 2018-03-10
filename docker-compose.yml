@@ -10,21 +10,13 @@
 #
 version: '2.3'
 services:
-  gateway:
-    depends_on:
-      - web
-    ports:
-      - "8080:5000"
-      - "1936:1936"
-    extends:
-      file: docker/docker-compose.base.yml
-      service: lb
-
   web:
     command: bash -c "scripts/init-webserver.sh /dev/stderr && cd app && waitress-serve --expose-tracebacks --port=80 discovery.wsgi:application"
-    scale: 3
     depends_on:
       - scheduler
+      - auth
+    ports:
+      - "8080:80"
     links:
       - data:discovery-db
       - tasks:discovery-tasks
@@ -36,7 +28,6 @@ services:
   worker:
     command: bash -c "celery --workdir=app --app=discovery worker --loglevel=info --concurrency=2"
     restart: always
-    scale: 2
     depends_on:
       - scheduler
     links:
@@ -53,7 +44,6 @@ services:
     depends_on:
       - data
       - tasks
-      - auth
     links:
       - data:discovery-db
       - tasks:discovery-tasks

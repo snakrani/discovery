@@ -1,0 +1,5258 @@
+[
+{
+  "model": "vendors.poolmembership",
+  "pk": 1,
+  "fields": {
+    "vendor": 1,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS101"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 2,
+  "fields": {
+    "vendor": 2,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS102"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 3,
+  "fields": {
+    "vendor": 3,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS103"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 4,
+  "fields": {
+    "vendor": 4,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS104"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 5,
+  "fields": {
+    "vendor": 5,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS133"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 6,
+  "fields": {
+    "vendor": 6,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS105"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 7,
+  "fields": {
+    "vendor": 7,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS144"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 8,
+  "fields": {
+    "vendor": 8,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS107"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 9,
+  "fields": {
+    "vendor": 9,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS108"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 10,
+  "fields": {
+    "vendor": 10,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS109"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 11,
+  "fields": {
+    "vendor": 11,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS110"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 12,
+  "fields": {
+    "vendor": 12,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS111"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 13,
+  "fields": {
+    "vendor": 13,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS112"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 14,
+  "fields": {
+    "vendor": 14,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS113"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 15,
+  "fields": {
+    "vendor": 15,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS114"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 16,
+  "fields": {
+    "vendor": 16,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS115"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 17,
+  "fields": {
+    "vendor": 17,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS116"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 18,
+  "fields": {
+    "vendor": 18,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS117"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 19,
+  "fields": {
+    "vendor": 19,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS118"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 20,
+  "fields": {
+    "vendor": 20,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS119"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 21,
+  "fields": {
+    "vendor": 21,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS120"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 22,
+  "fields": {
+    "vendor": 22,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS106"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 23,
+  "fields": {
+    "vendor": 23,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS145"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 24,
+  "fields": {
+    "vendor": 24,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS121"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 25,
+  "fields": {
+    "vendor": 25,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS122"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 26,
+  "fields": {
+    "vendor": 26,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS123"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 27,
+  "fields": {
+    "vendor": 27,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS124"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 28,
+  "fields": {
+    "vendor": 28,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS125"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 29,
+  "fields": {
+    "vendor": 29,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS126"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 30,
+  "fields": {
+    "vendor": 30,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS127"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 31,
+  "fields": {
+    "vendor": 31,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS128"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 32,
+  "fields": {
+    "vendor": 32,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS129"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 33,
+  "fields": {
+    "vendor": 33,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS130"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 34,
+  "fields": {
+    "vendor": 34,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS131"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 35,
+  "fields": {
+    "vendor": 35,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS132"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 36,
+  "fields": {
+    "vendor": 36,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS134"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 37,
+  "fields": {
+    "vendor": 37,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS135"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 38,
+  "fields": {
+    "vendor": 38,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS136"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 39,
+  "fields": {
+    "vendor": 39,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS138"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 40,
+  "fields": {
+    "vendor": 40,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS137"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 41,
+  "fields": {
+    "vendor": 41,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS139"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 42,
+  "fields": {
+    "vendor": 42,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS141"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 43,
+  "fields": {
+    "vendor": 43,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS142"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 44,
+  "fields": {
+    "vendor": 44,
+    "pool": "OASIS_SB_1",
+    "piid": "GS00Q14OADS143"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 45,
+  "fields": {
+    "vendor": 45,
+    "pool": "OASIS_SB_2",
+    "piid": "GS00Q14OADS201"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 46,
+  "fields": {
+    "vendor": 46,
+    "pool": "OASIS_SB_2",
+    "piid": "GS00Q14OADS202"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 47,
+  "fields": {
+    "vendor": 47,
+    "pool": "OASIS_SB_2",
+    "piid": "GS00Q14OADS203"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 48,
+  "fields": {
+    "vendor": 48,
+    "pool": "OASIS_SB_2",
+    "piid": "GS00Q14OADS204"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 49,
+  "fields": {
+    "vendor": 18,
+    "pool": "OASIS_SB_2",
+    "piid": "GS00Q14OADS205"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 50,
+  "fields": {
+    "vendor": 49,
+    "pool": "OASIS_SB_2",
+    "piid": "GS00Q14OADS206"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 51,
+  "fields": {
+    "vendor": 31,
+    "pool": "OASIS_SB_2",
+    "piid": "GS00Q14OADS207"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 52,
+  "fields": {
+    "vendor": 50,
+    "pool": "OASIS_SB_2",
+    "piid": "GS00Q14OADS208"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 53,
+  "fields": {
+    "vendor": 51,
+    "pool": "OASIS_SB_2",
+    "piid": "GS00Q14OADS209"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 54,
+  "fields": {
+    "vendor": 52,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS736"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 55,
+  "fields": {
+    "vendor": 53,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS701"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 56,
+  "fields": {
+    "vendor": 54,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS702"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 57,
+  "fields": {
+    "vendor": 55,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS742"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 58,
+  "fields": {
+    "vendor": 56,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS703"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 59,
+  "fields": {
+    "vendor": 57,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS704"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 60,
+  "fields": {
+    "vendor": 58,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS705"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 61,
+  "fields": {
+    "vendor": 59,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS706"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 62,
+  "fields": {
+    "vendor": 60,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS707"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 63,
+  "fields": {
+    "vendor": 61,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS708"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 64,
+  "fields": {
+    "vendor": 62,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS709"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 65,
+  "fields": {
+    "vendor": 63,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS710"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 66,
+  "fields": {
+    "vendor": 64,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS741"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 67,
+  "fields": {
+    "vendor": 65,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS711"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 68,
+  "fields": {
+    "vendor": 66,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS712"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 69,
+  "fields": {
+    "vendor": 67,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS713"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 70,
+  "fields": {
+    "vendor": 68,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS714"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 71,
+  "fields": {
+    "vendor": 69,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS715"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 72,
+  "fields": {
+    "vendor": 70,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS716"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 73,
+  "fields": {
+    "vendor": 71,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS717"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 74,
+  "fields": {
+    "vendor": 72,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS718"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 75,
+  "fields": {
+    "vendor": 73,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS719"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 76,
+  "fields": {
+    "vendor": 74,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS720"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 77,
+  "fields": {
+    "vendor": 75,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS721"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 78,
+  "fields": {
+    "vendor": 76,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS722"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 79,
+  "fields": {
+    "vendor": 77,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS723"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 80,
+  "fields": {
+    "vendor": 78,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS724"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 81,
+  "fields": {
+    "vendor": 79,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS725"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 82,
+  "fields": {
+    "vendor": 80,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS726"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 83,
+  "fields": {
+    "vendor": 81,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS727"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 84,
+  "fields": {
+    "vendor": 82,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS728"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 85,
+  "fields": {
+    "vendor": 83,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS729"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 86,
+  "fields": {
+    "vendor": 84,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS730"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 87,
+  "fields": {
+    "vendor": 85,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS731"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 88,
+  "fields": {
+    "vendor": 86,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS732"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 89,
+  "fields": {
+    "vendor": 87,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS733"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 90,
+  "fields": {
+    "vendor": 88,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS734"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 91,
+  "fields": {
+    "vendor": 89,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS735"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 92,
+  "fields": {
+    "vendor": 90,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS737"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 93,
+  "fields": {
+    "vendor": 91,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS738"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 94,
+  "fields": {
+    "vendor": 92,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS739"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 95,
+  "fields": {
+    "vendor": 93,
+    "pool": "OASIS_SB_6",
+    "piid": "GS00Q14OADS740"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 96,
+  "fields": {
+    "vendor": 53,
+    "pool": "OASIS_SB_5A",
+    "piid": "GS00Q14OADS501"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 97,
+  "fields": {
+    "vendor": 55,
+    "pool": "OASIS_SB_5A",
+    "piid": "GS00Q14OADS523"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 98,
+  "fields": {
+    "vendor": 6,
+    "pool": "OASIS_SB_5A",
+    "piid": "GS00Q14OADS502"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 99,
+  "fields": {
+    "vendor": 58,
+    "pool": "OASIS_SB_5A",
+    "piid": "GS00Q14OADS503"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 100,
+  "fields": {
+    "vendor": 62,
+    "pool": "OASIS_SB_5A",
+    "piid": "GS00Q14OADS504"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 101,
+  "fields": {
+    "vendor": 65,
+    "pool": "OASIS_SB_5A",
+    "piid": "GS00Q14OADS505"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 102,
+  "fields": {
+    "vendor": 66,
+    "pool": "OASIS_SB_5A",
+    "piid": "GS00Q14OADS506"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 103,
+  "fields": {
+    "vendor": 69,
+    "pool": "OASIS_SB_5A",
+    "piid": "GS00Q14OADS507"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 104,
+  "fields": {
+    "vendor": 70,
+    "pool": "OASIS_SB_5A",
+    "piid": "GS00Q14OADS508"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 105,
+  "fields": {
+    "vendor": 72,
+    "pool": "OASIS_SB_5A",
+    "piid": "GS00Q14OADS509"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 106,
+  "fields": {
+    "vendor": 73,
+    "pool": "OASIS_SB_5A",
+    "piid": "GS00Q14OADS510"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 107,
+  "fields": {
+    "vendor": 75,
+    "pool": "OASIS_SB_5A",
+    "piid": "GS00Q14OADS511"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 108,
+  "fields": {
+    "vendor": 78,
+    "pool": "OASIS_SB_5A",
+    "piid": "GS00Q14OADS512"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 109,
+  "fields": {
+    "vendor": 80,
+    "pool": "OASIS_SB_5A",
+    "piid": "GS00Q14OADS513"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 110,
+  "fields": {
+    "vendor": 37,
+    "pool": "OASIS_SB_5A",
+    "piid": "GS00Q14OADS514"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 111,
+  "fields": {
+    "vendor": 81,
+    "pool": "OASIS_SB_5A",
+    "piid": "GS00Q14OADS515"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 112,
+  "fields": {
+    "vendor": 83,
+    "pool": "OASIS_SB_5A",
+    "piid": "GS00Q14OADS516"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 113,
+  "fields": {
+    "vendor": 84,
+    "pool": "OASIS_SB_5A",
+    "piid": "GS00Q14OADS517"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 114,
+  "fields": {
+    "vendor": 85,
+    "pool": "OASIS_SB_5A",
+    "piid": "GS00Q14OADS518"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 115,
+  "fields": {
+    "vendor": 88,
+    "pool": "OASIS_SB_5A",
+    "piid": "GS00Q14OADS519"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 116,
+  "fields": {
+    "vendor": 89,
+    "pool": "OASIS_SB_5A",
+    "piid": "GS00Q14OADS520"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 117,
+  "fields": {
+    "vendor": 90,
+    "pool": "OASIS_SB_5A",
+    "piid": "GS00Q14OADS521"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 118,
+  "fields": {
+    "vendor": 91,
+    "pool": "OASIS_SB_5A",
+    "piid": "GS00Q14OADS522"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 119,
+  "fields": {
+    "vendor": 52,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS438"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 120,
+  "fields": {
+    "vendor": 6,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS401"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 121,
+  "fields": {
+    "vendor": 94,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS402"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 122,
+  "fields": {
+    "vendor": 56,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS403"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 123,
+  "fields": {
+    "vendor": 10,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS404"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 124,
+  "fields": {
+    "vendor": 57,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS405"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 125,
+  "fields": {
+    "vendor": 60,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS406"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 126,
+  "fields": {
+    "vendor": 95,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS409"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 127,
+  "fields": {
+    "vendor": 62,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS407"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 128,
+  "fields": {
+    "vendor": 96,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS408"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 129,
+  "fields": {
+    "vendor": 97,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS410"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 130,
+  "fields": {
+    "vendor": 98,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS411"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 131,
+  "fields": {
+    "vendor": 65,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS412"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 132,
+  "fields": {
+    "vendor": 99,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS413"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 133,
+  "fields": {
+    "vendor": 66,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS414"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 134,
+  "fields": {
+    "vendor": 20,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS415"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 135,
+  "fields": {
+    "vendor": 100,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS416"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 136,
+  "fields": {
+    "vendor": 69,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS417"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 137,
+  "fields": {
+    "vendor": 26,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS418"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 138,
+  "fields": {
+    "vendor": 71,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS419"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 139,
+  "fields": {
+    "vendor": 101,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS420"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 140,
+  "fields": {
+    "vendor": 73,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS421"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 141,
+  "fields": {
+    "vendor": 102,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS422"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 142,
+  "fields": {
+    "vendor": 103,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS423"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 143,
+  "fields": {
+    "vendor": 74,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS424"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 144,
+  "fields": {
+    "vendor": 77,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS426"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 145,
+  "fields": {
+    "vendor": 78,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS427"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 146,
+  "fields": {
+    "vendor": 104,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS428"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 147,
+  "fields": {
+    "vendor": 80,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS429"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 148,
+  "fields": {
+    "vendor": 81,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS430"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 149,
+  "fields": {
+    "vendor": 105,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS431"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 150,
+  "fields": {
+    "vendor": 84,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS432"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 151,
+  "fields": {
+    "vendor": 85,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS433"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 152,
+  "fields": {
+    "vendor": 106,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS434"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 153,
+  "fields": {
+    "vendor": 107,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS435"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 154,
+  "fields": {
+    "vendor": 86,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS436"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 155,
+  "fields": {
+    "vendor": 88,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS437"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 156,
+  "fields": {
+    "vendor": 90,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS439"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 157,
+  "fields": {
+    "vendor": 91,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS440"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 158,
+  "fields": {
+    "vendor": 108,
+    "pool": "OASIS_SB_4",
+    "piid": "GS00Q14OADS441"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 159,
+  "fields": {
+    "vendor": 45,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS301"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 160,
+  "fields": {
+    "vendor": 109,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS302"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 161,
+  "fields": {
+    "vendor": 2,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS303"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 162,
+  "fields": {
+    "vendor": 110,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS339"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 163,
+  "fields": {
+    "vendor": 53,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS304"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 164,
+  "fields": {
+    "vendor": 111,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS305"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 165,
+  "fields": {
+    "vendor": 6,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS306"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 166,
+  "fields": {
+    "vendor": 112,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS307"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 167,
+  "fields": {
+    "vendor": 113,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS308"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 168,
+  "fields": {
+    "vendor": 56,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS309"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 169,
+  "fields": {
+    "vendor": 8,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS310"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 170,
+  "fields": {
+    "vendor": 10,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS311"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 171,
+  "fields": {
+    "vendor": 114,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS312"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 172,
+  "fields": {
+    "vendor": 115,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS313"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 173,
+  "fields": {
+    "vendor": 116,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS314"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 174,
+  "fields": {
+    "vendor": 13,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS315"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 175,
+  "fields": {
+    "vendor": 117,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS316"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 176,
+  "fields": {
+    "vendor": 47,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS317"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 177,
+  "fields": {
+    "vendor": 118,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS318"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 178,
+  "fields": {
+    "vendor": 119,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS344"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 179,
+  "fields": {
+    "vendor": 19,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS319"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 180,
+  "fields": {
+    "vendor": 120,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS320"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 181,
+  "fields": {
+    "vendor": 121,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS321"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 182,
+  "fields": {
+    "vendor": 26,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS322"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 183,
+  "fields": {
+    "vendor": 122,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS323"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 184,
+  "fields": {
+    "vendor": 101,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS324"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 185,
+  "fields": {
+    "vendor": 33,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS326"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 186,
+  "fields": {
+    "vendor": 123,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS343"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 187,
+  "fields": {
+    "vendor": 124,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS327"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 188,
+  "fields": {
+    "vendor": 79,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS328"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 189,
+  "fields": {
+    "vendor": 37,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS329"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 190,
+  "fields": {
+    "vendor": 38,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS330"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 191,
+  "fields": {
+    "vendor": 39,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS331"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 192,
+  "fields": {
+    "vendor": 125,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS332"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 193,
+  "fields": {
+    "vendor": 126,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS333"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 194,
+  "fields": {
+    "vendor": 107,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS334"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 195,
+  "fields": {
+    "vendor": 86,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS335"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 196,
+  "fields": {
+    "vendor": 87,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS336"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 197,
+  "fields": {
+    "vendor": 42,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS337"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 198,
+  "fields": {
+    "vendor": 127,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS338"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 199,
+  "fields": {
+    "vendor": 128,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS340"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 200,
+  "fields": {
+    "vendor": 129,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS341"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 201,
+  "fields": {
+    "vendor": 108,
+    "pool": "OASIS_SB_3",
+    "piid": "GS00Q14OADS342"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 202,
+  "fields": {
+    "vendor": 52,
+    "pool": "OASIS_SB_5B",
+    "piid": "GS00Q14OADS620"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 203,
+  "fields": {
+    "vendor": 53,
+    "pool": "OASIS_SB_5B",
+    "piid": "GS00Q14OADS601"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 204,
+  "fields": {
+    "vendor": 6,
+    "pool": "OASIS_SB_5B",
+    "piid": "GS00Q14OADS602"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 205,
+  "fields": {
+    "vendor": 55,
+    "pool": "OASIS_SB_5B",
+    "piid": "GS00Q14OADS623"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 206,
+  "fields": {
+    "vendor": 57,
+    "pool": "OASIS_SB_5B",
+    "piid": "GS00Q14OADS603"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 207,
+  "fields": {
+    "vendor": 58,
+    "pool": "OASIS_SB_5B",
+    "piid": "GS00Q14OADS604"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 208,
+  "fields": {
+    "vendor": 66,
+    "pool": "OASIS_SB_5B",
+    "piid": "GS00Q14OADS605"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 209,
+  "fields": {
+    "vendor": 70,
+    "pool": "OASIS_SB_5B",
+    "piid": "GS00Q14OADS606"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 210,
+  "fields": {
+    "vendor": 71,
+    "pool": "OASIS_SB_5B",
+    "piid": "GS00Q14OADS607"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 211,
+  "fields": {
+    "vendor": 72,
+    "pool": "OASIS_SB_5B",
+    "piid": "GS00Q14OADS608"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 212,
+  "fields": {
+    "vendor": 74,
+    "pool": "OASIS_SB_5B",
+    "piid": "GS00Q14OADS609"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 213,
+  "fields": {
+    "vendor": 75,
+    "pool": "OASIS_SB_5B",
+    "piid": "GS00Q14OADS610"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 214,
+  "fields": {
+    "vendor": 77,
+    "pool": "OASIS_SB_5B",
+    "piid": "GS00Q14OADS611"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 215,
+  "fields": {
+    "vendor": 78,
+    "pool": "OASIS_SB_5B",
+    "piid": "GS00Q14OADS612"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 216,
+  "fields": {
+    "vendor": 80,
+    "pool": "OASIS_SB_5B",
+    "piid": "GS00Q14OADS613"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 217,
+  "fields": {
+    "vendor": 81,
+    "pool": "OASIS_SB_5B",
+    "piid": "GS00Q14OADS614"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 218,
+  "fields": {
+    "vendor": 130,
+    "pool": "OASIS_SB_5B",
+    "piid": "GS00Q14OADS615"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 219,
+  "fields": {
+    "vendor": 83,
+    "pool": "OASIS_SB_5B",
+    "piid": "GS00Q14OADS616"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 220,
+  "fields": {
+    "vendor": 84,
+    "pool": "OASIS_SB_5B",
+    "piid": "GS00Q14OADS617"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 221,
+  "fields": {
+    "vendor": 85,
+    "pool": "OASIS_SB_5B",
+    "piid": "GS00Q14OADS618"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 222,
+  "fields": {
+    "vendor": 89,
+    "pool": "OASIS_SB_5B",
+    "piid": "GS00Q14OADS619"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 223,
+  "fields": {
+    "vendor": 90,
+    "pool": "OASIS_SB_5B",
+    "piid": "GS00Q14OADS621"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 224,
+  "fields": {
+    "vendor": 91,
+    "pool": "OASIS_SB_5B",
+    "piid": "GS00Q14OADS622"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 225,
+  "fields": {
+    "vendor": 131,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU101"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 226,
+  "fields": {
+    "vendor": 132,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU136"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 227,
+  "fields": {
+    "vendor": 133,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU106"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 228,
+  "fields": {
+    "vendor": 134,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU103"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 229,
+  "fields": {
+    "vendor": 54,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU104"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 230,
+  "fields": {
+    "vendor": 135,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU105"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 231,
+  "fields": {
+    "vendor": 136,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU102"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 232,
+  "fields": {
+    "vendor": 137,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU107"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 233,
+  "fields": {
+    "vendor": 138,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU108"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 234,
+  "fields": {
+    "vendor": 139,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU121"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 235,
+  "fields": {
+    "vendor": 140,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU109"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 236,
+  "fields": {
+    "vendor": 141,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU110"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 237,
+  "fields": {
+    "vendor": 142,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU111"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 238,
+  "fields": {
+    "vendor": 143,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU112"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 239,
+  "fields": {
+    "vendor": 144,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU139"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 240,
+  "fields": {
+    "vendor": 145,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU113"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 241,
+  "fields": {
+    "vendor": 63,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU114"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 242,
+  "fields": {
+    "vendor": 146,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU115"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 243,
+  "fields": {
+    "vendor": 147,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU137"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 244,
+  "fields": {
+    "vendor": 148,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU116"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 245,
+  "fields": {
+    "vendor": 149,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU117"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 246,
+  "fields": {
+    "vendor": 150,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU119"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 247,
+  "fields": {
+    "vendor": 151,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU145"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 248,
+  "fields": {
+    "vendor": 152,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU120"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 249,
+  "fields": {
+    "vendor": 153,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU118"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 250,
+  "fields": {
+    "vendor": 154,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU122"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 251,
+  "fields": {
+    "vendor": 155,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU123"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 252,
+  "fields": {
+    "vendor": 156,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU141"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 253,
+  "fields": {
+    "vendor": 157,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU124"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 254,
+  "fields": {
+    "vendor": 158,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU143"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 255,
+  "fields": {
+    "vendor": 159,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU125"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 256,
+  "fields": {
+    "vendor": 160,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU126"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 257,
+  "fields": {
+    "vendor": 161,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU127"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 258,
+  "fields": {
+    "vendor": 162,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU129"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 259,
+  "fields": {
+    "vendor": 163,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU130"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 260,
+  "fields": {
+    "vendor": 82,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU131"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 261,
+  "fields": {
+    "vendor": 164,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU132"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 262,
+  "fields": {
+    "vendor": 165,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU133"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 263,
+  "fields": {
+    "vendor": 166,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU134"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 264,
+  "fields": {
+    "vendor": 167,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU135"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 265,
+  "fields": {
+    "vendor": 168,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU138"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 266,
+  "fields": {
+    "vendor": 169,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU144"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 267,
+  "fields": {
+    "vendor": 170,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU140"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 268,
+  "fields": {
+    "vendor": 171,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU128"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 269,
+  "fields": {
+    "vendor": 172,
+    "pool": "OASIS_1",
+    "piid": "GS00Q14OADU142"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 270,
+  "fields": {
+    "vendor": 131,
+    "pool": "OASIS_2",
+    "piid": "GS00Q14OADU202"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 271,
+  "fields": {
+    "vendor": 136,
+    "pool": "OASIS_2",
+    "piid": "GS00Q14OADU201"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 272,
+  "fields": {
+    "vendor": 138,
+    "pool": "OASIS_2",
+    "piid": "GS00Q14OADU203"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 273,
+  "fields": {
+    "vendor": 145,
+    "pool": "OASIS_2",
+    "piid": "GS00Q14OADU204"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 274,
+  "fields": {
+    "vendor": 147,
+    "pool": "OASIS_2",
+    "piid": "GS00Q14OADU205"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 275,
+  "fields": {
+    "vendor": 173,
+    "pool": "OASIS_2",
+    "piid": "GS00Q14OADU206"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 276,
+  "fields": {
+    "vendor": 148,
+    "pool": "OASIS_2",
+    "piid": "GS00Q14OADU207"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 277,
+  "fields": {
+    "vendor": 174,
+    "pool": "OASIS_2",
+    "piid": "GS00Q14OADU208"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 278,
+  "fields": {
+    "vendor": 150,
+    "pool": "OASIS_2",
+    "piid": "GS00Q14OADU209"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 279,
+  "fields": {
+    "vendor": 151,
+    "pool": "OASIS_2",
+    "piid": "GS00Q14OADU224"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 280,
+  "fields": {
+    "vendor": 175,
+    "pool": "OASIS_2",
+    "piid": "GS00Q14OADU210"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 281,
+  "fields": {
+    "vendor": 154,
+    "pool": "OASIS_2",
+    "piid": "GS00Q14OADU211"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 282,
+  "fields": {
+    "vendor": 155,
+    "pool": "OASIS_2",
+    "piid": "GS00Q14OADU212"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 283,
+  "fields": {
+    "vendor": 176,
+    "pool": "OASIS_2",
+    "piid": "GS00Q14OADU213"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 284,
+  "fields": {
+    "vendor": 177,
+    "pool": "OASIS_2",
+    "piid": "GS00Q14OADU214"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 285,
+  "fields": {
+    "vendor": 159,
+    "pool": "OASIS_2",
+    "piid": "GS00Q14OADU215"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 286,
+  "fields": {
+    "vendor": 178,
+    "pool": "OASIS_2",
+    "piid": "GS00Q14OADU216"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 287,
+  "fields": {
+    "vendor": 179,
+    "pool": "OASIS_2",
+    "piid": "GS00Q14OADU217"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 288,
+  "fields": {
+    "vendor": 163,
+    "pool": "OASIS_2",
+    "piid": "GS00Q14OADU218"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 289,
+  "fields": {
+    "vendor": 164,
+    "pool": "OASIS_2",
+    "piid": "GS00Q14OADU219"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 290,
+  "fields": {
+    "vendor": 180,
+    "pool": "OASIS_2",
+    "piid": "GS00Q14OADU220"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 291,
+  "fields": {
+    "vendor": 181,
+    "pool": "OASIS_2",
+    "piid": "GS00Q14OADU225"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 292,
+  "fields": {
+    "vendor": 182,
+    "pool": "OASIS_2",
+    "piid": "GS00Q14OADU221"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 293,
+  "fields": {
+    "vendor": 169,
+    "pool": "OASIS_2",
+    "piid": "GS00Q14OADU222"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 294,
+  "fields": {
+    "vendor": 183,
+    "pool": "OASIS_2",
+    "piid": "GS00Q14OADU223"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 295,
+  "fields": {
+    "vendor": 54,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU701"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 296,
+  "fields": {
+    "vendor": 135,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU703"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 297,
+  "fields": {
+    "vendor": 136,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU702"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 298,
+  "fields": {
+    "vendor": 137,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU704"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 299,
+  "fields": {
+    "vendor": 138,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU705"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 300,
+  "fields": {
+    "vendor": 139,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU715"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 301,
+  "fields": {
+    "vendor": 58,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU706"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 302,
+  "fields": {
+    "vendor": 61,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU707"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 303,
+  "fields": {
+    "vendor": 184,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU708"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 304,
+  "fields": {
+    "vendor": 63,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU709"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 305,
+  "fields": {
+    "vendor": 147,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU733"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 306,
+  "fields": {
+    "vendor": 148,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU710"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 307,
+  "fields": {
+    "vendor": 185,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU711"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 308,
+  "fields": {
+    "vendor": 70,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU713"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 309,
+  "fields": {
+    "vendor": 152,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU714"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 310,
+  "fields": {
+    "vendor": 153,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU712"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 311,
+  "fields": {
+    "vendor": 154,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU716"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 312,
+  "fields": {
+    "vendor": 155,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU717"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 313,
+  "fields": {
+    "vendor": 156,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU718"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 314,
+  "fields": {
+    "vendor": 186,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU719"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 315,
+  "fields": {
+    "vendor": 72,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU720"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 316,
+  "fields": {
+    "vendor": 73,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU721"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 317,
+  "fields": {
+    "vendor": 159,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU722"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 318,
+  "fields": {
+    "vendor": 76,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU723"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 319,
+  "fields": {
+    "vendor": 80,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU725"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 320,
+  "fields": {
+    "vendor": 81,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU726"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 321,
+  "fields": {
+    "vendor": 162,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU727"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 322,
+  "fields": {
+    "vendor": 163,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU728"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 323,
+  "fields": {
+    "vendor": 82,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU729"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 324,
+  "fields": {
+    "vendor": 164,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU738"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 325,
+  "fields": {
+    "vendor": 165,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU730"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 326,
+  "fields": {
+    "vendor": 84,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU731"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 327,
+  "fields": {
+    "vendor": 86,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU732"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 328,
+  "fields": {
+    "vendor": 90,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU734"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 329,
+  "fields": {
+    "vendor": 170,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU735"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 330,
+  "fields": {
+    "vendor": 171,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU724"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 331,
+  "fields": {
+    "vendor": 93,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU736"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 332,
+  "fields": {
+    "vendor": 172,
+    "pool": "OASIS_6",
+    "piid": "GS00Q14OADU737"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 333,
+  "fields": {
+    "vendor": 54,
+    "pool": "OASIS_5A",
+    "piid": "GS00Q14OADU501"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 334,
+  "fields": {
+    "vendor": 135,
+    "pool": "OASIS_5A",
+    "piid": "GS00Q14OADU503"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 335,
+  "fields": {
+    "vendor": 136,
+    "pool": "OASIS_5A",
+    "piid": "GS00Q14OADU502"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 336,
+  "fields": {
+    "vendor": 137,
+    "pool": "OASIS_5A",
+    "piid": "GS00Q14OADU504"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 337,
+  "fields": {
+    "vendor": 138,
+    "pool": "OASIS_5A",
+    "piid": "GS00Q14OADU505"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 338,
+  "fields": {
+    "vendor": 139,
+    "pool": "OASIS_5A",
+    "piid": "GS00Q14OADU510"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 339,
+  "fields": {
+    "vendor": 141,
+    "pool": "OASIS_5A",
+    "piid": "GS00Q14OADU506"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 340,
+  "fields": {
+    "vendor": 143,
+    "pool": "OASIS_5A",
+    "piid": "GS00Q14OADU507"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 341,
+  "fields": {
+    "vendor": 147,
+    "pool": "OASIS_5A",
+    "piid": "GS00Q14OADU519"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 342,
+  "fields": {
+    "vendor": 152,
+    "pool": "OASIS_5A",
+    "piid": "GS00Q14OADU509"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 343,
+  "fields": {
+    "vendor": 153,
+    "pool": "OASIS_5A",
+    "piid": "GS00Q14OADU508"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 344,
+  "fields": {
+    "vendor": 154,
+    "pool": "OASIS_5A",
+    "piid": "GS00Q14OADU511"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 345,
+  "fields": {
+    "vendor": 155,
+    "pool": "OASIS_5A",
+    "piid": "GS00Q14OADU512"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 346,
+  "fields": {
+    "vendor": 159,
+    "pool": "OASIS_5A",
+    "piid": "GS00Q14OADU513"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 347,
+  "fields": {
+    "vendor": 162,
+    "pool": "OASIS_5A",
+    "piid": "GS00Q14OADU515"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 348,
+  "fields": {
+    "vendor": 163,
+    "pool": "OASIS_5A",
+    "piid": "GS00Q14OADU516"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 349,
+  "fields": {
+    "vendor": 82,
+    "pool": "OASIS_5A",
+    "piid": "GS00Q14OADU517"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 350,
+  "fields": {
+    "vendor": 164,
+    "pool": "OASIS_5A",
+    "piid": "GS00Q14OADU521"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 351,
+  "fields": {
+    "vendor": 165,
+    "pool": "OASIS_5A",
+    "piid": "GS00Q14OADU518"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 352,
+  "fields": {
+    "vendor": 171,
+    "pool": "OASIS_5A",
+    "piid": "GS00Q14OADU514"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 353,
+  "fields": {
+    "vendor": 172,
+    "pool": "OASIS_5A",
+    "piid": "GS00Q14OADU520"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 354,
+  "fields": {
+    "vendor": 133,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU401"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 355,
+  "fields": {
+    "vendor": 187,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU442"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 356,
+  "fields": {
+    "vendor": 54,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU404"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 357,
+  "fields": {
+    "vendor": 135,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU403"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 358,
+  "fields": {
+    "vendor": 136,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU402"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 359,
+  "fields": {
+    "vendor": 137,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU405"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 360,
+  "fields": {
+    "vendor": 138,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU406"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 361,
+  "fields": {
+    "vendor": 188,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU407"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 362,
+  "fields": {
+    "vendor": 140,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU408"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 363,
+  "fields": {
+    "vendor": 141,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU409"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 364,
+  "fields": {
+    "vendor": 142,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU410"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 365,
+  "fields": {
+    "vendor": 143,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU411"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 366,
+  "fields": {
+    "vendor": 144,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU426"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 367,
+  "fields": {
+    "vendor": 61,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU419"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 368,
+  "fields": {
+    "vendor": 63,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU412"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 369,
+  "fields": {
+    "vendor": 146,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU413"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 370,
+  "fields": {
+    "vendor": 147,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU435"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 371,
+  "fields": {
+    "vendor": 148,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU414"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 372,
+  "fields": {
+    "vendor": 149,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU415"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 373,
+  "fields": {
+    "vendor": 150,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU417"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 374,
+  "fields": {
+    "vendor": 151,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU441"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 375,
+  "fields": {
+    "vendor": 152,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU418"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 376,
+  "fields": {
+    "vendor": 153,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU416"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 377,
+  "fields": {
+    "vendor": 154,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU420"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 378,
+  "fields": {
+    "vendor": 155,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU421"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 379,
+  "fields": {
+    "vendor": 157,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU422"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 380,
+  "fields": {
+    "vendor": 158,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU423"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 381,
+  "fields": {
+    "vendor": 159,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU424"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 382,
+  "fields": {
+    "vendor": 161,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU425"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 383,
+  "fields": {
+    "vendor": 162,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU427"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 384,
+  "fields": {
+    "vendor": 163,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU428"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 385,
+  "fields": {
+    "vendor": 82,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU429"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 386,
+  "fields": {
+    "vendor": 164,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU430"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 387,
+  "fields": {
+    "vendor": 165,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU431"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 388,
+  "fields": {
+    "vendor": 166,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU432"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 389,
+  "fields": {
+    "vendor": 167,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU433"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 390,
+  "fields": {
+    "vendor": 189,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU434"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 391,
+  "fields": {
+    "vendor": 168,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU436"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 392,
+  "fields": {
+    "vendor": 169,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU438"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 393,
+  "fields": {
+    "vendor": 170,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU439"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 394,
+  "fields": {
+    "vendor": 190,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU437"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 395,
+  "fields": {
+    "vendor": 172,
+    "pool": "OASIS_4",
+    "piid": "GS00Q14OADU440"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 396,
+  "fields": {
+    "vendor": 131,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU301"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 397,
+  "fields": {
+    "vendor": 133,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU303"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 398,
+  "fields": {
+    "vendor": 187,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU343"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 399,
+  "fields": {
+    "vendor": 54,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU304"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 400,
+  "fields": {
+    "vendor": 135,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU305"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 401,
+  "fields": {
+    "vendor": 136,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU302"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 402,
+  "fields": {
+    "vendor": 137,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU307"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 403,
+  "fields": {
+    "vendor": 138,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU308"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 404,
+  "fields": {
+    "vendor": 188,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU309"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 405,
+  "fields": {
+    "vendor": 140,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU310"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 406,
+  "fields": {
+    "vendor": 141,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU311"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 407,
+  "fields": {
+    "vendor": 142,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU312"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 408,
+  "fields": {
+    "vendor": 143,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU313"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 409,
+  "fields": {
+    "vendor": 144,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU314"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 410,
+  "fields": {
+    "vendor": 61,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU321"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 411,
+  "fields": {
+    "vendor": 173,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU315"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 412,
+  "fields": {
+    "vendor": 147,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU336"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 413,
+  "fields": {
+    "vendor": 191,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU327"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 414,
+  "fields": {
+    "vendor": 148,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU317"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 415,
+  "fields": {
+    "vendor": 192,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU316"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 416,
+  "fields": {
+    "vendor": 150,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU319"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 417,
+  "fields": {
+    "vendor": 151,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU342"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 418,
+  "fields": {
+    "vendor": 152,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU320"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 419,
+  "fields": {
+    "vendor": 153,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU318"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 420,
+  "fields": {
+    "vendor": 154,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU322"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 421,
+  "fields": {
+    "vendor": 155,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU323"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 422,
+  "fields": {
+    "vendor": 156,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU340"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 423,
+  "fields": {
+    "vendor": 157,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU324"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 424,
+  "fields": {
+    "vendor": 159,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU325"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 425,
+  "fields": {
+    "vendor": 161,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU326"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 426,
+  "fields": {
+    "vendor": 162,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU328"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 427,
+  "fields": {
+    "vendor": 163,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU329"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 428,
+  "fields": {
+    "vendor": 82,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU330"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 429,
+  "fields": {
+    "vendor": 164,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU331"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 430,
+  "fields": {
+    "vendor": 165,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU332"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 431,
+  "fields": {
+    "vendor": 166,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU333"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 432,
+  "fields": {
+    "vendor": 167,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU334"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 433,
+  "fields": {
+    "vendor": 189,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU335"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 434,
+  "fields": {
+    "vendor": 168,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU337"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 435,
+  "fields": {
+    "vendor": 170,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU339"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 436,
+  "fields": {
+    "vendor": 190,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU338"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 437,
+  "fields": {
+    "vendor": 172,
+    "pool": "OASIS_3",
+    "piid": "GS00Q14OADU341"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 438,
+  "fields": {
+    "vendor": 54,
+    "pool": "OASIS_5B",
+    "piid": "GS00Q14OADU601"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 439,
+  "fields": {
+    "vendor": 136,
+    "pool": "OASIS_5B",
+    "piid": "GS00Q14OADU602"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 440,
+  "fields": {
+    "vendor": 137,
+    "pool": "OASIS_5B",
+    "piid": "GS00Q14OADU603"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 441,
+  "fields": {
+    "vendor": 138,
+    "pool": "OASIS_5B",
+    "piid": "GS00Q14OADU604"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 442,
+  "fields": {
+    "vendor": 139,
+    "pool": "OASIS_5B",
+    "piid": "GS00Q14OADU609"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 443,
+  "fields": {
+    "vendor": 141,
+    "pool": "OASIS_5B",
+    "piid": "GS00Q14OADU605"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 444,
+  "fields": {
+    "vendor": 142,
+    "pool": "OASIS_5B",
+    "piid": "GS00Q14OADU606"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 445,
+  "fields": {
+    "vendor": 147,
+    "pool": "OASIS_5B",
+    "piid": "GS00Q14OADU620"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 446,
+  "fields": {
+    "vendor": 152,
+    "pool": "OASIS_5B",
+    "piid": "GS00Q14OADU608"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 447,
+  "fields": {
+    "vendor": 153,
+    "pool": "OASIS_5B",
+    "piid": "GS00Q14OADU607"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 448,
+  "fields": {
+    "vendor": 154,
+    "pool": "OASIS_5B",
+    "piid": "GS00Q14OADU610"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 449,
+  "fields": {
+    "vendor": 155,
+    "pool": "OASIS_5B",
+    "piid": "GS00Q14OADU611"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 450,
+  "fields": {
+    "vendor": 157,
+    "pool": "OASIS_5B",
+    "piid": "GS00Q14OADU612"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 451,
+  "fields": {
+    "vendor": 159,
+    "pool": "OASIS_5B",
+    "piid": "GS00Q14OADU613"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 452,
+  "fields": {
+    "vendor": 161,
+    "pool": "OASIS_5B",
+    "piid": "GS00Q14OADU614"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 453,
+  "fields": {
+    "vendor": 162,
+    "pool": "OASIS_5B",
+    "piid": "GS00Q14OADU615"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 454,
+  "fields": {
+    "vendor": 163,
+    "pool": "OASIS_5B",
+    "piid": "GS00Q14OADU616"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 455,
+  "fields": {
+    "vendor": 82,
+    "pool": "OASIS_5B",
+    "piid": "GS00Q14OADU617"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 456,
+  "fields": {
+    "vendor": 165,
+    "pool": "OASIS_5B",
+    "piid": "GS00Q14OADU618"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 457,
+  "fields": {
+    "vendor": 166,
+    "pool": "OASIS_5B",
+    "piid": "GS00Q14OADU619"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 458,
+  "fields": {
+    "vendor": 190,
+    "pool": "OASIS_5B",
+    "piid": "GS00Q14OADU621"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 459,
+  "fields": {
+    "vendor": 193,
+    "pool": "HCATS_SB_1",
+    "piid": "GS02Q16DCR0073"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 460,
+  "fields": {
+    "vendor": 194,
+    "pool": "HCATS_SB_1",
+    "piid": "GS02Q17DCR0007"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 461,
+  "fields": {
+    "vendor": 195,
+    "pool": "HCATS_SB_1",
+    "piid": "GS02Q16DCR0074"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 462,
+  "fields": {
+    "vendor": 196,
+    "pool": "HCATS_SB_1",
+    "piid": "GS02Q16DCR0075"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 463,
+  "fields": {
+    "vendor": 197,
+    "pool": "HCATS_SB_1",
+    "piid": "GS02Q17DCR0010"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 464,
+  "fields": {
+    "vendor": 198,
+    "pool": "HCATS_SB_1",
+    "piid": "GS02Q16DCR0076"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 465,
+  "fields": {
+    "vendor": 199,
+    "pool": "HCATS_SB_1",
+    "piid": "GS02Q16DCR0077"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 466,
+  "fields": {
+    "vendor": 200,
+    "pool": "HCATS_SB_1",
+    "piid": "GS02Q16DCR0078"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 467,
+  "fields": {
+    "vendor": 201,
+    "pool": "HCATS_SB_1",
+    "piid": "GS02Q16DCR0079"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 468,
+  "fields": {
+    "vendor": 202,
+    "pool": "HCATS_SB_1",
+    "piid": "GS02Q16DCR0080"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 469,
+  "fields": {
+    "vendor": 203,
+    "pool": "HCATS_SB_1",
+    "piid": "GS02Q16DCR0081"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 470,
+  "fields": {
+    "vendor": 193,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q16DCR0082"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 471,
+  "fields": {
+    "vendor": 204,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q17DCR0008"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 472,
+  "fields": {
+    "vendor": 195,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q16DCR0083"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 473,
+  "fields": {
+    "vendor": 205,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q17DCR0001"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 474,
+  "fields": {
+    "vendor": 196,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q16DCR0084"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 475,
+  "fields": {
+    "vendor": 206,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q17DCR0002"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 476,
+  "fields": {
+    "vendor": 207,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q17DCR0003"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 477,
+  "fields": {
+    "vendor": 208,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q16DCR0085"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 478,
+  "fields": {
+    "vendor": 209,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q16DCR0086"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 479,
+  "fields": {
+    "vendor": 210,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q16DCR0087"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 480,
+  "fields": {
+    "vendor": 211,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q16DCR0088"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 481,
+  "fields": {
+    "vendor": 212,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q16DCR0090"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 482,
+  "fields": {
+    "vendor": 213,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q16DCR0089"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 483,
+  "fields": {
+    "vendor": 18,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q17DCR0004"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 484,
+  "fields": {
+    "vendor": 214,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q16DCR0091"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 485,
+  "fields": {
+    "vendor": 215,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q16DCR0092"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 486,
+  "fields": {
+    "vendor": 216,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q16DCR0093"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 487,
+  "fields": {
+    "vendor": 217,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q16DCR0094"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 488,
+  "fields": {
+    "vendor": 218,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q16DCR0095"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 489,
+  "fields": {
+    "vendor": 219,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q16DCR0096"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 490,
+  "fields": {
+    "vendor": 220,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q16DCR0097"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 491,
+  "fields": {
+    "vendor": 199,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q16DCR0098"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 492,
+  "fields": {
+    "vendor": 30,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q16DCR0099"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 493,
+  "fields": {
+    "vendor": 221,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q17DCR0006"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 494,
+  "fields": {
+    "vendor": 222,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q17DCR0009"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 495,
+  "fields": {
+    "vendor": 223,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q16DCR0100"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 496,
+  "fields": {
+    "vendor": 224,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q16DCR0101"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 497,
+  "fields": {
+    "vendor": 201,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q16DCR0102"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 498,
+  "fields": {
+    "vendor": 202,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q16DCR0103"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 499,
+  "fields": {
+    "vendor": 225,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q16DCR0104"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 500,
+  "fields": {
+    "vendor": 226,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q16DCR0105"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 501,
+  "fields": {
+    "vendor": 203,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q16DCR0106"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 502,
+  "fields": {
+    "vendor": 227,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q16DCR0107"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 503,
+  "fields": {
+    "vendor": 228,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q16DCR0108"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 504,
+  "fields": {
+    "vendor": 229,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q17DCR0005"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 505,
+  "fields": {
+    "vendor": 230,
+    "pool": "HCATS_SB_2",
+    "piid": "GS02Q16DCR0109"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 506,
+  "fields": {
+    "vendor": 131,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0001"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 507,
+  "fields": {
+    "vendor": 231,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0002"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 508,
+  "fields": {
+    "vendor": 232,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0003"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 509,
+  "fields": {
+    "vendor": 196,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0004"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 510,
+  "fields": {
+    "vendor": 138,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0005"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 511,
+  "fields": {
+    "vendor": 233,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0006"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 512,
+  "fields": {
+    "vendor": 234,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0007"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 513,
+  "fields": {
+    "vendor": 140,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0008"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 514,
+  "fields": {
+    "vendor": 235,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0009"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 515,
+  "fields": {
+    "vendor": 236,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0010"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 516,
+  "fields": {
+    "vendor": 197,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0116"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 517,
+  "fields": {
+    "vendor": 237,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0011"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 518,
+  "fields": {
+    "vendor": 238,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0012"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 519,
+  "fields": {
+    "vendor": 145,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0013"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 520,
+  "fields": {
+    "vendor": 147,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0014"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 521,
+  "fields": {
+    "vendor": 239,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0015"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 522,
+  "fields": {
+    "vendor": 148,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0016"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 523,
+  "fields": {
+    "vendor": 240,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0017"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 524,
+  "fields": {
+    "vendor": 151,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0018"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 525,
+  "fields": {
+    "vendor": 150,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0019"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 526,
+  "fields": {
+    "vendor": 241,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0020"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 527,
+  "fields": {
+    "vendor": 242,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0022"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 528,
+  "fields": {
+    "vendor": 156,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0021"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 529,
+  "fields": {
+    "vendor": 243,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0023"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 530,
+  "fields": {
+    "vendor": 244,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0115"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 531,
+  "fields": {
+    "vendor": 245,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0024"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 532,
+  "fields": {
+    "vendor": 201,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0025"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 533,
+  "fields": {
+    "vendor": 202,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0026"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 534,
+  "fields": {
+    "vendor": 178,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0027"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 535,
+  "fields": {
+    "vendor": 163,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0028"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 536,
+  "fields": {
+    "vendor": 164,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0029"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 537,
+  "fields": {
+    "vendor": 84,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0030"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 538,
+  "fields": {
+    "vendor": 167,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0031"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 539,
+  "fields": {
+    "vendor": 246,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0032"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 540,
+  "fields": {
+    "vendor": 247,
+    "pool": "HCATS_1",
+    "piid": "GS02Q16DCR0033"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 541,
+  "fields": {
+    "vendor": 131,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0034"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 542,
+  "fields": {
+    "vendor": 231,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0035"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 543,
+  "fields": {
+    "vendor": 248,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0036"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 544,
+  "fields": {
+    "vendor": 187,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0110"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 545,
+  "fields": {
+    "vendor": 196,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0037"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 546,
+  "fields": {
+    "vendor": 138,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0038"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 547,
+  "fields": {
+    "vendor": 233,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0039"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 548,
+  "fields": {
+    "vendor": 234,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0040"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 549,
+  "fields": {
+    "vendor": 140,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0041"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 550,
+  "fields": {
+    "vendor": 236,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0042"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 551,
+  "fields": {
+    "vendor": 249,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0043"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 552,
+  "fields": {
+    "vendor": 250,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0111"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 553,
+  "fields": {
+    "vendor": 251,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0112"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 554,
+  "fields": {
+    "vendor": 237,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0044"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 555,
+  "fields": {
+    "vendor": 238,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0045"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 556,
+  "fields": {
+    "vendor": 145,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0046"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 557,
+  "fields": {
+    "vendor": 147,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0047"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 558,
+  "fields": {
+    "vendor": 18,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0114"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 559,
+  "fields": {
+    "vendor": 239,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0048"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 560,
+  "fields": {
+    "vendor": 252,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0049"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 561,
+  "fields": {
+    "vendor": 148,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0050"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 562,
+  "fields": {
+    "vendor": 253,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0051"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 563,
+  "fields": {
+    "vendor": 254,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0113"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 564,
+  "fields": {
+    "vendor": 151,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0052"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 565,
+  "fields": {
+    "vendor": 150,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0053"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 566,
+  "fields": {
+    "vendor": 241,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0054"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 567,
+  "fields": {
+    "vendor": 255,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0055"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 568,
+  "fields": {
+    "vendor": 242,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0057"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 569,
+  "fields": {
+    "vendor": 156,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0056"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 570,
+  "fields": {
+    "vendor": 243,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0058"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 571,
+  "fields": {
+    "vendor": 30,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0059"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 572,
+  "fields": {
+    "vendor": 256,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0060"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 573,
+  "fields": {
+    "vendor": 245,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0061"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 574,
+  "fields": {
+    "vendor": 201,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0062"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 575,
+  "fields": {
+    "vendor": 202,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0063"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 576,
+  "fields": {
+    "vendor": 178,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0064"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 577,
+  "fields": {
+    "vendor": 163,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0065"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 578,
+  "fields": {
+    "vendor": 164,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0066"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 579,
+  "fields": {
+    "vendor": 84,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0067"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 580,
+  "fields": {
+    "vendor": 167,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0068"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 581,
+  "fields": {
+    "vendor": 257,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0069"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 582,
+  "fields": {
+    "vendor": 246,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0070"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 583,
+  "fields": {
+    "vendor": 247,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0071"
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 584,
+  "fields": {
+    "vendor": 258,
+    "pool": "HCATS_2",
+    "piid": "GS02Q16DCR0072"
+  }
+}
+]

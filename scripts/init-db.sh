@@ -15,7 +15,8 @@ fi
 #activate the virtual python environment
 if [ -d /venv ]
 then
-  alias python="/venv/bin/python"
+  echo "> Activating Python virtual environment" | tee -a "$LOG_FILE"
+  alias python3="/venv/bin/python3"
   source /venv/bin/activate
 fi
 
@@ -24,26 +25,22 @@ DB_PORT="${3:-5432}"
 
 if [ "$DB_HOST" != "none" ]
 then
-  if which git >/dev/null
-  then
-    git submodule update --init --recursive
-  fi
-  "$SCRIPT_DIR/wait-for-it/wait-for-it.sh" --host="$DB_HOST" --port="$DB_PORT"
+  "$SCRIPT_DIR/wait-for-it.sh" --host="$DB_HOST" --port="$DB_PORT"
 fi
 
 #run application setup commands
 
 echo "> Migrating Django database structure" | tee -a "$LOG_FILE"
-python manage.py migrate --noinput >>"$LOG_FILE" 2>&1
+python3 manage.py migrate --noinput >>"$LOG_FILE" 2>&1
 
 echo "> Ensuring Django cache table" | tee -a "$LOG_FILE"
-python manage.py createcachetable >>"$LOG_FILE" 2>&1
+python3 manage.py createcachetable >>"$LOG_FILE" 2>&1
 
 echo "> Loading basic category information" | tee -a "$LOG_FILE"
-python manage.py load_categories >>"$LOG_FILE" 2>&1
+python3 manage.py load_categories >>"$LOG_FILE" 2>&1
 
 echo "> Clearing outdated locks" | tee -a "$LOG_FILE"
-python manage.py clear_locks >>"$LOG_FILE" 2>&1
+python3 manage.py clear_locks >>"$LOG_FILE" 2>&1
 
 # Create admin user ONLY IF it doesn't exist yet
 "$SCRIPT_DIR/create-admin.sh" admin admin-changeme >>"$LOG_FILE" 2>&1

@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='fpdscontract',
             name='vendor',
-            field=models.ForeignKey(to='vendors.Vendor', default=691),
+            field=models.ForeignKey(to='vendors.Vendor', default=691, on_delete=models.CASCADE),
             preserve_default=False,
         ),
     ]

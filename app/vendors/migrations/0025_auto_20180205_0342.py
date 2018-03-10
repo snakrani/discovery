@@ -41,6 +41,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='vendor',
             name='sam_location',
-            field=models.ForeignKey(to='vendors.Location', null=True),
+            field=models.ForeignKey(to='vendors.Location', null=True, on_delete=models.CASCADE),
         ),
     ]

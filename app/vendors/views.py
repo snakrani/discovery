@@ -37,7 +37,7 @@ class VendorView(TemplateView):
         return pdf_path
 
 
-def pool_csv(request):
+def PoolCSV(request):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="search_results.csv"'
     writer = csv.writer(response)
@@ -79,8 +79,13 @@ def pool_csv(request):
                 setaside_list.append('X')
             else:
                 setaside_list.append('')
+                
+        if v.sam_location:
+            location = "{}, {}".format(v.sam_location.city, v.sam_location.state)
+        else:
+            location = 'NA'
 
-        v_row = [v.name, v.sam_location.citystate, Contract.objects.filter(NAICS=naics.code, vendor=v).count()]
+        v_row = [v.name, location, Contract.objects.filter(NAICS=naics.code, vendor=v).count()]
         v_row.extend(setaside_list)
         lines.append(v_row)
 
@@ -91,7 +96,7 @@ def pool_csv(request):
     return response
 
 
-def vendor_csv(request, vendor_duns):
+def VendorCSV(request, vendor_duns):
     vendor = Vendor.objects.get(duns=vendor_duns)
     setasides = SetAside.objects.all().order_by('far_order')
 

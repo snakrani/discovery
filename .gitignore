@@ -1,6 +1,7 @@
 *.swp
 *.swn
 local_settings.py
+__pycache__
 *.pyc
 *.DS_Store
 **.log
@@ -10,7 +11,7 @@ logs/*.csv
 .vagrant/
 vagrant/config.yml
 src/
-/static/
+app/static/
 .coverage
 .project
 .pydevproject
@@ -20,3 +21,4 @@ celerybeat.pid
 docs/build
 opencontrols/
 _book
+/tmp/

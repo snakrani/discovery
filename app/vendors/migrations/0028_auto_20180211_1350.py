@@ -19,12 +19,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='poolpiid',
             name='zone',
-            field=models.ForeignKey(to='categories.Zone', null=True),
+            field=models.ForeignKey(to='categories.Zone', null=True, on_delete=models.DO_NOTHING),
         ),
         migrations.AlterField(
             model_name='poolpiid',
             name='pool',
-            field=models.ForeignKey(to='categories.Pool'),
+            field=models.ForeignKey(to='categories.Pool', on_delete=models.DO_NOTHING),
         ),
         migrations.AlterField(
             model_name='vendor',

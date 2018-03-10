@@ -7,13 +7,13 @@ from django.core.management import call_command
 
 from discovery.utils import csv_memory
 from categories.models import SetAside, Pool, Zone
-from vendors.models import Vendor, Manager, PoolPIID
+from vendors.models import Vendor, Manager, PoolMembership, PoolMembershipZone
 
 import os
 import sys
 import logging
 import traceback
-import StringIO
+import io
 
 import requests
 import re
@@ -34,7 +34,7 @@ def vendor_data_logger():
     return logging.getLogger('vendor_data')
 
 def log_data(*args):
-    line = StringIO.StringIO()
+    line = io.StringIO()
     writer = csv.writer(line)
     writer.writerow(args)
     vendor_data_logger().info(line.getvalue().rstrip())
@@ -54,14 +54,48 @@ def duns_plus_4(duns):
 
 
 class Command(BaseCommand):
-
-    option_list = BaseCommand.option_list \
-                  + (make_option('--pause', action='store', type=int, dest='pause', default=1, help="Number of seconds to pause before each query to the SAM API"), ) \
-                  + (make_option('--vehicles', action='store', type=str, dest='vehicles', default='', help="Comma separated list of vehicles to load (lowercase)"), ) \
-                  + (make_option('--pools', action='store', type=str, dest='pools', default='', help="Comma separated list of pool numbers to load from each vehicle"), ) \
-                  + (make_option('--vpp', action='store', type=int, dest='vpp', default=0, help="Number of vendors to load per pool (useful for creating fixtures)"), ) \
-                  + (make_option('--tries', action='store', type=int, dest='tries', default=3, help="Number of tries to query the SAM API before exiting"), )
-
+    
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '--pause',
+            action='store',
+            type=int,
+            default=1,
+            dest='pause',
+            help='Number of seconds to pause before each query to the SAM API',
+        )
+        parser.add_argument(
+            '--tries',
+            action='store',
+            type=int,
+            default=3,
+            dest='tries',
+            help='Number of tries to query the SAM API before exiting',
+        )
+        parser.add_argument(
+            '--vehicles',
+            action='store',
+            type=str,
+            default='',
+            dest='vehicles',
+            help='Comma separated list of vehicles to load (lowercase)',
+        )
+        parser.add_argument(
+            '--pools',
+            action='store',
+            type=str,
+            default='',
+            dest='pools',
+            help='Comma separated list of pool numbers to load from each vehicle',
+        )
+        parser.add_argument(
+            '--vpp',
+            action='store',
+            type=int,
+            default=0,
+            dest='vpp',
+            help='Number of vendors to load per pool (useful for creating fixtures)',
+        )
 
     def update_vendor(self, record, pool_data, options):
         logger = vendor_logger()
@@ -69,7 +103,7 @@ class Command(BaseCommand):
         name = record[0].strip()
         piid = record[1].strip()
         duns = format_duns(record[2].strip())
-        zone = record[9].strip()
+        zones = record[9].strip()
         
         # Get vendor object
         vendor, created = Vendor.objects.get_or_create(duns=duns)
@@ -112,13 +146,14 @@ class Command(BaseCommand):
         
         vendor.save()
         
-        # Update pool relationship
-        if zone and zone.lower() != 'all':
-            zone = Zone.objects.get(id=int(zone))
-        else:
-            zone = None
+        # Update pool membership information
+        membership, ppcreated = PoolMembership.objects.get_or_create(vendor=vendor, pool=pool_data, piid=piid)
         
-        poolpiid, ppcreated = PoolPIID.objects.get_or_create(vendor=vendor, pool=pool_data, piid=piid, zone=zone)
+        if zones and zones.lower() != 'all':
+            for zone in [x.strip() for x in zones.split(',')]:
+                PoolMembershipZone.objects.get_or_create(membership=membership, zone=Zone.objects.get(id=int(zone)))
+        else:
+            zone = None    
         
         log_memory("Final vendor [ {} - {} ]".format(pool_data.id, vendor.id))
         log_data(
@@ -131,7 +166,7 @@ class Command(BaseCommand):
             pm.name,
             ":".join(pm.phones()),
             ":".join(pm.emails()),
-            zone,
+            zones,
             ":".join([str(sa.pk) for sa in vendor.setasides.all()])
         )
         
@@ -218,12 +253,12 @@ class Command(BaseCommand):
             'PM Name', 
             'PM Phones', 
             'PM Emails',
-            'Zone',
+            'Zones',
             'SetAsides'
         )
         
-        vehicles = filter(None, "".join(options['vehicles'].lower().split()).split(','))
-        pools = filter(None, "".join(options['pools'].split()).split(','))
+        vehicles = [x.strip() for x in options['vehicles'].lower().split(',') if x != '']
+        pools = [x.strip() for x in options['pools'].lower().split(',') if x != '']
         
         try:
             for vehicle in settings.VEHICLES:
@@ -231,7 +266,7 @@ class Command(BaseCommand):
                     new_vendor_count += self.update_vehicle(vehicle, options, pools)
 
             #load extra SAM fields
-            call_command('load_sam', **options)
+            call_command('load_sam', **{k: options[k] for k in ('pause', 'tries')})
 
         except Exception as e:
             display_error(e)

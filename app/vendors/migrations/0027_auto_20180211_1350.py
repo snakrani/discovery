@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('address', models.CharField(max_length=128, null=True)),
-                ('manager', models.ForeignKey(related_name='email', to='vendors.Manager', null=True)),
+                ('manager', models.ForeignKey(related_name='email', to='vendors.Manager', null=True, on_delete=models.CASCADE)),
             ],
         ),
         migrations.CreateModel(
@@ -49,13 +49,13 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('number', models.CharField(max_length=128, null=True)),
-                ('manager', models.ForeignKey(related_name='phone', to='vendors.Manager', null=True)),
+                ('manager', models.ForeignKey(related_name='phone', to='vendors.Manager', null=True, on_delete=models.CASCADE)),
             ],
         ),
         migrations.AddField(
             model_name='manager',
             name='vendor',
-            field=models.ForeignKey(related_name='managers', to='vendors.Vendor', null=True),
+            field=models.ForeignKey(related_name='managers', to='vendors.Vendor', null=True, on_delete=models.CASCADE),
         ),
         
         migrations.RunPython(migrate_managers),

@@ -1,0 +1,100 @@
+#
+# All Docker related files with the exception of this one reside in the
+# "docker" folder to unclutter the top level project directory.
+#
+# IMPORTANT:
+#
+# Before running docker-compose up be sure to copy "docker/django-env.example.vars"
+# into "docker/django-env.vars" and update the necessary environment variables
+# accordingly.
+#
+version: '2.3'
+services:
+  gateway:
+    depends_on:
+      - web
+    ports:
+      - "8080:5000"
+      - "1936:1936"
+    extends:
+      file: docker/docker-compose.base.yml
+      service: lb
+
+  web:
+    command: bash -c "scripts/init-webserver.sh /dev/stderr && cd app && waitress-serve --expose-tracebacks --port=80 discovery.wsgi:application"
+    scale: 3
+    depends_on:
+      - scheduler
+      - auth
+    links:
+      - data:discovery-db
+      - tasks:discovery-tasks
+      - auth:discovery-auth
+    extends:
+      file: docker/docker-compose.base.yml
+      service: django
+
+  worker:
+    command: bash -c "celery --workdir=app --app=discovery worker --loglevel=info --concurrency=2"
+    restart: always
+    scale: 2
+    depends_on:
+      - scheduler
+    links:
+      - data:discovery-db
+      - tasks:discovery-tasks
+      - auth:discovery-auth
+    extends:
+      file: docker/docker-compose.base.yml
+      service: django
+
+  scheduler:
+    command: bash -c "scripts/init-db.sh /dev/stderr discovery-db 5432 && celery --workdir=app --app=discovery beat --loglevel=info --pidfile=../logs/celerybeat.pid"
+    restart: always
+    depends_on:
+      - data
+      - tasks
+    links:
+      - data:discovery-db
+      - tasks:discovery-tasks
+      - auth:discovery-auth
+    extends:
+      file: ./docker/docker-compose.base.yml
+      service: django
+
+  data:
+    ports:
+      - "5432:5432"
+    volumes:
+      - discovery-data:/var/lib/postgresql
+    extends:
+      file: docker/docker-compose.base.yml
+      service: db
+
+  tasks:
+    ports:
+      - "6379:6379"
+    volumes:
+      - discovery-tasks:/data
+    extends:
+      file: docker/docker-compose.base.yml
+      service: queue
+
+  auth:
+    ports:
+      - "6479:6379"
+    volumes:
+      - discovery-auth:/data
+    extends:
+      file: docker/docker-compose.base.yml
+      service: queue
+
+volumes:
+  discovery-data:
+    external: false
+
+  discovery-tasks:
+    external: false
+
+  discovery-auth:
+    external: false

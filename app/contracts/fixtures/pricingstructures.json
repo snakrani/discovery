@@ -1,0 +1,114 @@
+[
+{
+  "model": "contracts.pricingstructure",
+  "pk": "1",
+  "fields": {
+    "name": "Order Dependent"
+  }
+},
+{
+  "model": "contracts.pricingstructure",
+  "pk": "2",
+  "fields": {
+    "name": "Combination"
+  }
+},
+{
+  "model": "contracts.pricingstructure",
+  "pk": "3",
+  "fields": {
+    "name": "Other"
+  }
+},
+{
+  "model": "contracts.pricingstructure",
+  "pk": "A",
+  "fields": {
+    "name": "Fixed Price Redetermination"
+  }
+},
+{
+  "model": "contracts.pricingstructure",
+  "pk": "B",
+  "fields": {
+    "name": "Fixed Price Level of Effort"
+  }
+},
+{
+  "model": "contracts.pricingstructure",
+  "pk": "J",
+  "fields": {
+    "name": "Firm Fixed Price"
+  }
+},
+{
+  "model": "contracts.pricingstructure",
+  "pk": "K",
+  "fields": {
+    "name": "Fixed Price with Economic Price Adjustment"
+  }
+},
+{
+  "model": "contracts.pricingstructure",
+  "pk": "L",
+  "fields": {
+    "name": "Fixed Price Incentive"
+  }
+},
+{
+  "model": "contracts.pricingstructure",
+  "pk": "M",
+  "fields": {
+    "name": "Fixed Price Award Fee"
+  }
+},
+{
+  "model": "contracts.pricingstructure",
+  "pk": "R",
+  "fields": {
+    "name": "Cost Plus Award Fee"
+  }
+},
+{
+  "model": "contracts.pricingstructure",
+  "pk": "S",
+  "fields": {
+    "name": "Cost No Fee"
+  }
+},
+{
+  "model": "contracts.pricingstructure",
+  "pk": "T",
+  "fields": {
+    "name": "Cost Sharing"
+  }
+},
+{
+  "model": "contracts.pricingstructure",
+  "pk": "U",
+  "fields": {
+    "name": "Cost Plus Fixed Fee"
+  }
+},
+{
+  "model": "contracts.pricingstructure",
+  "pk": "V",
+  "fields": {
+    "name": "Cost Plus Incentive Fee"
+  }
+},
+{
+  "model": "contracts.pricingstructure",
+  "pk": "Y",
+  "fields": {
+    "name": "Time and Materials"
+  }
+},
+{
+  "model": "contracts.pricingstructure",
+  "pk": "Z",
+  "fields": {
+    "name": "Labor Hours"
+  }
+}
+]

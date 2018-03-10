@@ -15,11 +15,14 @@ cd "$SCRIPT_DIR/../app"
 ./manage.py loaddata vendors/fixtures/managers.json # reqs: vendors
 ./manage.py loaddata vendors/fixtures/managerphonenumbers.json # reqs: managers
 ./manage.py loaddata vendors/fixtures/manageremails.json # reqs: managers
-./manage.py loaddata vendors/fixtures/poolpiids.json # reqs: pool, vendor, zone
+./manage.py loaddata vendors/fixtures/poolmemberships.json # reqs: pool, vendor
+./manage.py loaddata vendors/fixtures/poolmembershipzones.json # reqs: poolmembership, zone
 ./manage.py loaddata vendors/fixtures/samloads.json
 
 # Load contract related fixtures
 
+./manage.py loaddata contracts/fixtures/contractstatuses.json
+./manage.py loaddata contracts/fixtures/pricingstructures.json
 ./manage.py loaddata contracts/fixtures/placesofperformance.json
-./manage.py loaddata contracts/fixtures/contracts.json #reqs: naics, vendor, piid
+./manage.py loaddata contracts/fixtures/contracts.json #reqs: naics, vendor, piid, contractstatus, pricingstructure, placeofperformance
 ./manage.py loaddata contracts/fixtures/fpdsloads.json #reqs: vendor

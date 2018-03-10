@@ -1,0 +1,156 @@
+[
+{
+  "model": "contracts.contractstatus",
+  "pk": "A",
+  "fields": {
+    "name": "Additional Work"
+  }
+},
+{
+  "model": "contracts.contractstatus",
+  "pk": "B",
+  "fields": {
+    "name": "Supplemental Agreement for work within scope"
+  }
+},
+{
+  "model": "contracts.contractstatus",
+  "pk": "C",
+  "fields": {
+    "name": "Funding Only Action"
+  }
+},
+{
+  "model": "contracts.contractstatus",
+  "pk": "C1",
+  "fields": {
+    "name": "Completed"
+  }
+},
+{
+  "model": "contracts.contractstatus",
+  "pk": "C2",
+  "fields": {
+    "name": "Current"
+  }
+},
+{
+  "model": "contracts.contractstatus",
+  "pk": "D",
+  "fields": {
+    "name": "Change Order"
+  }
+},
+{
+  "model": "contracts.contractstatus",
+  "pk": "E",
+  "fields": {
+    "name": "Terminated for Default"
+  }
+},
+{
+  "model": "contracts.contractstatus",
+  "pk": "F",
+  "fields": {
+    "name": "Terminated for Convenience"
+  }
+},
+{
+  "model": "contracts.contractstatus",
+  "pk": "G",
+  "fields": {
+    "name": "Exercise an Option"
+  }
+},
+{
+  "model": "contracts.contractstatus",
+  "pk": "H",
+  "fields": {
+    "name": "Definitize Letter Contract"
+  }
+},
+{
+  "model": "contracts.contractstatus",
+  "pk": "J",
+  "fields": {
+    "name": "Novation Agreement"
+  }
+},
+{
+  "model": "contracts.contractstatus",
+  "pk": "K",
+  "fields": {
+    "name": "Close out"
+  }
+},
+{
+  "model": "contracts.contractstatus",
+  "pk": "L",
+  "fields": {
+    "name": "Definitize Letter Contract"
+  }
+},
+{
+  "model": "contracts.contractstatus",
+  "pk": "M",
+  "fields": {
+    "name": "Other Adminitrative Action"
+  }
+},
+{
+  "model": "contracts.contractstatus",
+  "pk": "N",
+  "fields": {
+    "name": "Legal Contract Cancellation"
+  }
+},
+{
+  "model": "contracts.contractstatus",
+  "pk": "P",
+  "fields": {
+    "name": "Representation of non-Novated Merger/Acquisitoin"
+  }
+},
+{
+  "model": "contracts.contractstatus",
+  "pk": "R",
+  "fields": {
+    "name": "Rerepresentation"
+  }
+},
+{
+  "model": "contracts.contractstatus",
+  "pk": "S",
+  "fields": {
+    "name": "Change PIID"
+  }
+},
+{
+  "model": "contracts.contractstatus",
+  "pk": "T",
+  "fields": {
+    "name": "Transfer Action"
+  }
+},
+{
+  "model": "contracts.contractstatus",
+  "pk": "V",
+  "fields": {
+    "name": "Vendor DUNS Change"
+  }
+},
+{
+  "model": "contracts.contractstatus",
+  "pk": "W",
+  "fields": {
+    "name": "Vendor Address Change"
+  }
+},
+{
+  "model": "contracts.contractstatus",
+  "pk": "X",
+  "fields": {
+    "name": "Terminated for Cause"
+  }
+}
+]
