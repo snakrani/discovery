@@ -15,7 +15,7 @@ BIN_DIR="/usr/local/bin"
 apt-get update >>"$LOG_FILE" 2>&1 
 
 echo "> Installing Chrome dependencies" | tee -a "$LOG_FILE"
-apt-get install -y wget unzip libappindicator1 libxss1 libasound2 libx11-xcb1 libminizip1 libwebpmux2 libgtk-3-0 >>"$LOG_FILE" 2>&1
+apt-get install -y wget unzip xvfb libappindicator1 libxss1 libasound2 libx11-xcb1 libminizip1 libwebpmux2 libgtk-3-0 >>"$LOG_FILE" 2>&1
 
 if ! which google-chrome >/dev/null
 then
