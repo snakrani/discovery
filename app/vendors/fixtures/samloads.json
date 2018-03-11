@@ -3,13 +3,6 @@
   "model": "vendors.samload",
   "pk": 1,
   "fields": {
-    "sam_load": "2018-03-07"
-  }
-},
-{
-  "model": "vendors.samload",
-  "pk": 2,
-  "fields": {
     "sam_load": "2018-03-10"
   }
 }
