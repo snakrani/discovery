@@ -73,7 +73,7 @@ class SetAsideViewSet(DiscoveryReadOnlyModelViewSet):
         'list': (SearchFilter, OrderingFilter),
     }
     search_fields = ['code', 'name', 'description']
-    ordering_fields = ['code', 'name', 'description']
+    ordering_fields = ['code', 'name', 'description', 'far_order']
     ordering = 'name'
     
     pagination_class = pagination.ResultSetPagination
