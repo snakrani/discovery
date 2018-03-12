@@ -186,7 +186,7 @@ class ContractsTest(TestCase):
         self.path = '/api/contracts/'
 
     def test_default_pagination(self):
-        resp = self.c.get(self.path, {'vendor__duns': '007901598'})
+        resp = self.c.get(self.path, {'vendor__duns': '926451519'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(len(resp.data['results']), 100)
         self.assertEqual(resp.data['previous'], None)
@@ -194,7 +194,7 @@ class ContractsTest(TestCase):
         self.assertEqual(resp.data['count'], 500)
     
     def test_custom_pagination(self):
-        resp = self.c.get(self.path, {'vendor__duns': '007901598', 'count': 25})
+        resp = self.c.get(self.path, {'vendor__duns': '926451519', 'count': 25})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(len(resp.data['results']), 25)
         self.assertEqual(resp.data['previous'], None)
