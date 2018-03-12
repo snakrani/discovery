@@ -152,16 +152,20 @@ class ResponseValidator(object):
         self.compare_data('assertIsNot', data_value, not_value)
         
     def is_in(self, resp_value, correct_values):
+        correct_values = correct_values.split(',') if isinstance(correct_values, str) else correct_values
         self.compare('assertIn', resp_value, correct_values)
         
     def is_in_data(self, data_value, correct_values):
+        correct_values = correct_values.split(',') if isinstance(correct_values, str) else correct_values
         self.compare_data('assertIn', data_value, correct_values)
         
     def is_not_in(self, resp_value, not_values):
-        self.compare('assertNotIn', resp_value, not_value)
+        not_values = not_values.split(',') if isinstance(not_values, str) else not_values
+        self.compare('assertNotIn', resp_value, not_values)
         
     def is_not_in_data(self, data_value, not_values):
-        self.compare_data('assertNotIn', data_value, not_value)
+        not_values = not_values.split(',') if isinstance(not_values, str) else not_values
+        self.compare_data('assertNotIn', data_value, not_values)
         
     def is_instance(self, resp_value, correct_value):
         self.compare('assertIsInstance', resp_value, correct_value)
@@ -450,7 +454,7 @@ class DiscoveryAssertions(object):
         if not self._check_float(number):
             raise AssertionError("Value ({}) given is not a numeric value".format(number))
         
-        if float(number) > maximum_value:
+        if float(number) > float(maximum_value):
             raise AssertionError("Value ({}) given is greater than the maximum allowed ({})".format(number, maximum_value))
         
     def assertLessThan(self, number, excluded_value, **params):
@@ -460,7 +464,7 @@ class DiscoveryAssertions(object):
         if not self._check_float(number):
             raise AssertionError("Value ({}) given is not a numeric value".format(number))
         
-        if float(number) >= excluded_value:
+        if float(number) >= float(excluded_value):
             raise AssertionError("Value ({}) given is not less than ({})".format(number, excluded_value))
               
     def assertGreaterThanEqual(self, number, minimum_value, **params):
@@ -470,7 +474,7 @@ class DiscoveryAssertions(object):
         if not self._check_float(number):
             raise AssertionError("Value ({}) given is not a numeric value".format(number))
         
-        if float(number) < minimum_value:
+        if float(number) < float(minimum_value):
             raise AssertionError("Value ({}) given is less than the minimum allowed ({})".format(number, minimum_value))
         
     def assertGreaterThan(self, number, excluded_value, **params):
@@ -480,7 +484,7 @@ class DiscoveryAssertions(object):
         if not self._check_float(number):
             raise AssertionError("Value ({}) given is not a numeric value".format(number))
         
-        if float(number) <= excluded_value:
+        if float(number) <= float(excluded_value):
             raise AssertionError("Value ({}) given is not greater than ({})".format(number, excluded_value))
    
     def assertBetween(self, number, correct_values, **params):
