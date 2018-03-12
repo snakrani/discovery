@@ -38,7 +38,11 @@ ASSERTION_MAP = {
 
 
 def normalize_list(input_value):
-    return [input_value] if not isinstance(input_value, list) else input_value
+    if isinstance(input_value, (str, int, float)):
+        return [input_value]
+    elif isinstance(input_value, tuple):
+        return list(input_value)
+    return input_value
 
 
 def get_nested_value(data, keys):
