@@ -5,7 +5,9 @@ VEHICLE_CHOICES = (
     ('OASIS_SB', 'OASIS Small Business'),
     ('OASIS', 'OASIS Unrestricted'),
     ('HCATS_SB', 'HCATS Small Business'),
-    ('HCATS', 'HCATS Unrestricted')
+    ('HCATS', 'HCATS Unrestricted'),
+    ('BMO_SB', 'BMO Small Business'),
+    ('BMO', 'BMO Unrestricted')
 )
 
 

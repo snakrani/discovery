@@ -104,17 +104,14 @@ var URLManager = {
     },
 
     getDUNS: function() {
-        //extract pool information from document url
-        var pathArray = window.location.href.split('/');
+        var pathArray = window.location.pathname.split('/');
         pathArray = pathArray.removeEmpties();
-        var i = pathArray.length - 1;
 
-        while (i--) {
-            if (parseInt(pathArray[i], 10) !== NaN) {
+        for (var i = 0; i < pathArray.length; i++) {
+            if (!isNaN(pathArray[i])) {
                 return pathArray[i];
             }
         }
-
         return false;
     },
 

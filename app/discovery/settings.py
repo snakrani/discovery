@@ -38,7 +38,9 @@ VEHICLES = (
     'oasis_sb', 
     'oasis', 
     'hcats_sb', 
-    'hcats'
+    'hcats',
+    'bmo_sb',
+    'bmo'
 )
 
 #-------------------------------------------------------------------------------
@@ -331,6 +333,8 @@ CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 #
 # REST configuration 
 #
+REST_PAGE_COUNT = 100
+
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'api.schemas.DiscoverySchema',
     
@@ -345,7 +349,7 @@ REST_FRAMEWORK = {
     'SEARCH_PARAM': 'q',
     
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 100,
+    'PAGE_SIZE': REST_PAGE_COUNT,
     
     'COERCE_DECIMAL_TO_STRING': False,
 }

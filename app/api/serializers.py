@@ -15,7 +15,7 @@ class NaicsSerializer(ModelSerializer):
 class SetAsideSerializer(ModelSerializer):
     class Meta:
         model = categories.SetAside
-        fields = ['code', 'name', 'description']
+        fields = ['code', 'name', 'description', 'far_order']
 
 
 class PoolSerializer(ModelSerializer):

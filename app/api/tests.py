@@ -39,7 +39,7 @@ class PoolsTest(TestCase):
     def test_request_no_params(self):
         resp = self.c.get(self.path, {'format': 'json'})
         
-        self.assertEqual(resp.data['count'], 18)
+        self.assertEqual(resp.data['count'], 52)
         self.assertEqual(resp.status_code, 200)
 
     def test_request_vehicle_param(self):

@@ -210,8 +210,8 @@
     "duns_4": "1272224660000",
     "cage": "3DFS9",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-11-20T16:13:41Z",
-    "sam_expiration_date": "2018-11-20T15:56:30Z",
+    "sam_activation_date": "2018-03-07T13:30:13Z",
+    "sam_expiration_date": "2019-03-07T13:14:59Z",
     "sam_exclusion": false,
     "sam_url": "http://www.chevoconsulting.com",
     "sam_location": 12,
@@ -1022,8 +1022,8 @@
     "duns_4": "8079903820000",
     "cage": "4YHD4",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-10-16T16:28:58Z",
-    "sam_expiration_date": "2018-10-16T16:09:22Z",
+    "sam_activation_date": "2018-03-08T14:30:13Z",
+    "sam_expiration_date": "2019-03-08T14:16:57Z",
     "sam_exclusion": false,
     "sam_url": null,
     "sam_location": 53,
@@ -1056,8 +1056,8 @@
     "duns_4": "8835048540000",
     "cage": "07GB6",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-05-09T15:00:10Z",
-    "sam_expiration_date": "2018-05-09T14:40:25Z",
+    "sam_activation_date": "2018-03-08T16:45:09Z",
+    "sam_expiration_date": "2019-03-08T16:38:57Z",
     "sam_exclusion": false,
     "sam_url": "http://www.btas.com",
     "sam_location": 55,
@@ -1255,8 +1255,8 @@
     "duns_4": "0479395040000",
     "cage": "1JSR9",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-10-24T08:28:50Z",
-    "sam_expiration_date": "2018-10-24T08:16:07Z",
+    "sam_activation_date": "2018-03-09T15:00:10Z",
+    "sam_expiration_date": "2019-03-09T14:46:38Z",
     "sam_exclusion": false,
     "sam_url": "http://www.integrity-apps.com",
     "sam_location": 66,
@@ -1448,8 +1448,8 @@
     "duns_4": "1327298770000",
     "cage": "1PST8",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-02-01T21:45:06Z",
-    "sam_expiration_date": "2019-02-01T21:39:02Z",
+    "sam_activation_date": "2018-03-07T08:45:08Z",
+    "sam_expiration_date": "2019-03-07T08:28:14Z",
     "sam_exclusion": false,
     "sam_url": "http://www.epeerless.com",
     "sam_location": 77,
@@ -2368,8 +2368,8 @@
     "duns_4": "1397271480000",
     "cage": "1ZD18",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-01-25T10:00:09Z",
-    "sam_expiration_date": "2019-01-25T09:43:04Z",
+    "sam_activation_date": "2018-03-06T10:00:10Z",
+    "sam_expiration_date": "2019-03-06T09:46:05Z",
     "sam_exclusion": false,
     "sam_url": "http://www.accenture.com",
     "sam_location": 129,
@@ -2487,8 +2487,8 @@
     "duns_4": "0069288570000",
     "cage": "17038",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-10-16T09:28:57Z",
-    "sam_expiration_date": "2018-10-16T09:08:53Z",
+    "sam_activation_date": "2018-03-07T12:00:21Z",
+    "sam_expiration_date": "2019-03-07T11:45:24Z",
     "sam_exclusion": false,
     "sam_url": "HTTP://WWW.BOOZALLEN.COM",
     "sam_location": 136,
@@ -2861,8 +2861,8 @@
     "duns_4": "8097900170000",
     "cage": "00TB2",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-11-01T15:44:45Z",
-    "sam_expiration_date": "2018-11-01T15:26:26Z",
+    "sam_activation_date": "2018-03-07T08:45:08Z",
+    "sam_expiration_date": "2019-03-07T08:33:17Z",
     "sam_exclusion": false,
     "sam_url": null,
     "sam_location": 158,
@@ -3235,8 +3235,8 @@
     "duns_4": "1615797350000",
     "cage": "0CA21",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-11-09T12:29:09Z",
-    "sam_expiration_date": "2018-11-09T12:19:02Z",
+    "sam_activation_date": "2018-03-08T13:15:18Z",
+    "sam_expiration_date": "2019-03-08T13:01:56Z",
     "sam_exclusion": false,
     "sam_url": "http://www.milcorp.com",
     "sam_location": 180,
@@ -3320,8 +3320,8 @@
     "duns_4": "0777997990000",
     "cage": "61443",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-01-25T11:00:15Z",
-    "sam_expiration_date": "2019-01-25T10:49:07Z",
+    "sam_activation_date": "2018-03-07T14:30:14Z",
+    "sam_expiration_date": "2019-03-07T14:16:41Z",
     "sam_exclusion": false,
     "sam_url": null,
     "sam_location": 185,
@@ -4100,7 +4100,7 @@
     "duns": "128560328",
     "duns_4": "1285603280000",
     "cage": "3DW81",
-    "sam_status": "ACTIVE",
+    "sam_status": "EXPIRED",
     "sam_activation_date": "2017-03-06T12:56:55Z",
     "sam_expiration_date": "2018-03-06T12:17:31Z",
     "sam_exclusion": false,
@@ -4341,8 +4341,8 @@
     "duns_4": "0823556520000",
     "cage": "5J639",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-11-01T14:29:32Z",
-    "sam_expiration_date": "2018-11-01T14:22:49Z",
+    "sam_activation_date": "2018-03-07T13:30:12Z",
+    "sam_expiration_date": "2019-03-07T13:12:33Z",
     "sam_exclusion": false,
     "sam_url": "http://www.managementconcepts.com",
     "sam_location": 241,
@@ -4601,6 +4601,872 @@
     "sam_exclusion": false,
     "sam_url": "http://www.yrci.com",
     "sam_location": 255,
+    "setasides": []
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 259,
+  "fields": {
+    "name": "ACEPEX Management",
+    "duns": "090967704",
+    "duns_4": "0909677040000",
+    "cage": "1A9K1",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2017-12-21T12:43:23Z",
+    "sam_expiration_date": "2018-12-21T12:23:39Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.acepex.com",
+    "sam_location": 256,
+    "setasides": [
+      15
+    ]
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 260,
+  "fields": {
+    "name": "Action Facilities Management, Inc.",
+    "duns": "129304551",
+    "duns_4": "1293045510000",
+    "cage": "3EET9",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-01-02T14:39:40Z",
+    "sam_expiration_date": "2019-01-02T14:07:54Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.actionfacilities.com",
+    "sam_location": 257,
+    "setasides": [
+      3,
+      15
+    ]
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 261,
+  "fields": {
+    "name": "Ben Fitzgerald Real Estate dba Rosemark",
+    "duns": "053117149",
+    "duns_4": "0531171490000",
+    "cage": "1TG18",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2017-07-07T16:14:42Z",
+    "sam_expiration_date": "2018-07-07T15:58:08Z",
+    "sam_exclusion": false,
+    "sam_url": "HTTP://WWW.ROSEMARKONLINE.COM",
+    "sam_location": 258,
+    "setasides": []
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 262,
+  "fields": {
+    "name": "CEEPCO Contracting",
+    "duns": "187402586",
+    "duns_4": "1874025860000",
+    "cage": "363W8",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-02-11T12:00:08Z",
+    "sam_expiration_date": "2019-02-11T11:48:18Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.ceepco.com",
+    "sam_location": 259,
+    "setasides": [
+      15,
+      16
+    ]
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 263,
+  "fields": {
+    "name": "Chenega Facility Mgmt",
+    "duns": "078650478",
+    "duns_4": "0786504780000",
+    "cage": "6TLQ7",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-02-16T16:30:09Z",
+    "sam_expiration_date": "2019-02-16T15:52:37Z",
+    "sam_exclusion": false,
+    "sam_url": null,
+    "sam_location": 260,
+    "setasides": [
+      15,
+      16
+    ]
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 264,
+  "fields": {
+    "name": "CMI Facilites Management",
+    "duns": "602619223",
+    "duns_4": "6026192230000",
+    "cage": "0YSJ1",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-02-26T08:30:04Z",
+    "sam_expiration_date": "2019-02-26T08:24:05Z",
+    "sam_exclusion": false,
+    "sam_url": "https://www.cmimgmt.com",
+    "sam_location": 261,
+    "setasides": []
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 265,
+  "fields": {
+    "name": "Four Seasons Environmental",
+    "duns": "107611246",
+    "duns_4": "1076112460000",
+    "cage": "02PC7",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2017-04-04T08:27:58Z",
+    "sam_expiration_date": "2018-04-04T07:39:10Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.fseinc.net",
+    "sam_location": 262,
+    "setasides": []
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 266,
+  "fields": {
+    "name": "Global Precision Systems",
+    "duns": "805596710",
+    "duns_4": "8055967100000",
+    "cage": "4UB21",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2017-10-05T07:09:12Z",
+    "sam_expiration_date": "2018-10-04T19:10:33Z",
+    "sam_exclusion": false,
+    "sam_url": null,
+    "sam_location": 263,
+    "setasides": [
+      15,
+      16
+    ]
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 267,
+  "fields": {
+    "name": "Inspection Experts,Inc.",
+    "duns": "187931717",
+    "duns_4": "1879317170000",
+    "cage": "4AQW8",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-03-01T11:00:16Z",
+    "sam_expiration_date": "2019-03-01T10:46:45Z",
+    "sam_exclusion": false,
+    "sam_url": "https://www.ieinc.net",
+    "sam_location": 264,
+    "setasides": [
+      3,
+      15,
+      16
+    ]
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 268,
+  "fields": {
+    "name": "Native Energy & Technology, Inc.",
+    "duns": "080778868",
+    "duns_4": "0807788680000",
+    "cage": "1L8Y9",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2017-10-17T13:59:06Z",
+    "sam_expiration_date": "2018-10-17T13:49:48Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.native-energy.com",
+    "sam_location": 265,
+    "setasides": [
+      15
+    ]
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 269,
+  "fields": {
+    "name": "NVE Inc",
+    "duns": "141611272",
+    "duns_4": "1416112720000",
+    "cage": "3RKV2",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2017-11-14T15:44:34Z",
+    "sam_expiration_date": "2018-11-14T15:36:39Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.nvecorp.com",
+    "sam_location": 266,
+    "setasides": [
+      3,
+      15
+    ]
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 270,
+  "fields": {
+    "name": "Preventative Maintenance Service Company",
+    "duns": "847316189",
+    "duns_4": "8473161890000",
+    "cage": "004Q5",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2017-06-02T07:10:46Z",
+    "sam_expiration_date": "2018-06-01T18:59:17Z",
+    "sam_exclusion": false,
+    "sam_url": null,
+    "sam_location": 267,
+    "setasides": [
+      3,
+      15
+    ]
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 271,
+  "fields": {
+    "name": "ProSource Consulting",
+    "duns": "134345326",
+    "duns_4": "1343453260000",
+    "cage": "3HS74",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-01-31T17:45:10Z",
+    "sam_expiration_date": "2019-01-31T17:37:36Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.prosourcenow.com",
+    "sam_location": 268,
+    "setasides": [
+      3,
+      15
+    ]
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 272,
+  "fields": {
+    "name": "Raven Service Corporation",
+    "duns": "064860299",
+    "duns_4": "0648602990000",
+    "cage": "1FAN6",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2017-11-27T09:43:35Z",
+    "sam_expiration_date": "2018-11-27T09:27:57Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.ravenservices.us",
+    "sam_location": 269,
+    "setasides": []
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 273,
+  "fields": {
+    "name": "SDAC Facility Service LLC",
+    "duns": "079515381",
+    "duns_4": "0795153810000",
+    "cage": "77M00",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2017-09-21T15:14:08Z",
+    "sam_expiration_date": "2018-09-21T15:01:47Z",
+    "sam_exclusion": false,
+    "sam_url": null,
+    "sam_location": 270,
+    "setasides": [
+      1,
+      2,
+      15,
+      16
+    ]
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 274,
+  "fields": {
+    "name": "Tigua Enterprises Inc",
+    "duns": "830124462",
+    "duns_4": "8301244620000",
+    "cage": "5E6N6",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-03-08T12:30:46Z",
+    "sam_expiration_date": "2019-03-08T12:21:18Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.tiguainc.org",
+    "sam_location": 271,
+    "setasides": [
+      15,
+      16
+    ]
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 275,
+  "fields": {
+    "name": "Trademasters",
+    "duns": "834434649",
+    "duns_4": "8344346490000",
+    "cage": "43NA6",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2017-10-12T10:43:57Z",
+    "sam_expiration_date": "2018-10-12T10:27:53Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.gov.trademasters.com",
+    "sam_location": 272,
+    "setasides": [
+      15,
+      16
+    ]
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 276,
+  "fields": {
+    "name": "Urban Services",
+    "duns": "933708141",
+    "duns_4": "9337081410000",
+    "cage": "1H1V6",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2017-09-14T15:59:19Z",
+    "sam_expiration_date": "2018-09-14T15:17:30Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.URBANSERVICESGROUP.COM",
+    "sam_location": 273,
+    "setasides": []
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 277,
+  "fields": {
+    "name": "Zero Waste Solutions",
+    "duns": "147175017",
+    "duns_4": "1471750170000",
+    "cage": "374W7",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-02-01T22:00:06Z",
+    "sam_expiration_date": "2019-02-01T21:44:26Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.zerowastesolutions.com",
+    "sam_location": 274,
+    "setasides": [
+      3,
+      15
+    ]
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 278,
+  "fields": {
+    "name": "B3 Enterprises LLC",
+    "duns": "610940632",
+    "duns_4": "6109406320000",
+    "cage": "47U96",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-01-24T13:15:12Z",
+    "sam_expiration_date": "2019-01-24T13:07:14Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.b3enterprisesllc.com",
+    "sam_location": 275,
+    "setasides": [
+      1,
+      2,
+      15
+    ]
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 279,
+  "fields": {
+    "name": "Brown Point Management Solutions",
+    "duns": "080438446",
+    "duns_4": "0804384460000",
+    "cage": "7SEA5",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2017-11-08T09:28:53Z",
+    "sam_expiration_date": "2018-11-08T09:22:45Z",
+    "sam_exclusion": false,
+    "sam_url": null,
+    "sam_location": 276,
+    "setasides": [
+      3
+    ]
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 280,
+  "fields": {
+    "name": "CTSI-FM LLC",
+    "duns": "052648261",
+    "duns_4": "0526482610000",
+    "cage": "6JSM3",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-02-05T15:15:15Z",
+    "sam_expiration_date": "2019-02-05T15:09:15Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.CTSI-FM.com",
+    "sam_location": 277,
+    "setasides": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 281,
+  "fields": {
+    "name": "Facility Services Management",
+    "duns": "884999491",
+    "duns_4": "8849994910000",
+    "cage": "05HC6",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-01-02T09:58:20Z",
+    "sam_expiration_date": "2019-01-02T09:15:40Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.facsvcs.com",
+    "sam_location": 278,
+    "setasides": [
+      3
+    ]
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 282,
+  "fields": {
+    "name": "General Mechanical Services",
+    "duns": "031432615",
+    "duns_4": "0314326150000",
+    "cage": "1GYD2",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2017-09-08T10:29:10Z",
+    "sam_expiration_date": "2018-09-08T10:18:39Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.gms-hvac.com",
+    "sam_location": 279,
+    "setasides": [
+      15
+    ]
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 283,
+  "fields": {
+    "name": "Government Contracting Resources Inc",
+    "duns": "614155380",
+    "duns_4": "6141553800000",
+    "cage": null,
+    "sam_status": null,
+    "sam_activation_date": null,
+    "sam_expiration_date": null,
+    "sam_exclusion": null,
+    "sam_url": null,
+    "sam_location": null,
+    "setasides": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 284,
+  "fields": {
+    "name": "KCorp Support Services Inc",
+    "duns": "790993252",
+    "duns_4": "7909932520000",
+    "cage": "52TJ5",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2017-05-30T16:30:03Z",
+    "sam_expiration_date": "2018-05-30T16:21:20Z",
+    "sam_exclusion": false,
+    "sam_url": null,
+    "sam_location": 280,
+    "setasides": [
+      15,
+      16
+    ]
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 285,
+  "fields": {
+    "name": "Panacea Group, LLC",
+    "duns": "968276951",
+    "duns_4": "9682769510000",
+    "cage": "6FNU3",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2017-09-05T14:14:33Z",
+    "sam_expiration_date": "2018-09-05T13:54:25Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.pan-gro.com",
+    "sam_location": 281,
+    "setasides": [
+      1,
+      2,
+      18
+    ]
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 286,
+  "fields": {
+    "name": "Raymond Pond Solutions",
+    "duns": "079939977",
+    "duns_4": "0799399770000",
+    "cage": "7FTE5",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2017-11-09T13:58:45Z",
+    "sam_expiration_date": "2018-11-09T13:41:12Z",
+    "sam_exclusion": false,
+    "sam_url": null,
+    "sam_location": 282,
+    "setasides": [
+      1,
+      2,
+      15,
+      16
+    ]
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 287,
+  "fields": {
+    "name": "Tidewater, Inc.",
+    "duns": "837142470",
+    "duns_4": "8371424700000",
+    "cage": "1HMG8",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-01-12T11:43:13Z",
+    "sam_expiration_date": "2019-01-12T11:31:08Z",
+    "sam_exclusion": false,
+    "sam_url": "http://WWW.TIDEH2O.NET",
+    "sam_location": 283,
+    "setasides": [
+      15
+    ]
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 288,
+  "fields": {
+    "name": "United Facility Services Corp",
+    "duns": "605119932",
+    "duns_4": "6051199320000",
+    "cage": "1G1Y9",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2017-08-15T15:44:29Z",
+    "sam_expiration_date": "2018-08-15T15:33:48Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.eastcobuildingservices.com",
+    "sam_location": 284,
+    "setasides": []
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 289,
+  "fields": {
+    "name": "Urban Services Group",
+    "duns": "933706141",
+    "duns_4": "9337061410000",
+    "cage": null,
+    "sam_status": null,
+    "sam_activation_date": null,
+    "sam_expiration_date": null,
+    "sam_exclusion": null,
+    "sam_url": null,
+    "sam_location": null,
+    "setasides": []
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 290,
+  "fields": {
+    "name": "VW International, Inc.",
+    "duns": "626999247",
+    "duns_4": "6269992470000",
+    "cage": "0XNC0",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2017-09-12T15:29:05Z",
+    "sam_expiration_date": "2018-09-12T14:42:04Z",
+    "sam_exclusion": false,
+    "sam_url": null,
+    "sam_location": 285,
+    "setasides": []
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 291,
+  "fields": {
+    "name": "Wilson 5 Service Company Inc",
+    "duns": "121350292",
+    "duns_4": "1213502920000",
+    "cage": "0D5N8",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2017-10-27T15:28:53Z",
+    "sam_expiration_date": "2018-10-27T15:11:59Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.wilsonfive.com",
+    "sam_location": 286,
+    "setasides": [
+      1,
+      2,
+      15
+    ]
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 292,
+  "fields": {
+    "name": "WW Contractors",
+    "duns": "175515774",
+    "duns_4": "1755157740000",
+    "cage": "08JS8",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2017-04-21T16:50:28Z",
+    "sam_expiration_date": "2018-04-21T15:56:23Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.wwcontractors.com",
+    "sam_location": 287,
+    "setasides": [
+      1,
+      2,
+      15
+    ]
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 293,
+  "fields": {
+    "name": "Exemplar",
+    "duns": "181423372",
+    "duns_4": "1814233720000",
+    "cage": "42PE4",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2017-12-12T16:13:27Z",
+    "sam_expiration_date": "2018-12-12T15:54:20Z",
+    "sam_exclusion": false,
+    "sam_url": null,
+    "sam_location": 288,
+    "setasides": [
+      15,
+      3
+    ]
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 294,
+  "fields": {
+    "name": "AECOM Technical Services, Inc.",
+    "duns": "003184462",
+    "duns_4": "0031844620000",
+    "cage": "4L767",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2017-07-24T16:29:36Z",
+    "sam_expiration_date": "2018-07-24T16:18:11Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.aecom.com",
+    "sam_location": 289,
+    "setasides": []
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 295,
+  "fields": {
+    "name": "Amec Foster Wheeler Programs, Inc.",
+    "duns": "106974876",
+    "duns_4": "1069748760000",
+    "cage": "0FX47",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-01-04T13:13:17Z",
+    "sam_expiration_date": "2019-01-04T12:54:13Z",
+    "sam_exclusion": false,
+    "sam_url": null,
+    "sam_location": 290,
+    "setasides": []
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 296,
+  "fields": {
+    "name": "CBRE",
+    "duns": "039839683",
+    "duns_4": "0398396830000",
+    "cage": "3G5K7",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-02-15T12:00:56Z",
+    "sam_expiration_date": "2019-02-15T11:49:34Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.cbre.com",
+    "sam_location": 291,
+    "setasides": []
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 297,
+  "fields": {
+    "name": "Complete Building Services",
+    "duns": "808649888",
+    "duns_4": "8086498880000",
+    "cage": "4YAL6",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2017-09-18T10:59:12Z",
+    "sam_expiration_date": "2018-09-18T10:15:30Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.completebuildingservices.com",
+    "sam_location": 292,
+    "setasides": []
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 298,
+  "fields": {
+    "name": "EML LLC",
+    "duns": "012722836",
+    "duns_4": "0127228360000",
+    "cage": "1UVM4",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2017-12-28T12:13:16Z",
+    "sam_expiration_date": "2018-12-28T12:07:11Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.eml1.com",
+    "sam_location": 293,
+    "setasides": []
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 299,
+  "fields": {
+    "name": "J&J Worldwide Services",
+    "duns": "055124077",
+    "duns_4": "0551240770000",
+    "cage": "5P021",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-02-14T14:45:16Z",
+    "sam_expiration_date": "2019-02-14T14:39:31Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.jjwws.com",
+    "sam_location": 294,
+    "setasides": []
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 300,
+  "fields": {
+    "name": "Jones, Lang & LaSalle",
+    "duns": "079859134",
+    "duns_4": "0798591340000",
+    "cage": "7EM20",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2017-08-10T12:39:22Z",
+    "sam_expiration_date": "2018-08-10T12:03:26Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.jll.com",
+    "sam_location": 295,
+    "setasides": []
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 301,
+  "fields": {
+    "name": "LB&B",
+    "duns": "793374034",
+    "duns_4": "7933740340000",
+    "cage": "0V349",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-02-05T16:45:17Z",
+    "sam_expiration_date": "2019-02-05T16:28:06Z",
+    "sam_exclusion": false,
+    "sam_url": null,
+    "sam_location": 296,
+    "setasides": []
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 302,
+  "fields": {
+    "name": "M.C. Dean, Inc.",
+    "duns": "043203249",
+    "duns_4": "0432032490000",
+    "cage": "3K773",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-01-17T07:00:06Z",
+    "sam_expiration_date": "2019-01-17T06:42:58Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.mcdean.com",
+    "sam_location": 297,
+    "setasides": []
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 303,
+  "fields": {
+    "name": "Valiant Integrated Services (formerly ABM Government Services, LLC)",
+    "duns": "616858908",
+    "duns_4": "6168589080000",
+    "cage": "0UFD5",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2017-10-02T14:08:59Z",
+    "sam_expiration_date": "2018-10-02T13:36:27Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.abm.com",
+    "sam_location": 298,
+    "setasides": []
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 304,
+  "fields": {
+    "name": "S J Services, Inc.",
+    "duns": "170542906",
+    "duns_4": "1705429060000",
+    "cage": "7S4S4",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2017-08-09T13:29:31Z",
+    "sam_expiration_date": "2018-08-09T13:19:44Z",
+    "sam_exclusion": false,
+    "sam_url": null,
+    "sam_location": 299,
     "setasides": []
   }
 }
