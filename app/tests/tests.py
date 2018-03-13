@@ -113,7 +113,7 @@ class FunctionalTests(LiveServerTestCase):
             EC.presence_of_all_elements_located((By.CLASS_NAME, "table_row_data"))
         )
         #make sure selected filters are described above search results
-        self.assertEqual("541330 - Engineering Services", driver.find_element_by_id("your_search").text)
+        self.assertEqual("Engineering Services ( 541330 )", driver.find_element_by_id("your_search").text)
 
 
     def test_vendor_count_in_search_results(self):
@@ -372,7 +372,7 @@ class FunctionalTests(LiveServerTestCase):
         self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/th[8]').text, 'VO')
         self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[1]/th[9]').text, 'SDB')
         #make sure "OASIS SB Only" column exists in results table
-        self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[2]/td[4]').text, 'Not Applicable\n(OASIS SB Only)')
+        self.assertEqual(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[2]/td[4]').text, 'Not Applicable\n(SB Only)')
         #make sure filter selection says "OASIS SB Only"
         self.assertEqual(driver.find_element_by_id('choose_filters').text, 'Choose filters (SB Only)')
         #make sure filter selection remains disabled after NAICS is selected
