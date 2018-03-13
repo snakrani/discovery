@@ -41,7 +41,7 @@ LayoutManager.vehicleInfo = function() {
         accordionUpSpeed: 100,
         accordionDownSpeed: 100,
         collapseSpeed: 100,
-        contentOpen: 0,
+        contentOpen: null,
         arrowRclass: 'arrow-r',
         arrowDclass: 'arrow-d',
         animate: true
