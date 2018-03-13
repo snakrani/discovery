@@ -232,7 +232,7 @@ var InputHandler = {
         // can't seem to use cached jqobj, something goes wrong with select2
         this.populatePromise = RequestsManager.getAPIRequest(
             "/api/naics/",
-            { format: "json" },
+            { ordering: "description" },
             function( data ) {
                 $("#naics-code").empty().append($("<option></option>"));
 
@@ -241,7 +241,7 @@ var InputHandler = {
                         $("#naics-code")
                             .append($("<option></option>")
                             .attr("value", result.code)
-                            .text(result.code + " - " + result.description));
+                            .text(result.description + " ( " + result.code + " ) "));
                     }
                 });
                 $("#naics-code").select2({placeholder:'Select a NAICS code', width: '380px'}).val(naics).trigger('change');
