@@ -57,22 +57,6 @@ class Command(BaseCommand):
     
     def add_arguments(self, parser):
         parser.add_argument(
-            '--pause',
-            action='store',
-            type=int,
-            default=1,
-            dest='pause',
-            help='Number of seconds to pause before each query to the SAM API',
-        )
-        parser.add_argument(
-            '--tries',
-            action='store',
-            type=int,
-            default=3,
-            dest='tries',
-            help='Number of tries to query the SAM API before exiting',
-        )
-        parser.add_argument(
             '--vehicles',
             action='store',
             type=str,
@@ -114,9 +98,19 @@ class Command(BaseCommand):
         # Update basic vendor information
         vendor.name = name
         vendor.duns_4 = duns_plus_4(duns)
+        vendor.save()
+        
+        # Update pool membership information
+        membership, ppcreated = PoolMembership.objects.get_or_create(vendor=vendor, pool=pool_data, piid=piid)
+        
+        if zones and zones.lower() != 'all':
+            for zone in [x.strip() for x in zones.split(',')]:
+                PoolMembershipZone.objects.get_or_create(membership=membership, zone=Zone.objects.get(id=int(zone)))
+        else:
+            zone = None
         
         # Add contract manager
-        cm, cm_created = vendor.managers.get_or_create(type='CM', name=record[3].strip())
+        cm, cm_created = membership.cms.get_or_create(name=record[3].strip())
         
         for number in filter(None, "".join(record[4].split()).split(',')):
             cm.phone.get_or_create(number=number)
@@ -125,7 +119,7 @@ class Command(BaseCommand):
             cm.email.get_or_create(address=address)
         
         # Add project manager
-        pm, pm_created = vendor.managers.get_or_create(type='PM', name=record[6].strip())
+        pm, pm_created = membership.pms.get_or_create(name=record[6].strip())
         
         for number in filter(None, "".join(record[7].split()).split(',')):
             pm.phone.get_or_create(number=number)
@@ -138,23 +132,12 @@ class Command(BaseCommand):
             for name in filter(None, "".join(record[10].split()).split(',')):
                 try:
                     sa = SetAside.objects.get(name__iexact=name)
-                    if sa not in vendor.setasides.all():
-                        vendor.setasides.add(sa)
+                    if sa not in membership.setasides.all():
+                        membership.setasides.add(sa)
 
                 except SetAside.DoesNotExist as error:
                     continue
-        
-        vendor.save()
-        
-        # Update pool membership information
-        membership, ppcreated = PoolMembership.objects.get_or_create(vendor=vendor, pool=pool_data, piid=piid)
-        
-        if zones and zones.lower() != 'all':
-            for zone in [x.strip() for x in zones.split(',')]:
-                PoolMembershipZone.objects.get_or_create(membership=membership, zone=Zone.objects.get(id=int(zone)))
-        else:
-            zone = None    
-        
+                
         log_memory("Final vendor [ {} - {} ]".format(pool_data.id, vendor.id))
         log_data(
             vendor.name, 
@@ -167,15 +150,13 @@ class Command(BaseCommand):
             ":".join(pm.phones()),
             ":".join(pm.emails()),
             zones,
-            ":".join([str(sa.pk) for sa in vendor.setasides.all()])
+            ":".join([str(sa.pk) for sa in membership.setasides.all()])
         )
-        
+
         if created:
             logger.debug("Successfully created {}".format(vendor.name))
-            return 1
         else:
             logger.debug("Vendor {} already in database".format(vendor.name))
-            return 0
 
 
     def update_pool(self, vehicle, pool, data_path, options):
@@ -183,7 +164,6 @@ class Command(BaseCommand):
         
         data_stream = open(data_path, 'r')
         reader = csv.reader(data_stream)
-        new_vendor_count = 0
         pool_count = 0
         
         # Skip header.
@@ -198,7 +178,7 @@ class Command(BaseCommand):
             pool_data = Pool.objects.get(number=pool, vehicle__iexact=vehicle)
             
             for line in reader:
-                new_vendor_count += self.update_vendor(line, pool_data, options)
+                self.update_vendor(line, pool_data, options)
                 pool_count += 1
                 
                 if vendors_per_pool > 0 and pool_count == vendors_per_pool:
@@ -217,13 +197,10 @@ class Command(BaseCommand):
         print(" --- completed pool {} with: {} vendor(s) processed".format(pool, pool_count))
         log_memory("Final pool [ {} ]".format(pool))
         data_stream.close()
-        
-        return new_vendor_count
 
 
     def update_vehicle(self, vehicle, options, pools):
         vehicle_dir = os.path.join(settings.BASE_DIR, 'data/pools/{0}'.format(vehicle))
-        new_vendor_count = 0
         
         for pool_file in os.listdir(vehicle_dir):
             data_path = os.path.join(vehicle_dir, pool_file)
@@ -234,14 +211,10 @@ class Command(BaseCommand):
                 pool = None # Not a pool file, skip...
             
             if pool and (len(pools) == 0 or pool in pools):
-                new_vendor_count += self.update_pool(vehicle, pool, data_path, options)
-        
-        return new_vendor_count
+                self.update_pool(vehicle, pool, data_path, options)
         
 
     def handle(self, *args, **options):
-        new_vendor_count = 0
-        
         print("-------BEGIN LOAD_VENDORS PROCESS-------")
         log_memory('Start')        
         log_data('Name', 
@@ -263,15 +236,11 @@ class Command(BaseCommand):
         try:
             for vehicle in settings.VEHICLES:
                 if len(vehicles) == 0 or vehicle in vehicles:
-                    new_vendor_count += self.update_vehicle(vehicle, options, pools)
-
-            #load extra SAM fields
-            call_command('load_sam', **{k: options[k] for k in ('pause', 'tries')})
+                    self.update_vehicle(vehicle, options, pools)
 
         except Exception as e:
             display_error(e)
             raise
         
-        print("New vendors: {}".format(new_vendor_count))
         print("-------END LOAD_VENDORS PROCESS-------")
         log_memory('End')
