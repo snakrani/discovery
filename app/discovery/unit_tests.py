@@ -853,4 +853,8 @@ class DiscoveryAPITestCase(TestCase, DiscoveryAssertions):
 
 class CategoryAPITestCase(DiscoveryAPITestCase):
     fixtures = data.get_category_fixtures()
-    
+
+
+class VendorAPITestCase(DiscoveryAPITestCase):
+    fixtures = data.get_vendor_fixtures()
+     
