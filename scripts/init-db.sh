@@ -39,6 +39,9 @@ python3 manage.py createcachetable >>"$LOG_FILE" 2>&1
 echo "> Loading basic category information" | tee -a "$LOG_FILE"
 python3 manage.py load_categories >>"$LOG_FILE" 2>&1
 
+echo "> Loading vendor information from pools" | tee -a "$LOG_FILE"
+python3 manage.py load_vendors >>"$LOG_FILE" 2>&1
+
 echo "> Clearing outdated locks" | tee -a "$LOG_FILE"
 python3 manage.py clear_locks >>"$LOG_FILE" 2>&1
 
