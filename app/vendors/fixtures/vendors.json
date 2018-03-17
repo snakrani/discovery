@@ -12,8 +12,7 @@
     "sam_expiration_date": "2019-02-13T15:48:36Z",
     "sam_exclusion": false,
     "sam_url": "http://www.act-i.com",
-    "sam_location": 1,
-    "setasides": []
+    "sam_location": 1
   }
 },
 {
@@ -29,8 +28,7 @@
     "sam_expiration_date": "2018-10-10T12:16:52Z",
     "sam_exclusion": false,
     "sam_url": "http://www.adstm.com",
-    "sam_location": 2,
-    "setasides": []
+    "sam_location": 2
   }
 },
 {
@@ -46,8 +44,7 @@
     "sam_expiration_date": "2019-01-05T10:45:00Z",
     "sam_exclusion": false,
     "sam_url": "http://www.amyx.com",
-    "sam_location": 3,
-    "setasides": []
+    "sam_location": 3
   }
 },
 {
@@ -63,11 +60,7 @@
     "sam_expiration_date": "2018-12-15T09:39:17Z",
     "sam_exclusion": false,
     "sam_url": "HTTP://WWW.planetrisk.COM",
-    "sam_location": 4,
-    "setasides": [
-      1,
-      2
-    ]
+    "sam_location": 4
   }
 },
 {
@@ -79,14 +72,11 @@
     "duns_4": "1702031990000",
     "cage": "35CZ6",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-11-01T18:43:47Z",
-    "sam_expiration_date": "2018-11-01T18:32:45Z",
+    "sam_activation_date": "2018-03-11T10:15:08Z",
+    "sam_expiration_date": "2019-03-11T09:57:26Z",
     "sam_exclusion": false,
     "sam_url": "http://www.apogeeengineering.net",
-    "sam_location": 5,
-    "setasides": [
-      16
-    ]
+    "sam_location": 5
   }
 },
 {
@@ -102,10 +92,7 @@
     "sam_expiration_date": "2019-02-26T20:27:39Z",
     "sam_exclusion": false,
     "sam_url": "http://www.ascs-corp.com",
-    "sam_location": 6,
-    "setasides": [
-      16
-    ]
+    "sam_location": 6
   }
 },
 {
@@ -121,8 +108,7 @@
     "sam_expiration_date": "2018-11-21T14:57:42Z",
     "sam_exclusion": false,
     "sam_url": "http://www.bbande.com",
-    "sam_location": 7,
-    "setasides": []
+    "sam_location": 7
   }
 },
 {
@@ -138,10 +124,7 @@
     "sam_expiration_date": "2018-10-16T11:25:54Z",
     "sam_exclusion": false,
     "sam_url": "http://www.brc2.com",
-    "sam_location": 8,
-    "setasides": [
-      18
-    ]
+    "sam_location": 8
   }
 },
 {
@@ -157,10 +140,7 @@
     "sam_expiration_date": "2019-02-14T15:07:42Z",
     "sam_exclusion": false,
     "sam_url": "http://www.bwfed.com",
-    "sam_location": 9,
-    "setasides": [
-      3
-    ]
+    "sam_location": 9
   }
 },
 {
@@ -176,10 +156,7 @@
     "sam_expiration_date": "2019-02-15T15:38:26Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 10,
-    "setasides": [
-      16
-    ]
+    "sam_location": 10
   }
 },
 {
@@ -195,10 +172,7 @@
     "sam_expiration_date": "2018-12-16T18:04:49Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 11,
-    "setasides": [
-      16
-    ]
+    "sam_location": 11
   }
 },
 {
@@ -214,10 +188,7 @@
     "sam_expiration_date": "2019-03-07T13:14:59Z",
     "sam_exclusion": false,
     "sam_url": "http://www.chevoconsulting.com",
-    "sam_location": 12,
-    "setasides": [
-      3
-    ]
+    "sam_location": 12
   }
 },
 {
@@ -233,10 +204,7 @@
     "sam_expiration_date": "2018-11-01T09:55:02Z",
     "sam_exclusion": false,
     "sam_url": "http://www.credence-llc.com",
-    "sam_location": 13,
-    "setasides": [
-      16
-    ]
+    "sam_location": 13
   }
 },
 {
@@ -252,11 +220,7 @@
     "sam_expiration_date": "2018-10-31T11:50:10Z",
     "sam_exclusion": false,
     "sam_url": "http://www.dakota-consulting.com",
-    "sam_location": 14,
-    "setasides": [
-      3,
-      16
-    ]
+    "sam_location": 14
   }
 },
 {
@@ -272,10 +236,7 @@
     "sam_expiration_date": "2019-02-27T15:26:09Z",
     "sam_exclusion": false,
     "sam_url": "http://www.eaglerayinc.com",
-    "sam_location": 15,
-    "setasides": [
-      3
-    ]
+    "sam_location": 15
   }
 },
 {
@@ -291,8 +252,7 @@
     "sam_expiration_date": "2018-10-13T09:29:06Z",
     "sam_exclusion": false,
     "sam_url": "http://www.ecompex.com",
-    "sam_location": 16,
-    "setasides": []
+    "sam_location": 16
   }
 },
 {
@@ -308,11 +268,7 @@
     "sam_expiration_date": "2019-01-23T10:48:49Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 17,
-    "setasides": [
-      3,
-      18
-    ]
+    "sam_location": 17
   }
 },
 {
@@ -328,8 +284,7 @@
     "sam_expiration_date": "2018-10-23T14:22:23Z",
     "sam_exclusion": false,
     "sam_url": "http://www.forsmarshgroup.com",
-    "sam_location": 18,
-    "setasides": []
+    "sam_location": 18
   }
 },
 {
@@ -345,8 +300,7 @@
     "sam_expiration_date": "2018-11-01T07:50:28Z",
     "sam_exclusion": false,
     "sam_url": "http://www.gemini-ind.com",
-    "sam_location": 19,
-    "setasides": []
+    "sam_location": 19
   }
 },
 {
@@ -362,10 +316,7 @@
     "sam_expiration_date": "2019-02-19T14:53:54Z",
     "sam_exclusion": false,
     "sam_url": "http://www.ikun.com/",
-    "sam_location": 20,
-    "setasides": [
-      16
-    ]
+    "sam_location": 20
   }
 },
 {
@@ -381,12 +332,7 @@
     "sam_expiration_date": "2018-10-09T17:40:27Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 21,
-    "setasides": [
-      1,
-      2,
-      16
-    ]
+    "sam_location": 21
   }
 },
 {
@@ -402,10 +348,7 @@
     "sam_expiration_date": "2018-05-31T09:15:06Z",
     "sam_exclusion": false,
     "sam_url": "http://www.insighttsi.com",
-    "sam_location": 22,
-    "setasides": [
-      3
-    ]
+    "sam_location": 22
   }
 },
 {
@@ -421,11 +364,7 @@
     "sam_expiration_date": "2018-09-29T19:04:03Z",
     "sam_exclusion": false,
     "sam_url": "http://www.e2zintegral.com",
-    "sam_location": 23,
-    "setasides": [
-      3,
-      16
-    ]
+    "sam_location": 23
   }
 },
 {
@@ -441,12 +380,7 @@
     "sam_expiration_date": "2018-11-17T10:34:00Z",
     "sam_exclusion": false,
     "sam_url": "http://www.ibtci.com",
-    "sam_location": 24,
-    "setasides": [
-      1,
-      2,
-      3
-    ]
+    "sam_location": 24
   }
 },
 {
@@ -458,16 +392,11 @@
     "duns_4": "7995823790000",
     "cage": "1TC80",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-03-23T17:16:25Z",
-    "sam_expiration_date": "2018-03-23T16:27:29Z",
+    "sam_activation_date": "2018-03-14T12:00:18Z",
+    "sam_expiration_date": "2019-03-14T11:41:58Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 25,
-    "setasides": [
-      1,
-      2,
-      16
-    ]
+    "sam_location": 25
   }
 },
 {
@@ -483,11 +412,7 @@
     "sam_expiration_date": "2018-10-26T10:20:31Z",
     "sam_exclusion": false,
     "sam_url": "http://www.ktc-inc.com",
-    "sam_location": 26,
-    "setasides": [
-      1,
-      2
-    ]
+    "sam_location": 26
   }
 },
 {
@@ -503,11 +428,7 @@
     "sam_expiration_date": "2018-11-29T18:09:02Z",
     "sam_exclusion": false,
     "sam_url": "http://www.lochharbour.com/",
-    "sam_location": 27,
-    "setasides": [
-      1,
-      2
-    ]
+    "sam_location": 27
   }
 },
 {
@@ -523,10 +444,7 @@
     "sam_expiration_date": "2018-10-31T12:44:23Z",
     "sam_exclusion": false,
     "sam_url": "http://www.msiuniversal.com",
-    "sam_location": 28,
-    "setasides": [
-      16
-    ]
+    "sam_location": 28
   }
 },
 {
@@ -542,10 +460,7 @@
     "sam_expiration_date": "2018-05-01T11:35:09Z",
     "sam_exclusion": false,
     "sam_url": "http://www.mcmanis-monsalve.com",
-    "sam_location": 29,
-    "setasides": [
-      18
-    ]
+    "sam_location": 29
   }
 },
 {
@@ -555,17 +470,13 @@
     "name": "Micro Systems Consultant",
     "duns": "608740957",
     "duns_4": "6087409570000",
-    "cage": null,
-    "sam_status": null,
-    "sam_activation_date": null,
-    "sam_expiration_date": null,
-    "sam_exclusion": null,
-    "sam_url": null,
-    "sam_location": null,
-    "setasides": [
-      1,
-      2
-    ]
+    "cage": "1JDJ9",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-03-12T09:00:09Z",
+    "sam_expiration_date": "2019-03-12T08:44:23Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.msag.net",
+    "sam_location": 30
   }
 },
 {
@@ -581,10 +492,7 @@
     "sam_expiration_date": "2018-07-27T08:29:48Z",
     "sam_exclusion": false,
     "sam_url": "http://www.miraclesystems.net",
-    "sam_location": 30,
-    "setasides": [
-      16
-    ]
+    "sam_location": 31
   }
 },
 {
@@ -600,10 +508,7 @@
     "sam_expiration_date": "2018-11-28T15:17:13Z",
     "sam_exclusion": false,
     "sam_url": "http://www.mosaicsgroup.com",
-    "sam_location": 31,
-    "setasides": [
-      16
-    ]
+    "sam_location": 32
   }
 },
 {
@@ -619,10 +524,7 @@
     "sam_expiration_date": "2019-01-23T14:01:43Z",
     "sam_exclusion": false,
     "sam_url": "http://www.niksoft.com",
-    "sam_location": 32,
-    "setasides": [
-      16
-    ]
+    "sam_location": 33
   }
 },
 {
@@ -638,11 +540,7 @@
     "sam_expiration_date": null,
     "sam_exclusion": null,
     "sam_url": null,
-    "sam_location": null,
-    "setasides": [
-      1,
-      2
-    ]
+    "sam_location": null
   }
 },
 {
@@ -658,11 +556,7 @@
     "sam_expiration_date": "2018-09-04T20:26:33Z",
     "sam_exclusion": false,
     "sam_url": "http://www.panum.com",
-    "sam_location": 33,
-    "setasides": [
-      3,
-      16
-    ]
+    "sam_location": 34
   }
 },
 {
@@ -678,10 +572,7 @@
     "sam_expiration_date": "2018-05-16T10:23:12Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 34,
-    "setasides": [
-      3
-    ]
+    "sam_location": 35
   }
 },
 {
@@ -697,10 +588,7 @@
     "sam_expiration_date": "2019-01-31T09:49:12Z",
     "sam_exclusion": false,
     "sam_url": "HTTP://WWW.QUANTITECH.COM",
-    "sam_location": 35,
-    "setasides": [
-      3
-    ]
+    "sam_location": 36
   }
 },
 {
@@ -716,8 +604,7 @@
     "sam_expiration_date": "2018-05-09T08:39:53Z",
     "sam_exclusion": false,
     "sam_url": "http://www.RMCWEB.com",
-    "sam_location": 36,
-    "setasides": []
+    "sam_location": 37
   }
 },
 {
@@ -733,12 +620,7 @@
     "sam_expiration_date": "2018-06-29T21:38:13Z",
     "sam_exclusion": false,
     "sam_url": "http://www.sawdeysolutionservices.com",
-    "sam_location": 37,
-    "setasides": [
-      1,
-      2,
-      3
-    ]
+    "sam_location": 38
   }
 },
 {
@@ -754,8 +636,7 @@
     "sam_expiration_date": "2018-10-20T14:53:00Z",
     "sam_exclusion": false,
     "sam_url": "http://www.sev1tech.com",
-    "sam_location": 38,
-    "setasides": []
+    "sam_location": 39
   }
 },
 {
@@ -771,10 +652,7 @@
     "sam_expiration_date": "2018-11-09T15:31:42Z",
     "sam_exclusion": false,
     "sam_url": "http://www.sti-tec.com",
-    "sam_location": 39,
-    "setasides": [
-      16
-    ]
+    "sam_location": 40
   }
 },
 {
@@ -790,10 +668,7 @@
     "sam_expiration_date": "2018-03-22T14:06:25Z",
     "sam_exclusion": false,
     "sam_url": "http://www.synecsolu.com",
-    "sam_location": 40,
-    "setasides": [
-      3
-    ]
+    "sam_location": 41
   }
 },
 {
@@ -809,8 +684,7 @@
     "sam_expiration_date": "2018-10-31T11:28:48Z",
     "sam_exclusion": false,
     "sam_url": "http://www.sysplus.com/",
-    "sam_location": 41,
-    "setasides": []
+    "sam_location": 42
   }
 },
 {
@@ -826,11 +700,7 @@
     "sam_expiration_date": "2019-01-05T20:23:08Z",
     "sam_exclusion": false,
     "sam_url": "http://www.T3W.com",
-    "sam_location": 42,
-    "setasides": [
-      3,
-      16
-    ]
+    "sam_location": 43
   }
 },
 {
@@ -846,11 +716,7 @@
     "sam_expiration_date": "2018-10-16T11:27:28Z",
     "sam_exclusion": false,
     "sam_url": "http://www.addxcorp.com",
-    "sam_location": 43,
-    "setasides": [
-      1,
-      2
-    ]
+    "sam_location": 44
   }
 },
 {
@@ -866,8 +732,7 @@
     "sam_expiration_date": "2019-02-05T17:04:58Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 44,
-    "setasides": []
+    "sam_location": 45
   }
 },
 {
@@ -883,11 +748,7 @@
     "sam_expiration_date": "2018-12-04T07:04:22Z",
     "sam_exclusion": false,
     "sam_url": "http://www.drtstrategies.com",
-    "sam_location": 45,
-    "setasides": [
-      3,
-      16
-    ]
+    "sam_location": 46
   }
 },
 {
@@ -903,8 +764,7 @@
     "sam_expiration_date": "2018-10-23T12:18:05Z",
     "sam_exclusion": false,
     "sam_url": "http://www.FIConsulting.com",
-    "sam_location": 46,
-    "setasides": []
+    "sam_location": 47
   }
 },
 {
@@ -920,10 +780,7 @@
     "sam_expiration_date": "2018-11-21T15:36:08Z",
     "sam_exclusion": false,
     "sam_url": "http://www.usfti.com",
-    "sam_location": 47,
-    "setasides": [
-      16
-    ]
+    "sam_location": 48
   }
 },
 {
@@ -939,8 +796,7 @@
     "sam_expiration_date": "2018-11-27T10:55:02Z",
     "sam_exclusion": false,
     "sam_url": "http://www.rmadvisory.com",
-    "sam_location": 48,
-    "setasides": []
+    "sam_location": 49
   }
 },
 {
@@ -956,8 +812,7 @@
     "sam_expiration_date": "2019-01-10T10:39:18Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 49,
-    "setasides": []
+    "sam_location": 50
   }
 },
 {
@@ -973,8 +828,7 @@
     "sam_expiration_date": "2019-02-20T16:53:39Z",
     "sam_exclusion": false,
     "sam_url": "http://www.aegistg.com",
-    "sam_location": 50,
-    "setasides": []
+    "sam_location": 51
   }
 },
 {
@@ -990,10 +844,7 @@
     "sam_expiration_date": "2018-12-01T13:48:44Z",
     "sam_exclusion": false,
     "sam_url": "HTTP://WWW.ASM-USA.COM",
-    "sam_location": 51,
-    "setasides": [
-      3
-    ]
+    "sam_location": 52
   }
 },
 {
@@ -1009,8 +860,7 @@
     "sam_expiration_date": "2019-01-10T13:09:25Z",
     "sam_exclusion": false,
     "sam_url": "http://www.ara.com",
-    "sam_location": 52,
-    "setasides": []
+    "sam_location": 53
   }
 },
 {
@@ -1026,8 +876,7 @@
     "sam_expiration_date": "2019-03-08T14:16:57Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 53,
-    "setasides": []
+    "sam_location": 54
   }
 },
 {
@@ -1043,8 +892,7 @@
     "sam_expiration_date": "2018-10-12T11:48:02Z",
     "sam_exclusion": false,
     "sam_url": "http://www.avionsolutions.com",
-    "sam_location": 54,
-    "setasides": []
+    "sam_location": 55
   }
 },
 {
@@ -1060,10 +908,7 @@
     "sam_expiration_date": "2019-03-08T16:38:57Z",
     "sam_exclusion": false,
     "sam_url": "http://www.btas.com",
-    "sam_location": 55,
-    "setasides": [
-      3
-    ]
+    "sam_location": 56
   }
 },
 {
@@ -1079,11 +924,7 @@
     "sam_expiration_date": "2018-10-16T17:06:31Z",
     "sam_exclusion": false,
     "sam_url": "http://www.colsa.com",
-    "sam_location": 56,
-    "setasides": [
-      1,
-      2
-    ]
+    "sam_location": 57
   }
 },
 {
@@ -1099,8 +940,7 @@
     "sam_expiration_date": "2018-10-26T11:18:39Z",
     "sam_exclusion": false,
     "sam_url": "http://www.compass-sys-inc.com/",
-    "sam_location": 57,
-    "setasides": []
+    "sam_location": 58
   }
 },
 {
@@ -1112,12 +952,11 @@
     "duns_4": "6214209910000",
     "cage": "0YUD7",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-11-08T07:28:38Z",
-    "sam_expiration_date": "2018-11-08T07:22:48Z",
+    "sam_activation_date": "2018-03-13T11:45:16Z",
+    "sam_expiration_date": "2019-03-13T11:29:33Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 58,
-    "setasides": []
+    "sam_location": 59
   }
 },
 {
@@ -1133,8 +972,7 @@
     "sam_expiration_date": "2019-02-01T09:11:10Z",
     "sam_exclusion": false,
     "sam_url": "http://www.dcscorp.com",
-    "sam_location": 59,
-    "setasides": []
+    "sam_location": 60
   }
 },
 {
@@ -1150,8 +988,7 @@
     "sam_expiration_date": "2018-12-15T12:28:14Z",
     "sam_exclusion": false,
     "sam_url": "http://www.dac.us",
-    "sam_location": 60,
-    "setasides": []
+    "sam_location": 61
   }
 },
 {
@@ -1167,8 +1004,7 @@
     "sam_expiration_date": "2018-10-24T11:15:23Z",
     "sam_exclusion": false,
     "sam_url": "http://www.dynetics.com",
-    "sam_location": 61,
-    "setasides": []
+    "sam_location": 62
   }
 },
 {
@@ -1184,8 +1020,7 @@
     "sam_expiration_date": "2018-11-06T09:54:20Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 62,
-    "setasides": []
+    "sam_location": 63
   }
 },
 {
@@ -1201,8 +1036,7 @@
     "sam_expiration_date": "2018-10-13T18:02:50Z",
     "sam_exclusion": false,
     "sam_url": "HTTP://WWW.FULCRUMCO.COM",
-    "sam_location": 63,
-    "setasides": []
+    "sam_location": 64
   }
 },
 {
@@ -1218,13 +1052,7 @@
     "sam_expiration_date": "2018-10-13T14:51:28Z",
     "sam_exclusion": false,
     "sam_url": "http://www.hxfive.com",
-    "sam_location": 64,
-    "setasides": [
-      1,
-      2,
-      3,
-      16
-    ]
+    "sam_location": 65
   }
 },
 {
@@ -1240,10 +1068,7 @@
     "sam_expiration_date": "2018-06-29T13:15:50Z",
     "sam_exclusion": false,
     "sam_url": "http://www.itc-1.com/",
-    "sam_location": 65,
-    "setasides": [
-      3
-    ]
+    "sam_location": 66
   }
 },
 {
@@ -1259,8 +1084,7 @@
     "sam_expiration_date": "2019-03-09T14:46:38Z",
     "sam_exclusion": false,
     "sam_url": "http://www.integrity-apps.com",
-    "sam_location": 66,
-    "setasides": []
+    "sam_location": 67
   }
 },
 {
@@ -1276,8 +1100,7 @@
     "sam_expiration_date": "2018-11-07T17:45:56Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 67,
-    "setasides": []
+    "sam_location": 68
   }
 },
 {
@@ -1293,8 +1116,7 @@
     "sam_expiration_date": "2018-12-14T09:47:34Z",
     "sam_exclusion": false,
     "sam_url": "http://www.irtc-hq.com",
-    "sam_location": 68,
-    "setasides": []
+    "sam_location": 69
   }
 },
 {
@@ -1310,8 +1132,7 @@
     "sam_expiration_date": "2018-10-24T13:57:47Z",
     "sam_exclusion": false,
     "sam_url": "http://www.linquest.com/",
-    "sam_location": 69,
-    "setasides": []
+    "sam_location": 70
   }
 },
 {
@@ -1327,8 +1148,7 @@
     "sam_expiration_date": "2018-10-16T11:20:43Z",
     "sam_exclusion": false,
     "sam_url": "http://www.mcri.com",
-    "sam_location": 70,
-    "setasides": []
+    "sam_location": 71
   }
 },
 {
@@ -1344,11 +1164,7 @@
     "sam_expiration_date": "2018-12-27T16:20:12Z",
     "sam_exclusion": false,
     "sam_url": "http://www.meitechinc.com",
-    "sam_location": 71,
-    "setasides": [
-      1,
-      2
-    ]
+    "sam_location": 72
   }
 },
 {
@@ -1364,8 +1180,7 @@
     "sam_expiration_date": "2018-10-10T17:29:35Z",
     "sam_exclusion": false,
     "sam_url": "http://www.meicompany.com/",
-    "sam_location": 72,
-    "setasides": []
+    "sam_location": 73
   }
 },
 {
@@ -1381,8 +1196,7 @@
     "sam_expiration_date": "2018-12-21T13:45:38Z",
     "sam_exclusion": false,
     "sam_url": "http://www.mtsi-va.com",
-    "sam_location": 73,
-    "setasides": []
+    "sam_location": 74
   }
 },
 {
@@ -1398,8 +1212,7 @@
     "sam_expiration_date": "2018-10-11T17:28:11Z",
     "sam_exclusion": false,
     "sam_url": "http://www.oasissystems.com/",
-    "sam_location": 74,
-    "setasides": []
+    "sam_location": 75
   }
 },
 {
@@ -1415,8 +1228,7 @@
     "sam_expiration_date": "2019-02-07T11:20:52Z",
     "sam_exclusion": false,
     "sam_url": "http://www.odysseyconsult.com",
-    "sam_location": 75,
-    "setasides": []
+    "sam_location": 76
   }
 },
 {
@@ -1432,11 +1244,7 @@
     "sam_expiration_date": "2018-11-13T14:54:12Z",
     "sam_exclusion": false,
     "sam_url": "http://www.pesystems.com",
-    "sam_location": 76,
-    "setasides": [
-      1,
-      2
-    ]
+    "sam_location": 77
   }
 },
 {
@@ -1452,10 +1260,7 @@
     "sam_expiration_date": "2019-03-07T08:28:14Z",
     "sam_exclusion": false,
     "sam_url": "http://www.epeerless.com",
-    "sam_location": 77,
-    "setasides": [
-      16
-    ]
+    "sam_location": 78
   }
 },
 {
@@ -1471,8 +1276,7 @@
     "sam_expiration_date": "2018-12-18T07:27:18Z",
     "sam_exclusion": false,
     "sam_url": "http://www.quantechserv.com",
-    "sam_location": 78,
-    "setasides": []
+    "sam_location": 79
   }
 },
 {
@@ -1488,8 +1292,7 @@
     "sam_expiration_date": "2018-11-27T16:35:41Z",
     "sam_exclusion": false,
     "sam_url": "http://www.radiancetech.com",
-    "sam_location": 79,
-    "setasides": []
+    "sam_location": 80
   }
 },
 {
@@ -1505,8 +1308,7 @@
     "sam_expiration_date": "2018-10-13T15:37:51Z",
     "sam_exclusion": false,
     "sam_url": "http://www.scires.com",
-    "sam_location": 80,
-    "setasides": []
+    "sam_location": 81
   }
 },
 {
@@ -1522,8 +1324,7 @@
     "sam_expiration_date": "2018-10-18T13:35:32Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 81,
-    "setasides": []
+    "sam_location": 82
   }
 },
 {
@@ -1539,8 +1340,7 @@
     "sam_expiration_date": "2018-10-12T16:10:06Z",
     "sam_exclusion": false,
     "sam_url": "http://www.sigmatech.com",
-    "sam_location": 82,
-    "setasides": []
+    "sam_location": 83
   }
 },
 {
@@ -1552,12 +1352,11 @@
     "duns_4": "7992645310000",
     "cage": "1LXY1",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-01-12T12:58:46Z",
-    "sam_expiration_date": "2019-01-12T12:46:07Z",
+    "sam_activation_date": "2018-03-13T10:00:34Z",
+    "sam_expiration_date": "2019-03-13T09:47:56Z",
     "sam_exclusion": false,
     "sam_url": "http://www.sptrm.com",
-    "sam_location": 83,
-    "setasides": []
+    "sam_location": 84
   }
 },
 {
@@ -1573,8 +1372,7 @@
     "sam_expiration_date": "2018-10-16T15:12:51Z",
     "sam_exclusion": false,
     "sam_url": "http://www.sumaria.com",
-    "sam_location": 84,
-    "setasides": []
+    "sam_location": 85
   }
 },
 {
@@ -1590,8 +1388,7 @@
     "sam_expiration_date": "2018-10-10T12:19:23Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 85,
-    "setasides": []
+    "sam_location": 86
   }
 },
 {
@@ -1607,8 +1404,7 @@
     "sam_expiration_date": "2018-11-07T10:09:14Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 86,
-    "setasides": []
+    "sam_location": 87
   }
 },
 {
@@ -1624,8 +1420,7 @@
     "sam_expiration_date": "2018-11-03T16:02:03Z",
     "sam_exclusion": false,
     "sam_url": "http://www.tecolote.com",
-    "sam_location": 87,
-    "setasides": []
+    "sam_location": 88
   }
 },
 {
@@ -1641,8 +1436,7 @@
     "sam_expiration_date": "2019-03-05T10:04:02Z",
     "sam_exclusion": false,
     "sam_url": "http://www.torchtechnologies.com",
-    "sam_location": 88,
-    "setasides": []
+    "sam_location": 89
   }
 },
 {
@@ -1658,8 +1452,7 @@
     "sam_expiration_date": "2018-11-20T09:18:20Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 89,
-    "setasides": []
+    "sam_location": 90
   }
 },
 {
@@ -1671,15 +1464,11 @@
     "duns_4": "8292888560000",
     "cage": "4CWP6",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-10-24T09:28:54Z",
-    "sam_expiration_date": "2018-10-24T09:17:53Z",
+    "sam_activation_date": "2018-03-12T17:00:45Z",
+    "sam_expiration_date": "2019-03-12T16:46:21Z",
     "sam_exclusion": false,
     "sam_url": "http://www.usfalcon.com",
-    "sam_location": 90,
-    "setasides": [
-      1,
-      2
-    ]
+    "sam_location": 91
   }
 },
 {
@@ -1695,8 +1484,7 @@
     "sam_expiration_date": "2019-01-11T10:34:29Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 91,
-    "setasides": []
+    "sam_location": 92
   }
 },
 {
@@ -1712,8 +1500,7 @@
     "sam_expiration_date": "2018-10-10T15:13:41Z",
     "sam_exclusion": false,
     "sam_url": "http://www.assurtech.com/",
-    "sam_location": 92,
-    "setasides": []
+    "sam_location": 93
   }
 },
 {
@@ -1729,8 +1516,7 @@
     "sam_expiration_date": "2018-10-10T14:52:21Z",
     "sam_exclusion": false,
     "sam_url": "http://www.dsainc.com",
-    "sam_location": 93,
-    "setasides": []
+    "sam_location": 94
   }
 },
 {
@@ -1746,11 +1532,7 @@
     "sam_expiration_date": "2019-02-23T16:38:34Z",
     "sam_exclusion": false,
     "sam_url": "http://www.deltasands.com",
-    "sam_location": 94,
-    "setasides": [
-      1,
-      2
-    ]
+    "sam_location": 95
   }
 },
 {
@@ -1766,8 +1548,7 @@
     "sam_expiration_date": "2018-10-31T13:43:12Z",
     "sam_exclusion": false,
     "sam_url": "http://www.ertcorp.com/",
-    "sam_location": 95,
-    "setasides": []
+    "sam_location": 96
   }
 },
 {
@@ -1783,8 +1564,7 @@
     "sam_expiration_date": "2019-02-12T09:35:50Z",
     "sam_exclusion": false,
     "sam_url": "http://www.erg.com",
-    "sam_location": 96,
-    "setasides": []
+    "sam_location": 97
   }
 },
 {
@@ -1800,8 +1580,7 @@
     "sam_expiration_date": "2018-12-19T15:55:03Z",
     "sam_exclusion": false,
     "sam_url": "http://www.gst.com",
-    "sam_location": 97,
-    "setasides": []
+    "sam_location": 98
   }
 },
 {
@@ -1817,8 +1596,7 @@
     "sam_expiration_date": "2018-12-19T16:38:36Z",
     "sam_exclusion": false,
     "sam_url": "http://www.i3-corps.com",
-    "sam_location": 98,
-    "setasides": []
+    "sam_location": 99
   }
 },
 {
@@ -1834,8 +1612,7 @@
     "sam_expiration_date": "2018-10-17T19:50:55Z",
     "sam_exclusion": false,
     "sam_url": "HTTP://WWW.METICORP.COM",
-    "sam_location": 99,
-    "setasides": []
+    "sam_location": 100
   }
 },
 {
@@ -1851,10 +1628,7 @@
     "sam_expiration_date": "2019-01-12T12:42:16Z",
     "sam_exclusion": false,
     "sam_url": "http://www.metricanet.com",
-    "sam_location": 100,
-    "setasides": [
-      3
-    ]
+    "sam_location": 101
   }
 },
 {
@@ -1870,11 +1644,7 @@
     "sam_expiration_date": "2019-02-28T11:31:29Z",
     "sam_exclusion": false,
     "sam_url": "http://www.microtech.net",
-    "sam_location": 101,
-    "setasides": [
-      1,
-      2
-    ]
+    "sam_location": 102
   }
 },
 {
@@ -1890,8 +1660,7 @@
     "sam_expiration_date": "2018-07-07T14:42:47Z",
     "sam_exclusion": false,
     "sam_url": "http://www.pxi.com",
-    "sam_location": 102,
-    "setasides": []
+    "sam_location": 103
   }
 },
 {
@@ -1907,8 +1676,7 @@
     "sam_expiration_date": "2018-10-23T15:17:54Z",
     "sam_exclusion": false,
     "sam_url": "http://www.riverside.com",
-    "sam_location": 103,
-    "setasides": []
+    "sam_location": 104
   }
 },
 {
@@ -1924,8 +1692,7 @@
     "sam_expiration_date": "2018-11-13T14:27:41Z",
     "sam_exclusion": false,
     "sam_url": "http://www.sainc.com",
-    "sam_location": 104,
-    "setasides": []
+    "sam_location": 105
   }
 },
 {
@@ -1941,8 +1708,7 @@
     "sam_expiration_date": "2018-11-20T12:58:18Z",
     "sam_exclusion": false,
     "sam_url": "HTTP://WWW.SUBSYSTEM.COM",
-    "sam_location": 105,
-    "setasides": []
+    "sam_location": 106
   }
 },
 {
@@ -1958,8 +1724,7 @@
     "sam_expiration_date": "2018-10-19T15:28:26Z",
     "sam_exclusion": false,
     "sam_url": "http://www.zeltech.com",
-    "sam_location": 106,
-    "setasides": []
+    "sam_location": 107
   }
 },
 {
@@ -1975,11 +1740,7 @@
     "sam_expiration_date": "2019-02-22T15:39:36Z",
     "sam_exclusion": false,
     "sam_url": "http://www.ac4s.com",
-    "sam_location": 107,
-    "setasides": [
-      1,
-      2
-    ]
+    "sam_location": 108
   }
 },
 {
@@ -1995,8 +1756,7 @@
     "sam_expiration_date": "2018-11-02T12:51:40Z",
     "sam_exclusion": false,
     "sam_url": "http://www.agile-defense.com",
-    "sam_location": 108,
-    "setasides": []
+    "sam_location": 109
   }
 },
 {
@@ -2012,8 +1772,7 @@
     "sam_expiration_date": "2018-10-10T09:26:48Z",
     "sam_exclusion": false,
     "sam_url": "http://www.aptresearch.com",
-    "sam_location": 109,
-    "setasides": []
+    "sam_location": 110
   }
 },
 {
@@ -2029,10 +1788,7 @@
     "sam_expiration_date": "2019-02-05T08:22:42Z",
     "sam_exclusion": false,
     "sam_url": "http://www.act-corp.com",
-    "sam_location": 110,
-    "setasides": [
-      3
-    ]
+    "sam_location": 111
   }
 },
 {
@@ -2048,8 +1804,7 @@
     "sam_expiration_date": "2019-01-23T16:03:49Z",
     "sam_exclusion": false,
     "sam_url": "https://www.atlas-tech.com",
-    "sam_location": 111,
-    "setasides": []
+    "sam_location": 112
   }
 },
 {
@@ -2065,8 +1820,7 @@
     "sam_expiration_date": "2018-10-11T16:15:39Z",
     "sam_exclusion": false,
     "sam_url": "http://www.caelum.com",
-    "sam_location": 112,
-    "setasides": []
+    "sam_location": 113
   }
 },
 {
@@ -2082,12 +1836,7 @@
     "sam_expiration_date": "2018-10-11T16:01:06Z",
     "sam_exclusion": false,
     "sam_url": "http://www.csaassociates.com",
-    "sam_location": 113,
-    "setasides": [
-      1,
-      2,
-      16
-    ]
+    "sam_location": 114
   }
 },
 {
@@ -2103,11 +1852,7 @@
     "sam_expiration_date": "2018-11-02T14:23:43Z",
     "sam_exclusion": false,
     "sam_url": "http://www.cse-corp.com",
-    "sam_location": 114,
-    "setasides": [
-      3,
-      16
-    ]
+    "sam_location": 115
   }
 },
 {
@@ -2123,8 +1868,7 @@
     "sam_expiration_date": "2018-12-01T08:56:40Z",
     "sam_exclusion": false,
     "sam_url": "http://www.ddlomni.com",
-    "sam_location": 115,
-    "setasides": []
+    "sam_location": 116
   }
 },
 {
@@ -2140,8 +1884,7 @@
     "sam_expiration_date": "2018-10-13T18:57:19Z",
     "sam_exclusion": false,
     "sam_url": "http://www.forwardslope.com",
-    "sam_location": 116,
-    "setasides": []
+    "sam_location": 117
   }
 },
 {
@@ -2157,8 +1900,7 @@
     "sam_expiration_date": "2019-01-19T17:55:44Z",
     "sam_exclusion": false,
     "sam_url": "http://www.futroninc.com",
-    "sam_location": 117,
-    "setasides": []
+    "sam_location": 118
   }
 },
 {
@@ -2174,8 +1916,7 @@
     "sam_expiration_date": "2018-11-21T11:35:25Z",
     "sam_exclusion": false,
     "sam_url": "http://www.keylogic.com",
-    "sam_location": 118,
-    "setasides": []
+    "sam_location": 119
   }
 },
 {
@@ -2191,10 +1932,7 @@
     "sam_expiration_date": "2018-10-18T09:13:34Z",
     "sam_exclusion": false,
     "sam_url": "http://www.kihomac.com",
-    "sam_location": 119,
-    "setasides": [
-      16
-    ]
+    "sam_location": 120
   }
 },
 {
@@ -2210,11 +1948,7 @@
     "sam_expiration_date": "2018-10-13T18:23:55Z",
     "sam_exclusion": false,
     "sam_url": "https://www.lcibest.com/",
-    "sam_location": 120,
-    "setasides": [
-      1,
-      2
-    ]
+    "sam_location": 121
   }
 },
 {
@@ -2230,8 +1964,7 @@
     "sam_expiration_date": "2018-11-08T15:06:44Z",
     "sam_exclusion": false,
     "sam_url": "http://www.orbisinc.net",
-    "sam_location": 121,
-    "setasides": []
+    "sam_location": 122
   }
 },
 {
@@ -2247,8 +1980,7 @@
     "sam_expiration_date": "2019-02-27T16:20:09Z",
     "sam_exclusion": false,
     "sam_url": "http://www.pccii.com",
-    "sam_location": 122,
-    "setasides": []
+    "sam_location": 123
   }
 },
 {
@@ -2264,12 +1996,7 @@
     "sam_expiration_date": "2018-09-05T09:26:20Z",
     "sam_exclusion": false,
     "sam_url": "http://www.skyllaeng.com",
-    "sam_location": 123,
-    "setasides": [
-      1,
-      2,
-      16
-    ]
+    "sam_location": 124
   }
 },
 {
@@ -2285,8 +2012,7 @@
     "sam_expiration_date": "2018-07-18T16:33:27Z",
     "sam_exclusion": false,
     "sam_url": "http://www.teamscci.com",
-    "sam_location": 124,
-    "setasides": []
+    "sam_location": 125
   }
 },
 {
@@ -2302,10 +2028,7 @@
     "sam_expiration_date": "2018-11-20T15:36:05Z",
     "sam_exclusion": false,
     "sam_url": "HTTP://WWW.TELEINC.COM",
-    "sam_location": 125,
-    "setasides": [
-      3
-    ]
+    "sam_location": 126
   }
 },
 {
@@ -2321,8 +2044,7 @@
     "sam_expiration_date": "2018-10-17T12:14:55Z",
     "sam_exclusion": false,
     "sam_url": "http://www.vectorcsp.com",
-    "sam_location": 126,
-    "setasides": []
+    "sam_location": 127
   }
 },
 {
@@ -2338,8 +2060,7 @@
     "sam_expiration_date": "2018-10-13T12:20:25Z",
     "sam_exclusion": false,
     "sam_url": "http://www.x-technologies.com",
-    "sam_location": 127,
-    "setasides": []
+    "sam_location": 128
   }
 },
 {
@@ -2355,8 +2076,7 @@
     "sam_expiration_date": "2018-10-13T11:58:46Z",
     "sam_exclusion": false,
     "sam_url": "http://www.ssaihq.com",
-    "sam_location": 128,
-    "setasides": []
+    "sam_location": 129
   }
 },
 {
@@ -2372,8 +2092,7 @@
     "sam_expiration_date": "2019-03-06T09:46:05Z",
     "sam_exclusion": false,
     "sam_url": "http://www.accenture.com",
-    "sam_location": 129,
-    "setasides": []
+    "sam_location": 130
   }
 },
 {
@@ -2389,8 +2108,7 @@
     "sam_expiration_date": "2018-11-13T15:31:22Z",
     "sam_exclusion": false,
     "sam_url": "http://www.aceinfosolutions.com",
-    "sam_location": 130,
-    "setasides": []
+    "sam_location": 131
   }
 },
 {
@@ -2406,8 +2124,7 @@
     "sam_expiration_date": "2018-12-27T11:59:14Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 131,
-    "setasides": []
+    "sam_location": 132
   }
 },
 {
@@ -2423,8 +2140,7 @@
     "sam_expiration_date": "2018-10-09T16:33:29Z",
     "sam_exclusion": false,
     "sam_url": "http://www.amecfw.com",
-    "sam_location": 132,
-    "setasides": []
+    "sam_location": 133
   }
 },
 {
@@ -2440,8 +2156,7 @@
     "sam_expiration_date": "2019-02-09T13:08:15Z",
     "sam_exclusion": false,
     "sam_url": "http://www.ball.com/aerospace",
-    "sam_location": 133,
-    "setasides": []
+    "sam_location": 134
   }
 },
 {
@@ -2457,8 +2172,7 @@
     "sam_expiration_date": "2019-02-27T13:09:25Z",
     "sam_exclusion": false,
     "sam_url": "http://www.battelle.org",
-    "sam_location": 134,
-    "setasides": []
+    "sam_location": 135
   }
 },
 {
@@ -2474,8 +2188,7 @@
     "sam_expiration_date": "2018-12-15T20:02:45Z",
     "sam_exclusion": false,
     "sam_url": "http://www.boeing.com/",
-    "sam_location": 135,
-    "setasides": []
+    "sam_location": 136
   }
 },
 {
@@ -2491,8 +2204,7 @@
     "sam_expiration_date": "2019-03-07T11:45:24Z",
     "sam_exclusion": false,
     "sam_url": "HTTP://WWW.BOOZALLEN.COM",
-    "sam_location": 136,
-    "setasides": []
+    "sam_location": 137
   }
 },
 {
@@ -2508,8 +2220,7 @@
     "sam_expiration_date": "2019-02-08T09:45:09Z",
     "sam_exclusion": false,
     "sam_url": "http://www.caci.com",
-    "sam_location": 137,
-    "setasides": []
+    "sam_location": 138
   }
 },
 {
@@ -2525,8 +2236,7 @@
     "sam_expiration_date": "2019-01-30T10:21:59Z",
     "sam_exclusion": false,
     "sam_url": "http://tsd.huntingtoningalls.com",
-    "sam_location": 138,
-    "setasides": []
+    "sam_location": 139
   }
 },
 {
@@ -2542,8 +2252,7 @@
     "sam_expiration_date": "2019-01-03T15:41:31Z",
     "sam_exclusion": false,
     "sam_url": "http://www.cgifederal.com",
-    "sam_location": 139,
-    "setasides": []
+    "sam_location": 140
   }
 },
 {
@@ -2559,8 +2268,7 @@
     "sam_expiration_date": "2019-02-27T14:49:16Z",
     "sam_exclusion": false,
     "sam_url": " https://www.csra.com/our-company/contracts/",
-    "sam_location": 140,
-    "setasides": []
+    "sam_location": 141
   }
 },
 {
@@ -2576,8 +2284,7 @@
     "sam_expiration_date": "2018-10-13T10:38:12Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 141,
-    "setasides": []
+    "sam_location": 142
   }
 },
 {
@@ -2593,8 +2300,7 @@
     "sam_expiration_date": "2018-10-23T17:28:16Z",
     "sam_exclusion": false,
     "sam_url": "https://www.cubic.com",
-    "sam_location": 142,
-    "setasides": []
+    "sam_location": 143
   }
 },
 {
@@ -2610,8 +2316,7 @@
     "sam_expiration_date": "2019-03-05T11:19:49Z",
     "sam_exclusion": false,
     "sam_url": "http://www.deloitte.com",
-    "sam_location": 143,
-    "setasides": []
+    "sam_location": 144
   }
 },
 {
@@ -2627,8 +2332,7 @@
     "sam_expiration_date": "2019-01-30T14:46:21Z",
     "sam_exclusion": false,
     "sam_url": "http://www.engilitycorp.com",
-    "sam_location": 144,
-    "setasides": []
+    "sam_location": 145
   }
 },
 {
@@ -2644,8 +2348,7 @@
     "sam_expiration_date": "2018-12-12T11:39:43Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 145,
-    "setasides": []
+    "sam_location": 146
   }
 },
 {
@@ -2661,8 +2364,7 @@
     "sam_expiration_date": "2018-12-15T08:45:18Z",
     "sam_exclusion": false,
     "sam_url": "http://www.gdit.com",
-    "sam_location": 146,
-    "setasides": []
+    "sam_location": 147
   }
 },
 {
@@ -2678,8 +2380,7 @@
     "sam_expiration_date": "2019-02-05T10:34:38Z",
     "sam_exclusion": false,
     "sam_url": "HTTP://WWW.HARRIS.COM/",
-    "sam_location": 147,
-    "setasides": []
+    "sam_location": 148
   }
 },
 {
@@ -2695,8 +2396,7 @@
     "sam_expiration_date": "2018-10-13T18:04:57Z",
     "sam_exclusion": false,
     "sam_url": "http://www.icf.com/",
-    "sam_location": 148,
-    "setasides": []
+    "sam_location": 149
   }
 },
 {
@@ -2712,8 +2412,7 @@
     "sam_expiration_date": "2018-07-18T17:44:10Z",
     "sam_exclusion": false,
     "sam_url": "http://ibm.com/easyaccess/gsa",
-    "sam_location": 149,
-    "setasides": []
+    "sam_location": 150
   }
 },
 {
@@ -2729,8 +2428,7 @@
     "sam_expiration_date": "2019-01-11T10:32:49Z",
     "sam_exclusion": false,
     "sam_url": "http://www.jacobstechnology.com",
-    "sam_location": 150,
-    "setasides": []
+    "sam_location": 151
   }
 },
 {
@@ -2746,8 +2444,7 @@
     "sam_expiration_date": "2018-11-29T06:52:07Z",
     "sam_exclusion": false,
     "sam_url": "https://kbr.com/markets/government/kbr-wyle/",
-    "sam_location": 151,
-    "setasides": []
+    "sam_location": 152
   }
 },
 {
@@ -2763,8 +2460,7 @@
     "sam_expiration_date": "2019-01-16T11:32:14Z",
     "sam_exclusion": false,
     "sam_url": "http://www.leidos.com",
-    "sam_location": 152,
-    "setasides": []
+    "sam_location": 153
   }
 },
 {
@@ -2780,8 +2476,7 @@
     "sam_expiration_date": "2019-03-05T06:18:27Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 153,
-    "setasides": []
+    "sam_location": 154
   }
 },
 {
@@ -2797,8 +2492,7 @@
     "sam_expiration_date": "2019-01-30T11:16:36Z",
     "sam_exclusion": false,
     "sam_url": "HTTP://WWW.LMI.ORG",
-    "sam_location": 154,
-    "setasides": []
+    "sam_location": 155
   }
 },
 {
@@ -2814,8 +2508,7 @@
     "sam_expiration_date": "2018-10-10T12:43:10Z",
     "sam_exclusion": false,
     "sam_url": "http://www.mantech.com",
-    "sam_location": 155,
-    "setasides": []
+    "sam_location": 156
   }
 },
 {
@@ -2831,8 +2524,7 @@
     "sam_expiration_date": "2018-12-06T16:07:04Z",
     "sam_exclusion": false,
     "sam_url": "http://www.noblis.org",
-    "sam_location": 156,
-    "setasides": []
+    "sam_location": 157
   }
 },
 {
@@ -2848,8 +2540,7 @@
     "sam_expiration_date": "2019-01-04T15:31:59Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 157,
-    "setasides": []
+    "sam_location": 158
   }
 },
 {
@@ -2865,8 +2556,7 @@
     "sam_expiration_date": "2019-03-07T08:33:17Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 158,
-    "setasides": []
+    "sam_location": 159
   }
 },
 {
@@ -2882,8 +2572,7 @@
     "sam_expiration_date": "2018-10-30T09:41:50Z",
     "sam_exclusion": false,
     "sam_url": "http://www.parsons.com",
-    "sam_location": 159,
-    "setasides": []
+    "sam_location": 160
   }
 },
 {
@@ -2899,8 +2588,7 @@
     "sam_expiration_date": "2018-10-10T11:53:50Z",
     "sam_exclusion": false,
     "sam_url": "http://www.raytheon.com",
-    "sam_location": 160,
-    "setasides": []
+    "sam_location": 161
   }
 },
 {
@@ -2916,8 +2604,7 @@
     "sam_expiration_date": "2019-02-13T09:56:04Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 161,
-    "setasides": []
+    "sam_location": 162
   }
 },
 {
@@ -2933,8 +2620,7 @@
     "sam_expiration_date": "2019-03-05T09:45:41Z",
     "sam_exclusion": false,
     "sam_url": "http://www.serco-na.com",
-    "sam_location": 162,
-    "setasides": []
+    "sam_location": 163
   }
 },
 {
@@ -2946,12 +2632,11 @@
     "duns_4": "8789013960000",
     "cage": "1DDX3",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-11-10T15:58:46Z",
-    "sam_expiration_date": "2018-11-10T15:46:05Z",
+    "sam_activation_date": "2018-03-13T13:30:15Z",
+    "sam_expiration_date": "2019-03-13T13:10:04Z",
     "sam_exclusion": false,
     "sam_url": "http://www.sgt-inc.com",
-    "sam_location": 163,
-    "setasides": []
+    "sam_location": 164
   }
 },
 {
@@ -2967,8 +2652,7 @@
     "sam_expiration_date": "2018-10-13T12:04:32Z",
     "sam_exclusion": false,
     "sam_url": "http://www.swri.org",
-    "sam_location": 164,
-    "setasides": []
+    "sam_location": 165
   }
 },
 {
@@ -2984,8 +2668,7 @@
     "sam_expiration_date": "2018-11-06T11:40:21Z",
     "sam_exclusion": false,
     "sam_url": "http://www.csra.com",
-    "sam_location": 165,
-    "setasides": []
+    "sam_location": 166
   }
 },
 {
@@ -3001,8 +2684,7 @@
     "sam_expiration_date": "2018-10-16T14:23:17Z",
     "sam_exclusion": false,
     "sam_url": "http://www.tetratech.com/",
-    "sam_location": 166,
-    "setasides": []
+    "sam_location": 167
   }
 },
 {
@@ -3018,8 +2700,7 @@
     "sam_expiration_date": "2019-02-21T14:25:56Z",
     "sam_exclusion": false,
     "sam_url": "http://www.unisys.com",
-    "sam_location": 167,
-    "setasides": []
+    "sam_location": 168
   }
 },
 {
@@ -3035,8 +2716,7 @@
     "sam_expiration_date": "2019-02-05T10:35:21Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 168,
-    "setasides": []
+    "sam_location": 169
   }
 },
 {
@@ -3052,8 +2732,7 @@
     "sam_expiration_date": "2018-11-10T15:52:41Z",
     "sam_exclusion": false,
     "sam_url": "http://www.vencore.com/",
-    "sam_location": 169,
-    "setasides": []
+    "sam_location": 170
   }
 },
 {
@@ -3069,8 +2748,7 @@
     "sam_expiration_date": "2018-10-10T14:57:52Z",
     "sam_exclusion": false,
     "sam_url": "http://www.wyle.com",
-    "sam_location": 170,
-    "setasides": []
+    "sam_location": 171
   }
 },
 {
@@ -3086,8 +2764,7 @@
     "sam_expiration_date": "2018-11-28T15:08:23Z",
     "sam_exclusion": false,
     "sam_url": "http://www.ecs-federal.com",
-    "sam_location": 171,
-    "setasides": []
+    "sam_location": 172
   }
 },
 {
@@ -3103,8 +2780,7 @@
     "sam_expiration_date": "2018-07-13T15:57:00Z",
     "sam_exclusion": false,
     "sam_url": "http://www.grantthornton.com",
-    "sam_location": 172,
-    "setasides": []
+    "sam_location": 173
   }
 },
 {
@@ -3120,8 +2796,7 @@
     "sam_expiration_date": "2018-10-19T10:18:05Z",
     "sam_exclusion": false,
     "sam_url": "http://www.kearneyco.com",
-    "sam_location": 173,
-    "setasides": []
+    "sam_location": 174
   }
 },
 {
@@ -3137,8 +2812,7 @@
     "sam_expiration_date": "2018-05-10T18:45:07Z",
     "sam_exclusion": false,
     "sam_url": "http://www.norc.org/",
-    "sam_location": 174,
-    "setasides": []
+    "sam_location": 175
   }
 },
 {
@@ -3154,8 +2828,7 @@
     "sam_expiration_date": "2018-05-25T12:24:12Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 175,
-    "setasides": []
+    "sam_location": 176
   }
 },
 {
@@ -3171,8 +2844,7 @@
     "sam_expiration_date": "2019-02-20T14:45:46Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 176,
-    "setasides": []
+    "sam_location": 177
   }
 },
 {
@@ -3188,8 +2860,7 @@
     "sam_expiration_date": "2018-11-01T15:34:51Z",
     "sam_exclusion": false,
     "sam_url": "http://www.rti.org",
-    "sam_location": 177,
-    "setasides": []
+    "sam_location": 178
   }
 },
 {
@@ -3205,8 +2876,7 @@
     "sam_expiration_date": "2018-10-19T12:01:36Z",
     "sam_exclusion": false,
     "sam_url": "http://www.teksouth.com",
-    "sam_location": 178,
-    "setasides": []
+    "sam_location": 179
   }
 },
 {
@@ -3222,8 +2892,7 @@
     "sam_expiration_date": "2018-11-30T14:01:01Z",
     "sam_exclusion": false,
     "sam_url": "http://www.terathink.com",
-    "sam_location": 179,
-    "setasides": []
+    "sam_location": 180
   }
 },
 {
@@ -3239,8 +2908,7 @@
     "sam_expiration_date": "2019-03-08T13:01:56Z",
     "sam_exclusion": false,
     "sam_url": "http://www.milcorp.com",
-    "sam_location": 180,
-    "setasides": []
+    "sam_location": 181
   }
 },
 {
@@ -3256,8 +2924,7 @@
     "sam_expiration_date": "2018-06-26T10:45:29Z",
     "sam_exclusion": false,
     "sam_url": "http://www.westat.com",
-    "sam_location": 181,
-    "setasides": []
+    "sam_location": 182
   }
 },
 {
@@ -3273,8 +2940,7 @@
     "sam_expiration_date": "2019-01-31T11:12:16Z",
     "sam_exclusion": false,
     "sam_url": "http://www.engilitycorp.com",
-    "sam_location": 182,
-    "setasides": []
+    "sam_location": 183
   }
 },
 {
@@ -3290,8 +2956,7 @@
     "sam_expiration_date": "2018-10-18T10:22:03Z",
     "sam_exclusion": false,
     "sam_url": "http://www.gtarc.gatech.edu",
-    "sam_location": 183,
-    "setasides": []
+    "sam_location": 184
   }
 },
 {
@@ -3307,8 +2972,7 @@
     "sam_expiration_date": "2019-02-12T09:22:29Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 184,
-    "setasides": []
+    "sam_location": 185
   }
 },
 {
@@ -3324,8 +2988,7 @@
     "sam_expiration_date": "2019-03-07T14:16:41Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 185,
-    "setasides": []
+    "sam_location": 186
   }
 },
 {
@@ -3341,8 +3004,7 @@
     "sam_expiration_date": "2019-01-31T09:59:07Z",
     "sam_exclusion": false,
     "sam_url": "http://WWW.CACI.COM",
-    "sam_location": 186,
-    "setasides": []
+    "sam_location": 187
   }
 },
 {
@@ -3358,8 +3020,7 @@
     "sam_expiration_date": "2018-11-06T18:32:40Z",
     "sam_exclusion": false,
     "sam_url": "http://www.sri.com",
-    "sam_location": 187,
-    "setasides": []
+    "sam_location": 188
   }
 },
 {
@@ -3375,8 +3036,7 @@
     "sam_expiration_date": "2018-11-10T09:55:14Z",
     "sam_exclusion": false,
     "sam_url": "http://www.vencore.com/",
-    "sam_location": 188,
-    "setasides": []
+    "sam_location": 189
   }
 },
 {
@@ -3392,8 +3052,7 @@
     "sam_expiration_date": "2019-02-01T11:56:37Z",
     "sam_exclusion": false,
     "sam_url": "http://www.espus.com",
-    "sam_location": 189,
-    "setasides": []
+    "sam_location": 190
   }
 },
 {
@@ -3409,8 +3068,7 @@
     "sam_expiration_date": "2019-02-22T16:13:50Z",
     "sam_exclusion": false,
     "sam_url": "http://www.peraton.com",
-    "sam_location": 190,
-    "setasides": []
+    "sam_location": 191
   }
 },
 {
@@ -3426,10 +3084,7 @@
     "sam_expiration_date": "2019-02-06T15:39:39Z",
     "sam_exclusion": false,
     "sam_url": "http://www.APVit.com",
-    "sam_location": 191,
-    "setasides": [
-      16
-    ]
+    "sam_location": 192
   }
 },
 {
@@ -3445,11 +3100,7 @@
     "sam_expiration_date": "2019-01-25T18:38:15Z",
     "sam_exclusion": false,
     "sam_url": "http://www.alisinc.com",
-    "sam_location": 192,
-    "setasides": [
-      1,
-      2
-    ]
+    "sam_location": 193
   }
 },
 {
@@ -3465,8 +3116,7 @@
     "sam_expiration_date": "2018-10-23T16:01:44Z",
     "sam_exclusion": false,
     "sam_url": "http://www.aestrategies.com",
-    "sam_location": 193,
-    "setasides": []
+    "sam_location": 194
   }
 },
 {
@@ -3482,11 +3132,7 @@
     "sam_expiration_date": "2019-01-22T08:46:43Z",
     "sam_exclusion": false,
     "sam_url": "https://www.atlasresearch.us",
-    "sam_location": 194,
-    "setasides": [
-      1,
-      2
-    ]
+    "sam_location": 195
   }
 },
 {
@@ -3502,8 +3148,7 @@
     "sam_expiration_date": "2018-07-28T15:49:00Z",
     "sam_exclusion": false,
     "sam_url": "http://www.colleagueconsulting.com",
-    "sam_location": 195,
-    "setasides": []
+    "sam_location": 196
   }
 },
 {
@@ -3519,8 +3164,7 @@
     "sam_expiration_date": "2018-06-13T13:36:31Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 196,
-    "setasides": []
+    "sam_location": 197
   }
 },
 {
@@ -3536,8 +3180,7 @@
     "sam_expiration_date": "2019-02-06T15:13:21Z",
     "sam_exclusion": false,
     "sam_url": "http://www.metisolutions.com",
-    "sam_location": 197,
-    "setasides": []
+    "sam_location": 198
   }
 },
 {
@@ -3553,10 +3196,7 @@
     "sam_expiration_date": "2018-11-29T20:39:56Z",
     "sam_exclusion": false,
     "sam_url": "http://www.pherson.org",
-    "sam_location": 198,
-    "setasides": [
-      3
-    ]
+    "sam_location": 199
   }
 },
 {
@@ -3572,11 +3212,7 @@
     "sam_expiration_date": "2018-10-11T15:26:10Z",
     "sam_exclusion": false,
     "sam_url": "http://www.pitonscience.com",
-    "sam_location": 199,
-    "setasides": [
-      1,
-      2
-    ]
+    "sam_location": 200
   }
 },
 {
@@ -3592,10 +3228,7 @@
     "sam_expiration_date": "2018-10-24T15:51:30Z",
     "sam_exclusion": false,
     "sam_url": "http://www.powertrain.com",
-    "sam_location": 200,
-    "setasides": [
-      3
-    ]
+    "sam_location": 201
   }
 },
 {
@@ -3611,11 +3244,7 @@
     "sam_expiration_date": "2018-10-16T10:14:15Z",
     "sam_exclusion": false,
     "sam_url": "http://www.rigil.com",
-    "sam_location": 201,
-    "setasides": [
-      3,
-      16
-    ]
+    "sam_location": 202
   }
 },
 {
@@ -3631,12 +3260,7 @@
     "sam_expiration_date": "2019-01-05T10:32:30Z",
     "sam_exclusion": false,
     "sam_url": "http://www.goaclc.com",
-    "sam_location": 202,
-    "setasides": [
-      1,
-      2,
-      16
-    ]
+    "sam_location": 203
   }
 },
 {
@@ -3652,10 +3276,7 @@
     "sam_expiration_date": "2019-02-16T15:58:28Z",
     "sam_exclusion": false,
     "sam_url": "http://www.arcaspicio.com",
-    "sam_location": 203,
-    "setasides": [
-      3
-    ]
+    "sam_location": 204
   }
 },
 {
@@ -3671,12 +3292,7 @@
     "sam_expiration_date": "2018-12-06T10:03:57Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 204,
-    "setasides": [
-      1,
-      2,
-      18
-    ]
+    "sam_location": 205
   }
 },
 {
@@ -3692,10 +3308,7 @@
     "sam_expiration_date": "2018-12-16T17:56:41Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 205,
-    "setasides": [
-      16
-    ]
+    "sam_location": 206
   }
 },
 {
@@ -3711,10 +3324,7 @@
     "sam_expiration_date": "2019-02-27T09:13:32Z",
     "sam_exclusion": false,
     "sam_url": "http://www.cgstrategy.com",
-    "sam_location": 206,
-    "setasides": [
-      3
-    ]
+    "sam_location": 207
   }
 },
 {
@@ -3730,11 +3340,7 @@
     "sam_expiration_date": "2019-02-23T13:16:34Z",
     "sam_exclusion": false,
     "sam_url": "http://www.dsfederal.com",
-    "sam_location": 207,
-    "setasides": [
-      3,
-      16
-    ]
+    "sam_location": 208
   }
 },
 {
@@ -3750,11 +3356,7 @@
     "sam_expiration_date": "2018-04-25T14:28:46Z",
     "sam_exclusion": false,
     "sam_url": "http://www.dutyfirst.com",
-    "sam_location": 208,
-    "setasides": [
-      1,
-      2
-    ]
+    "sam_location": 209
   }
 },
 {
@@ -3770,8 +3372,7 @@
     "sam_expiration_date": "2019-01-03T11:29:22Z",
     "sam_exclusion": false,
     "sam_url": "http://WWW.DYNAMIS.COM",
-    "sam_location": 209,
-    "setasides": []
+    "sam_location": 210
   }
 },
 {
@@ -3787,10 +3388,7 @@
     "sam_expiration_date": "2019-03-02T08:56:41Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 210,
-    "setasides": [
-      16
-    ]
+    "sam_location": 211
   }
 },
 {
@@ -3806,11 +3404,7 @@
     "sam_expiration_date": "2018-06-28T10:23:16Z",
     "sam_exclusion": false,
     "sam_url": "http://www.eaglehillconsulting.com",
-    "sam_location": 211,
-    "setasides": [
-      3,
-      16
-    ]
+    "sam_location": 212
   }
 },
 {
@@ -3826,10 +3420,7 @@
     "sam_expiration_date": "2018-08-02T14:21:32Z",
     "sam_exclusion": false,
     "sam_url": "http://www.fyinfo.com",
-    "sam_location": 212,
-    "setasides": [
-      3
-    ]
+    "sam_location": 213
   }
 },
 {
@@ -3845,8 +3436,7 @@
     "sam_expiration_date": "2019-02-28T15:53:52Z",
     "sam_exclusion": false,
     "sam_url": "http://www.mahernet.com",
-    "sam_location": 213,
-    "setasides": []
+    "sam_location": 214
   }
 },
 {
@@ -3862,8 +3452,7 @@
     "sam_expiration_date": "2018-04-28T14:15:00Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 214,
-    "setasides": []
+    "sam_location": 215
   }
 },
 {
@@ -3879,8 +3468,7 @@
     "sam_expiration_date": "2018-09-06T12:18:33Z",
     "sam_exclusion": false,
     "sam_url": "http://www.jps-usa.com",
-    "sam_location": 215,
-    "setasides": []
+    "sam_location": 216
   }
 },
 {
@@ -3896,8 +3484,7 @@
     "sam_expiration_date": "2018-05-09T10:30:51Z",
     "sam_exclusion": false,
     "sam_url": "http://www.knowledgebank.us.com",
-    "sam_location": 216,
-    "setasides": []
+    "sam_location": 217
   }
 },
 {
@@ -3913,11 +3500,7 @@
     "sam_expiration_date": "2019-01-03T14:46:03Z",
     "sam_exclusion": false,
     "sam_url": "http://www.linkvisum.com",
-    "sam_location": 217,
-    "setasides": [
-      3,
-      16
-    ]
+    "sam_location": 218
   }
 },
 {
@@ -3933,10 +3516,7 @@
     "sam_expiration_date": "2018-11-06T12:04:44Z",
     "sam_exclusion": false,
     "sam_url": "http://www.mscginc.com",
-    "sam_location": 218,
-    "setasides": [
-      3
-    ]
+    "sam_location": 219
   }
 },
 {
@@ -3952,11 +3532,7 @@
     "sam_expiration_date": "2018-08-25T18:40:51Z",
     "sam_exclusion": false,
     "sam_url": "http://www.oban-corp.com",
-    "sam_location": 219,
-    "setasides": [
-      1,
-      2
-    ]
+    "sam_location": 220
   }
 },
 {
@@ -3972,8 +3548,7 @@
     "sam_expiration_date": "2019-02-08T15:06:52Z",
     "sam_exclusion": false,
     "sam_url": "http://www.pal-tech.com",
-    "sam_location": 220,
-    "setasides": []
+    "sam_location": 221
   }
 },
 {
@@ -3989,8 +3564,7 @@
     "sam_expiration_date": "2018-07-21T14:59:26Z",
     "sam_exclusion": false,
     "sam_url": "http://www.ParkerTide.com",
-    "sam_location": 221,
-    "setasides": []
+    "sam_location": 222
   }
 },
 {
@@ -4006,10 +3580,7 @@
     "sam_expiration_date": "2019-01-17T12:59:36Z",
     "sam_exclusion": false,
     "sam_url": "http://www.performexcel.com",
-    "sam_location": 222,
-    "setasides": [
-      3
-    ]
+    "sam_location": 223
   }
 },
 {
@@ -4025,11 +3596,7 @@
     "sam_expiration_date": "2018-09-05T10:49:45Z",
     "sam_exclusion": false,
     "sam_url": "http://www.PQCWorks.com",
-    "sam_location": 223,
-    "setasides": [
-      16,
-      18
-    ]
+    "sam_location": 224
   }
 },
 {
@@ -4045,11 +3612,7 @@
     "sam_expiration_date": "2018-08-01T08:30:36Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 224,
-    "setasides": [
-      1,
-      2
-    ]
+    "sam_location": 225
   }
 },
 {
@@ -4065,12 +3628,7 @@
     "sam_expiration_date": "2019-03-01T10:02:04Z",
     "sam_exclusion": false,
     "sam_url": "http://www.rividium.com",
-    "sam_location": 225,
-    "setasides": [
-      1,
-      2,
-      16
-    ]
+    "sam_location": 226
   }
 },
 {
@@ -4086,10 +3644,7 @@
     "sam_expiration_date": "2018-10-20T11:29:20Z",
     "sam_exclusion": false,
     "sam_url": "http://www.teamconsult.com",
-    "sam_location": 226,
-    "setasides": [
-      1
-    ]
+    "sam_location": 227
   }
 },
 {
@@ -4100,13 +3655,12 @@
     "duns": "128560328",
     "duns_4": "1285603280000",
     "cage": "3DW81",
-    "sam_status": "EXPIRED",
-    "sam_activation_date": "2017-03-06T12:56:55Z",
-    "sam_expiration_date": "2018-03-06T12:17:31Z",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-03-12T11:30:06Z",
+    "sam_expiration_date": "2019-03-12T10:52:08Z",
     "sam_exclusion": false,
     "sam_url": "http://www.mckinleygroup.net",
-    "sam_location": 227,
-    "setasides": []
+    "sam_location": 228
   }
 },
 {
@@ -4122,10 +3676,7 @@
     "sam_expiration_date": "2018-04-20T19:36:15Z",
     "sam_exclusion": false,
     "sam_url": "http://www.tmgi.net",
-    "sam_location": 228,
-    "setasides": [
-      16
-    ]
+    "sam_location": 229
   }
 },
 {
@@ -4141,8 +3692,7 @@
     "sam_expiration_date": "2019-01-11T09:57:16Z",
     "sam_exclusion": false,
     "sam_url": "http://www.afsc.com",
-    "sam_location": 229,
-    "setasides": []
+    "sam_location": 230
   }
 },
 {
@@ -4158,8 +3708,7 @@
     "sam_expiration_date": "2018-10-11T16:27:17Z",
     "sam_exclusion": false,
     "sam_url": "http://www.allencorporation.com",
-    "sam_location": 230,
-    "setasides": []
+    "sam_location": 231
   }
 },
 {
@@ -4175,8 +3724,7 @@
     "sam_expiration_date": "2018-09-29T14:56:47Z",
     "sam_exclusion": false,
     "sam_url": "http://www.c2ti.com",
-    "sam_location": 231,
-    "setasides": []
+    "sam_location": 232
   }
 },
 {
@@ -4192,8 +3740,7 @@
     "sam_expiration_date": "2019-03-05T16:04:52Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 232,
-    "setasides": []
+    "sam_location": 233
   }
 },
 {
@@ -4209,8 +3756,7 @@
     "sam_expiration_date": "2018-10-17T10:08:47Z",
     "sam_exclusion": false,
     "sam_url": "http://www.carleycorp.com",
-    "sam_location": 233,
-    "setasides": []
+    "sam_location": 234
   }
 },
 {
@@ -4226,8 +3772,7 @@
     "sam_expiration_date": "2019-02-22T11:48:15Z",
     "sam_exclusion": false,
     "sam_url": "http://www.teamcarney.com",
-    "sam_location": 234,
-    "setasides": []
+    "sam_location": 235
   }
 },
 {
@@ -4243,8 +3788,7 @@
     "sam_expiration_date": "2019-02-26T21:50:06Z",
     "sam_exclusion": false,
     "sam_url": "http://www.creativecorrections.com",
-    "sam_location": 235,
-    "setasides": []
+    "sam_location": 236
   }
 },
 {
@@ -4260,8 +3804,7 @@
     "sam_expiration_date": "2018-10-23T16:50:17Z",
     "sam_exclusion": false,
     "sam_url": "http://www.cubic.com",
-    "sam_location": 236,
-    "setasides": []
+    "sam_location": 237
   }
 },
 {
@@ -4277,8 +3820,7 @@
     "sam_expiration_date": "2018-07-03T08:53:22Z",
     "sam_exclusion": false,
     "sam_url": "http://www.apprioinc.com",
-    "sam_location": 237,
-    "setasides": []
+    "sam_location": 238
   }
 },
 {
@@ -4294,8 +3836,7 @@
     "sam_expiration_date": "2019-02-23T11:59:42Z",
     "sam_exclusion": false,
     "sam_url": "http://www.gpstrategies.com",
-    "sam_location": 238,
-    "setasides": []
+    "sam_location": 239
   }
 },
 {
@@ -4311,8 +3852,7 @@
     "sam_expiration_date": "2018-10-27T11:35:29Z",
     "sam_exclusion": false,
     "sam_url": "http://www.keybridgeti.com",
-    "sam_location": 239,
-    "setasides": []
+    "sam_location": 240
   }
 },
 {
@@ -4328,8 +3868,7 @@
     "sam_expiration_date": "2019-03-02T10:22:07Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 240,
-    "setasides": []
+    "sam_location": 241
   }
 },
 {
@@ -4345,8 +3884,7 @@
     "sam_expiration_date": "2019-03-07T13:12:33Z",
     "sam_exclusion": false,
     "sam_url": "http://www.managementconcepts.com",
-    "sam_location": 241,
-    "setasides": []
+    "sam_location": 242
   }
 },
 {
@@ -4362,8 +3900,7 @@
     "sam_expiration_date": "2018-07-11T09:30:38Z",
     "sam_exclusion": false,
     "sam_url": "http://americas.nttdata.com/Industries/Industries/Public Sector/NTT-DATA-Federal-Services.aspx",
-    "sam_location": 242,
-    "setasides": []
+    "sam_location": 243
   }
 },
 {
@@ -4379,8 +3916,7 @@
     "sam_expiration_date": "2018-10-10T15:19:11Z",
     "sam_exclusion": false,
     "sam_url": "http://www.pdri.com",
-    "sam_location": 243,
-    "setasides": []
+    "sam_location": 244
   }
 },
 {
@@ -4396,8 +3932,7 @@
     "sam_expiration_date": "2018-08-25T17:07:10Z",
     "sam_exclusion": false,
     "sam_url": "http://center4oe.com",
-    "sam_location": 244,
-    "setasides": []
+    "sam_location": 245
   }
 },
 {
@@ -4413,8 +3948,7 @@
     "sam_expiration_date": "2018-06-30T10:12:26Z",
     "sam_exclusion": false,
     "sam_url": "http://www.northhighland.com/",
-    "sam_location": 245,
-    "setasides": []
+    "sam_location": 246
   }
 },
 {
@@ -4430,8 +3964,7 @@
     "sam_expiration_date": "2019-01-24T14:24:52Z",
     "sam_exclusion": false,
     "sam_url": "https://www.air.org",
-    "sam_location": 246,
-    "setasides": []
+    "sam_location": 247
   }
 },
 {
@@ -4447,8 +3980,7 @@
     "sam_expiration_date": "2018-10-27T09:23:57Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 247,
-    "setasides": []
+    "sam_location": 248
   }
 },
 {
@@ -4464,8 +3996,7 @@
     "sam_expiration_date": "2018-08-22T13:15:07Z",
     "sam_exclusion": false,
     "sam_url": "http://www.censeoconsulting.com",
-    "sam_location": 248,
-    "setasides": []
+    "sam_location": 249
   }
 },
 {
@@ -4481,8 +4012,7 @@
     "sam_expiration_date": "2018-11-15T13:49:12Z",
     "sam_exclusion": false,
     "sam_url": "http://www.cherokee-technology.com",
-    "sam_location": 11,
-    "setasides": []
+    "sam_location": 11
   }
 },
 {
@@ -4498,8 +4028,7 @@
     "sam_expiration_date": "2018-12-13T17:47:04Z",
     "sam_exclusion": false,
     "sam_url": "http://www.gapsi.com",
-    "sam_location": 249,
-    "setasides": []
+    "sam_location": 250
   }
 },
 {
@@ -4515,8 +4044,7 @@
     "sam_expiration_date": "2018-11-01T15:29:50Z",
     "sam_exclusion": false,
     "sam_url": "http://www.goldenkeygroup.com",
-    "sam_location": 250,
-    "setasides": []
+    "sam_location": 251
   }
 },
 {
@@ -4532,8 +4060,7 @@
     "sam_expiration_date": "2019-01-10T14:59:32Z",
     "sam_exclusion": false,
     "sam_url": "http://www.humrro.org",
-    "sam_location": 251,
-    "setasides": []
+    "sam_location": 252
   }
 },
 {
@@ -4549,8 +4076,7 @@
     "sam_expiration_date": "2019-03-01T15:30:38Z",
     "sam_exclusion": false,
     "sam_url": "http://www.kpmg.com",
-    "sam_location": 252,
-    "setasides": []
+    "sam_location": 253
   }
 },
 {
@@ -4566,8 +4092,7 @@
     "sam_expiration_date": "2018-09-06T16:38:49Z",
     "sam_exclusion": false,
     "sam_url": "http://www.monstergovernmentsolutions.com",
-    "sam_location": 253,
-    "setasides": []
+    "sam_location": 254
   }
 },
 {
@@ -4583,8 +4108,7 @@
     "sam_expiration_date": "2018-12-12T16:43:50Z",
     "sam_exclusion": false,
     "sam_url": "http://www.suntiva.com",
-    "sam_location": 254,
-    "setasides": []
+    "sam_location": 255
   }
 },
 {
@@ -4600,8 +4124,7 @@
     "sam_expiration_date": "2019-01-29T10:04:24Z",
     "sam_exclusion": false,
     "sam_url": "http://www.yrci.com",
-    "sam_location": 255,
-    "setasides": []
+    "sam_location": 256
   }
 },
 {
@@ -4617,10 +4140,7 @@
     "sam_expiration_date": "2018-12-21T12:23:39Z",
     "sam_exclusion": false,
     "sam_url": "http://www.acepex.com",
-    "sam_location": 256,
-    "setasides": [
-      15
-    ]
+    "sam_location": 257
   }
 },
 {
@@ -4636,11 +4156,7 @@
     "sam_expiration_date": "2019-01-02T14:07:54Z",
     "sam_exclusion": false,
     "sam_url": "http://www.actionfacilities.com",
-    "sam_location": 257,
-    "setasides": [
-      3,
-      15
-    ]
+    "sam_location": 258
   }
 },
 {
@@ -4656,8 +4172,7 @@
     "sam_expiration_date": "2018-07-07T15:58:08Z",
     "sam_exclusion": false,
     "sam_url": "HTTP://WWW.ROSEMARKONLINE.COM",
-    "sam_location": 258,
-    "setasides": []
+    "sam_location": 259
   }
 },
 {
@@ -4669,15 +4184,11 @@
     "duns_4": "1874025860000",
     "cage": "363W8",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-02-11T12:00:08Z",
-    "sam_expiration_date": "2019-02-11T11:48:18Z",
+    "sam_activation_date": "2018-03-14T07:15:09Z",
+    "sam_expiration_date": "2019-03-14T06:59:17Z",
     "sam_exclusion": false,
     "sam_url": "http://www.ceepco.com",
-    "sam_location": 259,
-    "setasides": [
-      15,
-      16
-    ]
+    "sam_location": 260
   }
 },
 {
@@ -4693,11 +4204,7 @@
     "sam_expiration_date": "2019-02-16T15:52:37Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 260,
-    "setasides": [
-      15,
-      16
-    ]
+    "sam_location": 261
   }
 },
 {
@@ -4713,8 +4220,7 @@
     "sam_expiration_date": "2019-02-26T08:24:05Z",
     "sam_exclusion": false,
     "sam_url": "https://www.cmimgmt.com",
-    "sam_location": 261,
-    "setasides": []
+    "sam_location": 262
   }
 },
 {
@@ -4730,8 +4236,7 @@
     "sam_expiration_date": "2018-04-04T07:39:10Z",
     "sam_exclusion": false,
     "sam_url": "http://www.fseinc.net",
-    "sam_location": 262,
-    "setasides": []
+    "sam_location": 263
   }
 },
 {
@@ -4747,11 +4252,7 @@
     "sam_expiration_date": "2018-10-04T19:10:33Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 263,
-    "setasides": [
-      15,
-      16
-    ]
+    "sam_location": 264
   }
 },
 {
@@ -4767,12 +4268,7 @@
     "sam_expiration_date": "2019-03-01T10:46:45Z",
     "sam_exclusion": false,
     "sam_url": "https://www.ieinc.net",
-    "sam_location": 264,
-    "setasides": [
-      3,
-      15,
-      16
-    ]
+    "sam_location": 265
   }
 },
 {
@@ -4788,10 +4284,7 @@
     "sam_expiration_date": "2018-10-17T13:49:48Z",
     "sam_exclusion": false,
     "sam_url": "http://www.native-energy.com",
-    "sam_location": 265,
-    "setasides": [
-      15
-    ]
+    "sam_location": 266
   }
 },
 {
@@ -4807,11 +4300,7 @@
     "sam_expiration_date": "2018-11-14T15:36:39Z",
     "sam_exclusion": false,
     "sam_url": "http://www.nvecorp.com",
-    "sam_location": 266,
-    "setasides": [
-      3,
-      15
-    ]
+    "sam_location": 267
   }
 },
 {
@@ -4827,11 +4316,7 @@
     "sam_expiration_date": "2018-06-01T18:59:17Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 267,
-    "setasides": [
-      3,
-      15
-    ]
+    "sam_location": 268
   }
 },
 {
@@ -4847,11 +4332,7 @@
     "sam_expiration_date": "2019-01-31T17:37:36Z",
     "sam_exclusion": false,
     "sam_url": "http://www.prosourcenow.com",
-    "sam_location": 268,
-    "setasides": [
-      3,
-      15
-    ]
+    "sam_location": 269
   }
 },
 {
@@ -4867,8 +4348,7 @@
     "sam_expiration_date": "2018-11-27T09:27:57Z",
     "sam_exclusion": false,
     "sam_url": "http://www.ravenservices.us",
-    "sam_location": 269,
-    "setasides": []
+    "sam_location": 270
   }
 },
 {
@@ -4884,13 +4364,7 @@
     "sam_expiration_date": "2018-09-21T15:01:47Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 270,
-    "setasides": [
-      1,
-      2,
-      15,
-      16
-    ]
+    "sam_location": 271
   }
 },
 {
@@ -4906,11 +4380,7 @@
     "sam_expiration_date": "2019-03-08T12:21:18Z",
     "sam_exclusion": false,
     "sam_url": "http://www.tiguainc.org",
-    "sam_location": 271,
-    "setasides": [
-      15,
-      16
-    ]
+    "sam_location": 272
   }
 },
 {
@@ -4926,11 +4396,7 @@
     "sam_expiration_date": "2018-10-12T10:27:53Z",
     "sam_exclusion": false,
     "sam_url": "http://www.gov.trademasters.com",
-    "sam_location": 272,
-    "setasides": [
-      15,
-      16
-    ]
+    "sam_location": 273
   }
 },
 {
@@ -4946,8 +4412,7 @@
     "sam_expiration_date": "2018-09-14T15:17:30Z",
     "sam_exclusion": false,
     "sam_url": "http://www.URBANSERVICESGROUP.COM",
-    "sam_location": 273,
-    "setasides": []
+    "sam_location": 274
   }
 },
 {
@@ -4963,11 +4428,7 @@
     "sam_expiration_date": "2019-02-01T21:44:26Z",
     "sam_exclusion": false,
     "sam_url": "http://www.zerowastesolutions.com",
-    "sam_location": 274,
-    "setasides": [
-      3,
-      15
-    ]
+    "sam_location": 275
   }
 },
 {
@@ -4983,12 +4444,7 @@
     "sam_expiration_date": "2019-01-24T13:07:14Z",
     "sam_exclusion": false,
     "sam_url": "http://www.b3enterprisesllc.com",
-    "sam_location": 275,
-    "setasides": [
-      1,
-      2,
-      15
-    ]
+    "sam_location": 276
   }
 },
 {
@@ -5004,10 +4460,7 @@
     "sam_expiration_date": "2018-11-08T09:22:45Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 276,
-    "setasides": [
-      3
-    ]
+    "sam_location": 277
   }
 },
 {
@@ -5023,11 +4476,7 @@
     "sam_expiration_date": "2019-02-05T15:09:15Z",
     "sam_exclusion": false,
     "sam_url": "http://www.CTSI-FM.com",
-    "sam_location": 277,
-    "setasides": [
-      1,
-      2
-    ]
+    "sam_location": 278
   }
 },
 {
@@ -5043,10 +4492,7 @@
     "sam_expiration_date": "2019-01-02T09:15:40Z",
     "sam_exclusion": false,
     "sam_url": "http://www.facsvcs.com",
-    "sam_location": 278,
-    "setasides": [
-      3
-    ]
+    "sam_location": 279
   }
 },
 {
@@ -5062,10 +4508,7 @@
     "sam_expiration_date": "2018-09-08T10:18:39Z",
     "sam_exclusion": false,
     "sam_url": "http://www.gms-hvac.com",
-    "sam_location": 279,
-    "setasides": [
-      15
-    ]
+    "sam_location": 280
   }
 },
 {
@@ -5081,11 +4524,7 @@
     "sam_expiration_date": null,
     "sam_exclusion": null,
     "sam_url": null,
-    "sam_location": null,
-    "setasides": [
-      1,
-      2
-    ]
+    "sam_location": null
   }
 },
 {
@@ -5101,11 +4540,7 @@
     "sam_expiration_date": "2018-05-30T16:21:20Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 280,
-    "setasides": [
-      15,
-      16
-    ]
+    "sam_location": 281
   }
 },
 {
@@ -5121,12 +4556,7 @@
     "sam_expiration_date": "2018-09-05T13:54:25Z",
     "sam_exclusion": false,
     "sam_url": "http://www.pan-gro.com",
-    "sam_location": 281,
-    "setasides": [
-      1,
-      2,
-      18
-    ]
+    "sam_location": 282
   }
 },
 {
@@ -5142,13 +4572,7 @@
     "sam_expiration_date": "2018-11-09T13:41:12Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 282,
-    "setasides": [
-      1,
-      2,
-      15,
-      16
-    ]
+    "sam_location": 283
   }
 },
 {
@@ -5164,10 +4588,7 @@
     "sam_expiration_date": "2019-01-12T11:31:08Z",
     "sam_exclusion": false,
     "sam_url": "http://WWW.TIDEH2O.NET",
-    "sam_location": 283,
-    "setasides": [
-      15
-    ]
+    "sam_location": 284
   }
 },
 {
@@ -5183,8 +4604,7 @@
     "sam_expiration_date": "2018-08-15T15:33:48Z",
     "sam_exclusion": false,
     "sam_url": "http://www.eastcobuildingservices.com",
-    "sam_location": 284,
-    "setasides": []
+    "sam_location": 285
   }
 },
 {
@@ -5200,8 +4620,7 @@
     "sam_expiration_date": null,
     "sam_exclusion": null,
     "sam_url": null,
-    "sam_location": null,
-    "setasides": []
+    "sam_location": null
   }
 },
 {
@@ -5217,8 +4636,7 @@
     "sam_expiration_date": "2018-09-12T14:42:04Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 285,
-    "setasides": []
+    "sam_location": 286
   }
 },
 {
@@ -5234,12 +4652,7 @@
     "sam_expiration_date": "2018-10-27T15:11:59Z",
     "sam_exclusion": false,
     "sam_url": "http://www.wilsonfive.com",
-    "sam_location": 286,
-    "setasides": [
-      1,
-      2,
-      15
-    ]
+    "sam_location": 287
   }
 },
 {
@@ -5255,12 +4668,7 @@
     "sam_expiration_date": "2018-04-21T15:56:23Z",
     "sam_exclusion": false,
     "sam_url": "http://www.wwcontractors.com",
-    "sam_location": 287,
-    "setasides": [
-      1,
-      2,
-      15
-    ]
+    "sam_location": 288
   }
 },
 {
@@ -5276,11 +4684,7 @@
     "sam_expiration_date": "2018-12-12T15:54:20Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 288,
-    "setasides": [
-      15,
-      3
-    ]
+    "sam_location": 289
   }
 },
 {
@@ -5296,8 +4700,7 @@
     "sam_expiration_date": "2018-07-24T16:18:11Z",
     "sam_exclusion": false,
     "sam_url": "http://www.aecom.com",
-    "sam_location": 289,
-    "setasides": []
+    "sam_location": 290
   }
 },
 {
@@ -5313,8 +4716,7 @@
     "sam_expiration_date": "2019-01-04T12:54:13Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 290,
-    "setasides": []
+    "sam_location": 291
   }
 },
 {
@@ -5330,8 +4732,7 @@
     "sam_expiration_date": "2019-02-15T11:49:34Z",
     "sam_exclusion": false,
     "sam_url": "http://www.cbre.com",
-    "sam_location": 291,
-    "setasides": []
+    "sam_location": 292
   }
 },
 {
@@ -5347,8 +4748,7 @@
     "sam_expiration_date": "2018-09-18T10:15:30Z",
     "sam_exclusion": false,
     "sam_url": "http://www.completebuildingservices.com",
-    "sam_location": 292,
-    "setasides": []
+    "sam_location": 293
   }
 },
 {
@@ -5364,8 +4764,7 @@
     "sam_expiration_date": "2018-12-28T12:07:11Z",
     "sam_exclusion": false,
     "sam_url": "http://www.eml1.com",
-    "sam_location": 293,
-    "setasides": []
+    "sam_location": 294
   }
 },
 {
@@ -5381,8 +4780,7 @@
     "sam_expiration_date": "2019-02-14T14:39:31Z",
     "sam_exclusion": false,
     "sam_url": "http://www.jjwws.com",
-    "sam_location": 294,
-    "setasides": []
+    "sam_location": 295
   }
 },
 {
@@ -5398,8 +4796,7 @@
     "sam_expiration_date": "2018-08-10T12:03:26Z",
     "sam_exclusion": false,
     "sam_url": "http://www.jll.com",
-    "sam_location": 295,
-    "setasides": []
+    "sam_location": 296
   }
 },
 {
@@ -5415,8 +4812,7 @@
     "sam_expiration_date": "2019-02-05T16:28:06Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 296,
-    "setasides": []
+    "sam_location": 297
   }
 },
 {
@@ -5432,8 +4828,7 @@
     "sam_expiration_date": "2019-01-17T06:42:58Z",
     "sam_exclusion": false,
     "sam_url": "http://www.mcdean.com",
-    "sam_location": 297,
-    "setasides": []
+    "sam_location": 298
   }
 },
 {
@@ -5449,8 +4844,7 @@
     "sam_expiration_date": "2018-10-02T13:36:27Z",
     "sam_exclusion": false,
     "sam_url": "http://www.abm.com",
-    "sam_location": 298,
-    "setasides": []
+    "sam_location": 299
   }
 },
 {
@@ -5466,8 +4860,7 @@
     "sam_expiration_date": "2018-08-09T13:19:44Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 299,
-    "setasides": []
+    "sam_location": 300
   }
 }
 ]
