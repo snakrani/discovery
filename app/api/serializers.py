@@ -38,66 +38,60 @@ class ZoneSerializer(ModelSerializer):
 
 
 class LocationSerializer(ModelSerializer):
-    citystate = SerializerMethodField()
-    
     class Meta:
         model = vendors.Location
-        fields = ['address', 'city', 'state', 'zipcode', 'congressional_district', 'citystate']
+        fields = ['address', 'city', 'state', 'zipcode', 'congressional_district']
+
+
+class ContractManagerSerializer(ModelSerializer):
+    class Meta:
+        model = vendors.ContractManager
+        fields = ['name', 'phones', 'emails']
+
+class ProjectManagerSerializer(ModelSerializer):
+    class Meta:
+        model = vendors.ProjectManager
+        fields = ['name', 'phones', 'emails']
+
+
+class PoolMembershipSerializer(ModelSerializer):
+    pool = PoolSerializer(many=False)
+    setasides = SetAsideSerializer(many=True)
     
-    def get_citystate(self, item):
-        return "{}, {} {}".format(item.city, item.state, item.zipcode)
-
-
-class ManagerSerializer(ModelSerializer):
-    phones = SerializerMethodField()
-    emails = SerializerMethodField()
+    cms = ContractManagerSerializer(many=True)
+    pms = ProjectManagerSerializer(many=True)
     
     class Meta:
-        model = vendors.Manager
-        fields = ['name', 'phones', 'emails']
-        
-    def get_phones(self, item):
-        return item.phones()
-    
-    def get_emails(self, item):
-        return item.emails()
+        model = vendors.PoolMembership
+        fields = ['piid', 'pool', 'setasides', 'cms', 'pms']
 
 
 class VendorSerializer(ModelSerializer):
     sam_location = LocationSerializer(many=False)
-    setasides = SetAsideSerializer(many=True)
-    pools = PoolSerializer(many=True)
+    sam_location_citystate = CharField()
+    
+    pools = PoolMembershipSerializer(many=True)
     
     annual_revenue = IntegerField()
     number_of_employees = IntegerField()
     number_of_contracts = IntegerField()
     
-    cms = SerializerMethodField()
-    pms = SerializerMethodField()
-    
     class Meta:
         model = vendors.Vendor
-        fields = ['id', 'name', 'duns', 'duns_4', 'cage', 'sam_status', 
-                  'sam_expiration_date', 'sam_activation_date', 'sam_exclusion', 
-                  'sam_url', 'sam_location', 'cms', 'pms', 'pools', 'setasides', 
-                  'annual_revenue', 'number_of_employees', 'number_of_contracts']
-           
-    def get_cms(self, item):
-        return ManagerSerializer(item.managers.filter(type='CM'), many=True).data
-       
-    def get_pms(self, item):
-        return ManagerSerializer(item.managers.filter(type='PM'), many=True).data
+        fields = ['name', 'duns', 'duns_4', 'cage', 
+                  'sam_status', 'sam_expiration_date', 'sam_activation_date', 'sam_exclusion', 
+                  'sam_url', 'sam_location', 'sam_location_citystate', 
+                  'pools', 'annual_revenue', 'number_of_employees', 'number_of_contracts']
 
 
 class CoreVendorSerializer(ModelSerializer):
     sam_location = LocationSerializer(many=False)
-    setasides = SetAsideSerializer(many=True)
      
     class Meta:
         model = vendors.Vendor
-        fields = ['id', 'name', 'duns', 'duns_4', 
+        fields = ['name', 'duns', 'duns_4', 'cage',
                   'sam_status', 'sam_exclusion', 'sam_url',
-                  'sam_location', 'setasides']
+                  'sam_location']
 
 
 class ContractStatusSerializer(ModelSerializer):
