@@ -5,43 +5,15 @@ from test.common import get_nested_value
 import re
 
 
-class APIResponseValidator(object):
+class BaseValidator(object):
     
-    resp = None
     test = None
-    url  = ''
     
     
-    def __init__(self, response, test_case, url):
-        self.resp = response
+    def __init__(self, test_case):
         self.test = test_case
-        self.url = url
 
-
-    # Utilities
-    
-    def _wrap_error(self, error):
-        if self.url:
-            error.args = ("{}\nRequestURL: {}".format(error.args[0], self.url),)
-            
-        raise error
-    
-
-    # Status
-    
-    def check_status(self, status):
-        self.test.assertEqual(self.resp.status_code, status)
-        
-    def success(self):
-        self.check_status(200)
-        
-    def failure(self):
-        self.check_status(400)
-        
-    def not_found(self):
-        self.check_status(404)
-        
-        
+           
     # Data
     
     def compare_data(self, op, data_value, correct_value = None, **params):
@@ -56,12 +28,7 @@ class APIResponseValidator(object):
     
     
     def compare(self, op, resp_value, correct_value = None, **params):
-        if isinstance(resp_value, (str, list)):
-            data_value = get_nested_value(self.resp.data, resp_value)
-        else:
-            data_value = resp_value
-                
-        self.compare_data(op, data_value, correct_value, **params)
+        self.compare_data(op, resp_value, correct_value, **params)
     
     
     def equal(self, resp_value, correct_value):
@@ -252,6 +219,53 @@ class APIResponseValidator(object):
     def includes(self, resp_value, items, validator = None):
         self.compare('assertIncludes', resp_value, items, resp = self, validator = validator)
 
+
+class APIResponseValidator(BaseValidator):
+    
+    resp = None
+    url  = ''
+    
+    
+    def __init__(self, response, test_case, url):
+        self.resp = response
+        self.test = test_case
+        self.url = url
+
+
+    # Utilities
+    
+    def _wrap_error(self, error):
+        if self.url:
+            error.args = ("{}\nRequestURL: {}".format(error.args[0], self.url),)
+            
+        raise error
+    
+
+    # Status
+    
+    def check_status(self, status):
+        self.test.assertEqual(self.resp.status_code, status)
+        
+    def success(self):
+        self.check_status(200)
+        
+    def failure(self):
+        self.check_status(400)
+        
+    def not_found(self):
+        self.check_status(404)
+        
+        
+    # Data
+    
+    def compare(self, op, resp_value, correct_value = None, **params):
+        if isinstance(resp_value, (str, list)):
+            data_value = get_nested_value(self.resp.data, resp_value)
+        else:
+            data_value = resp_value
+                
+        self.compare_data(op, data_value, correct_value, **params)
+    
         
     # Count
     
