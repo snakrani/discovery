@@ -4,7 +4,7 @@ from django.test import Client, TestCase
 
 from urllib.parse import urlencode, quote
 
-from discovery import fixtures as data
+from test import fixtures as data
 from test.common import normalize_list
 from test.assertions import ASSERTION_MAP, DiscoveryAssertions
 from test.validators import APIResponseValidator
