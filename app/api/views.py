@@ -152,9 +152,10 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, OrderingFilter),
     }
     filter_class = filters.VendorFilter
-    search_fields = ['id', 'name', 'duns']
+    search_fields = ['name', 'duns', 'cage']
     ordering_fields = [
-        'id', 'name', 'duns', 'sam_status', 'sam_exclusion', 'sam_url',
+        'name', 'duns', 'cage', 
+        'sam_status', 'sam_exclusion', 'sam_url',
         'sam_location__address', 'sam_location__city', 'sam_location__state', 
         'sam_location__zipcode', 'sam_location__congressional_district', 'sam_location_citystate',
         'annual_revenue', 'number_of_employees', 'number_of_contracts'
@@ -165,7 +166,7 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
     serializer_class = serializers.VendorSerializer
     
     def get_queryset(self):
-        naics_param_name = 'pools__naics__code'
+        naics_param_name = 'pools__pool__naics__code'
         
         queryset = self.queryset.annotate(
             annual_revenue=Subquery(
@@ -174,7 +175,7 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
             number_of_employees=Subquery(
                 contracts.Contract.objects.filter(vendor=OuterRef('pk')).order_by('-date_signed').values('number_of_employees')[:1]
             ),
-            sam_location_citystate = Concat('sam_location__city', Value(', '), 'sam_location__state')
+            sam_location_citystate = Concat('sam_location__city', Value(', '), 'sam_location__state', Value(' '), 'sam_location__zipcode')
         )
         if naics_param_name in self.request.query_params and self.request.query_params[naics_param_name]:
             contract_list = contracts.Contract.objects.filter(NAICS=re.sub(r'[^\d]+$', '', self.request.query_params[naics_param_name]), vendor=OuterRef('pk')).values('pk')
