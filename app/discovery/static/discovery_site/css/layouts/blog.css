@@ -405,6 +405,7 @@ h4.data {
 #discovery_vehicles h1.vehicle {
   font-size: 1.0em;
   padding-bottom: 10px;
+  cursor: pointer;
 }
 
 #discovery_vehicles .learn_more {
