@@ -97,7 +97,7 @@ INSTALLED_APPS = [
     'vendors',
     'contracts',
     
-    'tests',
+    'selenium',
     
     'django.contrib.admin',
     'django.contrib.auth',
