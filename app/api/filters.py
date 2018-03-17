@@ -3,7 +3,7 @@ from django.db.models.query import QuerySet
 from rest_framework.fields import CharField, IntegerField
 
 from rest_framework_filters.filterset import FilterSet
-from rest_framework_filters.filters import NumberFilter, CharFilter, RelatedFilter, BaseInFilter
+from rest_framework_filters.filters import NumberFilter, CharFilter, DateFilter, RelatedFilter, BaseInFilter
 from rest_framework_filters.backends import ComplexFilterBackend
 
 from categories import models as categories
@@ -90,14 +90,16 @@ LOCATION_FIELDS = {
 }
 
 MANAGER_FIELDS = {
-    'name': FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS, 
-    'type': EQUALITY_CHAR_FILTERS,
-    'phone': FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS,
-    'email': FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS
+    'name': FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS
 }
 
+
+POOL_MEMBERSHIP_FIELDS = {
+    'piid': FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS, 
+}
+
+
 VENDOR_FIELDS = {
-    'id': NUM_FILTERS, 
     'name': FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS, 
     'duns': EQUALITY_CHAR_FILTERS, 
     'cage': EQUALITY_CHAR_FILTERS, 
@@ -143,6 +145,9 @@ CONTRACT_FIELDS = {
 
 
 class CharInFilter(BaseInFilter, CharFilter):
+    pass
+
+class DateInFilter(BaseInFilter, DateFilter):
     pass
 
 
@@ -191,21 +196,58 @@ class LocationFilter(FilterSet):
 
 
 class ManagerFilter(FilterSet):
-    phone = CharFilter(field_name='phone__number')
-    email = CharFilter(field_name='email__address')
+    phone = CharFilter(field_name='phone__number', lookup_expr='exact')
+    phone__iexact = CharFilter(field_name='phone__number', lookup_expr='iexact')
+    phone__in = CharInFilter(field_name='phone__number', lookup_expr='in')
+    phone__contains = CharFilter(field_name='phone__number', lookup_expr='contains')
+    phone__icontains = CharFilter(field_name='phone__number', lookup_expr='icontains')
+    phone__startswith = CharFilter(field_name='phone__number', lookup_expr='startswith')
+    phone__istartswith = CharFilter(field_name='phone__number', lookup_expr='istartswith')
+    phone__endswith = CharFilter(field_name='phone__number', lookup_expr='endswith')
+    phone__iendswith = CharFilter(field_name='phone__number', lookup_expr='iendswith')
+    phone__regex = CharFilter(field_name='phone__number', lookup_expr='regex')
+    phone__iregex = CharFilter(field_name='phone__number', lookup_expr='iregex')
+    
+    email = CharFilter(field_name='email__address', lookup_expr='exact')
+    email__iexact = CharFilter(field_name='email__address', lookup_expr='iexact')
+    email__in = CharInFilter(field_name='email__address', lookup_expr='in')
+    email__contains = CharFilter(field_name='email__address', lookup_expr='contains')
+    email__icontains = CharFilter(field_name='email__address', lookup_expr='icontains')
+    email__startswith = CharFilter(field_name='email__address', lookup_expr='startswith')
+    email__istartswith = CharFilter(field_name='email__address', lookup_expr='istartswith')
+    email__endswith = CharFilter(field_name='email__address', lookup_expr='endswith')
+    email__iendswith = CharFilter(field_name='email__address', lookup_expr='iendswith')
+    email__regex = CharFilter(field_name='email__address', lookup_expr='regex')
+    email__iregex = CharFilter(field_name='email__address', lookup_expr='iregex')
+
+
+class ContractManagerFilter(ManagerFilter):
+    class Meta:
+        model = vendors.ContractManager
+        fields = MANAGER_FIELDS
+
+        
+class ProjectManagerFilter(ManagerFilter):
+    class Meta:
+        model = vendors.ProjectManager
+        fields = MANAGER_FIELDS
+
+        
+class PoolMembershipFilter(FilterSet):
+    pool = RelatedFilter(PoolFilter)
+    setasides = RelatedFilter(SetAsideFilter)
+    
+    cms = RelatedFilter(ContractManagerFilter)
+    pms = RelatedFilter(ProjectManagerFilter)
     
     class Meta:
-        model = vendors.Manager
-        fields = MANAGER_FIELDS
+        model = vendors.PoolMembership
+        fields = POOL_MEMBERSHIP_FIELDS
 
 
 class VendorFilter(FilterSet):
     sam_location = RelatedFilter(LocationFilter)
-    
-    setasides = RelatedFilter(SetAsideFilter)
-    pools = RelatedFilter(PoolFilter)
-    
-    managers = RelatedFilter(ManagerFilter)
+    pools = RelatedFilter(PoolMembershipFilter)
     
     class Meta:
         model = vendors.Vendor
