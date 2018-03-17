@@ -1,8 +1,8 @@
-from discovery import unit_tests as test
+from test import cases as case
 from api import filters
 
 
-class BaseZoneTest(test.CategoryAPITestCase):
+class BaseZoneTest(case.CategoryAPITestCase):
     def initialize(self):
         self.router = 'zones'
         

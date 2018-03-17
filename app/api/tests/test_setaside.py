@@ -1,7 +1,7 @@
-from discovery import unit_tests as test
+from test import cases as case
 
 
-class BaseSetasideTest(test.CategoryAPITestCase):
+class BaseSetasideTest(case.CategoryAPITestCase):
     def initialize(self):
         self.router = 'setasides'
         

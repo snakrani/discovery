@@ -1,7 +1,7 @@
-from discovery import unit_tests as test
+from test import cases as case
 
 
-class BaseNaicsTest(test.CategoryAPITestCase):
+class BaseNaicsTest(case.CategoryAPITestCase):
     def initialize(self):
         self.router = 'naics'
         

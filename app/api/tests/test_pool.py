@@ -1,7 +1,7 @@
-from discovery import unit_tests as test
+from test import cases as case
 
 
-class BasePoolTest(test.CategoryAPITestCase):
+class BasePoolTest(case.CategoryAPITestCase):
     def initialize(self):
         self.router = 'pools'
         
