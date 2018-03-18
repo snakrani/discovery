@@ -7,7 +7,7 @@ from django.core.management import call_command
 
 from discovery.utils import csv_memory
 from categories.models import SetAside, Pool, Zone
-from vendors.models import Vendor, Manager, PoolMembership, PoolMembershipZone
+from vendors.models import Vendor, Manager, PoolMembership
 
 import os
 import sys
@@ -104,10 +104,15 @@ class Command(BaseCommand):
         membership, ppcreated = PoolMembership.objects.get_or_create(vendor=vendor, pool=pool_data, piid=piid)
         
         if zones and zones.lower() != 'all':
-            for zone in [x.strip() for x in zones.split(',')]:
-                PoolMembershipZone.objects.get_or_create(membership=membership, zone=Zone.objects.get(id=int(zone)))
-        else:
-            zone = None
+            for zone_id in [x.strip() for x in zones.split(',')]:
+                try:
+                    zone = Zone.objects.get(id=int(zone_id))
+                    if zone not in membership.zones.all():
+                        membership.zones.add(zone)
+
+                except Zone.DoesNotExist as error:
+                    continue
+        
         
         # Add contract manager
         cm, cm_created = membership.cms.get_or_create(name=record[3].strip())
@@ -149,7 +154,7 @@ class Command(BaseCommand):
             pm.name,
             ":".join(pm.phones()),
             ":".join(pm.emails()),
-            zones,
+            ":".join([str(zone.pk) for zone in membership.zones.all()]),
             ":".join([str(sa.pk) for sa in membership.setasides.all()])
         )
 
