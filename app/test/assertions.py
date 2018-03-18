@@ -1,8 +1,11 @@
 from django.db.models.query import QuerySet
 
+from datetime import datetime
+
 from test.common import normalize_list, get_nested_value
 
 import re
+import math
 
 
 ASSERTION_MAP = {
@@ -18,13 +21,13 @@ ASSERTION_MAP = {
     'iendswith': 'iendswith',
     'regex': 'matches',
     'iregex': 'imatches',
-    'date': 'equal',
-    'year': 'equal',
-    'month': 'equal',
-    'day': 'equal',
-    'week': 'equal',
-    'week_day': 'equal',
-    'quarter': 'equal',
+    'date': 'startswith',
+    'year': 'is_year',
+    'month': 'is_month',
+    'day': 'is_day',
+    'week': 'is_week',
+    'week_day': 'is_week_day',
+    'quarter': 'is_quarter',
     'range': 'between',
     'lt': 'is_below',
     'lte': 'is_max', 
@@ -170,6 +173,53 @@ class DiscoveryAssertions(object):
         
         if not re.search(pattern, value, re.IGNORECASE):
             raise AssertionError("Value ({}) given does not match pattern {}".format(value, pattern))
+    
+    
+    def _convert_date(self, date):
+        if not date or not isinstance(date, str) or not re.search('^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$', date):
+            raise AssertionError("Value ({}) must be passed as a date string".format(date))
+        
+        return datetime.strptime(date, '%Y-%m-%dT%H:%M:%SZ')
+        
+        
+    def assertYear(self, date, year, **params):
+        date = self._convert_date(date)
+        
+        if date.year != int(year):
+            raise AssertionError("Value ({}) given does not match year {}".format(year, date.year))
+        
+    def assertMonth(self, date, month, **params):
+        date = self._convert_date(date)
+        
+        if date.month != int(month):
+            raise AssertionError("Value ({}) given does not match month {}".format(month, date.month))
+        
+    def assertDay(self, date, day, **params):
+        date = self._convert_date(date)
+        
+        if date.day != int(day):
+            raise AssertionError("Value ({}) given does not match day {}".format(day, date.day))
+        
+    def assertWeek(self, date, week, **params):
+        date = self._convert_date(date)
+        date_week = date.isocalendar()[1]
+        
+        if date_week != int(week):
+            raise AssertionError("Value ({}) given does not match week {}".format(week, date_week))
+        
+    def assertWeekDay(self, date, week_day, **params):
+        date = self._convert_date(date)
+        date_week_day = max((date.isoweekday() + 1) % 8, 1)
+        
+        if date_week_day != int(week_day):
+            raise AssertionError("Value ({}) given does not match week day {}".format(week_day, date_week_day))
+        
+    def assertQuarter(self, date, quarter, **params):
+        date = self._convert_date(date)
+        date_quarter = math.ceil(date.month / 3)
+        
+        if date_quarter != int(quarter):
+            raise AssertionError("Value ({}) given does not match quarter {}".format(quarter, date_quarter))
     
     
     def assertIncludes(self, value, items, **params):
