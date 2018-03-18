@@ -56,18 +56,16 @@ class DiscoveryAPITestCase(TestCase, DiscoveryAssertions):
     
     
     def fetch_object(self, id, **params):
-        return APIResponseValidator(
-            self.client.get(self._get_object_path(id), params), 
-            self, 
-            self._get_object_url(id, params)
-        )
+        url = self._get_object_url(id, params)
+        
+        print("Testing object: {}".format(url))
+        return APIResponseValidator(self.client.get(self._get_object_path(id), params), self, url)
     
     def fetch_objects(self, **params):
-        return APIResponseValidator(
-            self.client.get(self.path, params), 
-            self, 
-            self._get_list_url(params)
-        )
+        url = self._get_list_url(params)
+        
+        print("Testing list: {}".format(url))
+        return APIResponseValidator(self.client.get(self.path, params), self, url)
 
     
     # Validation
@@ -125,7 +123,8 @@ class DiscoveryAPITestCase(TestCase, DiscoveryAssertions):
         
         if object:
             self._test_schema_object(object)
-        else:
+        
+        elif schema:
             with self.subTest(all = "schema"):
                 self.validated_multi_list()
             
@@ -197,26 +196,26 @@ class DiscoveryAPITestCase(TestCase, DiscoveryAssertions):
                     validation = self._validation_info(lookup, '@')
                     validator = ASSERTION_MAP[validation['lookup']]
                     
-                    field_lookup = field if validation['lookup'] == 'exact' else "{}__{}".format(field, validation['lookup'])
+                    field_lookup = field if validation['lookup'] in ('exact', 'date') else "{}__{}".format(field, validation['lookup'])
                     search_value = params[0]
                         
-                    if not search_value:
+                    if search_value is None:
                         raise Exception("Search value (string/integer) must be first parameter to lookup")
                         
                     check_value = params[1] if len(params) > 1 else search_value
-                        
+                    
                     with self.subTest(field = "{} [{}]".format(field_lookup, validation['type'])):
                         if field_info['relation']:
                             resp = getattr(self, validation['method'])(**{"{}".format(field_lookup): search_value})
                             
                             if self._check_valid(validation):
-                                resp.validate(lambda resp, base_key: resp.includes((base_key + [field_info['base_field']]), {"{}".format(field_info['relation']): search_value}, validator))         
+                                resp.validate(lambda resp, base_key: resp.includes((base_key + [field_info['base_field']]), {"{}".format(field_info['relation']): check_value}, validator))         
                         else:                    
                             resp = getattr(self, validation['method'])(**{"{}".format(field_lookup): search_value})
                             
                             if self._check_valid(validation):
                                 resp.validate(lambda resp, base_key: getattr(resp, validator)(base_key + [field], check_value))
-    
+
     
     def _test_schema_object(self, object):
         if object:
