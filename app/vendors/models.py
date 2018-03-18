@@ -44,17 +44,10 @@ class PoolMembership(models.Model):
     piid = models.CharField(max_length=128) # from CSV
     
     setasides = models.ManyToManyField(SetAside, blank=True) # from CSV
+    zones = models.ManyToManyField(Zone, blank=True) # from CSV
     
     def __str__(self):
         return "{0} - {1}/{2} ({3})".format(self.vendor.name, self.pool.id, self.zone, self.piid)
-
-
-class PoolMembershipZone(models.Model):
-    membership = models.ForeignKey(PoolMembership, null=True, related_name='zone', on_delete=models.CASCADE)
-    zone = models.ForeignKey(Zone, null=True, on_delete=models.DO_NOTHING)
-
-    def __str__(self):
-        return "{0}".format(self.zone)
 
 
 class Manager(models.Model):
