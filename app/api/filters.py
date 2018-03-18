@@ -233,6 +233,8 @@ class PoolMembershipFilter(FilterSet):
     pool = RelatedFilter(PoolFilter)
     setasides = RelatedFilter(SetAsideFilter)
     
+    zones = RelatedFilter(ZoneFilter)
+    
     cms = RelatedFilter(ContractManagerFilter)
     pms = RelatedFilter(ProjectManagerFilter)
     
