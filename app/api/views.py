@@ -149,7 +149,7 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
     lookup_field = 'duns'
     
     action_filters = {
-        'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, OrderingFilter),
+        'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
     }
     filter_class = filters.VendorFilter
     search_fields = ['name', 'duns', 'cage']
@@ -201,7 +201,7 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
     lookup_field = 'id'
     
     action_filters = {
-        'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, OrderingFilter),
+        'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
     }
     filter_class = filters.ContractFilter
     search_fields = ['id', 'name', 'duns']
