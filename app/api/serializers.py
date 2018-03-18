@@ -58,12 +58,14 @@ class PoolMembershipSerializer(ModelSerializer):
     pool = PoolSerializer(many=False)
     setasides = SetAsideSerializer(many=True)
     
+    zones = ZoneSerializer(many=True)
+    
     cms = ContractManagerSerializer(many=True)
     pms = ProjectManagerSerializer(many=True)
     
     class Meta:
         model = vendors.PoolMembership
-        fields = ['piid', 'pool', 'setasides', 'cms', 'pms']
+        fields = ['piid', 'pool', 'setasides', 'zones', 'cms', 'pms']
 
 
 class VendorSerializer(ModelSerializer):
