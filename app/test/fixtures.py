@@ -17,8 +17,7 @@ def get_vendor_fixtures():
         'managers.json',
         'managerphonenumbers.json',
         'manageremails.json', 
-        'poolmemberships.json',
-        'poolmembershipzones.json'
+        'poolmemberships.json'
     ]
 
 
