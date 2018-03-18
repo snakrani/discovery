@@ -13,7 +13,17 @@ class BaseValidator(object):
     def __init__(self, test_case):
         self.test = test_case
 
-           
+    
+    # Utilities
+    
+    def check(self, validator, *args, **kwargs):
+        try:
+            getattr(self, validator)(*args, **kwargs)
+            return True
+        except AssertionError as error:
+            return False
+        
+    
     # Data
     
     def compare_data(self, op, data_value, correct_value = None, **params):
@@ -25,7 +35,6 @@ class BaseValidator(object):
                 
         except Exception as error:
             raise self._wrap_error(error)
-    
     
     def compare(self, op, resp_value, correct_value = None, **params):
         self.compare_data(op, resp_value, correct_value, **params)
@@ -215,6 +224,42 @@ class BaseValidator(object):
     def iequal_data(self, data_value, text):
         self.imatches_data(data_value, "^{}$".format(re.escape(text)))
     
+    def is_year(self, resp_value, year):
+        self.compare('assertYear', resp_value, year)
+        
+    def is_year_data(self, data_value, year):
+        self.compare_data('assertYear', data_value, year)
+            
+    def is_month(self, resp_value, month):
+        self.compare('assertMonth', resp_value, month)
+        
+    def is_month_data(self, data_value, month):
+        self.compare_data('assertMonth', data_value, month)
+        
+    def is_day(self, resp_value, day):
+        self.compare('assertDay', resp_value, day)
+        
+    def is_day_data(self, data_value, day):
+        self.compare_data('assertDay', resp_value, day)
+        
+    def is_week(self, resp_value, week):
+        self.compare('assertWeek', resp_value, week)
+        
+    def is_week_data(self, data_value, week):
+        self.compare_data('assertWeek', data_value, week)
+    
+    def is_week_day(self, resp_value, week_day):
+        self.compare('assertWeekDay', resp_value, week_day)
+        
+    def is_week_day_data(self, data_value, week_day):
+        self.compare_data('assertWeekDay', data_value, week_day)
+    
+    def is_quarter(self, resp_value, quarter):
+        self.compare('assertQuarter', resp_value, quarter)
+        
+    def is_quarter_data(self, data_value, quarter):
+        self.compare_data('assertQuarter', data_value, quarter)
+    
         
     def includes(self, resp_value, items, validator = None):
         self.compare('assertIncludes', resp_value, items, resp = self, validator = validator)
@@ -281,6 +326,13 @@ class APIResponseValidator(BaseValidator):
     
     # Ordering
     
+    def _order_value(self, value):
+        if isinstance(value, str):
+            return re.sub('[^a-z0-9]+', '', value.lower())
+        else:
+            return value
+
+
     def validate_ordering(self, resp_value, dir = 'asc'):
         prev_value = None
         
@@ -290,18 +342,16 @@ class APIResponseValidator(BaseValidator):
         for i in range(0, len(self.resp.data['results']) - 1):
             data_value = get_nested_value(self.resp.data['results'][i], resp_value)
             
-            if isinstance(data_value, str):
-                data_value = data_value.lower()
-            
-            if i > 0:
-                if dir == 'asc':
-                    if data_value < prev_value:
-                        raise self._wrap_error(AssertionError("Data value ({}) is less than previous ({}) - Expected greater or equal".format(data_value, prev_value)))
-                else:
-                    if data_value > prev_value:
-                        raise self._wrap_error(AssertionError("Data value ({}) is greater than previous ({}) - Expected less than or equal".format(data_value, prev_value)))
+            if data_value is not None:
+                if prev_value is not None:
+                    if dir == 'asc':
+                        if self._order_value(data_value) < self._order_value(prev_value):
+                            raise self._wrap_error(AssertionError("Data value ({}) is less than previous ({}) - Expected greater or equal".format(data_value, prev_value)))
+                    else:
+                        if self._order_value(data_value) > self._order_value(prev_value):
+                            raise self._wrap_error(AssertionError("Data value ({}) is greater than previous ({}) - Expected less than or equal".format(data_value, prev_value)))
                 
-            prev_value = data_value
+                prev_value = data_value
     
     
     # Pagination
