@@ -3,7 +3,7 @@ from django.db.models.query import QuerySet
 from rest_framework.fields import CharField, IntegerField
 
 from rest_framework_filters.filterset import FilterSet
-from rest_framework_filters.filters import NumberFilter, CharFilter, DateFilter, RelatedFilter, BaseInFilter
+from rest_framework_filters.filters import NumberFilter, CharFilter, DateFilter, DateTimeFilter, RelatedFilter, BaseInFilter
 from rest_framework_filters.backends import ComplexFilterBackend
 
 from categories import models as categories
@@ -12,8 +12,7 @@ from contracts import models as contracts
 
 
 EQUALITY_BOOL_FILTERS = [
-    'exact',
-    'isnull'
+    'exact'
 ]
 
 EQUALITY_CHAR_FILTERS = [
@@ -33,6 +32,7 @@ FUZZY_CHAR_FILTERS = [
     'iregex'
 ]
 
+
 DATE_FILTERS = [
     'date',
     'year',
@@ -40,9 +40,7 @@ DATE_FILTERS = [
     'day',
     'week',
     'week_day',
-    'quarter',
-    'range',
-    'in'
+    'quarter'
 ]
 
 NUM_FILTERS = [
@@ -101,7 +99,7 @@ POOL_MEMBERSHIP_FIELDS = {
 
 VENDOR_FIELDS = {
     'name': FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS, 
-    'duns': EQUALITY_CHAR_FILTERS, 
+    'duns': NUM_FILTERS, 
     'cage': EQUALITY_CHAR_FILTERS, 
     'sam_status': EQUALITY_CHAR_FILTERS, 
     'sam_activation_date': DATE_FILTERS, 
@@ -145,9 +143,6 @@ CONTRACT_FIELDS = {
 
 
 class CharInFilter(BaseInFilter, CharFilter):
-    pass
-
-class DateInFilter(BaseInFilter, DateFilter):
     pass
 
 
@@ -196,6 +191,7 @@ class LocationFilter(FilterSet):
 
 
 class ManagerFilter(FilterSet):
+
     phone = CharFilter(field_name='phone__number', lookup_expr='exact')
     phone__iexact = CharFilter(field_name='phone__number', lookup_expr='iexact')
     phone__in = CharInFilter(field_name='phone__number', lookup_expr='in')
@@ -248,6 +244,9 @@ class PoolMembershipFilter(FilterSet):
 class VendorFilter(FilterSet):
     sam_location = RelatedFilter(LocationFilter)
     pools = RelatedFilter(PoolMembershipFilter)
+    
+    sam_activation_date = CharFilter(field_name="sam_activation_date", lookup_expr="startswith")
+    sam_expiration_date = CharFilter(field_name="sam_expiration_date", lookup_expr="startswith")
     
     class Meta:
         model = vendors.Vendor
