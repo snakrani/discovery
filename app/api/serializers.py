@@ -27,13 +27,13 @@ class PoolSerializer(ModelSerializer):
 
 
 class ZoneSerializer(ModelSerializer):
-    states = SerializerMethodField()
+    state = SerializerMethodField()
     
     class Meta:
         model = categories.Zone
-        fields = ['id', 'states']
+        fields = ['id', 'state']
         
-    def get_states(self, item):
+    def get_state(self, item):
         return item.states()
 
 
@@ -46,12 +46,12 @@ class LocationSerializer(ModelSerializer):
 class ContractManagerSerializer(ModelSerializer):
     class Meta:
         model = vendors.ContractManager
-        fields = ['name', 'phones', 'emails']
+        fields = ['name', 'phone', 'email']
 
 class ProjectManagerSerializer(ModelSerializer):
     class Meta:
         model = vendors.ProjectManager
-        fields = ['name', 'phones', 'emails']
+        fields = ['name', 'phone', 'email']
 
 
 class PoolMembershipSerializer(ModelSerializer):
