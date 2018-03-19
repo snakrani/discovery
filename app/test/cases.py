@@ -194,7 +194,7 @@ class DiscoveryAPITestCase(TestCase, DiscoveryAssertions):
                     validation = self._validation_info(lookup, '@')
                     validator = VALIDATION_MAP[validation['lookup']]
                     
-                    field_lookup = field if validation['lookup'] in ('exact',) else "{}__{}".format(field, validation['lookup'])
+                    field_lookup = field if validation['lookup'] in ('exact', 'date') else "{}__{}".format(field, validation['lookup'])
                         
                     if search_value is None:
                         raise Exception("Search value (string/integer/list) is expected for field lookup")
