@@ -78,6 +78,7 @@ class DiscoveryAPITestCase(TestCase, DiscoveryAssertions):
             resp.count(list_count)
         else:
             resp.countMin(1)
+        
         resp.validate_list()
         return resp
     
@@ -125,9 +126,6 @@ class DiscoveryAPITestCase(TestCase, DiscoveryAssertions):
             self._test_schema_object(object)
         
         elif schema:
-            with self.subTest(all = "schema"):
-                self.validated_multi_list()
-            
             self._test_schema_ordering(schema.get('ordering', None))
             self._test_schema_pagination(schema.get('pagination', None))
             self._test_schema_search(schema.get('search', None))
@@ -199,8 +197,10 @@ class DiscoveryAPITestCase(TestCase, DiscoveryAssertions):
                     if search_value is None:
                         raise Exception("Search value (string/integer/list) is expected for field lookup")
                         
-                    if validation['lookup'] in ('range', 'in') and isinstance(search_value, (list, tuple)):
+                    if isinstance(search_value, (list, tuple)):
                         search_value = ",".join(str(val) for val in search_value)
+                    else:
+                        search_value = str(search_value)
                         
                     with self.subTest(field = "{} [{}]".format(field_lookup, validation['type'])):
                         if field_info['relation']:
@@ -284,3 +284,7 @@ class CategoryAPITestCase(DiscoveryAPITestCase):
 
 class VendorAPITestCase(DiscoveryAPITestCase):
     fixtures = data.get_vendor_fixtures()
+
+
+class ContractAPITestCase(DiscoveryAPITestCase):
+    fixtures = data.get_contract_fixtures()
