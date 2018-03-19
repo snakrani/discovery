@@ -118,19 +118,19 @@ class Command(BaseCommand):
         cm, cm_created = membership.cms.get_or_create(name=record[3].strip())
         
         for number in filter(None, "".join(record[4].split()).split(',')):
-            cm.phone.get_or_create(number=number)
+            cm.phones.get_or_create(number=number)
         
         for address in filter(None, "".join(record[5].split()).split(',')):
-            cm.email.get_or_create(address=address)
+            cm.emails.get_or_create(address=address)
         
         # Add project manager
         pm, pm_created = membership.pms.get_or_create(name=record[6].strip())
         
         for number in filter(None, "".join(record[7].split()).split(',')):
-            pm.phone.get_or_create(number=number)
+            pm.phones.get_or_create(number=number)
         
         for address in filter(None, "".join(record[8].split()).split(',')):
-            pm.email.get_or_create(address=address)
+            pm.emails.get_or_create(address=address)
         
         # Add setaside information (if it exists)
         if (len(record) == 11 and len(record[10])):
@@ -149,11 +149,11 @@ class Command(BaseCommand):
             vendor.duns, 
             vendor.duns_4,
             cm.name,
-            ":".join(cm.phones()),
-            ":".join(cm.emails()),
+            ":".join(cm.phone()),
+            ":".join(cm.email()),
             pm.name,
-            ":".join(pm.phones()),
-            ":".join(pm.emails()),
+            ":".join(pm.phone()),
+            ":".join(pm.email()),
             ":".join([str(zone.pk) for zone in membership.zones.all()]),
             ":".join([str(sa.pk) for sa in membership.setasides.all()])
         )
