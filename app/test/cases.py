@@ -6,8 +6,8 @@ from urllib.parse import urlencode, quote
 
 from test import fixtures as data
 from test.common import normalize_list
-from test.assertions import ASSERTION_MAP, DiscoveryAssertions
-from test.validators import APIResponseValidator
+from test.assertions import DiscoveryAssertions
+from test.validators import VALIDATION_MAP, APIResponseValidator
 
 import re
 
@@ -190,31 +190,29 @@ class DiscoveryAPITestCase(TestCase, DiscoveryAssertions):
             for field, lookups in fields.items():
                 field_info = self._field_info(field)
                 
-                for lookup, params in lookups.items():
-                    params = normalize_list(params)
-                    
+                for lookup, search_value in lookups.items():
                     validation = self._validation_info(lookup, '@')
-                    validator = ASSERTION_MAP[validation['lookup']]
+                    validator = VALIDATION_MAP[validation['lookup']]
                     
-                    field_lookup = field if validation['lookup'] in ('exact', 'date') else "{}__{}".format(field, validation['lookup'])
-                    search_value = params[0]
+                    field_lookup = field if validation['lookup'] in ('exact',) else "{}__{}".format(field, validation['lookup'])
                         
                     if search_value is None:
-                        raise Exception("Search value (string/integer) must be first parameter to lookup")
+                        raise Exception("Search value (string/integer/list) is expected for field lookup")
                         
-                    check_value = params[1] if len(params) > 1 else search_value
-                    
+                    if validation['lookup'] in ('range', 'in') and isinstance(search_value, (list, tuple)):
+                        search_value = ",".join(str(val) for val in search_value)
+                        
                     with self.subTest(field = "{} [{}]".format(field_lookup, validation['type'])):
                         if field_info['relation']:
                             resp = getattr(self, validation['method'])(**{"{}".format(field_lookup): search_value})
                             
                             if self._check_valid(validation):
-                                resp.validate(lambda resp, base_key: resp.includes((base_key + [field_info['base_field']]), {"{}".format(field_info['relation']): check_value}, validator))         
+                                resp.validate(lambda resp, base_key: resp.map(validator, (base_key + [field_info['base_field']]), field_info['relation'], search_value))         
                         else:                    
                             resp = getattr(self, validation['method'])(**{"{}".format(field_lookup): search_value})
                             
                             if self._check_valid(validation):
-                                resp.validate(lambda resp, base_key: getattr(resp, validator)(base_key + [field], check_value))
+                                resp.validate(lambda resp, base_key: getattr(resp, validator)(base_key + [field], search_value))
 
     
     def _test_schema_object(self, object):
@@ -242,8 +240,8 @@ class DiscoveryAPITestCase(TestCase, DiscoveryAssertions):
         if field.find('__') != -1:
             components = field.split('__')
             
-            base_field = components[0]
-            relation = components[1]
+            base_field = components.pop(0)
+            relation = components
         else:
             base_field = field
             relation = None
