@@ -36,7 +36,7 @@ class NaicsFilter(FilterSet):
     
     code = CharFilter(field_name='code', lookup_expr='exact')
     code__iexact = CharFilter(field_name='code', lookup_expr='iexact')
-    code__in = CharInFilter(field_name='code', lookup_expr='in')
+    code__in = CharInFilter(field_name='code')
     code__contains = CharFilter(field_name='code', lookup_expr='contains')
     code__icontains = CharFilter(field_name='code', lookup_expr='icontains')
     code__startswith = CharFilter(field_name='code', lookup_expr='startswith')
@@ -48,7 +48,7 @@ class NaicsFilter(FilterSet):
     
     root_code = CharFilter(field_name='root_code', lookup_expr='exact')
     root_code__iexact = CharFilter(field_name='root_code', lookup_expr='iexact')
-    root_code__in = CharInFilter(field_name='root_code', lookup_expr='in')
+    root_code__in = CharInFilter(field_name='root_code')
     root_code__contains = CharFilter(field_name='root_code', lookup_expr='contains')
     root_code__icontains = CharFilter(field_name='root_code', lookup_expr='icontains')
     root_code__startswith = CharFilter(field_name='root_code', lookup_expr='startswith')
@@ -60,7 +60,7 @@ class NaicsFilter(FilterSet):
     
     description = CharFilter(field_name='description', lookup_expr='exact')
     description__iexact = CharFilter(field_name='description', lookup_expr='iexact')
-    description__in = CharInFilter(field_name='description', lookup_expr='in')
+    description__in = CharInFilter(field_name='description')
     description__contains = CharFilter(field_name='description', lookup_expr='contains')
     description__icontains = CharFilter(field_name='description', lookup_expr='icontains')
     description__startswith = CharFilter(field_name='description', lookup_expr='startswith')
@@ -79,15 +79,15 @@ class SetAsideFilter(FilterSet):
     
     code = CharFilter(field_name='code', lookup_expr='exact')
     code__iexact = CharFilter(field_name='code', lookup_expr='iexact')
-    code__in = CharInFilter(field_name='code', lookup_expr='in')
+    code__in = CharInFilter(field_name='code')
     
     name = CharFilter(field_name='name', lookup_expr='exact')
     name__iexact = CharFilter(field_name='name', lookup_expr='iexact')
-    name__in = CharInFilter(field_name='name', lookup_expr='in')
+    name__in = CharInFilter(field_name='name')
     
     description = CharFilter(field_name='description', lookup_expr='exact')
     description__iexact = CharFilter(field_name='description', lookup_expr='iexact')
-    description__in = CharInFilter(field_name='description', lookup_expr='in')
+    description__in = CharInFilter(field_name='description')
     description__contains = CharFilter(field_name='description', lookup_expr='contains')
     description__icontains = CharFilter(field_name='description', lookup_expr='icontains')
     description__startswith = CharFilter(field_name='description', lookup_expr='startswith')
@@ -98,8 +98,8 @@ class SetAsideFilter(FilterSet):
     description__iregex = CharFilter(field_name='description', lookup_expr='iregex')
     
     far_order = NumberFilter(field_name='far_order', lookup_expr='exact')
-    far_order__range = NumberFilter(field_name='far_order', lookup_expr='range')
-    far_order__in = NumberInFilter(field_name='far_order', lookup_expr='in')
+    far_order__range = NumberRangeFilter(field_name='far_order')
+    far_order__in = NumberInFilter(field_name='far_order')
     far_order__lt = NumberFilter(field_name='far_order', lookup_expr='lt')
     far_order__lte = NumberFilter(field_name='far_order', lookup_expr='lte')
     far_order__gt = NumberFilter(field_name='far_order', lookup_expr='gt')
@@ -114,11 +114,11 @@ class PoolFilter(FilterSet):
         
     id = CharFilter(field_name='id', lookup_expr='exact')
     id__iexact = CharFilter(field_name='id', lookup_expr='iexact')
-    id__in = CharInFilter(field_name='id', lookup_expr='in')
+    id__in = CharInFilter(field_name='id')
     
     name = CharFilter(field_name='name', lookup_expr='exact')
     name__iexact = CharFilter(field_name='name', lookup_expr='iexact')
-    name__in = CharInFilter(field_name='name', lookup_expr='in')
+    name__in = CharInFilter(field_name='name')
     name__contains = CharFilter(field_name='name', lookup_expr='contains')
     name__icontains = CharFilter(field_name='name', lookup_expr='icontains')
     name__startswith = CharFilter(field_name='name', lookup_expr='startswith')
@@ -130,11 +130,11 @@ class PoolFilter(FilterSet):
     
     number = CharFilter(field_name='number', lookup_expr='exact')
     number__iexact = CharFilter(field_name='number', lookup_expr='iexact')
-    number__in = CharInFilter(field_name='number', lookup_expr='in')
+    number__in = CharInFilter(field_name='number')
     
     vehicle = CharFilter(field_name='vehicle', lookup_expr='exact')
     vehicle__iexact = CharFilter(field_name='vehicle', lookup_expr='iexact')
-    vehicle__in = CharInFilter(field_name='vehicle', lookup_expr='in')
+    vehicle__in = CharInFilter(field_name='vehicle')
     vehicle__contains = CharFilter(field_name='vehicle', lookup_expr='contains')
     vehicle__icontains = CharFilter(field_name='vehicle', lookup_expr='icontains')
     vehicle__startswith = CharFilter(field_name='vehicle', lookup_expr='startswith')
@@ -146,7 +146,7 @@ class PoolFilter(FilterSet):
     
     threshold = CharFilter(field_name='threshold', lookup_expr='exact')
     threshold__iexact = CharFilter(field_name='threshold', lookup_expr='iexact')
-    threshold__in = CharInFilter(field_name='threshold', lookup_expr='in')
+    threshold__in = CharInFilter(field_name='threshold')
     threshold__contains = CharFilter(field_name='threshold', lookup_expr='contains')
     threshold__icontains = CharFilter(field_name='threshold', lookup_expr='icontains')
     threshold__startswith = CharFilter(field_name='threshold', lookup_expr='startswith')
@@ -166,8 +166,8 @@ class PoolFilter(FilterSet):
 class ZoneFilter(FilterSet):
     
     id = NumberFilter(field_name='id', lookup_expr='exact')
-    id__range = NumberFilter(field_name='id', lookup_expr='range')
-    id__in = NumberInFilter(field_name='id', lookup_expr='in')
+    id__range = NumberRangeFilter(field_name='id')
+    id__in = NumberInFilter(field_name='id')
     id__lt = NumberFilter(field_name='id', lookup_expr='lt')
     id__lte = NumberFilter(field_name='id', lookup_expr='lte')
     id__gt = NumberFilter(field_name='id', lookup_expr='gt')
@@ -186,7 +186,7 @@ class LocationFilter(FilterSet):
     
     address = CharFilter(field_name='address', lookup_expr='exact')
     address__iexact = CharFilter(field_name='address', lookup_expr='iexact')
-    address__in = CharInFilter(field_name='address', lookup_expr='in')
+    address__in = CharInFilter(field_name='address')
     address__contains = CharFilter(field_name='address', lookup_expr='contains')
     address__icontains = CharFilter(field_name='address', lookup_expr='icontains')
     address__startswith = CharFilter(field_name='address', lookup_expr='startswith')
@@ -198,7 +198,7 @@ class LocationFilter(FilterSet):
     
     city = CharFilter(field_name='city', lookup_expr='exact')
     city__iexact = CharFilter(field_name='city', lookup_expr='iexact')
-    city__in = CharInFilter(field_name='city', lookup_expr='in')
+    city__in = CharInFilter(field_name='city')
     city__contains = CharFilter(field_name='city', lookup_expr='contains')
     city__icontains = CharFilter(field_name='city', lookup_expr='icontains')
     city__startswith = CharFilter(field_name='city', lookup_expr='startswith')
@@ -210,11 +210,11 @@ class LocationFilter(FilterSet):
     
     state = CharFilter(field_name='state', lookup_expr='exact')
     state__iexact = CharFilter(field_name='state', lookup_expr='iexact')
-    state__in = CharInFilter(field_name='state', lookup_expr='in')
+    state__in = CharInFilter(field_name='state')
     
     zipcode = CharFilter(field_name='zipcode', lookup_expr='exact')
     zipcode__iexact = CharFilter(field_name='zipcode', lookup_expr='iexact')
-    zipcode__in = CharInFilter(field_name='zipcode', lookup_expr='in')
+    zipcode__in = CharInFilter(field_name='zipcode')
     zipcode__contains = CharFilter(field_name='zipcode', lookup_expr='contains')
     zipcode__icontains = CharFilter(field_name='zipcode', lookup_expr='icontains')
     zipcode__startswith = CharFilter(field_name='zipcode', lookup_expr='startswith')
@@ -226,7 +226,7 @@ class LocationFilter(FilterSet):
     
     congressional_district = CharFilter(field_name='congressional_district', lookup_expr='exact')
     congressional_district__iexact = CharFilter(field_name='congressional_district', lookup_expr='iexact')
-    congressional_district__in = CharInFilter(field_name='congressional_district', lookup_expr='in')
+    congressional_district__in = CharInFilter(field_name='congressional_district')
 
     class Meta:
         model = vendors.Location
@@ -237,7 +237,7 @@ class ManagerFilter(FilterSet):
     
     name = CharFilter(field_name='name', lookup_expr='exact')
     name__iexact = CharFilter(field_name='name', lookup_expr='iexact')
-    name__in = CharInFilter(field_name='name', lookup_expr='in')
+    name__in = CharInFilter(field_name='name')
     name__contains = CharFilter(field_name='name', lookup_expr='contains')
     name__icontains = CharFilter(field_name='name', lookup_expr='icontains')
     name__startswith = CharFilter(field_name='name', lookup_expr='startswith')
@@ -247,29 +247,29 @@ class ManagerFilter(FilterSet):
     name__regex = CharFilter(field_name='name', lookup_expr='regex')
     name__iregex = CharFilter(field_name='name', lookup_expr='iregex')
 
-    phone = CharFilter(field_name='phone__number', lookup_expr='exact')
-    phone__iexact = CharFilter(field_name='phone__number', lookup_expr='iexact')
-    phone__in = CharInFilter(field_name='phone__number', lookup_expr='in')
-    phone__contains = CharFilter(field_name='phone__number', lookup_expr='contains')
-    phone__icontains = CharFilter(field_name='phone__number', lookup_expr='icontains')
-    phone__startswith = CharFilter(field_name='phone__number', lookup_expr='startswith')
-    phone__istartswith = CharFilter(field_name='phone__number', lookup_expr='istartswith')
-    phone__endswith = CharFilter(field_name='phone__number', lookup_expr='endswith')
-    phone__iendswith = CharFilter(field_name='phone__number', lookup_expr='iendswith')
-    phone__regex = CharFilter(field_name='phone__number', lookup_expr='regex')
-    phone__iregex = CharFilter(field_name='phone__number', lookup_expr='iregex')
+    phone = CharFilter(field_name='phones__number', lookup_expr='exact')
+    phone__iexact = CharFilter(field_name='phones__number', lookup_expr='iexact')
+    phone__in = CharInFilter(field_name='phones__number')
+    phone__contains = CharFilter(field_name='phones__number', lookup_expr='contains')
+    phone__icontains = CharFilter(field_name='phones__number', lookup_expr='icontains')
+    phone__startswith = CharFilter(field_name='phones__number', lookup_expr='startswith')
+    phone__istartswith = CharFilter(field_name='phones__number', lookup_expr='istartswith')
+    phone__endswith = CharFilter(field_name='phones__number', lookup_expr='endswith')
+    phone__iendswith = CharFilter(field_name='phones__number', lookup_expr='iendswith')
+    phone__regex = CharFilter(field_name='phones__number', lookup_expr='regex')
+    phone__iregex = CharFilter(field_name='phones__number', lookup_expr='iregex')
     
-    email = CharFilter(field_name='email__address', lookup_expr='exact')
-    email__iexact = CharFilter(field_name='email__address', lookup_expr='iexact')
-    email__in = CharInFilter(field_name='email__address', lookup_expr='in')
-    email__contains = CharFilter(field_name='email__address', lookup_expr='contains')
-    email__icontains = CharFilter(field_name='email__address', lookup_expr='icontains')
-    email__startswith = CharFilter(field_name='email__address', lookup_expr='startswith')
-    email__istartswith = CharFilter(field_name='email__address', lookup_expr='istartswith')
-    email__endswith = CharFilter(field_name='email__address', lookup_expr='endswith')
-    email__iendswith = CharFilter(field_name='email__address', lookup_expr='iendswith')
-    email__regex = CharFilter(field_name='email__address', lookup_expr='regex')
-    email__iregex = CharFilter(field_name='email__address', lookup_expr='iregex')
+    email = CharFilter(field_name='emails__address', lookup_expr='exact')
+    email__iexact = CharFilter(field_name='emails__address', lookup_expr='iexact')
+    email__in = CharInFilter(field_name='emails__address')
+    email__contains = CharFilter(field_name='emails__address', lookup_expr='contains')
+    email__icontains = CharFilter(field_name='emails__address', lookup_expr='icontains')
+    email__startswith = CharFilter(field_name='emails__address', lookup_expr='startswith')
+    email__istartswith = CharFilter(field_name='emails__address', lookup_expr='istartswith')
+    email__endswith = CharFilter(field_name='emails__address', lookup_expr='endswith')
+    email__iendswith = CharFilter(field_name='emails__address', lookup_expr='iendswith')
+    email__regex = CharFilter(field_name='emails__address', lookup_expr='regex')
+    email__iregex = CharFilter(field_name='emails__address', lookup_expr='iregex')
 
 
 class ContractManagerFilter(ManagerFilter):
@@ -288,7 +288,7 @@ class PoolMembershipFilter(FilterSet):
     
     piid = CharFilter(field_name='piid', lookup_expr='exact')
     piid__iexact = CharFilter(field_name='piid', lookup_expr='iexact')
-    piid__in = CharInFilter(field_name='piid', lookup_expr='in')
+    piid__in = CharInFilter(field_name='piid')
     piid__contains = CharFilter(field_name='piid', lookup_expr='contains')
     piid__icontains = CharFilter(field_name='piid', lookup_expr='icontains')
     piid__startswith = CharFilter(field_name='piid', lookup_expr='startswith')
@@ -315,7 +315,7 @@ class VendorFilter(FilterSet):
     
     name = CharFilter(field_name='name', lookup_expr='exact')
     name__iexact = CharFilter(field_name='name', lookup_expr='iexact')
-    name__in = CharInFilter(field_name='name', lookup_expr='in')
+    name__in = CharInFilter(field_name='name')
     name__contains = CharFilter(field_name='name', lookup_expr='contains')
     name__icontains = CharFilter(field_name='name', lookup_expr='icontains')
     name__startswith = CharFilter(field_name='name', lookup_expr='startswith')
@@ -334,11 +334,11 @@ class VendorFilter(FilterSet):
     
     cage = CharFilter(field_name='cage', lookup_expr='exact')
     cage__iexact = CharFilter(field_name='cage', lookup_expr='iexact')
-    cage__in = CharInFilter(field_name='cage', lookup_expr='in')
+    cage__in = CharInFilter(field_name='cage')
     
     sam_status = CharFilter(field_name='sam_status', lookup_expr='exact')
     sam_status__iexact = CharFilter(field_name='sam_status', lookup_expr='iexact')
-    sam_status__in = CharInFilter(field_name='sam_status', lookup_expr='in')
+    sam_status__in = CharInFilter(field_name='sam_status')
     
     sam_activation_date = CharFilter(field_name="sam_activation_date", lookup_expr="startswith")
     sam_activation_date__year = NumberFilter(field_name='sam_activation_date', lookup_expr='year')
@@ -360,7 +360,7 @@ class VendorFilter(FilterSet):
     
     sam_url = CharFilter(field_name='sam_url', lookup_expr='exact')
     sam_url__iexact = CharFilter(field_name='sam_url', lookup_expr='iexact')
-    sam_url__in = CharInFilter(field_name='sam_url', lookup_expr='in')
+    sam_url__in = CharInFilter(field_name='sam_url')
     sam_url__contains = CharFilter(field_name='sam_url', lookup_expr='contains')
     sam_url__icontains = CharFilter(field_name='sam_url', lookup_expr='icontains')
     sam_url__startswith = CharFilter(field_name='sam_url', lookup_expr='startswith')
@@ -382,11 +382,11 @@ class ContractStatusFilter(FilterSet):
     
     code = CharFilter(field_name='code', lookup_expr='exact')
     code__iexact = CharFilter(field_name='code', lookup_expr='iexact')
-    code__in = CharInFilter(field_name='code', lookup_expr='in')
+    code__in = CharInFilter(field_name='code')
     
     name = CharFilter(field_name='name', lookup_expr='exact')
     name__iexact = CharFilter(field_name='name', lookup_expr='iexact')
-    name__in = CharInFilter(field_name='name', lookup_expr='in')
+    name__in = CharInFilter(field_name='name')
     name__contains = CharFilter(field_name='name', lookup_expr='contains')
     name__icontains = CharFilter(field_name='name', lookup_expr='icontains')
     name__startswith = CharFilter(field_name='name', lookup_expr='startswith')
@@ -405,11 +405,11 @@ class PricingStructureFilter(FilterSet):
     
     code = CharFilter(field_name='code', lookup_expr='exact')
     code__iexact = CharFilter(field_name='code', lookup_expr='iexact')
-    code__in = CharInFilter(field_name='code', lookup_expr='in')
+    code__in = CharInFilter(field_name='code')
     
     name = CharFilter(field_name='name', lookup_expr='exact')
     name__iexact = CharFilter(field_name='name', lookup_expr='iexact')
-    name__in = CharInFilter(field_name='name', lookup_expr='in')
+    name__in = CharInFilter(field_name='name')
     name__contains = CharFilter(field_name='name', lookup_expr='contains')
     name__icontains = CharFilter(field_name='name', lookup_expr='icontains')
     name__startswith = CharFilter(field_name='name', lookup_expr='startswith')
@@ -428,11 +428,11 @@ class PlaceOfPerformanceFilter(FilterSet):
     
     country_code = CharFilter(field_name='country_code', lookup_expr='exact')
     country_code__iexact = CharFilter(field_name='country_code', lookup_expr='iexact')
-    country_code__in = CharInFilter(field_name='country_code', lookup_expr='in')
+    country_code__in = CharInFilter(field_name='country_code')
     
     country_name = CharFilter(field_name='country_name', lookup_expr='exact')
     country_name__iexact = CharFilter(field_name='country_name', lookup_expr='iexact')
-    country_name__in = CharInFilter(field_name='country_name', lookup_expr='in')
+    country_name__in = CharInFilter(field_name='country_name')
     country_name__contains = CharFilter(field_name='country_name', lookup_expr='contains')
     country_name__icontains = CharFilter(field_name='country_name', lookup_expr='icontains')
     country_name__startswith = CharFilter(field_name='country_name', lookup_expr='startswith')
@@ -444,11 +444,11 @@ class PlaceOfPerformanceFilter(FilterSet):
     
     state = CharFilter(field_name='state', lookup_expr='exact')
     state__iexact = CharFilter(field_name='state', lookup_expr='iexact')
-    state__in = CharInFilter(field_name='state', lookup_expr='in')
+    state__in = CharInFilter(field_name='state')
     
     zipcode = CharFilter(field_name='zipcode', lookup_expr='exact')
     zipcode__iexact = CharFilter(field_name='zipcode', lookup_expr='iexact')
-    zipcode__in = CharInFilter(field_name='zipcode', lookup_expr='in')
+    zipcode__in = CharInFilter(field_name='zipcode')
     zipcode__contains = CharFilter(field_name='zipcode', lookup_expr='contains')
     zipcode__icontains = CharFilter(field_name='zipcode', lookup_expr='icontains')
     zipcode__startswith = CharFilter(field_name='zipcode', lookup_expr='startswith')
@@ -466,8 +466,8 @@ class PlaceOfPerformanceFilter(FilterSet):
 class ContractFilter(FilterSet):
     
     id = NumberFilter(field_name='id', lookup_expr='exact')
-    id__range = NumberFilter(field_name='id', lookup_expr='range')
-    id__in = NumberInFilter(field_name='id', lookup_expr='in')
+    id__range = NumberRangeFilter(field_name='id')
+    id__in = NumberInFilter(field_name='id')
     id__lt = NumberFilter(field_name='id', lookup_expr='lt')
     id__lte = NumberFilter(field_name='id', lookup_expr='lte')
     id__gt = NumberFilter(field_name='id', lookup_expr='gt')
@@ -475,7 +475,7 @@ class ContractFilter(FilterSet):
     
     piid = CharFilter(field_name='piid', lookup_expr='exact')
     piid__iexact = CharFilter(field_name='piid', lookup_expr='iexact')
-    piid__in = CharInFilter(field_name='piid', lookup_expr='in')
+    piid__in = CharInFilter(field_name='piid')
     piid__contains = CharFilter(field_name='piid', lookup_expr='contains')
     piid__icontains = CharFilter(field_name='piid', lookup_expr='icontains')
     piid__startswith = CharFilter(field_name='piid', lookup_expr='startswith')
@@ -487,11 +487,11 @@ class ContractFilter(FilterSet):
     
     agency_id = CharFilter(field_name='agency_id', lookup_expr='exact')
     agency_id__iexact = CharFilter(field_name='agency_id', lookup_expr='iexact')
-    agency_id__in = CharInFilter(field_name='agency_id', lookup_expr='in')
+    agency_id__in = CharInFilter(field_name='agency_id')
     
     agency_name = CharFilter(field_name='agency_name', lookup_expr='exact')
     agency_name__iexact = CharFilter(field_name='agency_name', lookup_expr='iexact')
-    agency_name__in = CharInFilter(field_name='agency_name', lookup_expr='in')
+    agency_name__in = CharInFilter(field_name='agency_name')
     agency_name__contains = CharFilter(field_name='agency_name', lookup_expr='contains')
     agency_name__icontains = CharFilter(field_name='agency_name', lookup_expr='icontains')
     agency_name__startswith = CharFilter(field_name='agency_name', lookup_expr='startswith')
@@ -503,7 +503,7 @@ class ContractFilter(FilterSet):
     
     NAICS = CharFilter(field_name='NAICS', lookup_expr='exact')
     NAICS__iexact = CharFilter(field_name='NAICS', lookup_expr='iexact')
-    NAICS__in = CharInFilter(field_name='NAICS', lookup_expr='in')
+    NAICS__in = CharInFilter(field_name='NAICS')
     NAICS__contains = CharFilter(field_name='NAICS', lookup_expr='contains')
     NAICS__icontains = CharFilter(field_name='NAICS', lookup_expr='icontains')
     NAICS__startswith = CharFilter(field_name='NAICS', lookup_expr='startswith')
@@ -515,7 +515,7 @@ class ContractFilter(FilterSet):
     
     PSC = CharFilter(field_name='PSC', lookup_expr='exact')
     PSC__iexact = CharFilter(field_name='PSC', lookup_expr='iexact')
-    PSC__in = CharInFilter(field_name='PSC', lookup_expr='in')
+    PSC__in = CharInFilter(field_name='PSC')
     PSC__contains = CharFilter(field_name='PSC', lookup_expr='contains')
     PSC__icontains = CharFilter(field_name='PSC', lookup_expr='icontains')
     PSC__startswith = CharFilter(field_name='PSC', lookup_expr='startswith')
@@ -542,8 +542,8 @@ class ContractFilter(FilterSet):
     completion_date__quarter = DateFilter(field_name='completion_date', lookup_expr='quarter')
     
     obligated_amount = NumberFilter(field_name='obligated_amount', lookup_expr='exact')
-    obligated_amount__range = NumberFilter(field_name='obligated_amount', lookup_expr='range')
-    obligated_amount__in = NumberInFilter(field_name='obligated_amount', lookup_expr='in')
+    obligated_amount__range = NumberRangeFilter(field_name='obligated_amount')
+    obligated_amount__in = NumberInFilter(field_name='obligated_amount')
     obligated_amount__lt = NumberFilter(field_name='obligated_amount', lookup_expr='lt')
     obligated_amount__lte = NumberFilter(field_name='obligated_amount', lookup_expr='lte')
     obligated_amount__gt = NumberFilter(field_name='obligated_amount', lookup_expr='gt')
@@ -551,7 +551,7 @@ class ContractFilter(FilterSet):
     
     point_of_contact = CharFilter(field_name='point_of_contact', lookup_expr='exact')
     point_of_contact__iexact = CharFilter(field_name='point_of_contact', lookup_expr='iexact')
-    point_of_contact__in = CharInFilter(field_name='point_of_contact', lookup_expr='in')
+    point_of_contact__in = CharInFilter(field_name='point_of_contact')
     point_of_contact__contains = CharFilter(field_name='point_of_contact', lookup_expr='contains')
     point_of_contact__icontains = CharFilter(field_name='point_of_contact', lookup_expr='icontains')
     point_of_contact__startswith = CharFilter(field_name='point_of_contact', lookup_expr='startswith')
@@ -563,7 +563,7 @@ class ContractFilter(FilterSet):
     
     vendor_phone = CharFilter(field_name='vendor_phone', lookup_expr='exact')
     vendor_phone__iexact = CharFilter(field_name='vendor_phone', lookup_expr='iexact')
-    vendor_phone__in = CharInFilter(field_name='vendor_phone', lookup_expr='in')
+    vendor_phone__in = CharInFilter(field_name='vendor_phone')
     vendor_phone__contains = CharFilter(field_name='vendor_phone', lookup_expr='contains')
     vendor_phone__icontains = CharFilter(field_name='vendor_phone', lookup_expr='icontains')
     vendor_phone__startswith = CharFilter(field_name='vendor_phone', lookup_expr='startswith')
@@ -574,16 +574,16 @@ class ContractFilter(FilterSet):
     vendor_phone__iregex = CharFilter(field_name='vendor_phone', lookup_expr='iregex')
     
     annual_revenue = NumberFilter(field_name='annual_revenue', lookup_expr='exact')
-    annual_revenue__range = NumberFilter(field_name='annual_revenue', lookup_expr='range')
-    annual_revenue__in = NumberInFilter(field_name='annual_revenue', lookup_expr='in')
+    annual_revenue__range = NumberRangeFilter(field_name='annual_revenue')
+    annual_revenue__in = NumberInFilter(field_name='annual_revenue')
     annual_revenue__lt = NumberFilter(field_name='annual_revenue', lookup_expr='lt')
     annual_revenue__lte = NumberFilter(field_name='annual_revenue', lookup_expr='lte')
     annual_revenue__gt = NumberFilter(field_name='annual_revenue', lookup_expr='gt')
     annual_revenue__gte = NumberFilter(field_name='annual_revenue', lookup_expr='gte')
     
     number_of_employees = NumberFilter(field_name='number_of_employees', lookup_expr='exact')
-    number_of_employees__range = NumberFilter(field_name='number_of_employees', lookup_expr='range')
-    number_of_employees__in = NumberInFilter(field_name='number_of_employees', lookup_expr='in')
+    number_of_employees__range = NumberRangeFilter(field_name='number_of_employees')
+    number_of_employees__in = NumberInFilter(field_name='number_of_employees')
     number_of_employees__lt = NumberFilter(field_name='number_of_employees', lookup_expr='lt')
     number_of_employees__lte = NumberFilter(field_name='number_of_employees', lookup_expr='lte')
     number_of_employees__gt = NumberFilter(field_name='number_of_employees', lookup_expr='gt')
