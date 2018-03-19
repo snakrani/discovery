@@ -204,12 +204,22 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
     }
     filter_class = filters.ContractFilter
-    search_fields = ['id', 'name', 'duns']
+    search_fields = ['id', 'piid', 'agency_id', 'agency_name', 'NAICS', 'PSC']
     ordering_fields = [
-        'id', 'piid', 'agency_id', 'agency_name', 'NAICS', 'PSC',
+        'id', 'piid', 
+        'agency_id', 'agency_name', 
+        'NAICS', 'PSC',
         'date_signed', 'completion_date', 'obligated_amount',
-        'point_of_contact', 'status__name', 'pricing_type__name',
-        'place_of_performance_location'
+        'vendor__duns', 'vendor__cage', 'vendor__name',
+        'point_of_contact', 'vendor_phone',
+        'vendor_location__address', 
+        'vendor_location__city', 
+        'vendor_location__state', 
+        'vendor_location__zipcode', 
+        'vendor_location__congressional_district', 
+        'status__name', 'pricing_type__name',
+        'place_of_performance_location',
+        'annual_revenue', 'number_of_employees'
     ]
     ordering = '-date_signed'
     
