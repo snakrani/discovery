@@ -1,8 +1,38 @@
 from django.conf import settings
+from django.db.models.query import QuerySet
 
-from test.common import get_nested_value
+from test.common import normalize_list, get_nested_value
 
 import re
+
+
+VALIDATION_MAP = {
+#   Lookup:   Validation method
+    'isnull': 'is_none',
+    'exact': 'equal',
+    'iexact': 'iequal',
+    'in': 'is_in',
+    'contains': 'contains',
+    'icontains': 'icontains',
+    'startswith': 'startswith',
+    'istartswith': 'istartswith',
+    'endswith': 'endswith',
+    'iendswith': 'iendswith',
+    'regex': 'matches',
+    'iregex': 'imatches',
+    'date': 'startswith',
+    'year': 'is_year',
+    'month': 'is_month',
+    'day': 'is_day',
+    'week': 'is_week',
+    'week_day': 'is_week_day',
+    'quarter': 'is_quarter',
+    'range': 'between',
+    'lt': 'is_below',
+    'lte': 'is_max', 
+    'gt': 'is_above', 
+    'gte': 'is_min',
+}
 
 
 class BaseValidator(object):
@@ -26,6 +56,14 @@ class BaseValidator(object):
     
     # Data
     
+    def get_data(self):
+        return {}
+    
+
+    def get_data_value(self, nested_keys):
+        return get_nested_value(self.get_data(), nested_keys)
+    
+    
     def compare_data(self, op, data_value, correct_value = None, **params):
         try:
             if correct_value is not None:
@@ -36,234 +74,230 @@ class BaseValidator(object):
         except Exception as error:
             raise self._wrap_error(error)
     
-    def compare(self, op, resp_value, correct_value = None, **params):
-        self.compare_data(op, resp_value, correct_value, **params)
+    def compare(self, op, nested_keys, value = None, **params):
+        self.compare_data(op, self.get_data_value(nested_keys), value, **params)
     
     
-    def equal(self, resp_value, correct_value):
-        self.compare('assertEqual', resp_value, correct_value)
+    def equal(self, nested_keys, correct_value):
+        self.compare('assertEqual', nested_keys, correct_value)
         
     def equal_data(self, data_value, correct_value):
         self.compare_data('assertEqual', data_value, correct_value)
         
-    def not_equal(self, resp_value, not_value):
-        self.compare('assertNotEqual', resp_value, not_value)
+    def not_equal(self, nested_keys, not_value):
+        self.compare('assertNotEqual', nested_keys, not_value)
         
     def not_equal_data(self, data_value, not_value):
         self.compare_data('assertNotEqual', data_value, not_value)
         
-    def is_a(self, resp_value, correct_value):
-        self.compare('assertIs', resp_value, correct_value)
+    def is_a(self, nested_keys, correct_value):
+        self.compare('assertIs', nested_keys, correct_value)
         
     def is_a_data(self, data_value, correct_value):
         self.compare_data('assertIs', data_value, correct_value)
         
-    def is_not_a(self, resp_value, not_value):
-        self.compare('assertIsNot', resp_value, not_value)
+    def is_not_a(self, nested_keys, not_value):
+        self.compare('assertIsNot', nested_keys, not_value)
         
     def is_not_a_data(self, data_value, not_value):
         self.compare_data('assertIsNot', data_value, not_value)
         
-    def is_in(self, resp_value, correct_values):
+    def is_in(self, nested_keys, correct_values):
         correct_values = correct_values.split(',') if isinstance(correct_values, str) else correct_values
-        self.compare('assertIn', resp_value, correct_values)
+        self.compare('assertIn', nested_keys, correct_values)
         
     def is_in_data(self, data_value, correct_values):
         correct_values = correct_values.split(',') if isinstance(correct_values, str) else correct_values
         self.compare_data('assertIn', data_value, correct_values)
         
-    def is_not_in(self, resp_value, not_values):
+    def is_not_in(self, nested_keys, not_values):
         not_values = not_values.split(',') if isinstance(not_values, str) else not_values
-        self.compare('assertNotIn', resp_value, not_values)
+        self.compare('assertNotIn', nested_keys, not_values)
         
     def is_not_in_data(self, data_value, not_values):
         not_values = not_values.split(',') if isinstance(not_values, str) else not_values
         self.compare_data('assertNotIn', data_value, not_values)
         
-    def is_instance(self, resp_value, correct_value):
-        self.compare('assertIsInstance', resp_value, correct_value)
+    def is_instance(self, nested_keys, correct_value):
+        self.compare('assertIsInstance', nested_keys, correct_value)
         
     def is_instance_data(self, data_value, correct_value):
         self.compare_data('assertIsInstance', data_value, correct_value)
         
-    def is_not_instance(self, resp_value, not_value):
-        self.compare('assertNotIsInstance', resp_value, not_value)
+    def is_not_instance(self, nested_keys, not_value):
+        self.compare('assertNotIsInstance', nested_keys, not_value)
         
     def is_not_instance_data(self, data_value, not_value):
         self.compare_data('assertNotIsInstance', data_value, not_value)
         
-    def is_true(self, resp_value):
-        self.compare('assertTrue', resp_value)
+    def is_true(self, nested_keys):
+        self.compare('assertTrue', nested_keys)
         
     def is_true_data(self, data_value):
         self.compare_data('assertTrue', data_value)
         
-    def is_false(self, resp_value):
-        self.compare('assertFalse', resp_value)
+    def is_false(self, nested_keys):
+        self.compare('assertFalse', nested_keys)
         
     def is_false_data(self, data_value):
         self.compare_data('assertFalse', data_value)
         
-    def is_none(self, resp_value):
-        self.compare('assertIsNone', resp_value)
+    def is_none(self, nested_keys):
+        self.compare('assertIsNone', nested_keys)
         
     def is_none_data(self, data_value):
         self.compare_data('assertIsNone', data_value)
         
-    def is_not_none(self, resp_value):
-        self.compare('assertIsNotNone', resp_value)
+    def is_not_none(self, nested_keys):
+        self.compare('assertIsNotNone', nested_keys)
         
     def is_not_none_data(self, data_value):
         self.compare_data('assertIsNotNone', data_value)
     
-    def is_empty(self, resp_value):
-        self.compare('assertIsEmpty', resp_value)
+    def is_empty(self, nested_keys):
+        self.compare('assertIsEmpty', nested_keys)
         
     def is_empty_data(self, data_value):
         self.compare_data('assertIsEmpty', data_value)
             
-    def is_not_empty(self, resp_value):
-        self.compare('assertIsNotEmpty', resp_value)
+    def is_not_empty(self, nested_keys):
+        self.compare('assertIsNotEmpty', nested_keys)
         
     def is_not_empty_data(self, data_value):
         self.compare_data('assertIsNotEmpty', data_value)
         
-    def is_int(self, resp_value):
-        self.compare('assertInteger', resp_value)
+    def is_int(self, nested_keys):
+        self.compare('assertInteger', nested_keys)
         
     def is_int_data(self, data_value):
         self.compare_data('assertInteger', data_value)
         
-    def is_float(self, resp_value):
-        self.compare('assertFloat', resp_value)
+    def is_float(self, nested_keys):
+        self.compare('assertFloat', nested_keys)
         
     def is_float_data(self, data_value):
         self.compare_data('assertFloat', data_value)
         
-    def is_max(self, resp_value, maximum_value):
-        self.compare('assertLessThanEqual', resp_value, maximum_value)
+    def is_max(self, nested_keys, maximum_value):
+        self.compare('assertLessThanEqual', nested_keys, maximum_value)
         
     def is_max_data(self, data_value, maximum_value):
         self.compare_data('assertLessThanEqual', data_value, maximum_value)
         
-    def is_below(self, resp_value, excluded_value):
-        self.compare('assertLessThan', resp_value, excluded_value)
+    def is_below(self, nested_keys, excluded_value):
+        self.compare('assertLessThan', nested_keys, excluded_value)
         
     def is_below_data(self, data_value, excluded_value):
         self.compare_data('assertLessThan', data_value, excluded_value)
         
-    def between(self, resp_value, correct_values):
-        self.compare('assertBetween', resp_value, correct_values)
+    def between(self, nested_keys, correct_values):
+        self.compare('assertBetween', nested_keys, correct_values)
         
     def between_data(self, data_value, correct_values):
         self.compare_data('assertBetween', data_value, correct_values)
     
-    def is_min(self, resp_value, minimum_value):
-        self.compare('assertGreaterThanEqual', resp_value, minimum_value)
+    def is_min(self, nested_keys, minimum_value):
+        self.compare('assertGreaterThanEqual', nested_keys, minimum_value)
         
     def is_min_data(self, data_value, minimum_value):
         self.compare_data('assertGreaterThanEqual', data_value, minimum_value)
         
-    def is_above(self, resp_value, excluded_value):
-        self.compare('assertGreaterThan', resp_value, excluded_value)
+    def is_above(self, nested_keys, excluded_value):
+        self.compare('assertGreaterThan', nested_keys, excluded_value)
         
     def is_above_data(self, data_value, excluded_value):
         self.compare_data('assertGreaterThan', data_value, excluded_value)
     
-    def contains(self, resp_value, substring):
-        self.compare('assertStrContains', resp_value, substring)
+    def contains(self, nested_keys, substring):
+        self.compare('assertStrContains', nested_keys, substring)
         
     def contains_data(self, data_value, substring):
         self.compare_data('assertStrContains', data_value, substring)
         
-    def matches(self, resp_value, pattern):
-        self.compare('assertMatch', resp_value, pattern)
+    def matches(self, nested_keys, pattern):
+        self.compare('assertMatch', nested_keys, pattern)
         
     def matches_data(self, data_value, pattern):
         self.compare_data('assertMatch', data_value, pattern)
         
-    def startswith(self, resp_value, text):
-        self.matches(resp_value, "^{}".format(re.escape(text)))
+    def startswith(self, nested_keys, text):
+        self.matches(nested_keys, "^{}".format(re.escape(text)))
         
     def startswith_data(self, data_value, text):
         self.matches_data(data_value, "^{}".format(re.escape(text)))
         
-    def endswith(self, resp_value, text):
-        self.matches(resp_value, "{}$".format(re.escape(text)))
+    def endswith(self, nested_keys, text):
+        self.matches(nested_keys, "{}$".format(re.escape(text)))
         
     def endswith_data(self, data_value, text):
         self.matches_data(data_value, "{}$".format(re.escape(text)))
         
-    def icontains(self, resp_value, substring):
-        self.compare('assertIStrContains', resp_value, substring)
+    def icontains(self, nested_keys, substring):
+        self.compare('assertIStrContains', nested_keys, substring)
         
     def icontains_data(self, data_value, substring):
         self.compare_data('assertIStrContains', data_value, substring)
         
-    def imatches(self, resp_value, pattern):
-        self.compare('assertIMatch', resp_value, pattern)
+    def imatches(self, nested_keys, pattern):
+        self.compare('assertIMatch', nested_keys, pattern)
         
     def imatches_data(self, data_value, pattern):
         self.compare_data('assertIMatch', data_value, pattern)
         
-    def istartswith(self, resp_value, text):
-        self.imatches(resp_value, "^{}".format(re.escape(text)))
+    def istartswith(self, nested_keys, text):
+        self.imatches(nested_keys, "^{}".format(re.escape(text)))
         
     def istartswith_data(self, data_value, text):
         self.imatches_data(data_value, "^{}".format(re.escape(text)))
         
-    def iendswith(self, resp_value, text):
-        self.imatches(resp_value, "{}$".format(re.escape(text)))
+    def iendswith(self, nested_keys, text):
+        self.imatches(nested_keys, "{}$".format(re.escape(text)))
         
     def iendswith_data(self, data_value, text):
         self.imatches_data(data_value, "{}$".format(re.escape(text)))
         
-    def iequal(self, resp_value, text):
-        self.imatches(resp_value, "^{}$".format(re.escape(text)))
+    def iequal(self, nested_keys, text):
+        self.imatches(nested_keys, "^{}$".format(re.escape(text)))
         
     def iequal_data(self, data_value, text):
         self.imatches_data(data_value, "^{}$".format(re.escape(text)))
     
-    def is_year(self, resp_value, year):
-        self.compare('assertYear', resp_value, year)
+    def is_year(self, nested_keys, year):
+        self.compare('assertYear', nested_keys, year)
         
     def is_year_data(self, data_value, year):
         self.compare_data('assertYear', data_value, year)
             
-    def is_month(self, resp_value, month):
-        self.compare('assertMonth', resp_value, month)
+    def is_month(self, nested_keys, month):
+        self.compare('assertMonth', nested_keys, month)
         
     def is_month_data(self, data_value, month):
         self.compare_data('assertMonth', data_value, month)
         
-    def is_day(self, resp_value, day):
-        self.compare('assertDay', resp_value, day)
+    def is_day(self, nested_keys, day):
+        self.compare('assertDay', nested_keys, day)
         
     def is_day_data(self, data_value, day):
         self.compare_data('assertDay', resp_value, day)
         
-    def is_week(self, resp_value, week):
-        self.compare('assertWeek', resp_value, week)
+    def is_week(self, nested_keys, week):
+        self.compare('assertWeek', nested_keys, week)
         
     def is_week_data(self, data_value, week):
         self.compare_data('assertWeek', data_value, week)
     
-    def is_week_day(self, resp_value, week_day):
-        self.compare('assertWeekDay', resp_value, week_day)
+    def is_week_day(self, nested_keys, week_day):
+        self.compare('assertWeekDay', nested_keys, week_day)
         
     def is_week_day_data(self, data_value, week_day):
         self.compare_data('assertWeekDay', data_value, week_day)
     
-    def is_quarter(self, resp_value, quarter):
-        self.compare('assertQuarter', resp_value, quarter)
+    def is_quarter(self, nested_keys, quarter):
+        self.compare('assertQuarter', nested_keys, quarter)
         
     def is_quarter_data(self, data_value, quarter):
         self.compare_data('assertQuarter', data_value, quarter)
     
-        
-    def includes(self, resp_value, items, validator = None):
-        self.compare('assertIncludes', resp_value, items, resp = self, validator = validator)
-
 
 class APIResponseValidator(BaseValidator):
     
@@ -303,13 +337,8 @@ class APIResponseValidator(BaseValidator):
         
     # Data
     
-    def compare(self, op, resp_value, correct_value = None, **params):
-        if isinstance(resp_value, (str, list)):
-            data_value = get_nested_value(self.resp.data, resp_value)
-        else:
-            data_value = resp_value
-                
-        self.compare_data(op, data_value, correct_value, **params)
+    def get_data(self):
+        return self.resp.data
     
         
     # Count
@@ -392,3 +421,29 @@ class APIResponseValidator(BaseValidator):
             
     def validate_object(self):
         self.test.validate_object(self)
+
+            
+    def map(self, validator, base_key, lookup_keys, value, **params):
+        lookup_keys = normalize_list(lookup_keys)
+        data_pool = self.get_data_value(base_key)
+        success = False
+        
+        if isinstance(data_pool, (list, QuerySet)):
+            for index, element in enumerate(list(data_pool)):
+                if self.map(validator, (base_key + [index]), lookup_keys, value, inner=True):
+                    success = True
+        
+        elif isinstance(data_pool, dict):
+            value_key = base_key + [lookup_keys[0]]
+            
+            if len(lookup_keys) == 1:
+                if self.check(validator, value_key, value):
+                    success = True
+            else:
+                if self.map(validator, value_key, lookup_keys[1:], value, inner=True):
+                    success = True
+        
+        if not 'inner' in params and not success:
+            raise self._wrap_error(AssertionError("Value ({}) {} {} keys {}".format(value, validator, base_key, lookup_keys)))
+                
+        return success
