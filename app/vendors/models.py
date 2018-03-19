@@ -39,10 +39,11 @@ class Vendor(models.Model):
 
 
 class PoolMembership(models.Model):
-    vendor = models.ForeignKey(Vendor, related_name='pools', on_delete=models.CASCADE)
-    pool = models.ForeignKey(Pool, on_delete=models.DO_NOTHING)
     piid = models.CharField(max_length=128) # from CSV
     
+    vendor = models.ForeignKey(Vendor, related_name='pools', on_delete=models.CASCADE)
+    pool = models.ForeignKey(Pool, on_delete=models.DO_NOTHING)
+        
     setasides = models.ManyToManyField(SetAside, blank=True) # from CSV
     zones = models.ManyToManyField(Zone, blank=True) # from CSV
     
