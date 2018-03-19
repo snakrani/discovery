@@ -1,39 +1,10 @@
-from django.db.models.query import QuerySet
-
 from datetime import datetime
+from django.db.models.query import QuerySet
 
 from test.common import normalize_list, get_nested_value
 
 import re
 import math
-
-
-ASSERTION_MAP = {
-    'isnull': 'is_none',
-    'exact': 'equal',
-    'iexact': 'iequal',
-    'in': 'is_in',
-    'contains': 'contains',
-    'icontains': 'icontains',
-    'startswith': 'startswith',
-    'istartswith': 'istartswith',
-    'endswith': 'endswith',
-    'iendswith': 'iendswith',
-    'regex': 'matches',
-    'iregex': 'imatches',
-    'date': 'startswith',
-    'year': 'is_year',
-    'month': 'is_month',
-    'day': 'is_day',
-    'week': 'is_week',
-    'week_day': 'is_week_day',
-    'quarter': 'is_quarter',
-    'range': 'between',
-    'lt': 'is_below',
-    'lte': 'is_max', 
-    'gt': 'is_above', 
-    'gte': 'is_min',
-}
 
 
 class DiscoveryAssertions(object):
@@ -220,53 +191,3 @@ class DiscoveryAssertions(object):
         
         if date_quarter != int(quarter):
             raise AssertionError("Value ({}) given does not match quarter {}".format(quarter, date_quarter))
-    
-    
-    def assertIncludes(self, value, items, **params):
-        failed = True
-        
-        resp = params['resp']
-        validator = params['validator']
-        
-        if isinstance(value, QuerySet):
-            value = list(value)
-            
-        if not value or not isinstance(value, (list, dict)):
-            raise AssertionError("Value must be passed as a list or dictionary")
-        
-        
-        def _check_value(data, keys, item):
-            try:
-                getattr(resp, "{}_data".format(validator))(get_nested_value(data, keys), item)
-                return True
-            
-            except Exception:
-                return None        
-        
-        if isinstance(items, dict):
-            keys = next(iter(items))
-            items = items[keys]
-            
-            keys = keys.split('|') if '|' in keys else [keys]
-            items = normalize_list(items)
-            
-            for item in items:
-                if isinstance(value, list):
-                    for element in value:
-                        if _check_value(element, keys, item):
-                            failed = False
-                else:
-                    if _check_value(value, keys, item):
-                        failed = False
-                
-        else:
-            if isinstance(items, (str, int, float)):
-                items = [items]
-        
-            for item in items:
-                if (isinstance(value, list) and item in value) or (isinstance(value, dict) and value.get(item, None)):
-                    failed = False
-        
-        if failed:    
-            raise AssertionError("Value passed ({}) does not include item ({})".format(str(value), item))
-
