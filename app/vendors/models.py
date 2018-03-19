@@ -57,11 +57,11 @@ class Manager(models.Model):
     def __str__(self):
         return "{0}".format(self.name)
     
-    def phones(self):
-        return self.phone.values_list('number', flat=True)
+    def phone(self):
+        return self.phones.values_list('number', flat=True)
     
-    def emails(self):
-        return self.email.values_list('address', flat=True)
+    def email(self):
+        return self.emails.values_list('address', flat=True)
     
 
 class ContractManager(Manager):
@@ -73,7 +73,7 @@ class ProjectManager(Manager):
 
 
 class ManagerPhoneNumber(models.Model):
-    manager = models.ForeignKey(Manager, null=True, related_name='phone', on_delete=models.CASCADE)
+    manager = models.ForeignKey(Manager, null=True, related_name='phones', on_delete=models.CASCADE)
     number = models.CharField(null=True, max_length=128)
 
     def __str__(self):
@@ -81,7 +81,7 @@ class ManagerPhoneNumber(models.Model):
 
 
 class ManagerEmail(models.Model):
-    manager = models.ForeignKey(Manager, null=True, related_name='email', on_delete=models.CASCADE)
+    manager = models.ForeignKey(Manager, null=True, related_name='emails', on_delete=models.CASCADE)
     address = models.CharField(null=True, max_length=128)
 
     def __str__(self):
