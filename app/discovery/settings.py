@@ -91,14 +91,14 @@ DATABASES['default'] = dj_database_url.config()
 # Applications and libraries
 #
 INSTALLED_APPS = [
+    'test',
+    'selenium',
+    
     'discovery',
     'api',
     'categories',
     'vendors',
     'contracts',
-    
-    'test',
-    'selenium',
     
     'django.contrib.admin',
     'django.contrib.auth',
@@ -354,6 +354,8 @@ REST_FRAMEWORK = {
     
     'COERCE_DECIMAL_TO_STRING': False,
 }
+
+REST_API_TEST = False
 
 #-------------------------------------------------------------------------------
 #
