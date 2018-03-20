@@ -128,7 +128,7 @@ class VendorListTest(BaseVendorTest):
                 'sam_location__city': {
                     '@exact': 'Lexington',
                     '@iexact': 'vienna',
-                    '@in': ("Lanham,Frederick","Huntsville"),
+                    '@in': ("Lanham", "Frederick", "Huntsville"),
                     '@contains': 'vill',
                     '@icontains': 'of',
                     '@startswith': 'Mc',
@@ -165,6 +165,19 @@ class VendorListTest(BaseVendorTest):
                     '@exact': 'BMO_SB_10',
                     '@iexact': 'hcaTs_Sb_2',
                     '@in': ("BMO_8", "OASIS_4", "HCATS_SB_1")
+                },
+                'pools__piid': {
+                    '@exact': 'GS00Q14OADS121',
+                    '@iexact': 'gs00q14Oads121',
+                    '@in': ("GS00Q14OADS121", "GS00Q14OADS608"),
+                    '@contains': 'OAD',
+                    '@icontains': 'Oad',
+                    '@startswith': 'GS02',
+                    '@istartswith': 'gs02',
+                    '@endswith': '102',
+                    '@iendswith': 's102',
+                    '@regex': '^GS\d+Q\d+$',
+                    '@iregex': '^(gs06|gs00)'
                 },
                 'pools__pool__name': {
                     '@exact': 'Elevator Maintenance',
