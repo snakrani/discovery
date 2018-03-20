@@ -1,8 +1,18 @@
+from django.conf import settings
+
 from inspect import getframeinfo, stack
 
 import psutil
 import os
 import json
+
+
+def check_api_test(request = None):
+    if settings.REST_API_TEST:
+        if request is None or ('test' in request.query_params and request.query_params['test']):
+            return True
+    
+    return False
 
 
 def config_value(name, default=None, types='user-provided', instance=None):
