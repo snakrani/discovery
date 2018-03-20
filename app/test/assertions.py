@@ -46,14 +46,14 @@ class DiscoveryAssertions(object):
             return False
               
     def assertInteger(self, number, **params):
-        if not number:
+        if number is None:
             raise AssertionError("Value must be passed as a integer or numeric string")
         
         if not self._check_int(number):
             raise AssertionError("Value ({}) given is not an integer value".format(number))
              
     def assertFloat(self, number, **params):
-        if not number:
+        if number is None:
             raise AssertionError("Value must be passed as a decimal or numeric string")
         
         if not self._check_float(number):
@@ -61,7 +61,7 @@ class DiscoveryAssertions(object):
 
               
     def assertLessThanEqual(self, number, maximum_value, **params):
-        if not number:
+        if number is None:
             raise AssertionError("Value must be passed as a integer or numeric string")
         
         if not self._check_float(number):
@@ -71,7 +71,7 @@ class DiscoveryAssertions(object):
             raise AssertionError("Value ({}) given is greater than the maximum allowed ({})".format(number, maximum_value))
         
     def assertLessThan(self, number, excluded_value, **params):
-        if not number:
+        if number is None:
             raise AssertionError("Value must be passed as a integer or numeric string")
         
         if not self._check_float(number):
@@ -81,7 +81,7 @@ class DiscoveryAssertions(object):
             raise AssertionError("Value ({}) given is not less than ({})".format(number, excluded_value))
               
     def assertGreaterThanEqual(self, number, minimum_value, **params):
-        if not number:
+        if number is None:
             raise AssertionError("Value must be passed as a integer or numeric string")
         
         if not self._check_float(number):
@@ -91,7 +91,7 @@ class DiscoveryAssertions(object):
             raise AssertionError("Value ({}) given is less than the minimum allowed ({})".format(number, minimum_value))
         
     def assertGreaterThan(self, number, excluded_value, **params):
-        if not number:
+        if number is None:
             raise AssertionError("Value must be passed as a integer or numeric string")
         
         if not self._check_float(number):
