@@ -97,6 +97,15 @@ class DiscoveryAPITestCase(TestCase, DiscoveryAssertions):
         return "{}{}?{}".format(settings.API_HOST, self.path, self.encode(params))
     
     
+    def fetch_data(self, **params):
+        params = self.prepare_params(params)
+        url = self._get_list_url(params)
+        
+        print("Testing request: {}".format(url))
+        TestCounter.increment(self.__class__.__name__)
+        
+        return APIResponseValidator(self.client.get(self.path, params), self, url)
+    
     def fetch_object(self, id, **params):
         params = self.prepare_params(params)
         url = self._get_object_url(id, params)
@@ -117,6 +126,11 @@ class DiscoveryAPITestCase(TestCase, DiscoveryAssertions):
 
     
     # Validation
+    
+    def validated_data(self, **params):
+        resp = self.fetch_data(**params)
+        resp.success()
+        return resp
     
     def validated_list(self, list_count = None, **params):
         resp = self.fetch_objects(**params)
@@ -342,3 +356,7 @@ class VendorAPITestCase(DiscoveryAPITestCase):
 
 class ContractAPITestCase(DiscoveryAPITestCase):
     fixtures = data.get_contract_fixtures()
+
+
+class MetadataAPITestCase(DiscoveryAPITestCase):
+    fixtures = data.get_metadata_fixtures()
