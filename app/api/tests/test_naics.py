@@ -55,9 +55,9 @@ class NaicsRetrieveTest(BaseNaicsTest):
     def schema(self):
         return {
             'object': {
-                '&541614': ('root_code', 'iequal', '541614'),
-                '&541330D': ('root_code', 'iequal', '541330'),
-                '&541840': ('root_code', 'iequal', '541840'),
+                '&541614': ('root_code', 'equal', '541614'),
+                '&541330D': ('root_code', 'equal', '541330'),
+                '&541840': ('root_code', 'equal', '541840'),
                 '#77777777': (),
                 '#ABCDEFG': ()
             }
