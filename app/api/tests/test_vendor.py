@@ -176,7 +176,7 @@ class VendorListTest(BaseVendorTest):
                     '@istartswith': 'gs02',
                     '@endswith': '102',
                     '@iendswith': 's102',
-                    '@regex': '^GS\d+Q\d+$',
+                    '@regex': '^GS\d+',
                     '@iregex': '^(gs06|gs00)'
                 },
                 'pools__pool__name': {
@@ -193,9 +193,9 @@ class VendorListTest(BaseVendorTest):
                     '@iregex': 'air.*development$'
                 },
                 'pools__pool__number': {
-                    '@exact': 8,
-                    '@iexact': 9,
-                    '@in': (1, 3, '5B', 16)
+                    '@exact': '8',
+                    '@iexact': '9',
+                    '@in': ('1', '3', '5B', '16')
                 },
                 'pools__pool__vehicle': {
                     '@exact': 'OASIS_SB',
