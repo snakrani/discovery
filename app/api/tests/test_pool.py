@@ -33,12 +33,12 @@ class PoolListTest(BasePoolTest):
                 'id': {
                     '*exact': 'BMO_SB_10',
                     '*iexact': 'hcaTs_Sb_2',
-                    '@in': "BMO_8,OASIS_4,HCATS_SB_1"
+                    '@in': ("BMO_8", "OASIS_4", "HCATS_SB_1")
                 },
                 'name': {
                     '@exact': 'Elevator Maintenance',
                     '@iexact': 'janitoRial',
-                    '@in': "Roofing Services,Plumbing and Pipefitting",
+                    '@in': ("Roofing Services", "Plumbing and Pipefitting"),
                     '@contains': 'Waste',
                     '@icontains': 'energy engineering',
                     '@startswith': 'HVAC',
@@ -51,12 +51,12 @@ class PoolListTest(BasePoolTest):
                 'number': {
                     '@exact': '8',
                     '@iexact': '9',
-                    '@in': '1,3,5B,16'
+                    '@in': ('1', '3', '5B', '16')
                 },
                 'vehicle': {
                     '@exact': 'OASIS_SB',
                     '@iexact': 'oasis',
-                    '@in': "HCATS,BMO_SB",
+                    '@in': ("HCATS", "BMO_SB"),
                     '@contains': 'SB',
                     '@icontains': 'oasis',
                     '@startswith': 'O',
@@ -69,7 +69,7 @@ class PoolListTest(BasePoolTest):
                 'threshold': {
                     '@exact': '$15 million',
                     '@iexact': '$7.5 MILLION',
-                    '@in': "1000 employee,$18 million,500 employee",
+                    '@in': ("1000 employee", "$18 million", "500 employee"),
                     '@contains': 'employee',
                     '@icontains': 'EmplOYeE',
                     '@startswith': '$38.5',
@@ -82,7 +82,7 @@ class PoolListTest(BasePoolTest):
                 'naics__code': {
                     '@exact': '541330',
                     '@iexact': '541712c',
-                    '@in': "541711,238290,561730B",
+                    '@in': ("541711", "238290", "561730B"),
                     '@contains': '622',
                     '@icontains': 'b',
                     '@startswith': '54',
@@ -95,7 +95,7 @@ class PoolListTest(BasePoolTest):
                 'naics__root_code': {
                     '@exact': '541330',
                     '@iexact': '541712',
-                    '@in': "541711,238290,561730",
+                    '@in': ("541711", "238290", "561730"),
                     '@contains': '622',
                     '@icontains': '990',
                     '@startswith': '61',
@@ -108,7 +108,7 @@ class PoolListTest(BasePoolTest):
                 'naics__description': {
                     '@exact': 'Outdoor Advertising',
                     '@iexact': 'hvac maintenance',
-                    '@in': "Payroll Services,Commissioning Services,Testing Laboratories",
+                    '@in': ("Payroll Services", "Commissioning Services", "Testing Laboratories"),
                     '@contains': 'Accounting',
                     '@icontains': 'rEPair',
                     '@startswith': 'Engineering',
