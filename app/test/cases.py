@@ -45,6 +45,14 @@ class DiscoveryAPITestCase(TestCase, DiscoveryAssertions):
     def encode_str(self, string):
         return quote(string)
     
+    def prepare_params(self, params):
+        for param, value in params.items():
+            if isinstance(value, (list, tuple)):
+                params[param] = ",".join(str(val) for val in value)
+            
+        return params
+  
+    
     def _get_object_path(self, id):
         return self.path + str(id)
     
@@ -56,12 +64,14 @@ class DiscoveryAPITestCase(TestCase, DiscoveryAssertions):
     
     
     def fetch_object(self, id, **params):
+        params = self.prepare_params(params)
         url = self._get_object_url(id, params)
         
         print("Testing object: {}".format(url))
         return APIResponseValidator(self.client.get(self._get_object_path(id), params), self, url)
     
     def fetch_objects(self, **params):
+        params = self.prepare_params(params)
         url = self._get_list_url(params)
         
         print("Testing list: {}".format(url))
@@ -197,10 +207,8 @@ class DiscoveryAPITestCase(TestCase, DiscoveryAssertions):
                     if search_value is None:
                         raise Exception("Search value (string/integer/list) is expected for field lookup")
                         
-                    if isinstance(search_value, (list, tuple)):
-                        search_value = ",".join(str(val) for val in search_value)
-                    else:
-                        search_value = str(search_value)
+                    if isinstance(search_value, (list, tuple, QuerySet)):
+                        search_value = list(search_value)
                         
                     with self.subTest(field = "{} [{}]".format(field_lookup, validation['type'])):
                         if field_info['relation']:
