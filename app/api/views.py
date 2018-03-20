@@ -51,33 +51,11 @@ class NaicsViewSet(DiscoveryReadOnlyModelViewSet):
     ordering = 'description'
     
     pagination_class = pagination.ResultSetPagination
-    serializer_class = serializers.NaicsSerializer
-
-
-@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
-@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='retrieve')
-class SetAsideViewSet(DiscoveryReadOnlyModelViewSet):
-    """
-    API endpoint that allows for access to Discovery related business setaside information.
-    
-    retrieve:
-    Returns information for a single business setaside code.
-    
-    list:
-    Returns all of the business setasides that are relevant to the acquisition vehicles in the Discovery universe.
-    """
-    queryset = categories.SetAside.objects.all().distinct()
-    lookup_field = 'code'
-    
-    action_filters = {
-        'list': (SearchFilter, OrderingFilter),
+    action_serializers = {
+        'list': serializers.NaicsSummarySerializer,
+        'retrieve': serializers.NaicsFullSerializer,
+        'test': serializers.NaicsTestSerializer
     }
-    search_fields = ['code', 'name', 'description']
-    ordering_fields = ['code', 'name', 'description', 'far_order']
-    ordering = 'name'
-    
-    pagination_class = pagination.ResultSetPagination
-    serializer_class = serializers.SetAsideSerializer
 
 
 @method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
@@ -104,7 +82,41 @@ class PoolViewSet(DiscoveryReadOnlyModelViewSet):
     ordering = 'name'
     
     pagination_class = pagination.ResultSetPagination
-    serializer_class = serializers.PoolSerializer
+    action_serializers = {
+        'list': serializers.PoolSummarySerializer,
+        'retrieve': serializers.PoolFullSerializer,
+        'test': serializers.PoolTestSerializer
+    }
+
+
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='retrieve')
+class SetAsideViewSet(DiscoveryReadOnlyModelViewSet):
+    """
+    API endpoint that allows for access to Discovery related business setaside information.
+    
+    retrieve:
+    Returns information for a single business setaside code.
+    
+    list:
+    Returns all of the business setasides that are relevant to the acquisition vehicles in the Discovery universe.
+    """
+    queryset = categories.SetAside.objects.all().distinct()
+    lookup_field = 'code'
+    
+    action_filters = {
+        'list': (SearchFilter, OrderingFilter),
+    }
+    search_fields = ['code', 'name', 'description']
+    ordering_fields = ['code', 'name', 'description', 'far_order']
+    ordering = 'name'
+    
+    pagination_class = pagination.ResultSetPagination
+    action_serializers = {
+        'list': serializers.SetasideSummarySerializer,
+        'retrieve': serializers.SetasideFullSerializer,
+        'test': serializers.SetasideTestSerializer
+    }
 
 
 @method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
@@ -130,7 +142,11 @@ class ZoneViewSet(DiscoveryReadOnlyModelViewSet):
     ordering = 'id'
     
     pagination_class = pagination.ResultSetPagination
-    serializer_class = serializers.ZoneSerializer
+    action_serializers = {
+        'list': serializers.ZoneSummarySerializer,
+        'retrieve': serializers.ZoneFullSerializer,
+        'test': serializers.ZoneTestSerializer
+    }
 
 
 @method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
@@ -163,7 +179,11 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
     ordering = '-number_of_contracts'
     
     pagination_class = pagination.ResultSetPagination
-    serializer_class = serializers.VendorSerializer
+    action_serializers = {
+        'list': serializers.VendorSummarySerializer,
+        'retrieve': serializers.VendorFullSerializer,
+        'test': serializers.VendorTestSerializer
+    }
     
     def get_queryset(self):
         naics_param_name = 'pools__pool__naics__code'
@@ -204,7 +224,7 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
     }
     filter_class = filters.ContractFilter
-    search_fields = ['id', 'piid', 'agency_id', 'agency_name', 'NAICS', 'PSC']
+    search_fields = ['piid', 'agency_name']
     ordering_fields = [
         'id', 'piid', 
         'agency_id', 'agency_name', 
@@ -224,7 +244,11 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
     ordering = '-date_signed'
     
     pagination_class = pagination.ResultSetPagination
-    serializer_class = serializers.ContractSerializer
+    action_serializers = {
+        'list': serializers.ContractSummarySerializer,
+        'retrieve': serializers.ContractFullSerializer,
+        'test': serializers.ContractTestSerializer
+    }
     
     def get_queryset(self):
         return self.queryset.annotate(
