@@ -8,7 +8,7 @@ class BaseZoneTest(case.CategoryAPITestCase):
         
     def validate_object(self, resp, base_key = []):
         resp.is_int(base_key + ['id'])
-        resp.is_not_empty(base_key + ['states'])
+        resp.is_not_empty(base_key + ['state'])
 
 
 class ZoneListTest(BaseZoneTest):
@@ -23,18 +23,18 @@ class ZoneListTest(BaseZoneTest):
             },
             'fields': {
                 'id': {
-                    '*exact': '2',
-                    '@lt': '4',
-                    '@lte': '4', 
-                    '@gt': '3', 
-                    '@gte': '3',
-                    '@range': '2,5',
-                    '@in': (2,3,5)
+                    '*exact': 2,
+                    '@lt': 4,
+                    '@lte': 4, 
+                    '@gt': 3, 
+                    '@gte': 3,
+                    '@range': (2, 5),
+                    '@in': (2, 3, 5)
                 },
                 'state': {
                     '*exact': 'PA',
                     '*iexact': 'mE',
-                    '@in': ('PA','NC','TX','NY')
+                    '@in': ('PA', 'NC', 'TX', 'NY')
                 }
             }
         }
@@ -43,11 +43,11 @@ class ZoneListTest(BaseZoneTest):
     def test_mixed_request_found_1(self):
         resp = self.validated_single_list(id = 1, state__iexact = 'md')
         resp.validate(lambda resp, base_key: resp.equal(base_key + ['id'], 1))
-        resp.validate(lambda resp, base_key: resp.includes(base_key + ['states'], 'MD'))
+        resp.validate(lambda resp, base_key: resp.equal(base_key + ['state'], 'MD'))
     
     def test_mixed_request_found_2(self):
         resp = self.validated_multi_list(filters = self.encode_str('(state__iexact=ct)&(state__iexact=nH)'))
-        resp.validate(lambda resp, base_key: resp.includes(base_key + ['states'], ['CT', 'NH']))
+        resp.validate(lambda resp, base_key: resp.is_in(base_key + ['state'], ['CT', 'NH']))
     
     def test_mixed_request_not_found_1(self):
         self.empty_list(id = 625, state = 'NC')
@@ -60,9 +60,9 @@ class ZoneRetrieveTest(BaseZoneTest):
     def schema(self):
         return {
             'object': {
-                '&1': ('states', 'includes', 'DE'),
-                '&3': ('states', 'includes', 'FL'),
-                '&6': ('states', 'includes', 'KS'),
+                '&1': ('state', 'equal', 'DE'),
+                '&3': ('state', 'equal', 'FL'),
+                '&6': ('state', 'equal', 'KS'),
                 '#345': (),
                 '#ABCDEFG': ()
             }
