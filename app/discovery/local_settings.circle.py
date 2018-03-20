@@ -5,7 +5,6 @@
 DEBUG = True
 TEMPLATE_DEBUG = True
 
-
 #
 # Database connections
 #
@@ -18,3 +17,8 @@ DATABASES = {
         'PASSWORD': 'circleci'
     }
 }
+
+#
+# REST configuration 
+#
+REST_API_TEST = True
