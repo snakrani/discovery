@@ -12,6 +12,39 @@ from test.validators import VALIDATION_MAP, APIResponseValidator
 import re
 
 
+class TestCounter(object):
+    counts = {}
+    
+    @classmethod
+    def increment(cls, key):
+        if key in cls.counts:
+            cls.counts[key] += 1
+        else:
+            cls.counts[key] = 1
+    
+    @classmethod
+    def get(cls, key):
+        if key in cls.counts:
+            return cls.counts[key]
+        else:
+            return 0
+        
+    @classmethod
+    def total(cls):
+        total = 0
+        
+        for key, count in cls.counts.items():
+            total += count
+            
+        return total
+    
+    @classmethod
+    def render(cls, key):
+        count = cls.get(key)
+        total = cls.total()
+        return "[ {} ] - {:.2f}% of {} tests so far".format(count, (count/total)*100, total)
+
+
 class DiscoveryAPITestCase(TestCase, DiscoveryAssertions):
     
     client = None
@@ -49,7 +82,8 @@ class DiscoveryAPITestCase(TestCase, DiscoveryAssertions):
         for param, value in params.items():
             if isinstance(value, (list, tuple)):
                 params[param] = ",".join(str(val) for val in value)
-            
+        
+        params['test'] = 'true'
         return params
   
     
@@ -68,6 +102,8 @@ class DiscoveryAPITestCase(TestCase, DiscoveryAssertions):
         url = self._get_object_url(id, params)
         
         print("Testing object: {}".format(url))
+        TestCounter.increment(self.__class__.__name__)
+        
         return APIResponseValidator(self.client.get(self._get_object_path(id), params), self, url)
     
     def fetch_objects(self, **params):
@@ -75,6 +111,8 @@ class DiscoveryAPITestCase(TestCase, DiscoveryAssertions):
         url = self._get_list_url(params)
         
         print("Testing list: {}".format(url))
+        TestCounter.increment(self.__class__.__name__)
+        
         return APIResponseValidator(self.client.get(self.path, params), self, url)
 
     
@@ -132,14 +170,22 @@ class DiscoveryAPITestCase(TestCase, DiscoveryAssertions):
         schema = self.schema()
         object = schema.get('object', None)
         
+        def _print_counts():
+            print("{}: {}\n".format(
+                self.__class__.__name__, 
+                TestCounter.render(self.__class__.__name__)
+            ))
+        
         if object:
             self._test_schema_object(object)
+            _print_counts()
         
         elif schema:
             self._test_schema_ordering(schema.get('ordering', None))
             self._test_schema_pagination(schema.get('pagination', None))
             self._test_schema_search(schema.get('search', None))
             self._test_schema_fields(schema.get('fields', None))
+            _print_counts()
     
     
     def _test_schema_ordering(self, ordering):
