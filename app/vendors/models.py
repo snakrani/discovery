@@ -48,14 +48,14 @@ class PoolMembership(models.Model):
     zones = models.ManyToManyField(Zone, blank=True) # from CSV
     
     def __str__(self):
-        return "{0} - {1}/{2} ({3})".format(self.vendor.name, self.pool.id, self.zone, self.piid)
+        return "{} {} ({})".format(self.pool.id, self.vendor.name, self.piid)
 
 
 class Manager(models.Model):
     name = models.CharField(null=True, max_length=128)
     
     def __str__(self):
-        return "{0}".format(self.name)
+        return "{}".format(self.name)
     
     def phone(self):
         return self.phones.values_list('number', flat=True)
