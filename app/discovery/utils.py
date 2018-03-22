@@ -59,7 +59,10 @@ def config_value(name, default=None, types='user-provided', instance=None):
     return value
 
 
-def memory_in_mb(mem):
+def memory_in_mb(mem = None):
+    if mem is None:
+        mem = psutil.virtual_memory()
+    
     #documentation on memory fields: http://psutil.readthedocs.io/en/latest/#id1
     unit = 1024 * 1024 # MB
     return {
@@ -77,7 +80,7 @@ def memory_in_mb(mem):
 
 def print_memory(message = "Max Memory"):
     caller = getframeinfo(stack()[1][0])
-    mem = memory_in_mb(psutil.virtual_memory())   
+    mem = memory_in_mb()   
     
     
     print("{}/{} | {}: {:.2f}MB {:.2f}MB".format(caller.filename, caller.lineno, message, mem['available'], mem['used']))
@@ -85,6 +88,6 @@ def print_memory(message = "Max Memory"):
 
 def csv_memory(message = "Memory"):
     caller = getframeinfo(stack()[1][0])
-    mem = memory_in_mb(psutil.virtual_memory())
+    mem = memory_in_mb()
     
     return('"{}","{}",{:.4f},{:.4f},{:.4f},{:.4f},{:.4f},{:.4f},{:.4f},{:.4f},{:.4f}'.format(caller.filename, message, mem['total'], mem['available'], mem['used'], mem['free'], mem['active'], mem['inactive'], mem['buffers'], mem['cached'], mem['shared']))
