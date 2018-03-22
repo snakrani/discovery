@@ -1,26 +1,18 @@
 from test import cases as case
+from test import fixtures as data
 
 
-class BaseVendorTest(case.VendorAPITestCase):
-    def initialize(self):
-        self.router = 'vendors'
-        
-    def validate_object(self, resp, base_key = []):
-        resp.is_not_empty(base_key + ['name'])
-        resp.is_int(base_key + ['duns'])
-        resp.is_int(base_key + ['duns_4'])
-                
-        if resp.check('is_not_in', base_key + ['duns'], ('830341645', '614155380', '605119932', '933706141')):
-            resp.is_not_empty(base_key + ['cage'])
-            resp.is_not_empty(base_key + ['sam_status'])
-            resp.is_not_none(base_key + ['sam_exclusion'])
-            resp.is_not_empty(base_key + ['sam_activation_date'])
-            resp.is_not_empty(base_key + ['sam_expiration_date'])
-
-
-class VendorListTest(BaseVendorTest):  
-    def schema(self):
-        return {
+class VendorListTest(case.APITestCase, metaclass = case.MetaAPISchema):
+    
+    fixtures = data.get_vendor_fixtures()
+    schema = {
+            'object': {
+                '&007901598': ('name', 'equal', 'Battelle Memorial Institute'),
+                '&132220604': ('name', 'equal', 'Censeo Consulting Group'),
+                '&001014182': ('name', 'equal', 'Dynamics Research Corporation'),
+                '#345': (),
+                '#ABCDEFG': ()
+            },
             'ordering': (
                 'name', 'duns', 'cage', 
                 'sam_status', 'sam_exclusion', 'sam_url',
@@ -316,8 +308,8 @@ class VendorListTest(BaseVendorTest):
                     '@icontains': 'taylor',
                     '@startswith': 'Ben',
                     '@istartswith': 'ben',
-                    '@endswith': 'Shea',
-                    '@iendswith': 'shea',
+                    '@endswith': 'Hughes',
+                    '@iendswith': 'hughes',
                     '@regex': '^[A-Za-z]{4}\s+',
                     '@iregex': '^da(n|na)'
                 },
@@ -390,14 +382,17 @@ class VendorListTest(BaseVendorTest):
         }
 
 
-class VendorRetrieveTest(BaseVendorTest):
-    def schema(self):
-        return {
-            'object': {
-                '&007901598': ('name', 'equal', 'Battelle Memorial Institute'),
-                '&132220604': ('name', 'equal', 'Censeo Consulting Group'),
-                '&001014182': ('name', 'equal', 'Dynamics Research Corporation'),
-                '#345': (),
-                '#ABCDEFG': ()
-            }
-        }
+    def initialize(self):
+        self.router = 'vendors'
+        
+    def validate_object(self, resp, base_key = []):
+        resp.is_not_empty(base_key + ['name'])
+        resp.is_int(base_key + ['duns'])
+        resp.is_int(base_key + ['duns_4'])
+                
+        if resp.check('is_not_in', base_key + ['duns'], ('830341645', '614155380', '605119932', '933706141')):
+            resp.is_not_empty(base_key + ['cage'])
+            resp.is_not_empty(base_key + ['sam_status'])
+            resp.is_not_none(base_key + ['sam_exclusion'])
+            resp.is_not_empty(base_key + ['sam_activation_date'])
+            resp.is_not_empty(base_key + ['sam_expiration_date'])
