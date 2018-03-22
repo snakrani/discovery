@@ -22,11 +22,12 @@ import re
 
 
 class DiscoveryReadOnlyModelViewSet(
-    mixins.FilterViewSetMixin, 
+    mixins.FilterViewSetMixin,
+    mixins.PaginationViewSetMixin,
     mixins.SerializerViewSetMixin, 
     ReadOnlyModelViewSet
 ): pass
-    
+
 
 @method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
 @method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='retrieve')
@@ -44,8 +45,9 @@ class NaicsViewSet(DiscoveryReadOnlyModelViewSet):
     lookup_field = 'code'
     
     action_filters = {
-        'list': (SearchFilter, OrderingFilter),
+        'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
     }
+    filter_class = filters.NaicsFilter
     search_fields = ['code', 'description']
     ordering_fields = ['code', 'root_code', 'description']
     ordering = 'description'
@@ -105,8 +107,9 @@ class SetAsideViewSet(DiscoveryReadOnlyModelViewSet):
     lookup_field = 'code'
     
     action_filters = {
-        'list': (SearchFilter, OrderingFilter),
+        'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
     }
+    filter_class = filters.SetAsideFilter
     search_fields = ['code', 'name', 'description']
     ordering_fields = ['code', 'name', 'description', 'far_order']
     ordering = 'name'
