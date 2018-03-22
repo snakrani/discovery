@@ -324,20 +324,21 @@ class BaseValidator(object):
         
     def is_quarter_data(self, data_value, quarter):
         self.compare_data('assertQuarter', data_value, quarter)
-    
 
-class APIResponseValidator(BaseValidator):
+
+class ResponseValidator(BaseValidator):
     
     resp = None
     url  = ''
-    
-    
+
+   
     def __init__(self, response, test_case, url):
+        super(ResponseValidator, self).__init__(test_case)
+        
         self.resp = response
-        self.test = test_case
         self.url = url
 
-
+    
     # Utilities
     
     def _wrap_error(self, error):
@@ -350,10 +351,20 @@ class APIResponseValidator(BaseValidator):
     # Status
     
     def check_status(self, status):
-        self.test.assertEqual(self.resp.status_code, status)
+        try:
+            self.test.assertEqual(self.resp.status_code, status)
+        
+        except Exception as error:
+            raise self._wrap_error(error)
         
     def success(self):
         self.check_status(200)
+        
+    def perm_redirect(self):
+        self.check_status(301)
+        
+    def temp_redirect(self):
+        self.check_status(302)
         
     def failure(self):
         self.check_status(400)
@@ -366,7 +377,9 @@ class APIResponseValidator(BaseValidator):
     
     def get_data(self):
         return self.resp.data
-    
+       
+
+class APIResponseValidator(ResponseValidator):
         
     # Count
     
