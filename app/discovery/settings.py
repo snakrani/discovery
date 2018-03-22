@@ -349,9 +349,6 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': [],
     'SEARCH_PARAM': 'q',
     
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': REST_PAGE_COUNT,
-    
     'COERCE_DECIMAL_TO_STRING': False,
 }
 
