@@ -1,4 +1,5 @@
 from discovery.utils import check_api_test
+from api.pagination import TestResultSetPagination
 
 
 class FilterViewSetMixin(object):
@@ -15,6 +16,21 @@ class FilterViewSetMixin(object):
     def filter_queryset(self, queryset):
         self.filter_backends = self.get_filter_classes()            
         return super(FilterViewSetMixin, self).filter_queryset(queryset)
+
+
+class PaginationViewSetMixin(object):
+    
+    @property
+    def paginator(self):
+        if not hasattr(self, '_paginator'):
+            if self.pagination_class is None:
+                self._paginator = None
+            elif check_api_test(self.request):
+                self._paginator = TestResultSetPagination()
+            else:
+                self._paginator = self.pagination_class()
+        
+        return self._paginator
 
 
 class SerializerViewSetMixin(object):
