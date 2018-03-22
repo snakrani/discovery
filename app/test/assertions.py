@@ -7,7 +7,7 @@ import re
 import math
 
 
-class DiscoveryAssertions(object):
+class TestAssertions(object):
    
     def assertIsEmpty(self, value, **params):
         if isinstance(value, QuerySet):
