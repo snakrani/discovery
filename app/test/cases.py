@@ -3,49 +3,51 @@ from django.db.models.query import QuerySet
 from django.test import Client, TestCase
 
 from urllib.parse import urlencode, quote
+from datetime import datetime
 
-from test import fixtures as data
+from discovery.utils import memory_in_mb
 from test.common import normalize_list
-from test.assertions import DiscoveryAssertions
+from test.assertions import TestAssertions
 from test.validators import VALIDATION_MAP, APIResponseValidator
 
+import os
+import math
+import psutil
 import re
 
 
-class TestCounter(object):
-    counts = {}
+class TestTracker(object):
+    
+    start_time = None
+    
     
     @classmethod
-    def increment(cls, key):
-        if key in cls.counts:
-            cls.counts[key] += 1
-        else:
-            cls.counts[key] = 1
+    def start(cls):
+        if cls.start_time is None:
+            cls.start_time = datetime.now()
     
     @classmethod
-    def get(cls, key):
-        if key in cls.counts:
-            return cls.counts[key]
-        else:
-            return 0
+    def render_running_time(cls):
+        seconds = (datetime.now() - cls.start_time).total_seconds()
+        return "{}:{}".format(math.floor(seconds / 60), "{:.0f}".format(seconds % 60).zfill(2))
+    
+    @classmethod
+    def render_memory(cls):
+        process = psutil.Process(os.getpid())
+        return "{}MB".format(math.floor(process.memory_info().rss / (1024 * 1024)))
+    
         
     @classmethod
-    def total(cls):
-        total = 0
-        
-        for key, count in cls.counts.items():
-            total += count
-            
-        return total
-    
-    @classmethod
-    def render(cls, key):
-        count = cls.get(key)
-        total = cls.total()
-        return "[ {} ] - {:.2f}% of {} tests so far".format(count, (count/total)*100, total)
+    def init_request(cls, name, url, key):
+        print("Testing {} [{} / {}]: {}".format(
+            name,
+            cls.render_running_time(),
+            cls.render_memory(),  
+            url
+        ))
 
 
-class DiscoveryAPITestCase(TestCase, DiscoveryAssertions):
+class APITestCase(TestCase, TestAssertions):
     
     client = None
     path = None
@@ -55,6 +57,8 @@ class DiscoveryAPITestCase(TestCase, DiscoveryAssertions):
     # Initialization
     
     def setUp(self):
+        TestTracker.start()
+        
         self.client = Client()
         self.initialize()
         
@@ -101,27 +105,21 @@ class DiscoveryAPITestCase(TestCase, DiscoveryAssertions):
         params = self.prepare_params(params)
         url = self._get_list_url(params)
         
-        print("Testing request: {}".format(url))
-        TestCounter.increment(self.__class__.__name__)
-        
+        TestTracker.init_request('request', url, self.__class__.__name__)
         return APIResponseValidator(self.client.get(self.path, params), self, url)
     
     def fetch_object(self, id, **params):
         params = self.prepare_params(params)
         url = self._get_object_url(id, params)
         
-        print("Testing object: {}".format(url))
-        TestCounter.increment(self.__class__.__name__)
-        
+        TestTracker.init_request('object', url, self.__class__.__name__)
         return APIResponseValidator(self.client.get(self._get_object_path(id), params), self, url)
     
     def fetch_objects(self, **params):
         params = self.prepare_params(params)
         url = self._get_list_url(params)
         
-        print("Testing list: {}".format(url))
-        TestCounter.increment(self.__class__.__name__)
-        
+        TestTracker.init_request('list', url, self.__class__.__name__)
         return APIResponseValidator(self.client.get(self.path, params), self, url)
 
     
@@ -178,146 +176,189 @@ class DiscoveryAPITestCase(TestCase, DiscoveryAssertions):
         pass
 
     
-    # Testing
+    # Utilities
     
-    def test_schema(self):
-        schema = self.schema()
-        object = schema.get('object', None)
+    def _check_valid(self, validation_info):
+        if not re.search('^[\-\!\#]', validation_info['type']):
+            return True
+        return False
+
+
+class MetaAPISchema(type):
+    
+    def __new__(cls, name, bases, attr):
+        if 'schema' in attr and attr['schema']:
+            schema = attr['schema']
+            
+            cls._generate_object_tests(schema.get('object', None), attr)
+            cls._generate_ordering_tests(schema.get('ordering', None), attr)
+            cls._generate_pagination_tests(schema.get('pagination', None), attr)
+            cls._generate_search_tests(schema.get('search', None), attr)
+            cls._generate_field_tests(schema.get('fields', None), attr)
         
-        def _print_counts():
-            print("{}: {}\n".format(
-                self.__class__.__name__, 
-                TestCounter.render(self.__class__.__name__)
-            ))
+        return super(MetaAPISchema, cls).__new__(cls, name, bases, attr)
+
+
+    @classmethod
+    def _generate_object_tests(cls, object, tests):
+        if object is None: return
         
-        if object:
-            self._test_schema_object(object)
-            _print_counts()
+        index = 1
+            
+        for id, params in object.items():
+            info = cls._validation_info(id, '&')
+            method_name = "test_object_{}".format(index)
+            
+            tests[method_name] = cls._object_test_method(info, params)
+            index += 1
+
+    @classmethod
+    def _generate_ordering_tests(cls, ordering, tests):
+        if ordering is None: return
+            
+        for field in normalize_list(ordering):
+            info = {'field': field, 'order': 'asc'}
+            tests['test_ordering_{}_asc'.format(field)] = cls._ordering_test_method(info)
+            
+            info = {'field': field, 'order': 'desc'}
+            tests['test_ordering_{}_desc'.format(field)] = cls._ordering_test_method(info)
+
+    @classmethod    
+    def _generate_pagination_tests(cls, pagination, tests):
+        if pagination is None: return
         
-        elif schema:
-            self._test_schema_ordering(schema.get('ordering', None))
-            self._test_schema_pagination(schema.get('pagination', None))
-            self._test_schema_search(schema.get('search', None))
-            self._test_schema_fields(schema.get('fields', None))
-            _print_counts()
-    
-    
-    def _test_schema_ordering(self, ordering):
-        if ordering:
-            for field in normalize_list(ordering):
-                with self.subTest(ordering = "{} [asc]".format(field)):
-                    resp = self.validated_multi_list(ordering = field)
-                    resp.validate_ordering(field, 'asc')
-                    
-                with self.subTest(ordering = "{} [desc]".format(field)):
-                    resp = self.validated_multi_list(ordering = "-{}".format(field))
-                    resp.validate_ordering(field, 'desc')                
-    
-    
-    def _test_schema_pagination(self, pagination):
-        if pagination:
-            for name, params in pagination.items():
-                validation = self._validation_info(name, '@')
+        index_map = {}
+        
+        for name, params in pagination.items():
+            info = cls._validation_info(name, '@')
+            lookup = info['lookup']
+            
+            index_map[lookup] = 1 if lookup not in index_map else index_map[lookup] + 1
+            method_name = "test_pagination_{}_{}".format(lookup, index_map[lookup])
+            
+            tests[method_name] = cls._pagination_test_method(info, params)
+
+    @classmethod    
+    def _generate_search_tests(cls, search, tests):
+        if search is None: return
+        
+        index_map = {}
+        
+        for name, params in search.items():
+            info = cls._validation_info(name, '@')
+            lookup = info['lookup']
                 
-                page = params.get('page', None)
-                count = params.get('count', None)
+            index_map[lookup] = 1 if lookup not in index_map else index_map[lookup] + 1
+            method_name = "test_search_{}_{}".format(lookup, index_map[lookup])
+            
+            tests[method_name] = cls._search_test_method(info, params)
+            
+    @classmethod        
+    def _generate_field_tests(cls, fields, tests):   
+        if fields is None: return
+        
+        index_map = {}
+        
+        for field, lookups in fields.items():
+            field_info = cls._field_info(field)
                 
-                with self.subTest(pagination = "{} [{}]".format(validation['lookup'], validation['type'])):
-                    page_options = {}
-                    
-                    if page:
-                        page_options['page'] = page
-                    if count:
-                        page_options['count'] = count
-                        
-                    page = 1 if page is None else page   
-                    resp = getattr(self, validation['method'])(**page_options)
-                    
-                    if self._check_valid(validation):
-                        resp.validate_pagination(page, count)
-    
-    
-    def _test_schema_search(self, search):
-        if search:
-            for name, params in search.items():
-                validation = self._validation_info(name, '@')
+            for lookup, search_value in lookups.items():
+                info = cls._validation_info(lookup, '@')
+                lookup = info['lookup']
+                id = "{}_{}".format(field, lookup)
                 
+                index_map[id] = 1 if id not in index_map else index_map[id] + 1
+                method_name = "test_field_{}_{}".format(id, index_map[id])
+            
+                if isinstance(search_value, (list, tuple, QuerySet)):
+                    search_value = list(search_value)
+                
+                params = [search_value]
+                tests[method_name] = cls._field_test_method(field_info, info, params)
+
+
+    @classmethod
+    def _object_test_method(cls, info, params):
+        def object_test(self):
+            resp = getattr(self, info['method'])(info['lookup'])
+                    
+            if self._check_valid(info) and len(params) == 3:
                 field = params[0]
                 validator = params[1]
                 search_value = params[2]
-                
-                with self.subTest(search = "{} [{}]".format(validation['lookup'], validation['type'])):
-                    resp = getattr(self, validation['method'])(**{'q': search_value})
                     
-                    if self._check_valid(validation):
-                        resp.validate(lambda resp, base_key: getattr(resp, validator)(base_key + [field], search_value))
-     
+                getattr(resp, validator)(field, search_value)
         
-    def _test_schema_fields(self, fields):   
-        if fields:
-            for field, lookups in fields.items():
-                field_info = self._field_info(field)
-                
-                for lookup, search_value in lookups.items():
-                    validation = self._validation_info(lookup, '@')
-                    validator = VALIDATION_MAP[validation['lookup']]
-                    
-                    field_lookup = field if validation['lookup'] in ('exact', 'date') else "{}__{}".format(field, validation['lookup'])
-                        
-                    if search_value is None:
-                        raise Exception("Search value (string/integer/list) is expected for field lookup")
-                        
-                    if isinstance(search_value, (list, tuple, QuerySet)):
-                        search_value = list(search_value)
-                        
-                    with self.subTest(field = "{} [{}]".format(field_lookup, validation['type'])):
-                        if field_info['relation']:
-                            resp = getattr(self, validation['method'])(**{"{}".format(field_lookup): search_value})
-                            
-                            if self._check_valid(validation):
-                                resp.validate(lambda resp, base_key: resp.map(validator, (base_key + [field_info['base_field']]), field_info['relation'], search_value))         
-                        else:                    
-                            resp = getattr(self, validation['method'])(**{"{}".format(field_lookup): search_value})
-                            
-                            if self._check_valid(validation):
-                                resp.validate(lambda resp, base_key: getattr(resp, validator)(base_key + [field], search_value))
-
-    
-    def _test_schema_object(self, object):
-        if object:
-            for id, params in object.items():
-                validation = self._validation_info(id, '&')
-                
-                with self.subTest(object = "{} [{}]".format(validation['lookup'], validation['type'])):
-                    resp = getattr(self, validation['method'])(validation['lookup'])
-                    
-                    if self._check_valid(validation) and len(params) == 3:
-                        field = params[0]
-                        validator = params[1]
-                        search_value = params[2]
-                    
-                        getattr(resp, validator)(field, search_value)
-                
-    
-    def schema(self):
-        # Override in subclass
-        return {}
-
-     
-    def _field_info(self, field):
-        if field.find('__') != -1:
-            components = field.split('__')
+        return object_test
+  
+    @classmethod
+    def _ordering_test_method(cls, info):
+        def ordering_test(self):
+            if info['order'] == 'desc':
+                info['field'] = "-{}".format(info['field'])
             
-            base_field = components.pop(0)
-            relation = components
-        else:
-            base_field = field
-            relation = None
-            
-        return { 'base_field': base_field, 'relation': relation }
-
+            resp = self.validated_multi_list(ordering = info['field'])
+            resp.validate_ordering(info['field'], info['order'])
+        
+        return ordering_test
     
-    def _validation_info(self, lookup, default_type = '@'):
+    @classmethod
+    def _pagination_test_method(cls, info, params):
+        def pagination_test(self):
+            page_options = {}
+            page = params.get('page', None)
+            count = params.get('count', None)
+                                
+            if page:
+                page_options['page'] = page
+            if count:
+                page_options['count'] = count
+                        
+            page = 1 if page is None else page   
+            resp = getattr(self, info['method'])(**page_options)
+                    
+            if self._check_valid(info):
+                resp.validate_pagination(page, count)
+                
+        return pagination_test
+    
+    @classmethod
+    def _search_test_method(cls, info, params):
+        def search_test(self):
+            field = params[0]
+            validator = params[1]
+            search_value = params[2]
+                
+            resp = getattr(self, info['method'])(**{'q': search_value})
+                    
+            if self._check_valid(info):
+                resp.validate(lambda resp, base_key: getattr(resp, validator)(base_key + [field], search_value))
+        
+        return search_test
+    
+    @classmethod
+    def _field_test_method(cls, field, info, params):
+        def field_test(self):
+            validator = VALIDATION_MAP[info['lookup']]
+            field_lookup = field['name'] if info['lookup'] in ('exact', 'date') else "{}__{}".format(field['name'], info['lookup'])
+            search_value = params[0]
+                        
+            if field['relation']:
+                resp = getattr(self, info['method'])(**{"{}".format(field_lookup): search_value})
+                            
+                if self._check_valid(info):
+                    resp.validate(lambda resp, base_key: resp.map(validator, (base_key + [field['base_field']]), field['relation'], search_value))         
+            else:                    
+                resp = getattr(self, info['method'])(**{"{}".format(field_lookup): search_value})
+                            
+                if self._check_valid(info):
+                    resp.validate(lambda resp, base_key: getattr(resp, validator)(base_key + [field['name']], search_value))
+        
+        return field_test
+
+   
+    @classmethod
+    def _validation_info(cls, lookup, default_type = '@'):
         count_specifier = default_type
                     
         if re.search('^[\-\*\@\!\&\#]', lookup):
@@ -338,25 +379,16 @@ class DiscoveryAPITestCase(TestCase, DiscoveryAssertions):
             validation_method = 'validated_multi_list'
         
         return { 'lookup': lookup, 'method': validation_method, 'type': count_specifier }
-    
-    
-    def _check_valid(self, validation_info):
-        if not re.search('^[\-\!\#]', validation_info['type']):
-            return True
-        return False
-    
 
-class CategoryAPITestCase(DiscoveryAPITestCase):
-    fixtures = data.get_category_fixtures()
-
-
-class VendorAPITestCase(DiscoveryAPITestCase):
-    fixtures = data.get_vendor_fixtures()
-
-
-class ContractAPITestCase(DiscoveryAPITestCase):
-    fixtures = data.get_contract_fixtures()
-
-
-class MetadataAPITestCase(DiscoveryAPITestCase):
-    fixtures = data.get_metadata_fixtures()
+    @classmethod
+    def _field_info(cls, field):
+        if field.find('__') != -1:
+            components = field.split('__')
+            
+            base_field = components.pop(0)
+            relation = components
+        else:
+            base_field = field
+            relation = None
+            
+        return { 'name': field, 'base_field': base_field, 'relation': relation }
