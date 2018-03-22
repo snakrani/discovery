@@ -15,15 +15,16 @@ def make_view(view, request, *args, **kwargs):
     return view
 
 
-class VendorLoadTest(case.APITestCase):
+class VendorLoadTest(case.BaseTestCase):
     
     fixtures = data.get_category_fixtures()
 
     
     def test_load(self):
         call_command('load_vendors', vpp=1)
-
-
+        call_command('load_sam')
+    
+    
     def test_sam_expiration_not_null(self):
         null_vendors = Vendor.objects.filter(sam_expiration_date=None).count()
         self.assertEqual(null_vendors, 0)
@@ -39,7 +40,7 @@ class VendorLoadTest(case.APITestCase):
             self.assertNotEqual(vendor.managers.filter(type='PM').first().phones().count(), 0)
 
 
-class VendorViewTest(TestCase):
+class VendorViewTest(case.BaseTestCase):
     def test_has_capability_statement_false(self):
         request = RequestFactory().get('/vendor/0000')
         view = VendorView(template_name='vendor.html')
