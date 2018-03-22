@@ -8,7 +8,7 @@ from datetime import datetime
 from discovery.utils import memory_in_mb
 from test.common import normalize_list
 from test.assertions import TestAssertions
-from test.validators import VALIDATION_MAP, APIResponseValidator
+from test.validators import VALIDATION_MAP, ResponseValidator, APIResponseValidator
 
 import os
 import math
@@ -47,33 +47,32 @@ class TestTracker(object):
         ))
 
 
-class APITestCase(TestCase, TestAssertions):
-    
-    client = None
-    path = None
-    router = None
-    
-    
+class BaseTestCase(TestCase, TestAssertions):
+
     # Initialization
     
     def setUp(self):
         TestTracker.start()
-        
-        self.client = Client()
         self.initialize()
-        
-        if self.router:
-            self.router = self.router.lower()
-        
-        if not self.path and self.router:
-            self.path = "/api/{}/".format(self.router)
-    
+
         
     def initialize(self):
         # Override in subclass
         pass
 
+
+class RequestTestCase(BaseTestCase):
     
+    client = None
+    
+    
+    # Initialization
+    
+    def setUp(self):
+        self.client = Client()
+        super(RequestTestCase, self).setUp()
+
+            
     # Request
     
     def encode(self, params):
@@ -87,6 +86,61 @@ class APITestCase(TestCase, TestAssertions):
             if isinstance(value, (list, tuple)):
                 params[param] = ",".join(str(val) for val in value)
         
+        return params
+  
+    
+    def _get_url(self, path, params = {}):
+        return "{}{}?{}".format(settings.API_HOST, path, self.encode(params))
+    
+        
+    def fetch_path(self, path, **params):
+        params = self.prepare_params(params)
+        url = self._get_url(path, params)
+        
+        TestTracker.init_request('request', url, self.__class__.__name__)
+        return ResponseValidator(self.client.get(path, params), self, url)
+
+    
+    # Validation
+    
+    def validated_path(self, path, **params):
+        resp = self.fetch_path(path, **params)
+        resp.success()
+        return resp
+    
+    def validated_perm_redirect(self, path, **params):
+        resp = self.fetch_path(path, **params)
+        resp.perm_redirect()
+        return resp
+    
+    def validated_temp_redirect(self, path, **params):
+        resp = self.fetch_path(path, **params)
+        resp.temp_redirect()
+        return resp       
+ 
+
+class APITestCase(RequestTestCase):
+    
+    path = None
+    router = None
+    
+    
+    # Initialization
+    
+    def setUp(self):
+        super(APITestCase, self).setUp()
+        
+        if self.router:
+            self.router = self.router.lower()
+        
+        if not self.path and self.router:
+            self.path = "/api/{}/".format(self.router)
+    
+        
+    # Request
+    
+    def prepare_params(self, params):
+        params = super(APITestCase, self).prepare_params(params)
         params['test'] = 'true'
         return params
   
@@ -95,10 +149,10 @@ class APITestCase(TestCase, TestAssertions):
         return self.path + str(id)
     
     def _get_object_url(self, id, params = {}):
-        return "{}{}?{}".format(settings.API_HOST, self._get_object_path(id), self.encode(params))
+        return self._get_url(self._get_object_path(id), params)
     
     def _get_list_url(self, params = {}):
-        return "{}{}?{}".format(settings.API_HOST, self.path, self.encode(params))
+        return self._get_url(self.path, params)
     
     
     def fetch_data(self, **params):
@@ -121,7 +175,7 @@ class APITestCase(TestCase, TestAssertions):
         
         TestTracker.init_request('list', url, self.__class__.__name__)
         return APIResponseValidator(self.client.get(self.path, params), self, url)
-
+    
     
     # Validation
     
