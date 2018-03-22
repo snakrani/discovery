@@ -43,10 +43,11 @@ jobs:
 
       - run:
           name: Run unit tests
+          no_output_timeout: 1h
           command: |
             source /venv/bin/activate
             scripts/init-webserver.sh /dev/stderr
-            ./run test discovery api categories vendors contracts
+            ./run test --parallel 4 discovery api categories vendors contracts
 
       - store_artifacts:
           path: logs
