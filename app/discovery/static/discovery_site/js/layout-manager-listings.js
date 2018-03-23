@@ -63,7 +63,7 @@ LayoutManager.renderRow = function(vendor, qs, i) {
     var location_col, num_contracts_col;
     var $vendorRow = $('<tr class="table_row_data"></tr>');
 
-    var locationStr = (vendor.sam_location ? this.cleanLocation(vendor.sam_location.citystate) : ' ');
+    var locationStr = (vendor.sam_location_citystate ? this.cleanLocation(vendor.sam_location_citystate) : ' ');
     var name_col = $('<td class="vendor_name" scope="row"></td>');
     var name_a = $('<a href="/vendor/' + vendor.duns + '/' + qs + '" class="link_style">' + vendor.name + '</a>');
     var vehicle = this.getQSByName(qs, 'vehicle');
@@ -106,20 +106,22 @@ LayoutManager.renderColumn = function(v, prefix, setasideCode) {
 };
 
 LayoutManager.renderPager = function(results, pageNumber, itemsPerPage) {
-    if (results['total'] > 0) {
+    var resultCount = results['results'].length;
+
+    if (results['count'] > 0) {
         if (pageNumber == undefined) {
             var pageNumber = 1;
         }
 
         var startnum = (pageNumber - 1) * itemsPerPage + 1;
-        var endnum = Math.min((pageNumber * itemsPerPage), results['total']);
+        var endnum = Math.min((pageNumber * itemsPerPage), results['count']);
 
         $("#vendors_current").text(startnum + " - " + endnum);
-        $("#vendors_total").text(LayoutManager.numberWithCommas(results['total']));
+        $("#vendors_total").text(LayoutManager.numberWithCommas(results['count']));
 
         $(function() {
             $("#pagination_container").pagination({
-                items: results['total'],
+                items: results['count'],
                 itemsOnPage: itemsPerPage,
                 cssStyle: 'light-theme',
                 currentPage: pageNumber,
@@ -132,7 +134,7 @@ LayoutManager.renderPager = function(results, pageNumber, itemsPerPage) {
                 }
             });
         });
-        if (results['count'] < results['total']) {
+        if (resultCount < results['count']) {
             $('#pagination_container').show();
         } else {
             $('#pagination_container').hide();
