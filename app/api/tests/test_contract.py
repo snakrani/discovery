@@ -312,6 +312,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': 'inc\.?$'
             },
             'vendor__duns': {
+                '*exact': '198024809',
                 '@lt': '193460839',
                 '@lte': '193460839', 
                 '@gt': '193460839', 

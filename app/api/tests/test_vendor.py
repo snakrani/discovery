@@ -52,6 +52,7 @@ class VendorListTest(case.APITestCase, metaclass = case.MetaAPISchema):
                     '@iregex': 'inc\.?$'
                 },
                 'duns': {
+                    '*exact': '198024809',
                     '@lt': '193460839',
                     '@lte': '193460839', 
                     '@gt': '193460839', 
