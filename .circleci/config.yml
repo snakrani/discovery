@@ -113,7 +113,7 @@ jobs:
           command: |
             scripts/wait-for-it.sh --host="localhost" --port=8080 --timeout=300
             source /venv/bin/activate
-            ./run test selenium
+            ./run test acceptance
 
       - store_artifacts:
           path: logs
