@@ -107,6 +107,7 @@ class MetaFilterSet(FilterSetMetaclass):
         name = info['name']
         field = info['field']
         
+        filters[name] = CharFilter(field_name = field, lookup_expr='exact')
         filters['{}__range'.format(name)] = CharRangeFilter(field_name = field)
         filters['{}__in'.format(name)] = CharInFilter(field_name = field)
         
