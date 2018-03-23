@@ -1,4 +1,4 @@
-from rest_framework.fields import CharField, IntegerField, DateField
+from rest_framework.fields import CharField, IntegerField, DateField, ListField
 from rest_framework.relations import HyperlinkedIdentityField
 from rest_framework.serializers import Serializer, ModelSerializer, HyperlinkedModelSerializer, SerializerMethodField
 
@@ -43,11 +43,13 @@ class PoolLinkSerializer(BasePoolSerializer):
         fields = ['id', 'url']
 
 class PoolSummarySerializer(BasePoolSerializer):
+    naics = NaicsSummarySerializer(many=True)
+    
     class Meta(BasePoolSerializer.Meta):
-        fields = BasePoolSerializer.Meta.fields + ['url']
+        fields = BasePoolSerializer.Meta.fields + ['naics', 'url']
 
 class PoolFullSerializer(BasePoolSerializer):
-    naics = NaicsLinkSerializer(many=True)
+    naics = NaicsSummarySerializer(many=True)
     
     class Meta(BasePoolSerializer.Meta):
         fields = BasePoolSerializer.Meta.fields + ['naics']
@@ -138,7 +140,7 @@ class BasePoolMembershipSerializer(ModelSerializer):
     
 class PoolMembershipLinkSerializer(BasePoolMembershipSerializer):
     pool = PoolLinkSerializer(many=False)
-    setasides = SetasideLinkSerializer(many=True)
+    setasides = SetasideSummarySerializer(many=True)
     
     zones = ZoneLinkSerializer(many=True)
     
@@ -178,18 +180,25 @@ class VendorLinkSerializer(BaseVendorSerializer):
         fields = ['duns', 'url']
 
 class AnnotatedVendorSerializer(BaseVendorSerializer):
+    setasides = SerializerMethodField()
+    
     sam_location_citystate = CharField()
     
     annual_revenue = IntegerField()
     number_of_employees = IntegerField()
     number_of_contracts = IntegerField()
+    
+    def get_setasides(self, item):
+        queryset = categories.SetAside.objects.filter(id__in=vendors.PoolMembership.objects.filter(vendor=item).values('setasides'))
+        return SetasideLinkSerializer(queryset, many=True, context=self.context).data
+
 
 class VendorSummarySerializer(AnnotatedVendorSerializer):
     class Meta(BaseVendorSerializer.Meta):
         fields = BaseVendorSerializer.Meta.fields + [
             'sam_location_citystate', 
             'annual_revenue', 'number_of_employees', 
-            'number_of_contracts',
+            'number_of_contracts', 'setasides',
             'url'
         ]
 
@@ -200,7 +209,7 @@ class VendorFullSerializer(AnnotatedVendorSerializer):
     class Meta(BaseVendorSerializer.Meta):
         fields = BaseVendorSerializer.Meta.fields + [
             'sam_location', 
-            'pools', 
+            'setasides', 'pools',
             'annual_revenue', 'number_of_employees', 
             'number_of_contracts'
         ]
