@@ -23,7 +23,7 @@ LayoutManager.render = function(results) {
         // if this is a vendor list page and the page has already been reloaded
         if (window.location.pathname == "/results"
             || URLManager.getParameterByName('naics-code') === InputHandler.getNAICSCode()) {
-            Events.publish('vendorDataLoaded', results, 1, RequestsManager.vendorsPageCount);
+            Events.publish('vendorDataLoaded', results, 1, RequestsManager.getPageCount());
         }
         else {
             // if this is a vendor list page and we need to reload to get the template
