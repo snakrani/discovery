@@ -49,7 +49,7 @@ def PoolCSV(request):
     naics = Naics.objects.get(code=request.GET['naics-code'])
     vehicle = request.GET['vehicle'].upper()
     pool = Pool.objects.get(naics=naics, vehicle=vehicle)
-    vendors = vendors.filter(pools__pool=pool)
+    vendors = vendors.filter(pools__pool=pool).distinct()
     filter_text.append("NAICS code {0}".format(naics))
 
     #setasides
@@ -81,7 +81,7 @@ def PoolCSV(request):
                 setaside_list.append('')
                 
         if v.sam_location:
-            location = "{}, {}".format(v.sam_location.city, v.sam_location.state)
+            location = "{}, {} {}".format(v.sam_location.city, v.sam_location.state, v.sam_location.zipcode)
         else:
             location = 'NA'
 
