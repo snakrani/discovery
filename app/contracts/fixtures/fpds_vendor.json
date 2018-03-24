@@ -1,22 +1,18 @@
 [
 {
   "model": "vendors.vendor",
-  "pk": 24,
+  "pk": 1,
   "fields": {
-    "name": "KT Consulting, Inc.",
-    "duns": "089072826",
-    "duns_4": "0890728260000",
-    "cage": "1X2F2",
+    "name": "Advanced Concepts and Technologies International, LLC dba ACT-I",
+    "duns": "008050242",
+    "duns_4": "0080502420000",
+    "cage": "1C2H1",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-10-26T10:29:24Z",
-    "sam_expiration_date": "2018-10-26T10:20:31Z",
+    "sam_activation_date": "2018-02-13T16:01:24Z",
+    "sam_expiration_date": "2019-02-13T15:48:36Z",
     "sam_exclusion": false,
-    "sam_url": "http://www.ktc-inc.com",
-    "sam_location": 24,
-    "setasides": [
-      1,
-      2
-    ]
+    "sam_url": "http://www.act-i.com",
+    "sam_location": 1
   }
 }
 ]
