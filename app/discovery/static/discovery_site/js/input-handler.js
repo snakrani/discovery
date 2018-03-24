@@ -138,6 +138,8 @@ var InputHandler = {
 
     sendVehicleChange: function() {
         this.vehicle = $('form#vehicle-select select').val(); //to get the default
+
+        $("form#setaside-filters input:checked").prop('checked', false);
         Events.publish('vehicleChanged', {'vehicle': this.vehicle, 'vehicleOnly': true});
     },
 
@@ -226,6 +228,8 @@ var InputHandler = {
         var vehicle = (data !== undefined ? data.vehicle : null);
         var naicsMap = (data !== undefined ? data.naics : {});
         var naics = URLManager.getParameterByName('naics-code');
+        var naics_exists = false;
+        var first_naics = null;
 
         $('#naics-code').select2({placeholder:'Select a NAICS code', width: '380px'});
 
@@ -238,13 +242,25 @@ var InputHandler = {
 
                 $.each(data.results, function(key, result) {
                     if ($.isEmptyObject(naicsMap) || (result.code in naicsMap)) {
+                        if (!first_naics) {
+                            first_naics = result.code;
+                        }
+                        if (naics == result.code) {
+                            naics_exists = true;
+                        }
                         $("#naics-code")
                             .append($("<option></option>")
                             .attr("value", result.code)
                             .text(result.description + " ( " + result.code + " ) "));
                     }
                 });
-                $("#naics-code").select2({placeholder:'Select a NAICS code', width: '380px'}).val(naics).trigger('change');
+
+                if (naics_exists) {
+                    $("#naics-code").select2({placeholder:'Select a NAICS code', width: '380px'}).val(naics).trigger('change');
+                }
+                else {
+                    $("#naics-code").select2({placeholder:'Select a NAICS code', width: '380px'}).val(first_naics).trigger('change');
+                }
             }
         );
     },
