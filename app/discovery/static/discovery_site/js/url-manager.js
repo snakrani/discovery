@@ -38,7 +38,9 @@ var URLManager = {
         }
 
         for (k in queryObject) {
-            qs += k + '=' + queryObject[k] + '&';
+            if (queryObject[k] && typeof queryObject[k] != undefined) {
+                qs += k + '=' + queryObject[k] + '&';
+            }
         }
 
         return qs;
@@ -71,7 +73,9 @@ var URLManager = {
         var url = document.location.href;
         var pathArray = url.split('/');
 
-        pathArray.pop();
+        if (url.indexOf("/?") == -1) {
+            pathArray.pop();
+        }
         pathArray.splice(5, 0, "csv");
 
         $("#csv_link").attr("href", pathArray.join('/'));
