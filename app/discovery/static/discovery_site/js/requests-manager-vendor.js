@@ -12,6 +12,8 @@ RequestsManager.sortClassMap = function() {
 };
 
 RequestsManager.initializers.vendor = function() {
+    Events.subscribe('poolUpdated', this.refreshVendor.bind(RequestsManager));
+
     Events.subscribe('vendorInfoLoaded', this.refreshContracts.bind(RequestsManager));
     Events.subscribe('contractsChanged', this.refreshContracts.bind(RequestsManager));
 };
@@ -51,6 +53,12 @@ RequestsManager.load = function() {
     RequestsManager.loadVendor(function(duns, results) {
         Events.publish('dataLoaded', results);
         Events.publish('vendorInfoLoaded', {'listType': listType});
+    });
+};
+
+RequestsManager.refreshVendor = function(pool) {
+    RequestsManager.loadVendor(function(duns, results) {
+        Events.publish('vendorPoolLoaded', results, pool);
     });
 };
 
