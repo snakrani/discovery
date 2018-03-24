@@ -160,10 +160,6 @@ var InputHandler = {
         return this.naicsCode;
     },
 
-    getPool: function() {
-        return this.pool;
-    },
-
     getSetasides: function() {
         /* returns array of setaside ids that are checked */
         var setasides = [];
