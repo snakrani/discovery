@@ -15,6 +15,13 @@ var RequestsManager = {
         }
     },
 
+    getPageCount: function() {
+        if (URLManager.getParameterByName('test')) {
+            return 5;
+        }
+        return 100;
+    },
+
     getAPIRequest: function(url, params, callback) {
         url = APIHOST + url;
 
@@ -58,6 +65,11 @@ var RequestsManager = {
         if (vehicle !== null) {
             queryData['vehicle'] = vehicle;
         }
+
+        if (URLManager.getParameterByName('test')) {
+            queryData['test'] = 'true';
+        }
+
         return queryData;
     },
 
