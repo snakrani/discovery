@@ -1,6 +1,4 @@
 
-RequestsManager.contractsPageCount = 100;
-
 RequestsManager.sortClassMap = function() {
     return {
         'h_date_signed': 'date_signed',
@@ -30,7 +28,7 @@ RequestsManager.loadVendor = function(callback) {
 RequestsManager.loadContracts = function(data, callback) {
     var duns = URLManager.getDUNS();
     var url = "/api/contracts";
-    var queryData = $.extend(data, {'vendor__duns': duns, 'count': RequestsManager.contractsPageCount});
+    var queryData = $.extend(data, {'vendor__duns': duns, 'count': this.getPageCount()});
 
     queryData['NAICS'] = queryData['naics'];
     delete queryData['naics'];
@@ -81,7 +79,7 @@ RequestsManager.refreshContracts = function(data) {
     }
 
     RequestsManager.loadContracts(data, function(queryData, response) {
-        Events.publish('contractDataLoaded', response, data['listType'], data['page'], RequestsManager.contractsPageCount);
+        Events.publish('contractDataLoaded', response, data['listType'], data['page'], queryData['count']);
     });
 };
 
