@@ -189,7 +189,7 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
     }
     
     def get_queryset(self):
-        naics_param_name = 'pools__pool__naics__code'
+        naics_param_name = 'contract_naics'
         
         queryset = self.queryset.annotate(
             annual_revenue=Subquery(
