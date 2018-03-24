@@ -1,12 +1,9 @@
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
-'use strict';
 
 var LayoutManager = {
     initializers: {},
 
     init: function() {
         Events.subscribe('dataLoaded', this.render.bind(LayoutManager));
-        //Events.subscribe('contentChanged', this.updateSAM.bind(LayoutManager));
         Events.subscribe('poolUpdated', this.updatePoolInfo);
         Events.subscribe('contentChanged', this.updateResultsInfo);
         Events.subscribe('vehicleChanged', this.enableNaics);
@@ -20,13 +17,6 @@ var LayoutManager = {
         $("div#search span.select_text").css('color', 'white');
         $("div#search select").attr("disabled", false);
     },
-
-    //updateSAM: function(results) {
-    //    if ($.isEmptyObject(results) === false) {
-    //        var dateObj = this.createDate(results['lastUpdated']);
-    //        $("#sam_load").text("SAM data updated: " + (dateObj.getMonth()) + '/' + dateObj.getDate() + '/' + dateObj.getFullYear().toString().substring(2));
-    //    }
-    //},
 
     updateResultsInfo: function(results) {
         var totalResults, totalPools, resultsStr;
