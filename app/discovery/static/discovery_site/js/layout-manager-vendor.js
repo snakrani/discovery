@@ -120,11 +120,10 @@ LayoutManager.renderButtonAndCSV = function(listType){
     var a = $("a#csv_link");
     var csv_link = a.attr('href');
 
-    if (csv_link.indexOf('naics-code') > -1) {
-        //remove naics code if csv link has it, if not add it back in
+    if (listType == 'all') {
         a.attr('href', csv_link.substring(0, csv_link.indexOf("?")));
     } else {
-        a.attr('href', csv_link + "?naics-code=" + $("#vendor_contract_history_title_container").find("div").first().text().replace("NAICS", '').trim());
+        a.attr('href', csv_link + URLManager.getQueryString());
     }
 };
 
