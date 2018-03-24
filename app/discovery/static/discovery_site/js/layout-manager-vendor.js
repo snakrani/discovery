@@ -21,8 +21,8 @@ LayoutManager.render = function(results) {
     if (results.sam_exclusion == true) {
         $('.debarred_status').show();
     }
-    $('.duns_number').html(results.duns ? results.duns : ' ');
-    $('.cage_code').html(results.cage ? results.cage : ' ');
+    $('.duns_number').html(results.duns);
+    $('.cage_code').html(results.cage);
     $('.number_of_employees').html(results.number_of_employees ? this.numberWithCommas(results.number_of_employees) : 'N/A');
     $('.annual_revenue').html(results.annual_revenue ? '$' + this.numberWithCommas(results.annual_revenue) : 'N/A');
 
@@ -42,15 +42,15 @@ LayoutManager.render = function(results) {
 
     //contact info
     $('.vendor_address1').html(results.sam_location ? results.sam_location.address : ' ');
-    $('.vendor_address2').html(results.sam_location ? results.sam_location.citystate : ' ');
+    $('.vendor_address2').html(results.sam_location ? results.sam_location.city + ', ' + results.sam_location.state + ' ' + results.sam_location.zipcode : ' ');
 
-    if (results.pms.length > 0) {
-      $('.vendor_poc_name').html(results.pms[0].name);
-      $('.vendor_poc_phone').html(results.pms[0].phones.length ? results.pms[0].phones.join(',') : ' ');
+    if (results.pools[0].pms.length > 0) {
+      $('.vendor_poc_name').html(results.pools[0].pms[0].name);
+      $('.vendor_poc_phone').html(results.pools[0].pms[0].phone.length ? results.pools[0].pms[0].phone.join(',') : ' ');
 
       var mailto = [];
-      for (var i = 0; i < results.pms[0].emails.length; i++) {
-        email = results.pms[0].emails[i];
+      for (var i = 0; i < results.pools[0].pms[0].email.length; i++) {
+        email = results.pools[0].pms[0].email[i];
         mailto.push('<a href="mailto:' + email + '">' + email + '</a>');
       }
       $('.vendor_poc_email').html(mailto.join(','));
@@ -78,7 +78,7 @@ LayoutManager.render = function(results) {
 
 LayoutManager.showSbBadge = function(pools) {
     for (var i = 0; i < pools.length; i++) {
-        if (pools[i].id.indexOf("_SB") != -1) {
+        if (pools[i].pool.id.indexOf("_SB") != -1) {
             return true;
         }
     }
