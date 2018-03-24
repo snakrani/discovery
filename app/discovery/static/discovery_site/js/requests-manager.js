@@ -26,11 +26,11 @@ var RequestsManager = {
         url = APIHOST + url;
 
         var responder = function(data) {
-          console.log(" > results: %s %o -> %o", url, params, data);
+          //console.log(" > results: %s %o -> %o", url, params, data);
           return callback(data);
         };
 
-        console.log("URL: %s %o", url, params);
+        //console.log("URL: %s %o", url, params);
         return $.ajax({
               url: url,
               dataType: 'json',
@@ -51,18 +51,18 @@ var RequestsManager = {
         var queryData = {};
         var pool = this.getPool();
 
-        if (typeof naicsCode !== 'undefined') {
+        if (naicsCode && typeof naicsCode !== 'undefined') {
             queryData['naics'] = naicsCode;
         }
 
         if (setasides.length > 0) {
             queryData["setasides"] = setasides.join(',');
         }
-        if (pool !== null) {
+        if (pool && typeof pool != undefined) {
             queryData['pool'] = pool[0];
             queryData['vehicle'] = pool[1];
         }
-        if (vehicle !== null) {
+        if (vehicle && typeof vehicle != undefined) {
             queryData['vehicle'] = vehicle;
         }
 
@@ -72,7 +72,6 @@ var RequestsManager = {
 
         return queryData;
     },
-
 
     currentSortParams: function() {
         var data = {};
@@ -87,7 +86,6 @@ var RequestsManager = {
         return data;
     },
 
-
     getPool: function() {
         var poolInfo = URLManager.getPoolInfo();
 
@@ -98,5 +96,4 @@ var RequestsManager = {
             return null;
         }
     }
-
 };
