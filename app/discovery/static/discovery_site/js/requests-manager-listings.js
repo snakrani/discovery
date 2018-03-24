@@ -1,6 +1,4 @@
 
-RequestsManager.vendorsPageCount = 25;
-
 RequestsManager.sortClassMap = function() {
     return {
         'h_vendor_name': 'name',
@@ -17,10 +15,11 @@ RequestsManager.loadVendors = function(data, callback) {
     var url = "/api/vendors/";
 
     var requestVars = this.buildRequestQuery();
-    var queryData = $.extend(data, {'count': RequestsManager.vendorsPageCount});
+    var queryData = $.extend(data, {'count': this.getPageCount()});
     var filters = [];
 
     if (requestVars['naics'] !== "") {
+        queryData['contract_naics'] = requestVars['naics'];
         filters.push('(pools__pool__naics__code' + '=' + requestVars['naics'] + ')');
 
         if ('vehicle' in requestVars) {
@@ -52,6 +51,6 @@ RequestsManager.load = function() {
 
 RequestsManager.refreshVendors = function(data) {
     RequestsManager.loadVendors(data, function(queryData, response) {
-        Events.publish('vendorDataLoaded', response, data['page'], RequestsManager.vendorsPageCount);
+        Events.publish('vendorDataLoaded', response, data['page'], queryData['count']);
     });
 };
