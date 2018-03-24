@@ -16,7 +16,7 @@ class PoolTest(case.APITestCase, metaclass = case.MetaAPISchema):
         'ordering': 'id',
         'pagination': {
             '@no_args': {},
-            '!page': {'page': 5},
+            '!page': {'page': 15},
             '@count': {'count': 3},
             '@mixed': {'page': 2, 'count': 3}
         },

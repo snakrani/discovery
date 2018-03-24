@@ -16,7 +16,7 @@ class NaicsTest(case.APITestCase, metaclass = case.MetaAPISchema):
         'ordering': ('code', 'root_code', 'description'),
         'pagination': {
             '@no_args': {},
-            '!page': {'page': 10},
+            '!page': {'page': 15},
             '@count': {'count': 5},
             '@mixed': {'page': 4, 'count': 10}
         },

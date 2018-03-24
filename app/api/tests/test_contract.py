@@ -8,7 +8,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
     schema = {
         'object': {
             '&1': ('piid', 'equal', 'DAAE0799CL001'),
-            '&162': ('piid', 'equal', 'SP470310D0002_0044'),
+            '&162': ('piid', 'equal', 'GS00Q14OADS128_19AQMM18F0838'),
             '&828': ('name', 'equal', 'USZA2202D0015_0194'),
             '#345C': (),
             '#ABCDEFG': ()
@@ -32,11 +32,11 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
         'pagination': {
             '@no_args': {},
             '@page': {'page': 3},
-            '@count': {'count': 50},
-            '@mixed': {'page': 2, 'count': 50}
+            '@count': {'count': 10},
+            '@mixed': {'page': 2, 'count': 10}
         },
         'search': {
-            '*search1': ('piid', 'iequal', 'NRC0807418'),
+            '*search1': ('piid', 'iequal', 'F4162401D9006_0019'),
             '@search2': ('agency_name', 'imatches', 'NUCLEAR REGULATORY COMMISSION')
         },
         'fields': {
@@ -50,9 +50,9 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@in': (2, 3, 5)
             },
             'piid': {
-                '*exact': 'NRC0804414_02',
-                '*iexact': 'nrc0804414_02',
-                '@in': ('NRC0804414_02', 'NRC3810699', 'SP470310D0002_0021'),
+                '*exact': 'W31P4Q09A0016_0003',
+                '*iexact': 'w31p4Q09a0016_0003',
+                '@in': ('N0001412C0203', 'W912DY10A0005_0002', 'EPW13024_0009'),
                 '@contains': 'D0002',
                 '@icontains': 'd0002',
                 '@startswith': 'FA',
@@ -107,7 +107,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '^(u0|ad)'
             },
             'date_signed': {
-                '@date': '2007-07-09',
+                '@date': '2016-12-29',
                 '@year': '2007',
                 '@month': '7',
                 '@day': '9',
@@ -116,7 +116,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@quarter': '2'
             },
             'completion_date': {
-                '@date': '2012-05-10',
+                '@date': '2010-10-08',
                 '@year': '2012',
                 '@month': '5',
                 '@day': '10',
@@ -131,7 +131,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@gt': 100000, 
                 '@gte': 200000,
                 '@range': (50000, 500000),
-                '@in': (-80000, 40640, 10250)
+                '@in': (162340, -43000, 416700)
             },
             'point_of_contact': {
                 '@exact': 'PADDS.W31P4Q@KO.ARMY.MIL',
@@ -147,11 +147,11 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '\.[a-z]+\d+$'
             },
             'vendor_phone': {
-                '@exact': '918-583-9900',
-                '@iexact': '918-583-9900',
-                '@in': ("918-583-9900", "301-948-4232", "619-298-0888"),
-                '@contains': '-948-',
-                '@icontains': '-948-',
+                '@exact': '702-816-5088',
+                '@iexact': '702-816-5088',
+                '@in': ("702-816-5088", "571-482-2501", "404-315-1940"),
+                '@contains': '-262-',
+                '@icontains': '-262-',
                 '@startswith': '505',
                 '@istartswith': '703',
                 '@endswith': '7637',
@@ -186,12 +186,12 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@exact': 'Completed',
                 '@iexact': 'currEnt',
                 '@in': ("Current", "Completed", "Close out"),
-                '@contains': 'Terminated',
-                '@icontains': 'terminated',
+                '@contains': 'plete',
+                '@icontains': 'PLETE',
                 '@startswith': 'C',
                 '@istartswith': 'c',
-                '@endswith': 'Cause',
-                '@iendswith': 'cause',
+                '@endswith': 'ent',
+                '@iendswith': 'ED',
                 '@regex': '(Current|Completed)',
                 '@iregex': '(current|completed)'
             },
@@ -224,10 +224,10 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@in': ("United States","United Kingdom"),
                 '@contains': 'United',
                 '@icontains': 'united',
-                '@startswith': 'Ant',
-                '@istartswith': 'ant',
-                '@endswith': 'non',
-                '@iendswith': 'NON',
+                '@startswith': 'Ha',
+                '@istartswith': 'ha',
+                '@endswith': 'dom',
+                '@iendswith': 'DOM',
                 '@regex': '^United (States|Kingdom)$',
                 '@iregex': '^united (states|kingdom)$'
             },
@@ -253,26 +253,26 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@exact': '7000 Muirkirk Meadows Dr',
                 '@iexact': '7000 muirkirk meadows dr',
                 '@in': ("1002 Explorer Blvd", "8600 Boeing Dr"),
-                '@contains': 'Northbrook',
+                '@contains': 'South',
                 '@icontains': 'dEErfield pOnd',
-                '@startswith': '7500',
-                '@istartswith': '360a',
+                '@startswith': '6710',
+                '@istartswith': '6710 ro',
                 '@endswith': 'Ave',
                 '@iendswith': 'ave',
                 '@regex': 'Ste \d+$',
                 '@iregex': 'ste \d+$'
             },
             'vendor_location__city': {
-                '@exact': 'Lexington',
-                '@iexact': 'vienna',
-                '@in': ("Lanham", "Frederick", "Huntsville"),
+                '@exact': 'Carlisle',
+                '@iexact': 'arlington',
+                '@in': ("Atlanta", "Reston", "Northville"),
                 '@contains': 'vill',
-                '@icontains': 'of',
+                '@icontains': 'on',
                 '@startswith': 'Mc',
                 '@istartswith': 'mc',
-                '@endswith': 'polis',
-                '@iendswith': 'POLIS',
-                '@regex': 'City',
+                '@endswith': 'ville',
+                '@iendswith': 'DA',
+                '@regex': 'Springs',
                 '@iregex': 'TOWN'
             },
             'vendor_location__state': {
@@ -299,31 +299,31 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@in': ("07", "04", "08", "01")
             },      
             'vendor__name': {
-                '@exact': 'Zero Waste Solutions',
-                '@iexact': 'urs federal services, inc.',
-                '@in': ('Suntiva', 'Trademasters', 'PowerTrain'),
+                '@exact': 'Dynamics Research Corporation',
+                '@iexact': 'native energy & technology',
+                '@in': ('Engility Corporation', 'CBRE', 'PowerTrain'),
                 '@contains': 'Research',
                 '@icontains': 'technologies',
                 '@startswith': 'M',
-                '@istartswith': 'global',
+                '@istartswith': 'applied',
                 '@endswith': 'LLC',
                 '@iendswith': 'llc',
                 '@regex': '\d+',
                 '@iregex': 'inc\.?$'
             },
             'vendor__duns': {
-                '*exact': '198024809',
+                '@exact': '097967608',
                 '@lt': '193460839',
                 '@lte': '193460839', 
                 '@gt': '193460839', 
                 '@gte': '193460839',
                 '@range': '074108176,196004394',
-                '@in': ('114896066', '555498187', '790984186')
+                '@in': ('055124077', '838295400', '003184462')
             },
             'vendor__cage': {
-                '@exact': '4WPK2',
-                '@iexact': '4WPK2',
-                '@in': ('1RUU6', '4ZSH3', '4YAG9')
+                '@exact': '3A3Q8',
+                '@iexact': '3A3Q8',
+                '@in': ('4L767', '4SJK4', '4U825')
             },
             'vendor__sam_status': {
                 '@exact': 'ACTIVE',
@@ -369,26 +369,26 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@exact': '7000 Muirkirk Meadows Dr',
                 '@iexact': '7000 muirkirk meadows dr',
                 '@in': ("1002 Explorer Blvd", "8600 Boeing Dr"),
-                '@contains': 'Northbrook',
+                '@contains': 'South',
                 '@icontains': 'dEErfield pOnd',
                 '@startswith': '7500',
-                '@istartswith': '360a',
+                '@istartswith': '6710 ro',
                 '@endswith': 'Ave',
                 '@iendswith': 'ave',
                 '@regex': 'Ste \d+$',
                 '@iregex': 'ste \d+$'
             },
             'vendor__sam_location__city': {
-                '@exact': 'Lexington',
-                '@iexact': 'vienna',
-                '@in': ("Lanham", "Frederick", "Huntsville"),
+                '@exact': 'Carlisle',
+                '@iexact': 'arlington',
+                '@in': ("Atlanta", "Reston", "Northville"),
                 '@contains': 'vill',
-                '@icontains': 'of',
+                '@icontains': 'on',
                 '@startswith': 'Mc',
                 '@istartswith': 'mc',
-                '@endswith': 'polis',
-                '@iendswith': 'POLIS',
-                '@regex': 'City',
+                '@endswith': 'ville',
+                '@iendswith': 'DA',
+                '@regex': 'Springs',
                 '@iregex': 'TOWN'
             },
             'vendor__sam_location__state': {
@@ -414,10 +414,15 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iexact': '07',
                 '@in': ("07", "04", "08", "01")
             },
+            'vendor__pools__pool__id': {
+                '@exact': 'BMO_SB_10',
+                '@iexact': 'hcaTs_Sb_2',
+                '@in': ("BMO_8", "OASIS_4", "HCATS_SB_1")
+            },
             'vendor__pools__piid': {
-                '@exact': 'GS00Q14OADS121',
-                '@iexact': 'gs00q14Oads121',
-                '@in': ("GS00Q14OADS121", "GS00Q14OADS608"),
+                '@exact': 'GS00Q14OADU208',
+                '@iexact': 'gs00Q14Oadu208',
+                '@in': ("GS00Q14OADU343", "GS02Q16DCR0086"),
                 '@contains': 'OAD',
                 '@icontains': 'Oad',
                 '@startswith': 'GS02',
@@ -426,11 +431,6 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iendswith': 's102',
                 '@regex': '^GS\d+',
                 '@iregex': '^(gs06|gs00)'
-            },
-            'vendor__pools__pool__id': {
-                '@exact': 'BMO_SB_10',
-                '@iexact': 'hcaTs_Sb_2',
-                '@in': ("BMO_8", "OASIS_4", "HCATS_SB_1")
             },
             'vendor__pools__pool__name': {
                 '@exact': 'Elevator Maintenance',
@@ -569,8 +569,8 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@icontains': 'taylor',
                 '@startswith': 'Ben',
                 '@istartswith': 'ben',
-                '@endswith': 'Hughes',
-                '@iendswith': 'hughes',
+                '@endswith': 'Scott',
+                '@iendswith': 'scott',
                 '@regex': '^[A-Za-z]{4}\s+',
                 '@iregex': '^da(n|na)'
             },
@@ -578,8 +578,8 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@exact': '703-821-0678',
                 '@iexact': '703-821-0678',
                 '@in': ("703-821-0678", "571-262-3144", "937-912-6102"),
-                '@contains': '-426-',
-                '@icontains': '-426-',
+                '@contains': '-882-',
+                '@icontains': '-882-',
                 '@startswith': '757',
                 '@istartswith': '757',
                 '@endswith': '6551',
@@ -601,22 +601,22 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '\.(com|net)$'
             },
             'vendor__pools__pms__name': {
-                '@exact': 'Phil Sahady',
-                '@iexact': 'phil sahady',
-                '@in': ("Phil Sahady", "Charles A. Colon,  III"),
+                '@exact': 'Gary Wittlinger',
+                '@iexact': 'gary wittlinger',
+                '@in': ("R. Ken Trammell", "Jeffrey Chesko", "Bob"),
                 '@contains': 'Glass',
                 '@icontains': 'glass',
                 '@startswith': 'John',
                 '@istartswith': 'john',
-                '@endswith': 'Carroll',
-                '@iendswith': 'carroll',
+                '@endswith': 'Gendron',
+                '@iendswith': 'gendron',
                 '@regex': '^[A-Za-z]{4}\s+',
                 '@iregex': '^dr\.?'
             },
             'vendor__pools__pms__phone': {
-                '@exact': '703-642-2380',
-                '@iexact': '703-642-2380',
-                '@in': ("703-642-2380", "937-912-6102", "703-435-2260"),
+                '@exact': '240-538-8357',
+                '@iexact': '937-912-6102',
+                '@in': ("240-538-8357", "937-912-6102", "256-882-6229x102"),
                 '@contains': '-824-',
                 '@icontains': '-824-',
                 '@startswith': '719',
@@ -627,18 +627,18 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '(937|703)-\d{3}'
             },
             'vendor__pools__pms__email': {
-                '@exact': 'OASIS@niksoft.com',
-                '@iexact': 'oasis@niksoft.com',
-                '@in': ("OASIS@niksoft.com", "OASISSB@integrity-apps.com", "hcats@arcaspicio.com"),
-                '@contains': 'apps',
-                '@icontains': 'APPS',
+                '@exact': 'ARA_OASIS_SB@ara.com',
+                '@iexact': 'ara_oasis_sb@ARA.com',
+                '@in': ("OASIS@avioninc.com", "contracts@cssiinc.com", "chauhan@battelle.org"),
+                '@contains': 'aeg',
+                '@icontains': 'AEG',
                 '@startswith': 'hcats',
                 '@istartswith': 'HcAtS',
                 '@endswith': 'com',
                 '@iendswith': 'cOM',
                 '@regex': '\d+',
                 '@iregex': '\.(com|net)$'
-            }                
+            }
         }
     }
     

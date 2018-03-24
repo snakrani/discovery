@@ -2,13 +2,13 @@ from test import cases as case
 from test import fixtures as data
 
 
-class VendorListTest(case.APITestCase, metaclass = case.MetaAPISchema):
+class VendorTest(case.APITestCase, metaclass = case.MetaAPISchema):
     
     fixtures = data.get_vendor_fixtures()
     schema = {
             'object': {
                 '&007901598': ('name', 'equal', 'Battelle Memorial Institute'),
-                '&132220604': ('name', 'equal', 'Censeo Consulting Group'),
+                '&133239397': ('name', 'equal', 'Miracle Systems, LLC'),
                 '&001014182': ('name', 'equal', 'Dynamics Research Corporation'),
                 '#345': (),
                 '#ABCDEFG': ()
@@ -29,41 +29,41 @@ class VendorListTest(case.APITestCase, metaclass = case.MetaAPISchema):
             'pagination': {
                 '@no_args': {},
                 '@page': {'page': 3},
-                '@count': {'count': 50},
-                '@mixed': {'page': 2, 'count': 50}
+                '@count': {'count': 10},
+                '@mixed': {'page': 2, 'count': 10}
             },
             'search': {
                 '@search1': ('name', 'matches', 'Services'),
-                '*search2': ('duns', 'equal', '181423372'),
+                '*search2': ('duns', 'equal', '830333824'),
                 '*search3': ('cage', 'equal', '3K773')
             },
             'fields': {
                 'name': {
-                    '*exact': 'Zero Waste Solutions',
-                    '@iexact': 'urs federal services, inc.',
-                    '@in': ('Suntiva', 'Trademasters', 'PowerTrain'),
+                    '*exact': 'Dynamics Research Corporation',
+                    '@iexact': 'native energy & technology',
+                    '@in': ('Engility Corporation', 'CBRE', 'PowerTrain'),
                     '@contains': 'Research',
                     '@icontains': 'technologies',
                     '@startswith': 'M',
-                    '@istartswith': 'global',
+                    '@istartswith': 'applied',
                     '@endswith': 'LLC',
                     '@iendswith': 'llc',
                     '@regex': '\d+',
                     '@iregex': 'inc\.?$'
                 },
                 'duns': {
-                    '*exact': '198024809',
+                    '*exact': '097967608',
                     '@lt': '193460839',
                     '@lte': '193460839', 
                     '@gt': '193460839', 
                     '@gte': '193460839',
                     '@range': '074108176,196004394',
-                    '@in': ('114896066', '555498187', '790984186')
+                    '@in': ('055124077', '838295400', '003184462')
                 },
                 'cage': {
-                    '*exact': '4WPK2',
-                    '*iexact': '4WPK2',
-                    '@in': ('1RUU6', '4ZSH3', '4YAG9')
+                    '*exact': '3A3Q8',
+                    '*iexact': '3A3Q8',
+                    '@in': ('4L767', '4SJK4', '4U825')
                 },
                 'sam_status': {
                     '@exact': 'ACTIVE',
@@ -109,26 +109,26 @@ class VendorListTest(case.APITestCase, metaclass = case.MetaAPISchema):
                     '@exact': '7000 Muirkirk Meadows Dr',
                     '@iexact': '7000 muirkirk meadows dr',
                     '@in': ("1002 Explorer Blvd", "8600 Boeing Dr"),
-                    '@contains': 'Northbrook',
+                    '@contains': 'South',
                     '@icontains': 'dEErfield pOnd',
                     '@startswith': '7500',
-                    '@istartswith': '360a',
+                    '@istartswith': '6710 ro',
                     '@endswith': 'Ave',
                     '@iendswith': 'ave',
                     '@regex': 'Ste \d+$',
                     '@iregex': 'ste \d+$'
                 },
                 'sam_location__city': {
-                    '@exact': 'Lexington',
-                    '@iexact': 'vienna',
-                    '@in': ("Lanham", "Frederick", "Huntsville"),
+                    '@exact': 'Carlisle',
+                    '@iexact': 'arlington',
+                    '@in': ("Atlanta", "Reston", "Northville"),
                     '@contains': 'vill',
-                    '@icontains': 'of',
+                    '@icontains': 'on',
                     '@startswith': 'Mc',
                     '@istartswith': 'mc',
-                    '@endswith': 'polis',
-                    '@iendswith': 'POLIS',
-                    '@regex': 'City',
+                    '@endswith': 'ville',
+                    '@iendswith': 'DA',
+                    '@regex': 'Springs',
                     '@iregex': 'TOWN'
                 },
                 'sam_location__state': {
@@ -160,9 +160,9 @@ class VendorListTest(case.APITestCase, metaclass = case.MetaAPISchema):
                     '@in': ("BMO_8", "OASIS_4", "HCATS_SB_1")
                 },
                 'pools__piid': {
-                    '@exact': 'GS00Q14OADS121',
-                    '@iexact': 'gs00q14Oads121',
-                    '@in': ("GS00Q14OADS121", "GS00Q14OADS608"),
+                    '@exact': 'GS00Q14OADU208',
+                    '@iexact': 'gs00Q14Oadu208',
+                    '@in': ("GS00Q14OADU343", "GS02Q16DCR0086"),
                     '@contains': 'OAD',
                     '@icontains': 'Oad',
                     '@startswith': 'GS02',
@@ -309,8 +309,8 @@ class VendorListTest(case.APITestCase, metaclass = case.MetaAPISchema):
                     '@icontains': 'taylor',
                     '@startswith': 'Ben',
                     '@istartswith': 'ben',
-                    '@endswith': 'Hughes',
-                    '@iendswith': 'hughes',
+                    '@endswith': 'Scott',
+                    '@iendswith': 'scott',
                     '@regex': '^[A-Za-z]{4}\s+',
                     '@iregex': '^da(n|na)'
                 },
@@ -318,8 +318,8 @@ class VendorListTest(case.APITestCase, metaclass = case.MetaAPISchema):
                     '@exact': '703-821-0678',
                     '@iexact': '703-821-0678',
                     '@in': ("703-821-0678", "571-262-3144", "937-912-6102"),
-                    '@contains': '-426-',
-                    '@icontains': '-426-',
+                    '@contains': '-882-',
+                    '@icontains': '-882-',
                     '@startswith': '757',
                     '@istartswith': '757',
                     '@endswith': '6551',
@@ -341,22 +341,22 @@ class VendorListTest(case.APITestCase, metaclass = case.MetaAPISchema):
                     '@iregex': '\.(com|net)$'
                 },
                 'pools__pms__name': {
-                    '@exact': 'Phil Sahady',
-                    '@iexact': 'phil sahady',
-                    '@in': ("Phil Sahady", "Charles A. Colon,  III"),
+                    '@exact': 'Gary Wittlinger',
+                    '@iexact': 'gary wittlinger',
+                    '@in': ("R. Ken Trammell", "Jeffrey Chesko", "Bob"),
                     '@contains': 'Glass',
                     '@icontains': 'glass',
                     '@startswith': 'John',
                     '@istartswith': 'john',
-                    '@endswith': 'Carroll',
-                    '@iendswith': 'carroll',
+                    '@endswith': 'Gendron',
+                    '@iendswith': 'gendron',
                     '@regex': '^[A-Za-z]{4}\s+',
                     '@iregex': '^dr\.?'
                 },
                 'pools__pms__phone': {
-                    '@exact': '703-642-2380',
-                    '@iexact': '703-642-2380',
-                    '@in': ("703-642-2380", "937-912-6102", "703-435-2260"),
+                    '@exact': '240-538-8357',
+                    '@iexact': '937-912-6102',
+                    '@in': ("240-538-8357", "937-912-6102", "256-882-6229x102"),
                     '@contains': '-824-',
                     '@icontains': '-824-',
                     '@startswith': '719',
@@ -367,11 +367,11 @@ class VendorListTest(case.APITestCase, metaclass = case.MetaAPISchema):
                     '@iregex': '(937|703)-\d{3}'
                 },
                 'pools__pms__email': {
-                    '@exact': 'OASIS@niksoft.com',
-                    '@iexact': 'oasis@niksoft.com',
-                    '@in': ("OASIS@niksoft.com", "OASISSB@integrity-apps.com", "hcats@arcaspicio.com"),
-                    '@contains': 'apps',
-                    '@icontains': 'APPS',
+                    '@exact': 'ARA_OASIS_SB@ara.com',
+                    '@iexact': 'ara_oasis_sb@ARA.com',
+                    '@in': ("OASIS@avioninc.com", "contracts@cssiinc.com", "chauhan@battelle.org"),
+                    '@contains': 'aeg',
+                    '@icontains': 'AEG',
                     '@startswith': 'hcats',
                     '@istartswith': 'HcAtS',
                     '@endswith': 'com',

@@ -16,7 +16,7 @@ class ZoneTest(case.APITestCase, metaclass = case.MetaAPISchema):
         'ordering': 'id',
         'pagination': {
             '@no_args': {},
-            '!page': {'page': 2},
+            '!page': {'page': 3},
             '@count': {'count': 2},
             '@mixed': {'page': 2, 'count': 2}
         },

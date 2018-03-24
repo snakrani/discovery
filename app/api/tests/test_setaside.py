@@ -2,7 +2,7 @@ from test import cases as case
 from test import fixtures as data
 
 
-class SetasideTest(case.APITestCase, metaclass = case.MetaAPISchema):
+class SetAsideTest(case.APITestCase, metaclass = case.MetaAPISchema):
     
     fixtures = data.get_category_fixtures()
     schema = {
@@ -16,7 +16,7 @@ class SetasideTest(case.APITestCase, metaclass = case.MetaAPISchema):
         'ordering': ('code', 'name', 'description', 'far_order'),
         'pagination': {
             '@no_args': {},
-            '!page': {'page': 2},
+            '!page': {'page': 3},
             '@count': {'count': 2},
             '@mixed': {'page': 2, 'count': 2}
         },
