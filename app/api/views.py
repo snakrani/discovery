@@ -29,11 +29,17 @@ class DiscoveryReadOnlyModelViewSet(
     ReadOnlyModelViewSet
 ):
     def list(self, request, *args, **kwargs):
-        system.CachePage.objects.get_or_create(url=request.build_absolute_uri())
+        page, created = system.CachePage.objects.get_or_create(url=request.build_absolute_uri())
+        page.count += 1
+        page.save()
+        
         return super(DiscoveryReadOnlyModelViewSet, self).list(request, *args, **kwargs)
         
     def retrieve(self, request, *args, **kwargs):
-        system.CachePage.objects.get_or_create(url=request.build_absolute_uri())
+        page, created = system.CachePage.objects.get_or_create(url=request.build_absolute_uri())
+        page.count += 1
+        page.save()
+        
         return super(DiscoveryReadOnlyModelViewSet, self).list(request, *args, **kwargs)
     
 
