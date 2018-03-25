@@ -1,7 +1,7 @@
 
 LayoutManager.initializers.vendor = function() {
-    Events.subscribe('vendorPoolLoaded', this.renderVendor.bind(LayoutManager));
-    Events.subscribe('contractDataLoaded', this.renderTable.bind(LayoutManager));
+    EventManager.subscribe('vendorPoolLoaded', this.renderVendor.bind(LayoutManager));
+    EventManager.subscribe('contractDataLoaded', this.renderTable.bind(LayoutManager));
 };
 
 LayoutManager.render = function(results) {
@@ -220,7 +220,7 @@ LayoutManager.renderPager = function(listType, results, pageNumber, itemsPerPage
                     contract_data['page'] = pageNumber;
                     contract_data['listType'] = listType;
 
-                    Events.publish("contractsChanged", contract_data);
+                    EventManager.publish("contractsChanged", contract_data);
                 }
             });
         });

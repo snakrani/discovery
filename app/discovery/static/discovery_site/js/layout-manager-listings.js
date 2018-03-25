@@ -1,36 +1,23 @@
 
 LayoutManager.initializers.listings = function() {
-    Events.subscribe('vendorDataLoaded', this.renderTable.bind(LayoutManager));
+    EventManager.subscribe('vendorDataLoaded', this.renderTable.bind(LayoutManager));
 };
 
 LayoutManager.render = function(results) {
-    // this is turning into something of a router
-    // should be refactored [TS]
-
     if (this.getQSByName(document.location, 'vehicle').indexOf("_sb") == -1) {
-        //disable filters for 'oasis unrestricted' results
         this.disableFilters();
     } else {
         this.enableFilters();
     }
 
     if ($.isEmptyObject(results)) {
-        //clear out content
         $('#pool_vendors').find('tr').not(':first').remove();
-        Events.publish('contentChanged', results);
+        EventManager.publish('contentChanged', results);
     }
     else {
-        // if this is a vendor list page and the page has already been reloaded
-        if (window.location.pathname == "/results"
-            || URLManager.getParameterByName('naics-code') === InputHandler.getNAICSCode()) {
-            Events.publish('vendorDataLoaded', results, 1, RequestsManager.getPageCount());
-        }
-        else {
-            // if this is a vendor list page and we need to reload to get the template
-            Events.publish('goToPoolPage', results);
-        }
+        this.renderTable(results, 1, RequestsManager.getPageCount());
     }
-    //update document title
+
     $(document).prop('title', "Results - " + URLManager.title);
 };
 
@@ -56,7 +43,7 @@ LayoutManager.renderTable = function(results, pageNumber, itemsPerPage) {
 
     LayoutManager.renderPager(results, pageNumber, itemsPerPage);
 
-    Events.publish('contentChanged', results);
+    EventManager.publish('contentChanged', results);
 };
 
 LayoutManager.renderRow = function(vendor, qs, i) {
@@ -130,7 +117,7 @@ LayoutManager.renderPager = function(results, pageNumber, itemsPerPage) {
 
                     vendor_data['page'] = pageNumber;
 
-                    Events.publish("vendorsChanged", vendor_data);
+                    EventManager.publish("vendorsChanged", vendor_data);
                 }
             });
         });
