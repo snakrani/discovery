@@ -1,4 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
+from django.core.cache import cache
 
 from discovery import models as system
 
@@ -28,11 +29,11 @@ class Command(BaseCommand):
         print("-------BEGIN POPULATE_CACHE PROCESS-------")
         
         try:
-            for page in system.CachePage.objects.all():
-                url = page.url
-                
-                print("> {}".format(url))
-                urllib.request.urlopen(url).read()
+            cache.clear()
+            
+            for page in system.CachePage.objects.all().order_by('-count'):
+                print("[ {} ] - {}".format(page.count, page.url))
+                urllib.request.urlopen(page.url).read()
 
         except Exception as e:
             display_error(e)
