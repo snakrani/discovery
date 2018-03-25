@@ -13,6 +13,7 @@ from rest_framework_filters.backends import RestFrameworkFilterBackend
 
 from discovery import query
 from discovery import metadata
+from discovery import models as system
 from categories import models as categories
 from vendors import models as vendors
 from contracts import models as contracts
@@ -26,8 +27,21 @@ class DiscoveryReadOnlyModelViewSet(
     mixins.PaginationViewSetMixin,
     mixins.SerializerViewSetMixin, 
     ReadOnlyModelViewSet
-): pass
-
+):
+    def list(self, request, *args, **kwargs):
+        page, created = system.CachePage.objects.get_or_create(url=request.build_absolute_uri())
+        page.count += 1
+        page.save()
+        
+        return super(DiscoveryReadOnlyModelViewSet, self).list(request, *args, **kwargs)
+        
+    def retrieve(self, request, *args, **kwargs):
+        page, created = system.CachePage.objects.get_or_create(url=request.build_absolute_uri())
+        page.count += 1
+        page.save()
+        
+        return super(DiscoveryReadOnlyModelViewSet, self).retrieve(request, *args, **kwargs)
+    
 
 @method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
 @method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='retrieve')
@@ -259,7 +273,7 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
         )
 
 
-@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='get')
+@method_decorator(cache_page(60*60), name='get')
 class ListMetadataView(APIView):
     """
     This endpoint returns metadata for the most recent data loads of SAM and FPDS data. It takes no parameters.
