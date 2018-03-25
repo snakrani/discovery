@@ -121,6 +121,15 @@ var URLManager = {
         return false;
     },
 
+    stripSubCategories: function(naics_code) {
+        //if last character in naics code isn't a number, strip it out
+        if (isNaN(naics_code.slice(-1))) {
+            //strip it
+            naics_code = naics_code.substring(0, naics_code.length - 1);
+        }
+        return naics_code;
+    },
+
     isHomePage: function() {
         var pathArray =  window.location.pathname.split('/').join('').split('');
 

@@ -93,7 +93,7 @@ LayoutManager.renderVendor = function(results, pool) {
 
     if (pool) {
         $("#naics_contracts_button").show();
-        $("#naics_contracts_button").text("NAICS " + InputHandler.naicsCode);
+        $("#naics_contracts_button").text("NAICS " + URLManager.stripSubCategories(InputHandler.naicsCode));
         $("#all_contracts_button").show();
         $(".vendor_contract_history_text").html("Showing this vendor's complete contract history for: ");
     }
