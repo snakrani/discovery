@@ -43,10 +43,11 @@ jobs:
 
       - run:
           name: Run unit tests
+          no_output_timeout: 2h
           command: |
             source /venv/bin/activate
             scripts/init-webserver.sh /dev/stderr
-            ./run test discovery api categories vendors contracts
+            ./run test --parallel=5 discovery api categories vendors contracts
 
       - store_artifacts:
           path: logs
@@ -112,7 +113,7 @@ jobs:
           command: |
             scripts/wait-for-it.sh --host="localhost" --port=8080 --timeout=300
             source /venv/bin/activate
-            ./run test tests
+            ./run test acceptance
 
       - store_artifacts:
           path: logs

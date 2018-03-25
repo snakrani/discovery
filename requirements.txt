@@ -25,6 +25,7 @@ PyYAML==3.12                        # YAML parsing/generation
 markdown==2.6.11                    # Markdown parsing/generation
 
 psutil==5.4.3                       # System utilities
+tblib==1.3.2                        # Traceback serialization (for parallel exceptions)
 
 -e git+https://github.com/philipn/django-rest-framework-filters.git@master#egg=djangorestframework-filters
 -e git+https://github.com/PSHCDevOps/pyfpds.git@integration#egg=pyfpds

@@ -3,23 +3,35 @@ var URLManager = {
     title: 'Discovery',
 
     init: function() {
-        Events.subscribe('contentChanged', this.update.bind(URLManager));
-        Events.subscribe('vehicleChanged', this.update.bind(URLManager));
-        Events.subscribe('goToPoolPage', this.loadPoolPage.bind(URLManager));
+        EventManager.subscribe('vehicleChanged', this.update.bind(URLManager));
+        EventManager.subscribe('naicsChanged', this.update.bind(URLManager));
+        EventManager.subscribe('contentChanged', this.update.bind(URLManager));
 
-        this.loadFromQS();
+        this.initFromQS();
     },
 
-    loadFromQS: function() {
+    initFromQS: function() {
+        var vehicle = this.getParameterByName('vehicle');
         var naics = this.getParameterByName('naics-code');
         var setasides = this.getParameterByName('setasides');
-        var vehicle = this.getParameterByName('vehicle');
-        var vendor = URLManager.isVendorPage();
+        var data = {};
 
-        // this + LayoutManager.render() are acting as a kind of router. should probably be rethought. [TS]
-        if (naics || setasides || vendor || vehicle) {
-            Events.publish('loadedWithQS', {'naics-code': naics, 'setasides': setasides, 'vehicle': vehicle});
+        if (vehicle) {
+            data['vehicle'] = vehicle;
         }
+        if (naics) {
+            data['naics-code'] = naics;
+        }
+        if (setasides) {
+            data['setasides'] = setasides;
+        }
+
+        LayoutManager.route(data);
+        EventManager.publish('loadPage', data);
+    },
+
+    update: function(results) {
+        History.pushState('', this.title, this.getURL());
     },
 
     getQueryString: function() {
@@ -31,38 +43,33 @@ var URLManager = {
         delete queryObject.group;
         delete queryObject.pool;
 
-        // the API wants "naics", the query string should have "naics-code"
-        if(typeof queryObject['naics-code'] !== undefined ) {
+        if('naics' in queryObject) {
             queryObject['naics-code'] = queryObject.naics;
             delete queryObject.naics;
         }
 
         for (k in queryObject) {
-            qs += k + '=' + queryObject[k] + '&';
+            if (queryObject[k]) {
+                qs += k + '=' + queryObject[k] + '&';
+            }
         }
-
         return qs;
     },
 
-    getURL: function(results) {
-        var q = RequestsManager.buildRequestQuery();
-        var qs = this.getQueryString(results);
-        // an area that needs rethinking [TS]
+    getParameterByName: function(name) {
+        // http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    },
 
-        // if the path bits we want aren't in the results object...
-        if ($.isEmptyObject(results)) {
-            // get them from the current url...
-            empty = true;
-        }
-        if (q['vehicle'] != '' && q['naics'] == ''){
-            return '/' + qs;
-        } else {
-            return '/results' + qs;
-        }
+    getURL: function() {
+        return window.location.pathname + this.getQueryString();
     },
 
     updateResultCSVURL: function(results) {
-        var qs = this.getQueryString(results);
+        var qs = this.getQueryString();
         //generate csv link (sloppy)
         $("#csv_link").attr("href", "/results/csv/" + qs );
     },
@@ -70,20 +77,16 @@ var URLManager = {
     updateVendorCSVURL: function() {
         var url = document.location.href;
         var pathArray = url.split('/');
+
+        if (url.indexOf("/?") == -1) {
+            pathArray.pop();
+        }
         pathArray.splice(5, 0, "csv");
+
         $("#csv_link").attr("href", pathArray.join('/'));
     },
 
-    update: function(results) {
-        History.pushState('', this.title, this.getURL(results));
-    },
-
-    loadPoolPage: function(results) {
-        window.location.href = this.getURL(results);
-    },
-
     getPoolInfo: function() {
-        //extract pool information from document url
         var pathArray = window.location.href.split('/').removeEmpties();
         var poolStart = $.inArray('pool', pathArray);
 
@@ -95,12 +98,15 @@ var URLManager = {
         }
     },
 
-    getParameterByName: function(name) {
-        // http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
-        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-            results = regex.exec(location.search);
-        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    getPool: function() {
+        var poolInfo = this.getPoolInfo();
+
+        if (poolInfo !== null){
+            return [poolInfo['vehicle'] + '_' + poolInfo['pool_number'], poolInfo['vehicle']];
+        }
+        else {
+            return null;
+        }
     },
 
     getDUNS: function() {
@@ -115,8 +121,39 @@ var URLManager = {
         return false;
     },
 
+    stripSubCategories: function(naics_code) {
+        //if last character in naics code isn't a number, strip it out
+        if (isNaN(naics_code.slice(-1))) {
+            //strip it
+            naics_code = naics_code.substring(0, naics_code.length - 1);
+        }
+        return naics_code;
+    },
+
+    isHomePage: function() {
+        var pathArray =  window.location.pathname.split('/').join('').split('');
+
+        if (pathArray.length == 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    },
+
+    isPoolPage: function() {
+        var pathArray =  window.location.pathname.split('/');
+
+        if ($.inArray('results', pathArray) !== -1) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    },
+
     isVendorPage: function() {
-        var pathArray =  window.location.href.split('/');
+        var pathArray =  window.location.pathname.split('/').join('').split('');
 
         if ($.inArray('vendor', pathArray) !== -1) {
             return true;

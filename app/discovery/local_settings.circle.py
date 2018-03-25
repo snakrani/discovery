@@ -2,9 +2,8 @@
 #
 # General project variables
 #
-DEBUG = True
-TEMPLATE_DEBUG = True
-
+DEBUG = False
+TEMPLATE_DEBUG = False
 
 #
 # Database connections
@@ -18,3 +17,8 @@ DATABASES = {
         'PASSWORD': 'circleci'
     }
 }
+
+#
+# REST configuration 
+#
+REST_API_TEST = True

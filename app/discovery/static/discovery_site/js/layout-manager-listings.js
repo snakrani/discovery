@@ -1,36 +1,23 @@
 
 LayoutManager.initializers.listings = function() {
-    Events.subscribe('vendorDataLoaded', this.renderTable.bind(LayoutManager));
+    EventManager.subscribe('vendorDataLoaded', this.renderTable.bind(LayoutManager));
 };
 
 LayoutManager.render = function(results) {
-    // this is turning into something of a router
-    // should be refactored [TS]
-
     if (this.getQSByName(document.location, 'vehicle').indexOf("_sb") == -1) {
-        //disable filters for 'oasis unrestricted' results
         this.disableFilters();
     } else {
         this.enableFilters();
     }
 
     if ($.isEmptyObject(results)) {
-        //clear out content
         $('#pool_vendors').find('tr').not(':first').remove();
-        Events.publish('contentChanged', results);
+        EventManager.publish('contentChanged', results);
     }
     else {
-        // if this is a vendor list page and the page has already been reloaded
-        if (window.location.pathname == "/results"
-            || URLManager.getParameterByName('naics-code') === InputHandler.getNAICSCode()) {
-            Events.publish('vendorDataLoaded', results, 1, RequestsManager.vendorsPageCount);
-        }
-        else {
-            // if this is a vendor list page and we need to reload to get the template
-            Events.publish('goToPoolPage', results);
-        }
+        this.renderTable(results, 1, RequestsManager.getPageCount());
     }
-    //update document title
+
     $(document).prop('title', "Results - " + URLManager.title);
 };
 
@@ -56,14 +43,14 @@ LayoutManager.renderTable = function(results, pageNumber, itemsPerPage) {
 
     LayoutManager.renderPager(results, pageNumber, itemsPerPage);
 
-    Events.publish('contentChanged', results);
+    EventManager.publish('contentChanged', results);
 };
 
 LayoutManager.renderRow = function(vendor, qs, i) {
     var location_col, num_contracts_col;
     var $vendorRow = $('<tr class="table_row_data"></tr>');
 
-    var locationStr = (vendor.sam_location ? this.cleanLocation(vendor.sam_location.citystate) : ' ');
+    var locationStr = (vendor.sam_location_citystate ? this.cleanLocation(vendor.sam_location_citystate) : ' ');
     var name_col = $('<td class="vendor_name" scope="row"></td>');
     var name_a = $('<a href="/vendor/' + vendor.duns + '/' + qs + '" class="link_style">' + vendor.name + '</a>');
     var vehicle = this.getQSByName(qs, 'vehicle');
@@ -106,20 +93,22 @@ LayoutManager.renderColumn = function(v, prefix, setasideCode) {
 };
 
 LayoutManager.renderPager = function(results, pageNumber, itemsPerPage) {
-    if (results['total'] > 0) {
+    var resultCount = results['results'].length;
+
+    if (results['count'] > 0) {
         if (pageNumber == undefined) {
             var pageNumber = 1;
         }
 
         var startnum = (pageNumber - 1) * itemsPerPage + 1;
-        var endnum = Math.min((pageNumber * itemsPerPage), results['total']);
+        var endnum = Math.min((pageNumber * itemsPerPage), results['count']);
 
         $("#vendors_current").text(startnum + " - " + endnum);
-        $("#vendors_total").text(LayoutManager.numberWithCommas(results['total']));
+        $("#vendors_total").text(LayoutManager.numberWithCommas(results['count']));
 
         $(function() {
             $("#pagination_container").pagination({
-                items: results['total'],
+                items: results['count'],
                 itemsOnPage: itemsPerPage,
                 cssStyle: 'light-theme',
                 currentPage: pageNumber,
@@ -128,11 +117,11 @@ LayoutManager.renderPager = function(results, pageNumber, itemsPerPage) {
 
                     vendor_data['page'] = pageNumber;
 
-                    Events.publish("vendorsChanged", vendor_data);
+                    EventManager.publish("vendorsChanged", vendor_data);
                 }
             });
         });
-        if (results['count'] < results['total']) {
+        if (resultCount < results['count']) {
             $('#pagination_container').show();
         } else {
             $('#pagination_container').hide();

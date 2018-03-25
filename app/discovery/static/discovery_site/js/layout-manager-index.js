@@ -1,38 +1,34 @@
 
 LayoutManager.initializers.index = function() {
-    Events.subscribe('metaDataLoaded', this.renderMetaData);
-    Events.subscribe('loadedWithQS', this.enableNaics);
+    EventManager.subscribe('naicsChanged', this.route.bind(LayoutManager));
+    EventManager.subscribe('loadPage', this.vehicleInfo.bind(LayoutManager));
 
     this.disableNaics();
     this.disableFilters();
-
-    this.vehicleInfo();
 };
 
-LayoutManager.renderMetaData = function(results) {
+LayoutManager.route = function(data) {
+    var queryObject = RequestsManager.buildRequestQuery();
 
-    if ($.isEmptyObject(results)) {
-        //clear out content
+    if ('vehicle' in queryObject && 'naics' in queryObject) {
+        this.loadPoolPage();
     }
-    else {
+};
+
+LayoutManager.loadPoolPage = function() {
+    var qs = URLManager.getQueryString();
+    window.location.href = '/results' + qs;
+};
+
+LayoutManager.render = function(results) {
+    if (! $.isEmptyObject(results)) {
         var dateStr = function(dateObj) {
             return ((dateObj.getMonth() + 1) + '/' + dateObj.getDate() + '/' + dateObj.getFullYear().toString().substring(2));
         };
-        //render data load dates
+
         $("#data_source_date_sam").text(LayoutManager.convertDate(results['sam_load_date']));
         $("#data_source_date_fpds").text(LayoutManager.convertDate(results['fpds_load_date']));
     }
-};
-
-LayoutManager.disableNaics = function() {
-    $("div#search span.select_text").css('color', this.disabledColor);
-    $("div#search select").attr("disabled", true);
-};
-
-LayoutManager.convertDate = function(oldDate) {
-    if (!oldDate) return 'Unknown';
-    var dateArray = oldDate.split('-');
-    return dateArray[1] + '/' + dateArray[2]+ '/' + dateArray[0];
 };
 
 LayoutManager.vehicleInfo = function() {

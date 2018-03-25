@@ -1,10 +1,16 @@
 
 LayoutManager.initializers.vendor = function() {
-    Events.subscribe('contractDataLoaded', this.renderTable.bind(LayoutManager));
+    EventManager.subscribe('vendorPoolLoaded', this.renderVendor.bind(LayoutManager));
+    EventManager.subscribe('contractDataLoaded', this.renderTable.bind(LayoutManager));
 };
 
 LayoutManager.render = function(results) {
-    //update document title
+    this.renderVendor(results, null);
+};
+
+LayoutManager.renderVendor = function(results, pool) {
+    var membership = null;
+
     $(document).prop('title', results.name + " - " + URLManager.title);
 
     URLManager.updateVendorCSVURL(results);
@@ -21,8 +27,8 @@ LayoutManager.render = function(results) {
     if (results.sam_exclusion == true) {
         $('.debarred_status').show();
     }
-    $('.duns_number').html(results.duns ? results.duns : ' ');
-    $('.cage_code').html(results.cage ? results.cage : ' ');
+    $('.duns_number').html(results.duns);
+    $('.cage_code').html(results.cage);
     $('.number_of_employees').html(results.number_of_employees ? this.numberWithCommas(results.number_of_employees) : 'N/A');
     $('.annual_revenue').html(results.annual_revenue ? '$' + this.numberWithCommas(results.annual_revenue) : 'N/A');
 
@@ -42,18 +48,29 @@ LayoutManager.render = function(results) {
 
     //contact info
     $('.vendor_address1').html(results.sam_location ? results.sam_location.address : ' ');
-    $('.vendor_address2').html(results.sam_location ? results.sam_location.citystate : ' ');
+    $('.vendor_address2').html(results.sam_location ? results.sam_location.city + ', ' + results.sam_location.state + ' ' + results.sam_location.zipcode : ' ');
 
-    if (results.pms.length > 0) {
-      $('.vendor_poc_name').html(results.pms[0].name);
-      $('.vendor_poc_phone').html(results.pms[0].phones.length ? results.pms[0].phones.join(',') : ' ');
+    if (pool) {
+        for (var i = 0; i < results.pools.length; i++) {
+            if (results.pools[i].pool.id == pool.id) {
+                membership = results.pools[i];
+            }
+        }
 
-      var mailto = [];
-      for (var i = 0; i < results.pms[0].emails.length; i++) {
-        email = results.pms[0].emails[i];
-        mailto.push('<a href="mailto:' + email + '">' + email + '</a>');
-      }
-      $('.vendor_poc_email').html(mailto.join(','));
+        if (membership.pms.length > 0) {
+            $('.vendor_poc_name').html(membership.pms[0].name);
+            $('.vendor_poc_phone').html(membership.pms[0].phone.length ? membership.pms[0].phone.join(',') : ' ');
+
+            var mailto = [];
+            for (var i = 0; i < membership.pms[0].email.length; i++) {
+                email = membership.pms[0].email[i];
+                mailto.push('<a href="mailto:' + email + '">' + email + '</a>');
+            }
+            $('.vendor_poc_email').html(mailto.join(','));
+        }
+    }
+    else {
+        membership = results;
     }
 
     //small business badge
@@ -63,22 +80,35 @@ LayoutManager.render = function(results) {
 
     //socioeconomic indicators
     t = $('#socioeconomic_indicators');
+    t.find("tr:gt(0)").remove();
+
     indicatorsRow = $('<tr></tr>');
-    indicatorsRow.append(this.renderColumn(results, '8a', 'A6'));
-    indicatorsRow.append(this.renderColumn(results, 'Hubz', 'XX'));
-    indicatorsRow.append(this.renderColumn(results, 'sdvo', 'QF'));
-    indicatorsRow.append(this.renderColumn(results, 'wo', 'A2'));
-    indicatorsRow.append(this.renderColumn(results, 'vo', 'A5'));
-    indicatorsRow.append(this.renderColumn(results, 'sdb', '27'));
+    indicatorsRow.append(this.renderColumn(membership, '8a', 'A6'));
+    indicatorsRow.append(this.renderColumn(membership, 'Hubz', 'XX'));
+    indicatorsRow.append(this.renderColumn(membership, 'sdvo', 'QF'));
+    indicatorsRow.append(this.renderColumn(membership, 'wo', 'A2'));
+    indicatorsRow.append(this.renderColumn(membership, 'vo', 'A5'));
+    indicatorsRow.append(this.renderColumn(membership, 'sdb', '27'));
     t.append(indicatorsRow);
 
-    //update button value to have proper NAICS code
-    $("#vendor_contract_history_title_container #naics_contracts_button").text("NAICS " + InputHandler.naicsCode);
+    if (pool) {
+        $("#naics_contracts_button").show();
+        $("#naics_contracts_button").text("NAICS " + URLManager.stripSubCategories(InputHandler.naicsCode));
+        $("#all_contracts_button").show();
+        $(".vendor_contract_history_text").html("Showing this vendor's complete contract history for: ");
+    }
+    else {
+        $("#naics_contracts_button").hide();
+        $("#all_contracts_button").hide();
+        $(".vendor_contract_history_text").html("Showing this vendor's indexed contract history");
+
+        this.renderButtonAndCSV('all');
+    }
 };
 
 LayoutManager.showSbBadge = function(pools) {
     for (var i = 0; i < pools.length; i++) {
-        if (pools[i].id.indexOf("_SB") != -1) {
+        if (pools[i].pool.id.indexOf("_SB") != -1) {
             return true;
         }
     }
@@ -120,11 +150,10 @@ LayoutManager.renderButtonAndCSV = function(listType){
     var a = $("a#csv_link");
     var csv_link = a.attr('href');
 
-    if (csv_link.indexOf('naics-code') > -1) {
-        //remove naics code if csv link has it, if not add it back in
+    if (listType == 'all') {
         a.attr('href', csv_link.substring(0, csv_link.indexOf("?")));
     } else {
-        a.attr('href', csv_link + "?naics-code=" + $("#vendor_contract_history_title_container").find("div").first().text().replace("NAICS", '').trim());
+        a.attr('href', csv_link + URLManager.getQueryString());
     }
 };
 
@@ -191,7 +220,7 @@ LayoutManager.renderPager = function(listType, results, pageNumber, itemsPerPage
                     contract_data['page'] = pageNumber;
                     contract_data['listType'] = listType;
 
-                    Events.publish("contractsChanged", contract_data);
+                    EventManager.publish("contractsChanged", contract_data);
                 }
             });
         });
@@ -208,11 +237,11 @@ LayoutManager.renderPager = function(listType, results, pageNumber, itemsPerPage
     }
 };
 
-LayoutManager.vendorIndicator = function(v, prefix, setaside_code) {
+LayoutManager.vendorIndicator = function(membership, prefix, setaside_code) {
     //returns X if vendor and socioeconomic indicator match
-    if (v['setasides'].length > 0) {
-        for (var i=0; i<v['setasides'].length; i++) {
-            if (v['setasides'][i]['code'] == setaside_code) {
+    if (membership['setasides'].length > 0) {
+        for (var i = 0; i < membership['setasides'].length; i++) {
+            if (membership['setasides'][i]['code'] == setaside_code) {
                 return '<img alt="X" src="' + static_image_path  + 'green_dot.png" class="green_dot">';
             }
         }

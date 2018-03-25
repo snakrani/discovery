@@ -17,3 +17,8 @@ if DEBUG:
             'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
         }
     }
+
+#
+# REST configuration 
+#
+REST_API_TEST = True

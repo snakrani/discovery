@@ -7,12 +7,13 @@ cd "$SCRIPT_DIR/../app"
 # Generate vendor related fixtures
 
 ./manage.py dumpdata vendors.location --indent=2 > vendors/fixtures/locations.json
-./manage.py dumpdata vendors.manager --indent=2 > vendors/fixtures/managers.json
-./manage.py dumpdata vendors.managerphonenumber --indent=2 > vendors/fixtures/managerphonenumbers.json # reqs: managers
-./manage.py dumpdata vendors.manageremail --indent=2 > vendors/fixtures/manageremails.json # reqs: managers
 ./manage.py dumpdata vendors.vendor --indent=2 > vendors/fixtures/vendors.json # reqs: locations, managers, setasides
 ./manage.py dumpdata vendors.poolmembership --indent=2 > vendors/fixtures/poolmemberships.json # reqs: pool, vendor
-./manage.py dumpdata vendors.poolmembershipzone --indent=2 > vendors/fixtures/poolmembershipzones.json # reqs: poolmembership, zone
+./manage.py dumpdata vendors.manager --indent=2 > vendors/fixtures/managers.json
+./manage.py dumpdata vendors.manageremail --indent=2 > vendors/fixtures/manageremails.json # reqs: managers
+./manage.py dumpdata vendors.managerphonenumber --indent=2 > vendors/fixtures/managerphonenumbers.json # reqs: managers
+./manage.py dumpdata vendors.contractmanager --indent=2 > vendors/fixtures/contractmanagers.json # reqs: managers
+./manage.py dumpdata vendors.projectmanager --indent=2 > vendors/fixtures/projectmanagers.json # reqs: managers
 ./manage.py dumpdata vendors.samload --indent=2 > vendors/fixtures/samloads.json
 
 # Generate contract related fixtures

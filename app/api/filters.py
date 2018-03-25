@@ -2,8 +2,8 @@ from django.db.models.query import QuerySet
 
 from rest_framework.fields import CharField, IntegerField
 
-from rest_framework_filters.filterset import FilterSet
-from rest_framework_filters.filters import NumberFilter, CharFilter, RelatedFilter, BaseInFilter
+from rest_framework_filters.filterset import FilterSet, FilterSetMetaclass
+from rest_framework_filters.filters import BooleanFilter, NumberFilter, CharFilter, DateFilter, DateTimeFilter, RelatedFilter, BaseInFilter, BaseRangeFilter
 from rest_framework_filters.backends import ComplexFilterBackend
 
 from categories import models as categories
@@ -11,138 +11,16 @@ from vendors import models as vendors
 from contracts import models as contracts
 
 
-EQUALITY_BOOL_FILTERS = [
-    'exact',
-    'isnull'
-]
-
-EQUALITY_CHAR_FILTERS = [
-    'exact',
-    'iexact',
-    'in'
-]
-
-FUZZY_CHAR_FILTERS = [
-    'contains',
-    'icontains',
-    'startswith',
-    'istartswith',
-    'endswith', 
-    'iendswith',
-    'regex',
-    'iregex'
-]
-
-DATE_FILTERS = [
-    'date',
-    'year',
-    'month',
-    'day',
-    'week',
-    'week_day',
-    'quarter',
-    'range',
-    'in'
-]
-
-NUM_FILTERS = [
-    'exact',
-    'lt',
-    'lte', 
-    'gt', 
-    'gte',
-    'range',
-    'in'
-]
-
-
-NAICS_FIELDS = {
-    'code': FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS, 
-    'root_code': FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS, 
-    'description': FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS
-}
-
-SETASIDE_FIELDS = {
-    'code': EQUALITY_CHAR_FILTERS, 
-    'name': EQUALITY_CHAR_FILTERS, 
-    'description': FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS,
-    'far_order': NUM_FILTERS
-}
-
-POOL_FIELDS = {
-    'id': EQUALITY_CHAR_FILTERS, 
-    'name': FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS, 
-    'number': EQUALITY_CHAR_FILTERS, 
-    'vehicle': FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS, 
-    'threshold': FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS
-}
-
-ZONE_FIELDS = {
-    'id': NUM_FILTERS
-}
-
-LOCATION_FIELDS = {
-    'address': FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS, 
-    'city': FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS,
-    'state': EQUALITY_CHAR_FILTERS,
-    'zipcode': FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS,
-    'congressional_district': EQUALITY_CHAR_FILTERS
-}
-
-MANAGER_FIELDS = {
-    'name': FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS, 
-    'type': EQUALITY_CHAR_FILTERS,
-    'phone': FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS,
-    'email': FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS
-}
-
-VENDOR_FIELDS = {
-    'id': NUM_FILTERS, 
-    'name': FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS, 
-    'duns': EQUALITY_CHAR_FILTERS, 
-    'cage': EQUALITY_CHAR_FILTERS, 
-    'sam_status': EQUALITY_CHAR_FILTERS, 
-    'sam_activation_date': DATE_FILTERS, 
-    'sam_expiration_date': DATE_FILTERS, 
-    'sam_exclusion': EQUALITY_BOOL_FILTERS, 
-    'sam_url': FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS
-}
-
-PLACE_OF_PERFORMANCE_FIELDS = {
-    'country_code': EQUALITY_CHAR_FILTERS, 
-    'country_name': FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS,
-    'state': EQUALITY_CHAR_FILTERS,
-    'zipcode': FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS
-}
-
-PRICING_STRUCTURE_FIELDS = {
-    'code': EQUALITY_CHAR_FILTERS, 
-    'name': FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS
-}
-
-CONTRACT_STATUS_FIELDS = {
-    'code': EQUALITY_CHAR_FILTERS, 
-    'name': FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS
-}
-
-CONTRACT_FIELDS = {
-    'id': NUM_FILTERS, 
-    'piid': NUM_FILTERS, 
-    'agency_id': EQUALITY_CHAR_FILTERS, 
-    'agency_name': FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS, 
-    'NAICS': EQUALITY_CHAR_FILTERS, 
-    'PSC': EQUALITY_CHAR_FILTERS,
-    'date_signed': DATE_FILTERS, 
-    'completion_date': DATE_FILTERS,
-    'obligated_amount': NUM_FILTERS,
-    'point_of_contact': FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS, 
-    'vendor_phone': FUZZY_CHAR_FILTERS + EQUALITY_CHAR_FILTERS, 
-    'annual_revenue': NUM_FILTERS, 
-    'number_of_employees': NUM_FILTERS
-}
-
-
 class CharInFilter(BaseInFilter, CharFilter):
+    pass
+
+class CharRangeFilter(BaseRangeFilter, CharFilter):
+    pass
+
+class NumberInFilter(BaseInFilter, NumberFilter):
+    pass
+
+class NumberRangeFilter(BaseRangeFilter, NumberFilter):
     pass
 
 
@@ -154,91 +32,245 @@ class DiscoveryComplexFilterBackend(ComplexFilterBackend):
     }
 
 
-class NaicsFilter(FilterSet):
+class MetaFilterSet(FilterSetMetaclass):
+    
+    def __new__(cls, name, bases, attr):
+        
+        def _generate_filters(id):
+            if id in attr and attr[id]:
+                for field in list(attr[id]):
+                    components = field.split(':')
+                    
+                    if len(components) > 1:
+                        info = {'name': components[0], 'field': components[1]}
+                    else:
+                        info = {'name': field, 'field': field}
+                    
+                    getattr(cls, "{}_filters".format(id))(info, attr)
+                    
+            if id in attr.keys():
+                attr.pop(id)
+        
+        _generate_filters('_boolean')            
+        _generate_filters('_token_text')
+        _generate_filters('_fuzzy_text')
+        _generate_filters('_number_text')
+        _generate_filters('_number')
+        _generate_filters('_date_time')
+        
+        return super(MetaFilterSet, cls).__new__(cls, name, bases, attr)
+
+    
+    @classmethod
+    def _boolean_filters(cls, info, filters):
+        name = info['name']
+        field = info['field']
+        
+        filters[name] = BooleanFilter(field_name = field, lookup_expr='exact')
+    
+    @classmethod
+    def _token_text_filters(cls, info, filters):
+        name = info['name']
+        field = info['field']
+        
+        filters[name] = CharFilter(field_name = field, lookup_expr='exact')
+        filters['{}__in'.format(name)] = CharInFilter(field_name = field)
+        
+        for lookup in ('iexact',):
+            filters['{}__{}'.format(name, lookup)] = CharFilter(field_name = field, lookup_expr = lookup)
+        
+    @classmethod
+    def _fuzzy_text_filters(cls, info, filters):
+        name = info['name']
+        field = info['field']
+        
+        filters[name] = CharFilter(field_name = field, lookup_expr='exact')
+        filters['{}__in'.format(name)] = CharInFilter(field_name = field)
+        
+        for lookup in ('iexact', 'contains', 'icontains', 'startswith', 'istartswith', 'endswith', 'iendswith', 'regex', 'iregex'):
+            filters['{}__{}'.format(name, lookup)] = CharFilter(field_name = field, lookup_expr = lookup)
+    
+    @classmethod
+    def _number_filters(cls, info, filters):
+        name = info['name']
+        field = info['field']
+        
+        filters[name] = NumberFilter(field_name = field, lookup_expr='exact')
+        filters['{}__range'.format(name)] = NumberRangeFilter(field_name = field)
+        filters['{}__in'.format(name)] = NumberInFilter(field_name = field)
+        
+        for lookup in ('lt', 'lte', 'gt', 'gte'):
+            filters['{}__{}'.format(name, lookup)] = NumberFilter(field_name = field, lookup_expr = lookup)
+        
+    @classmethod
+    def _number_text_filters(cls, info, filters):
+        name = info['name']
+        field = info['field']
+        
+        filters[name] = CharFilter(field_name = field, lookup_expr='exact')
+        filters['{}__range'.format(name)] = CharRangeFilter(field_name = field)
+        filters['{}__in'.format(name)] = CharInFilter(field_name = field)
+        
+        for lookup in ('lt', 'lte', 'gt', 'gte'):
+            filters['{}__{}'.format(name, lookup)] = CharFilter(field_name = field, lookup_expr = lookup)
+
+    @classmethod
+    def _date_time_filters(cls, info, filters):
+        name = info['name']
+        field = info['field']
+        
+        filters[name] = CharFilter(field_name = field, lookup_expr='startswith')
+        
+        for lookup in ('year', 'month', 'day', 'week', 'week_day', 'quarter'):
+            filters['{}__{}'.format(name, lookup)] = NumberFilter(field_name = field, lookup_expr = lookup)
+        
+
+class NaicsFilter(FilterSet, metaclass = MetaFilterSet):
+    
+    _fuzzy_text = ('code', 'root_code', 'description')
+    
     class Meta:
         model = categories.Naics
-        fields = NAICS_FIELDS
+        fields = ()
 
 
-class SetAsideFilter(FilterSet):
-    class Meta:
-        model = categories.SetAside
-        fields = SETASIDE_FIELDS
-
-
-class PoolFilter(FilterSet):
+class PoolFilter(FilterSet, metaclass = MetaFilterSet):
+    
+    _token_text = ('id', 'number')
+    _fuzzy_text = ('name','vehicle', 'threshold')
+    
     naics = RelatedFilter(NaicsFilter)
     
     class Meta:
         model = categories.Pool
-        fields = POOL_FIELDS
+        fields = ()
 
 
-class ZoneFilter(FilterSet):
-    state = CharFilter(field_name="state__state", lookup_expr='exact')
-    state__iexact = CharFilter(field_name="state__state", lookup_expr='iexact')
-    state__in = CharInFilter(field_name="state__state", lookup_expr='in')
-     
+class SetAsideFilter(FilterSet, metaclass = MetaFilterSet):
+    
+    _token_text = ('code', 'name')
+    _fuzzy_text = ('description',)
+    _number = ('far_order',)
+
+    class Meta:
+        model = categories.SetAside
+        fields = ()
+
+
+class ZoneFilter(FilterSet, metaclass = MetaFilterSet):
+    
+    _token_text = ('state:state__state',)
+    _number = ('id',)
+    
     class Meta:
         model = categories.Zone
-        fields = ZONE_FIELDS
+        fields = ()
 
 
-class LocationFilter(FilterSet):
+class LocationFilter(FilterSet, metaclass = MetaFilterSet):
+    
+    _token_text = ('state', 'congressional_district')
+    _fuzzy_text = ('address', 'city', 'zipcode')
+    
     class Meta:
         model = vendors.Location
-        fields = LOCATION_FIELDS
+        fields = ()
 
 
-class ManagerFilter(FilterSet):
-    phone = CharFilter(field_name='phone__number')
-    email = CharFilter(field_name='email__address')
+class ManagerFilter(FilterSet, metaclass = MetaFilterSet):   
+    _fuzzy_text = ('name', 'phone:phones__number', 'email:emails__address')
+
+
+class ContractManagerFilter(ManagerFilter):
+    class Meta:
+        model = vendors.ContractManager
+        fields = ()
+
+        
+class ProjectManagerFilter(ManagerFilter):
+    class Meta:
+        model = vendors.ProjectManager
+        fields = ()
+
+        
+class PoolMembershipFilter(FilterSet, metaclass = MetaFilterSet):
+    
+    _fuzzy_text = ('piid',)
+    
+    pool = RelatedFilter(PoolFilter)
+    setasides = RelatedFilter(SetAsideFilter)
+    
+    zones = RelatedFilter(ZoneFilter)
+    
+    cms = RelatedFilter(ContractManagerFilter)
+    pms = RelatedFilter(ProjectManagerFilter)
     
     class Meta:
-        model = vendors.Manager
-        fields = MANAGER_FIELDS
+        model = vendors.PoolMembership
+        fields = ()
 
 
-class VendorFilter(FilterSet):
+class VendorFilter(FilterSet, metaclass = MetaFilterSet):
+    
+    _boolean = ('sam_exclusion',)
+    _token_text = ('cage', 'sam_status')
+    _fuzzy_text = ('name', 'sam_url')
+    _number_text = ('duns',)
+    _date_time = ('sam_activation_date', 'sam_expiration_date')
+    
     sam_location = RelatedFilter(LocationFilter)
-    
-    setasides = RelatedFilter(SetAsideFilter)
-    pools = RelatedFilter(PoolFilter)
-    
-    managers = RelatedFilter(ManagerFilter)
+    pools = RelatedFilter(PoolMembershipFilter)
     
     class Meta:
         model = vendors.Vendor
-        fields = VENDOR_FIELDS
+        fields = ()
 
 
-class ContractStatusFilter(FilterSet):
+class ContractStatusFilter(FilterSet, metaclass = MetaFilterSet):
+    
+    _token_text = ('code',)
+    _fuzzy_text = ('name',)
+    
     class Meta:
         model = contracts.ContractStatus
-        fields = CONTRACT_STATUS_FIELDS
+        fields = ()
 
 
-class PricingStructureFilter(FilterSet):
+class PricingStructureFilter(FilterSet, metaclass = MetaFilterSet):
+    
+    _token_text = ('code',)
+    _fuzzy_text = ('name',)
+   
     class Meta:
         model = contracts.PricingStructure
-        fields = PRICING_STRUCTURE_FIELDS
+        fields = ()
 
 
-class PlaceOfPerformanceFilter(FilterSet):
+class PlaceOfPerformanceFilter(FilterSet, metaclass = MetaFilterSet):
+    
+    _token_text = ('country_code', 'state')
+    _fuzzy_text = ('country_name', 'zipcode')
+    
     class Meta:
         model = contracts.PlaceOfPerformance
-        fields = PLACE_OF_PERFORMANCE_FIELDS
+        fields = ()
 
 
-class ContractFilter(FilterSet): 
+class ContractFilter(FilterSet, metaclass = MetaFilterSet):
+    
+    _token_text = ('agency_id',)
+    _fuzzy_text = ('piid', 'agency_name', 'NAICS', 'PSC', 'point_of_contact', 'vendor_phone')
+    _number = ('id', 'obligated_amount', 'annual_revenue', 'number_of_employees')
+    _date_time = ('date_signed', 'completion_date')
+    
     status = RelatedFilter(ContractStatusFilter)
     pricing_type = RelatedFilter(PricingStructureFilter)
-    
-    place_of_performance = RelatedFilter(PlaceOfPerformanceFilter)
+        
+    vendor = RelatedFilter(VendorFilter)
     vendor_location = RelatedFilter(LocationFilter)
     
-    vendor = RelatedFilter(VendorFilter)
-    
+    place_of_performance = RelatedFilter(PlaceOfPerformanceFilter)
+        
     class Meta:
         model = contracts.Contract
-        fields = CONTRACT_FIELDS
+        fields = ()

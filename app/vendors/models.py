@@ -3,12 +3,6 @@ from django.db import models
 from categories.models import SetAside, Pool, Zone
 
 
-MANAGEMENT_TYPES = (
-    ('CM', 'Contract Manager'),
-    ('PM', 'Project Manager')
-)
-
-
 class SamLoad(models.Model):
     sam_load = models.DateField()
 
@@ -39,31 +33,47 @@ class Vendor(models.Model):
     
     sam_url = models.URLField(null=True) # from SAM
     sam_location = models.ForeignKey(Location, null=True, on_delete=models.CASCADE) # from SAM
-  
-    pools = models.ManyToManyField(Pool, through='PoolMembership') # from CSV
-    setasides = models.ManyToManyField(SetAside, blank=True) # from CSV
-
+    
     def __str__(self):
         return self.name
 
 
-class Manager(models.Model):
-    vendor = models.ForeignKey(Vendor, null=True, related_name='managers', on_delete=models.CASCADE)
-    name = models.CharField(null=True, max_length=128)
-    type = models.CharField(choices=MANAGEMENT_TYPES, max_length=10)
+class PoolMembership(models.Model):
+    piid = models.CharField(max_length=128) # from CSV
     
-    def phones(self):
-        return self.phone.values_list('number', flat=True)
+    vendor = models.ForeignKey(Vendor, related_name='pools', on_delete=models.CASCADE)
+    pool = models.ForeignKey(Pool, on_delete=models.DO_NOTHING)
+        
+    setasides = models.ManyToManyField(SetAside, blank=True) # from CSV
+    zones = models.ManyToManyField(Zone, blank=True) # from CSV
     
-    def emails(self):
-        return self.email.values_list('address', flat=True)
-
     def __str__(self):
-        return "{0}: {1} ({2})".format(self.type, self.name, self.vendor.name)
+        return "{} {} ({})".format(self.pool.id, self.vendor.name, self.piid)
+
+
+class Manager(models.Model):
+    name = models.CharField(null=True, max_length=128)
+    
+    def __str__(self):
+        return "{}".format(self.name)
+    
+    def phone(self):
+        return self.phones.values_list('number', flat=True)
+    
+    def email(self):
+        return self.emails.values_list('address', flat=True)
+    
+
+class ContractManager(Manager):
+    responsibility = models.ForeignKey(PoolMembership, null=True, related_name='cms', on_delete=models.DO_NOTHING)
+
+
+class ProjectManager(Manager):
+    responsibility = models.ForeignKey(PoolMembership, null=True, related_name='pms', on_delete=models.DO_NOTHING)
 
 
 class ManagerPhoneNumber(models.Model):
-    manager = models.ForeignKey(Manager, null=True, related_name='phone', on_delete=models.CASCADE)
+    manager = models.ForeignKey(Manager, null=True, related_name='phones', on_delete=models.CASCADE)
     number = models.CharField(null=True, max_length=128)
 
     def __str__(self):
@@ -71,28 +81,8 @@ class ManagerPhoneNumber(models.Model):
 
 
 class ManagerEmail(models.Model):
-    manager = models.ForeignKey(Manager, null=True, related_name='email', on_delete=models.CASCADE)
+    manager = models.ForeignKey(Manager, null=True, related_name='emails', on_delete=models.CASCADE)
     address = models.CharField(null=True, max_length=128)
 
     def __str__(self):
         return "{0} ({1})".format(self.manager.name, self.address)
-    
-
-class PoolMembership(models.Model):
-    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
-    pool = models.ForeignKey(Pool, on_delete=models.DO_NOTHING)
-    piid = models.CharField(max_length=128)
-    
-    def zones(self):
-        return self.zone.values_list('zone', flat=True)
-    
-    def __str__(self):
-        return "{0} - {1}/{2} ({3})".format(self.vendor.name, self.pool.id, self.zone, self.piid)
-
-
-class PoolMembershipZone(models.Model):
-    membership = models.ForeignKey(PoolMembership, null=True, related_name='zone', on_delete=models.CASCADE)
-    zone = models.ForeignKey(Zone, null=True, on_delete=models.DO_NOTHING)
-
-    def __str__(self):
-        return "{0} ({1} | {2})".format(self.membership.vendor.name, self.pool.name, self.zone)

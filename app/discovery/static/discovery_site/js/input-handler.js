@@ -1,8 +1,6 @@
 
 var InputHandler = {
     init: function() {
-        this.populateNaicsDropDown();
-
         // event bindings
         $('#naics-code').change(this.sendCodeChange.bind(InputHandler));
         $('#setaside-filters').change(this.sendFilterChange);
@@ -18,20 +16,31 @@ var InputHandler = {
         $('#ch_table').on('keypress', 'th.sortable', this.sortContracts);
 
         // event subscriptions
-        Events.subscribe('loadedWithQS', this.updateFields.bind(InputHandler));
+        EventManager.subscribe('loadPage', this.updateFields.bind(InputHandler));
 
-        Events.subscribe('fieldsUpdated', this.loadPool.bind(InputHandler));
-        Events.subscribe('naicsChanged', this.loadPool.bind(InputHandler));
-        Events.subscribe('fieldsUpdated', this.loadVehiclePools.bind(InputHandler));
-        Events.subscribe('vehicleChanged', this.loadVehiclePools.bind(InputHandler));
-        Events.subscribe('poolDataLoaded', this.populateNaicsDropDown.bind(InputHandler));
+        if (URLManager.isHomePage() || URLManager.isPoolPage()) {
+            EventManager.subscribe('fieldsUpdated', this.loadVehiclePools.bind(InputHandler));
+            EventManager.subscribe('vehicleChanged', this.loadVehiclePools.bind(InputHandler));
+            EventManager.subscribe('poolDataLoaded', this.populateNaicsDropDown.bind(InputHandler));
+
+            EventManager.subscribe('vehicleChanged', this.loadPool.bind(InputHandler));
+            EventManager.subscribe('naicsChanged', this.loadPool.bind(InputHandler));
+        }
+        else {
+            EventManager.subscribe('loadPage', this.loadPool.bind(InputHandler));
+        }
     },
 
     updateFields: function(obj) {
         var setasides, i, len;
 
-        if (obj['naics-code'] !== null) {
-            $('#naics-code').val(obj['naics-code']).trigger('change');
+        if(obj['vehicle']){
+            this.vehicle = obj['vehicle'];
+            $('form#vehicle-select select').val(obj['vehicle']);
+            LayoutManager.enableNaics();
+        }
+
+        if (obj['naics-code']) {
             this.naicsCode = obj['naics-code'];
         }
 
@@ -44,12 +53,7 @@ var InputHandler = {
             }
         }
 
-        if(obj.vehicle){
-            this.vehicle = obj['vehicle'];
-            $('form#vehicle-select select').val(obj['vehicle']);
-        }
-
-        Events.publish('fieldsUpdated');
+        EventManager.publish('fieldsUpdated');
     },
 
     sortVendors: function(e) {
@@ -76,7 +80,7 @@ var InputHandler = {
             //reset other ths that are sortable
             $target.siblings('.sortable').removeClass('arrow-down').removeClass('arrow-up').addClass('arrow-sortable').attr("title", "Select to sort");
 
-            Events.publish('vendorsChanged', data);
+            EventManager.publish('vendorsChanged', data);
         }
     },
 
@@ -112,7 +116,7 @@ var InputHandler = {
             if ($button.text() == "All Contracts") { data['listType'] = 'all'; }
             else { data['listType'] = 'naics'; }
 
-            Events.publish('contractsChanged', data);
+            EventManager.publish('contractsChanged', data);
         }
     },
 
@@ -131,23 +135,25 @@ var InputHandler = {
             $date.removeClass('arrow-sortable').addClass('arrow-down').attr("title", "Sorted descending");
             $date.siblings('.sortable').removeClass('arrow-down').removeClass('arrow-up').addClass('arrow-sortable').attr("title", "Select to sort");
 
-            Events.publish('contractsChanged', {'page': 1, 'naics': this.naicsCode, 'listType': listType});
+            EventManager.publish('contractsChanged', {'page': 1, 'naics': this.naicsCode, 'listType': listType});
             return false;
         }
     },
 
     sendVehicleChange: function() {
         this.vehicle = $('form#vehicle-select select').val(); //to get the default
-        Events.publish('vehicleChanged', {'vehicle': this.vehicle, 'vehicleOnly': true});
+
+        $("form#setaside-filters input:checked").prop('checked', false);
+        EventManager.publish('vehicleChanged', {'vehicle': this.vehicle, 'vehicleOnly': true});
     },
 
     sendCodeChange: function(e) {
         this.naicsCode = $('#naics-code').val();
-        Events.publish('naicsChanged');
+        EventManager.publish('naicsChanged', this.naicsCode);
     },
 
     sendFilterChange: function() {
-        Events.publish('filtersChanged');
+        EventManager.publish('filtersChanged');
     },
 
     getVehicle: function() {
@@ -156,10 +162,6 @@ var InputHandler = {
 
     getNAICSCode: function() {
         return this.naicsCode;
-    },
-
-    getPool: function() {
-        return this.pool;
     },
 
     getSetasides: function() {
@@ -178,13 +180,13 @@ var InputHandler = {
         var url = "/api/pools/";
         var queryData = {};
 
-        if (vehicle !== null && naics !== null) {
+        if (vehicle && naics) {
             queryData['vehicle__iexact'] = vehicle;
             queryData['naics__code'] = naics;
 
             RequestsManager.getAPIRequest(url, queryData, function(data) {
                 if (data['results'].length == 1) {
-                    Events.publish('poolUpdated', data['results'][0]);
+                    EventManager.publish('poolUpdated', data['results'][0]);
                 }
             });
         }
@@ -195,7 +197,7 @@ var InputHandler = {
         var url = "/api/pools/";
         var queryData = {};
 
-        if (vehicle !== null) {
+        if (vehicle) {
             queryData['vehicle__iexact'] = vehicle;
         }
 
@@ -218,7 +220,7 @@ var InputHandler = {
                     }
                 }
             }
-            Events.publish('poolDataLoaded', {"vehicle": vehicle, "naics": naicsMap});
+            EventManager.publish('poolDataLoaded', {"vehicle": vehicle, "naics": naicsMap});
         });
     },
 
@@ -226,6 +228,8 @@ var InputHandler = {
         var vehicle = (data !== undefined ? data.vehicle : null);
         var naicsMap = (data !== undefined ? data.naics : {});
         var naics = URLManager.getParameterByName('naics-code');
+        var naics_exists = false;
+        var first_naics = null;
 
         $('#naics-code').select2({placeholder:'Select a NAICS code', width: '380px'});
 
@@ -238,13 +242,25 @@ var InputHandler = {
 
                 $.each(data.results, function(key, result) {
                     if ($.isEmptyObject(naicsMap) || (result.code in naicsMap)) {
+                        if (!first_naics) {
+                            first_naics = result.code;
+                        }
+                        if (naics == result.code) {
+                            naics_exists = true;
+                        }
                         $("#naics-code")
                             .append($("<option></option>")
                             .attr("value", result.code)
                             .text(result.description + " ( " + result.code + " ) "));
                     }
                 });
-                $("#naics-code").select2({placeholder:'Select a NAICS code', width: '380px'}).val(naics).trigger('change');
+
+                if (naics_exists || ! naics) {
+                    $("#naics-code").select2({placeholder:'Select a NAICS code', width: '380px'}).val(naics).trigger('change');
+                }
+                else {
+                    $("#naics-code").select2({placeholder:'Select a NAICS code', width: '380px'}).val(first_naics).trigger('change');
+                }
             }
         );
     },

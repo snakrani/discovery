@@ -1,7 +1,9 @@
-from django.test import TestCase, RequestFactory
+from test import cases as case
+from test import fixtures as data
+
+from django.test import RequestFactory
 from django.core.management import call_command
 
-from discovery.fixtures import get_category_fixtures
 from vendors.models import Vendor
 from vendors.views import VendorView
 
@@ -13,14 +15,16 @@ def make_view(view, request, *args, **kwargs):
     return view
 
 
-class VendorLoadTest(TestCase):
-    """Tests that the load_vendors management command works and loads all the correct fields"""
-    fixtures = get_category_fixtures()
+class VendorLoadTest(case.BaseTestCase):
+    
+    fixtures = data.get_category_fixtures()
 
+    
     def test_load(self):
         call_command('load_vendors', vpp=1)
-
-
+        call_command('load_sam')
+    
+    
     def test_sam_expiration_not_null(self):
         null_vendors = Vendor.objects.filter(sam_expiration_date=None).count()
         self.assertEqual(null_vendors, 0)
@@ -36,7 +40,7 @@ class VendorLoadTest(TestCase):
             self.assertNotEqual(vendor.managers.filter(type='PM').first().phones().count(), 0)
 
 
-class VendorViewTest(TestCase):
+class VendorViewTest(case.BaseTestCase):
     def test_has_capability_statement_false(self):
         request = RequestFactory().get('/vendor/0000')
         view = VendorView(template_name='vendor.html')
