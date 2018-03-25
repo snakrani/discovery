@@ -40,7 +40,7 @@ class DiscoveryReadOnlyModelViewSet(
         page.count += 1
         page.save()
         
-        return super(DiscoveryReadOnlyModelViewSet, self).list(request, *args, **kwargs)
+        return super(DiscoveryReadOnlyModelViewSet, self).retrieve(request, *args, **kwargs)
     
 
 @method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
