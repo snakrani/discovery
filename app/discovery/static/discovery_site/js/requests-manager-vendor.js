@@ -12,10 +12,10 @@ RequestsManager.sortClassMap = function() {
 };
 
 RequestsManager.initializers.vendor = function() {
-    Events.subscribe('poolUpdated', this.refreshVendor.bind(RequestsManager));
+    EventManager.subscribe('poolUpdated', this.refreshVendor.bind(RequestsManager));
 
-    Events.subscribe('vendorInfoLoaded', this.refreshContracts.bind(RequestsManager));
-    Events.subscribe('contractsChanged', this.refreshContracts.bind(RequestsManager));
+    EventManager.subscribe('vendorInfoLoaded', this.refreshContracts.bind(RequestsManager));
+    EventManager.subscribe('contractsChanged', this.refreshContracts.bind(RequestsManager));
 };
 
 RequestsManager.loadVendor = function(callback) {
@@ -51,14 +51,14 @@ RequestsManager.load = function() {
     }
 
     RequestsManager.loadVendor(function(duns, results) {
-        Events.publish('dataLoaded', results);
-        Events.publish('vendorInfoLoaded', {'listType': listType});
+        EventManager.publish('dataLoaded', results);
+        EventManager.publish('vendorInfoLoaded', {'listType': listType});
     });
 };
 
 RequestsManager.refreshVendor = function(pool) {
     RequestsManager.loadVendor(function(duns, results) {
-        Events.publish('vendorPoolLoaded', results, pool);
+        EventManager.publish('vendorPoolLoaded', results, pool);
     });
 };
 
@@ -87,7 +87,7 @@ RequestsManager.refreshContracts = function(data) {
     }
 
     RequestsManager.loadContracts(data, function(queryData, response) {
-        Events.publish('contractDataLoaded', response, data['listType'], data['page'], queryData['count']);
+        EventManager.publish('contractDataLoaded', response, data['listType'], data['page'], queryData['count']);
     });
 };
 

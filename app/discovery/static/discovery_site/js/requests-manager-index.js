@@ -1,12 +1,12 @@
 
-RequestsManager.initializers.index = function() {
-    this.loadMetadata();
-};
-
 RequestsManager.loadMetadata = function() {
     var url = "/api/metadata/";
+
     RequestsManager.getAPIRequest(url, {}, function(data) {
-        var resultsObj = data;
-        Events.publish('metaDataLoaded', resultsObj);
+        EventManager.publish('dataLoaded', data);
     });
+};
+
+RequestsManager.load = function() {
+    this.loadMetadata();
 };

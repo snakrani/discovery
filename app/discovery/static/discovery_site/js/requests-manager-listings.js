@@ -8,7 +8,7 @@ RequestsManager.sortClassMap = function() {
 };
 
 RequestsManager.initializers.listings = function() {
-    Events.subscribe('vendorsChanged', this.refreshVendors.bind(RequestsManager));
+    EventManager.subscribe('vendorsChanged', this.refreshVendors.bind(RequestsManager));
 };
 
 RequestsManager.loadVendors = function(data, callback) {
@@ -18,7 +18,7 @@ RequestsManager.loadVendors = function(data, callback) {
     var queryData = $.extend(data, {'count': this.getPageCount()});
     var filters = [];
 
-    if (requestVars['naics'] !== "") {
+    if ('naics' in requestVars) {
         queryData['contract_naics'] = requestVars['naics'];
         filters.push('(pools__pool__naics__code' + '=' + requestVars['naics'] + ')');
 
@@ -44,13 +44,15 @@ RequestsManager.loadVendors = function(data, callback) {
 };
 
 RequestsManager.load = function() {
-    RequestsManager.loadVendors(RequestsManager.currentSortParams(), function(queryData, response) {
-        Events.publish('dataLoaded', response);
-    });
+    if (URLManager.isPoolPage()) {
+        RequestsManager.loadVendors(RequestsManager.currentSortParams(), function(queryData, response) {
+            EventManager.publish('dataLoaded', response);
+        });
+    }
 };
 
 RequestsManager.refreshVendors = function(data) {
     RequestsManager.loadVendors(data, function(queryData, response) {
-        Events.publish('vendorDataLoaded', response, data['page'], queryData['count']);
+        EventManager.publish('vendorDataLoaded', response, data['page'], queryData['count']);
     });
 };
