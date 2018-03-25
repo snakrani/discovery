@@ -1,40 +1,37 @@
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
-'use strict';
 
 var RequestsManager = {
     initializers: {},
 
     init: function() {
-        Events.subscribe('naicsChanged', this.load.bind(RequestsManager));
-        Events.subscribe('vehicleChanged', this.load.bind(RequestsManager));
-        Events.subscribe('filtersChanged', this.load.bind(RequestsManager));
-        Events.subscribe('loadedWithQS', this.load.bind(RequestsManager));
+        if (URLManager.isHomePage() || URLManager.isPoolPage()) {
+            EventManager.subscribe('vehicleChanged', this.load.bind(RequestsManager));
+            EventManager.subscribe('naicsChanged', this.load.bind(RequestsManager));
+            EventManager.subscribe('filtersChanged', this.load.bind(RequestsManager));
+        }
+        else {
+            EventManager.subscribe('loadPage', this.load.bind(RequestsManager));
+        }
 
         for(var handler in this.initializers){
             this.initializers[handler].call(this);
         }
     },
 
-    getPageCount: function() {
-        if (URLManager.getParameterByName('test')) {
-            return 5;
-        }
-        return 100;
+    load: function() {
     },
 
     getAPIRequest: function(url, params, callback) {
         url = APIHOST + url;
 
         var responder = function(data) {
-          //console.log(" > results: %s %o -> %o", url, params, data);
-          return callback(data);
+            // Just in case...
+            return callback(data);
         };
 
-        //console.log("URL: %s %o", url, params);
-        return $.ajax({
+        return CacheService.get({
               url: url,
-              dataType: 'json',
-              data: params
+              data: params,
+              dataType: 'json'
             })
             .done(responder)
             .fail(function(req, status, error) {
@@ -48,8 +45,8 @@ var RequestsManager = {
         var setasides = InputHandler.getSetasides();
         var naicsCode = InputHandler.getNAICSCode() || URLManager.getParameterByName('naics-code');
         var vehicle = InputHandler.getVehicle();
+        var pool = URLManager.getPool();
         var queryData = {};
-        var pool = this.getPool();
 
         if (naicsCode && typeof naicsCode !== 'undefined') {
             queryData['naics'] = naicsCode;
@@ -69,7 +66,6 @@ var RequestsManager = {
         if (URLManager.getParameterByName('test')) {
             queryData['test'] = 'true';
         }
-
         return queryData;
     },
 
@@ -86,14 +82,10 @@ var RequestsManager = {
         return data;
     },
 
-    getPool: function() {
-        var poolInfo = URLManager.getPoolInfo();
-
-        if (poolInfo !== null){
-            return [poolInfo['vehicle'] + '_' + poolInfo['pool_number'], poolInfo['vehicle']];
+    getPageCount: function() {
+        if (URLManager.getParameterByName('test')) {
+            return 5;
         }
-        else {
-            return null;
-        }
+        return 100;
     }
 };
