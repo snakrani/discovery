@@ -3,19 +3,43 @@ var LayoutManager = {
     initializers: {},
 
     init: function() {
-        Events.subscribe('dataLoaded', this.render.bind(LayoutManager));
-        Events.subscribe('poolUpdated', this.updatePoolInfo);
-        Events.subscribe('contentChanged', this.updateResultsInfo);
-        Events.subscribe('vehicleChanged', this.enableNaics);
+        EventManager.subscribe('vehicleChanged', this.enableNaics);
+
+        EventManager.subscribe('dataLoaded', this.render.bind(LayoutManager));
+        EventManager.subscribe('poolUpdated', this.updatePoolInfo);
+        EventManager.subscribe('contentChanged', this.updateResultsInfo);
 
         for(var handler in this.initializers){
             this.initializers[handler].call(this);
         }
     },
 
+    route: function(data) {
+    },
+
+    render: function(results) {
+    },
+
     enableNaics: function() {
         $("div#search span.select_text").css('color', 'white');
         $("div#search select").attr("disabled", false);
+    },
+
+    disableNaics: function() {
+        $("div#search span.select_text").css('color', this.disabledColor);
+        $("div#search select").attr("disabled", true);
+    },
+
+    enableFilters: function() {
+        $('#choose_filters').removeClass('filter_text_disabled').addClass('filter_text');
+        $('.pure-checkbox-disabled').removeClass('pure-checkbox-disabled');
+        $('.se_filter').attr("disabled", false);
+    },
+
+    disableFilters: function() {
+        $('#choose_filters').removeClass('filter_text').addClass('filter_text_disabled');
+        $('.pure-checkbox').addClass('pure-checkbox-disabled');
+        $('.se_filter').attr("disabled", true);
     },
 
     updateResultsInfo: function(results) {
@@ -67,30 +91,23 @@ var LayoutManager = {
         return new Date(dateArray[0], dateArray[1], dateArray[2]);
     },
 
+    formatDate: function(dateObj) {
+        //returns (mm/dd/yyyy) string representation of a date object
+        return (dateObj.getMonth() + 1) + '/' + dateObj.getDate() + '/' + dateObj.getFullYear().toString().substring(2);
+    },
+
+    convertDate: function(oldDate) {
+        if (!oldDate) return 'Unknown';
+        var dateArray = oldDate.split('-');
+        return dateArray[1] + '/' + dateArray[2]+ '/' + dateArray[0];
+    },
+
+    numberWithCommas: function(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
+
     toTitleCase: function(str) {
         // from http://stackoverflow.com/questions/5097875/help-parsing-string-city-state-zip-with-javascript
         return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}).replace('U.s.', 'U.S.');
     }
-};
-
-LayoutManager.disableFilters = function() {
-    //disable socioeconomic indicators until a naics is selected
-    $('#choose_filters').removeClass('filter_text').addClass('filter_text_disabled');
-    $('.pure-checkbox').addClass('pure-checkbox-disabled');
-    $('.se_filter').attr("disabled", true);
-};
-
-LayoutManager.enableFilters = function() {
-    $('#choose_filters').removeClass('filter_text_disabled').addClass('filter_text');
-    $('.pure-checkbox-disabled').removeClass('pure-checkbox-disabled');
-    $('.se_filter').attr("disabled", false);
-};
-
-LayoutManager.formatDate = function(dateObj) {
-  //returns (mm/dd/yyyy) string representation of a date object
-  return (dateObj.getMonth() + 1) + '/' + dateObj.getDate() + '/' + dateObj.getFullYear().toString().substring(2);
-};
-
-LayoutManager.numberWithCommas = function(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
