@@ -1256,6 +1256,14 @@ img.green_dot {
     box-shadow: 0 1px 5px 0 #808080 inset;
 }
 
+#vendor_disclaimers .admin_label {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  padding-left: 10px;
+  font-size: 0.8em;
+  font-style: italic;
+}
+
 
 /* Vendor Detail  Socioeconomic Factors Table Styles */
 .vendor_detail_table {
