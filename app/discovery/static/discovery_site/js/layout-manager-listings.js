@@ -4,12 +4,6 @@ LayoutManager.initializers.listings = function() {
 };
 
 LayoutManager.render = function(results) {
-    if (this.getQSByName(document.location, 'vehicle').indexOf("_sb") == -1) {
-        this.disableFilters();
-    } else {
-        this.enableFilters();
-    }
-
     if ($.isEmptyObject(results)) {
         $('#pool_vendors').find('tr').not(':first').remove();
         EventManager.publish('contentChanged', results);

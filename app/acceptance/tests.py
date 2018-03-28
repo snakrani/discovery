@@ -57,10 +57,13 @@ class FunctionalTests(LiveServerTestCase):
         #on search results page, select veteran owned filter
         driver = self.driver
         driver.get(self.base_url + "/results?vehicle=oasis_sb&naics-code=541990&")
+        element = WebDriverWait(driver, 5).until(
+            EC.presence_of_all_elements_located((By.CLASS_NAME, "table_row_data"))
+        )
         driver.find_element_by_id("vet").click()
         element = WebDriverWait(driver, 5).until(
             EC.text_to_be_present_in_element((By.ID, "your_filters"), 'Veteran Owned')
-            )
+        )
         self.assertEqual('Veteran Owned', driver.find_element_by_id('your_filters').text)
         self.assertRegexpMatches(driver.find_element_by_css_selector("span.matching_your_search").text, r"^[\s\S]* vendors match your search$")
 
@@ -208,14 +211,14 @@ class FunctionalTests(LiveServerTestCase):
         #verify that contracts list isn't empty
         self.assertFalse(driver.find_element_by_id('no_matching_contracts').is_displayed())
         #make sure at least one row exists
-        self.assertTrue(driver.find_element_by_xpath('//*[@id="ch_table"]/table/tbody/tr[2]'))
+        self.assertTrue(driver.find_element_by_xpath('//*[@id="ch_table"]/div/table/tbody/tr[2]'))
         #open vendor with naics subcategory
         driver.get(self.base_url + "/vendor/102067378/?vehicle=oasis_sb&naics-code=541712B&")
         element = WebDriverWait(driver, 5).until(
             EC.presence_of_all_elements_located((By.CLASS_NAME, "table_row_data"))
         )
         #make sure at least one row exists
-        self.assertTrue(driver.find_element_by_xpath('//*[@id="ch_table"]/table/tbody/tr[2]'))
+        self.assertTrue(driver.find_element_by_xpath('//*[@id="ch_table"]/div/table/tbody/tr[2]'))
 
     def test_number_of_pools_not_displayed_in_search_results(self):
         driver = self.driver
@@ -290,6 +293,9 @@ class FunctionalTests(LiveServerTestCase):
 
         #open search results
         driver.get(self.base_url + '/results?vehicle=oasis_sb&naics-code=541618&')
+        element = WebDriverWait(driver, 5).until(
+            EC.presence_of_all_elements_located((By.CLASS_NAME, "table_row_data"))
+        )
         #make sure vehicle select is enabled
         self.assertTrue(driver.find_element_by_id("naics-code").is_enabled())
         #make sure naics is enabled
@@ -392,7 +398,7 @@ class FunctionalTests(LiveServerTestCase):
         element = WebDriverWait(driver, 5).until(
             EC.presence_of_element_located((By.CLASS_NAME, "table_row_data"))
         )
-        second_row = driver.find_element_by_xpath('//*[@id="ch_table"]/table/tbody/tr[4]')
+        second_row = driver.find_element_by_xpath('//*[@id="ch_table"]/div/table/tbody/tr[4]')
         driver.find_element_by_class_name("h_value").click()
     
         def rows_are_stale():
@@ -402,7 +408,7 @@ class FunctionalTests(LiveServerTestCase):
                 return True
        
         self.wait_for(rows_are_stale)
-        rows = driver.find_elements_by_xpath('//*[@id="ch_table"]/table/tbody/tr')
+        rows = driver.find_elements_by_xpath('//*[@id="ch_table"]/div/table/tbody/tr')
         prev_value = None
         for row in rows[1:]:
             cell = row.find_element_by_class_name('value')

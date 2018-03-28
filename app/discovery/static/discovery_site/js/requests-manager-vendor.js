@@ -38,9 +38,18 @@ RequestsManager.loadContracts = function(data, callback) {
     if (queryData['NAICS'] == 'all') {
         delete queryData['NAICS'];
     }
-    RequestsManager.getAPIRequest(url, queryData, function(response){
-        callback(queryData, response);
-    });
+
+    $('.table_wrapper').addClass('loading');
+
+    RequestsManager.getAPIRequest(url, queryData,
+        function(response) {
+            callback(queryData, response);
+            $('.table_wrapper').removeClass('loading');
+        },
+        function(req, status, error) {
+            $('.table_wrapper').removeClass('loading');
+        }
+    );
 };
 
 RequestsManager.load = function() {

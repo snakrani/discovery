@@ -37,9 +37,27 @@ RequestsManager.loadVendors = function(data, callback) {
         }
         queryData['filters'] = encodeURIComponent(filters.join('&'));
 
-        RequestsManager.getAPIRequest(url, queryData, function(response) {
-            callback(queryData, response);
-        });
+        LayoutManager.disableVehicles();
+        LayoutManager.disableNaics();
+        LayoutManager.disableFilters();
+        $('.table_wrapper').addClass('loading');
+
+        RequestsManager.getAPIRequest(url, queryData,
+            function(response) {
+                callback(queryData, response);
+
+                LayoutManager.enableVehicles();
+                LayoutManager.enableNaics();
+                LayoutManager.enableFilters();
+                $('.table_wrapper').removeClass('loading');
+            },
+            function(req, status, error) {
+                LayoutManager.enableVehicles();
+                LayoutManager.enableNaics();
+                LayoutManager.enableFilters();
+                $('.table_wrapper').removeClass('loading');
+            }
+        );
     };
 };
 

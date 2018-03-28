@@ -20,6 +20,16 @@ var LayoutManager = {
     render: function(results) {
     },
 
+    enableVehicles: function() {
+        $("div#vehicle_select span.select_text").css('color', 'white');
+        $("div#vehicle_select select").attr("disabled", false);
+    },
+
+    disableVehicles: function() {
+        $("div#vehicle_select span.select_text").css('color', this.disabledColor);
+        $("div#vehicle_select select").attr("disabled", true);
+    },
+
     enableNaics: function() {
         $("div#search span.select_text").css('color', 'white');
         $("div#search select").attr("disabled", false);
@@ -31,9 +41,11 @@ var LayoutManager = {
     },
 
     enableFilters: function() {
-        $('#choose_filters').removeClass('filter_text_disabled').addClass('filter_text');
-        $('.pure-checkbox-disabled').removeClass('pure-checkbox-disabled');
-        $('.se_filter').attr("disabled", false);
+        if (this.getQSByName(document.location, 'vehicle').indexOf("_sb") > 0) {
+            $('#choose_filters').removeClass('filter_text_disabled').addClass('filter_text');
+            $('.pure-checkbox-disabled').removeClass('pure-checkbox-disabled');
+            $('.se_filter').attr("disabled", false);
+        }
     },
 
     disableFilters: function() {
