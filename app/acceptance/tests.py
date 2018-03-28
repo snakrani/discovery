@@ -58,7 +58,7 @@ class FunctionalTests(LiveServerTestCase):
         driver = self.driver
         driver.get(self.base_url + "/results?vehicle=oasis_sb&naics-code=541990&")
         driver.find_element_by_id("vet").click()
-        time.sleep(2)
+        time.sleep(5)
         self.assertEqual('Veteran Owned', driver.find_element_by_id('your_filters').text)
         self.assertRegexpMatches(driver.find_element_by_css_selector("span.matching_your_search").text, r"^[\s\S]* vendors match your search$")
 
