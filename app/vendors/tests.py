@@ -42,17 +42,17 @@ class VendorLoadTest(case.BaseTestCase):
 
 class VendorViewTest(case.BaseTestCase):
     def test_has_capability_statement_false(self):
-        request = RequestFactory().get('/vendor/0000')
+        request = RequestFactory().get('/vendor/0000?vehicle=oasis_sb')
         view = VendorView(template_name='vendor.html')
         view = make_view(view, request)
         context = view.get_context_data(vendor_duns='0000')
         self.assertFalse(context['has_capability_statement'])
 
     def test_has_capability_statement(self):
-        request = RequestFactory().get('/vendor/625694500')
+        request = RequestFactory().get('/vendor/626979228?vehicle=oasis_sb')
         view = VendorView(template_name='vendor.html')
         view = make_view(view, request)
-        context = view.get_context_data(vendor_duns='625694500')
+        context = view.get_context_data(vendor_duns='626979228')
         self.assertTrue(context['has_capability_statement'])
         self.assertEqual(context['capability_statement_url'],
-                         'discovery_site/capability_statements/625694500.pdf')
+                         'discovery_site/capability_statements/oasis_sb/626979228.pdf')

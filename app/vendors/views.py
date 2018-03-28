@@ -13,25 +13,31 @@ import os.path
 
 
 class VendorView(TemplateView):
-    pdf_dir = 'static/discovery_site/capability_statements/'
-    static_pdf_dir = 'discovery_site/capability_statements/'
+    
+    pdf_dir = 'static/discovery_site/capability_statements'
+    web_pdf_path = 'discovery_site/capability_statements'
 
     def get_context_data(self, **kwargs):
         context = super(TemplateView, self).get_context_data(**kwargs)
+        
         duns = context['vendor_duns']
-        capability_statement = self.has_statement(duns)
+        vehicle = self.request.GET.get('vehicle', None)
+        
+        capability_statement = self.has_statement(duns, vehicle)
         context['has_capability_statement'] = capability_statement
+        
         if capability_statement:
-            context['capability_statement_url'] = self.get_pdf_path(duns, self.static_pdf_dir)
+            context['capability_statement_url'] = self.get_pdf_path(duns, vehicle, self.web_pdf_path)
+        
         return context
 
-    def has_statement(self, duns):
-        if os.path.isfile(self.get_pdf_path(duns, self.pdf_dir)):
+    def has_statement(self, duns, vehicle):
+        if vehicle is not None and os.path.isfile(self.get_pdf_path(duns, vehicle, self.pdf_dir)):
             return True
         return False
 
-    def get_pdf_path(self, duns, path):
-        pdf_path = path
+    def get_pdf_path(self, duns, vehicle, path):
+        pdf_path = "{}/{}/".format(path, vehicle)
         pdf_path += duns
         pdf_path += '.pdf'
         return pdf_path
