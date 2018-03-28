@@ -31,37 +31,39 @@
 {% block content %}
 
     <div id="pool_table" class="pooldetail">
-        <table id="pool_vendors">
-            <tr>
-                <th scope="col" class="h_vendor_name arrow-sortable sortable" title="Select to sort">
-                    Vendor Name
-                </th>
-                <th scope="col" class="h_vendor_location arrow-sortable sortable" title="Select to sort">
-                    Location
-                </th>
-                <th scope="col" class="h_naics_results arrow-down sortable" title="Sorted descending">
-                    Contracts
-                </th>
-                <th scope="col" class="h_8a">
-                    8(a)
-                </th>
-                <th scope="col" class="h_hubz">
-                    HubZ
-                </th>
-                <th scope="col" class="h_sdvo">
-                    SDVO
-                </th>
-                <th scope="col" class="h_wo">
-                    WO
-                </th>
-                <th scope="col" class="h_vo">
-                    VO
-                </th>
-                <th scope="col" class="h_sdb">
-                    SDB
-                </th>
-            </tr>
-        </table>
+        <div class="table_wrapper loading">
+            <table id="pool_vendors">
+                <tr>
+                    <th scope="col" class="h_vendor_name arrow-sortable sortable" title="Select to sort">
+                        Vendor Name
+                    </th>
+                    <th scope="col" class="h_vendor_location arrow-sortable sortable" title="Select to sort">
+                        Location
+                    </th>
+                    <th scope="col" class="h_naics_results arrow-down sortable" title="Sorted descending">
+                        Contracts
+                    </th>
+                    <th scope="col" class="h_8a">
+                        8(a)
+                    </th>
+                    <th scope="col" class="h_hubz">
+                        HubZ
+                    </th>
+                    <th scope="col" class="h_sdvo">
+                        SDVO
+                    </th>
+                    <th scope="col" class="h_wo">
+                        WO
+                    </th>
+                    <th scope="col" class="h_vo">
+                        VO
+                    </th>
+                    <th scope="col" class="h_sdb">
+                        SDB
+                    </th>
+                </tr>
+            </table>
+        </div>
     </div>
 
     <div id="no_matching_vendors">There are no matching vendors to display</div>
