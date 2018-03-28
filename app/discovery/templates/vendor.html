@@ -102,34 +102,36 @@
         </div>
 
         <div id="ch_table" class="contracthistory">
-            <table id="vendor_contracts">
-                <tr>
-                    <th scope="col" class="h_date_signed arrow-down sortable" title="Sorted descending" tabindex="0">
-                        Date Signed
-                    </th>
-                    <th scope="col" class="h_piid arrow-sortable sortable" title="Select to sort" tabindex="0">
-                        PIID
-                    </th>
-                    <th scope="col" class="h_agency arrow-sortable sortable" title="Select to sort" tabindex="0">
-                        Agency
-                    </th>
-                    <th scope="col" class="h_type arrow-sortable sortable" title="Select to sort" tabindex="0">
-                        Type
-                    </th>
-                    <th scope="col" class="h_location arrow-sortable sortable" title="Select to sort" tabindex="0">
-                        Location
-                    </th>
-                    <th scope="col" class="h_value arrow-sortable sortable" title="Select to sort" tabindex="0">
-                        Value ($)
-                    </th>
-                    <th scope="col" class="h_status arrow-sortable sortable" title="Select to sort" tabindex="0">
-                        Status
-                    </th>
-                    <th scope="col" class="h_naics">
-                        NAICS
-                    </th>
-                </tr>
-            </table>
+            <div class="table_wrapper loading">
+                <table id="vendor_contracts">
+                    <tr>
+                        <th scope="col" class="h_date_signed arrow-down sortable" title="Sorted descending" tabindex="0">
+                            Date Signed
+                        </th>
+                        <th scope="col" class="h_piid arrow-sortable sortable" title="Select to sort" tabindex="0">
+                            PIID
+                        </th>
+                        <th scope="col" class="h_agency arrow-sortable sortable" title="Select to sort" tabindex="0">
+                            Agency
+                        </th>
+                        <th scope="col" class="h_type arrow-sortable sortable" title="Select to sort" tabindex="0">
+                            Type
+                        </th>
+                        <th scope="col" class="h_location arrow-sortable sortable" title="Select to sort" tabindex="0">
+                            Location
+                        </th>
+                        <th scope="col" class="h_value arrow-sortable sortable" title="Select to sort" tabindex="0">
+                            Value ($)
+                        </th>
+                        <th scope="col" class="h_status arrow-sortable sortable" title="Select to sort" tabindex="0">
+                            Status
+                        </th>
+                        <th scope="col" class="h_naics">
+                            NAICS
+                        </th>
+                    </tr>
+                </table>
+            </div>
         </div>
 
         <div id="no_matching_contracts">There are no matching contracts to display</div>
