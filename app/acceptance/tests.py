@@ -57,8 +57,13 @@ class FunctionalTests(LiveServerTestCase):
         #on search results page, select veteran owned filter
         driver = self.driver
         driver.get(self.base_url + "/results?vehicle=oasis_sb&naics-code=541990&")
+        element = WebDriverWait(driver, 5).until(
+            EC.presence_of_all_elements_located((By.CLASS_NAME, "table_row_data"))
+        )
         driver.find_element_by_id("vet").click()
-        time.sleep(5)
+        element = WebDriverWait(driver, 5).until(
+            EC.text_to_be_present_in_element((By.ID, "your_filters"), 'Veteran Owned')
+        )
         self.assertEqual('Veteran Owned', driver.find_element_by_id('your_filters').text)
         self.assertRegexpMatches(driver.find_element_by_css_selector("span.matching_your_search").text, r"^[\s\S]* vendors match your search$")
 
