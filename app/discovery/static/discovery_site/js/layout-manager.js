@@ -41,9 +41,11 @@ var LayoutManager = {
     },
 
     enableFilters: function() {
-        $('#choose_filters').removeClass('filter_text_disabled').addClass('filter_text');
-        $('.pure-checkbox-disabled').removeClass('pure-checkbox-disabled');
-        $('.se_filter').attr("disabled", false);
+        if (this.getQSByName(document.location, 'vehicle').indexOf("_sb") > 0) {
+            $('#choose_filters').removeClass('filter_text_disabled').addClass('filter_text');
+            $('.pure-checkbox-disabled').removeClass('pure-checkbox-disabled');
+            $('.se_filter').attr("disabled", false);
+        }
     },
 
     disableFilters: function() {
