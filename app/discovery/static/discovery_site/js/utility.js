@@ -9,11 +9,11 @@ window.CacheService = {
             url += '?' + $.param(ajaxOptions.data);
         }
         if (this.inProgress[url]) {
-            //console.log("Cached: %s", url);
+            console.log("Cached: %s", url);
             return this.inProgress[url];
         }
         else {
-            //console.log("New: %s", url);
+            console.log("New: %s", url);
             this.inProgress[url] = $.ajax(ajaxOptions);
             return this.inProgress[url];
         }
@@ -23,7 +23,7 @@ window.CacheService = {
 window.EventManager = {
 
     publish: function(name, arg1 = null, arg2 = null, arg3 = null, arg4 = null) {
-        //console.log("Publishing %s", name);
+        console.log("Publishing %s", name);
 
         if (arg1) {
             //console.log("1> %o", arg1);
@@ -41,7 +41,7 @@ window.EventManager = {
     },
 
     subscribe: function(name, func) {
-        //console.log("Subscribing to %s from %s", name, arguments.callee.caller.name);
+        console.log("Subscribing to %s from %s", name, arguments.callee.caller.name);
         Events.subscribe(name, func);
     }
 };
