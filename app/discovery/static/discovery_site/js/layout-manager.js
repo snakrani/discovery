@@ -20,6 +20,16 @@ var LayoutManager = {
     render: function(results) {
     },
 
+    enableVehicles: function() {
+        $("div#vehicle_select span.select_text").css('color', 'white');
+        $("div#vehicle_select select").attr("disabled", false);
+    },
+
+    disableVehicles: function() {
+        $("div#vehicle_select span.select_text").css('color', this.disabledColor);
+        $("div#vehicle_select select").attr("disabled", true);
+    },
+
     enableNaics: function() {
         $("div#search span.select_text").css('color', 'white');
         $("div#search select").attr("disabled", false);
