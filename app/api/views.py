@@ -93,7 +93,7 @@ class PscViewSet(DiscoveryReadOnlyModelViewSet):
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
     }
     filter_class = filters.PscFilter
-    search_fields = ['code', 'description']
+    search_fields = ['code', 'description', 'naics_code']
     ordering_fields = ['code', 'description', 'naics_code']
     ordering = 'description'
     
