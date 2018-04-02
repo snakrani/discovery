@@ -76,6 +76,37 @@ class NaicsViewSet(DiscoveryReadOnlyModelViewSet):
 
 @method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
 @method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='retrieve')
+class PscViewSet(DiscoveryReadOnlyModelViewSet):
+    """
+    API endpoint that allows for access to Discovery related PSC code information.
+    
+    retrieve:
+    Returns information for a single PSC code.
+    
+    list:
+    Returns all of the PSC codes that are relevant to the acquisition vehicles in the Discovery universe.
+    """
+    queryset = categories.PSC.objects.all().distinct()
+    lookup_field = 'code'
+    
+    action_filters = {
+        'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
+    }
+    filter_class = filters.PscFilter
+    search_fields = ['code', 'description']
+    ordering_fields = ['code', 'description', 'naics_code']
+    ordering = 'description'
+    
+    pagination_class = pagination.ResultSetPagination
+    action_serializers = {
+        'list': serializers.PscSummarySerializer,
+        'retrieve': serializers.PscFullSerializer,
+        'test': serializers.PscTestSerializer
+    }
+
+
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='retrieve')
 class PoolViewSet(DiscoveryReadOnlyModelViewSet):
     """
     API endpoint that allows for access to Discovery related vendor pool information.
