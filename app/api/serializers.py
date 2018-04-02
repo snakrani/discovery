@@ -31,6 +31,30 @@ class NaicsTestSerializer(NaicsFullSerializer):
         fields = NaicsFullSerializer.Meta.fields + ['url']
 
 
+class BasePscSerializer(HyperlinkedModelSerializer):
+    url = HyperlinkedIdentityField(view_name="psc-detail", lookup_field='code')
+    
+    class Meta:
+        model = categories.PSC
+        fields = ['code', 'description', 'naics_code']
+
+class PscLinkSerializer(BasePscSerializer):
+    class Meta(BasePscSerializer.Meta):
+        fields = ['code', 'url']
+
+class PscSummarySerializer(BasePscSerializer):
+    class Meta(BasePscSerializer.Meta):
+        fields = BasePscSerializer.Meta.fields + ['url']
+
+class PscFullSerializer(BasePscSerializer):
+    class Meta(BasePscSerializer.Meta):
+        pass
+
+class PscTestSerializer(PscFullSerializer):
+    class Meta(PscFullSerializer.Meta):
+        fields = PscFullSerializer.Meta.fields + ['url']
+
+
 class BasePoolSerializer(HyperlinkedModelSerializer):
     url = HyperlinkedIdentityField(view_name="pool-detail", lookup_field='id')
     
