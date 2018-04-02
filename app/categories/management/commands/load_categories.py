@@ -30,6 +30,9 @@ class Command(BaseCommand):
             print('> Loading NAICS codes')
             call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/naics.json'))
             
+            print('> Loading PSC codes')
+            call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/psc.json'))
+            
             print('> Loading vendor setaside categories')
             call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/setasides.json'))
             

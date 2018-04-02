@@ -134,6 +134,15 @@ class NaicsFilter(FilterSet, metaclass = MetaFilterSet):
         fields = ()
 
 
+class PscFilter(FilterSet, metaclass = MetaFilterSet):
+    
+    _fuzzy_text = ('code', 'description', 'naics_code')
+    
+    class Meta:
+        model = categories.PSC
+        fields = ()
+
+
 class PoolFilter(FilterSet, metaclass = MetaFilterSet):
     
     _token_text = ('id', 'number')

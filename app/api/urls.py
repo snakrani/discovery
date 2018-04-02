@@ -6,6 +6,7 @@ from api import routers, views
 router = routers.OptionalSlashRouter()
 
 router.register(r'naics', views.NaicsViewSet)
+router.register(r'psc', views.PscViewSet)
 router.register(r'setasides', views.SetAsideViewSet)
 router.register(r'pools', views.PoolViewSet)
 router.register(r'zones', views.ZoneViewSet)
