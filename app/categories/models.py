@@ -20,6 +20,15 @@ class Naics(models.Model):
         return "{0} - {1}".format(self.code, self.description)
 
 
+class PSC(models.Model):
+    code = models.CharField(unique=True, max_length=25)
+    description = models.TextField()
+    naics_code = models.CharField(max_length=25, null=True)
+    
+    def __str__(self):
+        return "{0} - {1}".format(self.code, self.description)
+
+
 class SetAside(models.Model):
     code = models.CharField(unique=True, max_length=25)
     name = models.CharField(unique=True, max_length=25, null=True)
