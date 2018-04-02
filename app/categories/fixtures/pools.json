@@ -304,6 +304,7 @@
     "threshold": "$15 million",
     "vehicle": "BMO",
     "naics": [
+      39,
       43
     ],
     "name": "HVAC Mainentance",
@@ -317,6 +318,7 @@
     "threshold": "$15 million",
     "vehicle": "BMO",
     "naics": [
+      39,
       44
     ],
     "name": "Plumbing and Pipefitting",
@@ -330,6 +332,7 @@
     "threshold": "$7.5 million",
     "vehicle": "BMO",
     "naics": [
+      39,
       46
     ],
     "name": "Elevator Maintenance",
@@ -343,6 +346,7 @@
     "threshold": "$15 million",
     "vehicle": "BMO",
     "naics": [
+      39,
       42
     ],
     "name": "Electrical Maintenance",
@@ -356,6 +360,7 @@
     "threshold": "$18 million",
     "vehicle": "BMO",
     "naics": [
+      39,
       52
     ],
     "name": "Janitorial",
@@ -369,6 +374,7 @@
     "threshold": "$7.5 million",
     "vehicle": "BMO",
     "naics": [
+      39,
       53
     ],
     "name": "Landscaping / Grounds Maintenance",
@@ -382,6 +388,7 @@
     "threshold": "$20.5 million",
     "vehicle": "BMO",
     "naics": [
+      39,
       50
     ],
     "name": "Fire Alarm System Maintenance and Repair",
@@ -395,6 +402,7 @@
     "threshold": "$15 million",
     "vehicle": "BMO",
     "naics": [
+      39,
       45
     ],
     "name": "Fire Supression System Preventative Maintenance and Repair Services",
@@ -408,6 +416,7 @@
     "threshold": "$15 million",
     "vehicle": "BMO",
     "naics": [
+      39,
       41
     ],
     "name": "Roofing Services",
@@ -421,6 +430,7 @@
     "threshold": "$7.5 million",
     "vehicle": "BMO",
     "naics": [
+      39,
       47
     ],
     "name": "Building Management Services",
@@ -434,6 +444,7 @@
     "threshold": "$36.5 million",
     "vehicle": "BMO",
     "naics": [
+      39,
       40
     ],
     "name": "Architectural and Framework Building Maintenance Services",
@@ -447,6 +458,7 @@
     "threshold": "$15 million",
     "vehicle": "BMO",
     "naics": [
+      39,
       48
     ],
     "name": "Commissioning Services",
@@ -460,6 +472,7 @@
     "threshold": "$7.5 million",
     "vehicle": "BMO",
     "naics": [
+      39,
       49
     ],
     "name": "Elevator Inspection Services",
@@ -486,6 +499,7 @@
     "threshold": "$11 million",
     "vehicle": "BMO",
     "naics": [
+      39,
       51
     ],
     "name": "Pest Control",
@@ -499,6 +513,7 @@
     "threshold": "$38.5 million",
     "vehicle": "BMO",
     "naics": [
+      39,
       55
     ],
     "name": "Waste Management and Recycling Services",
@@ -512,6 +527,7 @@
     "threshold": "$7.5 million",
     "vehicle": "BMO",
     "naics": [
+      39,
       54
     ],
     "name": "Cemetery Maintenance",
@@ -525,6 +541,7 @@
     "threshold": "$15 million",
     "vehicle": "BMO_SB",
     "naics": [
+      39,
       43
     ],
     "name": "HVAC Mainentance",
@@ -538,6 +555,7 @@
     "threshold": "$15 million",
     "vehicle": "BMO_SB",
     "naics": [
+      39,
       44
     ],
     "name": "Plumbing and Pipefitting",
@@ -551,6 +569,7 @@
     "threshold": "$7.5 million",
     "vehicle": "BMO_SB",
     "naics": [
+      39,
       46
     ],
     "name": "Elevator Maintenance",
@@ -564,6 +583,7 @@
     "threshold": "$15 million",
     "vehicle": "BMO_SB",
     "naics": [
+      39,
       42
     ],
     "name": "Electrical Maintenance",
@@ -577,6 +597,7 @@
     "threshold": "$18 million",
     "vehicle": "BMO_SB",
     "naics": [
+      39,
       52
     ],
     "name": "Janitorial",
@@ -590,6 +611,7 @@
     "threshold": "$7.5 million",
     "vehicle": "BMO_SB",
     "naics": [
+      39,
       53
     ],
     "name": "Landscaping / Grounds Maintenance",
@@ -603,6 +625,7 @@
     "threshold": "$20.5 million",
     "vehicle": "BMO_SB",
     "naics": [
+      39,
       50
     ],
     "name": "Fire Alarm System Maintenance and Repair",
@@ -616,6 +639,7 @@
     "threshold": "$15 million",
     "vehicle": "BMO_SB",
     "naics": [
+      39,
       45
     ],
     "name": "Fire Supression System Preventative Maintenance and Repair Services",
@@ -629,6 +653,7 @@
     "threshold": "$15 million",
     "vehicle": "BMO_SB",
     "naics": [
+      39,
       41
     ],
     "name": "Roofing Services",
@@ -642,6 +667,7 @@
     "threshold": "$7.5 million",
     "vehicle": "BMO_SB",
     "naics": [
+      39,
       47
     ],
     "name": "Building Management Services",
@@ -655,6 +681,7 @@
     "threshold": "$36.5 million",
     "vehicle": "BMO_SB",
     "naics": [
+      39,
       40
     ],
     "name": "Architectural and Framework Building Maintenance Services",
@@ -668,6 +695,7 @@
     "threshold": "$15 million",
     "vehicle": "BMO_SB",
     "naics": [
+      39,
       48
     ],
     "name": "Commissioning Services",
@@ -681,6 +709,7 @@
     "threshold": "$7.5 million",
     "vehicle": "BMO_SB",
     "naics": [
+      39,
       49
     ],
     "name": "Elevator Inspection Services",
@@ -707,6 +736,7 @@
     "threshold": "$11 million",
     "vehicle": "BMO_SB",
     "naics": [
+      39,
       51
     ],
     "name": "Pest Control",
@@ -720,6 +750,7 @@
     "threshold": "$38.5 million",
     "vehicle": "BMO_SB",
     "naics": [
+      39,
       55
     ],
     "name": "Waste Management and Recycling Services",
@@ -733,6 +764,7 @@
     "threshold": "$7.5 million",
     "vehicle": "BMO_SB",
     "naics": [
+      39,
       54
     ],
     "name": "Cemetery Maintenance",
