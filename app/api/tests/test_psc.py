@@ -22,7 +22,7 @@ class PscTest(case.APITestCase, metaclass = case.MetaAPISchema):
         },
         'search': {
             '*search1': ('description', 'matches', 'Other housekeeping services'),
-            '*search2': ('naics_code', 'equal', '561210'),
+            '@search2': ('naics_code', 'equal', '561210'),
             '-search3': ('code', 'matches', '0000000000000')
         },
         'fields': {
@@ -50,7 +50,7 @@ class PscTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@endswith': 'system',
                 '@iendswith': 'SYSTEM',
                 '@regex': '[/]+',
-                '@iregex': 'maint?repair?alt'
+                '@iregex': '^maint[\s\/]+repair[\s\/]+alt[\s\-]+'
             },
             'naics_code': {
                 '@exact': '531312',
@@ -80,17 +80,17 @@ class PscTest(case.APITestCase, metaclass = case.MetaAPISchema):
 
     def test_mixed_request_found_1(self):
         resp = self.validated_multi_list(q = 'equipment', ordering = '-code')
-        resp.validate(lambda resp, base_key: resp.matches(base_key + ['description'], 'equipment'))
+        resp.validate(lambda resp, base_key: resp.icontains(base_key + ['description'], 'equipment'))
         resp.validate_ordering('code', 'desc')
 
     def test_mixed_request_found_2(self):
         resp = self.validated_multi_list(q = 'Maintenance', ordering = 'code')
-        resp.validate(lambda resp, base_key: resp.matches(base_key + ['description'], 'Maintenance'))
+        resp.validate(lambda resp, base_key: resp.icontains(base_key + ['description'], 'Maintenance'))
         resp.validate_ordering('code', 'asc')
     
     def test_mixed_request_found_3(self):
         resp = self.validated_multi_list(q = 'system', ordering = '-description')
-        resp.validate(lambda resp, base_key: resp.matches(base_key + ['description'], 'system'))
+        resp.validate(lambda resp, base_key: resp.icontains(base_key + ['description'], 'system'))
         resp.validate_ordering('description', 'desc')
     
     def test_mixed_request_not_found_1(self):
