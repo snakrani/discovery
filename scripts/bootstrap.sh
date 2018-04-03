@@ -32,9 +32,6 @@ rm -Rf /venv
 #install CloudFoundry CLI
 ./scripts/setup-cf.sh
 
-#install Compliance Masonry
-./scripts/setup-cm.sh
-
 #install Docker and Docker Compose
 ./scripts/setup-docker.sh
 
