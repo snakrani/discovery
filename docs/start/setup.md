@@ -258,29 +258,3 @@ The root documentation folder is: **docs**.
 #  - Used by the CircleCI deployment process
 $ scripts/deploy-docs.sh --help
 ```
-
-<br/>
-
-### Compliance documentation
-
-The Discovery application requires a government ATO to serve the public, so it requires compliance documentation that signifies how the information system or managing organization aheres to the relevant NIST standards and controls.  This documentation is currently housed in the **compliance** directory with a top level **opencontrol.yaml** file.
-
-We use the [Compliance Masonry project](https://github.com/opencontrol/compliance-masonry) using the [Open Control schemas](https://github.com/opencontrol/schemas) to generate a Gitbook of the required control documentation.
-
-<br/>
-
-#### Compliance documentation related scripts
-
-* Run on either the **host** or **vagrant** machine (_if installed and used_)
-* Run from the **top level project** directory
-
-```bash
-# Setup the Compliance Masonry CLI on the machine (only tested on Ubuntu and Debian)
-#  - This is included on the Vagrant development machine
-$ scripts/setup-cm.sh # No options
-
-# Generate a Gitbook formatted PDF with the included compliance documentation
-$ scripts/create-security-docs.sh {../path/to/controls.pdf}
-```
-
-<br/>
