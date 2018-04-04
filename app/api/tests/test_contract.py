@@ -659,3 +659,8 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
         
         resp.is_float(base_key + ['annual_revenue'])
         resp.is_int(base_key + ['number_of_employees'])
+    
+        
+    def test_psc_naics_found(self):
+        resp = self.validated_multi_list(psc_naics = '238220', ordering = '-date_signed')
+        resp.validate_ordering('date_signed', 'desc')

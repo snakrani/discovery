@@ -246,7 +246,12 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
             sam_location_citystate = Concat('sam_location__city', Value(', '), 'sam_location__state', Value(' '), 'sam_location__zipcode')
         )
         if naics_param_name in self.request.query_params and self.request.query_params[naics_param_name]:
-            contract_list = contracts.Contract.objects.filter(NAICS=re.sub(r'[^\d]+$', '', self.request.query_params[naics_param_name]), vendor=OuterRef('pk')).values('pk')
+            psc_codes = list(categories.PSC.objects.filter(naics_code=re.sub(r'[^\d]+$', '', self.request.query_params[naics_param_name])).values_list('code', flat=True))
+            
+            if len(psc_codes) > 0:
+                contract_list = contracts.Contract.objects.filter(PSC__in=psc_codes, vendor=OuterRef('pk')).values('pk')
+            else:            
+                contract_list = contracts.Contract.objects.filter(NAICS=re.sub(r'[^\d]+$', '', self.request.query_params[naics_param_name]), vendor=OuterRef('pk')).values('pk')
         else:
             contract_list = contracts.Contract.objects.filter(vendor=OuterRef('pk')).values('pk')
         
