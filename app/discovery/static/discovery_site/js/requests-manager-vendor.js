@@ -32,11 +32,11 @@ RequestsManager.loadContracts = function(data, callback) {
     var url = "/api/contracts";
     var queryData = $.extend(data, {'vendor__duns': duns, 'count': this.getPageCount()});
 
-    queryData['NAICS'] = queryData['naics'];
+    queryData['psc_naics'] = queryData['naics'];
     delete queryData['naics'];
 
-    if (queryData['NAICS'] == 'all') {
-        delete queryData['NAICS'];
+    if (queryData['psc_naics'] == 'all') {
+        delete queryData['psc_naics'];
     }
 
     $('.table_wrapper').addClass('loading');
