@@ -10,6 +10,8 @@ from categories import models as categories
 from vendors import models as vendors
 from contracts import models as contracts
 
+import re
+
 
 class CharInFilter(BaseInFilter, CharFilter):
     pass
@@ -279,7 +281,17 @@ class ContractFilter(FilterSet, metaclass = MetaFilterSet):
     vendor_location = RelatedFilter(LocationFilter)
     
     place_of_performance = RelatedFilter(PlaceOfPerformanceFilter)
+    
+    psc_naics = CharFilter(field_name='NAICS', method='filter_psc_naics')
         
     class Meta:
         model = contracts.Contract
         fields = ()
+        
+    def filter_psc_naics(self, qs, name, value):
+        psc_codes = list(categories.PSC.objects.filter(naics_code=re.sub(r'[^\d]+$', '', value)).values_list('code', flat=True))
+        
+        if len(psc_codes) > 0:
+            return qs.filter(PSC__in=psc_codes)
+        else:
+            return qs
