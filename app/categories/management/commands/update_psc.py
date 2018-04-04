@@ -18,5 +18,7 @@ class Command(BaseCommand):
         for line in reader:
             psc, created = PSC.objects.get_or_create(code=line[0].strip())
             psc.description = line[1].strip()
-            psc.naics_code = line[2].strip()
             psc.save()
+            
+            for naics_code in filter(None, "".join(line[2].split()).split(',')):
+                psc.naics.get_or_create(code=naics_code)
