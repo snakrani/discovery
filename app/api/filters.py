@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.db.models.query import QuerySet
 
 from rest_framework.fields import CharField, IntegerField
@@ -289,9 +290,10 @@ class ContractFilter(FilterSet, metaclass = MetaFilterSet):
         fields = ()
         
     def filter_psc_naics(self, qs, name, value):
-        psc_codes = list(categories.PSC.objects.filter(naics_code=re.sub(r'[^\d]+$', '', value)).values_list('code', flat=True))
+        naics_code = re.sub(r'[^\d]+$', '', value)
+        psc_codes = list(categories.PSC.objects.filter(naics__code=naics_code).distinct().values_list('code', flat=True))
         
         if len(psc_codes) > 0:
-            return qs.filter(PSC__in=psc_codes)
+            return qs.filter(Q(PSC__in=psc_codes) | Q(NAICS=naics_code))
         else:
             return qs
