@@ -4,8 +4,7 @@
   "pk": 1,
   "fields": {
     "code": "H335",
-    "description": "Inspection- service and trade equipment",
-    "naics_code": "561210"
+    "description": "Inspection- service and trade equipment"
   }
 },
 {
@@ -13,8 +12,7 @@
   "pk": 2,
   "fields": {
     "code": "H341",
-    "description": "Inspection- refrigeration, air conditioning, and air circulating equipment",
-    "naics_code": "238220"
+    "description": "Inspection- refrigeration, air conditioning, and air circulating equipment"
   }
 },
 {
@@ -22,8 +20,7 @@
   "pk": 3,
   "fields": {
     "code": "H345",
-    "description": "Inspection- plumbing, heating, and waste disposal equipment",
-    "naics_code": "238220"
+    "description": "Inspection- plumbing, heating, and waste disposal equipment"
   }
 },
 {
@@ -31,8 +28,7 @@
   "pk": 4,
   "fields": {
     "code": "H348",
-    "description": "Inspect SVCS/valves",
-    "naics_code": "238220"
+    "description": "Inspect SVCS/valves"
   }
 },
 {
@@ -40,8 +36,7 @@
   "pk": 5,
   "fields": {
     "code": "H359",
-    "description": "Inspection- electrical and electronic equipment components",
-    "naics_code": "238210"
+    "description": "Inspection- electrical and electronic equipment components"
   }
 },
 {
@@ -49,8 +44,7 @@
   "pk": 6,
   "fields": {
     "code": "H363",
-    "description": "Inspection- alarm, signal, and security detection systems",
-    "naics_code": "561621"
+    "description": "Inspection- alarm, signal, and security detection systems"
   }
 },
 {
@@ -58,8 +52,7 @@
   "pk": 7,
   "fields": {
     "code": "J034",
-    "description": "Maint/repair/rebuild of equipment- metalworking machinery",
-    "naics_code": "561210"
+    "description": "Maint/repair/rebuild of equipment- metalworking machinery"
   }
 },
 {
@@ -67,8 +60,7 @@
   "pk": 8,
   "fields": {
     "code": "J035",
-    "description": "Maint/repair/rebuild of equipment- service and trade equipment",
-    "naics_code": "561210"
+    "description": "Maint/repair/rebuild of equipment- service and trade equipment"
   }
 },
 {
@@ -76,8 +68,7 @@
   "pk": 9,
   "fields": {
     "code": "J039",
-    "description": "Maint-repair of materials handling equip",
-    "naics_code": "561210"
+    "description": "Maint-repair of materials handling equip"
   }
 },
 {
@@ -85,8 +76,7 @@
   "pk": 10,
   "fields": {
     "code": "J041",
-    "description": "Maint-repair of refrigeration - AC equip",
-    "naics_code": "238220"
+    "description": "Maint-repair of refrigeration - AC equip"
   }
 },
 {
@@ -94,8 +84,7 @@
   "pk": 11,
   "fields": {
     "code": "J043",
-    "description": "Maint/repair/rebuild of equipment- pumps and compressors",
-    "naics_code": "561210"
+    "description": "Maint/repair/rebuild of equipment- pumps and compressors"
   }
 },
 {
@@ -103,8 +92,7 @@
   "pk": 12,
   "fields": {
     "code": "J044",
-    "description": "Maint/repair/rebuild of equipment- furnace, steam plant, and drying equipment",
-    "naics_code": "561210"
+    "description": "Maint/repair/rebuild of equipment- furnace, steam plant, and drying equipment"
   }
 },
 {
@@ -112,8 +100,7 @@
   "pk": 13,
   "fields": {
     "code": "J045",
-    "description": "Maint/repair/rebuild of equipment- plumbing, heating, and waste disposal equip",
-    "naics_code": "238220"
+    "description": "Maint/repair/rebuild of equipment- plumbing, heating, and waste disposal equip"
   }
 },
 {
@@ -121,8 +108,7 @@
   "pk": 14,
   "fields": {
     "code": "J046",
-    "description": "Maint-repair of water purification equip",
-    "naics_code": "561210"
+    "description": "Maint-repair of water purification equip"
   }
 },
 {
@@ -130,8 +116,7 @@
   "pk": 15,
   "fields": {
     "code": "J047",
-    "description": "Maint/repair/rebuild of equipment- pipe, tubing, hose, and fittings",
-    "naics_code": "561210"
+    "description": "Maint/repair/rebuild of equipment- pipe, tubing, hose, and fittings"
   }
 },
 {
@@ -139,8 +124,7 @@
   "pk": 16,
   "fields": {
     "code": "J048",
-    "description": "Maint/repair/rebuild of equipment- valves",
-    "naics_code": "561210"
+    "description": "Maint/repair/rebuild of equipment- valves"
   }
 },
 {
@@ -148,8 +132,7 @@
   "pk": 17,
   "fields": {
     "code": "J049",
-    "description": "Maint/repair/rebuild of equipment- maintenance and repair shop equipment",
-    "naics_code": "561210"
+    "description": "Maint/repair/rebuild of equipment- maintenance and repair shop equipment"
   }
 },
 {
@@ -157,8 +140,7 @@
   "pk": 18,
   "fields": {
     "code": "J061",
-    "description": "Maint/repair/rebuild of equipment- electric wire and power distribution equip",
-    "naics_code": "238210"
+    "description": "Maint/repair/rebuild of equipment- electric wire and power distribution equip"
   }
 },
 {
@@ -166,8 +148,7 @@
   "pk": 19,
   "fields": {
     "code": "J062",
-    "description": "Maint/repair/rebuild of equipment- lighting fixtures and lamps",
-    "naics_code": "238210"
+    "description": "Maint/repair/rebuild of equipment- lighting fixtures and lamps"
   }
 },
 {
@@ -175,8 +156,7 @@
   "pk": 20,
   "fields": {
     "code": "J063",
-    "description": "Maint-repair of alarm signal system",
-    "naics_code": "561621"
+    "description": "Maint-repair of alarm signal system"
   }
 },
 {
@@ -184,8 +164,7 @@
   "pk": 21,
   "fields": {
     "code": "J072",
-    "description": "Maint-repair of household furnishings",
-    "naics_code": "531312"
+    "description": "Maint-repair of household furnishings"
   }
 },
 {
@@ -193,8 +172,7 @@
   "pk": 22,
   "fields": {
     "code": "N041",
-    "description": "Installation of equipment- refrigeration, air conditioning, and air circulation",
-    "naics_code": "238220"
+    "description": "Installation of equipment- refrigeration, air conditioning, and air circulation"
   }
 },
 {
@@ -202,8 +180,7 @@
   "pk": 23,
   "fields": {
     "code": "N043",
-    "description": "Installation of equipment- pumps and compressors",
-    "naics_code": "561210"
+    "description": "Installation of equipment- pumps and compressors"
   }
 },
 {
@@ -211,8 +188,7 @@
   "pk": 24,
   "fields": {
     "code": "N045",
-    "description": "Installation of equipment- plumbing, heating, and waste disposal equipment",
-    "naics_code": "238220"
+    "description": "Installation of equipment- plumbing, heating, and waste disposal equipment"
   }
 },
 {
@@ -220,8 +196,7 @@
   "pk": 25,
   "fields": {
     "code": "N059",
-    "description": "Installation of equipment- electrical and electronic equipment components",
-    "naics_code": "238210"
+    "description": "Installation of equipment- electrical and electronic equipment components"
   }
 },
 {
@@ -229,8 +204,7 @@
   "pk": 26,
   "fields": {
     "code": "N063",
-    "description": "Install of alarm signal system",
-    "naics_code": "561621"
+    "description": "Install of alarm signal system"
   }
 },
 {
@@ -238,8 +212,7 @@
   "pk": 27,
   "fields": {
     "code": "S201",
-    "description": "Housekeeping- custodial janitorial",
-    "naics_code": "561720"
+    "description": "Housekeeping- custodial janitorial"
   }
 },
 {
@@ -247,8 +220,7 @@
   "pk": 28,
   "fields": {
     "code": "S202",
-    "description": "Housekeeping- fire protection",
-    "naics_code": "561210"
+    "description": "Housekeeping- fire protection"
   }
 },
 {
@@ -256,8 +228,7 @@
   "pk": 29,
   "fields": {
     "code": "S205",
-    "description": "Housekeeping- trash/garbage collection",
-    "naics_code": "561720"
+    "description": "Housekeeping- trash/garbage collection"
   }
 },
 {
@@ -265,8 +236,7 @@
   "pk": 30,
   "fields": {
     "code": "S207",
-    "description": "Housekeeping- insect/rodent control",
-    "naics_code": "561710"
+    "description": "Housekeeping- insect/rodent control"
   }
 },
 {
@@ -274,8 +244,7 @@
   "pk": 31,
   "fields": {
     "code": "S208",
-    "description": "Landscaping/groundskeeping services",
-    "naics_code": "561730"
+    "description": "Landscaping/groundskeeping services"
   }
 },
 {
@@ -283,8 +252,7 @@
   "pk": 32,
   "fields": {
     "code": "S214",
-    "description": "Housekeeping- carpet laying/cleaning",
-    "naics_code": "561210"
+    "description": "Housekeeping- carpet laying/cleaning"
   }
 },
 {
@@ -292,8 +260,7 @@
   "pk": 33,
   "fields": {
     "code": "S216",
-    "description": "Housekeeping- facilities operations support",
-    "naics_code": "561210"
+    "description": "Housekeeping- facilities operations support"
   }
 },
 {
@@ -301,8 +268,7 @@
   "pk": 34,
   "fields": {
     "code": "S218",
-    "description": "Housekeeping- snow removal/salt",
-    "naics_code": "561210"
+    "description": "Housekeeping- snow removal/salt"
   }
 },
 {
@@ -310,8 +276,7 @@
   "pk": 35,
   "fields": {
     "code": "S299",
-    "description": "Other housekeeping services",
-    "naics_code": "561210"
+    "description": "Other housekeeping services"
   }
 },
 {
@@ -319,8 +284,7 @@
   "pk": 36,
   "fields": {
     "code": "Z1AA",
-    "description": "Maintenance of office buildings",
-    "naics_code": "561210"
+    "description": "Maintenance of office buildings"
   }
 },
 {
@@ -328,8 +292,7 @@
   "pk": 37,
   "fields": {
     "code": "Z1DA",
-    "description": "Maintenance of hospitals and infirmaries",
-    "naics_code": "561210"
+    "description": "Maintenance of hospitals and infirmaries"
   }
 },
 {
@@ -337,8 +300,7 @@
   "pk": 38,
   "fields": {
     "code": "Z1DB",
-    "description": "Maintenance of laboratories and clinics",
-    "naics_code": "561210"
+    "description": "Maintenance of laboratories and clinics"
   }
 },
 {
@@ -346,8 +308,7 @@
   "pk": 39,
   "fields": {
     "code": "Z1DZ",
-    "description": "Maintenance of other hospital buildings",
-    "naics_code": "561210"
+    "description": "Maintenance of other hospital buildings"
   }
 },
 {
@@ -355,8 +316,7 @@
   "pk": 40,
   "fields": {
     "code": "Z111",
-    "description": "Maint/repair/alt- office bldgs",
-    "naics_code": "561210"
+    "description": "Maint/repair/alt- office bldgs"
   }
 },
 {
@@ -364,8 +324,7 @@
   "pk": 41,
   "fields": {
     "code": "Z141",
-    "description": "Maint/repair/alt- hospitals; infirmary",
-    "naics_code": "561210"
+    "description": "Maint/repair/alt- hospitals; infirmary"
   }
 },
 {
@@ -373,8 +332,7 @@
   "pk": 42,
   "fields": {
     "code": "Z142",
-    "description": "Maint/repair/alt- labs; clinics",
-    "naics_code": "561210"
+    "description": "Maint/repair/alt- labs; clinics"
   }
 }
 ]
