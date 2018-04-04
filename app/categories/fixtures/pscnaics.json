@@ -334,5 +334,757 @@
     "psc": 42,
     "code": "561210"
   }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 43,
+  "fields": {
+    "psc": 43,
+    "code": "611430"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 44,
+  "fields": {
+    "psc": 44,
+    "code": "611430"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 45,
+  "fields": {
+    "psc": 45,
+    "code": "611430"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 46,
+  "fields": {
+    "psc": 46,
+    "code": "611430"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 47,
+  "fields": {
+    "psc": 47,
+    "code": "611430"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 48,
+  "fields": {
+    "psc": 48,
+    "code": "611430"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 49,
+  "fields": {
+    "psc": 49,
+    "code": "611430"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 50,
+  "fields": {
+    "psc": 50,
+    "code": "624310"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 51,
+  "fields": {
+    "psc": 50,
+    "code": "541612"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 52,
+  "fields": {
+    "psc": 51,
+    "code": "611430"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 53,
+  "fields": {
+    "psc": 52,
+    "code": "611430"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 54,
+  "fields": {
+    "psc": 53,
+    "code": "611430"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 55,
+  "fields": {
+    "psc": 54,
+    "code": "611430"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 56,
+  "fields": {
+    "psc": 54,
+    "code": "624310"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 57,
+  "fields": {
+    "psc": 54,
+    "code": "611699"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 58,
+  "fields": {
+    "psc": 55,
+    "code": "611430"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 59,
+  "fields": {
+    "psc": 56,
+    "code": "611430"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 60,
+  "fields": {
+    "psc": 57,
+    "code": "611430"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 61,
+  "fields": {
+    "psc": 57,
+    "code": "624310"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 62,
+  "fields": {
+    "psc": 58,
+    "code": "611430"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 63,
+  "fields": {
+    "psc": 58,
+    "code": "624310"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 64,
+  "fields": {
+    "psc": 59,
+    "code": "611430"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 65,
+  "fields": {
+    "psc": 59,
+    "code": "624310"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 66,
+  "fields": {
+    "psc": 60,
+    "code": "611430"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 67,
+  "fields": {
+    "psc": 61,
+    "code": "611430"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 68,
+  "fields": {
+    "psc": 62,
+    "code": "611430"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 69,
+  "fields": {
+    "psc": 63,
+    "code": "611430"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 70,
+  "fields": {
+    "psc": 64,
+    "code": "611430"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 71,
+  "fields": {
+    "psc": 64,
+    "code": "624310"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 72,
+  "fields": {
+    "psc": 65,
+    "code": "611430"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 73,
+  "fields": {
+    "psc": 66,
+    "code": "611430"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 74,
+  "fields": {
+    "psc": 67,
+    "code": "611430"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 75,
+  "fields": {
+    "psc": 67,
+    "code": "624310"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 76,
+  "fields": {
+    "psc": 67,
+    "code": "611699"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 77,
+  "fields": {
+    "psc": 68,
+    "code": "611430"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 78,
+  "fields": {
+    "psc": 68,
+    "code": "624310"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 79,
+  "fields": {
+    "psc": 68,
+    "code": "611699"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 80,
+  "fields": {
+    "psc": 69,
+    "code": "541611"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 81,
+  "fields": {
+    "psc": 69,
+    "code": "541612"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 82,
+  "fields": {
+    "psc": 70,
+    "code": "541611"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 83,
+  "fields": {
+    "psc": 70,
+    "code": "541612"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 84,
+  "fields": {
+    "psc": 71,
+    "code": "541611"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 85,
+  "fields": {
+    "psc": 71,
+    "code": "541612"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 86,
+  "fields": {
+    "psc": 72,
+    "code": "541611"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 87,
+  "fields": {
+    "psc": 72,
+    "code": "541612"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 88,
+  "fields": {
+    "psc": 73,
+    "code": "541611"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 89,
+  "fields": {
+    "psc": 73,
+    "code": "541612"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 90,
+  "fields": {
+    "psc": 74,
+    "code": "541611"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 91,
+  "fields": {
+    "psc": 74,
+    "code": "541612"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 92,
+  "fields": {
+    "psc": 75,
+    "code": "541612"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 93,
+  "fields": {
+    "psc": 76,
+    "code": "541611"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 94,
+  "fields": {
+    "psc": 77,
+    "code": "541611"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 95,
+  "fields": {
+    "psc": 77,
+    "code": "541612"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 96,
+  "fields": {
+    "psc": 78,
+    "code": "541611"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 97,
+  "fields": {
+    "psc": 78,
+    "code": "541612"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 98,
+  "fields": {
+    "psc": 79,
+    "code": "541611"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 99,
+  "fields": {
+    "psc": 80,
+    "code": "541611"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 100,
+  "fields": {
+    "psc": 80,
+    "code": "541612"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 101,
+  "fields": {
+    "psc": 81,
+    "code": "541612"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 102,
+  "fields": {
+    "psc": 82,
+    "code": "541612"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 103,
+  "fields": {
+    "psc": 83,
+    "code": "541613"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 104,
+  "fields": {
+    "psc": 83,
+    "code": "541611"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 105,
+  "fields": {
+    "psc": 84,
+    "code": "541611"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 106,
+  "fields": {
+    "psc": 85,
+    "code": "541611"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 107,
+  "fields": {
+    "psc": 86,
+    "code": "541611"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 108,
+  "fields": {
+    "psc": 87,
+    "code": "541611"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 109,
+  "fields": {
+    "psc": 87,
+    "code": "541612"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 110,
+  "fields": {
+    "psc": 88,
+    "code": "541611"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 111,
+  "fields": {
+    "psc": 88,
+    "code": "541612"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 112,
+  "fields": {
+    "psc": 89,
+    "code": "541611"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 113,
+  "fields": {
+    "psc": 89,
+    "code": "541618"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 114,
+  "fields": {
+    "psc": 89,
+    "code": "611710"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 115,
+  "fields": {
+    "psc": 52,
+    "code": "541611"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 116,
+  "fields": {
+    "psc": 90,
+    "code": "541611"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 117,
+  "fields": {
+    "psc": 90,
+    "code": "541612"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 118,
+  "fields": {
+    "psc": 91,
+    "code": "541611"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 119,
+  "fields": {
+    "psc": 91,
+    "code": "541613"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 120,
+  "fields": {
+    "psc": 92,
+    "code": "541613"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 121,
+  "fields": {
+    "psc": 93,
+    "code": "541611"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 122,
+  "fields": {
+    "psc": 93,
+    "code": "541613"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 123,
+  "fields": {
+    "psc": 94,
+    "code": "541612"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 124,
+  "fields": {
+    "psc": 95,
+    "code": "541618"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 125,
+  "fields": {
+    "psc": 95,
+    "code": "541611"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 126,
+  "fields": {
+    "psc": 96,
+    "code": "541611"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 127,
+  "fields": {
+    "psc": 97,
+    "code": "541611"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 128,
+  "fields": {
+    "psc": 97,
+    "code": "541612"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 129,
+  "fields": {
+    "psc": 97,
+    "code": "541613"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 130,
+  "fields": {
+    "psc": 98,
+    "code": "541611"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 131,
+  "fields": {
+    "psc": 98,
+    "code": "541618"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 132,
+  "fields": {
+    "psc": 99,
+    "code": "541611"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 133,
+  "fields": {
+    "psc": 100,
+    "code": "541612"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 134,
+  "fields": {
+    "psc": 100,
+    "code": "611710"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 135,
+  "fields": {
+    "psc": 67,
+    "code": "541612"
+  }
+},
+{
+  "model": "categories.pscnaics",
+  "pk": 136,
+  "fields": {
+    "psc": 67,
+    "code": "611710"
+  }
 }
 ]
