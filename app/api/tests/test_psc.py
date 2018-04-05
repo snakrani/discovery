@@ -13,16 +13,18 @@ class PscTest(case.APITestCase, metaclass = case.MetaAPISchema):
             '#77777777': (),
             '#ABCDEFG': ()
         },
-        'ordering': ('code', 'description', 'naics_code'),
+        'ordering': ('code', 'description', 'naics__code', 'naics__root_code', 'naics__description'),
         'pagination': {
             '@no_args': {},
-            '!page': {'page': 15},
+            '!page': {'page': 500},
             '@count': {'count': 2},
             '@mixed': {'page': 2, 'count': 3}
         },
         'search': {
+            '*search1': ('code', 'matches', 'J041'),
             '*search1': ('description', 'matches', 'Other housekeeping services'),
-            '@search2': ('naics_code', 'equal', '561210'),
+            '@search2': ('naics__code', 'equal', '561210'),
+            '@search2': ('naics__description', 'matches', 'Testing Laboratories'),
             '-search3': ('code', 'matches', '0000000000000')
         },
         'fields': {
@@ -40,30 +42,56 @@ class PscTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '^(S2|Z1)'
             },
             'description': {
-                '@exact': 'Install of alarm signal system',
+                '@exact': 'Inspect Services / Valves',
                 '@iexact': 'install of alarm signal SYStem',
-                '@in': ("Maintenance of office buildings", "Maint/repair/alt- office bldgs"),
-                '@contains': 'snow',
+                '@in': ("Maintenance Of Office Buildings", "Maint - Repair Of Household Furnishings"),
+                '@contains': 'Snow',
                 '@icontains': 'houseKEEPING',
                 '@startswith': 'Installation',
                 '@istartswith': 'installatION',
-                '@endswith': 'system',
+                '@endswith': 'System',
                 '@iendswith': 'SYSTEM',
                 '@regex': '[/]+',
-                '@iregex': '^maint[\s\/]+repair[\s\/]+alt[\s\-]+'
+                '@iregex': '^maint\s\/\srepair\s\/\salteration\s\-\s'
             },
-            'naics_code': {
-                '@exact': '531312',
-                '@iexact': '531312',
-                '@in': ("561210", "561621", "561621"),
-                '@contains': '173',
-                '@icontains': '612',
-                '@startswith': '56',
-                '@istartswith': '238',
-                '@endswith': '210',
-                '@iendswith': '21',
+            'naics__code': {
+                '@exact': '541330',
+                '@iexact': '541712c',
+                '@in': ("541711", "238290", "561730B"),
+                '@contains': '1210',
+                '@icontains': 'b',
+                '@startswith': '54',
+                '@istartswith': '2382',
+                '@endswith': 'A',
+                '@iendswith': 'c',
+                '@regex': '[^\d]+$',
+                '@iregex': '^(23|56)'
+            },
+            'naics__root_code': {
+                '@exact': '541330',
+                '@iexact': '541712',
+                '@in': ("541711", "238290", "561730"),
+                '@contains': '1210',
+                '@icontains': '990',
+                '@startswith': '61',
+                '@istartswith': '5617',
+                '@endswith': '10',
+                '@iendswith': '20',
                 '@regex': '^[\d]+$',
                 '@iregex': '^(23|56)'
+            },
+            'naics__description': {
+                '@exact': 'Outdoor Advertising',
+                '@iexact': 'hvac maintenance',
+                '@in': ("Payroll Services", "Commissioning Services", "Testing Laboratories"),
+                '@contains': 'Accounting',
+                '@icontains': 'rEPair',
+                '@startswith': 'Engineering',
+                '@istartswith': 'r',
+                '@endswith': 'Services',
+                '@iendswith': 'advertIsing',
+                '@regex': '[/]+',
+                '@iregex': 'water\s+based'
             }
         }
     }
@@ -75,26 +103,3 @@ class PscTest(case.APITestCase, metaclass = case.MetaAPISchema):
     def validate_object(self, resp, base_key = []):
         resp.is_not_empty(base_key + ['code'])
         resp.is_not_empty(base_key + ['description'])
-        resp.is_not_empty(base_key + ['naics_code'])
-    
-
-    def test_mixed_request_found_1(self):
-        resp = self.validated_multi_list(q = 'equipment', ordering = '-code')
-        resp.validate(lambda resp, base_key: resp.icontains(base_key + ['description'], 'equipment'))
-        resp.validate_ordering('code', 'desc')
-
-    def test_mixed_request_found_2(self):
-        resp = self.validated_multi_list(q = 'Maintenance', ordering = 'code')
-        resp.validate(lambda resp, base_key: resp.icontains(base_key + ['description'], 'Maintenance'))
-        resp.validate_ordering('code', 'asc')
-    
-    def test_mixed_request_found_3(self):
-        resp = self.validated_multi_list(q = 'system', ordering = '-description')
-        resp.validate(lambda resp, base_key: resp.icontains(base_key + ['description'], 'system'))
-        resp.validate_ordering('description', 'desc')
-    
-    def test_mixed_request_not_found_1(self):
-        self.empty_list(q = 'Space Man', ordering = 'code')
-    
-    def test_mixed_request_not_found_2(self):
-        self.empty_list(q = 'Arghhhhh!!', ordering = '-description')
