@@ -139,7 +139,9 @@ class NaicsFilter(FilterSet, metaclass = MetaFilterSet):
 
 class PscFilter(FilterSet, metaclass = MetaFilterSet):
     
-    _fuzzy_text = ('code', 'description', 'naics:naics__code', 'naics:naics__root_code', 'naics:naics__description')
+    _fuzzy_text = ('code', 'description')
+    
+    naics = RelatedFilter(NaicsFilter)
     
     class Meta:
         model = categories.PSC
