@@ -664,3 +664,6 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
     def test_psc_naics_found(self):
         resp = self.validated_multi_list(psc_naics = '238220', ordering = '-date_signed')
         resp.validate_ordering('date_signed', 'desc')
+        
+    def test_psc_naics_not_found_1(self):
+        self.empty_list(psc_naics = '000000', ordering = '-date_signed')
