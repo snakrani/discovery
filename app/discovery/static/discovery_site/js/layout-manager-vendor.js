@@ -185,7 +185,7 @@ LayoutManager.renderRow = function(contract, i) {
     $contractRow.append('<td class="poc">' + pointOfContact + '</td>');
     $contractRow.append('<td class="value">' + obligatedAmount+ '</td>');
     $contractRow.append('<td class="status">' + status + '</td>');
-    $contractRow.append('<td class="codes"><i>NAICS</i>: <b>' + naics + '</b><br/><i>PSC</i>: <b>' + psc + '</b></td>');
+    $contractRow.append('<td class="codes"><i>NAICS</i><br/><b>' + naics + '</b><br/><i>PSC</i><br/><b>' + psc + '</b></td>');
 
     return $contractRow;
 };

@@ -1481,25 +1481,25 @@ img.green_dot {
 }
 
 #ch_table th.h_agency {
-    width: 245px;
-    text-align: left;
-    padding-left: 10px;
-}
-
-#ch_table th.h_type {
-    width: 137px;
-    text-align: left;
-    padding-left: 10px;
-}
-
-#ch_table th.h_location {
     width: 150px;
     text-align: left;
     padding-left: 10px;
 }
 
+#ch_table th.h_type {
+    width: 110px;
+    text-align: left;
+    padding-left: 10px;
+}
+
+#ch_table th.h_poc {
+    width: 275px;
+    text-align: left;
+    padding-left: 10px;
+}
+
 #ch_table th.h_value {
-    width: 112px;
+    width: 110px;
     text-align: left;
     padding-left: 10px;
 }
@@ -1515,14 +1515,14 @@ img.green_dot {
     word-wrap: normal !important;
 }
 
-#ch_table th.h_naics {
+#ch_table th.h_codes {
     width: 80px;
     border: 0 solid #e5e5e5;
     text-align: center;
     border-width: 0 1px 1px 1px;
 }
 
-#ch_table td.naics {
+#ch_table td.codes {
     border: 0 solid #e5e5e5;
     text-align: center;
     border-width: 1px 1px 1px 1px;
