@@ -2,7 +2,7 @@ from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.core.management import call_command
 
-from categories.models import PSC
+from categories.models import Naics, PSC
 
 import os
 import csv
@@ -57,8 +57,13 @@ class Command(BaseCommand):
             psc.save()
             
             for naics_code in filter(None, "".join(line[2].split()).split(',')):
-                print(" > Adding NAICS code: [ {} ]".format(naics_code))
-                psc.naics.get_or_create(code=naics_code)
+                try:
+                    for naics in Naics.objects.filter(root_code=naics_code):
+                        if naics not in psc.naics.all():
+                            print(" > Adding NAICS code: [ {} ]".format(naics_code))
+                            psc.naics.add(naics)
+
+                except Naics.DoesNotExist as error:
+                    continue
                 
         call_command('dumpdata', 'categories.psc', indent=2, output="{}/{}".format(settings.BASE_DIR, 'categories/fixtures/psc.json'))
-        call_command('dumpdata', 'categories.pscnaics', indent=2, output="{}/{}".format(settings.BASE_DIR, 'categories/fixtures/pscnaics.json'))
