@@ -95,7 +95,7 @@ LayoutManager.renderVendor = function(results, pool) {
         $("#naics_contracts_button").show();
         $("#naics_contracts_button").text("NAICS " + URLManager.stripSubCategories(InputHandler.naicsCode));
         $("#all_contracts_button").show();
-        $(".vendor_contract_history_text").html("Showing this vendor's contract history in relation to: ");
+        $(".vendor_contract_history_text").html("Showing vendor contract history for PSCs related to: ");
     }
     else {
         $("#naics_contracts_button").hide();
