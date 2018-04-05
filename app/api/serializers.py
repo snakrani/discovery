@@ -36,19 +36,23 @@ class BasePscSerializer(HyperlinkedModelSerializer):
     
     class Meta:
         model = categories.PSC
-        fields = ['code', 'description', 'naics_code']
+        fields = ['code', 'description']
 
 class PscLinkSerializer(BasePscSerializer):
     class Meta(BasePscSerializer.Meta):
         fields = ['code', 'url']
 
 class PscSummarySerializer(BasePscSerializer):
+    naics = NaicsSummarySerializer(many=True)
+    
     class Meta(BasePscSerializer.Meta):
-        fields = BasePscSerializer.Meta.fields + ['url']
+        fields = BasePscSerializer.Meta.fields + ['naics', 'url']
 
 class PscFullSerializer(BasePscSerializer):
+    naics = NaicsSummarySerializer(many=True)
+    
     class Meta(BasePscSerializer.Meta):
-        pass
+        fields = BasePscSerializer.Meta.fields + ['naics']
 
 class PscTestSerializer(PscFullSerializer):
     class Meta(PscFullSerializer.Meta):
@@ -79,8 +83,6 @@ class PoolFullSerializer(BasePoolSerializer):
         fields = BasePoolSerializer.Meta.fields + ['naics']
 
 class PoolTestSerializer(PoolFullSerializer):
-    naics = NaicsTestSerializer(many=True)
-    
     class Meta(PoolFullSerializer.Meta):
         fields = PoolFullSerializer.Meta.fields + ['url']
 
