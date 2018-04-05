@@ -164,12 +164,12 @@ LayoutManager.renderRow = function(contract, i) {
     var piid = (contract['piid'] ? contract['piid'] : ' ');
     var agencyName = (contract['agency_name'] ? contract['agency_name'] : ' ');
     var pricingType = (contract['pricing_type'] ? contract['pricing_type'].name : ' ');
+    var pointOfContact = (contract['point_of_contact'] ? contract['point_of_contact'].name : ' ');
     var location = (contract['place_of_performance_location'] ? contract['place_of_performance_location'] : ' ');
     var obligatedAmount = (contract['obligated_amount'] ? this.numberWithCommas(contract['obligated_amount']) : ' ');
     var status = (contract['status'] ? contract['status'].name : ' ');
     var psc = (contract['PSC'] ? contract['PSC'] : ' ');
     var naics = (contract['NAICS'] ? contract['NAICS'] : ' ');
-    var pointOfContact;
 
     if (typeof contract['point_of_contact'] === 'string') {
         pointOfContact = contract['point_of_contact'].toLowerCase();
@@ -182,7 +182,7 @@ LayoutManager.renderRow = function(contract, i) {
     $contractRow.append('<td class="piid" scope="row">' + piid + '</td>');
     $contractRow.append('<td class="agency">' + this.toTitleCase(agencyName) + '</td>');
     $contractRow.append('<td class="type">' + pricingType + '</td>');
-    $contractRow.append('<td class="location">' + location + '</td>');
+    $contractRow.append('<td class="poc">' + pointOfContact + '</td>');
     $contractRow.append('<td class="value">' + obligatedAmount+ '</td>');
     $contractRow.append('<td class="status">' + status + '</td>');
     $contractRow.append('<td class="codes"><i>NAICS</i>: <b>' + naics + '</b><br/><i>PSC</i>: <b>' + psc + '</b></td>');
