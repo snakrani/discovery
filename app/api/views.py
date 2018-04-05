@@ -93,8 +93,8 @@ class PscViewSet(DiscoveryReadOnlyModelViewSet):
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
     }
     filter_class = filters.PscFilter
-    search_fields = ['code', 'description', 'naics__code']
-    ordering_fields = ['code', 'description', 'naics__code']
+    search_fields = ['code', 'description', 'naics__code', 'naics__description']
+    ordering_fields = ['code', 'description', 'naics__code', 'naics__root_code', 'naics__description']
     ordering = 'description'
     
     pagination_class = pagination.ResultSetPagination
