@@ -1219,7 +1219,6 @@ img.green_dot {
     line-height: 30px;
     color: #595959;
     font-weight: bold;
-    max-width: 140px;
 }
 
 .contracts_button {
@@ -1238,7 +1237,6 @@ img.green_dot {
     line-height: 30px;
     color: #bfbfbf;
     font-weight: bold;
-    max-width: 140px;
     cursor: pointer;
 }
 

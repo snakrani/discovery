@@ -382,7 +382,7 @@ class FunctionalTests(LiveServerTestCase):
     def test_number_of_contracts_column(self):
         driver = self.driver
         #open a search results page
-        driver.get(self.base_url + '/results?vehicle=oasis_sb&naics-code=541618&')
+        driver.get(self.base_url + '/results/?vehicle=oasis_sb&naics-code=541219&')
         element = WebDriverWait(driver, 5).until(
             EC.presence_of_all_elements_located((By.CLASS_NAME, "vendor_name"))
         )  

@@ -23,8 +23,8 @@ class Naics(models.Model):
 class PSC(models.Model):
     code = models.CharField(unique=True, max_length=25)
     description = models.TextField()
-    naics_code = models.CharField(max_length=25, null=True)
-    
+    naics = models.ManyToManyField(Naics)
+     
     def __str__(self):
         return "{0} - {1}".format(self.code, self.description)
 

@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.db.models import Subquery, OuterRef, Value
+from django.db.models import Subquery, OuterRef, Value, Q
 from django.db.models.functions import Concat, Coalesce
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
@@ -93,8 +93,8 @@ class PscViewSet(DiscoveryReadOnlyModelViewSet):
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
     }
     filter_class = filters.PscFilter
-    search_fields = ['code', 'description', 'naics_code']
-    ordering_fields = ['code', 'description', 'naics_code']
+    search_fields = ['code', 'description', 'naics__code', 'naics__description']
+    ordering_fields = ['code', 'description', 'naics__code', 'naics__root_code', 'naics__description']
     ordering = 'description'
     
     pagination_class = pagination.ResultSetPagination
@@ -246,12 +246,10 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
             sam_location_citystate = Concat('sam_location__city', Value(', '), 'sam_location__state', Value(' '), 'sam_location__zipcode')
         )
         if naics_param_name in self.request.query_params and self.request.query_params[naics_param_name]:
-            psc_codes = list(categories.PSC.objects.filter(naics_code=re.sub(r'[^\d]+$', '', self.request.query_params[naics_param_name])).values_list('code', flat=True))
+            naics_code = re.sub(r'[^\d]+$', '', self.request.query_params[naics_param_name])
+            psc_codes = list(categories.PSC.objects.filter(naics__root_code=naics_code).distinct().values_list('code', flat=True))
             
-            if len(psc_codes) > 0:
-                contract_list = contracts.Contract.objects.filter(PSC__in=psc_codes, vendor=OuterRef('pk')).values('pk')
-            else:            
-                contract_list = contracts.Contract.objects.filter(NAICS=re.sub(r'[^\d]+$', '', self.request.query_params[naics_param_name]), vendor=OuterRef('pk')).values('pk')
+            contract_list = contracts.Contract.objects.filter(Q(PSC__in=psc_codes) | Q(NAICS=naics_code), vendor=OuterRef('pk')).values('pk')
         else:
             contract_list = contracts.Contract.objects.filter(vendor=OuterRef('pk')).values('pk')
         

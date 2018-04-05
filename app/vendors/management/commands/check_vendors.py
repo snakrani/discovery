@@ -57,9 +57,5 @@ class Command(BaseCommand):
         
 
     def handle(self, *args, **options):
-        print("-------BEGIN FIX_VENDORS PROCESS-------")
-        
         for vehicle in settings.VEHICLES:
             self.check_vehicle(vehicle, options)
-
-        print("-------END LOAD_VENDORS PROCESS-------")
