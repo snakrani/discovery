@@ -249,10 +249,7 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
             naics_code = re.sub(r'[^\d]+$', '', self.request.query_params[naics_param_name])
             psc_codes = list(categories.PSC.objects.filter(naics__root_code=naics_code).distinct().values_list('code', flat=True))
             
-            if len(psc_codes) > 0:
-                contract_list = contracts.Contract.objects.filter(Q(PSC__in=psc_codes) | Q(NAICS=naics_code), vendor=OuterRef('pk')).values('pk')
-            else:            
-                contract_list = contracts.Contract.objects.filter(NAICS=naics_code, vendor=OuterRef('pk')).values('pk')
+            contract_list = contracts.Contract.objects.filter(Q(PSC__in=psc_codes) | Q(NAICS=naics_code), vendor=OuterRef('pk')).values('pk')
         else:
             contract_list = contracts.Contract.objects.filter(vendor=OuterRef('pk')).values('pk')
         
