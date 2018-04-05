@@ -127,7 +127,7 @@ var InputHandler = {
                 this.naicsCode = 'all';
                 listType = 'all';
             } else {
-                this.naicsCode = $("#vendor_contract_history_title_container").find("div").first().text().replace("NAICS", '').trim();
+                this.naicsCode = $("#vendor_contract_history_title_container").find("div").first().text().replace(/\D/g,'').trim();
             }
 
             //reset date header column classes
