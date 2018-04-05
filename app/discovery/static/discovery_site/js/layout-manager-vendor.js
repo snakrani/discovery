@@ -93,7 +93,7 @@ LayoutManager.renderVendor = function(results, pool) {
 
     if (pool) {
         $("#naics_contracts_button").show();
-        $("#naics_contracts_button").text("NAICS " + URLManager.stripSubCategories(InputHandler.naicsCode));
+        $("#naics_contracts_button").text("Contracts related to NAICS " + URLManager.stripSubCategories(InputHandler.naicsCode));
         $("#all_contracts_button").show();
         $(".vendor_contract_history_text").html("Showing this vendor's complete contract history for: ");
     }
@@ -167,6 +167,7 @@ LayoutManager.renderRow = function(contract, i) {
     var location = (contract['place_of_performance_location'] ? contract['place_of_performance_location'] : ' ');
     var obligatedAmount = (contract['obligated_amount'] ? this.numberWithCommas(contract['obligated_amount']) : ' ');
     var status = (contract['status'] ? contract['status'].name : ' ');
+    var psc = (contract['PSC'] ? contract['PSC'] : ' ');
     var naics = (contract['NAICS'] ? contract['NAICS'] : ' ');
     var pointOfContact;
 
@@ -184,7 +185,7 @@ LayoutManager.renderRow = function(contract, i) {
     $contractRow.append('<td class="location">' + location + '</td>');
     $contractRow.append('<td class="value">' + obligatedAmount+ '</td>');
     $contractRow.append('<td class="status">' + status + '</td>');
-    $contractRow.append('<td class="naics">' + naics + '</td>');
+    $contractRow.append('<td class="codes"><i>NAICS</i>: <b>' + naics + '</b><br/><i>PSC</i>: <b>' + psc + '</b></td>');
 
     return $contractRow;
 };
