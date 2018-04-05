@@ -5,7 +5,7 @@ RequestsManager.sortClassMap = function() {
         'h_piid': 'piid',
         'h_agency': 'agency_name',
         'h_type': 'pricing_type__name',
-        'h_location': 'place_of_performance_location',
+        'h_poc': 'point_of_contact',
         'h_value': 'obligated_amount',
         'h_status': 'status__name',
     };
