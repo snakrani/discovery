@@ -291,7 +291,7 @@ class ContractFilter(FilterSet, metaclass = MetaFilterSet):
         
     def filter_psc_naics(self, qs, name, value):
         naics_code = re.sub(r'[^\d]+$', '', value)
-        psc_codes = list(categories.PSC.objects.filter(naics__code=naics_code).distinct().values_list('code', flat=True))
+        psc_codes = list(categories.PSC.objects.filter(naics__root_code=naics_code).distinct().values_list('code', flat=True))
         
         if len(psc_codes) > 0:
             return qs.filter(Q(PSC__in=psc_codes) | Q(NAICS=naics_code))
