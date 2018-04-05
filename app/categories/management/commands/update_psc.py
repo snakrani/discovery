@@ -48,8 +48,8 @@ class Command(BaseCommand):
             description = re.sub(r'\s,\s', ', ', description) # Normalize comma
             description = re.sub(r'\s:\s', ': ', description) # Normalize colons
             description = re.sub(r'\s;\s', '; ', description) # Normalize semicolons
-            description = re.sub(r'\s\(\s', ' (', description) # Separate parenthesis from words
-            description = re.sub(r'\s\)\s', ') ', description) # Separate parenthesis from words
+            description = re.sub(r'\s\(\s', ' (', description) # Normalize parenthesis
+            description = re.sub(r'\s\)\s', ') ', description) # Normalize parenthesis
             
             psc.description = description
             
