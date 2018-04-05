@@ -23,17 +23,10 @@ class Naics(models.Model):
 class PSC(models.Model):
     code = models.CharField(unique=True, max_length=25)
     description = models.TextField()
+    naics = models.ManyToManyField(Naics)
      
     def __str__(self):
         return "{0} - {1}".format(self.code, self.description)
-
-
-class PscNaics(models.Model):
-    psc = models.ForeignKey(PSC, related_name='naics', on_delete=models.CASCADE)
-    code = models.CharField(max_length=25)
-
-    def __str__(self):
-        return "{0} - {1}".format(self.psc.code, self.code)
 
 
 class SetAside(models.Model):
