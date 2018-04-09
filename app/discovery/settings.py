@@ -194,12 +194,9 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'formatters': {
-        'verbose': {
+        'std': {
             'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
             'datefmt' : "%d/%b/%Y %H:%M:%S"
-        },
-        'simple': {
-            'format': '%(levelname)s %(message)s'
         },
         'csv': {
             'format' : '"%(asctime)s","%(levelname)s",%(message)s',
@@ -207,50 +204,37 @@ LOGGING = {
         }
     },
     'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(PROJ_DIR, 'logs/discovery.log'),
-            'formatter': 'verbose'
-        },
-        'vendor_file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(PROJ_DIR, 'logs/vendor.log'),
-            'formatter': 'verbose'
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'std',
         },
         'vendor_memory_file': {
-            'level': 'INFO',
+            'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': os.path.join(PROJ_DIR, 'logs/vendor_memory.csv'),
             'formatter': 'csv'
         },
         'vendor_data_file': {
-            'level': 'INFO',
+            'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': os.path.join(PROJ_DIR, 'logs/vendor_data.csv'),
             'formatter': 'csv'
         },
         'sam_data_file': {
-            'level': 'INFO',
+            'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': os.path.join(PROJ_DIR, 'logs/sam_data.csv'),
             'formatter': 'csv'
         },
-        'fpds_file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(PROJ_DIR, 'logs/fpds.log'),
-            'formatter': 'verbose'
-        },
         'fpds_memory_file': {
-            'level': 'INFO',
+            'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': os.path.join(PROJ_DIR, 'logs/fpds_memory.csv'),
             'formatter': 'csv'
         },
         'fpds_data_file': {
-            'level': 'INFO',
+            'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': os.path.join(PROJ_DIR, 'logs/fpds_data.csv'),
             'formatter': 'csv'
@@ -258,18 +242,23 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers':['file'],
-            'propagate': True,
-            'level':'DEBUG'
+            'handlers':['console'],
+            'propagate': True
+        },
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'WARNING',
+            'propagate': False,
         },
         'django.template': {
-            'handlers': ['file'],
-            'propagate': True,
-            'level': 'INFO',
+            'handlers': ['console'],
+            'level': 'WARNING',
+            'propagate': False
         },
-        'vendor': {
-            'handlers': ['vendor_file'],
-            'level': 'DEBUG'
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'WARNING',
+            'propagate': False
         },
         'vendor_memory': {
             'handlers': ['vendor_memory_file'],
@@ -283,10 +272,6 @@ LOGGING = {
             'handlers': ['sam_data_file'],
             'level': 'INFO'
         },
-        'fpds': {
-            'handlers': ['fpds_file'],
-            'level': 'DEBUG'
-        },
         'fpds_memory': {
             'handlers': ['fpds_memory_file'],
             'level': 'INFO'
@@ -296,6 +281,10 @@ LOGGING = {
             'level': 'INFO'
         }
     },
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO',
+    }
 }
 
 #-------------------------------------------------------------------------------
