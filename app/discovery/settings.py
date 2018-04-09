@@ -280,6 +280,10 @@ LOGGING = {
             'handlers': ['fpds_data_file'],
             'level': 'INFO'
         }
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO',
     }
 }
 
