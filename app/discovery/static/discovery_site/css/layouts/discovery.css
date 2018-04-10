@@ -1481,7 +1481,7 @@ img.green_dot {
 }
 
 #ch_table th.h_agency {
-    width: 150px;
+    width: 170px;
     text-align: left;
     padding-left: 10px;
 }
@@ -1493,9 +1493,13 @@ img.green_dot {
 }
 
 #ch_table th.h_poc {
-    width: 275px;
+    width: 255px;
     text-align: left;
     padding-left: 10px;
+}
+
+#ch_table td.poc {
+  font-size: .8em;
 }
 
 #ch_table th.h_value {
