@@ -13,6 +13,8 @@ LayoutManager.render = function(results) {
     }
 
     $(document).prop('title', "Results - " + URLManager.title);
+
+    $('#pool_vendors th span').tooltip();
 };
 
 LayoutManager.renderTable = function(results, pageNumber, itemsPerPage) {
