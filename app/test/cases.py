@@ -39,12 +39,13 @@ class TestTracker(object):
         
     @classmethod
     def init_request(cls, name, url, key):
-        print("Testing {} [{} / {}]: {}".format(
-            name,
-            cls.render_running_time(),
-            cls.render_memory(),  
-            url
-        ))
+        #print("Testing {} [{} / {}]: {}".format(
+        #    name,
+        #    cls.render_running_time(),
+        #    cls.render_memory(),  
+        #    url
+        #))
+        pass
 
 
 class BaseTestCase(TestCase, TestAssertions):
