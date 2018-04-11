@@ -41,23 +41,42 @@ var LayoutManager = {
         $("div#naics_select select").attr("disabled", true);
     },
 
+    zoneActive: function() {
+        if (InputHandler.getVehicle().match(/^BMO/i) && URLManager.getParameterByName('naics-code')) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    },
+
     enableZone: function() {
-        $("div#zone_select span.select_text").css('color', 'white');
-        $("div#zone_select select").attr("disabled", false);
+        if (this.zoneActive()) {
+            $("div#zone_select span.select_text").css('color', 'white');
+            $("div#zone_select select").attr("disabled", false);
+        }
+    },
+
+    showZone: function() {
         $("div#zone_select").show();
     },
 
     disableZone: function() {
         $("div#zone_select span.select_text").css('color', this.disabledColor);
         $("div#zone_select select").attr("disabled", true);
+    },
+
+    hideZone: function() {
         $("div#zone_select").hide();
     },
 
     toggleZone: function() {
-        if (InputHandler.getVehicle().match(/^BMO/i) && URLManager.getParameterByName('naics-code')) {
+        if (this.zoneActive()) {
             this.enableZone();
+            this.showZone();
         }
         else {
+            this.hideZone();
             this.disableZone();
         }
     },
