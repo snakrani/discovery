@@ -29,7 +29,7 @@ RequestsManager.loadVendors = function(data, callback) {
             filters.push('(pools__pool__number' + '=' + requestVars['pool'] + ')');
         }
 
-        if ('zone' in requestVars && requestVars['zone'] != 'all') {
+        if (LayoutManager.zoneActive() && 'zone' in requestVars && requestVars['zone'] != 'all') {
             filters.push('(pools__zones__id' + '=' + requestVars['zone'] + ')');
         }
 
@@ -53,14 +53,14 @@ RequestsManager.loadVendors = function(data, callback) {
 
                 LayoutManager.enableVehicles();
                 LayoutManager.enableNaics();
-                LayoutManager.toggleZone();
+                LayoutManager.enableZone();
                 LayoutManager.enableFilters();
                 $('.table_wrapper').removeClass('loading');
             },
             function(req, status, error) {
                 LayoutManager.enableVehicles();
                 LayoutManager.enableNaics();
-                LayoutManager.toggleZone();
+                LayoutManager.enableZone();
                 LayoutManager.enableFilters();
                 $('.table_wrapper').removeClass('loading');
             }

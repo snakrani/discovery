@@ -162,7 +162,13 @@ LayoutManager.cleanLocation = function(loc) {
         var after = loc.substring(comma + 2);
         var space = after.lastIndexOf(' ');
         location_obj.state = after.slice(0, space).toUpperCase();
-        new_location = this.toTitleCase(location_obj.city) + ', ' + location_obj.state;
+
+        if (location_obj.city.match(/^\s*$/) || location_obj.state.match(/^\s*$/)) {
+            new_location = '';
+        }
+        else {
+            new_location = this.toTitleCase(location_obj.city) + ', ' + location_obj.state;
+        }
     }
     return new_location;
 };
