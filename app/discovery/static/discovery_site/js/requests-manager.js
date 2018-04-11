@@ -6,6 +6,7 @@ var RequestsManager = {
         if (URLManager.isHomePage() || URLManager.isPoolPage()) {
             EventManager.subscribe('vehicleChanged', this.load.bind(RequestsManager));
             EventManager.subscribe('naicsChanged', this.load.bind(RequestsManager));
+            EventManager.subscribe('zoneChanged', this.load.bind(RequestsManager));
             EventManager.subscribe('filtersChanged', this.load.bind(RequestsManager));
         }
         else {
@@ -45,23 +46,28 @@ var RequestsManager = {
     buildRequestQuery: function() {
         var setasides = InputHandler.getSetasides();
         var naicsCode = InputHandler.getNAICSCode() || URLManager.getParameterByName('naics-code');
+        var zoneId = InputHandler.getZone() || URLManager.getParameterByName('zone-id');
         var vehicle = InputHandler.getVehicle();
         var pool = URLManager.getPool();
         var queryData = {};
 
-        if (naicsCode && typeof naicsCode !== 'undefined') {
-            queryData['naics'] = naicsCode;
-        }
-
-        if (setasides.length > 0) {
-            queryData["setasides"] = setasides.join(',');
-        }
         if (pool && typeof pool != undefined) {
             queryData['pool'] = pool[0];
             queryData['vehicle'] = pool[1];
         }
         if (vehicle && typeof vehicle != undefined) {
             queryData['vehicle'] = vehicle;
+        }
+
+        if (naicsCode && typeof naicsCode !== 'undefined') {
+            queryData['naics'] = naicsCode;
+        }
+        if (zoneId && typeof zoneId !== 'undefined') {
+            queryData['zone'] = zoneId;
+        }
+
+        if (setasides.length > 0) {
+            queryData["setasides"] = setasides.join(',');
         }
 
         if (URLManager.getParameterByName('test')) {
