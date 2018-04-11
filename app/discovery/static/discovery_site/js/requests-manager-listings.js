@@ -53,14 +53,14 @@ RequestsManager.loadVendors = function(data, callback) {
 
                 LayoutManager.enableVehicles();
                 LayoutManager.enableNaics();
-                LayoutManager.toggleZone();
+                LayoutManager.enableZone();
                 LayoutManager.enableFilters();
                 $('.table_wrapper').removeClass('loading');
             },
             function(req, status, error) {
                 LayoutManager.enableVehicles();
                 LayoutManager.enableNaics();
-                LayoutManager.toggleZone();
+                LayoutManager.enableZone();
                 LayoutManager.enableFilters();
                 $('.table_wrapper').removeClass('loading');
             }
