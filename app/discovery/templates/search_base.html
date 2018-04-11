@@ -20,12 +20,20 @@
         </div><!-- end vehicle_select -->
 
         <div id="search">
-            <span class="select_text">Select NAICS code or description</span>
-            <form id="naics-search" class="pure-form" title="2. Select a NAICS code or description">
-                <select id="naics-code"></select>
-            </form>
-        </div><!-- end search -->
+            <div id="naics_select">
+                <span class="select_text">Select NAICS code or description</span>
+                <form id="naics-search" class="pure-form" title="2. Select a NAICS code or description">
+                    <select id="naics-code"></select>
+                </form>
+            </div>
 
+            <div id="zone_select">
+                <span class="select_text">Select zone</span>
+                <form id="zone-search" class="zone_select_style" title="2.1. Select a zone">
+                    <select id="zone-id"></select>
+                </form>
+            </div>
+        </div><!-- end search -->
 
         <div id="filter_container">
             <span class="select_text" id="choose_filters">Choose filters (SB Only)</span>
