@@ -54,7 +54,7 @@ var LayoutManager = {
     },
 
     toggleZone: function() {
-        if (InputHandler.getVehicle().match(/^BMO/i)) {
+        if (InputHandler.getVehicle().match(/^BMO/i) && URLManager.getParameterByName('naics-code')) {
             this.enableZone();
         }
         else {

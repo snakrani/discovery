@@ -4,6 +4,7 @@ LayoutManager.initializers.index = function() {
     EventManager.subscribe('loadPage', this.vehicleInfo.bind(LayoutManager));
 
     this.disableNaics();
+    this.disableZone();
     this.disableFilters();
 };
 
