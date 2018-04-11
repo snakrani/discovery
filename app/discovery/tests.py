@@ -10,8 +10,17 @@ class SmokeTest(case.RequestTestCase):
     def test_home_found(self):
         self.validated_path('/')
 
-    def test_docs_found(self):
-        self.validated_path('/docs/')
+    def test_docs_found_1(self):
+        self.validated_path('/api/')
+        
+    def test_docs_found_2(self):
+        self.validated_temp_redirect('/docs/')
+        
+    def test_docs_found_3(self):
+        self.validated_temp_redirect('/developer/')
+        
+    def test_docs_found_4(self):
+        self.validated_temp_redirect('/developers/')
         
     def test_admin_found(self):
         self.validated_temp_redirect('/admin/')

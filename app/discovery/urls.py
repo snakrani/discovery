@@ -1,5 +1,6 @@
 from django.conf.urls import include, url
 from django.views.generic import TemplateView
+from django.views.generic.base import RedirectView
 from django.contrib import admin
 
 from rest_framework.documentation import include_docs_urls
@@ -15,8 +16,11 @@ urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='index.html')),
     
     url(r'^api/', include('api.urls')),
-    url(r'^docs/', include_docs_urls(title="Discovery API", public=True)),
-    
+    url(r'^api/', include_docs_urls(title="Discovery API", public=True)),
+    url(r'^docs/', RedirectView.as_view(url='/api', permanent=False)),
+    url(r'^developer/', RedirectView.as_view(url='/api', permanent=False)),
+    url(r'^developers/', RedirectView.as_view(url='/api', permanent=False)),
+        
     url(r'^results/$', TemplateView.as_view(template_name='pool.html')),
     url(r'^results/csv', vendors.PoolCSV, name="pool-csv"),
     
