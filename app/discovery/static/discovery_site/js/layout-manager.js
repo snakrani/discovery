@@ -3,11 +3,12 @@ var LayoutManager = {
     initializers: {},
 
     init: function() {
-        EventManager.subscribe('vehicleChanged', this.enableNaics);
+        EventManager.subscribe('vehicleChanged', this.enableNaics.bind(LayoutManager));
+        EventManager.subscribe('vehicleChanged', this.toggleZone.bind(LayoutManager));
 
         EventManager.subscribe('dataLoaded', this.render.bind(LayoutManager));
-        EventManager.subscribe('poolUpdated', this.updatePoolInfo);
-        EventManager.subscribe('contentChanged', this.updateResultsInfo);
+        EventManager.subscribe('poolUpdated', this.updatePoolInfo.bind(LayoutManager));
+        EventManager.subscribe('contentChanged', this.updateResultsInfo.bind(LayoutManager));
 
         for(var handler in this.initializers){
             this.initializers[handler].call(this);
@@ -31,13 +32,34 @@ var LayoutManager = {
     },
 
     enableNaics: function() {
-        $("div#search span.select_text").css('color', 'white');
-        $("div#search select").attr("disabled", false);
+        $("div#naics_select span.select_text").css('color', 'white');
+        $("div#naics_select select").attr("disabled", false);
     },
 
     disableNaics: function() {
-        $("div#search span.select_text").css('color', this.disabledColor);
-        $("div#search select").attr("disabled", true);
+        $("div#naics_select span.select_text").css('color', this.disabledColor);
+        $("div#naics_select select").attr("disabled", true);
+    },
+
+    enableZone: function() {
+        $("div#zone_select span.select_text").css('color', 'white');
+        $("div#zone_select select").attr("disabled", false);
+        $("div#zone_select").show();
+    },
+
+    disableZone: function() {
+        $("div#zone_select span.select_text").css('color', this.disabledColor);
+        $("div#zone_select select").attr("disabled", true);
+        $("div#zone_select").hide();
+    },
+
+    toggleZone: function() {
+        if (InputHandler.getVehicle().match(/^BMO/i)) {
+            this.enableZone();
+        }
+        else {
+            this.disableZone();
+        }
     },
 
     enableFilters: function() {

@@ -29,6 +29,10 @@ RequestsManager.loadVendors = function(data, callback) {
             filters.push('(pools__pool__number' + '=' + requestVars['pool'] + ')');
         }
 
+        if ('zone' in requestVars && requestVars['zone'] != 'all') {
+            filters.push('(pools__zones__id' + '=' + requestVars['zone'] + ')');
+        }
+
         if ('setasides' in requestVars) {
             var setasides = requestVars['setasides'].split(',');
             for (var index = 0; index < setasides.length; index++) {
@@ -39,6 +43,7 @@ RequestsManager.loadVendors = function(data, callback) {
 
         LayoutManager.disableVehicles();
         LayoutManager.disableNaics();
+        LayoutManager.disableZone();
         LayoutManager.disableFilters();
         $('.table_wrapper').addClass('loading');
 
@@ -48,12 +53,14 @@ RequestsManager.loadVendors = function(data, callback) {
 
                 LayoutManager.enableVehicles();
                 LayoutManager.enableNaics();
+                LayoutManager.toggleZone();
                 LayoutManager.enableFilters();
                 $('.table_wrapper').removeClass('loading');
             },
             function(req, status, error) {
                 LayoutManager.enableVehicles();
                 LayoutManager.enableNaics();
+                LayoutManager.toggleZone();
                 LayoutManager.enableFilters();
                 $('.table_wrapper').removeClass('loading');
             }

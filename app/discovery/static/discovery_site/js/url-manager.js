@@ -5,6 +5,7 @@ var URLManager = {
     init: function() {
         EventManager.subscribe('vehicleChanged', this.update.bind(URLManager));
         EventManager.subscribe('naicsChanged', this.update.bind(URLManager));
+        EventManager.subscribe('zoneChanged', this.update.bind(URLManager));
         EventManager.subscribe('contentChanged', this.update.bind(URLManager));
 
         this.initFromQS();
@@ -13,6 +14,7 @@ var URLManager = {
     initFromQS: function() {
         var vehicle = this.getParameterByName('vehicle');
         var naics = this.getParameterByName('naics-code');
+        var zone = this.getParameterByName('zone');
         var setasides = this.getParameterByName('setasides');
         var data = {};
 
@@ -21,6 +23,9 @@ var URLManager = {
         }
         if (naics) {
             data['naics-code'] = naics;
+        }
+        if (zone) {
+            data['zone'] = zone;
         }
         if (setasides) {
             data['setasides'] = setasides;

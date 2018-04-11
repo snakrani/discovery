@@ -2,9 +2,11 @@
 var InputHandler = {
     init: function() {
         // event bindings
-        $('#naics-code').change(this.sendCodeChange.bind(InputHandler));
-        $('#setaside-filters').change(this.sendFilterChange);
         $('form#vehicle-select select').change(this.sendVehicleChange.bind(InputHandler));
+        $('#naics-code').change(this.sendCodeChange.bind(InputHandler));
+        $('#zone-id').change(this.sendZoneChange.bind(InputHandler));
+        $('#setaside-filters').change(this.sendFilterChange);
+
         //should this be bound to the InputHandler? KBD
         $('#vendor_contract_history_title_container').on('click', 'div.contracts_button', this.sendContractsChange);
         $('#vendor_contract_history_title_container').on('keypress', 'div.contracts_button', this.sendContractsChange);
@@ -19,6 +21,8 @@ var InputHandler = {
         EventManager.subscribe('loadPage', this.updateFields.bind(InputHandler));
 
         if (URLManager.isHomePage() || URLManager.isPoolPage()) {
+            EventManager.subscribe('loadPage', this.populateZoneDropDown.bind(InputHandler));
+
             EventManager.subscribe('fieldsUpdated', this.loadVehiclePools.bind(InputHandler));
             EventManager.subscribe('vehicleChanged', this.loadVehiclePools.bind(InputHandler));
             EventManager.subscribe('poolDataLoaded', this.populateNaicsDropDown.bind(InputHandler));
@@ -37,11 +41,17 @@ var InputHandler = {
         if(obj['vehicle']){
             this.vehicle = obj['vehicle'];
             $('form#vehicle-select select').val(obj['vehicle']);
+
             LayoutManager.enableNaics();
+            LayoutManager.toggleZone();
         }
 
         if (obj['naics-code']) {
             this.naicsCode = obj['naics-code'];
+        }
+
+        if (obj['zone']) {
+            this.zoneId = obj['zone'];
         }
 
         if (obj.setasides) {
@@ -152,6 +162,11 @@ var InputHandler = {
         EventManager.publish('naicsChanged', this.naicsCode);
     },
 
+    sendZoneChange: function(e) {
+        this.zoneId = $('#zone-id').val();
+        EventManager.publish('zoneChanged', this.zoneId);
+    },
+
     sendFilterChange: function() {
         EventManager.publish('filtersChanged');
     },
@@ -162,6 +177,10 @@ var InputHandler = {
 
     getNAICSCode: function() {
         return this.naicsCode;
+    },
+
+    getZone: function() {
+        return this.zoneId;
     },
 
     getSetasides: function() {
@@ -263,6 +282,32 @@ var InputHandler = {
                 }
             }
         );
+    },
+
+    populateZoneDropDown: function() {
+        var zone = URLManager.getParameterByName('zone');
+        var url = "/api/zones/";
+        var queryData = {};
+
+        $('#zone-id').select2({placeholder:'Filter by zone', width: '380px'});
+
+        RequestsManager.getAPIRequest(url, queryData, function(data) {
+            $("#zone-id").empty()
+                .append($("<option></option>")
+                    .attr("value", 'all')
+                    .text("All zones"));
+
+            $.each(data.results, function(id, result) {
+                $("#zone-id")
+                    .append($("<option></option>")
+                    .attr("value", result.id)
+                    .text("Zone " + result.id + " (" + result.state.join(', ') + ")"));
+            });
+
+            if (zone) {
+                $("#zone-id").val(zone);
+            }
+        });
     },
 
     /*

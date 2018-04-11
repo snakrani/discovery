@@ -27,12 +27,12 @@ $(document).ready(function() {
     URLManager.init();
 
     //fix for select2 IE disable bug
-    $('#naics-code').fireOnDisable().select2();
     $('#placeholder').select2({
         'placeholder': 'Select a vehicle',
         minimumResultsForSearch: -1,
         width: "170px"
     });
+    $('#naics-code').fireOnDisable().select2();
 });
 
 // removes empty strings
