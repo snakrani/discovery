@@ -22,6 +22,8 @@ from api import mixins, filters, serializers, pagination
 import re
 
 
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='retrieve')
 class DiscoveryReadOnlyModelViewSet(
     mixins.FilterViewSetMixin,
     mixins.PaginationViewSetMixin,
@@ -43,8 +45,6 @@ class DiscoveryReadOnlyModelViewSet(
         return super(DiscoveryReadOnlyModelViewSet, self).retrieve(request, *args, **kwargs)
     
 
-@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
-@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='retrieve')
 class NaicsViewSet(DiscoveryReadOnlyModelViewSet):
     """
     API endpoint that allows for access to Discovery related NAICS code information.
@@ -74,8 +74,6 @@ class NaicsViewSet(DiscoveryReadOnlyModelViewSet):
     }
 
 
-@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
-@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='retrieve')
 class PscViewSet(DiscoveryReadOnlyModelViewSet):
     """
     API endpoint that allows for access to Discovery related PSC code information.
@@ -105,8 +103,6 @@ class PscViewSet(DiscoveryReadOnlyModelViewSet):
     }
 
 
-@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
-@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='retrieve')
 class PoolViewSet(DiscoveryReadOnlyModelViewSet):
     """
     API endpoint that allows for access to Discovery related vendor pool information.
@@ -136,8 +132,6 @@ class PoolViewSet(DiscoveryReadOnlyModelViewSet):
     }
 
 
-@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
-@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='retrieve')
 class SetAsideViewSet(DiscoveryReadOnlyModelViewSet):
     """
     API endpoint that allows for access to Discovery related business setaside information.
@@ -167,8 +161,6 @@ class SetAsideViewSet(DiscoveryReadOnlyModelViewSet):
     }
 
 
-@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
-@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='retrieve')
 class ZoneViewSet(DiscoveryReadOnlyModelViewSet):
     """
     API endpoint that allows for access to Discovery vendor pool zone information.
@@ -197,8 +189,6 @@ class ZoneViewSet(DiscoveryReadOnlyModelViewSet):
     }
 
 
-@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
-@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='retrieve')
 class VendorViewSet(DiscoveryReadOnlyModelViewSet):
     """
     API endpoint that allows for access to vendor information in the Discovery universe.
@@ -256,8 +246,6 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
         return queryset.annotate(number_of_contracts = query.QueryCount(contract_list))
 
 
-@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
-@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='retrieve')
 class ContractViewSet(DiscoveryReadOnlyModelViewSet):
     """
     API endpoint that allows for access to contract information for vendors in the Discovery universe.
