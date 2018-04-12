@@ -509,6 +509,29 @@
   "model": "contracts.contract",
   "pk": 23,
   "fields": {
+    "piid": "GS00Q14OADS103_DEDT0012913",
+    "date_signed": "2018-04-02T00:00:00Z",
+    "completion_date": "2019-04-16T00:00:00Z",
+    "NAICS": "541330",
+    "PSC": "R799",
+    "agency_id": "8900",
+    "agency_name": "ENERGY, DEPARTMENT OF",
+    "vendor": 3,
+    "point_of_contact": "MARIE.SEPE@HQ.DOE.GOV",
+    "pricing_type": "J",
+    "obligated_amount": "-982673.75",
+    "status": "C2",
+    "annual_revenue": 13463626,
+    "number_of_employees": 70,
+    "vendor_phone": "703-373-1984",
+    "vendor_location": 3,
+    "place_of_performance": 16
+  }
+},
+{
+  "model": "contracts.contract",
+  "pk": 24,
+  "fields": {
     "piid": "EDFSA09D0002_EDFSA09D0002TO0002",
     "date_signed": "2013-08-14T00:00:00Z",
     "completion_date": "2014-03-26T00:00:00Z",
@@ -525,12 +548,12 @@
     "number_of_employees": 45,
     "vendor_phone": "703-373-1984",
     "vendor_location": 126,
-    "place_of_performance": 16
+    "place_of_performance": 17
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 24,
+  "pk": 25,
   "fields": {
     "piid": "GS10F0019N_HHSGS10F0019NHHSF220D8554004",
     "date_signed": "2004-07-02T00:00:00Z",
@@ -553,7 +576,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 25,
+  "pk": 26,
   "fields": {
     "piid": "W81XWH13D0014_0001",
     "date_signed": "2013-11-21T00:00:00Z",
@@ -571,12 +594,12 @@
     "number_of_employees": 88,
     "vendor_phone": "703-373-1984",
     "vendor_location": 125,
-    "place_of_performance": 17
+    "place_of_performance": 18
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 26,
+  "pk": 27,
   "fields": {
     "piid": "SP470312A0007_0003",
     "date_signed": "2012-09-05T00:00:00Z",
@@ -594,12 +617,12 @@
     "number_of_employees": 88,
     "vendor_phone": "703-373-1984",
     "vendor_location": 128,
-    "place_of_performance": 18
+    "place_of_performance": 19
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 27,
+  "pk": 28,
   "fields": {
     "piid": "GS10F0019N_GST0006AJ0019",
     "date_signed": "2009-06-29T00:00:00Z",
@@ -617,12 +640,12 @@
     "number_of_employees": 30,
     "vendor_phone": null,
     "vendor_location": 127,
-    "place_of_performance": 19
+    "place_of_performance": 20
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 28,
+  "pk": 29,
   "fields": {
     "piid": "GS00Q14OADS103_HTC71117FD001",
     "date_signed": "2017-09-29T00:00:00Z",
@@ -640,12 +663,12 @@
     "number_of_employees": 70,
     "vendor_phone": "703-373-1984",
     "vendor_location": 3,
-    "place_of_performance": 20
+    "place_of_performance": 21
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 29,
+  "pk": 30,
   "fields": {
     "piid": "GS10F0019N_INM0405DO41426",
     "date_signed": "2005-01-10T00:00:00Z",
@@ -664,29 +687,6 @@
     "vendor_phone": null,
     "vendor_location": 127,
     "place_of_performance": 2
-  }
-},
-{
-  "model": "contracts.contract",
-  "pk": 30,
-  "fields": {
-    "piid": "GS00Q14OADS103_W9124L15F0039",
-    "date_signed": "2016-05-31T00:00:00Z",
-    "completion_date": "2017-08-27T00:00:00Z",
-    "NAICS": "541330",
-    "PSC": "R499",
-    "agency_id": "9700",
-    "agency_name": "DEPT OF DEFENSE",
-    "vendor": 3,
-    "point_of_contact": "SLAGLEL@SILL.ARMY.MIL",
-    "pricing_type": "J",
-    "obligated_amount": "184606.02",
-    "status": "C1",
-    "annual_revenue": 13463626,
-    "number_of_employees": 70,
-    "vendor_phone": "703-373-1984",
-    "vendor_location": 125,
-    "place_of_performance": 21
   }
 },
 {
@@ -1199,6 +1199,29 @@
   "model": "contracts.contract",
   "pk": 53,
   "fields": {
+    "piid": "DOCAB133E16CN0064",
+    "date_signed": "2018-03-27T00:00:00Z",
+    "completion_date": "2018-06-28T00:00:00Z",
+    "NAICS": "541330",
+    "PSC": "R425",
+    "agency_id": "1330",
+    "agency_name": "NATIONAL OCEANIC AND ATMOSPHERIC ADMINISTRATION",
+    "vendor": 6,
+    "point_of_contact": "MICHELE.EBERHART@NOAA.GOV",
+    "pricing_type": "U",
+    "obligated_amount": "346900.00",
+    "status": "C2",
+    "annual_revenue": 17333876,
+    "number_of_employees": 177,
+    "vendor_phone": "301-837-9029",
+    "vendor_location": 6,
+    "place_of_performance": 36
+  }
+},
+{
+  "model": "contracts.contract",
+  "pk": 54,
+  "fields": {
     "piid": "GS00Q14OADS105_FA251717F9014",
     "date_signed": "2017-06-23T00:00:00Z",
     "completion_date": "2017-07-14T00:00:00Z",
@@ -1220,7 +1243,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 54,
+  "pk": 55,
   "fields": {
     "piid": "HQ014715C7247",
     "date_signed": "2015-11-25T00:00:00Z",
@@ -1238,12 +1261,12 @@
     "number_of_employees": 125,
     "vendor_phone": "301-837-9029",
     "vendor_location": 6,
-    "place_of_performance": 36
+    "place_of_performance": 37
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 55,
+  "pk": 56,
   "fields": {
     "piid": "NNG15CR67C",
     "date_signed": "2017-05-11T00:00:00Z",
@@ -1261,12 +1284,12 @@
     "number_of_employees": 125,
     "vendor_phone": "301-837-9029",
     "vendor_location": 6,
-    "place_of_performance": 36
+    "place_of_performance": 37
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 56,
+  "pk": 57,
   "fields": {
     "piid": "NNH16CO92B_NNH16CP48T",
     "date_signed": "2016-08-04T00:00:00Z",
@@ -1284,12 +1307,12 @@
     "number_of_employees": 125,
     "vendor_phone": "301-837-9029",
     "vendor_location": 6,
-    "place_of_performance": 37
+    "place_of_performance": 38
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 57,
+  "pk": 58,
   "fields": {
     "piid": "NNK15MA15C",
     "date_signed": "2016-08-30T00:00:00Z",
@@ -1307,12 +1330,12 @@
     "number_of_employees": 128,
     "vendor_phone": "301-837-9029",
     "vendor_location": 6,
-    "place_of_performance": 38
+    "place_of_performance": 39
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 58,
+  "pk": 59,
   "fields": {
     "piid": "NNK16MA16P",
     "date_signed": "2016-10-24T00:00:00Z",
@@ -1330,12 +1353,12 @@
     "number_of_employees": 125,
     "vendor_phone": "301-837-9029",
     "vendor_location": 6,
-    "place_of_performance": 38
+    "place_of_performance": 39
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 59,
+  "pk": 60,
   "fields": {
     "piid": "W15P7T17D0104_0001",
     "date_signed": "2017-09-27T00:00:00Z",
@@ -1353,30 +1376,7 @@
     "number_of_employees": 445,
     "vendor_phone": "301-837-9029",
     "vendor_location": 6,
-    "place_of_performance": 36
-  }
-},
-{
-  "model": "contracts.contract",
-  "pk": 60,
-  "fields": {
-    "piid": "DOCAB133E16CN0064",
-    "date_signed": "2017-02-04T00:00:00Z",
-    "completion_date": "2017-06-28T00:00:00Z",
-    "NAICS": "541330",
-    "PSC": "R425",
-    "agency_id": "1330",
-    "agency_name": "NATIONAL OCEANIC AND ATMOSPHERIC ADMINISTRATION",
-    "vendor": 6,
-    "point_of_contact": "ANDREW.WALL@NOAA.GOV",
-    "pricing_type": "U",
-    "obligated_amount": "0.00",
-    "status": "C1",
-    "annual_revenue": 17333876,
-    "number_of_employees": 177,
-    "vendor_phone": "301-837-9029",
-    "vendor_location": 6,
-    "place_of_performance": 39
+    "place_of_performance": 37
   }
 },
 {
@@ -2602,6 +2602,29 @@
   "model": "contracts.contract",
   "pk": 114,
   "fields": {
+    "piid": "SFSIAQ17D0004_SFSIAQ17F0164",
+    "date_signed": "2018-04-02T00:00:00Z",
+    "completion_date": "2019-04-22T00:00:00Z",
+    "NAICS": "541611",
+    "PSC": "R431",
+    "agency_id": "1900",
+    "agency_name": "STATE, DEPARTMENT OF",
+    "vendor": 12,
+    "point_of_contact": "MODRAKER@STATE.GOV",
+    "pricing_type": "Z",
+    "obligated_amount": "88050.24",
+    "status": "C2",
+    "annual_revenue": 1750000,
+    "number_of_employees": 20,
+    "vendor_phone": "301-587-4074",
+    "vendor_location": 12,
+    "place_of_performance": 68
+  }
+},
+{
+  "model": "contracts.contract",
+  "pk": 115,
+  "fields": {
     "piid": "GS23F0246L_SP010305FA043",
     "date_signed": "2005-02-09T00:00:00Z",
     "completion_date": "2005-03-18T00:00:00Z",
@@ -2623,7 +2646,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 115,
+  "pk": 116,
   "fields": {
     "piid": "GS23F0246L_AG7245D150044",
     "date_signed": "2015-03-23T00:00:00Z",
@@ -2641,12 +2664,12 @@
     "number_of_employees": 13,
     "vendor_phone": null,
     "vendor_location": 12,
-    "place_of_performance": 68
+    "place_of_performance": 69
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 116,
+  "pk": 117,
   "fields": {
     "piid": "GS23F0246L_DOCDG133W07NC0983",
     "date_signed": "2007-06-19T00:00:00Z",
@@ -2664,12 +2687,12 @@
     "number_of_employees": 13,
     "vendor_phone": null,
     "vendor_location": 143,
-    "place_of_performance": 69
+    "place_of_performance": 70
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 117,
+  "pk": 118,
   "fields": {
     "piid": "GS23F0246L_VA74112F0315",
     "date_signed": "2014-04-01T00:00:00Z",
@@ -2692,7 +2715,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 118,
+  "pk": 119,
   "fields": {
     "piid": "GS23F0246L_W81XWH08F1062",
     "date_signed": "2009-04-03T00:00:00Z",
@@ -2715,7 +2738,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 119,
+  "pk": 120,
   "fields": {
     "piid": "GS23F0246L_GSP0210DT0019",
     "date_signed": "2016-03-22T00:00:00Z",
@@ -2733,30 +2756,7 @@
     "number_of_employees": 13,
     "vendor_phone": null,
     "vendor_location": 12,
-    "place_of_performance": 70
-  }
-},
-{
-  "model": "contracts.contract",
-  "pk": 120,
-  "fields": {
-    "piid": "W74V8H06P0549",
-    "date_signed": "2011-10-14T00:00:00Z",
-    "completion_date": "2007-07-31T00:00:00Z",
-    "NAICS": "561110",
-    "PSC": "R704",
-    "agency_id": "9700",
-    "agency_name": "DEPT OF DEFENSE",
-    "vendor": 12,
-    "point_of_contact": "HARRISA1-HQTMP.W91WAW@CONUS.ARMY.MIL",
-    "pricing_type": "J",
-    "obligated_amount": "-75816.44",
-    "status": "C1",
-    "annual_revenue": 989053,
-    "number_of_employees": 20,
-    "vendor_phone": null,
-    "vendor_location": 143,
-    "place_of_performance": 4
+    "place_of_performance": 71
   }
 },
 {
@@ -2779,7 +2779,7 @@
     "number_of_employees": 9,
     "vendor_phone": null,
     "vendor_location": 144,
-    "place_of_performance": 71
+    "place_of_performance": 72
   }
 },
 {
@@ -2802,7 +2802,7 @@
     "number_of_employees": 9,
     "vendor_phone": null,
     "vendor_location": 144,
-    "place_of_performance": 71
+    "place_of_performance": 72
   }
 },
 {
@@ -2825,7 +2825,7 @@
     "number_of_employees": 9,
     "vendor_phone": "571-482-2500",
     "vendor_location": 145,
-    "place_of_performance": 72
+    "place_of_performance": 73
   }
 },
 {
@@ -2843,12 +2843,12 @@
     "point_of_contact": "CARLA.HUNTER1@FNS.USDA.GOV",
     "pricing_type": "J",
     "obligated_amount": "0.00",
-    "status": "C2",
+    "status": "C1",
     "annual_revenue": 33170832,
     "number_of_employees": 200,
     "vendor_phone": "571-482-2500",
     "vendor_location": 145,
-    "place_of_performance": 73
+    "place_of_performance": 74
   }
 },
 {
@@ -2871,7 +2871,7 @@
     "number_of_employees": 15,
     "vendor_phone": "571-482-2501",
     "vendor_location": 146,
-    "place_of_performance": 74
+    "place_of_performance": 75
   }
 },
 {
@@ -2894,7 +2894,7 @@
     "number_of_employees": 38,
     "vendor_phone": "571-482-2501",
     "vendor_location": 146,
-    "place_of_performance": 74
+    "place_of_performance": 75
   }
 },
 {
@@ -2917,7 +2917,7 @@
     "number_of_employees": 38,
     "vendor_phone": "571-482-2501",
     "vendor_location": 146,
-    "place_of_performance": 72
+    "place_of_performance": 73
   }
 },
 {
@@ -2940,7 +2940,7 @@
     "number_of_employees": 38,
     "vendor_phone": "571-482-2501",
     "vendor_location": 145,
-    "place_of_performance": 75
+    "place_of_performance": 76
   }
 },
 {
@@ -2963,7 +2963,7 @@
     "number_of_employees": 38,
     "vendor_phone": "571-482-2501",
     "vendor_location": 145,
-    "place_of_performance": 72
+    "place_of_performance": 73
   }
 },
 {
@@ -2986,7 +2986,7 @@
     "number_of_employees": 38,
     "vendor_phone": "571-482-2501",
     "vendor_location": 145,
-    "place_of_performance": 72
+    "place_of_performance": 73
   }
 },
 {
@@ -3009,7 +3009,7 @@
     "number_of_employees": 28,
     "vendor_phone": "571-255-6771",
     "vendor_location": 147,
-    "place_of_performance": 76
+    "place_of_performance": 77
   }
 },
 {
@@ -3032,7 +3032,7 @@
     "number_of_employees": 34,
     "vendor_phone": "571-255-6767",
     "vendor_location": 148,
-    "place_of_performance": 71
+    "place_of_performance": 72
   }
 },
 {
@@ -3055,7 +3055,7 @@
     "number_of_employees": 34,
     "vendor_phone": "571-255-6767",
     "vendor_location": 148,
-    "place_of_performance": 77
+    "place_of_performance": 78
   }
 },
 {
@@ -3101,7 +3101,7 @@
     "number_of_employees": 46,
     "vendor_phone": "571-255-6767",
     "vendor_location": 14,
-    "place_of_performance": 72
+    "place_of_performance": 73
   }
 },
 {
@@ -3124,7 +3124,7 @@
     "number_of_employees": 46,
     "vendor_phone": "571-255-6767",
     "vendor_location": 148,
-    "place_of_performance": 78
+    "place_of_performance": 79
   }
 },
 {
@@ -3147,7 +3147,7 @@
     "number_of_employees": 18,
     "vendor_phone": "571-255-6767",
     "vendor_location": 14,
-    "place_of_performance": 79
+    "place_of_performance": 80
   }
 },
 {
@@ -3170,7 +3170,7 @@
     "number_of_employees": 18,
     "vendor_phone": "571-255-6771",
     "vendor_location": 147,
-    "place_of_performance": 80
+    "place_of_performance": 81
   }
 },
 {
@@ -3193,7 +3193,7 @@
     "number_of_employees": 20,
     "vendor_phone": "571-255-6767",
     "vendor_location": 14,
-    "place_of_performance": 81
+    "place_of_performance": 82
   }
 },
 {
@@ -3216,7 +3216,7 @@
     "number_of_employees": 46,
     "vendor_phone": "571-255-6767",
     "vendor_location": 148,
-    "place_of_performance": 78
+    "place_of_performance": 79
   }
 },
 {
@@ -3239,7 +3239,7 @@
     "number_of_employees": 23,
     "vendor_phone": "703-243-7713",
     "vendor_location": 149,
-    "place_of_performance": 72
+    "place_of_performance": 73
   }
 },
 {
@@ -3262,7 +3262,7 @@
     "number_of_employees": 9,
     "vendor_phone": "703-243-7713",
     "vendor_location": 150,
-    "place_of_performance": 72
+    "place_of_performance": 73
   }
 },
 {
@@ -3285,7 +3285,7 @@
     "number_of_employees": 9,
     "vendor_phone": "703-243-7713",
     "vendor_location": 150,
-    "place_of_performance": 72
+    "place_of_performance": 73
   }
 },
 {
@@ -3308,7 +3308,7 @@
     "number_of_employees": 9,
     "vendor_phone": "703-243-7713",
     "vendor_location": 150,
-    "place_of_performance": 72
+    "place_of_performance": 73
   }
 },
 {
@@ -3331,7 +3331,7 @@
     "number_of_employees": 43,
     "vendor_phone": "703-243-7713",
     "vendor_location": 149,
-    "place_of_performance": 82
+    "place_of_performance": 83
   }
 },
 {
@@ -3354,7 +3354,7 @@
     "number_of_employees": 9,
     "vendor_phone": "703-243-7713",
     "vendor_location": 150,
-    "place_of_performance": 83
+    "place_of_performance": 84
   }
 },
 {
@@ -3377,7 +3377,7 @@
     "number_of_employees": 9,
     "vendor_phone": "703-243-7713",
     "vendor_location": 150,
-    "place_of_performance": 72
+    "place_of_performance": 73
   }
 },
 {
@@ -3400,7 +3400,7 @@
     "number_of_employees": 69,
     "vendor_phone": "571-858-3799",
     "vendor_location": 15,
-    "place_of_performance": 84
+    "place_of_performance": 85
   }
 },
 {
@@ -3423,7 +3423,7 @@
     "number_of_employees": 69,
     "vendor_phone": "571-858-3799",
     "vendor_location": 15,
-    "place_of_performance": 84
+    "place_of_performance": 85
   }
 },
 {
@@ -3446,7 +3446,7 @@
     "number_of_employees": 70,
     "vendor_phone": "571-858-3799",
     "vendor_location": 15,
-    "place_of_performance": 84
+    "place_of_performance": 85
   }
 },
 {
@@ -3469,7 +3469,7 @@
     "number_of_employees": 10,
     "vendor_phone": "202-204-2238",
     "vendor_location": 16,
-    "place_of_performance": 85
+    "place_of_performance": 86
   }
 },
 {
@@ -3492,7 +3492,7 @@
     "number_of_employees": 10,
     "vendor_phone": "202-204-2238",
     "vendor_location": 151,
-    "place_of_performance": 86
+    "place_of_performance": 87
   }
 },
 {
@@ -3515,7 +3515,7 @@
     "number_of_employees": 10,
     "vendor_phone": "202-204-2238",
     "vendor_location": 151,
-    "place_of_performance": 87
+    "place_of_performance": 88
   }
 },
 {
@@ -3538,7 +3538,7 @@
     "number_of_employees": 10,
     "vendor_phone": "202-204-2238",
     "vendor_location": 151,
-    "place_of_performance": 88
+    "place_of_performance": 89
   }
 },
 {
@@ -3561,7 +3561,7 @@
     "number_of_employees": 12,
     "vendor_phone": "202-204-2238",
     "vendor_location": 151,
-    "place_of_performance": 89
+    "place_of_performance": 90
   }
 },
 {
@@ -3584,7 +3584,7 @@
     "number_of_employees": 20,
     "vendor_phone": "202-204-2238",
     "vendor_location": 151,
-    "place_of_performance": 86
+    "place_of_performance": 87
   }
 },
 {
@@ -3607,7 +3607,7 @@
     "number_of_employees": 10,
     "vendor_phone": "202-204-2238",
     "vendor_location": 151,
-    "place_of_performance": 85
+    "place_of_performance": 86
   }
 },
 {
@@ -3630,7 +3630,7 @@
     "number_of_employees": 15,
     "vendor_phone": "202-204-2238",
     "vendor_location": 151,
-    "place_of_performance": 90
+    "place_of_performance": 91
   }
 },
 {
@@ -3653,7 +3653,7 @@
     "number_of_employees": 10,
     "vendor_phone": "202-204-2238",
     "vendor_location": 151,
-    "place_of_performance": 86
+    "place_of_performance": 87
   }
 },
 {
@@ -3671,12 +3671,12 @@
     "point_of_contact": null,
     "pricing_type": "Z",
     "obligated_amount": "136973.87",
-    "status": "C2",
+    "status": "C1",
     "annual_revenue": 265000,
     "number_of_employees": 10,
     "vendor_phone": "202-204-2238",
     "vendor_location": 151,
-    "place_of_performance": 91
+    "place_of_performance": 92
   }
 },
 {
@@ -3699,7 +3699,7 @@
     "number_of_employees": 110,
     "vendor_phone": "571-331-1355",
     "vendor_location": 17,
-    "place_of_performance": 92
+    "place_of_performance": 93
   }
 },
 {
@@ -3722,7 +3722,7 @@
     "number_of_employees": 110,
     "vendor_phone": "571-331-1355",
     "vendor_location": 152,
-    "place_of_performance": 93
+    "place_of_performance": 94
   }
 },
 {
@@ -3745,7 +3745,7 @@
     "number_of_employees": 110,
     "vendor_phone": "571-331-1355",
     "vendor_location": 152,
-    "place_of_performance": 74
+    "place_of_performance": 75
   }
 },
 {
@@ -3768,7 +3768,7 @@
     "number_of_employees": 110,
     "vendor_phone": "571-331-1355",
     "vendor_location": 152,
-    "place_of_performance": 94
+    "place_of_performance": 95
   }
 },
 {
@@ -3791,7 +3791,7 @@
     "number_of_employees": 110,
     "vendor_phone": "571-331-1355",
     "vendor_location": 152,
-    "place_of_performance": 92
+    "place_of_performance": 93
   }
 },
 {
@@ -3837,7 +3837,7 @@
     "number_of_employees": 40,
     "vendor_phone": "571-331-1355",
     "vendor_location": 153,
-    "place_of_performance": 95
+    "place_of_performance": 96
   }
 },
 {
@@ -3860,7 +3860,7 @@
     "number_of_employees": 40,
     "vendor_phone": "571-331-1355",
     "vendor_location": 153,
-    "place_of_performance": 92
+    "place_of_performance": 93
   }
 },
 {
@@ -3883,7 +3883,7 @@
     "number_of_employees": 40,
     "vendor_phone": "571-331-1355",
     "vendor_location": 153,
-    "place_of_performance": 96
+    "place_of_performance": 97
   }
 },
 {
@@ -3906,7 +3906,7 @@
     "number_of_employees": 40,
     "vendor_phone": "571-331-1355",
     "vendor_location": 153,
-    "place_of_performance": 85
+    "place_of_performance": 86
   }
 },
 {
@@ -3952,7 +3952,7 @@
     "number_of_employees": 7,
     "vendor_phone": "703-850-2352",
     "vendor_location": 155,
-    "place_of_performance": 92
+    "place_of_performance": 93
   }
 },
 {
@@ -3975,7 +3975,7 @@
     "number_of_employees": 7,
     "vendor_phone": "301-871-7601",
     "vendor_location": 155,
-    "place_of_performance": 97
+    "place_of_performance": 98
   }
 },
 {
@@ -4044,7 +4044,7 @@
     "number_of_employees": 7,
     "vendor_phone": "703-850-2352",
     "vendor_location": 154,
-    "place_of_performance": 92
+    "place_of_performance": 93
   }
 },
 {
@@ -4067,7 +4067,7 @@
     "number_of_employees": 7,
     "vendor_phone": "703-850-2352",
     "vendor_location": 155,
-    "place_of_performance": 92
+    "place_of_performance": 93
   }
 },
 {
@@ -4113,7 +4113,7 @@
     "number_of_employees": 7,
     "vendor_phone": "703-850-2352",
     "vendor_location": 154,
-    "place_of_performance": 98
+    "place_of_performance": 99
   }
 },
 {
@@ -4136,7 +4136,7 @@
     "number_of_employees": 1,
     "vendor_phone": "703-850-2352",
     "vendor_location": 18,
-    "place_of_performance": 99
+    "place_of_performance": 100
   }
 },
 {
@@ -4159,7 +4159,7 @@
     "number_of_employees": 180,
     "vendor_phone": null,
     "vendor_location": 156,
-    "place_of_performance": 100
+    "place_of_performance": 101
   }
 },
 {
@@ -4205,7 +4205,7 @@
     "number_of_employees": 310,
     "vendor_phone": "301-776-5000",
     "vendor_location": 19,
-    "place_of_performance": 101
+    "place_of_performance": 102
   }
 },
 {
@@ -4228,7 +4228,7 @@
     "number_of_employees": 310,
     "vendor_phone": "301-776-5000",
     "vendor_location": 19,
-    "place_of_performance": 101
+    "place_of_performance": 102
   }
 },
 {
@@ -4251,7 +4251,7 @@
     "number_of_employees": 270,
     "vendor_phone": null,
     "vendor_location": 156,
-    "place_of_performance": 102
+    "place_of_performance": 103
   }
 },
 {
@@ -4274,7 +4274,7 @@
     "number_of_employees": 270,
     "vendor_phone": null,
     "vendor_location": 156,
-    "place_of_performance": 102
+    "place_of_performance": 103
   }
 },
 {
@@ -4320,7 +4320,7 @@
     "number_of_employees": 180,
     "vendor_phone": null,
     "vendor_location": 156,
-    "place_of_performance": 103
+    "place_of_performance": 104
   }
 },
 {
@@ -4366,7 +4366,7 @@
     "number_of_employees": 144,
     "vendor_phone": null,
     "vendor_location": 156,
-    "place_of_performance": 95
+    "place_of_performance": 96
   }
 },
 {
@@ -4389,7 +4389,7 @@
     "number_of_employees": 200,
     "vendor_phone": "256-922-0802",
     "vendor_location": 20,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -4412,7 +4412,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 157,
-    "place_of_performance": 105
+    "place_of_performance": 106
   }
 },
 {
@@ -4435,7 +4435,7 @@
     "number_of_employees": 180,
     "vendor_phone": "256-922-0802",
     "vendor_location": 158,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -4458,7 +4458,7 @@
     "number_of_employees": 180,
     "vendor_phone": "256-922-0802",
     "vendor_location": 158,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -4481,7 +4481,7 @@
     "number_of_employees": 200,
     "vendor_phone": "256-922-0802",
     "vendor_location": 20,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -4504,7 +4504,7 @@
     "number_of_employees": 180,
     "vendor_phone": "256-922-0802",
     "vendor_location": 158,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -4527,7 +4527,7 @@
     "number_of_employees": 180,
     "vendor_phone": "256-922-0802",
     "vendor_location": 158,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -4550,7 +4550,7 @@
     "number_of_employees": 200,
     "vendor_phone": "256-922-0802",
     "vendor_location": 20,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -4573,7 +4573,7 @@
     "number_of_employees": 200,
     "vendor_phone": "256-922-0802",
     "vendor_location": 20,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -4596,7 +4596,7 @@
     "number_of_employees": 319,
     "vendor_phone": "256-922-0802",
     "vendor_location": 20,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -4665,7 +4665,7 @@
     "number_of_employees": 190,
     "vendor_phone": null,
     "vendor_location": 159,
-    "place_of_performance": 106
+    "place_of_performance": 107
   }
 },
 {
@@ -4688,7 +4688,7 @@
     "number_of_employees": 210,
     "vendor_phone": null,
     "vendor_location": 160,
-    "place_of_performance": 107
+    "place_of_performance": 108
   }
 },
 {
@@ -4711,7 +4711,7 @@
     "number_of_employees": 190,
     "vendor_phone": null,
     "vendor_location": 159,
-    "place_of_performance": 107
+    "place_of_performance": 108
   }
 },
 {
@@ -4734,7 +4734,7 @@
     "number_of_employees": 190,
     "vendor_phone": null,
     "vendor_location": 159,
-    "place_of_performance": 107
+    "place_of_performance": 108
   }
 },
 {
@@ -4757,7 +4757,7 @@
     "number_of_employees": 190,
     "vendor_phone": null,
     "vendor_location": 159,
-    "place_of_performance": 107
+    "place_of_performance": 108
   }
 },
 {
@@ -4780,7 +4780,7 @@
     "number_of_employees": 210,
     "vendor_phone": null,
     "vendor_location": 160,
-    "place_of_performance": 107
+    "place_of_performance": 108
   }
 },
 {
@@ -4803,7 +4803,7 @@
     "number_of_employees": 190,
     "vendor_phone": null,
     "vendor_location": 159,
-    "place_of_performance": 107
+    "place_of_performance": 108
   }
 },
 {
@@ -4826,7 +4826,7 @@
     "number_of_employees": 190,
     "vendor_phone": null,
     "vendor_location": 159,
-    "place_of_performance": 108
+    "place_of_performance": 109
   }
 },
 {
@@ -4849,7 +4849,7 @@
     "number_of_employees": 1072,
     "vendor_phone": "505-881-8074",
     "vendor_location": 161,
-    "place_of_performance": 109
+    "place_of_performance": 110
   }
 },
 {
@@ -4872,7 +4872,7 @@
     "number_of_employees": 1183,
     "vendor_phone": "505-881-8074",
     "vendor_location": 161,
-    "place_of_performance": 109
+    "place_of_performance": 110
   }
 },
 {
@@ -4895,7 +4895,7 @@
     "number_of_employees": 1183,
     "vendor_phone": "505-881-8074",
     "vendor_location": 161,
-    "place_of_performance": 109
+    "place_of_performance": 110
   }
 },
 {
@@ -4918,7 +4918,7 @@
     "number_of_employees": 1072,
     "vendor_phone": "505-881-8074",
     "vendor_location": 161,
-    "place_of_performance": 110
+    "place_of_performance": 111
   }
 },
 {
@@ -4941,7 +4941,7 @@
     "number_of_employees": 1183,
     "vendor_phone": "505-881-8074",
     "vendor_location": 161,
-    "place_of_performance": 111
+    "place_of_performance": 112
   }
 },
 {
@@ -4964,7 +4964,7 @@
     "number_of_employees": 1147,
     "vendor_phone": "505-881-8074",
     "vendor_location": 161,
-    "place_of_performance": 109
+    "place_of_performance": 110
   }
 },
 {
@@ -4987,7 +4987,7 @@
     "number_of_employees": 1072,
     "vendor_phone": "505-881-8074",
     "vendor_location": 161,
-    "place_of_performance": 109
+    "place_of_performance": 110
   }
 },
 {
@@ -5010,7 +5010,7 @@
     "number_of_employees": 1308,
     "vendor_phone": "505-881-8074",
     "vendor_location": 161,
-    "place_of_performance": 109
+    "place_of_performance": 110
   }
 },
 {
@@ -5033,7 +5033,7 @@
     "number_of_employees": 1183,
     "vendor_phone": "505-881-8074",
     "vendor_location": 161,
-    "place_of_performance": 109
+    "place_of_performance": 110
   }
 },
 {
@@ -5056,7 +5056,7 @@
     "number_of_employees": 1072,
     "vendor_phone": "505-881-8074",
     "vendor_location": 161,
-    "place_of_performance": 109
+    "place_of_performance": 110
   }
 },
 {
@@ -5079,7 +5079,7 @@
     "number_of_employees": 580,
     "vendor_phone": "937-912-6102",
     "vendor_location": 162,
-    "place_of_performance": 112
+    "place_of_performance": 113
   }
 },
 {
@@ -5102,7 +5102,7 @@
     "number_of_employees": 580,
     "vendor_phone": "937-912-6102",
     "vendor_location": 162,
-    "place_of_performance": 112
+    "place_of_performance": 113
   }
 },
 {
@@ -5148,7 +5148,7 @@
     "number_of_employees": 580,
     "vendor_phone": "937-912-6102",
     "vendor_location": 162,
-    "place_of_performance": 112
+    "place_of_performance": 113
   }
 },
 {
@@ -5171,7 +5171,7 @@
     "number_of_employees": 580,
     "vendor_phone": "937-912-6102",
     "vendor_location": 23,
-    "place_of_performance": 113
+    "place_of_performance": 114
   }
 },
 {
@@ -5194,7 +5194,7 @@
     "number_of_employees": 70,
     "vendor_phone": "937-912-6102",
     "vendor_location": 23,
-    "place_of_performance": 112
+    "place_of_performance": 113
   }
 },
 {
@@ -5263,7 +5263,7 @@
     "number_of_employees": 70,
     "vendor_phone": "937-912-6102",
     "vendor_location": 23,
-    "place_of_performance": 112
+    "place_of_performance": 113
   }
 },
 {
@@ -5286,7 +5286,7 @@
     "number_of_employees": 580,
     "vendor_phone": "937-912-6102",
     "vendor_location": 23,
-    "place_of_performance": 114
+    "place_of_performance": 115
   }
 },
 {
@@ -5378,7 +5378,7 @@
     "number_of_employees": 135,
     "vendor_phone": "256-721-7006",
     "vendor_location": 163,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -5401,7 +5401,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 164,
-    "place_of_performance": 115
+    "place_of_performance": 116
   }
 },
 {
@@ -5424,7 +5424,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 164,
-    "place_of_performance": 115
+    "place_of_performance": 116
   }
 },
 {
@@ -5447,7 +5447,7 @@
     "number_of_employees": 83,
     "vendor_phone": null,
     "vendor_location": 165,
-    "place_of_performance": 116
+    "place_of_performance": 117
   }
 },
 {
@@ -5470,7 +5470,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 165,
-    "place_of_performance": 115
+    "place_of_performance": 116
   }
 },
 {
@@ -5539,7 +5539,7 @@
     "number_of_employees": 285,
     "vendor_phone": null,
     "vendor_location": 166,
-    "place_of_performance": 117
+    "place_of_performance": 118
   }
 },
 {
@@ -5585,7 +5585,7 @@
     "number_of_employees": 128,
     "vendor_phone": "937-431-9431",
     "vendor_location": 167,
-    "place_of_performance": 117
+    "place_of_performance": 118
   }
 },
 {
@@ -5631,7 +5631,7 @@
     "number_of_employees": 218,
     "vendor_phone": "937-431-9431",
     "vendor_location": 168,
-    "place_of_performance": 117
+    "place_of_performance": 118
   }
 },
 {
@@ -5700,7 +5700,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 169,
-    "place_of_performance": 118
+    "place_of_performance": 119
   }
 },
 {
@@ -5723,7 +5723,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 169,
-    "place_of_performance": 119
+    "place_of_performance": 120
   }
 },
 {
@@ -5746,7 +5746,7 @@
     "number_of_employees": 275,
     "vendor_phone": null,
     "vendor_location": 166,
-    "place_of_performance": 117
+    "place_of_performance": 118
   }
 },
 {
@@ -5769,7 +5769,7 @@
     "number_of_employees": 900,
     "vendor_phone": null,
     "vendor_location": 170,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -5792,7 +5792,7 @@
     "number_of_employees": 965,
     "vendor_phone": "256-964-5555",
     "vendor_location": 26,
-    "place_of_performance": 120
+    "place_of_performance": 121
   }
 },
 {
@@ -5815,7 +5815,7 @@
     "number_of_employees": 840,
     "vendor_phone": "256-964-5555",
     "vendor_location": 26,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -5838,7 +5838,7 @@
     "number_of_employees": 965,
     "vendor_phone": "256-964-5555",
     "vendor_location": 26,
-    "place_of_performance": 120
+    "place_of_performance": 121
   }
 },
 {
@@ -5861,7 +5861,7 @@
     "number_of_employees": 900,
     "vendor_phone": "256-964-5269",
     "vendor_location": 171,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -5884,7 +5884,7 @@
     "number_of_employees": 786,
     "vendor_phone": null,
     "vendor_location": 171,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -5907,7 +5907,7 @@
     "number_of_employees": 900,
     "vendor_phone": "256-964-5269",
     "vendor_location": 26,
-    "place_of_performance": 121
+    "place_of_performance": 122
   }
 },
 {
@@ -5930,7 +5930,7 @@
     "number_of_employees": 900,
     "vendor_phone": "256-964-5269",
     "vendor_location": 26,
-    "place_of_performance": 121
+    "place_of_performance": 122
   }
 },
 {
@@ -5953,7 +5953,7 @@
     "number_of_employees": 786,
     "vendor_phone": null,
     "vendor_location": 171,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -5976,7 +5976,7 @@
     "number_of_employees": 915,
     "vendor_phone": "256-964-5555",
     "vendor_location": 26,
-    "place_of_performance": 122
+    "place_of_performance": 123
   }
 },
 {
@@ -5999,7 +5999,7 @@
     "number_of_employees": 49,
     "vendor_phone": null,
     "vendor_location": 172,
-    "place_of_performance": 103
+    "place_of_performance": 104
   }
 },
 {
@@ -6022,7 +6022,7 @@
     "number_of_employees": 49,
     "vendor_phone": null,
     "vendor_location": 172,
-    "place_of_performance": 123
+    "place_of_performance": 124
   }
 },
 {
@@ -6045,7 +6045,7 @@
     "number_of_employees": 183,
     "vendor_phone": "301-737-4640",
     "vendor_location": 27,
-    "place_of_performance": 123
+    "place_of_performance": 124
   }
 },
 {
@@ -6068,7 +6068,7 @@
     "number_of_employees": 155,
     "vendor_phone": "301-737-4640",
     "vendor_location": 27,
-    "place_of_performance": 123
+    "place_of_performance": 124
   }
 },
 {
@@ -6091,7 +6091,7 @@
     "number_of_employees": 144,
     "vendor_phone": "301-737-4640",
     "vendor_location": 27,
-    "place_of_performance": 123
+    "place_of_performance": 124
   }
 },
 {
@@ -6114,7 +6114,7 @@
     "number_of_employees": 155,
     "vendor_phone": "301-737-4640",
     "vendor_location": 27,
-    "place_of_performance": 123
+    "place_of_performance": 124
   }
 },
 {
@@ -6137,7 +6137,7 @@
     "number_of_employees": 49,
     "vendor_phone": null,
     "vendor_location": 172,
-    "place_of_performance": 123
+    "place_of_performance": 124
   }
 },
 {
@@ -6183,7 +6183,7 @@
     "number_of_employees": 155,
     "vendor_phone": "301-737-4640",
     "vendor_location": 27,
-    "place_of_performance": 123
+    "place_of_performance": 124
   }
 },
 {
@@ -6206,7 +6206,7 @@
     "number_of_employees": 49,
     "vendor_phone": null,
     "vendor_location": 27,
-    "place_of_performance": 123
+    "place_of_performance": 124
   }
 },
 {
@@ -6229,7 +6229,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 173,
-    "place_of_performance": 124
+    "place_of_performance": 125
   }
 },
 {
@@ -6252,7 +6252,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 174,
-    "place_of_performance": 125
+    "place_of_performance": 126
   }
 },
 {
@@ -6275,7 +6275,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 174,
-    "place_of_performance": 125
+    "place_of_performance": 126
   }
 },
 {
@@ -6298,7 +6298,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 174,
-    "place_of_performance": 124
+    "place_of_performance": 125
   }
 },
 {
@@ -6321,7 +6321,7 @@
     "number_of_employees": 210,
     "vendor_phone": null,
     "vendor_location": 174,
-    "place_of_performance": 71
+    "place_of_performance": 72
   }
 },
 {
@@ -6344,7 +6344,7 @@
     "number_of_employees": 210,
     "vendor_phone": null,
     "vendor_location": 174,
-    "place_of_performance": 71
+    "place_of_performance": 72
   }
 },
 {
@@ -6367,7 +6367,7 @@
     "number_of_employees": 210,
     "vendor_phone": null,
     "vendor_location": 174,
-    "place_of_performance": 71
+    "place_of_performance": 72
   }
 },
 {
@@ -6390,7 +6390,7 @@
     "number_of_employees": 210,
     "vendor_phone": null,
     "vendor_location": 174,
-    "place_of_performance": 71
+    "place_of_performance": 72
   }
 },
 {
@@ -6413,7 +6413,7 @@
     "number_of_employees": 210,
     "vendor_phone": null,
     "vendor_location": 174,
-    "place_of_performance": 71
+    "place_of_performance": 72
   }
 },
 {
@@ -6436,7 +6436,7 @@
     "number_of_employees": 280,
     "vendor_phone": "202-863-2175",
     "vendor_location": 175,
-    "place_of_performance": 71
+    "place_of_performance": 72
   }
 },
 {
@@ -6459,7 +6459,7 @@
     "number_of_employees": 725,
     "vendor_phone": "571-227-6263",
     "vendor_location": 176,
-    "place_of_performance": 126
+    "place_of_performance": 127
   }
 },
 {
@@ -6505,7 +6505,7 @@
     "number_of_employees": 725,
     "vendor_phone": "571-227-6263",
     "vendor_location": 176,
-    "place_of_performance": 126
+    "place_of_performance": 127
   }
 },
 {
@@ -6528,7 +6528,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 177,
-    "place_of_performance": 127
+    "place_of_performance": 128
   }
 },
 {
@@ -6551,7 +6551,7 @@
     "number_of_employees": 461,
     "vendor_phone": null,
     "vendor_location": 177,
-    "place_of_performance": 103
+    "place_of_performance": 104
   }
 },
 {
@@ -6597,7 +6597,7 @@
     "number_of_employees": 725,
     "vendor_phone": "571-227-6263",
     "vendor_location": 176,
-    "place_of_performance": 126
+    "place_of_performance": 127
   }
 },
 {
@@ -6620,7 +6620,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 177,
-    "place_of_performance": 126
+    "place_of_performance": 127
   }
 },
 {
@@ -6666,7 +6666,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 177,
-    "place_of_performance": 126
+    "place_of_performance": 127
   }
 },
 {
@@ -6689,7 +6689,7 @@
     "number_of_employees": 131,
     "vendor_phone": "703-414-5024",
     "vendor_location": 30,
-    "place_of_performance": 128
+    "place_of_performance": 68
   }
 },
 {
@@ -7379,7 +7379,7 @@
     "number_of_employees": 62,
     "vendor_phone": "256-705-6810",
     "vendor_location": 183,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -7402,7 +7402,7 @@
     "number_of_employees": 1038,
     "vendor_phone": null,
     "vendor_location": 184,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -7425,7 +7425,7 @@
     "number_of_employees": 62,
     "vendor_phone": "256-705-6810",
     "vendor_location": 183,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -7471,7 +7471,7 @@
     "number_of_employees": 1038,
     "vendor_phone": null,
     "vendor_location": 184,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -7494,7 +7494,7 @@
     "number_of_employees": 1038,
     "vendor_phone": null,
     "vendor_location": 184,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -7540,7 +7540,7 @@
     "number_of_employees": 62,
     "vendor_phone": "256-705-6810",
     "vendor_location": 183,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -7609,7 +7609,7 @@
     "number_of_employees": 167,
     "vendor_phone": "256-922-9300",
     "vendor_location": 185,
-    "place_of_performance": 116
+    "place_of_performance": 117
   }
 },
 {
@@ -7655,7 +7655,7 @@
     "number_of_employees": 85,
     "vendor_phone": null,
     "vendor_location": 186,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -7678,7 +7678,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 187,
-    "place_of_performance": 116
+    "place_of_performance": 117
   }
 },
 {
@@ -7848,7 +7848,7 @@
   "fields": {
     "piid": "W31P4Q14A0009_0001",
     "date_signed": "2014-11-25T00:00:00Z",
-    "completion_date": "2015-11-19T12:11:00Z",
+    "completion_date": "2015-11-19T00:00:00Z",
     "NAICS": "541330",
     "PSC": "R425",
     "agency_id": "9700",
@@ -7954,7 +7954,7 @@
     "number_of_employees": 550,
     "vendor_phone": "703-740-2237",
     "vendor_location": 35,
-    "place_of_performance": 20
+    "place_of_performance": 21
   }
 },
 {
@@ -7977,7 +7977,7 @@
     "number_of_employees": 480,
     "vendor_phone": null,
     "vendor_location": 190,
-    "place_of_performance": 103
+    "place_of_performance": 104
   }
 },
 {
@@ -8248,7 +8248,7 @@
     "point_of_contact": null,
     "pricing_type": "U",
     "obligated_amount": "795713.00",
-    "status": "C2",
+    "status": "C1",
     "annual_revenue": 80160472,
     "number_of_employees": 218,
     "vendor_phone": "703-765-6623",
@@ -8283,6 +8283,29 @@
   "model": "contracts.contract",
   "pk": 361,
   "fields": {
+    "piid": "HC102808D2006_0015",
+    "date_signed": "2017-12-28T00:00:00Z",
+    "completion_date": "2107-04-30T00:00:00Z",
+    "NAICS": "541712",
+    "PSC": "D399",
+    "agency_id": "9700",
+    "agency_name": "DEPT OF DEFENSE",
+    "vendor": 37,
+    "point_of_contact": "TARA.HORSTMANN.HC1028@DISA.MIL",
+    "pricing_type": "J",
+    "obligated_amount": "58536.59",
+    "status": "C2",
+    "annual_revenue": 70759944,
+    "number_of_employees": 188,
+    "vendor_phone": "267-525-2039",
+    "vendor_location": 37,
+    "place_of_performance": 145
+  }
+},
+{
+  "model": "contracts.contract",
+  "pk": 362,
+  "fields": {
     "piid": "GS35F0074K_HC102808F2312",
     "date_signed": "2009-04-07T00:00:00Z",
     "completion_date": "2009-09-30T00:00:00Z",
@@ -8299,12 +8322,12 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 194,
-    "place_of_performance": 145
+    "place_of_performance": 146
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 362,
+  "pk": 363,
   "fields": {
     "piid": "GS35F0074K_HC104706F4385",
     "date_signed": "2008-05-01T00:00:00Z",
@@ -8327,7 +8350,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 363,
+  "pk": 364,
   "fields": {
     "piid": "GS35F0074K_HHM40206F0430",
     "date_signed": "2006-09-09T00:00:00Z",
@@ -8350,7 +8373,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 364,
+  "pk": 365,
   "fields": {
     "piid": "HC102808D2006_0016",
     "date_signed": "2017-08-24T00:00:00Z",
@@ -8368,12 +8391,12 @@
     "number_of_employees": 188,
     "vendor_phone": "267-525-2039",
     "vendor_location": 37,
-    "place_of_performance": 146
+    "place_of_performance": 147
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 365,
+  "pk": 366,
   "fields": {
     "piid": "HC102808D2006_0018",
     "date_signed": "2017-03-23T00:00:00Z",
@@ -8391,12 +8414,12 @@
     "number_of_employees": 188,
     "vendor_phone": "267-525-2039",
     "vendor_location": 37,
-    "place_of_performance": 147
+    "place_of_performance": 148
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 366,
+  "pk": 367,
   "fields": {
     "piid": "DCA10087C0032_0ZD10198701D0094DCA10087C0032",
     "date_signed": "1987-01-15T00:00:00Z",
@@ -8419,7 +8442,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 367,
+  "pk": 368,
   "fields": {
     "piid": "HC102808D2006_2T03",
     "date_signed": "2017-03-03T00:00:00Z",
@@ -8437,12 +8460,12 @@
     "number_of_employees": 188,
     "vendor_phone": "267-525-2039",
     "vendor_location": 37,
-    "place_of_performance": 145
+    "place_of_performance": 146
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 368,
+  "pk": 369,
   "fields": {
     "piid": "GS35F0074K_DAAB0701F0075",
     "date_signed": "2005-06-22T00:00:00Z",
@@ -8460,12 +8483,12 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 194,
-    "place_of_performance": 148
+    "place_of_performance": 149
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 369,
+  "pk": 370,
   "fields": {
     "piid": "FA445214C0009",
     "date_signed": "2016-04-28T00:00:00Z",
@@ -8483,30 +8506,7 @@
     "number_of_employees": 271,
     "vendor_phone": "267-525-2039",
     "vendor_location": 37,
-    "place_of_performance": 149
-  }
-},
-{
-  "model": "contracts.contract",
-  "pk": 370,
-  "fields": {
-    "piid": "HC102808D2006_0011",
-    "date_signed": "2017-06-28T00:00:00Z",
-    "completion_date": "2017-09-29T00:00:00Z",
-    "NAICS": "541712",
-    "PSC": "D399",
-    "agency_id": "9700",
-    "agency_name": "DEPT OF DEFENSE",
-    "vendor": 37,
-    "point_of_contact": "DONALD.PETTERSON.HC1028@DISA.MIL",
-    "pricing_type": "J",
-    "obligated_amount": "679203.62",
-    "status": "C1",
-    "annual_revenue": 70759944,
-    "number_of_employees": 188,
-    "vendor_phone": "267-525-2039",
-    "vendor_location": 37,
-    "place_of_performance": 146
+    "place_of_performance": 150
   }
 },
 {
@@ -8529,7 +8529,7 @@
     "number_of_employees": 75,
     "vendor_phone": "719-475-0605",
     "vendor_location": 196,
-    "place_of_performance": 120
+    "place_of_performance": 121
   }
 },
 {
@@ -8667,7 +8667,7 @@
     "number_of_employees": 1,
     "vendor_phone": null,
     "vendor_location": 198,
-    "place_of_performance": 151
+    "place_of_performance": 152
   }
 },
 {
@@ -8736,7 +8736,7 @@
     "number_of_employees": 1,
     "vendor_phone": null,
     "vendor_location": 198,
-    "place_of_performance": 151
+    "place_of_performance": 152
   }
 },
 {
@@ -8759,7 +8759,7 @@
     "number_of_employees": 55,
     "vendor_phone": null,
     "vendor_location": 199,
-    "place_of_performance": 153
+    "place_of_performance": 154
   }
 },
 {
@@ -8782,7 +8782,7 @@
     "number_of_employees": 200,
     "vendor_phone": "813-282-3031",
     "vendor_location": 200,
-    "place_of_performance": 121
+    "place_of_performance": 122
   }
 },
 {
@@ -8828,7 +8828,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 199,
-    "place_of_performance": 154
+    "place_of_performance": 155
   }
 },
 {
@@ -8851,7 +8851,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 199,
-    "place_of_performance": 155
+    "place_of_performance": 156
   }
 },
 {
@@ -8874,7 +8874,7 @@
     "number_of_employees": 200,
     "vendor_phone": "813-282-3031",
     "vendor_location": 200,
-    "place_of_performance": 156
+    "place_of_performance": 157
   }
 },
 {
@@ -8897,7 +8897,7 @@
     "number_of_employees": 200,
     "vendor_phone": "813-282-3031",
     "vendor_location": null,
-    "place_of_performance": 157
+    "place_of_performance": 158
   }
 },
 {
@@ -8920,7 +8920,7 @@
     "number_of_employees": 200,
     "vendor_phone": "813-282-3031",
     "vendor_location": 201,
-    "place_of_performance": 158
+    "place_of_performance": 159
   }
 },
 {
@@ -8943,7 +8943,7 @@
     "number_of_employees": 200,
     "vendor_phone": "813-282-3031",
     "vendor_location": 201,
-    "place_of_performance": 158
+    "place_of_performance": 159
   }
 },
 {
@@ -8966,7 +8966,7 @@
     "number_of_employees": 200,
     "vendor_phone": "813-282-3031",
     "vendor_location": 201,
-    "place_of_performance": 158
+    "place_of_performance": 159
   }
 },
 {
@@ -9012,7 +9012,7 @@
     "number_of_employees": 94,
     "vendor_phone": "571-748-4455",
     "vendor_location": 203,
-    "place_of_performance": 16
+    "place_of_performance": 17
   }
 },
 {
@@ -9035,7 +9035,7 @@
     "number_of_employees": 94,
     "vendor_phone": "571-748-4455",
     "vendor_location": 203,
-    "place_of_performance": 16
+    "place_of_performance": 17
   }
 },
 {
@@ -9058,7 +9058,7 @@
     "number_of_employees": 94,
     "vendor_phone": "571-748-4455",
     "vendor_location": 40,
-    "place_of_performance": 159
+    "place_of_performance": 160
   }
 },
 {
@@ -9081,7 +9081,7 @@
     "number_of_employees": 94,
     "vendor_phone": "571-748-4451",
     "vendor_location": 204,
-    "place_of_performance": 20
+    "place_of_performance": 21
   }
 },
 {
@@ -9104,7 +9104,7 @@
     "number_of_employees": 94,
     "vendor_phone": "571-748-4455",
     "vendor_location": 203,
-    "place_of_performance": 16
+    "place_of_performance": 17
   }
 },
 {
@@ -9127,7 +9127,7 @@
     "number_of_employees": 94,
     "vendor_phone": "571-748-4455",
     "vendor_location": 203,
-    "place_of_performance": 160
+    "place_of_performance": 161
   }
 },
 {
@@ -9150,7 +9150,7 @@
     "number_of_employees": 94,
     "vendor_phone": "571-748-4455",
     "vendor_location": 203,
-    "place_of_performance": 16
+    "place_of_performance": 17
   }
 },
 {
@@ -9173,7 +9173,7 @@
     "number_of_employees": 94,
     "vendor_phone": "571-748-4455",
     "vendor_location": 203,
-    "place_of_performance": 72
+    "place_of_performance": 73
   }
 },
 {
@@ -9196,7 +9196,7 @@
     "number_of_employees": 94,
     "vendor_phone": "571-748-4455",
     "vendor_location": 203,
-    "place_of_performance": 161
+    "place_of_performance": 162
   }
 },
 {
@@ -9219,7 +9219,7 @@
     "number_of_employees": 130,
     "vendor_phone": "256-327-4015",
     "vendor_location": 41,
-    "place_of_performance": 162
+    "place_of_performance": 163
   }
 },
 {
@@ -9242,7 +9242,7 @@
     "number_of_employees": 95,
     "vendor_phone": "256-327-4001",
     "vendor_location": 41,
-    "place_of_performance": 120
+    "place_of_performance": 121
   }
 },
 {
@@ -9265,7 +9265,7 @@
     "number_of_employees": 95,
     "vendor_phone": "256-327-4001",
     "vendor_location": 41,
-    "place_of_performance": 163
+    "place_of_performance": 164
   }
 },
 {
@@ -9288,7 +9288,7 @@
     "number_of_employees": 95,
     "vendor_phone": "256-327-4001",
     "vendor_location": 41,
-    "place_of_performance": 163
+    "place_of_performance": 164
   }
 },
 {
@@ -9357,7 +9357,7 @@
     "number_of_employees": 150,
     "vendor_phone": "256-327-4015",
     "vendor_location": 41,
-    "place_of_performance": 38
+    "place_of_performance": 39
   }
 },
 {
@@ -9380,7 +9380,7 @@
     "number_of_employees": 85,
     "vendor_phone": null,
     "vendor_location": 41,
-    "place_of_performance": 164
+    "place_of_performance": 165
   }
 },
 {
@@ -9403,7 +9403,7 @@
     "number_of_employees": 36,
     "vendor_phone": null,
     "vendor_location": 205,
-    "place_of_performance": 165
+    "place_of_performance": 166
   }
 },
 {
@@ -9426,7 +9426,7 @@
     "number_of_employees": 85,
     "vendor_phone": "256-327-4015",
     "vendor_location": 41,
-    "place_of_performance": 38
+    "place_of_performance": 39
   }
 },
 {
@@ -9449,7 +9449,7 @@
     "number_of_employees": 97,
     "vendor_phone": "757-858-5303",
     "vendor_location": 42,
-    "place_of_performance": 166
+    "place_of_performance": 167
   }
 },
 {
@@ -9472,7 +9472,7 @@
     "number_of_employees": 110,
     "vendor_phone": "757-858-5303",
     "vendor_location": 42,
-    "place_of_performance": 125
+    "place_of_performance": 126
   }
 },
 {
@@ -9495,7 +9495,7 @@
     "number_of_employees": 40,
     "vendor_phone": null,
     "vendor_location": 206,
-    "place_of_performance": 167
+    "place_of_performance": 168
   }
 },
 {
@@ -9518,7 +9518,7 @@
     "number_of_employees": 100,
     "vendor_phone": "757-858-5303",
     "vendor_location": 42,
-    "place_of_performance": 168
+    "place_of_performance": 169
   }
 },
 {
@@ -9541,7 +9541,7 @@
     "number_of_employees": 40,
     "vendor_phone": null,
     "vendor_location": 206,
-    "place_of_performance": 169
+    "place_of_performance": 170
   }
 },
 {
@@ -9564,7 +9564,7 @@
     "number_of_employees": 40,
     "vendor_phone": null,
     "vendor_location": 206,
-    "place_of_performance": 170
+    "place_of_performance": 171
   }
 },
 {
@@ -9587,7 +9587,7 @@
     "number_of_employees": 40,
     "vendor_phone": null,
     "vendor_location": 206,
-    "place_of_performance": 171
+    "place_of_performance": 172
   }
 },
 {
@@ -9610,7 +9610,7 @@
     "number_of_employees": 40,
     "vendor_phone": null,
     "vendor_location": 206,
-    "place_of_performance": 172
+    "place_of_performance": 173
   }
 },
 {
@@ -9633,7 +9633,7 @@
     "number_of_employees": 40,
     "vendor_phone": null,
     "vendor_location": 206,
-    "place_of_performance": 173
+    "place_of_performance": 174
   }
 },
 {
@@ -9656,7 +9656,7 @@
     "number_of_employees": 40,
     "vendor_phone": null,
     "vendor_location": 206,
-    "place_of_performance": 174
+    "place_of_performance": 175
   }
 },
 {
@@ -9679,7 +9679,7 @@
     "number_of_employees": 94,
     "vendor_phone": "843-554-6111",
     "vendor_location": 43,
-    "place_of_performance": 175
+    "place_of_performance": 176
   }
 },
 {
@@ -9702,7 +9702,7 @@
     "number_of_employees": 94,
     "vendor_phone": "843-554-6111",
     "vendor_location": 43,
-    "place_of_performance": 175
+    "place_of_performance": 176
   }
 },
 {
@@ -9725,7 +9725,7 @@
     "number_of_employees": 72,
     "vendor_phone": "843-554-6111",
     "vendor_location": 207,
-    "place_of_performance": 175
+    "place_of_performance": 176
   }
 },
 {
@@ -9748,7 +9748,7 @@
     "number_of_employees": 72,
     "vendor_phone": "843-554-6111",
     "vendor_location": 207,
-    "place_of_performance": 176
+    "place_of_performance": 177
   }
 },
 {
@@ -9771,7 +9771,7 @@
     "number_of_employees": 72,
     "vendor_phone": "843-554-6111",
     "vendor_location": 207,
-    "place_of_performance": 175
+    "place_of_performance": 176
   }
 },
 {
@@ -9794,7 +9794,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 208,
-    "place_of_performance": 124
+    "place_of_performance": 125
   }
 },
 {
@@ -9817,7 +9817,7 @@
     "number_of_employees": 72,
     "vendor_phone": "843-554-6111",
     "vendor_location": 207,
-    "place_of_performance": 175
+    "place_of_performance": 176
   }
 },
 {
@@ -9840,7 +9840,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 208,
-    "place_of_performance": 124
+    "place_of_performance": 125
   }
 },
 {
@@ -9863,7 +9863,7 @@
     "number_of_employees": 72,
     "vendor_phone": "843-554-6111",
     "vendor_location": 207,
-    "place_of_performance": 175
+    "place_of_performance": 176
   }
 },
 {
@@ -9886,7 +9886,7 @@
     "number_of_employees": 72,
     "vendor_phone": "843-554-6111",
     "vendor_location": 207,
-    "place_of_performance": 175
+    "place_of_performance": 176
   }
 },
 {
@@ -9932,7 +9932,7 @@
     "number_of_employees": 284,
     "vendor_phone": "323-924-1490",
     "vendor_location": 44,
-    "place_of_performance": 177
+    "place_of_performance": 178
   }
 },
 {
@@ -9955,7 +9955,7 @@
     "number_of_employees": 284,
     "vendor_phone": "323-924-1490",
     "vendor_location": 209,
-    "place_of_performance": 119
+    "place_of_performance": 120
   }
 },
 {
@@ -9978,7 +9978,7 @@
     "number_of_employees": 284,
     "vendor_phone": "323-924-1490",
     "vendor_location": 44,
-    "place_of_performance": 177
+    "place_of_performance": 178
   }
 },
 {
@@ -10047,7 +10047,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 210,
-    "place_of_performance": 178
+    "place_of_performance": 179
   }
 },
 {
@@ -10070,7 +10070,7 @@
     "number_of_employees": 284,
     "vendor_phone": null,
     "vendor_location": 209,
-    "place_of_performance": 179
+    "place_of_performance": 180
   }
 },
 {
@@ -10134,12 +10134,12 @@
     "point_of_contact": null,
     "pricing_type": "J",
     "obligated_amount": "716306.02",
-    "status": "C2",
+    "status": "C1",
     "annual_revenue": 11000000512,
     "number_of_employees": 250000,
     "vendor_phone": "571-414-2442",
     "vendor_location": 45,
-    "place_of_performance": 72
+    "place_of_performance": 73
   }
 },
 {
@@ -10185,7 +10185,7 @@
     "number_of_employees": 250000,
     "vendor_phone": "571-414-2442",
     "vendor_location": 45,
-    "place_of_performance": 72
+    "place_of_performance": 73
   }
 },
 {
@@ -10208,7 +10208,7 @@
     "number_of_employees": 150000,
     "vendor_phone": "703-947-2841",
     "vendor_location": 212,
-    "place_of_performance": 180
+    "place_of_performance": 181
   }
 },
 {
@@ -10231,7 +10231,7 @@
     "number_of_employees": 150000,
     "vendor_phone": "703-947-2841",
     "vendor_location": 213,
-    "place_of_performance": 181
+    "place_of_performance": 182
   }
 },
 {
@@ -10254,7 +10254,7 @@
     "number_of_employees": 150000,
     "vendor_phone": "703-947-2841",
     "vendor_location": 212,
-    "place_of_performance": 182
+    "place_of_performance": 183
   }
 },
 {
@@ -10277,7 +10277,7 @@
     "number_of_employees": 150000,
     "vendor_phone": "703-947-2841",
     "vendor_location": 212,
-    "place_of_performance": 182
+    "place_of_performance": 183
   }
 },
 {
@@ -10300,7 +10300,7 @@
     "number_of_employees": 250000,
     "vendor_phone": "571-414-5789",
     "vendor_location": 45,
-    "place_of_performance": 183
+    "place_of_performance": 184
   }
 },
 {
@@ -10323,7 +10323,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 213,
-    "place_of_performance": 181
+    "place_of_performance": 182
   }
 },
 {
@@ -10346,7 +10346,7 @@
     "number_of_employees": 150000,
     "vendor_phone": "703-947-2841",
     "vendor_location": 213,
-    "place_of_performance": 181
+    "place_of_performance": 182
   }
 },
 {
@@ -10369,7 +10369,7 @@
     "number_of_employees": 175,
     "vendor_phone": "703-391-2800",
     "vendor_location": 214,
-    "place_of_performance": 184
+    "place_of_performance": 185
   }
 },
 {
@@ -10392,7 +10392,7 @@
     "number_of_employees": 175,
     "vendor_phone": "703-391-2800",
     "vendor_location": 46,
-    "place_of_performance": 184
+    "place_of_performance": 185
   }
 },
 {
@@ -10438,7 +10438,7 @@
     "number_of_employees": 55,
     "vendor_phone": null,
     "vendor_location": 215,
-    "place_of_performance": 77
+    "place_of_performance": 78
   }
 },
 {
@@ -10461,7 +10461,7 @@
     "number_of_employees": 150,
     "vendor_phone": "703-391-2800",
     "vendor_location": 214,
-    "place_of_performance": 185
+    "place_of_performance": 186
   }
 },
 {
@@ -10484,7 +10484,7 @@
     "number_of_employees": 150,
     "vendor_phone": "703-391-2800",
     "vendor_location": 46,
-    "place_of_performance": 77
+    "place_of_performance": 78
   }
 },
 {
@@ -10507,7 +10507,7 @@
     "number_of_employees": 175,
     "vendor_phone": "703-391-2800",
     "vendor_location": 46,
-    "place_of_performance": 186
+    "place_of_performance": 187
   }
 },
 {
@@ -10530,7 +10530,7 @@
     "number_of_employees": 70,
     "vendor_phone": "703-391-2800",
     "vendor_location": 46,
-    "place_of_performance": 73
+    "place_of_performance": 74
   }
 },
 {
@@ -10553,7 +10553,7 @@
     "number_of_employees": 10,
     "vendor_phone": null,
     "vendor_location": 216,
-    "place_of_performance": 73
+    "place_of_performance": 74
   }
 },
 {
@@ -10576,7 +10576,7 @@
     "number_of_employees": 10,
     "vendor_phone": null,
     "vendor_location": 217,
-    "place_of_performance": 68
+    "place_of_performance": 69
   }
 },
 {
@@ -10599,7 +10599,7 @@
     "number_of_employees": 3180,
     "vendor_phone": "703-269-3437",
     "vendor_location": 47,
-    "place_of_performance": 187
+    "place_of_performance": 188
   }
 },
 {
@@ -10622,7 +10622,7 @@
     "number_of_employees": 3180,
     "vendor_phone": "703-269-3437",
     "vendor_location": 47,
-    "place_of_performance": 187
+    "place_of_performance": 188
   }
 },
 {
@@ -10645,7 +10645,7 @@
     "number_of_employees": 2824,
     "vendor_phone": "703-269-3437",
     "vendor_location": 47,
-    "place_of_performance": 188
+    "place_of_performance": 189
   }
 },
 {
@@ -10714,7 +10714,7 @@
     "number_of_employees": 3380,
     "vendor_phone": "703-269-3437",
     "vendor_location": 47,
-    "place_of_performance": 189
+    "place_of_performance": 190
   }
 },
 {
@@ -10737,7 +10737,7 @@
     "number_of_employees": 3180,
     "vendor_phone": "703-269-3437",
     "vendor_location": 47,
-    "place_of_performance": 188
+    "place_of_performance": 189
   }
 },
 {
@@ -10760,7 +10760,7 @@
     "number_of_employees": 3180,
     "vendor_phone": "703-269-3437",
     "vendor_location": 47,
-    "place_of_performance": 190
+    "place_of_performance": 191
   }
 },
 {
@@ -10806,7 +10806,7 @@
     "number_of_employees": 3180,
     "vendor_phone": "703-269-3437",
     "vendor_location": 47,
-    "place_of_performance": 190
+    "place_of_performance": 191
   }
 },
 {
@@ -10829,7 +10829,7 @@
     "number_of_employees": 17368,
     "vendor_phone": "610-828-8100",
     "vendor_location": 218,
-    "place_of_performance": 191
+    "place_of_performance": 192
   }
 },
 {
@@ -10852,7 +10852,7 @@
     "number_of_employees": 36000,
     "vendor_phone": "770-360-0746",
     "vendor_location": 48,
-    "place_of_performance": 192
+    "place_of_performance": 193
   }
 },
 {
@@ -10898,7 +10898,7 @@
     "number_of_employees": 22000,
     "vendor_phone": "610-877-6106",
     "vendor_location": 219,
-    "place_of_performance": 193
+    "place_of_performance": 194
   }
 },
 {
@@ -10921,7 +10921,7 @@
     "number_of_employees": 22000,
     "vendor_phone": "610-877-6106",
     "vendor_location": 219,
-    "place_of_performance": 194
+    "place_of_performance": 195
   }
 },
 {
@@ -10944,7 +10944,7 @@
     "number_of_employees": 21800,
     "vendor_phone": "610-877-6106",
     "vendor_location": 219,
-    "place_of_performance": 195
+    "place_of_performance": 196
   }
 },
 {
@@ -10990,7 +10990,7 @@
     "number_of_employees": 27000,
     "vendor_phone": "858-300-4312",
     "vendor_location": 48,
-    "place_of_performance": 196
+    "place_of_performance": 197
   }
 },
 {
@@ -11013,7 +11013,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 221,
-    "place_of_performance": 197
+    "place_of_performance": 198
   }
 },
 {
@@ -11036,7 +11036,7 @@
     "number_of_employees": 1238,
     "vendor_phone": null,
     "vendor_location": 218,
-    "place_of_performance": 197
+    "place_of_performance": 198
   }
 },
 {
@@ -11059,7 +11059,7 @@
     "number_of_employees": 3000,
     "vendor_phone": "303-533-4140",
     "vendor_location": 49,
-    "place_of_performance": 198
+    "place_of_performance": 199
   }
 },
 {
@@ -11082,7 +11082,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 49,
-    "place_of_performance": 199
+    "place_of_performance": 200
   }
 },
 {
@@ -11105,7 +11105,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 49,
-    "place_of_performance": 199
+    "place_of_performance": 200
   }
 },
 {
@@ -11128,7 +11128,7 @@
     "number_of_employees": 0,
     "vendor_phone": "303-533-7037",
     "vendor_location": 49,
-    "place_of_performance": 178
+    "place_of_performance": 179
   }
 },
 {
@@ -11151,7 +11151,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 49,
-    "place_of_performance": 147
+    "place_of_performance": 148
   }
 },
 {
@@ -11174,7 +11174,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 222,
-    "place_of_performance": 178
+    "place_of_performance": 179
   }
 },
 {
@@ -11197,7 +11197,7 @@
     "number_of_employees": 0,
     "vendor_phone": "303-533-7037",
     "vendor_location": 49,
-    "place_of_performance": 199
+    "place_of_performance": 200
   }
 },
 {
@@ -11220,7 +11220,7 @@
     "number_of_employees": 0,
     "vendor_phone": "303-533-7037",
     "vendor_location": 49,
-    "place_of_performance": 198
+    "place_of_performance": 199
   }
 },
 {
@@ -11243,7 +11243,7 @@
     "number_of_employees": 0,
     "vendor_phone": "303-533-7037",
     "vendor_location": 49,
-    "place_of_performance": 199
+    "place_of_performance": 200
   }
 },
 {
@@ -11266,7 +11266,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 222,
-    "place_of_performance": 178
+    "place_of_performance": 179
   }
 },
 {
@@ -11289,7 +11289,7 @@
     "number_of_employees": 20000,
     "vendor_phone": "614-424-7068",
     "vendor_location": 223,
-    "place_of_performance": 200
+    "place_of_performance": 201
   }
 },
 {
@@ -11312,7 +11312,7 @@
     "number_of_employees": 20000,
     "vendor_phone": "937-258-6745",
     "vendor_location": 223,
-    "place_of_performance": 201
+    "place_of_performance": 202
   }
 },
 {
@@ -11335,7 +11335,7 @@
     "number_of_employees": 20000,
     "vendor_phone": "614-424-6503",
     "vendor_location": 50,
-    "place_of_performance": 200
+    "place_of_performance": 201
   }
 },
 {
@@ -11358,7 +11358,7 @@
     "number_of_employees": 8900,
     "vendor_phone": "614-424-5010",
     "vendor_location": 50,
-    "place_of_performance": 202
+    "place_of_performance": 203
   }
 },
 {
@@ -11381,7 +11381,7 @@
     "number_of_employees": 8900,
     "vendor_phone": null,
     "vendor_location": 223,
-    "place_of_performance": 17
+    "place_of_performance": 18
   }
 },
 {
@@ -11404,7 +11404,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 224,
-    "place_of_performance": 203
+    "place_of_performance": 204
   }
 },
 {
@@ -11427,7 +11427,7 @@
     "number_of_employees": 20000,
     "vendor_phone": "614-424-6503",
     "vendor_location": 50,
-    "place_of_performance": 200
+    "place_of_performance": 201
   }
 },
 {
@@ -11450,7 +11450,7 @@
     "number_of_employees": 20000,
     "vendor_phone": "937-258-6745",
     "vendor_location": 223,
-    "place_of_performance": 200
+    "place_of_performance": 201
   }
 },
 {
@@ -11473,7 +11473,7 @@
     "number_of_employees": 20000,
     "vendor_phone": "614-424-6503",
     "vendor_location": 50,
-    "place_of_performance": 200
+    "place_of_performance": 201
   }
 },
 {
@@ -11496,7 +11496,7 @@
     "number_of_employees": 8900,
     "vendor_phone": null,
     "vendor_location": 50,
-    "place_of_performance": 200
+    "place_of_performance": 201
   }
 },
 {
@@ -11519,7 +11519,7 @@
     "number_of_employees": 160000,
     "vendor_phone": "405-622-6320",
     "vendor_location": 225,
-    "place_of_performance": 204
+    "place_of_performance": 205
   }
 },
 {
@@ -11542,7 +11542,7 @@
     "number_of_employees": 160000,
     "vendor_phone": "405-622-6320",
     "vendor_location": 225,
-    "place_of_performance": 204
+    "place_of_performance": 205
   }
 },
 {
@@ -11565,7 +11565,7 @@
     "number_of_employees": 155000,
     "vendor_phone": "405-622-6314",
     "vendor_location": 225,
-    "place_of_performance": 204
+    "place_of_performance": 205
   }
 },
 {
@@ -11588,7 +11588,7 @@
     "number_of_employees": 160000,
     "vendor_phone": "480-891-1045",
     "vendor_location": 225,
-    "place_of_performance": 205
+    "place_of_performance": 206
   }
 },
 {
@@ -11611,7 +11611,7 @@
     "number_of_employees": 160000,
     "vendor_phone": "405-622-6320",
     "vendor_location": 225,
-    "place_of_performance": 204
+    "place_of_performance": 205
   }
 },
 {
@@ -11634,7 +11634,7 @@
     "number_of_employees": 162000,
     "vendor_phone": "405-622-6314",
     "vendor_location": 225,
-    "place_of_performance": 206
+    "place_of_performance": 207
   }
 },
 {
@@ -11657,7 +11657,7 @@
     "number_of_employees": 162000,
     "vendor_phone": "405-622-6314",
     "vendor_location": 225,
-    "place_of_performance": 204
+    "place_of_performance": 205
   }
 },
 {
@@ -11680,7 +11680,7 @@
     "number_of_employees": 162000,
     "vendor_phone": "405-622-6314",
     "vendor_location": 225,
-    "place_of_performance": 204
+    "place_of_performance": 205
   }
 },
 {
@@ -11703,7 +11703,7 @@
     "number_of_employees": 155000,
     "vendor_phone": null,
     "vendor_location": 226,
-    "place_of_performance": 204
+    "place_of_performance": 205
   }
 },
 {
@@ -11726,7 +11726,7 @@
     "number_of_employees": 162000,
     "vendor_phone": "405-622-6314",
     "vendor_location": 225,
-    "place_of_performance": 204
+    "place_of_performance": 205
   }
 },
 {
@@ -11818,7 +11818,7 @@
     "number_of_employees": 12000,
     "vendor_phone": null,
     "vendor_location": 227,
-    "place_of_performance": 116
+    "place_of_performance": 117
   }
 },
 {
@@ -11841,7 +11841,7 @@
     "number_of_employees": 23000,
     "vendor_phone": "703-377-0667",
     "vendor_location": 228,
-    "place_of_performance": 148
+    "place_of_performance": 149
   }
 },
 {
@@ -11864,7 +11864,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 229,
-    "place_of_performance": 178
+    "place_of_performance": 179
   }
 },
 {
@@ -12002,7 +12002,7 @@
     "number_of_employees": 65000,
     "vendor_phone": "813-281-2470",
     "vendor_location": 230,
-    "place_of_performance": 207
+    "place_of_performance": 208
   }
 },
 {
@@ -12025,7 +12025,7 @@
     "number_of_employees": 11000,
     "vendor_phone": null,
     "vendor_location": 231,
-    "place_of_performance": 20
+    "place_of_performance": 21
   }
 },
 {
@@ -12048,7 +12048,7 @@
     "number_of_employees": 11000,
     "vendor_phone": "850-897-8470",
     "vendor_location": 53,
-    "place_of_performance": 180
+    "place_of_performance": 181
   }
 },
 {
@@ -12071,7 +12071,7 @@
     "number_of_employees": 11000,
     "vendor_phone": "850-897-8470",
     "vendor_location": 53,
-    "place_of_performance": 208
+    "place_of_performance": 209
   }
 },
 {
@@ -12117,7 +12117,7 @@
     "number_of_employees": 11000,
     "vendor_phone": null,
     "vendor_location": 231,
-    "place_of_performance": 92
+    "place_of_performance": 93
   }
 },
 {
@@ -12140,7 +12140,7 @@
     "number_of_employees": 65000,
     "vendor_phone": "850-897-8470",
     "vendor_location": 53,
-    "place_of_performance": 157
+    "place_of_performance": 158
   }
 },
 {
@@ -12163,7 +12163,7 @@
     "number_of_employees": 11000,
     "vendor_phone": "850-897-8470",
     "vendor_location": 53,
-    "place_of_performance": 201
+    "place_of_performance": 202
   }
 },
 {
@@ -12186,7 +12186,7 @@
     "number_of_employees": 2000,
     "vendor_phone": null,
     "vendor_location": 232,
-    "place_of_performance": 209
+    "place_of_performance": 210
   }
 },
 {
@@ -12416,7 +12416,7 @@
     "number_of_employees": 9714,
     "vendor_phone": "703-885-6100",
     "vendor_location": 233,
-    "place_of_performance": 72
+    "place_of_performance": 73
   }
 },
 {
@@ -12485,7 +12485,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 236,
-    "place_of_performance": 105
+    "place_of_performance": 106
   }
 },
 {
@@ -12508,7 +12508,7 @@
     "number_of_employees": 5000,
     "vendor_phone": "703-653-5746",
     "vendor_location": 237,
-    "place_of_performance": 210
+    "place_of_performance": 211
   }
 },
 {
@@ -12531,7 +12531,7 @@
     "number_of_employees": 5000,
     "vendor_phone": "703-984-5052",
     "vendor_location": 55,
-    "place_of_performance": 211
+    "place_of_performance": 212
   }
 },
 {
@@ -12692,7 +12692,7 @@
     "number_of_employees": 206,
     "vendor_phone": "703-270-1540",
     "vendor_location": 239,
-    "place_of_performance": 212
+    "place_of_performance": 213
   }
 },
 {
@@ -12715,7 +12715,7 @@
     "number_of_employees": 1300,
     "vendor_phone": "703-270-1540",
     "vendor_location": 56,
-    "place_of_performance": 120
+    "place_of_performance": 121
   }
 },
 {
@@ -12738,7 +12738,7 @@
     "number_of_employees": 1300,
     "vendor_phone": "703-270-1540",
     "vendor_location": 56,
-    "place_of_performance": 120
+    "place_of_performance": 121
   }
 },
 {
@@ -12761,7 +12761,7 @@
     "number_of_employees": 206,
     "vendor_phone": "703-270-1540",
     "vendor_location": 239,
-    "place_of_performance": 212
+    "place_of_performance": 213
   }
 },
 {
@@ -12784,7 +12784,7 @@
     "number_of_employees": 206,
     "vendor_phone": "703-270-1540",
     "vendor_location": 239,
-    "place_of_performance": 212
+    "place_of_performance": 213
   }
 },
 {
@@ -12807,7 +12807,7 @@
     "number_of_employees": 206,
     "vendor_phone": "703-270-1540",
     "vendor_location": 239,
-    "place_of_performance": 212
+    "place_of_performance": 213
   }
 },
 {
@@ -12830,7 +12830,7 @@
     "number_of_employees": 206,
     "vendor_phone": "703-270-1540",
     "vendor_location": 239,
-    "place_of_performance": 212
+    "place_of_performance": 213
   }
 },
 {
@@ -12853,7 +12853,7 @@
     "number_of_employees": 206,
     "vendor_phone": "703-270-1540",
     "vendor_location": 56,
-    "place_of_performance": 212
+    "place_of_performance": 213
   }
 },
 {
@@ -12876,7 +12876,7 @@
     "number_of_employees": 206,
     "vendor_phone": "703-270-1540",
     "vendor_location": 56,
-    "place_of_performance": 212
+    "place_of_performance": 213
   }
 },
 {
@@ -12968,7 +12968,7 @@
     "number_of_employees": 84000,
     "vendor_phone": "703-246-0708",
     "vendor_location": 57,
-    "place_of_performance": 213
+    "place_of_performance": 214
   }
 },
 {
@@ -13014,7 +13014,7 @@
     "number_of_employees": 83500,
     "vendor_phone": null,
     "vendor_location": 57,
-    "place_of_performance": 214
+    "place_of_performance": 215
   }
 },
 {
@@ -13037,7 +13037,7 @@
     "number_of_employees": 92000,
     "vendor_phone": "703-995-2666",
     "vendor_location": 57,
-    "place_of_performance": 145
+    "place_of_performance": 146
   }
 },
 {
@@ -13060,7 +13060,7 @@
     "number_of_employees": 6952,
     "vendor_phone": null,
     "vendor_location": 57,
-    "place_of_performance": 17
+    "place_of_performance": 18
   }
 },
 {
@@ -13106,7 +13106,7 @@
     "number_of_employees": 92000,
     "vendor_phone": "703-995-2666",
     "vendor_location": 57,
-    "place_of_performance": 145
+    "place_of_performance": 146
   }
 },
 {
@@ -13129,7 +13129,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 242,
-    "place_of_performance": 125
+    "place_of_performance": 126
   }
 },
 {
@@ -13175,7 +13175,7 @@
     "number_of_employees": 5346,
     "vendor_phone": "703-562-5956",
     "vendor_location": 58,
-    "place_of_performance": 17
+    "place_of_performance": 18
   }
 },
 {
@@ -13198,12 +13198,35 @@
     "number_of_employees": 22000,
     "vendor_phone": null,
     "vendor_location": 58,
-    "place_of_performance": 103
+    "place_of_performance": 104
   }
 },
 {
   "model": "contracts.contract",
   "pk": 575,
+  "fields": {
+    "piid": "AG3144B170021_12314418F0169",
+    "date_signed": "2018-03-28T00:00:00Z",
+    "completion_date": "2018-03-27T00:00:00Z",
+    "NAICS": "541611",
+    "PSC": "R710",
+    "agency_id": "3600",
+    "agency_name": "VETERANS AFFAIRS, DEPARTMENT OF",
+    "vendor": 58,
+    "point_of_contact": null,
+    "pricing_type": "Z",
+    "obligated_amount": "0.00",
+    "status": "C1",
+    "annual_revenue": 1831000064,
+    "number_of_employees": 6303,
+    "vendor_phone": "703-562-5956",
+    "vendor_location": 58,
+    "place_of_performance": 78
+  }
+},
+{
+  "model": "contracts.contract",
+  "pk": 576,
   "fields": {
     "piid": "AG645SB060005_AG645SK080088",
     "date_signed": "2008-09-24T00:00:00Z",
@@ -13221,12 +13244,12 @@
     "number_of_employees": 22000,
     "vendor_phone": null,
     "vendor_location": 58,
-    "place_of_performance": 185
+    "place_of_performance": 186
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 576,
+  "pk": 577,
   "fields": {
     "piid": "GS23F9763H_BL000200203CT0002BL1027GS23F9763H",
     "date_signed": "2002-03-15T00:00:00Z",
@@ -13249,7 +13272,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 577,
+  "pk": 578,
   "fields": {
     "piid": "CNSHQ09A0014_CNS09A00140007",
     "date_signed": "2011-05-09T00:00:00Z",
@@ -13272,7 +13295,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 578,
+  "pk": 579,
   "fields": {
     "piid": "CNSHQ09A0014_CNS09A00140019",
     "date_signed": "2015-06-17T00:00:00Z",
@@ -13295,7 +13318,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 579,
+  "pk": 580,
   "fields": {
     "piid": "GS23F9763H_DAAD2101F0010",
     "date_signed": "2000-12-11T00:00:00Z",
@@ -13314,29 +13337,6 @@
     "vendor_phone": null,
     "vendor_location": 58,
     "place_of_performance": 8
-  }
-},
-{
-  "model": "contracts.contract",
-  "pk": 580,
-  "fields": {
-    "piid": "DECF0000018",
-    "date_signed": "2009-09-21T00:00:00Z",
-    "completion_date": "2009-11-23T00:00:00Z",
-    "NAICS": "541618",
-    "PSC": "R703",
-    "agency_id": "8900",
-    "agency_name": "ENERGY, DEPARTMENT OF",
-    "vendor": 58,
-    "point_of_contact": null,
-    "pricing_type": "Y",
-    "obligated_amount": "141250.00",
-    "status": "C1",
-    "annual_revenue": 2800000000,
-    "number_of_employees": 25296,
-    "vendor_phone": "703-373-8690",
-    "vendor_location": 58,
-    "place_of_performance": 215
   }
 },
 {
@@ -13681,7 +13681,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 244,
-    "place_of_performance": 103
+    "place_of_performance": 104
   }
 },
 {
@@ -13704,7 +13704,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 244,
-    "place_of_performance": 181
+    "place_of_performance": 182
   }
 },
 {
@@ -13773,7 +13773,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 244,
-    "place_of_performance": 103
+    "place_of_performance": 104
   }
 },
 {
@@ -13796,7 +13796,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 244,
-    "place_of_performance": 181
+    "place_of_performance": 182
   }
 },
 {
@@ -13842,7 +13842,7 @@
     "number_of_employees": 1448,
     "vendor_phone": null,
     "vendor_location": 246,
-    "place_of_performance": 214
+    "place_of_performance": 215
   }
 },
 {
@@ -13865,7 +13865,7 @@
     "number_of_employees": 1448,
     "vendor_phone": null,
     "vendor_location": 247,
-    "place_of_performance": 211
+    "place_of_performance": 212
   }
 },
 {
@@ -13911,7 +13911,7 @@
     "number_of_employees": 1378,
     "vendor_phone": "978-289-1666",
     "vendor_location": 61,
-    "place_of_performance": 211
+    "place_of_performance": 212
   }
 },
 {
@@ -13934,7 +13934,7 @@
     "number_of_employees": 1444,
     "vendor_phone": "978-289-1666",
     "vendor_location": 248,
-    "place_of_performance": 211
+    "place_of_performance": 212
   }
 },
 {
@@ -13957,7 +13957,7 @@
     "number_of_employees": 1676,
     "vendor_phone": "978-289-1666",
     "vendor_location": 61,
-    "place_of_performance": 211
+    "place_of_performance": 212
   }
 },
 {
@@ -14026,7 +14026,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 245,
-    "place_of_performance": 211
+    "place_of_performance": 212
   }
 },
 {
@@ -14118,7 +14118,7 @@
     "number_of_employees": 925,
     "vendor_phone": null,
     "vendor_location": 250,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -14141,7 +14141,7 @@
     "number_of_employees": 1302,
     "vendor_phone": "256-964-4222",
     "vendor_location": 62,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -14164,7 +14164,7 @@
     "number_of_employees": 1302,
     "vendor_phone": "256-964-4222",
     "vendor_location": 62,
-    "place_of_performance": 147
+    "place_of_performance": 148
   }
 },
 {
@@ -14187,7 +14187,7 @@
     "number_of_employees": 925,
     "vendor_phone": null,
     "vendor_location": 250,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -14210,7 +14210,7 @@
     "number_of_employees": 1066,
     "vendor_phone": "256-964-4222",
     "vendor_location": 62,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -14233,7 +14233,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 249,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -14256,7 +14256,7 @@
     "number_of_employees": 1380,
     "vendor_phone": "256-964-4222",
     "vendor_location": 62,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -14463,7 +14463,7 @@
     "number_of_employees": 1100,
     "vendor_phone": null,
     "vendor_location": 251,
-    "place_of_performance": 71
+    "place_of_performance": 72
   }
 },
 {
@@ -14486,7 +14486,7 @@
     "number_of_employees": 1100,
     "vendor_phone": null,
     "vendor_location": 251,
-    "place_of_performance": 68
+    "place_of_performance": 69
   }
 },
 {
@@ -14762,7 +14762,7 @@
     "number_of_employees": 43700,
     "vendor_phone": "931-393-6694",
     "vendor_location": 65,
-    "place_of_performance": 121
+    "place_of_performance": 122
   }
 },
 {
@@ -14831,7 +14831,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 253,
-    "place_of_performance": 103
+    "place_of_performance": 104
   }
 },
 {
@@ -14854,7 +14854,7 @@
     "number_of_employees": 43700,
     "vendor_phone": "931-393-6694",
     "vendor_location": 65,
-    "place_of_performance": 121
+    "place_of_performance": 122
   }
 },
 {
@@ -14923,7 +14923,7 @@
     "number_of_employees": 43700,
     "vendor_phone": "931-393-6694",
     "vendor_location": 253,
-    "place_of_performance": 121
+    "place_of_performance": 122
   }
 },
 {
@@ -14992,7 +14992,7 @@
     "number_of_employees": 1300,
     "vendor_phone": "703-968-5225",
     "vendor_location": 66,
-    "place_of_performance": 84
+    "place_of_performance": 85
   }
 },
 {
@@ -15038,7 +15038,7 @@
     "number_of_employees": 1400,
     "vendor_phone": "703-968-5225",
     "vendor_location": 66,
-    "place_of_performance": 106
+    "place_of_performance": 107
   }
 },
 {
@@ -15130,7 +15130,7 @@
     "number_of_employees": 1300,
     "vendor_phone": "703-968-5225",
     "vendor_location": 66,
-    "place_of_performance": 164
+    "place_of_performance": 165
   }
 },
 {
@@ -15153,7 +15153,7 @@
     "number_of_employees": 1300,
     "vendor_phone": "703-968-5225",
     "vendor_location": 66,
-    "place_of_performance": 189
+    "place_of_performance": 190
   }
 },
 {
@@ -15429,7 +15429,7 @@
     "number_of_employees": 2063,
     "vendor_phone": "703-825-2515",
     "vendor_location": 68,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -15452,7 +15452,7 @@
     "number_of_employees": 1475,
     "vendor_phone": null,
     "vendor_location": 257,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -15544,7 +15544,7 @@
     "number_of_employees": 1940,
     "vendor_phone": "256-922-3524",
     "vendor_location": 257,
-    "place_of_performance": 210
+    "place_of_performance": 211
   }
 },
 {
@@ -15567,7 +15567,7 @@
     "number_of_employees": 1940,
     "vendor_phone": "256-922-3524",
     "vendor_location": 257,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -15613,7 +15613,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 258,
-    "place_of_performance": 116
+    "place_of_performance": 117
   }
 },
 {
@@ -15636,7 +15636,7 @@
     "number_of_employees": 1700,
     "vendor_phone": "256-713-4107",
     "vendor_location": 257,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -15689,6 +15689,29 @@
   "model": "contracts.contract",
   "pk": 683,
   "fields": {
+    "piid": "DOCSS130117BU0002_DOCSS130117CC0031",
+    "date_signed": "2018-04-11T00:00:00Z",
+    "completion_date": "2018-05-16T00:00:00Z",
+    "NAICS": "541511",
+    "PSC": "R408",
+    "agency_id": "1301",
+    "agency_name": "OFFICE OF THE SECRETARY",
+    "vendor": 69,
+    "point_of_contact": "AKRAM@DOC.GOV",
+    "pricing_type": "J",
+    "obligated_amount": "0.00",
+    "status": "C2",
+    "annual_revenue": 16199999488,
+    "number_of_employees": 930000,
+    "vendor_phone": "703-876-1243",
+    "vendor_location": 69,
+    "place_of_performance": 82
+  }
+},
+{
+  "model": "contracts.contract",
+  "pk": 684,
+  "fields": {
     "piid": "DOCSS130117BU0002_DOCSS132317NC0076",
     "date_signed": "2017-03-22T00:00:00Z",
     "completion_date": "2017-08-31T00:00:00Z",
@@ -15705,12 +15728,12 @@
     "number_of_employees": 930000,
     "vendor_phone": "703-876-1243",
     "vendor_location": 69,
-    "place_of_performance": 39
+    "place_of_performance": 36
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 684,
+  "pk": 685,
   "fields": {
     "piid": "GS00F313CA_DOLOPS16F00037",
     "date_signed": "2016-04-29T00:00:00Z",
@@ -15728,12 +15751,12 @@
     "number_of_employees": 93000,
     "vendor_phone": "703-876-1243",
     "vendor_location": 69,
-    "place_of_performance": 94
+    "place_of_performance": 95
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 685,
+  "pk": 686,
   "fields": {
     "piid": "EPC12008",
     "date_signed": "2018-01-10T00:00:00Z",
@@ -15756,7 +15779,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 686,
+  "pk": 687,
   "fields": {
     "piid": "EPC15012",
     "date_signed": "2017-06-20T00:00:00Z",
@@ -15779,7 +15802,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 687,
+  "pk": 688,
   "fields": {
     "piid": "GS23F8029H_GS11T13BJA0001",
     "date_signed": "2015-12-17T00:00:00Z",
@@ -15802,7 +15825,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 688,
+  "pk": 689,
   "fields": {
     "piid": "GS23F8029H_GSQ1114BJ0024",
     "date_signed": "2015-12-24T00:00:00Z",
@@ -15825,7 +15848,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 689,
+  "pk": 690,
   "fields": {
     "piid": "HSBP1014A00003_HSBP1016F00032",
     "date_signed": "2017-03-31T00:00:00Z",
@@ -15848,29 +15871,6 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 690,
-  "fields": {
-    "piid": "HSHQDC16D00001_HSFLGL17J00066",
-    "date_signed": "2017-02-22T00:00:00Z",
-    "completion_date": "2017-06-30T00:00:00Z",
-    "NAICS": "541513",
-    "PSC": "D399",
-    "agency_id": "7015",
-    "agency_name": "FEDERAL LAW ENFORCEMENT TRAINING CENTER",
-    "vendor": 69,
-    "point_of_contact": "GLOVELL@DHS.GOV",
-    "pricing_type": "J",
-    "obligated_amount": "0.00",
-    "status": "C1",
-    "annual_revenue": 16199999488,
-    "number_of_employees": 930000,
-    "vendor_phone": "703-876-1243",
-    "vendor_location": 69,
-    "place_of_performance": 231
-  }
-},
-{
-  "model": "contracts.contract",
   "pk": 691,
   "fields": {
     "piid": "W56HZV07D0136_0001",
@@ -15889,7 +15889,7 @@
     "number_of_employees": 4000,
     "vendor_phone": null,
     "vendor_location": 259,
-    "place_of_performance": 232
+    "place_of_performance": 231
   }
 },
 {
@@ -15912,7 +15912,7 @@
     "number_of_employees": 5000,
     "vendor_phone": "410-964-7195",
     "vendor_location": 259,
-    "place_of_performance": 233
+    "place_of_performance": 232
   }
 },
 {
@@ -15935,7 +15935,7 @@
     "number_of_employees": 5000,
     "vendor_phone": "410-964-7111",
     "vendor_location": 259,
-    "place_of_performance": 234
+    "place_of_performance": 233
   }
 },
 {
@@ -15958,7 +15958,7 @@
     "number_of_employees": 4000,
     "vendor_phone": null,
     "vendor_location": 259,
-    "place_of_performance": 235
+    "place_of_performance": 234
   }
 },
 {
@@ -15981,7 +15981,7 @@
     "number_of_employees": 5000,
     "vendor_phone": "410-964-7195",
     "vendor_location": 259,
-    "place_of_performance": 232
+    "place_of_performance": 231
   }
 },
 {
@@ -16004,7 +16004,7 @@
     "number_of_employees": 5000,
     "vendor_phone": "410-964-7195",
     "vendor_location": 259,
-    "place_of_performance": 157
+    "place_of_performance": 158
   }
 },
 {
@@ -16027,7 +16027,7 @@
     "number_of_employees": 5000,
     "vendor_phone": "410-964-7111",
     "vendor_location": 70,
-    "place_of_performance": 119
+    "place_of_performance": 120
   }
 },
 {
@@ -16050,7 +16050,7 @@
     "number_of_employees": 5000,
     "vendor_phone": "410-964-7195",
     "vendor_location": 259,
-    "place_of_performance": 236
+    "place_of_performance": 235
   }
 },
 {
@@ -16073,7 +16073,7 @@
     "number_of_employees": 4000,
     "vendor_phone": null,
     "vendor_location": 259,
-    "place_of_performance": 119
+    "place_of_performance": 120
   }
 },
 {
@@ -16096,7 +16096,7 @@
     "number_of_employees": 5409,
     "vendor_phone": null,
     "vendor_location": 259,
-    "place_of_performance": 232
+    "place_of_performance": 231
   }
 },
 {
@@ -16119,7 +16119,7 @@
     "number_of_employees": 50,
     "vendor_phone": "443-542-9188",
     "vendor_location": 71,
-    "place_of_performance": 232
+    "place_of_performance": 231
   }
 },
 {
@@ -16142,7 +16142,7 @@
     "number_of_employees": 50,
     "vendor_phone": "443-542-9188",
     "vendor_location": 71,
-    "place_of_performance": 237
+    "place_of_performance": 236
   }
 },
 {
@@ -16165,7 +16165,7 @@
     "number_of_employees": 50,
     "vendor_phone": "443-542-9188",
     "vendor_location": 71,
-    "place_of_performance": 238
+    "place_of_performance": 237
   }
 },
 {
@@ -16188,7 +16188,7 @@
     "number_of_employees": 50,
     "vendor_phone": "443-542-9188",
     "vendor_location": 71,
-    "place_of_performance": 232
+    "place_of_performance": 231
   }
 },
 {
@@ -16211,7 +16211,7 @@
     "number_of_employees": 50,
     "vendor_phone": "443-542-9188",
     "vendor_location": 71,
-    "place_of_performance": 239
+    "place_of_performance": 238
   }
 },
 {
@@ -16234,7 +16234,7 @@
     "number_of_employees": 50,
     "vendor_phone": "443-542-9188",
     "vendor_location": 71,
-    "place_of_performance": 232
+    "place_of_performance": 231
   }
 },
 {
@@ -16257,7 +16257,7 @@
     "number_of_employees": 50,
     "vendor_phone": "443-542-9188",
     "vendor_location": 71,
-    "place_of_performance": 232
+    "place_of_performance": 231
   }
 },
 {
@@ -16280,7 +16280,7 @@
     "number_of_employees": 26,
     "vendor_phone": "703-379-4340",
     "vendor_location": 72,
-    "place_of_performance": 240
+    "place_of_performance": 239
   }
 },
 {
@@ -16303,7 +16303,7 @@
     "number_of_employees": 42,
     "vendor_phone": "703-379-4340",
     "vendor_location": 72,
-    "place_of_performance": 240
+    "place_of_performance": 239
   }
 },
 {
@@ -16326,7 +16326,7 @@
     "number_of_employees": 14,
     "vendor_phone": "703-379-4340",
     "vendor_location": 72,
-    "place_of_performance": 239
+    "place_of_performance": 238
   }
 },
 {
@@ -16349,7 +16349,7 @@
     "number_of_employees": 26,
     "vendor_phone": "703-379-4340",
     "vendor_location": 72,
-    "place_of_performance": 201
+    "place_of_performance": 202
   }
 },
 {
@@ -16372,7 +16372,7 @@
     "number_of_employees": 27,
     "vendor_phone": "703-379-4340",
     "vendor_location": 72,
-    "place_of_performance": 241
+    "place_of_performance": 240
   }
 },
 {
@@ -16395,7 +16395,7 @@
     "number_of_employees": 14,
     "vendor_phone": "703-379-4340",
     "vendor_location": 72,
-    "place_of_performance": 242
+    "place_of_performance": 241
   }
 },
 {
@@ -16418,7 +16418,7 @@
     "number_of_employees": 14,
     "vendor_phone": "703-379-4340",
     "vendor_location": 72,
-    "place_of_performance": 243
+    "place_of_performance": 242
   }
 },
 {
@@ -16441,7 +16441,7 @@
     "number_of_employees": 14,
     "vendor_phone": "703-379-4340",
     "vendor_location": 72,
-    "place_of_performance": 244
+    "place_of_performance": 243
   }
 },
 {
@@ -16464,7 +16464,7 @@
     "number_of_employees": 14,
     "vendor_phone": "703-379-4340",
     "vendor_location": 72,
-    "place_of_performance": 245
+    "place_of_performance": 244
   }
 },
 {
@@ -16487,7 +16487,7 @@
     "number_of_employees": 42,
     "vendor_phone": "703-379-4340",
     "vendor_location": 72,
-    "place_of_performance": 246
+    "place_of_performance": 245
   }
 },
 {
@@ -16510,7 +16510,7 @@
     "number_of_employees": 40,
     "vendor_phone": null,
     "vendor_location": 260,
-    "place_of_performance": 126
+    "place_of_performance": 127
   }
 },
 {
@@ -16556,7 +16556,7 @@
     "number_of_employees": 10,
     "vendor_phone": "703-286-0879",
     "vendor_location": 262,
-    "place_of_performance": 183
+    "place_of_performance": 184
   }
 },
 {
@@ -16579,7 +16579,7 @@
     "number_of_employees": 40,
     "vendor_phone": null,
     "vendor_location": 260,
-    "place_of_performance": 126
+    "place_of_performance": 127
   }
 },
 {
@@ -16602,7 +16602,7 @@
     "number_of_employees": 28,
     "vendor_phone": "703-286-0879",
     "vendor_location": 261,
-    "place_of_performance": 247
+    "place_of_performance": 246
   }
 },
 {
@@ -16625,7 +16625,7 @@
     "number_of_employees": 29,
     "vendor_phone": "703-286-0879",
     "vendor_location": 263,
-    "place_of_performance": 182
+    "place_of_performance": 183
   }
 },
 {
@@ -16648,7 +16648,7 @@
     "number_of_employees": 40,
     "vendor_phone": null,
     "vendor_location": 260,
-    "place_of_performance": 71
+    "place_of_performance": 72
   }
 },
 {
@@ -16671,7 +16671,7 @@
     "number_of_employees": 40,
     "vendor_phone": null,
     "vendor_location": 260,
-    "place_of_performance": 88
+    "place_of_performance": 89
   }
 },
 {
@@ -16694,7 +16694,7 @@
     "number_of_employees": 40,
     "vendor_phone": "703-286-0879",
     "vendor_location": 261,
-    "place_of_performance": 248
+    "place_of_performance": 247
   }
 },
 {
@@ -16740,7 +16740,7 @@
     "number_of_employees": 49,
     "vendor_phone": "202-717-8710",
     "vendor_location": 264,
-    "place_of_performance": 249
+    "place_of_performance": 248
   }
 },
 {
@@ -16763,7 +16763,7 @@
     "number_of_employees": 30,
     "vendor_phone": "202-717-8710",
     "vendor_location": 265,
-    "place_of_performance": 250
+    "place_of_performance": 249
   }
 },
 {
@@ -16786,7 +16786,7 @@
     "number_of_employees": 30,
     "vendor_phone": "202-717-8710",
     "vendor_location": 264,
-    "place_of_performance": 251
+    "place_of_performance": 250
   }
 },
 {
@@ -16809,7 +16809,7 @@
     "number_of_employees": 30,
     "vendor_phone": "202-717-8710",
     "vendor_location": 264,
-    "place_of_performance": 251
+    "place_of_performance": 250
   }
 },
 {
@@ -16832,7 +16832,7 @@
     "number_of_employees": 30,
     "vendor_phone": "202-717-8710",
     "vendor_location": 264,
-    "place_of_performance": 251
+    "place_of_performance": 250
   }
 },
 {
@@ -16855,7 +16855,7 @@
     "number_of_employees": 30,
     "vendor_phone": "202-717-8710",
     "vendor_location": 264,
-    "place_of_performance": 252
+    "place_of_performance": 251
   }
 },
 {
@@ -16878,7 +16878,7 @@
     "number_of_employees": 30,
     "vendor_phone": "202-717-8710",
     "vendor_location": 264,
-    "place_of_performance": 251
+    "place_of_performance": 250
   }
 },
 {
@@ -16901,7 +16901,7 @@
     "number_of_employees": 30,
     "vendor_phone": "202-717-8710",
     "vendor_location": 265,
-    "place_of_performance": 250
+    "place_of_performance": 249
   }
 },
 {
@@ -16947,7 +16947,7 @@
     "number_of_employees": 30,
     "vendor_phone": "202-717-8710",
     "vendor_location": 264,
-    "place_of_performance": 246
+    "place_of_performance": 245
   }
 },
 {
@@ -16993,7 +16993,7 @@
     "number_of_employees": 4,
     "vendor_phone": null,
     "vendor_location": 266,
-    "place_of_performance": 215
+    "place_of_performance": 252
   }
 },
 {
@@ -17016,7 +17016,7 @@
     "number_of_employees": 4,
     "vendor_phone": null,
     "vendor_location": 266,
-    "place_of_performance": 215
+    "place_of_performance": 252
   }
 },
 {
@@ -17039,7 +17039,7 @@
     "number_of_employees": 4,
     "vendor_phone": null,
     "vendor_location": 266,
-    "place_of_performance": 215
+    "place_of_performance": 252
   }
 },
 {
@@ -17062,7 +17062,7 @@
     "number_of_employees": 4,
     "vendor_phone": null,
     "vendor_location": 266,
-    "place_of_performance": 215
+    "place_of_performance": 252
   }
 },
 {
@@ -17085,7 +17085,7 @@
     "number_of_employees": 4,
     "vendor_phone": null,
     "vendor_location": 266,
-    "place_of_performance": 215
+    "place_of_performance": 252
   }
 },
 {
@@ -17108,7 +17108,7 @@
     "number_of_employees": 12,
     "vendor_phone": null,
     "vendor_location": 266,
-    "place_of_performance": 215
+    "place_of_performance": 252
   }
 },
 {
@@ -17131,7 +17131,7 @@
     "number_of_employees": 4,
     "vendor_phone": null,
     "vendor_location": 266,
-    "place_of_performance": 215
+    "place_of_performance": 252
   }
 },
 {
@@ -17154,7 +17154,7 @@
     "number_of_employees": 4,
     "vendor_phone": null,
     "vendor_location": 266,
-    "place_of_performance": 215
+    "place_of_performance": 252
   }
 },
 {
@@ -17177,7 +17177,7 @@
     "number_of_employees": 4,
     "vendor_phone": null,
     "vendor_location": 266,
-    "place_of_performance": 215
+    "place_of_performance": 252
   }
 },
 {
@@ -17333,7 +17333,7 @@
     "point_of_contact": "PAUL.MCCLAIN.H92222@SOCOM.MIL",
     "pricing_type": "J",
     "obligated_amount": "26766.99",
-    "status": "C2",
+    "status": "C1",
     "annual_revenue": 14937724,
     "number_of_employees": 161,
     "vendor_phone": "202-821-6883",
@@ -17379,7 +17379,7 @@
     "point_of_contact": "TIMOTHY.WALLING.HS0021@DSS.MIL",
     "pricing_type": "J",
     "obligated_amount": "0.00",
-    "status": "C2",
+    "status": "C1",
     "annual_revenue": 7100000,
     "number_of_employees": 130,
     "vendor_phone": "202-821-6883",
@@ -17453,7 +17453,7 @@
     "number_of_employees": 45,
     "vendor_phone": "571-485-4438",
     "vendor_location": 270,
-    "place_of_performance": 184
+    "place_of_performance": 185
   }
 },
 {
@@ -17476,7 +17476,7 @@
     "number_of_employees": 45,
     "vendor_phone": "703-759-5542",
     "vendor_location": 271,
-    "place_of_performance": 16
+    "place_of_performance": 17
   }
 },
 {
@@ -17568,7 +17568,7 @@
     "number_of_employees": 45,
     "vendor_phone": "571-485-4438",
     "vendor_location": 270,
-    "place_of_performance": 16
+    "place_of_performance": 17
   }
 },
 {
@@ -17591,7 +17591,7 @@
     "number_of_employees": 45,
     "vendor_phone": "571-485-4438",
     "vendor_location": 270,
-    "place_of_performance": 16
+    "place_of_performance": 17
   }
 },
 {
@@ -17660,7 +17660,7 @@
     "number_of_employees": 10,
     "vendor_phone": null,
     "vendor_location": 271,
-    "place_of_performance": 16
+    "place_of_performance": 17
   }
 },
 {
@@ -17913,7 +17913,7 @@
     "number_of_employees": 24,
     "vendor_phone": null,
     "vendor_location": 275,
-    "place_of_performance": 94
+    "place_of_performance": 95
   }
 },
 {
@@ -18235,7 +18235,7 @@
     "number_of_employees": 13,
     "vendor_phone": "910-764-7781",
     "vendor_location": 277,
-    "place_of_performance": 208
+    "place_of_performance": 209
   }
 },
 {
@@ -18396,7 +18396,7 @@
     "number_of_employees": 6,
     "vendor_phone": null,
     "vendor_location": 279,
-    "place_of_performance": 88
+    "place_of_performance": 89
   }
 },
 {
@@ -18419,7 +18419,7 @@
     "number_of_employees": 26,
     "vendor_phone": "703-465-2060",
     "vendor_location": 278,
-    "place_of_performance": 71
+    "place_of_performance": 72
   }
 },
 {
@@ -18442,7 +18442,7 @@
     "number_of_employees": 6,
     "vendor_phone": null,
     "vendor_location": 279,
-    "place_of_performance": 88
+    "place_of_performance": 89
   }
 },
 {
@@ -18465,7 +18465,7 @@
     "number_of_employees": 26,
     "vendor_phone": "703-465-2060",
     "vendor_location": 82,
-    "place_of_performance": 247
+    "place_of_performance": 246
   }
 },
 {
@@ -18488,7 +18488,7 @@
     "number_of_employees": 6,
     "vendor_phone": null,
     "vendor_location": 279,
-    "place_of_performance": 88
+    "place_of_performance": 89
   }
 },
 {
@@ -18552,7 +18552,7 @@
     "point_of_contact": "MATTHEW.ELDEN@FEMA.DHS.GOV",
     "pricing_type": "Y",
     "obligated_amount": "858910.00",
-    "status": "C2",
+    "status": "C1",
     "annual_revenue": 4480579,
     "number_of_employees": 26,
     "vendor_phone": "703-465-2060",
@@ -18580,7 +18580,7 @@
     "number_of_employees": 26,
     "vendor_phone": "703-465-2060",
     "vendor_location": 278,
-    "place_of_performance": 247
+    "place_of_performance": 246
   }
 },
 {
@@ -18626,7 +18626,7 @@
     "number_of_employees": 60,
     "vendor_phone": "202-629-9790",
     "vendor_location": 280,
-    "place_of_performance": 94
+    "place_of_performance": 95
   }
 },
 {
@@ -18649,7 +18649,7 @@
     "number_of_employees": 0,
     "vendor_phone": "202-629-9790",
     "vendor_location": 280,
-    "place_of_performance": 248
+    "place_of_performance": 247
   }
 },
 {
@@ -18810,7 +18810,7 @@
     "number_of_employees": 96,
     "vendor_phone": "202-629-9790",
     "vendor_location": 282,
-    "place_of_performance": 76
+    "place_of_performance": 77
   }
 },
 {
@@ -19063,7 +19063,7 @@
     "number_of_employees": 4,
     "vendor_phone": "703-527-7001",
     "vendor_location": 283,
-    "place_of_performance": 81
+    "place_of_performance": 82
   }
 },
 {
@@ -19086,7 +19086,7 @@
     "number_of_employees": 4,
     "vendor_phone": "703-527-7001",
     "vendor_location": 283,
-    "place_of_performance": 92
+    "place_of_performance": 93
   }
 },
 {
@@ -19109,7 +19109,7 @@
     "number_of_employees": 4,
     "vendor_phone": null,
     "vendor_location": 284,
-    "place_of_performance": 92
+    "place_of_performance": 93
   }
 },
 {
@@ -19201,7 +19201,7 @@
     "number_of_employees": 4,
     "vendor_phone": "703-527-7001",
     "vendor_location": 283,
-    "place_of_performance": 88
+    "place_of_performance": 89
   }
 },
 {
@@ -19224,7 +19224,7 @@
     "number_of_employees": 4,
     "vendor_phone": null,
     "vendor_location": 284,
-    "place_of_performance": 88
+    "place_of_performance": 89
   }
 },
 {
@@ -19247,7 +19247,7 @@
     "number_of_employees": 4,
     "vendor_phone": null,
     "vendor_location": 284,
-    "place_of_performance": 92
+    "place_of_performance": 93
   }
 },
 {
@@ -19270,7 +19270,7 @@
     "number_of_employees": 4,
     "vendor_phone": null,
     "vendor_location": 284,
-    "place_of_performance": 84
+    "place_of_performance": 85
   }
 },
 {
@@ -19293,7 +19293,7 @@
     "number_of_employees": 60,
     "vendor_phone": "301-208-2829",
     "vendor_location": 286,
-    "place_of_performance": 36
+    "place_of_performance": 37
   }
 },
 {
@@ -19431,7 +19431,7 @@
     "number_of_employees": 60,
     "vendor_phone": "301-208-2829",
     "vendor_location": 289,
-    "place_of_performance": 252
+    "place_of_performance": 251
   }
 },
 {
@@ -19477,7 +19477,7 @@
     "number_of_employees": 109,
     "vendor_phone": "301-208-2829",
     "vendor_location": 289,
-    "place_of_performance": 17
+    "place_of_performance": 18
   }
 },
 {
@@ -19638,7 +19638,7 @@
     "number_of_employees": 34,
     "vendor_phone": "703-462-1430",
     "vendor_location": 87,
-    "place_of_performance": 86
+    "place_of_performance": 87
   }
 },
 {
@@ -19661,7 +19661,7 @@
     "number_of_employees": 34,
     "vendor_phone": "703-462-1430",
     "vendor_location": 87,
-    "place_of_performance": 86
+    "place_of_performance": 87
   }
 },
 {
@@ -19684,7 +19684,7 @@
     "number_of_employees": 34,
     "vendor_phone": "703-462-1430",
     "vendor_location": 87,
-    "place_of_performance": 79
+    "place_of_performance": 80
   }
 },
 {
@@ -19753,7 +19753,7 @@
     "number_of_employees": 136,
     "vendor_phone": "703-379-9311",
     "vendor_location": 88,
-    "place_of_performance": 240
+    "place_of_performance": 239
   }
 },
 {
@@ -19845,7 +19845,7 @@
     "number_of_employees": 246,
     "vendor_phone": "703-379-9311",
     "vendor_location": 88,
-    "place_of_performance": 245
+    "place_of_performance": 244
   }
 },
 {
@@ -19891,7 +19891,7 @@
     "number_of_employees": 577,
     "vendor_phone": "703-379-9311",
     "vendor_location": 88,
-    "place_of_performance": 240
+    "place_of_performance": 239
   }
 },
 {
@@ -19914,7 +19914,7 @@
     "number_of_employees": 300,
     "vendor_phone": "703-379-9311",
     "vendor_location": 88,
-    "place_of_performance": 207
+    "place_of_performance": 208
   }
 },
 {
@@ -20006,7 +20006,7 @@
     "number_of_employees": 98,
     "vendor_phone": null,
     "vendor_location": 89,
-    "place_of_performance": 145
+    "place_of_performance": 146
   }
 },
 {
@@ -20144,7 +20144,7 @@
     "number_of_employees": 240,
     "vendor_phone": "866-472-5536",
     "vendor_location": 89,
-    "place_of_performance": 104
+    "place_of_performance": 105
   }
 },
 {
@@ -20167,7 +20167,7 @@
     "number_of_employees": 156,
     "vendor_phone": "804-862-7500",
     "vendor_location": 89,
-    "place_of_performance": 145
+    "place_of_performance": 146
   }
 },
 {
@@ -20213,7 +20213,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 292,
-    "place_of_performance": 115
+    "place_of_performance": 116
   }
 },
 {
@@ -20259,7 +20259,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 293,
-    "place_of_performance": 239
+    "place_of_performance": 238
   }
 },
 {
@@ -20489,7 +20489,7 @@
     "number_of_employees": 535,
     "vendor_phone": "703-797-8500",
     "vendor_location": 296,
-    "place_of_performance": 128
+    "place_of_performance": 68
   }
 },
 {
@@ -20673,7 +20673,7 @@
     "number_of_employees": 120,
     "vendor_phone": null,
     "vendor_location": 297,
-    "place_of_performance": 105
+    "place_of_performance": 106
   }
 },
 {
@@ -20696,7 +20696,7 @@
     "number_of_employees": 0,
     "vendor_phone": "407-894-5575",
     "vendor_location": 298,
-    "place_of_performance": 205
+    "place_of_performance": 206
   }
 },
 {
@@ -20742,7 +20742,7 @@
     "number_of_employees": 0,
     "vendor_phone": "407-894-5575",
     "vendor_location": 299,
-    "place_of_performance": 212
+    "place_of_performance": 213
   }
 },
 {
@@ -20765,7 +20765,7 @@
     "number_of_employees": 120,
     "vendor_phone": null,
     "vendor_location": 300,
-    "place_of_performance": 212
+    "place_of_performance": 213
   }
 },
 {
@@ -20788,7 +20788,7 @@
     "number_of_employees": 60,
     "vendor_phone": null,
     "vendor_location": 301,
-    "place_of_performance": 105
+    "place_of_performance": 106
   }
 },
 {
@@ -20811,7 +20811,7 @@
     "number_of_employees": 50,
     "vendor_phone": null,
     "vendor_location": 302,
-    "place_of_performance": 105
+    "place_of_performance": 106
   }
 },
 {
@@ -20834,7 +20834,7 @@
     "number_of_employees": 120,
     "vendor_phone": null,
     "vendor_location": 297,
-    "place_of_performance": 214
+    "place_of_performance": 215
   }
 },
 {
@@ -20857,7 +20857,7 @@
     "number_of_employees": 218,
     "vendor_phone": "407-894-5575",
     "vendor_location": 299,
-    "place_of_performance": 212
+    "place_of_performance": 213
   }
 },
 {
@@ -21156,7 +21156,7 @@
     "number_of_employees": 1100,
     "vendor_phone": "202-403-5295",
     "vendor_location": 305,
-    "place_of_performance": 250
+    "place_of_performance": 249
   }
 },
 {
@@ -21179,7 +21179,7 @@
     "number_of_employees": 1100,
     "vendor_phone": "202-403-5295",
     "vendor_location": 305,
-    "place_of_performance": 250
+    "place_of_performance": 249
   }
 },
 {
@@ -21248,7 +21248,7 @@
     "number_of_employees": 750,
     "vendor_phone": null,
     "vendor_location": 306,
-    "place_of_performance": 103
+    "place_of_performance": 104
   }
 },
 {
@@ -21271,7 +21271,7 @@
     "number_of_employees": 750,
     "vendor_phone": null,
     "vendor_location": 306,
-    "place_of_performance": 103
+    "place_of_performance": 104
   }
 },
 {
@@ -21294,7 +21294,7 @@
     "number_of_employees": 750,
     "vendor_phone": null,
     "vendor_location": 306,
-    "place_of_performance": 103
+    "place_of_performance": 104
   }
 },
 {
@@ -21317,7 +21317,7 @@
     "number_of_employees": 764,
     "vendor_phone": null,
     "vendor_location": 307,
-    "place_of_performance": 250
+    "place_of_performance": 249
   }
 },
 {
@@ -21363,7 +21363,7 @@
     "number_of_employees": 200,
     "vendor_phone": "909-625-6900",
     "vendor_location": 95,
-    "place_of_performance": 119
+    "place_of_performance": 120
   }
 },
 {
@@ -21386,7 +21386,7 @@
     "number_of_employees": 500,
     "vendor_phone": "909-625-6900",
     "vendor_location": 95,
-    "place_of_performance": 162
+    "place_of_performance": 163
   }
 },
 {
@@ -21432,7 +21432,7 @@
     "number_of_employees": 260,
     "vendor_phone": null,
     "vendor_location": 309,
-    "place_of_performance": 106
+    "place_of_performance": 107
   }
 },
 {
@@ -21524,7 +21524,7 @@
     "number_of_employees": 260,
     "vendor_phone": null,
     "vendor_location": 309,
-    "place_of_performance": 162
+    "place_of_performance": 163
   }
 },
 {
@@ -21708,7 +21708,7 @@
     "number_of_employees": 82,
     "vendor_phone": "304-599-6850",
     "vendor_location": 96,
-    "place_of_performance": 17
+    "place_of_performance": 18
   }
 },
 {
@@ -22099,7 +22099,7 @@
     "number_of_employees": 10,
     "vendor_phone": "301-931-1600",
     "vendor_location": 313,
-    "place_of_performance": 36
+    "place_of_performance": 37
   }
 },
 {
@@ -22513,7 +22513,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 316,
-    "place_of_performance": 103
+    "place_of_performance": 104
   }
 },
 {
@@ -22743,7 +22743,7 @@
     "number_of_employees": 5,
     "vendor_phone": null,
     "vendor_location": 319,
-    "place_of_performance": 197
+    "place_of_performance": 198
   }
 },
 {
@@ -22766,7 +22766,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 320,
-    "place_of_performance": 197
+    "place_of_performance": 198
   }
 },
 {
@@ -22789,7 +22789,7 @@
     "number_of_employees": 5,
     "vendor_phone": null,
     "vendor_location": 319,
-    "place_of_performance": 197
+    "place_of_performance": 198
   }
 },
 {
@@ -23019,7 +23019,7 @@
     "number_of_employees": 19,
     "vendor_phone": null,
     "vendor_location": 323,
-    "place_of_performance": 36
+    "place_of_performance": 37
   }
 },
 {
@@ -23042,7 +23042,7 @@
     "number_of_employees": 120,
     "vendor_phone": "703-787-8100",
     "vendor_location": 324,
-    "place_of_performance": 215
+    "place_of_performance": 252
   }
 },
 {
@@ -23111,7 +23111,7 @@
     "number_of_employees": 65,
     "vendor_phone": "703-787-8100",
     "vendor_location": 325,
-    "place_of_performance": 252
+    "place_of_performance": 251
   }
 },
 {
@@ -23134,7 +23134,7 @@
     "number_of_employees": 30,
     "vendor_phone": null,
     "vendor_location": 326,
-    "place_of_performance": 93
+    "place_of_performance": 94
   }
 },
 {
@@ -23157,7 +23157,7 @@
     "number_of_employees": 65,
     "vendor_phone": "703-787-8100",
     "vendor_location": 325,
-    "place_of_performance": 96
+    "place_of_performance": 97
   }
 },
 {
@@ -23180,7 +23180,7 @@
     "number_of_employees": 65,
     "vendor_phone": "703-787-8100",
     "vendor_location": 324,
-    "place_of_performance": 96
+    "place_of_performance": 97
   }
 },
 {
@@ -23364,7 +23364,7 @@
     "number_of_employees": 135,
     "vendor_phone": "703-644-6400",
     "vendor_location": 104,
-    "place_of_performance": 36
+    "place_of_performance": 37
   }
 },
 {
@@ -23410,7 +23410,7 @@
     "number_of_employees": 108,
     "vendor_phone": "703-644-6400",
     "vendor_location": 328,
-    "place_of_performance": 36
+    "place_of_performance": 37
   }
 },
 {
@@ -23433,7 +23433,7 @@
     "number_of_employees": 30,
     "vendor_phone": "703-644-6400",
     "vendor_location": 329,
-    "place_of_performance": 36
+    "place_of_performance": 37
   }
 },
 {
@@ -23456,7 +23456,7 @@
     "number_of_employees": 30,
     "vendor_phone": "703-644-6400",
     "vendor_location": 329,
-    "place_of_performance": 36
+    "place_of_performance": 37
   }
 },
 {
@@ -23532,6 +23532,29 @@
   "model": "contracts.contract",
   "pk": 1024,
   "fields": {
+    "piid": "GS11P15YMC00501",
+    "date_signed": "2018-04-05T00:00:00Z",
+    "completion_date": "2018-07-31T00:00:00Z",
+    "NAICS": "238220",
+    "PSC": "Z2AA",
+    "agency_id": "4740",
+    "agency_name": "PUBLIC BUILDINGS SERVICE",
+    "vendor": 104,
+    "point_of_contact": "11.ISAAC.KARTO@GSA.GOV",
+    "pricing_type": "J",
+    "obligated_amount": "0.00",
+    "status": "C2",
+    "annual_revenue": 8681278,
+    "number_of_employees": 75,
+    "vendor_phone": "703-644-6400",
+    "vendor_location": 328,
+    "place_of_performance": 251
+  }
+},
+{
+  "model": "contracts.contract",
+  "pk": 1025,
+  "fields": {
     "piid": "GS11P16ZGP7223",
     "date_signed": "2016-09-28T00:00:00Z",
     "completion_date": "2017-01-27T00:00:00Z",
@@ -23548,30 +23571,7 @@
     "number_of_employees": 108,
     "vendor_phone": "703-644-6400",
     "vendor_location": 328,
-    "place_of_performance": 71
-  }
-},
-{
-  "model": "contracts.contract",
-  "pk": 1025,
-  "fields": {
-    "piid": "GS11P14YTD0320_GSP1115YT0107",
-    "date_signed": "2015-06-12T00:00:00Z",
-    "completion_date": "2015-06-30T00:00:00Z",
-    "NAICS": "561210",
-    "PSC": "Z1AA",
-    "agency_id": "4740",
-    "agency_name": "PUBLIC BUILDINGS SERVICE",
-    "vendor": 104,
-    "point_of_contact": null,
-    "pricing_type": "J",
-    "obligated_amount": "24731.95",
-    "status": "C1",
-    "annual_revenue": 6968667,
-    "number_of_employees": 52,
-    "vendor_phone": "703-644-6400",
-    "vendor_location": 328,
-    "place_of_performance": 267
+    "place_of_performance": 72
   }
 },
 {
@@ -23709,7 +23709,7 @@
     "number_of_employees": 350,
     "vendor_phone": "910-215-1900",
     "vendor_location": 332,
-    "place_of_performance": 212
+    "place_of_performance": 213
   }
 },
 {
@@ -23801,7 +23801,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 334,
-    "place_of_performance": 105
+    "place_of_performance": 106
   }
 },
 {
@@ -24077,7 +24077,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 338,
-    "place_of_performance": 127
+    "place_of_performance": 128
   }
 },
 {
@@ -24192,7 +24192,7 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 338,
-    "place_of_performance": 127
+    "place_of_performance": 128
   }
 },
 {
@@ -24238,7 +24238,7 @@
     "number_of_employees": 45000,
     "vendor_phone": "404-965-9600",
     "vendor_location": 340,
-    "place_of_performance": 234
+    "place_of_performance": 233
   }
 },
 {
@@ -24537,7 +24537,7 @@
     "number_of_employees": 7000,
     "vendor_phone": null,
     "vendor_location": 343,
-    "place_of_performance": 77
+    "place_of_performance": 78
   }
 },
 {
@@ -24790,7 +24790,7 @@
     "number_of_employees": 530,
     "vendor_phone": "202-625-4173",
     "vendor_location": 346,
-    "place_of_performance": 232
+    "place_of_performance": 231
   }
 },
 {
@@ -24859,7 +24859,7 @@
     "number_of_employees": 550,
     "vendor_phone": "202-625-4173",
     "vendor_location": 347,
-    "place_of_performance": 71
+    "place_of_performance": 72
   }
 },
 {
@@ -24882,7 +24882,7 @@
     "number_of_employees": 550,
     "vendor_phone": null,
     "vendor_location": 346,
-    "place_of_performance": 250
+    "place_of_performance": 249
   }
 },
 {
@@ -24905,7 +24905,7 @@
     "number_of_employees": 550,
     "vendor_phone": "202-625-4173",
     "vendor_location": 346,
-    "place_of_performance": 232
+    "place_of_performance": 231
   }
 },
 {
@@ -25073,6 +25073,29 @@
   "model": "contracts.contract",
   "pk": 1091,
   "fields": {
+    "piid": "GS21F0140Y_2091JB18F00046",
+    "date_signed": "2018-04-09T00:00:00Z",
+    "completion_date": "2018-09-30T00:00:00Z",
+    "NAICS": "561210",
+    "PSC": "J041",
+    "agency_id": "2050",
+    "agency_name": "INTERNAL REVENUE SERVICE",
+    "vendor": 112,
+    "point_of_contact": null,
+    "pricing_type": "J",
+    "obligated_amount": "3838.56",
+    "status": "C2",
+    "annual_revenue": 40000000,
+    "number_of_employees": 300,
+    "vendor_phone": "615-771-2560",
+    "vendor_location": 111,
+    "place_of_performance": 360
+  }
+},
+{
+  "model": "contracts.contract",
+  "pk": 1092,
+  "fields": {
     "piid": "DOLB102J14013",
     "date_signed": "2010-03-12T00:00:00Z",
     "completion_date": "2010-04-12T00:00:00Z",
@@ -25089,12 +25112,12 @@
     "number_of_employees": 35,
     "vendor_phone": "615-771-2560",
     "vendor_location": 111,
-    "place_of_performance": 360
+    "place_of_performance": 361
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 1092,
+  "pk": 1093,
   "fields": {
     "piid": "GS07F0293N_DOLF112J15018",
     "date_signed": "2011-06-13T00:00:00Z",
@@ -25112,12 +25135,12 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 348,
-    "place_of_performance": 360
+    "place_of_performance": 361
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 1093,
+  "pk": 1094,
   "fields": {
     "piid": "GS07P09UED0005A",
     "date_signed": "2011-05-12T00:00:00Z",
@@ -25135,12 +25158,12 @@
     "number_of_employees": 35,
     "vendor_phone": "615-771-2560",
     "vendor_location": 111,
-    "place_of_performance": 362
+    "place_of_performance": 363
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 1094,
+  "pk": 1095,
   "fields": {
     "piid": "GS04P11EWD0131_GSP0413EW5025",
     "date_signed": "2014-06-09T00:00:00Z",
@@ -25158,12 +25181,12 @@
     "number_of_employees": 100,
     "vendor_phone": "615-771-2560",
     "vendor_location": 111,
-    "place_of_performance": 363
+    "place_of_performance": 364
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 1095,
+  "pk": 1096,
   "fields": {
     "piid": "GS04P13EWD0093_GSP0413EW5056",
     "date_signed": "2014-12-12T00:00:00Z",
@@ -25176,29 +25199,6 @@
     "point_of_contact": null,
     "pricing_type": "J",
     "obligated_amount": "0.00",
-    "status": "C1",
-    "annual_revenue": 24000000,
-    "number_of_employees": 150,
-    "vendor_phone": "615-771-2560",
-    "vendor_location": 111,
-    "place_of_performance": 364
-  }
-},
-{
-  "model": "contracts.contract",
-  "pk": 1096,
-  "fields": {
-    "piid": "GS04P13EWD0093_GSP0414RD5006",
-    "date_signed": "2014-08-27T00:00:00Z",
-    "completion_date": "2014-09-30T00:00:00Z",
-    "NAICS": "561210",
-    "PSC": "Z2AA",
-    "agency_id": "4740",
-    "agency_name": "PUBLIC BUILDINGS SERVICE",
-    "vendor": 112,
-    "point_of_contact": null,
-    "pricing_type": "J",
-    "obligated_amount": "4741.00",
     "status": "C1",
     "annual_revenue": 24000000,
     "number_of_employees": 150,
@@ -25349,6 +25349,29 @@
   "model": "contracts.contract",
   "pk": 1103,
   "fields": {
+    "piid": "W912DY15D0034_0003",
+    "date_signed": "2018-01-09T00:00:00Z",
+    "completion_date": "2018-07-31T00:00:00Z",
+    "NAICS": "561210",
+    "PSC": "S216",
+    "agency_id": "9700",
+    "agency_name": "DEPT OF DEFENSE",
+    "vendor": 113,
+    "point_of_contact": "JOYCE.F.POWELL.W912DY@USACE.ARMY.MIL",
+    "pricing_type": "J",
+    "obligated_amount": "0.00",
+    "status": "C2",
+    "annual_revenue": 270840512,
+    "number_of_employees": 1375,
+    "vendor_phone": "512-444-7271",
+    "vendor_location": 112,
+    "place_of_performance": 232
+  }
+},
+{
+  "model": "contracts.contract",
+  "pk": 1104,
+  "fields": {
     "piid": "W912DY10D0051_0003",
     "date_signed": "2015-07-01T00:00:00Z",
     "completion_date": "2015-09-30T00:00:00Z",
@@ -25370,7 +25393,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1104,
+  "pk": 1105,
   "fields": {
     "piid": "W9127815D0023_0003",
     "date_signed": "2017-02-27T00:00:00Z",
@@ -25393,7 +25416,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1105,
+  "pk": 1106,
   "fields": {
     "piid": "DACA8303D0017_0006",
     "date_signed": "2006-09-27T00:00:00Z",
@@ -25412,29 +25435,6 @@
     "vendor_phone": null,
     "vendor_location": 350,
     "place_of_performance": 371
-  }
-},
-{
-  "model": "contracts.contract",
-  "pk": 1106,
-  "fields": {
-    "piid": "W912DY10D0051_0006",
-    "date_signed": "2012-08-28T00:00:00Z",
-    "completion_date": "2013-07-24T00:00:00Z",
-    "NAICS": "561210",
-    "PSC": "S216",
-    "agency_id": "9700",
-    "agency_name": "DEPT OF DEFENSE",
-    "vendor": 113,
-    "point_of_contact": "CHAD.GREEN.W912DY@SA2100.ARMY.MIL",
-    "pricing_type": "J",
-    "obligated_amount": "29976.20",
-    "status": "C1",
-    "annual_revenue": 190000000,
-    "number_of_employees": 1500,
-    "vendor_phone": "512-444-7271",
-    "vendor_location": 349,
-    "place_of_performance": 228
   }
 },
 {
@@ -25475,7 +25475,7 @@
     "point_of_contact": null,
     "pricing_type": "J",
     "obligated_amount": "9026.85",
-    "status": "C2",
+    "status": "C1",
     "annual_revenue": 6066366464,
     "number_of_employees": 77300,
     "vendor_phone": "312-228-2720",
@@ -25486,6 +25486,29 @@
 {
   "model": "contracts.contract",
   "pk": 1109,
+  "fields": {
+    "piid": "47PF0017D0013_47PF0018F0403",
+    "date_signed": "2018-04-03T00:00:00Z",
+    "completion_date": "2018-09-30T00:00:00Z",
+    "NAICS": "238220",
+    "PSC": "Z1AA",
+    "agency_id": "4740",
+    "agency_name": "PUBLIC BUILDINGS SERVICE",
+    "vendor": 114,
+    "point_of_contact": null,
+    "pricing_type": "J",
+    "obligated_amount": "7500.87",
+    "status": "C2",
+    "annual_revenue": 6066366464,
+    "number_of_employees": 77300,
+    "vendor_phone": "312-228-2720",
+    "vendor_location": 113,
+    "place_of_performance": 373
+  }
+},
+{
+  "model": "contracts.contract",
+  "pk": 1110,
   "fields": {
     "piid": "47PF0017D0013_47PF0018F0145",
     "date_signed": "2017-12-13T00:00:00Z",
@@ -25508,7 +25531,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1110,
+  "pk": 1111,
   "fields": {
     "piid": "47PF0017D0013_47PF0018F0115",
     "date_signed": "2017-11-30T00:00:00Z",
@@ -25531,7 +25554,53 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1111,
+  "pk": 1112,
+  "fields": {
+    "piid": "47PF0017D0013_47PF0018F0393",
+    "date_signed": "2018-03-29T00:00:00Z",
+    "completion_date": "2018-05-31T00:00:00Z",
+    "NAICS": "238220",
+    "PSC": "Z1AA",
+    "agency_id": "4740",
+    "agency_name": "PUBLIC BUILDINGS SERVICE",
+    "vendor": 114,
+    "point_of_contact": null,
+    "pricing_type": "J",
+    "obligated_amount": "3950.13",
+    "status": "C2",
+    "annual_revenue": 6066366464,
+    "number_of_employees": 77300,
+    "vendor_phone": "312-228-2720",
+    "vendor_location": 113,
+    "place_of_performance": 373
+  }
+},
+{
+  "model": "contracts.contract",
+  "pk": 1113,
+  "fields": {
+    "piid": "47PF0017D0013_47PF0018F0438",
+    "date_signed": "2018-04-11T00:00:00Z",
+    "completion_date": "2018-06-22T00:00:00Z",
+    "NAICS": "238220",
+    "PSC": "Z1AA",
+    "agency_id": "4740",
+    "agency_name": "PUBLIC BUILDINGS SERVICE",
+    "vendor": 114,
+    "point_of_contact": null,
+    "pricing_type": "J",
+    "obligated_amount": "15097.62",
+    "status": "C2",
+    "annual_revenue": 6066366464,
+    "number_of_employees": 77300,
+    "vendor_phone": "312-228-2720",
+    "vendor_location": 113,
+    "place_of_performance": 373
+  }
+},
+{
+  "model": "contracts.contract",
+  "pk": 1114,
   "fields": {
     "piid": "47PF0017D0013_47PF0018F0154",
     "date_signed": "2017-12-15T00:00:00Z",
@@ -25554,7 +25623,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1112,
+  "pk": 1115,
   "fields": {
     "piid": "47PF0017D0013_47PF0018F0353",
     "date_signed": "2018-03-15T00:00:00Z",
@@ -25577,7 +25646,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1113,
+  "pk": 1116,
   "fields": {
     "piid": "00001200306D03HQCN0008",
     "date_signed": "2008-10-29T00:00:00Z",
@@ -25600,7 +25669,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1114,
+  "pk": 1117,
   "fields": {
     "piid": "N6133905D6008_0001",
     "date_signed": "2012-09-06T00:00:00Z",
@@ -25623,7 +25692,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1115,
+  "pk": 1118,
   "fields": {
     "piid": "N6134011D1007_0002",
     "date_signed": "2015-08-14T00:00:00Z",
@@ -25641,12 +25710,12 @@
     "number_of_employees": 1200,
     "vendor_phone": "301-596-2440",
     "vendor_location": 114,
-    "place_of_performance": 232
+    "place_of_performance": 231
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 1116,
+  "pk": 1119,
   "fields": {
     "piid": "SPE60016D0493_0006",
     "date_signed": "2017-08-10T00:00:00Z",
@@ -25664,12 +25733,12 @@
     "number_of_employees": 980,
     "vendor_phone": "301-596-2440",
     "vendor_location": 114,
-    "place_of_performance": 232
+    "place_of_performance": 231
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 1117,
+  "pk": 1120,
   "fields": {
     "piid": "W911S704D0018_0010",
     "date_signed": "2009-08-09T00:00:00Z",
@@ -25692,7 +25761,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1118,
+  "pk": 1121,
   "fields": {
     "piid": "SP060003D5311_0013",
     "date_signed": "2016-01-22T00:00:00Z",
@@ -25710,12 +25779,12 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 352,
-    "place_of_performance": 232
+    "place_of_performance": 231
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 1119,
+  "pk": 1122,
   "fields": {
     "piid": "SP060003D5311_0014",
     "date_signed": "2017-09-21T00:00:00Z",
@@ -25733,12 +25802,12 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 352,
-    "place_of_performance": 232
+    "place_of_performance": 231
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 1120,
+  "pk": 1123,
   "fields": {
     "piid": "W911S704D0018_0026",
     "date_signed": "2005-04-11T00:00:00Z",
@@ -25756,12 +25825,12 @@
     "number_of_employees": 0,
     "vendor_phone": null,
     "vendor_location": 352,
-    "place_of_performance": 115
+    "place_of_performance": 116
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 1121,
+  "pk": 1124,
   "fields": {
     "piid": "W911S710D0010_0026",
     "date_signed": "2010-09-22T00:00:00Z",
@@ -25784,7 +25853,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1122,
+  "pk": 1125,
   "fields": {
     "piid": "W911S710D0010_0037",
     "date_signed": "2010-06-01T00:00:00Z",
@@ -25807,7 +25876,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1123,
+  "pk": 1126,
   "fields": {
     "piid": "N6523612D4142_0002",
     "date_signed": "2014-05-21T00:00:00Z",
@@ -25825,12 +25894,12 @@
     "number_of_employees": 2902,
     "vendor_phone": "571-262-8200",
     "vendor_location": 353,
-    "place_of_performance": 175
+    "place_of_performance": 176
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 1124,
+  "pk": 1127,
   "fields": {
     "piid": "N6523612D4811_0003",
     "date_signed": "2013-01-25T00:00:00Z",
@@ -25848,12 +25917,12 @@
     "number_of_employees": 2902,
     "vendor_phone": "571-262-8200",
     "vendor_location": 353,
-    "place_of_performance": 125
+    "place_of_performance": 126
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 1125,
+  "pk": 1128,
   "fields": {
     "piid": "N0003915D0035_0005",
     "date_signed": "2016-05-18T00:00:00Z",
@@ -25871,12 +25940,12 @@
     "number_of_employees": 2844,
     "vendor_phone": "703-802-6231",
     "vendor_location": 354,
-    "place_of_performance": 122
+    "place_of_performance": 123
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 1126,
+  "pk": 1129,
   "fields": {
     "piid": "HQ003412D0004_0007",
     "date_signed": "2013-07-26T00:00:00Z",
@@ -25899,7 +25968,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1127,
+  "pk": 1130,
   "fields": {
     "piid": "N6523611D6853_0008",
     "date_signed": "2013-06-18T00:00:00Z",
@@ -25922,7 +25991,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1128,
+  "pk": 1131,
   "fields": {
     "piid": "N6523611D2122_0014",
     "date_signed": "2014-09-03T00:00:00Z",
@@ -25940,12 +26009,12 @@
     "number_of_employees": 3689,
     "vendor_phone": "571-262-8200",
     "vendor_location": 353,
-    "place_of_performance": 125
+    "place_of_performance": 126
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 1129,
+  "pk": 1132,
   "fields": {
     "piid": "N6523611D2122_0018",
     "date_signed": "2015-02-05T00:00:00Z",
@@ -25963,12 +26032,12 @@
     "number_of_employees": 3689,
     "vendor_phone": "571-262-8200",
     "vendor_location": 353,
-    "place_of_performance": 125
+    "place_of_performance": 126
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 1130,
+  "pk": 1133,
   "fields": {
     "piid": "N6523605D7148_0025",
     "date_signed": "2006-05-24T00:00:00Z",
@@ -25991,7 +26060,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1131,
+  "pk": 1134,
   "fields": {
     "piid": "N6523612D3218_0025",
     "date_signed": "2013-09-16T00:00:00Z",
@@ -26014,7 +26083,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1132,
+  "pk": 1135,
   "fields": {
     "piid": "N6523612D4811_0026",
     "date_signed": "2014-09-29T00:00:00Z",
@@ -26032,12 +26101,12 @@
     "number_of_employees": 2902,
     "vendor_phone": "571-262-8200",
     "vendor_location": 353,
-    "place_of_performance": 207
+    "place_of_performance": 208
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 1133,
+  "pk": 1136,
   "fields": {
     "piid": "N6246706D5318_0001",
     "date_signed": "2006-09-30T00:00:00Z",
@@ -26060,7 +26129,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1134,
+  "pk": 1137,
   "fields": {
     "piid": "N6246701D5726_0030",
     "date_signed": "2003-03-26T00:00:00Z",
@@ -26083,7 +26152,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1135,
+  "pk": 1138,
   "fields": {
     "piid": "N6246799D0859_0610",
     "date_signed": "2002-07-23T00:00:00Z",
@@ -26106,7 +26175,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1136,
+  "pk": 1139,
   "fields": {
     "piid": "N6246701D5726_1725",
     "date_signed": "2002-02-04T00:00:00Z",
@@ -26129,7 +26198,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1137,
+  "pk": 1140,
   "fields": {
     "piid": "GS08P08JAD0006_47PJ0017F0034",
     "date_signed": "2017-07-25T00:00:00Z",
@@ -26152,7 +26221,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1138,
+  "pk": 1141,
   "fields": {
     "piid": "GS08P08JAD0006_47PJ0017F0067",
     "date_signed": "2017-08-07T00:00:00Z",
@@ -26175,7 +26244,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1139,
+  "pk": 1142,
   "fields": {
     "piid": "GS08P08JAD0006_47PJ0017F0147",
     "date_signed": "2017-08-28T00:00:00Z",
@@ -26198,7 +26267,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1140,
+  "pk": 1143,
   "fields": {
     "piid": "GS08P08JAD0006_47PJ0018F0060",
     "date_signed": "2018-01-04T00:00:00Z",
@@ -26221,7 +26290,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1141,
+  "pk": 1144,
   "fields": {
     "piid": "GS08P08JAD0006_47PJ0018F0086",
     "date_signed": "2018-01-26T00:00:00Z",
@@ -26244,7 +26313,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1142,
+  "pk": 1145,
   "fields": {
     "piid": "F3260403D0003_5003",
     "date_signed": "2006-07-28T00:00:00Z",
@@ -26267,7 +26336,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1143,
+  "pk": 1146,
   "fields": {
     "piid": "W911W411D0006_0001",
     "date_signed": "2013-01-04T00:00:00Z",
@@ -26290,7 +26359,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1144,
+  "pk": 1147,
   "fields": {
     "piid": "W912DY10D0049_0001",
     "date_signed": "2011-08-17T00:00:00Z",
@@ -26308,12 +26377,12 @@
     "number_of_employees": 6000,
     "vendor_phone": "270-885-4642",
     "vendor_location": 117,
-    "place_of_performance": 163
+    "place_of_performance": 164
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 1145,
+  "pk": 1148,
   "fields": {
     "piid": "W912DY10D0049_0002",
     "date_signed": "2014-08-20T00:00:00Z",
@@ -26336,7 +26405,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1146,
+  "pk": 1149,
   "fields": {
     "piid": "W912DY04D0028_0003",
     "date_signed": "2005-01-28T00:00:00Z",
@@ -26359,7 +26428,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1147,
+  "pk": 1150,
   "fields": {
     "piid": "W912DY10D0049_0003",
     "date_signed": "2016-06-17T00:00:00Z",
@@ -26377,12 +26446,35 @@
     "number_of_employees": 6000,
     "vendor_phone": "270-885-4642",
     "vendor_location": 117,
-    "place_of_performance": 20
+    "place_of_performance": 21
   }
 },
 {
   "model": "contracts.contract",
-  "pk": 1148,
+  "pk": 1151,
+  "fields": {
+    "piid": "W9127815D0020_0003",
+    "date_signed": "2018-01-10T00:00:00Z",
+    "completion_date": "2018-03-20T00:00:00Z",
+    "NAICS": "236220",
+    "PSC": "Z1DA",
+    "agency_id": "9700",
+    "agency_name": "DEPT OF DEFENSE",
+    "vendor": 118,
+    "point_of_contact": "KIMBERLY.L.BRACKETT.W91278@USACE.ARMY.MIL",
+    "pricing_type": "J",
+    "obligated_amount": "0.00",
+    "status": "C1",
+    "annual_revenue": 4000000000,
+    "number_of_employees": 100000,
+    "vendor_phone": "270-885-4642",
+    "vendor_location": 117,
+    "place_of_performance": 58
+  }
+},
+{
+  "model": "contracts.contract",
+  "pk": 1152,
   "fields": {
     "piid": "W911W411D0006_0004",
     "date_signed": "2017-06-06T00:00:00Z",
@@ -26405,7 +26497,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1149,
+  "pk": 1153,
   "fields": {
     "piid": "W912DY15D0029_0004",
     "date_signed": "2017-02-28T00:00:00Z",
@@ -26428,7 +26520,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1150,
+  "pk": 1154,
   "fields": {
     "piid": "W9127815D0020_0004",
     "date_signed": "2017-03-30T00:00:00Z",
@@ -26441,7 +26533,7 @@
     "point_of_contact": "ROBERT.S.MCALLISTER.W91278@USACE.ARMY.MIL",
     "pricing_type": "J",
     "obligated_amount": "4644591.38",
-    "status": "C2",
+    "status": "C1",
     "annual_revenue": 4000000000,
     "number_of_employees": 100000,
     "vendor_phone": "703-739-2136",
@@ -26451,7 +26543,7 @@
 },
 {
   "model": "contracts.contract",
-  "pk": 1151,
+  "pk": 1155,
   "fields": {
     "piid": "W912DY15D0029_0005",
     "date_signed": "2016-03-31T00:00:00Z",
@@ -26469,30 +26561,7 @@
     "number_of_employees": 100000,
     "vendor_phone": "703-739-2136",
     "vendor_location": 117,
-    "place_of_performance": 201
-  }
-},
-{
-  "model": "contracts.contract",
-  "pk": 1152,
-  "fields": {
-    "piid": "W912HN08D0056_0005",
-    "date_signed": "2010-09-07T00:00:00Z",
-    "completion_date": "2011-09-23T00:00:00Z",
-    "NAICS": "561210",
-    "PSC": "S216",
-    "agency_id": "9700",
-    "agency_name": "DEPT OF DEFENSE",
-    "vendor": 118,
-    "point_of_contact": "HENRY.WIGFALL.W912HN@USACE.ARMY.MIL",
-    "pricing_type": "J",
-    "obligated_amount": "665886.00",
-    "status": "C1",
-    "annual_revenue": 450000000,
-    "number_of_employees": 6000,
-    "vendor_phone": null,
-    "vendor_location": 359,
-    "place_of_performance": null
+    "place_of_performance": 202
   }
 }
 ]
