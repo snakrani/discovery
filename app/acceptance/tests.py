@@ -114,7 +114,7 @@ class FunctionalTests(LiveServerTestCase):
             EC.presence_of_all_elements_located((By.CLASS_NAME, "table_row_data"))
         )
         #make sure selected filters are described above search results
-        self.assertEqual("Engineering Services ( 541330 )", driver.find_element_by_id("your_search").text)
+        self.assertEqual("Engineering Services", driver.find_element_by_id("your_search").text)
 
 
     def test_vendor_count_in_search_results(self):
