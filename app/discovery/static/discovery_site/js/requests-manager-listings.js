@@ -49,13 +49,15 @@ RequestsManager.loadVendors = function(data, callback) {
 
         RequestsManager.getAPIRequest(url, queryData,
             function(response) {
-                callback(queryData, response);
+                if (queryData['contract_naics'] == URLManager.getParameterByName('naics-code')) {
+                    callback(queryData, response);
 
-                LayoutManager.enableVehicles();
-                LayoutManager.enableNaics();
-                LayoutManager.enableZone();
-                LayoutManager.enableFilters();
-                $('.table_wrapper').removeClass('loading');
+                    LayoutManager.enableVehicles();
+                    LayoutManager.enableNaics();
+                    LayoutManager.enableZone();
+                    LayoutManager.enableFilters();
+                    $('.table_wrapper').removeClass('loading');
+                }
             },
             function(req, status, error) {
                 LayoutManager.enableVehicles();
