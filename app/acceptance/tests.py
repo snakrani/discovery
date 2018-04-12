@@ -77,12 +77,12 @@ class FunctionalTests(LiveServerTestCase):
     def test_socioeconomic_indicators_in_search_results(self):
         driver = self.driver
         #on search results page for a veteran owned search
-        driver.get(self.base_url + "/results?vehicle=oasis_sb&setasides=A5&naics-code=541330&")
+        driver.get(self.base_url + "/results?vehicle=oasis_sb&setasides=A2&naics-code=541330&")
         element = WebDriverWait(driver, 5).until(
             EC.presence_of_all_elements_located((By.CLASS_NAME, "table_row_data"))
         )
-        #make sure veteran owned filter is selected
-        self.assertEqual("A5", driver.find_element_by_id("vet").get_attribute("value"))
+        #make sure woman owned filter is selected
+        self.assertEqual("A2", driver.find_element_by_id("woman").get_attribute("value"))
         #make sure headers for each socioeconomic indicator exist
         self.assertEqual(driver.find_element_by_css_selector("th.h_8a").text, "8(a)")
         self.assertEqual(driver.find_element_by_css_selector("th.h_hubz").text, "HubZ")
@@ -90,16 +90,16 @@ class FunctionalTests(LiveServerTestCase):
         self.assertEqual(driver.find_element_by_css_selector("th.h_wo").text, "WO")
         self.assertEqual(driver.find_element_by_css_selector("th.h_vo").text, "VO")
         self.assertEqual(driver.find_element_by_css_selector("th.h_sdb").text, "SDB")
-        #make sure the first few results are all veteran owned
+        #make sure the first few results are all woman owned
         try:
-            self.assertTrue(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[2]/td[8]/img'))
+            self.assertTrue(driver.find_element_by_xpath('//*[@id="pool_vendors"]/tbody/tr[2]/td[7]/img'))
         except:
             self.assertTrue(False)
 
     def test_result_count_on_search_results(self):
         driver = self.driver
         #load search results
-        driver.get(self.base_url + "/results?vehicle=oasis_sb&naics-code=541330&setasides=A5&pool=1_SB")
+        driver.get(self.base_url + "/results?vehicle=oasis_sb&naics-code=541330&setasides=A2")
         element = WebDriverWait(driver, 5).until(
             EC.presence_of_all_elements_located((By.CLASS_NAME, "table_row_data"))
         )
@@ -109,7 +109,7 @@ class FunctionalTests(LiveServerTestCase):
     def test_search_criteria_on_search_results(self):
         driver = self.driver
         #load search results
-        driver.get(self.base_url + "/results?vehicle=oasis_sb&naics-code=541330&setasides=A5&pool=1_SB")
+        driver.get(self.base_url + "/results?vehicle=oasis_sb&naics-code=541330&setasides=A2")
         element = WebDriverWait(driver, 5).until(
             EC.presence_of_all_elements_located((By.CLASS_NAME, "table_row_data"))
         )
@@ -120,7 +120,7 @@ class FunctionalTests(LiveServerTestCase):
     def test_vendor_count_in_search_results(self):
         driver = self.driver
         #load search results
-        driver.get(self.base_url + "/results?vehicle=oasis_sb&naics-code=541330&setasides=A5&")
+        driver.get(self.base_url + "/results?vehicle=oasis_sb&naics-code=541330&setasides=A2&")
         element = WebDriverWait(driver, 5).until(
             EC.presence_of_all_elements_located((By.CLASS_NAME, "table_row_data"))
         )
