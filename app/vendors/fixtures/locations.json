@@ -3936,16 +3936,5 @@
     "zipcode": "42240",
     "congressional_district": "01"
   }
-},
-{
-  "model": "vendors.location",
-  "pk": 359,
-  "fields": {
-    "address": "3999 Fort Campbell Blvd",
-    "city": "Hopkinsville",
-    "state": "KY",
-    "zipcode": "42240",
-    "congressional_district": "01"
-  }
 }
 ]
