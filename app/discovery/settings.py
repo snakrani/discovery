@@ -262,23 +262,28 @@ LOGGING = {
         },
         'vendor_memory': {
             'handlers': ['vendor_memory_file'],
-            'level': 'INFO'
+            'level': 'INFO',
+            'propagate': False
         },
         'vendor_data': {
             'handlers': ['vendor_data_file'],
-            'level': 'INFO'
+            'level': 'INFO',
+            'propagate': False
         },
         'sam_data': {
             'handlers': ['sam_data_file'],
-            'level': 'INFO'
+            'level': 'INFO',
+            'propagate': False
         },
         'fpds_memory': {
             'handlers': ['fpds_memory_file'],
-            'level': 'INFO'
+            'level': 'INFO',
+            'propagate': False
         },
         'fpds_data': {
             'handlers': ['fpds_data_file'],
-            'level': 'INFO'
+            'level': 'INFO',
+            'propagate': False
         }
     },
     'root': {
