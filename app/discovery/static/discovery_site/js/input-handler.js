@@ -320,7 +320,7 @@ var InputHandler = {
      */
     getSelectedNAICS: function(callback) {
         this.populatePromise.done(function() {
-            var text = $("#naics-code option:selected").text();
+            var text = $("#naics-code option:selected").text().replace(/\s+\(\s*[\d]+\s*\)\s*$/, '');
             callback(text);
         });
     }
