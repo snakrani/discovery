@@ -39,8 +39,8 @@ Z1DA,Maintenance Of Hospitals And Infirmaries,561210
 Z1DB,Maintenance Of Laboratories And Clinics,561210
 Z1DZ,Maintenance Of Other Hospital Buildings,561210
 Z111,Maint / Repair / Alteration - Office Bldgs,561210
-Z141,Maint / Repair / Alteration - Hospitals; Infirmary,561210
-Z142,Maint / Repair / Alteration - Labs; Clinics,561210
+Z141,Maint / Repair / Alteration – Hospitals / Infirmary,561210
+Z142,Maint / Repair / Alteration – Labs / Clinics,561210
 H169,Quality Control – Training Aids And Devices,611430
 H269,Equipment And Materials Testing – Training Aids And Devices,611430
 H969,"Other Quality Control, Testing And Inspection – Training Aids / Devices",611430
