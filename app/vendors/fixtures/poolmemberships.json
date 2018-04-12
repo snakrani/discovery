@@ -39,10 +39,7 @@
     "piid": "GS00Q14OADS104",
     "vendor": 4,
     "pool": "OASIS_SB_1",
-    "setasides": [
-      1,
-      2
-    ],
+    "setasides": [],
     "zones": []
   }
 },
@@ -129,7 +126,9 @@
     "piid": "GS00Q14OADS201",
     "vendor": 11,
     "pool": "OASIS_SB_2",
-    "setasides": [],
+    "setasides": [
+      2
+    ],
     "zones": []
   }
 },
@@ -305,7 +304,6 @@
     "vendor": 26,
     "pool": "OASIS_SB_6",
     "setasides": [
-      1,
       2
     ],
     "zones": []
@@ -389,7 +387,6 @@
     "vendor": 26,
     "pool": "OASIS_SB_5A",
     "setasides": [
-      1,
       2
     ],
     "zones": []
@@ -425,7 +422,6 @@
     "vendor": 32,
     "pool": "OASIS_SB_5A",
     "setasides": [
-      1,
       2,
       3,
       16
@@ -579,7 +575,6 @@
     "vendor": 38,
     "pool": "OASIS_SB_4",
     "setasides": [
-      1,
       2
     ],
     "zones": []
@@ -593,7 +588,6 @@
     "vendor": 11,
     "pool": "OASIS_SB_3",
     "setasides": [
-      1,
       2
     ],
     "zones": []
@@ -607,7 +601,6 @@
     "vendor": 39,
     "pool": "OASIS_SB_3",
     "setasides": [
-      1,
       2
     ],
     "zones": []
@@ -776,7 +769,6 @@
     "vendor": 26,
     "pool": "OASIS_SB_5B",
     "setasides": [
-      1,
       2
     ],
     "zones": []
@@ -790,7 +782,6 @@
     "vendor": 32,
     "pool": "OASIS_SB_5B",
     "setasides": [
-      1,
       2,
       3,
       16
