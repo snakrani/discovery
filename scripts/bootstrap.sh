@@ -13,6 +13,8 @@ echo "> Updating OS package repositories"
 sudo apt-get update >/dev/null
 
 #install basic dependencies
+sudo apt-get install -y redis-tools
+  
 if ! which git >/dev/null
 then
   echo "> Installing Git version control"
