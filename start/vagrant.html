@@ -94,26 +94,8 @@
               
             
             
-              <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../readme.html">Discovery overview</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../readme.html#documentation-outline">Documentation outline</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../readme.html#getting-set-up-with-discovery">Getting set up with Discovery</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="about.html">About Discovery</a></li>
-<li class="toctree-l4"><a class="reference internal" href="development.html">Development options</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">Running with Vagrant</a></li>
-<li class="toctree-l4"><a class="reference internal" href="docker.html">Discovery on Docker</a></li>
-<li class="toctree-l4"><a class="reference internal" href="setup.html">Application setup</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="../readme.html#discovery-architecture-and-design">Discovery architecture and design</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../readme.html#discovery-related-processes">Discovery related processes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../readme.html#discovery-security-documentation">Discovery security documentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../readme.html#useful-links">Useful links</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../readme.html#related-projects">Related projects</a></li>
-</ul>
-</li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">Discovery overview</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Links</span></p>
 <ul>
@@ -124,7 +106,25 @@
 </ul>
 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="readme.html">Getting started with Discovery</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="readme.html">Getting started with Discovery</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="readme.html#overview">Overview</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="readme.html#topics">Topics</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="about.html">About Discovery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="development.html">Development options</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Running with Vagrant</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running-the-virtual-machine">Running the virtual machine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common-vagrant-commands">Common Vagrant commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getting-help">Getting help</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="docker.html">Discovery on Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup.html">Discovery setup</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About Discovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="development.html">Discovery development options</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Discovery on Vagrant</a><ul>
@@ -240,14 +240,14 @@
 </div>
 <div class="section" id="configuration">
 <span id="configuration"></span><h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
-<p>The Discovery Vagrantfile is meant to be configurable depending on the needs of the developer.  To keep everything that needs to be versioned, we use a pattern of a default Vagrant configuration file that can be overridden if an override exists.</p>
+<p>The Discovery Vagrantfile is meant to be configurable depending on the needs of the developer.  To keep everything that needs to be versioned, we use a pattern of a default Vagrant configuration file that can be overridden if an override exists.  All Vagrant related configurations are in the <strong>vagrant</strong> directory.</p>
 <p>You will also need to ensure certain environment variables are set for the Discovery application containers.  We provide an example (<a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/docker/django-env.example.vars">docker/django-env.example.vars</a>) but you will need to create a file called <strong>docker/django-env.vars</strong> that has sensitive application information.</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Fetch Discovery project</span>
 $ git clone https://github.com/PSHCDevOps/discovery.git <span class="o">{</span>project_directory<span class="o">}</span>
 $ <span class="nb">cd</span> <span class="o">{</span>project_directory<span class="o">}</span>
 
 <span class="c1"># vagrant-config.yml is ignored by Git so your configurations will not be versioned</span>
-$ cp vagrant-config.default.yml vagrant-config.yml
+$ cp vagrant/config.default.yml vagrant/config.yml
 
 <span class="c1"># docker/django-env.vars is ignored by Git so your configuration will not be versioned</span>
 $ cp docker/django-env.example.vars docker/django-env.vars
@@ -339,11 +339,6 @@ $ cp docker/django-env.example.vars docker/django-env.vars
 </li>
 </ul>
 <ul>
-<li><p class="first"><strong>API_KEY</strong> <em>default: <strong>REQUIRED!!!</strong></em></p>
-<p>Sets a <a class="reference external" href="https://api.data.gov/signup/">Data.gov API key</a> that is passed to the Discovery API by the frontend Javascript.</p>
-</li>
-</ul>
-<ul>
 <li><p class="first"><strong>SAM_API_KEY</strong> <em>default: <strong>REQUIRED!!!</strong></em></p>
 <p>Sets the <a class="reference external" href="https://api.data.gov/signup/">Data.gov API key</a> that is passed to requests to get SAM vendor registration information.</p>
 </li>
@@ -379,7 +374,7 @@ $ vagrant ssh
 </ul>
 <p><br/></p>
 <p>Using Vagrant, when SSHing into the virtual machine, you will be automatically redirected to the project root directory (<strong>/vagrant</strong>) and <strong>docker-compose up</strong> will be run to ensure Docker application containers are up to date.</p>
-<p><strong>Git</strong>, <strong>Cloud Foundry Client</strong> with the <strong>Autopliot plugin</strong>, <strong>Docker</strong>, and <strong>Docker Compose</strong> come installed on the Vagrant virtual environment initially.  The development environment is meant to bundle tooling necessary to running the Discovery application that might not make sense to install in the containers, and it provides a platform for running isolated Docker clusters in Docker Compose.</p>
+<p><strong>Git</strong>, <strong>Cloud Foundry Client</strong> with the <strong>Autopilot</strong> and <strong>Service Connect</strong> plugins, <strong>Docker</strong>, and <strong>Docker Compose</strong> come installed on the Vagrant virtual environment initially.  The development environment is meant to bundle tooling necessary to running the Discovery application that might not make sense to install in the containers, and it provides a platform for running isolated Docker clusters in Docker Compose.</p>
 <p><br/></p>
 </div>
 <div class="section" id="common-vagrant-commands">

@@ -94,26 +94,8 @@
               
             
             
-              <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../readme.html">Discovery overview</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../readme.html#documentation-outline">Documentation outline</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../readme.html#getting-set-up-with-discovery">Getting set up with Discovery</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="about.html">About Discovery</a></li>
-<li class="toctree-l4"><a class="reference internal" href="development.html">Development options</a></li>
-<li class="toctree-l4"><a class="reference internal" href="vagrant.html">Running with Vagrant</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">Discovery on Docker</a></li>
-<li class="toctree-l4"><a class="reference internal" href="setup.html">Application setup</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="../readme.html#discovery-architecture-and-design">Discovery architecture and design</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../readme.html#discovery-related-processes">Discovery related processes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../readme.html#discovery-security-documentation">Discovery security documentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../readme.html#useful-links">Useful links</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../readme.html#related-projects">Related projects</a></li>
-</ul>
-</li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">Discovery overview</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Links</span></p>
 <ul>
@@ -124,7 +106,25 @@
 </ul>
 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="readme.html">Getting started with Discovery</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="readme.html">Getting started with Discovery</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="readme.html#overview">Overview</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="readme.html#topics">Topics</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="about.html">About Discovery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="development.html">Development options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vagrant.html">Running with Vagrant</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Discovery on Docker</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running-the-docker-services">Running the Docker services</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common-docker-commands">Common Docker commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getting-help">Getting help</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="setup.html">Discovery setup</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About Discovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="development.html">Discovery development options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vagrant.html">Discovery on Vagrant</a></li>
@@ -132,7 +132,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#application-configurations">Application configurations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#docker-user-environment">Docker user environment</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#running-the-docker-services">Running the Docker services</a></li>
@@ -260,11 +259,6 @@ $ cp docker/django-env.example.vars docker/django-env.vars
 </li>
 </ul>
 <ul>
-<li><p class="first"><strong>API_KEY</strong> <em>default: <strong>REQUIRED!!!</strong></em></p>
-<p>Sets a <a class="reference external" href="https://api.data.gov/signup/">Data.gov API key</a> that is passed to the Discovery API by the frontend Javascript.</p>
-</li>
-</ul>
-<ul>
 <li><p class="first"><strong>SAM_API_KEY</strong> <em>default: <strong>REQUIRED!!!</strong></em></p>
 <p>Sets the <a class="reference external" href="https://api.data.gov/signup/">Data.gov API key</a> that is passed to requests to get SAM vendor registration information.</p>
 </li>
@@ -274,13 +268,6 @@ $ cp docker/django-env.example.vars docker/django-env.vars
 <p>Sets a secret alpha-numeric key that is required by Django for certain operations.  This key can be anything you like but it should be lengthy and randomistic.</p>
 </li>
 </ul>
-<p><br/></p>
-</div>
-<div class="section" id="docker-user-environment">
-<span id="docker-user-environment"></span><h3>Docker user environment<a class="headerlink" href="#docker-user-environment" title="Permalink to this headline">¶</a></h3>
-<p>To make inspecting state and working within the Docker application containers easier the Discovery application is configured to create (<em>if it does not exit</em>) and share a host folder <strong>/usr/local/discovery-docker-root</strong> that can allow for the sharing of <strong>/root</strong> environment files, such as .bashrc, .profile, .gitconfig, etc...</p>
-<p>If you are running Docker within the Vagrant virtual machine, Vagrant has already copied all Vagrant user environment files to this folder and they are being shared with the Docker application containers already.</p>
-<p>Note that this has not been tested with Windows so please <a class="reference external" href="https://github.com/PSHCDevOps/discovery/issues">file an issue</a> if you experience issues with local Docker development and our Docker Compose configuration.  If you do have issues on an untested environment, Docker on the Discovery Vagrant instance should provide a short term alternative while we get it fixed.</p>
 <p><br/></p>
 </div>
 </div>
@@ -294,11 +281,10 @@ $ docker-compose up -d
 <span class="c1"># You can verify all Docker services are running with</span>
 $ docker-compose ps
 <span class="c1">#</span>
-<span class="c1"># You should see 10 containers running</span>
-<span class="c1">#   1 load balancer</span>
-<span class="c1">#   3 web servers</span>
+<span class="c1"># You should see 6 containers running</span>
+<span class="c1">#   1 web server</span>
 <span class="c1">#   1 scheduler</span>
-<span class="c1">#   2 workers</span>
+<span class="c1">#   1 worker</span>
 <span class="c1">#   1 PostgreSQL database</span>
 <span class="c1">#   2 Redis instances (tasks and shared sessions)</span>
 
@@ -331,8 +317,8 @@ $ docker <span class="nb">exec</span> -it <span class="o">{</span>full-container
 </ul>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ docker-compose ps                      <span class="c1"># List all running containers from the docker-compose images</span>
 
-$ docker logs discovery_web_1            <span class="c1"># Display recent log entries from the discovery_web_1 container</span>
-$ docker logs discovery_web_1 --follow   <span class="c1"># Follow log entries from the discovery_web_1 container</span>
+$ docker-compose logs web                <span class="c1"># Display recent log entries from the discovery_web_1 container</span>
+$ docker-compose logs -f web             <span class="c1"># Follow log entries from the discovery_web_1 container</span>
 
 $ docker <span class="nb">exec</span> -it discovery_web_1 bash   <span class="c1"># &quot;SSH&quot; into the running discovery_web_1 container</span>
 

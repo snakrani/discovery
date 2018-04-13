@@ -39,7 +39,7 @@ To learn more about executing Discovery unit tests see testing section of the [D
 
 ## Acceptance testing
 
-The Discovery application currently implements [Selenium](http://www.seleniumhq.org/) based acceptance testing through the [PhantomJS](http://phantomjs.org/) library.  This library is installed by default on the Discovery Docker image.
+The Discovery application currently implements [Selenium](http://www.seleniumhq.org/) based acceptance testing through the [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/getting-started) library.  This library is installed by default on the Discovery Docker image and Vagrant development environment.
 
 Acceptance testing requires a Discovery application server running at http://localhost:8080
 

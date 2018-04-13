@@ -106,7 +106,6 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../readme.html#discovery-related-processes">Discovery related processes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../readme.html#discovery-security-documentation">Discovery security documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../readme.html#useful-links">Useful links</a></li>
 </ul>
 </li>
@@ -270,13 +269,13 @@
 </div>
 <div class="section" id="vendor-information">
 <span id="vendor-information"></span><h2>Vendor information<a class="headerlink" href="#vendor-information" title="Permalink to this headline">¶</a></h2>
-<p>Vendors make up the core data type in the Discovery system.  All related data displays are grouped around vendors currently.  Vendor information is provided both through CSV file information provided by GSA PSHC staff in the <strong>vendors/docs</strong> directory and through SAM API registration data that is returned for the DUNS number of the vendor in the SAM system.</p>
+<p>Vendors make up the core data type in the Discovery system.  All related data displays are grouped around vendors currently.  Vendor information is provided both through CSV file information provided by GSA PSHC staff in the <strong>vendors/data</strong> directory and through SAM API registration data that is returned for the DUNS number of the vendor in the SAM system.</p>
 <p>You can find examples of vendor data elements in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/vendors.json">vendor fixture data</a>.</p>
 <p><br/></p>
 <div class="section" id="pool-membership">
 <span id="pool-membership"></span><h3>Pool membership<a class="headerlink" href="#pool-membership" title="Permalink to this headline">¶</a></h3>
 <p>Each vendor is classified into different pools using a PIID value which serves as a unique identifier for the vendor.</p>
-<p>You can find examples of vendor PIID mapping data elements in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/poolpiids.json">vendor PIID fixture data</a>.</p>
+<p>You can find examples of vendor PIID mapping data elements in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/poolmemberships.json">vendor pool membership fixture data</a>.</p>
 <p><br/></p>
 </div>
 <div class="section" id="sam-registrations">

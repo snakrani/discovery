@@ -113,6 +113,9 @@ $ scripts/gen-fixtures.sh  # Has no options
 # Helper script that fetches all production time period data into the Discovery application
 $ scripts/fetch-data.sh  # Has no options
 
+# Helper script that fetches updated fixture data (to standardize the data collection)
+$ scripts/fetch-fixture-data.sh  # Has no options
+
 # Load all classification information into Discovery (currently these are all local file based)
 # - included in fetch-data.sh
 $ manage.py load_categories  # Has no options
@@ -166,7 +169,7 @@ You can check on the results of executed tasks at http://localhost:8080/admin/dj
 
 ## Testing changes
 
-The Discovery application is currently designed with two types of automated testing; unit tests and [Selenium](http://www.seleniumhq.org/docs/01_introducing_selenium.jsp) based acceptance testing through [PhantomJS](http://phantomjs.org/documentation).
+The Discovery application is currently designed with two types of automated testing; unit tests and [Selenium](http://www.seleniumhq.org/docs/01_introducing_selenium.jsp) based acceptance testing through [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/getting-started).
 
 The Discovery [CircleCI environment](https://circleci.com/docs/2.0/) is currently configured to run both unit tests and acceptance tests on pushes to branches and merges on the official PSHCDevOps source repository.
 
@@ -178,9 +181,9 @@ The Discovery [CircleCI environment](https://circleci.com/docs/2.0/) is currentl
 * Run on Cloud Foundry with **cf run-task**
 
 ```bash
-# Install PhantomJS on the machine (only tested on Debian and Ubuntu for the Vagrant machine and CI containers)
+# Install Chrome with webdriver on the machine (only tested on Debian and Ubuntu for the Vagrant machine and CI containers)
 #  - Already installed on Docker Django images
-$ scripts/setup-phantomjs.sh  # Has no options
+$ scripts/setup-chrome.sh  # Has no options
 
 # Run all defined unit tests from Django api, vendors, and contract applications
 #  - See CircleCI configuration for full usage example
@@ -255,29 +258,3 @@ The root documentation folder is: **docs**.
 #  - Used by the CircleCI deployment process
 $ scripts/deploy-docs.sh --help
 ```
-
-<br/>
-
-### Compliance documentation
-
-The Discovery application requires a government ATO to serve the public, so it requires compliance documentation that signifies how the information system or managing organization aheres to the relevant NIST standards and controls.  This documentation is currently housed in the **compliance** directory with a top level **opencontrol.yaml** file.
-
-We use the [Compliance Masonry project](https://github.com/opencontrol/compliance-masonry) using the [Open Control schemas](https://github.com/opencontrol/schemas) to generate a Gitbook of the required control documentation.
-
-<br/>
-
-#### Compliance documentation related scripts
-
-* Run on either the **host** or **vagrant** machine (_if installed and used_)
-* Run from the **top level project** directory
-
-```bash
-# Setup the Compliance Masonry CLI on the machine (only tested on Ubuntu and Debian)
-#  - This is included on the Vagrant development machine
-$ scripts/setup-cm.sh # No options
-
-# Generate a Gitbook formatted PDF with the included compliance documentation
-$ scripts/create-security-docs.sh {../path/to/controls.pdf}
-```
-
-<br/>
