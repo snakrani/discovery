@@ -9,6 +9,7 @@ cf_init_plugins() {
   
   # In case we are running as a different user as the user who installed CF
   cf install-plugin -f "${bin_dir}/cf-autopilot"
+  cf install-plugin -f "${bin_dir}/cf-service-connect"
 }
 
 cf_login() {

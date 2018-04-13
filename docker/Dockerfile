@@ -1,12 +1,10 @@
-#
-# See: https://github.com/docker-library/python/blob/master/2.7/stretch/slim/Dockerfile
-#
-FROM python:2.7-slim-stretch
+FROM debian:stretch-slim
 
 #
 # Container environment variables
 #
 ENV PATH /venv/bin:$PATH
+ENV LANG C.UTF-8
 ENV PYTHONUNBUFFERED 1
 
 #
@@ -15,11 +13,6 @@ ENV PYTHONUNBUFFERED 1
 RUN mkdir /discovery
 VOLUME /discovery
 WORKDIR /discovery
-
-#
-# SSH configuration
-#
-RUN mkdir /root/.ssh
 
 #
 # Application requirements
@@ -32,9 +25,6 @@ RUN /usr/local/discovery/bin/setup-python.sh /dev/stderr \
     && rm -rf /tmp/*
 
 #
-# Javascript dependencies
+# Initial command
 #
-COPY ./scripts/setup-phantomjs.sh /usr/local/discovery/bin/setup-phantomjs.sh
-
-RUN /usr/local/discovery/bin/setup-phantomjs.sh /dev/stderr \
-    && rm -rf /tmp/*
+CMD ["python3"]

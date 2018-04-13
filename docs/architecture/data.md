@@ -55,7 +55,7 @@ You can find a list of all the available vendor pools in the [vendor pool fixtur
 
 ## Vendor information
 
-Vendors make up the core data type in the Discovery system.  All related data displays are grouped around vendors currently.  Vendor information is provided both through CSV file information provided by GSA PSHC staff in the **vendors/docs** directory and through SAM API registration data that is returned for the DUNS number of the vendor in the SAM system.
+Vendors make up the core data type in the Discovery system.  All related data displays are grouped around vendors currently.  Vendor information is provided both through CSV file information provided by GSA PSHC staff in the **vendors/data** directory and through SAM API registration data that is returned for the DUNS number of the vendor in the SAM system.
 
 You can find examples of vendor data elements in the [vendor fixture data](https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/vendors.json).
 
@@ -65,7 +65,7 @@ You can find examples of vendor data elements in the [vendor fixture data](https
 
 Each vendor is classified into different pools using a PIID value which serves as a unique identifier for the vendor.
 
-You can find examples of vendor PIID mapping data elements in the [vendor PIID fixture data](https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/poolpiids.json).
+You can find examples of vendor PIID mapping data elements in the [vendor pool membership fixture data](https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/poolmemberships.json).
 
 <br/>
 

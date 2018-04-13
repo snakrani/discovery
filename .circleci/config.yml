@@ -8,11 +8,11 @@ version: 2
 jobs:
   unit-tests:
     docker:
-      - image: python:2.7-slim-stretch
+      - image: debian:stretch-slim
         environment:
           PYTHONUNBUFFERED: 1
 
-      - image: postgres:9.3
+      - image: postgres:9.4
         environment:
           POSTGRES_USER: circleci
           POSTGRES_PASSWORD: circleci
@@ -39,13 +39,15 @@ jobs:
       - run:
           name: Set CircleCI configuration
           command: |
-            cp discovery/local_settings.circle.py discovery/local_settings.py
+            cp app/discovery/local_settings.circle.py app/discovery/local_settings.py
 
       - run:
           name: Run unit tests
+          no_output_timeout: 2h
           command: |
             source /venv/bin/activate
-            python manage.py test api vendors contract
+            scripts/init-webserver.sh /dev/stderr
+            ./run test --parallel=5 discovery api categories vendors contracts
 
       - store_artifacts:
           path: logs
@@ -53,11 +55,11 @@ jobs:
 
   acceptance-tests:
     docker:
-      - image: python:2.7-slim-stretch
+      - image: debian:stretch-slim
         environment:
           PYTHONUNBUFFERED: 1
 
-      - image: postgres:9.3
+      - image: postgres:9.4
         environment:
           POSTGRES_USER: circleci
           POSTGRES_PASSWORD: circleci
@@ -82,14 +84,18 @@ jobs:
             scripts/setup-python.sh /dev/stderr
 
       - run:
-          name: Install PhantomJS web driver
+          name: Install Chrome web driver
           command: |
-            scripts/setup-phantomjs.sh /dev/stderr
+            scripts/setup-chrome.sh /dev/stderr
 
       - run:
           name: Set CircleCI configuration
           command: |
-            cp discovery/local_settings.circle.py discovery/local_settings.py
+            cp app/discovery/local_settings.circle.py app/discovery/local_settings.py
+
+      - run:
+          background: true
+          command: Xvfb -ac :99 -screen 0 1280x1024x16 +extension RANDR > /dev/null 2>&1
 
       - run:
           name: Import fixtures and run test server
@@ -99,15 +105,15 @@ jobs:
             scripts/init-db.sh /dev/stderr
             scripts/init-webserver.sh /dev/stderr
             scripts/load-fixtures.sh
+            cd app
             waitress-serve --expose-tracebacks --port=8080 discovery.wsgi:application
 
       - run:
           name: Run acceptance tests
           command: |
-            git submodule update --init --recursive
-            scripts/wait-for-it/wait-for-it.sh --host="localhost" --port=8080 --timeout=300
+            scripts/wait-for-it.sh --host="localhost" --port=8080 --timeout=300
             source /venv/bin/activate
-            python manage.py test selenium_tests
+            ./run test acceptance
 
       - store_artifacts:
           path: logs
@@ -169,7 +175,7 @@ jobs:
 
   deploy-docs:
     docker:
-      - image: python:2.7-slim-stretch
+      - image: debian:stretch-slim
         environment:
           PYTHONUNBUFFERED: 1
 

@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 #-------------------------------------------------------------------------------
 
+export DEBIAN_FRONTEND=noninteractive
+
 PROJ_DIR="${1}" # Required!!
 cd "$PROJ_DIR"
 
@@ -21,14 +23,14 @@ fi
 rm -Rf /venv
 ./scripts/setup-python.sh
 
-#install PhantomJS
-./scripts/setup-phantomjs.sh
+#install PostgreSQL client
+./scripts/setup-postgresql.sh
+
+#install Chrome (for acceptance testing)
+./scripts/setup-chrome.sh
 
 #install CloudFoundry CLI
 ./scripts/setup-cf.sh
-
-#install Compliance Masonry
-./scripts/setup-cm.sh
 
 #install Docker and Docker Compose
 ./scripts/setup-docker.sh
@@ -36,9 +38,8 @@ rm -Rf /venv
 #run Docker applications
 echo "> Running all Docker services"
 
-# Ensure Scheduler can start if we have run before (Scheduler checks for PID file)
-docker-compose stop scheduler
+# Remove any previously running containers and start fresh
+docker-compose rm --stop --force web scheduler worker
 rm -f "$PROJ_DIR/logs/celerybeat.pid"
 
-docker-compose build    
-docker-compose up -d
+docker-compose build

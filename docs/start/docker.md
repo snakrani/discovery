@@ -44,11 +44,6 @@ _See below for notes on the available configurations..._
     Sets the API request location for the Discovery frontend. The Discovery application passes the host and port of the API interface to the frontend Javascript.  This enables the Javascript to make requests to the API which basically power the frontend displays.  If no data is loading in the interface, chances are that this value is wrong.
 
 
- * **API_KEY** _default: **REQUIRED!!!**_
-
-    Sets a [Data.gov API key](https://api.data.gov/signup/) that is passed to the Discovery API by the frontend Javascript.
-
-
  * **SAM_API_KEY** _default: **REQUIRED!!!**_
 
     Sets the [Data.gov API key](https://api.data.gov/signup/) that is passed to requests to get SAM vendor registration information.
@@ -57,16 +52,6 @@ _See below for notes on the available configurations..._
  * **SECRET_KEY** _default: **REQUIRED!!!**_
 
     Sets a secret alpha-numeric key that is required by Django for certain operations.  This key can be anything you like but it should be lengthy and randomistic.
-
-<br/>
-
-### Docker user environment
-
-To make inspecting state and working within the Docker application containers easier the Discovery application is configured to create (_if it does not exit_) and share a host folder **/usr/local/discovery-docker-root** that can allow for the sharing of **/root** environment files, such as .bashrc, .profile, .gitconfig, etc...
-
-If you are running Docker within the Vagrant virtual machine, Vagrant has already copied all Vagrant user environment files to this folder and they are being shared with the Docker application containers already.
-
-Note that this has not been tested with Windows so please [file an issue](https://github.com/PSHCDevOps/discovery/issues) if you experience issues with local Docker development and our Docker Compose configuration.  If you do have issues on an untested environment, Docker on the Discovery Vagrant instance should provide a short term alternative while we get it fixed.
 
 <br/>
 
@@ -81,11 +66,10 @@ $ docker-compose up -d
 # You can verify all Docker services are running with
 $ docker-compose ps
 #
-# You should see 10 containers running
-#   1 load balancer
-#   3 web servers
+# You should see 6 containers running
+#   1 web server
 #   1 scheduler
-#   2 workers
+#   1 worker
 #   1 PostgreSQL database
 #   2 Redis instances (tasks and shared sessions)
 
@@ -118,8 +102,8 @@ You are now in the shared project directory: **/discovery**
 ```bash
 $ docker-compose ps                      # List all running containers from the docker-compose images
 
-$ docker logs discovery_web_1            # Display recent log entries from the discovery_web_1 container
-$ docker logs discovery_web_1 --follow   # Follow log entries from the discovery_web_1 container
+$ docker-compose logs web                # Display recent log entries from the discovery_web_1 container
+$ docker-compose logs -f web             # Follow log entries from the discovery_web_1 container
 
 $ docker exec -it discovery_web_1 bash   # "SSH" into the running discovery_web_1 container
 

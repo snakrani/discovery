@@ -7,8 +7,8 @@ require 'yaml'
 VAGRANTFILE_API_VERSION = "2"
 
 # Load Vagrant configurations (versioned and unversioned)
-vm_config = YAML.load_file("vagrant-config.default.yml")
-vm_config.merge!(YAML.load_file("vagrant-config.yml")) if File.exist?("vagrant-config.yml")
+vm_config = YAML.load_file("vagrant/config.default.yml")
+vm_config.merge!(YAML.load_file("vagrant/config.yml")) if File.exist?("vagrant/config.yml")
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   vagrant_home = "/home/vagrant"
@@ -70,7 +70,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     s.env = { "HOME" => vagrant_home, "PROJECT_DIR" => project_directory }
   end
 
-  config.vm.provision :shell do |s|
+  config.vm.provision :shell, run: "always" do |s|
     s.name = "Bootstrapping development server"
     s.path = "scripts/bootstrap.sh"
     s.args = [ project_directory ]

@@ -18,17 +18,6 @@ if [ -d /vagrant ]
 then
   cd /vagrant
   
-  # Refresh Docker Compose cluster
-  if which docker-compose >/dev/null
-  then
-    # Ensure Scheduler can start if we have run before (Scheduler checks for PID file)
-    docker-compose stop scheduler
-    rm -f logs/celerybeat.pid
-    
-    # Ensure all containers are up and running (if possible)
-    docker-compose up -d
-  fi
-  
   # Include Django related environment variables
   source docker/django-env.local.vars
   export $(grep -o '^[^ #]*' docker/django-env.local.vars | cut -d= -f1 -)
@@ -37,6 +26,13 @@ then
   then
     source docker/django-env.vars
     export $(grep -o '^[^ #]*' docker/django-env.vars | cut -d= -f1 -)
+  fi
+  
+  # Ensure CF plugins are installed
+  if which cf >/dev/null
+  then
+    cf install-plugin -f "/usr/local/bin/cf-autopilot"
+    cf install-plugin -f "/usr/local/bin/cf-service-connect"
   fi
 fi
 

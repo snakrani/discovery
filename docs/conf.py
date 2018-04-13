@@ -49,7 +49,7 @@ author = 'GSA FAS PSHC with 18F'
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
-VERSION_PY_PATH = os.path.join(BASE_DIR, 'discovery', 'version.py')
+VERSION_PY_PATH = os.path.join(BASE_DIR, 'app', 'discovery', 'version.py')
 _globs = {}
 exec(open(VERSION_PY_PATH).read(), _globs)  # nosec
 version = _globs['__version__']

@@ -51,10 +51,6 @@ All Discovery related documentation is available as a mobile friendly [documenta
   * [Discovery management](docs/process/management.md)
   * [Contributing to Discovery](docs/process/contributing.md)
 
-#### Discovery security documentation
-
-* [Discovery SSP reference](docs/files/Discovery-Controls-LATO.pdf)
-
 <br/>
 
 #### Useful links

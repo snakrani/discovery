@@ -9,7 +9,7 @@ SCRIPT_USAGE="
 "
 
 SCRIPT_DIR="$(cd "$(dirname "$([ `readlink "$0"` ] && echo "`readlink "$0"`" || echo "$0")")"; pwd -P)"
-cd "$SCRIPT_DIR/.."
+cd "$SCRIPT_DIR/../app"
 
 #-------------------------------------------------------------------------------
 # Defaults
@@ -71,15 +71,15 @@ fi
 #create admin user
 if [ -d /venv ]
 then
-  alias python="/venv/bin/python"
+  alias python3="/venv/bin/python3"
   source /venv/bin/activate
 fi
 
 if [ ! -z "$FORCE_CREATE" ]
 then
   echo "> Recreating admin user: $ADMIN_USERNAME ( $ADMIN_EMAIL )"
-  echo "from django.contrib.auth.models import User; User.objects.filter(username='$ADMIN_USERNAME').delete(); User.objects.create_superuser('$ADMIN_USERNAME', '$ADMIN_EMAIL', '$ADMIN_PASSWORD')" | python manage.py shell
+  echo "from django.contrib.auth.models import User; User.objects.filter(username='$ADMIN_USERNAME').delete(); User.objects.create_superuser('$ADMIN_USERNAME', '$ADMIN_EMAIL', '$ADMIN_PASSWORD')" | python3 manage.py shell
 else
   echo "> Ensuring admin user: $ADMIN_USERNAME ( $ADMIN_EMAIL )"
-  echo "from django.contrib.auth.models import User; User.objects.filter(username='$ADMIN_USERNAME').first() or User.objects.create_superuser('$ADMIN_USERNAME', '$ADMIN_EMAIL', '$ADMIN_PASSWORD')" | python manage.py shell
+  echo "from django.contrib.auth.models import User; User.objects.filter(username='$ADMIN_USERNAME').first() or User.objects.create_superuser('$ADMIN_USERNAME', '$ADMIN_EMAIL', '$ADMIN_PASSWORD')" | python3 manage.py shell
 fi

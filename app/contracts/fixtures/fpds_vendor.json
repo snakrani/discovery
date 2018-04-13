@@ -1,0 +1,18 @@
+[
+{
+  "model": "vendors.vendor",
+  "pk": 1,
+  "fields": {
+    "name": "Advanced Concepts and Technologies International, LLC dba ACT-I",
+    "duns": "008050242",
+    "duns_4": "0080502420000",
+    "cage": "1C2H1",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-02-13T16:01:24Z",
+    "sam_expiration_date": "2019-02-13T15:48:36Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.act-i.com",
+    "sam_location": 1
+  }
+}
+]

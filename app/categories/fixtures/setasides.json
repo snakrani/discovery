@@ -1,0 +1,62 @@
+[
+{
+  "fields": {
+    "far_order": 5,
+    "code": "A5",
+    "name": "VO",
+    "description": "Veteran Owned"
+  },
+  "model": "categories.setaside",
+  "pk": 1
+},
+{
+  "fields": {
+    "far_order": 3,
+    "code": "QF",
+    "name": "SDVO",
+    "description": "Service Disabled Vet Owned"
+  },
+  "model": "categories.setaside",
+  "pk": 2
+},
+{
+  "fields": {
+    "far_order": 4,
+    "code": "A2",
+    "name": "WO",
+    "description": "Woman Owned"
+  },
+  "model": "categories.setaside",
+  "pk": 3
+},
+{
+  "fields": {
+    "far_order": 6,
+    "code": "27",
+    "name": "SDB",
+    "description": "Small Disadvantaged Business"
+  },
+  "model": "categories.setaside",
+  "pk": 15
+},
+{
+  "fields": {
+    "far_order": 1,
+    "code": "A6",
+    "name": "8(A)",
+    "description": "8(A)"
+  },
+  "model": "categories.setaside",
+  "pk": 16
+},
+{
+  "fields": {
+    "far_order": 2,
+    "code": "XX",
+    "name": "HubZ",
+    "description": "HUBZone"
+  },
+  "model": "categories.setaside",
+  "pk": 18
+}
+]

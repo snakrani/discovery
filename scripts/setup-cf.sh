@@ -38,3 +38,13 @@ fi
 
 echo "> Adding the CloudFoundry Autopilot plugin for current user" | tee -a "$LOG_FILE"
 cf install-plugin -f "$PLUGIN_BIN_DIR/cf-autopilot" >>"$LOG_FILE" 2>&1
+
+if [ ! -f "$PLUGIN_BIN_DIR/cf-service-connect" ]
+then
+  echo "> Installing the CloudFoundry Service Connect plugin" | tee -a "$LOG_FILE"  
+  curl -L -o "$PLUGIN_BIN_DIR/cf-service-connect" 'https://github.com/18F/cf-service-connect/releases/download/1.1.0/cf-service-connect.linux64' >>"$LOG_FILE" 2>&1
+  chmod 755 "$PLUGIN_BIN_DIR/cf-service-connect" >>"$LOG_FILE" 2>&1
+fi
+
+echo "> Adding the CloudFoundry Service Connect plugin for current user" | tee -a "$LOG_FILE"
+cf install-plugin -f "$PLUGIN_BIN_DIR/cf-service-connect" >>"$LOG_FILE" 2>&1
