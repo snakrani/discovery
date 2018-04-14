@@ -1,4 +1,4 @@
-![Discovery image](https://raw.githubusercontent.com/PSHCDevOps/discovery/master/discovery_site/static/discovery_site/images/discovery.png)
+![Discovery image](https://raw.githubusercontent.com/PSHCDevOps/discovery/master/app/discovery/static/discovery_site/images/discovery.png)
 
 <br/>
 

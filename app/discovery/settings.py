@@ -356,17 +356,3 @@ try:
     from discovery.local_settings import *
 except:
     pass
-
-#-------------------------------------------------------------------------------
-#
-# Security settings
-#
-
-if not DEBUG:
-    SESSION_COOKIE_SECURE = True
-    SESSION_COOKIE_HTTPONLY = True
-    CSRF_COOKIE_SECURE = True
-    CSRF_COOKIE_HTTPONLY = True
-
-USE_X_FORWARDED_HOST = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
