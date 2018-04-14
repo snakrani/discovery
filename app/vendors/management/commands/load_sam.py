@@ -105,17 +105,16 @@ class Command(BaseCommand):
             sleep(options['pause'])
         
         #request data
-        logger.debug("Fetching vendor at {}".format(log_url))
+        logger.info("Fetching vendor at {}".format(log_url))
         request = requests.get(sam_url)
 
         #catch and log key problems
         if request.status_code == 403:
             if 'Message' in request.json():
-                logger.debug("There was a 403 error on {}. Registration information forbidden".format(log_url))
+                logger.error("There was a 403 error on {}. Registration information forbidden".format(log_url))
             else:
                 raise Exception('Data.gov API key is invalid')
         
-        #return data object    
         try:
             sam_data = request.json()
 
@@ -130,10 +129,10 @@ class Command(BaseCommand):
             sam_data = sam_data['sam_data']
         
         elif 'Error' in sam_data:
-            logger.debug("SAM API returned an error for {}, and duns {}".format(log_url, duns_4))
+            logger.error("SAM API returned an error for {}, and duns {}".format(log_url, duns_4))
             loaded = False
         else:
-            logger.debug("Could not load data from {} for unknown reason".format(log_url))
+            logger.error("Could not load data from {} for unknown reason".format(log_url))
             loaded = False
                 
         return sam_data, loaded
@@ -191,7 +190,7 @@ class Command(BaseCommand):
                 vendor.sam_url
             )
         else:
-            logger.debug("'registration' key is missing for {} / {}".format(vid, vendor.duns_4))
+            logger.error("'registration' key is missing for {} / {}".format(vid, vendor.duns_4))
         
 
     def handle(self, *args, **options):
