@@ -1,6 +1,17 @@
 from django.conf import settings
 from django.db.models.query import QuerySet
-from django.test import Client, TestCase
+from django.test import Client, TestCase, LiveServerTestCase
+
+from selenium.common.exceptions import TimeoutException, NoSuchElementException, StaleElementReferenceException
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome import options as chrome
+from selenium.webdriver.firefox import options as firefox
 
 from urllib.parse import urlencode, quote
 from datetime import datetime
@@ -8,12 +19,14 @@ from datetime import datetime
 from discovery.utils import memory_in_mb
 from test.common import normalize_list
 from test.assertions import TestAssertions
-from test.validators import VALIDATION_MAP, ResponseValidator, APIResponseValidator
+from test.validators import VALIDATION_MAP, ResponseValidator, APIResponseValidator, AcceptanceResponseValidator
 
 import os
 import math
 import psutil
 import re
+import time
+import unittest
 
 
 class TestTracker(object):
@@ -62,19 +75,7 @@ class BaseTestCase(TestCase, TestAssertions):
         pass
 
 
-class RequestTestCase(BaseTestCase):
-    
-    client = None
-    
-    
-    # Initialization
-    
-    def setUp(self):
-        self.client = Client()
-        super(RequestTestCase, self).setUp()
-
-            
-    # Request
+class RequestMixin(object):
     
     def encode(self, params):
         return urlencode(params)
@@ -88,7 +89,21 @@ class RequestTestCase(BaseTestCase):
                 params[param] = ",".join(str(val) for val in value)
         
         return params
-  
+
+
+class RequestTestCase(BaseTestCase, RequestMixin):
+    
+    client = None
+    
+    
+    # Initialization
+    
+    def setUp(self):
+        self.client = Client()
+        super(RequestTestCase, self).setUp()
+
+            
+    # Request
     
     def _get_url(self, path, params = {}):
         return "{}{}?{}".format(settings.API_HOST, path, self.encode(params))
@@ -447,3 +462,114 @@ class MetaAPISchema(type):
             relation = None
             
         return { 'name': field, 'base_field': base_field, 'relation': relation }
+
+
+class AcceptanceTestCase(LiveServerTestCase, TestAssertions, RequestMixin):
+    
+    drivers = {}
+    path = ''
+    
+    # Initialization
+    
+    def setUp(self):
+        self.base_url = 'http://localhost:8080'
+        self.screenshot_dir = "{}/{}/{}".format(settings.PROJ_DIR, 'logs', 'screenshots')
+        
+        TestTracker.start()
+        
+        self.initialize()
+        self.init_drivers()
+    
+    def tearDown(self):
+        for name, driver in self.drivers.items():
+            driver.quit()
+
+        
+    def initialize(self):
+        # Override in subclass
+        pass
+    
+    
+    def init_drivers(self):
+        self.init_chrome()
+
+    def init_chrome(self):
+        options = chrome.Options()
+        options.add_experimental_option("excludeSwitches",["ignore-certificate-errors"])
+        options.add_argument('--disable-gpu')
+        options.add_argument("--headless")
+        options.add_argument("--no-sandbox")
+        
+        driver = webdriver.Chrome(chrome_options=options)
+        driver.set_page_load_timeout(60)
+        
+        self.drivers['chrome'] = driver
+        
+    def init_firefox(self):
+        options = firefox.Options()
+        options.set_headless()
+        
+        driver = webdriver.Firefox(options=options)
+        driver.set_page_load_timeout(60)
+        
+        self.drivers['firefox'] = driver
+    
+    
+    def _get_url(self, params = {}):
+        return "{}/{}?{}".format(self.base_url, self.path, self.encode(params))
+    
+    
+    def fetch_page(self, test_function, **params):
+        params = self.prepare_params(params)
+        url = self._get_url(params)
+        
+        TestTracker.init_request('request', url, self.__class__.__name__)
+        
+        for name, driver in self.drivers.items():
+            driver.get(url)
+            validator = AcceptanceResponseValidator(driver, self, url)
+            validator.wait_for_tag('body')
+            test_function(validator)
+
+
+class MetaAcceptanceSchema(type):
+    
+    def __new__(cls, name, bases, attr):
+        if 'schema' in attr and attr['schema']:
+            schema = attr['schema']
+            
+            cls._generate_tests(schema, attr)
+        
+        return super(MetaAcceptanceSchema, cls).__new__(cls, name, bases, attr)
+
+
+    @classmethod
+    def _generate_tests(cls, object, tests):
+        for name, data in object.items():
+            method_name = "test_{}".format(name)
+            tests[method_name] = cls._elem_test_method(name, data)
+    
+    @classmethod
+    def _elem_test_method(cls, name, data):
+        def elem_test(self):
+            def tests(resp):
+                if isinstance(data, str):
+                    getattr(resp, name)(data)
+                else:
+                    for elem, test in data.items():
+                        if elem != 'params':
+                            if isinstance(test, (list, tuple)):
+                                method = test[0]
+                                args = [elem] + list(test[1:])
+                            else:
+                                method = test
+                                args = [elem]                    
+                        
+                            getattr(resp, method)(*args)
+        
+            if 'params' in data and data['params']:
+                self.fetch_page(tests, **data['params'])
+            else:
+                self.fetch_page(tests)
+        
+        return elem_test
