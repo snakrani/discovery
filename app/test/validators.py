@@ -1,6 +1,13 @@
 from django.conf import settings
 from django.db.models.query import QuerySet
 
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 from test.common import normalize_list, get_nested_value
 
 import re
@@ -326,6 +333,7 @@ class BaseValidator(object):
         self.compare_data('assertQuarter', data_value, quarter)
 
 
+
 class ResponseValidator(BaseValidator):
     
     resp = None
@@ -487,3 +495,135 @@ class APIResponseValidator(ResponseValidator):
             raise self._wrap_error(AssertionError("Value ({}) {} {} keys {}".format(value, validator, base_key, lookup_keys)))
                 
         return success
+
+
+class AcceptanceResponseValidator(BaseValidator):
+    
+    def __init__(self, driver, test_case, url):
+        super(AcceptanceResponseValidator, self).__init__(test_case)
+        
+        self.driver = driver
+        self.url = url
+    
+    
+    # Locators
+  
+    def _name(self, name):
+        return (By.NAME, name)
+    
+    def _tag(self, name):
+        return (By.TAG_NAME, name)
+    
+    def _id(self, path):
+        return (By.ID, path)
+    
+    def _class(self, name):
+        return (By.CLASS_NAME, name)
+    
+    def _xpath(self, path):
+        return (By.XPATH, path)
+    
+    def _selector(self, name):
+        return (By.CSS_SELECTOR, name)
+    
+    
+    # Wait
+    
+    def default_wait(self):
+        return 5
+    
+    
+    def _wait(self, test_condition):
+        WebDriverWait(self.driver, self.default_wait()).until(test_condition)
+    
+    
+    def wait_for_name(self, name, text = None):
+        if text is None:
+            self._wait(EC.presence_of_all_elements_located(self._name(name)))
+        else:
+            self._wait(EC.text_to_be_present_in_element(self._name(name), text))
+    
+    def wait_for_tag(self, name, text = None):
+        if text is None:
+            self._wait(EC.presence_of_all_elements_located(self._tag(name)))
+        else:
+            self._wait(EC.text_to_be_present_in_element(self._tag(name), text))
+    
+    def wait_for_id(self, name, text = None):
+        if text is None:
+            self._wait(EC.presence_of_all_elements_located(self._id(name)))
+        else:
+            self._wait(EC.text_to_be_present_in_element(self._id(name), text)) 
+        
+    def wait_for_class(self, name, text = None):
+        if text is None:
+            self._wait(EC.presence_of_all_elements_located(self._class(name)))
+        else:
+            self._wait(EC.text_to_be_present_in_element(self._class(name), text))
+    
+    def wait_for_xpath(self, path, text = None):
+        if text is None:
+            self._wait(EC.presence_of_all_elements_located(self._xpath(path)))
+        else:
+            self._wait(EC.text_to_be_present_in_element(self._xpath(path), text))
+            
+    def wait_for_selector(self, name, text = None):
+        if text is None:
+            self._wait(EC.presence_of_all_elements_located(self._selector(name)))
+        else:
+            self._wait(EC.text_to_be_present_in_element(self._selector(name), text))
+
+    
+    # Validation
+    
+    def compare(self, op, data_value, value = None, **params):
+        self.compare_data(op, data_value, value, **params)
+    
+    def title(self, text):
+        self.equal(self.driver.title, text)
+        
+    def link(self, elem, url):
+        self.equal(self._get_element(elem).get_attribute("href"), url)
+        
+    def enabled(self, elem):
+        self.is_true(self._get_element(elem).is_enabled())
+        
+    def disabled(self, elem):
+        self.is_false(self._get_element(elem).is_enabled())
+    
+    
+    # Helper methods
+        
+    def _get_element(self, elem):
+        
+        def by_id(name):
+            return self.driver.find_element_by_id(name)
+        
+        def by_css(selector):
+            return self.driver.find_element_by_css_selector(selector)
+        
+        def by_link_text(text):
+            return self.driver.find_element_by_link_text(text)
+                
+        element_map = {
+            'id': by_id,
+            'css': by_css,
+            'link_text': by_link_text
+        }
+        
+        if isinstance(elem, str):
+            components = elem.split(':')
+            
+            if len(components) > 1:
+                type = components[0]
+                param = ":".join(components[1:])
+            else:
+                type = 'id'
+                param = components[0]
+            
+            return element_map[type](param)
+        else:
+            return elem
+    
+    
+    
