@@ -59,7 +59,9 @@ OASIS_NAICS_2 = {
 class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
     
     schema = {
-        'title': 'Discovery',
+        'header': {
+            'Discovery': 'title'
+        },
         'search_veteran_owned': {
             'params': OASIS_SB_NAICS,
             'wait': ('class', 'table_row_data'),
