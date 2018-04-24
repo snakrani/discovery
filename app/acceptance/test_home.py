@@ -4,7 +4,9 @@ from test import cases as case
 class HomeTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
     
     schema = {
-        'title': 'Discovery',
+        'header': {
+            'Discovery': 'title'
+        },
         'vehicle_naics_filter': {
             'params': {
                 'vehicle': 'oasis_sb'
