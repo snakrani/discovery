@@ -11,6 +11,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from test.common import normalize_list, get_nested_value
 
 import re
+import time
 
 
 VALIDATION_MAP = {
@@ -505,6 +506,26 @@ class AcceptanceResponseValidator(BaseValidator):
         self.driver = driver
         self.url = url
     
+        
+    def __getattr__(self, name):
+        def method(*args):
+            components = name.split('__')
+            
+            if len(components) > 1 and hasattr(self, components[0]) and hasattr(self, components[1]):
+                method = components[0]
+                op = components[1]
+                
+                if args:
+                    args = [op] + list(args)
+                else:
+                    args = [op]
+                
+                getattr(self, method)(*args)
+            else:
+                raise AttributeError("Trying to access a nonexistent method: {}".format(name))
+        
+        return method
+    
     
     # Locators
   
@@ -572,6 +593,14 @@ class AcceptanceResponseValidator(BaseValidator):
             self._wait(EC.presence_of_all_elements_located(self._selector(name)))
         else:
             self._wait(EC.text_to_be_present_in_element(self._selector(name), text))
+            
+    def wait_for_sec(self, sec, notused = None):
+        time.sleep(sec)
+            
+    # Events
+    
+    def execute(self, elem, event):
+        getattr(self._get_element(elem), event)()
 
     
     # Validation
@@ -579,17 +608,48 @@ class AcceptanceResponseValidator(BaseValidator):
     def compare(self, op, data_value, value = None, **params):
         self.compare_data(op, data_value, value, **params)
     
+    
     def title(self, text):
         self.equal(self.driver.title, text)
         
-    def link(self, elem, url):
-        self.equal(self._get_element(elem).get_attribute("href"), url)
+    def exists(self, elem):
+        self.is_true(self._get_element(elem))
+    
+    def not_exists(self, elem):
+        self.is_false(self._get_element(elem))
         
     def enabled(self, elem):
         self.is_true(self._get_element(elem).is_enabled())
         
     def disabled(self, elem):
         self.is_false(self._get_element(elem).is_enabled())
+        
+    def value(self, op, elem, text):
+        getattr(self, op)(self._get_element(elem).get_attribute("value"), text)
+        
+    def link(self, op, elem, url):
+        getattr(self, op)(self._get_element(elem).get_attribute("href"), url)
+        
+    def text(self, op, elem, text):
+        match = re.match(r'^\s*\<\<(.+)\>\>\s*$', text)
+        if match:
+            text = self._get_element(match.group(1)).text
+            
+        getattr(self, op)(self._get_element(elem).text, text)
+        
+    def int(self, op, elem, num):
+        match = re.match(r'^\s*\<\<(.+)\>\>\s*$', num)
+        if match:
+            num = self._get_element(match.group(1)).text
+        
+        getattr(self, op)(int(self._get_element(elem).text), int(num))
+        
+    def float(self, op, elem, num):
+        match = re.match(r'^\s*\<\<(.+)\>\>\s*$', num)
+        if match:
+            num = self._get_element(match.group(1)).text
+        
+        getattr(self, op)(float(self._get_element(elem).text), float(num))
     
     
     # Helper methods
@@ -602,12 +662,16 @@ class AcceptanceResponseValidator(BaseValidator):
         def by_css(selector):
             return self.driver.find_element_by_css_selector(selector)
         
+        def by_xpath(xpath):
+            return self.driver.find_element_by_xpath(xpath)
+        
         def by_link_text(text):
             return self.driver.find_element_by_link_text(text)
                 
         element_map = {
             'id': by_id,
             'css': by_css,
+            'xpath': by_xpath,
             'link_text': by_link_text
         }
         
@@ -624,6 +688,3 @@ class AcceptanceResponseValidator(BaseValidator):
             return element_map[type](param)
         else:
             return elem
-    
-    
-    
