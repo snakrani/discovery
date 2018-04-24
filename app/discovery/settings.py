@@ -43,6 +43,12 @@ VEHICLES = (
     'bmo'
 )
 
+#
+# Test configuration
+#
+TEST_URL = config_value('TEST_URL', 'http://localhost:8080')
+
+
 #-------------------------------------------------------------------------------
 # Core Django settings
 
