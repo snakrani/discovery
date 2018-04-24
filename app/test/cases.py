@@ -1,6 +1,17 @@
 from django.conf import settings
 from django.db.models.query import QuerySet
-from django.test import Client, TestCase
+from django.test import Client, TestCase, LiveServerTestCase
+
+from selenium.common.exceptions import TimeoutException, NoSuchElementException, StaleElementReferenceException
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome import options as chrome
+from selenium.webdriver.firefox import options as firefox
 
 from urllib.parse import urlencode, quote
 from datetime import datetime
@@ -8,12 +19,15 @@ from datetime import datetime
 from discovery.utils import memory_in_mb
 from test.common import normalize_list
 from test.assertions import TestAssertions
-from test.validators import VALIDATION_MAP, ResponseValidator, APIResponseValidator
+from test.validators import VALIDATION_MAP, ResponseValidator, APIResponseValidator, AcceptanceResponseValidator
 
 import os
 import math
 import psutil
 import re
+import time
+import copy
+import json
 
 
 class TestTracker(object):
@@ -39,12 +53,12 @@ class TestTracker(object):
         
     @classmethod
     def init_request(cls, name, url, key):
-        #print("Testing {} [{} / {}]: {}".format(
-        #    name,
-        #    cls.render_running_time(),
-        #    cls.render_memory(),  
-        #    url
-        #))
+        print("Testing {} [{} / {}]: {}".format(
+            name,
+            cls.render_running_time(),
+            cls.render_memory(),  
+            url
+        ))
         pass
 
 
@@ -62,19 +76,7 @@ class BaseTestCase(TestCase, TestAssertions):
         pass
 
 
-class RequestTestCase(BaseTestCase):
-    
-    client = None
-    
-    
-    # Initialization
-    
-    def setUp(self):
-        self.client = Client()
-        super(RequestTestCase, self).setUp()
-
-            
-    # Request
+class RequestMixin(object):
     
     def encode(self, params):
         return urlencode(params)
@@ -88,7 +90,21 @@ class RequestTestCase(BaseTestCase):
                 params[param] = ",".join(str(val) for val in value)
         
         return params
-  
+
+
+class RequestTestCase(BaseTestCase, RequestMixin):
+    
+    client = None
+    
+    
+    # Initialization
+    
+    def setUp(self):
+        self.client = Client()
+        super(RequestTestCase, self).setUp()
+
+            
+    # Request
     
     def _get_url(self, path, params = {}):
         return "{}{}?{}".format(settings.API_HOST, path, self.encode(params))
@@ -447,3 +463,162 @@ class MetaAPISchema(type):
             relation = None
             
         return { 'name': field, 'base_field': base_field, 'relation': relation }
+
+
+class AcceptanceTestCase(LiveServerTestCase, TestAssertions, RequestMixin):
+    
+    drivers = {}
+    path = ''
+    
+    # Initialization
+    
+    def setUp(self):
+        self.base_url = settings.TEST_URL
+        self.screenshot_dir = "{}/{}/{}".format(settings.PROJ_DIR, 'logs', 'screenshots')
+        
+        TestTracker.start()
+        
+        self.initialize()
+        self.init_drivers()
+    
+    def tearDown(self):
+        for name, driver in self.drivers.items():
+            driver.quit()
+
+        
+    def initialize(self):
+        # Override in subclass
+        pass
+    
+    
+    def init_drivers(self):
+        self.init_chrome()
+
+    def init_chrome(self):
+        options = chrome.Options()
+        options.add_experimental_option("excludeSwitches",["ignore-certificate-errors"])
+        options.add_argument('--disable-gpu')
+        options.add_argument("--headless")
+        options.add_argument("--no-sandbox")
+        
+        driver = webdriver.Chrome(chrome_options=options)
+        driver.set_page_load_timeout(60)
+        
+        self.drivers['chrome'] = driver
+        
+    def init_firefox(self):
+        options = firefox.Options()
+        options.set_headless()
+        
+        driver = webdriver.Firefox(options=options)
+        driver.set_page_load_timeout(60)
+        
+        self.drivers['firefox'] = driver
+    
+    
+    def _get_url(self, params = {}):
+        args = params.pop('args', None)
+        
+        if args:
+            if isinstance(args, (list, tuple)):
+                args = list(args)
+            else:
+                args = [args]
+                
+            return "{}/{}/{}?{}".format(self.base_url, self.path, "/".join(args), self.encode(params))
+        
+        return "{}/{}?{}".format(self.base_url, self.path, self.encode(params))
+    
+    
+    def fetch_page(self, test_function, **params):
+        params = self.prepare_params(params)
+        url = self._get_url(params)
+        
+        for name, driver in self.drivers.items():
+            TestTracker.init_request('request', url, self.__class__.__name__)
+            
+            driver.get(url)
+            
+            validator = AcceptanceResponseValidator(driver, self, url)
+            validator.wait_for_tag('body')
+            
+            test_function(validator)
+
+
+class MetaAcceptanceSchema(type):
+    
+    def __new__(cls, name, bases, attr):
+        if 'schema' in attr and attr['schema']:
+            schema = attr['schema']
+            
+            cls._generate_tests(schema, attr)
+        
+        return super(MetaAcceptanceSchema, cls).__new__(cls, name, bases, attr)
+
+
+    @classmethod
+    def _generate_tests(cls, object, tests):
+        for name, schema in object.items():
+            method_name = "test_{}".format(name)
+            single_schema = True
+            
+            if 'params' in schema:
+                params = schema['params']
+                
+                if isinstance(params, (list, tuple)):
+                    for index, param_set in enumerate(list(params)):
+                        sub_schema = copy.deepcopy(schema)
+                        sub_schema['params'] = param_set
+                        tests["{}_{}".format(method_name, index+1)] = cls._elem_test_method(name, sub_schema)   
+                    
+                    single_schema = False
+            
+            if single_schema:
+                tests[method_name] = cls._elem_test_method(name, copy.deepcopy(schema))
+            
+    
+    @classmethod
+    def _elem_test_method(cls, name, schema):
+        def elem_test(self):
+            def tests(resp, data = None):
+                if data is None:
+                    data = schema
+                    
+                if isinstance(data, str):
+                    getattr(resp, name)(data)
+                else:
+                    params = data.pop('params', None)
+                    wait = data.pop('wait', None)
+                    actions = data.pop('actions', {})
+                    
+                    if wait:
+                        type = wait[0]
+                        elem = wait[1]
+                        text = wait[2] if len(wait) > 2 else None
+                        
+                        getattr(resp, "wait_for_{}".format(type))(elem, text)
+                    
+                    for elem, test in data.items():
+                        if isinstance(test, (list, tuple)):
+                            method = test[0]
+                            args = [elem] + list(test[1:])
+                        else:
+                            method = test
+                            args = [elem]                    
+                        
+                        getattr(resp, method)(*args)
+                        
+                    for action, action_data in actions.items():
+                        components = action.split('*')
+                        action_elem = components[0]
+                        action_event = components[1]
+                        
+                        resp.execute(action_elem, action_event)
+                        tests(resp, action_data)
+        
+            if 'params' in schema:
+                self.fetch_page(tests, **schema['params'])
+            else:
+                self.fetch_page(tests)
+        
+        return elem_test
