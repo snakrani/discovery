@@ -26,7 +26,8 @@ import math
 import psutil
 import re
 import time
-import unittest
+import copy
+import json
 
 
 class TestTracker(object):
@@ -52,12 +53,12 @@ class TestTracker(object):
         
     @classmethod
     def init_request(cls, name, url, key):
-        #print("Testing {} [{} / {}]: {}".format(
-        #    name,
-        #    cls.render_running_time(),
-        #    cls.render_memory(),  
-        #    url
-        #))
+        print("Testing {} [{} / {}]: {}".format(
+            name,
+            cls.render_running_time(),
+            cls.render_memory(),  
+            url
+        ))
         pass
 
 
@@ -472,7 +473,7 @@ class AcceptanceTestCase(LiveServerTestCase, TestAssertions, RequestMixin):
     # Initialization
     
     def setUp(self):
-        self.base_url = 'http://localhost:8080'
+        self.base_url = settings.TEST_URL
         self.screenshot_dir = "{}/{}/{}".format(settings.PROJ_DIR, 'logs', 'screenshots')
         
         TestTracker.start()
@@ -523,12 +524,14 @@ class AcceptanceTestCase(LiveServerTestCase, TestAssertions, RequestMixin):
         params = self.prepare_params(params)
         url = self._get_url(params)
         
-        TestTracker.init_request('request', url, self.__class__.__name__)
-        
         for name, driver in self.drivers.items():
+            TestTracker.init_request('request', url, self.__class__.__name__)
+            
             driver.get(url)
+            
             validator = AcceptanceResponseValidator(driver, self, url)
             validator.wait_for_tag('body')
+            
             test_function(validator)
 
 
@@ -545,30 +548,66 @@ class MetaAcceptanceSchema(type):
 
     @classmethod
     def _generate_tests(cls, object, tests):
-        for name, data in object.items():
+        for name, schema in object.items():
             method_name = "test_{}".format(name)
-            tests[method_name] = cls._elem_test_method(name, data)
+            single_schema = True
+            
+            if 'params' in schema:
+                params = schema['params']
+                
+                if isinstance(params, (list, tuple)):
+                    for index, param_set in enumerate(list(params)):
+                        sub_schema = copy.deepcopy(schema)
+                        sub_schema['params'] = param_set
+                        tests["{}_{}".format(method_name, index+1)] = cls._elem_test_method(name, sub_schema)   
+                    
+                    single_schema = False
+            
+            if single_schema:
+                tests[method_name] = cls._elem_test_method(name, copy.deepcopy(schema))
+            
     
     @classmethod
-    def _elem_test_method(cls, name, data):
+    def _elem_test_method(cls, name, schema):
         def elem_test(self):
-            def tests(resp):
+            def tests(resp, data = None):
+                if data is None:
+                    data = schema
+                    
                 if isinstance(data, str):
                     getattr(resp, name)(data)
                 else:
-                    for elem, test in data.items():
-                        if elem != 'params':
-                            if isinstance(test, (list, tuple)):
-                                method = test[0]
-                                args = [elem] + list(test[1:])
-                            else:
-                                method = test
-                                args = [elem]                    
+                    params = data.pop('params', None)
+                    wait = data.pop('wait', None)
+                    actions = data.pop('actions', {})
+                    
+                    if wait:
+                        type = wait[0]
+                        elem = wait[1]
+                        text = wait[2] if len(wait) > 2 else None
                         
-                            getattr(resp, method)(*args)
+                        getattr(resp, "wait_for_{}".format(type))(elem, text)
+                    
+                    for elem, test in data.items():
+                        if isinstance(test, (list, tuple)):
+                            method = test[0]
+                            args = [elem] + list(test[1:])
+                        else:
+                            method = test
+                            args = [elem]                    
+                        
+                        getattr(resp, method)(*args)
+                        
+                    for action, action_data in actions.items():
+                        components = action.split('*')
+                        action_elem = components[0]
+                        action_event = components[1]
+                        
+                        resp.execute(action_elem, action_event)
+                        tests(resp, action_data)
         
-            if 'params' in data and data['params']:
-                self.fetch_page(tests, **data['params'])
+            if 'params' in schema:
+                self.fetch_page(tests, **schema['params'])
             else:
                 self.fetch_page(tests)
         
