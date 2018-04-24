@@ -517,6 +517,16 @@ class AcceptanceTestCase(LiveServerTestCase, TestAssertions, RequestMixin):
     
     
     def _get_url(self, params = {}):
+        args = params.pop('args', None)
+        
+        if args:
+            if isinstance(args, (list, tuple)):
+                args = list(args)
+            else:
+                args = [args]
+                
+            return "{}/{}/{}?{}".format(self.base_url, self.path, "/".join(args), self.encode(params))
+        
         return "{}/{}?{}".format(self.base_url, self.path, self.encode(params))
     
     
