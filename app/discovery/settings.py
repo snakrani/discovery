@@ -121,7 +121,9 @@ INSTALLED_APPS = [
     'crispy_forms',
     
     'django_celery_beat',
-    'django_celery_results'
+    'django_celery_results',
+    
+    'uaa_client'
 ]
 
 MIDDLEWARE = [
@@ -132,12 +134,16 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware'
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'uaa_client.middleware.UaaRefreshMiddleware'
 ]
 
 #
 # Authentication configuration
 #
+AUTHENTICATION_BACKENDS = ['uaa_client.authentication.UaaBackend']
+LOGIN_URL = 'uaa_client:login'
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -353,6 +359,14 @@ REST_FRAMEWORK = {
 }
 
 REST_API_TEST = False
+
+#
+# Cloud.gov UAA authentication
+#
+UAA_CLIENT_ID = config_value('UAA_CLIENT_ID')
+UAA_CLIENT_SECRET = config_value('UAA_CLIENT_SECRET')
+UAA_AUTH_URL = config_value('UAA_AUTH_URL', 'https://login.fr.cloud.gov/oauth/authorize')
+UAA_TOKEN_URL = config_value('UAA_TOKEN_URL', 'https://uaa.fr.cloud.gov/oauth/token')
 
 #-------------------------------------------------------------------------------
 #
