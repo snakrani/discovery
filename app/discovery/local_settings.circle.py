@@ -32,7 +32,4 @@ REST_API_TEST = True
 #
 # Cloud.gov UAA authentication
 #
-UAA_CLIENT_ID = 'notused'
-UAA_CLIENT_SECRET = 'notused'
-UAA_AUTH_URL = 'fake:'
-UAA_TOKEN_URL = 'fake:'
+UAA_AUTH = False
