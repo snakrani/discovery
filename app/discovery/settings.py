@@ -43,6 +43,12 @@ VEHICLES = (
     'bmo'
 )
 
+#
+# Test configuration
+#
+TEST_URL = config_value('TEST_URL', 'http://localhost:8080')
+
+
 #-------------------------------------------------------------------------------
 # Core Django settings
 
@@ -126,7 +132,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware'
+    'django.middleware.clickjacking.XFrameOptionsMiddleware'    
 ]
 
 #
@@ -348,6 +354,15 @@ REST_FRAMEWORK = {
 
 REST_API_TEST = False
 
+#
+# Cloud.gov UAA authentication
+#
+UAA_AUTH = True
+UAA_CLIENT_ID = config_value('UAA_CLIENT_ID')
+UAA_CLIENT_SECRET = config_value('UAA_CLIENT_SECRET')
+UAA_AUTH_URL = config_value('UAA_AUTH_URL', 'https://login.fr.cloud.gov/oauth/authorize')
+UAA_TOKEN_URL = config_value('UAA_TOKEN_URL', 'https://uaa.fr.cloud.gov/oauth/token')
+
 #-------------------------------------------------------------------------------
 #
 # Local settings overrides
@@ -356,3 +371,18 @@ try:
     from discovery.local_settings import *
 except:
     pass
+
+#-------------------------------------------------------------------------------
+#
+# Blended overrides
+#
+
+#
+# Authentication configuration
+#
+if UAA_AUTH:
+    INSTALLED_APPS.append('uaa_client')
+    MIDDLEWARE.append('uaa_client.middleware.UaaRefreshMiddleware')
+    
+    AUTHENTICATION_BACKENDS = ['uaa_client.authentication.UaaBackend']
+    LOGIN_URL = 'uaa_client:login'

@@ -1,9 +1,19 @@
 from django.conf import settings
 from django.db.models.query import QuerySet
 
+from selenium.common.exceptions import TimeoutException, NoSuchElementException, StaleElementReferenceException
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 from test.common import normalize_list, get_nested_value
 
 import re
+import time
 
 
 VALIDATION_MAP = {
@@ -326,6 +336,7 @@ class BaseValidator(object):
         self.compare_data('assertQuarter', data_value, quarter)
 
 
+
 class ResponseValidator(BaseValidator):
     
     resp = None
@@ -487,3 +498,287 @@ class APIResponseValidator(ResponseValidator):
             raise self._wrap_error(AssertionError("Value ({}) {} {} keys {}".format(value, validator, base_key, lookup_keys)))
                 
         return success
+
+
+class AcceptanceResponseValidator(BaseValidator):
+    
+    def __init__(self, driver, test_case, url):
+        super(AcceptanceResponseValidator, self).__init__(test_case)
+        
+        self.driver = driver
+        self.url = url
+    
+        
+    def __getattr__(self, name):
+        def method(*args):
+            components = name.split('__')
+            
+            if len(components) > 1 and hasattr(self, components[0]) and hasattr(self, components[1]):
+                method = components[0]
+                op = components[1]
+                
+                if args:
+                    args = [op] + list(args)
+                else:
+                    args = [op]
+                
+                getattr(self, method)(*args)
+            else:
+                raise AttributeError("Trying to access a nonexistent method: {}".format(name))
+        
+        return method
+    
+    
+    # Utilities
+    
+    def _wrap_error(self, error):
+        if self.url:
+            error.args = ("{}\nRequestURL: {}".format(error.args[0], self.url),)
+            
+        raise error
+    
+    
+    # Locators
+  
+    def _name(self, name):
+        return (By.NAME, name)
+    
+    def _tag(self, name):
+        return (By.TAG_NAME, name)
+    
+    def _id(self, path):
+        return (By.ID, path)
+    
+    def _class(self, name):
+        return (By.CLASS_NAME, name)
+    
+    def _xpath(self, path):
+        return (By.XPATH, path)
+    
+    def _selector(self, name):
+        return (By.CSS_SELECTOR, name)
+    
+    
+    # Wait
+    
+    def default_wait(self):
+        return 5
+    
+    
+    def wait(self, test_condition):
+        WebDriverWait(self.driver, self.default_wait()).until(test_condition)
+        
+    def wait_for(self, condition_function):
+        start_time = time.time()
+        
+        while time.time() < start_time + 3:
+            if condition_function():
+                return True
+            else:
+                time.sleep(0.1)
+        
+        raise self._wrap_error(Exception(
+            'Timeout waiting for {}'.format(condition_function.__name__)
+        ))
+        
+    def wait_for_name(self, name, text = None):
+        if text is None:
+            self.wait(EC.presence_of_all_elements_located(self._name(name)))
+        else:
+            self.wait(EC.text_to_be_present_in_element(self._name(name), text))
+    
+    def wait_for_tag(self, name, text = None):
+        if text is None:
+            self.wait(EC.presence_of_all_elements_located(self._tag(name)))
+        else:
+            self.wait(EC.text_to_be_present_in_element(self._tag(name), text))
+    
+    def wait_for_id(self, name, text = None):
+        if text is None:
+            self.wait(EC.presence_of_all_elements_located(self._id(name)))
+        else:
+            self.wait(EC.text_to_be_present_in_element(self._id(name), text)) 
+        
+    def wait_for_class(self, name, text = None):
+        if text is None:
+            self.wait(EC.presence_of_all_elements_located(self._class(name)))
+        else:
+            self.wait(EC.text_to_be_present_in_element(self._class(name), text))
+    
+    def wait_for_xpath(self, path, text = None):
+        if text is None:
+            self.wait(EC.presence_of_all_elements_located(self._xpath(path)))
+        else:
+            self.wait(EC.text_to_be_present_in_element(self._xpath(path), text))
+            
+    def wait_for_selector(self, name, text = None):
+        if text is None:
+            self.wait(EC.presence_of_all_elements_located(self._selector(name)))
+        else:
+            self.wait(EC.text_to_be_present_in_element(self._selector(name), text))
+            
+    def wait_for_stale(self, elem):
+        def stale():
+            try: 
+                text = self.attr(elem, 'text')
+            
+            except StaleElementReferenceException: 
+                return True
+        
+        self.wait_for(stale)
+        
+            
+    def wait_for_sec(self, sec, notused = None):
+        time.sleep(sec)
+
+        
+    # Element access
+    
+    def _get_scope(self, scope = None):
+        if scope is None:
+            return self.driver 
+        return scope
+    
+    def _get_element(self, elem, element_map):
+        if isinstance(elem, str):
+            components = elem.split(':')
+            
+            if len(components) > 1:
+                type = components[0]
+                param = ":".join(components[1:])
+            else:
+                type = 'id'
+                param = components[0]
+            
+            return element_map[type](param)
+        else:
+            return elem
+
+        
+    def element(self, elem, scope = None):
+        
+        def by_id(name):
+            return self._get_scope(scope).find_element_by_id(name)
+        
+        def by_class(name):
+            return self._get_scope(scope).find_element_by_class_name(name)
+        
+        def by_css(selector):
+            return self._get_scope(scope).find_element_by_css_selector(selector)
+        
+        def by_xpath(xpath):
+            return self._get_scope(scope).find_element_by_xpath(xpath)
+        
+        def by_link_text(text):
+            return self._get_scope(scope).find_element_by_link_text(text)
+                
+        return self._get_element(elem, {
+            'id': by_id,
+            'class': by_class,
+            'css': by_css,
+            'xpath': by_xpath,
+            'link_text': by_link_text
+        })
+    
+    def elements(self, elems, scope = None):
+        
+        def by_id(name):
+            return self._get_scope(scope).find_elements_by_id(name)
+        
+        def by_class(name):
+            return self._get_scope(scope).find_elements_by_class_name(name)
+        
+        def by_css(selector):
+            return self._get_scope(scope).find_elements_by_css_selector(selector)
+        
+        def by_xpath(xpath):
+            return self._get_scope(scope).find_elements_by_xpath(xpath)
+        
+        def by_link_text(text):
+            return self._get_scope(scope).find_elements_by_link_text(text)
+                
+        return self._get_element(elems, {
+            'id': by_id,
+            'class': by_class,
+            'css': by_css,
+            'xpath': by_xpath,
+            'link_text': by_link_text
+        })
+        
+    def attr(self, elem, name):
+        return self.element(elem).get_attribute(name)
+        
+    
+    # Formatters
+    
+    def format_int(self, value):
+        return int(value.replace(',', '').replace('$', ''))
+    
+    def format_float(self, value):
+        return float(value.replace(',', '').replace('$', ''))
+    
+        
+    # Events
+    
+    def execute(self, elem, event):
+        getattr(self.element(elem), event)()
+    
+    
+    # Validation
+    
+    def compare(self, op, data_value, value = None, **params):
+        self.compare_data(op, data_value, value, **params)
+    
+    
+    def title(self, text):
+        self.equal(self.driver.title, text)
+        
+    def exists(self, elem):
+        self.is_true(self.element(elem))
+    
+    def not_exists(self, elem):
+        self.is_false(self.element(elem))
+        
+    def has_class(self, elem, class_name):
+        self.is_true(class_name in self.attr(elem, 'class'))
+        
+    def enabled(self, elem):
+        self.is_true(self.element(elem).is_enabled())
+        
+    def disabled(self, elem):
+        self.is_false(self.element(elem).is_enabled())
+        
+    def displayed(self, elem):
+        self.is_true(self.element(elem).is_displayed())
+        
+    def not_displayed(self, elem):
+        self.is_false(self.element(elem).is_displayed())
+        
+    def value(self, op, elem, text):
+        getattr(self, op)(self.attr(elem, 'value'), text)
+        
+    def link(self, op, elem, url):
+        getattr(self, op)(self.attr(elem, 'href'), url)
+        
+    def text(self, op, elem, text):
+        match = re.match(r'^\s*\<\<(.+)\>\>\s*$', text)
+        if match:
+            text = self.element(match.group(1)).text
+            
+        getattr(self, op)(self.element(elem).text, text)
+        
+    def int(self, op, elem, num):
+        if isinstance(num, str):
+            match = re.match(r'^\s*\<\<(.+)\>\>\s*$', num)
+            if match:
+                num = self.format_int(self.element(match.group(1)).text)
+        
+        getattr(self, op)(self.format_int(self.element(elem).text), int(num))
+        
+    def float(self, op, elem, num):
+        if isinstance(num, str):
+            match = re.match(r'^\s*\<\<(.+)\>\>\s*$', num)
+            if match:
+                num = self.format_float(self.element(match.group(1)).text)
+        
+        getattr(self, op)(self.format_float(self.element(elem).text), float(num))

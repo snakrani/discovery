@@ -1,12 +1,15 @@
 
+#-------------------------------------------------------------------------------
+# Core Django settings
+
 #
-# General project variables
+# Debugging
 #
 DEBUG = False
 TEMPLATE_DEBUG = False
 
 #
-# Database connections
+# Database configurations
 #
 DATABASES = {
     'default': {
@@ -18,7 +21,15 @@ DATABASES = {
     }
 }
 
+#-------------------------------------------------------------------------------
+# Django Addons
+
 #
 # REST configuration 
 #
 REST_API_TEST = True
+
+#
+# Cloud.gov UAA authentication
+#
+UAA_AUTH = False
