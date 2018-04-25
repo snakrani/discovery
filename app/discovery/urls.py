@@ -11,9 +11,13 @@ from vendors import views as vendors
 
 
 admin.autodiscover()
+urlpatterns = []
 
+if settings.UAA_AUTH:
+    admin.site.login = staff_login_required(admin.site.login)
+    urlpatterns.append(url(r'^auth/', include('uaa_client.urls')))
 
-urlpatterns = [
+urlpatterns.extend([
     url(r'^admin/', admin.site.urls),
     url(r'^$', TemplateView.as_view(template_name='index.html')),
     
@@ -27,8 +31,4 @@ urlpatterns = [
     
     url(r'^vendor/(?P<vendor_duns>\w+)/$', vendors.VendorView.as_view(template_name='vendor.html')),
     url(r'^vendor/(?P<vendor_duns>\w+)/csv/$', vendors.VendorCSV, name="vendor-csv"),
-]
-
-if settings.UAA_AUTH:
-    admin.site.login = staff_login_required(admin.site.login)
-    urlpatterns.append(url(r'^auth/', include('uaa_client.urls')))
+])
