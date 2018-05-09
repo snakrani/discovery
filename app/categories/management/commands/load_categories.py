@@ -27,6 +27,9 @@ class Command(BaseCommand):
         print("-------BEGIN LOAD_CATEGORIES PROCESS-------")
         
         try:
+            print('> Loading keywords')
+            call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/keywords.json'))
+            
             print('> Loading NAICS codes')
             call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/naics.json'))
             
