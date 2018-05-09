@@ -128,9 +128,20 @@ class MetaFilterSet(FilterSetMetaclass):
             filters['{}__{}'.format(name, lookup)] = NumberFilter(field_name = field, lookup_expr = lookup)
         
 
+class KeywordFilter(FilterSet, metaclass = MetaFilterSet):
+    
+    _fuzzy_text = ('name')
+    
+    class Meta:
+        model = categories.Keyword
+        fields = ()
+
+
 class NaicsFilter(FilterSet, metaclass = MetaFilterSet):
     
     _fuzzy_text = ('code', 'root_code', 'description')
+    
+    keywords = RelatedFilter(KeywordFilter)
     
     class Meta:
         model = categories.Naics
@@ -142,6 +153,7 @@ class PscFilter(FilterSet, metaclass = MetaFilterSet):
     _fuzzy_text = ('code', 'description')
     
     naics = RelatedFilter(NaicsFilter)
+    keywords = RelatedFilter(KeywordFilter)
     
     class Meta:
         model = categories.PSC
