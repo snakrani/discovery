@@ -114,7 +114,7 @@ class PoolTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': '[/]+',
                 '@iregex': 'water\s+based'
             },
-            'naics__keywords__name': {
+            'naics__keyword': {
                 '@exact': 'Cognitive development',
                 '@iexact': 'educational Consultants',
                 '@in': ("Fine arts schools", "Investment advice", "Language schools"),

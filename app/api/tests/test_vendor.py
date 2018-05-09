@@ -255,7 +255,7 @@ class VendorTest(case.APITestCase, metaclass = case.MetaAPISchema):
                     '@regex': '[/]+',
                     '@iregex': 'water\s+based'
                 },
-                'pools__pool__naics__keywords__name': {
+                'pools__pool__naics__keyword': {
                     '@exact': 'Cognitive development',
                     '@iexact': 'educational Consultants',
                     '@in': ("Fine arts schools", "Investment advice", "Language schools"),

@@ -66,7 +66,7 @@ class NaicsTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': '[/]+',
                 '@iregex': 'water\s+based'
             },
-            'keywords__name': {
+            'keyword': {
                 '@exact': 'Cognitive development',
                 '@iexact': 'educational Consultants',
                 '@in': ("Fine arts schools", "Investment advice", "Language schools"),
