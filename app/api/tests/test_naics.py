@@ -13,7 +13,7 @@ class NaicsTest(case.APITestCase, metaclass = case.MetaAPISchema):
             '#77777777': (),
             '#ABCDEFG': ()
         },
-        'ordering': ('code', 'root_code', 'description'),
+        'ordering': ('code', 'root_code', 'description', 'keywords__name'),
         'pagination': {
             '@no_args': {},
             '!page': {'page': 15},
@@ -23,7 +23,8 @@ class NaicsTest(case.APITestCase, metaclass = case.MetaAPISchema):
         'search': {
             '*search1': ('description', 'matches', 'Environmental'),
             '*search2': ('root_code', 'equal', '541910'),
-            '-search3': ('code', 'matches', '0000000000000')
+            '*search3': ('keywords__name', 'equal', 'Automobile driving schools'),
+            '-search4': ('code', 'matches', '0000000000000')
         },
         'fields': {
             'code': {
@@ -64,6 +65,19 @@ class NaicsTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iendswith': 'advertIsing',
                 '@regex': '[/]+',
                 '@iregex': 'water\s+based'
+            },
+            'keywords__name': {
+                '@exact': 'Cognitive development',
+                '@iexact': 'educational Consultants',
+                '@in': ("Fine arts schools", "Investment advice", "Language schools"),
+                '@contains': 'consulting',
+                '@icontains': 'CONSULTING',
+                '@startswith': 'Management',
+                '@istartswith': 'edu',
+                '@endswith': 'services',
+                '@iendswith': 'Services',
+                '@regex': '(training|consulting)',
+                '@iregex': '^(vocational|strategic)'
             }
         }
     }
