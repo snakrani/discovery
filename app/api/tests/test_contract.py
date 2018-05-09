@@ -515,6 +515,19 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': '[/]+',
                 '@iregex': 'water\s+based'
             },
+            'vendor__pools__pool__naics__keywords__name': {
+                '@exact': 'Cognitive development',
+                '@iexact': 'educational Consultants',
+                '@in': ("Fine arts schools", "Investment advice", "Language schools"),
+                '@contains': 'consulting',
+                '@icontains': 'CONSULTING',
+                '@startswith': 'Management',
+                '@istartswith': 'edu',
+                '@endswith': 'services',
+                '@iendswith': 'Services',
+                '@regex': '(training|consulting)',
+                '@iregex': '^(vocational|strategic)'
+            },
             'vendor__pools__setasides__code': {
                 '@exact': 'QF',
                 '@iexact': 'a2',
