@@ -22,10 +22,10 @@ class PscTest(case.APITestCase, metaclass = case.MetaAPISchema):
         },
         'search': {
             '*search1': ('code', 'matches', 'J041'),
-            '*search1': ('description', 'matches', 'Other housekeeping services'),
-            '@search2': ('naics__code', 'equal', '561210'),
-            '@search2': ('naics__description', 'matches', 'Testing Laboratories'),
-            '-search3': ('code', 'matches', '0000000000000')
+            '*search2': ('description', 'matches', 'Other housekeeping services'),
+            '@search3': ('naics__code', 'equal', '561210'),
+            '@search4': ('naics__description', 'matches', 'Testing Laboratories'),
+            '-search5': ('code', 'matches', '0000000000000')
         },
         'fields': {
             'code': {
