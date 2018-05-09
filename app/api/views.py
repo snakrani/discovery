@@ -62,7 +62,7 @@ class NaicsViewSet(DiscoveryReadOnlyModelViewSet):
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
     }
     filter_class = filters.NaicsFilter
-    search_fields = ['code', 'description']
+    search_fields = ['code', 'description', 'keywords__name']
     ordering_fields = ['code', 'root_code', 'description']
     ordering = 'description'
     
@@ -91,7 +91,7 @@ class PscViewSet(DiscoveryReadOnlyModelViewSet):
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
     }
     filter_class = filters.PscFilter
-    search_fields = ['code', 'description', 'naics__code', 'naics__description']
+    search_fields = ['code', 'description', 'naics__code', 'naics__description', 'keywords__name']
     ordering_fields = ['code', 'description', 'naics__code', 'naics__root_code', 'naics__description']
     ordering = 'description'
     
