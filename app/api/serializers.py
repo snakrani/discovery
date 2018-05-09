@@ -7,6 +7,12 @@ from vendors import models as vendors
 from contracts import models as contracts
 
 
+class KeywordSerializer(ModelSerializer):
+    class Meta:
+        model = categories.Keyword
+        fields = ['name']
+
+
 class BaseNaicsSerializer(HyperlinkedModelSerializer):
     url = HyperlinkedIdentityField(view_name="naics-detail", lookup_field='code')
     
@@ -19,12 +25,16 @@ class NaicsLinkSerializer(BaseNaicsSerializer):
         fields = ['code', 'url']
 
 class NaicsSummarySerializer(BaseNaicsSerializer):
+    keywords = KeywordSerializer(many=True)
+    
     class Meta(BaseNaicsSerializer.Meta):
-        fields = BaseNaicsSerializer.Meta.fields + ['url']
+        fields = BaseNaicsSerializer.Meta.fields + ['keywords', 'url']
 
 class NaicsFullSerializer(BaseNaicsSerializer):
+    keywords = KeywordSerializer(many=True)
+    
     class Meta(BaseNaicsSerializer.Meta):
-        pass
+        fields = BaseNaicsSerializer.Meta.fields + ['keywords']
 
 class NaicsTestSerializer(NaicsFullSerializer):
     class Meta(NaicsFullSerializer.Meta):
@@ -44,15 +54,17 @@ class PscLinkSerializer(BasePscSerializer):
 
 class PscSummarySerializer(BasePscSerializer):
     naics = NaicsSummarySerializer(many=True)
+    keywords = KeywordSerializer(many=True)
     
     class Meta(BasePscSerializer.Meta):
-        fields = BasePscSerializer.Meta.fields + ['naics', 'url']
+        fields = BasePscSerializer.Meta.fields + ['naics', 'keywords', 'url']
 
 class PscFullSerializer(BasePscSerializer):
     naics = NaicsSummarySerializer(many=True)
+    keywords = KeywordSerializer(many=True)
     
     class Meta(BasePscSerializer.Meta):
-        fields = BasePscSerializer.Meta.fields + ['naics']
+        fields = BasePscSerializer.Meta.fields + ['naics', 'keywords']
 
 class PscTestSerializer(PscFullSerializer):
     class Meta(PscFullSerializer.Meta):
