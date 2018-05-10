@@ -298,7 +298,7 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
 
 
 @method_decorator(cache_page(60*60), name='get')
-class ListKeywordView(ListAPIView):
+class ListKeywordView(mixins.FilterViewSetMixin, ListAPIView):
     """
     This endpoint returns keyword autocomplete results based on input text.
     """
