@@ -4,6 +4,10 @@
 SCRIPT_DIR="$(cd "$(dirname "$([ `readlink "$0"` ] && echo "`readlink "$0"`" || echo "$0")")"; pwd -P)"
 cd "$SCRIPT_DIR/../app"
 
+# Load category fixtures
+
+./manage.py dump_categories
+
 # Generate vendor related fixtures
 
 ./manage.py dumpdata vendors.location --indent=2 > vendors/fixtures/locations.json
