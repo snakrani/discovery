@@ -11,6 +11,14 @@ class KeywordSerializer(ModelSerializer):
     class Meta:
         model = categories.Keyword
         fields = ['name']
+        
+    def to_representation(self, instance):
+        return instance.name
+    
+class KeywordTestSerializer(ModelSerializer):
+    class Meta:
+        model = categories.Keyword
+        fields = ['name']
 
 
 class BaseNaicsSerializer(HyperlinkedModelSerializer):
@@ -37,6 +45,8 @@ class NaicsFullSerializer(BaseNaicsSerializer):
         fields = BaseNaicsSerializer.Meta.fields + ['keywords']
 
 class NaicsTestSerializer(NaicsFullSerializer):
+    keywords = KeywordTestSerializer(many=True)
+    
     class Meta(NaicsFullSerializer.Meta):
         fields = NaicsFullSerializer.Meta.fields + ['url']
 
@@ -67,6 +77,9 @@ class PscFullSerializer(BasePscSerializer):
         fields = BasePscSerializer.Meta.fields + ['naics', 'keywords']
 
 class PscTestSerializer(PscFullSerializer):
+    naics = NaicsTestSerializer(many=True)
+    keywords = KeywordTestSerializer(many=True)
+    
     class Meta(PscFullSerializer.Meta):
         fields = PscFullSerializer.Meta.fields + ['url']
 
