@@ -6,11 +6,13 @@ from django.views.decorators.cache import cache_page
 
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.response import Response
 
 from rest_framework_filters.backends import RestFrameworkFilterBackend
 
+from discovery.utils import check_api_test
 from discovery import query
 from discovery import metadata
 from discovery import models as system
@@ -293,6 +295,30 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
         return self.queryset.annotate(
             place_of_performance_location = Concat('place_of_performance__country_name', Value(' '), Coalesce('place_of_performance__state', Value('')))
         )
+
+
+@method_decorator(cache_page(60*60), name='get')
+class ListKeywordView(ListAPIView):
+    """
+    This endpoint returns keyword autocomplete results based on input text.
+    """
+    queryset = categories.Keyword.objects.all()
+    
+    filter_backends = (SearchFilter,)
+    search_fields = ['^name']
+    
+    
+    def get_serializer_class(self):
+        if check_api_test(self.request):
+            return serializers.KeywordTestSerializer
+        else:
+            return serializers.KeywordSerializer
+    
+    
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
 
 
 @method_decorator(cache_page(60*60), name='get')
