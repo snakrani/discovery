@@ -304,6 +304,9 @@ class ListKeywordView(ListAPIView):
     """
     queryset = categories.Keyword.objects.all()
     
+    def get_filter_classes(self):
+        return [] # This doesn't work but is required for the API generation page
+    
     def get_serializer_class(self):
         if check_api_test(self.request):
             return serializers.KeywordTestSerializer
@@ -312,7 +315,7 @@ class ListKeywordView(ListAPIView):
     
     
     def list(self, request, *args, **kwargs):
-        queryset = self.filter_queryset(self.get_queryset())
+        queryset = self.get_queryset()
         
         if 'q' in request.query_params and request.query_params['q']:
             queryset = queryset.filter(name__istartswith = request.query_params['q'])
