@@ -298,15 +298,11 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
 
 
 @method_decorator(cache_page(60*60), name='get')
-class ListKeywordView(mixins.FilterViewSetMixin, ListAPIView):
+class ListKeywordView(ListAPIView):
     """
     This endpoint returns keyword autocomplete results based on input text.
     """
     queryset = categories.Keyword.objects.all()
-    
-    filter_backends = (SearchFilter,)
-    search_fields = ['^name']
-    
     
     def get_serializer_class(self):
         if check_api_test(self.request):
@@ -317,8 +313,12 @@ class ListKeywordView(mixins.FilterViewSetMixin, ListAPIView):
     
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
+        
+        if 'q' in request.query_params and request.query_params['q']:
+            queryset = queryset.filter(name__istartswith = request.query_params['q'])
+        
         serializer = self.get_serializer(queryset, many=True)
-        return Response(serializer.data)
+        return Response({ 'results': serializer.data })
 
 
 @method_decorator(cache_page(60*60), name='get')
