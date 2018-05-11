@@ -200,8 +200,9 @@ def VendorCSV(request, vendor_duns):
 
     writer.writerow(('Date Signed', 'PIID', 'Agency', 'Type', 'Value ($)', 'Email POC', 'Status'))
 
-    if naics:
-        contracts = Contract.objects.filter(vendor=vendor, NAICS=naics.root_code).order_by('-date_signed')
+    if naics:    
+        psc_codes = list(PSC.objects.filter(naics__root_code=naics.root_code).distinct().values_list('code', flat=True))    
+        contracts = Contract.objects.filter(Q(PSC__in=psc_codes) | Q(NAICS=naics.root_code), vendor=vendor).order_by('-date_signed')
     else:
         contracts = Contract.objects.filter(vendor=vendor).order_by('-date_signed')
 
