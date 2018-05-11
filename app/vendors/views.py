@@ -1,10 +1,11 @@
 from titlecase import titlecase
 
+from django.db.models import Q
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.generic import TemplateView
 
-from categories.models import Naics, SetAside, Pool
+from categories.models import Naics, PSC, SetAside, Pool
 from vendors.models import Vendor, ProjectManager
 from contracts.models import Contract
 
@@ -90,8 +91,11 @@ def PoolCSV(request):
             location = "{}, {} {}".format(v.sam_location.city, v.sam_location.state, v.sam_location.zipcode)
         else:
             location = 'NA'
-
-        v_row = [v.name, location, Contract.objects.filter(NAICS=naics.code, vendor=v).count()]
+            
+        psc_codes = list(PSC.objects.filter(naics__root_code=naics.root_code).distinct().values_list('code', flat=True))    
+        contract_list = Contract.objects.filter(Q(PSC__in=psc_codes) | Q(NAICS=naics.root_code), vendor=v)
+        
+        v_row = [v.name, location, contract_list.count()]
         v_row.extend(setaside_list)
         lines.append(v_row)
 
