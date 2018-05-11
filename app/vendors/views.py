@@ -206,6 +206,15 @@ def VendorCSV(request, vendor_duns):
         contracts = Contract.objects.filter(vendor=vendor).order_by('-date_signed')
 
     for c in contracts:
-        writer.writerow((c.date_signed.strftime("%m/%d/%Y"), c.piid, titlecase(c.agency_name), c.pricing_type.name, c.obligated_amount, (c.point_of_contact or "").lower(), c.status.name))
+        pricing_type = ''
+        status = ''
+        
+        if c.pricing_type:
+            pricing_type = c.pricing_type.name
+        
+        if c.status:
+            status = c.status.name
+                
+        writer.writerow((c.date_signed.strftime("%m/%d/%Y"), c.piid, titlecase(c.agency_name), pricing_type, c.obligated_amount, (c.point_of_contact or "").lower(), status))
 
     return response
