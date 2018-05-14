@@ -1,0 +1,569 @@
+[
+{
+  "model": "categories.keyword",
+  "pk": 1,
+  "fields": {
+    "name": "Actuarial consulting services (except insurance actuarial services)"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 2,
+  "fields": {
+    "name": "Administrative management consulting services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 3,
+  "fields": {
+    "name": "Automobile driving schools"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 4,
+  "fields": {
+    "name": "Benefit consulting services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 5,
+  "fields": {
+    "name": "Benefit or compensation consulting services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 6,
+  "fields": {
+    "name": "Business management consulting services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 7,
+  "fields": {
+    "name": "Business process improvement"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 8,
+  "fields": {
+    "name": "Business schools and computer and management training"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 9,
+  "fields": {
+    "name": "Career and vocational counseling"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 10,
+  "fields": {
+    "name": "Cognitive development"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 11,
+  "fields": {
+    "name": "Colleges, universities, and professional schools"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 12,
+  "fields": {
+    "name": "Compensation consulting services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 13,
+  "fields": {
+    "name": "Compensation planning services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 14,
+  "fields": {
+    "name": "Compensation systems planning"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 15,
+  "fields": {
+    "name": "Consulting services, logistics consulting services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 16,
+  "fields": {
+    "name": "Customer services management consulting services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 17,
+  "fields": {
+    "name": "Developing and conducting marketing research, marketing research and public opinion polling"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 18,
+  "fields": {
+    "name": "Developing marketing objectives and policies, sales forecasting, new product developing and pricing, licensing and franchise planning, and marketing planning and strategy"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 19,
+  "fields": {
+    "name": "Educational consultants"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 20,
+  "fields": {
+    "name": "Educational guidance counseling services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 21,
+  "fields": {
+    "name": "Educational institutions"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 22,
+  "fields": {
+    "name": "Educational processes or systems"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 23,
+  "fields": {
+    "name": "Educational support services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 24,
+  "fields": {
+    "name": "Educational testing evaluation services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 25,
+  "fields": {
+    "name": "Educational testing services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 26,
+  "fields": {
+    "name": "Electronic and distance - learning methods"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 27,
+  "fields": {
+    "name": "Elementary and secondary schools; elementary and secondary schools"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 28,
+  "fields": {
+    "name": "Employee assessment consulting services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 29,
+  "fields": {
+    "name": "Employee benefits planning, communication, and administration"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 30,
+  "fields": {
+    "name": "Employment to persons with disabilities"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 31,
+  "fields": {
+    "name": "Exam preparation and tutoring"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 32,
+  "fields": {
+    "name": "Executive search, recruitment, and placement services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 33,
+  "fields": {
+    "name": "Financial planning, billing and recordkeeping, personnel, and physical distribution and logistics, office administrative services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 34,
+  "fields": {
+    "name": "Financial planning, budgeting, equity and asset management, records management, office planning"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 35,
+  "fields": {
+    "name": "Fine arts schools"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 36,
+  "fields": {
+    "name": "Human resource and personnel policies"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 37,
+  "fields": {
+    "name": "Human resources consulting services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 38,
+  "fields": {
+    "name": "Investment advice"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 39,
+  "fields": {
+    "name": "Job counseling, job training, and work experience"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 40,
+  "fields": {
+    "name": "Junior colleges"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 41,
+  "fields": {
+    "name": "Labor relations consulting services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 42,
+  "fields": {
+    "name": "Language schools"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 43,
+  "fields": {
+    "name": "Listing employment vacancies and in selecting, referring, and employment placement agencies"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 44,
+  "fields": {
+    "name": "Management consultants, human resource; marketing; process, physical distribution, and logistics"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 45,
+  "fields": {
+    "name": "Management consulting services, establishments providing telecommunications, utilities management consulting services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 46,
+  "fields": {
+    "name": "Marketing consulting services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 47,
+  "fields": {
+    "name": "Marketing management consulting services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 48,
+  "fields": {
+    "name": "Medical office management consulting services or consultants"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 49,
+  "fields": {
+    "name": "New product development consulting services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 50,
+  "fields": {
+    "name": "Offering academic degrees"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 51,
+  "fields": {
+    "name": "Organization development consulting services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 52,
+  "fields": {
+    "name": "Personnel management consulting services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 53,
+  "fields": {
+    "name": "Physical distribution and logistics consulting services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 54,
+  "fields": {
+    "name": "Professional and management development training"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 55,
+  "fields": {
+    "name": "Public administration"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 56,
+  "fields": {
+    "name": "Public relations"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 57,
+  "fields": {
+    "name": "Public speaking training"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 58,
+  "fields": {
+    "name": "Records management consulting services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 59,
+  "fields": {
+    "name": "Reorganizational consulting services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 60,
+  "fields": {
+    "name": "Research and development in the social sciences and humanities"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 61,
+  "fields": {
+    "name": "Resources consulting services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 62,
+  "fields": {
+    "name": "Sales management consulting services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 63,
+  "fields": {
+    "name": "Sheltered workshops"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 64,
+  "fields": {
+    "name": "Site location consulting services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 65,
+  "fields": {
+    "name": "Site selection consulting services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 66,
+  "fields": {
+    "name": "Speed reading instruction"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 67,
+  "fields": {
+    "name": "Sports and recreation instruction"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 68,
+  "fields": {
+    "name": "Strategic and organizational planning, site selection"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 69,
+  "fields": {
+    "name": "Strategic planning consulting services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 70,
+  "fields": {
+    "name": "Student exchange programs"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 71,
+  "fields": {
+    "name": "Survival training"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 72,
+  "fields": {
+    "name": "Technical and trade schools"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 73,
+  "fields": {
+    "name": "Telecommunications management consulting services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 74,
+  "fields": {
+    "name": "Training facilities"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 75,
+  "fields": {
+    "name": "Utilities management consulting services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 76,
+  "fields": {
+    "name": "Vocational high schools, elementary and secondary schools"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 77,
+  "fields": {
+    "name": "Vocational rehabilitation job training facilities"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 78,
+  "fields": {
+    "name": "Rehabilitation services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 79,
+  "fields": {
+    "name": "Vocational rehabilitation services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 80,
+  "fields": {
+    "name": "Wage and salary administration"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 81,
+  "fields": {
+    "name": "Yoga instruction, camps, or schools"
+  }
+}
+]

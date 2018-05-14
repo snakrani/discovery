@@ -146,7 +146,7 @@ var LayoutManager = {
 
     formatDate: function(dateObj) {
         //returns (mm/dd/yyyy) string representation of a date object
-        return (dateObj.getMonth() + 1) + '/' + dateObj.getDate() + '/' + dateObj.getFullYear().toString().substring(2);
+        return dateObj.getMonth() + '/' + dateObj.getDate() + '/' + dateObj.getFullYear().toString().substring(2);
     },
 
     convertDate: function(oldDate) {

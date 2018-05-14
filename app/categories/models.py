@@ -11,10 +11,18 @@ VEHICLE_CHOICES = (
 )
 
 
+class Keyword(models.Model):
+    name = models.CharField(max_length=255)
+    
+    def __str__(self):
+        return "{0} ({1})".format(self.name, self.id)
+
+
 class Naics(models.Model):
     code = models.CharField(unique=True, max_length=25)
     root_code = models.CharField(max_length=25, null=True)
     description = models.TextField()
+    keywords = models.ManyToManyField(Keyword, blank=True)
     
     def __str__(self):
         return "{0} - {1}".format(self.code, self.description)
@@ -24,6 +32,7 @@ class PSC(models.Model):
     code = models.CharField(unique=True, max_length=25)
     description = models.TextField()
     naics = models.ManyToManyField(Naics)
+    keywords = models.ManyToManyField(Keyword, blank=True)
      
     def __str__(self):
         return "{0} - {1}".format(self.code, self.description)

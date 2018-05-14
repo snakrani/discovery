@@ -2,6 +2,7 @@
 
 def get_category_fixtures():
     return [
+        'keywords.json',
         'naics.json',
         'psc.json',
         'setasides.json', 

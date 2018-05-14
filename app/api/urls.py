@@ -14,6 +14,7 @@ router.register(r'vendors', views.VendorViewSet)
 router.register(r'contracts', views.ContractViewSet)
 
 urlpatterns = [
+    url(r'^keywords/$', views.ListKeywordView.as_view()),
     url(r'^metadata/$', views.ListMetadataView.as_view()),
 ]
 

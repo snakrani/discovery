@@ -6,11 +6,13 @@ from django.views.decorators.cache import cache_page
 
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.response import Response
 
 from rest_framework_filters.backends import RestFrameworkFilterBackend
 
+from discovery.utils import check_api_test
 from discovery import query
 from discovery import metadata
 from discovery import models as system
@@ -62,7 +64,7 @@ class NaicsViewSet(DiscoveryReadOnlyModelViewSet):
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
     }
     filter_class = filters.NaicsFilter
-    search_fields = ['code', 'description']
+    search_fields = ['code', 'description', 'keywords__name']
     ordering_fields = ['code', 'root_code', 'description']
     ordering = 'description'
     
@@ -91,7 +93,7 @@ class PscViewSet(DiscoveryReadOnlyModelViewSet):
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
     }
     filter_class = filters.PscFilter
-    search_fields = ['code', 'description', 'naics__code', 'naics__description']
+    search_fields = ['code', 'description', 'naics__code', 'naics__description', 'keywords__name']
     ordering_fields = ['code', 'description', 'naics__code', 'naics__root_code', 'naics__description']
     ordering = 'description'
     
@@ -293,6 +295,33 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
         return self.queryset.annotate(
             place_of_performance_location = Concat('place_of_performance__country_name', Value(' '), Coalesce('place_of_performance__state', Value('')))
         )
+
+
+@method_decorator(cache_page(60*60), name='get')
+class ListKeywordView(ListAPIView):
+    """
+    This endpoint returns keyword autocomplete results based on input text.
+    """
+    queryset = categories.Keyword.objects.all()
+    
+    def get_filter_classes(self):
+        return [] # This doesn't work but is required for the API generation page
+    
+    def get_serializer_class(self):
+        if check_api_test(self.request):
+            return serializers.KeywordTestSerializer
+        else:
+            return serializers.KeywordSerializer
+    
+    
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        
+        if 'q' in request.query_params and request.query_params['q']:
+            queryset = queryset.filter(name__istartswith = request.query_params['q'])
+        
+        serializer = self.get_serializer(queryset, many=True)
+        return Response({ 'results': serializer.data })
 
 
 @method_decorator(cache_page(60*60), name='get')
