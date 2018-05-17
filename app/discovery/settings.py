@@ -131,6 +131,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'csp.middleware.CSPMiddleware',
+    'django_referrer_policy.middleware.ReferrerPolicyMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware'    
@@ -363,6 +364,12 @@ UAA_CLIENT_ID = config_value('UAA_CLIENT_ID')
 UAA_CLIENT_SECRET = config_value('UAA_CLIENT_SECRET')
 UAA_AUTH_URL = config_value('UAA_AUTH_URL', 'https://login.fr.cloud.gov/oauth/authorize')
 UAA_TOKEN_URL = config_value('UAA_TOKEN_URL', 'https://uaa.fr.cloud.gov/oauth/token')
+
+#
+# Site policies
+#
+REFERRER_POLICY = 'origin'
+
 
 #-------------------------------------------------------------------------------
 #
