@@ -11,7 +11,7 @@ django-filter==2.0.0.dev1           # Django query filtering
 django-crispy-forms==1.7.0          # Django advanced forms
 django-csp==3.4                     # Django browser CSP policy support
 django-referrer-policy==1.0         # Django referrer policy header support
-django-cors-headers==2.2.0          # Django CORs header support
+django-cors-headers==2.2.0          # Django CORS header support
 whitenoise==4.0b4                   # Static file handling
 
 djangorestframework==3.7.7          # Django REST framework
@@ -32,5 +32,5 @@ tblib==1.3.2                        # Traceback serialization (for parallel exce
 
 cg-django-uaa==1.3.0                # Cloud.gov Django UAA adaptor
 
--e git+https://github.com/philipn/django-rest-framework-filters.git@master#egg=djangorestframework-filters
+-e git+https://github.com/PSHCDevOps/django-rest-framework-filters.git@master#egg=djangorestframework-filters
 -e git+https://github.com/PSHCDevOps/pyfpds.git@integration#egg=pyfpds
