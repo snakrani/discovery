@@ -121,17 +121,20 @@ INSTALLED_APPS = [
     'crispy_forms',
     
     'django_celery_beat',
-    'django_celery_results'
+    'django_celery_results',
+    
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'csp.middleware.CSPMiddleware',
+    'django_referrer_policy.middleware.ReferrerPolicyMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'csp.middleware.CSPMiddleware',
-    'django_referrer_policy.middleware.ReferrerPolicyMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware'    
@@ -369,6 +372,9 @@ UAA_TOKEN_URL = config_value('UAA_TOKEN_URL', 'https://uaa.fr.cloud.gov/oauth/to
 # Site policies
 #
 REFERRER_POLICY = 'origin'
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_URLS_REGEX = r'^/(?!admin).*$'
 
 
 #-------------------------------------------------------------------------------
