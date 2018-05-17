@@ -386,3 +386,8 @@ if UAA_AUTH:
     
     AUTHENTICATION_BACKENDS = ['uaa_client.authentication.UaaBackend']
     LOGIN_URL = 'uaa_client:login'
+    
+    # Ensuring HTTPS
+    SECURE_HSTS_PRELOAD = True
+    SECURE_HSTS_SECONDS = 3600
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
