@@ -374,7 +374,6 @@ UAA_TOKEN_URL = config_value('UAA_TOKEN_URL', 'https://uaa.fr.cloud.gov/oauth/to
 REFERRER_POLICY = 'origin'
 
 CORS_ORIGIN_ALLOW_ALL = True
-CORS_URLS_REGEX = r'^/(?!admin).*$'
 
 CSP_DEFAULT_SRC = ("'self'",)
 CSP_SCRIPT_SRC = ("'self'", "'unsafe-inline'", 'www.google-analytics.com', 'dap.digitalgov.gov')
