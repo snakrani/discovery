@@ -63,15 +63,15 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '[a-z]{2}g15'
             },
             'base_piid': {
-                '*exact': 'W31P4Q09A0016',
-                '*iexact': 'w31p4Q09a0016',
+                '@exact': 'GS21F058AA',
+                '@iexact': 'gs21F058aA',
                 '@in': ('N0001412C0203', 'W912DY10A0005', 'EPW13024'),
-                '@contains': '09A0',
-                '@icontains': '09a0',
-                '@startswith': 'FA',
-                '@istartswith': 'fa',
-                '@endswith': 'C0203',
-                '@iendswith': 'c0203',
+                '@contains': 'A016',
+                '@icontains': 'a016',
+                '@startswith': 'GS',
+                '@istartswith': 'gs',
+                '@endswith': 'C0255',
+                '@iendswith': 'c0255',
                 '@regex': '[A-Z]+\d+',
                 '@iregex': '[a-z]{2}g15'
             },
