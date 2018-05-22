@@ -22,19 +22,19 @@ window.CacheService = {
 
 window.EventManager = {
 
-    publish: function(name, arg1 = null, arg2 = null, arg3 = null, arg4 = null) {
+    publish: function(name, arg1, arg2, arg3, arg4) {
         console.log("Publishing %s", name);
 
-        if (arg1) {
+        if (arg1 !== undefined) {
             //console.log("1> %o", arg1);
         }
-        if (arg2) {
+        if (arg2 !== undefined) {
             //console.log("2> %o", arg2);
         }
-        if (arg3) {
+        if (arg3 !== undefined) {
             //console.log("3> %o", arg3);
         }
-        if (arg4) {
+        if (arg4 !== undefined) {
             //console.log("4> %o", arg4);
         }
         Events.publish(name, arg1, arg2, arg3, arg4);

@@ -121,10 +121,15 @@ INSTALLED_APPS = [
     'crispy_forms',
     
     'django_celery_beat',
-    'django_celery_results'
+    'django_celery_results',
+    
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'csp.middleware.CSPMiddleware',
+    'django_referrer_policy.middleware.ReferrerPolicyMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -363,6 +368,20 @@ UAA_CLIENT_SECRET = config_value('UAA_CLIENT_SECRET')
 UAA_AUTH_URL = config_value('UAA_AUTH_URL', 'https://login.fr.cloud.gov/oauth/authorize')
 UAA_TOKEN_URL = config_value('UAA_TOKEN_URL', 'https://uaa.fr.cloud.gov/oauth/token')
 
+#
+# Site policies
+#
+REFERRER_POLICY = 'origin'
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+CSP_DEFAULT_SRC = ("'self'",)
+CSP_SCRIPT_SRC = ("'self'", "'unsafe-inline'", 'www.google-analytics.com', 'dap.digitalgov.gov')
+CSP_STYLE_SRC = ("'self'", "'unsafe-inline'", "fonts.googleapis.com")
+CSP_IMG_SRC = ("'self'", 'www.google-analytics.com')
+CSP_FONT_SRC = ("'self'", 'fonts.gstatic.com')
+
+
 #-------------------------------------------------------------------------------
 #
 # Local settings overrides
@@ -386,3 +405,8 @@ if UAA_AUTH:
     
     AUTHENTICATION_BACKENDS = ['uaa_client.authentication.UaaBackend']
     LOGIN_URL = 'uaa_client:login'
+    
+    # Ensuring HTTPS
+    SECURE_HSTS_PRELOAD = True
+    SECURE_HSTS_SECONDS = 3600
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
