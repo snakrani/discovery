@@ -47,22 +47,22 @@
     "root_code": "541611",
     "description": "Administrative Management and General Management Consulting Services",
     "keywords": [
+      64,
+      33,
       2,
+      34,
+      65,
+      68,
       6,
       7,
-      15,
-      33,
-      34,
       38,
+      69,
       44,
+      15,
       48,
       55,
       58,
-      59,
-      64,
-      65,
-      68,
-      69
+      59
     ]
   }
 },
@@ -112,12 +112,12 @@
     "root_code": "541618",
     "description": "Other Management Consulting Services",
     "keywords": [
+      73,
+      75,
       37,
       45,
       46,
-      53,
-      73,
-      75
+      53
     ]
   }
 },
@@ -381,10 +381,10 @@
     "keywords": [
       11,
       21,
+      74,
       26,
       50,
-      61,
-      74
+      61
     ]
   }
 },
@@ -396,20 +396,20 @@
     "root_code": "611699",
     "description": "All Other Miscellaneous Schools and Instruction",
     "keywords": [
-      3,
-      8,
-      11,
-      27,
-      31,
-      35,
-      40,
-      42,
-      57,
       66,
+      3,
+      35,
       67,
       71,
+      8,
+      40,
+      42,
+      11,
       72,
-      81
+      81,
+      57,
+      27,
+      31
     ]
   }
 },
@@ -422,14 +422,14 @@
     "description": "Vocational Rehabilitation Services",
     "keywords": [
       9,
-      23,
-      30,
-      39,
-      63,
       72,
       76,
       77,
-      78
+      78,
+      23,
+      30,
+      39,
+      63
     ]
   }
 },
@@ -444,12 +444,12 @@
       10,
       19,
       20,
+      70,
+      79,
       22,
       24,
       25,
-      60,
-      70,
-      79
+      60
     ]
   }
 },
