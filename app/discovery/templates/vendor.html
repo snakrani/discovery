@@ -95,6 +95,9 @@
             <!-- <span class="vendor_contract_history_naics"></span> -->
             <div tabindex="0" id="naics_contracts_button" class="contracts_button" title="load this vendor's contract history for this NAICS in the table below">NAICS</div>
             <div tabindex="0" id="all_contracts_button" class="contracts_button" title="load this vendor's contract history for all past contracts in the table below">All Contracts</div>
+            <div id="pool_filter_display">
+              <label class="pure-checkbox" for="pool_filter"><input type="checkbox" id="pool_filter" name="pool_filter" value="pool" aria-labeledby="choose_filters" {% if request.GET.pool_only %}checked{% endif %} /><span>Filter to pool</span></label>
+            </div>
         </div><!-- end vendor_contract_history_title_container -->
 
         <div id="vendor_disclaimers">
