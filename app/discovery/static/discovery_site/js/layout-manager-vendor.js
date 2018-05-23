@@ -93,8 +93,6 @@ LayoutManager.renderVendor = function(results, pool) {
 
     if (pool) {
         var pool_components = pool.id.split('_');
-        var pool_number = pool_components.pop();
-        var pool_name = pool_components.join(" ") + " pool " + pool_number;
 
         $("#naics_contracts_button").show();
         $("#naics_contracts_button").text("NAICS " + URLManager.stripSubCategories(InputHandler.naicsCode));
@@ -102,7 +100,7 @@ LayoutManager.renderVendor = function(results, pool) {
         $(".vendor_contract_history_text").html("Showing vendor contract history for PSCs related to: ");
 
         $("#pool_filter_display").show();
-        $("#pool_filter_display span").text("Filter to " + pool_name);
+        $("#pool_filter_display span").text("Only show contracts for  " + pool_components[0]);
     }
     else {
         $("#naics_contracts_button").hide();
