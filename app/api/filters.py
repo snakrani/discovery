@@ -273,7 +273,7 @@ class PlaceOfPerformanceFilter(FilterSet, metaclass = MetaFilterSet):
 class ContractFilter(FilterSet, metaclass = MetaFilterSet):
     
     _token_text = ('agency_id',)
-    _fuzzy_text = ('piid', 'agency_name', 'NAICS', 'PSC', 'point_of_contact', 'vendor_phone')
+    _fuzzy_text = ('piid', 'base_piid', 'agency_name', 'NAICS', 'PSC', 'point_of_contact', 'vendor_phone')
     _number = ('id', 'obligated_amount', 'annual_revenue', 'number_of_employees')
     _date_time = ('date_signed', 'completion_date')
     

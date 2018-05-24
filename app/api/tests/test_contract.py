@@ -14,7 +14,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
             '#ABCDEFG': ()
         },
         'ordering': (
-            'id', 'piid', 
+            'id', 'piid', 'base_piid', 
             'agency_id', 'agency_name', 
             'NAICS', 'PSC',
             'date_signed', 'completion_date', 'obligated_amount',
@@ -60,6 +60,19 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@endswith': '_0002',
                 '@iendswith': 'a16p',
                 '@regex': '\d+_\d+',
+                '@iregex': '[a-z]{2}g15'
+            },
+            'base_piid': {
+                '@exact': 'GS21F058AA',
+                '@iexact': 'gs21F058aA',
+                '@in': ('N0001412C0203', 'W912DY10A0005', 'EPW13024'),
+                '@contains': 'A016',
+                '@icontains': 'a016',
+                '@startswith': 'GS',
+                '@istartswith': 'gs',
+                '@endswith': 'C0255',
+                '@iendswith': 'c0255',
+                '@regex': '[A-Z]+\d+',
                 '@iregex': '[a-z]{2}g15'
             },
             'agency_id': {

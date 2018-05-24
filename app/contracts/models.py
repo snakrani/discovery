@@ -38,6 +38,8 @@ class PlaceOfPerformance(models.Model):
 
 class Contract(models.Model):
     piid = models.CharField(max_length=128, db_index=True)
+    base_piid = models.CharField(max_length=128, db_index=True, null=True)
+    
     date_signed = models.DateTimeField(null=True)
     completion_date = models.DateTimeField(null=True)
     

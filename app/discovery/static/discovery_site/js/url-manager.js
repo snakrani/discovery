@@ -7,6 +7,8 @@ var URLManager = {
         EventManager.subscribe('naicsChanged', this.update.bind(URLManager));
         EventManager.subscribe('zoneChanged', this.update.bind(URLManager));
         EventManager.subscribe('contentChanged', this.update.bind(URLManager));
+        EventManager.subscribe('vendorPoolFilterChanged', this.update.bind(URLManager));
+
 
         this.initFromQS();
     },
