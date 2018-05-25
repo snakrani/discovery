@@ -8,26 +8,21 @@ RequestsManager.sortClassMap = function() {
 };
 
 RequestsManager.initializers.listings = function() {
+    EventManager.subscribe('poolUpdated', this.load.bind(RequestsManager));
     EventManager.subscribe('vendorsChanged', this.refreshVendors.bind(RequestsManager));
 };
 
-RequestsManager.loadVendors = function(data, callback) {
+RequestsManager.loadVendorData = function(data, callback) {
     var url = "/api/vendors/";
+    var pool = RequestsManager.pool;
 
     var requestVars = this.buildRequestQuery();
     var queryData = $.extend(data, {'count': this.getPageCount()});
     var filters = [];
 
-    if ('naics' in requestVars) {
+    if (pool && 'naics' in requestVars) {
         queryData['contract_naics'] = requestVars['naics'];
-        filters.push('(pools__pool__naics__code' + '=' + requestVars['naics'] + ')');
-
-        if ('vehicle' in requestVars) {
-            filters.push('(pools__pool__vehicle__iexact' + '=' + requestVars['vehicle'] + ')');
-        }
-        if ('pool' in requestVars) {
-            filters.push('(pools__pool__number' + '=' + requestVars['pool'] + ')');
-        }
+        filters.push('(pools__pool__id' + '=' + pool.id + ')');
 
         if (LayoutManager.zoneActive() && 'zone' in requestVars && requestVars['zone'] != 'all') {
             filters.push('(pools__zones__id' + '=' + requestVars['zone'] + ')');
@@ -72,14 +67,14 @@ RequestsManager.loadVendors = function(data, callback) {
 
 RequestsManager.load = function() {
     if (URLManager.isPoolPage()) {
-        RequestsManager.loadVendors(RequestsManager.currentSortParams(), function(queryData, response) {
+        RequestsManager.loadVendorData(RequestsManager.currentSortParams(), function(queryData, response) {
             EventManager.publish('dataLoaded', response);
         });
     }
 };
 
 RequestsManager.refreshVendors = function(data) {
-    RequestsManager.loadVendors(data, function(queryData, response) {
+    RequestsManager.loadVendorData(data, function(queryData, response) {
         EventManager.publish('vendorDataLoaded', response, data['page'], queryData['count']);
     });
 };
