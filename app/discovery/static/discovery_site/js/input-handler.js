@@ -237,10 +237,15 @@ var InputHandler = {
 
             RequestsManager.getAPIRequest(url, queryData, function(data) {
                 if (data['results'].length == 1) {
-                    EventManager.publish('poolUpdated', data['results'][0]);
+                    pool = data['results'][0];
+
+                    RequestsManager.pool = pool;
+                    EventManager.publish('poolUpdated', pool);
+                    return;
                 }
             });
         }
+        EventManager.publish('poolUpdated', null);
     },
 
     loadVehiclePools: function() {
