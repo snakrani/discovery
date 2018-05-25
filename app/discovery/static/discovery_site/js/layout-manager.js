@@ -126,8 +126,10 @@ var LayoutManager = {
     },
 
     updatePoolInfo: function(data) {
-        $(".results_pool_name_number_pool").text("Pool " + data['number'] + ": ");
-        $(".results_pool_name_number_description").text(data['name']);
+        if (data) {
+            $(".results_pool_name_number_pool").text("Pool " + data['number'] + ": ");
+            $(".results_pool_name_number_description").text(data['name']);
+        }
     },
 
     createDate: function(date) {

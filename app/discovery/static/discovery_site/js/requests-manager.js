@@ -1,6 +1,8 @@
 
 var RequestsManager = {
     initializers: {},
+    vendor: null,
+    pool: null,
 
     init: function() {
         if (URLManager.isHomePage() || URLManager.isPoolPage()) {

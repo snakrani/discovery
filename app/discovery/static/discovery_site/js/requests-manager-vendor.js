@@ -1,7 +1,4 @@
 
-RequestsManager.vendor = null;
-RequestsManager.pool = null;
-
 RequestsManager.sortClassMap = function() {
     return {
         'h_date_signed': 'date_signed',
@@ -25,8 +22,9 @@ RequestsManager.loadVendor = function(callback) {
     var duns = URLManager.getDUNS();
     var url = "/api/vendors/" + duns + "/";
 
-    RequestsManager.getAPIRequest(url, {}, function(response){
-        callback(duns, response);
+    RequestsManager.getAPIRequest(url, {}, function(vendor){
+        RequestsManager.vendor = vendor;
+        callback(duns, vendor);
     });
 };
 
@@ -68,7 +66,6 @@ RequestsManager.load = function() {
     }
 
     RequestsManager.loadVendor(function(duns, vendor) {
-        RequestsManager.vendor = vendor;
         EventManager.publish('dataLoaded', vendor);
         EventManager.publish('vendorInfoLoaded', {'listType': listType});
     });
@@ -81,9 +78,7 @@ RequestsManager.refreshVendor = function(pool) {
         listType = 'all';
     }
 
-    RequestsManager.pool = pool;
     RequestsManager.loadVendor(function(duns, vendor) {
-        RequestsManager.vendor = vendor;
         EventManager.publish('vendorPoolLoaded', vendor, pool);
         EventManager.publish('vendorInfoLoaded', {'listType': listType});
     });
