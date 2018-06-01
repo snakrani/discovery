@@ -28,7 +28,7 @@ pytz==2018.3                        # Timezones
 titlecase==0.12.0                   # String processing
 PyYAML==3.12                        # YAML parsing/generation
 markdown==2.6.11                    # Markdown parsing/generation
-openpyxl==2.5.3                     # Parsing of XLS* documents
+xlrd==1.1.0                         # Parsing of XLS* documents
 
 psutil==5.4.3                       # System utilities
 tblib==1.3.2                        # Traceback serialization (for parallel exceptions)
