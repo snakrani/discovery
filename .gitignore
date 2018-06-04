@@ -12,6 +12,7 @@ __pycache__
 /.vagrant/
 /tmp/
 _*/
+.~lock.*
 
 /app/discovery/local_settings.py
 /app/static/
