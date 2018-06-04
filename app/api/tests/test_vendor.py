@@ -172,6 +172,15 @@ class VendorTest(case.APITestCase, metaclass = case.MetaAPISchema):
                     '@regex': '^GS\d+',
                     '@iregex': '^(gs06|gs00)'
                 },
+                'pools__expiration_8a_date': {
+                    '@date': '2017-08-10',
+                    '@year': '2017',
+                    '@month': '7',
+                    '@day': '24',
+                    '@week': '5',
+                    '@week_day': '3',
+                    '@quarter': '1'
+                },
                 'pools__pool__name': {
                     '@exact': 'Elevator Maintenance',
                     '@iexact': 'janitoRial',
