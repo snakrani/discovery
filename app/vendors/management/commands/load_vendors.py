@@ -25,6 +25,20 @@ def format_duns(text):
 def format_duns_plus_4(text):
     return format_duns(text) + '0000'
 
+def format_date(text):
+    date = None
+    
+    if text and type(text) is str and not re.match(r'^(0|N[\.\/]?A\.?)$', text, re.IGNORECASE):
+        text = format_ascii(text)
+        regex = re.search(r'^\s*(\d{1,2})\s*\/\s*(\d{1,2})\s*\/\s*(\d{4})\s*$', text, re.IGNORECASE)
+        
+        month = regex.group(1)
+        day = regex.group(2)
+        year = regex.group(3) 
+        date = "{}-{}-{}".format(year, month.zfill(2), day.zfill(2))
+    
+    return date
+
 def format_emails(text):
     emails = []
     
@@ -129,6 +143,12 @@ def get_setasides(record):
     except Exception as e:
         pass
     
+    try:
+        if check_bool(record['VIP']):
+            setasides.append('VIP')
+    except Exception as e:
+        pass
+    
     return setasides
 
 
@@ -182,6 +202,15 @@ class Command(BaseCommand):
             
             # Update pool membership information
             membership, ppcreated = PoolMembership.objects.get_or_create(vendor=vendor, pool=pool_data, piid=piid)
+            
+            # Basic membership information
+            if 'ContractEnd' in columns:
+                membership.contract_end_date = format_date(record['ContractEnd'])
+                
+            if '8(a)Date' in columns:
+                membership.expiration_8a_date = format_date(record['8(a)Date'])
+                
+            membership.save()
             
             # Add contract manager
             cm, cm_created = membership.cms.get_or_create(name=format_ascii(record['POC1']))
