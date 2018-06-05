@@ -3519,5 +3519,12 @@
   "fields": {
     "responsibility": 503
   }
+},
+{
+  "model": "vendors.projectmanager",
+  "pk": 1008,
+  "fields": {
+    "responsibility": 504
+  }
 }
 ]

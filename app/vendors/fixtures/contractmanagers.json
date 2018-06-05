@@ -3519,5 +3519,12 @@
   "fields": {
     "responsibility": 503
   }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1007,
+  "fields": {
+    "responsibility": 504
+  }
 }
 ]
