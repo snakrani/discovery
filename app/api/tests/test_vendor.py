@@ -173,11 +173,10 @@ class VendorTest(case.APITestCase, metaclass = case.MetaAPISchema):
                     '@iregex': '^(gs06|gs00)'
                 },
                 'pools__expiration_8a_date': {
-                    '@date': '2017-08-10',
                     '@year': '2017',
                     '@month': '7',
-                    '@day': '24',
-                    '@week': '5',
+                    '@day': '19',
+                    '@week': '32',
                     '@week_day': '3',
                     '@quarter': '1'
                 },
@@ -346,7 +345,7 @@ class VendorTest(case.APITestCase, metaclass = case.MetaAPISchema):
                     '@istartswith': '757',
                     '@endswith': '6551',
                     '@iendswith': '6551',
-                    '@regex': 'x\d+$',
+                    '@regex': 'x\s*\d+$',
                     '@iregex': '(304|703)-\d{3}'
                 },
                 'pools__cms__email': {
@@ -385,7 +384,7 @@ class VendorTest(case.APITestCase, metaclass = case.MetaAPISchema):
                     '@istartswith': '719',
                     '@endswith': '6102',
                     '@iendswith': '6102',
-                    '@regex': 'x\d+$',
+                    '@regex': 'x\s*\d+$',
                     '@iregex': '(937|703)-\d{3}'
                 },
                 'pools__pms__email': {
