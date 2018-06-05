@@ -187,7 +187,7 @@ class BasePoolMembershipSerializer(ModelSerializer):
     
     class Meta:
         model = vendors.PoolMembership
-        fields = ['piid', 'cms', 'pms']
+        fields = ['piid', 'cms', 'pms', 'expiration_8a_date', 'contract_end_date']
     
 class PoolMembershipLinkSerializer(BasePoolMembershipSerializer):
     pool = PoolLinkSerializer(many=False)

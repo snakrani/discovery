@@ -21,7 +21,7 @@ class SetAsideTest(case.APITestCase, metaclass = case.MetaAPISchema):
             '@mixed': {'page': 2, 'count': 2}
         },
         'search': {
-            '*search1': ('description', 'matches', 'Veteran'),
+            '@search1': ('description', 'matches', 'Veteran'),
             '*search2': ('name', 'equal', 'SDB'),
             '-search3': ('code', 'matches', '0000000000000')
         },
