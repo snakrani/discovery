@@ -47,8 +47,8 @@ class PoolMembership(models.Model):
     setasides = models.ManyToManyField(SetAside, blank=True) # from XLS
     zones = models.ManyToManyField(Zone, blank=True) # from XLS
     
-    expiration_8a_date = models.DateTimeField(null=True) # from XLS
-    contract_end_date = models.DateTimeField(null=True) # from XLS
+    expiration_8a_date = models.DateField(null=True) # from XLS
+    contract_end_date = models.DateField(null=True) # from XLS
     
     def __str__(self):
         return "{} {} ({})".format(self.pool.id, self.vendor.name, self.piid)
