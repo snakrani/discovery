@@ -7518,5 +7518,557 @@
     "manager": 1008,
     "number": "270-885-4642 x 113"
   }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 941,
+  "fields": {
+    "manager": 1009,
+    "number": "301-452-3152"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 942,
+  "fields": {
+    "manager": 1011,
+    "number": "512-238-9840 x 18"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 943,
+  "fields": {
+    "manager": 1013,
+    "number": "256-327-4015"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 944,
+  "fields": {
+    "manager": 1017,
+    "number": "301-907-8500"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 945,
+  "fields": {
+    "manager": 1019,
+    "number": "818-347-5068"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 946,
+  "fields": {
+    "manager": 1021,
+    "number": "865-671-5837"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 947,
+  "fields": {
+    "manager": 1023,
+    "number": "703-933-7637"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 948,
+  "fields": {
+    "manager": 1025,
+    "number": "478-923-9041"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 949,
+  "fields": {
+    "manager": 1027,
+    "number": "571-931-0435"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 950,
+  "fields": {
+    "manager": 1029,
+    "number": "301-563-6404"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 951,
+  "fields": {
+    "manager": 1031,
+    "number": "703-712-4167"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 952,
+  "fields": {
+    "manager": 1033,
+    "number": "703-436-4596"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 953,
+  "fields": {
+    "manager": 1035,
+    "number": "817-856-0861"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 954,
+  "fields": {
+    "manager": 1037,
+    "number": "239-849-9503"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 955,
+  "fields": {
+    "manager": 1039,
+    "number": "801-265-4619"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 956,
+  "fields": {
+    "manager": 1041,
+    "number": "703-840-3491"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 957,
+  "fields": {
+    "manager": 1043,
+    "number": "443-542-9188"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 958,
+  "fields": {
+    "manager": 1045,
+    "number": "410-972-4664"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 959,
+  "fields": {
+    "manager": 1047,
+    "number": "866-990-8866"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 960,
+  "fields": {
+    "manager": 1049,
+    "number": "512-238-9840 x 18"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 961,
+  "fields": {
+    "manager": 1051,
+    "number": "816-483-6330"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 962,
+  "fields": {
+    "manager": 1053,
+    "number": "502-883-6709"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 963,
+  "fields": {
+    "manager": 1055,
+    "number": "813-983-7463"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 964,
+  "fields": {
+    "manager": 1057,
+    "number": "478-923-9041"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 965,
+  "fields": {
+    "manager": 1059,
+    "number": "571-931-0435"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 966,
+  "fields": {
+    "manager": 1061,
+    "number": "478-420-0272"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 967,
+  "fields": {
+    "manager": 1063,
+    "number": "410-266-8000"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 968,
+  "fields": {
+    "manager": 1065,
+    "number": "973-890-8915"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 969,
+  "fields": {
+    "manager": 1067,
+    "number": "703-766-6260"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 970,
+  "fields": {
+    "manager": 1069,
+    "number": "727-535-1066"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 971,
+  "fields": {
+    "manager": 1071,
+    "number": "510-655-9470 x 15"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 972,
+  "fields": {
+    "manager": 1073,
+    "number": "571-262-0603"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 973,
+  "fields": {
+    "manager": 1075,
+    "number": "301-408-4242"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 974,
+  "fields": {
+    "manager": 1077,
+    "number": "301-984-6090"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 975,
+  "fields": {
+    "manager": 1079,
+    "number": "301-944-3224"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 976,
+  "fields": {
+    "manager": 1081,
+    "number": "510-526-5495"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 977,
+  "fields": {
+    "manager": 1083,
+    "number": "301-881-8884"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 978,
+  "fields": {
+    "manager": 1085,
+    "number": "212-766-4111"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 979,
+  "fields": {
+    "manager": 1087,
+    "number": "972-517-2700"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 980,
+  "fields": {
+    "manager": 1089,
+    "number": "917-992-0828"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 981,
+  "fields": {
+    "manager": 1091,
+    "number": "801-836-1111"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 982,
+  "fields": {
+    "manager": 1093,
+    "number": "813-749-7117"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 983,
+  "fields": {
+    "manager": 1095,
+    "number": "202-204-0600"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 984,
+  "fields": {
+    "manager": 1097,
+    "number": "703-757-4900"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 985,
+  "fields": {
+    "manager": 1099,
+    "number": "301-386-5558"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 986,
+  "fields": {
+    "manager": 1101,
+    "number": "919-747-7486"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 987,
+  "fields": {
+    "manager": 1103,
+    "number": "978-522-7004"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 988,
+  "fields": {
+    "manager": 1105,
+    "number": "703-373-7600"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 989,
+  "fields": {
+    "manager": 1107,
+    "number": "925-790-2122"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 990,
+  "fields": {
+    "manager": 1109,
+    "number": "434-975-0687"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 991,
+  "fields": {
+    "manager": 1111,
+    "number": "210-656-9300"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 992,
+  "fields": {
+    "manager": 1113,
+    "number": "484-533-2550"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 993,
+  "fields": {
+    "manager": 1115,
+    "number": "508-990-9054"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 994,
+  "fields": {
+    "manager": 1117,
+    "number": "410-897-9100"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 995,
+  "fields": {
+    "manager": 1119,
+    "number": "907-455-6777"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 996,
+  "fields": {
+    "manager": 1121,
+    "number": "301-347-5093"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 997,
+  "fields": {
+    "manager": 1123,
+    "number": "609-702-1500"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 998,
+  "fields": {
+    "manager": 1125,
+    "number": "707-709-8894"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 999,
+  "fields": {
+    "manager": 1127,
+    "number": "845-278-7710"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 1000,
+  "fields": {
+    "manager": 1129,
+    "number": "410-836-7180"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 1001,
+  "fields": {
+    "manager": 1131,
+    "number": "301-347-5093"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 1002,
+  "fields": {
+    "manager": 1133,
+    "number": "202-333-4444"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 1003,
+  "fields": {
+    "manager": 1135,
+    "number": "212-481-9576"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 1004,
+  "fields": {
+    "manager": 1137,
+    "number": "262-502-0507"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 1005,
+  "fields": {
+    "manager": 1139,
+    "number": "410-327-7400"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 1006,
+  "fields": {
+    "manager": 1141,
+    "number": "202-403-5086"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 1007,
+  "fields": {
+    "manager": 1143,
+    "number": "443-285-0008"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 1008,
+  "fields": {
+    "manager": 1145,
+    "number": "703-598-0697"
+  }
+},
+{
+  "model": "vendors.managerphonenumber",
+  "pk": 1009,
+  "fields": {
+    "manager": 1147,
+    "number": "914-821-5100"
+  }
 }
 ]
