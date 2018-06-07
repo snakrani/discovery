@@ -16,14 +16,14 @@ class NaicsTest(case.APITestCase, metaclass = case.MetaAPISchema):
         'ordering': ('code', 'root_code', 'description', 'keywords__name'),
         'pagination': {
             '@no_args': {},
-            '!page': {'page': 15},
+            '!page': {'page': 25},
             '@count': {'count': 5},
             '@mixed': {'page': 4, 'count': 10}
         },
         'search': {
             '*search1': ('description', 'matches', 'Environmental'),
             '*search2': ('root_code', 'equal', '541910'),
-            '*search3': ('keywords__name', 'equal', 'Automobile driving schools'),
+            '@search3': ('keywords__name', 'equal', 'Automobile driving schools'),
             '-search4': ('code', 'matches', '0000000000000')
         },
         'fields': {
