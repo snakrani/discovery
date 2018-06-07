@@ -173,6 +173,7 @@ class VendorTest(case.APITestCase, metaclass = case.MetaAPISchema):
                     '@iregex': '^(gs06|gs00)'
                 },
                 'pools__expiration_8a_date': {
+                    '@date': '2022-07-19',
                     '@year': '2017',
                     '@month': '7',
                     '@day': '19',
