@@ -147,10 +147,16 @@ class TestAssertions(object):
     
     
     def _convert_date(self, date):
-        if not date or not isinstance(date, str) or not re.search('^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$', date):
+        if not date or not isinstance(date, str) or not re.search('^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}Z)?$', date):
             raise AssertionError("Value ({}) must be passed as a date string".format(date))
         
-        return datetime.strptime(date, '%Y-%m-%dT%H:%M:%SZ')
+        try:
+            date = datetime.strptime(date, '%Y-%m-%dT%H:%M:%SZ')
+        
+        except Exception as e:
+            date = datetime.strptime(date, '%Y-%m-%d')
+        
+        return date        
         
         
     def assertYear(self, date, year, **params):
