@@ -218,8 +218,7 @@ class Command(BaseCommand):
         logger = vendor_logger()
         
         if check_num(record['DUNS']) and check_text(record['ContractNumber']):
-            #print(record)
-            name = format_ascii(record['ContractorName'])
+            name = format_ascii(record['ContractorName']).capitalize()
             piid = format_ascii(record['ContractNumber'])
             duns = format_duns(record['DUNS'])
         
