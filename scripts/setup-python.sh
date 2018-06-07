@@ -24,7 +24,7 @@ fi
 echo "> Installing Python and CLI utilities" | tee -a "$LOG_FILE"
 apt-get update >>"$LOG_FILE" 2>&1
 apt-get install -y make gcc libdpkg-perl libpq-dev git ssh vim >>"$LOG_FILE" 2>&1
-apt-get -t testing -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install python3.6-dev python3.6-venv >>"$LOG_FILE" 2>&1
+apt-get -t testing -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install python3-dev python3-venv >>"$LOG_FILE" 2>&1
 rm -rf /var/lib/apt/lists/* >>"$LOG_FILE" 2>&1
 
 
