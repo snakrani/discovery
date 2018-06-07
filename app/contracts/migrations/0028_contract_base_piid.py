@@ -3,14 +3,6 @@
 from django.db import migrations, models
 
 
-def create_base_piids(apps, schema_editor):
-    Contract = apps.get_model('contracts', 'Contract')
-    
-    for contract in Contract.objects.all():
-        contract.base_piid = contract.piid.split('_')[0]
-        contract.save()
-
-
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -22,6 +14,5 @@ class Migration(migrations.Migration):
             model_name='contract',
             name='base_piid',
             field=models.CharField(db_index=True, max_length=128, null=True),
-        ),
-        migrations.RunPython(create_base_piids),
+        )
     ]
