@@ -5,17 +5,19 @@ var InputHandler = {
         $('form#vehicle-select select').change(this.sendVehicleChange.bind(InputHandler));
         $('#naics-code').change(this.sendCodeChange.bind(InputHandler));
         $('#zone-id').change(this.sendZoneChange.bind(InputHandler));
-        $('#setaside-filters').change(this.sendFilterChange);
+        $('#setaside-filters').change(this.sendFilterChange.bind(InputHandler));
+        $('input#pool_filter').change(this.sendPoolFilterContractsChange.bind(InputHandler));
+        $('input#pool_filter').change(this.sendVendorPoolFilterChange.bind(InputHandler));
 
         //should this be bound to the InputHandler? KBD
-        $('#vendor_contract_history_title_container').on('click', 'div.contracts_button', this.sendContractsChange);
-        $('#vendor_contract_history_title_container').on('keypress', 'div.contracts_button', this.sendContractsChange);
+        $('#vendor_contract_history_title_container').on('click', 'div.contracts_button', this.sendContractsChange.bind(InputHandler));
+        $('#vendor_contract_history_title_container').on('keypress', 'div.contracts_button', this.sendContractsChange.bind(InputHandler));
 
-        $('#pool_table').on('click', 'th.sortable', this.sortVendors);
-        $('#pool_table').on('keypress', 'th.sortable', this.sortVendors);
+        $('#pool_table').on('click', 'th.sortable', this.sortVendors.bind(InputHandler));
+        $('#pool_table').on('keypress', 'th.sortable', this.sortVendors.bind(InputHandler));
 
-        $('#ch_table').on('click', 'th.sortable', this.sortContracts);
-        $('#ch_table').on('keypress', 'th.sortable', this.sortContracts);
+        $('#ch_table').on('click', 'th.sortable', this.sortContracts.bind(InputHandler));
+        $('#ch_table').on('keypress', 'th.sortable', this.sortContracts.bind(InputHandler));
 
         // event subscriptions
         EventManager.subscribe('loadPage', this.updateFields.bind(InputHandler));
@@ -133,6 +135,7 @@ var InputHandler = {
     sendContractsChange: function(e) {
         if ((e.type == "keypress" && e.charCode == 13) || e.type == "click") {
             var listType = 'naics';
+
             if(e.target.textContent == "All Contracts" || e.target.innerText == "All Contracts"){
                 this.naicsCode = 'all';
                 listType = 'all';
@@ -148,6 +151,27 @@ var InputHandler = {
             EventManager.publish('contractsChanged', {'page': 1, 'naics': this.naicsCode, 'listType': listType});
             return false;
         }
+    },
+
+    sendPoolFilterContractsChange: function() {
+        var listType = 'naics';
+
+        var $button = $("#vendor_contract_history_title_container").find('.contracts_button_active');
+        if ($button.text() == "All Contracts") {
+            this.naicsCode = 'all';
+            listType = 'all';
+        }
+        else {
+            this.naicsCode = $("#vendor_contract_history_title_container").find("div").first().text().replace(/\D/g,'').trim();
+        }
+
+        //reset date header column classes
+        var $date = $("div#ch_table th.h_date_signed");
+        $date.removeClass('arrow-sortable').addClass('arrow-down').attr("title", "Sorted descending");
+        $date.siblings('.sortable').removeClass('arrow-down').removeClass('arrow-up').addClass('arrow-sortable').attr("title", "Select to sort");
+
+        EventManager.publish('contractsChanged', {'page': 1, 'naics': this.naicsCode, 'listType': listType});
+        return false;
     },
 
     sendVehicleChange: function() {
@@ -169,6 +193,10 @@ var InputHandler = {
 
     sendFilterChange: function() {
         EventManager.publish('filtersChanged');
+    },
+
+    sendVendorPoolFilterChange: function() {
+        EventManager.publish('vendorPoolFilterChanged');
     },
 
     getVehicle: function() {
@@ -193,6 +221,10 @@ var InputHandler = {
         return setasides;
     },
 
+    getVendorPoolFilter: function() {
+      return $('input#pool_filter').is(':checked');
+    },
+
     loadPool: function() {
         var vehicle = this.getVehicle();
         var naics = this.getNAICSCode();
@@ -205,10 +237,15 @@ var InputHandler = {
 
             RequestsManager.getAPIRequest(url, queryData, function(data) {
                 if (data['results'].length == 1) {
-                    EventManager.publish('poolUpdated', data['results'][0]);
+                    pool = data['results'][0];
+
+                    RequestsManager.pool = pool;
+                    EventManager.publish('poolUpdated', pool);
+                    return;
                 }
             });
         }
+        EventManager.publish('poolUpdated', null);
     },
 
     loadVehiclePools: function() {

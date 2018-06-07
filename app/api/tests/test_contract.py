@@ -14,7 +14,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
             '#ABCDEFG': ()
         },
         'ordering': (
-            'id', 'piid', 
+            'id', 'piid', 'base_piid', 
             'agency_id', 'agency_name', 
             'NAICS', 'PSC',
             'date_signed', 'completion_date', 'obligated_amount',
@@ -60,6 +60,19 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@endswith': '_0002',
                 '@iendswith': 'a16p',
                 '@regex': '\d+_\d+',
+                '@iregex': '[a-z]{2}g15'
+            },
+            'base_piid': {
+                '@exact': 'GS21F058AA',
+                '@iexact': 'gs21F058aA',
+                '@in': ('N0001412C0203', 'W912DY10A0005', 'EPW13024'),
+                '@contains': 'A016',
+                '@icontains': 'a016',
+                '@startswith': 'GS',
+                '@istartswith': 'gs',
+                '@endswith': 'C0255',
+                '@iendswith': 'c0255',
+                '@regex': '[A-Z]+\d+',
                 '@iregex': '[a-z]{2}g15'
             },
             'agency_id': {
@@ -432,6 +445,15 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': '^GS\d+',
                 '@iregex': '^(gs06|gs00)'
             },
+            'vendor__pools__expiration_8a_date': {
+                '@date': '2022-07-19',
+                '@year': '2017',
+                '@month': '7',
+                '@day': '19',
+                '@week': '32',
+                '@week_day': '3',
+                '@quarter': '1'
+            },
             'vendor__pools__pool__name': {
                 '@exact': 'Elevator Maintenance',
                 '@iexact': 'janitoRial',
@@ -597,7 +619,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@istartswith': '757',
                 '@endswith': '6551',
                 '@iendswith': '6551',
-                '@regex': 'x\d+$',
+                '@regex': 'x\s*\d+$',
                 '@iregex': '(304|703)-\d{3}'
             },
             'vendor__pools__cms__email': {
@@ -636,7 +658,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@istartswith': '719',
                 '@endswith': '6102',
                 '@iendswith': '6102',
-                '@regex': 'x\d+$',
+                '@regex': 'x\s*\d+$',
                 '@iregex': '(937|703)-\d{3}'
             },
             'vendor__pools__pms__email': {
@@ -654,8 +676,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
             }
         }
     }
-    
-    
+        
     def initialize(self):
         self.router = 'contracts'
         

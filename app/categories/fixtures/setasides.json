@@ -58,5 +58,15 @@
     "description": "HUBZone",
     "far_order": 2
   }
+},
+{
+  "model": "categories.setaside",
+  "pk": 19,
+  "fields": {
+    "code": "VIP",
+    "name": "VIP",
+    "description": "Veterans VIP",
+    "far_order": 10
+  }
 }
 ]

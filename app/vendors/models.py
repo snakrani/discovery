@@ -21,9 +21,9 @@ class Location(models.Model):
 
 
 class Vendor(models.Model):
-    name = models.CharField(max_length=128) # from CSV
-    duns = models.CharField(max_length=9, unique=True) # from CSV
-    duns_4 = models.CharField(max_length=13, unique=True) # generated from CSV
+    name = models.CharField(max_length=128) # from XLS
+    duns = models.CharField(max_length=9, unique=True) # from XLS
+    duns_4 = models.CharField(max_length=13, unique=True) # generated from XLS
     cage = models.CharField(max_length=15, null=True) #from SAM
 
     sam_status = models.CharField(null=True, max_length=128) # from SAM
@@ -39,13 +39,16 @@ class Vendor(models.Model):
 
 
 class PoolMembership(models.Model):
-    piid = models.CharField(max_length=128) # from CSV
+    piid = models.CharField(max_length=128) # from XLS
     
     vendor = models.ForeignKey(Vendor, related_name='pools', on_delete=models.CASCADE)
     pool = models.ForeignKey(Pool, on_delete=models.DO_NOTHING)
         
-    setasides = models.ManyToManyField(SetAside, blank=True) # from CSV
-    zones = models.ManyToManyField(Zone, blank=True) # from CSV
+    setasides = models.ManyToManyField(SetAside, blank=True) # from XLS
+    zones = models.ManyToManyField(Zone, blank=True) # from XLS
+    
+    expiration_8a_date = models.DateField(null=True) # from XLS
+    contract_end_date = models.DateField(null=True) # from XLS
     
     def __str__(self):
         return "{} {} ({})".format(self.pool.id, self.vendor.name, self.piid)

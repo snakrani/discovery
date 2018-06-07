@@ -414,6 +414,8 @@ class Command(BaseCommand):
         con, created = Contract.objects.get_or_create(piid=piid, vendor=v)
         total = 0 # amount obligated
         
+        con.base_piid = piid.split('_')[0]
+        
         for mod in records:
             total += float(mod.get('obligated_amount'))
             

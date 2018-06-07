@@ -267,7 +267,7 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
     filter_class = filters.ContractFilter
     search_fields = ['piid', 'agency_name']
     ordering_fields = [
-        'id', 'piid', 
+        'id', 'piid', 'base_piid',
         'agency_id', 'agency_name', 
         'NAICS', 'PSC',
         'date_signed', 'completion_date', 'obligated_amount',

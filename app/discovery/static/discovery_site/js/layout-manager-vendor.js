@@ -8,33 +8,33 @@ LayoutManager.render = function(results) {
     this.renderVendor(results, null);
 };
 
-LayoutManager.renderVendor = function(results, pool) {
+LayoutManager.renderVendor = function(vendor, pool) {
     var membership = null;
 
-    $(document).prop('title', results.name + " - " + URLManager.title);
+    $(document).prop('title', vendor.name + " - " + URLManager.title);
 
-    URLManager.updateVendorCSVURL(results);
+    URLManager.updateVendorCSVURL(vendor);
 
     var currentDate = new Date();
     var mailto, t, indicatorsRow, formattedDate, dateObj;
 
-    $('.vendor_title').html(results.name);
-    if (results.sam_url) {
-        $('#vendor_site_link').attr('href', results.sam_url);
+    $('.vendor_title').html(vendor.name);
+    if (vendor.sam_url) {
+        $('#vendor_site_link').attr('href', vendor.sam_url);
     } else {
         $('.vendor_website').hide();
     }
-    if (results.sam_exclusion == true) {
+    if (vendor.sam_exclusion == true) {
         $('.debarred_status').show();
     }
-    $('.duns_number').html(results.duns);
-    $('.cage_code').html(results.cage);
-    $('.number_of_employees').html(results.number_of_employees ? this.numberWithCommas(results.number_of_employees) : 'N/A');
-    $('.annual_revenue').html(results.annual_revenue ? '$' + this.numberWithCommas(results.annual_revenue) : 'N/A');
+    $('.duns_number').html(vendor.duns);
+    $('.cage_code').html(vendor.cage);
+    $('.number_of_employees').html(vendor.number_of_employees ? this.numberWithCommas(vendor.number_of_employees) : 'N/A');
+    $('.annual_revenue').html(vendor.annual_revenue ? '$' + this.numberWithCommas(vendor.annual_revenue) : 'N/A');
 
     //load SAM expiration date
-    if (results['sam_expiration_date']) {
-        dateObj = this.createDate(results['sam_expiration_date']);
+    if (vendor['sam_expiration_date']) {
+        dateObj = this.createDate(vendor['sam_expiration_date']);
         formattedDate = this.formatDate(dateObj);
     }
     else {
@@ -47,34 +47,39 @@ LayoutManager.renderVendor = function(results, pool) {
     }
 
     //contact info
-    $('.vendor_address1').html(results.sam_location ? results.sam_location.address : ' ');
-    $('.vendor_address2').html(results.sam_location ? results.sam_location.city + ', ' + results.sam_location.state + ' ' + results.sam_location.zipcode : ' ');
+    $('.vendor_address1').html(vendor.sam_location ? vendor.sam_location.address : ' ');
+    $('.vendor_address2').html(vendor.sam_location ? vendor.sam_location.city + ', ' + vendor.sam_location.state + ' ' + vendor.sam_location.zipcode : ' ');
 
     if (pool) {
-        for (var i = 0; i < results.pools.length; i++) {
-            if (results.pools[i].pool.id == pool.id) {
-                membership = results.pools[i];
+        for (var i = 0; i < vendor.pools.length; i++) {
+            if (vendor.pools[i].pool.id == pool.id) {
+                membership = vendor.pools[i];
             }
         }
 
-        if (membership.pms.length > 0) {
-            $('.vendor_poc_name').html(membership.pms[0].name);
-            $('.vendor_poc_phone').html(membership.pms[0].phone.length ? membership.pms[0].phone.join(',') : ' ');
+        if (membership) {
+            if (membership.pms.length > 0) {
+                $('.vendor_poc_name').html(membership.pms[0].name);
+                $('.vendor_poc_phone').html(membership.pms[0].phone.length ? membership.pms[0].phone.join(',') : ' ');
 
-            var mailto = [];
-            for (var i = 0; i < membership.pms[0].email.length; i++) {
-                email = membership.pms[0].email[i];
-                mailto.push('<a href="mailto:' + email + '">' + email + '</a>');
+                var mailto = [];
+                for (var i = 0; i < membership.pms[0].email.length; i++) {
+                    email = membership.pms[0].email[i];
+                    mailto.push('<a href="mailto:' + email + '">' + email + '</a>');
+                }
+                $('.vendor_poc_email').html(mailto.join(','));
             }
-            $('.vendor_poc_email').html(mailto.join(','));
+        }
+        else {
+            membership = vendor;
         }
     }
     else {
-        membership = results;
+        membership = vendor;
     }
 
     //small business badge
-    if (LayoutManager.showSbBadge(results['pools'])) {
+    if (LayoutManager.showSbBadge(vendor['pools'])) {
         $('#sb_badge').show();
     }
 
@@ -92,15 +97,21 @@ LayoutManager.renderVendor = function(results, pool) {
     t.append(indicatorsRow);
 
     if (pool) {
+        var pool_components = pool.id.split('_');
+
         $("#naics_contracts_button").show();
         $("#naics_contracts_button").text("NAICS " + URLManager.stripSubCategories(InputHandler.naicsCode));
         $("#all_contracts_button").show();
         $(".vendor_contract_history_text").html("Showing vendor contract history for PSCs related to: ");
+
+        $("#pool_filter_display").show();
+        $("#pool_filter_display span").text("Only show contracts for  " + pool_components[0]);
     }
     else {
         $("#naics_contracts_button").hide();
         $("#all_contracts_button").hide();
         $(".vendor_contract_history_text").html("Showing this vendor's indexed contract history");
+        $("#pool_filter_display").hide();
 
         this.renderButtonAndCSV('all');
     }

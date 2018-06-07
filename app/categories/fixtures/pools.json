@@ -740,5 +740,149 @@
       34
     ]
   }
+},
+{
+  "model": "categories.pool",
+  "pk": "PSS_382",
+  "fields": {
+    "name": "Language Services",
+    "number": "382",
+    "vehicle": "PSS",
+    "threshold": "",
+    "naics": [
+      74
+    ]
+  }
+},
+{
+  "model": "categories.pool",
+  "pk": "PSS_520",
+  "fields": {
+    "name": "Financial and Business Solutions",
+    "number": "520",
+    "vehicle": "PSS",
+    "threshold": "",
+    "naics": [
+      5,
+      21,
+      22,
+      24,
+      25,
+      66,
+      67,
+      68,
+      69,
+      70,
+      75,
+      76
+    ]
+  }
+},
+{
+  "model": "categories.pool",
+  "pk": "PSS_541",
+  "fields": {
+    "name": "Advertising & Integrated Marketing Solutions",
+    "number": "541",
+    "vehicle": "PSS",
+    "threshold": "",
+    "naics": [
+      7,
+      12,
+      13,
+      16,
+      20,
+      64,
+      71,
+      72,
+      73,
+      77
+    ]
+  }
+},
+{
+  "model": "categories.pool",
+  "pk": "PSS_871",
+  "fields": {
+    "name": "Professional Engineering Services",
+    "number": "871",
+    "vehicle": "PSS",
+    "threshold": "",
+    "naics": [
+      1,
+      30,
+      31,
+      40
+    ]
+  }
+},
+{
+  "model": "categories.pool",
+  "pk": "PSS_874",
+  "fields": {
+    "name": "Mission Oriented Business Integrated Services (MOBIS)",
+    "number": "874",
+    "vehicle": "PSS",
+    "threshold": "",
+    "naics": [
+      65,
+      35,
+      36,
+      5,
+      38,
+      37,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      62,
+      63
+    ]
+  }
+},
+{
+  "model": "categories.pool",
+  "pk": "PSS_874500",
+  "fields": {
+    "name": "Logistics Worldwide (LOGWORLD)",
+    "number": "874500",
+    "vehicle": "PSS",
+    "threshold": "",
+    "naics": [
+      8,
+      39,
+      41,
+      43,
+      44,
+      45,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61
+    ]
+  }
+},
+{
+  "model": "categories.pool",
+  "pk": "PSS_899",
+  "fields": {
+    "name": "Environmental Services",
+    "number": "899",
+    "vehicle": "PSS",
+    "threshold": "",
+    "naics": [
+      3,
+      4,
+      10,
+      78,
+      79,
+      80
+    ]
+  }
 }
 ]

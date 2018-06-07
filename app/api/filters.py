@@ -210,6 +210,7 @@ class ProjectManagerFilter(ManagerFilter):
 class PoolMembershipFilter(FilterSet, metaclass = MetaFilterSet):
     
     _fuzzy_text = ('piid',)
+    _date_time = ('expiration_8a_date', 'contract_end_date')
     
     pool = RelatedFilter(PoolFilter)
     setasides = RelatedFilter(SetAsideFilter)
@@ -273,7 +274,7 @@ class PlaceOfPerformanceFilter(FilterSet, metaclass = MetaFilterSet):
 class ContractFilter(FilterSet, metaclass = MetaFilterSet):
     
     _token_text = ('agency_id',)
-    _fuzzy_text = ('piid', 'agency_name', 'NAICS', 'PSC', 'point_of_contact', 'vendor_phone')
+    _fuzzy_text = ('piid', 'base_piid', 'agency_name', 'NAICS', 'PSC', 'point_of_contact', 'vendor_phone')
     _number = ('id', 'obligated_amount', 'annual_revenue', 'number_of_employees')
     _date_time = ('date_signed', 'completion_date')
     

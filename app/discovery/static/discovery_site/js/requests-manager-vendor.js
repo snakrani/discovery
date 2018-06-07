@@ -22,8 +22,9 @@ RequestsManager.loadVendor = function(callback) {
     var duns = URLManager.getDUNS();
     var url = "/api/vendors/" + duns + "/";
 
-    RequestsManager.getAPIRequest(url, {}, function(response){
-        callback(duns, response);
+    RequestsManager.getAPIRequest(url, {}, function(vendor){
+        RequestsManager.vendor = vendor;
+        callback(duns, vendor);
     });
 };
 
@@ -31,12 +32,17 @@ RequestsManager.loadContracts = function(data, callback) {
     var duns = URLManager.getDUNS();
     var url = "/api/contracts";
     var queryData = $.extend(data, {'vendor__duns': duns, 'count': this.getPageCount()});
+    var piids = RequestsManager.getPIIDs();
 
     queryData['psc_naics'] = queryData['naics'];
     delete queryData['naics'];
 
     if (queryData['psc_naics'] == 'all') {
         delete queryData['psc_naics'];
+    }
+
+    if (piids.length > 0) {
+        queryData['base_piid__in'] = piids.join(',');
     }
 
     $('.table_wrapper').addClass('loading');
@@ -59,15 +65,22 @@ RequestsManager.load = function() {
         listType = 'all';
     }
 
-    RequestsManager.loadVendor(function(duns, results) {
-        EventManager.publish('dataLoaded', results);
+    RequestsManager.loadVendor(function(duns, vendor) {
+        EventManager.publish('dataLoaded', vendor);
         EventManager.publish('vendorInfoLoaded', {'listType': listType});
     });
 };
 
 RequestsManager.refreshVendor = function(pool) {
-    RequestsManager.loadVendor(function(duns, results) {
-        EventManager.publish('vendorPoolLoaded', results, pool);
+    var listType = 'naics';
+
+    if (URLManager.getParameterByName('showall')) {
+        listType = 'all';
+    }
+
+    RequestsManager.loadVendor(function(duns, vendor) {
+        EventManager.publish('vendorPoolLoaded', vendor, pool);
+        EventManager.publish('vendorInfoLoaded', {'listType': listType});
     });
 };
 
@@ -98,4 +111,26 @@ RequestsManager.refreshContracts = function(data) {
     RequestsManager.loadContracts(data, function(queryData, response) {
         EventManager.publish('contractDataLoaded', response, data['listType'], data['page'], queryData['count']);
     });
+};
+
+RequestsManager.getPIIDs = function() {
+  var vendor = RequestsManager.vendor;
+  var pool = RequestsManager.pool;
+  var piids = [];
+  var vehicle = null;
+
+  if (vendor && pool && InputHandler.getVendorPoolFilter()) {
+    vehicle = pool.id.split("_")[0];
+
+    for (var index = 0; index < vendor.pools.length; index++) {
+      vendor_pool = vendor.pools[index];
+      vendor_pool_vehicle = vendor_pool.pool.id.split("_")[0];
+
+      if (vehicle == vendor_pool_vehicle) {
+        piids.push(vendor_pool.piid);
+      }
+    }
+  }
+
+  return piids;
 };

@@ -1,6 +1,8 @@
 
 var RequestsManager = {
     initializers: {},
+    vendor: null,
+    pool: null,
 
     init: function() {
         if (URLManager.isHomePage() || URLManager.isPoolPage()) {
@@ -49,6 +51,7 @@ var RequestsManager = {
         var zoneId = InputHandler.getZone() || URLManager.getParameterByName('zone-id');
         var vehicle = InputHandler.getVehicle();
         var pool = URLManager.getPool();
+        var poolOnly = InputHandler.getVendorPoolFilter();
         var queryData = {};
 
         if (pool && typeof pool != undefined) {
@@ -57,6 +60,9 @@ var RequestsManager = {
         }
         if (vehicle && typeof vehicle != undefined) {
             queryData['vehicle'] = vehicle;
+        }
+        if (poolOnly) {
+            queryData['pool_only'] = 'true';
         }
 
         if (naicsCode && typeof naicsCode !== 'undefined') {

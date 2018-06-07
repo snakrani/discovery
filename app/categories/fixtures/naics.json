@@ -47,22 +47,22 @@
     "root_code": "541611",
     "description": "Administrative Management and General Management Consulting Services",
     "keywords": [
+      64,
+      33,
       2,
+      34,
+      65,
+      68,
       6,
       7,
-      15,
-      33,
-      34,
       38,
+      69,
       44,
+      15,
       48,
       55,
       58,
-      59,
-      64,
-      65,
-      68,
-      69
+      59
     ]
   }
 },
@@ -396,20 +396,20 @@
     "root_code": "611699",
     "description": "All Other Miscellaneous Schools and Instruction",
     "keywords": [
-      3,
-      8,
-      11,
-      27,
-      31,
-      35,
-      40,
-      42,
-      57,
       66,
+      3,
+      35,
       67,
       71,
+      8,
+      40,
+      42,
+      11,
       72,
-      81
+      81,
+      57,
+      27,
+      31
     ]
   }
 },
@@ -620,6 +620,326 @@
     "code": "562111",
     "root_code": "562111",
     "description": "Waste Management and Recycling Services",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 56,
+  "fields": {
+    "code": "238130",
+    "root_code": "238130",
+    "description": "Framing Contractors",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 57,
+  "fields": {
+    "code": "238140",
+    "root_code": "238140",
+    "description": "Masonry Contractors",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 58,
+  "fields": {
+    "code": "238310",
+    "root_code": "238310",
+    "description": "Drywall and Insulation Contractors",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 59,
+  "fields": {
+    "code": "238320",
+    "root_code": "238320",
+    "description": "Painting and Wall Covering Contractors",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 60,
+  "fields": {
+    "code": "238350",
+    "root_code": "238350",
+    "description": "Finish Carpentry Contractors",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 61,
+  "fields": {
+    "code": "238990",
+    "root_code": "238990",
+    "description": "All Other Specialty Trade Contractors",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 62,
+  "fields": {
+    "code": "333318",
+    "root_code": "333318",
+    "description": "Other Commercial and Service Industry Machinery Manufacturing",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 63,
+  "fields": {
+    "code": "511199",
+    "root_code": "511199",
+    "description": "All Other Publishers",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 64,
+  "fields": {
+    "code": "512110",
+    "root_code": "512110",
+    "description": "Motion Picture and Video Production",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 65,
+  "fields": {
+    "code": "519130",
+    "root_code": "519130",
+    "description": "Internet Publishing and Broadcasting and Web Search Portals",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 66,
+  "fields": {
+    "code": "522310",
+    "root_code": "522310",
+    "description": "Mortgage and Nonmortgage Loan Brokers",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 67,
+  "fields": {
+    "code": "523110",
+    "root_code": "523110",
+    "description": "Investment Banking and Securities Dealing",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 68,
+  "fields": {
+    "code": "524292",
+    "root_code": "524292",
+    "description": "Third Party Administration of Insurance and Pension Funds",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 69,
+  "fields": {
+    "code": "531210",
+    "root_code": "531210",
+    "description": "Offices of Real Estate Agents and Brokers",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 70,
+  "fields": {
+    "code": "541110",
+    "root_code": "541110",
+    "description": "Offices of Lawyers",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 71,
+  "fields": {
+    "code": "541430",
+    "root_code": "541430",
+    "description": "Graphic Design Services",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 72,
+  "fields": {
+    "code": "541511",
+    "root_code": "541511",
+    "description": "Custom Computer Programming Services",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 73,
+  "fields": {
+    "code": "541922",
+    "root_code": "541922",
+    "description": "Commercial Photography",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 74,
+  "fields": {
+    "code": "541930",
+    "root_code": "541930",
+    "description": "Translation and Interpretation Services",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 75,
+  "fields": {
+    "code": "561440",
+    "root_code": "561440",
+    "description": "Collection Agencies",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 76,
+  "fields": {
+    "code": "561450",
+    "root_code": "561450",
+    "description": "Credit Bureaus",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 77,
+  "fields": {
+    "code": "561920",
+    "root_code": "561920",
+    "description": "Convention and Trade Show Organizers",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 78,
+  "fields": {
+    "code": "562112",
+    "root_code": "562112",
+    "description": "Hazardous Waste Collection",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 79,
+  "fields": {
+    "code": "562910",
+    "root_code": "562910",
+    "description": "Remediation Services",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 80,
+  "fields": {
+    "code": "562920",
+    "root_code": "562920",
+    "description": "Materials Recovery Facilities",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 81,
+  "fields": {
+    "code": "611310",
+    "root_code": "611310",
+    "description": "Colleges, Universities, and Professional Schools",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 82,
+  "fields": {
+    "code": "611410",
+    "root_code": "611410",
+    "description": "Business and Secretarial Schools",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 83,
+  "fields": {
+    "code": "611512",
+    "root_code": "611512",
+    "description": "Flight Training",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 84,
+  "fields": {
+    "code": "611513",
+    "root_code": "611513",
+    "description": "Apprenticeship Training",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 85,
+  "fields": {
+    "code": "611519",
+    "root_code": "611519",
+    "description": "Other Technical and Trade Schools",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 86,
+  "fields": {
+    "code": "611691",
+    "root_code": "611691",
+    "description": "Exam Preparation and Tutoring",
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": 87,
+  "fields": {
+    "code": "611692",
+    "root_code": "611692",
+    "description": "Automobile Driving Schools",
     "keywords": []
   }
 }

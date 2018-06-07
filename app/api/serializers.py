@@ -187,7 +187,7 @@ class BasePoolMembershipSerializer(ModelSerializer):
     
     class Meta:
         model = vendors.PoolMembership
-        fields = ['piid', 'cms', 'pms']
+        fields = ['piid', 'cms', 'pms', 'expiration_8a_date', 'contract_end_date']
     
 class PoolMembershipLinkSerializer(BasePoolMembershipSerializer):
     pool = PoolLinkSerializer(many=False)
@@ -302,7 +302,7 @@ class BaseContractSerializer(HyperlinkedModelSerializer):
     
     class Meta:
         model = contracts.Contract
-        fields = ['id', 'piid', 'agency_id', 'agency_name', 'NAICS', 'PSC',
+        fields = ['id', 'piid', 'base_piid', 'agency_id', 'agency_name', 'NAICS', 'PSC',
                   'point_of_contact', 'vendor_phone',
                   'date_signed', 'completion_date', 'status', 'pricing_type', 'obligated_amount', 
                   'annual_revenue', 'number_of_employees']
