@@ -3,7 +3,7 @@
   "model": "vendors.vendor",
   "pk": 1,
   "fields": {
-    "name": "Advanced Concepts and Technologies International, LLC dba ACT-I",
+    "name": "Advanced Concepts And Technologies International, LLC Dba Act-I",
     "duns": "008050242",
     "duns_4": "0080502420000",
     "cage": "1C2H1",
@@ -19,7 +19,7 @@
   "model": "vendors.vendor",
   "pk": 2,
   "fields": {
-    "name": "Advanced Systems Technology and Management, Inc. dba AdSTM",
+    "name": "Advanced Systems Technology And Management, Inc. Dba Adstm",
     "duns": "049192649",
     "duns_4": "0491926490000",
     "cage": "1NU65",
@@ -99,7 +99,7 @@
   "model": "vendors.vendor",
   "pk": 7,
   "fields": {
-    "name": "BB&E, Inc.",
+    "name": "Bb&E, Inc.",
     "duns": "117755293",
     "duns_4": "1177552930000",
     "cage": "3A3Q8",
@@ -131,7 +131,7 @@
   "model": "vendors.vendor",
   "pk": 9,
   "fields": {
-    "name": "BlueWater Federal Solutions, Inc.",
+    "name": "Bluewater Federal Solutions, Inc.",
     "duns": "832403948",
     "duns_4": "8324039480000",
     "cage": "5T6A9",
@@ -163,7 +163,7 @@
   "model": "vendors.vendor",
   "pk": 11,
   "fields": {
-    "name": "ADDX CORPORATION",
+    "name": "Addx Corporation",
     "duns": "039872622",
     "duns_4": "0398726220000",
     "cage": "1XPA3",
@@ -195,7 +195,7 @@
   "model": "vendors.vendor",
   "pk": 13,
   "fields": {
-    "name": "DRT Strategies, Inc.",
+    "name": "Drt Strategies, Inc.",
     "duns": "142428783",
     "duns_4": "1424287830000",
     "cage": "3PZT2",
@@ -211,7 +211,7 @@
   "model": "vendors.vendor",
   "pk": 14,
   "fields": {
-    "name": "FI Consulting, Inc. dba FI Consulting",
+    "name": "Fi Consulting, Inc. Dba Fi Consulting",
     "duns": "126150056",
     "duns_4": "1261500560000",
     "cage": "4MEL7",
@@ -243,7 +243,7 @@
   "model": "vendors.vendor",
   "pk": 16,
   "fields": {
-    "name": "Hamilton Enterprises, LLC dba Franklin and Turner International",
+    "name": "Hamilton Enterprises, LLC Dba Franklin And Turner International",
     "duns": "825487130",
     "duns_4": "8254871300000",
     "cage": "52DB6",
@@ -275,7 +275,7 @@
   "model": "vendors.vendor",
   "pk": 18,
   "fields": {
-    "name": "RM Advisory Services, LLC",
+    "name": "Rm Advisory Services, LLC",
     "duns": "609732198",
     "duns_4": "6097321980000",
     "cage": "48L84",
@@ -291,7 +291,7 @@
   "model": "vendors.vendor",
   "pk": 19,
   "fields": {
-    "name": "Ruchman and Associates, Inc.",
+    "name": "Ruchman And Associates, Inc.",
     "duns": "101456903",
     "duns_4": "1014569030000",
     "cage": "1JS86",
@@ -307,7 +307,7 @@
   "model": "vendors.vendor",
   "pk": 20,
   "fields": {
-    "name": "ADVANCED C4 SOLUTIONS, INC.",
+    "name": "Advanced C4 Solutions, Inc.",
     "duns": "118498067",
     "duns_4": "1184980670000",
     "cage": "3BEH8",
@@ -339,7 +339,7 @@
   "model": "vendors.vendor",
   "pk": 22,
   "fields": {
-    "name": "Analytical Services and Materials, Inc.",
+    "name": "Analytical Services And Materials, Inc.",
     "duns": "119069052",
     "duns_4": "1190690520000",
     "cage": "3Y798",
@@ -355,7 +355,7 @@
   "model": "vendors.vendor",
   "pk": 23,
   "fields": {
-    "name": "A-P-T RESEARCH, INC.",
+    "name": "A-P-T Research, Inc.",
     "duns": "791195167",
     "duns_4": "7911951670000",
     "cage": "0S289",
@@ -371,7 +371,7 @@
   "model": "vendors.vendor",
   "pk": 24,
   "fields": {
-    "name": "Atlantic CommTech Corporation",
+    "name": "Atlantic Commtech Corporation",
     "duns": "048870724",
     "duns_4": "0488707240000",
     "cage": "1J0V2",
@@ -403,7 +403,7 @@
   "model": "vendors.vendor",
   "pk": 26,
   "fields": {
-    "name": "Avion Solutions, Inc. dba Avion",
+    "name": "Avion Solutions, Inc. Dba Avion",
     "duns": "804859841",
     "duns_4": "8048598410000",
     "cage": "1BFU7",
@@ -419,7 +419,7 @@
   "model": "vendors.vendor",
   "pk": 27,
   "fields": {
-    "name": "AEgis Technologies Group, Inc. The",
+    "name": "Aegis Technologies Group, Inc. The",
     "duns": "625694500",
     "duns_4": "6256945000000",
     "cage": "0EXA1",
@@ -451,7 +451,7 @@
   "model": "vendors.vendor",
   "pk": 29,
   "fields": {
-    "name": "BTAS, Inc. dba Business Technologies & Solutions",
+    "name": "Btas, Inc. Dba Business Technologies & Solutions",
     "duns": "883504854",
     "duns_4": "8835048540000",
     "cage": "07GB6",
@@ -467,7 +467,7 @@
   "model": "vendors.vendor",
   "pk": 30,
   "fields": {
-    "name": "CSSI, Inc.",
+    "name": "Cssi, Inc.",
     "duns": "621420991",
     "duns_4": "6214209910000",
     "cage": "0YUD7",
@@ -483,7 +483,7 @@
   "model": "vendors.vendor",
   "pk": 31,
   "fields": {
-    "name": "Data Systems Analyst, Inc. (DSA)",
+    "name": "Data Systems Analyst, Inc. (Dsa)",
     "duns": "048620512",
     "duns_4": "0486205120000",
     "cage": "4D266",
@@ -547,7 +547,7 @@
   "model": "vendors.vendor",
   "pk": 35,
   "fields": {
-    "name": "COLSA Corporation",
+    "name": "Colsa Corporation",
     "duns": "102067378",
     "duns_4": "1020673780000",
     "cage": "4U825",
@@ -563,7 +563,7 @@
   "model": "vendors.vendor",
   "pk": 36,
   "fields": {
-    "name": "Fulcrum IT Services, LLC",
+    "name": "Fulcrum It Services, LLC",
     "duns": "048382386",
     "duns_4": "0483823860000",
     "cage": "0E1B6",
@@ -579,7 +579,7 @@
   "model": "vendors.vendor",
   "pk": 37,
   "fields": {
-    "name": "HX5, LLC",
+    "name": "Hx5, LLC",
     "duns": "781841080",
     "duns_4": "7818410800000",
     "cage": "4VMT5",
@@ -611,7 +611,7 @@
   "model": "vendors.vendor",
   "pk": 39,
   "fields": {
-    "name": "Intuitive Research and Technology Corporation",
+    "name": "Intuitive Research And Technology Corporation",
     "duns": "034964945",
     "duns_4": "0349649450000",
     "cage": "1MQC1",
@@ -627,7 +627,7 @@
   "model": "vendors.vendor",
   "pk": 40,
   "fields": {
-    "name": "MCR Federal, LLC",
+    "name": "Mcr Federal, LLC",
     "duns": "028509656",
     "duns_4": "0285096560000",
     "cage": "0GYV7",
@@ -643,7 +643,7 @@
   "model": "vendors.vendor",
   "pk": 41,
   "fields": {
-    "name": "MEI Technologies, Inc.",
+    "name": "Mei Technologies, Inc.",
     "duns": "859145658",
     "duns_4": "8591456580000",
     "cage": "0XBY6",
@@ -659,7 +659,7 @@
   "model": "vendors.vendor",
   "pk": 42,
   "fields": {
-    "name": "LinQuest Corporation",
+    "name": "Linquest Corporation",
     "duns": "140389763",
     "duns_4": "1403897630000",
     "cage": "3MZU6",
@@ -675,7 +675,7 @@
   "model": "vendors.vendor",
   "pk": 43,
   "fields": {
-    "name": "Millennium Engineering and Integration Company dba Millennium",
+    "name": "Millennium Engineering And Integration Company Dba Millennium",
     "duns": "011971939",
     "duns_4": "0119719390000",
     "cage": "1B5V4",
@@ -691,7 +691,7 @@
   "model": "vendors.vendor",
   "pk": 44,
   "fields": {
-    "name": "Applied Research Associates, Inc., dba ARA",
+    "name": "Applied Research Associates, Inc., Dba Ara",
     "duns": "097967608",
     "duns_4": "0979676080000",
     "cage": "9R446",
@@ -723,7 +723,7 @@
   "model": "vendors.vendor",
   "pk": 46,
   "fields": {
-    "name": "DCS Corporation",
+    "name": "Dcs Corporation",
     "duns": "083662916",
     "duns_4": "0836629160000",
     "cage": "1P418",
@@ -771,7 +771,7 @@
   "model": "vendors.vendor",
   "pk": 49,
   "fields": {
-    "name": "Alion Science and Technology Corporation",
+    "name": "Alion Science And Technology Corporation",
     "duns": "963450866",
     "duns_4": "9634508660000",
     "cage": "3BM47",
@@ -867,7 +867,7 @@
   "model": "vendors.vendor",
   "pk": 55,
   "fields": {
-    "name": "CACI NSS, Inc.",
+    "name": "Caci Nss, Inc.",
     "duns": "136127482",
     "duns_4": "1361274820000",
     "cage": "3HNV7",
@@ -883,7 +883,7 @@
   "model": "vendors.vendor",
   "pk": 56,
   "fields": {
-    "name": "Deloitte Consulting, LLP",
+    "name": "Deloitte Consulting, Llp",
     "duns": "019121586",
     "duns_4": "0191215860000",
     "cage": "1TTG5",
@@ -915,7 +915,7 @@
   "model": "vendors.vendor",
   "pk": 58,
   "fields": {
-    "name": "ECS Federal Inc.",
+    "name": "Ecs Federal Inc.",
     "duns": "806026852",
     "duns_4": "8060268520000",
     "cage": "1T1E5",
@@ -947,7 +947,7 @@
   "model": "vendors.vendor",
   "pk": 60,
   "fields": {
-    "name": "Grant Thornton, LLP",
+    "name": "Grant Thornton, Llp",
     "duns": "128159105",
     "duns_4": "1281591050000",
     "cage": "1CDS1",
@@ -963,7 +963,7 @@
   "model": "vendors.vendor",
   "pk": 61,
   "fields": {
-    "name": "ICF Incorporated, LLC",
+    "name": "Icf Incorporated, LLC",
     "duns": "072648579",
     "duns_4": "0726485790000",
     "cage": "5M571",
@@ -979,7 +979,7 @@
   "model": "vendors.vendor",
   "pk": 62,
   "fields": {
-    "name": "International Business Machines Corporation dba IBM",
+    "name": "International Business Machines Corporation Dba Ibm",
     "duns": "835130485",
     "duns_4": "8351304850000",
     "cage": "3BXY7",
@@ -1011,7 +1011,7 @@
   "model": "vendors.vendor",
   "pk": 64,
   "fields": {
-    "name": "CACI, Inc. Federal",
+    "name": "Caci, Inc. Federal",
     "duns": "114896066",
     "duns_4": "1148960660000",
     "cage": "1QU78",
@@ -1043,7 +1043,7 @@
   "model": "vendors.vendor",
   "pk": 66,
   "fields": {
-    "name": "CGI Federal, Inc.",
+    "name": "Cgi Federal, Inc.",
     "duns": "145969783",
     "duns_4": "1459697830000",
     "cage": "3YVK7",
@@ -1091,7 +1091,7 @@
   "model": "vendors.vendor",
   "pk": 69,
   "fields": {
-    "name": "CSRA LLC",
+    "name": "Csra LLC",
     "duns": "079735371",
     "duns_4": "0797353710000",
     "cage": "7C146",
@@ -1107,7 +1107,7 @@
   "model": "vendors.vendor",
   "pk": 70,
   "fields": {
-    "name": "Kbrwyle Technology Solutions, LLC dba KBRWYLE",
+    "name": "Kbrwyle Technology Solutions, LLC Dba Kbrwyle",
     "duns": "041014242",
     "duns_4": "0410142420000",
     "cage": "15151",
@@ -1155,7 +1155,7 @@
   "model": "vendors.vendor",
   "pk": 73,
   "fields": {
-    "name": "A P VENTURES, LLC",
+    "name": "A P Ventures, LLC",
     "duns": "005752289",
     "duns_4": "0057522890000",
     "cage": "4ZAE2",
@@ -1171,7 +1171,7 @@
   "model": "vendors.vendor",
   "pk": 74,
   "fields": {
-    "name": "Abrams Learning and Information Systems, Inc.",
+    "name": "Abrams Learning And Information Systems, Inc.",
     "duns": "169830200",
     "duns_4": "1698302000000",
     "cage": "33JM3",
@@ -1187,7 +1187,7 @@
   "model": "vendors.vendor",
   "pk": 75,
   "fields": {
-    "name": "AE Strategies, LLC",
+    "name": "Ae Strategies, LLC",
     "duns": "136483547",
     "duns_4": "1364835470000",
     "cage": "3H7M0",
@@ -1251,7 +1251,7 @@
   "model": "vendors.vendor",
   "pk": 79,
   "fields": {
-    "name": "METIS Solutions",
+    "name": "Metis Solutions",
     "duns": "833266500",
     "duns_4": "8332665000000",
     "cage": "5X2G4",
@@ -1267,7 +1267,7 @@
   "model": "vendors.vendor",
   "pk": 80,
   "fields": {
-    "name": "Pherson Associates, LLC.",
+    "name": "Pherson Associates, LLC",
     "duns": "136659054",
     "duns_4": "1366590540000",
     "cage": "3HXP9",
@@ -1283,7 +1283,7 @@
   "model": "vendors.vendor",
   "pk": 81,
   "fields": {
-    "name": "Piton Science & Technology llc",
+    "name": "Piton Science & Technology LLC",
     "duns": "786931050",
     "duns_4": "7869310500000",
     "cage": "4KW69",
@@ -1299,7 +1299,7 @@
   "model": "vendors.vendor",
   "pk": 82,
   "fields": {
-    "name": "PowerTrain, Inc.",
+    "name": "Powertrain, Inc.",
     "duns": "837788223",
     "duns_4": "8377882230000",
     "cage": "1ZLY7",
@@ -1395,7 +1395,7 @@
   "model": "vendors.vendor",
   "pk": 88,
   "fields": {
-    "name": "DSFederal, Inc.",
+    "name": "Dsfederal, Inc.",
     "duns": "805643546",
     "duns_4": "8056435460000",
     "cage": "4V8Y3",
@@ -1427,7 +1427,7 @@
   "model": "vendors.vendor",
   "pk": 90,
   "fields": {
-    "name": "Armed Forces Services Corporation (AFSC)",
+    "name": "Armed Forces Services Corporation (Afsc)",
     "duns": "830333824",
     "duns_4": "8303338240000",
     "cage": "1Q8F1",
@@ -1443,7 +1443,7 @@
   "model": "vendors.vendor",
   "pk": 91,
   "fields": {
-    "name": "Allen Corporation of America",
+    "name": "Allen Corporation Of America",
     "duns": "007102168",
     "duns_4": "0071021680000",
     "cage": "3FMC7",
@@ -1523,7 +1523,7 @@
   "model": "vendors.vendor",
   "pk": 96,
   "fields": {
-    "name": "AMERICAN INSTITUTES FOR RESEARCH IN THE BEHAVIORAL SCIENCES",
+    "name": "American Institutes For Research In The Behavioral Sciences",
     "duns": "041733197",
     "duns_4": "0417331970000",
     "cage": "9B514",
@@ -1539,7 +1539,7 @@
   "model": "vendors.vendor",
   "pk": 97,
   "fields": {
-    "name": "ACEPEX Management",
+    "name": "Acepex Management",
     "duns": "090967704",
     "duns_4": "0909677040000",
     "cage": "1A9K1",
@@ -1587,7 +1587,7 @@
   "model": "vendors.vendor",
   "pk": 100,
   "fields": {
-    "name": "CEEPCO Contracting",
+    "name": "Ceepco Contracting",
     "duns": "187402586",
     "duns_4": "1874025860000",
     "cage": "363W8",
@@ -1619,7 +1619,7 @@
   "model": "vendors.vendor",
   "pk": 102,
   "fields": {
-    "name": "CMI Facilites Management",
+    "name": "Cmi Facilites Management",
     "duns": "602619223",
     "duns_4": "6026192230000",
     "cage": "0YSJ1",
@@ -1651,7 +1651,7 @@
   "model": "vendors.vendor",
   "pk": 104,
   "fields": {
-    "name": "NVE,  Inc",
+    "name": "Nve,  Inc",
     "duns": "141611272",
     "duns_4": "1416112720000",
     "cage": "3RKV2",
@@ -1667,7 +1667,7 @@
   "model": "vendors.vendor",
   "pk": 105,
   "fields": {
-    "name": "SDAC Facility Service",
+    "name": "Sdac Facility Service",
     "duns": "079515381",
     "duns_4": "0795153810000",
     "cage": "77M00",
@@ -1747,7 +1747,7 @@
   "model": "vendors.vendor",
   "pk": 110,
   "fields": {
-    "name": "AECOM Technical Services, Inc.",
+    "name": "Aecom Technical Services, Inc.",
     "duns": "003184462",
     "duns_4": "0031844620000",
     "cage": "4L767",
@@ -1779,7 +1779,7 @@
   "model": "vendors.vendor",
   "pk": 112,
   "fields": {
-    "name": "CBRE",
+    "name": "Cbre",
     "duns": "039839683",
     "duns_4": "0398396830000",
     "cage": "3G5K7",
@@ -1811,7 +1811,7 @@
   "model": "vendors.vendor",
   "pk": 114,
   "fields": {
-    "name": "EML LLC",
+    "name": "Eml LLC",
     "duns": "012722836",
     "duns_4": "0127228360000",
     "cage": "1UVM4",
@@ -1843,7 +1843,7 @@
   "model": "vendors.vendor",
   "pk": 116,
   "fields": {
-    "name": "Jones, Lang & LaSalle",
+    "name": "Jones, Lang & Lasalle",
     "duns": "079859134",
     "duns_4": "0798591340000",
     "cage": "7EM20",
@@ -1875,7 +1875,7 @@
   "model": "vendors.vendor",
   "pk": 118,
   "fields": {
-    "name": "Valiant Integrated Services (formerly ABM Government Services, LLC)",
+    "name": "Valiant Integrated Services (Formerly Abm Government Services, LLC)",
     "duns": "616858908",
     "duns_4": "6168589080000",
     "cage": "0UFD5",
@@ -1891,7 +1891,7 @@
   "model": "vendors.vendor",
   "pk": 119,
   "fields": {
-    "name": "LB&B",
+    "name": "Lb&B",
     "duns": "793374034",
     "duns_4": "7933740340000",
     "cage": "0V349",
@@ -1923,7 +1923,7 @@
   "model": "vendors.vendor",
   "pk": 121,
   "fields": {
-    "name": "3U TECHNOLOGIES, LLC",
+    "name": "3U Technologies, LLC",
     "duns": "808716711",
     "duns_4": "8087167110000",
     "cage": "1TSD9",
@@ -1939,7 +1939,7 @@
   "model": "vendors.vendor",
   "pk": 122,
   "fields": {
-    "name": "5-D SYSTEMS, INC.",
+    "name": "5-D Systems, Inc.",
     "duns": "090213369",
     "duns_4": "0902133690000",
     "cage": "1TXR4",
@@ -1955,7 +1955,7 @@
   "model": "vendors.vendor",
   "pk": 123,
   "fields": {
-    "name": "A2 SYSTEMS ENGINEERING, INC.",
+    "name": "A2 Systems Engineering, Inc.",
     "duns": "809155562",
     "duns_4": "8091555620000",
     "cage": "4YVT3",
@@ -1971,7 +1971,7 @@
   "model": "vendors.vendor",
   "pk": 124,
   "fields": {
-    "name": "ABACUS TECHNOLOGY CORPORATION",
+    "name": "Abacus Technology Corporation",
     "duns": "126505833",
     "duns_4": "1265058330000",
     "cage": "0FVN8",
@@ -1987,7 +1987,7 @@
   "model": "vendors.vendor",
   "pk": 125,
   "fields": {
-    "name": "ABRAHAM WEITZBERG",
+    "name": "Abraham Weitzberg",
     "duns": "122151934",
     "duns_4": "1221519340000",
     "cage": "3L6T3",
@@ -2003,7 +2003,7 @@
   "model": "vendors.vendor",
   "pk": 126,
   "fields": {
-    "name": "ABSG CONSULTING INC.",
+    "name": "Absg Consulting Inc.",
     "duns": "075238337",
     "duns_4": "0752383370000",
     "cage": "1LVV1",
@@ -2019,7 +2019,7 @@
   "model": "vendors.vendor",
   "pk": 127,
   "fields": {
-    "name": "ADVANCED CORE CONCEPTS, LLC",
+    "name": "Advanced Core Concepts, LLC",
     "duns": "080117787",
     "duns_4": "0801177870000",
     "cage": "7JRY5",
@@ -2035,7 +2035,7 @@
   "model": "vendors.vendor",
   "pk": 128,
   "fields": {
-    "name": "ADVANCED MANAGEMENT STRATEGIES GROUP, INC.",
+    "name": "Advanced Management Strategies Group, Inc.",
     "duns": "827128187",
     "duns_4": "8271281870000",
     "cage": "551W8",
@@ -2051,7 +2051,7 @@
   "model": "vendors.vendor",
   "pk": 129,
   "fields": {
-    "name": "1ST CHOICE, LLC",
+    "name": "1St Choice, LLC",
     "duns": "830910597",
     "duns_4": "8309105970000",
     "cage": "1W2D9",
@@ -2067,7 +2067,7 @@
   "model": "vendors.vendor",
   "pk": 130,
   "fields": {
-    "name": "2020 COMPANY, LLC",
+    "name": "2020 Company, LLC",
     "duns": "169810657",
     "duns_4": "1698106570000",
     "cage": "1SHD7",
@@ -2083,7 +2083,7 @@
   "model": "vendors.vendor",
   "pk": 131,
   "fields": {
-    "name": "22ND CENTURY TECHNOLOGIES INC.",
+    "name": "22Nd Century Technologies Inc.",
     "duns": "028619588",
     "duns_4": "0286195880000",
     "cage": "3DYY9",
@@ -2099,7 +2099,7 @@
   "model": "vendors.vendor",
   "pk": 132,
   "fields": {
-    "name": "2M RESEARCH SERVICES LLC",
+    "name": "2M Research Services LLC",
     "duns": "962480070",
     "duns_4": "9624800700000",
     "cage": "60YR4",
@@ -2115,7 +2115,7 @@
   "model": "vendors.vendor",
   "pk": 133,
   "fields": {
-    "name": "360 PATRIOT ENTERPRISES",
+    "name": "360 Patriot Enterprises",
     "duns": "831340356",
     "duns_4": "8313403560000",
     "cage": null,
@@ -2131,7 +2131,7 @@
   "model": "vendors.vendor",
   "pk": 134,
   "fields": {
-    "name": "3M COMPANY",
+    "name": "3M Company",
     "duns": "006173082",
     "duns_4": "0061730820000",
     "cage": "76381",
@@ -2147,7 +2147,7 @@
   "model": "vendors.vendor",
   "pk": 135,
   "fields": {
-    "name": "6K SYSTEMS, INC.",
+    "name": "6K Systems, Inc.",
     "duns": "114214211",
     "duns_4": "1142142110000",
     "cage": "1ZJK7",
@@ -2163,7 +2163,7 @@
   "model": "vendors.vendor",
   "pk": 136,
   "fields": {
-    "name": "A-G ASSOCIATES, INC.",
+    "name": "A-G Associates, Inc.",
     "duns": "825173029",
     "duns_4": "8251730290000",
     "cage": "52KP9",
@@ -2179,7 +2179,7 @@
   "model": "vendors.vendor",
   "pk": 137,
   "fields": {
-    "name": "A-SA-MA-DI (SMART) BUSINESS SOLUTIONS LLC",
+    "name": "A-Sa-Ma-Di (Smart) Business Solutions LLC",
     "duns": "829307649",
     "duns_4": "8293076490000",
     "cage": "5JKP0",
@@ -2195,7 +2195,7 @@
   "model": "vendors.vendor",
   "pk": 138,
   "fields": {
-    "name": "ACCENT CONTROLS, INC.",
+    "name": "Accent Controls, Inc.",
     "duns": "840338420",
     "duns_4": "8403384200000",
     "cage": "1JPU9",
@@ -2211,7 +2211,7 @@
   "model": "vendors.vendor",
   "pk": 139,
   "fields": {
-    "name": "ACUITY PACKAGING AND LOGISTICS SOLUTIONS, LLC",
+    "name": "Acuity Packaging And Logistics Solutions, LLC",
     "duns": "054985679",
     "duns_4": "0549856790000",
     "cage": "735J5",
@@ -2227,7 +2227,7 @@
   "model": "vendors.vendor",
   "pk": 140,
   "fields": {
-    "name": "ADVANCED PROJECT CONSULTING, LLC",
+    "name": "Advanced Project Consulting, LLC",
     "duns": "135469828",
     "duns_4": "1354698280000",
     "cage": "42QH2",
@@ -2243,7 +2243,7 @@
   "model": "vendors.vendor",
   "pk": 141,
   "fields": {
-    "name": "ADVANTECH, INC.",
+    "name": "Advantech, Inc.",
     "duns": "160913687",
     "duns_4": "1609136870000",
     "cage": "1J3C7",
@@ -2259,7 +2259,7 @@
   "model": "vendors.vendor",
   "pk": 142,
   "fields": {
-    "name": "AFFORDABLE ENGINEERING SERVICES L.L.C.",
+    "name": "Affordable Engineering Services L.L.C.",
     "duns": "961542078",
     "duns_4": "9615420780000",
     "cage": "6UX43",
@@ -2275,7 +2275,7 @@
   "model": "vendors.vendor",
   "pk": 143,
   "fields": {
-    "name": "AKIMA LOGISTICS SERVICES LLC",
+    "name": "Akima Logistics Services LLC",
     "duns": "363702080",
     "duns_4": "3637020800000",
     "cage": "41VK0",
@@ -2291,7 +2291,7 @@
   "model": "vendors.vendor",
   "pk": 144,
   "fields": {
-    "name": "A AMERICAN HIGH TECH TRANSCRIPTION AND REPORTING INC",
+    "name": "A American High Tech Transcription And Reporting Inc",
     "duns": "835878943",
     "duns_4": "8358789430000",
     "cage": "1XND0",
@@ -2307,7 +2307,7 @@
   "model": "vendors.vendor",
   "pk": 145,
   "fields": {
-    "name": "ACCENT ON LANGUAGES, INC.",
+    "name": "Accent On Languages, Inc.",
     "duns": "016590528",
     "duns_4": "0165905280000",
     "cage": "1WJT4",
@@ -2323,7 +2323,7 @@
   "model": "vendors.vendor",
   "pk": 146,
   "fields": {
-    "name": "ACCLAIM TECHNICAL SERVICES, INC.",
+    "name": "Acclaim Technical Services, Inc.",
     "duns": "805616484",
     "duns_4": "8056164840000",
     "cage": "4UJN9",
@@ -2339,7 +2339,7 @@
   "model": "vendors.vendor",
   "pk": 147,
   "fields": {
-    "name": "AD ASTRA INC.",
+    "name": "Ad Astra Inc.",
     "duns": "962857244",
     "duns_4": "9628572440000",
     "cage": "61VV7",
@@ -2355,7 +2355,7 @@
   "model": "vendors.vendor",
   "pk": 148,
   "fields": {
-    "name": "ADVANCED LANGUAGE SYSTEMS INTERNATIONAL INC.",
+    "name": "Advanced Language Systems International Inc.",
     "duns": "148815173",
     "duns_4": "1488151730000",
     "cage": null,
@@ -2371,7 +2371,7 @@
   "model": "vendors.vendor",
   "pk": 149,
   "fields": {
-    "name": "AECOM NATIONAL SECURITY PROGRAMS, INC.",
+    "name": "Aecom National Security Programs, Inc.",
     "duns": "193348489",
     "duns_4": "1933484890000",
     "cage": "0DEY3",
@@ -2387,7 +2387,7 @@
   "model": "vendors.vendor",
   "pk": 150,
   "fields": {
-    "name": "AFAF TRANSLATIONS, LLC",
+    "name": "Afaf Translations, LLC",
     "duns": "827964052",
     "duns_4": "8279640520000",
     "cage": "561E5",
@@ -2403,7 +2403,7 @@
   "model": "vendors.vendor",
   "pk": 151,
   "fields": {
-    "name": "ALLWORLD LANGUAGE CONSULTANTS INC.",
+    "name": "Allworld Language Consultants Inc.",
     "duns": "949873624",
     "duns_4": "9498736240000",
     "cage": "075P1",
@@ -2419,7 +2419,7 @@
   "model": "vendors.vendor",
   "pk": 152,
   "fields": {
-    "name": "ALS INTERNATIONAL INC",
+    "name": "Als International Inc",
     "duns": "071378835",
     "duns_4": "0713788350000",
     "cage": "3K8T3",
@@ -2435,7 +2435,7 @@
   "model": "vendors.vendor",
   "pk": 153,
   "fields": {
-    "name": "ALT SERVICES INC",
+    "name": "Alt Services Inc",
     "duns": "029174617",
     "duns_4": "0291746170000",
     "cage": "1UK41",
@@ -2451,7 +2451,7 @@
   "model": "vendors.vendor",
   "pk": 154,
   "fields": {
-    "name": "522 CAPITAL PARTNERS, LLC",
+    "name": "522 Capital Partners, LLC",
     "duns": "962192162",
     "duns_4": "9621921620000",
     "cage": "63VL7",
@@ -2467,7 +2467,7 @@
   "model": "vendors.vendor",
   "pk": 155,
   "fields": {
-    "name": "ALPINE COMPANIES, INC.",
+    "name": "Alpine Companies, Inc.",
     "duns": "789701898",
     "duns_4": "7897018980000",
     "cage": "6D4V6",
@@ -2483,7 +2483,7 @@
   "model": "vendors.vendor",
   "pk": 156,
   "fields": {
-    "name": "AMERIVET REAL ESTATE SERVICES, INC.",
+    "name": "Amerivet Real Estate Services, Inc.",
     "duns": "828929666",
     "duns_4": "8289296660000",
     "cage": "59C97",
@@ -2499,7 +2499,7 @@
   "model": "vendors.vendor",
   "pk": 157,
   "fields": {
-    "name": "ANSWER TITLE AND ESCROW LLC",
+    "name": "Answer Title And Escrow LLC",
     "duns": "167205819",
     "duns_4": "1672058190000",
     "cage": "36FK1",
@@ -2515,7 +2515,7 @@
   "model": "vendors.vendor",
   "pk": 158,
   "fields": {
-    "name": "BANKWORLD, INC.",
+    "name": "Bankworld, Inc.",
     "duns": "046680331",
     "duns_4": "0466803310000",
     "cage": "1W3S4",
@@ -2531,7 +2531,7 @@
   "model": "vendors.vendor",
   "pk": 159,
   "fields": {
-    "name": "BROOKS & ASSOCIATES CPAS, LLC",
+    "name": "Brooks & Associates Cpas, LLC",
     "duns": "094718637",
     "duns_4": "0947186370000",
     "cage": "3UKL9",
@@ -2547,7 +2547,7 @@
   "model": "vendors.vendor",
   "pk": 160,
   "fields": {
-    "name": "CALLOWAY & ASSOCIATES, INC.",
+    "name": "Calloway & Associates, Inc.",
     "duns": "008169919",
     "duns_4": "0081699190000",
     "cage": "3YUF3",
@@ -2563,7 +2563,7 @@
   "model": "vendors.vendor",
   "pk": 161,
   "fields": {
-    "name": "CAPITAL HOTEL MANAGEMENT, LLC",
+    "name": "Capital Hotel Management, LLC",
     "duns": "111834987",
     "duns_4": "1118349870000",
     "cage": "3LSK2",
@@ -2579,7 +2579,7 @@
   "model": "vendors.vendor",
   "pk": 162,
   "fields": {
-    "name": "CARDNO EMERGING MARKETS USA, LTD.",
+    "name": "Cardno Emerging Markets Usa, Ltd.",
     "duns": "877698936",
     "duns_4": "8776989360000",
     "cage": "1R4G2",
@@ -2595,7 +2595,7 @@
   "model": "vendors.vendor",
   "pk": 163,
   "fields": {
-    "name": "CARPENTER/ROBBINS COMMERCIAL REAL ESTATE, INC.",
+    "name": "Carpenter/Robbins Commercial Real Estate, Inc.",
     "duns": "111371238",
     "duns_4": "1113712380000",
     "cage": "1YMF3",
@@ -2611,7 +2611,7 @@
   "model": "vendors.vendor",
   "pk": 164,
   "fields": {
-    "name": "3D ENVIROLOGICS LLC",
+    "name": "3D Envirologics LLC",
     "duns": "102769168",
     "duns_4": "1027691680000",
     "cage": "3PBU9",
@@ -2627,7 +2627,7 @@
   "model": "vendors.vendor",
   "pk": 165,
   "fields": {
-    "name": "A E H S INCORPORATED",
+    "name": "A E H S Incorporated",
     "duns": "941735763",
     "duns_4": "9417357630000",
     "cage": "1ELT2",
@@ -2643,7 +2643,7 @@
   "model": "vendors.vendor",
   "pk": 166,
   "fields": {
-    "name": "A.D. MARBLE & CO., INC.",
+    "name": "A.D. Marble & Co., Inc.",
     "duns": "131110793",
     "duns_4": "1311107930000",
     "cage": "1TDR6",
@@ -2659,7 +2659,7 @@
   "model": "vendors.vendor",
   "pk": 167,
   "fields": {
-    "name": "A.I.S., INC.",
+    "name": "A.I.S., Inc.",
     "duns": "783206659",
     "duns_4": "7832066590000",
     "cage": "1HBX3",
@@ -2675,7 +2675,7 @@
   "model": "vendors.vendor",
   "pk": 168,
   "fields": {
-    "name": "AARCHER INC",
+    "name": "Aarcher Inc",
     "duns": "008184819",
     "duns_4": "0081848190000",
     "cage": "1DPC6",
@@ -2691,7 +2691,7 @@
   "model": "vendors.vendor",
   "pk": 169,
   "fields": {
-    "name": "ABR INC",
+    "name": "Abr Inc",
     "duns": "038523239",
     "duns_4": "0385232390000",
     "cage": "0Y330",
@@ -2707,7 +2707,7 @@
   "model": "vendors.vendor",
   "pk": 170,
   "fields": {
-    "name": "ABT ASSOCIATES INC.",
+    "name": "Abt Associates Inc.",
     "duns": "043397520",
     "duns_4": "0433975200000",
     "cage": "1A018",
@@ -2723,7 +2723,7 @@
   "model": "vendors.vendor",
   "pk": 171,
   "fields": {
-    "name": "ACTIVE ENVIRONMENTAL TECHNOLOGIES, INC.",
+    "name": "Active Environmental Technologies, Inc.",
     "duns": "806757316",
     "duns_4": "8067573160000",
     "cage": "083X9",
@@ -2739,7 +2739,7 @@
   "model": "vendors.vendor",
   "pk": 172,
   "fields": {
-    "name": "ADANTA, INC.",
+    "name": "Adanta, Inc.",
     "duns": "827627618",
     "duns_4": "8276276180000",
     "cage": "55A73",
@@ -2755,7 +2755,7 @@
   "model": "vendors.vendor",
   "pk": 173,
   "fields": {
-    "name": "ADELAIDE ENVIRONMENTAL HEALTH ASSOCIATES, INC.",
+    "name": "Adelaide Environmental Health Associates, Inc.",
     "duns": "119232304",
     "duns_4": "1192323040000",
     "cage": "0MKM2",
@@ -2771,7 +2771,7 @@
   "model": "vendors.vendor",
   "pk": 174,
   "fields": {
-    "name": "A. BRIGHT IDEA, LLC",
+    "name": "A. Bright Idea, LLC",
     "duns": "002833684",
     "duns_4": "0028336840000",
     "cage": "359K4",
@@ -2787,7 +2787,7 @@
   "model": "vendors.vendor",
   "pk": 175,
   "fields": {
-    "name": "ADFERO GROUP, LLC",
+    "name": "Adfero Group, LLC",
     "duns": "025290847",
     "duns_4": "0252908470000",
     "cage": "4ELL0",
@@ -2803,7 +2803,7 @@
   "model": "vendors.vendor",
   "pk": 176,
   "fields": {
-    "name": "ADVENTIUM LLC",
+    "name": "Adventium LLC",
     "duns": "118810592",
     "duns_4": "1188105920000",
     "cage": null,
@@ -2819,7 +2819,7 @@
   "model": "vendors.vendor",
   "pk": 177,
   "fields": {
-    "name": "ADZ ETC., INC.",
+    "name": "Adz Etc., Inc.",
     "duns": "966451833",
     "duns_4": "9664518330000",
     "cage": "4LFB3",
@@ -2835,7 +2835,7 @@
   "model": "vendors.vendor",
   "pk": 178,
   "fields": {
-    "name": "ALEXANDER & TOM, INC",
+    "name": "Alexander & Tom, Inc",
     "duns": "942202334",
     "duns_4": "9422023340000",
     "cage": "3C932",
@@ -2851,7 +2851,7 @@
   "model": "vendors.vendor",
   "pk": 179,
   "fields": {
-    "name": "ANTKOWIAK DESIGN GROUP, INC.",
+    "name": "Antkowiak Design Group, Inc.",
     "duns": "800833733",
     "duns_4": "8008337330000",
     "cage": "1BAJ4",
@@ -2867,7 +2867,7 @@
   "model": "vendors.vendor",
   "pk": 180,
   "fields": {
-    "name": "APTIVE RESOURCES LLC",
+    "name": "Aptive Resources LLC",
     "duns": "828890751",
     "duns_4": "8288907510000",
     "cage": "5AF04",
@@ -2883,7 +2883,7 @@
   "model": "vendors.vendor",
   "pk": 181,
   "fields": {
-    "name": "ARCH STREET COMMUNICATIONS, INC.",
+    "name": "Arch Street Communications, Inc.",
     "duns": "125931159",
     "duns_4": "1259311590000",
     "cage": "3GLE4",
