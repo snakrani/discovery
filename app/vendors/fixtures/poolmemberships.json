@@ -1896,7 +1896,7 @@
     "piid": "GS02Q16DCR0073",
     "vendor": 73,
     "pool": "HCATS_SB_1",
-    "expiration_8a_date": "2022-07-19T00:00:00Z",
+    "expiration_8a_date": "2022-07-19",
     "contract_end_date": null,
     "setasides": [
       16
@@ -2041,7 +2041,7 @@
     "piid": "GS02Q16DCR0082",
     "vendor": 73,
     "pool": "HCATS_SB_2",
-    "expiration_8a_date": "2022-07-19T00:00:00Z",
+    "expiration_8a_date": "2022-07-19",
     "contract_end_date": null,
     "setasides": [
       16
@@ -2056,7 +2056,7 @@
     "piid": "GS02Q17DCR0008",
     "vendor": 83,
     "pool": "HCATS_SB_2",
-    "expiration_8a_date": "2021-06-25T00:00:00Z",
+    "expiration_8a_date": "2021-06-25",
     "contract_end_date": null,
     "setasides": [
       1,
@@ -2134,7 +2134,7 @@
     "piid": "GS02Q17DCR0003",
     "vendor": 86,
     "pool": "HCATS_SB_2",
-    "expiration_8a_date": "2024-01-26T00:00:00Z",
+    "expiration_8a_date": "2024-01-26",
     "contract_end_date": null,
     "setasides": [
       16
@@ -2164,7 +2164,7 @@
     "piid": "GS02Q16DCR0086",
     "vendor": 88,
     "pool": "HCATS_SB_2",
-    "expiration_8a_date": "2017-08-11T00:00:00Z",
+    "expiration_8a_date": "2017-08-11",
     "contract_end_date": null,
     "setasides": [
       3,
@@ -8183,6 +8183,1005 @@
       3,
       2
     ]
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 505,
+  "fields": {
+    "piid": "GS10F119AA",
+    "vendor": 121,
+    "pool": "PSS_871",
+    "expiration_8a_date": null,
+    "contract_end_date": "2023-03-14",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 506,
+  "fields": {
+    "piid": "GS23F0322N",
+    "vendor": 122,
+    "pool": "PSS_871",
+    "expiration_8a_date": null,
+    "contract_end_date": "2018-08-28",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 507,
+  "fields": {
+    "piid": "GS23F0153L",
+    "vendor": 23,
+    "pool": "PSS_871",
+    "expiration_8a_date": null,
+    "contract_end_date": "2021-04-05",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 508,
+  "fields": {
+    "piid": "GS10F0316X",
+    "vendor": 123,
+    "pool": "PSS_871",
+    "expiration_8a_date": null,
+    "contract_end_date": "2021-06-14",
+    "setasides": [
+      1
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 509,
+  "fields": {
+    "piid": "GS00F191CA",
+    "vendor": 124,
+    "pool": "PSS_871",
+    "expiration_8a_date": null,
+    "contract_end_date": "2020-06-30",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 510,
+  "fields": {
+    "piid": "GS23F0115N",
+    "vendor": 125,
+    "pool": "PSS_871",
+    "expiration_8a_date": null,
+    "contract_end_date": "2023-01-15",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 511,
+  "fields": {
+    "piid": "GS00F026CA",
+    "vendor": 126,
+    "pool": "PSS_871",
+    "expiration_8a_date": null,
+    "contract_end_date": "2020-01-26",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 512,
+  "fields": {
+    "piid": "GS10F0349N",
+    "vendor": 11,
+    "pool": "PSS_871",
+    "expiration_8a_date": null,
+    "contract_end_date": "2023-04-16",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 513,
+  "fields": {
+    "piid": "GS00F0005U",
+    "vendor": 127,
+    "pool": "PSS_871",
+    "expiration_8a_date": null,
+    "contract_end_date": "2018-07-23",
+    "setasides": [
+      15,
+      16
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 514,
+  "fields": {
+    "piid": "GS00F024CA",
+    "vendor": 128,
+    "pool": "PSS_871",
+    "expiration_8a_date": null,
+    "contract_end_date": "2020-01-22",
+    "setasides": [
+      2
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 515,
+  "fields": {
+    "piid": "GS10F0058P",
+    "vendor": 129,
+    "pool": "PSS_874",
+    "expiration_8a_date": null,
+    "contract_end_date": "2018-11-02",
+    "setasides": [
+      15,
+      16
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 516,
+  "fields": {
+    "piid": "GS10F0141S",
+    "vendor": 130,
+    "pool": "PSS_874",
+    "expiration_8a_date": null,
+    "contract_end_date": "2021-02-02",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 517,
+  "fields": {
+    "piid": "GS02F0112Y",
+    "vendor": 131,
+    "pool": "PSS_874",
+    "expiration_8a_date": null,
+    "contract_end_date": "2022-03-29",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 518,
+  "fields": {
+    "piid": "GS00F216GA",
+    "vendor": 132,
+    "pool": "PSS_874",
+    "expiration_8a_date": null,
+    "contract_end_date": "2022-06-08",
+    "setasides": [
+      15,
+      16,
+      18
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 519,
+  "fields": {
+    "piid": "GS10F0093L",
+    "vendor": 133,
+    "pool": "PSS_874",
+    "expiration_8a_date": null,
+    "contract_end_date": "2020-11-30",
+    "setasides": [
+      2,
+      15
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 520,
+  "fields": {
+    "piid": "GS10F0454M",
+    "vendor": 134,
+    "pool": "PSS_874",
+    "expiration_8a_date": null,
+    "contract_end_date": "2022-09-15",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 521,
+  "fields": {
+    "piid": "GS10F0081V",
+    "vendor": 135,
+    "pool": "PSS_874",
+    "expiration_8a_date": null,
+    "contract_end_date": "2019-02-08",
+    "setasides": [
+      15,
+      16
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 522,
+  "fields": {
+    "piid": "GS00F357GA",
+    "vendor": 73,
+    "pool": "PSS_874",
+    "expiration_8a_date": null,
+    "contract_end_date": "2022-09-05",
+    "setasides": [
+      15,
+      16
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 523,
+  "fields": {
+    "piid": "GS00F105DA",
+    "vendor": 136,
+    "pool": "PSS_874",
+    "expiration_8a_date": null,
+    "contract_end_date": "2021-03-31",
+    "setasides": [
+      2
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 524,
+  "fields": {
+    "piid": "GS00F297DA",
+    "vendor": 137,
+    "pool": "PSS_874",
+    "expiration_8a_date": null,
+    "contract_end_date": "2021-09-20",
+    "setasides": [
+      15,
+      16
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 525,
+  "fields": {
+    "piid": "GS23F0322N",
+    "vendor": 122,
+    "pool": "PSS_874500",
+    "expiration_8a_date": null,
+    "contract_end_date": "2018-08-28",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 526,
+  "fields": {
+    "piid": "GS10F0175P",
+    "vendor": 138,
+    "pool": "PSS_874500",
+    "expiration_8a_date": null,
+    "contract_end_date": "2019-02-03",
+    "setasides": [
+      15,
+      16
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 527,
+  "fields": {
+    "piid": "GS00F021GA",
+    "vendor": 139,
+    "pool": "PSS_874500",
+    "expiration_8a_date": null,
+    "contract_end_date": "2021-10-23",
+    "setasides": [
+      15
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 528,
+  "fields": {
+    "piid": "GS00F131CA",
+    "vendor": 20,
+    "pool": "PSS_874500",
+    "expiration_8a_date": null,
+    "contract_end_date": "2020-05-06",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 529,
+  "fields": {
+    "piid": "GS00F0005U",
+    "vendor": 127,
+    "pool": "PSS_874500",
+    "expiration_8a_date": null,
+    "contract_end_date": "2018-07-23",
+    "setasides": [
+      15,
+      16
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 530,
+  "fields": {
+    "piid": "GS00F024CA",
+    "vendor": 128,
+    "pool": "PSS_874500",
+    "expiration_8a_date": null,
+    "contract_end_date": "2020-01-22",
+    "setasides": [
+      2
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 531,
+  "fields": {
+    "piid": "GS00F122GA",
+    "vendor": 140,
+    "pool": "PSS_874500",
+    "expiration_8a_date": null,
+    "contract_end_date": "2022-02-20",
+    "setasides": [
+      2,
+      15,
+      16
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 532,
+  "fields": {
+    "piid": "GS10F0320P",
+    "vendor": 141,
+    "pool": "PSS_874500",
+    "expiration_8a_date": null,
+    "contract_end_date": "2019-05-16",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 533,
+  "fields": {
+    "piid": "GS00F008BA",
+    "vendor": 142,
+    "pool": "PSS_874500",
+    "expiration_8a_date": null,
+    "contract_end_date": "2019-05-29",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 534,
+  "fields": {
+    "piid": "GS00F206DA",
+    "vendor": 143,
+    "pool": "PSS_874500",
+    "expiration_8a_date": null,
+    "contract_end_date": "2021-06-30",
+    "setasides": [
+      15
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 535,
+  "fields": {
+    "piid": "GS10F0163V",
+    "vendor": 144,
+    "pool": "PSS_382",
+    "expiration_8a_date": null,
+    "contract_end_date": "2019-04-29",
+    "setasides": [
+      3
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 536,
+  "fields": {
+    "piid": "GS10F0351N",
+    "vendor": 145,
+    "pool": "PSS_382",
+    "expiration_8a_date": null,
+    "contract_end_date": "2023-04-16",
+    "setasides": [
+      3
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 537,
+  "fields": {
+    "piid": "GS10F0106R",
+    "vendor": 146,
+    "pool": "PSS_382",
+    "expiration_8a_date": null,
+    "contract_end_date": "2019-11-21",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 538,
+  "fields": {
+    "piid": "GS10F177AA",
+    "vendor": 147,
+    "pool": "PSS_382",
+    "expiration_8a_date": null,
+    "contract_end_date": "2023-05-22",
+    "setasides": [
+      3,
+      15
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 539,
+  "fields": {
+    "piid": "GS10F0097T",
+    "vendor": 148,
+    "pool": "PSS_382",
+    "expiration_8a_date": null,
+    "contract_end_date": "2021-12-28",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 540,
+  "fields": {
+    "piid": "GS10F0103K",
+    "vendor": 149,
+    "pool": "PSS_382",
+    "expiration_8a_date": null,
+    "contract_end_date": "2020-01-17",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 541,
+  "fields": {
+    "piid": "GS10F0239Y",
+    "vendor": 150,
+    "pool": "PSS_382",
+    "expiration_8a_date": null,
+    "contract_end_date": "2022-03-21",
+    "setasides": [
+      3
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 542,
+  "fields": {
+    "piid": "GS10F0227K",
+    "vendor": 151,
+    "pool": "PSS_382",
+    "expiration_8a_date": null,
+    "contract_end_date": "2020-05-04",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 543,
+  "fields": {
+    "piid": "GS10F0208T",
+    "vendor": 152,
+    "pool": "PSS_382",
+    "expiration_8a_date": null,
+    "contract_end_date": "2022-04-04",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 544,
+  "fields": {
+    "piid": "GS10F0112S",
+    "vendor": 153,
+    "pool": "PSS_382",
+    "expiration_8a_date": null,
+    "contract_end_date": "2021-01-12",
+    "setasides": [
+      1
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 545,
+  "fields": {
+    "piid": "GS23F005BA",
+    "vendor": 154,
+    "pool": "PSS_520",
+    "expiration_8a_date": null,
+    "contract_end_date": "2018-11-24",
+    "setasides": [
+      15
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 546,
+  "fields": {
+    "piid": "GS00F144DA",
+    "vendor": 155,
+    "pool": "PSS_520",
+    "expiration_8a_date": null,
+    "contract_end_date": "2021-05-08",
+    "setasides": [
+      15,
+      16
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 547,
+  "fields": {
+    "piid": "GS00F257CA",
+    "vendor": 156,
+    "pool": "PSS_520",
+    "expiration_8a_date": null,
+    "contract_end_date": "2020-08-12",
+    "setasides": [
+      2
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 548,
+  "fields": {
+    "piid": "GS23F0036V",
+    "vendor": 157,
+    "pool": "PSS_520",
+    "expiration_8a_date": null,
+    "contract_end_date": "2019-02-25",
+    "setasides": [
+      15,
+      16
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 549,
+  "fields": {
+    "piid": "GS23F0071P",
+    "vendor": 158,
+    "pool": "PSS_520",
+    "expiration_8a_date": null,
+    "contract_end_date": "2018-12-16",
+    "setasides": [
+      15,
+      16
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 550,
+  "fields": {
+    "piid": "GS00F299CA",
+    "vendor": 159,
+    "pool": "PSS_520",
+    "expiration_8a_date": null,
+    "contract_end_date": "2020-09-09",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 551,
+  "fields": {
+    "piid": "GS23F037AA",
+    "vendor": 160,
+    "pool": "PSS_520",
+    "expiration_8a_date": null,
+    "contract_end_date": "2018-06-05",
+    "setasides": [
+      2,
+      15,
+      16
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 552,
+  "fields": {
+    "piid": "GS23F0020V",
+    "vendor": 161,
+    "pool": "PSS_520",
+    "expiration_8a_date": null,
+    "contract_end_date": "2019-02-09",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 553,
+  "fields": {
+    "piid": "GS23F0168P",
+    "vendor": 162,
+    "pool": "PSS_520",
+    "expiration_8a_date": null,
+    "contract_end_date": "2019-02-26",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 554,
+  "fields": {
+    "piid": "GS23F0028W",
+    "vendor": 163,
+    "pool": "PSS_520",
+    "expiration_8a_date": null,
+    "contract_end_date": "2020-01-13",
+    "setasides": [
+      2
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 555,
+  "fields": {
+    "piid": "GS10F023CA",
+    "vendor": 164,
+    "pool": "PSS_899",
+    "expiration_8a_date": null,
+    "contract_end_date": "2019-11-20",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 556,
+  "fields": {
+    "piid": "GS10F0227R",
+    "vendor": 165,
+    "pool": "PSS_899",
+    "expiration_8a_date": null,
+    "contract_end_date": "2020-03-10",
+    "setasides": [
+      1
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 557,
+  "fields": {
+    "piid": "GS00F411GA",
+    "vendor": 166,
+    "pool": "PSS_899",
+    "expiration_8a_date": null,
+    "contract_end_date": "2022-09-20",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 558,
+  "fields": {
+    "piid": "GS10F0131T",
+    "vendor": 167,
+    "pool": "PSS_899",
+    "expiration_8a_date": null,
+    "contract_end_date": "2022-02-05",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 559,
+  "fields": {
+    "piid": "GS10F0451M",
+    "vendor": 168,
+    "pool": "PSS_899",
+    "expiration_8a_date": null,
+    "contract_end_date": "2022-09-16",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 560,
+  "fields": {
+    "piid": "GS10F0175M",
+    "vendor": 169,
+    "pool": "PSS_899",
+    "expiration_8a_date": null,
+    "contract_end_date": "2022-02-25",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 561,
+  "fields": {
+    "piid": "GS00F252CA",
+    "vendor": 170,
+    "pool": "PSS_899",
+    "expiration_8a_date": null,
+    "contract_end_date": "2020-08-10",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 562,
+  "fields": {
+    "piid": "GS10F0297U",
+    "vendor": 171,
+    "pool": "PSS_899",
+    "expiration_8a_date": null,
+    "contract_end_date": "2018-07-15",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 563,
+  "fields": {
+    "piid": "GS10F041CA",
+    "vendor": 172,
+    "pool": "PSS_899",
+    "expiration_8a_date": null,
+    "contract_end_date": "2020-01-11",
+    "setasides": [
+      15,
+      16
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 564,
+  "fields": {
+    "piid": "GS10F0080V",
+    "vendor": 173,
+    "pool": "PSS_899",
+    "expiration_8a_date": null,
+    "contract_end_date": "2019-02-05",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 565,
+  "fields": {
+    "piid": "GS07F0324W",
+    "vendor": 174,
+    "pool": "PSS_541",
+    "expiration_8a_date": null,
+    "contract_end_date": "2020-04-06",
+    "setasides": [
+      15,
+      16
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 566,
+  "fields": {
+    "piid": "GS00F252CA",
+    "vendor": 170,
+    "pool": "PSS_541",
+    "expiration_8a_date": null,
+    "contract_end_date": "2020-08-10",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 567,
+  "fields": {
+    "piid": "GS00F341GA",
+    "vendor": 175,
+    "pool": "PSS_541",
+    "expiration_8a_date": null,
+    "contract_end_date": "2022-08-24",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 568,
+  "fields": {
+    "piid": "GS23F0131R",
+    "vendor": 176,
+    "pool": "PSS_541",
+    "expiration_8a_date": null,
+    "contract_end_date": "2020-03-07",
+    "setasides": [
+      15,
+      16
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 569,
+  "fields": {
+    "piid": "GS07F0610X",
+    "vendor": 177,
+    "pool": "PSS_541",
+    "expiration_8a_date": null,
+    "contract_end_date": "2021-06-20",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 570,
+  "fields": {
+    "piid": "GS07F0081Y",
+    "vendor": 178,
+    "pool": "PSS_541",
+    "expiration_8a_date": null,
+    "contract_end_date": "2021-11-02",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 571,
+  "fields": {
+    "piid": "GS00F347CA",
+    "vendor": 96,
+    "pool": "PSS_541",
+    "expiration_8a_date": null,
+    "contract_end_date": "2020-09-28",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 572,
+  "fields": {
+    "piid": "GS00F201DA",
+    "vendor": 179,
+    "pool": "PSS_541",
+    "expiration_8a_date": null,
+    "contract_end_date": "2021-06-28",
+    "setasides": [],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 573,
+  "fields": {
+    "piid": "GS07F281BA",
+    "vendor": 180,
+    "pool": "PSS_541",
+    "expiration_8a_date": null,
+    "contract_end_date": "2019-08-26",
+    "setasides": [
+      2
+    ],
+    "zones": []
+  }
+},
+{
+  "model": "vendors.poolmembership",
+  "pk": 574,
+  "fields": {
+    "piid": "GS00F154DA",
+    "vendor": 181,
+    "pool": "PSS_541",
+    "expiration_8a_date": null,
+    "contract_end_date": "2021-05-16",
+    "setasides": [
+      15
+    ],
+    "zones": []
   }
 }
 ]

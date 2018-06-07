@@ -446,6 +446,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '^(gs06|gs00)'
             },
             'vendor__pools__expiration_8a_date': {
+                '@date': '2022-07-19',
                 '@year': '2017',
                 '@month': '7',
                 '@day': '19',
@@ -675,8 +676,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
             }
         }
     }
-    
-    
+        
     def initialize(self):
         self.router = 'contracts'
         

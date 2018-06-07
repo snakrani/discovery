@@ -82,7 +82,9 @@ var LayoutManager = {
     },
 
     enableFilters: function() {
-        if (this.getQSByName(document.location, 'vehicle').indexOf("_sb") > 0) {
+        var vehicle = this.getQSByName(document.location, 'vehicle');
+
+        if (vehicle == 'pss' || vehicle.indexOf("_sb") > 0) {
             $('#choose_filters').removeClass('filter_text_disabled').addClass('filter_text');
             $('.pure-checkbox-disabled').removeClass('pure-checkbox-disabled');
             $('.se_filter').attr("disabled", false);

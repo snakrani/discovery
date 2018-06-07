@@ -3526,5 +3526,495 @@
   "fields": {
     "responsibility": 504
   }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1009,
+  "fields": {
+    "responsibility": 505
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1011,
+  "fields": {
+    "responsibility": 506
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1013,
+  "fields": {
+    "responsibility": 507
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1015,
+  "fields": {
+    "responsibility": 508
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1017,
+  "fields": {
+    "responsibility": 509
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1019,
+  "fields": {
+    "responsibility": 510
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1021,
+  "fields": {
+    "responsibility": 511
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1023,
+  "fields": {
+    "responsibility": 512
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1025,
+  "fields": {
+    "responsibility": 513
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1027,
+  "fields": {
+    "responsibility": 514
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1029,
+  "fields": {
+    "responsibility": 515
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1031,
+  "fields": {
+    "responsibility": 516
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1033,
+  "fields": {
+    "responsibility": 517
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1035,
+  "fields": {
+    "responsibility": 518
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1037,
+  "fields": {
+    "responsibility": 519
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1039,
+  "fields": {
+    "responsibility": 520
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1041,
+  "fields": {
+    "responsibility": 521
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1043,
+  "fields": {
+    "responsibility": 522
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1045,
+  "fields": {
+    "responsibility": 523
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1047,
+  "fields": {
+    "responsibility": 524
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1049,
+  "fields": {
+    "responsibility": 525
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1051,
+  "fields": {
+    "responsibility": 526
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1053,
+  "fields": {
+    "responsibility": 527
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1055,
+  "fields": {
+    "responsibility": 528
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1057,
+  "fields": {
+    "responsibility": 529
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1059,
+  "fields": {
+    "responsibility": 530
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1061,
+  "fields": {
+    "responsibility": 531
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1063,
+  "fields": {
+    "responsibility": 532
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1065,
+  "fields": {
+    "responsibility": 533
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1067,
+  "fields": {
+    "responsibility": 534
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1069,
+  "fields": {
+    "responsibility": 535
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1071,
+  "fields": {
+    "responsibility": 536
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1073,
+  "fields": {
+    "responsibility": 537
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1075,
+  "fields": {
+    "responsibility": 538
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1077,
+  "fields": {
+    "responsibility": 539
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1079,
+  "fields": {
+    "responsibility": 540
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1081,
+  "fields": {
+    "responsibility": 541
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1083,
+  "fields": {
+    "responsibility": 542
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1085,
+  "fields": {
+    "responsibility": 543
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1087,
+  "fields": {
+    "responsibility": 544
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1089,
+  "fields": {
+    "responsibility": 545
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1091,
+  "fields": {
+    "responsibility": 546
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1093,
+  "fields": {
+    "responsibility": 547
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1095,
+  "fields": {
+    "responsibility": 548
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1097,
+  "fields": {
+    "responsibility": 549
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1099,
+  "fields": {
+    "responsibility": 550
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1101,
+  "fields": {
+    "responsibility": 551
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1103,
+  "fields": {
+    "responsibility": 552
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1105,
+  "fields": {
+    "responsibility": 553
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1107,
+  "fields": {
+    "responsibility": 554
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1109,
+  "fields": {
+    "responsibility": 555
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1111,
+  "fields": {
+    "responsibility": 556
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1113,
+  "fields": {
+    "responsibility": 557
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1115,
+  "fields": {
+    "responsibility": 558
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1117,
+  "fields": {
+    "responsibility": 559
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1119,
+  "fields": {
+    "responsibility": 560
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1121,
+  "fields": {
+    "responsibility": 561
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1123,
+  "fields": {
+    "responsibility": 562
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1125,
+  "fields": {
+    "responsibility": 563
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1127,
+  "fields": {
+    "responsibility": 564
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1129,
+  "fields": {
+    "responsibility": 565
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1131,
+  "fields": {
+    "responsibility": 566
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1133,
+  "fields": {
+    "responsibility": 567
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1135,
+  "fields": {
+    "responsibility": 568
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1137,
+  "fields": {
+    "responsibility": 569
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1139,
+  "fields": {
+    "responsibility": 570
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1141,
+  "fields": {
+    "responsibility": 571
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1143,
+  "fields": {
+    "responsibility": 572
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1145,
+  "fields": {
+    "responsibility": 573
+  }
+},
+{
+  "model": "vendors.contractmanager",
+  "pk": 1147,
+  "fields": {
+    "responsibility": 574
+  }
 }
 ]

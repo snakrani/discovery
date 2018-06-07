@@ -10,6 +10,8 @@ import os
 import logging
 import re
 import math
+import datetime
+import pytz
 
 
 def vendor_logger():
@@ -17,7 +19,12 @@ def vendor_logger():
 
     
 def format_ascii(text):
-    return re.sub(r'[^\x00-\x7F]+', '', str(text).strip())
+    return re.sub(r'^nan$', '', re.sub(r'[^\x00-\x7F]+', '', str(text).strip()))
+
+def format_name(text):
+    name = format_ascii(text).title()
+    name = re.sub(r'\s+L\.?l\.?c\.?', ' LLC', name, re.IGNORECASE)
+    return name
 
 def format_duns(text):
     return format_ascii(int(text)).replace('X', '0').replace('x', '0').zfill(9)
@@ -28,14 +35,45 @@ def format_duns_plus_4(text):
 def format_date(text):
     date = None
     
+    def get_month(month):
+        month_map = {
+            'Jan': '1',
+            'Feb': '2',
+            'Mar': '3',
+            'Apr': '4',
+            'May': '5',
+            'Jun': '6',
+            'Jul': '7',
+            'Aug': '8',
+            'Sep': '9',
+            'Oct': '10',
+            'Nov': '11',
+            'Dec': '12'
+        }
+        return month_map[month]
+    
     if text and type(text) is str and not re.match(r'^(0|N[\.\/]?A\.?)$', text, re.IGNORECASE):
         text = format_ascii(text)
+        
+        # 01/01/2000
         regex = re.search(r'^\s*(\d{1,2})\s*\/\s*(\d{1,2})\s*\/\s*(\d{4})\s*$', text, re.IGNORECASE)
         
-        month = regex.group(1)
-        day = regex.group(2)
-        year = regex.group(3) 
-        date = "{}-{}-{}".format(year, month.zfill(2), day.zfill(2))
+        if regex:
+            month = regex.group(1)
+            day = regex.group(2)
+            year = regex.group(3) 
+            date = "{}-{}-{}".format(year, month.zfill(2), day.zfill(2))
+        else:
+            # Jan 01, 2000
+            regex = re.search(r'^\s*([A-Z][a-z]{2})\s+(\d{1,2})\s*\,\s*(\d{4})\s*$', text, re.IGNORECASE)
+            
+            if regex:
+                month = get_month(regex.group(1))
+                day = regex.group(2)
+                year = regex.group(3) 
+                date = "{}-{}-{}".format(year, month.zfill(2), day.zfill(2))
+    if date:
+        return datetime.datetime.strptime(date, '%Y-%m-%d')
     
     return date
 
@@ -185,8 +223,7 @@ class Command(BaseCommand):
         logger = vendor_logger()
         
         if check_num(record['DUNS']) and check_text(record['ContractNumber']):
-            #print(record)
-            name = format_ascii(record['ContractorName'])
+            name = format_name(record['ContractorName'])
             piid = format_ascii(record['ContractNumber'])
             duns = format_duns(record['DUNS'])
         
