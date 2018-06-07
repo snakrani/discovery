@@ -21,6 +21,11 @@ def vendor_logger():
 def format_ascii(text):
     return re.sub(r'^nan$', '', re.sub(r'[^\x00-\x7F]+', '', str(text).strip()))
 
+def format_name(text):
+    name = format_ascii(text).title()
+    name = re.sub(r'\s+L\.?l\.?c\.?', ' LLC', name, re.IGNORECASE)
+    return name
+
 def format_duns(text):
     return format_ascii(int(text)).replace('X', '0').replace('x', '0').zfill(9)
 
@@ -218,7 +223,7 @@ class Command(BaseCommand):
         logger = vendor_logger()
         
         if check_num(record['DUNS']) and check_text(record['ContractNumber']):
-            name = format_ascii(record['ContractorName']).title()
+            name = format_name(record['ContractorName'])
             piid = format_ascii(record['ContractNumber'])
             duns = format_duns(record['DUNS'])
         
