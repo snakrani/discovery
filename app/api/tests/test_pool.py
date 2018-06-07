@@ -139,5 +139,5 @@ class PoolTest(case.APITestCase, metaclass = case.MetaAPISchema):
         resp.is_not_empty(base_key + ['name'])
         resp.is_not_empty(base_key + ['number'])
         resp.is_not_empty(base_key + ['vehicle'])
-        resp.is_not_empty(base_key + ['threshold'])
+        #resp.is_not_empty(base_key + ['threshold'])
         resp.is_not_empty(base_key + ['naics'])
