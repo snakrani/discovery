@@ -6,7 +6,7 @@ from django.db import migrations, models
 def create_base_piids(apps, schema_editor):
     Contract = apps.get_model('contracts', 'Contract')
     
-    for contract in Contract.objects.all():
+    for contract in Contract.objects.all().iterator():
         contract.base_piid = contract.piid.split('_')[0]
         contract.save()
 
