@@ -8,7 +8,7 @@
     "vehicle": "BMO",
     "threshold": "$15 million",
     "naics": [
-      "238220A"
+      "238220"
     ]
   }
 },
@@ -47,7 +47,7 @@
     "vehicle": "BMO",
     "threshold": "$15 million",
     "naics": [
-      "541330D"
+      "541330"
     ]
   }
 },
@@ -112,7 +112,7 @@
     "vehicle": "BMO",
     "threshold": "$7.5 million",
     "naics": [
-      "561730B"
+      "561730"
     ]
   }
 },
@@ -125,7 +125,7 @@
     "vehicle": "BMO",
     "threshold": "$15 million",
     "naics": [
-      "238220B"
+      "238220"
     ]
   }
 },
@@ -177,7 +177,7 @@
     "vehicle": "BMO",
     "threshold": "$7.5 million",
     "naics": [
-      "561730A"
+      "561730"
     ]
   }
 },
@@ -203,7 +203,7 @@
     "vehicle": "BMO",
     "threshold": "$15 million",
     "naics": [
-      "238220C"
+      "238220"
     ]
   }
 },
@@ -229,7 +229,7 @@
     "vehicle": "BMO_SB",
     "threshold": "$15 million",
     "naics": [
-      "238220A"
+      "238220"
     ]
   }
 },
@@ -268,7 +268,7 @@
     "vehicle": "BMO_SB",
     "threshold": "$15 million",
     "naics": [
-      "541330D"
+      "541330"
     ]
   }
 },
@@ -333,7 +333,7 @@
     "vehicle": "BMO_SB",
     "threshold": "$7.5 million",
     "naics": [
-      "561730B"
+      "561730"
     ]
   }
 },
@@ -346,7 +346,7 @@
     "vehicle": "BMO_SB",
     "threshold": "$15 million",
     "naics": [
-      "238220B"
+      "238220"
     ]
   }
 },
@@ -398,7 +398,7 @@
     "vehicle": "BMO_SB",
     "threshold": "$7.5 million",
     "naics": [
-      "561730A"
+      "561730"
     ]
   }
 },
@@ -424,7 +424,7 @@
     "vehicle": "BMO_SB",
     "threshold": "$15 million",
     "naics": [
-      "238220C"
+      "238220"
     ]
   }
 },
@@ -564,9 +564,7 @@
     "vehicle": "OASIS",
     "threshold": "$35.5 million",
     "naics": [
-      "541330A",
-      "541330B",
-      "541330C"
+      "541330"
     ]
   }
 },
@@ -593,7 +591,7 @@
     "vehicle": "OASIS",
     "threshold": "1000 employee",
     "naics": [
-      "541712B"
+      "541712"
     ]
   }
 },
@@ -606,7 +604,7 @@
     "vehicle": "OASIS",
     "threshold": "1000 employee",
     "naics": [
-      "541712C"
+      "541712"
     ]
   }
 },
@@ -619,7 +617,7 @@
     "vehicle": "OASIS",
     "threshold": "1500 employee",
     "naics": [
-      "541712A"
+      "541712"
     ]
   }
 },
@@ -682,9 +680,7 @@
     "vehicle": "OASIS_SB",
     "threshold": "$35.5 million",
     "naics": [
-      "541330A",
-      "541330B",
-      "541330C"
+      "541330"
     ]
   }
 },
@@ -711,7 +707,7 @@
     "vehicle": "OASIS_SB",
     "threshold": "1000 employee",
     "naics": [
-      "541712B"
+      "541712"
     ]
   }
 },
@@ -724,7 +720,7 @@
     "vehicle": "OASIS_SB",
     "threshold": "1000 employee",
     "naics": [
-      "541712C"
+      "541712"
     ]
   }
 },
@@ -737,7 +733,7 @@
     "vehicle": "OASIS_SB",
     "threshold": "1500 employee",
     "naics": [
-      "541712A"
+      "541712"
     ]
   }
 },
@@ -855,9 +851,7 @@
       "541614",
       "561210",
       "238160",
-      "238220A",
-      "238220B",
-      "238220C",
+      "238220",
       "238130",
       "238140",
       "238310",
