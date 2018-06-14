@@ -21,6 +21,20 @@ class KeywordTestSerializer(ModelSerializer):
         fields = ['name']
 
 
+class SinSerializer(ModelSerializer):
+    class Meta:
+        model = categories.SIN
+        fields = ['code']
+        
+    def to_representation(self, instance):
+        return instance.code
+    
+class SinTestSerializer(ModelSerializer):
+    class Meta:
+        model = categories.SIN
+        fields = ['code']
+
+
 class BaseNaicsSerializer(HyperlinkedModelSerializer):
     url = HyperlinkedIdentityField(view_name="naics-detail", lookup_field='code')
     
@@ -33,18 +47,21 @@ class NaicsLinkSerializer(BaseNaicsSerializer):
         fields = ['code', 'url']
 
 class NaicsSummarySerializer(BaseNaicsSerializer):
+    sin = SinSerializer(many=True)
     keywords = KeywordSerializer(many=True)
     
     class Meta(BaseNaicsSerializer.Meta):
         fields = BaseNaicsSerializer.Meta.fields + ['sin', 'keywords', 'url']
 
 class NaicsFullSerializer(BaseNaicsSerializer):
+    sin = SinSerializer(many=True)
     keywords = KeywordSerializer(many=True)
     
     class Meta(BaseNaicsSerializer.Meta):
         fields = BaseNaicsSerializer.Meta.fields + ['sin', 'keywords']
 
 class NaicsTestSerializer(NaicsFullSerializer):
+    sin = SinTestSerializer(many=True)
     keywords = KeywordTestSerializer(many=True)
     
     class Meta(NaicsFullSerializer.Meta):
@@ -63,6 +80,7 @@ class PscLinkSerializer(BasePscSerializer):
         fields = ['code', 'url']
 
 class PscSummarySerializer(BasePscSerializer):
+    sin = SinSerializer(many=True)
     naics = NaicsSummarySerializer(many=True)
     keywords = KeywordSerializer(many=True)
     
@@ -70,6 +88,7 @@ class PscSummarySerializer(BasePscSerializer):
         fields = BasePscSerializer.Meta.fields + ['sin', 'naics', 'keywords', 'url']
 
 class PscFullSerializer(BasePscSerializer):
+    sin = SinSerializer(many=True)
     naics = NaicsSummarySerializer(many=True)
     keywords = KeywordSerializer(many=True)
     
@@ -77,6 +96,7 @@ class PscFullSerializer(BasePscSerializer):
         fields = BasePscSerializer.Meta.fields + ['sin', 'naics', 'keywords']
 
 class PscTestSerializer(PscFullSerializer):
+    sin = SinTestSerializer(many=True)
     naics = NaicsTestSerializer(many=True)
     keywords = KeywordTestSerializer(many=True)
     
