@@ -26,7 +26,7 @@ class BaseNaicsSerializer(HyperlinkedModelSerializer):
     
     class Meta:
         model = categories.Naics
-        fields = ['code', 'root_code', 'description']
+        fields = ['code', 'description']
 
 class NaicsLinkSerializer(BaseNaicsSerializer):
     class Meta(BaseNaicsSerializer.Meta):
@@ -36,13 +36,13 @@ class NaicsSummarySerializer(BaseNaicsSerializer):
     keywords = KeywordSerializer(many=True)
     
     class Meta(BaseNaicsSerializer.Meta):
-        fields = BaseNaicsSerializer.Meta.fields + ['keywords', 'url']
+        fields = BaseNaicsSerializer.Meta.fields + ['sin', 'keywords', 'url']
 
 class NaicsFullSerializer(BaseNaicsSerializer):
     keywords = KeywordSerializer(many=True)
     
     class Meta(BaseNaicsSerializer.Meta):
-        fields = BaseNaicsSerializer.Meta.fields + ['keywords']
+        fields = BaseNaicsSerializer.Meta.fields + ['sin', 'keywords']
 
 class NaicsTestSerializer(NaicsFullSerializer):
     keywords = KeywordTestSerializer(many=True)
@@ -67,14 +67,14 @@ class PscSummarySerializer(BasePscSerializer):
     keywords = KeywordSerializer(many=True)
     
     class Meta(BasePscSerializer.Meta):
-        fields = BasePscSerializer.Meta.fields + ['naics', 'keywords', 'url']
+        fields = BasePscSerializer.Meta.fields + ['sin', 'naics', 'keywords', 'url']
 
 class PscFullSerializer(BasePscSerializer):
     naics = NaicsSummarySerializer(many=True)
     keywords = KeywordSerializer(many=True)
     
     class Meta(BasePscSerializer.Meta):
-        fields = BasePscSerializer.Meta.fields + ['naics', 'keywords']
+        fields = BasePscSerializer.Meta.fields + ['sin', 'naics', 'keywords']
 
 class PscTestSerializer(PscFullSerializer):
     naics = NaicsTestSerializer(many=True)
