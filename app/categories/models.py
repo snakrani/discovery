@@ -19,9 +19,18 @@ class Keyword(models.Model):
         return "{0} ({1})".format(self.name, self.id)
 
 
+class SIN(models.Model):
+    code = models.CharField(primary_key=True, max_length=25)
+    keywords = models.ManyToManyField(Keyword, blank=True)
+    
+    def __str__(self):
+        return "{0}".format(self.code)
+
+
 class Naics(models.Model):
     code = models.CharField(primary_key=True, max_length=25)
     description = models.TextField()
+    sin = models.ManyToManyField(SIN, blank=True)
     keywords = models.ManyToManyField(Keyword, blank=True)
     
     def __str__(self):
@@ -32,6 +41,7 @@ class PSC(models.Model):
     code = models.CharField(primary_key=True, max_length=25)
     description = models.TextField()
     naics = models.ManyToManyField(Naics)
+    sin = models.ManyToManyField(SIN, blank=True)
     keywords = models.ManyToManyField(Keyword, blank=True)
      
     def __str__(self):
