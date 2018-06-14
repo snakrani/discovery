@@ -64,8 +64,8 @@ class NaicsViewSet(DiscoveryReadOnlyModelViewSet):
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
     }
     filter_class = filters.NaicsFilter
-    search_fields = ['code', 'description', 'keywords__name']
-    ordering_fields = ['code', 'root_code', 'description']
+    search_fields = ['code', 'description', 'sin__code', 'keywords__name']
+    ordering_fields = ['code', 'description', 'sin__code', 'keywords__name']
     ordering = 'description'
     
     pagination_class = pagination.ResultSetPagination
@@ -93,8 +93,8 @@ class PscViewSet(DiscoveryReadOnlyModelViewSet):
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
     }
     filter_class = filters.PscFilter
-    search_fields = ['code', 'description', 'naics__code', 'naics__description', 'keywords__name']
-    ordering_fields = ['code', 'description', 'naics__code', 'naics__root_code', 'naics__description']
+    search_fields = ['code', 'description', 'sin__code', 'naics__code', 'naics__description', 'keywords__name']
+    ordering_fields = ['code', 'description', 'sin__code', 'naics__code', 'naics__description', 'keywords__name']
     ordering = 'description'
     
     pagination_class = pagination.ResultSetPagination
@@ -122,8 +122,8 @@ class PoolViewSet(DiscoveryReadOnlyModelViewSet):
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
     }
     filter_class = filters.PoolFilter
-    search_fields = ['id', 'name', 'number', 'vehicle']
-    ordering_fields = ['id', 'name', 'number', 'vehicle']
+    search_fields = ['id', 'name', 'number', 'vehicle', 'threshold', 'naics__code', 'naics__description']
+    ordering_fields = ['id', 'name', 'number', 'vehicle', 'threshold', 'naics__code', 'naics__description']
     ordering = 'name'
     
     pagination_class = pagination.ResultSetPagination
