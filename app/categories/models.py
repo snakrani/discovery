@@ -20,8 +20,7 @@ class Keyword(models.Model):
 
 
 class Naics(models.Model):
-    code = models.CharField(unique=True, max_length=25)
-    root_code = models.CharField(max_length=25, null=True)
+    code = models.CharField(primary_key=True, max_length=25)
     description = models.TextField()
     keywords = models.ManyToManyField(Keyword, blank=True)
     
@@ -30,7 +29,7 @@ class Naics(models.Model):
 
 
 class PSC(models.Model):
-    code = models.CharField(unique=True, max_length=25)
+    code = models.CharField(primary_key=True, max_length=25)
     description = models.TextField()
     naics = models.ManyToManyField(Naics)
     keywords = models.ManyToManyField(Keyword, blank=True)
