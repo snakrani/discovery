@@ -130,7 +130,7 @@ class MetaFilterSet(FilterSetMetaclass):
 
 class NaicsFilter(FilterSet, metaclass = MetaFilterSet):
     
-    _fuzzy_text = ('code', 'root_code', 'description', 'keyword:keywords__name')
+    _fuzzy_text = ('code', 'description', 'sin:sin__code', 'keyword:keywords__name')
     
     class Meta:
         model = categories.Naics
@@ -139,7 +139,7 @@ class NaicsFilter(FilterSet, metaclass = MetaFilterSet):
 
 class PscFilter(FilterSet, metaclass = MetaFilterSet):
     
-    _fuzzy_text = ('code', 'description', 'keyword:keywords__name')
+    _fuzzy_text = ('code', 'description', 'sin:sin__code', 'keyword:keywords__name')
     
     naics = RelatedFilter(NaicsFilter)
     
