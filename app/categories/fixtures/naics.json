@@ -593,6 +593,24 @@
 },
 {
   "model": "categories.naics",
+  "pk": "211111",
+  "fields": {
+    "description": "Crude Petroleum and Natural Gas Extraction ",
+    "sin": [],
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": "211112",
+  "fields": {
+    "description": "Natural Gas Liquid Extraction ",
+    "sin": [],
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
   "pk": "211120",
   "fields": {
     "description": "Crude Petroleum Extraction\u00a0",
@@ -668,6 +686,24 @@
   "pk": "212230",
   "fields": {
     "description": "Copper, Nickel, Lead, and Zinc Mining ",
+    "sin": [],
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": "212231",
+  "fields": {
+    "description": "Lead Ore and Zinc Ore Mining ",
+    "sin": [],
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": "212234",
+  "fields": {
+    "description": "Copper Ore and Nickel Ore Mining ",
     "sin": [],
     "keywords": []
   }
@@ -1371,16 +1407,16 @@
       "302-1"
     ],
     "keywords": [
-      7,
       86,
+      7,
+      891,
       91,
       222,
       223,
       224,
       261,
       262,
-      639,
-      891
+      639
     ]
   }
 },
@@ -1417,8 +1453,8 @@
       "563-98"
     ],
     "keywords": [
-      7,
       56,
+      7,
       89,
       91,
       96,
@@ -2081,18 +2117,18 @@
     ],
     "keywords": [
       619,
+      904,
       620,
       621,
       622,
       623,
       624,
+      905,
       625,
       626,
       627,
       628,
-      629,
-      904,
-      905
+      629
     ]
   }
 },
@@ -4983,6 +5019,21 @@
 },
 {
   "model": "categories.naics",
+  "pk": "333911",
+  "fields": {
+    "description": "Pump and Pumping Equipment Manufacturing ",
+    "sin": [
+      "253-24",
+      "465-11"
+    ],
+    "keywords": [
+      241,
+      840
+    ]
+  }
+},
+{
+  "model": "categories.naics",
   "pk": "333912",
   "fields": {
     "description": "Air and Gas Compressor Manufacturing ",
@@ -5001,6 +5052,31 @@
       247,
       249,
       254
+    ]
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": "333913",
+  "fields": {
+    "description": "Measuring and Dispensing Pump Manufacturing ",
+    "sin": [
+      "253-24",
+      "253-99",
+      "361-24",
+      "361-28",
+      "361-99",
+      "465-1000",
+      "465-22"
+    ],
+    "keywords": [
+      241,
+      254,
+      272,
+      274,
+      280,
+      839,
+      843
     ]
   }
 },
@@ -5933,6 +6009,94 @@
     "description": "Major Household Appliance Manufacturing ",
     "sin": [],
     "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": "335221",
+  "fields": {
+    "description": "Household Cooking Appliance Manufacturing ",
+    "sin": [
+      "051-200",
+      "051-400",
+      "051-99",
+      "639-001",
+      "639-002"
+    ],
+    "keywords": [
+      6,
+      210,
+      212,
+      228,
+      229
+    ]
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": "335222",
+  "fields": {
+    "description": "Household Refrigerator and Home Freezer Manufacturing ",
+    "sin": [
+      "051-200",
+      "051-400",
+      "051-99",
+      "302-49",
+      "639-001",
+      "639-002"
+    ],
+    "keywords": [
+      6,
+      210,
+      212,
+      228,
+      229,
+      652
+    ]
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": "335224",
+  "fields": {
+    "description": "Household Laundry Equipment Manufacturing ",
+    "sin": [
+      "051-200",
+      "051-400",
+      "051-99",
+      "639-001",
+      "639-002"
+    ],
+    "keywords": [
+      6,
+      210,
+      212,
+      228,
+      229
+    ]
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": "335228",
+  "fields": {
+    "description": "Other Major Household Appliance Manufacturing ",
+    "sin": [
+      "051-200",
+      "051-400",
+      "051-99",
+      "302-15",
+      "639-001",
+      "639-002"
+    ],
+    "keywords": [
+      6,
+      210,
+      212,
+      228,
+      229,
+      640
+    ]
   }
 },
 {
@@ -8287,6 +8451,24 @@
 },
 {
   "model": "categories.naics",
+  "pk": "452111",
+  "fields": {
+    "description": "Department Stores (except Discount Department Stores) ",
+    "sin": [],
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": "452112",
+  "fields": {
+    "description": "Discount Department Stores ",
+    "sin": [],
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
   "pk": "452210",
   "fields": {
     "description": "Department Stores ",
@@ -8306,6 +8488,24 @@
 {
   "model": "categories.naics",
   "pk": "452319",
+  "fields": {
+    "description": "All Other General Merchandise Stores ",
+    "sin": [],
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": "452910",
+  "fields": {
+    "description": "Warehouse Clubs and Supercenters ",
+    "sin": [],
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": "452990",
   "fields": {
     "description": "All Other General Merchandise Stores ",
     "sin": [],
@@ -8398,6 +8598,33 @@
   "pk": "454110",
   "fields": {
     "description": "Electronic Shopping and Mail-Order Houses ",
+    "sin": [],
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": "454111",
+  "fields": {
+    "description": "Electronic Shopping ",
+    "sin": [],
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": "454112",
+  "fields": {
+    "description": "Electronic Auctions ",
+    "sin": [],
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": "454113",
+  "fields": {
+    "description": "Mail-Order Houses ",
     "sin": [],
     "keywords": []
   }
@@ -9222,6 +9449,24 @@
 },
 {
   "model": "categories.naics",
+  "pk": "512210",
+  "fields": {
+    "description": "Record Production",
+    "sin": [],
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": "512220",
+  "fields": {
+    "description": "Integrated Record Production/Distribution",
+    "sin": [],
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
   "pk": "512230",
   "fields": {
     "description": "Music Publishers",
@@ -9297,6 +9542,32 @@
     ],
     "keywords": [
       732
+    ]
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": "517110",
+  "fields": {
+    "description": "Wired Telecommunications Carriers ",
+    "sin": [
+      "132-52"
+    ],
+    "keywords": [
+      503
+    ]
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": "517210",
+  "fields": {
+    "description": "Wireless Telecommunications Carriers (except Satellite)",
+    "sin": [
+      "132-53"
+    ],
+    "keywords": [
+      504
     ]
   }
 },
@@ -10030,6 +10301,28 @@
 },
 {
   "model": "categories.naics",
+  "pk": "532220",
+  "fields": {
+    "description": "Formal Wear and Costume Rental",
+    "sin": [],
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": "532230",
+  "fields": {
+    "description": "Video Tape and Disc Rental",
+    "sin": [
+      "760-5"
+    ],
+    "keywords": [
+      731
+    ]
+  }
+},
+{
+  "model": "categories.naics",
   "pk": "532281",
   "fields": {
     "description": "Formal Wear and Costume Rental",
@@ -10071,6 +10364,47 @@
     "description": "All Other Consumer Goods Rental ",
     "sin": [],
     "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": "532291",
+  "fields": {
+    "description": "Home Health Equipment Rental ",
+    "sin": [],
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": "532292",
+  "fields": {
+    "description": "Recreational Goods Rental ",
+    "sin": [],
+    "keywords": []
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": "532299",
+  "fields": {
+    "description": "All Other Consumer Goods Rental ",
+    "sin": [
+      "51-208",
+      "51-55",
+      "51-57",
+      "51-58",
+      "51-58A",
+      "51-58B"
+    ],
+    "keywords": [
+      163,
+      179,
+      181,
+      182,
+      183,
+      184
+    ]
   }
 },
 {
@@ -10167,15 +10501,15 @@
       "66-508"
     ],
     "keywords": [
-      6,
       210,
+      6,
       212,
       219,
       220,
       311,
       393,
-      406,
       456,
+      406,
       457,
       458,
       459
@@ -10680,16 +11014,16 @@
       "132-51"
     ],
     "keywords": [
-      7,
+      886,
       82,
+      7,
       91,
       97,
-      502,
-      886,
       895,
       896,
       897,
-      898
+      898,
+      502
     ]
   }
 },
@@ -10862,11 +11196,11 @@
       "595-9"
     ],
     "keywords": [
+      887,
+      908,
       716,
       718,
       720,
-      887,
-      908,
       910,
       911,
       912,
@@ -10911,17 +11245,17 @@
       "874-599"
     ],
     "keywords": [
-      6,
       7,
+      6,
       51,
       52,
       53,
       54,
       56,
-      57,
       194,
       614,
-      615
+      615,
+      57
     ]
   }
 },
@@ -11039,6 +11373,62 @@
       803,
       807,
       823
+    ]
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": "541711",
+  "fields": {
+    "description": "Research and Development in Biotechnology ",
+    "sin": [
+      "100-03",
+      "66-1000",
+      "871-1",
+      "871-2",
+      "871-3",
+      "871-4",
+      "871-5",
+      "871-6",
+      "871-8"
+    ],
+    "keywords": [
+      6,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      438
+    ]
+  }
+},
+{
+  "model": "categories.naics",
+  "pk": "541712",
+  "fields": {
+    "description": "Research and Development in the Physical, Engineering, and Life Sciences (except Biotechnology) ",
+    "sin": [
+      "100-03",
+      "66-1000",
+      "871-1",
+      "871-2",
+      "871-3",
+      "871-4",
+      "871-5",
+      "871-6",
+      "871-8"
+    ],
+    "keywords": [
+      6,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      438
     ]
   }
 },
@@ -11356,16 +11746,16 @@
       "760-3"
     ],
     "keywords": [
-      7,
-      91,
+      887,
       173,
       177,
       186,
-      729,
-      887,
+      7,
+      91,
       908,
       912,
-      915
+      915,
+      729
     ]
   }
 },
@@ -11754,14 +12144,14 @@
     "keywords": [
       17,
       18,
+      909,
+      887,
       717,
       719,
-      790,
-      887,
-      909,
       912,
       913,
-      914
+      914,
+      790
     ]
   }
 },
