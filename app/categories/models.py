@@ -13,7 +13,7 @@ VEHICLE_CHOICES = (
 
 
 class Keyword(models.Model):
-    name = models.CharField(max_length=500, null=True)
+    name = models.CharField(max_length=1000, null=True)
     
     def __str__(self):
         return "{0} ({1})".format(self.name, self.id)
