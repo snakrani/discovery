@@ -292,7 +292,7 @@ var InputHandler = {
         // can't seem to use cached jqobj, something goes wrong with select2
         this.populatePromise = RequestsManager.getAPIRequest(
             "/api/naics/",
-            { ordering: "description" },
+            { ordering: "description", code__in: Object.keys(naicsMap).join(',') },
             function( data ) {
                 $("#naics-code").empty().append($("<option></option>"));
 
