@@ -97,23 +97,28 @@ class Command(BaseCommand):
 
     
     def load_naics_codes(self):
-        mapping_file = os.path.join(settings.BASE_DIR, 'data/naics.xlsx')
-        wb = open_workbook(mapping_file)
+        mapping_files = [
+            os.path.join(settings.BASE_DIR, 'data/naics_2012.xls'),
+            os.path.join(settings.BASE_DIR, 'data/naics_2017.xlsx')
+        ]
         
         print("Loading NAICS codes")
-        for listing in wb.sheets():
-            for row in range(listing.nrows):
-                try:
-                    code = int(listing.cell(row, 0).value)
-                    title = str(listing.cell(row, 1).value)
+        for file in mapping_files:
+            wb = open_workbook(file)
+        
+            for listing in wb.sheets():
+                for row in range(listing.nrows):
+                    try:
+                        code = int(listing.cell(row, 0).value)
+                        title = str(listing.cell(row, 1).value)
                     
-                    # Save NAICS object
-                    naics, created = Naics.objects.get_or_create(code=code)
-                    naics.description = title
-                    naics.save()
+                        # Save NAICS object
+                        naics, created = Naics.objects.get_or_create(code=code)
+                        naics.description = title
+                        naics.save()
                     
-                except Exception as e:
-                    pass
+                    except Exception as e:
+                        pass
     
     def map_naics_code(self, sin, sin_label, naics_code):
         sin_obj, created = SIN.objects.get_or_create(code=sin)
