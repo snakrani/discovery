@@ -453,16 +453,20 @@ class MetaAPISchema(type):
 
     @classmethod
     def _field_info(cls, field):
-        if field.find('__') != -1:
-            components = field.split('__')
+        components = re.split(r'\s*\:\s*', field)
+        field_query = components[0]
+        field_path = components[1] if len(components) > 1 else field_query
+        
+        if field_path.find('__') != -1:
+            components = field_path.split('__')
             
             base_field = components.pop(0)
             relation = components
         else:
-            base_field = field
+            base_field = field_path
             relation = None
             
-        return { 'name': field, 'base_field': base_field, 'relation': relation }
+        return { 'name': field_query, 'base_field': base_field, 'relation': relation }
 
 
 class AcceptanceTestCase(LiveServerTestCase, TestAssertions, RequestMixin):
