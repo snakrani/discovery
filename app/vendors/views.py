@@ -92,8 +92,8 @@ def PoolCSV(request):
         else:
             location = 'NA'
             
-        psc_codes = list(PSC.objects.filter(naics__root_code=naics.root_code).distinct().values_list('code', flat=True))    
-        contract_list = Contract.objects.filter(Q(PSC__in=psc_codes) | Q(NAICS=naics.root_code), vendor=v)
+        psc_codes = list(PSC.objects.filter(naics__code=naics.code).distinct().values_list('code', flat=True))    
+        contract_list = Contract.objects.filter(Q(PSC__in=psc_codes) | Q(NAICS=naics.code), vendor=v)
         
         v_row = [v.name, location, contract_list.count()]
         v_row.extend(setaside_list)
@@ -201,8 +201,8 @@ def VendorCSV(request, vendor_duns):
     writer.writerow(('Date Signed', 'PIID', 'Agency', 'Type', 'Value ($)', 'Email POC', 'Status'))
 
     if naics:    
-        psc_codes = list(PSC.objects.filter(naics__root_code=naics.root_code).distinct().values_list('code', flat=True))    
-        contracts = Contract.objects.filter(Q(PSC__in=psc_codes) | Q(NAICS=naics.root_code), vendor=vendor).order_by('-date_signed')
+        psc_codes = list(PSC.objects.filter(naics__code=naics.code).distinct().values_list('code', flat=True))    
+        contracts = Contract.objects.filter(Q(PSC__in=psc_codes) | Q(NAICS=naics.code), vendor=vendor).order_by('-date_signed')
     else:
         contracts = Contract.objects.filter(vendor=vendor).order_by('-date_signed')
 
