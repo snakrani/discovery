@@ -7,55 +7,42 @@ class NaicsTest(case.APITestCase, metaclass = case.MetaAPISchema):
     fixtures = data.get_category_fixtures()
     schema = {
         'object': {
-            '&541614': ('root_code', 'equal', '541614'),
-            '&541330D': ('root_code', 'equal', '541330'),
-            '&541840': ('root_code', 'equal', '541840'),
+            '&541614': ('code', 'equal', '541614'),
+            '&541330': ('code', 'equal', '541330'),
+            '&541840': ('code', 'equal', '541840'),
             '#77777777': (),
             '#ABCDEFG': ()
         },
-        'ordering': ('code', 'root_code', 'description', 'keywords__name'),
+        'ordering': ('code', 'description', 'sin__code', 'keywords__name'),
         'pagination': {
             '@no_args': {},
-            '!page': {'page': 25},
+            '!page': {'page': 1000},
             '@count': {'count': 5},
             '@mixed': {'page': 4, 'count': 10}
         },
         'search': {
-            '*search1': ('description', 'matches', 'Environmental'),
-            '*search2': ('root_code', 'equal', '541910'),
+            '@search1': ('description', 'matches', 'Water Supply and Irrigation Systems'),
+            '*search2': ('code', 'equal', '541910'),
             '@search3': ('keywords__name', 'equal', 'Automobile driving schools'),
             '-search4': ('code', 'matches', '0000000000000')
         },
         'fields': {
             'code': {
                 '*exact': '541330',
-                '*iexact': '541712c',
-                '@in': ("541711", "238290", "561730B"),
-                '@contains': '622',
-                '@icontains': 'b',
-                '@startswith': '54',
-                '@istartswith': '2382',
-                '@endswith': 'A',
-                '@iendswith': 'c',
-                '@regex': '[^\d]+$',
-                '@iregex': '^(23|56)'
-            },
-            'root_code': {
-                '@exact': '541330',
-                '@iexact': '541712',
+                '*iexact': '541713',
                 '@in': ("541711", "238290", "561730"),
                 '@contains': '622',
-                '@icontains': '990',
-                '@startswith': '61',
-                '@istartswith': '5617',
-                '@endswith': '10',
-                '@iendswith': '20',
-                '@regex': '^[\d]+$',
+                '@icontains': '622',
+                '@startswith': '54',
+                '@istartswith': '2382',
+                '@endswith': '30',
+                '@iendswith': '30',
+                '@regex': '^54\d+0$',
                 '@iregex': '^(23|56)'
             },
             'description': {
                 '@exact': 'Outdoor Advertising',
-                '@iexact': 'hvac maintenance',
+                '@iexact': 'adhesive manufacturing',
                 '@in': ("Payroll Services", "Commissioning Services", "Testing Laboratories"),
                 '@contains': 'Accounting',
                 '@icontains': 'rEPair',
@@ -63,20 +50,33 @@ class NaicsTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@istartswith': 'r',
                 '@endswith': 'Services',
                 '@iendswith': 'advertIsing',
-                '@regex': '[/]+',
-                '@iregex': 'water\s+based'
+                '@regex': 'Services$',
+                '@iregex': 'similar\s+events'
             },
-            'keyword': {
-                '@exact': 'Cognitive development',
-                '@iexact': 'educational Consultants',
-                '@in': ("Fine arts schools", "Investment advice", "Language schools"),
-                '@contains': 'consulting',
-                '@icontains': 'CONSULTING',
-                '@startswith': 'Management',
+            'sin:sin__code': {
+                '@exact': '100-03',
+                '@iexact': 'c871-202',
+                '@in': ("100-03", "520-14", "541-4G", "51-B36-2A"),
+                '@contains': 'B36',
+                '@icontains': '-b36',
+                '@startswith': '51',
+                '@istartswith': 'c132',
+                '@endswith': '03',
+                '@iendswith': '2a',
+                '@regex': '[A-Z]\d+\-\d+$',
+                '@iregex': '^(C87|51)'
+            },
+            'keyword:keywords__name': {
+                '@exact': 'Cooking Equipment',
+                '@iexact': 'ancillary supplies and / or services',
+                '@in': ("Elemental Analyzers", "Energy Consulting Services", "Environmental Consulting Services"),
+                '@contains': 'Support',
+                '@icontains': 'support',
+                '@startswith': 'Marine',
                 '@istartswith': 'edu',
-                '@endswith': 'services',
-                '@iendswith': 'Services',
-                '@regex': '(training|consulting)',
+                '@endswith': 'Services',
+                '@iendswith': 'services',
+                '@regex': '(Training|Consulting)',
                 '@iregex': '^(vocational|strategic)'
             }
         }
@@ -88,27 +88,4 @@ class NaicsTest(case.APITestCase, metaclass = case.MetaAPISchema):
         
     def validate_object(self, resp, base_key = []):
         resp.is_not_empty(base_key + ['code'])
-        resp.is_int(base_key + ['root_code'])
         resp.is_not_empty(base_key + ['description'])
-    
-
-    def test_mixed_request_found_1(self):
-        resp = self.validated_multi_list(q = 'Maintenance', ordering = '-code')
-        resp.validate(lambda resp, base_key: resp.matches(base_key + ['description'], 'Maintenance'))
-        resp.validate_ordering('code', 'desc')
-
-    def test_mixed_request_found_2(self):
-        resp = self.validated_multi_list(q = 'Pest', ordering = 'code')
-        resp.validate(lambda resp, base_key: resp.matches(base_key + ['description'], 'Pest'))
-        resp.validate_ordering('code', 'asc')
-    
-    def test_mixed_request_found_3(self):
-        resp = self.validated_multi_list(q = 'Services', ordering = '-description')
-        resp.validate(lambda resp, base_key: resp.matches(base_key + ['description'], 'Services'))
-        resp.validate_ordering('description', 'desc')
-    
-    def test_mixed_request_not_found_1(self):
-        self.empty_list(q = 'Space Man', ordering = 'code')
-    
-    def test_mixed_request_not_found_2(self):
-        self.empty_list(q = 'Arghhhhh!!', ordering = '-description')
