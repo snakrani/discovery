@@ -128,6 +128,8 @@ class PoolFullSerializer(BasePoolSerializer):
         fields = BasePoolSerializer.Meta.fields + ['naics']
 
 class PoolTestSerializer(PoolFullSerializer):
+    naics = NaicsTestSerializer(many=True)
+    
     class Meta(PoolFullSerializer.Meta):
         fields = PoolFullSerializer.Meta.fields + ['url']
 
