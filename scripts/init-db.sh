@@ -12,14 +12,6 @@ then
   rm -f "$LOG_FILE"
 fi
 
-#activate the virtual python environment
-if [ -d /venv ]
-then
-  echo "> Activating Python virtual environment" | tee -a "$LOG_FILE"
-  alias python3="/venv/bin/python3"
-  source /venv/bin/activate
-fi
-
 DB_HOST="${2:-none}"
 DB_PORT="${3:-5432}"
 
