@@ -22,7 +22,6 @@ then
 fi
 
 #install Python with virtual environment
-rm -Rf /venv
 ./scripts/setup-python.sh
 
 #install PostgreSQL client
