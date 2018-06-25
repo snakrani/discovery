@@ -3,7 +3,6 @@ LayoutManager.initializers.index = function() {
     EventManager.subscribe('naicsChanged', this.route.bind(LayoutManager));
     EventManager.subscribe('loadPage', this.vehicleInfo.bind(LayoutManager));
 
-    this.disableNaics();
     this.hideZone();
     this.disableFilters();
 };
