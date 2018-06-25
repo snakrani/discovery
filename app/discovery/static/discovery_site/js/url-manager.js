@@ -4,17 +4,18 @@ var URLManager = {
 
     init: function() {
         EventManager.subscribe('vehicleChanged', this.update.bind(URLManager));
+        EventManager.subscribe('poolSelected', this.update.bind(URLManager));
         EventManager.subscribe('naicsChanged', this.update.bind(URLManager));
         EventManager.subscribe('zoneChanged', this.update.bind(URLManager));
         EventManager.subscribe('contentChanged', this.update.bind(URLManager));
         EventManager.subscribe('vendorPoolFilterChanged', this.update.bind(URLManager));
-
 
         this.initFromQS();
     },
 
     initFromQS: function() {
         var vehicle = this.getParameterByName('vehicle');
+        var pool = this.getParameterByName('pool');
         var naics = this.getParameterByName('naics-code');
         var zone = this.getParameterByName('zone');
         var setasides = this.getParameterByName('setasides');
@@ -22,6 +23,9 @@ var URLManager = {
 
         if (vehicle) {
             data['vehicle'] = vehicle;
+        }
+        if (pool) {
+            data['pool'] = pool;
         }
         if (naics) {
             data['naics-code'] = naics;
@@ -45,10 +49,6 @@ var URLManager = {
         var queryObject = RequestsManager.buildRequestQuery();
         var qs = '?';
         var k;
-
-        // these aren't needed for query string, included for requestquery.
-        delete queryObject.group;
-        delete queryObject.pool;
 
         if('naics' in queryObject) {
             queryObject['naics-code'] = queryObject.naics;
@@ -91,29 +91,6 @@ var URLManager = {
         pathArray.splice(5, 0, "csv");
 
         $("#csv_link").attr("href", pathArray.join('/'));
-    },
-
-    getPoolInfo: function() {
-        var pathArray = window.location.href.split('/').removeEmpties();
-        var poolStart = $.inArray('pool', pathArray);
-
-        if (poolStart !== -1) {
-            return {'vehicle': pathArray[poolStart + 1], 'pool_number': pathArray[poolStart + 2]};
-        }
-        else {
-            return null;
-        }
-    },
-
-    getPool: function() {
-        var poolInfo = this.getPoolInfo();
-
-        if (poolInfo !== null){
-            return [poolInfo['vehicle'] + '_' + poolInfo['pool_number'], poolInfo['vehicle']];
-        }
-        else {
-            return null;
-        }
     },
 
     getDUNS: function() {
