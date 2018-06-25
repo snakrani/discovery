@@ -71,7 +71,8 @@ RequestsManager.load = function() {
     });
 };
 
-RequestsManager.refreshVendor = function(pool) {
+RequestsManager.refreshVendor = function() {
+    var pools = RequestsManager.vehiclePools;
     var listType = 'naics';
 
     if (URLManager.getParameterByName('showall')) {
@@ -79,7 +80,7 @@ RequestsManager.refreshVendor = function(pool) {
     }
 
     RequestsManager.loadVendor(function(duns, vendor) {
-        EventManager.publish('vendorPoolLoaded', vendor, pool);
+        EventManager.publish('vendorPoolLoaded', vendor, pools);
         EventManager.publish('vendorInfoLoaded', {'listType': listType});
     });
 };
