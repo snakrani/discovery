@@ -8,7 +8,7 @@ LayoutManager.render = function(results) {
     this.renderVendor(results, null);
 };
 
-LayoutManager.renderVendor = function(vendor, pool) {
+LayoutManager.renderVendor = function(vendor, pools) {
     var membership = null;
 
     $(document).prop('title', vendor.name + " - " + URLManager.title);
