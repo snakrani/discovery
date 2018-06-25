@@ -143,8 +143,6 @@ h4.data {
 }
 
 
-
-
 /* Template Styles */
 
 #banner {
@@ -223,7 +221,7 @@ h4.data {
 #combined_search {
     width: 1100px;
     min-height: 230px;
-    padding-top: 15px;
+    padding-top: 7px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -260,34 +258,80 @@ h4.data {
     text-decoration: underline !important;
 }
 
+#search-main {
+  float: left;
+  width: 650px;
+}
+
+#search-focus {
+    margin-left: 50px;
+    padding-top: 25px;
+}
+
+#search-focus .select_text {
+    color: #aaa;
+}
+
+#naics_select {
+    margin-top: 0px;
+    font-size: 1.2em;
+}
+
+#naics_select .select2-selection {
+  min-height: 35px;
+  max-height: 50px;
+  font-weight: bold;
+}
+
+.select2-dropdown .select2-search input.select2-search__field {
+  min-height: 40px;
+  max-height: 50px;
+  border: 4px solid #323a45;
+  background: #ffffcc;
+}
+
+.search_text_style {
+    color: #bfbfbf;
+    height: 35px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#search-contract {
+    margin-left: 50px;
+    padding-top: 20px;
+}
+
+#search-contract .select_text {
+    color: #aaa;
+}
+
 #vehicle_select {
     float: left;
-    margin-left: 60px;
-    padding-top: 57px;
-    background: url(../../images/1.png);
-    background-repeat: no-repeat;
-    background-position: 0 0;
+    margin-top: 0px;
 }
 
 .vehicle_select_style {
     color: #bfbfbf;
     height: 26px;
     font-family: 'Open Sans', sans-serif;
-    margin-top: 9px;
 }
 
-#search {
+#pool_select {
     float: left;
-    margin-left: 50px;
-    padding-top: 57px;
-    background: url(../../images/2.png);
-    background-repeat: no-repeat;
-    background-position: 0 0;
-    width: 417px;
+    margin-top: 0px;
+    margin-left: 15px;
+}
+
+.pool_select_style {
+    color: #bfbfbf;
+    height: 26px;
+    font-family: 'Open Sans', sans-serif;
 }
 
 #zone_select {
-    margin-top: 15px;
+    float: left;
+    margin-top: 0px;
+    margin-left: 15px;
 }
 
 .zone_select_style {
@@ -314,13 +358,14 @@ h4.data {
 
 #filter_container {
     float: left;
-    padding-top: 57px;
-    margin-left: 37px;
-    background: url(../../images/3.png);
-    background-repeat: no-repeat;
-    background-position: 0 0;
+    padding-top: 25px;
+    margin-left: 45px;
     color: #FFF;
     width: 340px;
+}
+
+#filter_container .select_text {
+    color: #aaa;
 }
 
 #container #filter_container {
@@ -700,34 +745,53 @@ h4.data {
     padding-top: 13px;
 }
 
-#results_pool_name_number {
+#results_pool_names {
     padding-bottom: 10px;
     width: 100%;
-    padding-right: px;
     border-bottom: 1px solid #eeeeee;
 }
 
-.results_pool_name_number_search {
+.results_pool_search {
     color: #666;
-    font-size: 1.3em;
+    font-size: 1.1em;
     font-family: 'Raleway';
     padding-bottom: 4px;
     display: inline-block;
 }
 
-.results_pool_name_number_pool {
-    font-size: 1.8em;
-    font-weight: 700;
-    color: #4A84A3;
+.results_pool_names {
+    height: 20px;
     font-family: 'Raleway';
 }
 
-.results_pool_name_number_description {
-    font-size: 1.8em;
+.results_pool_names .pool {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+}
+
+.results_pool_names .spacer {
+    float: left;
+    margin: 0 10px 0 0;
+    background: #323a45;
+    width: 10px;
+    height: 20px;
+}
+
+.results_pool_names .vehicle {
+    font-size: 1.2em;
     font-weight: 700;
     line-height: 1em;
     color: #4A84A3;
-    font-family: 'Raleway';
+
+}
+
+.results_pool_names .title {
+    padding-left: 10px;
+    font-size: 1.1em;
+    font-weight: 500;
+    line-height: 1em;
+    color: #4A84A3;
 }
 
 #number_of_results {
@@ -737,9 +801,10 @@ h4.data {
     background-color: ;
     color: #333333;
     font-weight: 600;
+    clear: both;
     display: block;
     font-family: 'Raleway';
-    margin-top: 5px;
+    padding-top: 35px;
 }
 
 .matching_your_search {
@@ -872,8 +937,6 @@ img.green_dot {
 
 .pooldetail td.unrestricted {
     background-color: #e3e3e3;
-    vertical-align: top;
-    padding-top: 13%;
     color: #3f3f3f;
 }
 
