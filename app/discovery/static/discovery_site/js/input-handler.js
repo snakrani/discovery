@@ -7,8 +7,8 @@ var InputHandler = {
         $('#naics-code').change(this.sendCodeChange.bind(InputHandler));
         $('#zone-id').change(this.sendZoneChange.bind(InputHandler));
         $('#setaside-filters').change(this.sendFilterChange.bind(InputHandler));
-        $('input#pool_filter').change(this.sendPoolFilterContractsChange.bind(InputHandler));
-        $('input#pool_filter').change(this.sendVendorPoolFilterChange.bind(InputHandler));
+        //$('input#pool_filter').change(this.sendPoolFilterContractsChange.bind(InputHandler));
+        $('#contract_pool_filters').change(this.sendPoolFilterContractsChange.bind(InputHandler));
 
         //should this be bound to the InputHandler? KBD
         $('#vendor_contract_history_title_container').on('click', 'div.contracts_button', this.sendContractsChange.bind(InputHandler));
@@ -166,11 +166,7 @@ var InputHandler = {
 
         var $button = $("#vendor_contract_history_title_container").find('.contracts_button_active');
         if ($button.text() == "All Contracts") {
-            this.naicsCode = 'all';
             listType = 'all';
-        }
-        else {
-            this.naicsCode = $("#vendor_contract_history_title_container").find("div").first().text().replace(/\D/g,'').trim();
         }
 
         //reset date header column classes
@@ -178,7 +174,12 @@ var InputHandler = {
         $date.removeClass('arrow-sortable').addClass('arrow-down').attr("title", "Sorted descending");
         $date.siblings('.sortable').removeClass('arrow-down').removeClass('arrow-up').addClass('arrow-sortable').attr("title", "Select to sort");
 
-        EventManager.publish('contractsChanged', {'page': 1, 'naics': this.naicsCode, 'listType': listType});
+        RequestsManager.pool = this.getContractPools();
+
+        EventManager.publish('contractsChanged', {
+            'page': 1,
+            'listType': listType
+        });
         return false;
     },
 
@@ -208,10 +209,6 @@ var InputHandler = {
         EventManager.publish('filtersChanged');
     },
 
-    sendVendorPoolFilterChange: function() {
-        EventManager.publish('vendorPoolFilterChanged');
-    },
-
     getVehicle: function() {
         return this.vehicle;
     },
@@ -229,8 +226,8 @@ var InputHandler = {
     },
 
     getSetasides: function() {
-        /* returns array of setaside ids that are checked */
         var setasides = [];
+
         $("form#setaside-filters input:checked").each(function(index) {
             setasides.push($(this).val());
         });
@@ -238,13 +235,19 @@ var InputHandler = {
         return setasides;
     },
 
-    //getVendorPoolFilter: function() {
-    //  return $('input#pool_filter').is(':checked');
-    //},
+    getContractPools: function() {
+        var pools = [];
+
+        $("form#contract_pool_filters input:checked").each(function(index) {
+            pools.push($(this).val());
+        });
+
+        return pools;
+    },
 
     loadPools: function() {
-        var vehicle = this.getVehicle();
-        var naics = this.getNAICSCode();
+        var vehicle = this.getVehicle() || URLManager.getParameterByName('vehicle');
+        var naics = this.getNAICSCode() || URLManager.getParameterByName('naics-code');
         var url = "/api/pools/";
         var queryData = {};
 
@@ -260,7 +263,7 @@ var InputHandler = {
             for (var index = 0; index < pools.length; index++) {
                 var pool = pools[index];
 
-                if (! vehicle || vehicle == 'all' || pool.vehicle == vehicle) {
+                if (! vehicle || $.inArray(vehicle, ['', 'all', pool.vehicle]) != -1) {
                     vehiclePoolMap[pool.id] = pool;
                 }
                 naicsPoolMap[pool.id] = pool;
