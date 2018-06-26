@@ -3,14 +3,14 @@ LayoutManager.initializers.index = function() {
     EventManager.subscribe('naicsChanged', this.route.bind(LayoutManager));
     EventManager.subscribe('loadPage', this.vehicleInfo.bind(LayoutManager));
 
-    this.hideZone();
+    this.hideZones();
     this.disableFilters();
 };
 
 LayoutManager.route = function(data) {
     var queryObject = RequestsManager.buildRequestQuery();
 
-    if ('vehicle' in queryObject && 'naics' in queryObject) {
+    if ('naics' in queryObject) {
         this.loadPoolPage();
     }
 };
