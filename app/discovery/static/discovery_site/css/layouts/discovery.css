@@ -1106,14 +1106,11 @@ img.green_dot {
 }
 
 .vendor_website {
-    float: left;
-    margin-left: 10px;
-    margin-top: 4px;
-    padding-right: 8px;
-    padding-top: 10px;
+    margin-left: 0;
+    margin-top: 5px;
     background: url(../../images/external_link.png);
     background-repeat: no-repeat;
-    background-position: 118px 14px;
+    background-position: 118px 5px;
     height: 35px;
     width: 140px;
     vertical-align: text-bottom;
@@ -1132,20 +1129,44 @@ img.green_dot {
 #vendor_admin_container {
     width: 100%;
     margin-top: 0;
-    min-height: 200px;
-    border-bottom: 1px solid #DDDDDD;
+    min-height: 250px;
     border-top: 1px solid #DDDDDD;
     padding-top: 30px;
+    margin-bottom: 10px;
 }
 
 #vendor_admin_c1 {
-    width: 340px;
+    width: 700px;
     float: left;
     min-height: 90px;
 }
 
+#vendor_contact_table_container {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#vendor_contact_table_container .vendor_contact_label {
+    font-size: 1em;
+    padding-bottom: 6px;
+}
+
+#vendor_contact_table_container td {
+  text-align: left;
+}
+
+#vendor_result_links {
+  clear: both;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#vendor_result_links a {
+  float: right;
+  padding-bottom: 10px;
+}
+
 #download_data {
-    width: 340px;
     min-height: 20px;
     padding-left: 23px;
     background: url(../../images/download_icon.png);
@@ -1200,6 +1221,7 @@ img.green_dot {
 .admin_label {
     display: inline-block;
     color: #666666;
+    font-style: italic;
 }
 
 .admin_data {
@@ -1219,19 +1241,16 @@ img.green_dot {
 }
 
 .admin_title {
-    margin: 0em;
-    font-size: 1em;
-    color: #333333;
-    font-weight: 600;
-}
-
-#vendor_admin_c3 {
-    min-width: 300px;
-    float: left;
-    min-height: 130px;
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    color: #666666;
+    font-style: italic;
 }
 
 #sb_badge {
+    position: absolute;
+    left: 1020px;
     display: none;
     float: right;
 }
@@ -1249,15 +1268,20 @@ img.green_dot {
 }
 
 #vendor_contract_history_container {
+    clear: both;
     width: 100%;
     min-height: 100px;
     display: block;
     margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #DDDDDD;
 }
 
 #vendor_contract_history_title_container {
     width: 100%;
     display: block;
+    margin-top: 10px;
+    margin-bottom: 15px;
 }
 
 .vendor_contract_history_text {
