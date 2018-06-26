@@ -21,8 +21,6 @@
 
     <div id="vendor_title_status_container">
         <div class="vendor_title"></div>
-        <div class="vendor_website"><a id="vendor_site_link" target="_blank" href="#" rel="noopener noreferrer">vendor website</a></div>
-        <div class="debarred_status"> &lt;&lt;&lt; WARNING: DEBARRED!</div>
     </div><!-- end vendor_title_status_container -->
 
     <div id="vendor_admin_container">
@@ -60,33 +58,62 @@
                     </table>
                 </div>
             </div><!-- end vendor_socioeconomic_table_container -->
-            <a id="csv_link" href="#"><div id="download_data">Download vendor data (CSV)</div></a>
-            {% if has_capability_statement %}
-                <a href="{% static capability_statement_url %}">Vendor capabilities statement (PDF)</a>
-            {% endif %}
+
+            <div id="vendor_contact_table_container">
+                <div class="vendor_contact_label">Pool Membership</div>
+                <div class="vendor_detail_table">
+                    <form id="contract_pool_filters" title="Contract pool filters">
+                        <table id="contact_details">
+                            <tr>
+                                <td scope="col">
+                                </td>
+                                <td scope="col">
+                                    Pool
+                                </td>
+                                <td scope="col">
+                                    Contact
+                                </td>
+                                <td scope="col">
+                                    Phone
+                                </td>
+                                <td scope="col">
+                                    Email
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div><!-- end vendor_contact_table_container -->
 
         </div><!-- end vendor_admin_c1 -->
 
         <div id="vendor_admin_c2">
-            <div id="vendor_c1_info">
+            <div id="vendor_info">
+                <div class="vendor_website"><a id="vendor_site_link" target="_blank" href="#" rel="noopener noreferrer">vendor website</a></div>
+                <div class="debarred_status"> &lt;&lt;&lt; WARNING: DEBARRED!</div>
+
                 <p class="lh"><span class="admin_label">DUNS:</span> <span class="duns_number admin_data"></span></p>
                 <p class="lh"><span class="admin_label">CAGE Code:</span> <span class="cage_code admin_data"></span></p>
                 <p class="lh"><span class="admin_label">Employees:</span> <span class="number_of_employees admin_data"></span></p>
                 <p class="lh"><span class="admin_label">Annual Revenue:</span> <span class="annual_revenue admin_data"></span></p>
-            </div><!-- end vendor_c1_info -->
+            </div>
+
+            <div id="vendor_address">
+                <p class="admin_title">Address</p>
+                <p class="lh"><span class="admin_label"></span><span class="vendor_address1 admin_data2"></span></p>
+                <p class="lh"><span class="admin_label"></span><span class="vendor_address2 admin_data2"></span></p>
+            </div>
         </div><!-- end vendor_admin_c2 -->
 
-        <div id="vendor_admin_c3">
-            <p class="admin_title">POC</p>
-            <p class="lh"><span class="admin_label"></span><span class="vendor_address1 admin_data2"></span></p>
-            <p class="lh"><span class="admin_label"></span><span class="vendor_address2 admin_data2"></span></p>
-            <p class="lh"><span class="admin_label"></span><span class="vendor_poc_name admin_data2"></span></p>
-            <p class="lh"><span class="admin_label"></span><span class="vendor_poc_phone admin_data2"></span></p>
-            <p class="lh"><span class="admin_label"></span><span class="vendor_poc_email admin_data2"></span></p>
-        </div><!-- end vendor_admin_c3 -->
         <div id="sb_badge"><img src="{% static "discovery_site/images/sb_badge.png" %}"></div>
     </div><!-- end vendor_admin_container -->
 
+    <div id="vendor_result_links">
+        <a id="csv_link" href="#"><div id="download_data">Download vendor data (CSV)</div></a>
+        {% if has_capability_statement %}
+            <a href="{% static capability_statement_url %}">Vendor capabilities statement (PDF)</a>
+        {% endif %}
+    </div>
 
     <div id="vendor_contract_history_container">
 
@@ -95,9 +122,6 @@
             <!-- <span class="vendor_contract_history_naics"></span> -->
             <div tabindex="0" id="naics_contracts_button" class="contracts_button" title="load this vendor's contract history for this NAICS in the table below">NAICS</div>
             <div tabindex="0" id="all_contracts_button" class="contracts_button" title="load this vendor's contract history for all past contracts in the table below">All Contracts</div>
-            <div id="pool_filter_display">
-              <label class="pure-checkbox" for="pool_filter"><input type="checkbox" id="pool_filter" name="pool_filter" value="pool" aria-labeledby="choose_filters" {% if request.GET.pool_only %}checked{% endif %} /><span>Filter to pool</span></label>
-            </div>
         </div><!-- end vendor_contract_history_title_container -->
 
         <div id="vendor_disclaimers">
