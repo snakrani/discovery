@@ -3,12 +3,13 @@ var LayoutManager = {
     initializers: {},
 
     init: function() {
-        EventManager.subscribe('vehicleChanged', this.toggleZones.bind(LayoutManager));
-
+        if (URLManager.isHomePage() || URLManager.isPoolPage()) {
+            EventManager.subscribe('vehicleChanged', this.toggleZones.bind(LayoutManager));
+            EventManager.subscribe('poolUpdated', this.updatePoolInfo.bind(LayoutManager));
+            EventManager.subscribe('poolSelected', this.updatePoolInfo.bind(LayoutManager));
+            EventManager.subscribe('contentChanged', this.updateResultsInfo.bind(LayoutManager));
+        }
         EventManager.subscribe('dataLoaded', this.render.bind(LayoutManager));
-        EventManager.subscribe('poolUpdated', this.updatePoolInfo.bind(LayoutManager));
-        EventManager.subscribe('poolSelected', this.updatePoolInfo.bind(LayoutManager));
-        EventManager.subscribe('contentChanged', this.updateResultsInfo.bind(LayoutManager));
 
         for(var handler in this.initializers){
             this.initializers[handler].call(this);
