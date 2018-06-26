@@ -14,9 +14,6 @@ var RequestsManager = {
             EventManager.subscribe('zoneChanged', this.load.bind(RequestsManager));
             EventManager.subscribe('filtersChanged', this.load.bind(RequestsManager));
         }
-        else {
-            EventManager.subscribe('loadPage', this.load.bind(RequestsManager));
-        }
 
         for(var handler in this.initializers){
             this.initializers[handler].call(this);
