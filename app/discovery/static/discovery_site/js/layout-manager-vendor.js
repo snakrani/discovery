@@ -83,22 +83,16 @@ LayoutManager.renderVendor = function(vendor) {
     indicatorsRow.append(this.renderColumn(vendor, 'sdb', '27'));
     t.append(indicatorsRow);
 
-    if (! $.isEmptyObject(pools)) {
-        var pool_components = vendor.pools[0].pool.id.split('_');
-
+    if (InputHandler.getNAICSCode()) {
         $("#naics_contracts_button").show();
-        $("#naics_contracts_button").text("NAICS " + URLManager.stripSubCategories(InputHandler.naicsCode));
+        $("#naics_contracts_button").text("NAICS " + URLManager.stripSubCategories(InputHandler.getNAICSCode()));
         $("#all_contracts_button").show();
         $(".vendor_contract_history_text").html("Showing vendor contract history for PSCs related to: ");
-
-        $("#pool_filter_display").show();
-        $("#pool_filter_display span").text("Only show contracts for  " + pool_components[0]);
     }
     else {
         $("#naics_contracts_button").hide();
         $("#all_contracts_button").hide();
         $(".vendor_contract_history_text").html("Showing this vendor's indexed contract history");
-        $("#pool_filter_display").hide();
 
         this.renderButtonAndCSV('all');
     }
@@ -128,7 +122,6 @@ LayoutManager.renderContacts = function(vendor, pools) {
 
         $table.append($contractRow);
     }
-    RequestsManager.pool = InputHandler.getContractPools();
 };
 
 LayoutManager.showSbBadge = function(pools) {
