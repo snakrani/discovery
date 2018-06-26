@@ -1132,7 +1132,7 @@ img.green_dot {
     min-height: 250px;
     border-top: 1px solid #DDDDDD;
     padding-top: 30px;
-    margin-bottom: 10px;
+    margin-bottom: 0;
 }
 
 #vendor_admin_c1 {
@@ -1157,7 +1157,7 @@ img.green_dot {
 
 #vendor_result_links {
   clear: both;
-  margin-top: 10px;
+  margin-top: 0;
   margin-bottom: 10px;
 }
 
@@ -1249,10 +1249,11 @@ img.green_dot {
 }
 
 #sb_badge {
-    position: absolute;
-    left: 1020px;
+    position: relative;
+    top: -200px;
+    left: 300px;
+    height: 10px;
     display: none;
-    float: right;
 }
 
 
