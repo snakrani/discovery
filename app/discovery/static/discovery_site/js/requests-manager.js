@@ -55,16 +55,20 @@ var RequestsManager = {
         var naics = InputHandler.getNAICSCode() || URLManager.getParameterByName('naics-code');
         var zone = InputHandler.getZone() || URLManager.getParameterByName('zone');
         var setasides = InputHandler.getSetasides();
+        var contractPools = InputHandler.getContractPools();
         var queryData = {};
 
         if (vehicle && vehicle != 'all') {
             queryData['vehicle'] = vehicle;
         }
-        if (pool && pool in pools) {
+        if (contractPools.length > 0) {
+            queryData['pool'] = contractPools.join(',');
+        }
+        else if (pool && pool in pools) {
             queryData['pool'] = pool;
         }
 
-        if (naics) {
+        if (naics && naics != 'all') {
             queryData['naics'] = naics;
         }
         if (zone && zone != 'all') {
