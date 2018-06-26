@@ -58,19 +58,6 @@ RequestsManager.loadContracts = function(data, callback) {
     );
 };
 
-RequestsManager.load = function() {
-    var listType = 'naics';
-
-    if (URLManager.getParameterByName('showall')) {
-        listType = 'all';
-    }
-
-    RequestsManager.loadVendor(function(duns, vendor) {
-        EventManager.publish('dataLoaded', vendor);
-        EventManager.publish('vendorInfoLoaded', {'listType': listType});
-    });
-};
-
 RequestsManager.refreshVendor = function() {
     var listType = 'naics';
 
@@ -99,7 +86,7 @@ RequestsManager.refreshContracts = function(data) {
 
 RequestsManager.getPIIDs = function() {
   var vendor = RequestsManager.vendor;
-  var pools = RequestsManager.pool;
+  var pools = InputHandler.getContractPools();
   var piids = [];
 
   if (vendor && pools.length > 0) {
