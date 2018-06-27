@@ -24,6 +24,7 @@ var InputHandler = {
         EventManager.subscribe('loadPage', this.updateFields.bind(InputHandler));
 
         if (URLManager.isHomePage() || URLManager.isPoolPage()) {
+            EventManager.subscribe('loadPage', this.loadPools.bind(InputHandler));
             EventManager.subscribe('loadPage', this.populateZoneDropDown.bind(InputHandler));
 
             EventManager.subscribe('fieldsUpdated', this.loadVehiclePools.bind(InputHandler));
@@ -34,6 +35,7 @@ var InputHandler = {
             EventManager.subscribe('naicsChanged', this.loadPools.bind(InputHandler));
 
             EventManager.subscribe('poolUpdated', this.populateVehicleDropDown.bind(InputHandler));
+            EventManager.subscribe('vehicleChanged', this.populateVehicleDropDown.bind(InputHandler));
 
             EventManager.subscribe('poolUpdated', this.populatePoolDropDown.bind(InputHandler));
             EventManager.subscribe('poolChanged', this.populatePoolDropDown.bind(InputHandler));
@@ -184,10 +186,10 @@ var InputHandler = {
     },
 
     sendVehicleChange: function() {
-        this.vehicle = $('form#vehicle-select select').val(); //to get the default
+        this.vehicle = $('#vehicle-id').val();
 
         $("form#setaside-filters input:checked").prop('checked', false);
-        EventManager.publish('vehicleChanged', {'vehicle': this.vehicle, 'vehicleOnly': true});
+        EventManager.publish('vehicleChanged', this.vehicle);
     },
 
     sendPoolChange: function(e) {
@@ -361,14 +363,17 @@ var InputHandler = {
         else {
             $("#vehicle-id").val('all');
         }
+
+        this.updatePools();
     },
 
     populatePoolDropDown: function(updatedId) {
         var pools = RequestsManager.vehiclePools;
         var count = 0;
         var pool;
+        var poolId;
 
-        if (updatedId) {
+        if (typeof updatedId == 'string') {
             pool = updatedId;
         }
         else {
@@ -392,6 +397,7 @@ var InputHandler = {
                 .text(pool.name + " (" + pool.vehicle.split('_').join(' ') + ")"));
 
             count += 1;
+            poolId = id;
         });
 
         if (pool && pool in pools) {
@@ -406,6 +412,8 @@ var InputHandler = {
         }
         else {
             LayoutManager.hidePools();
+            $("#pool-id").val(poolId);
+            this.poolId = poolId;
         }
 
         this.updatePools();
@@ -443,10 +451,10 @@ var InputHandler = {
                 });
 
                 if (naics_exists || ! naics) {
-                    $("#naics-code").val(naics).trigger('change');
+                    $("#naics-code").val(naics);
                 }
                 else {
-                    $("#naics-code").val(first_naics).trigger('change');
+                    $("#naics-code").val(first_naics);
                 }
             }
         );
