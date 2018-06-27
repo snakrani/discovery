@@ -2,6 +2,7 @@
 LayoutManager.initializers.vendor = function() {
     EventManager.subscribe('vendorPoolLoaded', this.renderVendor.bind(LayoutManager));
     EventManager.subscribe('contractDataLoaded', this.renderTable.bind(LayoutManager));
+    EventManager.subscribe('pageUpdated', this.renderButtonAndCSV(LayoutManager));
 };
 
 LayoutManager.render = function(results) {
@@ -162,14 +163,24 @@ LayoutManager.renderTable = function(results, listType, pageNumber, itemsPerPage
 };
 
 LayoutManager.renderButtonAndCSV = function(listType){
+    if (typeof listType != 'string' || ! ['all', 'naics'].includes(listType)) {
+        listType = 'naics';
+
+        if (URLManager.getParameterByName('showall')) {
+            listType = 'all';
+        }
+    }
+
     $("#vendor_contract_history_title_container .contracts_button_active").attr('class', 'contracts_button');
     $("#" + listType + "_contracts_button").attr('class', 'contracts_button_active');
 
     var a = $("a#csv_link");
     var csv_link = a.attr('href');
 
+    csv_link = csv_link.substring(0, csv_link.indexOf("?"));
+
     if (listType == 'all') {
-        a.attr('href', csv_link.substring(0, csv_link.indexOf("?")));
+        a.attr('href', csv_link);
     } else {
         a.attr('href', csv_link + URLManager.getQueryString());
     }
