@@ -4,41 +4,44 @@
 <div id="combined_search_container">
     <div id="combined_search">
 
-        <div id="vehicle_select">
-                <span class="select_text">Select vehicle</span>
-            <form id="vehicle-select">
-                <select id="placeholder" class="vehicle_select_style" title="1. Select a vehicle">
-                    <option></option>
-                    <option value="oasis_sb">OASIS SB</option>
-                    <option value="oasis">OASIS Unrestricted</option>
-                    <option value="hcats_sb">HCATS SB</option>
-                    <option value="hcats">HCATS Unrestricted</option>
-                    <option value="bmo_sb">BMO SB</option>
-                    <option value="bmo">BMO Unrestricted</option>
-                </select>
-            </form>
-        </div><!-- end vehicle_select -->
-
-        <div id="search">
-            <div id="naics_select">
-                <span class="select_text">Select NAICS code or description</span>
-                <form id="naics-search" class="pure-form" title="2. Select a NAICS code or description">
-                    <select id="naics-code"></select>
-                </form>
+        <div id="search-main">
+            <div id="search-focus">
+                <div id="naics_select">
+                    <span class="select_text">Choose NAICS category</span>
+                    <form id="naics-search" class="pure-form">
+                        <select id="naics-code" class="search_text_style" title="Select a NAICS code or description"></select>
+                    </form>
+                </div>
             </div>
 
-            <div id="zone_select">
-                <span class="select_text">Select zone</span>
-                <form id="zone-search" class="zone_select_style" title="2.1. Select a zone">
-                    <select id="zone-id"></select>
-                </form>
+            <div id="search-contract">
+                <div id="vehicle_select">
+                    <span class="select_text">Select vehicle</span>
+                    <form id="vehicle-select">
+                        <select id="vehicle-id" class="vehicle_select_style" title="Select a vehicle"></select>
+                    </form>
+                </div>
+
+                <div id="pool_select">
+                    <span class="select_text">Select pool</span>
+                    <form id="pool-search">
+                        <select id="pool-id" class="pool_select_style" title="Select a pool"></select>
+                    </form>
+                </div>
+
+                <div id="zone_select">
+                    <span class="select_text">Select zone</span>
+                    <form id="zone-search">
+                        <select id="zone-id" class="zone_select_style" title="Select a zone"></select>
+                    </form>
+                </div>
             </div>
-        </div><!-- end search -->
+        </div>
 
         <div id="filter_container">
-            <span class="select_text" id="choose_filters">Choose filters (SB Only)</span>
+            <span class="select_text" id="choose_filters">Choose filters <i>(Small Business Only)</i></span>
             <div id="filter" class="filterbox">
-                <form id="setaside-filters" class="pure-form pure-form-stacked" title="3. Choose Filters (SB Only)">
+                <form id="setaside-filters" class="pure-form pure-form-stacked" title="Choose Filters (SB Only)">
                     <fieldset>
                         <div id="filter_c1">
                             <label class="pure-checkbox" for="eight_a" title="choose_filter_8a"><input class="se_filter" type="checkbox" id="eight_a" name="8a" value="A6" aria-labeledby="choose_filters" {% if "A6" in request.GET.setasides %}checked{% endif %} />8(a)</label>

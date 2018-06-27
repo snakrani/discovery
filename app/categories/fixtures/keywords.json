@@ -3,567 +3,6482 @@
   "model": "categories.keyword",
   "pk": 1,
   "fields": {
-    "name": "Actuarial consulting services (except insurance actuarial services)"
+    "name": "Translation Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 2,
   "fields": {
-    "name": "Administrative management consulting services"
+    "name": "Interpretation Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 3,
   "fields": {
-    "name": "Automobile driving schools"
+    "name": "Training And Educational Materials"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 4,
   "fields": {
-    "name": "Benefit consulting services"
+    "name": "Comprehensive Linguistic Analytical Support Services (Class) "
   }
 },
 {
   "model": "categories.keyword",
   "pk": 5,
   "fields": {
-    "name": "Benefit or compensation consulting services"
+    "name": "Services For The Visual And Hearing Impaired"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 6,
   "fields": {
-    "name": "Business management consulting services"
+    "name": "Ancillary Supplies And / Or Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 7,
   "fields": {
-    "name": "Business process improvement"
+    "name": "Introduction Of New Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 8,
   "fields": {
-    "name": "Business schools and computer and management training"
+    "name": "Program Financial Advisor"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 9,
   "fields": {
-    "name": "Career and vocational counseling"
+    "name": "Transportation Audits"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 10,
   "fields": {
-    "name": "Cognitive development"
+    "name": "Accounting"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 11,
   "fields": {
-    "name": "Colleges, universities, and professional schools"
+    "name": "Budgeting"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 12,
   "fields": {
-    "name": "Compensation consulting services"
+    "name": "Complementary Financial Management Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 13,
   "fields": {
-    "name": "Compensation planning services"
+    "name": "Audit & Financial Training Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 14,
   "fields": {
-    "name": "Compensation systems planning"
+    "name": "Outsourcing Recurring Commercial Activities For Financial Management Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 15,
   "fields": {
-    "name": "Consulting services, logistics consulting services"
+    "name": "Business Information Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 16,
   "fields": {
-    "name": "Customer services management consulting services"
+    "name": "Risk Assessment And Mitigation Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 17,
   "fields": {
-    "name": "Developing and conducting marketing research, marketing research and public opinion polling"
+    "name": "Independent Risk Analysis"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 18,
   "fields": {
-    "name": "Developing marketing objectives and policies, sales forecasting, new product developing and pricing, licensing and franchise planning, and marketing planning and strategy"
+    "name": "Data Breach Analysis"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 19,
   "fields": {
-    "name": "Educational consultants"
+    "name": "Transaction Specialist"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 20,
   "fields": {
-    "name": "Educational guidance counseling services"
+    "name": "Comprehensive Protection Solutions"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 21,
   "fields": {
-    "name": "Educational institutions"
+    "name": "Program Management Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 22,
   "fields": {
-    "name": "Educational processes or systems"
+    "name": "Grants Management Support Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 23,
   "fields": {
-    "name": "Educational support services"
+    "name": "Due Diligence & Support Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 24,
   "fields": {
-    "name": "Educational testing evaluation services"
+    "name": "Debt Collection"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 25,
   "fields": {
-    "name": "Educational testing services"
+    "name": "Loan Servicing & Asset Management"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 26,
   "fields": {
-    "name": "Electronic and distance - learning methods"
+    "name": "Professional Legal Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 27,
   "fields": {
-    "name": "Elementary and secondary schools; elementary and secondary schools"
+    "name": "Financial & Performance Audits"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 28,
   "fields": {
-    "name": "Employee assessment consulting services"
+    "name": "Complementary Audit Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 29,
   "fields": {
-    "name": "Employee benefits planning, communication, and administration"
+    "name": "Recovery Audits"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 30,
   "fields": {
-    "name": "Employment to persons with disabilities"
+    "name": "Advertising Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 31,
   "fields": {
-    "name": "Exam preparation and tutoring"
+    "name": "Other Direct Costs (Odcs) Are Expenses Other Than Labor Hours"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 32,
   "fields": {
-    "name": "Executive search, recruitment, and placement services"
+    "name": "Public Relations Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 33,
   "fields": {
-    "name": "Financial planning, billing and recordkeeping, personnel, and physical distribution and logistics, office administrative services"
+    "name": "Web Based Marketing Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 34,
   "fields": {
-    "name": "Financial planning, budgeting, equity and asset management, records management, office planning"
+    "name": "Market Research And Analysis"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 35,
   "fields": {
-    "name": "Fine arts schools"
+    "name": "Video / Film Production"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 36,
   "fields": {
-    "name": "Human resource and personnel policies"
+    "name": "Exhibit Design And Implementation Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 37,
   "fields": {
-    "name": "Human resources consulting services"
+    "name": "Conference, Events And Tradeshow Planning Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 38,
   "fields": {
-    "name": "Investment advice"
+    "name": "Commercial Photography Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 39,
   "fields": {
-    "name": "Job counseling, job training, and work experience"
+    "name": "Commercial Art And Graphic Design Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 40,
   "fields": {
-    "name": "Junior colleges"
+    "name": "Challenges And Competitions Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 41,
   "fields": {
-    "name": "Labor relations consulting services"
+    "name": "Integrated Marketing Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 42,
   "fields": {
-    "name": "Language schools"
+    "name": "Strategic Planning For Technology Programs / Activities"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 43,
   "fields": {
-    "name": "Listing employment vacancies and in selecting, referring, and employment placement agencies"
+    "name": "Concept Development And Requirements Analysis"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 44,
   "fields": {
-    "name": "Management consultants, human resource; marketing; process, physical distribution, and logistics"
+    "name": "System Design, Engineering And Integration"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 45,
   "fields": {
-    "name": "Management consulting services, establishments providing telecommunications, utilities management consulting services"
+    "name": "Test And Evaluation"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 46,
   "fields": {
-    "name": "Marketing consulting services"
+    "name": "Integrated Logistics Support"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 47,
   "fields": {
-    "name": "Marketing management consulting services"
+    "name": "Acquisition And Life Cycle Management"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 48,
   "fields": {
-    "name": "Medical office management consulting services or consultants"
+    "name": "Construction Management And Engineering Consulting Services Related To Real Property"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 49,
   "fields": {
-    "name": "New product development consulting services"
+    "name": "Integrated Consulting Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 50,
   "fields": {
-    "name": "Offering academic degrees"
+    "name": "Training Services: Instructor Led Training, Web Based Training And Education Courses, Course Development And Test Administration, Learning Management, Internships"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 51,
   "fields": {
-    "name": "Organization development consulting services"
+    "name": "Supply And Value Chain Management"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 52,
   "fields": {
-    "name": "Personnel management consulting services"
+    "name": "Distribution And Transportation Logistics Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 53,
   "fields": {
-    "name": "Physical distribution and logistics consulting services"
+    "name": "Deployment Logistics"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 54,
   "fields": {
-    "name": "Professional and management development training"
+    "name": "Logistics Training Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 55,
   "fields": {
-    "name": "Public administration"
+    "name": "Operations & Maintenance Logistics Management And Support Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 56,
   "fields": {
-    "name": "Public relations"
+    "name": "Ancillary Repair And Alterations"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 57,
   "fields": {
-    "name": "Public speaking training"
+    "name": "Introduction Of New Service"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 58,
   "fields": {
-    "name": "Records management consulting services"
+    "name": "Acquisition Management Support"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 59,
   "fields": {
-    "name": "Reorganizational consulting services"
+    "name": "Integrated Business Program Support Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 60,
   "fields": {
-    "name": "Research and development in the social sciences and humanities"
+    "name": "Dau And Fai Certified Dawia And Fac Acquisition Workforce Training For Gs-1102 And Non-1102 Personnel Training For Acquisition Workforce (Gs-1102 And Non-Gs-1102)"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 61,
   "fields": {
-    "name": "Resources consulting services"
+    "name": "Off-The-Shelf Training Devices And Training Materials: Print, Electronic, Audio-Visual, Multi-Media, And Simulation Training Devices"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 62,
   "fields": {
-    "name": "Sales management consulting services"
+    "name": "Environmental Consulting Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 63,
   "fields": {
-    "name": "Sheltered workshops"
+    "name": "Environmental Training Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 64,
   "fields": {
-    "name": "Site location consulting services"
+    "name": "Materials And Waste Recycling And Disposal Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 65,
   "fields": {
-    "name": "Site selection consulting services"
+    "name": "Geographic Information Systems (Gis) Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 66,
   "fields": {
-    "name": "Speed reading instruction"
+    "name": "Remediation And Reclamation Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 67,
   "fields": {
-    "name": "Sports and recreation instruction"
+    "name": "Information Technology Professional Services Subject To Cooperative Purchasing"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 68,
   "fields": {
-    "name": "Strategic and organizational planning, site selection"
+    "name": "Intrepretation Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 69,
   "fields": {
-    "name": "Strategic planning consulting services"
+    "name": "Comprehensive Linguistic Analytical Support Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 70,
   "fields": {
-    "name": "Student exchange programs"
+    "name": "Due Diligence And Support Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 71,
   "fields": {
-    "name": "Survival training"
+    "name": "Challenges And Competition Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 72,
   "fields": {
-    "name": "Technical and trade schools"
+    "name": "Human Resource Services (Excluding Eeo Services)"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 73,
   "fields": {
-    "name": "Telecommunications management consulting services"
+    "name": "Energy Management Planning And Strategies"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 74,
   "fields": {
-    "name": "Training facilities"
+    "name": "Energy Audit Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 75,
   "fields": {
-    "name": "Utilities management consulting services"
+    "name": "Resource Efficiency Management (Rem)"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 76,
   "fields": {
-    "name": "Vocational high schools, elementary and secondary schools"
+    "name": "Energy Consulting Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 77,
   "fields": {
-    "name": "Vocational rehabilitation job training facilities"
+    "name": "Test And Evaluation Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 78,
   "fields": {
-    "name": "Rehabilitation services"
+    "name": "Integrated Logistics Support Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 79,
   "fields": {
-    "name": "Vocational rehabilitation services"
+    "name": "Acquisition And Life Cycle Management Services"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 80,
   "fields": {
-    "name": "Wage and salary administration"
+    "name": "Training Services: Instructor Led Training, Web Based Training Web Based Training And Education Courses, Course Development And Test Administration, Learning Management, Internships"
   }
 },
 {
   "model": "categories.keyword",
   "pk": 81,
   "fields": {
-    "name": "Yoga instruction, camps, or schools"
+    "name": "Deployment Logistics Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 82,
+  "fields": {
+    "name": "Smart Buildings Systems Integrator"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 83,
+  "fields": {
+    "name": "Grounds And / Or Cemetery Maintenance"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 84,
+  "fields": {
+    "name": "Tree Planting / Trimming / Removal"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 85,
+  "fields": {
+    "name": "Pest Control"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 86,
+  "fields": {
+    "name": "Independent Elevator Inspection Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 87,
+  "fields": {
+    "name": "Fire Alarm System Preventative Maintenance And Repair Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 88,
+  "fields": {
+    "name": "Water Based Fire Suppression System Preventative Maintenance And Repair Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 89,
+  "fields": {
+    "name": "Surface Preparation And / Or Application Of Chemical Compounds"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 90,
+  "fields": {
+    "name": "Elevator And Escalator Preventative Maintenance"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 91,
+  "fields": {
+    "name": "Complete Facilities Maintenance"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 92,
+  "fields": {
+    "name": "Complete Facilities Management"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 93,
+  "fields": {
+    "name": "Maintenance Of Utility Systems"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 94,
+  "fields": {
+    "name": "Refrigeration, Heating, Ventilation, Air Conditioner, Boiler And Chiller Hvac Maintenance"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 95,
+  "fields": {
+    "name": "Facilities Maintenance And Management Consulting"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 96,
+  "fields": {
+    "name": "Dry Docking And / Or Dockside Maintenance And Repair Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 97,
+  "fields": {
+    "name": "Training On Energy Management"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 98,
+  "fields": {
+    "name": "Metering Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 99,
+  "fields": {
+    "name": "Energy Program Support Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 100,
+  "fields": {
+    "name": "Building Commissioning Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 101,
+  "fields": {
+    "name": "Innovations In Renewable Energy"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 102,
+  "fields": {
+    "name": "Water Conservation"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 103,
+  "fields": {
+    "name": "Trailers And Attachments"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 104,
+  "fields": {
+    "name": "Low Speed Vehicles, Gas Or Electric"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 105,
+  "fields": {
+    "name": "Miscellaneous Vehicle Accessories"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 106,
+  "fields": {
+    "name": "Passenger Tires (New)"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 107,
+  "fields": {
+    "name": "Light Truck Tires (New)"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 108,
+  "fields": {
+    "name": "Light Truck Tires (Retread) "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 109,
+  "fields": {
+    "name": "Medium Truck-Bus Tires (New)"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 110,
+  "fields": {
+    "name": "Medium Truck-Bus Tires (Retread) "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 111,
+  "fields": {
+    "name": "Specialty Tires (New) "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 112,
+  "fields": {
+    "name": "Specialty Tires (Retread) "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 113,
+  "fields": {
+    "name": "Utility & Telecom Construction Equipment And Attachments"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 114,
+  "fields": {
+    "name": "Vocational Bodies And Attachments"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 115,
+  "fields": {
+    "name": "Fire Fighting Apparatus And Attachments"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 116,
+  "fields": {
+    "name": "Leased Fire Fighting Vehicles And Accessories"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 117,
+  "fields": {
+    "name": "Law Enforcement Vehicles And Attachments"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 118,
+  "fields": {
+    "name": "Emergency Communications Vehicles"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 119,
+  "fields": {
+    "name": "Special Vocation Vehicles And Attachments"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 120,
+  "fields": {
+    "name": "Aircraft Ground Support Vehicles And Equipment"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 121,
+  "fields": {
+    "name": "Upfitting Of Government-Owned Emergency Response Vehicles To Provide Turn-Key Solutions"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 122,
+  "fields": {
+    "name": "Construction Equipment And Attachments:"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 123,
+  "fields": {
+    "name": "Snow Maintenance Equipment (Vehicle Mounting) "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 124,
+  "fields": {
+    "name": "Vehicular Cranes And Attachments"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 125,
+  "fields": {
+    "name": "Snow Maintenance And Cleaning Equipment And Attachments"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 126,
+  "fields": {
+    "name": "Forestry, Mulching, Brush Cutting, And Land Clearing Equipment And Attachments"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 127,
+  "fields": {
+    "name": "Street Repair Equipment And Attachments:"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 128,
+  "fields": {
+    "name": "Leased Equipment And Accessories"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 129,
+  "fields": {
+    "name": "Spare Components And Equipment For Sedans, Light, Buses, Medium And Heavy Duty Trucks"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 130,
+  "fields": {
+    "name": "Leased Heavy Duty Vehicles And Accessories"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 131,
+  "fields": {
+    "name": "Ancillary Supplies"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 132,
+  "fields": {
+    "name": "Ancillary Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 133,
+  "fields": {
+    "name": "New Technologies"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 134,
+  "fields": {
+    "name": "Remanufactured Automotive Components"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 135,
+  "fields": {
+    "name": "General Automotive Maintenance And Repair Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 136,
+  "fields": {
+    "name": "Automotive Body And Repair Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 137,
+  "fields": {
+    "name": "Automotive Towing Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 138,
+  "fields": {
+    "name": "Waste Disposal Vehicles And Attachments"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 139,
+  "fields": {
+    "name": "Fuel And Petroleum Tank Trucks And Accessories"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 140,
+  "fields": {
+    "name": "Water Tank Trucks And Accessories"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 141,
+  "fields": {
+    "name": "Multimedia Office Cabinets, Displays, And Filing Systems Including Pocket Card Frames And Portfolios"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 142,
+  "fields": {
+    "name": "Projection Screen, Stand, Printer (Enlarger ), Systems"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 143,
+  "fields": {
+    "name": "Projectors & Electronic Whiteboards"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 144,
+  "fields": {
+    "name": "Typewriters"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 145,
+  "fields": {
+    "name": "Security Applications For Business Machines"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 146,
+  "fields": {
+    "name": "Dictating And Transcribing Machines And Systems"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 147,
+  "fields": {
+    "name": "Personal & Document Identification Systems"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 148,
+  "fields": {
+    "name": "Mail Processing Machines, Systems And Related Software"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 149,
+  "fields": {
+    "name": "Date And Time Stamps"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 150,
+  "fields": {
+    "name": "Time And Attendance Program Systems"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 151,
+  "fields": {
+    "name": "Rental Plan For Postage Meters And Related Mailing Equipment"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 152,
+  "fields": {
+    "name": "Calculators"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 153,
+  "fields": {
+    "name": "Money Handling & Processing Machines"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 154,
+  "fields": {
+    "name": "Stencil Cutting Machines"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 155,
+  "fields": {
+    "name": "Office Products For The Impaired"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 156,
+  "fields": {
+    "name": "Business Card Scanner And Solutions"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 157,
+  "fields": {
+    "name": "Copiers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 158,
+  "fields": {
+    "name": "Introduction Of New Products / Services (Inps Sin) "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 159,
+  "fields": {
+    "name": "Cost-Per-Copy Plan For Copiers (To Include Analog, Digital, Multifunctional And Engineer Copiers) "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 160,
+  "fields": {
+    "name": "Flat Rate Monthly Fee Copying Plan For Copiers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 161,
+  "fields": {
+    "name": "Consumable Supplies For Copiers, Computers Printers And Fax Machines"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 162,
+  "fields": {
+    "name": "Transparency Film"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 163,
+  "fields": {
+    "name": "Maintenance Service Agreement For All Other Equipment Repair, Replacement, And Spare Parts For Equipment Other Than Copiers, Including Their Associated Accessories And Attachments."
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 164,
+  "fields": {
+    "name": "Post Copying / Finishing Equipment And Supplies"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 165,
+  "fields": {
+    "name": "Digital Duplicating Equipment"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 166,
+  "fields": {
+    "name": "3D Printing Solutions"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 167,
+  "fields": {
+    "name": "Multi-Media Readers, Reader-Printers And Systems"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 168,
+  "fields": {
+    "name": "Network, Optical Imaging Systems And Solutions"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 169,
+  "fields": {
+    "name": "Microphotographic Film, Paper, Chemical Preparation And Equipment"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 170,
+  "fields": {
+    "name": "Managed Print Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 171,
+  "fields": {
+    "name": "Needs Assessment And Analysis Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 172,
+  "fields": {
+    "name": "Education And Training Support Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 173,
+  "fields": {
+    "name": "Records Management Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 174,
+  "fields": {
+    "name": "Document Production On-Site And Off-Site Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 175,
+  "fields": {
+    "name": "Document Conversion Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 176,
+  "fields": {
+    "name": "Destruction Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 177,
+  "fields": {
+    "name": "Litigation Support Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 178,
+  "fields": {
+    "name": "Network Connectivity Support Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 179,
+  "fields": {
+    "name": "Rental Plan For Copiers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 180,
+  "fields": {
+    "name": "Repair Of Government-Owned Equipment (All Equipment Covered Under This Schedule) For Equipment Not Under Maintenance Service Agreement"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 181,
+  "fields": {
+    "name": "Maintenance Service Agreement For Copiers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 182,
+  "fields": {
+    "name": "Lease To Ownership Plans (Ltop) Copiers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 183,
+  "fields": {
+    "name": "Operating Lease Plan For Copiers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 184,
+  "fields": {
+    "name": "Operating Lease Plan-(All Other Products) "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 185,
+  "fields": {
+    "name": "International-All Equipment Under This Schedule"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 186,
+  "fields": {
+    "name": "Mail Room Management Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 187,
+  "fields": {
+    "name": "Presort Mail"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 188,
+  "fields": {
+    "name": "Miscellaneous Mail Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 189,
+  "fields": {
+    "name": "List Management Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 190,
+  "fields": {
+    "name": "Mailroom Ergonomic Analysis Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 191,
+  "fields": {
+    "name": "Mail Screening And Inspection Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 192,
+  "fields": {
+    "name": "Ground Transportation Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 193,
+  "fields": {
+    "name": "Rental Supplemental Vehicle Program (Rsvp ): "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 194,
+  "fields": {
+    "name": "Transportation Consulting Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 195,
+  "fields": {
+    "name": "Transportation Service Providers-Motor Freight"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 196,
+  "fields": {
+    "name": "Transportation Service Providers-Water Freight"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 197,
+  "fields": {
+    "name": "Transportation Service Providers-Rail Freight"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 198,
+  "fields": {
+    "name": "Transportation Service Providers-Air Cargo / Freight"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 199,
+  "fields": {
+    "name": "Express Small Package And Express Heavyweight Delivery Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 200,
+  "fields": {
+    "name": "Ground Small Package Delivery Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 201,
+  "fields": {
+    "name": "Local Courier Delivery Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 202,
+  "fields": {
+    "name": "New Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 203,
+  "fields": {
+    "name": "Relocation Service Package"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 204,
+  "fields": {
+    "name": "Relocation Software And Technology Tools"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 205,
+  "fields": {
+    "name": "Additional Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 206,
+  "fields": {
+    "name": "Agency Customization Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 207,
+  "fields": {
+    "name": "Move Management Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 208,
+  "fields": {
+    "name": "Office Relocation"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 209,
+  "fields": {
+    "name": "Long Term Lodging"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 210,
+  "fields": {
+    "name": "Accessories: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 211,
+  "fields": {
+    "name": "Inventory Bin Management, Technical Support And Training: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 212,
+  "fields": {
+    "name": "Introduction Of New Products And Services: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 213,
+  "fields": {
+    "name": "Hardware Store, Home Improvement Center, Or Mro-Store Front"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 214,
+  "fields": {
+    "name": "Hardware Store, Home Improvement Center, Or Mro-Catalog"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 215,
+  "fields": {
+    "name": "Hardware Store, Home Improvement Center, Or Mro-Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 216,
+  "fields": {
+    "name": "Lawn And Garden Equipment, Machinery, Implements, And Products"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 217,
+  "fields": {
+    "name": "Animal Deterrents: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 218,
+  "fields": {
+    "name": "Lawn And Garden Tools: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 219,
+  "fields": {
+    "name": "Leasing: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 220,
+  "fields": {
+    "name": "Rental"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 221,
+  "fields": {
+    "name": "Tools, Powered: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 222,
+  "fields": {
+    "name": "Woodworking Machinery Equipment And Related Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 223,
+  "fields": {
+    "name": "Maintenance Industrial Machinery And Related Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 224,
+  "fields": {
+    "name": "Metalworking Machinery And Equipment, And Related Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 225,
+  "fields": {
+    "name": "Tool Boxes, Tool Chests And Tool Holders: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 226,
+  "fields": {
+    "name": "Tool Kits: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 227,
+  "fields": {
+    "name": "Tools, Nonpowered: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 228,
+  "fields": {
+    "name": "Domestic Appliances"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 229,
+  "fields": {
+    "name": "Export Appliances"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 230,
+  "fields": {
+    "name": "Commercial Coatings, Adhesives, Sealants And Related Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 231,
+  "fields": {
+    "name": "Stains, Varnishes, Sealers, Shellacs And Lacquers And Related Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 232,
+  "fields": {
+    "name": "Commercial Coatings Removers And Related Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 233,
+  "fields": {
+    "name": "Commercial Coatings Applicators"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 234,
+  "fields": {
+    "name": "Lubricants, Petroleum And Waxes: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 235,
+  "fields": {
+    "name": "Energy Saving, Energy Efficient, Sustainable, And Environmentally Sustainable Outdoor Lighting Solutions, Including Airport Lighting, Runway, Taxiway, Roadway And Parking Lot, Parking Garage Lighting Solutions: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 236,
+  "fields": {
+    "name": "Alternative And Renewable Sustainable Energy Solutions, Including Solar Energy Systems, Fuel Cells, Geothermal, And Wind Power: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 237,
+  "fields": {
+    "name": "Energy Saving Lighting, Energy Efficient, Sustainable, And Environmentally Sustainable Lamps (Light Bulbs ), Lighting Fixtures And Accessories, Indoor Emergency Lighting, Reading Lights, Lighting Sensor Systems: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 238,
+  "fields": {
+    "name": "Diagnostic Equipment: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 239,
+  "fields": {
+    "name": "Wheel & Tire Equipment: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 240,
+  "fields": {
+    "name": "Vehicle Material Handling Equipment: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 241,
+  "fields": {
+    "name": "Lubrication Equipment: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 242,
+  "fields": {
+    "name": "Air Compressors: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 243,
+  "fields": {
+    "name": "Environmental Equipment And Services Related To Maintenance And Repair Shop Equipment: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 244,
+  "fields": {
+    "name": "Miscellaneous Maintenance And Repair Shop Supplies: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 245,
+  "fields": {
+    "name": "Pressure Cleaners-Underwriters Laboratories (Ul) 1776 Certified: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 246,
+  "fields": {
+    "name": "Pressure Cleaners-Not Ul-1776 Certified: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 247,
+  "fields": {
+    "name": "Automatic Cleaning Machines & Parts Washers: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 248,
+  "fields": {
+    "name": "Blasters And Media: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 249,
+  "fields": {
+    "name": "Spray Paint Booths And Equipment: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 250,
+  "fields": {
+    "name": "Miscellaneous Abrasives: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 251,
+  "fields": {
+    "name": "Ancillary Services Related To Maintenance And Repair Shop Equipment: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 252,
+  "fields": {
+    "name": "Lease / Rental Of Vehicle Maintenance And Repair Shop Equipment: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 253,
+  "fields": {
+    "name": "Ancillary Repair And Alterations Related To Maintenance And Repair Shop Solutions"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 254,
+  "fields": {
+    "name": "Introduction Of New Services / Products Relating To Maintenance And Repair Shop Equipment: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 255,
+  "fields": {
+    "name": "Warehouse Trucks And Tractors"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 256,
+  "fields": {
+    "name": "Utility Trucks, Platform Trucks, Handtrucks And Mail Carts"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 257,
+  "fields": {
+    "name": "Dock Plates, Boards, Ramps, And Bridges"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 258,
+  "fields": {
+    "name": "Pallet Trucks"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 259,
+  "fields": {
+    "name": "Spill Containment Units, Containment Pallets, Non-Wooden Pallets"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 260,
+  "fields": {
+    "name": "Warehouse Equipment And Supplies"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 261,
+  "fields": {
+    "name": "Ancillary Repair And Alterations Related To Warehouse Equipment Solutions"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 262,
+  "fields": {
+    "name": "Ancillary Services Relating To Warehouse Equipment And Supplies, Relating To And Ordered In Conjunction With Products Purchased Under The Supply Schedule Contract"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 263,
+  "fields": {
+    "name": "Introduction Of New Products / Services, Related To Warehouse Equipment And Supplies"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 264,
+  "fields": {
+    "name": "Scaffolding, Work And Service Platforms: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 265,
+  "fields": {
+    "name": "Pre-Engineered And Prefabricated Buildings And Structures For Storage Solutions: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 266,
+  "fields": {
+    "name": "Pre-Engineered And Prefabricated Buildings And Structures For In-Plant Solutions: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 267,
+  "fields": {
+    "name": "Pre-Engineered And Prefabricated Buildings And Structures For Military, Disaster / Emergency Response, And Medical Facility Solutions: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 268,
+  "fields": {
+    "name": "Pre-Engineered And Prefabricated Buildings And Structures For Professional Facility Solutions: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 269,
+  "fields": {
+    "name": "Pre-Engineered And Prefabricated Buildings And Structures For Outdoor Shelter And Security Shelter Solutions: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 270,
+  "fields": {
+    "name": "Pre-Engineered And Prefabricated Buildings And Structures For Restroom, Shower, And Laundry Solutions: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 271,
+  "fields": {
+    "name": "Above Ground Storage Tanks / Systems: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 272,
+  "fields": {
+    "name": "Fuel Management Systems / Units, Fuel Dispensing Units, Fuel Monitoring Systems: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 273,
+  "fields": {
+    "name": "Ancillary Services For Above Ground Storage Tanks / Systems, Fuel Dispensing Units, And Fuel Management Systems: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 274,
+  "fields": {
+    "name": "Installation And Site Preparation For Above Ground Storage Tanks / Systems, Fuel Dispensing Units, And Fuel Management Systems: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 275,
+  "fields": {
+    "name": "Ancillary Services Relating To Pre-Engineered / Pre-Fabricated Buildings And Structures: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 276,
+  "fields": {
+    "name": "Lease / Rental Of Pre-Engineered / Prefabricated Buildings And Structures: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 277,
+  "fields": {
+    "name": "Lease / Rental Of Pre-Engineered / Prefabricated Restrooms And Utility Rooms"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 278,
+  "fields": {
+    "name": "Ancillary Repair And Alterations Related To Pre-Engineered / Prefabricated Building And Structures Solutions"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 279,
+  "fields": {
+    "name": "Ancillary Repair And Alterations Related To Above Ground Storage Tanks, Fuel Dispensing Equipment, And Fuel Management System Solutions"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 280,
+  "fields": {
+    "name": "Introduction Of New Services And Products Related To Water Treatment And Above Ground Storage Tank / Systems Including, But Not Limited To, Protected, Fire Resistant, Non Vaulted, Single Or Dual Compartment / Single Or Double Tank, Waste Oil Systems, Including Options, Parts And Accessories: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 281,
+  "fields": {
+    "name": "Introduction Of New Services And Products Related To Pre-Engineered / Prefabricated Buildings And Structures: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 282,
+  "fields": {
+    "name": "Portable Light Towers: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 283,
+  "fields": {
+    "name": "Generators, Portable, Standby, Backup, Or Prime: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 284,
+  "fields": {
+    "name": "Batteries And Battery Chargers, Including Rental: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 285,
+  "fields": {
+    "name": "Battery And Alternator Monitoring Systems; Battery Spill Containment Systems; Parts And Accessories"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 286,
+  "fields": {
+    "name": "Uninterruptible Power Supplies: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 287,
+  "fields": {
+    "name": "Power Distribution Units"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 288,
+  "fields": {
+    "name": "Switchgear, Panelboards, Switchboards, Load Centers, Metering: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 289,
+  "fields": {
+    "name": "Transformers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 290,
+  "fields": {
+    "name": "Electrical, Voltage, Generator Controls, Electric Motors, Motor Controllers / Motor Control Centers: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 291,
+  "fields": {
+    "name": "Surge Protection / Suppression: Surge Protection / Suppression, Hard Wired Surge Protection And Emi / Rfi Filtration Devices: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 292,
+  "fields": {
+    "name": "Ancillary Service Related To Alternative Energy Solutions And Power Distribution Equipment"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 293,
+  "fields": {
+    "name": "Installation And Site Preparation Services For Alternative Energy Solutions And Power Distribution Equipment: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 294,
+  "fields": {
+    "name": "Power Systems Engineering Support For Alternative Energy Solutions And Power Distribution Equipment: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 295,
+  "fields": {
+    "name": "Ancillary Repair And Alterations For Alternative Energy Systems, Power Generation Equipment, Generators, And Batteries Solutions"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 296,
+  "fields": {
+    "name": "Introduction Of New Services And Products Related To Alternative Energy Solutions And Power Distribution Equipment, Generators And Batteries: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 297,
+  "fields": {
+    "name": "Energy Savings / Security Door, Window, And Wall Glass Fragmentation Transparencies, Glazings, And Film Solutions, Including Solar, Blast Mitigation, Bullet Resistant: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 298,
+  "fields": {
+    "name": "Doors, Windows, Skylights, Panels, And Shutters: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 299,
+  "fields": {
+    "name": "Plumbing Products And Bathroom Fixture Solutions: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 300,
+  "fields": {
+    "name": "Energy Savings / Energy Efficient Industrial And Commercial Heating / Air Conditioning Units, Air Purification Equipment, Hvac Systems, Boiler Systems, Space Heaters, Air Curtains, Fans, And Blowers: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 301,
+  "fields": {
+    "name": "Energy Savings / Energy Efficient Industrial And Commercial Electric And Gas Water Heaters, Boiled Water Heaters, Including Options, Energy Efficient Monitoring Devices, And Accessories: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 302,
+  "fields": {
+    "name": "Miscellaneous Building Materials: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 303,
+  "fields": {
+    "name": "Portable Roads, Airstrips, Helipads And Ground-Cover Mats: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 304,
+  "fields": {
+    "name": "Roofing Materials, Products And Services Solutions"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 305,
+  "fields": {
+    "name": "Access And Portable Flooring Solutions: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 306,
+  "fields": {
+    "name": "Erosion Control Solutions, Including Soil Stabilization Solutions, Protective Barriers And Sandbags, Fabric & Gabions: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 307,
+  "fields": {
+    "name": "Ancillary Repair And Alterations For Building Materials Solutions"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 308,
+  "fields": {
+    "name": "Ancillary Services Related To Building Materials / Supplies: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 309,
+  "fields": {
+    "name": "Introduction Of New Services And Products Related To Building Materials / Supplies: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 310,
+  "fields": {
+    "name": "Forklifts-Electric, Gas, Lpg, And Diesel Powered"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 311,
+  "fields": {
+    "name": "Maintenance, Rental And Lease Of Forklifts"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 312,
+  "fields": {
+    "name": "Water Treatment Solutions, Including Water Filtration Systems, Water Purification Systems, Sewage Treatment Equipment / Systems: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 313,
+  "fields": {
+    "name": "Television / Vcr / Dvd / Blu-Ray Combinations"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 314,
+  "fields": {
+    "name": "Audio Components"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 315,
+  "fields": {
+    "name": "Hand Held Camcorders"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 316,
+  "fields": {
+    "name": "Televisions"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 317,
+  "fields": {
+    "name": "Television For Hospital, Hotels And Motel"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 318,
+  "fields": {
+    "name": "Vcrs, Vcp, Dvd, Blu-Ray"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 319,
+  "fields": {
+    "name": "Recording And Reproducing Video And Audio Equipment, Including Spare & Repair Parts, And Accessories"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 320,
+  "fields": {
+    "name": "Professional Audio / Video Services Nec"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 321,
+  "fields": {
+    "name": "Monitors And Monitors / Receivers, Including Spare & Repair Parts, And Accessories"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 322,
+  "fields": {
+    "name": "Television Cameras, Color Or Monochrome, Including Spare & Repair Parts, & Accessories"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 323,
+  "fields": {
+    "name": "Audio Equipment, Including Spare & Repair Parts, And Accessories"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 324,
+  "fields": {
+    "name": "Telecommunications Equipment, Including Spare And Repair Parts, And Accessories"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 325,
+  "fields": {
+    "name": "Professional Audio / Video Assessment, Design, And Integration"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 326,
+  "fields": {
+    "name": "Professional Audio / Video Production"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 327,
+  "fields": {
+    "name": "Overseas (International) Products"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 328,
+  "fields": {
+    "name": "Introduction Of New Products, Including Spare & Repair Parts And Accessories"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 329,
+  "fields": {
+    "name": "Travel Consulting Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 330,
+  "fields": {
+    "name": "Contract Support Items"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 331,
+  "fields": {
+    "name": "Travel Agent Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 332,
+  "fields": {
+    "name": "Lodging Negotiations And Management Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 333,
+  "fields": {
+    "name": "Air Charter Services-Owner Operated"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 334,
+  "fields": {
+    "name": "Air Charter Services-Brokers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 335,
+  "fields": {
+    "name": "Specialized Conference Facilities And Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 336,
+  "fields": {
+    "name": "Introduction To New Services / Products"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 337,
+  "fields": {
+    "name": "Reusable Laboratory Plastic Ware"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 338,
+  "fields": {
+    "name": "Disposable Laboratory Plastic Ware"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 339,
+  "fields": {
+    "name": "Non-Plastic And Non-Glass Laboratory Ware"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 340,
+  "fields": {
+    "name": "Laboratory Water Purification Devices, Systems"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 341,
+  "fields": {
+    "name": "Labware Support Apparatus, Thermometers, Contact Heating Sensing Devices"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 342,
+  "fields": {
+    "name": "Filter Elements"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 343,
+  "fields": {
+    "name": "Reusable Laboratory Glassware"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 344,
+  "fields": {
+    "name": "Disposable Laboratory Glassware"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 345,
+  "fields": {
+    "name": "Modular Laboratory Furniture Systems"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 346,
+  "fields": {
+    "name": "Individual Non-Modular Laboratory Tables, Cabinets, Benches, Laboratory Carts"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 347,
+  "fields": {
+    "name": "Special-Purpose Laboratory Furniture"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 348,
+  "fields": {
+    "name": "Workstation Design / Installation"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 349,
+  "fields": {
+    "name": "Convertible Vertical Laminar Airflow, Biological Hazard Safety Cabinets"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 350,
+  "fields": {
+    "name": "Externally Exhausted, Vertical Laminar Airflow, Biological Hazard Safety Cabinets"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 351,
+  "fields": {
+    "name": "Microwave / Millimeter Wave Antennas"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 352,
+  "fields": {
+    "name": "Pressure Standards And Calibration Instruments"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 353,
+  "fields": {
+    "name": "Chart Recorders, Data Acquisition And Data Logging Systems"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 354,
+  "fields": {
+    "name": "Laboratory Bench And Rack Power Supplies, Mount Type, Programmable"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 355,
+  "fields": {
+    "name": "Transducer Signal Conditioning Devices"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 356,
+  "fields": {
+    "name": "Microwave / Millimeter Wave Instrumentation Subcomponents"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 357,
+  "fields": {
+    "name": "Load Pressure And Vacuum Transducers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 358,
+  "fields": {
+    "name": "Acceleration Transducers (Accelerometers) "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 359,
+  "fields": {
+    "name": "Vibration, Acoustic, And Ultrasonic Transducers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 360,
+  "fields": {
+    "name": "Panel Meters"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 361,
+  "fields": {
+    "name": "Nuclear Radiation Standards And Calibrators"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 362,
+  "fields": {
+    "name": "Amplifiers And Filters"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 363,
+  "fields": {
+    "name": "Vibration, Acoustic And Ultrasonic Testers And Analyzers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 364,
+  "fields": {
+    "name": "Spot-Sensing, Non-Contact Temperature-Measuring Instruments"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 365,
+  "fields": {
+    "name": "Temperature / Heat Imaging Instruments; Humidity Standards And Calibrators, Heat Energy Measuring Instruments And Temperature Controlling Instruments"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 366,
+  "fields": {
+    "name": "Ground Penetrating Radar Equipment (Gpr ), Electromagnetic Induction Equipment, And Other Conductive Material Locators"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 367,
+  "fields": {
+    "name": "Avionics Test Equipment"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 368,
+  "fields": {
+    "name": "Aircraft Components, Maintenance, Repair Services, Extended Warranties, And Maintenance Agreements"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 369,
+  "fields": {
+    "name": "Navigational And Flight Instruments"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 370,
+  "fields": {
+    "name": "Automatic Pilot Mechanisms And Airborne Gyro Components"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 371,
+  "fields": {
+    "name": "Aviation Engine Instruments"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 372,
+  "fields": {
+    "name": "Microwave / Millimeter Wave Amplifiers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 373,
+  "fields": {
+    "name": "Electrical / Electronic Parameter, Standards And Calibration Instruments"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 374,
+  "fields": {
+    "name": "Time And Frequency Standards And Calibration Instruments"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 375,
+  "fields": {
+    "name": "Sound And Vibration Standards And Calibration Instruments"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 376,
+  "fields": {
+    "name": "Infrared Radiation And Temperature Standards And Calibration Instruments"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 377,
+  "fields": {
+    "name": "Ph And Ion-Selective Meters"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 378,
+  "fields": {
+    "name": "Microscopes: Metallographic, Multipurpose And Electron"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 379,
+  "fields": {
+    "name": "Borescopes And Fiberscopes"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 380,
+  "fields": {
+    "name": "Titrators And Titration Systems"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 381,
+  "fields": {
+    "name": "Laboratory Centrifuges"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 382,
+  "fields": {
+    "name": "Microtomes And Microtom Cryostats"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 383,
+  "fields": {
+    "name": "Laboratory Shakers And Mixers, Accessories And Options"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 384,
+  "fields": {
+    "name": "Tissue Embedding Equipment"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 385,
+  "fields": {
+    "name": "Microscopes, Conventional Upright Type"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 386,
+  "fields": {
+    "name": "Microscopes, Inverted Type"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 387,
+  "fields": {
+    "name": "Biomolecule Analyzers Synthesizers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 388,
+  "fields": {
+    "name": "Biomedical And Industrial Particle Counting And Sorting Apparatus And Systems And Related Chemistries, Supplies And Consumables"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 389,
+  "fields": {
+    "name": "Blood Cell Analyzers For Clinical Hematology And Related Chemistries, Supplies And Consumables"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 390,
+  "fields": {
+    "name": "Elemental Analyzers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 391,
+  "fields": {
+    "name": "Thermal Analysis"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 392,
+  "fields": {
+    "name": "Gas Chromatograph (Gc) And Chromatograph / Mass Spectrometer (Gc-Ms) Systems And Related Chemistries, Supplies And Consumables"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 393,
+  "fields": {
+    "name": "Product Support Options To Include Equipment Maintenance; Repair And Service; Calibration And Calibration Traceability Certificate; Extended Warranties; Technical Training, Technical Support And Application Development Support; And Equipment Leasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 394,
+  "fields": {
+    "name": "Liquid Chromatographer (Lc) And Liquid Chromatographer / Mass Spectrometer (Lc-Ms) Systems And Related Chemistries, Supplies And Consumables"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 395,
+  "fields": {
+    "name": "Oscilloscopes And Video Signal Monitors And Analyzers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 396,
+  "fields": {
+    "name": "Component Analyzers And Testers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 397,
+  "fields": {
+    "name": "Introduction To New Services / Products (Insp) "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 398,
+  "fields": {
+    "name": "Circuit (Pc Board And Ic) Testers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 399,
+  "fields": {
+    "name": "Telecommunication Line Testers And Analyzers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 400,
+  "fields": {
+    "name": "Data Communication Equipment Testers And Analyzers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 401,
+  "fields": {
+    "name": "Lightwave Test Instruments"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 402,
+  "fields": {
+    "name": "Signal Generators"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 403,
+  "fields": {
+    "name": "Audio And Video Signal Generators"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 404,
+  "fields": {
+    "name": "Microwave Signal Generators"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 405,
+  "fields": {
+    "name": "Signal Analyzers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 406,
+  "fields": {
+    "name": "Equipment Maintenance And Repair"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 407,
+  "fields": {
+    "name": "Pre-Purchase Calibration Or Calibration Traceability Certificate"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 408,
+  "fields": {
+    "name": "Post Purchase Calibration Or Calibration Traceability Certificate"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 409,
+  "fields": {
+    "name": "Extended Warranty"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 410,
+  "fields": {
+    "name": "Service Agreement"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 411,
+  "fields": {
+    "name": "Technical Training And Support (Tts) "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 412,
+  "fields": {
+    "name": "Technical / Application Development Support (Tads) "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 413,
+  "fields": {
+    "name": "Electronic Counters And Frequency Meters"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 414,
+  "fields": {
+    "name": "Voltmeters, Ammeters And Multi-Meters"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 415,
+  "fields": {
+    "name": "Field Strength / Intensity Meters"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 416,
+  "fields": {
+    "name": "Line Power And Signal Power Meters And Line Power Consumption Meters"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 417,
+  "fields": {
+    "name": "Resistance And / Or Conductivity Meters And Bridges"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 418,
+  "fields": {
+    "name": "Rf Communication Monitors, Testers And Analyzers And Global Positioning System (Gps) Receiver Test Sets"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 419,
+  "fields": {
+    "name": "Reactance And Impedance Meters And Bridges"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 420,
+  "fields": {
+    "name": "Inductance And Capacitance Meters And Bridges"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 421,
+  "fields": {
+    "name": " AC Wiring Analyzers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 422,
+  "fields": {
+    "name": "Modular Instruments, Mainframes"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 423,
+  "fields": {
+    "name": "Relay And Circuit Breaker Test Sets And Soldering, Desoldering, And Repair Equipment"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 424,
+  "fields": {
+    "name": "Audio / Distortion Signal Analyzers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 425,
+  "fields": {
+    "name": "Unmanned Vehicle Systems, Operations Support, Data Collection, Analysis, Reporting, And Related Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 426,
+  "fields": {
+    "name": "Leasing Of Equipment"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 427,
+  "fields": {
+    "name": "Electronic Noise Analyzers / Meters"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 428,
+  "fields": {
+    "name": "Network Analyzers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 429,
+  "fields": {
+    "name": "Voltage, Current And Line Power Recorders And Analyzers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 430,
+  "fields": {
+    "name": "Digital Logic Generators And Analyzers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 431,
+  "fields": {
+    "name": "Atomic Absorption, Atomic Emission, And Atomic Fluorescence Spectrometers, Including Inductively Coupled Plasma (Ipc) And Inductively Coupled Plasma Mass Spectrometers (Ipc / Ms) Systems And Related Chemistries, Supplies And Consumables"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 432,
+  "fields": {
+    "name": "Liquid Scintillation Systems And Gamma Counters, Accessories And Options"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 433,
+  "fields": {
+    "name": "Infrared Spectrometers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 434,
+  "fields": {
+    "name": "Ultraviolet, Visible, Infrared, And Near Infrared Spectrophotometers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 435,
+  "fields": {
+    "name": "Fluorescence Spectrometers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 436,
+  "fields": {
+    "name": "X-Ray Spectrometers, Diffractometers, Emission Spectrometers, Including Flame, Spark, Arc And Laser Types, Mass Spectrometers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 437,
+  "fields": {
+    "name": "Blood Serum, Urine And Fecal Chemical Analysis, Instruments And Related Chemistries, Supplies And Consumables"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 438,
+  "fields": {
+    "name": "Professional Scientific Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 439,
+  "fields": {
+    "name": "Ancillary Supplies And / Or Services And Related Chemistries, Supplies And Consumables"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 440,
+  "fields": {
+    "name": "Blood Gas Analyzers, Electrolyte Analyzers, Blood Coagulation Analyzers And Timers, Single Test Analyzers And Related Chemistries, Supplies And Consumables"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 441,
+  "fields": {
+    "name": "Electrophoresis, Including Capillary Electrophoresis And Electrophoration Devices And Systems, Nucleic Acid And Amino Acid Sequencing Systems"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 442,
+  "fields": {
+    "name": "Hand Operated Pipettors, And Pipetting, Diluting And Dispensing Devices"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 443,
+  "fields": {
+    "name": "Automated Pipetting And Dispensing Systems, And Laboratory Robotic Labware Handling Devices, Systems"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 444,
+  "fields": {
+    "name": "Microplate Readers And Washers, And Cell Harvesting Apparatus"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 445,
+  "fields": {
+    "name": "Video Image Analyzers And Analysis Systems"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 446,
+  "fields": {
+    "name": "Animal Caging Equipment"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 447,
+  "fields": {
+    "name": "Laboratory Refrigerators And Freezers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 448,
+  "fields": {
+    "name": "Environmental Chambers And Plant Growth Chambers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 449,
+  "fields": {
+    "name": "Miscellaneous Laboratory Equipment To Include Laboratory Baths; Freeze Drying Apparatus; Tissue Grinding, Processing, Cell Disruption Apparatus; Waste Recovery Systems; Laboratory Pumps; Ware Washers; Dryers; Laboratory Ovens And Furnaces"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 450,
+  "fields": {
+    "name": "Laboratory Fume Hoods"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 451,
+  "fields": {
+    "name": "Laboratory Incubators"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 452,
+  "fields": {
+    "name": "Laboratory Information Management System (Lims) "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 453,
+  "fields": {
+    "name": "Laboratory Scales, Balances"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 454,
+  "fields": {
+    "name": "Vehicular Scales, Balances"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 455,
+  "fields": {
+    "name": "Industrial Scales, Balances"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 456,
+  "fields": {
+    "name": "Equipment Leasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 457,
+  "fields": {
+    "name": "Services And Product Support Options To Include Pre-Purchase Calibration, Post-Purchase Calibration, Extended Warranty And Service Agreements"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 458,
+  "fields": {
+    "name": "Technical Training And Support"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 459,
+  "fields": {
+    "name": "Technical Application Development Support"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 460,
+  "fields": {
+    "name": "Water Current Meters, Seawater Sampling And Salinity Measuring Equipment"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 461,
+  "fields": {
+    "name": "Seawater Sampling And Salinity Measuring Equipment"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 462,
+  "fields": {
+    "name": "Seismic Measuring And Recording Instruments"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 463,
+  "fields": {
+    "name": "Underwater Releases, Transponders, Buoys, And Platforms And Oceanographic Analysis And Display Systems"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 464,
+  "fields": {
+    "name": "Soil Temperature And Moisture Measuring Instruments, Plant Moisture Analysis Instruments"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 465,
+  "fields": {
+    "name": "Air Temperature Measuring Instruments, Solar Radiation Measuring Instruments, Barometric Pressure Measuring Instruments"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 466,
+  "fields": {
+    "name": "Humidity, Precipitation And Wind Measuring Instruments"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 467,
+  "fields": {
+    "name": "Atmospheric And Video Computer Display System, Video Computer Weather Displays"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 468,
+  "fields": {
+    "name": "Atmospheric, Meteorological Platforms, Enclosures And Sondes"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 469,
+  "fields": {
+    "name": "Multiparameter Environment And Flood Data Acquisition Systems"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 470,
+  "fields": {
+    "name": "Environmental Data Loggers And Communication Equipment"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 471,
+  "fields": {
+    "name": "Electronic Distance Measuring Equipment, Theodolites, Engineering And Surveying Level Instruments, Planimeters"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 472,
+  "fields": {
+    "name": "Global Positioning Systems (Gps) "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 473,
+  "fields": {
+    "name": "Noise Analyzers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 474,
+  "fields": {
+    "name": "Liquid / Gas Flow Measuring Instruments, Liquid Level Measuring Instruments"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 475,
+  "fields": {
+    "name": "Water Monitors"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 476,
+  "fields": {
+    "name": "Multi-Parameter Water Quality Instruments, Meters And Analyzers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 477,
+  "fields": {
+    "name": "Stack Emission Measuring Equipment, Gas Analyzers, Monitors, Particle Analyzers / Detectors"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 478,
+  "fields": {
+    "name": "Air Sampling Equipment, Automatic Gas Alarms"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 479,
+  "fields": {
+    "name": "Radioactivity Detectors"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 480,
+  "fields": {
+    "name": "Storage Tank Leak Detectors"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 481,
+  "fields": {
+    "name": "Mechanical Testing And Analysis"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 482,
+  "fields": {
+    "name": "Chemical Testing And Analysis Services And Related Chemistries, Supplies And Consumables"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 483,
+  "fields": {
+    "name": "Electric Testing And Analysis Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 484,
+  "fields": {
+    "name": "Geotechnical And Thermal / Firetesting And Analysis"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 485,
+  "fields": {
+    "name": "Film, Paper, Chemical, Processing Equipment For Photographic And Radiographic Applications"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 486,
+  "fields": {
+    "name": "Photographic Services And Solutions"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 487,
+  "fields": {
+    "name": "Photographic Laboratory Systems"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 488,
+  "fields": {
+    "name": "Cameras And Accessories Mm"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 489,
+  "fields": {
+    "name": "Photo Digital Technologies"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 490,
+  "fields": {
+    "name": "Product Support For Photographic Products And Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 491,
+  "fields": {
+    "name": "Photographic Analog And Digital Cameras And Imaging Systems And Services (Photo Instrumentation) "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 492,
+  "fields": {
+    "name": "New Products / Technology"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 493,
+  "fields": {
+    "name": "Ancillary Supplies And / Or Services-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 494,
+  "fields": {
+    "name": "Equipment Maintenance-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 495,
+  "fields": {
+    "name": "Leasing Of Products-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 496,
+  "fields": {
+    "name": "Term Software License-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 497,
+  "fields": {
+    "name": "Perpetual Software License-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 498,
+  "fields": {
+    "name": "Maintenance Of Software As A Service-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 499,
+  "fields": {
+    "name": "Daily / Short Term Rental-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 500,
+  "fields": {
+    "name": "Cloud Computing Services-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 501,
+  "fields": {
+    "name": "Training Courses-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 502,
+  "fields": {
+    "name": "Information Technology Professional Services-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 503,
+  "fields": {
+    "name": "Electronic Commerce And Subscription Services Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 504,
+  "fields": {
+    "name": "Wireless Services-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 505,
+  "fields": {
+    "name": "Commercial Satellite Communications (Comsatcom) Transponded Capacity-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 506,
+  "fields": {
+    "name": "Commercial Satellite Communications (Comsatcom) Subscription Services-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 507,
+  "fields": {
+    "name": "Electronic Credentials, Not Identity Proofed (Assurance Level 1-Omb M-04-04) Managed Service Offering-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 508,
+  "fields": {
+    "name": "Electronic Credentials, Identity Proofed (Assurance Level 2 Omb M-04-04) Managed Service Offering-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 509,
+  "fields": {
+    "name": "Digital Certificates, Including Aces (Assurance Level 3 And 4 Omb M-04-04)-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 510,
+  "fields": {
+    "name": "E-Authentication Hardware Tokens-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 511,
+  "fields": {
+    "name": "Remote Identity And Access Managed Service Offering-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 512,
+  "fields": {
+    "name": "Identity And Access Management Professional Services-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 513,
+  "fields": {
+    "name": "Public Key Infrastructure (Pki) Shared Service Providers (Pki Ssp) Program"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 514,
+  "fields": {
+    "name": "Products And Services For Agencies To Implement The Requirements Of Hspd-12, Fip S-201 And Associated Nist Special Publications. The Hspd-12 Implementation Components Specified Under This Sin Are: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 515,
+  "fields": {
+    "name": "Purchase Of New Equipment-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 516,
+  "fields": {
+    "name": "Purchase Of Used Or Refurbished Equipment-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 517,
+  "fields": {
+    "name": "Introduction Of New Information Technology Services And / Or Products-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 518,
+  "fields": {
+    "name": "Interior Components"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 519,
+  "fields": {
+    "name": "Vault Door Accessories"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 520,
+  "fields": {
+    "name": "Utility Locker"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 521,
+  "fields": {
+    "name": "Key Rack"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 522,
+  "fields": {
+    "name": "Wall Key Cabinet"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 523,
+  "fields": {
+    "name": "Wall Cabinet"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 524,
+  "fields": {
+    "name": "Special Access Control Container"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 525,
+  "fields": {
+    "name": "Safe, Burglary Resistant"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 526,
+  "fields": {
+    "name": "Filing Cabinet"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 527,
+  "fields": {
+    "name": "Safe, Insulated"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 528,
+  "fields": {
+    "name": "Depository"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 529,
+  "fields": {
+    "name": "Adp Safe"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 530,
+  "fields": {
+    "name": "Modular Vault System, Gsa Approved"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 531,
+  "fields": {
+    "name": "Vault Design Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 532,
+  "fields": {
+    "name": "Installation Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 533,
+  "fields": {
+    "name": "Repair Parts"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 534,
+  "fields": {
+    "name": "Cabinet, Security, Information Processing System Storage, Class 5"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 535,
+  "fields": {
+    "name": "Room Safes"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 536,
+  "fields": {
+    "name": "Lock, Combination"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 537,
+  "fields": {
+    "name": "Modular Vault System, Commercial"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 538,
+  "fields": {
+    "name": "International Products"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 539,
+  "fields": {
+    "name": "Introduction Of New Products (Inp) "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 540,
+  "fields": {
+    "name": "Packaged Offices"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 541,
+  "fields": {
+    "name": "Healthcare Exam Room"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 542,
+  "fields": {
+    "name": "Healthcare Waiting Room"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 543,
+  "fields": {
+    "name": "Healthcare Long Term Care Room"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 544,
+  "fields": {
+    "name": "Healthcare Office"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 545,
+  "fields": {
+    "name": "Dormitory And Quarters Packaged Rooms"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 546,
+  "fields": {
+    "name": "Cabinets: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 547,
+  "fields": {
+    "name": "Wall Units: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 548,
+  "fields": {
+    "name": "Loft Group: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 549,
+  "fields": {
+    "name": "Dormitory, Quarters And Residential Casegoods And Beds: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 550,
+  "fields": {
+    "name": "Chairs-Dining Room, Desk, Side, Period Style And Bar Stools: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 551,
+  "fields": {
+    "name": "Upholstered Seating: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 552,
+  "fields": {
+    "name": "Casual And Outdoor Furniture And Accessories: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 553,
+  "fields": {
+    "name": "Residential, Dormitory And Quarters Furniture Installation Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 554,
+  "fields": {
+    "name": "Rental Residential, Dormitory And Quarters Furniture"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 555,
+  "fields": {
+    "name": "International Residential, Dormitory And Quarters Furniture Products"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 556,
+  "fields": {
+    "name": "Introduction Of New Residential, Dormitory And Quarters Furniture Services / Products (Insp) "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 557,
+  "fields": {
+    "name": "Complete Daycare, Preschool And Classroom Solutions"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 558,
+  "fields": {
+    "name": "Training Room, Auditorium And Theater Furniture"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 559,
+  "fields": {
+    "name": "Lecterns."
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 560,
+  "fields": {
+    "name": "Library Furniture."
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 561,
+  "fields": {
+    "name": "Mail Sorting And Distribution Furniture."
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 562,
+  "fields": {
+    "name": "Mail Lock Boxes."
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 563,
+  "fields": {
+    "name": "Cafeteria And Food Service Furniture."
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 564,
+  "fields": {
+    "name": "Clothing Lockers And Locker Benches."
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 565,
+  "fields": {
+    "name": "Industrial And Institutional Furniture: Workbenches, Worktables, Warehouse Storage, And High Density Storage Cabinets, Modular Cabinets."
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 566,
+  "fields": {
+    "name": "Modular Electronic Equipment Cabinets."
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 567,
+  "fields": {
+    "name": "Hazardous Materials Storage."
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 568,
+  "fields": {
+    "name": "Museum Storage."
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 569,
+  "fields": {
+    "name": "Hospital Patient Room Furniture."
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 570,
+  "fields": {
+    "name": "Hospital And Geriatric Chairs."
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 571,
+  "fields": {
+    "name": "Chair, Convalescent."
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 572,
+  "fields": {
+    "name": "Patient Service Systems."
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 573,
+  "fields": {
+    "name": "Bookstack."
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 574,
+  "fields": {
+    "name": "Correctional Institution Furniture."
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 575,
+  "fields": {
+    "name": "Special Use Furniture Design Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 576,
+  "fields": {
+    "name": "Special Use Furniture Reconfiguration Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 577,
+  "fields": {
+    "name": "Special Use Furniture Installation Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 578,
+  "fields": {
+    "name": "Leased Special Use Furniture."
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 579,
+  "fields": {
+    "name": "Rental Special Use Furniture"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 580,
+  "fields": {
+    "name": "International Special Use Furniture Products"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 581,
+  "fields": {
+    "name": "Introduction Of New Special Use Furniture Services / Products (Insp) "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 582,
+  "fields": {
+    "name": "International Packaged Room Furniture"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 583,
+  "fields": {
+    "name": "Introduction To New Packaged Room Services / Products"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 584,
+  "fields": {
+    "name": "Furniture Systems And Workstation Clusters"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 585,
+  "fields": {
+    "name": "Executive Furniture Single Item Accent & Speciality Pieces"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 586,
+  "fields": {
+    "name": "Tables And Accessories"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 587,
+  "fields": {
+    "name": "System Type Tables And Accessories"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 588,
+  "fields": {
+    "name": "Acoustical Partitions, Demountable Walls, And Accessories"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 589,
+  "fields": {
+    "name": "Vertical Surface Attachment Panels And Accessories"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 590,
+  "fields": {
+    "name": "Acoustical Wall Treatments"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 591,
+  "fields": {
+    "name": "Upholstered Seating"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 592,
+  "fields": {
+    "name": "Multiple Seating"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 593,
+  "fields": {
+    "name": "Multipurpose Seating"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 594,
+  "fields": {
+    "name": "Stacking Chairs And Dollies Or Trucks Designed To Support Stacking Chairs"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 595,
+  "fields": {
+    "name": "Worksurfaces, Workstations, Computer Furniture And Accessories"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 596,
+  "fields": {
+    "name": "Display And Communication Boards, Wall Stations, And Accessories"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 597,
+  "fields": {
+    "name": "Filing And Storage Cabinets, Shelves, Mobile Carts, Dollies, Racks & Accessories"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 598,
+  "fields": {
+    "name": "Blueprint Filing Cabinets"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 599,
+  "fields": {
+    "name": "Card Files"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 600,
+  "fields": {
+    "name": "Form Files"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 601,
+  "fields": {
+    "name": "High Density, Movable Filing Systems And Accessories"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 602,
+  "fields": {
+    "name": "Executive Office Furniture"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 603,
+  "fields": {
+    "name": "Executive Conference Room Furniture, Coordinated Tables, Case Pieces And Accessories"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 604,
+  "fields": {
+    "name": "Project Management (Furniture Related ): "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 605,
+  "fields": {
+    "name": "Remanufactured Furniture"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 606,
+  "fields": {
+    "name": "Reconfiguration And Relocation Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 607,
+  "fields": {
+    "name": "Office Design / Layout Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 608,
+  "fields": {
+    "name": "Office Furniture Installation Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 609,
+  "fields": {
+    "name": "Leased Office Furniture Systems"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 610,
+  "fields": {
+    "name": "Rental Office Furniture"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 611,
+  "fields": {
+    "name": "International Office Furniture"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 612,
+  "fields": {
+    "name": "Introduction Of New Office Furniture Services / Products"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 613,
+  "fields": {
+    "name": "Project Management (Furniture / Furnishings Related) "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 614,
+  "fields": {
+    "name": "Assets Management (Furniture And Furnishings Related) "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 615,
+  "fields": {
+    "name": "Reconfiguration / Relocation Management (Furniture And Furniture Related) "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 616,
+  "fields": {
+    "name": "Furniture Design / Layout"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 617,
+  "fields": {
+    "name": " (Furniture And Furniture Related)-Assets Maintenance"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 618,
+  "fields": {
+    "name": "Introduction Of New Services / Products"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 619,
+  "fields": {
+    "name": "Broadloom Carpet"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 620,
+  "fields": {
+    "name": "Carpet Tiles"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 621,
+  "fields": {
+    "name": "Special Use Broadloom Carpet And Carpet Tiles."
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 622,
+  "fields": {
+    "name": "Carpet Cushion"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 623,
+  "fields": {
+    "name": "Resilient (Hard Surface) Tile"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 624,
+  "fields": {
+    "name": "Resilient (Hard Surface) Sheet Flooring"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 625,
+  "fields": {
+    "name": "Mats And Matting (With And Without Logos) "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 626,
+  "fields": {
+    "name": "Recycled And / Or Biobased Content (As Defined In The Farm Security And Rural Investment Act Of 2002, As Amended) Flooring"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 627,
+  "fields": {
+    "name": "Flooring Recycling Programs"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 628,
+  "fields": {
+    "name": "Ancillary Supplies And Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 629,
+  "fields": {
+    "name": "Floor Coverings"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 630,
+  "fields": {
+    "name": "Lamps / Shades"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 631,
+  "fields": {
+    "name": "Window Treatments"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 632,
+  "fields": {
+    "name": "Coordinating Bedspreads And Comforters"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 633,
+  "fields": {
+    "name": "Cubicle Curtains And Hardware"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 634,
+  "fields": {
+    "name": "Wall Art Including Paintings, Photographs, And Posters"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 635,
+  "fields": {
+    "name": "Artificial Trees, Plants, Dried Foliage, And Planters For Indoor Use."
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 636,
+  "fields": {
+    "name": "Ancillary Supplies And Services (Small Business Set Aside) "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 637,
+  "fields": {
+    "name": "Overseas (International) Fabric"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 638,
+  "fields": {
+    "name": "Introduction Of New Products"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 639,
+  "fields": {
+    "name": "Kitchen Management Solutions"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 640,
+  "fields": {
+    "name": "Sanitation And Warewashing Equipment"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 641,
+  "fields": {
+    "name": "Emergency And Non-Emergency Food Service Support"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 642,
+  "fields": {
+    "name": "Food Preparation Equipment"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 643,
+  "fields": {
+    "name": "Food Service Carts And Holding And Transport Equipment"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 644,
+  "fields": {
+    "name": "Food Measuring And Testing Devices"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 645,
+  "fields": {
+    "name": "Cooking Equipment"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 646,
+  "fields": {
+    "name": "Food Serving And Merchandising Equipment"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 647,
+  "fields": {
+    "name": "Hot And Cold Food Counters"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 648,
+  "fields": {
+    "name": "Food And Beverage Dispensing Equipment"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 649,
+  "fields": {
+    "name": "Food Preparation And Storage Smallwares, "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 650,
+  "fields": {
+    "name": "Food Service Items"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 651,
+  "fields": {
+    "name": "Food Service Storage Racks And Cabinets"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 652,
+  "fields": {
+    "name": "Refrigeration Equipment"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 653,
+  "fields": {
+    "name": "Concession Equipment"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 654,
+  "fields": {
+    "name": "Kitchens In Minutes"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 655,
+  "fields": {
+    "name": "Kiosks Food Center Concepts"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 656,
+  "fields": {
+    "name": "Tableware"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 657,
+  "fields": {
+    "name": "Ancillary Services Related To Food Service Equipment"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 658,
+  "fields": {
+    "name": "Introduction Of New Services And Products Related To Food Service Equipment"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 659,
+  "fields": {
+    "name": "Vacuum Cleaner Canister Type"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 660,
+  "fields": {
+    "name": "Vacuum Cleaner Upright Type"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 661,
+  "fields": {
+    "name": "Vacuum Cleaner Portable Hand Type"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 662,
+  "fields": {
+    "name": "Carpet Cleaner, Including Shampooer, Extractor, Liquid Or Powder"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 663,
+  "fields": {
+    "name": "Sweeper And Scrubber"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 664,
+  "fields": {
+    "name": "Floor Machine"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 665,
+  "fields": {
+    "name": "Accessories And Attachments"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 666,
+  "fields": {
+    "name": "Parts, Repair And Replacement, Miscellaneous For Cleaning Equipment"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 667,
+  "fields": {
+    "name": "Mops, Buckets, Wringers, Squeegees, Brooms, Brushes, Sponges, Scouring Pads, Wiping Rags, Cleaning Cloths, Chamois, Polishing Pads, Cleaning Products, And Related Items"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 668,
+  "fields": {
+    "name": "Powdered And Liquid Machine Warewashing (Dishwashing) Compounds And Rinse Additives"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 669,
+  "fields": {
+    "name": "Laundry Cleaner, Powdered And Liquid, And Dry Cleaning Chemicals"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 670,
+  "fields": {
+    "name": "Floor And Carpet Chemical Products"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 671,
+  "fields": {
+    "name": "Sorbents"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 672,
+  "fields": {
+    "name": "Sorbent Accessories"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 673,
+  "fields": {
+    "name": "Sweeping Compounds"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 674,
+  "fields": {
+    "name": "Biodegradable Cleaner / Degreaser (Water Based) Non-Phenolic And Non-Petrolemm"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 675,
+  "fields": {
+    "name": "Biodegradable Cleaner / Degreaser (Solvent Based) Non-Phenolic And Non-Petroleum"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 676,
+  "fields": {
+    "name": "Cleaners / Degreasers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 677,
+  "fields": {
+    "name": "Cleaner / Degreasers And Polishes"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 678,
+  "fields": {
+    "name": "Gloves, Cleaning, Rubber"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 679,
+  "fields": {
+    "name": "Cleaning Chemical Dispensing Equipment And Systems"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 680,
+  "fields": {
+    "name": "Cleaning Chemicals Used With Dispensing Systems"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 681,
+  "fields": {
+    "name": "Auto Cleaners / Polishers, Air Fresheners, And Windshield Care"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 682,
+  "fields": {
+    "name": "Tire Care: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 683,
+  "fields": {
+    "name": "Introduction Of New Products / Services Relating To Cleaning Equipment, Janitorial Supplies, Cleaning Chemicals And Sorbents"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 684,
+  "fields": {
+    "name": "Office Recycling Containers And Waste Receptacles"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 685,
+  "fields": {
+    "name": "Outdoor Recycling Containers And Waste Receptacles"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 686,
+  "fields": {
+    "name": "Industrial Trash Storage Containers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 687,
+  "fields": {
+    "name": "Introduction Of New Services And Products Relating To Recycling Containers And Waste Receptacles"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 688,
+  "fields": {
+    "name": "Sterilants, Surgical Scrubs, And Related Products"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 689,
+  "fields": {
+    "name": "Disinfectants"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 690,
+  "fields": {
+    "name": "Permanent / Disposable Dispenser Housing And Refills For The Control Of General Institutional Airborneodors, Smoke, And Sanitizing Surfaces"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 691,
+  "fields": {
+    "name": "Toilet Bowl Cleaner, Liquid, Powder, And / Or Gel And Product"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 692,
+  "fields": {
+    "name": "Sanitizers For Food Handling Areas"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 693,
+  "fields": {
+    "name": "Insect Repellent"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 694,
+  "fields": {
+    "name": "Introduction Of New Products / Services Related To Chemicals And Chemical Products"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 695,
+  "fields": {
+    "name": "Fuel Oil Additive"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 696,
+  "fields": {
+    "name": "Boiler Feed, Cooling Water, And Closed Water Treatment Chemicals"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 697,
+  "fields": {
+    "name": "Propane"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 698,
+  "fields": {
+    "name": "Service / Repair And Or Rental Demurrage Relating To Propane"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 699,
+  "fields": {
+    "name": "Water Purification Chemicals"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 700,
+  "fields": {
+    "name": "Road Stabilization / Ice Melting Chemicals Or Chemical Formulations"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 701,
+  "fields": {
+    "name": "Aircraft Deicers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 702,
+  "fields": {
+    "name": "Antifreeze, Fuel Engine Primer, Penetrates, And Related Products-^^^^Note: Commercially Available Products Under This Sin May Be Covered By The U.S. Environmental Protection Agency Comprehensive Procurement Guidelines (Recycled Content) Program."
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 703,
+  "fields": {
+    "name": "Toiletries"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 704,
+  "fields": {
+    "name": "Personal Care Articles"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 705,
+  "fields": {
+    "name": "Lodging And Hospitality Supplies And Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 706,
+  "fields": {
+    "name": "Hospitality Wear"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 707,
+  "fields": {
+    "name": "Linens"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 708,
+  "fields": {
+    "name": "Introduction Of New Products / Services Relating To Toiletries, Personal Care Articles, And Hospitality Supplies And Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 709,
+  "fields": {
+    "name": "Administrative Support And Clerical Occupations (With And / Or Without Security Clearances, I.E. Secret, Top Secret, And Top Secret Science, Etc. ): This Sin Is Set Aside For Small Business Concerns Only."
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 710,
+  "fields": {
+    "name": "Automatic Data Processing Occupations (With And / Or Without Security Clearances, I.E. Secret, Top Secret, And Top Secret Science ): This Sin Is Set Aside For Small Business Concerns Only."
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 711,
+  "fields": {
+    "name": "General Services And Support (With And / Or Without Security Clearances, I.E. Secret, Top Secret, And Top Secret Science ): This Sin Is Set Aside For Small Business Concerns Only."
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 712,
+  "fields": {
+    "name": "Information And Arts Occupations, Including Miscellaneous Occupations (With And / Or Without Security Clearances, I.E. Secret, Top Secret, And Top Secret Science ): This Sin Is Set Aside For Small Business Concerns Only."
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 713,
+  "fields": {
+    "name": "Technical And Professional Occupations (With And / Or Without Security Clearances, I.E. Secret, Top Secret, And Top Secret Science ): This Sin Is Set Aside For Small Business Concerns Only."
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 714,
+  "fields": {
+    "name": "Introduction Of New Labor Categories For Temporary Services (With And / Or Without Security Clearances, I.E. Secret, Top Secret, And Top Secret Science ): This Sin Is Set Aside For Small Business Concerns Only."
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 715,
+  "fields": {
+    "name": "Human Resource Services (Excluding Eeo Services) "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 716,
+  "fields": {
+    "name": "Private Shared Service Center For Core Hr Services: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 717,
+  "fields": {
+    "name": "Eeo Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 718,
+  "fields": {
+    "name": "Private Shared Service Center For Non-Core Hr Services (Offered By Contractors Awarded 595-22 ): "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 719,
+  "fields": {
+    "name": "Pre-Employment Background Investigations"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 720,
+  "fields": {
+    "name": "Social Services, Professional Counseling And Veterans Readjustment & Behavioral Health Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 721,
+  "fields": {
+    "name": "Office Products / Supplies"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 722,
+  "fields": {
+    "name": "Office Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 723,
+  "fields": {
+    "name": "Restroom Products"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 724,
+  "fields": {
+    "name": "Lease Of Sedans, All Classes"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 725,
+  "fields": {
+    "name": "Lease Of Sport Utility Vehicles"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 726,
+  "fields": {
+    "name": "Lease Of Vans & Light Trucks"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 727,
+  "fields": {
+    "name": "Books / Pamphlets"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 728,
+  "fields": {
+    "name": "Periodicals / Subscriptions Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 729,
+  "fields": {
+    "name": "Editorial, Publishing, And Library Media Services: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 730,
+  "fields": {
+    "name": "On-Line Bookselling Services And Associated Items"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 731,
+  "fields": {
+    "name": "Lending Library Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 732,
+  "fields": {
+    "name": "Entertainment, News, And Library Media: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 733,
+  "fields": {
+    "name": "Sporting Goods Equipment And Supplies / N"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 734,
+  "fields": {
+    "name": "Fitness Center Management Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 735,
+  "fields": {
+    "name": "Personal Trainer And Aerobic / Cardio Class Leader / Instructor"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 736,
+  "fields": {
+    "name": "Fitness Center Equipment Maintenance"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 737,
+  "fields": {
+    "name": "Packaged Fitness Center"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 738,
+  "fields": {
+    "name": "Fitness Equipment / N"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 739,
+  "fields": {
+    "name": "Turfs, Greens And Floors Galore / N"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 740,
+  "fields": {
+    "name": "Poolside / N"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 741,
+  "fields": {
+    "name": "Camping And Hiking Equipment"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 742,
+  "fields": {
+    "name": "Park And Recreational Tables, Benches, Outdoor Pool And Patio Furniture And Bleachers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 743,
+  "fields": {
+    "name": "Park And Playground Equipment"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 744,
+  "fields": {
+    "name": "Sounds Of Music"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 745,
+  "fields": {
+    "name": "Child'S Play"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 746,
+  "fields": {
+    "name": "Sports Clothing And Accessories / N"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 747,
+  "fields": {
+    "name": "Introduction Of New Products / Services Relating To Athletic Clothing, Recreational Equipment, And Musical Instruments / N"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 748,
+  "fields": {
+    "name": "Introduction Of New Products And Services Relating To Park And Outdoor Recreational Equipment And Wheel And Track Vehicles / N"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 749,
+  "fields": {
+    "name": "Wheel And Track Vehicles"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 750,
+  "fields": {
+    "name": "Mobile Homes, Travel Trailers With Ancillary Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 751,
+  "fields": {
+    "name": "Recreational Watercraft"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 752,
+  "fields": {
+    "name": "Utility Vehicle, Unlicensed, Off-Road, Automotive Design"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 753,
+  "fields": {
+    "name": "Signs"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 754,
+  "fields": {
+    "name": "Safety Zone Products / N"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 755,
+  "fields": {
+    "name": "Trade Show Displays, Exhibit Systems And Related Products"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 756,
+  "fields": {
+    "name": "Flags, Banners, Pennants, And Related Products"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 757,
+  "fields": {
+    "name": "Introduction Of New Products / Services Relating To Signs And Safety Zone Products"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 758,
+  "fields": {
+    "name": "Awards / N"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 759,
+  "fields": {
+    "name": "Pens & Writing Implements, Rulers, Tape Measures, Magnets, Stress Indicators, Key Tags, Key Rings, Luggage Tags, Pocket Tools, Ice Scrapers, Mugs, Glassware, Plates And Bowls Suitable For Engraving, Imprintable Planners, Portfolios, Calculators, Briefcases, Carrying Cases, Bags And Accessories, Imprintable Computer Accessories, Including Mouse Pads And Wrists Rests"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 760,
+  "fields": {
+    "name": "Introduction Of New Products / Services Related To Trophies, Awards, Presentations, Promotional Materials, Flags, Briefcases, And Carrying Cases / N"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 761,
+  "fields": {
+    "name": "Bags And Sacks"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 762,
+  "fields": {
+    "name": "Packaging Services."
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 763,
+  "fields": {
+    "name": "Maintenance, Repair And Modification Of Containers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 764,
+  "fields": {
+    "name": "Pallets, Plastic And Wood"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 765,
+  "fields": {
+    "name": "Unique Identification (Uid) / Radio Frequency Identification (Rfid"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 766,
+  "fields": {
+    "name": "Bottles, Jars, Boxes, Cartons, Crates, Container Systems And Metal Drums."
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 767,
+  "fields": {
+    "name": "Wrapping And Strapping Materials"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 768,
+  "fields": {
+    "name": "Packaging And Packing Bulk Materials"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 769,
+  "fields": {
+    "name": "Performance-Oriented Packaging (Pop ), Plastic Over Pack, And Hazardous Material Packaging."
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 770,
+  "fields": {
+    "name": "Aluminum Foil"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 771,
+  "fields": {
+    "name": "New Technology"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 772,
+  "fields": {
+    "name": "Security, Alarm & Signal Systems"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 773,
+  "fields": {
+    "name": "Miscellaneous Alarm And Signal Systems. Process Monitoring / Fault Reporting Devices Or Systems-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 774,
+  "fields": {
+    "name": "Miscellaneous Alarm And Signal Systems-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 775,
+  "fields": {
+    "name": "Miscellaneous Alarm And Signal Systems. Audible / Visual Warning / Signaling Devices-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 776,
+  "fields": {
+    "name": "Miscellaneous Alarm And Signal Systems. Warning System Devices (Patient / Detainees)-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 777,
+  "fields": {
+    "name": "Anti-Theft Material Alarm Control Systems For Detection Of Property-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 778,
+  "fields": {
+    "name": "Fire Alarm Systems-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 779,
+  "fields": {
+    "name": "Access Control Systems, Door Entry Control By Card Access, Magnetic Proximity-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 780,
+  "fields": {
+    "name": "Access Control Systems, Door Entry Control By Touch Access, Dial, Digital, Keyboard, Keypad-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 781,
+  "fields": {
+    "name": "Access Control Systems, Parking Access Control-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 782,
+  "fields": {
+    "name": "Access Control Systems, Emergency Exit Door Access / Alarm Systems For Security And / Or Fire Safety-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 783,
+  "fields": {
+    "name": "Access Control Systems-Vehicle Arrest / Security Barrier / Barricade / Bollard Systems, Decorative Barrier Planters-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 784,
+  "fields": {
+    "name": "Other Access Control Systems-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 785,
+  "fields": {
+    "name": "Locking Devices-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 786,
+  "fields": {
+    "name": "Intrusion Alarms And Signal Systems-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 787,
+  "fields": {
+    "name": "Facility Management Systems-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 788,
+  "fields": {
+    "name": "Perimeter Security / Detection Systems-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 789,
+  "fields": {
+    "name": "Installation Of Security / Facility Management Systems Requiring Construction-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 790,
+  "fields": {
+    "name": "Professional Security / Facility Management Services-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 791,
+  "fields": {
+    "name": "Facility Management And Energy Solutions-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 792,
+  "fields": {
+    "name": "Protective Service Occupations-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 793,
+  "fields": {
+    "name": "Security Systems Integration And Design Services-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 794,
+  "fields": {
+    "name": "Security Management And Support Services-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 795,
+  "fields": {
+    "name": "Security System Life Cycle Support-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 796,
+  "fields": {
+    "name": "Total Solution Support Products-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 797,
+  "fields": {
+    "name": "Introduction Of New Products / Services Relating To Alarm And Signal Systems / Facility-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 798,
+  "fields": {
+    "name": "Boats, Powered-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 799,
+  "fields": {
+    "name": "Boats, Nonpowered-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 800,
+  "fields": {
+    "name": "Boats, Inflatable, Powered And Nonpowered-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 801,
+  "fields": {
+    "name": "Inboard And Outboard Engines, Marine Diesel Propulsion Engines (Ranging In Horsepower From 150-4, 000)-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 802,
+  "fields": {
+    "name": "Marine Craft Electronics-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 803,
+  "fields": {
+    "name": "Marine Craft"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 804,
+  "fields": {
+    "name": "Marine Craft Trailers And Trailer Accessories / Spare Parts-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 805,
+  "fields": {
+    "name": "Floating Marine Barriers And Booms, Floats, Perimeter Floats, And Moorings-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 806,
+  "fields": {
+    "name": "Marine Craft Modifications, Marine Craft Repair And Marine Craft Spare Parts-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 807,
+  "fields": {
+    "name": "Harbor / Waterfront Security Products And Services And Professional Marine Security Services-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 808,
+  "fields": {
+    "name": "Introduction Of New Products And Services Items Directly Related To Marine Equipment-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 809,
+  "fields": {
+    "name": "Law Enforcement"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 810,
+  "fields": {
+    "name": "Miscellaneous Personal Equipment-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 811,
+  "fields": {
+    "name": "Body Armor-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 812,
+  "fields": {
+    "name": "Helmets-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 813,
+  "fields": {
+    "name": "Restraining Equipment-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 814,
+  "fields": {
+    "name": "Miscellaneous Non-Personal Law Enforcement Equipment-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 815,
+  "fields": {
+    "name": "Canine Training And Handling Equipment, Canine Search And Detection-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 816,
+  "fields": {
+    "name": "Emergency Signal Systems-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 817,
+  "fields": {
+    "name": "In-Vehicle Protection And Restraint Systems-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 818,
+  "fields": {
+    "name": ""
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 819,
+  "fields": {
+    "name": "Police Bicycles"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 820,
+  "fields": {
+    "name": "Night Vision Equipment-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 821,
+  "fields": {
+    "name": "Alcohol Detection Kits And Devices-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 822,
+  "fields": {
+    "name": "Bomb Disposal And Hazardous Material Protective And Detective Equipment-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 823,
+  "fields": {
+    "name": "Emergency Preparedness And First Responder Equipment, Training And Services-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 824,
+  "fields": {
+    "name": "Firearms Storage, Securing And Cleaning Equipment; Unloading Stations; Bullet Recovery Systems And Gun Racks-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 825,
+  "fields": {
+    "name": "Target Systems / Target Range Accessories-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 826,
+  "fields": {
+    "name": "Metal And Bomb Detection Equipment:-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 827,
+  "fields": {
+    "name": "Fingerprinting / Palmprinting (Taking And Detection) And Evidential Casting Materials-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 828,
+  "fields": {
+    "name": "Employment, Forensic Drug Testing Equipment And Services-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 829,
+  "fields": {
+    "name": "Criminal Investigative Equipment And Supplies-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 830,
+  "fields": {
+    "name": "Vehicle Monitor (Tracking) Systems-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 831,
+  "fields": {
+    "name": "Radiation / Nuclear Material Detection Equipment"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 832,
+  "fields": {
+    "name": "Surveillance Systems, Wearable Body Cameras, Vehicular Video"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 833,
+  "fields": {
+    "name": "Aircraft Armoring And Related Services-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 834,
+  "fields": {
+    "name": "Armored Vehicles, Vehicle Armoring Services, Wheeled Vehicles-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 835,
+  "fields": {
+    "name": "Law Enforcement And Security Training-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 836,
+  "fields": {
+    "name": "Professional Law Enforcement Services-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 837,
+  "fields": {
+    "name": "Introduction Of New Services / Products Related To Law Enforcement And Security Equipment-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 838,
+  "fields": {
+    "name": "Emergency Patient Transportation And Immobilization Devices-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 839,
+  "fields": {
+    "name": "Wildland Firefighters"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 840,
+  "fields": {
+    "name": "Fire Extinguishing / Suppressing Products, Retardant, Foams And Equipment-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 841,
+  "fields": {
+    "name": "Firefighting Distress / Signal Devices And Heat Sensing Devices-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 842,
+  "fields": {
+    "name": "Firefighting And Rescue Tools, Equipment And Accessories-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 843,
+  "fields": {
+    "name": "Breathing Air Equipment, Inhalator Devices, Respiratory Protection Products, Related Support Items And Solutions-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 844,
+  "fields": {
+    "name": "Flood Control Equipment-Traditional And Alternative Approaches-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 845,
+  "fields": {
+    "name": "Medical / Rescue Kits-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 846,
+  "fields": {
+    "name": "Hoses, Valves, Fittings, Nozzles, Couplings And Related Accessories. Hoses-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 847,
+  "fields": {
+    "name": "Helicopter Equipment And Products For Search And Rescue And Firefighting Applications-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 848,
+  "fields": {
+    "name": "Burning Equipment-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 849,
+  "fields": {
+    "name": "Introduction Of New Products And Services Relating To Firefighting And Rescue Equipment-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 850,
+  "fields": {
+    "name": "Gloves-Industrial, Work And Cold Weather Gloves-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 851,
+  "fields": {
+    "name": "Special Purpose Clothing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 852,
+  "fields": {
+    "name": "Rainwear. Lightweight Rainwear-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 853,
+  "fields": {
+    "name": "Footwear. Men'S Over-The-Sock Boots (Work, Uniform, Sport) And Women'S Over-The-Sock Boots (Work, Uniform, Sport)-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 854,
+  "fields": {
+    "name": "Footwear. Men'S Or Women'S Overshoes, Rubber-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 855,
+  "fields": {
+    "name": "Footwear. Men'S Safety Toe Shoes Or Boots And Women'S Safety Toe Shoes Or Boots-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 856,
+  "fields": {
+    "name": "Shipboard / Aircraft Anti-Exposure Immersion Clothing Not Otherwise Covered-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 857,
+  "fields": {
+    "name": "Extreme Cold Weather Clothing. Coats, Jackets, Vests, Hoods And Hats-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 858,
+  "fields": {
+    "name": "Extreme Cold Weather Clothing. Overalls, Coveralls, Pants, Insulated-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 859,
+  "fields": {
+    "name": "Footwear. Boots, Insulated, Waterproof, Extreme Cold Weather-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 860,
+  "fields": {
+    "name": "Special Purpose Work Clothes. Disposable Clothing-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 861,
+  "fields": {
+    "name": "Special Purpose Work Clothes. Coveralls, General Purpose, Detainee Clothing-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 862,
+  "fields": {
+    "name": "Structural Fire Fighting Clothing. Coat, Turnout; Trousers-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 863,
+  "fields": {
+    "name": "Structural Fire Fighting Clothing. Coat, Turnout, Proximity; Trousers, Proximity; Helmets, Proximity-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 864,
+  "fields": {
+    "name": "Structural Fire Fighting Clothing. Boots, Bunker And Hip-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 865,
+  "fields": {
+    "name": "Structural Fire Fighting Clothing. Gloves-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 866,
+  "fields": {
+    "name": "Structural Fire Fighting Clothing. Protective Hoods-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 867,
+  "fields": {
+    "name": "Structural Fire Fighting Clothing. Fire Fighter'S Station Wear-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 868,
+  "fields": {
+    "name": "Wildland Fire Fighting Clothing-Personal Protection. Shirts And Pants (Bdu'S) Nfpa 1977 Compliant-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 869,
+  "fields": {
+    "name": "Wildland Fire Fighting Clothing-Personal Protection. Brush Shirts, Pants, Coats, Jackets, Jumpsuits-Nfpa 1977 Compliant. Shirts, Pants, Coats, Jumpsuits, Coveralls-Flame Resistant. Not Nfpa Compliant-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 870,
+  "fields": {
+    "name": "Protective Worksuits, Waterproof, Chemical And Electrical Safety. Jackets, Coats And Hoods-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 871,
+  "fields": {
+    "name": "Flotation Devices. Personal Flotation Devices, Coast Guard Approved Under 46 Cfr 160.064; And Personal Flotation Devices Not Coast Guard Approved-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 872,
+  "fields": {
+    "name": "Wildland Fire Fighting Clothing-Personal Protection. Helmets, Safety, Wildfire-Nfpa 1977 Compliant-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 873,
+  "fields": {
+    "name": "Wildland Fire Fighting Clothing-Personal Protection. Helmets, Safety, Electrical Construction (Welder'S)-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 874,
+  "fields": {
+    "name": "Security Wear, Ems Clothing And Related Products-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 875,
+  "fields": {
+    "name": "High Visibility, Reflective Safety Products-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 876,
+  "fields": {
+    "name": "Medical / Hospital Clothing-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 877,
+  "fields": {
+    "name": "Industrial Work Shirts And Pants-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 878,
+  "fields": {
+    "name": "Concealment Clothing, Camouflage Clothing And Bdu'S-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 879,
+  "fields": {
+    "name": "Miscellaneous Footwear Accessories-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 880,
+  "fields": {
+    "name": "A Protective Worksuits, Waterproof, Chemical And Electrical Safety-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 881,
+  "fields": {
+    "name": "Miscellaneous Undergarments For Use With Special Purpose Clothing-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 882,
+  "fields": {
+    "name": "Special Purpose Clothing Not Elsewhere Covered Under This Solicitation-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 883,
+  "fields": {
+    "name": "Emergency Response / Hazmat Clothing And Related Products-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 884,
+  "fields": {
+    "name": "Cool / Hot Products-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 885,
+  "fields": {
+    "name": "Introduction Of New Products / Services Relating To Special Purpose Clothing-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 886,
+  "fields": {
+    "name": "Information Technology Professional Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 887,
+  "fields": {
+    "name": "Agency Human Capital Strategy, Policy, And Operational Planning"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 888,
+  "fields": {
+    "name": "Defense Acquisition Workforce Improvement Act (Dawia) And Federal Acquisition Certification (Fac) Training For Acquisition Workforce Personnel: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 889,
+  "fields": {
+    "name": "Specialty Tires (Retread)"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 890,
+  "fields": {
+    "name": "Snow Maintenance Equipment (Vehicle Mounting)"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 891,
+  "fields": {
+    "name": "Elevator And Escalator Preventative Maintenance ="
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 892,
+  "fields": {
+    "name": "Other Direct Costs (Odcs ); Expenses Other Than Direct Labor Hours"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 893,
+  "fields": {
+    "name": "Other Direct Costs (Odcs) Are Expenses Other Than Labor Hours.^^ (Small Business Set-Aside ): "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 894,
+  "fields": {
+    "name": "Earth Observation Solutions-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 895,
+  "fields": {
+    "name": "Penetration Testing-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 896,
+  "fields": {
+    "name": "Incident Response-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 897,
+  "fields": {
+    "name": "Cyber Hunt-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 898,
+  "fields": {
+    "name": "Risk And Vulnerability Assessments (Rva)-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 899,
+  "fields": {
+    "name": "Health Information Technology Services-Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 900,
+  "fields": {
+    "name": "Packaged Office Furniture"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 901,
+  "fields": {
+    "name": "Packaged Healthcare Furniture"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 902,
+  "fields": {
+    "name": "Packaged Dormitory And Quarters Furniture"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 903,
+  "fields": {
+    "name": "International Packaged Furniture"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 904,
+  "fields": {
+    "name": "Broadloom Carpet (Small Business Set Aside) "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 905,
+  "fields": {
+    "name": "Mats And Matting (With And Without Logos) (Small Business Set Aside) "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 906,
+  "fields": {
+    "name": "Road Stabilization / Ice Melting Chemicals Or Chemical Formulations And Aircraft Deicers"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 907,
+  "fields": {
+    "name": "Agency Human Capital Evaluation"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 908,
+  "fields": {
+    "name": "Ancillary Services: Administrative Support Services"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 909,
+  "fields": {
+    "name": "Talent Acquisition: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 910,
+  "fields": {
+    "name": "Talent Development"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 911,
+  "fields": {
+    "name": "Employee Performance Management"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 912,
+  "fields": {
+    "name": "Compensation & Benefits"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 913,
+  "fields": {
+    "name": "Employee Relations"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 914,
+  "fields": {
+    "name": "Labor Relations"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 915,
+  "fields": {
+    "name": "Workforce Analytics And Employee Records"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 916,
+  "fields": {
+    "name": "New Item Technology"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 917,
+  "fields": {
+    "name": "Smart Buildings Systems Integrator Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 918,
+  "fields": {
+    "name": "Miscellaneous Alarm And Signal Systems, Audible / Visual Warning / Signaling Devices Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 919,
+  "fields": {
+    "name": "Physical Access Control Systems (Pacs) Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 920,
+  "fields": {
+    "name": "Physical Access Control Systems (Pacs ), Fips 201 Apl Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 921,
+  "fields": {
+    "name": "Security System Integration, Design, Management, And Life Cycle Support Subject To Cooperative Purchasing"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 922,
+  "fields": {
+    "name": "Integrated Consulting Services: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 923,
+  "fields": {
+    "name": "Integrated Business Program Support Services: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 924,
+  "fields": {
+    "name": "Dau And Fai Certified Dawia And Fac Acquisition Workforce Training For Gs-1102 And Non-1102 Personnel"
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 925,
+  "fields": {
+    "name": "New Services: "
+  }
+},
+{
+  "model": "categories.keyword",
+  "pk": 926,
+  "fields": {
+    "name": "Operations & Maintenance Logistics Management And Support Services."
   }
 }
 ]

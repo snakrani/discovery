@@ -130,7 +130,7 @@ class MetaFilterSet(FilterSetMetaclass):
 
 class NaicsFilter(FilterSet, metaclass = MetaFilterSet):
     
-    _fuzzy_text = ('code', 'root_code', 'description', 'keyword:keywords__name')
+    _fuzzy_text = ('code', 'description', 'sin:sin__code', 'keyword:keywords__name')
     
     class Meta:
         model = categories.Naics
@@ -139,7 +139,7 @@ class NaicsFilter(FilterSet, metaclass = MetaFilterSet):
 
 class PscFilter(FilterSet, metaclass = MetaFilterSet):
     
-    _fuzzy_text = ('code', 'description', 'keyword:keywords__name')
+    _fuzzy_text = ('code', 'description', 'sin:sin__code', 'keyword:keywords__name')
     
     naics = RelatedFilter(NaicsFilter)
     
@@ -294,6 +294,6 @@ class ContractFilter(FilterSet, metaclass = MetaFilterSet):
         
     def filter_psc_naics(self, qs, name, value):
         naics_code = re.sub(r'[^\d]+$', '', value)
-        psc_codes = list(categories.PSC.objects.filter(naics__root_code=naics_code).distinct().values_list('code', flat=True))
+        psc_codes = list(categories.PSC.objects.filter(naics__code=naics_code).distinct().values_list('code', flat=True))
         
         return qs.filter(Q(PSC__in=psc_codes) | Q(NAICS=naics_code))

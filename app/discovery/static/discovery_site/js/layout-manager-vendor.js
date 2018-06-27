@@ -2,14 +2,26 @@
 LayoutManager.initializers.vendor = function() {
     EventManager.subscribe('vendorPoolLoaded', this.renderVendor.bind(LayoutManager));
     EventManager.subscribe('contractDataLoaded', this.renderTable.bind(LayoutManager));
+    EventManager.subscribe('pageUpdated', this.renderButtonAndCSV(LayoutManager));
 };
 
 LayoutManager.render = function(results) {
-    this.renderVendor(results, null);
+    this.renderVendor(results);
 };
 
-LayoutManager.renderVendor = function(vendor, pool) {
-    var membership = null;
+LayoutManager.renderVendor = function(vendor) {
+    var pools = {};
+
+    if (! $.isEmptyObject(RequestsManager.vehiclePools)) {
+        for (var i = 0; i < vendor.pools.length; i++) {
+            if (vendor.pools[i].pool.id in RequestsManager.vehiclePools) {
+                pools[vendor.pools[i].pool.id] = {
+                    "vendor": vendor.pools[i],
+                    "pool": RequestsManager.vehiclePools[vendor.pools[i].pool.id]
+                };
+            }
+        }
+    }
 
     $(document).prop('title', vendor.name + " - " + URLManager.title);
 
@@ -50,32 +62,8 @@ LayoutManager.renderVendor = function(vendor, pool) {
     $('.vendor_address1').html(vendor.sam_location ? vendor.sam_location.address : ' ');
     $('.vendor_address2').html(vendor.sam_location ? vendor.sam_location.city + ', ' + vendor.sam_location.state + ' ' + vendor.sam_location.zipcode : ' ');
 
-    if (pool) {
-        for (var i = 0; i < vendor.pools.length; i++) {
-            if (vendor.pools[i].pool.id == pool.id) {
-                membership = vendor.pools[i];
-            }
-        }
-
-        if (membership) {
-            if (membership.pms.length > 0) {
-                $('.vendor_poc_name').html(membership.pms[0].name);
-                $('.vendor_poc_phone').html(membership.pms[0].phone.length ? membership.pms[0].phone.join(',') : ' ');
-
-                var mailto = [];
-                for (var i = 0; i < membership.pms[0].email.length; i++) {
-                    email = membership.pms[0].email[i];
-                    mailto.push('<a href="mailto:' + email + '">' + email + '</a>');
-                }
-                $('.vendor_poc_email').html(mailto.join(','));
-            }
-        }
-        else {
-            membership = vendor;
-        }
-    }
-    else {
-        membership = vendor;
+    if (! $.isEmptyObject(pools)) {
+        this.renderContacts(vendor, pools);
     }
 
     //small business badge
@@ -88,32 +76,56 @@ LayoutManager.renderVendor = function(vendor, pool) {
     t.find("tr:gt(0)").remove();
 
     indicatorsRow = $('<tr></tr>');
-    indicatorsRow.append(this.renderColumn(membership, '8a', 'A6'));
-    indicatorsRow.append(this.renderColumn(membership, 'Hubz', 'XX'));
-    indicatorsRow.append(this.renderColumn(membership, 'sdvo', 'QF'));
-    indicatorsRow.append(this.renderColumn(membership, 'wo', 'A2'));
-    indicatorsRow.append(this.renderColumn(membership, 'vo', 'A5'));
-    indicatorsRow.append(this.renderColumn(membership, 'sdb', '27'));
+    indicatorsRow.append(this.renderColumn(vendor, '8a', 'A6'));
+    indicatorsRow.append(this.renderColumn(vendor, 'Hubz', 'XX'));
+    indicatorsRow.append(this.renderColumn(vendor, 'sdvo', 'QF'));
+    indicatorsRow.append(this.renderColumn(vendor, 'wo', 'A2'));
+    indicatorsRow.append(this.renderColumn(vendor, 'vo', 'A5'));
+    indicatorsRow.append(this.renderColumn(vendor, 'sdb', '27'));
     t.append(indicatorsRow);
 
-    if (pool) {
-        var pool_components = pool.id.split('_');
-
+    if (InputHandler.getNAICSCode()) {
         $("#naics_contracts_button").show();
-        $("#naics_contracts_button").text("NAICS " + URLManager.stripSubCategories(InputHandler.naicsCode));
+        $("#naics_contracts_button").text("NAICS " + URLManager.stripSubCategories(InputHandler.getNAICSCode()));
         $("#all_contracts_button").show();
         $(".vendor_contract_history_text").html("Showing vendor contract history for PSCs related to: ");
-
-        $("#pool_filter_display").show();
-        $("#pool_filter_display span").text("Only show contracts for  " + pool_components[0]);
     }
     else {
         $("#naics_contracts_button").hide();
         $("#all_contracts_button").hide();
         $(".vendor_contract_history_text").html("Showing this vendor's indexed contract history");
-        $("#pool_filter_display").hide();
 
         this.renderButtonAndCSV('all');
+    }
+};
+
+LayoutManager.renderContacts = function(vendor, pools) {
+    var $table = $('#contact_details');
+    var poolIds = URLManager.getParameterByName('pool');
+
+    if (poolIds) {
+        poolIds = poolIds.split(',').filter(Boolean);
+    }
+
+    $table.find("tr:gt(0)").remove();
+
+    for (var poolId in pools) {
+        var data = pools[poolId];
+        var checked = "";
+
+        if (poolIds && poolIds.includes(data.pool.id)) {
+            checked = "checked";
+        }
+
+        var $contractRow = $('<tr class="contact_filter"></tr>');
+
+        $contractRow.append('<td class="filter"><input type="checkbox" class="contract_pool_filter" name="' + data.pool.id + '" value="' + data.pool.id + '" ' + checked + ' /></td>');
+        $contractRow.append('<td class="pool">' + data.pool.vehicle.split('_').join(' ') + ': ' + data.pool.name + '</td>');
+        $contractRow.append('<td class="contact">' + data.vendor.cms[0].name + '</td>');
+        $contractRow.append('<td class="phones">' + data.vendor.cms[0].phone.join('<br/>') + '</td>');
+        $contractRow.append('<td class="emails">' + data.vendor.cms[0].email.join('<br/>') + '</td>');
+
+        $table.append($contractRow);
     }
 };
 
@@ -155,14 +167,24 @@ LayoutManager.renderTable = function(results, listType, pageNumber, itemsPerPage
 };
 
 LayoutManager.renderButtonAndCSV = function(listType){
+    if (typeof listType != 'string' || ! ['all', 'naics'].includes(listType)) {
+        listType = 'naics';
+
+        if (URLManager.getParameterByName('showall')) {
+            listType = 'all';
+        }
+    }
+
     $("#vendor_contract_history_title_container .contracts_button_active").attr('class', 'contracts_button');
     $("#" + listType + "_contracts_button").attr('class', 'contracts_button_active');
 
     var a = $("a#csv_link");
     var csv_link = a.attr('href');
 
+    csv_link = csv_link.substring(0, csv_link.indexOf("?"));
+
     if (listType == 'all') {
-        a.attr('href', csv_link.substring(0, csv_link.indexOf("?")));
+        a.attr('href', csv_link);
     } else {
         a.attr('href', csv_link + URLManager.getQueryString());
     }

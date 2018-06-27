@@ -1,57 +1,61 @@
 from test import cases as case
 
 
+NAICS = {
+    'naics-code': '541330'
+}
+
 OASIS_SB_NAICS = {
-    'vehicle': 'oasis_sb',
+    'vehicle': 'OASIS_SB',
     'naics-code': '541990'
 }
 
 OASIS_SB_NAICS_2 = {
-    'vehicle': 'oasis_sb',
+    'vehicle': 'OASIS_SB',
     'naics-code': '541620'
 }
 
 OASIS_SB_NAICS_3 = {
-    'vehicle': 'oasis_sb',
+    'vehicle': 'OASIS_SB',
     'naics-code': '541618'
 }
 
 OASIS_SB_NAICS_4 = {
-    'vehicle': 'oasis_sb',
+    'vehicle': 'OASIS_SB',
     'naics-code': '541219'
 }
 
 OASIS_SB_NAICS_WO = {
-    'vehicle': 'oasis_sb',
+    'vehicle': 'OASIS_SB',
     'naics-code': '541330',
     'setasides': 'A2'
 }
 
 OASIS_SB_NAICS_8A = {
-    'vehicle': 'oasis_sb',
-    'naics-code': '541330B',
+    'vehicle': 'OASIS_SB',
+    'naics-code': '541330',
     'setasides': 'A6'
 }
 
 OASIS_SB_NAICS_8A_2 = {
-    'vehicle': 'oasis_sb',
+    'vehicle': 'OASIS_SB',
     'naics-code': '541612',
     'setasides': 'A6'
 }
 
 OASIS_SB_NAICS_HZ = {
-    'vehicle': 'oasis_sb',
+    'vehicle': 'OASIS_SB',
     'naics-code': '541330',
     'setasides': 'XX'
 }
 
 OASIS_NAICS = {
-    'vehicle': 'oasis',
+    'vehicle': 'OASIS',
     'naics-code': '541990'
 }
 
 OASIS_NAICS_2 = {
-    'vehicle': 'oasis',
+    'vehicle': 'OASIS',
     'naics-code': '541618'
 }
 
@@ -63,19 +67,18 @@ class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
             'Discovery': 'title'
         },
         'search_veteran_owned': {
-            'params': OASIS_SB_NAICS,
+            'params': NAICS,
             'wait': ('class', 'table_row_data'),
             'actions': {
                 'vet*click': {
-                    'wait': ('id', 'your_filters', 'Veteran Owned'),
-                    'your_filters': ('text__equal', 'Veteran Owned'),
-                    'css:span.matching_your_search': ('text__matches', r'^[\s\S]* vendors match your search$')
+                    'wait': ('sec', 2),
+                    'css:span.matching_your_search': ('text__equal', '5 vendors match your search')
                 }
             }
         },
         'search_zero_results': {
             'params': {
-                'vehicle': 'oasis_sb',
+                'vehicle': 'OASIS_SB',
                 'naics-code': '541990',
                 'setasides': ('A6', 'A2', 'XX')
             },
@@ -97,12 +100,7 @@ class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
         'search_result_count': {
             'params': OASIS_SB_NAICS_WO,
             'wait': ('class', 'table_row_data'),
-            'css:span.matching_your_search': ('text__equal', '1 vendors match your search')
-        },
-        'search_result_criteria': {
-            'params': OASIS_SB_NAICS_WO,
-            'wait': ('class', 'table_row_data'),
-            'your_search': ('text__equal', 'Engineering Services')
+            'css:span.matching_your_search': ('text__equal', '3 vendors match your search')
         },
         'search_vendor_count': {
             'params': OASIS_SB_NAICS_WO,
@@ -133,7 +131,8 @@ class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
             'params': OASIS_SB_NAICS_3,
             'wait': ('class', 'table_row_data'),
             'naics-code': 'enabled',
-            'placeholder': 'enabled',
+            'vehicle-id': 'enabled',
+            'pool-id': 'enabled',
             'css:.se_filter': 'enabled'
         },
         'unrestricted_socioeconomic_factors': {
@@ -145,9 +144,7 @@ class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
             'xpath://*[@id="pool_vendors"]/tbody/tr[1]/th[7]': ('text__equal', 'WO'),
             'xpath://*[@id="pool_vendors"]/tbody/tr[1]/th[8]': ('text__equal', 'VO'),
             'xpath://*[@id="pool_vendors"]/tbody/tr[1]/th[9]': ('text__equal', 'SDB'),
-            'xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[4]': ('text__equal', 'Not Applicable\n(SB Only)'),
-            'choose_filters': ('text__equal', 'Choose filters (SB Only)'),
-            'css:.se_filter': 'disabled'
+            'choose_filters': ('text__equal', 'Choose filters (Small Business Only)')
         },
         'contract_count_column': {
             'params': OASIS_SB_NAICS_4,

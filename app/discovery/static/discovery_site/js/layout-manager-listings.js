@@ -61,20 +61,16 @@ LayoutManager.renderRow = function(vendor, qs, i) {
     $vendorRow.append(num_contracts_col);
 
     //add socio-economic columns
-    if (vehicle != 'pss' && vehicle.indexOf("_sb") == -1) {
-        if (i==0) {
-            //if first row of content, create cell for "SB Only"
-            var unrestricted_setasides = $('<td colspan="6" rowspan="100" class="unrestricted">Not Applicable </br>(SB Only)</td>');
-            $vendorRow.append(unrestricted_setasides);
-        }
-    } else {
-        //render socioeconomic indicators
+    if (vendor.setasides.length > 0) {
         $vendorRow.append(this.renderColumn(vendor, '8a', 'A6'));
         $vendorRow.append(this.renderColumn(vendor, 'Hubz', 'XX'));
         $vendorRow.append(this.renderColumn(vendor, 'sdvo', 'QF'));
         $vendorRow.append(this.renderColumn(vendor, 'wo', 'A2'));
         $vendorRow.append(this.renderColumn(vendor, 'vo', 'A5'));
         $vendorRow.append(this.renderColumn(vendor, 'sdb', '27'));
+    }
+    else {
+        $vendorRow.append($('<td colspan="6" class="unrestricted"></td>'));
     }
 
     return $vendorRow;

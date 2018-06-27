@@ -3,6 +3,7 @@
 def get_category_fixtures():
     return [
         'keywords.json',
+        'sin.json',
         'naics.json',
         'psc.json',
         'setasides.json', 

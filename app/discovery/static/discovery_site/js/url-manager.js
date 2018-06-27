@@ -4,17 +4,18 @@ var URLManager = {
 
     init: function() {
         EventManager.subscribe('vehicleChanged', this.update.bind(URLManager));
+        EventManager.subscribe('poolSelected', this.update.bind(URLManager));
         EventManager.subscribe('naicsChanged', this.update.bind(URLManager));
         EventManager.subscribe('zoneChanged', this.update.bind(URLManager));
         EventManager.subscribe('contentChanged', this.update.bind(URLManager));
-        EventManager.subscribe('vendorPoolFilterChanged', this.update.bind(URLManager));
-
+        EventManager.subscribe('contractsChanged', this.update.bind(URLManager));
 
         this.initFromQS();
     },
 
     initFromQS: function() {
         var vehicle = this.getParameterByName('vehicle');
+        var pool = this.getParameterByName('pool');
         var naics = this.getParameterByName('naics-code');
         var zone = this.getParameterByName('zone');
         var setasides = this.getParameterByName('setasides');
@@ -22,6 +23,9 @@ var URLManager = {
 
         if (vehicle) {
             data['vehicle'] = vehicle;
+        }
+        if (pool) {
+            data['pool'] = pool;
         }
         if (naics) {
             data['naics-code'] = naics;
@@ -37,22 +41,25 @@ var URLManager = {
         EventManager.publish('loadPage', data);
     },
 
-    update: function(results) {
+    update: function() {
         History.pushState('', this.title, this.getURL());
+        EventManager.publish('pageUpdated');
     },
 
-    getQueryString: function() {
+    getQueryString: function(params) {
         var queryObject = RequestsManager.buildRequestQuery();
         var qs = '?';
         var k;
 
-        // these aren't needed for query string, included for requestquery.
-        delete queryObject.group;
-        delete queryObject.pool;
-
         if('naics' in queryObject) {
             queryObject['naics-code'] = queryObject.naics;
             delete queryObject.naics;
+        }
+
+        if (params !== undefined) {
+            for (key in params) {
+                queryObject[key] = params[key];
+            }
         }
 
         for (k in queryObject) {
@@ -60,19 +67,18 @@ var URLManager = {
                 qs += k + '=' + queryObject[k] + '&';
             }
         }
+
         return qs;
     },
 
     getParameterByName: function(name) {
-        // http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
-        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-            results = regex.exec(location.search);
-        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        name = name.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
+        var match = location.search.match(new RegExp("[?&]"+name+"=([^&]+)(&|$)"));
+        return match && decodeURIComponent(match[1].replace(/\+/g, " "));
     },
 
-    getURL: function() {
-        return window.location.pathname + this.getQueryString();
+    getURL: function(params) {
+        return window.location.pathname + this.getQueryString(params);
     },
 
     updateResultCSVURL: function(results) {
@@ -91,29 +97,6 @@ var URLManager = {
         pathArray.splice(5, 0, "csv");
 
         $("#csv_link").attr("href", pathArray.join('/'));
-    },
-
-    getPoolInfo: function() {
-        var pathArray = window.location.href.split('/').removeEmpties();
-        var poolStart = $.inArray('pool', pathArray);
-
-        if (poolStart !== -1) {
-            return {'vehicle': pathArray[poolStart + 1], 'pool_number': pathArray[poolStart + 2]};
-        }
-        else {
-            return null;
-        }
-    },
-
-    getPool: function() {
-        var poolInfo = this.getPoolInfo();
-
-        if (poolInfo !== null){
-            return [poolInfo['vehicle'] + '_' + poolInfo['pool_number'], poolInfo['vehicle']];
-        }
-        else {
-            return null;
-        }
     },
 
     getDUNS: function() {

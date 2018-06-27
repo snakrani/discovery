@@ -9,22 +9,32 @@ RequestsManager.sortClassMap = function() {
 
 RequestsManager.initializers.listings = function() {
     EventManager.subscribe('poolUpdated', this.load.bind(RequestsManager));
+    EventManager.subscribe('poolSelected', this.load.bind(RequestsManager));
     EventManager.subscribe('vendorsChanged', this.refreshVendors.bind(RequestsManager));
 };
 
 RequestsManager.loadVendorData = function(data, callback) {
     var url = "/api/vendors/";
-    var pool = RequestsManager.pool;
+    var pools = RequestsManager.vehiclePools;
+    var poolIds = [];
 
     var requestVars = this.buildRequestQuery();
     var queryData = $.extend(data, {'count': this.getPageCount()});
     var filters = [];
 
-    if (pool && 'naics' in requestVars) {
+    if (! $.isEmptyObject(pools) && 'naics' in requestVars) {
         queryData['contract_naics'] = requestVars['naics'];
-        filters.push('(pools__pool__id' + '=' + pool.id + ')');
 
-        if (LayoutManager.zoneActive() && 'zone' in requestVars && requestVars['zone'] != 'all') {
+        if (RequestsManager.pool) {
+            filters.push('(pools__pool__id' + '=' + RequestsManager.pool.id + ')');
+        } else {
+            Object.keys(pools).forEach(function (id) {
+                poolIds.push(id);
+            });
+            filters.push('(pools__pool__id__in' + '=' + poolIds.join(',') + ')');
+        }
+
+        if (LayoutManager.zoneActive() && 'zone' in requestVars) {
             filters.push('(pools__zones__id' + '=' + requestVars['zone'] + ')');
         }
 
@@ -37,8 +47,8 @@ RequestsManager.loadVendorData = function(data, callback) {
         queryData['filters'] = encodeURIComponent(filters.join('&'));
 
         LayoutManager.disableVehicles();
-        LayoutManager.disableNaics();
-        LayoutManager.disableZone();
+        LayoutManager.disablePools();
+        LayoutManager.disableZones();
         LayoutManager.disableFilters();
         $('.table_wrapper').addClass('loading');
 
@@ -48,16 +58,16 @@ RequestsManager.loadVendorData = function(data, callback) {
                     callback(queryData, response);
 
                     LayoutManager.enableVehicles();
-                    LayoutManager.enableNaics();
-                    LayoutManager.enableZone();
+                    LayoutManager.enablePools();
+                    LayoutManager.enableZones();
                     LayoutManager.enableFilters();
                     $('.table_wrapper').removeClass('loading');
                 }
             },
             function(req, status, error) {
                 LayoutManager.enableVehicles();
-                LayoutManager.enableNaics();
-                LayoutManager.enableZone();
+                LayoutManager.enablePools();
+                LayoutManager.enableZones();
                 LayoutManager.enableFilters();
                 $('.table_wrapper').removeClass('loading');
             }

@@ -3,12 +3,13 @@ var LayoutManager = {
     initializers: {},
 
     init: function() {
-        EventManager.subscribe('vehicleChanged', this.enableNaics.bind(LayoutManager));
-        EventManager.subscribe('vehicleChanged', this.toggleZone.bind(LayoutManager));
-
+        if (URLManager.isHomePage() || URLManager.isPoolPage()) {
+            EventManager.subscribe('vehicleChanged', this.toggleZones.bind(LayoutManager));
+            EventManager.subscribe('poolUpdated', this.updatePoolInfo.bind(LayoutManager));
+            EventManager.subscribe('poolSelected', this.updatePoolInfo.bind(LayoutManager));
+            EventManager.subscribe('contentChanged', this.updateResultsInfo.bind(LayoutManager));
+        }
         EventManager.subscribe('dataLoaded', this.render.bind(LayoutManager));
-        EventManager.subscribe('poolUpdated', this.updatePoolInfo.bind(LayoutManager));
-        EventManager.subscribe('contentChanged', this.updateResultsInfo.bind(LayoutManager));
 
         for(var handler in this.initializers){
             this.initializers[handler].call(this);
@@ -22,27 +23,33 @@ var LayoutManager = {
     },
 
     enableVehicles: function() {
-        $("div#vehicle_select span.select_text").css('color', 'white');
         $("div#vehicle_select select").attr("disabled", false);
     },
 
     disableVehicles: function() {
-        $("div#vehicle_select span.select_text").css('color', this.disabledColor);
         $("div#vehicle_select select").attr("disabled", true);
     },
 
-    enableNaics: function() {
-        $("div#naics_select span.select_text").css('color', 'white');
-        $("div#naics_select select").attr("disabled", false);
+    enablePools: function() {
+        $("div#pool_select select").attr("disabled", false);
     },
 
-    disableNaics: function() {
-        $("div#naics_select span.select_text").css('color', this.disabledColor);
-        $("div#naics_select select").attr("disabled", true);
+    showPools: function() {
+        $("div#pool_select").show();
+    },
+
+    disablePools: function() {
+        $("div#pool_select select").attr("disabled", true);
+    },
+
+    hidePools: function() {
+        $("div#pool_select").hide();
     },
 
     zoneActive: function() {
-        if (InputHandler.getVehicle().match(/^BMO/i) && URLManager.getParameterByName('naics-code')) {
+        var vehicle = InputHandler.getVehicle();
+
+        if (vehicle && vehicle.match(/^BMO/i)) {
             return true;
         }
         else {
@@ -50,45 +57,39 @@ var LayoutManager = {
         }
     },
 
-    enableZone: function() {
+    enableZones: function() {
         if (this.zoneActive()) {
-            $("div#zone_select span.select_text").css('color', 'white');
             $("div#zone_select select").attr("disabled", false);
         }
     },
 
-    showZone: function() {
+    showZones: function() {
         $("div#zone_select").show();
     },
 
-    disableZone: function() {
-        $("div#zone_select span.select_text").css('color', this.disabledColor);
+    disableZones: function() {
         $("div#zone_select select").attr("disabled", true);
     },
 
-    hideZone: function() {
+    hideZones: function() {
         $("div#zone_select").hide();
     },
 
-    toggleZone: function() {
+    toggleZones: function() {
         if (this.zoneActive()) {
-            this.enableZone();
-            this.showZone();
+            this.enableZones();
+            this.showZones();
         }
         else {
-            this.hideZone();
-            this.disableZone();
+            this.hideZones();
+            this.disableZones();
         }
     },
 
     enableFilters: function() {
-        var vehicle = this.getQSByName(document.location, 'vehicle');
-
-        if (vehicle == 'pss' || vehicle.indexOf("_sb") > 0) {
-            $('#choose_filters').removeClass('filter_text_disabled').addClass('filter_text');
-            $('.pure-checkbox-disabled').removeClass('pure-checkbox-disabled');
-            $('.se_filter').attr("disabled", false);
-        }
+        $('#choose_filters').removeClass('filter_text_disabled').addClass('filter_text');
+        $('.pure-checkbox-disabled').removeClass('pure-checkbox-disabled');
+        $('.se_filter').attr("disabled", false);
     },
 
     disableFilters: function() {
@@ -112,25 +113,32 @@ var LayoutManager = {
         URLManager.updateResultCSVURL(results);
 
         $("#number_of_results span").text(resultsStr);
-
-        // Asynchronously get the selected NAICS text
-        InputHandler.getSelectedNAICS(function(text) {
-            $("#your_search").text(text);
-        });
-
-        $("#your_filters").text(
-            $("#setaside-filters input:checkbox:checked").map(function() {
-                return $(this).parent().text();
-            }).get().join(', ')
-        );
-
-        $("#your_search_criteria").show();
     },
 
-    updatePoolInfo: function(data) {
-        if (data) {
-            $(".results_pool_name_number_pool").text("Pool " + data['number'] + ": ");
-            $(".results_pool_name_number_description").text(data['name']);
+    updatePoolInfo: function() {
+        var poolNames = [];
+        var pools;
+
+        if (RequestsManager.pool) {
+            pools = [RequestsManager.pool.id];
+        }
+        else {
+            pools = Object.keys(RequestsManager.vehiclePools).sort();
+        }
+
+        if (pools.length > 0) {
+            for (var index = 0; index < pools.length; index++) {
+                var pool = RequestsManager.vehiclePools[pools[index]];
+
+                if (pools.length > 1) {
+                    var url = URLManager.getURL({'vehicle': pool.vehicle, 'pool': pool.id});
+                    poolNames.push('<div class="pool"><div class="spacer"/><a class="pool_filter_link" href="' + url + '"><span class="vehicle">' + pool.vehicle.split('_').join(' ') + " pool " + pool.number + ':</span><span class="title">' + pool.name + '</span></a></div>');
+                }
+                else {
+                    poolNames.push('<div class="pool"><div class="spacer"/><span class="vehicle">' + pool.vehicle.split('_').join(' ') + " pool " + pool.number + ':</span><span class="title">' + pool.name + '</span></div>');
+                }
+            }
+            $(".results_pool_names").html(poolNames.join(''));
         }
     },
 

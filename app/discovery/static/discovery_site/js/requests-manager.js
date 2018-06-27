@@ -2,17 +2,17 @@
 var RequestsManager = {
     initializers: {},
     vendor: null,
+    naicsPools: {},
+    vehiclePools: {},
     pool: null,
 
     init: function() {
         if (URLManager.isHomePage() || URLManager.isPoolPage()) {
             EventManager.subscribe('vehicleChanged', this.load.bind(RequestsManager));
+            EventManager.subscribe('poolChanged', this.load.bind(RequestsManager));
             EventManager.subscribe('naicsChanged', this.load.bind(RequestsManager));
             EventManager.subscribe('zoneChanged', this.load.bind(RequestsManager));
             EventManager.subscribe('filtersChanged', this.load.bind(RequestsManager));
-        }
-        else {
-            EventManager.subscribe('loadPage', this.load.bind(RequestsManager));
         }
 
         for(var handler in this.initializers){
@@ -46,30 +46,30 @@ var RequestsManager = {
     },
 
     buildRequestQuery: function() {
-        var setasides = InputHandler.getSetasides();
-        var naicsCode = InputHandler.getNAICSCode() || URLManager.getParameterByName('naics-code');
-        var zoneId = InputHandler.getZone() || URLManager.getParameterByName('zone-id');
         var vehicle = InputHandler.getVehicle();
-        var pool = URLManager.getPool();
-        var poolOnly = InputHandler.getVendorPoolFilter();
+        var pools = RequestsManager.vehiclePools;
+        var pool = InputHandler.getPool();
+        var naics = InputHandler.getNAICSCode() || URLManager.getParameterByName('naics-code');
+        var zone = InputHandler.getZone() || URLManager.getParameterByName('zone');
+        var setasides = InputHandler.getSetasides();
+        var contractPools = InputHandler.getContractPools();
         var queryData = {};
 
-        if (pool && typeof pool != undefined) {
-            queryData['pool'] = pool[0];
-            queryData['vehicle'] = pool[1];
-        }
-        if (vehicle && typeof vehicle != undefined) {
+        if (vehicle && vehicle != 'all') {
             queryData['vehicle'] = vehicle;
         }
-        if (poolOnly) {
-            queryData['pool_only'] = 'true';
+        if (contractPools.length > 0) {
+            queryData['pool'] = contractPools.join(',');
+        }
+        else if (pool && pool in pools) {
+            queryData['pool'] = pool;
         }
 
-        if (naicsCode && typeof naicsCode !== 'undefined') {
-            queryData['naics'] = naicsCode;
+        if (naics && naics != 'all') {
+            queryData['naics'] = naics;
         }
-        if (zoneId && typeof zoneId !== 'undefined') {
-            queryData['zone'] = zoneId;
+        if (zone && zone != 'all') {
+            queryData['zone'] = zone;
         }
 
         if (setasides.length > 0) {

@@ -2,12 +2,13 @@
 var InputHandler = {
     init: function() {
         // event bindings
-        $('form#vehicle-select select').change(this.sendVehicleChange.bind(InputHandler));
+        $('#vehicle-id').on('select2:select select2:unselecting', this.sendVehicleChange.bind(InputHandler));
+        $('#pool-id').on('select2:select select2:unselecting', this.sendPoolChange.bind(InputHandler));
         $('#naics-code').change(this.sendCodeChange.bind(InputHandler));
         $('#zone-id').change(this.sendZoneChange.bind(InputHandler));
         $('#setaside-filters').change(this.sendFilterChange.bind(InputHandler));
-        $('input#pool_filter').change(this.sendPoolFilterContractsChange.bind(InputHandler));
-        $('input#pool_filter').change(this.sendVendorPoolFilterChange.bind(InputHandler));
+        //$('input#pool_filter').change(this.sendPoolFilterContractsChange.bind(InputHandler));
+        $('#contract_pool_filters').change(this.sendPoolFilterContractsChange.bind(InputHandler));
 
         //should this be bound to the InputHandler? KBD
         $('#vendor_contract_history_title_container').on('click', 'div.contracts_button', this.sendContractsChange.bind(InputHandler));
@@ -23,17 +24,24 @@ var InputHandler = {
         EventManager.subscribe('loadPage', this.updateFields.bind(InputHandler));
 
         if (URLManager.isHomePage() || URLManager.isPoolPage()) {
+            EventManager.subscribe('loadPage', this.loadPools.bind(InputHandler));
             EventManager.subscribe('loadPage', this.populateZoneDropDown.bind(InputHandler));
 
             EventManager.subscribe('fieldsUpdated', this.loadVehiclePools.bind(InputHandler));
             EventManager.subscribe('vehicleChanged', this.loadVehiclePools.bind(InputHandler));
             EventManager.subscribe('poolDataLoaded', this.populateNaicsDropDown.bind(InputHandler));
 
-            EventManager.subscribe('vehicleChanged', this.loadPool.bind(InputHandler));
-            EventManager.subscribe('naicsChanged', this.loadPool.bind(InputHandler));
+            EventManager.subscribe('vehicleChanged', this.loadPools.bind(InputHandler));
+            EventManager.subscribe('naicsChanged', this.loadPools.bind(InputHandler));
+
+            EventManager.subscribe('poolUpdated', this.populateVehicleDropDown.bind(InputHandler));
+            EventManager.subscribe('vehicleChanged', this.populateVehicleDropDown.bind(InputHandler));
+
+            EventManager.subscribe('poolUpdated', this.populatePoolDropDown.bind(InputHandler));
+            EventManager.subscribe('poolChanged', this.populatePoolDropDown.bind(InputHandler));
         }
         else {
-            EventManager.subscribe('loadPage', this.loadPool.bind(InputHandler));
+            EventManager.subscribe('loadPage', this.loadPools.bind(InputHandler));
         }
     },
 
@@ -43,9 +51,10 @@ var InputHandler = {
         if(obj['vehicle']){
             this.vehicle = obj['vehicle'];
             $('form#vehicle-select select').val(obj['vehicle']);
+        }
 
-            LayoutManager.enableNaics();
-            LayoutManager.toggleZone();
+        if (obj['pool']) {
+            this.poolId = obj['pool'];
         }
 
         if (obj['naics-code']) {
@@ -65,6 +74,7 @@ var InputHandler = {
             }
         }
 
+        LayoutManager.toggleZones();
         EventManager.publish('fieldsUpdated');
     },
 
@@ -158,11 +168,7 @@ var InputHandler = {
 
         var $button = $("#vendor_contract_history_title_container").find('.contracts_button_active');
         if ($button.text() == "All Contracts") {
-            this.naicsCode = 'all';
             listType = 'all';
-        }
-        else {
-            this.naicsCode = $("#vendor_contract_history_title_container").find("div").first().text().replace(/\D/g,'').trim();
         }
 
         //reset date header column classes
@@ -170,15 +176,25 @@ var InputHandler = {
         $date.removeClass('arrow-sortable').addClass('arrow-down').attr("title", "Sorted descending");
         $date.siblings('.sortable').removeClass('arrow-down').removeClass('arrow-up').addClass('arrow-sortable').attr("title", "Select to sort");
 
-        EventManager.publish('contractsChanged', {'page': 1, 'naics': this.naicsCode, 'listType': listType});
+        RequestsManager.pool = this.getContractPools();
+
+        EventManager.publish('contractsChanged', {
+            'page': 1,
+            'listType': listType
+        });
         return false;
     },
 
     sendVehicleChange: function() {
-        this.vehicle = $('form#vehicle-select select').val(); //to get the default
+        this.vehicle = $('#vehicle-id').val();
 
         $("form#setaside-filters input:checked").prop('checked', false);
-        EventManager.publish('vehicleChanged', {'vehicle': this.vehicle, 'vehicleOnly': true});
+        EventManager.publish('vehicleChanged', this.vehicle);
+    },
+
+    sendPoolChange: function(e) {
+        this.poolId = $('#pool-id').val();
+        EventManager.publish('poolChanged', this.poolId);
     },
 
     sendCodeChange: function(e) {
@@ -195,12 +211,12 @@ var InputHandler = {
         EventManager.publish('filtersChanged');
     },
 
-    sendVendorPoolFilterChange: function() {
-        EventManager.publish('vendorPoolFilterChanged');
-    },
-
     getVehicle: function() {
         return this.vehicle;
+    },
+
+    getPool: function() {
+        return this.poolId;
     },
 
     getNAICSCode: function() {
@@ -212,8 +228,8 @@ var InputHandler = {
     },
 
     getSetasides: function() {
-        /* returns array of setaside ids that are checked */
         var setasides = [];
+
         $("form#setaside-filters input:checked").each(function(index) {
             setasides.push($(this).val());
         });
@@ -221,31 +237,58 @@ var InputHandler = {
         return setasides;
     },
 
-    getVendorPoolFilter: function() {
-      return $('input#pool_filter').is(':checked');
+    getContractPools: function() {
+        var pools = [];
+
+        $("form#contract_pool_filters input:checked").each(function(index) {
+            pools.push($(this).val());
+        });
+
+        return pools;
     },
 
-    loadPool: function() {
-        var vehicle = this.getVehicle();
-        var naics = this.getNAICSCode();
+    loadPools: function() {
+        var vehicle = this.getVehicle() || URLManager.getParameterByName('vehicle');
+        var naics = this.getNAICSCode() || URLManager.getParameterByName('naics-code');
         var url = "/api/pools/";
         var queryData = {};
 
-        if (vehicle && naics) {
-            queryData['vehicle__iexact'] = vehicle;
+        if (naics) {
             queryData['naics__code'] = naics;
-
-            RequestsManager.getAPIRequest(url, queryData, function(data) {
-                if (data['results'].length == 1) {
-                    pool = data['results'][0];
-
-                    RequestsManager.pool = pool;
-                    EventManager.publish('poolUpdated', pool);
-                    return;
-                }
-            });
         }
-        EventManager.publish('poolUpdated', null);
+
+        RequestsManager.getAPIRequest(url, queryData, function(data) {
+            var pools = data['results'];
+            var vehiclePoolMap = {};
+            var naicsPoolMap = {};
+
+            for (var index = 0; index < pools.length; index++) {
+                var pool = pools[index];
+
+                if (! vehicle || $.inArray(vehicle, ['', 'all', pool.vehicle]) != -1) {
+                    vehiclePoolMap[pool.id] = pool;
+                }
+                naicsPoolMap[pool.id] = pool;
+            }
+
+            RequestsManager.vehiclePools = vehiclePoolMap;
+            RequestsManager.naicsPools = naicsPoolMap;
+            EventManager.publish('poolUpdated');
+        });
+    },
+
+    updatePools: function() {
+        var pool = this.getPool();
+        var poolMap = RequestsManager.vehiclePools;
+
+        if (pool && pool != 'all' && pool in poolMap) {
+            RequestsManager.pool = poolMap[pool];
+        }
+        else {
+            RequestsManager.pool = null;
+        }
+
+        EventManager.publish('poolSelected', RequestsManager.pool);
     },
 
     loadVehiclePools: function() {
@@ -253,7 +296,7 @@ var InputHandler = {
         var url = "/api/pools/";
         var queryData = {};
 
-        if (vehicle) {
+        if (vehicle && vehicle != 'all') {
             queryData['vehicle__iexact'] = vehicle;
         }
 
@@ -272,12 +315,108 @@ var InputHandler = {
                         if (!(naics in naicsMap)) {
                             naicsMap[naics] = [];
                         }
-                        naicsMap[naics].push(pool.number);
+                        naicsMap[naics].push(pool.vehicle + "|" + pool.number);
                     }
                 }
             }
             EventManager.publish('poolDataLoaded', {"vehicle": vehicle, "naics": naicsMap});
         });
+    },
+
+    populateVehicleDropDown: function() {
+        var pools = RequestsManager.naicsPools;
+        var vehicle = URLManager.getParameterByName('vehicle');
+        var vehicleMap = {
+            "OASIS_SB": "OASIS Small Business",
+            "OASIS": "OASIS Unrestricted",
+            "HCATS_SB": "HCATS Small Business",
+            "HCATS": "HCATS Unrestricted",
+            "BMO_SB": "BMO Small Business",
+            "BMO": "BMO Unrestricted",
+            "PSS": "Professional Services"
+        };
+
+        $('#vehicle-id').empty().select2({
+            'placeholder': 'Select a vehicle',
+            minimumResultsForSearch: -1,
+            width: "170px"
+        }).append($("<option></option>")
+            .attr("value", 'all')
+            .text("All vehicles"));
+
+        Object.keys(pools).forEach(function (id) {
+            var pool = pools[id];
+
+            if (pool.vehicle in vehicleMap) {
+                $("#vehicle-id")
+                    .append($("<option></option>")
+                    .attr("value", pool.vehicle)
+                    .text(vehicleMap[pool.vehicle]));
+
+                delete vehicleMap[pool.vehicle];
+            }
+        });
+
+        if (vehicle) {
+            $("#vehicle-id").val(vehicle);
+        }
+        else {
+            $("#vehicle-id").val('all');
+        }
+
+        this.updatePools();
+    },
+
+    populatePoolDropDown: function(updatedId) {
+        var pools = RequestsManager.vehiclePools;
+        var count = 0;
+        var pool;
+        var poolId;
+
+        if (typeof updatedId == 'string') {
+            pool = updatedId;
+        }
+        else {
+            pool = URLManager.getParameterByName('pool');
+        }
+
+        $('#pool-id').empty().select2({
+            'placeholder': 'Select a pool',
+            minimumResultsForSearch: -1,
+            width: "415px"
+        }).append($("<option></option>")
+            .attr("value", 'all')
+            .text("All pools"));
+
+        Object.keys(pools).forEach(function (id) {
+            var pool = pools[id];
+
+            $("#pool-id")
+                .append($("<option></option>")
+                .attr("value", id)
+                .text(pool.name + " (" + pool.vehicle.split('_').join(' ') + ")"));
+
+            count += 1;
+            poolId = id;
+        });
+
+        if (pool && pool in pools) {
+            $("#pool-id").val(pool);
+        }
+        else {
+            $("#pool-id").val('all');
+        }
+
+        if (count > 1) {
+            LayoutManager.showPools();
+        }
+        else {
+            LayoutManager.hidePools();
+            $("#pool-id").val(poolId);
+            this.poolId = poolId;
+        }
+
+        this.updatePools();
     },
 
     populateNaicsDropDown: function(data) {
@@ -287,12 +426,12 @@ var InputHandler = {
         var naics_exists = false;
         var first_naics = null;
 
-        $('#naics-code').select2({placeholder:'Select a NAICS code', width: '380px'});
+        $('#naics-code').select2({placeholder:'Select a NAICS code', width: '600px'});
 
-        // can't seem to use cached jqobj, something goes wrong with select2
+        // can't seem to use cached job, something goes wrong with select2
         this.populatePromise = RequestsManager.getAPIRequest(
             "/api/naics/",
-            { ordering: "description" },
+            { ordering: "description", code__in: Object.keys(naicsMap).join(',') },
             function( data ) {
                 $("#naics-code").empty().append($("<option></option>"));
 
@@ -312,10 +451,10 @@ var InputHandler = {
                 });
 
                 if (naics_exists || ! naics) {
-                    $("#naics-code").select2({placeholder:'Select a NAICS code', width: '380px'}).val(naics).trigger('change');
+                    $("#naics-code").val(naics);
                 }
                 else {
-                    $("#naics-code").select2({placeholder:'Select a NAICS code', width: '380px'}).val(first_naics).trigger('change');
+                    $("#naics-code").val(first_naics);
                 }
             }
         );
@@ -326,7 +465,7 @@ var InputHandler = {
         var url = "/api/zones/";
         var queryData = {};
 
-        $('#zone-id').select2({placeholder:'Filter by zone', width: '380px'});
+        $('#zone-id').select2({placeholder:'Filter by zone', width: '415px'});
 
         RequestsManager.getAPIRequest(url, queryData, function(data) {
             $("#zone-id").empty()
@@ -344,21 +483,6 @@ var InputHandler = {
             if (zone) {
                 $("#zone-id").val(zone);
             }
-        });
-    },
-
-    /*
-     * This function is asynchronous because getting the selected NAICS text
-     * depends on having populated the dropdown via a JSON request. Usage:
-     *
-     * InputHandler.getSelectedNAICS(function(text) {
-     *   // do something with text here
-     * });
-     */
-    getSelectedNAICS: function(callback) {
-        this.populatePromise.done(function() {
-            var text = $("#naics-code option:selected").text().replace(/\s+\([^\)]+\)\s*$/, '');
-            callback(text);
         });
     }
 };

@@ -69,12 +69,6 @@ fi
 # Execution
 
 #create admin user
-if [ -d /venv ]
-then
-  alias python3="/venv/bin/python3"
-  source /venv/bin/activate
-fi
-
 if [ ! -z "$FORCE_CREATE" ]
 then
   echo "> Recreating admin user: $ADMIN_USERNAME ( $ADMIN_EMAIL )"

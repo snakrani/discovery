@@ -6,11 +6,12 @@ from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.generic import TemplateView
 
 from categories.models import Naics, PSC, SetAside, Pool
-from vendors.models import Vendor, ProjectManager
+from vendors.models import Vendor, ContractManager
 from contracts.models import Contract
 
 import csv
 import os.path
+import time
 
 
 class VendorView(TemplateView):
@@ -48,30 +49,70 @@ def PoolCSV(request):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="search_results.csv"'
     writer = csv.writer(response)
-    #write results
-    vendors = Vendor.objects.all()
+        
+    # Vendor filtering
     setasides_all = SetAside.objects.all().order_by('far_order')
-    filter_text = []
-    #naics
+    vendors = Vendor.objects.all().distinct()
+    
     naics = Naics.objects.get(code=request.GET['naics-code'])
-    vehicle = request.GET['vehicle'].upper()
-    pool = Pool.objects.get(naics=naics, vehicle=vehicle)
-    vendors = vendors.filter(pools__pool=pool).distinct()
-    filter_text.append("NAICS code {0}".format(naics))
-
-    #setasides
+    vehicle = None
+    pools = []
+    zone = None
+    setasides = []
+    
+    if 'vehicle' in request.GET:
+        vehicle = request.GET['vehicle'].upper()
+        
+    if 'pool' in request.GET:
+        pools = [request.GET['pool'].upper()]
+        vendors = vendors.filter(pools__pool__id=pools[0])
+    else:
+        if vehicle:
+            pools = Pool.objects.filter(vehicle=vehicle)
+        else:
+            pools = Pool.objects.filter(naics=naics.code)
+            
+        vendors = vendors.filter(pools__pool__id__in=pools.values_list('id', flat=True))
+        
+    if 'zone' in request.GET:
+        zone = request.GET['zone']
+        vendors = vendors.filter(pools__zone__id=zone)
+    
     if 'setasides' in request.GET:
         setasides = request.GET.getlist('setasides')[0].split(',')
         setaside_objs = SetAside.objects.filter(code__in=setasides)
+        
         for sobj in setaside_objs:
             vendors = vendors.filter(pools__setasides=sobj)
 
-        filter_text.append("Set Aside filters: {0}".format(", ".join(setasides)))
-
-    writer.writerow(("Vehicle: " + vehicle,))
+    # CSV generation
+    writer.writerow(('GSA Discovery research results',))
+    writer.writerow(('URL: ' + request.build_absolute_uri(),))
+    writer.writerow(('Time: ' + time.strftime('%b %d, %Y %l:%M%p %Z'),))
+    writer.writerow(('', ))
+    
+    writer.writerow(('NAICS code', "{}: {}".format(naics.code, naics.description)))
+    
+    if zone:
+        writer.writerow(('Zone', zone))
+    
+    first_pool = True
+    for pool in pools:
+        name = "{} pool {}: {}".format(" ".join(pool.vehicle.split('_')), pool.number, pool.name)
+        
+        if first_pool:
+            writer.writerow(('Pools', name))
+            first_pool = False
+        else:
+            writer.writerow(('', name))
+    
+    if len(setasides):
+        writer.writerow(('Setasides', ", ".join(setasides)))
+    
+    writer.writerow(('',))
+    writer.writerow(('',))
     writer.writerow(("Search Results: {0} Vendors".format(len(vendors)),))
-    writer.writerow(filter_text)
-
+    
     writer.writerow(('',))
     header_row = ['Vendor', 'Location', 'No. of Contracts',]
     header_row.extend([sa_obj.name for sa_obj in setasides_all])
@@ -92,8 +133,8 @@ def PoolCSV(request):
         else:
             location = 'NA'
             
-        psc_codes = list(PSC.objects.filter(naics__root_code=naics.root_code).distinct().values_list('code', flat=True))    
-        contract_list = Contract.objects.filter(Q(PSC__in=psc_codes) | Q(NAICS=naics.root_code), vendor=v)
+        psc_codes = list(PSC.objects.filter(naics__code=naics.code).distinct().values_list('code', flat=True))    
+        contract_list = Contract.objects.filter(Q(PSC__in=psc_codes) | Q(NAICS=naics.code), vendor=v)
         
         v_row = [v.name, location, contract_list.count()]
         v_row.extend(setaside_list)
@@ -107,71 +148,73 @@ def PoolCSV(request):
 
 
 def VendorCSV(request, vendor_duns):
-    vendor = Vendor.objects.get(duns=vendor_duns)
-    setasides = SetAside.objects.all().order_by('far_order')
-    
-    vendor_sa = []
-    pm_names = []
-    pm_phones = []
-    pm_emails = []
-
-    vehicle = request.GET.get('vehicle', 'None')
-    naics = request.GET.get('naics-code', None)
-    
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="search_results.csv"'
     writer = csv.writer(response)
 
-    writer.writerow((vendor.name,))
-    writer.writerow(('SAM registration expires: ', vendor.sam_expiration_date.strftime("%m/%d/%Y")))
-    writer.writerow(('', ))
-    writer.writerow([''] + [sa_obj.name for sa_obj in setasides])
+    # Vendor loading
+    vendor = Vendor.objects.get(duns=vendor_duns)
     
-    if vehicle and naics:
-        naics = Naics.objects.get(code=naics)
-        pool = Pool.objects.get(naics=naics, vehicle=vehicle.upper())
-        membership = None
+    vehicle = None
+    naics = None
+    
+    pools = []
+    selected_pools = []
+    pool_piids = []
+    vendor_pools = {}
+    
+    setasides = SetAside.objects.all().order_by('far_order')
+    vendor_setasides = []
+       
+    pool_contacts = {}
+    
+    if 'naics-code' in request.GET:
+        naics = Naics.objects.get(code=request.GET['naics-code'])
+
+    if 'vehicle' in request.GET:
+        vehicle = request.GET['vehicle'].upper()
         
-        for mem in vendor.pools.all():
-            if pool.id == mem.pool.id:
-                membership = mem
-                break
-        
-        if membership:
-            for sa in setasides:
-                if sa.id in membership.setasides.values_list('id', flat=True):
-                    vendor_sa.append('X')
-                else:
-                    vendor_sa.append('')
-            
-            if membership.pms.count():
-                for pm in membership.pms.all():
-                    pm_names.append(pm.name)
-                    pm_phones.append(",".join(pm.phone()))
-                    pm_emails.append(",".join(pm.email()))
-            else:
-                pm_names = ['NA']
-                pm_phones = ['NA']
-                pm_emails = ['NA']
+    if 'pool' in request.GET:
+        selected_pools = request.GET['pool'].upper().split(',')
+    
+    if vehicle:
+        pools = Pool.objects.filter(vehicle=vehicle)
+    elif naics:
+        pools = Pool.objects.filter(naics=naics.code)
     else:
-        for sa in setasides:
-            if sa.id in vendor.pools.values_list('setasides', flat=True):
-                vendor_sa.append('X')
-            else:
-                vendor_sa.append('')
-    
-        if vendor.pools.count():
-            for id in vendor.pools.all().values_list('pms', flat=True):
-                pm = ProjectManager.objects.get(manager_ptr_id=id)
+        pools = Pool.objects.all()
             
-                pm_names.append(pm.name)
-                pm_phones.append(",".join(pm.phone()))
-                pm_emails.append(",".join(pm.email()))
-        else:
-            pm_names = ['NA']
-            pm_phones = ['NA']
-            pm_emails = ['NA']
+    pools = pools.values_list('id', flat=True)    
     
+    if vendor.pools.count():
+        vendor_setaside_ids = vendor.pools.values_list('setasides', flat=True)
+        
+        for membership in vendor.pools.all():
+            pool_id = membership.pool.id
+            
+            if pool_id in pools:
+                pool_name = "{} pool {}: {}".format(" ".join(membership.pool.vehicle.split('_')), membership.pool.number, membership.pool.name)
+            
+                vendor_pools[pool_id] = {'name': pool_name}
+            
+                if pool_id in selected_pools:
+                    vendor_pools[pool_id]['filter'] = 'X'
+                    pool_piids.append(membership.piid)
+                else:
+                    vendor_pools[pool_id]['filter'] = ''
+            
+                if membership.cms.count():
+                    cm = membership.cms.all()[:1].get()   
+                    vendor_pools[pool_id]['contact_name'] = cm.name
+                    vendor_pools[pool_id]['contact_phone'] = ",".join(cm.phone())
+                    vendor_pools[pool_id]['contact_email'] = ",".join(cm.email())
+        
+        for sa in setasides:
+            if sa.id in vendor_setaside_ids:
+                vendor_setasides.append('X')
+            else:
+                vendor_setasides.append('')
+                    
     contracts = Contract.objects.filter(vendor=vendor).order_by('-date_signed')[:1]
     
     if contracts.count() > 0:
@@ -181,41 +224,73 @@ def VendorCSV(request, vendor_duns):
     else:
         number_of_employees = 'NA'
         annual_revenue = 'NA'
+    
+    # Contract filtering
+    if naics:
+        psc_codes = list(PSC.objects.filter(naics__code=naics.code).distinct().values_list('code', flat=True))    
+        contracts = Contract.objects.filter(Q(PSC__in=psc_codes) | Q(NAICS=naics.code), vendor=vendor).order_by('-date_signed')
+    else:
+        contracts = Contract.objects.filter(vendor=vendor).order_by('-date_signed')
+    
+    if len(pool_piids) > 0:
+        contracts = contracts.filter(base_piid__in = pool_piids) 
         
-
-    writer.writerow([''] + vendor_sa)
+    # CSV generation
+    writer.writerow(('GSA Discovery research results',))
+    writer.writerow(('URL: ' + request.build_absolute_uri(),))
+    writer.writerow(('Time: ' + time.strftime('%b %d, %Y %l:%M%p %Z'),))
     writer.writerow(('', ))
-    writer.writerow(('DUNS', vendor.duns, '', 'Address:', titlecase(vendor.sam_location.address)))
-    writer.writerow(('CAGE Code', vendor.cage, '', '',  titlecase(vendor.sam_location.state) + ', ' + vendor.sam_location.zipcode))
-    writer.writerow(['Employees', number_of_employees, '', 'POC:'] + pm_names)
-    writer.writerow(['Annual Revenue', annual_revenue, '', ''] + pm_phones)
-    writer.writerow(['', '', '', ''] + pm_emails)
+    
+    writer.writerow((vendor.name,))
+    writer.writerow(('SAM registration expires: ', vendor.sam_expiration_date.strftime("%m/%d/%Y")))
+    writer.writerow(('', ))
+    writer.writerow(('DUNS', vendor.duns))
+    writer.writerow(('CAGE Code', vendor.cage))
+    writer.writerow(('Employees', number_of_employees))
+    writer.writerow(('Annual Revenue', annual_revenue))
+    writer.writerow(('', ))
+    writer.writerow(('Address',))
+    writer.writerow((titlecase(vendor.sam_location.address),))
+    writer.writerow((titlecase(vendor.sam_location.city) + ', ' + vendor.sam_location.state.upper() + ', ' + vendor.sam_location.zipcode,))
+    
+    writer.writerow(('', ))
+    writer.writerow([''] + [sa_obj.name for sa_obj in setasides])
+    writer.writerow([''] + vendor_setasides)
+    writer.writerow(('', ))
+    
+    writer.writerow(('Filter', 'Pool name', 'Contact name', 'Contact phone', 'Contact email'))
+    for pool_id, pool_data in vendor_pools.items():
+        writer.writerow((
+            pool_data['filter'], 
+            pool_data['name'],
+            pool_data['contact_name'],
+            pool_data['contact_phone'],
+            pool_data['contact_email']
+        ))
     writer.writerow(('', ))
     
     if naics:
-        writer.writerow(('This vendor\'s contract history for NAICS {0}'.format(naics.code), ))
-        writer.writerow(('{0}'.format(naics.description), ))
+        writer.writerow(('Showing vendor contract history for PSCs related to {}'.format(naics.code), ))
+        writer.writerow(('NAICS: ', naics.description,))
     else:
-        writer.writerow(('This vendor\'s contract history for all contracts', ))
+        writer.writerow(("Showing this vendor's indexed contract history", ))
 
+    writer.writerow(('', ))
+    writer.writerow(("Work performed by a vendor is often reported under a different NAICS code due to FPDS restrictions.",))
+    writer.writerow(('', ))
+    
     writer.writerow(('Date Signed', 'PIID', 'Agency', 'Type', 'Value ($)', 'Email POC', 'Status'))
 
-    if naics:    
-        psc_codes = list(PSC.objects.filter(naics__root_code=naics.root_code).distinct().values_list('code', flat=True))    
-        contracts = Contract.objects.filter(Q(PSC__in=psc_codes) | Q(NAICS=naics.root_code), vendor=vendor).order_by('-date_signed')
-    else:
-        contracts = Contract.objects.filter(vendor=vendor).order_by('-date_signed')
-
-    for c in contracts:
+    for contract in contracts:
         pricing_type = ''
         status = ''
         
-        if c.pricing_type:
-            pricing_type = c.pricing_type.name
+        if contract.pricing_type:
+            pricing_type = contract.pricing_type.name
         
-        if c.status:
-            status = c.status.name
+        if contract.status:
+            status = contract.status.name
                 
-        writer.writerow((c.date_signed.strftime("%m/%d/%Y"), c.piid, titlecase(c.agency_name), pricing_type, c.obligated_amount, (c.point_of_contact or "").lower(), status))
+        writer.writerow((contract.date_signed.strftime("%m/%d/%Y"), contract.piid, titlecase(contract.agency_name), pricing_type, contract.obligated_amount, (contract.point_of_contact or "").lower(), status))
 
     return response

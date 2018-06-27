@@ -58,7 +58,7 @@ RequestsManager.loadContracts = function(data, callback) {
     );
 };
 
-RequestsManager.load = function() {
+RequestsManager.refreshVendor = function() {
     var listType = 'naics';
 
     if (URLManager.getParameterByName('showall')) {
@@ -66,43 +66,14 @@ RequestsManager.load = function() {
     }
 
     RequestsManager.loadVendor(function(duns, vendor) {
-        EventManager.publish('dataLoaded', vendor);
-        EventManager.publish('vendorInfoLoaded', {'listType': listType});
-    });
-};
-
-RequestsManager.refreshVendor = function(pool) {
-    var listType = 'naics';
-
-    if (URLManager.getParameterByName('showall')) {
-        listType = 'all';
-    }
-
-    RequestsManager.loadVendor(function(duns, vendor) {
-        EventManager.publish('vendorPoolLoaded', vendor, pool);
+        EventManager.publish('vendorPoolLoaded', vendor);
         EventManager.publish('vendorInfoLoaded', {'listType': listType});
     });
 };
 
 RequestsManager.refreshContracts = function(data) {
     data['listType'] = typeof data['listType'] !== 'undefined' ? data['listType'] : 'naics';
-
-    if (data['naics']) {
-        if (data['naics'] != 'all') {
-          data['naics'] = URLManager.stripSubCategories(data['naics']);
-        }
-    }
-    else {
-        naics = URLManager.stripSubCategories(URLManager.getParameterByName('naics-code'));
-
-        if (naics && naics != 'all'){
-            data['naics'] = naics;
-        }
-
-        if (data['listType'] == 'all') {
-            data['naics'] = '';
-        }
-    }
+    data['naics'] = URLManager.getParameterByName('naics-code');
 
     if (!data['page']) {
         data['page'] = 1;
@@ -115,22 +86,21 @@ RequestsManager.refreshContracts = function(data) {
 
 RequestsManager.getPIIDs = function() {
   var vendor = RequestsManager.vendor;
-  var pool = RequestsManager.pool;
+  var pools = InputHandler.getContractPools();
   var piids = [];
-  var vehicle = null;
 
-  if (vendor && pool && InputHandler.getVendorPoolFilter()) {
-    vehicle = pool.id.split("_")[0];
+  if (vendor && pools.length > 0) {
+      for (var pindex = 0; pindex < pools.length; pindex++) {
+          var pool = RequestsManager.vehiclePools[pools[pindex]];
 
-    for (var index = 0; index < vendor.pools.length; index++) {
-      vendor_pool = vendor.pools[index];
-      vendor_pool_vehicle = vendor_pool.pool.id.split("_")[0];
+          for (var vindex = 0; vindex < vendor.pools.length; vindex++) {
+              var vendor_pool = vendor.pools[vindex];
 
-      if (vehicle == vendor_pool_vehicle) {
-        piids.push(vendor_pool.piid);
+              if (pool.id == vendor_pool.pool.id) {
+                  piids.push(vendor_pool.piid);
+              }
+          }
       }
-    }
   }
-
   return piids;
 };

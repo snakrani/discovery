@@ -1,9 +1,8 @@
-FROM debian:stretch-slim
+FROM python:3.6-slim-stretch
 
 #
 # Container environment variables
 #
-ENV PATH /venv/bin:$PATH
 ENV LANG C.UTF-8
 ENV PYTHONUNBUFFERED 1
 
@@ -17,14 +16,10 @@ WORKDIR /discovery
 #
 # Application requirements
 #
-COPY ./scripts/setup-python.sh /usr/local/discovery/bin/setup-python.sh
-COPY ./requirements.txt /usr/local/discovery/requirements.txt
-COPY ./requirements-dev.txt /usr/local/discovery/requirements-dev.txt
+RUN apt-get update -y && apt-get install -y git gcc
 
-RUN /usr/local/discovery/bin/setup-python.sh /dev/stderr \
-    && rm -rf /tmp/*
+COPY ./requirements.txt /tmp/requirements.txt
+COPY ./requirements-dev.txt /tmp/requirements-dev.txt
 
-#
-# Initial command
-#
-CMD ["python3"]
+RUN pip install --no-cache-dir -r /tmp/requirements.txt
+RUN pip install --no-cache-dir -r /tmp/requirements-dev.txt

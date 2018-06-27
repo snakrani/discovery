@@ -25,14 +25,6 @@ $(document).ready(function() {
     RequestsManager.init();
     LayoutManager.init();
     URLManager.init();
-
-    //fix for select2 IE disable bug
-    $('#placeholder').select2({
-        'placeholder': 'Select a vehicle',
-        minimumResultsForSearch: -1,
-        width: "170px"
-    });
-    $('#naics-code').fireOnDisable().select2();
 });
 
 // removes empty strings

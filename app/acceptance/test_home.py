@@ -7,16 +7,38 @@ class HomeTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
         'header': {
             'Discovery': 'title'
         },
-        'vehicle_naics_filter': {
+        'naics_filter': {
             'params': {
-                'vehicle': 'oasis_sb'
+                'vehicle': 'OASIS_SB'
             },
-            'naics-code': 'enabled',
-            'placeholder': 'enabled',
+            'naics-code': 'enabled'
+        },
+        'vehicle_filter': {
+            'params': {
+                'vehicle': 'OASIS_SB'
+            },
+            'vehicle-id': 'enabled'
+        },
+        'pool_filter': {
+            'params': {
+                'vehicle': 'OASIS_SB'
+            },
+            'pool-id': 'enabled'
+        },
+        'zone_filter': {
+            'params': {
+                'vehicle': 'OASIS_SB'
+            },
+            'zone-id': 'disabled'
+        },
+        'se_filter': {
+            'params': {
+                'vehicle': 'OASIS_SB'
+            },
             'css:.se_filter': 'disabled'
         },
         'load_dates': {
-            'wait': ('sec', 1),
+            'wait': ('sec', 2),
             'data_source_date_sam': ('text__matches', r'^[\d]*/[\d]*/[\d]*$'),
             'data_source_date_fpds': ('text__matches', r'^[\d]*/[\d]*/[\d]*$')
         },

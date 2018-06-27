@@ -107,7 +107,7 @@ class TestAssertions(object):
                 minimum_value = components[0]
                 maximum_value = components[1]
             else:
-                AssertionError("Betwen needs multiple values, one ({}) given".format(correct_values))
+                AssertionError("Between needs multiple values, one ({}) given".format(correct_values))
         else:
             minimum_value = correct_values[0]
             maximum_value = correct_values[1]

@@ -9,6 +9,9 @@ class Command(BaseCommand):
         print('> Loading keywords')
         call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/keywords.json'))
         
+        print('> Loading SIN codes')
+        call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/sin.json'))
+        
         print('> Loading NAICS codes')
         call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/naics.json'))
         
