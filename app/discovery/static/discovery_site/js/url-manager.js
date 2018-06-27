@@ -41,12 +41,12 @@ var URLManager = {
         EventManager.publish('loadPage', data);
     },
 
-    update: function(results) {
+    update: function() {
         History.pushState('', this.title, this.getURL());
         EventManager.publish('pageUpdated');
     },
 
-    getQueryString: function() {
+    getQueryString: function(params) {
         var queryObject = RequestsManager.buildRequestQuery();
         var qs = '?';
         var k;
@@ -56,24 +56,29 @@ var URLManager = {
             delete queryObject.naics;
         }
 
+        if (params !== undefined) {
+            for (key in params) {
+                queryObject[key] = params[key];
+            }
+        }
+
         for (k in queryObject) {
             if (queryObject[k]) {
                 qs += k + '=' + queryObject[k] + '&';
             }
         }
+
         return qs;
     },
 
     getParameterByName: function(name) {
-        // http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
-        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-            results = regex.exec(location.search);
-        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        name = name.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
+        var match = location.search.match(new RegExp("[?&]"+name+"=([^&]+)(&|$)"));
+        return match && decodeURIComponent(match[1].replace(/\+/g, " "));
     },
 
-    getURL: function() {
-        return window.location.pathname + this.getQueryString();
+    getURL: function(params) {
+        return window.location.pathname + this.getQueryString(params);
     },
 
     updateResultCSVURL: function(results) {
