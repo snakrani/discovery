@@ -8,12 +8,13 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
             'params': {
                 'args': '926451519'
             },
+            'wait': ('sec', 1),
             'Ball Aerospace & Technologies Corporation - Discovery': 'title'
         },
         'vendor_info': {
             'params': {
                 'args': '170203199',
-                'vehicle': 'oasis_sb',
+                'vehicle': 'OASIS_SB',
                 'naics-code': '541330',
                 'setasides': 'A6'
             },
@@ -24,15 +25,15 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
             'css:span.annual_revenue.admin_data': ('int__is_max', 5686000),
             'css:span.vendor_address1.admin_data2': ('text__equal', '8610 Explorer Dr Ste 305'),
             'css:span.vendor_address2.admin_data2': ('text__equal', 'Colorado Springs, CO 80920'),
-            'css:span.vendor_poc_name.admin_data2': ('text__equal', 'Bobby P. Veazey'),
-            'css:span.vendor_poc_phone.admin_data2': ('text__equal', '719-213-6199'),
-            'css:span.vendor_poc_email.admin_data2': ('text__equal', 'OASISPOOL1@apogeemail.net'),
+            'xpath://*[@id="contact_details"]/tbody/tr[2]/td[3]': ('text__equal', 'Denise Penn'),
+            'xpath://*[@id="contact_details"]/tbody/tr[2]/td[4]': ('text__equal', '719-418-4968'),
+            'xpath://*[@id="contact_details"]/tbody/tr[2]/td[5]': ('text__equal', 'OASISPOOL1@apogeemail.net'),
         },
         'all_contracts_button': {
             'params': {
                 'args': '118498067',
-                'vehicle': 'oasis_sb',
-                'naics-code': '541330C'
+                'vehicle': 'OASIS_SB',
+                'naics-code': '541330'
             },
             'wait': ('class', 'table_row_data'),
             'all_contracts_button': ('text__equal', 'All Contracts'),
@@ -47,7 +48,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
         'naics_contracts_button': {
             'params': {
                 'args': '049192649',
-                'vehicle': 'oasis_sb',
+                'vehicle': 'OASIS_SB',
                 'naics-code': '541330'
             },
             'wait': ('class', 'table_row_data'),
@@ -63,12 +64,12 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
         'contract_info_displayed': {
             'params': ({
                 'args': '623876096',
-                'vehicle': 'oasis_sb',
+                'vehicle': 'OASIS_SB',
                 'naics-code': '541330'
             },{
                 'args': '102067378',
-                'vehicle': 'oasis_sb',
-                'naics-code': '541712B'
+                'vehicle': 'OASIS_SB',
+                'naics-code': '541712'
             }),
             'wait': ('class', 'table_row_data'),
             'no_matching_contracts': 'not_displayed',
@@ -82,19 +83,19 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
             'wait': ('sec', 2),
             'link_text:Download vendor data (CSV)': ('link__matches', r'^[\s\S]*/vendor/[\s\S]*/csv[\s\S]*$')
         },
-        'poc_header': {
+        'address_header': {
             'params': {
                 'args': '786997739',
                 'naics-code': '541618'
             },
             'wait': ('sec', 1),
-            'css:p.admin_title': ('text__equal', 'POC')
+            'css:p.admin_title': ('text__equal', 'Address')
         },
         'no_matching_contracts': {
             'params': {
                 'args': '053117149',
-                'vehicle': 'bmo_sb',
-                'naics-code': '561730B'
+                'vehicle': 'BMO_SB',
+                'naics-code': '561730'
             },
             'wait': ('sec', 2),
             'no_matching_contracts': 'displayed'
@@ -102,8 +103,8 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
         'matching_contracts': {
             'params': {
                 'args': '080778868',
-                'vehicle': 'bmo_sb',
-                'naics-code': '541330D'
+                'vehicle': 'BMO_SB',
+                'naics-code': '541330'
             },
             'wait': ('sec', 2),
             'no_matching_contracts': 'not_displayed'
@@ -111,7 +112,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
         'small_business_badge': {
             'params': {
                 'args': '053117149',
-                'vehicle': 'bmo_sb',
+                'vehicle': 'BMO_SB',
                 'naics-code': '236220'
             },
             'wait': ('class', 'table_row_data'),
@@ -120,7 +121,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
         'no_small_business_badge': {
             'params': {
                 'args': '041733197',
-                'vehicle': 'hcats',
+                'vehicle': 'HCATS',
                 'naics-code': '541611'
             },
             'wait': ('class', 'table_row_data'),
@@ -129,7 +130,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
         'vendor_site': {
             'params': {
                 'args': '168719552',
-                'vehicle': 'hcats_sb',
+                'vehicle': 'HCATS_SB',
                 'naics-code': '541611'
             },
             'wait': ('class', 'table_row_data'),
@@ -138,7 +139,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
         'no_vendor_site': {
             'params': {
                 'args': '626979228',
-                'vehicle': 'oasis_sb',
+                'vehicle': 'OASIS_SB',
                 'naics-code': '541330'
             },
             'wait': ('class', 'table_row_data'),
@@ -147,7 +148,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
         'contract_pagination': {
             'params': {
                 'args': '926451519',
-                'vehicle': 'oasis',
+                'vehicle': 'OASIS',
                 'test': 'true'
             },
             'wait': ('class', 'agency'),
@@ -158,9 +159,9 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
         },
         'no_contract_pagination': {
             'params': {
-                'args': '097967608',
-                'vehicle': 'oasis_sb',
-                'naics-code': '541330',
+                'args': '008050242',
+                'vehicle': 'OASIS_SB',
+                'naics-code': '541611',
                 'test': 'true'
             },
             'wait': ('class', 'agency'),
