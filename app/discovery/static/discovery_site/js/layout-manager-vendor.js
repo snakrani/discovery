@@ -101,7 +101,11 @@ LayoutManager.renderVendor = function(vendor) {
 
 LayoutManager.renderContacts = function(vendor, pools) {
     var $table = $('#contact_details');
-    var poolIds = URLManager.getParameterByName('pool').split(',').filter(Boolean);
+    var poolIds = URLManager.getParameterByName('pool');
+
+    if (poolIds) {
+        poolIds = poolIds.split(',').filter(Boolean);
+    }
 
     $table.find("tr:gt(0)").remove();
 
@@ -109,7 +113,7 @@ LayoutManager.renderContacts = function(vendor, pools) {
         var data = pools[poolId];
         var checked = "";
 
-        if (poolIds.includes(data.pool.id)) {
+        if (poolIds && poolIds.includes(data.pool.id)) {
             checked = "checked";
         }
 
