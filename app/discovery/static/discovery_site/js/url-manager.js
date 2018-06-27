@@ -43,6 +43,7 @@ var URLManager = {
 
     update: function(results) {
         History.pushState('', this.title, this.getURL());
+        EventManager.publish('pageUpdated');
     },
 
     getQueryString: function() {
