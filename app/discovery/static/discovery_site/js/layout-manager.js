@@ -129,7 +129,14 @@ var LayoutManager = {
         if (pools.length > 0) {
             for (var index = 0; index < pools.length; index++) {
                 var pool = RequestsManager.vehiclePools[pools[index]];
-                poolNames.push('<div class="pool"><div class="spacer"/><span class="vehicle">' + pool.vehicle.split('_').join(' ') + " pool " + pool.number + ':</span><span class="title">' + pool.name + "</div>");
+
+                if (pools.length > 1) {
+                    var url = URLManager.getURL({'vehicle': pool.vehicle, 'pool': pool.id});
+                    poolNames.push('<div class="pool"><div class="spacer"/><a class="pool_filter_link" href="' + url + '"><span class="vehicle">' + pool.vehicle.split('_').join(' ') + " pool " + pool.number + ':</span><span class="title">' + pool.name + '</span></a></div>');
+                }
+                else {
+                    poolNames.push('<div class="pool"><div class="spacer"/><span class="vehicle">' + pool.vehicle.split('_').join(' ') + " pool " + pool.number + ':</span><span class="title">' + pool.name + '</span></div>');
+                }
             }
             $(".results_pool_names").html(poolNames.join(''));
         }
