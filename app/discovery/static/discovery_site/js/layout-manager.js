@@ -35,6 +35,13 @@ var LayoutManager = {
     },
 
     showPools: function() {
+        if ($("div#zone_select").is(":visible")) {
+            $("#pool-id").select2({width: '200px'});
+            $("#zone-id").select2({width: '200px'});
+        }
+        else {
+            $("#pool-id").select2({width: '415px'});
+        }
         $("div#pool_select").show();
     },
 
@@ -44,6 +51,10 @@ var LayoutManager = {
 
     hidePools: function() {
         $("div#pool_select").hide();
+
+        if ($("div#zone_select").is(":visible")) {
+            $("#zone-id").select2({width: '415px'});
+        }
     },
 
     zoneActive: function() {
@@ -64,6 +75,13 @@ var LayoutManager = {
     },
 
     showZones: function() {
+        if ($("div#pool_select").is(":visible")) {
+            $("#zone-id").select2({width: '200px'});
+            $("#pool-id").select2({width: '200px'});
+        }
+        else {
+            $("#zone-id").select2({width: '415px'});
+        }
         $("div#zone_select").show();
     },
 
@@ -73,6 +91,10 @@ var LayoutManager = {
 
     hideZones: function() {
         $("div#zone_select").hide();
+
+        if ($("div#pool_select").is(":visible")) {
+            $("#pool-id").select2({width: '415px'});
+        }
     },
 
     toggleZones: function() {
