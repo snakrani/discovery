@@ -7,7 +7,6 @@ var InputHandler = {
         $('#naics-code').change(this.sendCodeChange.bind(InputHandler));
         $('#zone-id').change(this.sendZoneChange.bind(InputHandler));
         $('#setaside-filters').change(this.sendFilterChange.bind(InputHandler));
-        //$('input#pool_filter').change(this.sendPoolFilterContractsChange.bind(InputHandler));
         $('#contract_pool_filters').change(this.sendPoolFilterContractsChange.bind(InputHandler));
 
         //should this be bound to the InputHandler? KBD
@@ -415,7 +414,6 @@ var InputHandler = {
             $("#pool-id").val(poolId);
             this.poolId = poolId;
         }
-
         this.updatePools();
     },
 
