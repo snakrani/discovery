@@ -22,9 +22,10 @@ RequestsManager.loadVendorData = function(data, callback) {
     var queryData = $.extend(data, {'count': this.getPageCount()});
     var filters = [];
 
-    if (! $.isEmptyObject(pools) && 'naics' in requestVars) {
+    if ('naics' in requestVars) {
         queryData['contract_naics'] = requestVars['naics'];
-
+    }
+    if (! $.isEmptyObject(pools)) {
         if (RequestsManager.pool) {
             filters.push('(pools__pool__id' + '=' + RequestsManager.pool.id + ')');
         } else {
@@ -33,46 +34,46 @@ RequestsManager.loadVendorData = function(data, callback) {
             });
             filters.push('(pools__pool__id__in' + '=' + poolIds.join(',') + ')');
         }
+    }
 
-        if (LayoutManager.zoneActive() && 'zone' in requestVars) {
-            filters.push('(pools__zones__id' + '=' + requestVars['zone'] + ')');
+    if (LayoutManager.zoneActive() && 'zone' in requestVars) {
+        filters.push('(pools__zones__id' + '=' + requestVars['zone'] + ')');
+    }
+
+    if ('setasides' in requestVars) {
+        var setasides = requestVars['setasides'].split(',');
+        for (var index = 0; index < setasides.length; index++) {
+            filters.push('(pools__setasides__code' + '=' + setasides[index] + ')');
         }
+    }
+    queryData['filters'] = encodeURIComponent(filters.join('&'));
 
-        if ('setasides' in requestVars) {
-            var setasides = requestVars['setasides'].split(',');
-            for (var index = 0; index < setasides.length; index++) {
-                filters.push('(pools__setasides__code' + '=' + setasides[index] + ')');
-            }
-        }
-        queryData['filters'] = encodeURIComponent(filters.join('&'));
+    LayoutManager.disableVehicles();
+    LayoutManager.disablePools();
+    LayoutManager.disableZones();
+    LayoutManager.disableFilters();
+    $('.table_wrapper').addClass('loading');
 
-        LayoutManager.disableVehicles();
-        LayoutManager.disablePools();
-        LayoutManager.disableZones();
-        LayoutManager.disableFilters();
-        $('.table_wrapper').addClass('loading');
+    RequestsManager.getAPIRequest(url, queryData,
+        function(response) {
+            if (queryData['contract_naics'] == URLManager.getParameterByName('naics-code')) {
+                callback(queryData, response);
 
-        RequestsManager.getAPIRequest(url, queryData,
-            function(response) {
-                if (queryData['contract_naics'] == URLManager.getParameterByName('naics-code')) {
-                    callback(queryData, response);
-
-                    LayoutManager.enableVehicles();
-                    LayoutManager.enablePools();
-                    LayoutManager.enableZones();
-                    LayoutManager.enableFilters();
-                    $('.table_wrapper').removeClass('loading');
-                }
-            },
-            function(req, status, error) {
                 LayoutManager.enableVehicles();
                 LayoutManager.enablePools();
                 LayoutManager.enableZones();
                 LayoutManager.enableFilters();
                 $('.table_wrapper').removeClass('loading');
             }
-        );
-    };
+        },
+        function(req, status, error) {
+            LayoutManager.enableVehicles();
+            LayoutManager.enablePools();
+            LayoutManager.enableZones();
+            LayoutManager.enableFilters();
+            $('.table_wrapper').removeClass('loading');
+        }
+    );
 };
 
 RequestsManager.load = function() {
