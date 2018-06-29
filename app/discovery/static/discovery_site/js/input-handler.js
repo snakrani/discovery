@@ -312,7 +312,7 @@ var InputHandler = {
             for (var poolIndex = 0; poolIndex < data.results.length; poolIndex++) {
                 pool = data.results[poolIndex];
 
-                if (vehicle !== null || pool.vehicle == vehicle.toUpperCase()) {
+                if (! vehicle || vehicle == 'all' || pool.vehicle == vehicle.toUpperCase()) {
                     for (var naicsIndex = 0; naicsIndex < pool.naics.length; naicsIndex++) {
                         naics = pool.naics[naicsIndex].code;
 
@@ -437,7 +437,7 @@ var InputHandler = {
         if (! $.isEmptyObject(naicsMap)) {
             RequestsManager.getAPIRequest(
                 "/api/naics/",
-                { ordering: "description", code__in: Object.keys(naicsMap).join(',') },
+                { ordering: "code", code__in: Object.keys(naicsMap).join(',') },
                 function( data ) {
                     $("#naics-code").empty().append($("<option></option>"));
 
@@ -452,7 +452,7 @@ var InputHandler = {
                             $("#naics-code")
                                 .append($("<option></option>")
                                 .attr("value", result.code)
-                                .text(result.description + " ( " + result.code + " ) "));
+                                .text(result.code + ' - ' + result.description));
                         }
                     });
 
