@@ -1,11 +1,10 @@
 
 LayoutManager.initializers.vendor = function() {
-    EventManager.subscribe('vendorInitialized', this.renderVendor.bind(LayoutManager));
-    EventManager.subscribe('vendorInitialized', this.renderButtonAndCSV(LayoutManager));
+    EventManager.subscribe('contractsLoaded', this.renderTable.bind(LayoutManager));
 };
 
-LayoutManager.render = function(results) {
-    this.renderVendor(results);
+LayoutManager.render = function(data) {
+    this.renderVendor(data);
 };
 
 LayoutManager.renderVendor = function(data) {
