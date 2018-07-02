@@ -1,6 +1,6 @@
 
 RequestsManager.initializers.index = function() {
-    EventManager.subscribe('poolUpdated', this.loadMetadata.bind(RequestsManager));
+    EventManager.subscribe('loadPage', this.loadMetadata.bind(RequestsManager));
 };
 
 RequestsManager.loadMetadata = function() {
