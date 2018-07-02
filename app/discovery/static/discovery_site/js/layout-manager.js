@@ -4,9 +4,8 @@ var LayoutManager = {
 
     init: function() {
         if (URLManager.isHomePage() || URLManager.isPoolPage()) {
-            EventManager.subscribe('vehicleChanged', this.toggleZones.bind(LayoutManager));
-            EventManager.subscribe('poolUpdated', this.updatePoolInfo.bind(LayoutManager));
-            EventManager.subscribe('poolSelected', this.updatePoolInfo.bind(LayoutManager));
+            EventManager.subscribe('dataChanged', this.toggleZones.bind(LayoutManager));
+            EventManager.subscribe('dataChanged', this.updatePoolInfo.bind(LayoutManager));
             EventManager.subscribe('contentChanged', this.updateResultsInfo.bind(LayoutManager));
         }
         EventManager.subscribe('dataLoaded', this.render.bind(LayoutManager));
