@@ -280,7 +280,6 @@ h4.data {
 #naics_select .select2-selection {
   min-height: 35px;
   max-height: 50px;
-  font-weight: bold;
 }
 
 .select2-dropdown .select2-search input.select2-search__field {
