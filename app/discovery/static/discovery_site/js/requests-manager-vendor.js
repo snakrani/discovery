@@ -12,7 +12,7 @@ RequestsManager.sortClassMap = function() {
 };
 
 RequestsManager.initializers.vendor = function() {
-    EventManager.subscribe('vendorInitialized', this.refreshContracts.bind(RequestsManager));
+    EventManager.subscribe('dataLoaded', this.refreshContracts.bind(RequestsManager));
     EventManager.subscribe('contractsChanged', this.refreshContracts.bind(RequestsManager));
 };
 
@@ -64,7 +64,7 @@ RequestsManager.load = function() {
     }
 
     RequestsManager.loadVendor(function(duns, vendor) {
-        EventManager.publish('vendorInitialized', {'listType': listType});
+        EventManager.publish('dataLoaded', {'listType': listType});
     });
 };
 
@@ -76,7 +76,7 @@ RequestsManager.refreshContracts = function(data) {
     }
 
     RequestsManager.loadContracts(data, function(queryData, response) {
-        EventManager.publish('dataLoaded', response, data['listType'], data['page'], queryData['count']);
+        EventManager.publish('contractsLoaded', response, data['listType'], data['page'], queryData['count']);
     });
 };
 
