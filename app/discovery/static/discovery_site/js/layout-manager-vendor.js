@@ -1,15 +1,15 @@
 
 LayoutManager.initializers.vendor = function() {
-    EventManager.subscribe('vendorPoolLoaded', this.renderVendor.bind(LayoutManager));
-    EventManager.subscribe('contractDataLoaded', this.renderTable.bind(LayoutManager));
-    EventManager.subscribe('pageUpdated', this.renderButtonAndCSV(LayoutManager));
+    EventManager.subscribe('vendorInitialized', this.renderVendor.bind(LayoutManager));
+    EventManager.subscribe('vendorInitialized', this.renderButtonAndCSV(LayoutManager));
 };
 
 LayoutManager.render = function(results) {
     this.renderVendor(results);
 };
 
-LayoutManager.renderVendor = function(vendor) {
+LayoutManager.renderVendor = function(data) {
+    var vendor = RequestsManager.vendor;
     var pools = {};
 
     if (! $.isEmptyObject(RequestsManager.vehiclePools)) {
@@ -166,7 +166,9 @@ LayoutManager.renderTable = function(results, listType, pageNumber, itemsPerPage
     LayoutManager.renderPager(listType, results, pageNumber, itemsPerPage);
 };
 
-LayoutManager.renderButtonAndCSV = function(listType){
+LayoutManager.renderButtonAndCSV = function(data) {
+    var listType = data['listType'];
+
     if (typeof listType != 'string' || ! ['all', 'naics'].includes(listType)) {
         listType = 'naics';
 
