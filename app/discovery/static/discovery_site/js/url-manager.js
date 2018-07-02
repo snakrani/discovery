@@ -3,12 +3,15 @@ var URLManager = {
     title: 'Discovery',
 
     init: function() {
-        EventManager.subscribe('vehicleChanged', this.update.bind(URLManager));
-        EventManager.subscribe('poolSelected', this.update.bind(URLManager));
         EventManager.subscribe('naicsChanged', this.update.bind(URLManager));
+        EventManager.subscribe('vehicleChanged', this.update.bind(URLManager));
+        EventManager.subscribe('poolChanged', this.update.bind(URLManager));
         EventManager.subscribe('zoneChanged', this.update.bind(URLManager));
-        EventManager.subscribe('contentChanged', this.update.bind(URLManager));
-        EventManager.subscribe('contractsChanged', this.update.bind(URLManager));
+        EventManager.subscribe('filtersChanged', this.update.bind(URLManager));
+
+        //EventManager.subscribe('contractsChanged', this.update.bind(URLManager));
+
+        EventManager.subscribe('pageUpdated', this.initFromQS.bind(URLManager));
 
         this.initFromQS();
     },
