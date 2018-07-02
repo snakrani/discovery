@@ -7,13 +7,7 @@ var RequestsManager = {
     pool: null,
 
     init: function() {
-        if (URLManager.isHomePage() || URLManager.isPoolPage()) {
-            EventManager.subscribe('vehicleChanged', this.load.bind(RequestsManager));
-            EventManager.subscribe('poolChanged', this.load.bind(RequestsManager));
-            EventManager.subscribe('naicsChanged', this.load.bind(RequestsManager));
-            EventManager.subscribe('zoneChanged', this.load.bind(RequestsManager));
-            EventManager.subscribe('filtersChanged', this.load.bind(RequestsManager));
-        }
+        EventManager.subscribe('dataChanged', this.load.bind(RequestsManager));
 
         for(var handler in this.initializers){
             this.initializers[handler].call(this);
@@ -49,8 +43,8 @@ var RequestsManager = {
         var vehicle = InputHandler.getVehicle();
         var pools = RequestsManager.vehiclePools;
         var pool = InputHandler.getPool();
-        var naics = InputHandler.getNAICSCode() || URLManager.getParameterByName('naics-code');
-        var zone = InputHandler.getZone() || URLManager.getParameterByName('zone');
+        var naics = InputHandler.getNAICSCode();
+        var zone = InputHandler.getZone();
         var setasides = InputHandler.getSetasides();
         var contractPools = InputHandler.getContractPools();
         var queryData = {};
