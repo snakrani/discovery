@@ -1,5 +1,16 @@
 
 var InputHandler = {
+
+    vehicleMap: {
+        "OASIS_SB": {"title": "OASIS Small Business", "sb": true},
+        "OASIS": {"title": "OASIS Unrestricted", "sb": false},
+        "HCATS_SB": {"title": "HCATS Small Business", "sb": true},
+        "HCATS": {"title": "HCATS Unrestricted", "sb": false},
+        "BMO_SB": {"title": "BMO Small Business", "sb": true},
+        "BMO": {"title": "BMO Unrestricted", "sb": false},
+        "PSS": {"title": "Professional Services", "sb": true}
+    },
+
     init: function() {
         // event bindings
         $('#vehicle-id').on('select2:select select2:unselecting', this.sendVehicleChange.bind(InputHandler));
@@ -292,20 +303,6 @@ var InputHandler = {
         });
     },
 
-    updatePools: function() {
-        var pool = this.getPool();
-        var poolMap = RequestsManager.vehiclePools;
-
-        if (pool && pool in poolMap) {
-            RequestsManager.pool = poolMap[pool];
-        }
-        else {
-            RequestsManager.pool = null;
-        }
-
-        EventManager.publish('poolSelected', RequestsManager.pool);
-    },
-
     loadNaicsMap: function() {
         var vehicle = this.getVehicle();
         var url = "/api/pools/";
@@ -343,15 +340,9 @@ var InputHandler = {
     populateVehicleDropDown: function() {
         var pools = RequestsManager.naicsPools;
         var vehicle = this.getVehicle();
-        var vehicleMap = {
-            "OASIS_SB": "OASIS Small Business",
-            "OASIS": "OASIS Unrestricted",
-            "HCATS_SB": "HCATS Small Business",
-            "HCATS": "HCATS Unrestricted",
-            "BMO_SB": "BMO Small Business",
-            "BMO": "BMO Unrestricted",
-            "PSS": "Professional Services"
-        };
+        var setasides = this.getSetasides();
+        var vehicleMap = this.vehicleMap;
+        var vehicles = {};
 
         $('#vehicle-id').empty().select2({
             'placeholder': 'Select a vehicle',
@@ -364,13 +355,13 @@ var InputHandler = {
         Object.keys(pools).forEach(function (id) {
             var pool = pools[id];
 
-            if (pool.vehicle in vehicleMap) {
+            if (!(pool.vehicle in vehicles) && (setasides.length == 0 || vehicleMap[pool.vehicle]["sb"])) {
                 $("#vehicle-id")
                     .append($("<option></option>")
                     .attr("value", pool.vehicle)
-                    .text(vehicleMap[pool.vehicle]));
+                    .text(vehicleMap[pool.vehicle]["title"]));
 
-                delete vehicleMap[pool.vehicle];
+                vehicles[pool.vehicle] = true;
             }
         });
 
@@ -393,6 +384,8 @@ var InputHandler = {
     populatePoolDropDown: function() {
         var pools = RequestsManager.vehiclePools;
         var pool = this.getPool();
+        var setasides = this.getSetasides();
+        var vehicleMap = this.vehicleMap;
         var count = 0;
         var poolId;
 
@@ -404,16 +397,20 @@ var InputHandler = {
             .attr("value", 'all')
             .text("All pools"));
 
+        console.log("Vehicle map (pool): %o", this.vehicleMap);
+
         Object.keys(pools).forEach(function (id) {
             var poolData = pools[id];
 
-            $("#pool-id")
-                .append($("<option></option>")
-                .attr("value", id)
-                .text(poolData.name + " (" + poolData.vehicle.split('_').join(' ') + ")"));
+            if (setasides.length == 0 || vehicleMap[poolData.vehicle]["sb"]) {
+                $("#pool-id")
+                    .append($("<option></option>")
+                    .attr("value", id)
+                    .text(poolData.name + " (" + poolData.vehicle.split('_').join(' ') + ")"));
 
-            count += 1;
-            poolId = id;
+                count += 1;
+                poolId = id;
+            }
         });
 
         if (pool && pool in pools) {
