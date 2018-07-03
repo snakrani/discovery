@@ -101,6 +101,6 @@ var RequestsManager = {
         if (URLManager.getParameterByName('test')) {
             return 5;
         }
-        return 100;
+        return 50;
     }
 };
