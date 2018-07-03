@@ -87,12 +87,12 @@ LayoutManager.renderVendor = function(data) {
         $("#naics_contracts_button").show();
         $("#naics_contracts_button").text("NAICS " + URLManager.stripSubCategories(InputHandler.getNAICSCode()));
         $("#all_contracts_button").show();
-        $(".vendor_contract_history_text").html("Showing vendor contract history for PSCs related to: ");
+        $(".vendor_contract_history_text").html("Showing vendor's indexed 5 year contract history for PSCs related to: ");
     }
     else {
         $("#naics_contracts_button").hide();
         $("#all_contracts_button").hide();
-        $(".vendor_contract_history_text").html("Showing this vendor's indexed contract history");
+        $(".vendor_contract_history_text").html("Showing vendor's indexed 5 year contract history");
 
         this.renderButtonAndCSV('all');
     }
@@ -166,6 +166,8 @@ LayoutManager.renderTable = function(results, pageNumber, itemsPerPage) {
     $("#ch_table").show();
 
     LayoutManager.renderPager(listType, results, pageNumber, itemsPerPage);
+
+    EventManager.publish('contentChanged', results);
 };
 
 LayoutManager.renderButtonAndCSV = function(data) {
@@ -265,6 +267,23 @@ LayoutManager.renderPager = function(listType, results, pageNumber, itemsPerPage
         $('#pagination_container').hide();
         $("#viewing_contracts").hide();
     }
+};
+
+LayoutManager.updateResultsInfo = function(results) {
+    var totalResults, totalPools, resultsStr;
+    if (results['count'] == 0) {
+        totalResults = 0;
+        totalPools = 0;
+    }
+    else {
+        totalResults = results['count'].toString();
+        totalPools = results['results'].length;
+    }
+    resultsStr = totalResults + " contracts match your search";
+
+    URLManager.updateResultCSVURL(results);
+
+    $("#number_of_results span").text(resultsStr);
 };
 
 LayoutManager.vendorIndicator = function(membership, prefix, setaside_code) {
