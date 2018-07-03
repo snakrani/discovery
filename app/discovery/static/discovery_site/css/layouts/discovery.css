@@ -761,6 +761,7 @@ h4.data {
 .results_pool_names {
     height: 20px;
     font-family: 'Raleway';
+    margin-bottom: 15px;
 }
 
 .results_pool_names .pool {
@@ -793,17 +794,22 @@ h4.data {
     color: #4A84A3;
 }
 
+#result_pool_spacer {
+    display: block;
+    clear: both;
+    padding-top: 10px;
+}
+
 #number_of_results {
     width: 650px;
     font-size: 1.2em;
     min-height: 20px;
-    background-color: ;
     color: #333333;
     font-weight: 600;
-    clear: both;
-    display: block;
     font-family: 'Raleway';
-    padding-top: 35px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
 }
 
 .matching_your_search {
@@ -1249,7 +1255,7 @@ img.green_dot {
 
 #sb_badge {
     position: relative;
-    top: -200px;
+    top: -175px;
     left: 300px;
     height: 10px;
     display: none;
@@ -1278,13 +1284,13 @@ img.green_dot {
 }
 
 #vendor_contract_history_title_container {
-    width: 100%;
     display: block;
     margin-top: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 .vendor_contract_history_text {
+    padding-right: 25px;
     font-family: 'Raleway';
     font-weight: 500;
     display: inline;
