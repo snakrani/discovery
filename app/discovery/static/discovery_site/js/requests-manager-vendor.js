@@ -12,7 +12,7 @@ RequestsManager.sortClassMap = function() {
 };
 
 RequestsManager.initializers.vendor = function() {
-    EventManager.subscribe('dataLoaded', this.refreshContracts.bind(RequestsManager));
+    EventManager.subscribe('vendorRendered', this.refreshContracts.bind(RequestsManager));
     EventManager.subscribe('contractsSorted', this.refreshContracts.bind(RequestsManager));
 };
 
