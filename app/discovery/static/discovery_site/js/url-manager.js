@@ -150,7 +150,7 @@ var URLManager = {
     },
 
     isVendorPage: function() {
-        var pathArray =  window.location.pathname.split('/').join('').split('');
+        var pathArray =  window.location.pathname.split('/');
 
         if ($.inArray('vendor', pathArray) !== -1) {
             return true;
