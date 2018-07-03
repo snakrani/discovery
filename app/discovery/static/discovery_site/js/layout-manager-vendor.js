@@ -141,7 +141,8 @@ LayoutManager.renderColumn = function(v, prefix, setasideCode) {
     return $('<td class="' + prefix + '">' + this.vendorIndicator(v, prefix, setasideCode) + '</td>');
 };
 
-LayoutManager.renderTable = function(results, listType, pageNumber, itemsPerPage) {
+LayoutManager.renderTable = function(results, pageNumber, itemsPerPage) {
+    var listType = InputHandler.getListType();
     var $table = $('#vendor_contracts');
     var len = results['results'].length;
 
@@ -166,15 +167,7 @@ LayoutManager.renderTable = function(results, listType, pageNumber, itemsPerPage
 };
 
 LayoutManager.renderButtonAndCSV = function(data) {
-    var listType = data['listType'];
-
-    if (typeof listType != 'string' || ! ['all', 'naics'].includes(listType)) {
-        listType = 'naics';
-
-        if (URLManager.getParameterByName('showall')) {
-            listType = 'all';
-        }
-    }
+    var listType = InputHandler.getListType();
 
     $("#vendor_contract_history_title_container .contracts_button_active").attr('class', 'contracts_button');
     $("#" + listType + "_contracts_button").attr('class', 'contracts_button_active');
