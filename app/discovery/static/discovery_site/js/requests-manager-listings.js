@@ -9,6 +9,7 @@ RequestsManager.sortClassMap = function() {
 
 RequestsManager.initializers.listings = function() {
     EventManager.subscribe('vendorsChanged', this.refreshVendors.bind(RequestsManager));
+    EventManager.subscribe('vendorsSorted', this.refreshVendors.bind(RequestsManager));
 };
 
 RequestsManager.loadVendorData = function(data, callback) {
