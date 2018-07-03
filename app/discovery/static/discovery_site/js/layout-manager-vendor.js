@@ -96,6 +96,8 @@ LayoutManager.renderVendor = function(data) {
 
         this.renderButtonAndCSV('all');
     }
+
+    EventManager.publish('vendorRendered', {});
 };
 
 LayoutManager.renderContacts = function(vendor, pools) {
