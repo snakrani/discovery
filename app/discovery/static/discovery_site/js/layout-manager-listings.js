@@ -125,6 +125,23 @@ LayoutManager.renderPager = function(results, pageNumber, itemsPerPage) {
     }
 };
 
+LayoutManager.updateResultsInfo = function(results) {
+    var totalResults, totalPools, resultsStr;
+    if (results['count'] == 0) {
+        totalResults = 0;
+        totalPools = 0;
+    }
+    else {
+        totalResults = results['count'].toString();
+        totalPools = results['results'].length;
+    }
+    resultsStr = totalResults + " vendors match your search";
+
+    URLManager.updateResultCSVURL(results);
+
+    $("#number_of_results span").text(resultsStr);
+};
+
 LayoutManager.getQSByName = function(qs, name) {
         // http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
         name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
