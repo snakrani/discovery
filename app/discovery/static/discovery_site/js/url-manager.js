@@ -9,7 +9,7 @@ var URLManager = {
         EventManager.subscribe('zoneChanged', this.update.bind(URLManager));
         EventManager.subscribe('filtersChanged', this.update.bind(URLManager));
 
-        //EventManager.subscribe('contractsChanged', this.update.bind(URLManager));
+        EventManager.subscribe('contractsChanged', this.update.bind(URLManager));
 
         EventManager.subscribe('pageUpdated', this.initFromQS.bind(URLManager));
 
@@ -22,6 +22,7 @@ var URLManager = {
         var naics = this.getParameterByName('naics-code');
         var zone = this.getParameterByName('zone');
         var setasides = this.getParameterByName('setasides');
+        var type = this.getParameterByName('type');
         var data = {};
 
         if (vehicle) {
@@ -38,6 +39,9 @@ var URLManager = {
         }
         if (setasides) {
             data['setasides'] = setasides;
+        }
+         if (type) {
+            data['type'] = type;
         }
 
         LayoutManager.route(data);
