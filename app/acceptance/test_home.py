@@ -36,6 +36,7 @@ class HomeTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
             'params': {
                 'vehicle': 'OASIS_SB'
             },
+            'wait': ('sec', 1),
             'css:.se_filter': 'enabled'
         },
         'load_dates': {
