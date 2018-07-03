@@ -11,12 +11,14 @@ class HomeTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
             'params': {
                 'vehicle': 'OASIS_SB'
             },
+            'wait': ('sec', 1),
             'naics-code': 'enabled'
         },
         'vehicle_filter': {
             'params': {
                 'vehicle': 'OASIS_SB'
             },
+            'wait': ('sec', 1),
             'vehicle-id': 'enabled'
         },
         'pool_filter': {
@@ -30,6 +32,7 @@ class HomeTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
             'params': {
                 'vehicle': 'OASIS_SB'
             },
+            'wait': ('sec', 1),
             'zone-id': 'disabled'
         },
         'se_filter': {
