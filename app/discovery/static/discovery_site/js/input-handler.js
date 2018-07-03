@@ -64,6 +64,13 @@ var InputHandler = {
             }
         }
 
+        if (obj['type']) {
+            this.listType = obj['type'];
+        }
+        else {
+            this.listType = 'naics';
+        }
+
         LayoutManager.toggleZones();
         EventManager.publish('fieldsUpdated');
     },
@@ -92,7 +99,7 @@ var InputHandler = {
             //reset other ths that are sortable
             $target.siblings('.sortable').removeClass('arrow-down').removeClass('arrow-up').addClass('arrow-sortable').attr("title", "Select to sort");
 
-            EventManager.publish('vendorsChanged', data);
+            EventManager.publish('vendorsSorted', data);
         }
     },
 
@@ -101,8 +108,7 @@ var InputHandler = {
         if ((e.type == "keypress" && e.charCode == 13) || e.type == "click") {
             var $target = $(e.target);
             var data = {
-                'naics': this.getNAICSCode(),
-                'listType': 'naics',
+                'naics': this.getNAICSCode()
             };
             var class_map = RequestsManager.sortClassMap();
             var classes = $target.attr('class').split(' ');
@@ -125,22 +131,19 @@ var InputHandler = {
 
             //prevent button flipping by selecting proper listType
             var $button = $("#vendor_contract_history_title_container").find('.contracts_button_active');
-            if ($button.text() == "All Contracts") { data['listType'] = 'all'; }
-            else { data['listType'] = 'naics'; }
+            if ($button.text() == "All Contracts") { this.listType = 'all'; }
+            else { this.listType = 'naics'; }
 
-            EventManager.publish('contractsChanged', data);
+            EventManager.publish('contractsSorted', data);
         }
     },
 
     sendContractsChange: function(e) {
         if ((e.type == "keypress" && e.charCode == 13) || e.type == "click") {
-            var listType = 'naics';
+            this.listType = 'naics';
 
             if(e.target.textContent == "All Contracts" || e.target.innerText == "All Contracts"){
-                this.naicsCode = 'all';
-                listType = 'all';
-            } else {
-                this.naicsCode = $("#vendor_contract_history_title_container").find("div").first().text().replace(/\D/g,'').trim();
+                this.listType = 'all';
             }
 
             //reset date header column classes
@@ -148,17 +151,16 @@ var InputHandler = {
             $date.removeClass('arrow-sortable').addClass('arrow-down').attr("title", "Sorted descending");
             $date.siblings('.sortable').removeClass('arrow-down').removeClass('arrow-up').addClass('arrow-sortable').attr("title", "Select to sort");
 
-            EventManager.publish('contractsChanged', {'page': 1, 'naics': this.naicsCode, 'listType': listType});
-            return false;
+            EventManager.publish('contractsChanged', {});
         }
     },
 
     sendPoolFilterContractsChange: function() {
-        var listType = 'naics';
+        this.listType = 'naics';
 
         var $button = $("#vendor_contract_history_title_container").find('.contracts_button_active');
         if ($button.text() == "All Contracts") {
-            listType = 'all';
+            this.listType = 'all';
         }
 
         //reset date header column classes
@@ -168,11 +170,7 @@ var InputHandler = {
 
         RequestsManager.pool = this.getContractPools();
 
-        EventManager.publish('contractsChanged', {
-            'page': 1,
-            'listType': listType
-        });
-        return false;
+        //EventManager.publish('contractsChanged', {});
     },
 
     sendVehicleChange: function() {
@@ -257,6 +255,10 @@ var InputHandler = {
         });
 
         return pools;
+    },
+
+    getListType: function() {
+        return this.listType;
     },
 
     loadPools: function() {
