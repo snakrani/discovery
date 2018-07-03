@@ -47,6 +47,7 @@ var RequestsManager = {
         var zone = InputHandler.getZone();
         var setasides = InputHandler.getSetasides();
         var contractPools = InputHandler.getContractPools();
+        var listType = InputHandler.getListType();
         var queryData = {};
 
         if (vehicle && vehicle != 'all') {
@@ -68,6 +69,10 @@ var RequestsManager = {
 
         if (setasides.length > 0) {
             queryData["setasides"] = setasides.join(',');
+        }
+
+        if (listType) {
+            queryData['type'] = listType;
         }
 
         if (URLManager.getParameterByName('test')) {
