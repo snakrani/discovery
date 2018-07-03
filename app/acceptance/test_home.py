@@ -23,6 +23,7 @@ class HomeTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
             'params': {
                 'vehicle': 'OASIS_SB'
             },
+            'wait': ('sec', 1),
             'pool-id': 'enabled'
         },
         'zone_filter': {
@@ -35,7 +36,7 @@ class HomeTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
             'params': {
                 'vehicle': 'OASIS_SB'
             },
-            'css:.se_filter': 'disabled'
+            'css:.se_filter': 'enabled'
         },
         'load_dates': {
             'wait': ('sec', 2),

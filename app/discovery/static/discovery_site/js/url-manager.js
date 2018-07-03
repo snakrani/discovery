@@ -3,12 +3,15 @@ var URLManager = {
     title: 'Discovery',
 
     init: function() {
-        EventManager.subscribe('vehicleChanged', this.update.bind(URLManager));
-        EventManager.subscribe('poolSelected', this.update.bind(URLManager));
         EventManager.subscribe('naicsChanged', this.update.bind(URLManager));
+        EventManager.subscribe('vehicleChanged', this.update.bind(URLManager));
+        EventManager.subscribe('poolChanged', this.update.bind(URLManager));
         EventManager.subscribe('zoneChanged', this.update.bind(URLManager));
-        EventManager.subscribe('contentChanged', this.update.bind(URLManager));
+        EventManager.subscribe('filtersChanged', this.update.bind(URLManager));
+
         EventManager.subscribe('contractsChanged', this.update.bind(URLManager));
+
+        EventManager.subscribe('pageUpdated', this.initFromQS.bind(URLManager));
 
         this.initFromQS();
     },
@@ -19,6 +22,7 @@ var URLManager = {
         var naics = this.getParameterByName('naics-code');
         var zone = this.getParameterByName('zone');
         var setasides = this.getParameterByName('setasides');
+        var type = this.getParameterByName('type');
         var data = {};
 
         if (vehicle) {
@@ -35,6 +39,9 @@ var URLManager = {
         }
         if (setasides) {
             data['setasides'] = setasides;
+        }
+         if (type) {
+            data['type'] = type;
         }
 
         LayoutManager.route(data);
@@ -143,7 +150,7 @@ var URLManager = {
     },
 
     isVendorPage: function() {
-        var pathArray =  window.location.pathname.split('/').join('').split('');
+        var pathArray =  window.location.pathname.split('/');
 
         if ($.inArray('vendor', pathArray) !== -1) {
             return true;

@@ -8,9 +8,8 @@ RequestsManager.sortClassMap = function() {
 };
 
 RequestsManager.initializers.listings = function() {
-    EventManager.subscribe('poolUpdated', this.load.bind(RequestsManager));
-    EventManager.subscribe('poolSelected', this.load.bind(RequestsManager));
     EventManager.subscribe('vendorsChanged', this.refreshVendors.bind(RequestsManager));
+    EventManager.subscribe('vendorsSorted', this.refreshVendors.bind(RequestsManager));
 };
 
 RequestsManager.loadVendorData = function(data, callback) {
@@ -79,13 +78,13 @@ RequestsManager.loadVendorData = function(data, callback) {
 RequestsManager.load = function() {
     if (URLManager.isPoolPage()) {
         RequestsManager.loadVendorData(RequestsManager.currentSortParams(), function(queryData, response) {
-            EventManager.publish('dataLoaded', response);
+            EventManager.publish('dataLoaded', response, 1, RequestsManager.getPageCount());
         });
     }
 };
 
 RequestsManager.refreshVendors = function(data) {
     RequestsManager.loadVendorData(data, function(queryData, response) {
-        EventManager.publish('vendorDataLoaded', response, data['page'], queryData['count']);
+        EventManager.publish('dataLoaded', response, data['page'], queryData['count']);
     });
 };

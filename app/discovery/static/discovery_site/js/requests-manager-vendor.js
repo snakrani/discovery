@@ -12,10 +12,8 @@ RequestsManager.sortClassMap = function() {
 };
 
 RequestsManager.initializers.vendor = function() {
-    EventManager.subscribe('poolUpdated', this.refreshVendor.bind(RequestsManager));
-
-    EventManager.subscribe('vendorInfoLoaded', this.refreshContracts.bind(RequestsManager));
-    EventManager.subscribe('contractsChanged', this.refreshContracts.bind(RequestsManager));
+    EventManager.subscribe('vendorRendered', this.refreshContracts.bind(RequestsManager));
+    EventManager.subscribe('contractsSorted', this.refreshContracts.bind(RequestsManager));
 };
 
 RequestsManager.loadVendor = function(callback) {
@@ -34,12 +32,14 @@ RequestsManager.loadContracts = function(data, callback) {
     var queryData = $.extend(data, {'vendor__duns': duns, 'count': this.getPageCount()});
     var piids = RequestsManager.getPIIDs();
 
-    queryData['psc_naics'] = queryData['naics'];
-    delete queryData['naics'];
+    if (InputHandler.getListType() == 'naics' && 'naics' in queryData) {
+        queryData['psc_naics'] = queryData['naics'];
 
-    if (queryData['psc_naics'] == 'all') {
-        delete queryData['psc_naics'];
+        if (queryData['psc_naics'] == 'all') {
+            delete queryData['psc_naics'];
+        }
     }
+    delete queryData['naics'];
 
     if (piids.length > 0) {
         queryData['base_piid__in'] = piids.join(',');
@@ -58,29 +58,21 @@ RequestsManager.loadContracts = function(data, callback) {
     );
 };
 
-RequestsManager.refreshVendor = function() {
-    var listType = 'naics';
-
-    if (URLManager.getParameterByName('showall')) {
-        listType = 'all';
-    }
-
+RequestsManager.load = function() {
     RequestsManager.loadVendor(function(duns, vendor) {
-        EventManager.publish('vendorPoolLoaded', vendor);
-        EventManager.publish('vendorInfoLoaded', {'listType': listType});
+        EventManager.publish('dataLoaded', {});
     });
 };
 
 RequestsManager.refreshContracts = function(data) {
-    data['listType'] = typeof data['listType'] !== 'undefined' ? data['listType'] : 'naics';
-    data['naics'] = URLManager.getParameterByName('naics-code');
+    data['naics'] = InputHandler.getNAICSCode();
 
     if (!data['page']) {
         data['page'] = 1;
     }
 
     RequestsManager.loadContracts(data, function(queryData, response) {
-        EventManager.publish('contractDataLoaded', response, data['listType'], data['page'], queryData['count']);
+        EventManager.publish('contractsLoaded', response, data['page'], queryData['count']);
     });
 };
 

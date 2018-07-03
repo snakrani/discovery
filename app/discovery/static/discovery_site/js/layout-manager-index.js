@@ -1,16 +1,15 @@
 
 LayoutManager.initializers.index = function() {
-    EventManager.subscribe('naicsChanged', this.route.bind(LayoutManager));
+    EventManager.subscribe('dataChanged', this.route.bind(LayoutManager));
     EventManager.subscribe('loadPage', this.vehicleInfo.bind(LayoutManager));
 
     this.hideZones();
-    this.disableFilters();
 };
 
 LayoutManager.route = function(data) {
     var queryObject = RequestsManager.buildRequestQuery();
 
-    if ('naics' in queryObject) {
+    if ('naics' in queryObject || 'vehicle' in queryObject || 'pool' in queryObject) {
         this.loadPoolPage();
     }
 };

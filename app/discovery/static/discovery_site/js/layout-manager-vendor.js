@@ -1,15 +1,14 @@
 
 LayoutManager.initializers.vendor = function() {
-    EventManager.subscribe('vendorPoolLoaded', this.renderVendor.bind(LayoutManager));
-    EventManager.subscribe('contractDataLoaded', this.renderTable.bind(LayoutManager));
-    EventManager.subscribe('pageUpdated', this.renderButtonAndCSV(LayoutManager));
+    EventManager.subscribe('contractsLoaded', this.renderTable.bind(LayoutManager));
 };
 
-LayoutManager.render = function(results) {
-    this.renderVendor(results);
+LayoutManager.render = function(data) {
+    this.renderVendor(data);
 };
 
-LayoutManager.renderVendor = function(vendor) {
+LayoutManager.renderVendor = function(data) {
+    var vendor = RequestsManager.vendor;
     var pools = {};
 
     if (! $.isEmptyObject(RequestsManager.vehiclePools)) {
@@ -97,6 +96,8 @@ LayoutManager.renderVendor = function(vendor) {
 
         this.renderButtonAndCSV('all');
     }
+
+    EventManager.publish('vendorRendered', {});
 };
 
 LayoutManager.renderContacts = function(vendor, pools) {
@@ -142,7 +143,8 @@ LayoutManager.renderColumn = function(v, prefix, setasideCode) {
     return $('<td class="' + prefix + '">' + this.vendorIndicator(v, prefix, setasideCode) + '</td>');
 };
 
-LayoutManager.renderTable = function(results, listType, pageNumber, itemsPerPage) {
+LayoutManager.renderTable = function(results, pageNumber, itemsPerPage) {
+    var listType = InputHandler.getListType();
     var $table = $('#vendor_contracts');
     var len = results['results'].length;
 
@@ -166,14 +168,8 @@ LayoutManager.renderTable = function(results, listType, pageNumber, itemsPerPage
     LayoutManager.renderPager(listType, results, pageNumber, itemsPerPage);
 };
 
-LayoutManager.renderButtonAndCSV = function(listType){
-    if (typeof listType != 'string' || ! ['all', 'naics'].includes(listType)) {
-        listType = 'naics';
-
-        if (URLManager.getParameterByName('showall')) {
-            listType = 'all';
-        }
-    }
+LayoutManager.renderButtonAndCSV = function(data) {
+    var listType = InputHandler.getListType();
 
     $("#vendor_contract_history_title_container .contracts_button_active").attr('class', 'contracts_button');
     $("#" + listType + "_contracts_button").attr('class', 'contracts_button_active');

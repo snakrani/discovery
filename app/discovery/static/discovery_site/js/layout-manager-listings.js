@@ -1,6 +1,5 @@
 
 LayoutManager.initializers.listings = function() {
-    EventManager.subscribe('vendorDataLoaded', this.renderTable.bind(LayoutManager));
 };
 
 LayoutManager.render = function(results) {
