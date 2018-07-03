@@ -170,7 +170,7 @@ var InputHandler = {
 
         RequestsManager.pool = this.getContractPools();
 
-        //EventManager.publish('contractsChanged', {});
+        EventManager.publish('contractsChanged', {});
     },
 
     sendVehicleChange: function() {
