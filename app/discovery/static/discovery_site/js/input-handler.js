@@ -364,7 +364,7 @@ var InputHandler = {
             }
         });
 
-        if (vehicle) {
+        if (vehicle && vehicle in vehicles) {
             $("#vehicle-id").val(vehicle);
         }
         else {
