@@ -74,7 +74,7 @@ var RequestsManager = {
             queryData["setasides"] = setasides.join(',');
         }
 
-        if (listType) {
+        if (listType && listType != 'naics') {
             queryData['type'] = listType;
         }
 
