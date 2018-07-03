@@ -53,8 +53,11 @@ var RequestsManager = {
         if (vehicle && vehicle != 'all') {
             queryData['vehicle'] = vehicle;
         }
-        if (contractPools.length > 0) {
-            queryData['pool'] = contractPools.join(',');
+
+        if (URLManager.isVendorPage()) {
+            if (contractPools.length > 0) {
+                queryData['pool'] = contractPools.join(',');
+            }
         }
         else if (pool && pool in pools) {
             queryData['pool'] = pool;
