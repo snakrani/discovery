@@ -345,7 +345,6 @@ var InputHandler = {
         var vehicles = {};
 
         $('#vehicle-id').empty().select2({
-            'placeholder': 'Select a vehicle',
             minimumResultsForSearch: -1,
             width: "170px"
         }).append($("<option></option>")
@@ -365,7 +364,7 @@ var InputHandler = {
             }
         });
 
-        if (vehicle) {
+        if (vehicle && vehicle in vehicles) {
             $("#vehicle-id").val(vehicle);
         }
         else {
@@ -390,14 +389,11 @@ var InputHandler = {
         var poolId;
 
         $('#pool-id').empty().select2({
-            'placeholder': 'Select a pool',
             minimumResultsForSearch: -1,
             width: "415px"
         }).append($("<option></option>")
             .attr("value", 'all')
             .text("All pools"));
-
-        console.log("Vehicle map (pool): %o", this.vehicleMap);
 
         Object.keys(pools).forEach(function (id) {
             var poolData = pools[id];
@@ -449,25 +445,23 @@ var InputHandler = {
         var naicsMap = this.getNaicsMap();
         var pool = this.getPool();
         var naics = this.getNAICSCode();
-        var naics_exists = false;
-        var first_naics = null;
 
-        $('#naics-code').select2({placeholder:'Select a NAICS code', width: '600px'});
+        $('#naics-code').select2({
+            minimumResultsForSearch: -1,
+            width: '600px'
+        });
 
         RequestsManager.getAPIRequest(
             "/api/naics/",
             { ordering: "code", code__in: Object.keys(naicsMap).join(',') },
             function( data ) {
-                $("#naics-code").empty().append($("<option></option>"));
+                $("#naics-code").empty()
+                    .append($("<option></option>")
+                        .attr("value", 'all')
+                        .text("All NAICS codes"));
 
                 $.each(data.results, function(key, result) {
                     if (result.code in naicsMap && (! pool || naicsMap[result.code].includes(pool))) {
-                        if (!first_naics) {
-                            first_naics = result.code;
-                        }
-                        if (naics == result.code) {
-                            naics_exists = true;
-                        }
                         $("#naics-code")
                             .append($("<option></option>")
                             .attr("value", result.code)
@@ -475,21 +469,22 @@ var InputHandler = {
                     }
                 });
 
-                if (naics_exists || ! naics) {
+                if (naics) {
                     $("#naics-code").val(naics);
                 }
                 else {
-                    this.naicsCode = first_naics;
-                    $("#naics-code").val(first_naics);
+                    InputHandler.naicsCode = null;
+                    $("#naics-code").val('all');
+                }
+
+                if (InputHandler.getNAICSCode() != URLManager.getParameterByName('naics-code')) {
+                    EventManager.publish('naicsChanged');
+                }
+                else {
+                    EventManager.publish('naicsSelected');
                 }
             }
         );
-        if (this.getNAICSCode() != URLManager.getParameterByName('naics-code')) {
-            EventManager.publish('naicsChanged');
-        }
-        else {
-            EventManager.publish('naicsSelected');
-        }
     },
 
     populateZoneDropDown: function() {
@@ -516,15 +511,16 @@ var InputHandler = {
                 $("#zone-id").val(zone);
             }
             else {
-                this.zoneId = null;
+                InputHandler.zoneId = null;
                 $("#zone-id").val('all');
             }
+
+            if (InputHandler.getZone() != URLManager.getParameterByName('zone')) {
+                EventManager.publish('zoneChanged');
+            }
+            else {
+                EventManager.publish('zoneSelected');
+            }
         });
-        if (this.getZone() != URLManager.getParameterByName('zone')) {
-            EventManager.publish('zoneChanged');
-        }
-        else {
-            EventManager.publish('zoneSelected');
-        }
     }
 };
