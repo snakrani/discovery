@@ -7,7 +7,6 @@ var LayoutManager = {
             EventManager.subscribe('dataChanged', this.toggleZones.bind(LayoutManager));
             EventManager.subscribe('dataChanged', this.updatePoolInfo.bind(LayoutManager));
         }
-        EventManager.subscribe('contentChanged', this.updateResultsInfo.bind(LayoutManager));
         EventManager.subscribe('dataLoaded', this.render.bind(LayoutManager));
 
         for(var handler in this.initializers){
