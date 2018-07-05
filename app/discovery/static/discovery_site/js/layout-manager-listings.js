@@ -1,5 +1,6 @@
 
 LayoutManager.initializers.listings = function() {
+    EventManager.subscribe('contentChanged', this.updateResultsInfo.bind(LayoutManager));
 };
 
 LayoutManager.render = function(results) {

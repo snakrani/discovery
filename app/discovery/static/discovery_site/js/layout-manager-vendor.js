@@ -1,6 +1,7 @@
 
 LayoutManager.initializers.vendor = function() {
     EventManager.subscribe('contractsLoaded', this.renderTable.bind(LayoutManager));
+    EventManager.subscribe('contentChanged', this.updateResultsInfo.bind(LayoutManager));
 };
 
 LayoutManager.render = function(data) {
