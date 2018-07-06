@@ -126,6 +126,11 @@ LayoutManager.renderPager = function(results, pageNumber, itemsPerPage) {
     }
 };
 
+LayoutManager.updateResultCSVURL = function() {
+    var qs = URLManager.getQueryString();
+    $("#csv_link").attr("href", "/results/csv/" + qs);
+};
+
 LayoutManager.updateResultsInfo = function(results) {
     var totalResults, totalPools, resultsStr;
     if (results['count'] == 0) {
@@ -138,7 +143,7 @@ LayoutManager.updateResultsInfo = function(results) {
     }
     resultsStr = totalResults + " vendors match your search";
 
-    URLManager.updateResultCSVURL(results);
+    LayoutManager.updateResultCSVURL();
 
     $("#number_of_results span").text(resultsStr);
 };
