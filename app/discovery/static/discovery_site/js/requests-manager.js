@@ -1,7 +1,6 @@
 
 var RequestsManager = {
     initializers: {},
-    vendor: null,
     naicsPools: {},
     vehiclePools: {},
     pool: null,
@@ -48,6 +47,9 @@ var RequestsManager = {
         var setasides = InputHandler.getSetasides();
         var contractPools = InputHandler.getContractPools();
         var listType = InputHandler.getListType();
+        var page = InputHandler.getPage();
+        var pageCount = InputHandler.getPageCount();
+        var sortOrdering = InputHandler.getSortOrdering();
         var queryData = {};
 
         if (vehicle && vehicle != 'all') {
@@ -76,6 +78,17 @@ var RequestsManager = {
 
         if (listType && listType != 'naics') {
             queryData['type'] = listType;
+        }
+
+        if (page && page > 1) {
+            queryData['page'] = page;
+        }
+        if (pageCount && pageCount != RequestsManager.getPageCount()) {
+            queryData['count'] = pageCount;
+        }
+
+        if (sortOrdering) {
+            queryData['ordering'] = sortOrdering;
         }
 
         if (URLManager.getParameterByName('test')) {
