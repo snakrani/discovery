@@ -1,17 +1,10 @@
 
 LayoutManager.initializers.listings = function() {
+    EventManager.subscribe('dataLoaded', this.renderTable.bind(LayoutManager));
     EventManager.subscribe('contentChanged', this.updateResultsInfo.bind(LayoutManager));
 };
 
 LayoutManager.render = function(results) {
-    if ($.isEmptyObject(results)) {
-        $('#pool_vendors').find('tr').not(':first').remove();
-        EventManager.publish('contentChanged', results);
-    }
-    else {
-        this.renderTable(results, 1, RequestsManager.getPageCount());
-    }
-
     $(document).prop('title', "Results - " + URLManager.title);
 
     $('#pool_vendors th span').tooltip();
