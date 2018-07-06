@@ -88,24 +88,6 @@ var URLManager = {
         return window.location.pathname + this.getQueryString(params);
     },
 
-    updateResultCSVURL: function(results) {
-        var qs = this.getQueryString();
-        //generate csv link (sloppy)
-        $("#csv_link").attr("href", "/results/csv/" + qs );
-    },
-
-    updateVendorCSVURL: function() {
-        var url = document.location.href;
-        var pathArray = url.split('/');
-
-        if (url.indexOf("/?") == -1) {
-            pathArray.pop();
-        }
-        pathArray.splice(5, 0, "csv");
-
-        $("#csv_link").attr("href", pathArray.join('/'));
-    },
-
     getDUNS: function() {
         var pathArray = window.location.pathname.split('/');
         pathArray = pathArray.removeEmpties();

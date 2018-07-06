@@ -1,5 +1,6 @@
 
 LayoutManager.initializers.listings = function() {
+    EventManager.subscribe('contentChanged', this.updateResultsInfo.bind(LayoutManager));
 };
 
 LayoutManager.render = function(results) {
@@ -123,6 +124,28 @@ LayoutManager.renderPager = function(results, pageNumber, itemsPerPage) {
         $('#pagination_container').hide();
         $("#viewing_vendors").hide();
     }
+};
+
+LayoutManager.updateResultCSVURL = function() {
+    var qs = URLManager.getQueryString();
+    $("#csv_link").attr("href", "/results/csv/" + qs);
+};
+
+LayoutManager.updateResultsInfo = function(results) {
+    var totalResults, totalPools, resultsStr;
+    if (results['count'] == 0) {
+        totalResults = 0;
+        totalPools = 0;
+    }
+    else {
+        totalResults = results['count'].toString();
+        totalPools = results['results'].length;
+    }
+    resultsStr = totalResults + " vendors match your search";
+
+    LayoutManager.updateResultCSVURL();
+
+    $("#number_of_results span").text(resultsStr);
 };
 
 LayoutManager.getQSByName = function(qs, name) {

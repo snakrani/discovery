@@ -6,7 +6,6 @@ var LayoutManager = {
         if (URLManager.isHomePage() || URLManager.isPoolPage()) {
             EventManager.subscribe('dataChanged', this.toggleZones.bind(LayoutManager));
             EventManager.subscribe('dataChanged', this.updatePoolInfo.bind(LayoutManager));
-            EventManager.subscribe('contentChanged', this.updateResultsInfo.bind(LayoutManager));
         }
         EventManager.subscribe('dataLoaded', this.render.bind(LayoutManager));
 
@@ -117,23 +116,6 @@ var LayoutManager = {
         $('#choose_filters').removeClass('filter_text').addClass('filter_text_disabled');
         $('.pure-checkbox').addClass('pure-checkbox-disabled');
         $('.se_filter').attr("disabled", true);
-    },
-
-    updateResultsInfo: function(results) {
-        var totalResults, totalPools, resultsStr;
-        if (results['count'] == 0) {
-            totalResults = 0;
-            totalPools = 0;
-        }
-        else {
-            totalResults = results['count'].toString();
-            totalPools = results['results'].length;
-        }
-        resultsStr = totalResults + " vendors match your search";
-
-        URLManager.updateResultCSVURL(results);
-
-        $("#number_of_results span").text(resultsStr);
     },
 
     updatePoolInfo: function() {
