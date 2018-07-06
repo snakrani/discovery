@@ -44,6 +44,7 @@ var InputHandler = {
         }
         else {
             EventManager.subscribe('poolUpdated', this.sendDataChange.bind(InputHandler));
+            EventManager.subscribe('dataChanged', this.initContractSort.bind(RequestsManager));
         }
     },
 
@@ -82,6 +83,23 @@ var InputHandler = {
             this.listType = 'naics';
         }
 
+        if (obj['page']) {
+            this.page = obj['page'];
+        }
+        else {
+            this.page = 1;
+        }
+        if (obj['count']) {
+            this.pageCount = obj['count'];
+        }
+        else {
+            this.pageCount = RequestsManager.getPageCount();
+        }
+
+        if (obj['ordering']) {
+            this.sortOrdering = obj['ordering'];
+        }
+
         LayoutManager.toggleZones();
         EventManager.publish('fieldsUpdated');
     },
@@ -90,27 +108,44 @@ var InputHandler = {
         //if enter pressed or if click then sort
         if ((e.type == "keypress" && e.charCode == 13) || e.type == "click") {
             var $target = $(e.target);
-            var data = {};
             var class_map = RequestsManager.sortClassMap();
-
             var classes = $target.attr('class').split(' ');
-            data['ordering'] = class_map[classes[0]];
-            data['page'] = 1;
+
+            this.sortOrdering = class_map[classes[0]];
+            this.page = 1;
 
             if ($target.hasClass('arrow-down')) {
                 $target.removeClass('arrow-down').addClass('arrow-up').attr("title", "Sorted ascending");
             } else if ($target.hasClass('arrow-sortable')) {
-                data['ordering'] = "-" + data['ordering'];
+                this.sortOrdering = "-" + this.sortOrdering;
                 $target.removeClass('arrow-sortable').addClass('arrow-down').attr("title", "Sorted descending");
             } else {
-                data['ordering'] = "-" + data['ordering'];
+                this.sortOrdering = "-" + this.sortOrdering;
                 $target.removeClass('arrow-up').addClass('arrow-down').attr("title", "Sorted descending");
             }
 
             //reset other ths that are sortable
             $target.siblings('.sortable').removeClass('arrow-down').removeClass('arrow-up').addClass('arrow-sortable').attr("title", "Select to sort");
 
-            EventManager.publish('vendorsSorted', data);
+            EventManager.publish('vendorsChanged');
+        }
+    },
+
+    initContractSort: function() {
+        var ordering = InputHandler.getSortOrdering();
+
+        if (ordering) {
+            var asc = (ordering[0] == '-' ? false : true);
+            var field = InputHandler.getOrderingField(ordering.replace(/^-/, ''));
+            var $target = $('th.' + field);
+
+            $target.siblings('.sortable').removeClass('arrow-down').removeClass('arrow-up').addClass('arrow-sortable').attr("title", "Select to sort");
+
+            if (asc) {
+                $target.removeClass('arrow-sortable').removeClass('arrow-down').addClass('arrow-up').attr("title", "Sorted ascending");
+            } else {
+                $target.removeClass('arrow-sortable').removeClass('arrow-up').addClass('arrow-down').attr("title", "Sorted descending");
+            }
         }
     },
 
@@ -118,22 +153,19 @@ var InputHandler = {
         //if enter pressed or if click then sort
         if ((e.type == "keypress" && e.charCode == 13) || e.type == "click") {
             var $target = $(e.target);
-            var data = {
-                'naics': this.getNAICSCode()
-            };
             var class_map = RequestsManager.sortClassMap();
             var classes = $target.attr('class').split(' ');
 
-            data['ordering'] = class_map[classes[0]];
-            data['page'] = 1;
+            this.sortOrdering = class_map[classes[0]];
+            this.page = 1;
 
             if ($target.hasClass('arrow-down')) {
                 $target.removeClass('arrow-down').addClass('arrow-up').attr("title", "Sorted ascending");
             } else if ($target.hasClass('arrow-sortable')) {
-                data['ordering'] = "-" + data['ordering'];
+                this.sortOrdering = "-" + this.sortOrdering;
                 $target.removeClass('arrow-sortable').addClass('arrow-down').attr("title", "Sorted descending");
             } else {
-                data['ordering'] = "-" + data['ordering'];
+                this.sortOrdering = "-" + this.sortOrdering;
                 $target.removeClass('arrow-up').addClass('arrow-down').attr("title", "Sorted descending");
             }
 
@@ -145,7 +177,7 @@ var InputHandler = {
             if ($button.text() == "All Contracts") { this.listType = 'all'; }
             else { this.listType = 'naics'; }
 
-            EventManager.publish('contractsSorted', data);
+            EventManager.publish('contractsChanged');
         }
     },
 
@@ -162,7 +194,7 @@ var InputHandler = {
             $date.removeClass('arrow-sortable').addClass('arrow-down').attr("title", "Sorted descending");
             $date.siblings('.sortable').removeClass('arrow-down').removeClass('arrow-up').addClass('arrow-sortable').attr("title", "Select to sort");
 
-            EventManager.publish('contractsChanged', {});
+            EventManager.publish('contractsChanged');
         }
     },
 
@@ -181,7 +213,7 @@ var InputHandler = {
 
         RequestsManager.pool = this.getContractPools();
 
-        EventManager.publish('contractsChanged', {});
+        EventManager.publish('contractsChanged');
     },
 
     sendVehicleChange: function() {
@@ -270,6 +302,29 @@ var InputHandler = {
 
     getListType: function() {
         return this.listType;
+    },
+
+    getPage: function() {
+        return this.page;
+    },
+
+    getPageCount: function() {
+        return this.pageCount;
+    },
+
+    getSortOrdering: function() {
+        return this.sortOrdering;
+    },
+
+    getOrderingField: function(param) {
+        var classMap = RequestsManager.sortClassMap();
+
+        for (var field in classMap) {
+            if (classMap[field] == param) {
+                return field;
+            }
+        }
+        return null;
     },
 
     loadPools: function() {
