@@ -23,6 +23,9 @@ var URLManager = {
         var zone = this.getParameterByName('zone');
         var setasides = this.getParameterByName('setasides');
         var type = this.getParameterByName('type');
+        var page = this.getParameterByName('page');
+        var count = this.getParameterByName('count');
+        var ordering = this.getParameterByName('ordering');
         var data = {};
 
         if (vehicle) {
@@ -40,8 +43,18 @@ var URLManager = {
         if (setasides) {
             data['setasides'] = setasides;
         }
-         if (type) {
+        if (type) {
             data['type'] = type;
+        }
+
+        if (page) {
+            data['page'] = page;
+        }
+        if (count) {
+            data['count'] = count;
+        }
+        if (ordering) {
+            data['ordering'] = ordering;
         }
 
         LayoutManager.route(data);
