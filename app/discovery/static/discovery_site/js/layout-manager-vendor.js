@@ -92,8 +92,6 @@ LayoutManager.renderVendor = function(data) {
         $("#naics_contracts_button").hide();
         $("#all_contracts_button").hide();
         $(".vendor_contract_history_text").html("Showing vendor's indexed 5 year contract history");
-
-        this.renderButtonAndCSV('all');
     }
 
     EventManager.publish('vendorRendered', {});
