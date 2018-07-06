@@ -1,15 +1,14 @@
 
 LayoutManager.initializers.vendor = function() {
     EventManager.subscribe('contractsLoaded', this.renderTable.bind(LayoutManager));
-    EventManager.subscribe('contentChanged', this.updateResultsInfo.bind(LayoutManager));
+    EventManager.subscribe('contractsLoaded', this.updateResultsInfo.bind(LayoutManager));
 };
 
-LayoutManager.render = function(data) {
-    this.renderVendor(data);
+LayoutManager.render = function(vendor) {
+    this.renderVendor(vendor);
 };
 
-LayoutManager.renderVendor = function(data) {
-    var vendor = RequestsManager.vendor;
+LayoutManager.renderVendor = function(vendor) {
     var pools = {};
 
     if (! $.isEmptyObject(RequestsManager.vehiclePools)) {
@@ -94,7 +93,7 @@ LayoutManager.renderVendor = function(data) {
         $(".vendor_contract_history_text").html("Showing vendor's indexed 5 year contract history");
     }
 
-    EventManager.publish('vendorRendered', {});
+    EventManager.publish('vendorRendered');
 };
 
 LayoutManager.renderContacts = function(vendor, pools) {
@@ -140,7 +139,7 @@ LayoutManager.renderColumn = function(v, prefix, setasideCode) {
     return $('<td class="' + prefix + '">' + this.vendorIndicator(v, prefix, setasideCode) + '</td>');
 };
 
-LayoutManager.renderTable = function(results, pageNumber, itemsPerPage) {
+LayoutManager.renderTable = function(results) {
     var listType = InputHandler.getListType();
     var $table = $('#vendor_contracts');
     var len = results['results'].length;
@@ -163,9 +162,7 @@ LayoutManager.renderTable = function(results, pageNumber, itemsPerPage) {
 
     $("#ch_table").show();
 
-    LayoutManager.renderPager(listType, results, pageNumber, itemsPerPage);
-
-    EventManager.publish('contentChanged', results);
+    LayoutManager.renderPager(listType, results);
 };
 
 LayoutManager.renderRow = function(contract, i) {
@@ -201,14 +198,13 @@ LayoutManager.renderRow = function(contract, i) {
     return $contractRow;
 };
 
-LayoutManager.renderPager = function(listType, results, pageNumber, itemsPerPage) {
-    if (results['count'] > 0) {
-        if (pageNumber == undefined) {
-            var pageNumber = 1;
-        }
+LayoutManager.renderPager = function(listType, results) {
+    var page = InputHandler.getPage();
+    var pageCount = InputHandler.getPageCount();
 
-        var startnum = (pageNumber - 1) * itemsPerPage + 1;
-        var endnum = Math.min((pageNumber * itemsPerPage), results['count']);
+    if (results['count'] > 0) {
+        var startnum = (page - 1) * pageCount + 1;
+        var endnum = Math.min((page * pageCount), results['count']);
 
         $("#contracts_current").text(startnum + " - " + endnum);
         $("#contracts_total").text(LayoutManager.numberWithCommas(results['count']));
@@ -216,23 +212,13 @@ LayoutManager.renderPager = function(listType, results, pageNumber, itemsPerPage
         $(function() {
             $("#pagination_container").pagination({
                 items: results['count'],
-                itemsOnPage: itemsPerPage,
+                itemsOnPage: pageCount,
                 cssStyle: 'light-theme',
-                currentPage: pageNumber,
+                currentPage: page,
+                selectOnClick: false,
                 onPageClick: function(pageNumber, e) {
-                    var contract_data = RequestsManager.currentSortParams();
-
-                    contract_data['duns'] = results['duns'];
-
-                    if (listType == 'all') {
-                        contract_data['naics'] == 'all';
-                    } else {
-                        contract_data['naics'] = naics;
-                    }
-                    contract_data['page'] = pageNumber;
-                    contract_data['listType'] = listType;
-
-                    EventManager.publish("contractsChanged", contract_data);
+                    InputHandler.page = pageNumber;
+                    EventManager.publish("contractsChanged");
                 }
             });
         });
