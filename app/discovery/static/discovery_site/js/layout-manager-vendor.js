@@ -25,8 +25,6 @@ LayoutManager.renderVendor = function(data) {
 
     $(document).prop('title', vendor.name + " - " + URLManager.title);
 
-    URLManager.updateVendorCSVURL(vendor);
-
     var currentDate = new Date();
     var mailto, t, indicatorsRow, formattedDate, dateObj;
 
@@ -149,7 +147,8 @@ LayoutManager.renderTable = function(results, pageNumber, itemsPerPage) {
     var $table = $('#vendor_contracts');
     var len = results['results'].length;
 
-    this.renderButtonAndCSV(listType);
+    $("#vendor_contract_history_title_container .contracts_button_active").attr('class', 'contracts_button');
+    $("#" + listType + "_contracts_button").attr('class', 'contracts_button_active');
 
     $table.find('tr').not(':first').remove();
 
@@ -169,24 +168,6 @@ LayoutManager.renderTable = function(results, pageNumber, itemsPerPage) {
     LayoutManager.renderPager(listType, results, pageNumber, itemsPerPage);
 
     EventManager.publish('contentChanged', results);
-};
-
-LayoutManager.renderButtonAndCSV = function(data) {
-    var listType = InputHandler.getListType();
-
-    $("#vendor_contract_history_title_container .contracts_button_active").attr('class', 'contracts_button');
-    $("#" + listType + "_contracts_button").attr('class', 'contracts_button_active');
-
-    var a = $("a#csv_link");
-    var csv_link = a.attr('href');
-
-    csv_link = csv_link.substring(0, csv_link.indexOf("?"));
-
-    if (listType == 'all') {
-        a.attr('href', csv_link);
-    } else {
-        a.attr('href', csv_link + URLManager.getQueryString());
-    }
 };
 
 LayoutManager.renderRow = function(contract, i) {
@@ -270,6 +251,18 @@ LayoutManager.renderPager = function(listType, results, pageNumber, itemsPerPage
     }
 };
 
+LayoutManager.updateVendorCSVURL = function() {
+    var url = document.location.href;
+    var pathArray = url.split('/');
+
+    if (url.indexOf("/?") == -1) {
+        pathArray.pop();
+    }
+    pathArray.splice(5, 0, "csv");
+
+    $("#csv_link").attr("href", pathArray.join('/'));
+};
+
 LayoutManager.updateResultsInfo = function(results) {
     var totalResults, totalPools, resultsStr;
     if (results['count'] == 0) {
@@ -282,7 +275,7 @@ LayoutManager.updateResultsInfo = function(results) {
     }
     resultsStr = totalResults + " contracts match your search";
 
-    URLManager.updateResultCSVURL(results);
+    LayoutManager.updateVendorCSVURL();
 
     $("#number_of_results span").text(resultsStr);
 };
