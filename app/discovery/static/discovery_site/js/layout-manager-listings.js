@@ -14,9 +14,16 @@ LayoutManager.render = function(results) {
 };
 
 LayoutManager.renderVendors = function(results) {
-    var $table = $('#pool_vendors');
-    var qs = DataManager.getQueryString({'pool': null});
     var len = results['results'].length;
+    var $table = $('#pool_vendors');
+    var qs = DataManager.getQueryString({
+        'vehicle': null,
+        'pool': null,
+        'zone': null,
+        'setasides': null,
+        'ordering': null,
+        'page': null
+    });
 
     $table.find('tr').not(':first').remove();
 
