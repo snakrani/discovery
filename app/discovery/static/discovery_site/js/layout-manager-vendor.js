@@ -1,7 +1,6 @@
 
 LayoutManager.initializers.vendor = function() {
-    EventManager.subscribe('contractsLoaded', this.renderTable.bind(LayoutManager));
-    EventManager.subscribe('contractsLoaded', this.updateResultsInfo.bind(LayoutManager));
+    EventManager.subscribe('contractsLoaded', this.renderContracts.bind(LayoutManager));
 };
 
 LayoutManager.render = function(vendor) {
@@ -9,20 +8,21 @@ LayoutManager.render = function(vendor) {
 };
 
 LayoutManager.renderVendor = function(vendor) {
+    var vehiclePools = DataManager.getVehiclePools();
     var pools = {};
 
-    if (! $.isEmptyObject(RequestsManager.vehiclePools)) {
+    if (! $.isEmptyObject(vehiclePools)) {
         for (var i = 0; i < vendor.pools.length; i++) {
-            if (vendor.pools[i].pool.id in RequestsManager.vehiclePools) {
+            if (vendor.pools[i].pool.id in vehiclePools) {
                 pools[vendor.pools[i].pool.id] = {
                     "vendor": vendor.pools[i],
-                    "pool": RequestsManager.vehiclePools[vendor.pools[i].pool.id]
+                    "pool": vehiclePools[vendor.pools[i].pool.id]
                 };
             }
         }
     }
 
-    $(document).prop('title', vendor.name + " - " + URLManager.title);
+    $(document).prop('title', vendor.name + " - " + DataManager.title);
 
     var currentDate = new Date();
     var mailto, t, indicatorsRow, formattedDate, dateObj;
@@ -64,7 +64,7 @@ LayoutManager.renderVendor = function(vendor) {
     }
 
     //small business badge
-    if (LayoutManager.showSbBadge(vendor['pools'])) {
+    if (this.showSbBadge(vendor['pools'])) {
         $('#sb_badge').show();
     }
 
@@ -81,9 +81,9 @@ LayoutManager.renderVendor = function(vendor) {
     indicatorsRow.append(this.renderColumn(vendor, 'sdb', '27'));
     t.append(indicatorsRow);
 
-    if (InputHandler.getNAICSCode()) {
+    if (DataManager.getNAICSCode()) {
         $("#naics_contracts_button").show();
-        $("#naics_contracts_button").text("NAICS " + URLManager.stripSubCategories(InputHandler.getNAICSCode()));
+        $("#naics_contracts_button").text("NAICS " + DataManager.getNAICSCode());
         $("#all_contracts_button").show();
         $(".vendor_contract_history_text").html("Showing vendor's indexed 5 year contract history for PSCs related to: ");
     }
@@ -98,7 +98,7 @@ LayoutManager.renderVendor = function(vendor) {
 
 LayoutManager.renderContacts = function(vendor, pools) {
     var $table = $('#contact_details');
-    var poolIds = URLManager.getParameterByName('pool');
+    var poolIds = DataManager.getParameterByName('pool');
 
     if (poolIds) {
         poolIds = poolIds.split(',').filter(Boolean);
@@ -139,17 +139,18 @@ LayoutManager.renderColumn = function(v, prefix, setasideCode) {
     return $('<td class="' + prefix + '">' + this.vendorIndicator(v, prefix, setasideCode) + '</td>');
 };
 
-LayoutManager.renderTable = function(results) {
-    var listType = InputHandler.getListType();
+LayoutManager.renderContracts = function(results) {
+    var listType = DataManager.getListType();
     var $table = $('#vendor_contracts');
     var len = results['results'].length;
 
     $("#vendor_contract_history_title_container .contracts_button_active").attr('class', 'contracts_button');
     $("#" + listType + "_contracts_button").attr('class', 'contracts_button_active');
 
+    this.updateResultsInfo(results);
+
     $table.find('tr').not(':first').remove();
 
-    //show or hide 'no matching contracts' indicator
     if (results['count'] == 0) {
         $('#no_matching_contracts').show();
     } else {
@@ -162,7 +163,7 @@ LayoutManager.renderTable = function(results) {
 
     $("#ch_table").show();
 
-    LayoutManager.renderPager(listType, results);
+    this.renderPager(listType, results);
 };
 
 LayoutManager.renderRow = function(contract, i) {
@@ -199,15 +200,15 @@ LayoutManager.renderRow = function(contract, i) {
 };
 
 LayoutManager.renderPager = function(listType, results) {
-    var page = InputHandler.getPage();
-    var pageCount = InputHandler.getPageCount();
+    var page = DataManager.getPage();
+    var pageCount = DataManager.getPageCount();
 
     if (results['count'] > 0) {
         var startnum = (page - 1) * pageCount + 1;
         var endnum = Math.min((page * pageCount), results['count']);
 
         $("#contracts_current").text(startnum + " - " + endnum);
-        $("#contracts_total").text(LayoutManager.numberWithCommas(results['count']));
+        $("#contracts_total").text(this.numberWithCommas(results['count']));
 
         $(function() {
             $("#pagination_container").pagination({
@@ -217,7 +218,7 @@ LayoutManager.renderPager = function(listType, results) {
                 currentPage: page,
                 selectOnClick: false,
                 onPageClick: function(pageNumber, e) {
-                    InputHandler.page = pageNumber;
+                    DataManager.page = pageNumber;
                     EventManager.publish("contractsChanged");
                 }
             });
@@ -259,7 +260,7 @@ LayoutManager.updateResultsInfo = function(results) {
     }
     resultsStr = totalResults + " contracts match your search";
 
-    LayoutManager.updateVendorCSVURL();
+    this.updateVendorCSVURL();
 
     $("#number_of_results span").text(resultsStr);
 };
