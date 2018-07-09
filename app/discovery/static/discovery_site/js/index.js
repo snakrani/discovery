@@ -1,7 +1,4 @@
 
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
-'use strict';
-
 // add support for cross-domain requests
 $.support.cors = true;
 
@@ -18,13 +15,13 @@ $.fn.exists = function(callback) {
 
 // initializes the app
 $(document).ready(function() {
-    // http://thejacklawson.com/Mediator.js/
     window.Events = new Mediator() || {};
 
-    InputHandler.init();
+    DataManager.init();
     RequestsManager.init();
     LayoutManager.init();
-    URLManager.init();
+
+    DataManager.bootstrap();
 });
 
 // removes empty strings

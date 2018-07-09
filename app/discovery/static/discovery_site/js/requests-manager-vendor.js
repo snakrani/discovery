@@ -12,34 +12,37 @@ RequestsManager.sortClassMap = function() {
 };
 
 RequestsManager.initializers.vendor = function() {
-    EventManager.subscribe('vendorRendered', this.refreshContracts.bind(RequestsManager));
-    EventManager.subscribe('contractsSorted', this.refreshContracts.bind(RequestsManager));
+    EventManager.subscribe('vendorRendered', RequestsManager.loadContracts);
 };
 
-RequestsManager.loadVendor = function(callback) {
-    var duns = URLManager.getDUNS();
+RequestsManager.load = function(callback) {
+    var duns = DataManager.getDUNS();
     var url = "/api/vendors/" + duns + "/";
 
-    RequestsManager.getAPIRequest(url, {}, function(vendor){
-        RequestsManager.vendor = vendor;
-        callback(duns, vendor);
+    RequestsManager.getAPIRequest(url, {}, function(vendor) {
+        DataManager.vendor = vendor;
+        EventManager.publish('dataLoaded', vendor);
     });
 };
 
-RequestsManager.loadContracts = function(data, callback) {
-    var duns = URLManager.getDUNS();
+RequestsManager.loadContracts = function() {
     var url = "/api/contracts";
-    var queryData = $.extend(data, {'vendor__duns': duns, 'count': this.getPageCount()});
     var piids = RequestsManager.getPIIDs();
+    var naics = DataManager.getNaicsCode();
+    var ordering = DataManager.getSortOrdering();
+    var queryData = {
+        'vendor__duns': DataManager.getDUNS(),
+        'page': DataManager.getPage(),
+        'count': DataManager.getPageCount()
+    };
 
-    if (InputHandler.getListType() == 'naics' && 'naics' in queryData) {
-        queryData['psc_naics'] = queryData['naics'];
-
-        if (queryData['psc_naics'] == 'all') {
-            delete queryData['psc_naics'];
-        }
+    if (ordering) {
+        queryData['ordering'] = ordering;
     }
-    delete queryData['naics'];
+
+    if (DataManager.getListType() == 'naics' && naics) {
+        queryData['psc_naics'] = naics;
+    }
 
     if (piids.length > 0) {
         queryData['base_piid__in'] = piids.join(',');
@@ -49,41 +52,30 @@ RequestsManager.loadContracts = function(data, callback) {
 
     RequestsManager.getAPIRequest(url, queryData,
         function(response) {
-            callback(queryData, response);
+            EventManager.publish('contractsLoaded', response);
             $('.table_wrapper').removeClass('loading');
         },
         function(req, status, error) {
-            $('.table_wrapper').removeClass('loading');
+            if (queryData['page'] > 1 && req.status == 404) {
+                DataManager.page = 1;
+                DataManager.update();
+            }
+            else {
+                $('.table_wrapper').removeClass('loading');
+            }
         }
     );
 };
 
-RequestsManager.load = function() {
-    RequestsManager.loadVendor(function(duns, vendor) {
-        EventManager.publish('dataLoaded', {});
-    });
-};
-
-RequestsManager.refreshContracts = function(data) {
-    data['naics'] = InputHandler.getNAICSCode();
-
-    if (!data['page']) {
-        data['page'] = 1;
-    }
-
-    RequestsManager.loadContracts(data, function(queryData, response) {
-        EventManager.publish('contractsLoaded', response, data['page'], queryData['count']);
-    });
-};
-
 RequestsManager.getPIIDs = function() {
-  var vendor = RequestsManager.vendor;
-  var pools = InputHandler.getContractPools();
+  var vendor = DataManager.getVendor();
+  var vehiclePools = DataManager.getVehiclePools();
+  var pools = DataManager.getContractPools();
   var piids = [];
 
   if (vendor && pools.length > 0) {
       for (var pindex = 0; pindex < pools.length; pindex++) {
-          var pool = RequestsManager.vehiclePools[pools[pindex]];
+          var pool = vehiclePools[pools[pindex]];
 
           for (var vindex = 0; vindex < vendor.pools.length; vindex++) {
               var vendor_pool = vendor.pools[vindex];

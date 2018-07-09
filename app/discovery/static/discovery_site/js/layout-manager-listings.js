@@ -1,30 +1,25 @@
 
 LayoutManager.initializers.listings = function() {
-    EventManager.subscribe('contentChanged', this.updateResultsInfo.bind(LayoutManager));
+    EventManager.subscribe('dataChanged', LayoutManager.toggleZones);
 };
 
 LayoutManager.render = function(results) {
-    if ($.isEmptyObject(results)) {
-        $('#pool_vendors').find('tr').not(':first').remove();
-        EventManager.publish('contentChanged', results);
-    }
-    else {
-        this.renderTable(results, 1, RequestsManager.getPageCount());
-    }
-
-    $(document).prop('title', "Results - " + URLManager.title);
+    $(document).prop('title', "Results - " + DataManager.title);
 
     $('#pool_vendors th span').tooltip();
+
+    LayoutManager.updatePoolInfo();
+    LayoutManager.updateResultsInfo(results);
+    LayoutManager.renderVendors(results);
 };
 
-LayoutManager.renderTable = function(results, pageNumber, itemsPerPage) {
+LayoutManager.renderVendors = function(results) {
     var $table = $('#pool_vendors');
-    var qs = URLManager.getQueryString();
+    var qs = DataManager.getQueryString();
     var len = results['results'].length;
 
     $table.find('tr').not(':first').remove();
 
-    //show or hide 'no matching vendors' indicator
     if (results['count'] == 0) {
         $('#no_matching_vendors').show();
     } else {
@@ -32,24 +27,21 @@ LayoutManager.renderTable = function(results, pageNumber, itemsPerPage) {
     }
 
     for (var i = 0; i < len; i++) {
-        $table.append(this.renderRow(results['results'][i], qs, i));
+        $table.append(LayoutManager.renderRow(results['results'][i], qs, i));
     }
 
     $('#pool_table').show();
 
-    LayoutManager.renderPager(results, pageNumber, itemsPerPage);
-
-    EventManager.publish('contentChanged', results);
+    LayoutManager.renderPager(results);
 };
 
 LayoutManager.renderRow = function(vendor, qs, i) {
     var location_col, num_contracts_col;
     var $vendorRow = $('<tr class="table_row_data"></tr>');
 
-    var locationStr = (vendor.sam_location_citystate ? this.cleanLocation(vendor.sam_location_citystate) : ' ');
+    var locationStr = (vendor.sam_location_citystate ? LayoutManager.cleanLocation(vendor.sam_location_citystate) : ' ');
     var name_col = $('<td class="vendor_name" scope="row"></td>');
     var name_a = $('<a href="/vendor/' + vendor.duns + '/' + qs + '" class="link_style">' + vendor.name + '</a>');
-    var vehicle = this.getQSByName(qs, 'vehicle');
 
     name_col.append(name_a);
     $vendorRow.append(name_col);
@@ -62,12 +54,12 @@ LayoutManager.renderRow = function(vendor, qs, i) {
 
     //add socio-economic columns
     if (vendor.setasides.length > 0) {
-        $vendorRow.append(this.renderColumn(vendor, '8a', 'A6'));
-        $vendorRow.append(this.renderColumn(vendor, 'Hubz', 'XX'));
-        $vendorRow.append(this.renderColumn(vendor, 'sdvo', 'QF'));
-        $vendorRow.append(this.renderColumn(vendor, 'wo', 'A2'));
-        $vendorRow.append(this.renderColumn(vendor, 'vo', 'A5'));
-        $vendorRow.append(this.renderColumn(vendor, 'sdb', '27'));
+        $vendorRow.append(LayoutManager.renderColumn(vendor, '8a', 'A6'));
+        $vendorRow.append(LayoutManager.renderColumn(vendor, 'Hubz', 'XX'));
+        $vendorRow.append(LayoutManager.renderColumn(vendor, 'sdvo', 'QF'));
+        $vendorRow.append(LayoutManager.renderColumn(vendor, 'wo', 'A2'));
+        $vendorRow.append(LayoutManager.renderColumn(vendor, 'vo', 'A5'));
+        $vendorRow.append(LayoutManager.renderColumn(vendor, 'sdb', '27'));
     }
     else {
         $vendorRow.append($('<td colspan="6" class="unrestricted"></td>'));
@@ -78,22 +70,20 @@ LayoutManager.renderRow = function(vendor, qs, i) {
 
 LayoutManager.renderColumn = function(v, prefix, setasideCode) {
     var $col = $('<td class="' + prefix + '"></td>');
-    if (this.findIndicatorMatch(v, prefix, setasideCode)) {
+    if (LayoutManager.findIndicatorMatch(v, prefix, setasideCode)) {
         $col.html('<img src="'+ static_image_path + 'green_dot.png" class="green_dot">');
     }
     return $col;
 };
 
 LayoutManager.renderPager = function(results, pageNumber, itemsPerPage) {
+    var page = DataManager.getPage();
+    var pageCount = DataManager.getPageCount();
     var resultCount = results['results'].length;
 
     if (results['count'] > 0) {
-        if (pageNumber == undefined) {
-            var pageNumber = 1;
-        }
-
-        var startnum = (pageNumber - 1) * itemsPerPage + 1;
-        var endnum = Math.min((pageNumber * itemsPerPage), results['count']);
+        var startnum = (page - 1) * pageCount + 1;
+        var endnum = Math.min((page * pageCount), results['count']);
 
         $("#vendors_current").text(startnum + " - " + endnum);
         $("#vendors_total").text(LayoutManager.numberWithCommas(results['count']));
@@ -101,15 +91,12 @@ LayoutManager.renderPager = function(results, pageNumber, itemsPerPage) {
         $(function() {
             $("#pagination_container").pagination({
                 items: results['count'],
-                itemsOnPage: itemsPerPage,
+                itemsOnPage: pageCount,
                 cssStyle: 'light-theme',
-                currentPage: pageNumber,
+                currentPage: page,
                 onPageClick: function(pageNumber, e) {
-                    var vendor_data = RequestsManager.currentSortParams();
-
-                    vendor_data['page'] = pageNumber;
-
-                    EventManager.publish("vendorsChanged", vendor_data);
+                    DataManager.page = pageNumber;
+                    EventManager.publish("vendorsChanged");
                 }
             });
         });
@@ -127,8 +114,37 @@ LayoutManager.renderPager = function(results, pageNumber, itemsPerPage) {
 };
 
 LayoutManager.updateResultCSVURL = function() {
-    var qs = URLManager.getQueryString();
+    var qs = DataManager.getQueryString();
     $("#csv_link").attr("href", "/results/csv/" + qs);
+};
+
+LayoutManager.updatePoolInfo = function() {
+    var vehiclePools = DataManager.getVehiclePools();
+    var pool = DataManager.getPool();
+    var poolNames = [];
+    var pools;
+
+    if (pool) {
+        pools = [pool.id];
+    }
+    else {
+        pools = Object.keys(vehiclePools).sort();
+    }
+
+    if (pools.length > 0) {
+        for (var index = 0; index < pools.length; index++) {
+            var pool = vehiclePools[pools[index]];
+
+            if (pools.length > 1) {
+                var url = DataManager.getURL({'vehicle': pool.vehicle, 'pool': pool.id});
+                poolNames.push('<div class="pool"><div class="spacer"/><a class="pool_filter_link" href="' + url + '"><span class="vehicle">' + pool.vehicle.split('_').join(' ') + " pool " + pool.number + ':</span><span class="title">' + pool.name + '</span></a></div>');
+            }
+            else {
+                poolNames.push('<div class="pool"><div class="spacer"/><span class="vehicle">' + pool.vehicle.split('_').join(' ') + " pool " + pool.number + ':</span><span class="title">' + pool.name + '</span></div>');
+            }
+        }
+        $(".results_pool_names").html(poolNames.join(''));
+    }
 };
 
 LayoutManager.updateResultsInfo = function(results) {
@@ -146,14 +162,6 @@ LayoutManager.updateResultsInfo = function(results) {
     LayoutManager.updateResultCSVURL();
 
     $("#number_of_results span").text(resultsStr);
-};
-
-LayoutManager.getQSByName = function(qs, name) {
-        // http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
-        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-            results = regex.exec(qs);
-        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 };
 
 LayoutManager.findIndicatorMatch = function(v, prefix, setasideCode) {
@@ -185,7 +193,7 @@ LayoutManager.cleanLocation = function(loc) {
             new_location = '';
         }
         else {
-            new_location = this.toTitleCase(location_obj.city) + ', ' + location_obj.state;
+            new_location = LayoutManager.toTitleCase(location_obj.city) + ', ' + location_obj.state;
         }
     }
     return new_location;

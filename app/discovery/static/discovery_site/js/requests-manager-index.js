@@ -1,6 +1,6 @@
 
 RequestsManager.initializers.index = function() {
-    EventManager.subscribe('loadPage', this.loadMetadata.bind(RequestsManager));
+    EventManager.subscribe('pageInitialized', RequestsManager.loadMetadata);
 };
 
 RequestsManager.loadMetadata = function() {

@@ -1,21 +1,22 @@
 
 LayoutManager.initializers.index = function() {
-    EventManager.subscribe('dataChanged', this.route.bind(LayoutManager));
-    EventManager.subscribe('loadPage', this.vehicleInfo.bind(LayoutManager));
+    EventManager.subscribe('dataChanged', LayoutManager.route);
+    EventManager.subscribe('dataChanged', LayoutManager.toggleZones);
+    EventManager.subscribe('pageInitialized', LayoutManager.vehicleInfo);
 
-    this.hideZones();
+    LayoutManager.hideZones();
 };
 
 LayoutManager.route = function(data) {
-    var queryObject = RequestsManager.buildRequestQuery();
+    var queryObject = DataManager.buildRequestQuery();
 
     if ('naics' in queryObject || 'vehicle' in queryObject || 'pool' in queryObject) {
-        this.loadPoolPage();
+        LayoutManager.loadPoolPage();
     }
 };
 
 LayoutManager.loadPoolPage = function() {
-    var qs = URLManager.getQueryString();
+    var qs = DataManager.getQueryString();
     window.location.href = '/results' + qs;
 };
 

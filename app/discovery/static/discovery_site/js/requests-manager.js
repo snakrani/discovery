@@ -1,16 +1,12 @@
 
 var RequestsManager = {
     initializers: {},
-    vendor: null,
-    naicsPools: {},
-    vehiclePools: {},
-    pool: null,
 
     init: function() {
-        EventManager.subscribe('dataChanged', this.load.bind(RequestsManager));
+        EventManager.subscribe('dataChanged', RequestsManager.load);
 
-        for(var handler in this.initializers){
-            this.initializers[handler].call(this);
+        for(var handler in RequestsManager.initializers){
+            RequestsManager.initializers[handler].call(this);
         }
     },
 
@@ -37,70 +33,5 @@ var RequestsManager = {
               console.log('Failed to load: ', url);
               console.log(error);
             });
-    },
-
-    buildRequestQuery: function() {
-        var vehicle = InputHandler.getVehicle();
-        var pools = RequestsManager.vehiclePools;
-        var pool = InputHandler.getPool();
-        var naics = InputHandler.getNAICSCode();
-        var zone = InputHandler.getZone();
-        var setasides = InputHandler.getSetasides();
-        var contractPools = InputHandler.getContractPools();
-        var listType = InputHandler.getListType();
-        var queryData = {};
-
-        if (vehicle && vehicle != 'all') {
-            queryData['vehicle'] = vehicle;
-        }
-
-        if (URLManager.isVendorPage()) {
-            if (contractPools.length > 0) {
-                queryData['pool'] = contractPools.join(',');
-            }
-        }
-        else if (pool && pool in pools) {
-            queryData['pool'] = pool;
-        }
-
-        if (naics && naics != 'all') {
-            queryData['naics'] = naics;
-        }
-        if (zone && zone != 'all') {
-            queryData['zone'] = zone;
-        }
-
-        if (setasides.length > 0) {
-            queryData["setasides"] = setasides.join(',');
-        }
-
-        if (listType && listType != 'naics') {
-            queryData['type'] = listType;
-        }
-
-        if (URLManager.getParameterByName('test')) {
-            queryData['test'] = 'true';
-        }
-        return queryData;
-    },
-
-    currentSortParams: function() {
-        var data = {};
-        var class_map = RequestsManager.sortClassMap();
-
-        $('th.arrow-down').exists(function() {
-            data['ordering'] = "-" + class_map[this.attr('class').split(' ')[0]];
-        });
-        $('th.arrow-up').exists(function() {
-            data['ordering'] = class_map[this.attr('class').split(' ')[0]];
-        });
-        return data;
-    },
-
-    getPageCount: function() {
-        if (URLManager.getParameterByName('test')) {
-            return 5;
-        }
-        return 50;
     }
 };

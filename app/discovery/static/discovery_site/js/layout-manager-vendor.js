@@ -1,29 +1,28 @@
 
 LayoutManager.initializers.vendor = function() {
-    EventManager.subscribe('contractsLoaded', this.renderTable.bind(LayoutManager));
-    EventManager.subscribe('contentChanged', this.updateResultsInfo.bind(LayoutManager));
+    EventManager.subscribe('contractsLoaded', LayoutManager.renderContracts);
 };
 
-LayoutManager.render = function(data) {
-    this.renderVendor(data);
+LayoutManager.render = function(vendor) {
+    LayoutManager.renderVendor(vendor);
 };
 
-LayoutManager.renderVendor = function(data) {
-    var vendor = RequestsManager.vendor;
+LayoutManager.renderVendor = function(vendor) {
+    var vehiclePools = DataManager.getVehiclePools();
     var pools = {};
 
-    if (! $.isEmptyObject(RequestsManager.vehiclePools)) {
+    if (! $.isEmptyObject(vehiclePools)) {
         for (var i = 0; i < vendor.pools.length; i++) {
-            if (vendor.pools[i].pool.id in RequestsManager.vehiclePools) {
+            if (vendor.pools[i].pool.id in vehiclePools) {
                 pools[vendor.pools[i].pool.id] = {
                     "vendor": vendor.pools[i],
-                    "pool": RequestsManager.vehiclePools[vendor.pools[i].pool.id]
+                    "pool": vehiclePools[vendor.pools[i].pool.id]
                 };
             }
         }
     }
 
-    $(document).prop('title', vendor.name + " - " + URLManager.title);
+    $(document).prop('title', vendor.name + " - " + DataManager.title);
 
     var currentDate = new Date();
     var mailto, t, indicatorsRow, formattedDate, dateObj;
@@ -39,13 +38,13 @@ LayoutManager.renderVendor = function(data) {
     }
     $('.duns_number').html(vendor.duns);
     $('.cage_code').html(vendor.cage);
-    $('.number_of_employees').html(vendor.number_of_employees ? this.numberWithCommas(vendor.number_of_employees) : 'N/A');
-    $('.annual_revenue').html(vendor.annual_revenue ? '$' + this.numberWithCommas(vendor.annual_revenue) : 'N/A');
+    $('.number_of_employees').html(vendor.number_of_employees ? LayoutManager.numberWithCommas(vendor.number_of_employees) : 'N/A');
+    $('.annual_revenue').html(vendor.annual_revenue ? '$' + LayoutManager.numberWithCommas(vendor.annual_revenue) : 'N/A');
 
     //load SAM expiration date
     if (vendor['sam_expiration_date']) {
-        dateObj = this.createDate(vendor['sam_expiration_date']);
-        formattedDate = this.formatDate(dateObj);
+        dateObj = LayoutManager.createDate(vendor['sam_expiration_date']);
+        formattedDate = LayoutManager.formatDate(dateObj);
     }
     else {
         formattedDate = 'unknown';
@@ -61,7 +60,7 @@ LayoutManager.renderVendor = function(data) {
     $('.vendor_address2').html(vendor.sam_location ? vendor.sam_location.city + ', ' + vendor.sam_location.state + ' ' + vendor.sam_location.zipcode : ' ');
 
     if (! $.isEmptyObject(pools)) {
-        this.renderContacts(vendor, pools);
+        LayoutManager.renderContacts(vendor, pools);
     }
 
     //small business badge
@@ -74,17 +73,17 @@ LayoutManager.renderVendor = function(data) {
     t.find("tr:gt(0)").remove();
 
     indicatorsRow = $('<tr></tr>');
-    indicatorsRow.append(this.renderColumn(vendor, '8a', 'A6'));
-    indicatorsRow.append(this.renderColumn(vendor, 'Hubz', 'XX'));
-    indicatorsRow.append(this.renderColumn(vendor, 'sdvo', 'QF'));
-    indicatorsRow.append(this.renderColumn(vendor, 'wo', 'A2'));
-    indicatorsRow.append(this.renderColumn(vendor, 'vo', 'A5'));
-    indicatorsRow.append(this.renderColumn(vendor, 'sdb', '27'));
+    indicatorsRow.append(LayoutManager.renderColumn(vendor, '8a', 'A6'));
+    indicatorsRow.append(LayoutManager.renderColumn(vendor, 'Hubz', 'XX'));
+    indicatorsRow.append(LayoutManager.renderColumn(vendor, 'sdvo', 'QF'));
+    indicatorsRow.append(LayoutManager.renderColumn(vendor, 'wo', 'A2'));
+    indicatorsRow.append(LayoutManager.renderColumn(vendor, 'vo', 'A5'));
+    indicatorsRow.append(LayoutManager.renderColumn(vendor, 'sdb', '27'));
     t.append(indicatorsRow);
 
-    if (InputHandler.getNAICSCode()) {
+    if (DataManager.getNaicsCode()) {
         $("#naics_contracts_button").show();
-        $("#naics_contracts_button").text("NAICS " + URLManager.stripSubCategories(InputHandler.getNAICSCode()));
+        $("#naics_contracts_button").text("NAICS " + DataManager.getNaicsCode());
         $("#all_contracts_button").show();
         $(".vendor_contract_history_text").html("Showing vendor's indexed 5 year contract history for PSCs related to: ");
     }
@@ -94,12 +93,12 @@ LayoutManager.renderVendor = function(data) {
         $(".vendor_contract_history_text").html("Showing vendor's indexed 5 year contract history");
     }
 
-    EventManager.publish('vendorRendered', {});
+    EventManager.publish('vendorRendered');
 };
 
 LayoutManager.renderContacts = function(vendor, pools) {
     var $table = $('#contact_details');
-    var poolIds = URLManager.getParameterByName('pool');
+    var poolIds = DataManager.getParameterByName('pool');
 
     if (poolIds) {
         poolIds = poolIds.split(',').filter(Boolean);
@@ -137,20 +136,21 @@ LayoutManager.showSbBadge = function(pools) {
 };
 
 LayoutManager.renderColumn = function(v, prefix, setasideCode) {
-    return $('<td class="' + prefix + '">' + this.vendorIndicator(v, prefix, setasideCode) + '</td>');
+    return $('<td class="' + prefix + '">' + LayoutManager.vendorIndicator(v, prefix, setasideCode) + '</td>');
 };
 
-LayoutManager.renderTable = function(results, pageNumber, itemsPerPage) {
-    var listType = InputHandler.getListType();
+LayoutManager.renderContracts = function(results) {
+    var listType = DataManager.getListType();
     var $table = $('#vendor_contracts');
     var len = results['results'].length;
 
     $("#vendor_contract_history_title_container .contracts_button_active").attr('class', 'contracts_button');
     $("#" + listType + "_contracts_button").attr('class', 'contracts_button_active');
 
+    LayoutManager.updateResultsInfo(results);
+
     $table.find('tr').not(':first').remove();
 
-    //show or hide 'no matching contracts' indicator
     if (results['count'] == 0) {
         $('#no_matching_contracts').show();
     } else {
@@ -158,26 +158,24 @@ LayoutManager.renderTable = function(results, pageNumber, itemsPerPage) {
     }
 
     for (var i = 0; i < len; i++) {
-        $table.append(this.renderRow(results['results'][i], i));
+        $table.append(LayoutManager.renderRow(results['results'][i], i));
     }
 
     $("#ch_table").show();
 
-    LayoutManager.renderPager(listType, results, pageNumber, itemsPerPage);
-
-    EventManager.publish('contentChanged', results);
+    LayoutManager.renderPager(listType, results);
 };
 
 LayoutManager.renderRow = function(contract, i) {
     var $contractRow = $('<tr class="table_row_data"></tr>');
 
-    var displayDate = (contract['date_signed'] ? this.formatDate(this.createDate(contract['date_signed'])) : ' ');
+    var displayDate = (contract['date_signed'] ? LayoutManager.formatDate(LayoutManager.createDate(contract['date_signed'])) : ' ');
     var piid = (contract['piid'] ? contract['piid'] : ' ');
     var agencyName = (contract['agency_name'] ? contract['agency_name'] : ' ');
     var pricingType = (contract['pricing_type'] ? contract['pricing_type'].name : ' ');
     var pointOfContact = (contract['point_of_contact'] ? contract['point_of_contact'].name : ' ');
     var location = (contract['place_of_performance_location'] ? contract['place_of_performance_location'] : ' ');
-    var obligatedAmount = (contract['obligated_amount'] ? this.numberWithCommas(contract['obligated_amount']) : ' ');
+    var obligatedAmount = (contract['obligated_amount'] ? LayoutManager.numberWithCommas(contract['obligated_amount']) : ' ');
     var status = (contract['status'] ? contract['status'].name : ' ');
     var psc = (contract['PSC'] ? contract['PSC'] : ' ');
     var naics = (contract['NAICS'] ? contract['NAICS'] : ' ');
@@ -191,7 +189,7 @@ LayoutManager.renderRow = function(contract, i) {
 
     $contractRow.append('<td class="date_signed">' + displayDate + '</td>');
     $contractRow.append('<td class="piid" scope="row">' + piid + '</td>');
-    $contractRow.append('<td class="agency">' + this.toTitleCase(agencyName) + '</td>');
+    $contractRow.append('<td class="agency">' + LayoutManager.toTitleCase(agencyName) + '</td>');
     $contractRow.append('<td class="type">' + pricingType + '</td>');
     $contractRow.append('<td class="poc">' + pointOfContact + '</td>');
     $contractRow.append('<td class="value">' + obligatedAmount+ '</td>');
@@ -201,14 +199,13 @@ LayoutManager.renderRow = function(contract, i) {
     return $contractRow;
 };
 
-LayoutManager.renderPager = function(listType, results, pageNumber, itemsPerPage) {
-    if (results['count'] > 0) {
-        if (pageNumber == undefined) {
-            var pageNumber = 1;
-        }
+LayoutManager.renderPager = function(listType, results) {
+    var page = DataManager.getPage();
+    var pageCount = DataManager.getPageCount();
 
-        var startnum = (pageNumber - 1) * itemsPerPage + 1;
-        var endnum = Math.min((pageNumber * itemsPerPage), results['count']);
+    if (results['count'] > 0) {
+        var startnum = (page - 1) * pageCount + 1;
+        var endnum = Math.min((page * pageCount), results['count']);
 
         $("#contracts_current").text(startnum + " - " + endnum);
         $("#contracts_total").text(LayoutManager.numberWithCommas(results['count']));
@@ -216,23 +213,13 @@ LayoutManager.renderPager = function(listType, results, pageNumber, itemsPerPage
         $(function() {
             $("#pagination_container").pagination({
                 items: results['count'],
-                itemsOnPage: itemsPerPage,
+                itemsOnPage: pageCount,
                 cssStyle: 'light-theme',
-                currentPage: pageNumber,
+                currentPage: page,
+                selectOnClick: false,
                 onPageClick: function(pageNumber, e) {
-                    var contract_data = RequestsManager.currentSortParams();
-
-                    contract_data['duns'] = results['duns'];
-
-                    if (listType == 'all') {
-                        contract_data['naics'] == 'all';
-                    } else {
-                        contract_data['naics'] = naics;
-                    }
-                    contract_data['page'] = pageNumber;
-                    contract_data['listType'] = listType;
-
-                    EventManager.publish("contractsChanged", contract_data);
+                    DataManager.page = pageNumber;
+                    EventManager.publish("contractsChanged");
                 }
             });
         });
