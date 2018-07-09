@@ -7,26 +7,30 @@ RequestsManager.sortClassMap = function() {
     };
 };
 
-RequestsManager.initializers.listings = function() {
-    EventManager.subscribe('vendorsChanged', this.refreshVendors.bind(RequestsManager));
-    EventManager.subscribe('vendorsSorted', this.refreshVendors.bind(RequestsManager));
-};
-
-RequestsManager.loadVendorData = function(data, callback) {
+RequestsManager.load = function() {
     var url = "/api/vendors/";
-    var pools = RequestsManager.vehiclePools;
+    var pools = DataManager.getVehiclePools();
+    var pool = DataManager.getPool();
     var poolIds = [];
 
-    var requestVars = this.buildRequestQuery();
-    var queryData = $.extend(data, {'count': this.getPageCount()});
+    var requestVars = DataManager.buildRequestQuery();
+    var ordering = DataManager.getSortOrdering();
+    var queryData = {
+        'page': DataManager.getPage(),
+        'count': DataManager.getPageCount()
+    };
+
+    if (ordering) {
+        queryData['ordering'] = ordering;
+    }
     var filters = [];
 
     if ('naics' in requestVars) {
         queryData['contract_naics'] = requestVars['naics'];
     }
     if (! $.isEmptyObject(pools)) {
-        if (RequestsManager.pool) {
-            filters.push('(pools__pool__id' + '=' + RequestsManager.pool.id + ')');
+        if (pool) {
+            filters.push('(pools__pool__id' + '=' + pool.id + ')');
         } else {
             Object.keys(pools).forEach(function (id) {
                 poolIds.push(id);
@@ -53,10 +57,10 @@ RequestsManager.loadVendorData = function(data, callback) {
     LayoutManager.disableFilters();
     $('.table_wrapper').addClass('loading');
 
-    RequestsManager.getAPIRequest(url, queryData,
+    this.getAPIRequest(url, queryData,
         function(response) {
-            if (queryData['contract_naics'] == URLManager.getParameterByName('naics-code')) {
-                callback(queryData, response);
+            if (queryData['contract_naics'] == DataManager.getParameterByName('naics-code')) {
+                EventManager.publish('dataLoaded', response);
 
                 LayoutManager.enableVehicles();
                 LayoutManager.enablePools();
@@ -73,18 +77,4 @@ RequestsManager.loadVendorData = function(data, callback) {
             $('.table_wrapper').removeClass('loading');
         }
     );
-};
-
-RequestsManager.load = function() {
-    if (URLManager.isPoolPage()) {
-        RequestsManager.loadVendorData(RequestsManager.currentSortParams(), function(queryData, response) {
-            EventManager.publish('dataLoaded', response, 1, RequestsManager.getPageCount());
-        });
-    }
-};
-
-RequestsManager.refreshVendors = function(data) {
-    RequestsManager.loadVendorData(data, function(queryData, response) {
-        EventManager.publish('dataLoaded', response, data['page'], queryData['count']);
-    });
 };
