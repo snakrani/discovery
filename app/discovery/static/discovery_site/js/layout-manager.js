@@ -3,10 +3,6 @@ var LayoutManager = {
     initializers: {},
 
     init: function() {
-        if (URLManager.isHomePage() || URLManager.isPoolPage()) {
-            EventManager.subscribe('dataChanged', this.toggleZones.bind(LayoutManager));
-            EventManager.subscribe('dataChanged', this.updatePoolInfo.bind(LayoutManager));
-        }
         EventManager.subscribe('dataLoaded', this.render.bind(LayoutManager));
 
         for(var handler in this.initializers){
@@ -18,6 +14,39 @@ var LayoutManager = {
     },
 
     render: function(results) {
+    },
+
+    isHomePage: function() {
+        var pathArray =  window.location.pathname.split('/').join('').split('');
+
+        if (pathArray.length == 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    },
+
+    isPoolPage: function() {
+        var pathArray =  window.location.pathname.split('/');
+
+        if ($.inArray('results', pathArray) !== -1) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    },
+
+    isVendorPage: function() {
+        var pathArray =  window.location.pathname.split('/');
+
+        if ($.inArray('vendor', pathArray) !== -1) {
+            return true;
+        }
+        else {
+            return false;
+        }
     },
 
     enableVehicles: function() {
@@ -56,7 +85,7 @@ var LayoutManager = {
     },
 
     zoneActive: function() {
-        var vehicle = InputHandler.getVehicle();
+        var vehicle = DataManager.getVehicle();
 
         if (vehicle && vehicle.match(/^BMO/i)) {
             return true;
@@ -116,33 +145,6 @@ var LayoutManager = {
         $('#choose_filters').removeClass('filter_text').addClass('filter_text_disabled');
         $('.pure-checkbox').addClass('pure-checkbox-disabled');
         $('.se_filter').attr("disabled", true);
-    },
-
-    updatePoolInfo: function() {
-        var poolNames = [];
-        var pools;
-
-        if (RequestsManager.pool) {
-            pools = [RequestsManager.pool.id];
-        }
-        else {
-            pools = Object.keys(RequestsManager.vehiclePools).sort();
-        }
-
-        if (pools.length > 0) {
-            for (var index = 0; index < pools.length; index++) {
-                var pool = RequestsManager.vehiclePools[pools[index]];
-
-                if (pools.length > 1) {
-                    var url = URLManager.getURL({'vehicle': pool.vehicle, 'pool': pool.id});
-                    poolNames.push('<div class="pool"><div class="spacer"/><a class="pool_filter_link" href="' + url + '"><span class="vehicle">' + pool.vehicle.split('_').join(' ') + " pool " + pool.number + ':</span><span class="title">' + pool.name + '</span></a></div>');
-                }
-                else {
-                    poolNames.push('<div class="pool"><div class="spacer"/><span class="vehicle">' + pool.vehicle.split('_').join(' ') + " pool " + pool.number + ':</span><span class="title">' + pool.name + '</span></div>');
-                }
-            }
-            $(".results_pool_names").html(poolNames.join(''));
-        }
     },
 
     createDate: function(date) {
