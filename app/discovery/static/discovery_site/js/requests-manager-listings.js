@@ -70,11 +70,17 @@ RequestsManager.load = function() {
             }
         },
         function(req, status, error) {
-            LayoutManager.enableVehicles();
-            LayoutManager.enablePools();
-            LayoutManager.enableZones();
-            LayoutManager.enableFilters();
-            $('.table_wrapper').removeClass('loading');
+            if (queryData['page'] > 1 && req.status == 404) {
+                DataManager.page = 1;
+                DataManager.update();
+            }
+            else {
+                LayoutManager.enableVehicles();
+                LayoutManager.enablePools();
+                LayoutManager.enableZones();
+                LayoutManager.enableFilters();
+                $('.table_wrapper').removeClass('loading');
+            }
         }
     );
 };
