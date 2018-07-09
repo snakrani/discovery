@@ -357,7 +357,12 @@ var DataManager = {
 
         if (params !== undefined) {
             for (key in params) {
-                queryObject[key] = params[key];
+                if (params[key] !== null) {
+                    queryObject[key] = params[key];
+                }
+                else {
+                    delete queryObject[key];
+                }
             }
         }
 
