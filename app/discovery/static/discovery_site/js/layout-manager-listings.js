@@ -1,23 +1,25 @@
 
 LayoutManager.initializers.listings = function() {
-    EventManager.subscribe('dataLoaded', this.renderTable.bind(LayoutManager));
-    EventManager.subscribe('contentChanged', this.updateResultsInfo.bind(LayoutManager));
+    EventManager.subscribe('dataChanged', this.toggleZones.bind(LayoutManager));
 };
 
 LayoutManager.render = function(results) {
-    $(document).prop('title', "Results - " + URLManager.title);
+    $(document).prop('title', "Results - " + DataManager.title);
 
     $('#pool_vendors th span').tooltip();
+
+    this.updatePoolInfo();
+    this.updateResultsInfo(results);
+    this.renderVendors(results);
 };
 
-LayoutManager.renderTable = function(results, pageNumber, itemsPerPage) {
+LayoutManager.renderVendors = function(results) {
     var $table = $('#pool_vendors');
-    var qs = URLManager.getQueryString();
+    var qs = DataManager.getQueryString();
     var len = results['results'].length;
 
     $table.find('tr').not(':first').remove();
 
-    //show or hide 'no matching vendors' indicator
     if (results['count'] == 0) {
         $('#no_matching_vendors').show();
     } else {
@@ -30,9 +32,7 @@ LayoutManager.renderTable = function(results, pageNumber, itemsPerPage) {
 
     $('#pool_table').show();
 
-    LayoutManager.renderPager(results, pageNumber, itemsPerPage);
-
-    EventManager.publish('contentChanged', results);
+    this.renderPager(results, pageNumber, itemsPerPage);
 };
 
 LayoutManager.renderRow = function(vendor, qs, i) {
@@ -42,7 +42,6 @@ LayoutManager.renderRow = function(vendor, qs, i) {
     var locationStr = (vendor.sam_location_citystate ? this.cleanLocation(vendor.sam_location_citystate) : ' ');
     var name_col = $('<td class="vendor_name" scope="row"></td>');
     var name_a = $('<a href="/vendor/' + vendor.duns + '/' + qs + '" class="link_style">' + vendor.name + '</a>');
-    var vehicle = this.getQSByName(qs, 'vehicle');
 
     name_col.append(name_a);
     $vendorRow.append(name_col);
@@ -89,7 +88,7 @@ LayoutManager.renderPager = function(results, pageNumber, itemsPerPage) {
         var endnum = Math.min((pageNumber * itemsPerPage), results['count']);
 
         $("#vendors_current").text(startnum + " - " + endnum);
-        $("#vendors_total").text(LayoutManager.numberWithCommas(results['count']));
+        $("#vendors_total").text(this.numberWithCommas(results['count']));
 
         $(function() {
             $("#pagination_container").pagination({
@@ -98,11 +97,8 @@ LayoutManager.renderPager = function(results, pageNumber, itemsPerPage) {
                 cssStyle: 'light-theme',
                 currentPage: pageNumber,
                 onPageClick: function(pageNumber, e) {
-                    var vendor_data = RequestsManager.currentSortParams();
-
-                    vendor_data['page'] = pageNumber;
-
-                    EventManager.publish("vendorsChanged", vendor_data);
+                    DataManager.page = pageNumber;
+                    EventManager.publish("vendorsChanged");
                 }
             });
         });
@@ -120,8 +116,37 @@ LayoutManager.renderPager = function(results, pageNumber, itemsPerPage) {
 };
 
 LayoutManager.updateResultCSVURL = function() {
-    var qs = URLManager.getQueryString();
+    var qs = DataManager.getQueryString();
     $("#csv_link").attr("href", "/results/csv/" + qs);
+};
+
+LayoutManager.updatePoolInfo = function() {
+    var vehiclePools = DataManager.getVehiclePools();
+    var pool = DataManager.getPool();
+    var poolNames = [];
+    var pools;
+
+    if (pool) {
+        pools = [pool.id];
+    }
+    else {
+        pools = Object.keys(vehiclePools).sort();
+    }
+
+    if (pools.length > 0) {
+        for (var index = 0; index < pools.length; index++) {
+            var pool = vehiclePools[pools[index]];
+
+            if (pools.length > 1) {
+                var url = DataManager.getURL({'vehicle': pool.vehicle, 'pool': pool.id});
+                poolNames.push('<div class="pool"><div class="spacer"/><a class="pool_filter_link" href="' + url + '"><span class="vehicle">' + pool.vehicle.split('_').join(' ') + " pool " + pool.number + ':</span><span class="title">' + pool.name + '</span></a></div>');
+            }
+            else {
+                poolNames.push('<div class="pool"><div class="spacer"/><span class="vehicle">' + pool.vehicle.split('_').join(' ') + " pool " + pool.number + ':</span><span class="title">' + pool.name + '</span></div>');
+            }
+        }
+        $(".results_pool_names").html(poolNames.join(''));
+    }
 };
 
 LayoutManager.updateResultsInfo = function(results) {
@@ -136,17 +161,9 @@ LayoutManager.updateResultsInfo = function(results) {
     }
     resultsStr = totalResults + " vendors match your search";
 
-    LayoutManager.updateResultCSVURL();
+    this.updateResultCSVURL();
 
     $("#number_of_results span").text(resultsStr);
-};
-
-LayoutManager.getQSByName = function(qs, name) {
-        // http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
-        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-            results = regex.exec(qs);
-        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 };
 
 LayoutManager.findIndicatorMatch = function(v, prefix, setasideCode) {
