@@ -17,72 +17,72 @@ var DataManager = {
 
     init: function() {
         // event bindings
-        $('#vehicle-id').on('select2:select select2:unselecting', this.sendVehicleChange.bind(DataManager));
-        $('#pool-id').on('select2:select select2:unselecting', this.sendPoolChange.bind(DataManager));
-        $('#naics-code').on('select2:select select2:unselecting', this.sendCodeChange.bind(DataManager));
-        $('#zone-id').on('select2:select select2:unselecting', this.sendZoneChange.bind(DataManager));
-        $('#setaside-filters').change(this.sendFilterChange.bind(DataManager));
-        $('#contract_pool_filters').change(this.sendPoolFilterContractsChange.bind(DataManager));
+        $('#vehicle-id').on('select2:select select2:unselecting', DataManager.sendVehicleChange);
+        $('#pool-id').on('select2:select select2:unselecting', DataManager.sendPoolChange);
+        $('#naics-code').on('select2:select select2:unselecting', DataManager.sendCodeChange);
+        $('#zone-id').on('select2:select select2:unselecting', DataManager.sendZoneChange);
+        $('#setaside-filters').change(DataManager.sendFilterChange);
+        $('#contract_pool_filters').change(DataManager.sendPoolFilterContractsChange);
 
-        $('#vendor_contract_history_title_container').on('click', 'div.contracts_button', this.sendContractsChange.bind(DataManager));
-        $('#vendor_contract_history_title_container').on('keypress', 'div.contracts_button', this.sendContractsChange.bind(DataManager));
+        $('#vendor_contract_history_title_container').on('click', 'div.contracts_button', DataManager.sendContractsChange);
+        $('#vendor_contract_history_title_container').on('keypress', 'div.contracts_button', DataManager.sendContractsChange);
 
-        $('#pool_table').on('click', 'th.sortable', this.sortVendors.bind(DataManager));
-        $('#pool_table').on('keypress', 'th.sortable', this.sortVendors.bind(DataManager));
+        $('#pool_table').on('click', 'th.sortable', DataManager.sortVendors);
+        $('#pool_table').on('keypress', 'th.sortable', DataManager.sortVendors);
 
-        $('#ch_table').on('click', 'th.sortable', this.sortContracts.bind(DataManager));
-        $('#ch_table').on('keypress', 'th.sortable', this.sortContracts.bind(DataManager));
+        $('#ch_table').on('click', 'th.sortable', DataManager.sortContracts);
+        $('#ch_table').on('keypress', 'th.sortable', DataManager.sortContracts);
 
         // event subscriptions
-        EventManager.subscribe('naicsChanged', this.update.bind(DataManager));
-        EventManager.subscribe('vehicleChanged', this.update.bind(DataManager));
-        EventManager.subscribe('poolChanged', this.update.bind(DataManager));
-        EventManager.subscribe('zoneChanged', this.update.bind(DataManager));
-        EventManager.subscribe('filtersChanged', this.update.bind(DataManager));
-        EventManager.subscribe('vendorsChanged', this.update.bind(DataManager));
-        EventManager.subscribe('contractsChanged', this.update.bind(DataManager));
+        EventManager.subscribe('naicsChanged', DataManager.update);
+        EventManager.subscribe('vehicleChanged', DataManager.update);
+        EventManager.subscribe('poolChanged', DataManager.update);
+        EventManager.subscribe('zoneChanged', DataManager.update);
+        EventManager.subscribe('filtersChanged', DataManager.update);
+        EventManager.subscribe('vendorsChanged', DataManager.update);
+        EventManager.subscribe('contractsChanged', DataManager.update);
 
-        EventManager.subscribe('pageUpdated', this.bootstrap.bind(DataManager));
-        EventManager.subscribe('pageInitialized', this.loadPools.bind(DataManager));
+        EventManager.subscribe('pageUpdated', DataManager.bootstrap);
+        EventManager.subscribe('pageInitialized', DataManager.loadPools);
 
         if (LayoutManager.isHomePage() || LayoutManager.isPoolPage()) {
-            EventManager.subscribe('poolUpdated', this.loadNaicsMap.bind(DataManager));
+            EventManager.subscribe('poolUpdated', DataManager.loadNaicsMap);
 
-            EventManager.subscribe('naicsMapLoaded', this.populateVehicleDropDown.bind(DataManager));
-            EventManager.subscribe('vehicleSelected', this.populatePoolDropDown.bind(DataManager));
-            EventManager.subscribe('poolSelected', this.populateNaicsDropDown.bind(DataManager));
-            EventManager.subscribe('naicsSelected', this.populateZoneDropDown.bind(DataManager));
-            EventManager.subscribe('zoneSelected', this.sendDataChange.bind(DataManager));
+            EventManager.subscribe('naicsMapLoaded', DataManager.populateVehicleDropDown);
+            EventManager.subscribe('vehicleSelected', DataManager.populatePoolDropDown);
+            EventManager.subscribe('poolSelected', DataManager.populateNaicsDropDown);
+            EventManager.subscribe('naicsSelected', DataManager.populateZoneDropDown);
+            EventManager.subscribe('zoneSelected', DataManager.sendDataChange);
         }
         else {
-            EventManager.subscribe('poolUpdated', this.sendDataChange.bind(DataManager));
-            EventManager.subscribe('dataChanged', this.initContractSort.bind(DataManager));
+            EventManager.subscribe('poolUpdated', DataManager.sendDataChange);
+            EventManager.subscribe('dataChanged', DataManager.initContractSort);
         }
     },
 
     bootstrap: function() {
-        var vehicle = this.getParameterByName('vehicle');
-        var pool = this.getParameterByName('pool');
-        var naics = this.getParameterByName('naics-code');
-        var zone = this.getParameterByName('zone');
-        var setasides = this.getParameterByName('setasides');
-        var type = this.getParameterByName('type');
-        var page = this.getParameterByName('page');
-        var count = this.getParameterByName('count');
-        var ordering = this.getParameterByName('ordering');
+        var vehicle = DataManager.getParameterByName('vehicle');
+        var pool = DataManager.getParameterByName('pool');
+        var naics = DataManager.getParameterByName('naics-code');
+        var zone = DataManager.getParameterByName('zone');
+        var setasides = DataManager.getParameterByName('setasides');
+        var type = DataManager.getParameterByName('type');
+        var page = DataManager.getParameterByName('page');
+        var count = DataManager.getParameterByName('count');
+        var ordering = DataManager.getParameterByName('ordering');
         var data = {};
 
         if (vehicle) {
-            this.vehicle = vehicle;
+            DataManager.vehicle = vehicle;
         }
         if (pool) {
-            this.poolId = pool;
+            DataManager.poolId = pool;
         }
         if (naics) {
-            this.naicsCode = naics;
+            DataManager.naicsCode = naics;
         }
         if (zone) {
-            this.zoneId = zone;
+            DataManager.zoneId = zone;
         }
         if (setasides) {
             var setasides = setasides.split(',');
@@ -93,26 +93,26 @@ var DataManager = {
             }
         }
         if (type) {
-            this.listType = type;
+            DataManager.listType = type;
         }
         else {
-            this.listType = 'naics';
+            DataManager.listType = 'naics';
         }
 
         if (page) {
-            this.page = page;
+            DataManager.page = page;
         }
         else {
-            this.page = 1;
+            DataManager.page = 1;
         }
         if (count) {
-            this.pageCount = count;
+            DataManager.pageCount = count;
         }
         else {
-            this.pageCount = this.getDefaultPageCount();
+            DataManager.pageCount = DataManager.getDefaultPageCount();
         }
         if (ordering) {
-            this.sortOrdering = ordering;
+            DataManager.sortOrdering = ordering;
         }
 
         LayoutManager.route(data);
@@ -121,17 +121,17 @@ var DataManager = {
     },
 
     buildRequestQuery: function() {
-        var vehicle = this.getVehicle();
-        var pools = this.getVehiclePools();
-        var pool = this.getPoolId();
-        var naics = this.getNAICSCode();
-        var zone = this.getZone();
-        var setasides = this.getSetasides();
-        var contractPools = this.getContractPools();
-        var listType = this.getListType();
-        var page = this.getPage();
-        var pageCount = this.getPageCount();
-        var sortOrdering = this.getSortOrdering();
+        var vehicle = DataManager.getVehicle();
+        var pools = DataManager.getVehiclePools();
+        var pool = DataManager.getPoolId();
+        var naics = DataManager.getNaicsCode();
+        var zone = DataManager.getZone();
+        var setasides = DataManager.getSetasides();
+        var contractPools = DataManager.getContractPools();
+        var listType = DataManager.getListType();
+        var page = DataManager.getPage();
+        var pageCount = DataManager.getPageCount();
+        var sortOrdering = DataManager.getSortOrdering();
 
         var queryData = {};
 
@@ -166,7 +166,7 @@ var DataManager = {
         if (page && page > 1) {
             queryData['page'] = page;
         }
-        if (pageCount && pageCount != this.getPageCount()) {
+        if (pageCount && pageCount != DataManager.getPageCount()) {
             queryData['count'] = pageCount;
         }
 
@@ -174,7 +174,7 @@ var DataManager = {
             queryData['ordering'] = sortOrdering;
         }
 
-        if (this.getParameterByName('test')) {
+        if (DataManager.getParameterByName('test')) {
             queryData['test'] = 'true';
         }
         return queryData;
@@ -187,16 +187,16 @@ var DataManager = {
             var class_map = RequestsManager.sortClassMap();
             var classes = $target.attr('class').split(' ');
 
-            this.sortOrdering = class_map[classes[0]];
-            this.page = 1;
+            DataManager.sortOrdering = class_map[classes[0]];
+            DataManager.page = 1;
 
             if ($target.hasClass('arrow-down')) {
                 $target.removeClass('arrow-down').addClass('arrow-up').attr("title", "Sorted ascending");
             } else if ($target.hasClass('arrow-sortable')) {
-                this.sortOrdering = "-" + this.sortOrdering;
+                DataManager.sortOrdering = "-" + DataManager.sortOrdering;
                 $target.removeClass('arrow-sortable').addClass('arrow-down').attr("title", "Sorted descending");
             } else {
-                this.sortOrdering = "-" + this.sortOrdering;
+                DataManager.sortOrdering = "-" + DataManager.sortOrdering;
                 $target.removeClass('arrow-up').addClass('arrow-down').attr("title", "Sorted descending");
             }
 
@@ -208,11 +208,11 @@ var DataManager = {
     },
 
     initContractSort: function() {
-        var ordering = this.getSortOrdering();
+        var ordering = DataManager.getSortOrdering();
 
         if (ordering) {
             var asc = (ordering[0] == '-' ? false : true);
-            var field = this.getOrderingField(ordering.replace(/^-/, ''));
+            var field = DataManager.getOrderingField(ordering.replace(/^-/, ''));
             var $target = $('th.' + field);
 
             $target.siblings('.sortable').removeClass('arrow-down').removeClass('arrow-up').addClass('arrow-sortable').attr("title", "Select to sort");
@@ -232,16 +232,16 @@ var DataManager = {
             var class_map = RequestsManager.sortClassMap();
             var classes = $target.attr('class').split(' ');
 
-            this.sortOrdering = class_map[classes[0]];
-            this.page = 1;
+            DataManager.sortOrdering = class_map[classes[0]];
+            DataManager.page = 1;
 
             if ($target.hasClass('arrow-down')) {
                 $target.removeClass('arrow-down').addClass('arrow-up').attr("title", "Sorted ascending");
             } else if ($target.hasClass('arrow-sortable')) {
-                this.sortOrdering = "-" + this.sortOrdering;
+                DataManager.sortOrdering = "-" + DataManager.sortOrdering;
                 $target.removeClass('arrow-sortable').addClass('arrow-down').attr("title", "Sorted descending");
             } else {
-                this.sortOrdering = "-" + this.sortOrdering;
+                DataManager.sortOrdering = "-" + DataManager.sortOrdering;
                 $target.removeClass('arrow-up').addClass('arrow-down').attr("title", "Sorted descending");
             }
 
@@ -250,8 +250,8 @@ var DataManager = {
 
             //prevent button flipping by selecting proper listType
             var $button = $("#vendor_contract_history_title_container").find('.contracts_button_active');
-            if ($button.text() == "All Contracts") { this.listType = 'all'; }
-            else { this.listType = 'naics'; }
+            if ($button.text() == "All Contracts") { DataManager.listType = 'all'; }
+            else { DataManager.listType = 'naics'; }
 
             EventManager.publish('contractsChanged');
         }
@@ -259,10 +259,10 @@ var DataManager = {
 
     sendContractsChange: function(e) {
         if ((e.type == "keypress" && e.charCode == 13) || e.type == "click") {
-            this.listType = 'naics';
+            DataManager.listType = 'naics';
 
             if(e.target.textContent == "All Contracts" || e.target.innerText == "All Contracts"){
-                this.listType = 'all';
+                DataManager.listType = 'all';
             }
 
             //reset date header column classes
@@ -275,11 +275,11 @@ var DataManager = {
     },
 
     sendPoolFilterContractsChange: function() {
-        this.listType = 'naics';
+        DataManager.listType = 'naics';
 
         var $button = $("#vendor_contract_history_title_container").find('.contracts_button_active');
         if ($button.text() == "All Contracts") {
-            this.listType = 'all';
+            DataManager.listType = 'all';
         }
 
         //reset date header column classes
@@ -287,45 +287,45 @@ var DataManager = {
         $date.removeClass('arrow-sortable').addClass('arrow-down').attr("title", "Sorted descending");
         $date.siblings('.sortable').removeClass('arrow-down').removeClass('arrow-up').addClass('arrow-sortable').attr("title", "Select to sort");
 
-        this.pool = this.getContractPools();
+        DataManager.pool = DataManager.getContractPools();
 
         EventManager.publish('contractsChanged');
     },
 
     sendVehicleChange: function() {
-        this.vehicle = $('#vehicle-id').val();
+        DataManager.vehicle = $('#vehicle-id').val();
 
-        if (this.vehicle && this.vehicle == 'all') {
-            this.vehicle = null;
+        if (DataManager.vehicle && DataManager.vehicle == 'all') {
+            DataManager.vehicle = null;
         }
-        EventManager.publish('vehicleChanged', this.vehicle);
+        EventManager.publish('vehicleChanged', DataManager.vehicle);
     },
 
     sendPoolChange: function(e) {
-        this.poolId = $('#pool-id').val();
+        DataManager.poolId = $('#pool-id').val();
 
-        if (this.poolId && this.poolId == 'all') {
-            this.poolId = null;
+        if (DataManager.poolId && DataManager.poolId == 'all') {
+            DataManager.poolId = null;
         }
-        EventManager.publish('poolChanged', this.poolId);
+        EventManager.publish('poolChanged', DataManager.poolId);
     },
 
     sendCodeChange: function(e) {
-        this.naicsCode = $('#naics-code').val();
+        DataManager.naicsCode = $('#naics-code').val();
 
-        if (this.naicsCode && this.naicsCode == 'all') {
-            this.naicsCode = null;
+        if (DataManager.naicsCode && DataManager.naicsCode == 'all') {
+            DataManager.naicsCode = null;
         }
-        EventManager.publish('naicsChanged', this.naicsCode);
+        EventManager.publish('naicsChanged', DataManager.naicsCode);
     },
 
     sendZoneChange: function(e) {
-        this.zoneId = $('#zone-id').val();
+        DataManager.zoneId = $('#zone-id').val();
 
-        if (this.zoneId && this.zoneId == 'all') {
-            this.zoneId = null;
+        if (DataManager.zoneId && DataManager.zoneId == 'all') {
+            DataManager.zoneId = null;
         }
-        EventManager.publish('zoneChanged', this.zoneId);
+        EventManager.publish('zoneChanged', DataManager.zoneId);
     },
 
     sendFilterChange: function() {
@@ -337,16 +337,16 @@ var DataManager = {
     },
 
     update: function() {
-        History.pushState('', this.title, this.getURL());
+        History.pushState('', DataManager.title, DataManager.getURL());
         EventManager.publish('pageUpdated');
     },
 
     getURL: function(params) {
-        return window.location.pathname + this.getQueryString(params);
+        return window.location.pathname + DataManager.getQueryString(params);
     },
 
     getQueryString: function(params) {
-        var queryObject = this.buildRequestQuery();
+        var queryObject = DataManager.buildRequestQuery();
         var qs = '?';
         var k;
 
@@ -371,39 +371,39 @@ var DataManager = {
     },
 
     getVehicle: function() {
-        return this.vehicle;
+        return DataManager.vehicle;
     },
 
     getVehicleMap: function() {
-        return this.vehicleMap;
+        return DataManager.vehicleMap;
     },
 
     getPoolId: function() {
-        return this.poolId;
+        return DataManager.poolId;
     },
 
     getPool: function() {
-        return this.pool;
+        return DataManager.pool;
     },
 
     getVehiclePools: function() {
-        return this.vehiclePools;
+        return DataManager.vehiclePools;
     },
 
-    getNAICSPools: function() {
-        return this.naicsPools;
+    getNaicsPools: function() {
+        return DataManager.naicsPools;
     },
 
-    getNAICSCode: function() {
-        return this.naicsCode;
+    getNaicsCode: function() {
+        return DataManager.naicsCode;
     },
 
     getNaicsMap: function() {
-        return this.naicsMap;
+        return DataManager.naicsMap;
     },
 
     getZone: function() {
-        return this.zoneId;
+        return DataManager.zoneId;
     },
 
     getSetasides: function() {
@@ -429,7 +429,7 @@ var DataManager = {
     },
 
     getVendor: function() {
-        return this.vendor;
+        return DataManager.vendor;
     },
 
     getContractPools: function() {
@@ -443,26 +443,26 @@ var DataManager = {
     },
 
     getListType: function() {
-        return this.listType;
+        return DataManager.listType;
     },
 
     getPage: function() {
-        return this.page;
+        return DataManager.page;
     },
 
     getPageCount: function() {
-        return this.pageCount;
+        return DataManager.pageCount;
     },
 
     getDefaultPageCount: function() {
-        if (this.getParameterByName('test')) {
+        if (DataManager.getParameterByName('test')) {
             return 5;
         }
         return 50;
     },
 
     getSortOrdering: function() {
-        return this.sortOrdering;
+        return DataManager.sortOrdering;
     },
 
     getOrderingField: function(param) {
@@ -477,8 +477,8 @@ var DataManager = {
     },
 
     loadPools: function() {
-        var vehicle = this.getVehicle();
-        var naics = this.getNAICSCode();
+        var vehicle = DataManager.getVehicle();
+        var naics = DataManager.getNaicsCode();
         var url = "/api/pools/";
         var queryData = {};
 
@@ -500,15 +500,15 @@ var DataManager = {
                 naicsPoolMap[pool.id] = pool;
             }
 
-            this.vehiclePools = vehiclePoolMap;
-            this.naicsPools = naicsPoolMap;
+            DataManager.vehiclePools = vehiclePoolMap;
+            DataManager.naicsPools = naicsPoolMap;
 
             EventManager.publish('poolUpdated');
         });
     },
 
     loadNaicsMap: function() {
-        var vehicle = this.getVehicle();
+        var vehicle = DataManager.getVehicle();
         var url = "/api/pools/";
         var queryData = {};
 
@@ -536,16 +536,16 @@ var DataManager = {
                 }
             }
 
-            this.naicsMap = naicsMap;
+            DataManager.naicsMap = naicsMap;
             EventManager.publish('naicsMapLoaded');
         });
     },
 
     populateVehicleDropDown: function() {
-        var pools = this.getNaicsPools();
-        var vehicle = this.getVehicle();
-        var setasides = this.getSetasides();
-        var vehicleMap = this.getVehicleMap();
+        var pools = DataManager.getNaicsPools();
+        var vehicle = DataManager.getVehicle();
+        var setasides = DataManager.getSetasides();
+        var vehicleMap = DataManager.getVehicleMap();
         var vehicles = {};
 
         $('#vehicle-id').empty().select2({
@@ -555,7 +555,7 @@ var DataManager = {
             .attr("value", 'all')
             .text("All vehicles"));
 
-        Object.keys(pools).forEach(function (id) {
+        Object.keys(pools).forEach(function(id) {
             var pool = pools[id];
 
             if (!(pool.vehicle in vehicles) && (setasides.length == 0 || vehicleMap[pool.vehicle]["sb"])) {
@@ -572,11 +572,11 @@ var DataManager = {
             $("#vehicle-id").val(vehicle);
         }
         else {
-            this.vehicle = null;
+            DataManager.vehicle = null;
             $("#vehicle-id").val('all');
         }
 
-        if (this.getVehicle() != this.getParameterByName('vehicle')) {
+        if (DataManager.getVehicle() != DataManager.getParameterByName('vehicle')) {
             EventManager.publish('vehicleChanged');
         }
         else {
@@ -585,10 +585,10 @@ var DataManager = {
     },
 
     populatePoolDropDown: function() {
-        var pools = this.getVehiclePools();
-        var pool = this.getPoolId();
-        var setasides = this.getSetasides();
-        var vehicleMap = this.getVehicleMap();
+        var pools = DataManager.getVehiclePools();
+        var pool = DataManager.getPoolId();
+        var setasides = DataManager.getSetasides();
+        var vehicleMap = DataManager.getVehicleMap();
         var count = 0;
         var poolId;
 
@@ -614,23 +614,23 @@ var DataManager = {
         });
 
         if (pool && pool in pools) {
-            this.pool = pools[pool];
+            DataManager.pool = pools[pool];
             $("#pool-id").val(pool);
         }
         else {
             if (count == 1) {
-                this.poolId = poolId;
-                this.pool = pools[poolId];
+                DataManager.poolId = poolId;
+                DataManager.pool = pools[poolId];
                 $("#pool-id").val(poolId);
             }
             else {
-                this.poolId = null;
-                this.pool = null;
+                DataManager.poolId = null;
+                DataManager.pool = null;
                 $("#pool-id").val('all');
             }
         }
 
-        if (this.getPoolId() != this.getParameterByName('pool')) {
+        if (DataManager.getPoolId() != DataManager.getParameterByName('pool')) {
             EventManager.publish('poolChanged');
         }
         else {
@@ -645,10 +645,10 @@ var DataManager = {
     },
 
     populateNaicsDropDown: function(data) {
-        var vehicle = this.getVehicle();
-        var naicsMap = this.getNaicsMap();
-        var pool = this.getPoolId();
-        var naics = this.getNAICSCode();
+        var vehicle = DataManager.getVehicle();
+        var naicsMap = DataManager.getNaicsMap();
+        var pool = DataManager.getPoolId();
+        var naics = DataManager.getNaicsCode();
 
         $('#naics-code').select2({
             minimumResultsForSearch: -1,
@@ -677,11 +677,11 @@ var DataManager = {
                     $("#naics-code").val(naics);
                 }
                 else {
-                    this.naicsCode = null;
+                    DataManager.naicsCode = null;
                     $("#naics-code").val('all');
                 }
 
-                if (this.getNAICSCode() != this.getParameterByName('naics-code')) {
+                if (DataManager.getNaicsCode() != DataManager.getParameterByName('naics-code')) {
                     EventManager.publish('naicsChanged');
                 }
                 else {
@@ -692,7 +692,7 @@ var DataManager = {
     },
 
     populateZoneDropDown: function() {
-        var zone = this.getZone();
+        var zone = DataManager.getZone();
         var url = "/api/zones/";
         var queryData = {};
 
@@ -715,11 +715,11 @@ var DataManager = {
                 $("#zone-id").val(zone);
             }
             else {
-                this.zoneId = null;
+                DataManager.zoneId = null;
                 $("#zone-id").val('all');
             }
 
-            if (this.getZone() != this.getParameterByName('zone')) {
+            if (DataManager.getZone() != DataManager.getParameterByName('zone')) {
                 EventManager.publish('zoneChanged');
             }
             else {
@@ -733,5 +733,4 @@ var DataManager = {
         var match = location.search.match(new RegExp("[?&]"+name+"=([^&]+)(&|$)"));
         return match && decodeURIComponent(match[1].replace(/\+/g, " "));
     }
-
 };

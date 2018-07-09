@@ -3,10 +3,10 @@ var LayoutManager = {
     initializers: {},
 
     init: function() {
-        EventManager.subscribe('dataLoaded', this.render.bind(LayoutManager));
+        EventManager.subscribe('dataLoaded', LayoutManager.render);
 
-        for(var handler in this.initializers){
-            this.initializers[handler].call(this);
+        for(var handler in LayoutManager.initializers){
+            LayoutManager.initializers[handler].call(this);
         }
     },
 
@@ -96,7 +96,7 @@ var LayoutManager = {
     },
 
     enableZones: function() {
-        if (this.zoneActive()) {
+        if (LayoutManager.zoneActive()) {
             $("div#zone_select select").attr("disabled", false);
         }
     },
@@ -125,13 +125,13 @@ var LayoutManager = {
     },
 
     toggleZones: function() {
-        if (this.zoneActive()) {
-            this.enableZones();
-            this.showZones();
+        if (LayoutManager.zoneActive()) {
+            LayoutManager.enableZones();
+            LayoutManager.showZones();
         }
         else {
-            this.hideZones();
-            this.disableZones();
+            LayoutManager.hideZones();
+            LayoutManager.disableZones();
         }
     },
 

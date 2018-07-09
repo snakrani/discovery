@@ -12,14 +12,14 @@ RequestsManager.sortClassMap = function() {
 };
 
 RequestsManager.initializers.vendor = function() {
-    EventManager.subscribe('vendorRendered', this.loadContracts.bind(RequestsManager));
+    EventManager.subscribe('vendorRendered', RequestsManager.loadContracts);
 };
 
 RequestsManager.load = function(callback) {
     var duns = DataManager.getDUNS();
     var url = "/api/vendors/" + duns + "/";
 
-    this.getAPIRequest(url, {}, function(vendor) {
+    RequestsManager.getAPIRequest(url, {}, function(vendor) {
         DataManager.vendor = vendor;
         EventManager.publish('dataLoaded', vendor);
     });
@@ -27,8 +27,8 @@ RequestsManager.load = function(callback) {
 
 RequestsManager.loadContracts = function() {
     var url = "/api/contracts";
-    var piids = this.getPIIDs();
-    var naics = DataManager.getNAICSCode();
+    var piids = RequestsManager.getPIIDs();
+    var naics = DataManager.getNaicsCode();
     var ordering = DataManager.getSortOrdering();
     var queryData = {
         'vendor__duns': DataManager.getDUNS(),
@@ -50,7 +50,7 @@ RequestsManager.loadContracts = function() {
 
     $('.table_wrapper').addClass('loading');
 
-    this.getAPIRequest(url, queryData,
+    RequestsManager.getAPIRequest(url, queryData,
         function(response) {
             EventManager.publish('contractsLoaded', response);
             $('.table_wrapper').removeClass('loading');

@@ -1,6 +1,6 @@
 
 LayoutManager.initializers.listings = function() {
-    EventManager.subscribe('dataChanged', this.toggleZones.bind(LayoutManager));
+    EventManager.subscribe('dataChanged', LayoutManager.toggleZones);
 };
 
 LayoutManager.render = function(results) {
@@ -8,9 +8,9 @@ LayoutManager.render = function(results) {
 
     $('#pool_vendors th span').tooltip();
 
-    this.updatePoolInfo();
-    this.updateResultsInfo(results);
-    this.renderVendors(results);
+    LayoutManager.updatePoolInfo();
+    LayoutManager.updateResultsInfo(results);
+    LayoutManager.renderVendors(results);
 };
 
 LayoutManager.renderVendors = function(results) {
@@ -27,19 +27,19 @@ LayoutManager.renderVendors = function(results) {
     }
 
     for (var i = 0; i < len; i++) {
-        $table.append(this.renderRow(results['results'][i], qs, i));
+        $table.append(LayoutManager.renderRow(results['results'][i], qs, i));
     }
 
     $('#pool_table').show();
 
-    this.renderPager(results, pageNumber, itemsPerPage);
+    LayoutManager.renderPager(results);
 };
 
 LayoutManager.renderRow = function(vendor, qs, i) {
     var location_col, num_contracts_col;
     var $vendorRow = $('<tr class="table_row_data"></tr>');
 
-    var locationStr = (vendor.sam_location_citystate ? this.cleanLocation(vendor.sam_location_citystate) : ' ');
+    var locationStr = (vendor.sam_location_citystate ? LayoutManager.cleanLocation(vendor.sam_location_citystate) : ' ');
     var name_col = $('<td class="vendor_name" scope="row"></td>');
     var name_a = $('<a href="/vendor/' + vendor.duns + '/' + qs + '" class="link_style">' + vendor.name + '</a>');
 
@@ -54,12 +54,12 @@ LayoutManager.renderRow = function(vendor, qs, i) {
 
     //add socio-economic columns
     if (vendor.setasides.length > 0) {
-        $vendorRow.append(this.renderColumn(vendor, '8a', 'A6'));
-        $vendorRow.append(this.renderColumn(vendor, 'Hubz', 'XX'));
-        $vendorRow.append(this.renderColumn(vendor, 'sdvo', 'QF'));
-        $vendorRow.append(this.renderColumn(vendor, 'wo', 'A2'));
-        $vendorRow.append(this.renderColumn(vendor, 'vo', 'A5'));
-        $vendorRow.append(this.renderColumn(vendor, 'sdb', '27'));
+        $vendorRow.append(LayoutManager.renderColumn(vendor, '8a', 'A6'));
+        $vendorRow.append(LayoutManager.renderColumn(vendor, 'Hubz', 'XX'));
+        $vendorRow.append(LayoutManager.renderColumn(vendor, 'sdvo', 'QF'));
+        $vendorRow.append(LayoutManager.renderColumn(vendor, 'wo', 'A2'));
+        $vendorRow.append(LayoutManager.renderColumn(vendor, 'vo', 'A5'));
+        $vendorRow.append(LayoutManager.renderColumn(vendor, 'sdb', '27'));
     }
     else {
         $vendorRow.append($('<td colspan="6" class="unrestricted"></td>'));
@@ -70,32 +70,30 @@ LayoutManager.renderRow = function(vendor, qs, i) {
 
 LayoutManager.renderColumn = function(v, prefix, setasideCode) {
     var $col = $('<td class="' + prefix + '"></td>');
-    if (this.findIndicatorMatch(v, prefix, setasideCode)) {
+    if (LayoutManager.findIndicatorMatch(v, prefix, setasideCode)) {
         $col.html('<img src="'+ static_image_path + 'green_dot.png" class="green_dot">');
     }
     return $col;
 };
 
 LayoutManager.renderPager = function(results, pageNumber, itemsPerPage) {
+    var page = DataManager.getPage();
+    var pageCount = DataManager.getPageCount();
     var resultCount = results['results'].length;
 
     if (results['count'] > 0) {
-        if (pageNumber == undefined) {
-            var pageNumber = 1;
-        }
-
-        var startnum = (pageNumber - 1) * itemsPerPage + 1;
-        var endnum = Math.min((pageNumber * itemsPerPage), results['count']);
+        var startnum = (page - 1) * pageCount + 1;
+        var endnum = Math.min((page * pageCount), results['count']);
 
         $("#vendors_current").text(startnum + " - " + endnum);
-        $("#vendors_total").text(this.numberWithCommas(results['count']));
+        $("#vendors_total").text(LayoutManager.numberWithCommas(results['count']));
 
         $(function() {
             $("#pagination_container").pagination({
                 items: results['count'],
-                itemsOnPage: itemsPerPage,
+                itemsOnPage: pageCount,
                 cssStyle: 'light-theme',
-                currentPage: pageNumber,
+                currentPage: page,
                 onPageClick: function(pageNumber, e) {
                     DataManager.page = pageNumber;
                     EventManager.publish("vendorsChanged");
@@ -161,7 +159,7 @@ LayoutManager.updateResultsInfo = function(results) {
     }
     resultsStr = totalResults + " vendors match your search";
 
-    this.updateResultCSVURL();
+    LayoutManager.updateResultCSVURL();
 
     $("#number_of_results span").text(resultsStr);
 };
@@ -195,7 +193,7 @@ LayoutManager.cleanLocation = function(loc) {
             new_location = '';
         }
         else {
-            new_location = this.toTitleCase(location_obj.city) + ', ' + location_obj.state;
+            new_location = LayoutManager.toTitleCase(location_obj.city) + ', ' + location_obj.state;
         }
     }
     return new_location;

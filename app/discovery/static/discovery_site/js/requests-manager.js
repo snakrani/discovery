@@ -3,10 +3,10 @@ var RequestsManager = {
     initializers: {},
 
     init: function() {
-        EventManager.subscribe('dataChanged', this.load.bind(RequestsManager));
+        EventManager.subscribe('dataChanged', RequestsManager.load);
 
-        for(var handler in this.initializers){
-            this.initializers[handler].call(this);
+        for(var handler in RequestsManager.initializers){
+            RequestsManager.initializers[handler].call(this);
         }
     },
 

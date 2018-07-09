@@ -57,7 +57,7 @@ RequestsManager.load = function() {
     LayoutManager.disableFilters();
     $('.table_wrapper').addClass('loading');
 
-    this.getAPIRequest(url, queryData,
+    RequestsManager.getAPIRequest(url, queryData,
         function(response) {
             if (queryData['contract_naics'] == DataManager.getParameterByName('naics-code')) {
                 EventManager.publish('dataLoaded', response);
