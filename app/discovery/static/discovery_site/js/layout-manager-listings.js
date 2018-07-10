@@ -196,15 +196,17 @@ LayoutManager.findIndicatorMatch = function(v, prefix, setasideCode) {
 LayoutManager.vendorPools = function(vendor, qs) {
     var pools = {};
 
-    for (var index = 0; index < vendor.pools.length; index++) {
-        var poolId = vendor.pools[index].pool.id;
+    if ('pools' in vendor) {
+        for (var index = 0; index < vendor.pools.length; index++) {
+            var poolId = vendor.pools[index].pool.id;
 
-        var poolComponents = poolId.split("_");
-        poolComponents.pop();
+            var poolComponents = poolId.split("_");
+            poolComponents.pop();
 
-        var vehicleId = poolComponents.join("_");
+            var vehicleId = poolComponents.join("_");
 
-        pools[vehicleId] = true;
+            pools[vehicleId] = true;
+        }
     }
     return Object.keys(pools);
 };
