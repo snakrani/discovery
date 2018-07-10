@@ -6,6 +6,8 @@ from categories import models as categories
 from vendors import models as vendors
 from contracts import models as contracts
 
+import os
+
 
 class KeywordSerializer(ModelSerializer):
     class Meta:
@@ -204,12 +206,27 @@ class ProjectManagerSerializer(ModelSerializer):
 
 
 class BasePoolMembershipSerializer(ModelSerializer):
+    capability_statement = SerializerMethodField()
+    
     cms = ContractManagerSerializer(many=True)
     pms = ProjectManagerSerializer(many=True)
     
     class Meta:
         model = vendors.PoolMembership
-        fields = ['piid', 'cms', 'pms', 'expiration_8a_date', 'contract_end_date']
+        fields = ['piid', 'cms', 'pms', 'expiration_8a_date', 'contract_end_date', 'capability_statement']
+        
+    def get_capability_statement(self, item):
+        request = self.context.get('request')
+        duns = item.vendor.duns
+        vehicle = item.pool.vehicle
+        
+        cs_path = "static/discovery_site/capability_statements/{}/{}.pdf".format(vehicle, duns)
+        cs_url = request.build_absolute_uri("/discovery_site/capability_statements/{}/{}.pdf".format(vehicle, duns))
+    
+        if vehicle and os.path.isfile(cs_path):
+            return cs_url
+            
+        return ''
     
 class PoolMembershipLinkSerializer(BasePoolMembershipSerializer):
     pool = PoolLinkSerializer(many=False)
