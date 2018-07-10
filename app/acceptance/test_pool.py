@@ -69,12 +69,12 @@ class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
         'search_veteran_owned': {
             'params': NAICS,
             'wait': ('class', 'table_row_data'),
-            #'actions': {
-            #    'vet*click': {
-            #        'wait': ('sec', 5),
-            #        'css:span.matching_your_search': ('text__equal', '5 vendors match your search')
-            #    }
-            #}
+            'actions': {
+                'vet*click': {
+                    'wait': ('sec', 5),
+                    'css:span.matching_your_search': ('text__equal', '5 vendors match your search')
+                }
+            }
         },
         'search_zero_results': {
             'params': {
