@@ -54,11 +54,14 @@ def PoolCSV(request):
     setasides_all = SetAside.objects.all().order_by('far_order')
     vendors = Vendor.objects.all().distinct()
     
-    naics = Naics.objects.get(code=request.GET['naics-code'])
+    naics = None
     vehicle = None
     pools = []
     zone = None
     setasides = []
+    
+    if 'naics-code' in request.GET:
+        naics = Naics.objects.get(code=request.GET['naics-code'])
     
     if 'vehicle' in request.GET:
         vehicle = request.GET['vehicle'].upper()
@@ -69,8 +72,10 @@ def PoolCSV(request):
     else:
         if vehicle:
             pools = Pool.objects.filter(vehicle=vehicle)
-        else:
+        elif naics:
             pools = Pool.objects.filter(naics=naics.code)
+        else:
+            pools = Pool.objects.all()
             
         vendors = vendors.filter(pools__pool__id__in=pools.values_list('id', flat=True))
         
@@ -91,22 +96,20 @@ def PoolCSV(request):
     writer.writerow(('Time: ' + time.strftime('%b %d, %Y %l:%M%p %Z'),))
     writer.writerow(('', ))
     
-    writer.writerow(('NAICS code', "{}: {}".format(naics.code, naics.description)))
+    if naics:
+        writer.writerow(('NAICS code', "{}: {}".format(naics.code, naics.description)))
     
     if zone:
         writer.writerow(('Zone', zone))
     
-    first_pool = True
+    writer.writerow(('', ))
+    writer.writerow(('Included pools',))
     for pool in pools:
         name = "{} pool {}: {}".format(" ".join(pool.vehicle.split('_')), pool.number, pool.name)
-        
-        if first_pool:
-            writer.writerow(('Pools', name))
-            first_pool = False
-        else:
-            writer.writerow(('', name))
+        writer.writerow(('', name))
     
     if len(setasides):
+        writer.writerow(('', ))
         writer.writerow(('Setasides', ", ".join(setasides)))
     
     writer.writerow(('',))
@@ -114,7 +117,7 @@ def PoolCSV(request):
     writer.writerow(("Search Results: {0} Vendors".format(len(vendors)),))
     
     writer.writerow(('',))
-    header_row = ['Vendor', 'Location', 'No. of Contracts',]
+    header_row = ['Vendor', 'Location', 'No. of Contracts', 'Vehicles']
     header_row.extend([sa_obj.name for sa_obj in setasides_all])
     writer.writerow(header_row)
 
@@ -123,7 +126,7 @@ def PoolCSV(request):
     for v in vendors:
         setaside_list = []
         for sa in setasides_all:
-            if sa.id in v.pools.filter(pool__id=pool.id).values_list('setasides', flat=True):
+            if sa.id in v.pools.all().values_list('setasides', flat=True):
                 setaside_list.append('X')
             else:
                 setaside_list.append('')
@@ -132,11 +135,21 @@ def PoolCSV(request):
             location = "{}, {} {}".format(v.sam_location.city, v.sam_location.state, v.sam_location.zipcode)
         else:
             location = 'NA'
-            
-        psc_codes = list(PSC.objects.filter(naics__code=naics.code).distinct().values_list('code', flat=True))    
-        contract_list = Contract.objects.filter(Q(PSC__in=psc_codes) | Q(NAICS=naics.code), vendor=v)
         
-        v_row = [v.name, location, contract_list.count()]
+        if naics:    
+            psc_codes = list(PSC.objects.filter(naics__code=naics.code).distinct().values_list('code', flat=True))
+            contract_list = Contract.objects.filter(Q(PSC__in=psc_codes) | Q(NAICS=naics.code), vendor=v)
+        else:
+            contract_list = Contract.objects.filter(vendor=v)
+        
+        vehicleMap = {}
+        vendor_vehicles = []  
+        for v_pool in v.pools.all():
+            if v_pool.pool.vehicle not in vehicleMap:
+                vendor_vehicles.append(" ".join(v_pool.pool.vehicle.split('_')))
+                vehicleMap[v_pool.pool.vehicle] = True      
+        
+        v_row = [v.name, location, contract_list.count(), ", ".join(vendor_vehicles)]
         v_row.extend(setaside_list)
         lines.append(v_row)
 
