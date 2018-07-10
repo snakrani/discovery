@@ -267,11 +267,13 @@ class AnnotatedVendorSerializer(BaseVendorSerializer):
 
 
 class VendorSummarySerializer(AnnotatedVendorSerializer):
+    pools = PoolMembershipLinkSerializer(many=True)
+    
     class Meta(BaseVendorSerializer.Meta):
         fields = BaseVendorSerializer.Meta.fields + [
             'sam_location_citystate', 
             'annual_revenue', 'number_of_employees', 
-            'number_of_contracts', 'setasides',
+            'number_of_contracts', 'setasides', 'pools',
             'url'
         ]
 
