@@ -44,6 +44,8 @@ LayoutManager.renderVendors = function(results) {
 
 LayoutManager.renderRow = function(vendor, qs, i) {
     var location_col, num_contracts_col;
+    var vendorPools = LayoutManager.vendorPools(vendor, qs);
+    var renderedPools = [];
     var $vendorRow = $('<tr class="table_row_data"></tr>');
 
     var locationStr = (vendor.sam_location_citystate ? LayoutManager.cleanLocation(vendor.sam_location_citystate) : ' ');
@@ -59,14 +61,21 @@ LayoutManager.renderRow = function(vendor, qs, i) {
     num_contracts_col = $('<td class="naics_results">' + vendor.number_of_contracts + '</td>');
     $vendorRow.append(num_contracts_col);
 
+    for (var index = 0; index < vendorPools.length; index++) {
+        var vehicleId = vendorPools[index];
+        renderedPools.push('<a href="/results/' + qs + '&vehicle=' + vehicleId + '" class="link_style">' + DataManager.vehicleMap[vehicleId].title + '</a>');
+    }
+    vendor_pools_col = $('<td class="vendor_pools">' + renderedPools.join(', ') + '</td>');
+    $vendorRow.append(vendor_pools_col);
+
     //add socio-economic columns
     if (vendor.setasides.length > 0) {
-        $vendorRow.append(LayoutManager.renderColumn(vendor, '8a', 'A6'));
-        $vendorRow.append(LayoutManager.renderColumn(vendor, 'Hubz', 'XX'));
-        $vendorRow.append(LayoutManager.renderColumn(vendor, 'sdvo', 'QF'));
-        $vendorRow.append(LayoutManager.renderColumn(vendor, 'wo', 'A2'));
-        $vendorRow.append(LayoutManager.renderColumn(vendor, 'vo', 'A5'));
-        $vendorRow.append(LayoutManager.renderColumn(vendor, 'sdb', '27'));
+        $vendorRow.append(LayoutManager.renderSetaside(vendor, '8a', 'A6'));
+        $vendorRow.append(LayoutManager.renderSetaside(vendor, 'Hubz', 'XX'));
+        $vendorRow.append(LayoutManager.renderSetaside(vendor, 'sdvo', 'QF'));
+        $vendorRow.append(LayoutManager.renderSetaside(vendor, 'wo', 'A2'));
+        $vendorRow.append(LayoutManager.renderSetaside(vendor, 'vo', 'A5'));
+        $vendorRow.append(LayoutManager.renderSetaside(vendor, 'sdb', '27'));
     }
     else {
         $vendorRow.append($('<td colspan="6" class="unrestricted"></td>'));
@@ -75,7 +84,7 @@ LayoutManager.renderRow = function(vendor, qs, i) {
     return $vendorRow;
 };
 
-LayoutManager.renderColumn = function(v, prefix, setasideCode) {
+LayoutManager.renderSetaside = function(v, prefix, setasideCode) {
     var $col = $('<td class="' + prefix + '"></td>');
     if (LayoutManager.findIndicatorMatch(v, prefix, setasideCode)) {
         $col.html('<img src="'+ static_image_path + 'green_dot.png" class="green_dot">');
@@ -182,6 +191,22 @@ LayoutManager.findIndicatorMatch = function(v, prefix, setasideCode) {
         }
     }
     return false;
+};
+
+LayoutManager.vendorPools = function(vendor, qs) {
+    var pools = {};
+
+    for (var index = 0; index < vendor.pools.length; index++) {
+        var poolId = vendor.pools[index].pool.id;
+
+        var poolComponents = poolId.split("_");
+        poolComponents.pop();
+
+        var vehicleId = poolComponents.join("_");
+
+        pools[vehicleId] = true;
+    }
+    return Object.keys(pools);
 };
 
 LayoutManager.cleanLocation = function(loc) {
