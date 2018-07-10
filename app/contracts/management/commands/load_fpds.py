@@ -314,17 +314,17 @@ class Command(BaseCommand):
             '--period',
             action='store',
             type=int,
-            default=520,
+            default=260,
             dest='period',
-            help='Number of weeks back to populate database (default 10 years)',
+            help='Number of weeks back to populate database (default 5 years)',
         )
         parser.add_argument(
             '--load',
             action='store',
             type=int,
-            default=520,
+            default=260,
             dest='load',
-            help='Weekly interval to process incoming data (default 10 years)',
+            help='Weekly interval to process incoming data (default 5 years)',
         )
         parser.add_argument(
             '--count',
