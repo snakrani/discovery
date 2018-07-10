@@ -504,7 +504,7 @@ var DataManager = {
         var vehicle = DataManager.getVehicle();
         var naics = DataManager.getNaicsCode();
         var url = "/api/pools/";
-        var queryData = {};
+        var queryData = {count: 1000};
 
         if (naics) {
             queryData['naics__code'] = naics;
@@ -534,7 +534,7 @@ var DataManager = {
     loadNaicsMap: function() {
         var vehicle = DataManager.getVehicle();
         var url = "/api/pools/";
-        var queryData = {};
+        var queryData = {count: 1000};
 
         if (vehicle) {
             queryData['vehicle__iexact'] = vehicle;
@@ -681,7 +681,7 @@ var DataManager = {
 
         RequestsManager.getAPIRequest(
             "/api/naics/",
-            { ordering: "code", code__in: Object.keys(naicsMap).join(',') },
+            {ordering: "code", code__in: Object.keys(naicsMap).join(','), count: 1000},
             function( data ) {
                 $("#naics-code").empty()
                     .append($("<option></option>")
@@ -718,7 +718,7 @@ var DataManager = {
     populateZoneDropDown: function() {
         var zone = DataManager.getZone();
         var url = "/api/zones/";
-        var queryData = {};
+        var queryData = {count: 1000};
 
         $('#zone-id').select2({placeholder:'Filter by zone', width: '415px'});
 
