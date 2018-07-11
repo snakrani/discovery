@@ -3,10 +3,6 @@ from django.db import models
 from categories.models import SetAside, Pool, Zone
 
 
-class SamLoad(models.Model):
-    sam_load = models.DateField()
-
-
 class Location(models.Model):
     address = models.CharField(max_length=128)
     
@@ -89,3 +85,8 @@ class ManagerEmail(models.Model):
 
     def __str__(self):
         return "{0} ({1})".format(self.manager.name, self.address)
+
+
+class SamLoad(models.Model):
+    vendor = models.OneToOneField(Vendor, unique=True, null=True, on_delete=models.CASCADE)
+    load_date = models.DateField()
