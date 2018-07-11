@@ -29,6 +29,6 @@ urlpatterns.extend([
     url(r'^results/$', TemplateView.as_view(template_name='pool.html')),
     url(r'^results/csv', vendors.PoolCSV, name="pool-csv"),
     
-    url(r'^vendor/(?P<vendor_duns>\w+)/$', vendors.VendorView.as_view(template_name='vendor.html')),
+    url(r'^vendor/(?P<vendor_duns>\w+)/$', TemplateView.as_view(template_name='vendor.html')),
     url(r'^vendor/(?P<vendor_duns>\w+)/csv/$', vendors.VendorCSV, name="vendor-csv"),
 ])
