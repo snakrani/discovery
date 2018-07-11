@@ -1165,6 +1165,11 @@ img.green_dot {
   text-align: left;
 }
 
+#vendor_contact_table_container .capability_statement_link {
+  padding-top: 5px;
+  padding-left: 5px;
+}
+
 #vendor_result_links {
   clear: both;
   margin-top: 0;

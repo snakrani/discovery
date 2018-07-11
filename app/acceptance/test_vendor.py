@@ -167,6 +167,15 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
             'wait': ('class', 'agency'),
             'pagination_container': 'not_displayed',
             'viewing_contracts': 'displayed'
+        },
+        'capability_statements': {
+            'params': {
+                'args': '028509656',
+                'vehicle': 'OASIS_SB',
+                'test': 'true'
+            },
+            'wait': ('class', 'capability_statement_link'),
+            'xpath://*[@id="vendor_contact_table_container"]/div/form/table/tbody/tr[2]/td[2]/div/a': ('link__equal', 'http://localhost:8080/discovery_site/capability_statements/OASIS_SB/028509656.pdf') 
         }
     }
     
@@ -201,6 +210,6 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
         
         self.fetch_page(sort, **{
             'args': '049192649', 
-            'vehicle': 'oasis_sb', 
+            'vehicle': 'OASIS_SB', 
             'naics-code': '541330'
         })

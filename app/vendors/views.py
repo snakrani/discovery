@@ -10,39 +10,7 @@ from vendors.models import Vendor, ContractManager
 from contracts.models import Contract
 
 import csv
-import os.path
 import time
-
-
-class VendorView(TemplateView):
-    
-    pdf_dir = 'static/discovery_site/capability_statements'
-    web_pdf_path = 'discovery_site/capability_statements'
-
-    def get_context_data(self, **kwargs):
-        context = super(TemplateView, self).get_context_data(**kwargs)
-        
-        duns = context['vendor_duns']
-        vehicle = self.request.GET.get('vehicle', None)
-        
-        capability_statement = self.has_statement(duns, vehicle)
-        context['has_capability_statement'] = capability_statement
-        
-        if capability_statement:
-            context['capability_statement_url'] = self.get_pdf_path(duns, vehicle, self.web_pdf_path)
-        
-        return context
-
-    def has_statement(self, duns, vehicle):
-        if vehicle is not None and os.path.isfile(self.get_pdf_path(duns, vehicle, self.pdf_dir)):
-            return True
-        return False
-
-    def get_pdf_path(self, duns, vehicle, path):
-        pdf_path = "{}/{}/".format(path, vehicle)
-        pdf_path += duns
-        pdf_path += '.pdf'
-        return pdf_path
 
 
 def PoolCSV(request):

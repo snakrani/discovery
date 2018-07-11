@@ -115,9 +115,15 @@ LayoutManager.renderContacts = function(vendor, pools) {
         }
 
         var $contractRow = $('<tr class="contact_filter"></tr>');
+        var poolName = data.pool.vehicle.split('_').join(' ') + ': ' + data.pool.name;
+
+        if (data.vendor.capability_statement.length > 0) {
+            var capabilityStatementLink = '<div class="capability_statement_link"><a href="' + data.vendor.capability_statement + '">Capability Statement (PDF)</a></div>';
+            poolName = '<div>' + poolName + '</div>' + capabilityStatementLink;
+        }
 
         $contractRow.append('<td class="filter"><input type="checkbox" class="contract_pool_filter" name="' + data.pool.id + '" value="' + data.pool.id + '" ' + checked + ' /></td>');
-        $contractRow.append('<td class="pool">' + data.pool.vehicle.split('_').join(' ') + ': ' + data.pool.name + '</td>');
+        $contractRow.append('<td class="pool">' + poolName + '</td>');
         $contractRow.append('<td class="contact">' + data.vendor.cms[0].name + '</td>');
         $contractRow.append('<td class="phones">' + data.vendor.cms[0].phone.join('<br/>') + '</td>');
         $contractRow.append('<td class="emails">' + data.vendor.cms[0].email.join('<br/>') + '</td>');
