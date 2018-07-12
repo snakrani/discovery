@@ -159,8 +159,8 @@ class Command(BaseCommand):
         sam_data, sam_loaded = self.load_sam_data(vendor.duns_4, options)
         
         if 'registration' in sam_data:
-            print("[ {} ] - Updating SAM vendor: {}".format(vendor.vid, vendor.name))
-            log_memory("Starting vendor [ {} | {} ]".format(vendor.vid, vendor.name))
+            print("[ {} ] - Updating SAM vendor: {}".format(vendor.id, vendor.name))
+            log_memory("Starting vendor [ {} | {} ]".format(vendor.id, vendor.name))
         
             reg = sam_data['registration']
             
@@ -191,7 +191,7 @@ class Command(BaseCommand):
             sam_load.load_date = timezone.now()
             sam_load.save()
                       
-            log_memory("Final vendor [ {} | {} ]".format(vendor.vid, vendor.name))
+            log_memory("Final vendor [ {} | {} ]".format(vendor.id, vendor.name))
             log_data(vendor.name,
                 vendor.duns,
                 vendor.duns_4,
@@ -208,7 +208,7 @@ class Command(BaseCommand):
                 vendor.sam_url
             )
         else:
-            logger.error("'registration' key is missing for {} / {}".format(vendor.vid, vendor.duns_4))
+            logger.error("'registration' key is missing for {} / {}".format(vendor.id, vendor.duns_4))
         
 
     def handle(self, *args, **options):
