@@ -88,7 +88,23 @@ class Command(BaseCommand):
     
     
     def get_vendor_ids(self):
-        return Vendor.objects.filter().order_by('id').values_list('id', flat=True)
+        vendor_list = Vendor.objects.all().order_by('id').values_list('id', flat=True)
+        vendors = {}
+        order = []
+        
+        for update in SamLoad.objects.all():
+            vendors[update.vendor] = update.load_date
+            
+        # Load all unloaded vendors first
+        for vid in vendor_list:
+            if vid not in vendors:
+                order.append(vid)
+        
+        # Load vendors by oldest first
+        for vid in sorted(vendors, key=vendors.get):
+            order.append(vid)
+        
+        return order
     
     
     def load_sam_data(self, duns_4, options):
@@ -138,15 +154,13 @@ class Command(BaseCommand):
         return sam_data, loaded
 
 
-    def update_vendor(self, vid, options):
+    def update_vendor(self, vendor, options):
         logger = vendor_logger()
-        
-        vendor = Vendor.objects.get(id=vid)
         sam_data, sam_loaded = self.load_sam_data(vendor.duns_4, options)
         
         if 'registration' in sam_data:
-            print("[ {} ] - Updating SAM vendor: {}".format(vid, vendor.name))
-            log_memory("Starting vendor [ {} | {} ]".format(vid, vendor.name))
+            print("[ {} ] - Updating SAM vendor: {}".format(vendor.id, vendor.name))
+            log_memory("Starting vendor [ {} | {} ]".format(vendor.id, vendor.name))
         
             reg = sam_data['registration']
             
@@ -171,9 +185,13 @@ class Command(BaseCommand):
             if vendor.sam_url and vendor.sam_url[:3].lower() == "www" :
                 vendor.sam_url = 'http://' + vendor.sam_url
 
-            vendor.save()           
+            vendor.save()
             
-            log_memory("Final vendor [ {} | {} ]".format(vid, vendor.name))
+            sam_load, created = SamLoad.objects.get_or_create(vendor = vendor)
+            sam_load.load_date = timezone.now()
+            sam_load.save()
+                      
+            log_memory("Final vendor [ {} | {} ]".format(vendor.id, vendor.name))
             log_data(vendor.name,
                 vendor.duns,
                 vendor.duns_4,
@@ -190,7 +208,7 @@ class Command(BaseCommand):
                 vendor.sam_url
             )
         else:
-            logger.error("'registration' key is missing for {} / {}".format(vid, vendor.duns_4))
+            logger.error("'registration' key is missing for {} / {}".format(vendor.id, vendor.duns_4))
         
 
     def handle(self, *args, **options):
@@ -216,10 +234,10 @@ class Command(BaseCommand):
             vendor_ids = self.get_vendor_ids()
             
             for vid in vendor_ids:
-                self.update_vendor(vid, options)
-
-            sam_load = SamLoad(sam_load=timezone.now())
-            sam_load.save()
+                vendor = Vendor.objects.get(id=vid)
+                
+                if vendor:
+                    self.update_vendor(vendor, options)
 
         except Exception as e:
             display_error(e)
