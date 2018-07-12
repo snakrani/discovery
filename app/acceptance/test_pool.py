@@ -71,7 +71,7 @@ class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
             'wait': ('class', 'table_row_data'),
             'actions': {
                 'vet*click': {
-                    'wait': ('sec', 5),
+                    'wait': ('sec', 10),
                     'css:span.matching_your_search': ('text__equal', '5 vendors match your search')
                 }
             }

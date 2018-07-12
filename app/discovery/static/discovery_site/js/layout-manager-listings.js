@@ -1,5 +1,6 @@
 
 LayoutManager.initializers.listings = function() {
+    EventManager.subscribe('dataChanged', LayoutManager.toggleFilters);
     EventManager.subscribe('dataChanged', LayoutManager.toggleZones);
 };
 
