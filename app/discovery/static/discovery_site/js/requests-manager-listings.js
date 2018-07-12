@@ -64,8 +64,8 @@ RequestsManager.load = function() {
 
                 LayoutManager.enableVehicles();
                 LayoutManager.enablePools();
-                LayoutManager.enableZones();
-                LayoutManager.enableFilters();
+                LayoutManager.toggleZones();
+                LayoutManager.toggleFilters();
                 $('.table_wrapper').removeClass('loading');
             }
         },
@@ -77,8 +77,8 @@ RequestsManager.load = function() {
             else {
                 LayoutManager.enableVehicles();
                 LayoutManager.enablePools();
-                LayoutManager.enableZones();
-                LayoutManager.enableFilters();
+                LayoutManager.toggleZones();
+                LayoutManager.toggleFilters();
                 $('.table_wrapper').removeClass('loading');
             }
         }
