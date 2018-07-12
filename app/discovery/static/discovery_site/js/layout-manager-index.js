@@ -1,6 +1,7 @@
 
 LayoutManager.initializers.index = function() {
     EventManager.subscribe('dataChanged', LayoutManager.route);
+    EventManager.subscribe('dataChanged', LayoutManager.toggleFilters);
     EventManager.subscribe('dataChanged', LayoutManager.toggleZones);
     EventManager.subscribe('pageInitialized', LayoutManager.vehicleInfo);
 
