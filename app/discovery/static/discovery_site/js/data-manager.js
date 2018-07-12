@@ -658,12 +658,6 @@ var DataManager = {
             EventManager.publish('poolChanged');
         }
         else {
-            if (count > 1) {
-                LayoutManager.showPools();
-            }
-            else {
-                LayoutManager.hidePools();
-            }
             EventManager.publish('poolSelected');
         }
     },
