@@ -147,6 +147,15 @@ var LayoutManager = {
         $('.se_filter').attr("disabled", true);
     },
 
+    toggleFilters: function() {
+        if (! DataManager.vehicle || DataManager.vehicleMap[DataManager.vehicle]["sb"]) {
+            LayoutManager.enableFilters();
+        }
+        else {
+            LayoutManager.disableFilters();
+        }
+    },
+
     createDate: function(date) {
         // in IE + Safari, if we pass the date the api sends right
         // into a date object, it outputs NaN
