@@ -58,7 +58,7 @@ LayoutManager.renderPoolInfo = function() {
                 poolNames.push('<div class="pool"><div class="spacer"/><a id="link_' + poolData.id + '" class="pool_filter_link" href="' + url + '"><span class="vehicle">' + poolData.vehicle.split('_').join(' ') + " pool " + poolData.number + ':</span><span class="title">' + poolData.name + '</span></a></div>');
             }
             else {
-                poolNames.push('<div class="pool"><div class="spacer"/><span class="vehicle">' + poolData.vehicle.split('_').join(' ') + " pool " + poolData.number + ':</span><span class="title">' + poolData.name + '</span></div>');
+                poolNames.push('<div class="pool"><div class="spacer"/><span class="vehicle">' + poolData.vehicle.split('_').join(' ') + " " + poolData.number + ':</span><span class="title">' + poolData.name + '</span></div>');
             }
         }
         $(".results_pool_names").html(poolNames.join(''));
