@@ -349,7 +349,7 @@ DataManager.populatePoolDropDown = function() {
         width: "415px"
     }).append($("<option></option>")
         .attr("value", 'all')
-        .text("All pools"));
+        .text("All service categories"));
 
     for (var id in pools) {
         var poolData = pools[id];
