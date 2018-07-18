@@ -1,187 +1,172 @@
 
 LayoutManager.initializers.vendor = function() {
+
+    // Internal event subscriptions
+    EventManager.subscribe('dataInitialized', LayoutManager.renderVendor);
+    EventManager.subscribe('dataInitialized', LayoutManager.renderContractSort);
     EventManager.subscribe('contractsLoaded', LayoutManager.renderContracts);
+
+    EventManager.subscribe('pageChanged', DataManager.update);
 };
 
-LayoutManager.render = function(vendor) {
-    LayoutManager.renderVendor(vendor);
-};
-
-LayoutManager.renderVendor = function(vendor) {
-    var vehiclePools = DataManager.getVehiclePools();
-    var pools = {};
-
-    if (! $.isEmptyObject(vehiclePools)) {
-        for (var i = 0; i < vendor.pools.length; i++) {
-            if (vendor.pools[i].pool.id in vehiclePools) {
-                pools[vendor.pools[i].pool.id] = {
-                    "vendor": vendor.pools[i],
-                    "pool": vehiclePools[vendor.pools[i].pool.id]
-                };
-            }
-        }
-    }
+LayoutManager.renderVendor = function() {
+    var vendor = DataManager.getVendor();
 
     $(document).prop('title', vendor.name + " - " + DataManager.title);
 
-    var currentDate = new Date();
-    var mailto, t, indicatorsRow, formattedDate, dateObj;
+    LayoutManager.renderBasicVendorInfo(vendor);
+    LayoutManager.renderSamExpiration(vendor);
+    LayoutManager.renderWebsite(vendor);
+    LayoutManager.renderAddress(vendor);
+    LayoutManager.renderBadges(vendor.pools);
+    LayoutManager.renderResultInfo(vendor);
+};
 
+LayoutManager.renderBasicVendorInfo = function(vendor) {
     $('.vendor_title').html(vendor.name);
-    if (vendor.sam_url) {
-        $('#vendor_site_link').attr('href', vendor.sam_url);
-    } else {
-        $('.vendor_website').hide();
-    }
+
     if (vendor.sam_exclusion == true) {
         $('.debarred_status').show();
     }
     $('.duns_number').html(vendor.duns);
     $('.cage_code').html(vendor.cage);
-    $('.number_of_employees').html(vendor.number_of_employees ? LayoutManager.numberWithCommas(vendor.number_of_employees) : 'N/A');
-    $('.annual_revenue').html(vendor.annual_revenue ? '$' + LayoutManager.numberWithCommas(vendor.annual_revenue) : 'N/A');
+    $('.number_of_employees').html(vendor.number_of_employees ? Format.numberWithCommas(vendor.number_of_employees) : 'N/A');
+    $('.annual_revenue').html(vendor.annual_revenue ? '$' + Format.numberWithCommas(vendor.annual_revenue) : 'N/A');
+};
 
-    //load SAM expiration date
-    if (vendor['sam_expiration_date']) {
-        dateObj = LayoutManager.createDate(vendor['sam_expiration_date']);
-        formattedDate = LayoutManager.formatDate(dateObj);
+LayoutManager.renderSamExpiration = function(vendor) {
+    var currentDate = new Date();
+    var formattedDate, dateObj;
+
+    if (vendor.sam_expiration_date) {
+        dateObj = Format.createDate(vendor.sam_expiration_date);
+        formattedDate = Format.formatDate(dateObj);
     }
     else {
         formattedDate = 'unknown';
     }
 
     $(".vendor_sam_expiration_date").text(formattedDate);
+
     if (currentDate > dateObj) {
         $(".vendor_sam_expiration_notice").show();
     }
+};
 
-    //contact info
+LayoutManager.renderWebsite = function(vendor) {
+    if (vendor.sam_url) {
+        $('#vendor_site_link').attr('href', vendor.sam_url);
+    } else {
+        $('.vendor_website').hide();
+    }
+};
+
+LayoutManager.renderAddress = function(vendor) {
     $('.vendor_address1').html(vendor.sam_location ? vendor.sam_location.address : ' ');
     $('.vendor_address2').html(vendor.sam_location ? vendor.sam_location.city + ', ' + vendor.sam_location.state + ' ' + vendor.sam_location.zipcode : ' ');
+};
 
-    if (! $.isEmptyObject(pools)) {
-        LayoutManager.renderContacts(vendor, pools);
+LayoutManager.renderBadges = function(memberships) {
+    var vehicleMap = DataManager.getVehicleMap();
+    var poolMap = DataManager.getPoolMap();
+    var smallBusiness = false;
+
+    for (var index = 0; index < memberships.length; index++) {
+        var pool = poolMap[memberships[index].pool.id];
+
+        if (vehicleMap[pool.vehicle].sb) {
+            smallBusiness = true;
+        }
     }
-
-    //small business badge
-    if (LayoutManager.showSbBadge(vendor['pools'])) {
+    if (smallBusiness) {
         $('#sb_badge').show();
     }
-
-    //socioeconomic indicators
-    t = $('#socioeconomic_indicators');
-    t.find("tr:gt(0)").remove();
-
-    indicatorsRow = $('<tr></tr>');
-    indicatorsRow.append(LayoutManager.renderColumn(vendor, '8a', 'A6'));
-    indicatorsRow.append(LayoutManager.renderColumn(vendor, 'Hubz', 'XX'));
-    indicatorsRow.append(LayoutManager.renderColumn(vendor, 'sdvo', 'QF'));
-    indicatorsRow.append(LayoutManager.renderColumn(vendor, 'wo', 'A2'));
-    indicatorsRow.append(LayoutManager.renderColumn(vendor, 'vo', 'A5'));
-    indicatorsRow.append(LayoutManager.renderColumn(vendor, 'sdb', '27'));
-    t.append(indicatorsRow);
-
-    if (DataManager.getNaicsCode()) {
-        $("#naics_contracts_button").show();
-        $("#naics_contracts_button").text("NAICS " + DataManager.getNaicsCode());
-        $("#all_contracts_button").show();
-        $(".vendor_contract_history_text").html("Showing vendor's indexed 5 year contract history for PSCs related to: ");
-    }
-    else {
-        $("#naics_contracts_button").hide();
-        $("#all_contracts_button").hide();
-        $(".vendor_contract_history_text").html("Showing vendor's indexed 5 year contract history");
-    }
-
-    EventManager.publish('vendorRendered');
 };
 
-LayoutManager.renderContacts = function(vendor, pools) {
-    var $table = $('#contact_details');
-    var poolIds = DataManager.getParameterByName('pool');
+LayoutManager.renderResultInfo = function(vendor) {
+    var duns = DataManager.getDuns();
+    var vehicleMap = DataManager.getVehicleMap();
+    var poolMap = DataManager.getPoolMap();
+    var naics = DataManager.getNaics();
+    var memberships = DataManager.getMemberships();
 
-    if (poolIds) {
-        poolIds = poolIds.split(',').filter(Boolean);
-    }
+    var resultMessage = "Showing vendor's indexed 5 year contract history";
+    var filterMessages = [];
+    var vehicles = [];
 
-    $table.find("tr:gt(0)").remove();
+    for (var index = 0; index < vendor.pools.length; index++) {
+        var vendorMembership = vendor.pools[index];
 
-    for (var poolId in pools) {
-        var data = pools[poolId];
-        var checked = "";
-
-        if (poolIds && poolIds.includes(data.pool.id)) {
-            checked = "checked";
-        }
-
-        var $contractRow = $('<tr class="contact_filter"></tr>');
-        var poolName = data.pool.vehicle.split('_').join(' ') + ': ' + data.pool.name;
-
-        if (data.vendor.capability_statement.length > 0) {
-            var capabilityStatementLink = '<div class="capability_statement_link"><a href="' + data.vendor.capability_statement + '">Capability Statement (PDF)</a></div>';
-            poolName = '<div>' + poolName + '</div>' + capabilityStatementLink;
-        }
-
-        $contractRow.append('<td class="filter"><input type="checkbox" class="contract_pool_filter" name="' + data.pool.id + '" value="' + data.pool.id + '" ' + checked + ' /></td>');
-        $contractRow.append('<td class="pool">' + poolName + '</td>');
-        $contractRow.append('<td class="contact">' + data.vendor.cms[0].name + '</td>');
-        $contractRow.append('<td class="phones">' + data.vendor.cms[0].phone.join('<br/>') + '</td>');
-        $contractRow.append('<td class="emails">' + data.vendor.cms[0].email.join('<br/>') + '</td>');
-
-        $table.append($contractRow);
-    }
-};
-
-LayoutManager.showSbBadge = function(pools) {
-    for (var i = 0; i < pools.length; i++) {
-        if (pools[i].pool.id.indexOf("_SB") != -1) {
-            return true;
+        if (memberships.length > 0 && memberships.includes(vendorMembership.piid)) {
+            vehicles.push(vehicleMap[poolMap[vendorMembership.pool.id].vehicle].title);
         }
     }
-    return false;
+    if (vehicles.length > 0) {
+        filterMessages.push(vehicles.join(', '));
+    }
+
+    if (naics) {
+        filterMessages.push('NAICS ' + naics);
+    }
+
+    if (filterMessages.length > 0) {
+        resultMessage += ' for ' + filterMessages.join(' and ');
+    }
+    $(".vendor_contract_history_text").html(resultMessage);
+
+    // CSV results link
+    $("#csv_link").attr("href", "/vendor/" + duns + "/csv/" + DataManager.getQueryString());
 };
 
-LayoutManager.renderColumn = function(v, prefix, setasideCode) {
-    return $('<td class="' + prefix + '">' + LayoutManager.vendorIndicator(v, prefix, setasideCode) + '</td>');
+LayoutManager.renderContractSort = function() {
+    var ordering = DataManager.getSortOrdering();
+
+    if (ordering) {
+        var asc = (ordering[0] == '-' ? false : true);
+        var field = DataManager.getOrderingField(ordering.replace(/^-/, ''));
+        var $target = $('th.' + field);
+
+        $target.siblings('.sortable').removeClass('arrow-down').removeClass('arrow-up').addClass('arrow-sortable').attr("title", "Select to sort");
+
+        if (asc) {
+            $target.removeClass('arrow-sortable').removeClass('arrow-down').addClass('arrow-up').attr("title", "Sorted ascending");
+        } else {
+            $target.removeClass('arrow-sortable').removeClass('arrow-up').addClass('arrow-down').attr("title", "Sorted descending");
+        }
+    }
 };
 
-LayoutManager.renderContracts = function(results) {
-    var listType = DataManager.getListType();
+LayoutManager.renderContracts = function(data) {
     var $table = $('#vendor_contracts');
-    var len = results['results'].length;
-
-    $("#vendor_contract_history_title_container .contracts_button_active").attr('class', 'contracts_button');
-    $("#" + listType + "_contracts_button").attr('class', 'contracts_button_active');
-
-    LayoutManager.updateResultsInfo(results);
 
     $table.find('tr').not(':first').remove();
 
-    if (results['count'] == 0) {
+    if (data['count'] == 0) {
         $('#no_matching_contracts').show();
-    } else {
-        $('#no_matching_contracts').hide();
     }
+    else {
+        $('#no_matching_contracts').hide();
 
-    for (var i = 0; i < len; i++) {
-        $table.append(LayoutManager.renderRow(results['results'][i], i));
+        for (var index = 0; index < data['results'].length; index++) {
+            $table.append(LayoutManager.renderContract(data['results'][index]));
+        }
     }
 
     $("#ch_table").show();
 
-    LayoutManager.renderPager(listType, results);
+    LayoutManager.renderPager(data);
 };
 
-LayoutManager.renderRow = function(contract, i) {
+LayoutManager.renderContract = function(contract) {
     var $contractRow = $('<tr class="table_row_data"></tr>');
 
-    var displayDate = (contract['date_signed'] ? LayoutManager.formatDate(LayoutManager.createDate(contract['date_signed'])) : ' ');
+    var displayDate = (contract['date_signed'] ? Format.formatDate(Format.createDate(contract['date_signed'])) : ' ');
     var piid = (contract['piid'] ? contract['piid'] : ' ');
     var agencyName = (contract['agency_name'] ? contract['agency_name'] : ' ');
     var pricingType = (contract['pricing_type'] ? contract['pricing_type'].name : ' ');
     var pointOfContact = (contract['point_of_contact'] ? contract['point_of_contact'].name : ' ');
     var location = (contract['place_of_performance_location'] ? contract['place_of_performance_location'] : ' ');
-    var obligatedAmount = (contract['obligated_amount'] ? LayoutManager.numberWithCommas(contract['obligated_amount']) : ' ');
+    var obligatedAmount = (contract['obligated_amount'] ? Format.numberWithCommas(contract['obligated_amount']) : ' ');
     var status = (contract['status'] ? contract['status'].name : ' ');
     var psc = (contract['PSC'] ? contract['PSC'] : ' ');
     var naics = (contract['NAICS'] ? contract['NAICS'] : ' ');
@@ -195,7 +180,7 @@ LayoutManager.renderRow = function(contract, i) {
 
     $contractRow.append('<td class="date_signed">' + displayDate + '</td>');
     $contractRow.append('<td class="piid" scope="row">' + piid + '</td>');
-    $contractRow.append('<td class="agency">' + LayoutManager.toTitleCase(agencyName) + '</td>');
+    $contractRow.append('<td class="agency">' + Format.toTitleCase(agencyName) + '</td>');
     $contractRow.append('<td class="type">' + pricingType + '</td>');
     $contractRow.append('<td class="poc">' + pointOfContact + '</td>');
     $contractRow.append('<td class="value">' + obligatedAmount+ '</td>');
@@ -205,31 +190,31 @@ LayoutManager.renderRow = function(contract, i) {
     return $contractRow;
 };
 
-LayoutManager.renderPager = function(listType, results) {
+LayoutManager.renderPager = function(data) {
     var page = DataManager.getPage();
     var pageCount = DataManager.getPageCount();
 
-    if (results['count'] > 0) {
+    if (data['count'] > 0) {
         var startnum = (page - 1) * pageCount + 1;
-        var endnum = Math.min((page * pageCount), results['count']);
+        var endnum = Math.min((page * pageCount), data['count']);
 
         $("#contracts_current").text(startnum + " - " + endnum);
-        $("#contracts_total").text(LayoutManager.numberWithCommas(results['count']));
+        $("#contracts_total").text(Format.numberWithCommas(data['count']));
 
         $(function() {
             $("#pagination_container").pagination({
-                items: results['count'],
+                items: data['count'],
                 itemsOnPage: pageCount,
                 cssStyle: 'light-theme',
                 currentPage: page,
                 selectOnClick: false,
                 onPageClick: function(pageNumber, e) {
-                    DataManager.page = pageNumber;
-                    EventManager.publish("contractsChanged");
+                    DataManager.setPage(pageNumber);
+                    EventManager.publish("pageChanged");
                 }
             });
         });
-        if (results['results'].length < results['count']) {
+        if (data['results'].length < data['count']) {
             $('#pagination_container').show();
         } else {
             $('#pagination_container').hide();
@@ -240,45 +225,4 @@ LayoutManager.renderPager = function(listType, results) {
         $('#pagination_container').hide();
         $("#viewing_contracts").hide();
     }
-};
-
-LayoutManager.updateVendorCSVURL = function() {
-    var url = document.location.href;
-    var pathArray = url.split('/');
-
-    if (url.indexOf("/?") == -1) {
-        pathArray.pop();
-    }
-    pathArray.splice(5, 0, "csv");
-
-    $("#csv_link").attr("href", pathArray.join('/'));
-};
-
-LayoutManager.updateResultsInfo = function(results) {
-    var totalResults, totalPools, resultsStr;
-    if (results['count'] == 0) {
-        totalResults = 0;
-        totalPools = 0;
-    }
-    else {
-        totalResults = results['count'].toString();
-        totalPools = results['results'].length;
-    }
-    resultsStr = totalResults + " contracts match your search";
-
-    LayoutManager.updateVendorCSVURL();
-
-    $("#number_of_results span").text(resultsStr);
-};
-
-LayoutManager.vendorIndicator = function(membership, prefix, setaside_code) {
-    //returns X if vendor and socioeconomic indicator match
-    if (membership['setasides'].length > 0) {
-        for (var i = 0; i < membership['setasides'].length; i++) {
-            if (membership['setasides'][i]['code'] == setaside_code) {
-                return '<img alt="X" src="' + static_image_path  + 'green_dot.png" class="green_dot">';
-            }
-        }
-    }
-    return '';
 };
