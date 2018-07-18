@@ -1,6 +1,7 @@
 
 var LayoutManager = {
     initializers: {},
+    preprocessors: {},
 
     init: function() {
         // Internal event subscriptions
@@ -12,5 +13,11 @@ var LayoutManager = {
     },
 
     route: function() {
+    },
+
+    execPreprocessors: function() {
+        for (var handler in LayoutManager.preprocessors){
+            LayoutManager.preprocessors[handler].call(this);
+        }
     }
 };
