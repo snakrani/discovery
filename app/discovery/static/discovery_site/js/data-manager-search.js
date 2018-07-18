@@ -82,7 +82,6 @@ DataManager.loadVendors = function() {
 DataManager.sortClassMap = function() {
     return {
         'h_vendor_name': 'name',
-        'h_vendor_location': 'sam_location_citystate',
         'h_naics_results': 'number_of_contracts',
     };
 };
