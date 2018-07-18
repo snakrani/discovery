@@ -91,15 +91,25 @@ class BaseValidator(object):
                 value = list(value)
             
             if isinstance(data_value, (list, tuple, QuerySet)):
+                success = False
+                
                 for index, data_element in enumerate(list(data_value)):
-                    _compare(op, data_element, value, **params)
-
+                    try:
+                        _compare(op, data_element, value, **params)
+                        success = True
+                    
+                    except AssertionError as error:
+                        pass
+                    
+                if not success:
+                    raise self._wrap_error(AssertionError("No items in value: ({}) {} ({})".format(data_value, op, value))) 
+            
             elif data_value is not None:
                 _compare(op, data_value, value, **params)
                 
         except Exception as error:
             raise self._wrap_error(error)
-    
+
     
     def compare(self, op, nested_keys, value = None, **params):
         self.compare_data(op, self.get_data_value(nested_keys), value, **params)
