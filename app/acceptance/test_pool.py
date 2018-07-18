@@ -1,158 +1,92 @@
 from test import cases as case
 
-
-NAICS = {
-    'naics-code': '541330'
-}
-
-OASIS_SB_NAICS = {
-    'vehicle': 'OASIS_SB',
-    'naics-code': '541990'
-}
-
-OASIS_SB_NAICS_2 = {
-    'vehicle': 'OASIS_SB',
-    'naics-code': '541620'
-}
-
-OASIS_SB_NAICS_3 = {
-    'vehicle': 'OASIS_SB',
-    'naics-code': '541618'
-}
-
-OASIS_SB_NAICS_4 = {
-    'vehicle': 'OASIS_SB',
-    'naics-code': '541219'
-}
-
-OASIS_SB_NAICS_WO = {
-    'vehicle': 'OASIS_SB',
-    'naics-code': '541330',
-    'setasides': 'A2'
-}
-
-OASIS_SB_NAICS_8A = {
-    'vehicle': 'OASIS_SB',
-    'naics-code': '541330',
-    'setasides': 'A6'
-}
-
-OASIS_SB_NAICS_8A_2 = {
-    'vehicle': 'OASIS_SB',
-    'naics-code': '541612',
-    'setasides': 'A6'
-}
-
-OASIS_SB_NAICS_HZ = {
-    'vehicle': 'OASIS_SB',
-    'naics-code': '541330',
-    'setasides': 'XX'
-}
-
-OASIS_NAICS = {
-    'vehicle': 'OASIS',
-    'naics-code': '541990'
-}
-
-OASIS_NAICS_2 = {
-    'vehicle': 'OASIS',
-    'naics-code': '541618'
-}
+from acceptance.common import generate_schema
+from acceptance.search import generate_search_tests
 
 
 class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
     
-    schema = {
+    schema = generate_schema({
+        'includes': {
+            'search': generate_search_tests()
+        },
         'header': {
             'Discovery': 'title'
         },
-        'search_veteran_owned': {
-            'params': NAICS,
-            'wait': ('class', 'table_row_data'),
-            'actions': {
-                'vet*click': {
-                    'wait': ('sec', 10),
-                    'css:span.matching_your_search': ('text__equal', '5 vendors match your search')
-                }
-            }
-        },
-        'search_zero_results': {
-            'params': {
-                'vehicle': 'OASIS_SB',
-                'naics-code': '541990',
-                'setasides': ('A6', 'A2', 'XX')
+        'actions': {
+            'unfiltered': {
+                'naics': ('all', 78, True),
+                'vehicle': ('all', 8, True),
+                'pool': ('all', 60, 59, True),
+                'zone': ('all', 7, False, False),
+                'filters': (None, 0, True),
+                'results': (181, 'results/csv/?'),
+                'table': (50, 'h_naics_results', 'desc', ('Prev', '1'), '4')
             },
-            'wait': ('sec', 2),
-            'css:span.matching_your_search': ('text__equal', '0 vendors match your search')
-        },
-        'search_socioeconomic_indicators': {
-            'params': OASIS_SB_NAICS_WO,
-            'wait': ('class', 'table_row_data'),
-            'woman': ('value__equal', 'A2'),
-            'css:th.h_8a': ('text__equal', '8(a)'),
-            'css:th.h_hubz': ('text__equal', 'HubZ'),
-            'css:th.h_sdvo': ('text__equal', 'SDVO'),
-            'css:th.h_wo': ('text__equal', 'WO'),
-            'css:th.h_vo': ('text__equal', 'VO'),
-            'css:th.h_sdb': ('text__equal', 'SDB'),
-            'xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[8]/img': 'exists'
-        },
-        'search_result_count': {
-            'params': OASIS_SB_NAICS_WO,
-            'wait': ('class', 'table_row_data'),
-            'css:span.matching_your_search': ('text__equal', '3 vendors match your search')
-        },
-        'search_vendor_count': {
-            'params': OASIS_SB_NAICS_WO,
-            'wait': ('class', 'table_row_data'),
-            'css:span.matching_your_search': ('text__matches', r'\d+ vendors match your search')
-        },
-        '8a_added': {
-            'params': OASIS_SB_NAICS_8A,
-            'wait': ('class', 'table_row_data'),
-            'xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[5]/img': 'exists'
-        },
-        'hubzone_added': {
-            'params': OASIS_SB_NAICS_HZ,
-            'wait': ('class', 'table_row_data'),
-            'xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[6]/img': 'exists'
-        },
-        'search_pool_number_not_displayed': {
-            'params': OASIS_SB_NAICS_8A_2,
-            'wait': ('class', 'table_row_data'),
-            'css:span.matching_your_search': ('text__matches', r'^[\s\S]* vendors match your search$')
-        },
-        'csv_link': {
-            'params': OASIS_SB_NAICS_2,
-            'wait': ('class', 'table_row_data'),
-            'link_text:download data (CSV)': ('link__matches', r'^[\s\S]*/results/csv[\s\S]*$')
-        },
-        'vehicle_naics_select_order': {
-            'params': OASIS_SB_NAICS_3,
-            'wait': ('class', 'table_row_data'),
-            'naics-code': 'enabled',
-            'vehicle-id': 'enabled',
-            'pool-id': 'enabled',
-            'css:.se_filter': 'enabled'
-        },
-        'unrestricted_socioeconomic_factors': {
-            'params': OASIS_NAICS_2,
-            'wait': ('class', 'vendor_name'),
-            'xpath://*[@id="pool_vendors"]/tbody/tr[1]/th[5]': ('text__equal', '8(a)'),
-            'xpath://*[@id="pool_vendors"]/tbody/tr[1]/th[6]': ('text__equal', 'HubZ'),
-            'xpath://*[@id="pool_vendors"]/tbody/tr[1]/th[7]': ('text__equal', 'SDVO'),
-            'xpath://*[@id="pool_vendors"]/tbody/tr[1]/th[8]': ('text__equal', 'WO'),
-            'xpath://*[@id="pool_vendors"]/tbody/tr[1]/th[9]': ('text__equal', 'VO'),
-            'xpath://*[@id="pool_vendors"]/tbody/tr[1]/th[10]': ('text__equal', 'SDB'),
-            'choose_filters': ('text__equal', 'Choose filters (Small Business Only)')
-        },
-        'contract_count_column': {
-            'params': OASIS_SB_NAICS_4,
-            'wait': ('class', 'vendor_name'),
-            'xpath://*[@id="pool_vendors"]/tbody/tr[1]/th[3]': ('text__equal', 'Contracts'),
-            'xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[3]': ('int__is_above', '<<xpath://*[@id="pool_vendors"]/tbody/tr[3]/td[3]>>')
+            'pool_links': {
+                'params': {'vehicle': 'BMO_SB', 'pool': 'BMO_SB_1'},
+                'action': ('#link_BMO_SB_1', 'click'),
+                'naics': ('all', 2, True),
+                'vehicle': ('BMO_SB', 8, True),
+                'pool': ('BMO_SB_1', 18, 1, True),
+                'zone': ('all', 7, True, True),
+                'filters': (None, 0, True),
+                'results': (6, 'results/csv/?vehicle=BMO_SB&pool=BMO_SB_1&'),
+                'table': (6, 'h_naics_results', 'desc')
+            },
+            'vendor_vehicle_links': {
+                'params': {'vehicle': 'PSS'},
+                'action': ('xpath://*[@id="pool_vendors"]/tbody/tr[12]/td[4]/a[1]', 'click'),
+                'naics': ('all', 58, True),
+                'vehicle': ('PSS', 8, True),
+                'pool': ('all', 8, 7, True),
+                'zone': ('all', 7, False, False),
+                'filters': (None, 0, True),
+                'results': (66, 'results/csv/?vehicle=PSS&'),
+                'table': (50, 'h_naics_results', 'desc', ('Prev', '1'), '2')
+            }, 
+            'sorting': {
+                'params': {'ordering': 'name'},
+                'action': (
+                    ('th.h_vendor_name', 'click', ('no_class', 'div.table_wrapper', 'loading')), 
+                    ('th.h_vendor_name', 'click', ('no_class', 'div.table_wrapper', 'loading'))
+                ),
+                'naics': ('all', 78, True),
+                'vehicle': ('all', 8, True),
+                'pool': ('all', 60, 59, True),
+                'zone': ('all', 7, False, False),
+                'filters': (None, 0, True),
+                'results': (181, 'results/csv/?ordering=name'),
+                'table': (50, 'h_vendor_name', 'asc', ('Prev', '1'), '4'),
+                'o1|xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[1]': ('text__is_max', '<<xpath://*[@id="pool_vendors"]/tbody/tr[10]/td[1]>>'),
+                'o2|xpath://*[@id="pool_vendors"]/tbody/tr[10]/td[1]': ('text__is_max', '<<xpath://*[@id="pool_vendors"]/tbody/tr[20]/td[1]>>'),
+                'o3|xpath://*[@id="pool_vendors"]/tbody/tr[20]/td[1]': ('text__is_max', '<<xpath://*[@id="pool_vendors"]/tbody/tr[30]/td[1]>>'),
+                'o4|xpath://*[@id="pool_vendors"]/tbody/tr[30]/td[1]': ('text__is_max', '<<xpath://*[@id="pool_vendors"]/tbody/tr[40]/td[1]>>'),
+                'o5|xpath://*[@id="pool_vendors"]/tbody/tr[40]/td[1]': ('text__is_max', '<<xpath://*[@id="pool_vendors"]/tbody/tr[50]/td[1]>>')
+            },
+            'paging': {
+                'params': {'page': 3},
+                'action': ('link_text:3', 'click'),
+                'naics': ('all', 78, True),
+                'vehicle': ('all', 8, True),
+                'pool': ('all', 60, 59, True),
+                'zone': ('all', 7, False, False),
+                'filters': (None, 0, True),
+                'results': (181, 'results/csv/?'),
+                'table': (50, 'h_naics_results', 'desc', '3', '4')
+            },
+            'page_count': {
+                'params': {'count': 10},
+                'naics': ('all', 78, True),
+                'vehicle': ('all', 8, True),
+                'pool': ('all', 60, 59, True),
+                'zone': ('all', 7, False, False),
+                'filters': (None, 0, True),
+                'results': (181, 'results/csv/?'),
+                'table': (10, 'h_naics_results', 'desc', ('Prev', '1'), '4')
+            }
         }
-    }
+    })
     
     def initialize(self):
         self.path = 'results'
