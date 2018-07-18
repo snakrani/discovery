@@ -62,6 +62,7 @@ DataManager.loadVendors = function() {
         function(response) {
             if (queryData['contract_naics'] == DataManager.getParameterByName('naics')) {
                 $('.table_wrapper').removeClass('loading');
+                $('#pool_table').removeClass('init');
 
                 EventManager.publish('vendorDataLoaded', response);
                 LayoutManager.enableSearch();
