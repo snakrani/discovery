@@ -186,7 +186,7 @@ DataManager.loadPools = function() {
     var vehicle = DataManager.getVehicle();
     var naics = DataManager.getNaics();
     var url = "/api/pools/";
-    var queryData = {count: 1000};
+    var queryData = {count: 1000, ordering: 'vehicle'};
 
     if (naics) {
         queryData['naics__code'] = naics;
@@ -339,6 +339,7 @@ DataManager.populatePoolDropDown = function() {
     var vehicleMap = DataManager.getVehicleMap();
     var pools = DataManager.getVehiclePools();
     var pool = DataManager.getPool();
+    var poolMap = {};
     var setasides = DataManager.getSetasides();
     var count = 0;
     var poolId;
@@ -350,18 +351,21 @@ DataManager.populatePoolDropDown = function() {
         .attr("value", 'all')
         .text("All pools"));
 
-    Object.keys(pools).forEach(function (id) {
+    for (var id in pools) {
         var poolData = pools[id];
+        var poolName = poolData.vehicle.split('_').join(' ') + ' - ' + poolData.name;
 
         if (setasides.length == 0 || vehicleMap[poolData.vehicle]["sb"]) {
-            $("#pool-id")
-                .append($("<option></option>")
-                .attr("value", id)
-                .text(poolData.name + " (" + poolData.vehicle.split('_').join(' ') + ")"));
-
+            poolMap[poolName] = id;
             count += 1;
             poolId = id;
         }
+    }
+    Object.keys(poolMap).sort().forEach(function(name) {
+        $("#pool-id")
+            .append($("<option></option>")
+            .attr("value", poolMap[name])
+            .text(name));
     });
 
     if (pool && pool in pools) {
