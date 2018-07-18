@@ -59,7 +59,7 @@ LayoutManager.renderPoolInfo = function() {
 
             if (pools.length > 1) {
                 var url = DataManager.getURL({'vehicle': poolData.vehicle, 'pool': poolData.id});
-                poolNames.push('<div class="pool"><div class="spacer"/><a id="link_' + poolData.id + '" class="pool_filter_link" href="' + url + '"><span class="vehicle">' + poolData.vehicle.split('_').join(' ') + " pool " + poolData.number + ':</span><span class="title">' + poolData.name + '</span></a></div>');
+                poolNames.push('<div class="pool"><div class="spacer"/><a id="link_' + poolData.id + '" class="pool_filter_link" href="' + url + '"><span class="vehicle">' + poolData.vehicle.split('_').join(' ') + " " + poolData.number + ':</span><span class="title">' + poolData.name + '</span></a></div>');
             }
             else {
                 poolNames.push('<div class="pool"><div class="spacer"/><span class="vehicle">' + poolData.vehicle.split('_').join(' ') + " " + poolData.number + ':</span><span class="title">' + poolData.name + '</span></div>');
