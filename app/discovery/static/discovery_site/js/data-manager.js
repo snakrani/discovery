@@ -61,6 +61,8 @@ var DataManager = {
         for (var handler in DataManager.preprocessors){
             DataManager.preprocessors[handler].call(this);
         }
+        LayoutManager.execPreprocessors();
+
         // Routing / Broadcast
         LayoutManager.route();
         EventManager.publish('pageInitialized');
