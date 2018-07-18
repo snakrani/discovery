@@ -301,7 +301,7 @@ DataManager.populateVehicleDropDown = function() {
 
     $('#vehicle-id').empty().select2({
         minimumResultsForSearch: -1,
-        width: "170px"
+        width: "150px"
     }).append($("<option></option>")
         .attr("value", 'all')
         .text("All vehicles"));
@@ -346,7 +346,7 @@ DataManager.populatePoolDropDown = function() {
 
     $('#pool-id').empty().select2({
         minimumResultsForSearch: -1,
-        width: "415px"
+        width: "420px"
     }).append($("<option></option>")
         .attr("value", 'all')
         .text("All service categories"));
@@ -398,7 +398,7 @@ DataManager.populateZoneDropDown = function() {
     var url = "/api/zones/";
     var queryData = {count: 1000};
 
-    $('#zone-id').select2({placeholder:'Filter by zone', width: '415px'});
+    $('#zone-id').select2({placeholder:'Filter by zone', width: '400px'});
 
     DataManager.getAPIRequest(url, queryData, function(data) {
         $("#zone-id").empty()
@@ -434,7 +434,6 @@ LayoutManager.initSearch = function() {
     EventManager.subscribe('dataChanged', LayoutManager.toggleFilters);
     EventManager.subscribe('pageInitialized', LayoutManager.toggleZone);
     EventManager.subscribe('dataChanged', LayoutManager.toggleZone);
-    LayoutManager.hideZone();
 };
 
 LayoutManager.enableSearch = function() {
