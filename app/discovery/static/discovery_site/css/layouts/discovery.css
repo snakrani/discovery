@@ -1005,7 +1005,7 @@ img.green_dot {
 }
 
 #pool_table {
-    display: none;
+  min-height: 120px;
 }
 
 #pool_table .h_vendor_name .h_vendor_location .h_naics_results .h_8a .h_hubz .h_sdvo .h_wo .h_vo .h_sdb {
@@ -1108,6 +1108,49 @@ img.green_dot {
     overflow: auto;
 }
 
+#vendor_info_container {
+    width: 100%;
+    margin-top: 0;
+    min-height: 250px;
+    border-top: 1px solid #DDDDDD;
+    padding-top: 30px;
+    margin-bottom: 0;
+}
+
+#vendor_info {
+    width: 1100px;
+    float: left;
+    min-height: 90px;
+}
+
+#vendor_c1 {
+    float: left;
+    width: 425px;
+}
+
+#vendor_c1 div.list {
+    margin-top: 15px;
+}
+
+#vendor_c2 {
+    float: left;
+    width: 425px;
+}
+
+#vendor_c3 {
+    float: left;
+    width: 250px;
+}
+
+#vendor_c3 div {
+    float: right;
+}
+
+#vendor_memberships {
+    clear: both;
+    padding-top: 20px;
+}
+
 .vendor_title {
     font-size: 2em;
     float: left;
@@ -1117,7 +1160,6 @@ img.green_dot {
 
 .vendor_website {
     margin-left: 0;
-    margin-top: 5px;
     background: url(../../images/external_link.png);
     background-repeat: no-repeat;
     background-position: 118px 5px;
@@ -1136,40 +1178,6 @@ img.green_dot {
     color: #d60006;
 }
 
-#vendor_admin_container {
-    width: 100%;
-    margin-top: 0;
-    min-height: 250px;
-    border-top: 1px solid #DDDDDD;
-    padding-top: 30px;
-    margin-bottom: 0;
-}
-
-#vendor_admin_c1 {
-    width: 700px;
-    float: left;
-    min-height: 90px;
-}
-
-#vendor_contact_table_container {
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
-#vendor_contact_table_container .vendor_contact_label {
-    font-size: 1em;
-    padding-bottom: 6px;
-}
-
-#vendor_contact_table_container td {
-  text-align: left;
-}
-
-#vendor_contact_table_container .capability_statement_link {
-  padding-top: 5px;
-  padding-left: 5px;
-}
-
 #vendor_result_links {
   clear: both;
   margin-top: 0;
@@ -1179,6 +1187,16 @@ img.green_dot {
 #vendor_result_links a {
   float: right;
   padding-bottom: 10px;
+}
+
+#vendor_result_links #naics_select {
+    margin-top: 0px;
+    font-size: 1.2em;
+}
+
+#vendor_result_links #naics_select .select2-selection {
+  min-height: 35px;
+  max-height: 50px;
 }
 
 #download_data {
@@ -1226,13 +1244,6 @@ img.green_dot {
     font-weight: bold;
 }
 
-#vendor_admin_c2 {
-    min-width: 260px;
-    float: left;
-    min-height: 110px;
-    margin-left: 70px;
-}
-
 .admin_label {
     display: inline-block;
     color: #666666;
@@ -1264,9 +1275,6 @@ img.green_dot {
 }
 
 #sb_badge {
-    position: relative;
-    top: -175px;
-    left: 300px;
     height: 10px;
     display: none;
 }
@@ -1391,27 +1399,52 @@ img.green_dot {
 }
 
 
-/* Vendor Detail  Socioeconomic Factors Table Styles */
-.vendor_detail_table {
+.vendor_contract_selector_container {
+
+}
+
+#vendor_contract_label {
+    float: left;
+    width: 700px;
+    min-height: 60px;
+    display: flex;
+    justify-content: left;
+    align-items: flex-end;
+}
+
+#contract_naics_select {
+    float: left;
+    width: 400px;
+}
+#contract_naics_select .select_text {
+    color: #4A84A3;
+    font-family: 'Raleway';
+    font-weight: 500;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+}
+
+
+.vendor_contract_filter_container {
+    clear: both;
     margin: 0;
-    padding: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
     width: 100%;
 }
 
-.vendor_detail_table table {
+.vendor_contract_filter_container table {
     border-collapse: collapse;
     border-spacing: 0;
-    width: 100%;
+    width: 1100px;
     height: 100%;
-    margin: 0;
-    padding: 0;
 }
 
-.vendor_detail_table tr:hover td {
+.vendor_contract_filter_container tr:hover td {
     background-color: #fff;
 }
 
-.vendor_detail_table td {
+.vendor_contract_filter_container td {
     vertical-align: middle;
     background-color: #fff;
     border: 1px solid #cecece;
@@ -1424,19 +1457,42 @@ img.green_dot {
     font-weight: 600;
 }
 
-.vendor_detail_table tr:last-child td {
+.vendor_contract_filter_container td.filter {
+    width: 50px;
+}
+.vendor_contract_filter_container td.contract {
+    width: 370px;
+    text-align: left;
+}
+.vendor_contract_filter_container td.contact {
+    width: 100px;
+    text-align: left;
+}
+.vendor_contract_filter_container td.phone {
+    width: 100px;
+    text-align: left;
+}
+.vendor_contract_filter_container td.email {
+    width: 100px;
+    text-align: left;
+}
+.vendor_contract_filter_container td.setaside {
+
+}
+
+.vendor_contract_filter_container tr:last-child td {
     border-width: 1px 1px 1px 1px;
 }
 
-.vendor_detail_table tr td:last-child {
+.vendor_contract_filter_container tr td:last-child {
     border-width: 1px 1px 1px 1px;
 }
 
-.vendor_detail_table tr:last-child td:last-child {
+.vendor_contract_filter_container tr:last-child td:last-child {
     border-width: 1px 1px 1px 1px;
 }
 
-.vendor_detail_table tr:first-child td {
+.vendor_contract_filter_container tr:first-child td {
     background-color: #4A85A3;
     border: 1px solid #cecece;
     text-align: center;
@@ -1445,15 +1501,15 @@ img.green_dot {
     color: #fff;
 }
 
-.vendor_detail_table tr:first-child:hover td {
+.vendor_contract_filter_container tr:first-child:hover td {
     background-color: #4A85A3;
 }
 
-.vendor_detail_table tr:first-child td:first-child {
+.vendor_contract_filter_container tr:first-child td:first-child {
     border-width: 0 0 1px 0;
 }
 
-.vendor_detail_table tr:first-child td:last-child {
+.vendor_contract_filter_container tr:first-child td:last-child {
     border-width: 0 0 1px 1px;
 }
 
@@ -1571,7 +1627,7 @@ img.green_dot {
     border-spacing: 0;
     table-layout: fixed;
     width: 1100px;
-    height: 100%;
+    min-height: 120px;
     margin: 0;
     padding: 0;
 }
@@ -1718,5 +1774,29 @@ img.green_dot {
   bottom: 0;
   right: 0;
   z-index: 100;
-  min-height: 100px;
-  background: rgba(0,0,0,0.3) center center no-repeat url(../../images/loading.gif);
+  min-height: 120px;
+  background: rgba(0,0,0,0.3) 50% 10px no-repeat url(../../images/loading.gif);
+}
+.warning:before {
+  content: 'Error: Discovery experienced an issue loading data.  Please refresh to try again';
+  color: #FFF;
+  font-weight: bold;
+  text-align: center;
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 100;
+  min-height: 120px;
+  background: rgba(8,0,0,0.8) 50% 30px no-repeat url(../../images/warning.png);
+  background-size: 90px;
+  padding-top: 5px;
+}
+
+#site_status {
+  display: none;
+}
