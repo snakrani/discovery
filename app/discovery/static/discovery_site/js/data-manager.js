@@ -9,31 +9,38 @@ var DataManager = {
     vehicleMap: {
         "OASIS_SB": {
             "title": "OASIS Small Business",
-            "sb": true
+            "sb": true,
+            "pool_numeric": false
         },
         "OASIS": {
             "title": "OASIS Unrestricted",
-            "sb": false
+            "sb": false,
+            "pool_numeric": false
         },
         "HCATS_SB": {
             "title": "HCATS Small Business",
-            "sb": true
+            "sb": true,
+            "pool_numeric": true
         },
         "HCATS": {
             "title": "HCATS Unrestricted",
-            "sb": false
+            "sb": false,
+            "pool_numeric": true
         },
         "BMO_SB": {
             "title": "BMO Small Business",
-            "sb": true
+            "sb": true,
+            "pool_numeric": true
         },
         "BMO": {
             "title": "BMO Unrestricted",
-            "sb": false
+            "sb": false,
+            "pool_numeric": true
         },
         "PSS": {
             "title": "Professional Services",
-            "sb": true
+            "sb": true,
+            "pool_numeric": false
         }
     },
 
