@@ -41,6 +41,7 @@ LayoutManager.renderVendors = function(data) {
 };
 
 LayoutManager.renderPoolInfo = function() {
+    var vehicleMap = DataManager.getVehicleMap();
     var vehiclePools = DataManager.getVehiclePools();
     var pool = DataManager.getPool();
     var poolNames = [];
@@ -50,7 +51,20 @@ LayoutManager.renderPoolInfo = function() {
         pools = [pool];
     }
     else {
-        pools = Object.keys(vehiclePools).sort();
+        pools = Object.keys(vehiclePools).sort(function(a, b) {
+            a = vehiclePools[a];
+            b = vehiclePools[b];
+
+            if (a.vehicle == b.vehicle) {
+                if (vehicleMap[a.vehicle].pool_numeric) {
+                    return a.number - b.number;
+                }
+                else {
+                    return a.number > b.number ? 1 : -1;
+                }
+            }
+            return a.vehicle > b.vehicle ? 1 : -1;
+        });
     }
 
     if (pools.length > 0) {
