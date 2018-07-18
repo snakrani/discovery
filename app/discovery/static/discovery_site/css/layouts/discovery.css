@@ -1014,7 +1014,10 @@ img.green_dot {
 }
 
 #pool_table {
-  min-height: 120px;
+}
+
+div.init {
+    min-height: 120px;
 }
 
 #pool_table .h_vendor_name .h_vendor_location .h_naics_results .h_8a .h_hubz .h_sdvo .h_wo .h_vo .h_sdb {
