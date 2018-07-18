@@ -126,10 +126,6 @@ LayoutManager.renderVendor = function(vendor, qs) {
     nameCol.append($('<a href="/vendor/' + vendor.duns + '/' + qs + '" class="link_style">' + vendor.name + '</a>'));
     $vendorRow.append(nameCol);
 
-    // Vendor location
-    var locationStr = (vendor.sam_location_citystate ? Format.cleanLocation(vendor.sam_location_citystate) : ' ');
-    $vendorRow.append($('<td class="vendor_location">' + locationStr + '</td>'));
-
     // Contract count
     $vendorRow.append($('<td class="naics_results">' + vendor.number_of_contracts + '</td>'));
 
@@ -145,15 +141,17 @@ LayoutManager.renderVendor = function(vendor, qs) {
 
     // Setasides
     if (vendor.setasides.length > 0) {
+        $vendorRow.append(LayoutManager.renderSetaside(vendor, 'sb', 'SB'));
+        $vendorRow.append(LayoutManager.renderSetaside(vendor, 'sdb', '27'));
         $vendorRow.append(LayoutManager.renderSetaside(vendor, '8a', 'A6'));
         $vendorRow.append(LayoutManager.renderSetaside(vendor, 'Hubz', 'XX'));
-        $vendorRow.append(LayoutManager.renderSetaside(vendor, 'sdvo', 'QF'));
         $vendorRow.append(LayoutManager.renderSetaside(vendor, 'wo', 'A2'));
         $vendorRow.append(LayoutManager.renderSetaside(vendor, 'vo', 'A5'));
-        $vendorRow.append(LayoutManager.renderSetaside(vendor, 'sdb', '27'));
+        $vendorRow.append(LayoutManager.renderSetaside(vendor, 'sdvo', 'QF'));
+        $vendorRow.append(LayoutManager.renderSetaside(vendor, 'vip', 'VIP'));
     }
     else {
-        $vendorRow.append($('<td colspan="6" class="unrestricted"></td>'));
+        $vendorRow.append($('<td colspan="8" class="unrestricted"></td>'));
     }
     return $vendorRow;
 };
