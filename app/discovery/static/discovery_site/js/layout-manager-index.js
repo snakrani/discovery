@@ -7,6 +7,10 @@ LayoutManager.initializers.index = function() {
     EventManager.subscribe('metadataLoaded', LayoutManager.renderMetadata);
 };
 
+LayoutManager.preprocessors.index = function() {
+    LayoutManager.hideZone();
+};
+
 LayoutManager.route = function() {
     var queryObject = DataManager.buildRequestQuery();
 

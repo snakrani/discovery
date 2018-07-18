@@ -8,6 +8,10 @@ LayoutManager.initializers.listings = function() {
     EventManager.subscribe('pageChanged', DataManager.update);
 };
 
+LayoutManager.preprocessors.index = function() {
+    LayoutManager.hideZone();
+};
+
 LayoutManager.renderSort = function() {
     var ordering = DataManager.getSortOrdering();
 
