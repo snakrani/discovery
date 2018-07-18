@@ -447,11 +447,6 @@ h4.data {
   padding-top: 0.3em;
 }
 
-.about_discovery_text {
-    margin-left: 10px;
-    font-weight: 300;
-}
-
 #discovery_vehicles {
   margin-top: 25px;
 }
@@ -493,6 +488,20 @@ h4.data {
     float: left;
     width: 440px;
     margin-left: 60px;
+}
+
+#data_sources h3 {
+    font-weight: 600;
+    margin-top: 35px;
+}
+
+#data_sources li {
+  padding-top: 0.3em;
+}
+
+.about_discovery_text {
+    margin-left: 10px;
+    font-weight: 300;
 }
 
 #data_sources_last_updated {
