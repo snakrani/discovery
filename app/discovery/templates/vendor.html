@@ -23,90 +23,95 @@
         <div class="vendor_title"></div>
     </div><!-- end vendor_title_status_container -->
 
-    <div id="vendor_admin_container">
+    <div id="vendor_info_container">
 
-        <div id="vendor_admin_c1">
-            <div id="vendor_sam_expiration_container">
+        <div id="vendor_info">
+            <div id="vendor_c1">
                 <span class="vendor_sam_expiration_text">SAM Registration Expires on:</span>
                 <span class="vendor_sam_expiration_date"></span>
                 <span class="vendor_sam_expiration_notice">EXPIRED!</span>
-            </div><!-- end vendor_sam_expiration_container -->
-
-            <div id="vendor_socioeconomic_table_container">
-                <div class="vendor_detail_table">
-                    <table id="socioeconomic_indicators">
-                        <tr>
-                            <td scope="col">
-                                8(a)
-                            </td>
-                            <td scope="col">
-                                HubZ
-                            </td>
-                            <td scope="col">
-                                SDVO
-                            </td>
-                             <td scope="col">
-                                WO
-                            </td>
-                            <td scope="col">
-                                VO
-                            </td>
-                            <td scope="col">
-                                SDB
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div><!-- end vendor_socioeconomic_table_container -->
-
-            <div id="vendor_contact_table_container">
-                <div class="vendor_contact_label">Choose one or more to show only contract history for that selection</div>
-                <div class="vendor_detail_table">
-                    <form id="contract_pool_filters" title="Contract pool filters">
-                        <table id="contact_details">
-                            <tr>
-                                <td scope="col">
-                                </td>
-                                <td scope="col">
-                                    Pool
-                                </td>
-                                <td scope="col">
-                                    Contact
-                                </td>
-                                <td scope="col">
-                                    Phone
-                                </td>
-                                <td scope="col">
-                                    Email
-                                </td>
-                            </tr>
-                        </table>
-                    </form>
-                </div>
-            </div><!-- end vendor_contact_table_container -->
-
-        </div><!-- end vendor_admin_c1 -->
-
-        <div id="vendor_admin_c2">
-            <div id="vendor_info">
-                <div class="vendor_website"><a id="vendor_site_link" target="_blank" href="#" rel="noopener noreferrer">vendor website</a></div>
                 <div class="debarred_status"> &lt;&lt;&lt; WARNING: DEBARRED!</div>
 
-                <p class="lh"><span class="admin_label">DUNS:</span> <span class="duns_number admin_data"></span></p>
-                <p class="lh"><span class="admin_label">CAGE Code:</span> <span class="cage_code admin_data"></span></p>
-                <p class="lh"><span class="admin_label">Employees:</span> <span class="number_of_employees admin_data"></span></p>
-                <p class="lh"><span class="admin_label">Annual Revenue:</span> <span class="annual_revenue admin_data"></span></p>
+                <div class="list">
+                    <p class="lh"><span class="admin_label">DUNS:</span> <span class="duns_number admin_data"></span></p>
+                    <p class="lh"><span class="admin_label">CAGE Code:</span> <span class="cage_code admin_data"></span></p>
+                    <p class="lh"><span class="admin_label">Employees:</span> <span class="number_of_employees admin_data"></span></p>
+                    <p class="lh"><span class="admin_label">Annual Revenue:</span> <span class="annual_revenue admin_data"></span></p>
+                </div>
             </div>
 
-            <div id="vendor_address">
+            <div id="vendor_c2">
+                <div class="vendor_website"><a id="vendor_site_link" target="_blank" href="#" rel="noopener noreferrer">vendor website</a></div>
+
                 <p class="admin_title">Address</p>
                 <p class="lh"><span class="admin_label"></span><span class="vendor_address1 admin_data2"></span></p>
                 <p class="lh"><span class="admin_label"></span><span class="vendor_address2 admin_data2"></span></p>
             </div>
-        </div><!-- end vendor_admin_c2 -->
 
-        <div id="sb_badge"><img src="{% static "discovery_site/images/sb_badge.png" %}"></div>
-    </div><!-- end vendor_admin_container -->
+            <div id="vendor_c3">
+                <div id="sb_badge"><img src="{% static "discovery_site/images/sb_badge.png" %}"></div>
+            </div>
+        </div><!-- end vendor_info -->
+
+        <div id="vendor_memberships">
+            <div class="vendor_contract_selector_container">
+                <div id="vendor_contract_label" class="contract_info_header">Choose one or more to show only contract history for that selection</div>
+                <div class="contract_info_header">
+                    <div id="contract_naics_select">
+                        <span class="select_text">Select NAICS Code / Description</span>
+                        <form id="naics-search" class="pure-form">
+                            <select id="naics-code" class="search_text_style" title="Select a NAICS code or description"></select>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="vendor_contract_filter_container">
+                <form id="contract_filters" title="Service category filters">
+                    <table id="vendor_contract_filter_table">
+                        <tr>
+                            <td scope="col" class="filter">
+                            </td>
+                            <td scope="col" class="contract">
+                                Contract membership
+                            </td>
+                            <td scope="col" class="contact">
+                                Contact
+                            </td>
+                            <td scope="col" class="phone">
+                                Phone
+                            </td>
+                            <td scope="col" class="email">
+                                Email
+                            </td>
+                            <td scope="col" class="setaside">
+                                8(a)
+                            </td>
+                            <td scope="col" class="setaside">
+                                HubZ
+                            </td>
+                            <td scope="col" class="setaside">
+                                SDB
+                            </td>
+                            <td scope="col" class="setaside">
+                                WO
+                            </td>
+                            <td scope="col" class="setaside">
+                                SDVO
+                            </td>
+                            <td scope="col" class="setaside">
+                                VO
+                            </td>
+                            <td scope="col" class="setaside">
+                                VA VIP
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div><!-- end vendor_contract_filter_container -->
+
+        </div><!-- end vendor_contracts -->
+
+    </div><!-- end vendor_info_container -->
 
     <div id="vendor_result_links">
         <a id="csv_link" href="#"><div id="download_data">Download vendor data (CSV)</div></a>
@@ -116,9 +121,6 @@
 
         <div id="vendor_contract_history_title_container">
             <span class="vendor_contract_history_text"></span>
-            <!-- <span class="vendor_contract_history_naics"></span> -->
-            <div tabindex="0" id="naics_contracts_button" class="contracts_button" title="load this vendor's contract history for this NAICS in the table below">NAICS</div>
-            <div tabindex="0" id="all_contracts_button" class="contracts_button" title="load this vendor's contract history for all past contracts in the table below">All Contracts</div>
         </div><!-- end vendor_contract_history_title_container -->
 
         <div id="number_of_results">
@@ -126,7 +128,7 @@
         </div><!-- end number_of_results -->
 
         <div id="vendor_disclaimers">
-            <span class="admin_label">Work performed by a vendor is often reported under a different NAICS code due to FPDS restrictions.  Select 'All Contracts' to see other contract work performed by the vendor.</span>
+            <span class="admin_label">Work performed by a vendor is often reported under a different NAICS code due to FPDS restrictions.</span>
         </div>
 
         <div id="ch_table" class="contracthistory">
@@ -178,9 +180,7 @@
 </div><!-- end vendor_main_container -->
 
 <script src="{% static 'discovery_site/js/contrib/jquery.simplePagination.js' %}"></script>
+<script src="{% static 'discovery_site/js/data-manager-vendor.js' %}"></script>
 <script src="{% static 'discovery_site/js/layout-manager-vendor.js' %}"></script>
-<script src="{% static 'discovery_site/js/requests-manager-vendor.js' %}"></script>
-
-
 
 {% endblock body %}
