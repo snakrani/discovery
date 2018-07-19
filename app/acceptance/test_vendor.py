@@ -8,26 +8,26 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
             'params': {
                 'args': '926451519'
             },
-            'wait': ('sec', 1),
-            'Ball Aerospace & Technologies Corporation - Discovery': 'title'
+            'wait': ('text', '#site_status', 'complete'),
+            'BALL AEROSPACE & TECHNOLOGIES CORPORATION - Discovery': 'title'
         },
         'vendor_info': {
             'params': {
-                'args': '170203199',
+                'args': '968706106',
                 'vehicle': 'OASIS_SB',
                 'naics': '541330',
                 'setasides': 'A6'
             },
-            'wait': ('class', 'table_row_data'),
-            'span.cage_code.admin_data': ('text__equal', '35CZ6'),
-            'span.duns_number.admin_data': ('text__equal', '170203199'),
-            'span.number_of_employees.admin_data': ('int__is_max', 62),
-            'span.annual_revenue.admin_data': ('int__is_max', 5686000),
-            'span.vendor_address1.admin_data2': ('text__equal', '8610 Explorer Dr Ste 305'),
-            'span.vendor_address2.admin_data2': ('text__equal', 'Colorado Springs, CO 80920'),
-            'xpath://*[@id="contact_details"]/tbody/tr[2]/td[3]': ('text__equal', 'Denise Penn'),
-            'xpath://*[@id="contact_details"]/tbody/tr[2]/td[4]': ('text__equal', '719-418-4968'),
-            'xpath://*[@id="contact_details"]/tbody/tr[2]/td[5]': ('text__equal', 'OASISPOOL1@apogeemail.net'),
+            'wait': ('text', '#site_status', 'complete'),
+            'span.cage_code.admin_data': ('text__equal', '6HBK6'),
+            'span.duns_number.admin_data': ('text__equal', '968706106'),
+            'span.number_of_employees.admin_data': ('int__is_max', 445),
+            'span.annual_revenue.admin_data': ('int__is_max', 48021632),
+            'span.vendor_address1.admin_data2': ('text__equal', '7000 Muirkirk Meadows Dr'),
+            'span.vendor_address2.admin_data2': ('text__equal', 'Beltsville, MD 20705'),
+            'xpath://*[@id="vendor_contract_filter_table"]/tbody/tr[2]/td[3]': ('text__equal', 'Benjamin W. Saunders'),
+            'xpath://*[@id="vendor_contract_filter_table"]/tbody/tr[2]/td[4]': ('text__equal', '571-266-2986'),
+            'xpath://*[@id="vendor_contract_filter_table"]/tbody/tr[2]/td[5]': ('text__equal', 'OASIS@asrcfederal.com'),
         },
         'contract_info_displayed': {
             'params': ({
@@ -39,7 +39,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'vehicle': 'OASIS_SB',
                 'naics': '541712'
             }),
-            'wait': ('class', 'table_row_data'),
+            'wait': ('text', '#site_status', 'complete'),
             '#no_matching_contracts': 'not_displayed',
             'xpath://*[@id="ch_table"]/div/table/tbody/tr[2]': 'exists'
         },
@@ -48,15 +48,15 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'args': '626979228',
                 'naics': '541620'
             },
-            'wait': ('sec', 2),
+            'wait': ('text', '#site_status', 'complete'),
             'link_text:Download vendor data (CSV)': ('link__matches', r'^[\s\S]*/vendor/[\s\S]*/csv[\s\S]*$')
         },
         'address_header': {
             'params': {
-                'args': '786997739',
+                'args': '170203199',
                 'naics': '541618'
             },
-            'wait': ('sec', 1),
+            'wait': ('text', '#site_status', 'complete'),
             'p.admin_title': ('text__equal', 'Address')
         },
         'no_matching_contracts': {
@@ -65,7 +65,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'vehicle': 'BMO_SB',
                 'naics': '561730'
             },
-            'wait': ('sec', 2),
+            'wait': ('text', '#site_status', 'complete'),
             '#no_matching_contracts': 'displayed'
         },
         'matching_contracts': {
@@ -74,7 +74,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'vehicle': 'BMO_SB',
                 'naics': '541330'
             },
-            'wait': ('sec', 2),
+            'wait': ('text', '#site_status', 'complete'),
             '#no_matching_contracts': 'not_displayed'
         },
         'small_business_badge': {
@@ -83,7 +83,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'vehicle': 'BMO_SB',
                 'naics': '236220'
             },
-            'wait': ('class', 'table_row_data'),
+            'wait': ('text', '#site_status', 'complete'),
             '#sb_badge': 'displayed'
         },
         'no_small_business_badge': {
@@ -92,7 +92,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'vehicle': 'HCATS',
                 'naics': '541611'
             },
-            'wait': ('class', 'table_row_data'),
+            'wait': ('text', '#site_status', 'complete'),
             '#sb_badge': 'not_displayed'
         },
         'vendor_site': {
@@ -101,7 +101,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'vehicle': 'HCATS_SB',
                 'naics': '541611'
             },
-            'wait': ('class', 'table_row_data'),
+            'wait': ('text', '#site_status', 'complete'),
             '#vendor_site_link': ('link__equal', 'http://www.arcaspicio.com/')
         },
         'no_vendor_site': {
@@ -110,7 +110,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'vehicle': 'OASIS_SB',
                 'naics': '541330'
             },
-            'wait': ('class', 'table_row_data'),
+            'wait': ('text', '#site_status', 'complete'),
             '#vendor_site_link': 'not_displayed'
         },
         'contract_pagination': {
@@ -119,7 +119,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'vehicle': 'OASIS',
                 'test': 'true'
             },
-            'wait': ('class', 'agency'),
+            'wait': ('text', '#site_status', 'complete'),
             '#contracts_current': ('text__equal', '1 - 5'),
             '#contracts_total': ('int__is_min', 10),
             '#pagination_container': 'displayed',
@@ -132,7 +132,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'naics': '541611',
                 'test': 'true'
             },
-            'wait': ('class', 'agency'),
+            'wait': ('text', '#site_status', 'complete'),
             '#pagination_container': 'not_displayed',
             '#viewing_contracts': 'displayed'
         },
@@ -142,8 +142,8 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'vehicle': 'OASIS_SB',
                 'test': 'true'
             },
-            'wait': ('class', 'capability_statement_link'),
-            'xpath://*[@id="vendor_contact_table_container"]/div/form/table/tbody/tr[2]/td[2]/div/a': ('link__equal', 'http://localhost:8080/discovery_site/capability_statements/OASIS_SB/028509656.pdf') 
+            'wait': ('text', '#site_status', 'complete'),
+            'xpath://*[@id="vendor_contract_filter_table"]/tbody/tr[2]/td[2]/div/a': ('link__equal', 'http://localhost:8080/discovery_site/capability_statements/OASIS_SB/028509656.pdf') 
         }
     }
     
