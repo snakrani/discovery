@@ -28,6 +28,7 @@ LayoutManager.renderSort = function() {
             $target.removeClass('arrow-sortable').removeClass('arrow-up').addClass('arrow-down').attr("title", "Sorted descending");
         }
     }
+    DataManager.completeStatus();
 };
 
 LayoutManager.renderVendors = function(data) {

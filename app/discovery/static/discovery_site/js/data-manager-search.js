@@ -11,6 +11,10 @@ DataManager.initializers.listings = function() {
     EventManager.subscribe('sortChanged', DataManager.update);
 };
 
+DataManager.getStatusCount = function() {
+    return 3;
+};
+
 DataManager.loadVendors = function() {
     var url = "/api/vendors/";
     var pools = DataManager.getVehiclePools();
