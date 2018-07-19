@@ -75,8 +75,19 @@ LayoutManager.renderBadges = function(memberships) {
     for (var index = 0; index < memberships.length; index++) {
         var pool = poolMap[memberships[index].pool.id];
 
-        if (vehicleMap[pool.vehicle].sb) {
+        if (pool.vehicle.includes('_SB')) {
             smallBusiness = true;
+            break;
+        }
+        else {
+            for (var sindex = 0; sindex < memberships[index].setasides.length; sindex++) {
+                var setaside = memberships[index].setasides[sindex];
+
+                if (['SB', 'SDB', 'A6'].includes(setaside.code)) {
+                    smallBusiness = true;
+                    break;
+                }
+            }
         }
     }
     if (smallBusiness) {
