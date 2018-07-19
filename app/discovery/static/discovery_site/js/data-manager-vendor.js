@@ -83,7 +83,8 @@ DataManager.getMembershipMap = function() {
                 'contacts': [],
                 'phones': [],
                 'emails': [],
-                'setasides': []
+                'setasides': [],
+                'reference': membership
             };
         }
 
@@ -140,9 +141,10 @@ DataManager.getMembershipName = function(membershipInfo) {
     });
 
     // Vehicle - Pool - Zone
-    membershipName = membershipInfo.vehicles.join(', ') + ' (Pools: ' + membershipInfo.pools.join(', ') + ')';
+    membershipName = '<div class="membership_vehicles">' + membershipInfo.vehicles.join(', ') + '</div>'
+        + '<div class="membership_pools"><span class="admin_label">Service category:</span> ' + membershipInfo.pools.join(', ') + '</div>';
     if (membershipInfo.zones.length > 0) {
-        membershipName += ' (Zones: ' + membershipInfo.zones.join(', ') + ')';
+        membershipName += '<div class="membership_zones"><span class="admin_label">Zone:</span> ' + membershipInfo.zones.join(', ') + '</div>';
     }
     return membershipName;
 };
@@ -259,11 +261,13 @@ DataManager.loadContracts = function() {
     }
 
     $('.table_wrapper').addClass('loading');
+    $('#ch_table').addClass('init');
 
     DataManager.getAPIRequest(url, queryData,
         function(response) {
             EventManager.publish('contractsLoaded', response);
             $('.table_wrapper').removeClass('loading');
+            $('#ch_table').removeClass('init');
         },
         function(req, status, error) {
             if (queryData['page'] > 1 && req.status == 404) {
@@ -356,9 +360,10 @@ DataManager.populateMembershipFilters = function() {
                 checked = "checked";
             }
 
-            if (vendor.capability_statement && vendor.capability_statement.length > 0) {
-                var capabilityStatementLink = '<div class="capability_statement_link"><a href="' + vendor.capability_statement + '">Capability Statement (PDF)</a></div>';
-                membershipName = '<div>' + membershipName + '</div>' + capabilityStatementLink;
+            membershipName = '<div class="membership_info">' + membershipName + '</div>';
+            if (membership.reference.capability_statement && membership.reference.capability_statement.length > 0) {
+                var capabilityStatementLink = '<div class="capability_statement_link"><a href="' + membership.reference.capability_statement + '">Capability Statement (PDF)</a></div>';
+                membershipName = membershipName + capabilityStatementLink;
             }
 
             $membershipRow.append('<td class="filter"><input type="checkbox" class="contract_pool_filter" name="' + piid + '" value="' + piid + '" ' + checked + ' /></td>');
@@ -368,16 +373,28 @@ DataManager.populateMembershipFilters = function() {
             $membershipRow.append('<td class="email">' + membership.emails.join('<br/>') + '</td>');
 
             if (membership.vehicleIds.length == 1 && vehicleMap[membership.vehicleIds[0]].sb) {
+                var exp_8a_date;
+
+                $membershipRow.append(DataManager.setasideColumn(membership.setasides, 'sb', 'SB'));
+                $membershipRow.append(DataManager.setasideColumn(membership.setasides, 'sdb', '27'));
                 $membershipRow.append(DataManager.setasideColumn(membership.setasides, '8a', 'A6'));
+
+                if (membership.reference.expiration_8a_date) {
+                    exp_8a_date = Format.formatDate(Format.createDate(membership.reference.expiration_8a_date));
+                }
+                else {
+                    exp_8a_date = 'NA';
+                }
+                $membershipRow.append('<td class="setaside_info">' + exp_8a_date + '</td>');
+
                 $membershipRow.append(DataManager.setasideColumn(membership.setasides, 'Hubz', 'XX'));
-                $membershipRow.append(DataManager.setasideColumn(membership.setasides, 'sdvo', 'QF'));
                 $membershipRow.append(DataManager.setasideColumn(membership.setasides, 'wo', 'A2'));
                 $membershipRow.append(DataManager.setasideColumn(membership.setasides, 'vo', 'A5'));
-                $membershipRow.append(DataManager.setasideColumn(membership.setasides, 'sdb', '27'));
+                $membershipRow.append(DataManager.setasideColumn(membership.setasides, 'sdvo', 'QF'));
                 $membershipRow.append(DataManager.setasideColumn(membership.setasides, 'VIP', 'VIP'));
             }
             else {
-                $membershipRow.append($('<td colspan="7" class="unrestricted"></td>'));
+                $membershipRow.append($('<td colspan="9" class="unrestricted"></td>'));
             }
 
             $table.append($membershipRow);
