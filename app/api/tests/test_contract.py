@@ -7,8 +7,8 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
     fixtures = data.get_contract_fixtures()
     schema = {
         'object': {
-            '&1': ('piid', 'equal', 'W911SR10D0015_0001'),
-            '&162': ('piid', 'equal', 'GS00Q14OADS128_19AQMM18F0834'),
+            '&1': ('piid', 'equal', 'DAAE0703CS108'),
+            '&162': ('piid', 'equal', 'GS00Q14OADS128_1605DC17F00172'),
             '&828': ('name', 'equal', 'USZA2202D0015_0194'),
             '#345C': (),
             '#ABCDEFG': ()
