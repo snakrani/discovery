@@ -28,8 +28,8 @@ def PoolCSV(request):
     zone = None
     setasides = []
     
-    if 'naics-code' in request.GET:
-        naics = Naics.objects.get(code=request.GET['naics-code'])
+    if 'naics' in request.GET:
+        naics = Naics.objects.get(code=request.GET['naics'])
     
     if 'vehicle' in request.GET:
         vehicle = request.GET['vehicle'].upper()
@@ -149,8 +149,8 @@ def VendorCSV(request, vendor_duns):
        
     pool_contacts = {}
     
-    if 'naics-code' in request.GET:
-        naics = Naics.objects.get(code=request.GET['naics-code'])
+    if 'naics' in request.GET:
+        naics = Naics.objects.get(code=request.GET['naics'])
 
     if 'vehicle' in request.GET:
         vehicle = request.GET['vehicle'].upper()

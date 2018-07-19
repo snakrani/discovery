@@ -62,77 +62,77 @@ def crash_handler(signum, frame):
 
 @catch_key_error
 def get_award_id_obj(award):
-    if 'awardID' in award: 
-        return award['awardID']
+    if 'https://www.fpds.gov/FPDS:awardID' in award: 
+        return award['https://www.fpds.gov/FPDS:awardID']
     else:
-        return award['OtherTransactionAwardID']['OtherTransactionAwardContractID']
+        return award['https://www.fpds.gov/FPDS:OtherTransactionAwardID']['https://www.fpds.gov/FPDS:OtherTransactionAwardContractID']
 
 
 def get_piid(award_id):
     piid = ''
-    if 'referencedIDVID' in award_id:
+    if 'https://www.fpds.gov/FPDS:referencedIDVID' in award_id:
         #part of an IDIQ
-        piid = award_id['referencedIDVID']['PIID'] + '_' 
-    elif 'PIID' in award_id:
-        return award_id['PIID']
+        piid = award_id['https://www.fpds.gov/FPDS:referencedIDVID']['https://www.fpds.gov/FPDS:PIID'] + '_' 
+    elif 'https://www.fpds.gov/FPDS:PIID' in award_id:
+        return award_id['https://www.fpds.gov/FPDS:PIID']
 
-    piid += award_id['awardContractID']['PIID']
+    piid += award_id['https://www.fpds.gov/FPDS:awardContractID']['https://www.fpds.gov/FPDS:PIID']
 
     return piid
 
 
 def get_mod(award_id):
-    if 'modNumber' in award_id:
-        return award_id['modNumber']
-    return award_id['awardContractID']['modNumber']
+    if 'https://www.fpds.gov/FPDS:modNumber' in award_id:
+        return award_id['https://www.fpds.gov/FPDS:modNumber']
+    return award_id['https://www.fpds.gov/FPDS:awardContractID']['https://www.fpds.gov/FPDS:modNumber']
 
 
 def get_agency_id(award_id):
-    if 'awardContractID' in award_id:
-        return award_id['awardContractID']['agencyID']['#text']
+    if 'https://www.fpds.gov/FPDS:awardContractID' in award_id:
+        return award_id['https://www.fpds.gov/FPDS:awardContractID']['https://www.fpds.gov/FPDS:agencyID']['#text']
     else:
-        return award_id['agencyID']['#text']
+        return award_id['https://www.fpds.gov/FPDS:agencyID']['#text']
 
 
 def get_agency_name(award_id):
-    if 'awardContractID' in award_id:
-        return award_id['awardContractID']['agencyID']['@name']
+    if 'https://www.fpds.gov/FPDS:awardContractID' in award_id:
+        return award_id['https://www.fpds.gov/FPDS:awardContractID']['https://www.fpds.gov/FPDS:agencyID']['@name']
     else:
-        return award_id['agencyID']['@name'] 
+        return award_id['https://www.fpds.gov/FPDS:agencyID']['@name'] 
 
 
 @catch_key_error
 def get_transaction_number(award_id):
-    return award_id['awardContractID']['transactionNumber']
+    return award_id['https://www.fpds.gov/FPDS:awardContractID']['https://www.fpds.gov/FPDS:transactionNumber']
 
 
 @catch_key_error
 def get_ultimate_completion_date(award):
-    return award['relevantContractDates']['ultimateCompletionDate']
+    return award['https://www.fpds.gov/FPDS:relevantContractDates']['https://www.fpds.gov/FPDS:ultimateCompletionDate']
 
 
 @catch_key_error
 def get_current_completion_date(award):
-    return award['relevantContractDates']['currentCompletionDate']
+    return award['https://www.fpds.gov/FPDS:relevantContractDates']['https://www.fpds.gov/FPDS:currentCompletionDate']
 
 
 @catch_key_error
 def get_annual_revenue(award):
-    return award['vendor']['vendorSiteDetails']['vendorOrganizationFactors']['annualRevenue']
+    return award['https://www.fpds.gov/FPDS:vendor']['https://www.fpds.gov/FPDS:vendorSiteDetails']['https://www.fpds.gov/FPDS:vendorOrganizationFactors']['https://www.fpds.gov/FPDS:annualRevenue']
 
 
 @catch_key_error
 def get_number_of_employees(award):
-    return award['vendor']['vendorSiteDetails']['vendorOrganizationFactors']['numberOfEmployees']
+    return award['https://www.fpds.gov/FPDS:vendor']['https://www.fpds.gov/FPDS:vendorSiteDetails']['https://www.fpds.gov/FPDS:vendorOrganizationFactors']['https://www.fpds.gov/FPDS:numberOfEmployees']
 
 
 @catch_key_error
 def get_last_modified_by(award):
-    return award['transactionInformation']['lastModifiedBy']
+    return award['https://www.fpds.gov/FPDS:transactionInformation']['https://www.fpds.gov/FPDS:lastModifiedBy']
 
 @catch_key_error
 def get_created_by(award):
-    return award['transactionInformation']['createdBy']
+    return award['https://www.fpds.gov/FPDS:transactionInformation']['https://www.fpds.gov/FPDS:createdBy']
 
 def poc_is_email(text):
     if text and re.search('@', text):
@@ -151,81 +151,81 @@ def get_contract_pricing_name(award):
     
     @catch_key_error
     def get_name(award):
-        return award['contractData']['typeOfContractPricing']
+        return award['https://www.fpds.gov/FPDS:contractData']['https://www.fpds.gov/FPDS:typeOfContractPricing']
 
     name = get_name(award) 
     if name and isinstance(name, str):
         return name
 
     elif name: 
-        return award['contractData']['typeOfContractPricing']['@description']
+        return award['https://www.fpds.gov/FPDS:contractData']['https://www.fpds.gov/FPDS:typeOfContractPricing']['@description']
 
 
 @catch_key_error
 def get_contract_pricing_id(award):
-    return award['contractData']['typeOfContractPricing']['#text']
+    return award['https://www.fpds.gov/FPDS:contractData']['https://www.fpds.gov/FPDS:typeOfContractPricing']['#text']
 
 
 @catch_key_error
 def get_reason_for_modification(award):
-    return award['contractData']['reasonForModification']['#text']
+    return award['https://www.fpds.gov/FPDS:contractData']['https://www.fpds.gov/FPDS:reasonForModification']['#text']
 
 
 def get_naics(award):
     
     @catch_key_error
     def get_name(award):
-        return award['productOrServiceInformation']['principalNAICSCode']
+        return award['https://www.fpds.gov/FPDS:productOrServiceInformation']['https://www.fpds.gov/FPDS:principalNAICSCode']
     
     name = get_name(award)
     
     if name and isinstance(name, str):
         return name
     elif name:
-        return award['productOrServiceInformation']['principalNAICSCode']['#text']
+        return award['https://www.fpds.gov/FPDS:productOrServiceInformation']['https://www.fpds.gov/FPDS:principalNAICSCode']['#text']
 
 
 @catch_key_error
 def get_psc(award):
-    return award['productOrServiceInformation']['productOrServiceCode']['#text']
+    return award['https://www.fpds.gov/FPDS:productOrServiceInformation']['https://www.fpds.gov/FPDS:productOrServiceCode']['#text']
 
 
 @catch_key_error
 def get_phone(award):
     return "{}-{}-{}".format(
-        award['vendor']['vendorSiteDetails']['vendorLocation']['phoneNo'][:3],
-        award['vendor']['vendorSiteDetails']['vendorLocation']['phoneNo'][3:6],
-        award['vendor']['vendorSiteDetails']['vendorLocation']['phoneNo'][6:]
+        award['https://www.fpds.gov/FPDS:vendor']['https://www.fpds.gov/FPDS:vendorSiteDetails']['https://www.fpds.gov/FPDS:vendorLocation']['https://www.fpds.gov/FPDS:phoneNo'][:3],
+        award['https://www.fpds.gov/FPDS:vendor']['https://www.fpds.gov/FPDS:vendorSiteDetails']['https://www.fpds.gov/FPDS:vendorLocation']['https://www.fpds.gov/FPDS:phoneNo'][3:6],
+        award['https://www.fpds.gov/FPDS:vendor']['https://www.fpds.gov/FPDS:vendorSiteDetails']['https://www.fpds.gov/FPDS:vendorLocation']['https://www.fpds.gov/FPDS:phoneNo'][6:]
     )
 
 
 @catch_key_error
 def get_location(award):
-    loc = award['vendor']['vendorSiteDetails']['vendorLocation']
+    loc = award['https://www.fpds.gov/FPDS:vendor']['https://www.fpds.gov/FPDS:vendorSiteDetails']['https://www.fpds.gov/FPDS:vendorLocation']
     return {
-        'address': loc['streetAddress'].strip().title(),
-        'city': loc['city'].strip().title(),
-        'state': loc['state']['#text'].strip().upper(),
-        'zipcode': loc['ZIPCode'].strip()[:5],
-        'congressional_district': '{:02d}'.format(int(loc['congressionalDistrictCode']))
+        'address': loc['https://www.fpds.gov/FPDS:streetAddress'].strip().title(),
+        'city': loc['https://www.fpds.gov/FPDS:city'].strip().title(),
+        'state': loc['https://www.fpds.gov/FPDS:state']['#text'].strip().upper(),
+        'zipcode': loc['https://www.fpds.gov/FPDS:ZIPCode'].strip()[:5],
+        'congressional_district': '{:02d}'.format(int(loc['https://www.fpds.gov/FPDS:congressionalDistrictCode']))
     }
 
 
 @catch_key_error
 def get_place_of_performance(award):
-    pop = award['placeOfPerformance']['principalPlaceOfPerformance']
+    pop = award['https://www.fpds.gov/FPDS:placeOfPerformance']['https://www.fpds.gov/FPDS:principalPlaceOfPerformance']
     info = {
-        'country_code': pop['countryCode']['#text'].strip().upper(),
-        'country_name': pop['countryCode']['@name'].strip().title(),
+        'country_code': pop['https://www.fpds.gov/FPDS:countryCode']['#text'].strip().upper(),
+        'country_name': pop['https://www.fpds.gov/FPDS:countryCode']['@name'].strip().title(),
         'state': None,
         'zipcode': None
     }
     
-    if 'stateCode' in pop:
-        info['state'] = pop['stateCode']['#text'].strip().upper()
+    if 'https://www.fpds.gov/FPDS:stateCode' in pop:
+        info['state'] = pop['https://www.fpds.gov/FPDS:stateCode']['#text'].strip().upper()
         
-    if 'placeOfPerformanceZIPCode' in award['placeOfPerformance']:
-        info['zipcode'] = award['placeOfPerformance']['placeOfPerformanceZIPCode']['#text'].strip()[:5]
+    if 'https://www.fpds.gov/FPDS:placeOfPerformanceZIPCode' in award['https://www.fpds.gov/FPDS:placeOfPerformance']:
+        info['zipcode'] = award['https://www.fpds.gov/FPDS:placeOfPerformance']['https://www.fpds.gov/FPDS:placeOfPerformanceZIPCode']['#text'].strip()[:5]
         
     return info
 
@@ -346,23 +346,22 @@ class Command(BaseCommand):
 
     def init_contract(self, raw_entry):
         fpds_contract = raw_entry['content']
-        last_modified = raw_entry['modified']
         
         #get contract award information
-        if 'IDV' in fpds_contract:
+        if 'https://www.fpds.gov/FPDS:IDV' in fpds_contract:
             return None, {} # don't get IDV records
 
         try:
-            award = fpds_contract['award']
+            award = fpds_contract['https://www.fpds.gov/FPDS:award']
                     
         except KeyError:
             try:
-                award = fpds_contract['OtherTransactionAward']
+                award = fpds_contract['https://www.fpds.gov/FPDS:OtherTransactionAward']
             except KeyError:
                 return None, {}
                         
-        if 'contractDetail' in award:
-            award = award['contractDetail'] # for OtherTransactionAward, details are nested one more level
+        if 'https://www.fpds.gov/FPDS:contractDetail' in award:
+            award = award['https://www.fpds.gov/FPDS:contractDetail'] # for OtherTransactionAward, details are nested one more level
     
         award_id = get_award_id_obj(award)
         if award_id is None:
@@ -373,15 +372,14 @@ class Command(BaseCommand):
         pop = get_place_of_performance(award)
         
         record = {
-            'modified_date': last_modified.strftime("%Y-%m-%d %H:%M:%S"),
             'mod_number': get_mod(award_id), 
             'transaction_number': get_transaction_number(award_id),
             'ultimate_completion_date': get_ultimate_completion_date(award), 
             'current_completion_date': get_current_completion_date(award), 
-            'signed_date': award['relevantContractDates']['signedDate'],
+            'signed_date': award['https://www.fpds.gov/FPDS:relevantContractDates']['https://www.fpds.gov/FPDS:signedDate'],
             'agency_id': get_agency_id(award_id),
             'agency_name': get_agency_name(award_id),
-            'obligated_amount': award['dollarValues']['obligatedAmount'],
+            'obligated_amount': award['https://www.fpds.gov/FPDS:dollarValues']['https://www.fpds.gov/FPDS:obligatedAmount'],
             'annual_revenue': get_annual_revenue(award),
             'number_of_employees': get_number_of_employees(award),
             'last_modified_by': get_last_modified_by(award),
@@ -513,16 +511,14 @@ class Command(BaseCommand):
             v_con, v_index = contracts.get_page(v_index, options['count'], vendor_duns=vendor.duns, last_modified_date=[load_date, load_to], _sleep=options['pause'])
             
             log_memory("Loading [ {} ] {} - {}".format(vid, vendor.name, vendor.duns))
-                
+            
             for vc in v_con:
                 piid, contract_record = self.init_contract(vc)
-                    
+                   
                 if piid is None:
                     continue
                     
                 contracts_processed += 1
-                if not contract_record['modified_date']:
-                    missing_modified += 1
                     
                 if piid in by_piid:
                     by_piid[piid].append(contract_record)
@@ -535,7 +531,7 @@ class Command(BaseCommand):
                                 
             if v_index == 0:
                 break
-             
+        
         for piid, records in by_piid.items():
             logger.debug("================{0}===Vendor {1}=================\n".format(piid, vendor.duns))
             logger.debug(contracts.pretty_print(by_piid[piid]))
@@ -547,7 +543,7 @@ class Command(BaseCommand):
             
         print(" --- completed with: {} PIID(s), {} contract(s) processed".format(len(by_piid.keys()), contracts_processed))
         log_memory("Final [ {} ] {} - {}".format(vid, vendor.name, vendor.duns))
-        log_data(vid, vendor.duns, vendor.name, load_date, load_to, contracts_processed, len(by_piid.keys()), missing_modified)
+        log_data(vid, vendor.duns, vendor.name, load_date, load_to, contracts_processed, len(by_piid.keys()))
 
     
     def update_vendors(self, vendor_ids, load_to, options):
@@ -560,7 +556,6 @@ class Command(BaseCommand):
             "End Date", 
             "Contracts", 
             "PIIDs", 
-            "Missing Modified Timestamp"
         )
         
         for vid in vendor_ids:

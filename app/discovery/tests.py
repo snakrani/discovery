@@ -29,7 +29,7 @@ class SmokeTest(case.RequestTestCase):
         self.validated_path('/results/')
     
     def test_results_csv_found(self):
-        self.validated_path('/results/csv/', **{'vehicle': 'HCATS_SB', 'naics-code': 611710})
+        self.validated_path('/results/csv/', **{'vehicle': 'HCATS_SB', 'naics': 611710})
     
     def test_vendor_found(self):
         self.validated_path('/vendor/079939977/')

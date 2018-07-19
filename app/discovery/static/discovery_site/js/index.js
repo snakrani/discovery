@@ -18,7 +18,6 @@ $(document).ready(function() {
     window.Events = new Mediator() || {};
 
     DataManager.init();
-    RequestsManager.init();
     LayoutManager.init();
 
     DataManager.bootstrap();

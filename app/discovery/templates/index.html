@@ -9,6 +9,9 @@
             <h3>Discovery</h3>
             <p class="about_discovery_text">Discovery is a market research tool for GSA Contract Vehicles. Currently, it features GSA IDIQ vehicles, with more contracts coming in the future. Use Discovery to search vendor history for the awarded contractors and NAICs of the various IDIQs. Some contracts are separated into Unrestricted and Small Business (SB) based on their contract structure. For all other contracts, you can apply small business filters to narrow your results based on any set aside needs you have.</p>
 
+            <h3>How to use Discovery</h3>
+            <p class="about_discovery_text">Discovery lets you pick and choose different criteria in order to narrow down contracts to find one that suits your needs.  Select any of the listed filters to view lists of vendors available based on the selected criteria.  The other filters will update as you select certain fields.  Select the “All” options to clear them. Once you’ve selected one or more options from the dropdowns, you can then click through to the vendor’s pages to see contract history and registration data for each vendor.</p>
+
             <h3>Contract Vehicles</h3>
             <div id="discovery_vehicles" class="about_discovery_text collapse-container">
                 <h1 class="vehicle"><span class="arrow-d"></span>One Acquisition Solution for Integrated Services (<b>OASIS</b>)</h1>
@@ -28,6 +31,7 @@
                         <li>Provides a regionally focused pool of highly qualified large and small contractors</li>
                         <li>Allows flexibility for contract types, including fixed price, labor hour, time and materials, and hybrids</li>
                         <li>Leverages spend in acquiring services in an effective, economical, and expedient manner resulting in both significant cost and time savings</li>
+                        <li>Following FAR Subpart 16.505 Ordering Procedures, all BMO vendors that can meet the exact specifications of your requirement should be notified (given Fair Opportunity to compete)</li>
                         <li><a class="bmo_descriptions" href="{% static 'discovery_site/files/BMO_Phase_II_Service_Category_Descriptions.pdf' %}" target="_blank" rel="noopener noreferrer">BMO Phase II Service Category Descriptions</a></li>
                         <li><a class="learn_more" href="https://www.gsa.gov/acquisition/purchasing-programs/federal-strategic-sourcing-initiative/building-maintenance-and-operations)">Learn more about BMO</a></li>
                     </ul>
@@ -53,12 +57,6 @@
                     </ul>
                 </div>
             </div>
-
-            <h3>What are Pools?</h3>
-            <ul class="about_discovery_text">
-                <li>Discovery’s IDIQs are divided into functional categories that are referred to as pools</li>
-                <li>If your contracting need spans multiple categories, choose the one that contains the preponderance of your work. Selecting the most relevant NAICS code above will guide you to the correct pool</li>
-            </ul>
         </div><!-- end about_discovery -->
 
         <div id="data_sources">
@@ -79,12 +77,19 @@
                 <span id="data_source_last_updated">last updated</span>
                 <span id="data_source_description_fpds"  class="data_source_description">Discovery loads data from the Federal Procurement Data System (FPDS) to automatically provide you with a context-rich contract history for each vendor, including the amount of the contract, the primary NAICS code and the pricing type.</span>
             </div><!-- end data_sources_row -->
+
+            <h3>What are Pools?</h3>
+            <ul class="about_discovery_text">
+                <li>Discovery’s IDIQs are divided into functional categories that are referred to as pools</li>
+                <li>If your contracting need spans multiple categories, choose the one that contains the preponderance of your work. Selecting the most relevant NAICS code above will guide you to the correct pool</li>
+            </ul>
         </div><!-- end data_sources -->
     <!-- END LANDING HTML -->
 {% endblock %}
 
 {% block page_js %}
     <script src="{% static 'discovery_site/js/contrib/jquery.collapsible.min.js' %}"></script>
-    <script src="{% static 'discovery_site/js/requests-manager-index.js' %}"></script>
+    <script src="{% static 'discovery_site/js/search.js' %}"></script>
+    <script src="{% static 'discovery_site/js/data-manager-index.js' %}"></script>
     <script src="{% static 'discovery_site/js/layout-manager-index.js' %}"></script>
 {% endblock %}

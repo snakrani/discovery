@@ -610,15 +610,33 @@ class MetaAcceptanceSchema(type):
                             method = test
                             args = [elem]                    
                         
+                        resp.locator = elem
                         getattr(resp, method)(*args)
                         
                     for action, action_data in actions.items():
-                        components = action.split('*')
-                        action_elem = components[0]
-                        action_event = components[1]
+                        if action == 'wait':
+                            type = action_data[0]
+                            elem = action_data[1]
+                            text = action_data[2] if len(action_data) > 2 else None
                         
-                        resp.execute(action_elem, action_event)
-                        tests(resp, action_data)
+                            getattr(resp, "wait_for_{}".format(type))(elem, text)
+                        else:
+                            components = action.split('<>')
+                            action_elem = components[0]
+                            action_event = components[1]
+                            action_value = None
+                        
+                            regex = re.search(r'^([^\[]+)(?:\[([^\]]+)\])?$', action_event, re.IGNORECASE)
+                            if regex:
+                                action_event = regex.group(1)
+                                action_value = regex.group(2)
+                            
+                                if action_value:
+                                    action_value = [value.strip() for value in action_value.split(',')]
+                                    action_value = action_value[0] if len(action_value) == 1 else action_value
+                        
+                            resp.execute(action_elem, action_event, action_value)
+                            tests(resp, action_data)
         
             if 'params' in schema:
                 self.fetch_page(tests, **schema['params'])
