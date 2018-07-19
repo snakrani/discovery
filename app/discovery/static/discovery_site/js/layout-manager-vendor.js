@@ -2,16 +2,11 @@
 LayoutManager.initializers.vendor = function() {
 
     // Internal event subscriptions
-    EventManager.subscribe('pageInitialized', LayoutManager.renderBackLink);
     EventManager.subscribe('dataInitialized', LayoutManager.renderVendor);
     EventManager.subscribe('dataInitialized', LayoutManager.renderContractSort);
     EventManager.subscribe('contractsLoaded', LayoutManager.renderContracts);
 
     EventManager.subscribe('pageChanged', DataManager.update);
-};
-
-LayoutManager.renderBackLink = function() {
-    $("#back_link").attr("href", "/results/" + DataManager.getQueryString());
 };
 
 LayoutManager.renderVendor = function() {
