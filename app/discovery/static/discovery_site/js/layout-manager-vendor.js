@@ -20,6 +20,7 @@ LayoutManager.renderVendor = function() {
     LayoutManager.renderAddress(vendor);
     LayoutManager.renderBadges(vendor.pools);
     LayoutManager.renderResultInfo(vendor);
+    DataManager.completeStatus();
 };
 
 LayoutManager.renderBasicVendorInfo = function(vendor) {
@@ -134,6 +135,7 @@ LayoutManager.renderContractSort = function() {
             $target.removeClass('arrow-sortable').removeClass('arrow-up').addClass('arrow-down').attr("title", "Sorted descending");
         }
     }
+    DataManager.completeStatus();
 };
 
 LayoutManager.renderContracts = function(data) {
@@ -155,6 +157,7 @@ LayoutManager.renderContracts = function(data) {
     $("#ch_table").show();
 
     LayoutManager.renderPager(data);
+    DataManager.completeStatus();
 };
 
 LayoutManager.renderContract = function(contract) {

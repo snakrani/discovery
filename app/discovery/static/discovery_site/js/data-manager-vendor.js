@@ -31,6 +31,10 @@ DataManager.initializers.vendor = function() {
     });
 };
 
+DataManager.getStatusCount = function() {
+    return 4;
+};
+
 DataManager.requestParams = function(queryData) {
     var naics = DataManager.getNaics();
     var memberships = DataManager.getMemberships();
