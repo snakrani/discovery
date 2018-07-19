@@ -187,6 +187,12 @@ def get_setasides(record):
     except Exception as e:
         pass
     
+    try:
+        if check_bool(record['SB']):
+            setasides.append('SB')
+    except Exception as e:
+        pass
+    
     return setasides
 
 
