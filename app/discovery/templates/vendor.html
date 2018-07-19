@@ -8,7 +8,7 @@
 {% block header %}
 <div id="combined_search_pool">
 
-    <a href="/results/?{{ request.GET.urlencode }}"><div id="vendor_back_button">
+    <a id="back_link" href="#"><div id="vendor_back_button">
         <span class="back_text">Back to search results</span>
     </div></a>
 
@@ -58,7 +58,7 @@
                 <div id="vendor_contract_label" class="contract_info_header">Choose one or more to show only contract history for that selection</div>
                 <div class="contract_info_header">
                     <div id="contract_naics_select">
-                        <span class="select_text">Select NAICS Code / Description</span>
+                        <span class="select_text">Select NAICS Code</span>
                         <form id="naics-search" class="pure-form">
                             <select id="naics-code" class="search_text_style" title="Select a NAICS code or description"></select>
                         </form>
@@ -84,22 +84,28 @@
                                 Email
                             </td>
                             <td scope="col" class="setaside">
-                                8(a)
-                            </td>
-                            <td scope="col" class="setaside">
-                                HubZ
+                                SB
                             </td>
                             <td scope="col" class="setaside">
                                 SDB
                             </td>
                             <td scope="col" class="setaside">
+                                8(a)
+                            </td>
+                            <td scope="col" class="setaside_info">
+                                8(a) exp
+                            </td>
+                            <td scope="col" class="setaside">
+                                HubZ
+                            </td>
+                            <td scope="col" class="setaside">
                                 WO
                             </td>
                             <td scope="col" class="setaside">
-                                SDVO
+                                VO
                             </td>
                             <td scope="col" class="setaside">
-                                VO
+                                SDVO
                             </td>
                             <td scope="col" class="setaside">
                                 VA VIP
