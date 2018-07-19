@@ -2082,6 +2082,17 @@
   "model": "vendors.location",
   "pk": 190,
   "fields": {
+    "address": "2136 Gallows Rd Ste F",
+    "city": "Dunn Loring",
+    "state": "VA",
+    "zipcode": "22027",
+    "congressional_district": "11"
+  }
+},
+{
+  "model": "vendors.location",
+  "pk": 191,
+  "fields": {
     "address": "8229 Boone Blvd Ste 520",
     "city": "Vienna",
     "state": "VA",
@@ -2091,7 +2102,7 @@
 },
 {
   "model": "vendors.location",
-  "pk": 191,
+  "pk": 192,
   "fields": {
     "address": "2427 Villanova Drive",
     "city": "Vienna",
@@ -2102,7 +2113,7 @@
 },
 {
   "model": "vendors.location",
-  "pk": 192,
+  "pk": 193,
   "fields": {
     "address": "1600 Tysons Blvd 8Th Fl",
     "city": "Mclean",
@@ -2113,7 +2124,7 @@
 },
 {
   "model": "vendors.location",
-  "pk": 193,
+  "pk": 194,
   "fields": {
     "address": "8300 Old Court House Rd Ste 210",
     "city": "Vienna",
@@ -2124,24 +2135,13 @@
 },
 {
   "model": "vendors.location",
-  "pk": 194,
-  "fields": {
-    "address": "2136 Gallows Rd Ste F",
-    "city": "Dunn Loring",
-    "state": "VA",
-    "zipcode": "22027",
-    "congressional_district": "11"
-  }
-},
-{
-  "model": "vendors.location",
   "pk": 195,
   "fields": {
-    "address": "12355 Sunrise Valley Dr Ste 520",
-    "city": "Reston",
+    "address": "1725 Duke St",
+    "city": "Alexandria",
     "state": "VA",
-    "zipcode": "20191",
-    "congressional_district": "11"
+    "zipcode": "22314",
+    "congressional_district": "08"
   }
 },
 {
@@ -2152,17 +2152,17 @@
     "city": "Reston",
     "state": "VA",
     "zipcode": "20191",
-    "congressional_district": "08"
+    "congressional_district": "11"
   }
 },
 {
   "model": "vendors.location",
   "pk": 197,
   "fields": {
-    "address": "1725 Duke St",
-    "city": "Alexandria",
+    "address": "12355 Sunrise Valley Dr Ste 520",
+    "city": "Reston",
     "state": "VA",
-    "zipcode": "22314",
+    "zipcode": "20191",
     "congressional_district": "08"
   }
 },
@@ -2229,7 +2229,7 @@
     "city": "Farmington Hills",
     "state": "MI",
     "zipcode": "48331",
-    "congressional_district": "09"
+    "congressional_district": "14"
   }
 },
 {
@@ -2240,7 +2240,7 @@
     "city": "Farmington Hills",
     "state": "MI",
     "zipcode": "48331",
-    "congressional_district": "14"
+    "congressional_district": "09"
   }
 },
 {
@@ -2258,7 +2258,7 @@
   "model": "vendors.location",
   "pk": 206,
   "fields": {
-    "address": "4040 S Memorial Pkwy, Suit",
+    "address": "1900 Golf Road",
     "city": "Huntsville",
     "state": "AL",
     "zipcode": "35802",
@@ -2269,7 +2269,7 @@
   "model": "vendors.location",
   "pk": 207,
   "fields": {
-    "address": "1900 Golf Road",
+    "address": "4040 S Memorial Pkwy, Suit",
     "city": "Huntsville",
     "state": "AL",
     "zipcode": "35802",
@@ -2357,7 +2357,7 @@
   "model": "vendors.location",
   "pk": 215,
   "fields": {
-    "address": "1101 Wilson Blvd Ste 1810",
+    "address": "1101 Wilson Blvd Ste 2210",
     "city": "Arlington",
     "state": "VA",
     "zipcode": "22209",
@@ -2368,7 +2368,7 @@
   "model": "vendors.location",
   "pk": 216,
   "fields": {
-    "address": "1101 Wilson Blvd Ste 2210",
+    "address": "1101 Wilson Blvd Ste 1810",
     "city": "Arlington",
     "state": "VA",
     "zipcode": "22209",
@@ -2456,10 +2456,10 @@
   "model": "vendors.location",
   "pk": 224,
   "fields": {
-    "address": "4017 W Martin Luther King Jr Blvd",
+    "address": "2202 N West Shore Blvd",
     "city": "Tampa",
     "state": "FL",
-    "zipcode": "33614",
+    "zipcode": "33607",
     "congressional_district": "11"
   }
 },
@@ -2467,10 +2467,10 @@
   "model": "vendors.location",
   "pk": 225,
   "fields": {
-    "address": "2202 N West Shore Blvd",
+    "address": "4017 W Martin Luther King Jr Blvd",
     "city": "Tampa",
     "state": "FL",
-    "zipcode": "33607",
+    "zipcode": "33614",
     "congressional_district": "11"
   }
 },
@@ -2555,22 +2555,22 @@
   "model": "vendors.location",
   "pk": 233,
   "fields": {
-    "address": "5416A Rivers Ave Ste 105",
-    "city": "North Charleston",
+    "address": "5416-A Rivers Ave",
+    "city": "North Charlest",
     "state": "SC",
     "zipcode": "29406",
-    "congressional_district": "06"
+    "congressional_district": "01"
   }
 },
 {
   "model": "vendors.location",
   "pk": 234,
   "fields": {
-    "address": "5416-A Rivers Ave",
-    "city": "North Charlest",
+    "address": "5416A Rivers Ave Ste 105",
+    "city": "North Charleston",
     "state": "SC",
     "zipcode": "29406",
-    "congressional_district": "01"
+    "congressional_district": "06"
   }
 },
 {
@@ -2588,7 +2588,7 @@
   "model": "vendors.location",
   "pk": 236,
   "fields": {
-    "address": "631 Discovery Drive",
+    "address": "631 Discovery Dr Nw",
     "city": "Huntsville",
     "state": "AL",
     "zipcode": "35806",
@@ -2599,7 +2599,7 @@
   "model": "vendors.location",
   "pk": 237,
   "fields": {
-    "address": "631 Discovery Dr Nw",
+    "address": "631 Discovery Drive",
     "city": "Huntsville",
     "state": "AL",
     "zipcode": "35806",
@@ -2621,7 +2621,7 @@
   "model": "vendors.location",
   "pk": 239,
   "fields": {
-    "address": "84 S St",
+    "address": "84 South St",
     "city": "Carlisle",
     "state": "MA",
     "zipcode": "01741",
@@ -2632,7 +2632,7 @@
   "model": "vendors.location",
   "pk": 240,
   "fields": {
-    "address": "84 South St",
+    "address": "84 S St",
     "city": "Carlisle",
     "state": "MA",
     "zipcode": "01741",
@@ -2643,7 +2643,7 @@
   "model": "vendors.location",
   "pk": 241,
   "fields": {
-    "address": "3572 Dayton-Xenia Rd Ste 210",
+    "address": "3572 Dayton Xenia Rd Ste 210",
     "city": "Beavercreek",
     "state": "OH",
     "zipcode": "45432",
@@ -2654,22 +2654,22 @@
   "model": "vendors.location",
   "pk": 242,
   "fields": {
-    "address": "3572 Dayton-Xenia Rd",
+    "address": "3572 Dayton Xenia Rd Ste 210",
     "city": "Beavercreek",
     "state": "OH",
     "zipcode": "45432",
-    "congressional_district": "07"
+    "congressional_district": "10"
   }
 },
 {
   "model": "vendors.location",
   "pk": 243,
   "fields": {
-    "address": "3572 Dayton Xenia Rd Ste 210",
+    "address": "3572 Dayton-Xenia Rd Ste 210",
     "city": "Beavercreek",
     "state": "OH",
     "zipcode": "45432",
-    "congressional_district": "10"
+    "congressional_district": "07"
   }
 },
 {
@@ -2687,7 +2687,7 @@
   "model": "vendors.location",
   "pk": 245,
   "fields": {
-    "address": "3572 Dayton Xenia Rd Ste 210",
+    "address": "3572 Dayton-Xenia Rd",
     "city": "Beavercreek",
     "state": "OH",
     "zipcode": "45432",
@@ -2709,7 +2709,7 @@
   "model": "vendors.location",
   "pk": 247,
   "fields": {
-    "address": "600 Maryland Ave Sw",
+    "address": "400 Virginia Ave Sw Ste 710",
     "city": "Washington",
     "state": "DC",
     "zipcode": "20024",
@@ -2720,7 +2720,7 @@
   "model": "vendors.location",
   "pk": 248,
   "fields": {
-    "address": "400 Virginia Ave Sw Ste 710",
+    "address": "600 Maryland Ave Sw",
     "city": "Washington",
     "state": "DC",
     "zipcode": "20024",
@@ -2764,10 +2764,10 @@
   "model": "vendors.location",
   "pk": 252,
   "fields": {
-    "address": "565 Space Center Drive, Suite 330",
+    "address": "1625 S Murray Blvd",
     "city": "Colorado Springs",
     "state": "CO",
-    "zipcode": "80915",
+    "zipcode": "80916",
     "congressional_district": "05"
   }
 },
@@ -2786,10 +2786,10 @@
   "model": "vendors.location",
   "pk": 254,
   "fields": {
-    "address": "1625 S Murray Blvd",
+    "address": "565 Space Center Drive, Suite 330",
     "city": "Colorado Springs",
     "state": "CO",
-    "zipcode": "80916",
+    "zipcode": "80915",
     "congressional_district": "05"
   }
 },
@@ -2808,7 +2808,7 @@
   "model": "vendors.location",
   "pk": 256,
   "fields": {
-    "address": "6726 Odyssey Dr Nw",
+    "address": "6726 Odyssey Dr",
     "city": "Huntsville",
     "state": "AL",
     "zipcode": "35806",
@@ -2819,7 +2819,7 @@
   "model": "vendors.location",
   "pk": 257,
   "fields": {
-    "address": "6726 Odyssey Dr",
+    "address": "6726 Odyssey Dr Nw",
     "city": "Huntsville",
     "state": "AL",
     "zipcode": "35806",
@@ -2852,17 +2852,6 @@
   "model": "vendors.location",
   "pk": 260,
   "fields": {
-    "address": "212 Eglin Pkwy Se Ste A",
-    "city": "Fort Walton Beach",
-    "state": "FL",
-    "zipcode": "32548",
-    "congressional_district": "01"
-  }
-},
-{
-  "model": "vendors.location",
-  "pk": 261,
-  "fields": {
     "address": "119 West Intendencia St Ste A",
     "city": "Pensacola",
     "state": "FL",
@@ -2872,18 +2861,18 @@
 },
 {
   "model": "vendors.location",
-  "pk": 262,
+  "pk": 261,
   "fields": {
-    "address": "360 B Quality Cir Nw",
-    "city": "Huntsville",
-    "state": "AL",
-    "zipcode": "35806",
-    "congressional_district": "05"
+    "address": "212 Eglin Pkwy Se Ste A",
+    "city": "Fort Walton Beach",
+    "state": "FL",
+    "zipcode": "32548",
+    "congressional_district": "01"
   }
 },
 {
   "model": "vendors.location",
-  "pk": 263,
+  "pk": 262,
   "fields": {
     "address": "1002 Explorer Blvd Nw",
     "city": "Huntsville",
@@ -2894,20 +2883,9 @@
 },
 {
   "model": "vendors.location",
-  "pk": 264,
+  "pk": 263,
   "fields": {
-    "address": "5030 Bradford Dr Bldg 2 Ste 205",
-    "city": "Huntsville",
-    "state": "AL",
-    "zipcode": "35805",
-    "congressional_district": "05"
-  }
-},
-{
-  "model": "vendors.location",
-  "pk": 265,
-  "fields": {
-    "address": "6767 Old Madison Pike Ste",
+    "address": "360 B Quality Cir Nw",
     "city": "Huntsville",
     "state": "AL",
     "zipcode": "35806",
@@ -2916,7 +2894,7 @@
 },
 {
   "model": "vendors.location",
-  "pk": 266,
+  "pk": 264,
   "fields": {
     "address": "6767 Old Madison Pike Ste 240",
     "city": "Huntsville",
@@ -2927,7 +2905,7 @@
 },
 {
   "model": "vendors.location",
-  "pk": 267,
+  "pk": 265,
   "fields": {
     "address": "6767 Old Madison Pike Nw",
     "city": "Huntsville",
@@ -2938,7 +2916,40 @@
 },
 {
   "model": "vendors.location",
+  "pk": 266,
+  "fields": {
+    "address": "6767 Old Madison Pike Ste",
+    "city": "Huntsville",
+    "state": "AL",
+    "zipcode": "35806",
+    "congressional_district": "05"
+  }
+},
+{
+  "model": "vendors.location",
+  "pk": 267,
+  "fields": {
+    "address": "5030 Bradford Dr Bldg 2 Ste 205",
+    "city": "Huntsville",
+    "state": "AL",
+    "zipcode": "35805",
+    "congressional_district": "05"
+  }
+},
+{
+  "model": "vendors.location",
   "pk": 268,
+  "fields": {
+    "address": "2000 Corporate Ridge",
+    "city": "Mc Lean",
+    "state": "VA",
+    "zipcode": "22102",
+    "congressional_district": "08"
+  }
+},
+{
+  "model": "vendors.location",
+  "pk": 269,
   "fields": {
     "address": "2010 Corporate Ridge Ste 350",
     "city": "Mc Lean",
@@ -2949,20 +2960,9 @@
 },
 {
   "model": "vendors.location",
-  "pk": 269,
-  "fields": {
-    "address": "2010 Corporate Ridge Suite 350",
-    "city": "Mc Lean",
-    "state": "VA",
-    "zipcode": "22102",
-    "congressional_district": "08"
-  }
-},
-{
-  "model": "vendors.location",
   "pk": 270,
   "fields": {
-    "address": "2000 Corporate Ridge",
+    "address": "2010 Corporate Ridge Suite 350",
     "city": "Mc Lean",
     "state": "VA",
     "zipcode": "22102",
@@ -3083,17 +3083,6 @@
   "model": "vendors.location",
   "pk": 281,
   "fields": {
-    "address": "1330 Braddock Pl Ste 700",
-    "city": "Alexandria",
-    "state": "VA",
-    "zipcode": "22314",
-    "congressional_district": "08"
-  }
-},
-{
-  "model": "vendors.location",
-  "pk": 282,
-  "fields": {
     "address": "6909 Metro Park Dr Ste 500",
     "city": "Alexandria",
     "state": "VA",
@@ -3103,18 +3092,18 @@
 },
 {
   "model": "vendors.location",
-  "pk": 283,
+  "pk": 282,
   "fields": {
-    "address": "11951 Freedom Dr Ste 1000",
-    "city": "Reston",
+    "address": "1330 Braddock Pl Ste 700",
+    "city": "Alexandria",
     "state": "VA",
-    "zipcode": "20190",
+    "zipcode": "22314",
     "congressional_district": "08"
   }
 },
 {
   "model": "vendors.location",
-  "pk": 284,
+  "pk": 283,
   "fields": {
     "address": "11951 Freedom Dr",
     "city": "Reston",
@@ -3125,13 +3114,24 @@
 },
 {
   "model": "vendors.location",
-  "pk": 285,
+  "pk": 284,
   "fields": {
     "address": "11951 Freedom Dr Ste 1000",
     "city": "Reston",
     "state": "VA",
     "zipcode": "20190",
     "congressional_district": "11"
+  }
+},
+{
+  "model": "vendors.location",
+  "pk": 285,
+  "fields": {
+    "address": "11951 Freedom Dr Ste 1000",
+    "city": "Reston",
+    "state": "VA",
+    "zipcode": "20190",
+    "congressional_district": "08"
   }
 },
 {
@@ -3182,8 +3182,8 @@
   "model": "vendors.location",
   "pk": 290,
   "fields": {
-    "address": "502 W Germantown Pike Ste 850",
-    "city": "Plymouth Meeting",
+    "address": "One Plymouth Meeting",
+    "city": "Plymouth Meeti",
     "state": "PA",
     "zipcode": "19462",
     "congressional_district": "13"
@@ -3193,8 +3193,8 @@
   "model": "vendors.location",
   "pk": 291,
   "fields": {
-    "address": "One Plymouth Meeting",
-    "city": "Plymouth Meeti",
+    "address": "502 W Germantown Pike Ste 850",
+    "city": "Plymouth Meeting",
     "state": "PA",
     "zipcode": "19462",
     "congressional_district": "13"
@@ -3237,7 +3237,7 @@
   "model": "vendors.location",
   "pk": 295,
   "fields": {
-    "address": "6001 S Air Depot",
+    "address": "6001 S Air Depot Blvd",
     "city": "Oklahoma City",
     "state": "OK",
     "zipcode": "73135",
@@ -3248,7 +3248,7 @@
   "model": "vendors.location",
   "pk": 296,
   "fields": {
-    "address": "6001 S Air Depot Blvd",
+    "address": "6001 S Air Depot",
     "city": "Oklahoma City",
     "state": "OK",
     "zipcode": "73135",
@@ -3325,22 +3325,22 @@
   "model": "vendors.location",
   "pk": 303,
   "fields": {
-    "address": "4801 Stonecroft Blvd",
-    "city": "Chantilly",
-    "state": "VA",
-    "zipcode": "20151",
-    "congressional_district": "10"
+    "address": "55 Walkers Brook Dr",
+    "city": "Reading",
+    "state": "MA",
+    "zipcode": "01867",
+    "congressional_district": "06"
   }
 },
 {
   "model": "vendors.location",
   "pk": 304,
   "fields": {
-    "address": "55 Walkers Brook Dr",
-    "city": "Reading",
-    "state": "MA",
-    "zipcode": "01867",
-    "congressional_district": "06"
+    "address": "4801 Stonecroft Blvd",
+    "city": "Chantilly",
+    "state": "VA",
+    "zipcode": "20151",
+    "congressional_district": "10"
   }
 },
 {
@@ -3391,7 +3391,7 @@
   "model": "vendors.location",
   "pk": 309,
   "fields": {
-    "address": "13990 Parkeast Cir",
+    "address": "13990 Parkeast Circle",
     "city": "Chantilly",
     "state": "VA",
     "zipcode": "20151",
@@ -3402,7 +3402,7 @@
   "model": "vendors.location",
   "pk": 310,
   "fields": {
-    "address": "13990 Parkeast Circle",
+    "address": "13990 Parkeast Cir",
     "city": "Chantilly",
     "state": "VA",
     "zipcode": "20151",
@@ -3424,7 +3424,7 @@
   "model": "vendors.location",
   "pk": 312,
   "fields": {
-    "address": "635 Discovery Dr Nw",
+    "address": "635 Discovery Dr",
     "city": "Huntsville",
     "state": "AL",
     "zipcode": "35806",
@@ -3435,7 +3435,7 @@
   "model": "vendors.location",
   "pk": 313,
   "fields": {
-    "address": "635 Discovery Dr",
+    "address": "635 Discovery Dr Nw",
     "city": "Huntsville",
     "state": "AL",
     "zipcode": "35806",
@@ -3501,7 +3501,7 @@
   "model": "vendors.location",
   "pk": 319,
   "fields": {
-    "address": "60 Frontage Road",
+    "address": "60 Frontage Rd",
     "city": "Andover",
     "state": "MA",
     "zipcode": "01810",
@@ -3512,7 +3512,7 @@
   "model": "vendors.location",
   "pk": 320,
   "fields": {
-    "address": "60 Frontage Rd",
+    "address": "60 Frontage Road",
     "city": "Andover",
     "state": "MA",
     "zipcode": "01810",
@@ -3534,7 +3534,7 @@
   "model": "vendors.location",
   "pk": 322,
   "fields": {
-    "address": "1000 Explorer Blvd",
+    "address": "1000 Explorer Boulevard",
     "city": "Huntsville",
     "state": "AL",
     "zipcode": "35806",
@@ -3556,7 +3556,7 @@
   "model": "vendors.location",
   "pk": 324,
   "fields": {
-    "address": "1000 Explorer Boulevard",
+    "address": "1000 Explorer Blvd",
     "city": "Huntsville",
     "state": "AL",
     "zipcode": "35806",
@@ -3567,7 +3567,7 @@
   "model": "vendors.location",
   "pk": 325,
   "fields": {
-    "address": "1616 Anderson Road, Suite 215",
+    "address": "1616 Anderson Rd Ste 228",
     "city": "Mc Lean",
     "state": "VA",
     "zipcode": "22102",
@@ -3578,7 +3578,7 @@
   "model": "vendors.location",
   "pk": 326,
   "fields": {
-    "address": "1616 Anderson Rd Ste 229",
+    "address": "1616 Anderson Road, Suite 215",
     "city": "Mc Lean",
     "state": "VA",
     "zipcode": "22102",
@@ -3589,7 +3589,7 @@
   "model": "vendors.location",
   "pk": 327,
   "fields": {
-    "address": "1616 Anderson Rd Ste 228",
+    "address": "1616 Anderson Rd Ste 229",
     "city": "Mc Lean",
     "state": "VA",
     "zipcode": "22102",
@@ -3666,11 +3666,11 @@
   "model": "vendors.location",
   "pk": 334,
   "fields": {
-    "address": "1892 Preston White Drive, Suite 300",
+    "address": "1892 Preston White Dr #300",
     "city": "Reston",
     "state": "VA",
     "zipcode": "20191",
-    "congressional_district": "11"
+    "congressional_district": "08"
   }
 },
 {
@@ -3681,7 +3681,7 @@
     "city": "Reston",
     "state": "VA",
     "zipcode": "20191",
-    "congressional_district": "08"
+    "congressional_district": "11"
   }
 },
 {
@@ -3699,7 +3699,7 @@
   "model": "vendors.location",
   "pk": 337,
   "fields": {
-    "address": "1892 Preston White Dr #300",
+    "address": "1892 Preston White Drive, Suite 300",
     "city": "Reston",
     "state": "VA",
     "zipcode": "20191",
@@ -3864,7 +3864,7 @@
   "model": "vendors.location",
   "pk": 352,
   "fields": {
-    "address": "1921 Gallows Rd Ste 840",
+    "address": "1921 Gallows Road",
     "city": "Vienna",
     "state": "VA",
     "zipcode": "22182",
@@ -3875,7 +3875,7 @@
   "model": "vendors.location",
   "pk": 353,
   "fields": {
-    "address": "1921 Gallows Road",
+    "address": "1921 Gallows Rd Ste 840",
     "city": "Vienna",
     "state": "VA",
     "zipcode": "22182",
@@ -3886,7 +3886,7 @@
   "model": "vendors.location",
   "pk": 354,
   "fields": {
-    "address": "6354 Walker Ln Ste 300",
+    "address": "6354 Walker Lane",
     "city": "Alexandria",
     "state": "VA",
     "zipcode": "22310",
@@ -3897,7 +3897,7 @@
   "model": "vendors.location",
   "pk": 355,
   "fields": {
-    "address": "6354 Walker Lane",
+    "address": "6354 Walker Ln",
     "city": "Alexandria",
     "state": "VA",
     "zipcode": "22310",
@@ -3908,7 +3908,7 @@
   "model": "vendors.location",
   "pk": 356,
   "fields": {
-    "address": "6354 Walker Ln",
+    "address": "6354 Walker Ln Ste 300",
     "city": "Alexandria",
     "state": "VA",
     "zipcode": "22310",
@@ -3919,7 +3919,7 @@
   "model": "vendors.location",
   "pk": 357,
   "fields": {
-    "address": "12600 Challenger Pkwy Ste 200",
+    "address": "12600 Challenger Pkwy, Ste 200",
     "city": "Orlando",
     "state": "FL",
     "zipcode": "32826",
@@ -3930,18 +3930,18 @@
   "model": "vendors.location",
   "pk": 358,
   "fields": {
-    "address": "12600 Challenger Pkwy Ste 100",
+    "address": "3203 Lawton Rd , Ste 251",
     "city": "Orlando",
     "state": "FL",
-    "zipcode": "32826",
-    "congressional_district": "24"
+    "zipcode": "32803",
+    "congressional_district": "08"
   }
 },
 {
   "model": "vendors.location",
   "pk": 359,
   "fields": {
-    "address": "12600 Challenger Pkwy, Ste 200",
+    "address": "12600 Challenger Pkwy Ste 200",
     "city": "Orlando",
     "state": "FL",
     "zipcode": "32826",
@@ -3952,11 +3952,11 @@
   "model": "vendors.location",
   "pk": 360,
   "fields": {
-    "address": "3203 Lawton Rd , Ste 251",
+    "address": "12600 Challenger Pkwy Ste 100",
     "city": "Orlando",
     "state": "FL",
-    "zipcode": "32803",
-    "congressional_district": "08"
+    "zipcode": "32826",
+    "congressional_district": "24"
   }
 },
 {
@@ -4029,22 +4029,22 @@
   "model": "vendors.location",
   "pk": 367,
   "fields": {
-    "address": "10643 Mills Ave",
-    "city": "Montclair",
+    "address": "13401 Yorba Avenue",
+    "city": "Chino",
     "state": "CA",
-    "zipcode": "91763",
-    "congressional_district": "26"
+    "zipcode": "91710",
+    "congressional_district": "42"
   }
 },
 {
   "model": "vendors.location",
   "pk": 368,
   "fields": {
-    "address": "13401 Yorba Avenue",
-    "city": "Chino",
+    "address": "10643 Mills Ave",
+    "city": "Montclair",
     "state": "CA",
-    "zipcode": "91710",
-    "congressional_district": "42"
+    "zipcode": "91763",
+    "congressional_district": "26"
   }
 },
 {
@@ -4084,7 +4084,7 @@
   "model": "vendors.location",
   "pk": 372,
   "fields": {
-    "address": "4324-B Evergreen Lane",
+    "address": "4324 Evergreen Ln Ste B",
     "city": "Annandale",
     "state": "VA",
     "zipcode": "22003",
@@ -4095,22 +4095,22 @@
   "model": "vendors.location",
   "pk": 373,
   "fields": {
-    "address": "5285 Shawnee Rd Ste 200",
-    "city": "Alexandria",
+    "address": "4324-B Evergreen Lane",
+    "city": "Annandale",
     "state": "VA",
-    "zipcode": "22312",
-    "congressional_district": "08"
+    "zipcode": "22003",
+    "congressional_district": "11"
   }
 },
 {
   "model": "vendors.location",
   "pk": 374,
   "fields": {
-    "address": "4324 Evergreen Ln Ste B",
-    "city": "Annandale",
+    "address": "5285 Shawnee Rd Ste 200",
+    "city": "Alexandria",
     "state": "VA",
-    "zipcode": "22003",
-    "congressional_district": "11"
+    "zipcode": "22312",
+    "congressional_district": "08"
   }
 },
 {
@@ -4216,22 +4216,22 @@
   "model": "vendors.location",
   "pk": 384,
   "fields": {
-    "address": "315 Page Rd Fl 2 Bldg 2",
+    "address": "315 Page Rd Box 7 Fl 2 Bldg 2",
     "city": "Pinehurst",
     "state": "NC",
     "zipcode": "28374",
-    "congressional_district": "06"
+    "congressional_district": "02"
   }
 },
 {
   "model": "vendors.location",
   "pk": 385,
   "fields": {
-    "address": "5445 Village Dr Ste 103",
-    "city": "Rockledge",
-    "state": "FL",
-    "zipcode": "32955",
-    "congressional_district": "15"
+    "address": "315 Page Rd Fl 2 Bldg 2",
+    "city": "Pinehurst",
+    "state": "NC",
+    "zipcode": "28374",
+    "congressional_district": "06"
   }
 },
 {
@@ -4242,12 +4242,23 @@
     "city": "Pinehurst",
     "state": "NC",
     "zipcode": "28374",
-    "congressional_district": "02"
+    "congressional_district": "06"
   }
 },
 {
   "model": "vendors.location",
   "pk": 387,
+  "fields": {
+    "address": "5445 Village Dr Ste 103",
+    "city": "Rockledge",
+    "state": "FL",
+    "zipcode": "32955",
+    "congressional_district": "15"
+  }
+},
+{
+  "model": "vendors.location",
+  "pk": 388,
   "fields": {
     "address": "5445 Village Drive",
     "city": "Viera",
@@ -4258,20 +4269,9 @@
 },
 {
   "model": "vendors.location",
-  "pk": 388,
-  "fields": {
-    "address": "315 Page Rd Box 7 Fl 2 Bldg 2",
-    "city": "Pinehurst",
-    "state": "NC",
-    "zipcode": "28374",
-    "congressional_district": "06"
-  }
-},
-{
-  "model": "vendors.location",
   "pk": 389,
   "fields": {
-    "address": "110 Broadway St Ste 560",
+    "address": "110 Broadway St Ste 690",
     "city": "San Antonio",
     "state": "TX",
     "zipcode": "78205",
@@ -4282,6 +4282,17 @@
   "model": "vendors.location",
   "pk": 390,
   "fields": {
+    "address": "110 Broadway St Ste 690",
+    "city": "San Antonio",
+    "state": "TX",
+    "zipcode": "78205",
+    "congressional_district": "35"
+  }
+},
+{
+  "model": "vendors.location",
+  "pk": 391,
+  "fields": {
     "address": "110 Broadway,  Suite 560",
     "city": "San Antonio",
     "state": "TX",
@@ -4291,20 +4302,9 @@
 },
 {
   "model": "vendors.location",
-  "pk": 391,
-  "fields": {
-    "address": "110 Broadway St Ste 560",
-    "city": "San Antonio",
-    "state": "TX",
-    "zipcode": "78205",
-    "congressional_district": "35"
-  }
-},
-{
-  "model": "vendors.location",
   "pk": 392,
   "fields": {
-    "address": "110 Broadway St Ste 320",
+    "address": "110 Broadway St Ste 560",
     "city": "San Antonio",
     "state": "TX",
     "zipcode": "78205",
@@ -4315,22 +4315,22 @@
   "model": "vendors.location",
   "pk": 393,
   "fields": {
-    "address": "110 Broadway St Ste 690",
+    "address": "110 Broadway St Ste 560",
     "city": "San Antonio",
     "state": "TX",
     "zipcode": "78205",
-    "congressional_district": "20"
+    "congressional_district": "35"
   }
 },
 {
   "model": "vendors.location",
   "pk": 394,
   "fields": {
-    "address": "110 Broadway St Ste 690",
+    "address": "110 Broadway St Ste 320",
     "city": "San Antonio",
     "state": "TX",
     "zipcode": "78205",
-    "congressional_district": "35"
+    "congressional_district": "20"
   }
 },
 {
@@ -4502,7 +4502,7 @@
   "model": "vendors.location",
   "pk": 410,
   "fields": {
-    "address": "9891 Brokenland Pkwy",
+    "address": "9891 Brokenland Parkway Ste 400",
     "city": "Columbia",
     "state": "MD",
     "zipcode": "21046",
@@ -4513,7 +4513,7 @@
   "model": "vendors.location",
   "pk": 411,
   "fields": {
-    "address": "9891 Brokenland Parkway Ste 400",
+    "address": "9891 Brokenland Pkwy",
     "city": "Columbia",
     "state": "MD",
     "zipcode": "21046",
@@ -4568,7 +4568,7 @@
   "model": "vendors.location",
   "pk": 416,
   "fields": {
-    "address": "3999 Fort Campbell Blvd",
+    "address": "3999 Ft Campbell Blvd",
     "city": "Hopkinsville",
     "state": "KY",
     "zipcode": "42240",
@@ -4579,7 +4579,7 @@
   "model": "vendors.location",
   "pk": 417,
   "fields": {
-    "address": "3999 Ft Campbell Blvd",
+    "address": "3999 Fort Campbell Blvd",
     "city": "Hopkinsville",
     "state": "KY",
     "zipcode": "42240",
@@ -4612,7 +4612,7 @@
   "model": "vendors.location",
   "pk": 420,
   "fields": {
-    "address": "515 S Flower St Fl 4",
+    "address": "300 S Grand Ave, Suite 1100",
     "city": "Los Angeles",
     "state": "CA",
     "zipcode": "90071",
@@ -4623,6 +4623,17 @@
   "model": "vendors.location",
   "pk": 421,
   "fields": {
+    "address": "515 S Flower St Fl 4",
+    "city": "Los Angeles",
+    "state": "CA",
+    "zipcode": "90071",
+    "congressional_district": "34"
+  }
+},
+{
+  "model": "vendors.location",
+  "pk": 422,
+  "fields": {
     "address": "100 West Broadway, Suite 2",
     "city": "Long Beach",
     "state": "CA",
@@ -4632,20 +4643,9 @@
 },
 {
   "model": "vendors.location",
-  "pk": 422,
-  "fields": {
-    "address": "300 S Grand Ave, Suite 1100",
-    "city": "Los Angeles",
-    "state": "CA",
-    "zipcode": "90071",
-    "congressional_district": "34"
-  }
-},
-{
-  "model": "vendors.location",
   "pk": 423,
   "fields": {
-    "address": "22461 Shaw Road",
+    "address": "22461 Shaw Rd",
     "city": "Dulles",
     "state": "VA",
     "zipcode": "20166",
@@ -4656,7 +4656,7 @@
   "model": "vendors.location",
   "pk": 424,
   "fields": {
-    "address": "22461 Shaw Rd",
+    "address": "22461 Shaw Road",
     "city": "Dulles",
     "state": "VA",
     "zipcode": "20166",
@@ -4733,7 +4733,7 @@
   "model": "vendors.location",
   "pk": 431,
   "fields": {
-    "address": "5454 Wisconsin Avenue Suit",
+    "address": "5454 Wisconsin Avenue, Sui",
     "city": "Chevy Chase",
     "state": "MD",
     "zipcode": "20815",
@@ -4744,7 +4744,7 @@
   "model": "vendors.location",
   "pk": 432,
   "fields": {
-    "address": "5454 Wisconsin Avenue, Sui",
+    "address": "5454 Wisconsin Avenue Suit",
     "city": "Chevy Chase",
     "state": "MD",
     "zipcode": "20815",
@@ -4777,17 +4777,6 @@
   "model": "vendors.location",
   "pk": 435,
   "fields": {
-    "address": "16855 Northchase Drive",
-    "city": "Houston",
-    "state": "TX",
-    "zipcode": "77060",
-    "congressional_district": "18"
-  }
-},
-{
-  "model": "vendors.location",
-  "pk": 436,
-  "fields": {
     "address": "45 Eisenhower Drive",
     "city": "Paramus",
     "state": "NJ",
@@ -4797,9 +4786,20 @@
 },
 {
   "model": "vendors.location",
-  "pk": 437,
+  "pk": 436,
   "fields": {
     "address": "16855 Northchase Dr",
+    "city": "Houston",
+    "state": "TX",
+    "zipcode": "77060",
+    "congressional_district": "18"
+  }
+},
+{
+  "model": "vendors.location",
+  "pk": 437,
+  "fields": {
+    "address": "16855 Northchase Drive",
     "city": "Houston",
     "state": "TX",
     "zipcode": "77060",
@@ -4832,22 +4832,22 @@
   "model": "vendors.location",
   "pk": 440,
   "fields": {
-    "address": "8121 Georgia Ave Ste 806",
-    "city": "Silver Spring",
+    "address": "400 E Pratt St Ste 826",
+    "city": "Baltimore",
     "state": "MD",
-    "zipcode": "20910",
-    "congressional_district": "08"
+    "zipcode": "21202",
+    "congressional_district": "07"
   }
 },
 {
   "model": "vendors.location",
   "pk": 441,
   "fields": {
-    "address": "400 E Pratt St Ste 826",
-    "city": "Baltimore",
+    "address": "8121 Georgia Ave Ste 806",
+    "city": "Silver Spring",
     "state": "MD",
-    "zipcode": "21202",
-    "congressional_district": "07"
+    "zipcode": "20910",
+    "congressional_district": "08"
   }
 },
 {
@@ -4865,7 +4865,7 @@
   "model": "vendors.location",
   "pk": 443,
   "fields": {
-    "address": "3110 Fairview Park Dr Ste 950",
+    "address": "3110 Fairview Park Dr 950",
     "city": "Falls Church",
     "state": "VA",
     "zipcode": "22042",
@@ -4876,7 +4876,7 @@
   "model": "vendors.location",
   "pk": 444,
   "fields": {
-    "address": "3110 Fairview Park Dr 950",
+    "address": "3110 Fairview Park Dr Ste 950",
     "city": "Falls Church",
     "state": "VA",
     "zipcode": "22042",
@@ -4964,7 +4964,7 @@
   "model": "vendors.location",
   "pk": 452,
   "fields": {
-    "address": "3M Center, Federal Systems",
+    "address": "3M Center, Bldg-220, 11W-02",
     "city": "Saint Paul",
     "state": "MN",
     "zipcode": "55144",
@@ -4975,7 +4975,7 @@
   "model": "vendors.location",
   "pk": 453,
   "fields": {
-    "address": "3M Center, Bldg-220, 11W-02",
+    "address": "3M Center, Federal Systems",
     "city": "Saint Paul",
     "state": "MN",
     "zipcode": "55144",
@@ -4986,10 +4986,10 @@
   "model": "vendors.location",
   "pk": 454,
   "fields": {
-    "address": "44084 Riverside Pkwy Ste 340",
-    "city": "Leesburg",
+    "address": "20881 Channel Ct",
+    "city": "Sterling",
     "state": "VA",
-    "zipcode": "20176",
+    "zipcode": "20165",
     "congressional_district": "10"
   }
 },
@@ -4997,10 +4997,10 @@
   "model": "vendors.location",
   "pk": 455,
   "fields": {
-    "address": "20881 Channel Ct",
-    "city": "Sterling",
+    "address": "44084 Riverside Pkwy Ste 340",
+    "city": "Leesburg",
     "state": "VA",
-    "zipcode": "20165",
+    "zipcode": "20176",
     "congressional_district": "10"
   }
 },
@@ -5020,7 +5020,7 @@
   "pk": 457,
   "fields": {
     "address": "400 Nw Platte Valley Dr",
-    "city": "Kansas City",
+    "city": "Riverside",
     "state": "MO",
     "zipcode": "64150",
     "congressional_district": "06"
@@ -5031,7 +5031,7 @@
   "pk": 458,
   "fields": {
     "address": "400 Nw Platte Valley Dr",
-    "city": "Riverside",
+    "city": "Kansas City",
     "state": "MO",
     "zipcode": "64150",
     "congressional_district": "06"
@@ -5063,11 +5063,11 @@
   "model": "vendors.location",
   "pk": 461,
   "fields": {
-    "address": "2661 Riva Rd Ste 1030",
+    "address": "2568A Riva Road, Suite 101",
     "city": "Annapolis",
     "state": "MD",
     "zipcode": "21401",
-    "congressional_district": "04"
+    "congressional_district": "03"
   }
 },
 {
@@ -5085,18 +5085,18 @@
   "model": "vendors.location",
   "pk": 463,
   "fields": {
-    "address": "2661 Riva Road, Suite 1000",
+    "address": "2661 Riva Rd Ste 1030",
     "city": "Annapolis",
     "state": "MD",
     "zipcode": "21401",
-    "congressional_district": "03"
+    "congressional_district": "04"
   }
 },
 {
   "model": "vendors.location",
   "pk": 464,
   "fields": {
-    "address": "2568A Riva Road, Suite 101",
+    "address": "2661 Riva Road, Suite 1000",
     "city": "Annapolis",
     "state": "MD",
     "zipcode": "21401",
@@ -5162,10 +5162,10 @@
   "model": "vendors.location",
   "pk": 470,
   "fields": {
-    "address": "4175 E Bay Dr Ste 103",
-    "city": "Clearwater",
+    "address": "2480 E Bay Dr Ste 9",
+    "city": "Largo",
     "state": "FL",
-    "zipcode": "33764",
+    "zipcode": "33771",
     "congressional_district": "13"
   }
 },
@@ -5173,10 +5173,10 @@
   "model": "vendors.location",
   "pk": 471,
   "fields": {
-    "address": "2480 E Bay Dr Ste 9",
-    "city": "Largo",
+    "address": "4175 E Bay Dr Ste 103",
+    "city": "Clearwater",
     "state": "FL",
-    "zipcode": "33771",
+    "zipcode": "33764",
     "congressional_district": "13"
   }
 },
@@ -5261,7 +5261,7 @@
   "model": "vendors.location",
   "pk": 479,
   "fields": {
-    "address": "6564 Loisdale Ct Ste 800",
+    "address": "6564 Loisdale Ct Ste 900",
     "city": "Springfield",
     "state": "VA",
     "zipcode": "22150",
@@ -5272,7 +5272,7 @@
   "model": "vendors.location",
   "pk": 480,
   "fields": {
-    "address": "6564 Loisdale Ct Ste 900",
+    "address": "6564 Loisdale Ct Ste 800",
     "city": "Springfield",
     "state": "VA",
     "zipcode": "22150",
@@ -5283,22 +5283,22 @@
   "model": "vendors.location",
   "pk": 481,
   "fields": {
-    "address": "6564 Loisdale Ct Ste 500",
+    "address": "6564 Loisdale Ct Ste 900",
     "city": "Springfield",
     "state": "VA",
     "zipcode": "22150",
-    "congressional_district": "08"
+    "congressional_district": "11"
   }
 },
 {
   "model": "vendors.location",
   "pk": 482,
   "fields": {
-    "address": "6564 Loisdale Ct Ste 900",
+    "address": "6564 Loisdale Ct Ste 500",
     "city": "Springfield",
     "state": "VA",
     "zipcode": "22150",
-    "congressional_district": "11"
+    "congressional_district": "08"
   }
 },
 {
@@ -5327,10 +5327,10 @@
   "model": "vendors.location",
   "pk": 485,
   "fields": {
-    "address": "1701 K St Nw",
+    "address": "1001 Connecticut Ave Nw Ste 401",
     "city": "Washington",
     "state": "DC",
-    "zipcode": "20006",
+    "zipcode": "20036",
     "congressional_district": "00"
   }
 },
@@ -5338,10 +5338,10 @@
   "model": "vendors.location",
   "pk": 486,
   "fields": {
-    "address": "1001 Connecticut Ave Nw Ste 401",
+    "address": "1701 K St Nw",
     "city": "Washington",
     "state": "DC",
-    "zipcode": "20036",
+    "zipcode": "20006",
     "congressional_district": "00"
   }
 },
@@ -5393,7 +5393,7 @@
   "model": "vendors.location",
   "pk": 491,
   "fields": {
-    "address": "10 G Street N.E., Suite 510",
+    "address": "10 G Street N.E., Suite 410",
     "city": "Washington",
     "state": "DC",
     "zipcode": "20002",
@@ -5404,7 +5404,7 @@
   "model": "vendors.location",
   "pk": 492,
   "fields": {
-    "address": "10 G Street N.E., Suite 410",
+    "address": "10 G Street N.E., Suite 510",
     "city": "Washington",
     "state": "DC",
     "zipcode": "20002",
@@ -5525,7 +5525,7 @@
   "model": "vendors.location",
   "pk": 503,
   "fields": {
-    "address": "375 E  Elm Street",
+    "address": "375 E Elm St Ste 200",
     "city": "Conshohocken",
     "state": "PA",
     "zipcode": "19428",
@@ -5536,7 +5536,7 @@
   "model": "vendors.location",
   "pk": 504,
   "fields": {
-    "address": "375 E Elm St Ste 200",
+    "address": "375 E  Elm Street",
     "city": "Conshohocken",
     "state": "PA",
     "zipcode": "19428",
@@ -5569,17 +5569,6 @@
   "model": "vendors.location",
   "pk": 507,
   "fields": {
-    "address": "19 Camden St",
-    "city": "Stoughton",
-    "state": "MA",
-    "zipcode": "02072",
-    "congressional_district": "09"
-  }
-},
-{
-  "model": "vendors.location",
-  "pk": 508,
-  "fields": {
     "address": "89 North Water Street",
     "city": "New Bedford",
     "state": "MA",
@@ -5589,13 +5578,24 @@
 },
 {
   "model": "vendors.location",
-  "pk": 509,
+  "pk": 508,
   "fields": {
     "address": "324 Main St",
     "city": "Gloucester",
     "state": "MA",
     "zipcode": "01930",
     "congressional_district": "06"
+  }
+},
+{
+  "model": "vendors.location",
+  "pk": 509,
+  "fields": {
+    "address": "19 Camden St",
+    "city": "Stoughton",
+    "state": "MA",
+    "zipcode": "02072",
+    "congressional_district": "09"
   }
 },
 {
@@ -5635,7 +5635,7 @@
   "model": "vendors.location",
   "pk": 513,
   "fields": {
-    "address": "55 Wheeler St Ste 1A",
+    "address": "55 Wheeler St",
     "city": "Cambridge",
     "state": "MA",
     "zipcode": "02138",
@@ -5646,7 +5646,7 @@
   "model": "vendors.location",
   "pk": 514,
   "fields": {
-    "address": "55 Wheeler St",
+    "address": "55 Wheeler St Ste 1A",
     "city": "Cambridge",
     "state": "MA",
     "zipcode": "02138",
