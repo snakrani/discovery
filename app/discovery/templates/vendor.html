@@ -8,7 +8,7 @@
 {% block header %}
 <div id="combined_search_pool">
 
-    <a id="back_link" href="#"><div id="vendor_back_button">
+    <a id="back_link" href="/results/?{{ request.GET.urlencode }}"><div id="vendor_back_button">
         <span class="back_text">Back to search results</span>
     </div></a>
 
@@ -137,7 +137,7 @@
             <span class="admin_label">Work performed by a vendor is often reported under a different NAICS code due to FPDS restrictions.</span>
         </div>
 
-        <div id="ch_table" class="contracthistory">
+        <div id="ch_table" class="contracthistory init">
             <div class="table_wrapper loading">
                 <table id="vendor_contracts">
                     <tr>
