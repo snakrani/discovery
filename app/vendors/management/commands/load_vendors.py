@@ -22,7 +22,7 @@ def format_ascii(text):
     return re.sub(r'^nan$', '', re.sub(r'[^\x00-\x7F]+', '', str(text).strip()))
 
 def format_name(text):
-    name = format_ascii(text).title()
+    name = format_ascii(text).upper()
     name = re.sub(r'\s+L\.?l\.?c\.?', ' LLC', name, re.IGNORECASE)
     return name
 
