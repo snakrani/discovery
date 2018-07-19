@@ -890,7 +890,7 @@ def generate_search_tests():
                 'i1|xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[6]/img': 'exists',
                 'i2|xpath://*[@id="pool_vendors"]/tbody/tr[10]/td[6]/img': 'exists',
                 'i3|xpath://*[@id="pool_vendors"]/tbody/tr[20]/td[6]/img': 'exists',
-                'i4|xpath://*[@id="pool_vendors"]/tbody/tr[31]/td[6]/img': 'exists'
+                'i4|xpath://*[@id="pool_vendors"]/tbody/tr[29]/td[6]/img': 'exists'
             },
             'setasides_hubz': {
                 'params': {'setasides': 'XX'},
@@ -903,8 +903,7 @@ def generate_search_tests():
                 'results': (3, 'results/csv/?setasides=XX'),
                 'table': (3, 'h_naics_results', 'desc'),
                 'i1|xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[7]/img': 'exists',
-                'i2|xpath://*[@id="pool_vendors"]/tbody/tr[3]/td[7]/img': 'exists',
-                'i3|xpath://*[@id="pool_vendors"]/tbody/tr[4]/td[7]/img': 'exists'
+                'i2|xpath://*[@id="pool_vendors"]/tbody/tr[3]/td[7]/img': 'exists'
             },
             'setasides_sdvo': {
                 'params': {'setasides': 'QF'},
@@ -932,7 +931,7 @@ def generate_search_tests():
                 'table': (20, 'h_naics_results', 'desc'),
                 'i1|xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[8]/img': 'exists',
                 'i2|xpath://*[@id="pool_vendors"]/tbody/tr[10]/td[8]/img': 'exists',
-                'i3|xpath://*[@id="pool_vendors"]/tbody/tr[17]/td[8]/img': 'exists'
+                'i3|xpath://*[@id="pool_vendors"]/tbody/tr[20]/td[8]/img': 'exists'
             },
             'setasides_vo': {
                 'params': {'setasides': 'A5'},
@@ -946,7 +945,7 @@ def generate_search_tests():
                 'table': (20, 'h_naics_results', 'desc'),
                 'i1|xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[9]/img': 'exists',
                 'i2|xpath://*[@id="pool_vendors"]/tbody/tr[10]/td[9]/img': 'exists',
-                'i3|xpath://*[@id="pool_vendors"]/tbody/tr[19]/td[9]/img': 'exists'
+                'i3|xpath://*[@id="pool_vendors"]/tbody/tr[20]/td[9]/img': 'exists'
             },
             'setasides_sdb': {
                 'params': {'setasides': '27'},
@@ -961,7 +960,7 @@ def generate_search_tests():
                 'i1|xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[5]/img': 'exists',
                 'i2|xpath://*[@id="pool_vendors"]/tbody/tr[10]/td[5]/img': 'exists',
                 'i3|xpath://*[@id="pool_vendors"]/tbody/tr[20]/td[5]/img': 'exists',
-                'i4|xpath://*[@id="pool_vendors"]/tbody/tr[31]/td[5]/img': 'exists'
+                'i4|xpath://*[@id="pool_vendors"]/tbody/tr[35]/td[5]/img': 'exists'
             }
         }
     }
