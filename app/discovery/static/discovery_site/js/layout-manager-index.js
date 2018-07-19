@@ -31,6 +31,7 @@ LayoutManager.styleVehicleInfo = function() {
         arrowDclass: 'arrow-d',
         animate: true
     });
+    DataManager.completeStatus();
 };
 
 LayoutManager.renderMetadata = function(data) {

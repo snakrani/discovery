@@ -6,6 +6,10 @@ DataManager.initializers.index = function() {
     EventManager.subscribe('pageInitialized', DataManager.loadMetadata);
 };
 
+DataManager.getStatusCount = function() {
+    return 3;
+};
+
 DataManager.loadMetadata = function() {
     var url = "/api/metadata/";
 
