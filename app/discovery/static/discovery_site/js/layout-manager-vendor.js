@@ -97,13 +97,14 @@ LayoutManager.renderResultInfo = function(vendor) {
 
     for (var index = 0; index < vendor.pools.length; index++) {
         var vendorMembership = vendor.pools[index];
+        var vehicle = poolMap[vendorMembership.pool.id].vehicle;
 
         if (memberships.length > 0 && memberships.includes(vendorMembership.piid)) {
-            vehicles.push(vehicleMap[poolMap[vendorMembership.pool.id].vehicle].title);
+            vehicles.push(vehicleMap[vehicle].title);
         }
     }
     if (vehicles.length > 0) {
-        filterMessages.push(vehicles.join(', '));
+        filterMessages.push(Array.from(new Set(vehicles)).join(', '));
     }
 
     if (naics) {
