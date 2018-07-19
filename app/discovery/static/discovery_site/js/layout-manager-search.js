@@ -94,11 +94,6 @@ LayoutManager.renderResultsInfo = function(data) {
 LayoutManager.renderVendorList = function(data) {
     var $table = $('#pool_vendors');
     var qs = DataManager.getQueryString({
-        'vehicle': null,
-        'pool': null,
-        'zone': null,
-        'setasides': null,
-        'ordering': null,
         'page': null
     });
 
