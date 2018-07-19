@@ -57,6 +57,7 @@ DataManager.loadVendors = function() {
 
     LayoutManager.disableSearch();
     $('.table_wrapper').addClass('loading');
+    $('#pool_table').addClass('init');
 
     DataManager.getAPIRequest(url, queryData,
         function(response) {
