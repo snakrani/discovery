@@ -816,7 +816,7 @@ h4.data {
     color: #333333;
     font-weight: 600;
     font-family: 'Raleway';
-    padding-top: 10px;
+    padding-top: 20px;
     padding-left: 10px;
     padding-bottom: 10px;
 }
@@ -950,12 +950,10 @@ img.green_dot {
 
 
 .pooldetail td.unrestricted {
-    background-color: #e3e3e3;
     color: #3f3f3f;
 }
 
 .pooldetail tr:hover td.unrestricted {
-    background-color: #e3e3e3;
 }
 
 
@@ -1534,10 +1532,10 @@ div.init {
 }
 
 .membership_pools {
-    margin-top: 5px;
     margin-left: 10px;
 }
 .membership_pools .admin_label {
+    margin-top: 5px;
     margin-right: 3px;
 }
 
@@ -1545,6 +1543,7 @@ div.init {
     margin-left: 10px;
 }
 .membership_zones .admin_label {
+    margin-top: 5px;
     margin-right: 3px;
 }
 
