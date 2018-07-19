@@ -36,7 +36,7 @@ class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
             },
             'vendor_vehicle_links': {
                 'params': {'vehicle': 'PSS'},
-                'action': ('xpath://*[@id="pool_vendors"]/tbody/tr[12]/td[4]/a[1]', 'click'),
+                'action': ('xpath://*[@id="pool_vendors"]/tbody/tr[12]/td[3]/a[1]', 'click'),
                 'naics': ('all', 58, True),
                 'vehicle': ('PSS', 8, True),
                 'pool': ('all', 8, 7, True),
