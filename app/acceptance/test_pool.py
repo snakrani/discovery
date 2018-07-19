@@ -20,7 +20,7 @@ class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
                 'pool': ('all', 60, 59, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (181, 'results/csv/?'),
+                'results': (191, 'results/csv/?'),
                 'table': (50, 'h_naics_results', 'desc', ('Prev', '1'), '4')
             },
             'pool_links': {
@@ -31,8 +31,8 @@ class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
                 'pool': ('BMO_SB_1', 18, 1, True),
                 'zone': ('all', 7, True, True),
                 'filters': (None, 0, True),
-                'results': (6, 'results/csv/?vehicle=BMO_SB&pool=BMO_SB_1&'),
-                'table': (6, 'h_naics_results', 'desc')
+                'results': (10, 'results/csv/?vehicle=BMO_SB&pool=BMO_SB_1&'),
+                'table': (10, 'h_naics_results', 'desc')
             },
             'vendor_vehicle_links': {
                 'params': {'vehicle': 'PSS'},
@@ -56,7 +56,7 @@ class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
                 'pool': ('all', 60, 59, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (181, 'results/csv/?ordering=name'),
+                'results': (191, 'results/csv/?ordering=name'),
                 'table': (50, 'h_vendor_name', 'asc', ('Prev', '1'), '4'),
                 'o1|xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[1]': ('text__is_max', '<<xpath://*[@id="pool_vendors"]/tbody/tr[10]/td[1]>>'),
                 'o2|xpath://*[@id="pool_vendors"]/tbody/tr[10]/td[1]': ('text__is_max', '<<xpath://*[@id="pool_vendors"]/tbody/tr[20]/td[1]>>'),
@@ -72,7 +72,7 @@ class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
                 'pool': ('all', 60, 59, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (181, 'results/csv/?'),
+                'results': (191, 'results/csv/?'),
                 'table': (50, 'h_naics_results', 'desc', '3', '4')
             },
             'page_count': {
@@ -82,7 +82,7 @@ class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
                 'pool': ('all', 60, 59, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (181, 'results/csv/?'),
+                'results': (191, 'results/csv/?'),
                 'table': (10, 'h_naics_results', 'desc', ('Prev', '1'), '4')
             }
         }
