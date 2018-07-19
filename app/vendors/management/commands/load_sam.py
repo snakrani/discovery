@@ -187,7 +187,7 @@ class Command(BaseCommand):
 
             vendor.save()
             
-            sam_load, created = SamLoad.objects.get_or_create(vendor = vendor)
+            sam_load, created = SamLoad.objects.get_or_create(vendor = vendor, load_date = timezone.now())
             sam_load.load_date = timezone.now()
             sam_load.save()
                       
