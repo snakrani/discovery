@@ -11,8 +11,8 @@ def generate_search_tests():
                 'pool': ('all', 8, 7, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (25, 'results/csv/?naics=238220'),
-                'table': (25, 'h_naics_results', 'desc')
+                'results': (35, 'results/csv/?naics=238220'),
+                'table': (35, 'h_naics_results', 'desc')
             },
             'naics_bmo_sb': {
                 'params': {'naics': '561730'},
@@ -22,8 +22,8 @@ def generate_search_tests():
                 'pool': ('all', 5, 4, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (15, 'results/csv/?naics=561730'),
-                'table': (15, 'h_naics_results', 'desc')
+                'results': (17, 'results/csv/?naics=561730'),
+                'table': (17, 'h_naics_results', 'desc')
             },
             'naics_hcats': {
                 'params': {'naics': '611710'},
@@ -77,8 +77,8 @@ def generate_search_tests():
                 'pool': ('all', 4, 3, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (24, 'results/csv/?naics=236220'),
-                'table': (24, 'h_naics_results', 'desc')
+                'results': (28, 'results/csv/?naics=236220'),
+                'table': (28, 'h_naics_results', 'desc')
             },
             
             'vehicle_bmo': {
@@ -89,8 +89,8 @@ def generate_search_tests():
                 'pool': ('all', 18, 17, True),
                 'zone': ('all', 7, True, True),
                 'filters': (None, 0, True),
-                'results': (12, 'results/csv/?vehicle=BMO'),
-                'table': (12, 'h_naics_results', 'desc')
+                'results': (14, 'results/csv/?vehicle=BMO'),
+                'table': (14, 'h_naics_results', 'desc')
             },
             'vehicle_bmo_sb': {
                 'params': {'vehicle': 'BMO_SB'},
@@ -100,8 +100,8 @@ def generate_search_tests():
                 'pool': ('all', 18, 17, True),
                 'zone': ('all', 7, True, True),
                 'filters': (None, 0, True),
-                'results': (13, 'results/csv/?vehicle=BMO_SB'),
-                'table': (13, 'h_naics_results', 'desc')
+                'results': (23, 'results/csv/?vehicle=BMO_SB'),
+                'table': (23, 'h_naics_results', 'desc')
             },
             'vehicle_hcats': {
                 'params': {'vehicle': 'HCATS'},
@@ -167,8 +167,8 @@ def generate_search_tests():
                 'pool': ('BMO_1', 60, 1, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (7, 'results/csv/?pool=BMO_1'),
-                'table': (7, 'h_naics_results', 'desc')
+                'results': (10, 'results/csv/?pool=BMO_1'),
+                'table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_2': {
                 'params': {'pool': 'BMO_2'},
@@ -178,8 +178,8 @@ def generate_search_tests():
                 'pool': ('BMO_2', 60, 1, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (7, 'results/csv/?pool=BMO_2'),
-                'table': (7, 'h_naics_results', 'desc')
+                'results': (10, 'results/csv/?pool=BMO_2'),
+                'table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_3': {
                 'params': {'pool': 'BMO_3'},
@@ -189,8 +189,8 @@ def generate_search_tests():
                 'pool': ('BMO_3', 60, 1, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (7, 'results/csv/?pool=BMO_3'),
-                'table': (7, 'h_naics_results', 'desc')
+                'results': (10, 'results/csv/?pool=BMO_3'),
+                'table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_4': {
                 'params': {'pool': 'BMO_4'},
@@ -200,8 +200,8 @@ def generate_search_tests():
                 'pool': ('BMO_4', 60, 1, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (7, 'results/csv/?pool=BMO_4'),
-                'table': (7, 'h_naics_results', 'desc')
+                'results': (10, 'results/csv/?pool=BMO_4'),
+                'table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_5': {
                 'params': {'pool': 'BMO_5'},
@@ -211,8 +211,8 @@ def generate_search_tests():
                 'pool': ('BMO_5', 60, 1, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (7, 'results/csv/?pool=BMO_5'),
-                'table': (7, 'h_naics_results', 'desc')
+                'results': (9, 'results/csv/?pool=BMO_5'),
+                'table': (9, 'h_naics_results', 'desc')
             },
             'pool_bmo_6': {
                 'params': {'pool': 'BMO_6'},
@@ -233,8 +233,8 @@ def generate_search_tests():
                 'pool': ('BMO_7', 60, 1, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (7, 'results/csv/?pool=BMO_7'),
-                'table': (7, 'h_naics_results', 'desc')
+                'results': (10, 'results/csv/?pool=BMO_7'),
+                'table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_8': {
                 'params': {'pool': 'BMO_8'},
@@ -244,8 +244,8 @@ def generate_search_tests():
                 'pool': ('BMO_8', 60, 1, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (7, 'results/csv/?pool=BMO_8'),
-                'table': (7, 'h_naics_results', 'desc')
+                'results': (10, 'results/csv/?pool=BMO_8'),
+                'table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_9': {
                 'params': {'pool': 'BMO_9'},
@@ -255,8 +255,8 @@ def generate_search_tests():
                 'pool': ('BMO_9', 60, 1, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (7, 'results/csv/?pool=BMO_9'),
-                'table': (7, 'h_naics_results', 'desc')
+                'results': (8, 'results/csv/?pool=BMO_9'),
+                'table': (8, 'h_naics_results', 'desc')
             },
             'pool_bmo_10': {
                 'params': {'pool': 'BMO_10'},
@@ -266,8 +266,8 @@ def generate_search_tests():
                 'pool': ('BMO_10', 60, 1, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (7, 'results/csv/?pool=BMO_10'),
-                'table': (7, 'h_naics_results', 'desc')
+                'results': (8, 'results/csv/?pool=BMO_10'),
+                'table': (8, 'h_naics_results', 'desc')
             },
             'pool_bmo_11': {
                 'params': {'pool': 'BMO_11'},
@@ -277,8 +277,8 @@ def generate_search_tests():
                 'pool': ('BMO_11', 60, 1, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (7, 'results/csv/?pool=BMO_11'),
-                'table': (7, 'h_naics_results', 'desc')
+                'results': (8, 'results/csv/?pool=BMO_11'),
+                'table': (8, 'h_naics_results', 'desc')
             },
             'pool_bmo_12': {
                 'params': {'pool': 'BMO_12'},
@@ -288,8 +288,8 @@ def generate_search_tests():
                 'pool': ('BMO_12', 60, 1, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (7, 'results/csv/?pool=BMO_12'),
-                'table': (7, 'h_naics_results', 'desc')
+                'results': (8, 'results/csv/?pool=BMO_12'),
+                'table': (8, 'h_naics_results', 'desc')
             },
             'pool_bmo_13': {
                 'params': {'pool': 'BMO_13'},
@@ -299,8 +299,8 @@ def generate_search_tests():
                 'pool': ('BMO_13', 60, 1, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (7, 'results/csv/?pool=BMO_13'),
-                'table': (7, 'h_naics_results', 'desc')
+                'results': (9, 'results/csv/?pool=BMO_13'),
+                'table': (9, 'h_naics_results', 'desc')
             },
             'pool_bmo_14': {
                 'params': {'pool': 'BMO_14'},
@@ -310,8 +310,8 @@ def generate_search_tests():
                 'pool': ('BMO_14', 60, 1, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (8, 'results/csv/?pool=BMO_14'),
-                'table': (8, 'h_naics_results', 'desc')
+                'results': (9, 'results/csv/?pool=BMO_14'),
+                'table': (9, 'h_naics_results', 'desc')
             },
             'pool_bmo_15': {
                 'params': {'pool': 'BMO_15'},
@@ -355,8 +355,8 @@ def generate_search_tests():
                 'pool': ('BMO_SB_1', 60, 1, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (6, 'results/csv/?pool=BMO_SB_1'),
-                'table': (6, 'h_naics_results', 'desc')
+                'results': (10, 'results/csv/?pool=BMO_SB_1'),
+                'table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_2': {
                 'params': {'pool': 'BMO_SB_2'},
@@ -366,8 +366,8 @@ def generate_search_tests():
                 'pool': ('BMO_SB_2', 60, 1, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (6, 'results/csv/?pool=BMO_SB_2'),
-                'table': (6, 'h_naics_results', 'desc')
+                'results': (10, 'results/csv/?pool=BMO_SB_2'),
+                'table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_3': {
                 'params': {'pool': 'BMO_SB_3'},
@@ -377,8 +377,8 @@ def generate_search_tests():
                 'pool': ('BMO_SB_3', 60, 1, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (6, 'results/csv/?pool=BMO_SB_3'),
-                'table': (6, 'h_naics_results', 'desc')
+                'results': (10, 'results/csv/?pool=BMO_SB_3'),
+                'table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_4': {
                 'params': {'pool': 'BMO_SB_4'},
@@ -399,8 +399,8 @@ def generate_search_tests():
                 'pool': ('BMO_SB_5', 60, 1, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (6, 'results/csv/?pool=BMO_SB_5'),
-                'table': (6, 'h_naics_results', 'desc')
+                'results': (10, 'results/csv/?pool=BMO_SB_5'),
+                'table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_6': {
                 'params': {'pool': 'BMO_SB_6'},
@@ -410,8 +410,8 @@ def generate_search_tests():
                 'pool': ('BMO_SB_6', 60, 1, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (6, 'results/csv/?pool=BMO_SB_6'),
-                'table': (6, 'h_naics_results', 'desc')
+                'results': (10, 'results/csv/?pool=BMO_SB_6'),
+                'table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_7': {
                 'params': {'pool': 'BMO_SB_7'},
@@ -421,8 +421,8 @@ def generate_search_tests():
                 'pool': ('BMO_SB_7', 60, 1, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (6, 'results/csv/?pool=BMO_SB_7'),
-                'table': (6, 'h_naics_results', 'desc')
+                'results': (10, 'results/csv/?pool=BMO_SB_7'),
+                'table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_8': {
                 'params': {'pool': 'BMO_SB_8'},
@@ -432,8 +432,8 @@ def generate_search_tests():
                 'pool': ('BMO_SB_8', 60, 1, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (7, 'results/csv/?pool=BMO_SB_8'),
-                'table': (7, 'h_naics_results', 'desc')
+                'results': (10, 'results/csv/?pool=BMO_SB_8'),
+                'table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_9': {
                 'params': {'pool': 'BMO_SB_9'},
@@ -443,8 +443,8 @@ def generate_search_tests():
                 'pool': ('BMO_SB_9', 60, 1, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (7, 'results/csv/?pool=BMO_SB_9'),
-                'table': (7, 'h_naics_results', 'desc')
+                'results': (10, 'results/csv/?pool=BMO_SB_9'),
+                'table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_10': {
                 'params': {'pool': 'BMO_SB_10'},
@@ -454,8 +454,8 @@ def generate_search_tests():
                 'pool': ('BMO_SB_10', 60, 1, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (7, 'results/csv/?pool=BMO_SB_10'),
-                'table': (7, 'h_naics_results', 'desc')
+                'results': (10, 'results/csv/?pool=BMO_SB_10'),
+                'table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_11': {
                 'params': {'pool': 'BMO_SB_11'},
@@ -465,8 +465,8 @@ def generate_search_tests():
                 'pool': ('BMO_SB_11', 60, 1, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (7, 'results/csv/?pool=BMO_SB_11'),
-                'table': (7, 'h_naics_results', 'desc')
+                'results': (10, 'results/csv/?pool=BMO_SB_11'),
+                'table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_12': {
                 'params': {'pool': 'BMO_SB_12'},
@@ -476,8 +476,8 @@ def generate_search_tests():
                 'pool': ('BMO_SB_12', 60, 1, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (9, 'results/csv/?pool=BMO_SB_12'),
-                'table': (9, 'h_naics_results', 'desc')
+                'results': (10, 'results/csv/?pool=BMO_SB_12'),
+                'table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_13': {
                 'params': {'pool': 'BMO_SB_13'},
@@ -487,8 +487,8 @@ def generate_search_tests():
                 'pool': ('BMO_SB_13', 60, 1, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (9, 'results/csv/?pool=BMO_SB_13'),
-                'table': (9, 'h_naics_results', 'desc')
+                'results': (10, 'results/csv/?pool=BMO_SB_13'),
+                'table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_14': {
                 'params': {'pool': 'BMO_SB_14'},
@@ -498,8 +498,8 @@ def generate_search_tests():
                 'pool': ('BMO_SB_14', 60, 1, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (9, 'results/csv/?pool=BMO_SB_14'),
-                'table': (9, 'h_naics_results', 'desc')
+                'results': (10, 'results/csv/?pool=BMO_SB_14'),
+                'table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_15': {
                 'params': {'pool': 'BMO_SB_15'},
@@ -509,8 +509,8 @@ def generate_search_tests():
                 'pool': ('BMO_SB_15', 60, 1, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (9, 'results/csv/?pool=BMO_SB_15'),
-                'table': (9, 'h_naics_results', 'desc')
+                'results': (10, 'results/csv/?pool=BMO_SB_15'),
+                'table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_16': {
                 'params': {'pool': 'BMO_SB_16'},
@@ -520,8 +520,8 @@ def generate_search_tests():
                 'pool': ('BMO_SB_16', 60, 1, True),
                 'zone': ('all', 7, False, False),
                 'filters': (None, 0, True),
-                'results': (9, 'results/csv/?pool=BMO_SB_16'),
-                'table': (9, 'h_naics_results', 'desc')
+                'results': (10, 'results/csv/?pool=BMO_SB_16'),
+                'table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_17': {
                 'params': {'pool': 'BMO_SB_17'},
@@ -818,8 +818,8 @@ def generate_search_tests():
                 'pool': ('all', 18, 17, True),
                 'zone': ('1', 7, True, True),
                 'filters': (None, 0, True),
-                'results': (7, 'results/csv/?vehicle=BMO&zone=1'),
-                'table': (7, 'h_naics_results', 'desc')
+                'results': (9, 'results/csv/?vehicle=BMO&zone=1'),
+                'table': (9, 'h_naics_results', 'desc')
             },
             'bmo_sb_zone_2': {
                 'params': {'vehicle': 'BMO_SB', 'zone': '2'},
@@ -829,8 +829,8 @@ def generate_search_tests():
                 'pool': ('all', 18, 17, True),
                 'zone': ('2', 7, True, True),
                 'filters': (None, 0, True),
-                'results': (4, 'results/csv/?vehicle=BMO_SB&zone=2'),
-                'table': (4, 'h_naics_results', 'desc')
+                'results': (13, 'results/csv/?vehicle=BMO_SB&zone=2'),
+                'table': (13, 'h_naics_results', 'desc')
             },
             'bmo_zone_3': {
                 'params': {'vehicle': 'BMO', 'zone': '3'},
@@ -840,8 +840,8 @@ def generate_search_tests():
                 'pool': ('all', 18, 17, True),
                 'zone': ('3', 7, True, True),
                 'filters': (None, 0, True),
-                'results': (7, 'results/csv/?vehicle=BMO&zone=3'),
-                'table': (7, 'h_naics_results', 'desc')
+                'results': (8, 'results/csv/?vehicle=BMO&zone=3'),
+                'table': (8, 'h_naics_results', 'desc')
             },
             'bmo_sb_zone_4': {
                 'params': {'vehicle': 'BMO_SB', 'zone': '4'},
@@ -851,8 +851,8 @@ def generate_search_tests():
                 'pool': ('all', 18, 17, True),
                 'zone': ('4', 7, True, True),
                 'filters': (None, 0, True),
-                'results': (5, 'results/csv/?vehicle=BMO_SB&zone=4'),
-                'table': (5, 'h_naics_results', 'desc')
+                'results': (15, 'results/csv/?vehicle=BMO_SB&zone=4'),
+                'table': (15, 'h_naics_results', 'desc')
             },
             'bmo_zone_5': {
                 'params': {'vehicle': 'BMO', 'zone': '5'},
@@ -862,8 +862,8 @@ def generate_search_tests():
                 'pool': ('all', 18, 17, True),
                 'zone': ('5', 7, True, True),
                 'filters': (None, 0, True),
-                'results': (6, 'results/csv/?vehicle=BMO&zone=5'),
-                'table': (6, 'h_naics_results', 'desc')
+                'results': (8, 'results/csv/?vehicle=BMO&zone=5'),
+                'table': (8, 'h_naics_results', 'desc')
             },
             'bmo_sb_zone_6': {
                 'params': {'vehicle': 'BMO_SB', 'zone': '6'},
@@ -873,8 +873,8 @@ def generate_search_tests():
                 'pool': ('all', 18, 17, True),
                 'zone': ('6', 7, True, True),
                 'filters': (None, 0, True),
-                'results': (4, 'results/csv/?vehicle=BMO_SB&zone=6'),
-                'table': (4, 'h_naics_results', 'desc')
+                'results': (13, 'results/csv/?vehicle=BMO_SB&zone=6'),
+                'table': (13, 'h_naics_results', 'desc')
             },
             
             'setasides_8a': {
@@ -887,10 +887,10 @@ def generate_search_tests():
                 'filters': ('A6', 1, True),
                 'results': (30, 'results/csv/?setasides=A6'),
                 'table': (30, 'h_naics_results', 'desc'),
-                'i1|xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[5]/img': 'exists',
-                'i2|xpath://*[@id="pool_vendors"]/tbody/tr[10]/td[5]/img': 'exists',
-                'i3|xpath://*[@id="pool_vendors"]/tbody/tr[20]/td[5]/img': 'exists',
-                'i4|xpath://*[@id="pool_vendors"]/tbody/tr[31]/td[5]/img': 'exists'
+                'i1|xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[6]/img': 'exists',
+                'i2|xpath://*[@id="pool_vendors"]/tbody/tr[10]/td[6]/img': 'exists',
+                'i3|xpath://*[@id="pool_vendors"]/tbody/tr[20]/td[6]/img': 'exists',
+                'i4|xpath://*[@id="pool_vendors"]/tbody/tr[31]/td[6]/img': 'exists'
             },
             'setasides_hubz': {
                 'params': {'setasides': 'XX'},
@@ -902,9 +902,9 @@ def generate_search_tests():
                 'filters': ('XX', 1, True),
                 'results': (3, 'results/csv/?setasides=XX'),
                 'table': (3, 'h_naics_results', 'desc'),
-                'i1|xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[6]/img': 'exists',
-                'i2|xpath://*[@id="pool_vendors"]/tbody/tr[3]/td[6]/img': 'exists',
-                'i3|xpath://*[@id="pool_vendors"]/tbody/tr[4]/td[6]/img': 'exists'
+                'i1|xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[7]/img': 'exists',
+                'i2|xpath://*[@id="pool_vendors"]/tbody/tr[3]/td[7]/img': 'exists',
+                'i3|xpath://*[@id="pool_vendors"]/tbody/tr[4]/td[7]/img': 'exists'
             },
             'setasides_sdvo': {
                 'params': {'setasides': 'QF'},
@@ -914,11 +914,11 @@ def generate_search_tests():
                 'pool': ('all', 34, 59, True),
                 'zone': ('all', 7, False, False),
                 'filters': ('QF', 1, True),
-                'results': (23, 'results/csv/?setasides=QF'),
-                'table': (23, 'h_naics_results', 'desc'),
-                'i1|xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[7]/img': 'exists',
-                'i2|xpath://*[@id="pool_vendors"]/tbody/tr[10]/td[7]/img': 'exists',
-                'i3|xpath://*[@id="pool_vendors"]/tbody/tr[24]/td[7]/img': 'exists'
+                'results': (25, 'results/csv/?setasides=QF'),
+                'table': (25, 'h_naics_results', 'desc'),
+                'i1|xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[10]/img': 'exists',
+                'i2|xpath://*[@id="pool_vendors"]/tbody/tr[10]/td[10]/img': 'exists',
+                'i3|xpath://*[@id="pool_vendors"]/tbody/tr[24]/td[10]/img': 'exists'
             },
             'setasides_wo': {
                 'params': {'setasides': 'A2'},
@@ -928,8 +928,8 @@ def generate_search_tests():
                 'pool': ('all', 34, 59, True),
                 'zone': ('all', 7, False, False),
                 'filters': ('A2', 1, True),
-                'results': (16, 'results/csv/?setasides=A2'),
-                'table': (16, 'h_naics_results', 'desc'),
+                'results': (20, 'results/csv/?setasides=A2'),
+                'table': (20, 'h_naics_results', 'desc'),
                 'i1|xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[8]/img': 'exists',
                 'i2|xpath://*[@id="pool_vendors"]/tbody/tr[10]/td[8]/img': 'exists',
                 'i3|xpath://*[@id="pool_vendors"]/tbody/tr[17]/td[8]/img': 'exists'
@@ -942,8 +942,8 @@ def generate_search_tests():
                 'pool': ('all', 34, 59, True),
                 'zone': ('all', 7, False, False),
                 'filters': ('A5', 1, True),
-                'results': (18, 'results/csv/?setasides=A5'),
-                'table': (18, 'h_naics_results', 'desc'),
+                'results': (20, 'results/csv/?setasides=A5'),
+                'table': (20, 'h_naics_results', 'desc'),
                 'i1|xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[9]/img': 'exists',
                 'i2|xpath://*[@id="pool_vendors"]/tbody/tr[10]/td[9]/img': 'exists',
                 'i3|xpath://*[@id="pool_vendors"]/tbody/tr[19]/td[9]/img': 'exists'
@@ -958,10 +958,10 @@ def generate_search_tests():
                 'filters': ('27', 1, True),
                 'results': (30, 'results/csv/?setasides=27'),
                 'table': (30, 'h_naics_results', 'desc'),
-                'i1|xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[10]/img': 'exists',
-                'i2|xpath://*[@id="pool_vendors"]/tbody/tr[10]/td[10]/img': 'exists',
-                'i3|xpath://*[@id="pool_vendors"]/tbody/tr[20]/td[10]/img': 'exists',
-                'i4|xpath://*[@id="pool_vendors"]/tbody/tr[31]/td[10]/img': 'exists'
+                'i1|xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[5]/img': 'exists',
+                'i2|xpath://*[@id="pool_vendors"]/tbody/tr[10]/td[5]/img': 'exists',
+                'i3|xpath://*[@id="pool_vendors"]/tbody/tr[20]/td[5]/img': 'exists',
+                'i4|xpath://*[@id="pool_vendors"]/tbody/tr[31]/td[5]/img': 'exists'
             }
         }
     }
