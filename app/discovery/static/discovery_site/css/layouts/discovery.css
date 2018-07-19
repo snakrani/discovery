@@ -1473,23 +1473,27 @@ div.init {
     width: 50px;
 }
 .vendor_contract_filter_container td.contract {
-    width: 370px;
     text-align: left;
+    padding: 0;
 }
 .vendor_contract_filter_container td.contact {
     width: 100px;
     text-align: left;
 }
 .vendor_contract_filter_container td.phone {
-    width: 100px;
+    width: 90px;
     text-align: left;
 }
 .vendor_contract_filter_container td.email {
-    width: 100px;
+    width: 140px;
     text-align: left;
 }
 .vendor_contract_filter_container td.setaside {
-
+    width: 50px;
+}
+.vendor_contract_filter_container td.setaside_info {
+    width: 80px;
+    text-align: left;
 }
 
 .vendor_contract_filter_container tr:last-child td {
@@ -1523,6 +1527,35 @@ div.init {
 
 .vendor_contract_filter_container tr:first-child td:last-child {
     border-width: 0 0 1px 1px;
+}
+
+.membership_vehicles {
+    font-size: 1.2em;
+}
+
+.membership_pools {
+    margin-top: 5px;
+    margin-left: 10px;
+}
+.membership_pools .admin_label {
+    margin-right: 3px;
+}
+
+.membership_zones {
+    margin-left: 10px;
+}
+.membership_zones .admin_label {
+    margin-right: 3px;
+}
+
+.membership_info {
+    padding: 10px;
+}
+.capability_statement_link {
+    width: 100%;
+    text-align: right;
+    background: #eee;
+    padding: 5px;
 }
 
 
@@ -1639,7 +1672,6 @@ div.init {
     border-spacing: 0;
     table-layout: fixed;
     width: 1100px;
-    min-height: 120px;
     margin: 0;
     padding: 0;
 }
