@@ -6,7 +6,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": null
+    "zipcode": "75201"
   }
 },
 {
@@ -16,7 +16,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "76710"
+    "zipcode": null
   }
 },
 {
@@ -26,7 +26,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "22448"
+    "zipcode": "76710"
   }
 },
 {
@@ -46,7 +46,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "75201"
+    "zipcode": "22448"
   }
 },
 {
@@ -76,7 +76,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "62225"
+    "zipcode": "22060"
   }
 },
 {
@@ -86,7 +86,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "22060"
+    "zipcode": "62225"
   }
 },
 {
@@ -96,7 +96,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "21702"
+    "zipcode": "49037"
   }
 },
 {
@@ -106,7 +106,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "49037"
+    "zipcode": "22350"
   }
 },
 {
@@ -116,7 +116,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "22350"
+    "zipcode": "20318"
   }
 },
 {
@@ -126,7 +126,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20318"
+    "zipcode": "21702"
   }
 },
 {
@@ -166,7 +166,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20705"
+    "zipcode": "08405"
   }
 },
 {
@@ -176,7 +176,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "08405"
+    "zipcode": "20705"
   }
 },
 {
@@ -186,7 +186,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "48045"
+    "zipcode": "48167"
   }
 },
 {
@@ -196,7 +196,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "48167"
+    "zipcode": "48045"
   }
 },
 {
@@ -206,7 +206,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "78236"
+    "zipcode": "79601"
   }
 },
 {
@@ -216,7 +216,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "79601"
+    "zipcode": "78236"
   }
 },
 {
@@ -226,7 +226,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20762"
+    "zipcode": "00918"
   }
 },
 {
@@ -236,7 +236,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "00918"
+    "zipcode": "20762"
   }
 },
 {
@@ -286,7 +286,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20151"
+    "zipcode": "33621"
   }
 },
 {
@@ -296,7 +296,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "33621"
+    "zipcode": "20376"
   }
 },
 {
@@ -306,7 +306,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20376"
+    "zipcode": "01731"
   }
 },
 {
@@ -316,7 +316,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "01731"
+    "zipcode": "20151"
   }
 },
 {
@@ -336,7 +336,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "22311"
+    "zipcode": "21005"
   }
 },
 {
@@ -346,7 +346,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "21005"
+    "zipcode": "23604"
   }
 },
 {
@@ -356,7 +356,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "23604"
+    "zipcode": "20460"
   }
 },
 {
@@ -366,7 +366,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20460"
+    "zipcode": "20004"
   }
 },
 {
@@ -376,7 +376,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20004"
+    "zipcode": "22311"
   }
 },
 {
@@ -386,7 +386,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20032"
+    "zipcode": "23801"
   }
 },
 {
@@ -396,7 +396,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20202"
+    "zipcode": "20001"
   }
 },
 {
@@ -406,7 +406,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "23801"
+    "zipcode": "20032"
   }
 },
 {
@@ -416,7 +416,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20001"
+    "zipcode": "20202"
   }
 },
 {
@@ -426,7 +426,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "64131"
+    "zipcode": "20250"
   }
 },
 {
@@ -436,7 +436,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "22301"
+    "zipcode": "20560"
   }
 },
 {
@@ -446,7 +446,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20560"
+    "zipcode": "22301"
   }
 },
 {
@@ -456,7 +456,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20250"
+    "zipcode": "64131"
   }
 },
 {
@@ -496,7 +496,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "22302"
+    "zipcode": "20210"
   }
 },
 {
@@ -506,7 +506,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20210"
+    "zipcode": "22302"
   }
 },
 {
@@ -516,7 +516,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20416"
+    "zipcode": "22209"
   }
 },
 {
@@ -536,7 +536,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20011"
+    "zipcode": "20416"
   }
 },
 {
@@ -546,7 +546,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "22209"
+    "zipcode": "20220"
   }
 },
 {
@@ -556,7 +556,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20220"
+    "zipcode": "20011"
   }
 },
 {
@@ -596,7 +596,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "87508"
+    "zipcode": "20006"
   }
 },
 {
@@ -606,7 +606,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20742"
+    "zipcode": "87508"
   }
 },
 {
@@ -616,7 +616,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20006"
+    "zipcode": "20742"
   }
 },
 {
@@ -626,7 +626,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20571"
+    "zipcode": "22219"
   }
 },
 {
@@ -636,32 +636,12 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "22219"
+    "zipcode": "20571"
   }
 },
 {
   "model": "contracts.placeofperformance",
   "pk": 65,
-  "fields": {
-    "country_code": "USA",
-    "country_name": "United States",
-    "state": null,
-    "zipcode": "22230"
-  }
-},
-{
-  "model": "contracts.placeofperformance",
-  "pk": 66,
-  "fields": {
-    "country_code": "USA",
-    "country_name": "United States",
-    "state": null,
-    "zipcode": "22308"
-  }
-},
-{
-  "model": "contracts.placeofperformance",
-  "pk": 67,
   "fields": {
     "country_code": "UGA",
     "country_name": "Uganda",
@@ -671,7 +651,7 @@
 },
 {
   "model": "contracts.placeofperformance",
-  "pk": 68,
+  "pk": 66,
   "fields": {
     "country_code": "USA",
     "country_name": "United States",
@@ -681,17 +661,7 @@
 },
 {
   "model": "contracts.placeofperformance",
-  "pk": 69,
-  "fields": {
-    "country_code": "USA",
-    "country_name": "United States",
-    "state": null,
-    "zipcode": "05602"
-  }
-},
-{
-  "model": "contracts.placeofperformance",
-  "pk": 70,
+  "pk": 67,
   "fields": {
     "country_code": "USA",
     "country_name": "United States",
@@ -701,12 +671,42 @@
 },
 {
   "model": "contracts.placeofperformance",
+  "pk": 68,
+  "fields": {
+    "country_code": "USA",
+    "country_name": "United States",
+    "state": null,
+    "zipcode": "22308"
+  }
+},
+{
+  "model": "contracts.placeofperformance",
+  "pk": 69,
+  "fields": {
+    "country_code": "USA",
+    "country_name": "United States",
+    "state": null,
+    "zipcode": "22230"
+  }
+},
+{
+  "model": "contracts.placeofperformance",
+  "pk": 70,
+  "fields": {
+    "country_code": "USA",
+    "country_name": "United States",
+    "state": null,
+    "zipcode": "05602"
+  }
+},
+{
+  "model": "contracts.placeofperformance",
   "pk": 71,
   "fields": {
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "32542"
+    "zipcode": "33607"
   }
 },
 {
@@ -716,7 +716,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "33602"
+    "zipcode": "32542"
   }
 },
 {
@@ -726,7 +726,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "33607"
+    "zipcode": "33602"
   }
 },
 {
@@ -746,7 +746,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "22030"
+    "zipcode": "20330"
   }
 },
 {
@@ -766,7 +766,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20330"
+    "zipcode": "20350"
   }
 },
 {
@@ -776,7 +776,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20350"
+    "zipcode": "90245"
   }
 },
 {
@@ -786,7 +786,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "90245"
+    "zipcode": "22030"
   }
 },
 {
@@ -796,7 +796,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "32226"
+    "zipcode": "35807"
   }
 },
 {
@@ -806,22 +806,12 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "35807"
+    "zipcode": "32226"
   }
 },
 {
   "model": "contracts.placeofperformance",
   "pk": 82,
-  "fields": {
-    "country_code": "USA",
-    "country_name": "United States",
-    "state": null,
-    "zipcode": "29419"
-  }
-},
-{
-  "model": "contracts.placeofperformance",
-  "pk": 83,
   "fields": {
     "country_code": "DEU",
     "country_name": "Germany",
@@ -831,12 +821,22 @@
 },
 {
   "model": "contracts.placeofperformance",
-  "pk": 84,
+  "pk": 83,
   "fields": {
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
     "zipcode": "23513"
+  }
+},
+{
+  "model": "contracts.placeofperformance",
+  "pk": 84,
+  "fields": {
+    "country_code": "ITA",
+    "country_name": "Italy",
+    "state": null,
+    "zipcode": null
   }
 },
 {
@@ -853,10 +853,10 @@
   "model": "contracts.placeofperformance",
   "pk": 86,
   "fields": {
-    "country_code": "ITA",
-    "country_name": "Italy",
+    "country_code": "USA",
+    "country_name": "United States",
     "state": null,
-    "zipcode": null
+    "zipcode": "29419"
   }
 },
 {
@@ -896,7 +896,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20375"
+    "zipcode": "01741"
   }
 },
 {
@@ -906,7 +906,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "01741"
+    "zipcode": "20375"
   }
 },
 {
@@ -936,7 +936,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "78150"
+    "zipcode": "19053"
   }
 },
 {
@@ -976,7 +976,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "19053"
+    "zipcode": "07801"
   }
 },
 {
@@ -986,7 +986,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "07801"
+    "zipcode": "78150"
   }
 },
 {
@@ -1026,7 +1026,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "80914"
+    "zipcode": "80915"
   }
 },
 {
@@ -1036,7 +1036,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "80916"
+    "zipcode": "35898"
   }
 },
 {
@@ -1046,7 +1046,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "80915"
+    "zipcode": "80914"
   }
 },
 {
@@ -1056,7 +1056,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "35898"
+    "zipcode": "80916"
   }
 },
 {
@@ -1106,7 +1106,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "92110"
+    "zipcode": "35801"
   }
 },
 {
@@ -1116,7 +1116,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "35801"
+    "zipcode": "92110"
   }
 },
 {
@@ -1203,20 +1203,20 @@
   "model": "contracts.placeofperformance",
   "pk": 121,
   "fields": {
-    "country_code": "AFG",
-    "country_name": "Afghanistan",
+    "country_code": "USA",
+    "country_name": "United States",
     "state": null,
-    "zipcode": null
+    "zipcode": "20653"
   }
 },
 {
   "model": "contracts.placeofperformance",
   "pk": 122,
   "fields": {
-    "country_code": "USA",
-    "country_name": "United States",
+    "country_code": "AFG",
+    "country_name": "Afghanistan",
     "state": null,
-    "zipcode": "20653"
+    "zipcode": null
   }
 },
 {
@@ -1236,7 +1236,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "21235"
+    "zipcode": "20190"
   }
 },
 {
@@ -1246,7 +1246,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20190"
+    "zipcode": "21235"
   }
 },
 {
@@ -1276,7 +1276,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "77099"
+    "zipcode": "20755"
   }
 },
 {
@@ -1296,7 +1296,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20755"
+    "zipcode": "20640"
   }
 },
 {
@@ -1306,7 +1306,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20640"
+    "zipcode": "66101"
   }
 },
 {
@@ -1316,7 +1316,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "66101"
+    "zipcode": "77099"
   }
 },
 {
@@ -1326,7 +1326,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "32403"
+    "zipcode": "32669"
   }
 },
 {
@@ -1336,7 +1336,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "32669"
+    "zipcode": "19462"
   }
 },
 {
@@ -1346,7 +1346,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20590"
+    "zipcode": "78843"
   }
 },
 {
@@ -1356,7 +1356,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "78843"
+    "zipcode": "27709"
   }
 },
 {
@@ -1366,7 +1366,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "19462"
+    "zipcode": "32403"
   }
 },
 {
@@ -1376,7 +1376,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "27709"
+    "zipcode": "19422"
   }
 },
 {
@@ -1386,7 +1386,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "19422"
+    "zipcode": "20590"
   }
 },
 {
@@ -1396,7 +1396,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "80301"
+    "zipcode": "80306"
   }
 },
 {
@@ -1406,7 +1406,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "80306"
+    "zipcode": "80022"
   }
 },
 {
@@ -1416,7 +1416,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "80022"
+    "zipcode": "80301"
   }
 },
 {
@@ -1456,7 +1456,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "73135"
+    "zipcode": "73108"
   }
 },
 {
@@ -1466,7 +1466,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "63134"
+    "zipcode": "73135"
   }
 },
 {
@@ -1476,7 +1476,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "73108"
+    "zipcode": "63134"
   }
 },
 {
@@ -1496,7 +1496,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "17050"
+    "zipcode": "22031"
   }
 },
 {
@@ -1506,7 +1506,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "22031"
+    "zipcode": "17050"
   }
 },
 {
@@ -1516,7 +1516,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "23511"
+    "zipcode": "32826"
   }
 },
 {
@@ -1526,7 +1526,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "32826"
+    "zipcode": "23511"
   }
 },
 {
@@ -1536,7 +1536,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "93524"
+    "zipcode": "93523"
   }
 },
 {
@@ -1546,7 +1546,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "93523"
+    "zipcode": "93524"
   }
 },
 {
@@ -1556,27 +1556,27 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "32509"
+    "zipcode": "93943"
   }
 },
 {
   "model": "contracts.placeofperformance",
   "pk": 157,
   "fields": {
-    "country_code": "USA",
-    "country_name": "United States",
+    "country_code": "JOR",
+    "country_name": "Jordan",
     "state": null,
-    "zipcode": "93943"
+    "zipcode": null
   }
 },
 {
   "model": "contracts.placeofperformance",
   "pk": 158,
   "fields": {
-    "country_code": "JOR",
-    "country_name": "Jordan",
+    "country_code": "USA",
+    "country_name": "United States",
     "state": null,
-    "zipcode": null
+    "zipcode": "32509"
   }
 },
 {
@@ -1596,7 +1596,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "31704"
+    "zipcode": "22134"
   }
 },
 {
@@ -1606,7 +1606,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "22134"
+    "zipcode": "31704"
   }
 },
 {
@@ -1726,7 +1726,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20472"
+    "zipcode": "22206"
   }
 },
 {
@@ -1736,7 +1736,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20420"
+    "zipcode": "20463"
   }
 },
 {
@@ -1746,7 +1746,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20007"
+    "zipcode": "20420"
   }
 },
 {
@@ -1756,7 +1756,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "22206"
+    "zipcode": "20007"
   }
 },
 {
@@ -1766,7 +1766,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20737"
+    "zipcode": "79918"
   }
 },
 {
@@ -1776,7 +1776,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "79918"
+    "zipcode": "20472"
   }
 },
 {
@@ -1786,7 +1786,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20463"
+    "zipcode": "20737"
   }
 },
 {
@@ -1806,7 +1806,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "05001"
+    "zipcode": "20002"
   }
 },
 {
@@ -1816,7 +1816,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20002"
+    "zipcode": "05001"
   }
 },
 {
@@ -1826,7 +1826,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20585"
+    "zipcode": "43213"
   }
 },
 {
@@ -1836,7 +1836,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "43213"
+    "zipcode": "20585"
   }
 },
 {
@@ -1846,7 +1846,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20740"
+    "zipcode": "40503"
   }
 },
 {
@@ -1856,7 +1856,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "40503"
+    "zipcode": "20740"
   }
 },
 {
@@ -1886,7 +1886,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "22066"
+    "zipcode": "30912"
   }
 },
 {
@@ -1906,7 +1906,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "30912"
+    "zipcode": "22066"
   }
 },
 {
@@ -1966,7 +1966,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20226"
+    "zipcode": "28301"
   }
 },
 {
@@ -1976,7 +1976,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20852"
+    "zipcode": "20226"
   }
 },
 {
@@ -1986,7 +1986,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "28301"
+    "zipcode": "20852"
   }
 },
 {
@@ -1996,7 +1996,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20229"
+    "zipcode": "22207"
   }
 },
 {
@@ -2006,7 +2006,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "22207"
+    "zipcode": "20229"
   }
 },
 {
@@ -2056,7 +2056,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20850"
+    "zipcode": "20783"
   }
 },
 {
@@ -2066,7 +2066,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20783"
+    "zipcode": "20850"
   }
 },
 {
@@ -2086,7 +2086,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "21401"
+    "zipcode": "21224"
   }
 },
 {
@@ -2096,7 +2096,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "21224"
+    "zipcode": "21401"
   }
 },
 {
@@ -2106,7 +2106,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "40121"
+    "zipcode": "22332"
   }
 },
 {
@@ -2116,7 +2116,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "22903"
+    "zipcode": "40121"
   }
 },
 {
@@ -2126,7 +2126,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "22332"
+    "zipcode": "22903"
   }
 },
 {
@@ -2136,7 +2136,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20164"
+    "zipcode": "30330"
   }
 },
 {
@@ -2146,7 +2146,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "99505"
+    "zipcode": "30310"
   }
 },
 {
@@ -2156,7 +2156,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "30330"
+    "zipcode": "20164"
   }
 },
 {
@@ -2166,7 +2166,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "30310"
+    "zipcode": "99505"
   }
 },
 {
@@ -2176,7 +2176,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "36112"
+    "zipcode": "73145"
   }
 },
 {
@@ -2186,7 +2186,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "23651"
+    "zipcode": "36112"
   }
 },
 {
@@ -2206,7 +2206,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "73145"
+    "zipcode": "23651"
   }
 },
 {
@@ -2236,7 +2236,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "92132"
+    "zipcode": "23322"
   }
 },
 {
@@ -2246,7 +2246,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "23322"
+    "zipcode": "92132"
   }
 },
 {
@@ -2276,7 +2276,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "07722"
+    "zipcode": "26354"
   }
 },
 {
@@ -2286,7 +2286,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "26354"
+    "zipcode": "07722"
   }
 },
 {
@@ -2296,7 +2296,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "29229"
+    "zipcode": "29201"
   }
 },
 {
@@ -2306,7 +2306,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "29201"
+    "zipcode": "29229"
   }
 },
 {
@@ -2316,7 +2316,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "78249"
+    "zipcode": "14020"
   }
 },
 {
@@ -2326,7 +2326,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "84022"
+    "zipcode": "78566"
   }
 },
 {
@@ -2336,7 +2336,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "78566"
+    "zipcode": "78249"
   }
 },
 {
@@ -2346,7 +2346,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "99703"
+    "zipcode": "61299"
   }
 },
 {
@@ -2356,7 +2356,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "61299"
+    "zipcode": "73502"
   }
 },
 {
@@ -2366,7 +2366,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "73502"
+    "zipcode": "10996"
   }
 },
 {
@@ -2376,7 +2376,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "14020"
+    "zipcode": "76544"
   }
 },
 {
@@ -2386,7 +2386,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "22603"
+    "zipcode": "84022"
   }
 },
 {
@@ -2396,7 +2396,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "10996"
+    "zipcode": "99703"
   }
 },
 {
@@ -2406,7 +2406,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "76544"
+    "zipcode": "22603"
   }
 },
 {
@@ -2426,7 +2426,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "43218"
+    "zipcode": "43215"
   }
 },
 {
@@ -2436,7 +2436,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "43215"
+    "zipcode": "43218"
   }
 },
 {
@@ -2446,7 +2446,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "21226"
+    "zipcode": "21230"
   }
 },
 {
@@ -2456,7 +2456,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20020"
+    "zipcode": "21409"
   }
 },
 {
@@ -2466,7 +2466,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20708"
+    "zipcode": "21226"
   }
 },
 {
@@ -2476,7 +2476,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "21230"
+    "zipcode": "20020"
   }
 },
 {
@@ -2486,7 +2486,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "21409"
+    "zipcode": "20708"
   }
 },
 {
@@ -2526,7 +2526,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "32212"
+    "zipcode": "55111"
   }
 },
 {
@@ -2536,7 +2536,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "55111"
+    "zipcode": "32212"
   }
 },
 {
@@ -2566,7 +2566,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "00965"
+    "zipcode": "73069"
   }
 },
 {
@@ -2576,7 +2576,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "73069"
+    "zipcode": "00965"
   }
 },
 {
@@ -2586,7 +2586,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "35816"
+    "zipcode": "37040"
   }
 },
 {
@@ -2596,7 +2596,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "68111"
+    "zipcode": "72653"
   }
 },
 {
@@ -2606,7 +2606,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "72653"
+    "zipcode": "60088"
   }
 },
 {
@@ -2616,7 +2616,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "60088"
+    "zipcode": "35816"
   }
 },
 {
@@ -2636,7 +2636,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "37040"
+    "zipcode": "65616"
   }
 },
 {
@@ -2646,7 +2646,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "65616"
+    "zipcode": "68111"
   }
 },
 {
@@ -2656,7 +2656,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "38054"
+    "zipcode": "39501"
   }
 },
 {
@@ -2666,7 +2666,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "28533"
+    "zipcode": "32407"
   }
 },
 {
@@ -2676,7 +2676,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "39501"
+    "zipcode": "32836"
   }
 },
 {
@@ -2686,7 +2686,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "32836"
+    "zipcode": "28533"
   }
 },
 {
@@ -2706,7 +2706,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "32407"
+    "zipcode": "38054"
   }
 },
 {
@@ -2716,7 +2716,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "68508"
+    "zipcode": "21075"
   }
 },
 {
@@ -2726,7 +2726,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "78401"
+    "zipcode": "68508"
   }
 },
 {
@@ -2736,7 +2736,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "21075"
+    "zipcode": "78419"
   }
 },
 {
@@ -2746,7 +2746,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "78419"
+    "zipcode": "78401"
   }
 },
 {
@@ -2756,7 +2756,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "78205"
+    "zipcode": "08640"
   }
 },
 {
@@ -2766,7 +2766,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "31098"
+    "zipcode": "78205"
   }
 },
 {
@@ -2776,7 +2776,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "08640"
+    "zipcode": "08641"
   }
 },
 {
@@ -2786,7 +2786,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "08641"
+    "zipcode": "31098"
   }
 },
 {
@@ -2796,7 +2796,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20810"
+    "zipcode": "20889"
   }
 },
 {
@@ -2806,7 +2806,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20889"
+    "zipcode": "20810"
   }
 },
 {
@@ -2846,7 +2846,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "76131"
+    "zipcode": "54656"
   }
 },
 {
@@ -2856,7 +2856,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "54656"
+    "zipcode": "76131"
   }
 },
 {
@@ -2936,7 +2936,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "30009"
+    "zipcode": "78226"
   }
 },
 {
@@ -2946,7 +2946,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "78226"
+    "zipcode": "30009"
   }
 },
 {
@@ -2963,16 +2963,6 @@
   "model": "contracts.placeofperformance",
   "pk": 297,
   "fields": {
-    "country_code": "LVA",
-    "country_name": "Latvia",
-    "state": null,
-    "zipcode": null
-  }
-},
-{
-  "model": "contracts.placeofperformance",
-  "pk": 298,
-  "fields": {
     "country_code": "GHA",
     "country_name": "Ghana",
     "state": null,
@@ -2981,10 +2971,20 @@
 },
 {
   "model": "contracts.placeofperformance",
+  "pk": 298,
+  "fields": {
+    "country_code": "UZB",
+    "country_name": "Uzbekistan",
+    "state": null,
+    "zipcode": null
+  }
+},
+{
+  "model": "contracts.placeofperformance",
   "pk": 299,
   "fields": {
-    "country_code": "EST",
-    "country_name": "Estonia",
+    "country_code": "LVA",
+    "country_name": "Latvia",
     "state": null,
     "zipcode": null
   }
@@ -2993,8 +2993,8 @@
   "model": "contracts.placeofperformance",
   "pk": 300,
   "fields": {
-    "country_code": "UZB",
-    "country_name": "Uzbekistan",
+    "country_code": "EST",
+    "country_name": "Estonia",
     "state": null,
     "zipcode": null
   }
@@ -3016,7 +3016,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20552"
+    "zipcode": "20219"
   }
 },
 {
@@ -3026,7 +3026,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20219"
+    "zipcode": "20552"
   }
 },
 {
@@ -3046,7 +3046,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "32570"
+    "zipcode": "22554"
   }
 },
 {
@@ -3056,7 +3056,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "22554"
+    "zipcode": "32570"
   }
 },
 {
@@ -3073,20 +3073,20 @@
   "model": "contracts.placeofperformance",
   "pk": 308,
   "fields": {
-    "country_code": "USA",
-    "country_name": "United States",
+    "country_code": "KOR",
+    "country_name": "Korea, South",
     "state": null,
-    "zipcode": "96819"
+    "zipcode": null
   }
 },
 {
   "model": "contracts.placeofperformance",
   "pk": 309,
   "fields": {
-    "country_code": "KOR",
-    "country_name": "Korea, South",
+    "country_code": "USA",
+    "country_name": "United States",
     "state": null,
-    "zipcode": null
+    "zipcode": "96819"
   }
 },
 {
@@ -3206,7 +3206,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20854"
+    "zipcode": "20546"
   }
 },
 {
@@ -3226,7 +3226,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20546"
+    "zipcode": "20854"
   }
 },
 {
@@ -3296,7 +3296,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "98204"
+    "zipcode": "17070"
   }
 },
 {
@@ -3306,7 +3306,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "17070"
+    "zipcode": "98204"
   }
 },
 {
@@ -3316,7 +3316,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "21742"
+    "zipcode": "20526"
   }
 },
 {
@@ -3326,7 +3326,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20526"
+    "zipcode": "21742"
   }
 },
 {
@@ -3336,7 +3336,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "76010"
+    "zipcode": "76011"
   }
 },
 {
@@ -3346,7 +3346,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "30341"
+    "zipcode": "76010"
   }
 },
 {
@@ -3356,7 +3356,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "76011"
+    "zipcode": "30341"
   }
 },
 {
@@ -3366,7 +3366,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "22039"
+    "zipcode": "20310"
   }
 },
 {
@@ -3376,7 +3376,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20310"
+    "zipcode": "22039"
   }
 },
 {
@@ -3386,7 +3386,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "55118"
+    "zipcode": "55144"
   }
 },
 {
@@ -3396,7 +3396,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "55144"
+    "zipcode": "55114"
   }
 },
 {
@@ -3406,7 +3406,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "55114"
+    "zipcode": "55118"
   }
 },
 {
@@ -3416,7 +3416,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "22602"
+    "zipcode": "26301"
   }
 },
 {
@@ -3426,7 +3426,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "26306"
+    "zipcode": "22135"
   }
 },
 {
@@ -3436,7 +3436,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "22135"
+    "zipcode": "22602"
   }
 },
 {
@@ -3446,7 +3446,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "26301"
+    "zipcode": "26306"
   }
 },
 {
@@ -3456,7 +3456,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "80124"
+    "zipcode": "80235"
   }
 },
 {
@@ -3466,7 +3466,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "80235"
+    "zipcode": "80124"
   }
 },
 {
@@ -3476,7 +3476,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "76102"
+    "zipcode": "80525"
   }
 },
 {
@@ -3486,7 +3486,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "80525"
+    "zipcode": "76102"
   }
 },
 {
@@ -3536,7 +3536,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "84056"
+    "zipcode": "07512"
   }
 },
 {
@@ -3546,7 +3546,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "07512"
+    "zipcode": "84056"
   }
 },
 {
@@ -3576,7 +3576,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "73503"
+    "zipcode": "46124"
   }
 },
 {
@@ -3586,7 +3586,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "46124"
+    "zipcode": "73503"
   }
 },
 {
@@ -3606,7 +3606,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "33764"
+    "zipcode": "20536"
   }
 },
 {
@@ -3616,7 +3616,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20536"
+    "zipcode": "33701"
   }
 },
 {
@@ -3626,7 +3626,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "33701"
+    "zipcode": "20530"
   }
 },
 {
@@ -3656,7 +3656,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "07030"
+    "zipcode": "33764"
   }
 },
 {
@@ -3666,7 +3666,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20530"
+    "zipcode": "07030"
   }
 },
 {
@@ -3696,7 +3696,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20535"
+    "zipcode": "92310"
   }
 },
 {
@@ -3706,7 +3706,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "92310"
+    "zipcode": "20535"
   }
 },
 {
@@ -3716,7 +3716,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "02109"
+    "zipcode": "20892"
   }
 },
 {
@@ -3726,7 +3726,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20918"
+    "zipcode": "02109"
   }
 },
 {
@@ -3736,7 +3736,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20892"
+    "zipcode": "20918"
   }
 },
 {
@@ -3776,7 +3776,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "21240"
+    "zipcode": "56567"
   }
 },
 {
@@ -3786,7 +3786,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "56567"
+    "zipcode": "21240"
   }
 },
 {
@@ -3806,7 +3806,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "84004"
+    "zipcode": "83113"
   }
 },
 {
@@ -3816,7 +3816,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "83113"
+    "zipcode": "84004"
   }
 },
 {
@@ -3826,7 +3826,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20407"
+    "zipcode": "30303"
   }
 },
 {
@@ -3836,7 +3836,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "30303"
+    "zipcode": "20407"
   }
 },
 {
@@ -3846,7 +3846,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "44512"
+    "zipcode": "44406"
   }
 },
 {
@@ -3866,7 +3866,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "44406"
+    "zipcode": "08360"
   }
 },
 {
@@ -3876,7 +3876,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "95404"
+    "zipcode": "30642"
   }
 },
 {
@@ -3886,7 +3886,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "08360"
+    "zipcode": "44512"
   }
 },
 {
@@ -3896,7 +3896,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "30642"
+    "zipcode": "95404"
   }
 },
 {
@@ -3906,7 +3906,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "46249"
+    "zipcode": "20227"
   }
 },
 {
@@ -3916,7 +3916,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20227"
+    "zipcode": "46249"
   }
 },
 {
@@ -3946,7 +3946,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "20422"
+    "zipcode": "53717"
   }
 },
 {
@@ -3966,7 +3966,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "80220"
+    "zipcode": "84148"
   }
 },
 {
@@ -3986,7 +3986,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "84148"
+    "zipcode": "62701"
   }
 },
 {
@@ -3996,7 +3996,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "53717"
+    "zipcode": "75242"
   }
 },
 {
@@ -4006,7 +4006,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "62701"
+    "zipcode": "20422"
   }
 },
 {
@@ -4016,7 +4016,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "75242"
+    "zipcode": "80220"
   }
 },
 {
@@ -4036,7 +4036,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "97201"
+    "zipcode": "99802"
   }
 },
 {
@@ -4046,7 +4046,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "89130"
+    "zipcode": "97201"
   }
 },
 {
@@ -4056,7 +4056,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "99802"
+    "zipcode": "89130"
   }
 },
 {
@@ -4073,8 +4073,8 @@
   "model": "contracts.placeofperformance",
   "pk": 408,
   "fields": {
-    "country_code": "BIH",
-    "country_name": "Bosnia And Herzegovina",
+    "country_code": "SRB",
+    "country_name": "Serbia",
     "state": null,
     "zipcode": null
   }
@@ -4083,8 +4083,8 @@
   "model": "contracts.placeofperformance",
   "pk": 409,
   "fields": {
-    "country_code": "SRB",
-    "country_name": "Serbia",
+    "country_code": "BIH",
+    "country_name": "Bosnia And Herzegovina",
     "state": null,
     "zipcode": null
   }
@@ -4176,7 +4176,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "01930"
+    "zipcode": "99501"
   }
 },
 {
@@ -4186,7 +4186,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "99501"
+    "zipcode": "99619"
   }
 },
 {
@@ -4206,7 +4206,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "02543"
+    "zipcode": "99692"
   }
 },
 {
@@ -4216,7 +4216,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "99619"
+    "zipcode": "01930"
   }
 },
 {
@@ -4226,7 +4226,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "99692"
+    "zipcode": "02543"
   }
 },
 {
@@ -4296,7 +4296,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "11231"
+    "zipcode": "18711"
   }
 },
 {
@@ -4306,7 +4306,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "08060"
+    "zipcode": "40914"
   }
 },
 {
@@ -4316,7 +4316,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "18711"
+    "zipcode": "11231"
   }
 },
 {
@@ -4326,7 +4326,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "07843"
+    "zipcode": "08060"
   }
 },
 {
@@ -4336,7 +4336,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "40914"
+    "zipcode": "07843"
   }
 },
 {
@@ -4356,7 +4356,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "32508"
+    "zipcode": "94103"
   }
 },
 {
@@ -4366,7 +4366,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "94103"
+    "zipcode": "94559"
   }
 },
 {
@@ -4376,7 +4376,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "94559"
+    "zipcode": "32508"
   }
 },
 {
@@ -4386,7 +4386,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "11209"
+    "zipcode": "10305"
   }
 },
 {
@@ -4396,7 +4396,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "12302"
+    "zipcode": "00603"
   }
 },
 {
@@ -4406,7 +4406,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "14810"
+    "zipcode": "11209"
   }
 },
 {
@@ -4416,7 +4416,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "23667"
+    "zipcode": "12302"
   }
 },
 {
@@ -4426,7 +4426,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "10305"
+    "zipcode": "14810"
   }
 },
 {
@@ -4446,7 +4446,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "00603"
+    "zipcode": "23667"
   }
 },
 {
@@ -4466,7 +4466,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "10016"
+    "zipcode": "19107"
   }
 },
 {
@@ -4476,7 +4476,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "19107"
+    "zipcode": "10016"
   }
 },
 {
@@ -4506,7 +4506,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "60612"
+    "zipcode": "02301"
   }
 },
 {
@@ -4516,7 +4516,7 @@
     "country_code": "USA",
     "country_name": "United States",
     "state": null,
-    "zipcode": "02301"
+    "zipcode": "60612"
   }
 },
 {
