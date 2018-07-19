@@ -62,7 +62,7 @@ var DataManager = {
     },
 
     bootstrap: function() {
-        DataManager.runningStatus();
+        DataManager.initStatus();
 
         // Preprocessing
         for (var handler in DataManager.preprocessors){
@@ -77,6 +77,7 @@ var DataManager = {
 
     sendDataInitialized: function() {
         EventManager.publish('dataInitialized');
+        DataManager.completeStatus();
     },
 
     buildRequestQuery: function() {
@@ -143,14 +144,27 @@ var DataManager = {
         }
     },
 
-    runningStatus: function() {
+    getStatusCount: function() {
+        return 1;
+    },
+
+    initStatus: function() {
         console.log("<<<Running>>>");
+
+        DataManager.set('status_count', DataManager.getStatusCount());
         $('#site_status').text('running');
     },
 
     completeStatus: function() {
-        console.log("<<<<Complete>>>>");
-        $('#site_status').text('complete');
+        var count = Math.max((DataManager.get('status_count') - 1), 0);
+
+        if (count == 0) {
+            $('#site_status').text('complete');
+            console.log("<<<<Complete>>>>");
+        }
+        else {
+            DataManager.set('status_count', count);
+        }
     },
 
     getVehicleMap: function() {
