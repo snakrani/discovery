@@ -221,7 +221,7 @@ def get_place_of_performance(award):
         'zipcode': None
     }
     
-    if 'stateCode' in pop:
+    if 'https://www.fpds.gov/FPDS:stateCode' in pop:
         info['state'] = pop['https://www.fpds.gov/FPDS:stateCode']['#text'].strip().upper()
         
     if 'https://www.fpds.gov/FPDS:placeOfPerformanceZIPCode' in award['https://www.fpds.gov/FPDS:placeOfPerformance']:
