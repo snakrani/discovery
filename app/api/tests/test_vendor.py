@@ -7,9 +7,9 @@ class VendorTest(case.APITestCase, metaclass = case.MetaAPISchema):
     fixtures = data.get_vendor_fixtures()
     schema = {
             'object': {
-                '&007901598': ('name', 'equal', 'Battelle Memorial Institute'),
-                '&133239397': ('name', 'equal', 'Miracle Systems, LLC'),
-                '&001014182': ('name', 'equal', 'Dynamics Research Corporation'),
+                '&007901598': ('name', 'equal', 'BATTELLE MEMORIAL INSTITUTE'),
+                '&133239397': ('name', 'equal', 'MIRACLE SYSTEMS, LLC'),
+                '&001014182': ('name', 'equal', 'DYNAMICS RESEARCH CORPORATION'),
                 '#345': (),
                 '#ABCDEFG': ()
             },
@@ -33,16 +33,16 @@ class VendorTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@mixed': {'page': 2, 'count': 10}
             },
             'search': {
-                '@search1': ('name', 'matches', 'Services'),
+                '@search1': ('name', 'matches', 'SERVICES'),
                 '*search2': ('duns', 'equal', '830333824'),
                 '*search3': ('cage', 'equal', '3K773')
             },
             'fields': {
                 'name': {
-                    '*exact': 'Dynamics Research Corporation',
-                    '@iexact': 'native energy & technology',
-                    '@in': ('Engility Corporation', 'CBRE', 'PowerTrain'),
-                    '@contains': 'Research',
+                    '*exact': 'DYNAMICS RESEARCH CORPORATION',
+                    '@iexact': 'native energy & technology, inc.',
+                    '@in': ('ENGILITY CORPORATION', 'CBRE', 'POWERTRAIN'),
+                    '@contains': 'RESEARCH',
                     '@icontains': 'technologies',
                     '@startswith': 'M',
                     '@istartswith': 'applied',
