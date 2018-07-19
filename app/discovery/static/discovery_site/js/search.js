@@ -251,8 +251,8 @@ DataManager.populateNaicsDropDown = function(data) {
     var vehicle = DataManager.getVehicle();
     var pool = DataManager.getPool();
 
-    $('#naics-code').select2({
-        minimumResultsForSearch: -1,
+    $('#naics-code').empty().select2({
+        minimumResultsForSearch: 1,
         width: '600px'
     });
 
@@ -260,7 +260,7 @@ DataManager.populateNaicsDropDown = function(data) {
         "/api/naics/",
         {ordering: "code", code__in: Object.keys(naicsMap).join(','), count: 2000},
         function(data) {
-            $("#naics-code").empty()
+            $("#naics-code")
                 .append($("<option></option>")
                     .attr("value", 'all')
                     .text("All NAICS codes"));
