@@ -275,7 +275,7 @@ DataManager.loadContracts = function() {
         },
         function(req, status, error) {
             if (queryData['page'] > 1 && req.status == 404) {
-                DataManager.page = 1;
+                DataManager.setPage(1);
                 DataManager.update();
             }
             else {
