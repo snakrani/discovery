@@ -337,7 +337,7 @@ class Command(BaseCommand):
         
         for name in sheets:
             try:
-                pool = re.search(r'Pool\s+([0-9A-Z]+)', name, re.IGNORECASE).group(1)
+                pool = re.search(r'\(\s*([0-9a-zA-Z]+)\s*\)', name, re.IGNORECASE).group(1)
                 
                 if len(pools) == 0 or pool in pools:
                     self.update_pool(vehicle, pool, wb.parse(name), options)
