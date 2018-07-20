@@ -40,6 +40,24 @@ DataManager.initSearch = function() {
         }
         return value;
     });
+
+    // Input element initialization
+    $('#naics-code').select2({
+        minimumResultsForSearch: 1,
+        width: '600px'
+    });
+    $('#vehicle-id').select2({
+        minimumResultsForSearch: -1,
+        width: '150px'
+    });
+    $('#pool-id').select2({
+        minimumResultsForSearch: -1,
+        width: '220px'
+    });
+    $('#zone-id').select2({
+        minimumResultsForSearch: -1,
+        width: '200px'
+    });
 };
 
 DataManager.requestParams = function(queryData) {
@@ -251,16 +269,11 @@ DataManager.populateNaicsDropDown = function(data) {
     var vehicle = DataManager.getVehicle();
     var pool = DataManager.getPool();
 
-    $('#naics-code').empty().select2({
-        minimumResultsForSearch: 1,
-        width: '600px'
-    });
-
     DataManager.getAPIRequest(
         "/api/naics/",
         {ordering: "code", code__in: Object.keys(naicsMap).join(','), count: 2000},
         function(data) {
-            $("#naics-code")
+            $("#naics-code").empty()
                 .append($("<option></option>")
                     .attr("value", 'all')
                     .text("All NAICS codes"));
@@ -299,12 +312,10 @@ DataManager.populateVehicleDropDown = function() {
     var setasides = DataManager.getSetasides();
     var vehicles = {};
 
-    $('#vehicle-id').empty().select2({
-        minimumResultsForSearch: -1,
-        width: "150px"
-    }).append($("<option></option>")
-        .attr("value", 'all')
-        .text("All vehicles"));
+    $('#vehicle-id').empty()
+        .append($("<option></option>")
+            .attr("value", 'all')
+            .text("All vehicles"));
 
     Object.keys(pools).forEach(function(id) {
         var pool = pools[id];
@@ -344,12 +355,10 @@ DataManager.populatePoolDropDown = function() {
     var count = 0;
     var poolId;
 
-    $('#pool-id').empty().select2({
-        minimumResultsForSearch: -1,
-        width: "420px"
-    }).append($("<option></option>")
-        .attr("value", 'all')
-        .text("All service categories"));
+    $('#pool-id').empty()
+        .append($("<option></option>")
+            .attr("value", 'all')
+            .text("All service categories"));
 
     for (var id in pools) {
         var poolData = pools[id];
@@ -398,8 +407,6 @@ DataManager.populateZoneDropDown = function() {
     var url = "/api/zones/";
     var queryData = {count: 1000};
 
-    $('#zone-id').select2({placeholder:'Filter by zone', width: '400px'});
-
     DataManager.getAPIRequest(url, queryData, function(data) {
         $("#zone-id").empty()
             .append($("<option></option>")
@@ -431,17 +438,16 @@ DataManager.populateZoneDropDown = function() {
 };
 
 LayoutManager.initSearch = function() {
-    EventManager.subscribe('dataChanged', LayoutManager.toggleFilters);
-    EventManager.subscribe('pageInitialized', LayoutManager.toggleZone);
-    EventManager.subscribe('dataChanged', LayoutManager.toggleZone);
+    EventManager.subscribe('pageInitialized', LayoutManager.disableSearch);
+    EventManager.subscribe('vehicleSelected', LayoutManager.toggleZone);
 };
 
 LayoutManager.enableSearch = function() {
     LayoutManager.enableNaics();
     LayoutManager.enableVehicle();
     LayoutManager.enablePool();
-    LayoutManager.toggleZone();
-    LayoutManager.toggleFilters();
+    LayoutManager.enableZone();
+    LayoutManager.enableFilters();
 };
 
 LayoutManager.disableSearch = function() {
@@ -472,27 +478,8 @@ LayoutManager.enablePool = function() {
     $("div#pool_select select").attr("disabled", false);
 };
 
-LayoutManager.showPool = function() {
-    if ($("div#zone_select").is(":visible")) {
-        $("#pool-id").select2({width: '200px'});
-        $("#zone-id").select2({width: '200px'});
-    }
-    else {
-        $("#pool-id").select2({width: '415px'});
-    }
-    $("div#pool_select").show();
-};
-
 LayoutManager.disablePool = function() {
     $("div#pool_select select").attr("disabled", true);
-};
-
-LayoutManager.hidePool = function() {
-    $("div#pool_select").hide();
-
-    if ($("div#zone_select").is(":visible")) {
-        $("#zone-id").select2({width: '415px'});
-    }
 };
 
 LayoutManager.zoneActive = function() {
@@ -513,13 +500,7 @@ LayoutManager.enableZone = function() {
 };
 
 LayoutManager.showZone = function() {
-    if ($("div#pool_select").is(":visible")) {
-        $("#zone-id").select2({width: '200px'});
-        $("#pool-id").select2({width: '200px'});
-    }
-    else {
-        $("#zone-id").select2({width: '415px'});
-    }
+    $("#pool-id").select2({width: '220px'});
     $("div#zone_select").show();
 };
 
@@ -529,20 +510,15 @@ LayoutManager.disableZone = function() {
 
 LayoutManager.hideZone = function() {
     $("div#zone_select").hide();
-
-    if ($("div#pool_select").is(":visible")) {
-        $("#pool-id").select2({width: '415px'});
-    }
+    $("#pool-id").select2({width: '435px'});
 };
 
 LayoutManager.toggleZone = function() {
     if (LayoutManager.zoneActive()) {
-        LayoutManager.enableZone();
         LayoutManager.showZone();
     }
     else {
         LayoutManager.hideZone();
-        LayoutManager.disableZone();
     }
 };
 
