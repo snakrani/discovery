@@ -337,6 +337,7 @@ DataManager.populateMembershipFilters = function() {
     var naicsMap = DataManager.getNaicsMap();
     var naics = DataManager.getNaics();
     var selectedMemberships = DataManager.getParameterByName('memberships');
+    var piids = Object.keys(membershipMap);
 
     if (selectedMemberships) {
         selectedMemberships = selectedMemberships.split(',').filter(Boolean);
@@ -347,7 +348,34 @@ DataManager.populateMembershipFilters = function() {
 
     $table.find("tr:gt(0)").remove();
 
-    for (var piid in membershipMap) {
+    piids.sort(function(a, b) {
+        var aVehicles = membershipMap[a].vehicles.join(' ');
+        var bVehicles = membershipMap[b].vehicles.join(' ');
+
+        if (aVehicles == bVehicles) {
+            var aPools = membershipMap[a].pools.join(' ');
+            var bPools = membershipMap[b].pools.join(' ');
+
+            if (aPools == bPools) {
+                var aZones = membershipMap[a].zones.join(' ');
+                var bZones = membershipMap[b].zones.join(' ');
+
+                if (aZones == bZones) {
+                    return 0;
+                }
+                else {
+                    return aZones > bZones ? 1 : -1;
+                }
+            }
+            else {
+                return aPools > bPools ? 1 : -1;
+            }
+        }
+        return aVehicles > bVehicles ? 1 : -1;
+    });
+
+    for (var index = 0; index < piids.length; index++) {
+        var piid = piids[index];
         var membership = membershipMap[piid];
         var membershipName = DataManager.getMembershipName(membership);
         var pools = membership.poolIds;
@@ -377,7 +405,7 @@ DataManager.populateMembershipFilters = function() {
             $membershipRow.append('<td class="email">' + membership.emails.join('<br/>') + '</td>');
 
             if (membership.vehicleIds.length == 1 && vehicleMap[membership.vehicleIds[0]].sb) {
-                var exp_8a_date;
+                var exp_8a_date = '';
 
                 $membershipRow.append(DataManager.setasideColumn(membership.setasides, 'sb', 'SB'));
                 $membershipRow.append(DataManager.setasideColumn(membership.setasides, 'sdb', '27'));
@@ -385,9 +413,6 @@ DataManager.populateMembershipFilters = function() {
 
                 if (membership.reference.expiration_8a_date) {
                     exp_8a_date = Format.formatDate(Format.createDate(membership.reference.expiration_8a_date));
-                }
-                else {
-                    exp_8a_date = 'NA';
                 }
                 $membershipRow.append('<td class="setaside_info">' + exp_8a_date + '</td>');
 
