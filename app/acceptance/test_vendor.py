@@ -154,17 +154,17 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
     def test_contract_sort(self):
         
         def sort(resp):
-            resp.wait_for_class('table_row_data')
+            resp.wait_for_complete()
             
             data_row = resp.element('xpath://*[@id="ch_table"]/div/table/tbody/tr[4]')
-            resp.execute('class:h_value', 'click')
+            resp.execute('.h_value', 'click')
             resp.wait_for_stale(data_row)
             
             rows = resp.elements('xpath://*[@id="ch_table"]/div/table/tbody/tr')
             prev_value = None
             
             for row in rows[1:]:
-                cell = resp.element('class:value', row)
+                cell = resp.element('.value', row)
                 value = resp.attr(cell, 'innerText')
                 
                 if value:
