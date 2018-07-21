@@ -73,7 +73,7 @@ def generate_test(config):
     if 'wait' in config:
         schema['wait'] = config.pop('wait')
     else:
-        schema['wait'] = ('text', '#site_status', 'complete')
+        schema['wait'] = 'complete'
         
     if 'naics' in config:
         add_naics_tests(schema, *config.pop('naics'))
@@ -103,7 +103,7 @@ def generate_test(config):
     return schema
 
 def generate_action_test(config):
-    schema = {'wait': ('text', '#site_status', 'complete')}
+    schema = {'wait': 'complete'}
     
     def add_actions(actions, params, config, index = 1):
         if not isinstance(actions[0], (list, tuple)):
@@ -121,7 +121,7 @@ def generate_action_test(config):
         if len(action) == 3:
             schema['wait'] = action[2]
         else:
-            schema['wait'] = ('text', '#site_status', 'complete')
+            schema['wait'] = 'complete'
         
         if len(actions) > 0:
             schema[event_name] = {}
@@ -130,7 +130,7 @@ def generate_action_test(config):
             schema[event_name] = generate_test(config)
             
             if 'wait' not in config:
-                schema[event_name]['wait'] = ('text', '#site_status', 'complete')
+                schema[event_name]['wait'] = 'complete'
         
         return schema
     
@@ -142,15 +142,15 @@ def generate_action_test(config):
     return schema
 
 
-def generate_action_tests(schema, name, config):
-    if 'params' in config:
+def generate_action_tests(schema, type, name, config):
+    if (not type or type == 'url') and 'params' in config:
         schema["filter_{}_url".format(name)] = generate_test(config)
     
-    if 'action' in config:
+    if (not type or type == 'action') and 'action' in config:
         schema["filter_{}_action".format(name)] = generate_action_test(config)
 
 
-def generate_schema(config):
+def generate_schema(config, type = None):
     schema = {}
         
     if 'includes' in config:
@@ -169,9 +169,10 @@ def generate_schema(config):
     if 'actions' in config:
         action_tests = config.pop('actions')
         for name, action_config in action_tests.items():
-            generate_action_tests(schema, name, action_config)
-            
-    for name, test_config in config.items():
-        schema[name] = test_config             
+            generate_action_tests(schema, type, name, action_config)
+    
+    if not type or type == 'test':        
+        for name, test_config in config.items():
+            schema[name] = test_config             
     
     return schema
