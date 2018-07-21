@@ -12,7 +12,7 @@ DataManager.initializers.listings = function() {
 };
 
 DataManager.getStatusCount = function() {
-    return 3;
+    return 4;
 };
 
 DataManager.loadVendors = function() {
@@ -59,19 +59,9 @@ DataManager.loadVendors = function() {
     }
     queryData['filters'] = encodeURIComponent(filters.join('&'));
 
-    LayoutManager.disableSearch();
-    $('.table_wrapper').addClass('loading');
-    $('#pool_table').addClass('init');
-
     DataManager.getAPIRequest(url, queryData,
         function(response) {
-            if (queryData['contract_naics'] == DataManager.getParameterByName('naics')) {
-                $('.table_wrapper').removeClass('loading');
-                $('#pool_table').removeClass('init');
-
-                EventManager.publish('vendorDataLoaded', response);
-                LayoutManager.enableSearch();
-            }
+            EventManager.publish('vendorDataLoaded', response);
         },
         function(req, status, error) {
             if (queryData['page'] > 1 && req.status == 404) {
@@ -79,7 +69,8 @@ DataManager.loadVendors = function() {
                 DataManager.update();
             }
             else {
-                LayoutManager.enableSearch();
+                $('.table_wrapper').addClass('loading');
+                $('.table_wrapper').addClass('warning');
             }
         }
     );
