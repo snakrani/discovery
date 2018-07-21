@@ -596,9 +596,14 @@ class MetaAcceptanceSchema(type):
                     actions = data.pop('actions', {})
                     
                     if wait:
-                        type = wait[0]
-                        elem = wait[1]
-                        text = wait[2] if len(wait) > 2 else None
+                        if isinstance(wait, (list, tuple)):
+                            type = wait[0]
+                            elem = wait[1] if len(wait) > 1 else None
+                            text = wait[2] if len(wait) > 2 else None
+                        else:
+                            type = wait
+                            elem = None
+                            text = None
                         
                         getattr(resp, "wait_for_{}".format(type))(elem, text)
                     
@@ -615,9 +620,14 @@ class MetaAcceptanceSchema(type):
                         
                     for action, action_data in actions.items():
                         if action == 'wait':
-                            type = action_data[0]
-                            elem = action_data[1]
-                            text = action_data[2] if len(action_data) > 2 else None
+                            if isinstance(action_data, (list, tuple)):
+                                type = action_data[0]
+                                elem = action_data[1] if len(action_data) > 2 else None
+                                text = action_data[2] if len(action_data) > 2 else None
+                            else:
+                                type = action_data
+                                elem = None
+                                text = None
                         
                             getattr(resp, "wait_for_{}".format(type))(elem, text)
                         else:

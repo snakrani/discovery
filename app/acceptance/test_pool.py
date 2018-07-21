@@ -47,10 +47,7 @@ class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
             }, 
             'sorting': {
                 'params': {'ordering': 'name'},
-                'action': (
-                    ('th.h_vendor_name', 'click', ('no_class', 'div.table_wrapper', 'loading')), 
-                    ('th.h_vendor_name', 'click', ('no_class', 'div.table_wrapper', 'loading'))
-                ),
+                'action': (('th.h_vendor_name', 'click'), ('th.h_vendor_name', 'click')),
                 'naics': ('all', 78, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('all', 60, 59, True),
