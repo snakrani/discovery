@@ -600,6 +600,7 @@ class AcceptanceResponseValidator(BaseValidator):
             'Timeout waiting for {}'.format(condition_function.__name__)
         ))
         
+    
     def wait_for_name(self, name, text = None):
         if text is None:
             self.wait(EC.presence_of_all_elements_located(self._name(name)))
@@ -635,6 +636,7 @@ class AcceptanceResponseValidator(BaseValidator):
             self.wait(EC.presence_of_all_elements_located(self._selector(name)))
         else:
             self.wait(EC.text_to_be_present_in_element(self._selector(name), text))
+    
            
     def wait_for_enabled(self, elem, notused = None):
         def enabled(vars):
@@ -693,7 +695,7 @@ class AcceptanceResponseValidator(BaseValidator):
                
     def wait_for_text(self, elem, text = None):
         def elem_text(vars):
-            try: 
+            try:
                 local_text = self.attr(elem, 'text')
                 
                 if not text or local_text.strip() == text:
@@ -705,6 +707,10 @@ class AcceptanceResponseValidator(BaseValidator):
                 return False
         
         self.wait_for(elem_text)
+        
+    def wait_for_complete(self, notused = None, notused2 = None):
+        self.wait_for_text('#site_status', 'complete')
+        time.sleep(0.5)
             
     def wait_for_stale(self, elem, notused = None):
         def stale(vars):
@@ -738,7 +744,6 @@ class AcceptanceResponseValidator(BaseValidator):
         def no_class(vars):
             try:
                 if not text or text in self.attr(elem, 'class'):
-                    time.sleep(1)
                     return True
                 else:
                     return False
@@ -752,7 +757,6 @@ class AcceptanceResponseValidator(BaseValidator):
         def no_class(vars):
             try:
                 if not text or text not in self.attr(elem, 'class'):
-                    time.sleep(1)
                     return True
                 else:
                     return False
@@ -799,13 +803,21 @@ class AcceptanceResponseValidator(BaseValidator):
             return elem
 
         
+    def element_wait(self, elem, scope = None):
+        
+        def by_css(selector):
+            return self._selector(selector)
+        
+        def by_xpath(xpath):
+            return self._xpath(xpath)
+                
+        return self._get_element(elem, {
+            'css': by_css,
+            'xpath': by_xpath
+        })
+        
+          
     def element(self, elem, scope = None):
-        
-        def by_id(name):
-            return self._get_scope(scope).find_element_by_id(name)
-        
-        def by_class(name):
-            return self._get_scope(scope).find_element_by_class_name(name)
         
         def by_css(selector):
             return self._get_scope(scope).find_element_by_css_selector(selector)
@@ -817,20 +829,12 @@ class AcceptanceResponseValidator(BaseValidator):
             return self._get_scope(scope).find_element_by_link_text(text)
                 
         return self._get_element(elem, {
-            'id': by_id,
-            'class': by_class,
             'css': by_css,
             'xpath': by_xpath,
             'link_text': by_link_text
         })
     
     def elements(self, elems, scope = None):
-        
-        def by_id(name):
-            return self._get_scope(scope).find_elements_by_id(name)
-        
-        def by_class(name):
-            return self._get_scope(scope).find_elements_by_class_name(name)
         
         def by_css(selector):
             return self._get_scope(scope).find_elements_by_css_selector(selector)
@@ -842,12 +846,11 @@ class AcceptanceResponseValidator(BaseValidator):
             return self._get_scope(scope).find_elements_by_link_text(text)
                 
         return self._get_element(elems, {
-            'id': by_id,
-            'class': by_class,
             'css': by_css,
             'xpath': by_xpath,
             'link_text': by_link_text
         })
+        
         
     def attr(self, elem, name):
         if name == 'text':
@@ -876,10 +879,18 @@ class AcceptanceResponseValidator(BaseValidator):
             for value in values:
                 select.select_by_value(value)
         
+        try:        
+            self.wait(EC.element_to_be_clickable(self.element_wait(elem)))
+        
+        except TimeoutException:
+            pass
+        
         if event == 'select' and value:
             execute_select(self.element(elem), value)
         else:
             getattr(self.element(elem), event)()
+            
+        time.sleep(1)
     
     
     # Validation
@@ -999,7 +1010,7 @@ class AcceptanceResponseValidator(BaseValidator):
         match = re.match(r'^\s*\<\<(.+)\>\>\s*$', text)
         if match:
             text = self.element(match.group(1)).text
-            
+        
         getattr(self, op)(self.element(elem).text, text)
         
     def int(self, op, elem, num):
