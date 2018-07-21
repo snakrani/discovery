@@ -3,42 +3,15 @@ LayoutManager.initializers.listings = function() {
     LayoutManager.initSearch();
 
     // Internal event subscriptions
+    EventManager.subscribe('dataInitialized', LayoutManager.renderPoolInfo);
     EventManager.subscribe('dataInitialized', LayoutManager.renderSort);
     EventManager.subscribe('vendorDataLoaded', LayoutManager.renderVendors);
     EventManager.subscribe('pageChanged', DataManager.update);
 };
 
 LayoutManager.preprocessors.index = function() {
+    LayoutManager.disableSearch();
     LayoutManager.hideZone();
-};
-
-LayoutManager.renderSort = function() {
-    var ordering = DataManager.getSortOrdering();
-
-    if (ordering) {
-        var asc = (ordering[0] == '-' ? false : true);
-        var field = DataManager.getOrderingField(ordering.replace(/^-/, ''));
-        var $target = $('th.' + field);
-
-        $target.siblings('.sortable').removeClass('arrow-down').removeClass('arrow-up').addClass('arrow-sortable').attr("title", "Select to sort");
-
-        if (asc) {
-            $target.removeClass('arrow-sortable').removeClass('arrow-down').addClass('arrow-up').attr("title", "Sorted ascending");
-        } else {
-            $target.removeClass('arrow-sortable').removeClass('arrow-up').addClass('arrow-down').attr("title", "Sorted descending");
-        }
-    }
-    DataManager.completeStatus();
-};
-
-LayoutManager.renderVendors = function(data) {
-    $(document).prop('title', "Results - " + DataManager.title);
-
-    LayoutManager.renderPoolInfo();
-    LayoutManager.renderResultsInfo(data);
-    LayoutManager.renderVendorList(data);
-
-    DataManager.completeStatus();
 };
 
 LayoutManager.renderPoolInfo = function() {
@@ -82,6 +55,36 @@ LayoutManager.renderPoolInfo = function() {
         }
         $(".results_pool_names").html(poolNames.join(''));
     }
+    DataManager.completeStatus();
+};
+
+LayoutManager.renderSort = function() {
+    var ordering = DataManager.getSortOrdering();
+
+    if (ordering) {
+        var asc = (ordering[0] == '-' ? false : true);
+        var field = DataManager.getOrderingField(ordering.replace(/^-/, ''));
+        var $target = $('th.' + field);
+
+        $target.siblings('.sortable').removeClass('arrow-down').removeClass('arrow-up').addClass('arrow-sortable').attr("title", "Select to sort");
+
+        if (asc) {
+            $target.removeClass('arrow-sortable').removeClass('arrow-down').addClass('arrow-up').attr("title", "Sorted ascending");
+        } else {
+            $target.removeClass('arrow-sortable').removeClass('arrow-up').addClass('arrow-down').attr("title", "Sorted descending");
+        }
+    }
+    DataManager.completeStatus();
+};
+
+LayoutManager.renderVendors = function(data) {
+    $(document).prop('title', "Results - " + DataManager.title);
+
+    LayoutManager.renderResultsInfo(data);
+    LayoutManager.renderVendorList(data);
+
+    LayoutManager.enableSearch();
+    DataManager.completeStatus();
 };
 
 LayoutManager.renderResultsInfo = function(data) {
