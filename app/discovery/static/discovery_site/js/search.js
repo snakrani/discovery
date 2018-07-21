@@ -43,18 +43,22 @@ DataManager.initSearch = function() {
 
     // Input element initialization
     $('#naics-code').select2({
+        placeholder: 'Select a NAICS code',
         minimumResultsForSearch: 1,
         width: '600px'
     });
     $('#vehicle-id').select2({
+        placeholder: 'Select a vehicle',
         minimumResultsForSearch: -1,
         width: '150px'
     });
     $('#pool-id').select2({
+        placeholder: 'Select a service category',
         minimumResultsForSearch: -1,
         width: '220px'
     });
     $('#zone-id').select2({
+        placeholder: 'Select a service zone',
         minimumResultsForSearch: -1,
         width: '200px'
     });
@@ -438,11 +442,13 @@ DataManager.populateZoneDropDown = function() {
 };
 
 LayoutManager.initSearch = function() {
-    EventManager.subscribe('pageInitialized', LayoutManager.disableSearch);
     EventManager.subscribe('vehicleSelected', LayoutManager.toggleZone);
 };
 
 LayoutManager.enableSearch = function() {
+    $('.table_wrapper').removeClass('loading');
+    $('#pool_table').removeClass('init');
+
     LayoutManager.enableNaics();
     LayoutManager.enableVehicle();
     LayoutManager.enablePool();
@@ -451,6 +457,9 @@ LayoutManager.enableSearch = function() {
 };
 
 LayoutManager.disableSearch = function() {
+    $('.table_wrapper').addClass('loading');
+    $('#pool_table').addClass('init');
+
     LayoutManager.disableNaics();
     LayoutManager.disableVehicle();
     LayoutManager.disablePool();
