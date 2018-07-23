@@ -1,9 +1,121 @@
 from test import cases as case
 
+from acceptance.common import generate_schema
+
 
 class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
-    
-    schema = {
+  
+    schema = generate_schema({
+        'actions': {
+            'unfiltered': {
+                'params': {'args': '102067378', 'test': 'true'},
+                'naics': ('all', 2),
+                'membership_filters': (None, 4, 0, 0, {
+                    1: ('Mary C. Dickens', '256-964-5213', 'cdickens@colsa.com')
+                }, {
+                    1: ('VO', 'SDVO')
+                }),
+                'vendor_sam': ('5/18/19',),
+                'vendor_info': ('COLSA CORPORATION', '102067378', '4U825', '965', '$197,000,000'),
+                'vendor_address': ('6728 Odyssey Dr', 'Huntsville, AL 35806', True),
+                'vendor_badges': (True,),
+                'contract_result_info': ('vendor/102067378/csv/?',),
+                'contract_table': (5, 'h_date_signed', 'desc', ('Prev', '1'), '2')
+            },
+            'naics': {
+                'params': {'args': '139727148', 'test': 'true', 'naics': '541214'},
+                'action': ('#naics-code', 'select[541214]'),
+                'naics': ('541214', 31),
+                'membership_filters': (None, 1, 0, 0, {
+                    1: ('Tania Koles', '571-414-4033', 'OASIS@accenturefederal.com')
+                }),
+                'vendor_sam': ('4/5/19',),
+                'vendor_info': ('ACCENTURE FEDERAL SERVICES LLC', '139727148', '1ZD18', '380', '$65,000,000'),
+                'vendor_address': ('800 North Glebe Rd #300', 'Arlington, VA 22203', True),
+                'vendor_badges': (),
+                'contract_result_info': ('vendor/139727148/csv/?naics=541214',),
+                'contract_table': (0, 'h_date_signed', 'desc')
+            },
+            'membership': {
+                'params': {'args': '038523239', 'test': 'true', 'memberships': 'GS10F0175M'},
+                'action': ('#GS10F0175M', 'click'),
+                'naics': ('all', 7),
+                'membership_filters': ('GS10F0175M', 1, 1, 0, {
+                    1: ('', '907-455-6777', 'tdelong@abrinc.com')
+                }),
+                'vendor_sam': ('11/20/18',),
+                'vendor_info': ('ABR INC', '038523239', '0Y330', '49', '$13,967,623'),
+                'vendor_address': ('2842 Goldstream Rd', 'Fairbanks, AK 99709', True),
+                'vendor_badges': (),
+                'contract_result_info': ('vendor/139727148/csv/?memberships=GS10F0175M',),
+                'contract_table': (5, 'h_date_signed', 'desc', ('Prev', '1'), '2')
+            },
+            'mixed': {
+                'params': {'args': '114214211', 'test': 'true', 'memberships': 'GS10F0081V', 'naics': '541611'},
+                'action': (('#naics-code', 'select[541611]'), ('#GS10F0081V', 'click')),
+                'naics': ('541611', 16),
+                'membership_filters': ('GS10F0081V', 1, 1, 0, {
+                    1: ('', '703-840-3491', 'doc.grantham@6Ksystems.com')
+                }),
+                'vendor_sam': ('6/28/19',),
+                'vendor_info': ('6K SYSTEMS, INC.', '114214211', '1ZJK7', '100', '$5,666,666'),
+                'vendor_address': ('11710 Plaza America Dr Ste 810', 'Reston, VA 20190', True),
+                'vendor_badges': (True,),
+                'contract_result_info': ('vendor/114214211/csv/?naics=541611&memberships=GS10F0081V',),
+                'contract_table': (3, 'h_date_signed', 'desc')
+            },
+            'sorting': {
+                'params': {'args': '129304551', 'test': 'true', 'ordering': '-obligated_amount'},
+                'action': ('th.h_value', 'click'),
+                'naics': ('all', 15),
+                'membership_filters': (None, 2, 0, 0, {
+                    2: ('Donald Hill III', '202-434-8470', 'dhill@actionfacilities.com')
+                }),
+                'vendor_sam': ('1/2/19',),
+                'vendor_info': ('ACTION FACILITIES MANAGEMENT, INC.', '129304551', '3EET9', '182', '$14,600,000'),
+                'vendor_address': ('115 Malone Dr', 'Morgantown, WV 26501', True),
+                'vendor_badges': (True,),
+                'contract_result_info': ('vendor/129304551/csv/?ordering=-obligated_amount',),
+                'contract_table': (5, 'h_value', 'desc', ('Prev', '1'), '2'),
+                'o1|xpath://*[@id="vendor_contracts"]/tbody/tr[2]/td[6]': ('float__is_min', '<<xpath://*[@id="vendor_contracts"]/tbody/tr[3]/td[6]>>'),
+                'o2|xpath://*[@id="vendor_contracts"]/tbody/tr[3]/td[6]': ('float__is_min', '<<xpath://*[@id="vendor_contracts"]/tbody/tr[4]/td[6]>>'),
+                'o3|xpath://*[@id="vendor_contracts"]/tbody/tr[4]/td[6]': ('float__is_min', '<<xpath://*[@id="vendor_contracts"]/tbody/tr[5]/td[6]>>'),
+                'o4|xpath://*[@id="vendor_contracts"]/tbody/tr[5]/td[6]': ('float__is_min', '<<xpath://*[@id="vendor_contracts"]/tbody/tr[6]/td[6]>>'),
+            },
+            'paging': {
+                'params': {'args': '008050242', 'test': 'true', 'page': 2},
+                'action': ('link_text:2', 'click'),
+                'naics': ('all', 27),
+                'membership_filters': (None, 2, 0, 2, {
+                    1: ('Shelly Bowan', '703-418-0636', 'OASIS@act-i.com'),
+                    2: ('Jeff Earley', '703-418-0636', 'OASIS@act-i.com')
+                }),
+                'vendor_sam': ('2/13/19',),
+                'vendor_info': ('ADVANCED CONCEPTS AND TECHNOLOGIES INTERNATIONAL, LLC DBA ACT-I', '008050242', '1C2H1', '55', '$5,400,000'),
+                'vendor_address': ('1105 Wooded Acres Ste 500', 'Waco, TX 76710', True),
+                'vendor_badges': (True,),
+                'contract_result_info': ('vendor/008050242/csv/?page=2',),
+                'contract_table': (5, 'h_date_signed', 'desc', ('2', 'Next'), '1'),
+            },
+            'page_count': {
+                'params': {'args': '039872622', 'test': 'true', 'count': 3},
+                'naics': ('all', 10),
+                'membership_filters': (None, 3, 0, 2, {
+                    1: ('Lynna S. Hood', '571-257-4785', 'lhood@addxcorp.com'),
+                    2: ('Lynna S. Hood', '571-257-4785', 'lhood@addxcorp.com'),
+                    3: ('', '703-933-7637', 'lhood@addxcorp.com')
+                }, {
+                    1: ('VO', 'SDVO'),
+                    2: ('VO', 'SDVO')
+                }),
+                'vendor_sam': ('10/16/18',),
+                'vendor_info': ('ADDX CORPORATION', '039872622', '1XPA3', '62', '$16,534,185'),
+                'vendor_address': ('4900 Seminary Rd Ste 700', 'Alexandria, VA 22311', True),
+                'vendor_badges': (True,),
+                'contract_result_info': ('vendor/039872622/csv/?count=3',),
+                'contract_table': (3, 'h_date_signed', 'desc', ('Prev', '1'), '4'),
+            }
+        },
         'header': {
             'params': {
                 'args': '926451519'
@@ -145,39 +257,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
             'wait': ('text', '#site_status', 'complete'),
             'xpath://*[@id="vendor_contract_filter_table"]/tbody/tr[2]/td[2]/div/a': ('link__equal', 'http://localhost:8080/discovery_site/capability_statements/OASIS_SB/028509656.pdf') 
         }
-    }
+    })
     
     def initialize(self):
         self.path = 'vendor'
-
-
-    def test_contract_sort(self):
-        
-        def sort(resp):
-            resp.wait_for_complete()
-            
-            data_row = resp.element('xpath://*[@id="ch_table"]/div/table/tbody/tr[4]')
-            resp.execute('.h_value', 'click')
-            resp.wait_for_stale(data_row)
-            
-            rows = resp.elements('xpath://*[@id="ch_table"]/div/table/tbody/tr')
-            prev_value = None
-            
-            for row in rows[1:]:
-                cell = resp.element('.value', row)
-                value = resp.attr(cell, 'innerText')
-                
-                if value:
-                    value = resp.format_float(value)
-
-                    if not prev_value:
-                        prev_value = value
-                    else:
-                        resp.is_max(value, prev_value)
-                        prev_value = value
-        
-        self.fetch_page(sort, **{
-            'args': '049192649', 
-            'vehicle': 'OASIS_SB', 
-            'naics': '541330'
-        })

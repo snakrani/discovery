@@ -398,7 +398,7 @@ DataManager.populateMembershipFilters = function() {
                 membershipName = membershipName + capabilityStatementLink;
             }
 
-            $membershipRow.append('<td class="filter"><input type="checkbox" class="contract_pool_filter" name="' + piid + '" value="' + piid + '" ' + checked + ' /></td>');
+            $membershipRow.append('<td class="filter"><input type="checkbox" class="contract_pool_filter" id="' + piid + '" name="' + piid + '" value="' + piid + '" ' + checked + ' /></td>');
             $membershipRow.append('<td class="contract">' + membershipName + '</td>');
             $membershipRow.append('<td class="contact">' + membership.contacts.join('<br/>') + '</td>');
             $membershipRow.append('<td class="phone">' + membership.phones.join('<br/>') + '</td>');
