@@ -1000,18 +1000,27 @@ class AcceptanceResponseValidator(BaseValidator):
     def not_displayed(self, elem):
         self.is_false(self.element(elem).is_displayed())
         
-    def value(self, op, elem, text):
-        getattr(self, op)(self.attr(elem, 'value'), text)
+    def value(self, op, elem, text = None):
+        if text is not None:
+            getattr(self, op)(self.attr(elem, 'value'), text)
+        else:
+            getattr(self, op)(self.attr(elem, 'value'))
         
-    def link(self, op, elem, url):
-        getattr(self, op)(self.attr(elem, 'href'), url)
+    def link(self, op, elem, url = None):
+        if url is not None:
+            getattr(self, op)(self.attr(elem, 'href'), url)
+        else:
+            getattr(self, op)(self.attr(elem, 'href'))
         
-    def text(self, op, elem, text):
-        match = re.match(r'^\s*\<\<(.+)\>\>\s*$', text)
-        if match:
-            text = self.element(match.group(1)).text
+    def text(self, op, elem, text = None):
+        if text is not None:
+            match = re.match(r'^\s*\<\<(.+)\>\>\s*$', text)
+            if match:
+                text = self.element(match.group(1)).text
         
-        getattr(self, op)(self.element(elem).text, text)
+            getattr(self, op)(self.element(elem).text, text)
+        else:
+            getattr(self, op)(self.element(elem).text)
         
     def int(self, op, elem, num):
         if isinstance(num, str):
