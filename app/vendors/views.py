@@ -13,6 +13,10 @@ import csv
 import time
 
 
+def format_duns(text):
+    return str(text).zfill(9)
+
+
 def PoolCSV(request):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="search_results.csv"'
@@ -85,7 +89,7 @@ def PoolCSV(request):
     writer.writerow(("Search Results: {0} Vendors".format(len(vendors)),))
     
     writer.writerow(('',))
-    header_row = ['Vendor', 'Location', 'No. of Contracts', 'Vehicles']
+    header_row = ['Vendor DUNS', 'Vendor Name', 'Location', 'No. of Contracts', 'Vehicles']
     header_row.extend([sa_obj.name for sa_obj in setasides_all])
     writer.writerow(header_row)
 
@@ -117,7 +121,7 @@ def PoolCSV(request):
                 vendor_vehicles.append(" ".join(v_pool.pool.vehicle.split('_')))
                 vehicleMap[v_pool.pool.vehicle] = True      
         
-        v_row = [v.name, location, contract_list.count(), ", ".join(vendor_vehicles)]
+        v_row = [format_duns(v.duns), v.name, location, contract_list.count(), ", ".join(vendor_vehicles)]
         v_row.extend(setaside_list)
         lines.append(v_row)
 
