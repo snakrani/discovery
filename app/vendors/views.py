@@ -5,12 +5,102 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.generic import TemplateView
 
-from categories.models import Naics, PSC, SetAside, Pool
+from categories.models import VEHICLE_CHOICES, Naics, PSC, SetAside, Pool
 from vendors.models import Vendor, ContractManager
 from contracts.models import Contract
 
 import csv
 import time
+import json
+
+
+def format_duns(text):
+    return str(text).zfill(9)
+
+
+def get_vehicle_name(id):
+    for vehicle_info in VEHICLE_CHOICES:
+        if vehicle_info[0] == id:
+            return vehicle_info[1];
+    return ''
+
+
+def get_memberships(vendor):
+    membership_map = {}
+    
+    for membership in vendor.pools.all():
+        piid = membership.piid
+        vehicle_id = membership.pool.vehicle
+        vehicle_name = get_vehicle_name(vehicle_id)
+        pool_id = membership.pool.id
+        pool_number = membership.pool.number
+        
+        cms = membership.cms.all()
+        contact_name = cms[0].name
+        contact_phone = ",".join(cms[0].phone())
+        contact_email = ",".join(cms[0].email())
+        
+        if piid not in membership_map:
+            membership_map[piid] = {
+                'vehicle_ids': [],
+                'vehicle_names': [],
+                'pool_ids': [],
+                'pool_numbers': [],
+                'zones': [],
+                'contacts': [],
+                'phones': [],
+                'emails': [],
+                'setasides': [],
+                'reference': membership
+            }
+            
+        if vehicle_id not in membership_map[piid]['vehicle_ids']:
+            membership_map[piid]['vehicle_ids'].append(vehicle_id)
+            membership_map[piid]['vehicle_names'].append(vehicle_name)
+            
+        if pool_id not in membership_map[piid]['pool_ids']:
+            membership_map[piid]['pool_ids'].append(pool_id)
+            membership_map[piid]['pool_numbers'].append(pool_number)
+        
+        for zone in membership.zones.all():    
+            if str(zone.id) not in membership_map[piid]['zones']:
+                membership_map[piid]['zones'].append(str(zone.id))
+            
+        if contact_name not in membership_map[piid]['contacts']:
+            membership_map[piid]['contacts'].append(contact_name)
+            
+        if contact_phone not in membership_map[piid]['phones']:
+            membership_map[piid]['phones'].append(contact_phone)
+            
+        if contact_email not in membership_map[piid]['emails']:
+            membership_map[piid]['emails'].append(contact_email)
+            
+        for setaside in membership.setasides.all():
+            if setaside.code not in membership_map[piid]['setasides']:
+                membership_map[piid]['setasides'].append(setaside.code)
+            
+    return membership_map
+ 
+ 
+def get_membership_name(membership_map, piid):
+    info = membership_map[piid]
+    vehicles = sorted(info['vehicle_names'])
+    
+    def sort_key(name):
+        try:
+            return int(name)
+        except Exception:
+            return name
+    
+    pools = sorted(info['pool_numbers'], key=sort_key)
+    zones = sorted(info['zones'], key=sort_key)
+    
+    name = ",".join(vehicles) + ' (Service categories: ' + ",".join(pools) + ') '
+
+    if len(info['zones']):
+        name += ' (Zones: ' + ",".join(zones) + ')'
+    
+    return name.strip()
 
 
 def PoolCSV(request):
@@ -73,7 +163,7 @@ def PoolCSV(request):
     writer.writerow(('', ))
     writer.writerow(('Included pools',))
     for pool in pools:
-        name = "{} pool {}: {}".format(" ".join(pool.vehicle.split('_')), pool.number, pool.name)
+        name = "{} {}: {}".format(" ".join(pool.vehicle.split('_')), pool.number, pool.name)
         writer.writerow(('', name))
     
     if len(setasides):
@@ -85,7 +175,7 @@ def PoolCSV(request):
     writer.writerow(("Search Results: {0} Vendors".format(len(vendors)),))
     
     writer.writerow(('',))
-    header_row = ['Vendor', 'Location', 'No. of Contracts', 'Vehicles']
+    header_row = ['Vendor DUNS', 'Vendor Name', 'Location', 'No. of Contracts', 'Vehicles']
     header_row.extend([sa_obj.name for sa_obj in setasides_all])
     writer.writerow(header_row)
 
@@ -117,11 +207,11 @@ def PoolCSV(request):
                 vendor_vehicles.append(" ".join(v_pool.pool.vehicle.split('_')))
                 vehicleMap[v_pool.pool.vehicle] = True      
         
-        v_row = [v.name, location, contract_list.count(), ", ".join(vendor_vehicles)]
+        v_row = [format_duns(v.duns), v.name, location, contract_list.count(), ", ".join(vendor_vehicles)]
         v_row.extend(setaside_list)
         lines.append(v_row)
 
-    lines.sort(key=lambda x: x[2], reverse=True)
+    lines.sort(key=lambda x: x[3], reverse=True)
     for line in lines:
         writer.writerow(line)
 
@@ -135,66 +225,40 @@ def VendorCSV(request, vendor_duns):
 
     # Vendor loading
     vendor = Vendor.objects.get(duns=vendor_duns)
+    membership_map = get_memberships(vendor)
+    membership_rows = []
     
-    vehicle = None
-    naics = None
+    naics = None    
+    memberships = []
     
-    pools = []
-    selected_pools = []
-    pool_piids = []
-    vendor_pools = {}
-    
-    setasides = SetAside.objects.all().order_by('far_order')
-    vendor_setasides = []
-       
-    pool_contacts = {}
+    setasides_all = SetAside.objects.all().order_by('far_order')
     
     if 'naics' in request.GET:
         naics = Naics.objects.get(code=request.GET['naics'])
-
-    if 'vehicle' in request.GET:
-        vehicle = request.GET['vehicle'].upper()
+   
+    if 'memberships' in request.GET:
+        memberships = request.GET['memberships'].split(',')
         
-    if 'pool' in request.GET:
-        selected_pools = request.GET['pool'].upper().split(',')
-    
-    if vehicle:
-        pools = Pool.objects.filter(vehicle=vehicle)
-    elif naics:
-        pools = Pool.objects.filter(naics=naics.code)
-    else:
-        pools = Pool.objects.all()
-            
-    pools = pools.values_list('id', flat=True)    
-    
-    if vendor.pools.count():
-        vendor_setaside_ids = vendor.pools.values_list('setasides', flat=True)
+    for piid, info in membership_map.items():
+        row = {}
+        setasides = []
         
-        for membership in vendor.pools.all():
-            pool_id = membership.pool.id
-            
-            if pool_id in pools:
-                pool_name = "{} pool {}: {}".format(" ".join(membership.pool.vehicle.split('_')), membership.pool.number, membership.pool.name)
-            
-                vendor_pools[pool_id] = {'name': pool_name}
-            
-                if pool_id in selected_pools:
-                    vendor_pools[pool_id]['filter'] = 'X'
-                    pool_piids.append(membership.piid)
-                else:
-                    vendor_pools[pool_id]['filter'] = ''
-            
-                if membership.cms.count():
-                    cm = membership.cms.all()[:1].get()   
-                    vendor_pools[pool_id]['contact_name'] = cm.name
-                    vendor_pools[pool_id]['contact_phone'] = ",".join(cm.phone())
-                    vendor_pools[pool_id]['contact_email'] = ",".join(cm.email())
+        row['filter'] = piid in memberships
+        row['piid'] = piid
+        row['name'] = get_membership_name(membership_map, piid)
+        row['contact_name'] = ",".join(info['contacts'])
+        row['contact_phone'] = ",".join(info['phones'])
+        row['contact_email'] = ",".join(info['emails'])
         
-        for sa in setasides:
-            if sa.id in vendor_setaside_ids:
-                vendor_setasides.append('X')
+        for sa in setasides_all:
+            if sa.code in info['setasides']:
+                setasides.append('X')
             else:
-                vendor_setasides.append('')
+                setasides.append('')
+        
+        row['setasides'] = setasides
+        
+        membership_rows.append(row)
                     
     contracts = Contract.objects.filter(vendor=vendor).order_by('-date_signed')[:1]
     
@@ -213,8 +277,8 @@ def VendorCSV(request, vendor_duns):
     else:
         contracts = Contract.objects.filter(vendor=vendor).order_by('-date_signed')
     
-    if len(pool_piids) > 0:
-        contracts = contracts.filter(base_piid__in = pool_piids) 
+    if len(memberships) > 0:
+        contracts = contracts.filter(base_piid__in = memberships) 
         
     # CSV generation
     writer.writerow(('GSA Discovery research results',))
@@ -235,24 +299,28 @@ def VendorCSV(request, vendor_duns):
     writer.writerow((titlecase(vendor.sam_location.city) + ', ' + vendor.sam_location.state.upper() + ', ' + vendor.sam_location.zipcode,))
     
     writer.writerow(('', ))
-    writer.writerow([''] + [sa_obj.name for sa_obj in setasides])
-    writer.writerow([''] + vendor_setasides)
-    writer.writerow(('', ))
     
-    writer.writerow(('Filter', 'Pool name', 'Contact name', 'Contact phone', 'Contact email'))
-    for pool_id, pool_data in vendor_pools.items():
-        writer.writerow((
-            pool_data['filter'], 
-            pool_data['name'],
-            pool_data['contact_name'],
-            pool_data['contact_phone'],
-            pool_data['contact_email']
-        ))
+    filter_labels = ['Filter', 'Contract PIID', 'Name', 'Contact name', 'Contact phone', 'Contact email']
+    filter_labels.extend([sa_obj.name for sa_obj in setasides_all])
+    
+    writer.writerow(filter_labels)
+    for filter_row in membership_rows:
+        filter_data = [
+            'X' if filter_row['filter'] else '',
+            filter_row['piid'],
+            filter_row['name'],
+            filter_row['contact_name'],
+            filter_row['contact_phone'],
+            filter_row['contact_email']
+        ]
+        filter_data.extend(filter_row['setasides'])
+        writer.writerow(filter_data)
+
     writer.writerow(('', ))
     
     if naics:
         writer.writerow(('Showing vendor contract history for PSCs related to {}'.format(naics.code), ))
-        writer.writerow(('NAICS: ', naics.description,))
+        writer.writerow(('NAICS: ', "{} - {}".format(naics.code, naics.description),))
     else:
         writer.writerow(("Showing this vendor's indexed contract history", ))
 
