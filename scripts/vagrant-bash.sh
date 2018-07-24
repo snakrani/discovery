@@ -35,9 +35,3 @@ then
     cf install-plugin -f "/usr/local/bin/cf-service-connect"
   fi
 fi
-
-# Activate Python virtual environment if present
-if [ -d /venv ]
-then
-  source /venv/bin/activate
-fi

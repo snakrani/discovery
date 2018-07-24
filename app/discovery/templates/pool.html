@@ -7,10 +7,11 @@
 
 {% block search_info %}
 
-        <div id="results_pool_name_number">
-            <span class="results_pool_name_number_search">SEARCH RESULTS</span><br>
-            <span class="results_pool_name_number_pool"></span>
-            <span class="results_pool_name_number_description"></span>
+        <div id="results_pool_names">
+            <span class="results_pool_search">Vendor results from:</span><br>
+            <div class="results_pool_names"></div>
+
+            <div id="result_pool_spacer"></div>
 
             <div id="number_of_results">
                 <span class="matching_your_search"></span>
@@ -21,27 +22,28 @@
 
         </div><!-- end results_pool_name_number -->
 
-        <div id="your_search_criteria">
-            <span class="your_search_grey">showing vendors in: </span><span id="your_search" class="your_search_blue"></span>
-            <span class="your_search_grey">filters: </span><span id="your_filters" class="your_search_blue"></span>
-        </div> <!-- closes your search criteria -->
-
 {% endblock %}
 
 {% block content %}
 
-    <div id="pool_table" class="pooldetail">
+    <div id="pool_table" class="pooldetail init">
         <div class="table_wrapper loading">
             <table id="pool_vendors">
                 <tr>
                     <th scope="col" class="h_vendor_name arrow-sortable sortable" title="Select to sort">
                         Vendor Name
                     </th>
-                    <th scope="col" class="h_vendor_location arrow-sortable sortable" title="Select to sort">
-                        Location
-                    </th>
                     <th scope="col" class="h_naics_results arrow-down sortable" title="Sorted descending">
-                        <span title="Contract count for work performed under the selected NAICs codes over the last 10 years">Contracts</span>
+                        <span title="Contract count for 5 years of work related to search">Contracts</span>
+                    </th>
+                    <th scope="col" class="h_vendor_pools">
+                        Vehicles
+                    </th>
+                    <th scope="col" class="h_sb">
+                        SB
+                    </th>
+                    <th scope="col" class="h_sdb">
+                        SDB
                     </th>
                     <th scope="col" class="h_8a">
                         8(a)
@@ -49,17 +51,17 @@
                     <th scope="col" class="h_hubz">
                         HubZ
                     </th>
-                    <th scope="col" class="h_sdvo">
-                        SDVO
-                    </th>
                     <th scope="col" class="h_wo">
                         WO
                     </th>
                     <th scope="col" class="h_vo">
                         VO
                     </th>
-                    <th scope="col" class="h_sdb">
-                        SDB
+                    <th scope="col" class="h_sdvo">
+                        SDVO
+                    </th>
+                    <th scope="col" class="h_vip">
+                        VA VIP
                     </th>
                 </tr>
             </table>
@@ -81,6 +83,7 @@
 
 {% block page_js %}
     <script src="{% static 'discovery_site/js/contrib/jquery.simplePagination.js' %}"></script>
-    <script src="{% static 'discovery_site/js/layout-manager-listings.js' %}"></script>
-    <script src="{% static 'discovery_site/js/requests-manager-listings.js' %}"></script>
+    <script src="{% static 'discovery_site/js/search.js' %}"></script>
+    <script src="{% static 'discovery_site/js/data-manager-search.js' %}"></script>
+    <script src="{% static 'discovery_site/js/layout-manager-search.js' %}"></script>
 {% endblock %}

@@ -1,38 +1,26 @@
 
 LayoutManager.initializers.index = function() {
-    EventManager.subscribe('naicsChanged', this.route.bind(LayoutManager));
-    EventManager.subscribe('loadPage', this.vehicleInfo.bind(LayoutManager));
+    LayoutManager.initSearch();
 
-    this.disableNaics();
-    this.hideZone();
-    this.disableFilters();
+    // Internal event subscriptions
+    EventManager.subscribe('pageInitialized', LayoutManager.styleVehicleInfo);
+    EventManager.subscribe('metadataLoaded', LayoutManager.renderMetadata);
 };
 
-LayoutManager.route = function(data) {
-    var queryObject = RequestsManager.buildRequestQuery();
+LayoutManager.preprocessors.index = function() {
+    LayoutManager.hideZone();
+};
 
-    if ('vehicle' in queryObject && 'naics' in queryObject) {
-        this.loadPoolPage();
+LayoutManager.route = function() {
+    var queryObject = DataManager.buildRequestQuery();
+
+    if ('naics' in queryObject || 'vehicle' in queryObject || 'pool' in queryObject || 'setasides' in queryObject) {
+        var qs = DataManager.getQueryString();
+        window.location.href = '/results' + qs;
     }
 };
 
-LayoutManager.loadPoolPage = function() {
-    var qs = URLManager.getQueryString();
-    window.location.href = '/results' + qs;
-};
-
-LayoutManager.render = function(results) {
-    if (! $.isEmptyObject(results)) {
-        var dateStr = function(dateObj) {
-            return ((dateObj.getMonth() + 1) + '/' + dateObj.getDate() + '/' + dateObj.getFullYear().toString().substring(2));
-        };
-
-        $("#data_source_date_sam").text(LayoutManager.convertDate(results['sam_load_date']));
-        $("#data_source_date_fpds").text(LayoutManager.convertDate(results['fpds_load_date']));
-    }
-};
-
-LayoutManager.vehicleInfo = function() {
+LayoutManager.styleVehicleInfo = function() {
     $('#discovery_vehicles').collapsible({
         accordion: false,
         accordionUpSpeed: 100,
@@ -43,4 +31,13 @@ LayoutManager.vehicleInfo = function() {
         arrowDclass: 'arrow-d',
         animate: true
     });
+    DataManager.completeStatus();
+};
+
+LayoutManager.renderMetadata = function(data) {
+    if (! $.isEmptyObject(data)) {
+        $("#data_source_date_sam").text(Format.convertDate(data['sam_load_date']));
+        $("#data_source_date_fpds").text(Format.convertDate(data['fpds_load_date']));
+    }
+    DataManager.completeStatus();
 };

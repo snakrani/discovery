@@ -4,6 +4,7 @@
 *.pyc
 __pycache__
 
+/src/
 /.project
 /.pydevproject
 /.settings/

@@ -13,10 +13,10 @@ class PscTest(case.APITestCase, metaclass = case.MetaAPISchema):
             '#77777777': (),
             '#ABCDEFG': ()
         },
-        'ordering': ('code', 'description', 'naics__code', 'naics__root_code', 'naics__description'),
+        'ordering': ('code', 'description', 'naics__code', 'naics__description'),
         'pagination': {
             '@no_args': {},
-            '!page': {'page': 500},
+            '!page': {'page': 1000},
             '@count': {'count': 2},
             '@mixed': {'page': 2, 'count': 3}
         },
@@ -42,9 +42,9 @@ class PscTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '^(S2|Z1)'
             },
             'description': {
-                '@exact': 'Inspect Services / Valves',
-                '@iexact': 'install of alarm signal SYStem',
-                '@in': ("Maintenance Of Office Buildings", "Maint - Repair Of Household Furnishings"),
+                '@exact': 'Abrasive Materials',
+                '@iexact': 'ADP backup and security services',
+                '@in': ("Aerial Seeding Services", "Aircraft Components / Accessories"),
                 '@contains': 'Snow',
                 '@icontains': 'houseKEEPING',
                 '@startswith': 'Installation',
@@ -52,46 +52,59 @@ class PscTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@endswith': 'System',
                 '@iendswith': 'SYSTEM',
                 '@regex': '[/]+',
-                '@iregex': '^maint\s\/\srepair\s\/\salteration\s\-\s'
+                '@iregex': '^air(craft)?'
             },
             'naics__code': {
                 '@exact': '541330',
-                '@iexact': '541712c',
-                '@in': ("541711", "238290", "561730B"),
-                '@contains': '1210',
-                '@icontains': 'b',
+                '@iexact': '561710',
+                '@in': ("541711", "238290", "561730"),
+                '@contains': '622',
+                '@icontains': '622',
                 '@startswith': '54',
                 '@istartswith': '2382',
-                '@endswith': 'A',
-                '@iendswith': 'c',
-                '@regex': '[^\d]+$',
-                '@iregex': '^(23|56)'
-            },
-            'naics__root_code': {
-                '@exact': '541330',
-                '@iexact': '541712',
-                '@in': ("541711", "238290", "561730"),
-                '@contains': '1210',
-                '@icontains': '990',
-                '@startswith': '61',
-                '@istartswith': '5617',
-                '@endswith': '10',
-                '@iendswith': '20',
-                '@regex': '^[\d]+$',
+                '@endswith': '30',
+                '@iendswith': '30',
+                '@regex': '^54\d+0$',
                 '@iregex': '^(23|56)'
             },
             'naics__description': {
                 '@exact': 'Outdoor Advertising',
-                '@iexact': 'hvac maintenance',
+                '@iexact': 'outdoor advertising',
                 '@in': ("Payroll Services", "Commissioning Services", "Testing Laboratories"),
                 '@contains': 'Accounting',
-                '@icontains': 'rEPair',
+                '@icontains': 'heating',
                 '@startswith': 'Engineering',
                 '@istartswith': 'r',
                 '@endswith': 'Services',
                 '@iendswith': 'advertIsing',
-                '@regex': '[/]+',
-                '@iregex': 'water\s+based'
+                '@regex': 'Services$',
+                '@iregex': 'apprentice(ship)?'
+            },
+            'naics__sin:naics__sin__code': {
+                '@exact': '100-03',
+                '@iexact': 'c871-202',
+                '@in': ("100-03", "520-14", "541-4G", "51-B36-2A"),
+                '@contains': '4B',
+                '@icontains': '-4b',
+                '@startswith': '51',
+                '@istartswith': 'c132',
+                '@endswith': '03',
+                '@iendswith': '2a',
+                '@regex': '[A-Z]\d+\-\d+$',
+                '@iregex': '^(C87|51)'
+            },
+            'naics__keyword:naics__keywords__name': {
+                '@exact': 'Cooking Equipment',
+                '@iexact': 'ancillary supplies and / or services',
+                '@in': ("Elemental Analyzers", "Energy Consulting Services", "Environmental Consulting Services"),
+                '@contains': 'Support',
+                '@icontains': 'support',
+                '@startswith': 'Marine',
+                '@istartswith': 'edu',
+                '@endswith': 'Services',
+                '@iendswith': 'services',
+                '@regex': '(Training|Consulting)',
+                '@iregex': '^(vocational|strategic)'
             }
         }
     }
@@ -102,4 +115,4 @@ class PscTest(case.APITestCase, metaclass = case.MetaAPISchema):
         
     def validate_object(self, resp, base_key = []):
         resp.is_not_empty(base_key + ['code'])
-        resp.is_not_empty(base_key + ['description'])
+        #resp.is_not_empty(base_key + ['description'])

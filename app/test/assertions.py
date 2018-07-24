@@ -60,45 +60,61 @@ class TestAssertions(object):
             raise AssertionError("Value ({}) given is not an decimal value".format(number))
 
               
-    def assertLessThanEqual(self, number, maximum_value, **params):
-        if number is None:
-            raise AssertionError("Value must be passed as a integer or numeric string")
+    def assertLessThanEqual(self, text, maximum_value, **params):
+        if text is None:
+            raise AssertionError("Value must be passed as a number or string")
         
-        if not self._check_float(number):
-            raise AssertionError("Value ({}) given is not a numeric value".format(number))
+        if isinstance(text, str):
+            if text > maximum_value:
+                raise AssertionError("Value ({}) given is greater than the maximum allowed ({})".format(text, maximum_value))
+        else:
+            if not self._check_float(text):
+                raise AssertionError("Value ({}) given is not a numeric or string value".format(text))
         
-        if float(number) > float(maximum_value):
-            raise AssertionError("Value ({}) given is greater than the maximum allowed ({})".format(number, maximum_value))
+            if float(text) > float(maximum_value):
+                raise AssertionError("Value ({}) given is greater than the maximum allowed ({})".format(text, maximum_value))
         
-    def assertLessThan(self, number, excluded_value, **params):
-        if number is None:
-            raise AssertionError("Value must be passed as a integer or numeric string")
+    def assertLessThan(self, text, excluded_value, **params):
+        if text is None:
+            raise AssertionError("Value must be passed as a number or string")
         
-        if not self._check_float(number):
-            raise AssertionError("Value ({}) given is not a numeric value".format(number))
+        if isinstance(text, str):
+            if text >= excluded_value:
+                raise AssertionError("Value ({}) given is not less than ({})".format(text, excluded_value))
+        else:
+            if not self._check_float(text):
+                raise AssertionError("Value ({}) given is not a numeric or string value".format(text))
         
-        if float(number) >= float(excluded_value):
-            raise AssertionError("Value ({}) given is not less than ({})".format(number, excluded_value))
+            if float(text) >= float(excluded_value):
+                raise AssertionError("Value ({}) given is not less than ({})".format(text, excluded_value))
               
-    def assertGreaterThanEqual(self, number, minimum_value, **params):
-        if number is None:
-            raise AssertionError("Value must be passed as a integer or numeric string")
+    def assertGreaterThanEqual(self, text, minimum_value, **params):
+        if text is None:
+            raise AssertionError("Value must be passed as a number or string")
         
-        if not self._check_float(number):
-            raise AssertionError("Value ({}) given is not a numeric value".format(number))
+        if isinstance(text, str):
+            if text < minimum_value:
+                raise AssertionError("Value ({}) given is less than the minimum allowed ({})".format(text, minimum_value))
+        else:
+            if not self._check_float(text):
+                raise AssertionError("Value ({}) given is not a numeric or string value".format(text))
         
-        if float(number) < float(minimum_value):
-            raise AssertionError("Value ({}) given is less than the minimum allowed ({})".format(number, minimum_value))
+            if float(text) < float(minimum_value):
+                raise AssertionError("Value ({}) given is less than the minimum allowed ({})".format(text, minimum_value))
         
-    def assertGreaterThan(self, number, excluded_value, **params):
-        if number is None:
-            raise AssertionError("Value must be passed as a integer or numeric string")
+    def assertGreaterThan(self, text, excluded_value, **params):
+        if text is None:
+            raise AssertionError("Value must be passed as a number or string")
         
-        if not self._check_float(number):
-            raise AssertionError("Value ({}) given is not a numeric value".format(number))
+        if isinstance(text, str):
+            if text <= excluded_value:
+                raise AssertionError("Value ({}) given is not greater than ({})".format(text, excluded_value))
+        else:        
+            if not self._check_float(text):
+                raise AssertionError("Value ({}) given is not a numeric or string value".format(text))
         
-        if float(number) <= float(excluded_value):
-            raise AssertionError("Value ({}) given is not greater than ({})".format(number, excluded_value))
+            if float(text) <= float(excluded_value):
+                raise AssertionError("Value ({}) given is not greater than ({})".format(text, excluded_value))
    
     def assertBetween(self, number, correct_values, **params):
         if isinstance(correct_values, str): 
@@ -107,7 +123,7 @@ class TestAssertions(object):
                 minimum_value = components[0]
                 maximum_value = components[1]
             else:
-                AssertionError("Betwen needs multiple values, one ({}) given".format(correct_values))
+                AssertionError("Between needs multiple values, one ({}) given".format(correct_values))
         else:
             minimum_value = correct_values[0]
             maximum_value = correct_values[1]
@@ -197,3 +213,39 @@ class TestAssertions(object):
         
         if date_quarter != int(quarter):
             raise AssertionError("Value ({}) given does not match quarter {}".format(quarter, date_quarter))
+        
+    def assertAny(self, list1, list2, **params):
+        if not isinstance(list1, (list, tuple)):
+            list1 = [list1]
+            
+        if not isinstance(list2, (list, tuple)):
+            list2 = [list2]
+            
+        intersection = [value for value in list2 if value in list1]
+        
+        if len(intersection) == 0:
+            raise AssertionError("There are no matching values ({}) within {}".format(list2, list1))
+        
+    def assertAll(self, list1, list2, **params):
+        if not isinstance(list1, (list, tuple)):
+            list1 = [list1]
+            
+        if not isinstance(list2, (list, tuple)):
+            list2 = [list2]
+            
+        intersection = [value for value in list2 if value in list1]
+      
+        if len(intersection) != len(list2):
+            raise AssertionError("Not all values ({}) are contained within {}".format(list2, list1))
+        
+    def assertNone(self, list1, list2, **params):
+        if not isinstance(list1, (list, tuple)):
+            list1 = [list1]
+            
+        if not isinstance(list2, (list, tuple)):
+            list2 = [list2]
+            
+        intersection = [value for value in list2 if value in list1]
+        
+        if len(intersection) != 0:
+            raise AssertionError("Values ({}) exist within {}".format(list2, list1))

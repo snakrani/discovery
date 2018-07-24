@@ -9,6 +9,9 @@ class Command(BaseCommand):
         print('> Dumping keywords')
         call_command('dumpdata', 'categories.keyword', indent=2, output="{}/{}".format(settings.BASE_DIR, 'categories/fixtures/keywords.json'))
         
+        print('> Dumping SIN codes')
+        call_command('dumpdata', 'categories.sin', indent=2, output="{}/{}".format(settings.BASE_DIR, 'categories/fixtures/sin.json'))
+        
         print('> Dumping NAICS codes')
         call_command('dumpdata', 'categories.naics', indent=2, output="{}/{}".format(settings.BASE_DIR, 'categories/fixtures/naics.json'))
         

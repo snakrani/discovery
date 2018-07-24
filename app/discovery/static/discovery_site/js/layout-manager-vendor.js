@@ -1,183 +1,187 @@
 
 LayoutManager.initializers.vendor = function() {
-    EventManager.subscribe('vendorPoolLoaded', this.renderVendor.bind(LayoutManager));
-    EventManager.subscribe('contractDataLoaded', this.renderTable.bind(LayoutManager));
+
+    // Internal event subscriptions
+    EventManager.subscribe('dataInitialized', LayoutManager.renderVendor);
+    EventManager.subscribe('dataInitialized', LayoutManager.renderContractSort);
+    EventManager.subscribe('contractsLoaded', LayoutManager.renderContracts);
+
+    EventManager.subscribe('pageChanged', DataManager.update);
 };
 
-LayoutManager.render = function(results) {
-    this.renderVendor(results, null);
+LayoutManager.renderVendor = function() {
+    var vendor = DataManager.getVendor();
+
+    $(document).prop('title', vendor.name + " - " + DataManager.title);
+
+    LayoutManager.renderBasicVendorInfo(vendor);
+    LayoutManager.renderSamExpiration(vendor);
+    LayoutManager.renderWebsite(vendor);
+    LayoutManager.renderAddress(vendor);
+    LayoutManager.renderBadges(vendor.pools);
+    LayoutManager.renderResultInfo(vendor);
+    DataManager.completeStatus();
 };
 
-LayoutManager.renderVendor = function(vendor, pool) {
-    var membership = null;
-
-    $(document).prop('title', vendor.name + " - " + URLManager.title);
-
-    URLManager.updateVendorCSVURL(vendor);
-
-    var currentDate = new Date();
-    var mailto, t, indicatorsRow, formattedDate, dateObj;
-
+LayoutManager.renderBasicVendorInfo = function(vendor) {
     $('.vendor_title').html(vendor.name);
-    if (vendor.sam_url) {
-        $('#vendor_site_link').attr('href', vendor.sam_url);
-    } else {
-        $('.vendor_website').hide();
-    }
+
     if (vendor.sam_exclusion == true) {
         $('.debarred_status').show();
     }
     $('.duns_number').html(vendor.duns);
     $('.cage_code').html(vendor.cage);
-    $('.number_of_employees').html(vendor.number_of_employees ? this.numberWithCommas(vendor.number_of_employees) : 'N/A');
-    $('.annual_revenue').html(vendor.annual_revenue ? '$' + this.numberWithCommas(vendor.annual_revenue) : 'N/A');
+    $('.number_of_employees').html(vendor.number_of_employees ? Format.numberWithCommas(vendor.number_of_employees) : 'N/A');
+    $('.annual_revenue').html(vendor.annual_revenue ? '$' + Format.numberWithCommas(vendor.annual_revenue) : 'N/A');
+};
 
-    //load SAM expiration date
-    if (vendor['sam_expiration_date']) {
-        dateObj = this.createDate(vendor['sam_expiration_date']);
-        formattedDate = this.formatDate(dateObj);
+LayoutManager.renderSamExpiration = function(vendor) {
+    var currentDate = new Date();
+    var formattedDate, dateObj;
+
+    if (vendor.sam_expiration_date) {
+        dateObj = Format.createDate(vendor.sam_expiration_date);
+        formattedDate = Format.formatDate(dateObj);
     }
     else {
         formattedDate = 'unknown';
     }
 
     $(".vendor_sam_expiration_date").text(formattedDate);
+
     if (currentDate > dateObj) {
         $(".vendor_sam_expiration_notice").show();
     }
+};
 
-    //contact info
+LayoutManager.renderWebsite = function(vendor) {
+    if (vendor.sam_url) {
+        $('#vendor_site_link').attr('href', vendor.sam_url);
+    } else {
+        $('.vendor_website').hide();
+    }
+};
+
+LayoutManager.renderAddress = function(vendor) {
     $('.vendor_address1').html(vendor.sam_location ? vendor.sam_location.address : ' ');
     $('.vendor_address2').html(vendor.sam_location ? vendor.sam_location.city + ', ' + vendor.sam_location.state + ' ' + vendor.sam_location.zipcode : ' ');
+};
 
-    if (pool) {
-        for (var i = 0; i < vendor.pools.length; i++) {
-            if (vendor.pools[i].pool.id == pool.id) {
-                membership = vendor.pools[i];
-            }
-        }
+LayoutManager.renderBadges = function(memberships) {
+    var vehicleMap = DataManager.getVehicleMap();
+    var poolMap = DataManager.getPoolMap();
+    var smallBusiness = false;
 
-        if (membership) {
-            if (membership.pms.length > 0) {
-                $('.vendor_poc_name').html(membership.pms[0].name);
-                $('.vendor_poc_phone').html(membership.pms[0].phone.length ? membership.pms[0].phone.join(',') : ' ');
+    for (var index = 0; index < memberships.length; index++) {
+        var pool = poolMap[memberships[index].pool.id];
 
-                var mailto = [];
-                for (var i = 0; i < membership.pms[0].email.length; i++) {
-                    email = membership.pms[0].email[i];
-                    mailto.push('<a href="mailto:' + email + '">' + email + '</a>');
-                }
-                $('.vendor_poc_email').html(mailto.join(','));
-            }
+        if (pool.vehicle.includes('_SB')) {
+            smallBusiness = true;
+            break;
         }
         else {
-            membership = vendor;
+            for (var sindex = 0; sindex < memberships[index].setasides.length; sindex++) {
+                var setaside = memberships[index].setasides[sindex];
+
+                if (['SB', 'SDB', 'A6'].includes(setaside.code)) {
+                    smallBusiness = true;
+                    break;
+                }
+            }
         }
     }
-    else {
-        membership = vendor;
-    }
-
-    //small business badge
-    if (LayoutManager.showSbBadge(vendor['pools'])) {
+    if (smallBusiness) {
         $('#sb_badge').show();
     }
-
-    //socioeconomic indicators
-    t = $('#socioeconomic_indicators');
-    t.find("tr:gt(0)").remove();
-
-    indicatorsRow = $('<tr></tr>');
-    indicatorsRow.append(this.renderColumn(membership, '8a', 'A6'));
-    indicatorsRow.append(this.renderColumn(membership, 'Hubz', 'XX'));
-    indicatorsRow.append(this.renderColumn(membership, 'sdvo', 'QF'));
-    indicatorsRow.append(this.renderColumn(membership, 'wo', 'A2'));
-    indicatorsRow.append(this.renderColumn(membership, 'vo', 'A5'));
-    indicatorsRow.append(this.renderColumn(membership, 'sdb', '27'));
-    t.append(indicatorsRow);
-
-    if (pool) {
-        var pool_components = pool.id.split('_');
-
-        $("#naics_contracts_button").show();
-        $("#naics_contracts_button").text("NAICS " + URLManager.stripSubCategories(InputHandler.naicsCode));
-        $("#all_contracts_button").show();
-        $(".vendor_contract_history_text").html("Showing vendor contract history for PSCs related to: ");
-
-        $("#pool_filter_display").show();
-        $("#pool_filter_display span").text("Only show contracts for  " + pool_components[0]);
-    }
-    else {
-        $("#naics_contracts_button").hide();
-        $("#all_contracts_button").hide();
-        $(".vendor_contract_history_text").html("Showing this vendor's indexed contract history");
-        $("#pool_filter_display").hide();
-
-        this.renderButtonAndCSV('all');
-    }
 };
 
-LayoutManager.showSbBadge = function(pools) {
-    for (var i = 0; i < pools.length; i++) {
-        if (pools[i].pool.id.indexOf("_SB") != -1) {
-            return true;
+LayoutManager.renderResultInfo = function(vendor) {
+    var duns = DataManager.getDuns();
+    var vehicleMap = DataManager.getVehicleMap();
+    var poolMap = DataManager.getPoolMap();
+    var naics = DataManager.getNaics();
+    var memberships = DataManager.getMemberships();
+
+    var resultMessage = "Showing vendor's indexed 5 year contract history";
+    var filterMessages = [];
+    var vehicles = [];
+
+    for (var index = 0; index < vendor.pools.length; index++) {
+        var vendorMembership = vendor.pools[index];
+        var vehicle = poolMap[vendorMembership.pool.id].vehicle;
+
+        if (memberships.length > 0 && memberships.includes(vendorMembership.piid)) {
+            vehicles.push(vehicleMap[vehicle].title);
         }
     }
-    return false;
+    if (vehicles.length > 0) {
+        filterMessages.push(Array.from(new Set(vehicles)).join(', '));
+    }
+
+    if (naics) {
+        filterMessages.push('NAICS ' + naics);
+    }
+
+    if (filterMessages.length > 0) {
+        resultMessage += ' for ' + filterMessages.join(' and ');
+    }
+    $(".vendor_contract_history_text").html(resultMessage);
+
+    // CSV results link
+    $("#csv_link").attr("href", "/vendor/" + duns + "/csv/" + DataManager.getQueryString());
 };
 
-LayoutManager.renderColumn = function(v, prefix, setasideCode) {
-    return $('<td class="' + prefix + '">' + this.vendorIndicator(v, prefix, setasideCode) + '</td>');
+LayoutManager.renderContractSort = function() {
+    var ordering = DataManager.getSortOrdering();
+
+    if (ordering) {
+        var asc = (ordering[0] == '-' ? false : true);
+        var field = DataManager.getOrderingField(ordering.replace(/^-/, ''));
+        var $target = $('th.' + field);
+
+        $target.siblings('.sortable').removeClass('arrow-down').removeClass('arrow-up').addClass('arrow-sortable').attr("title", "Select to sort");
+
+        if (asc) {
+            $target.removeClass('arrow-sortable').removeClass('arrow-down').addClass('arrow-up').attr("title", "Sorted ascending");
+        } else {
+            $target.removeClass('arrow-sortable').removeClass('arrow-up').addClass('arrow-down').attr("title", "Sorted descending");
+        }
+    }
+    DataManager.completeStatus();
 };
 
-LayoutManager.renderTable = function(results, listType, pageNumber, itemsPerPage) {
+LayoutManager.renderContracts = function(data) {
     var $table = $('#vendor_contracts');
-    var len = results['results'].length;
-
-    this.renderButtonAndCSV(listType);
 
     $table.find('tr').not(':first').remove();
 
-    //show or hide 'no matching contracts' indicator
-    if (results['count'] == 0) {
+    if (data['count'] == 0) {
         $('#no_matching_contracts').show();
-    } else {
-        $('#no_matching_contracts').hide();
     }
+    else {
+        $('#no_matching_contracts').hide();
 
-    for (var i = 0; i < len; i++) {
-        $table.append(this.renderRow(results['results'][i], i));
+        for (var index = 0; index < data['results'].length; index++) {
+            $table.append(LayoutManager.renderContract(data['results'][index]));
+        }
     }
 
     $("#ch_table").show();
 
-    LayoutManager.renderPager(listType, results, pageNumber, itemsPerPage);
+    LayoutManager.renderPager(data);
+    DataManager.completeStatus();
 };
 
-LayoutManager.renderButtonAndCSV = function(listType){
-    $("#vendor_contract_history_title_container .contracts_button_active").attr('class', 'contracts_button');
-    $("#" + listType + "_contracts_button").attr('class', 'contracts_button_active');
-
-    var a = $("a#csv_link");
-    var csv_link = a.attr('href');
-
-    if (listType == 'all') {
-        a.attr('href', csv_link.substring(0, csv_link.indexOf("?")));
-    } else {
-        a.attr('href', csv_link + URLManager.getQueryString());
-    }
-};
-
-LayoutManager.renderRow = function(contract, i) {
+LayoutManager.renderContract = function(contract) {
     var $contractRow = $('<tr class="table_row_data"></tr>');
 
-    var displayDate = (contract['date_signed'] ? this.formatDate(this.createDate(contract['date_signed'])) : ' ');
+    var displayDate = (contract['date_signed'] ? Format.formatDate(Format.createDate(contract['date_signed'])) : ' ');
     var piid = (contract['piid'] ? contract['piid'] : ' ');
     var agencyName = (contract['agency_name'] ? contract['agency_name'] : ' ');
     var pricingType = (contract['pricing_type'] ? contract['pricing_type'].name : ' ');
     var pointOfContact = (contract['point_of_contact'] ? contract['point_of_contact'].name : ' ');
     var location = (contract['place_of_performance_location'] ? contract['place_of_performance_location'] : ' ');
-    var obligatedAmount = (contract['obligated_amount'] ? this.numberWithCommas(contract['obligated_amount']) : ' ');
+    var obligatedAmount = (contract['obligated_amount'] ? Format.numberWithCommas(contract['obligated_amount']) : ' ');
     var status = (contract['status'] ? contract['status'].name : ' ');
     var psc = (contract['PSC'] ? contract['PSC'] : ' ');
     var naics = (contract['NAICS'] ? contract['NAICS'] : ' ');
@@ -191,7 +195,7 @@ LayoutManager.renderRow = function(contract, i) {
 
     $contractRow.append('<td class="date_signed">' + displayDate + '</td>');
     $contractRow.append('<td class="piid" scope="row">' + piid + '</td>');
-    $contractRow.append('<td class="agency">' + this.toTitleCase(agencyName) + '</td>');
+    $contractRow.append('<td class="agency">' + Format.toTitleCase(agencyName) + '</td>');
     $contractRow.append('<td class="type">' + pricingType + '</td>');
     $contractRow.append('<td class="poc">' + pointOfContact + '</td>');
     $contractRow.append('<td class="value">' + obligatedAmount+ '</td>');
@@ -201,42 +205,31 @@ LayoutManager.renderRow = function(contract, i) {
     return $contractRow;
 };
 
-LayoutManager.renderPager = function(listType, results, pageNumber, itemsPerPage) {
-    if (results['count'] > 0) {
-        if (pageNumber == undefined) {
-            var pageNumber = 1;
-        }
+LayoutManager.renderPager = function(data) {
+    var page = DataManager.getPage();
+    var pageCount = DataManager.getPageCount();
 
-        var startnum = (pageNumber - 1) * itemsPerPage + 1;
-        var endnum = Math.min((pageNumber * itemsPerPage), results['count']);
+    if (data['count'] > 0) {
+        var startnum = (page - 1) * pageCount + 1;
+        var endnum = Math.min((page * pageCount), data['count']);
 
         $("#contracts_current").text(startnum + " - " + endnum);
-        $("#contracts_total").text(LayoutManager.numberWithCommas(results['count']));
+        $("#contracts_total").text(Format.numberWithCommas(data['count']));
 
         $(function() {
             $("#pagination_container").pagination({
-                items: results['count'],
-                itemsOnPage: itemsPerPage,
+                items: data['count'],
+                itemsOnPage: pageCount,
                 cssStyle: 'light-theme',
-                currentPage: pageNumber,
+                currentPage: page,
+                selectOnClick: false,
                 onPageClick: function(pageNumber, e) {
-                    var contract_data = RequestsManager.currentSortParams();
-
-                    contract_data['duns'] = results['duns'];
-
-                    if (listType == 'all') {
-                        contract_data['naics'] == 'all';
-                    } else {
-                        contract_data['naics'] = naics;
-                    }
-                    contract_data['page'] = pageNumber;
-                    contract_data['listType'] = listType;
-
-                    EventManager.publish("contractsChanged", contract_data);
+                    DataManager.setPage(pageNumber);
+                    EventManager.publish("pageChanged");
                 }
             });
         });
-        if (results['results'].length < results['count']) {
+        if (data['results'].length < data['count']) {
             $('#pagination_container').show();
         } else {
             $('#pagination_container').hide();
@@ -247,16 +240,4 @@ LayoutManager.renderPager = function(listType, results, pageNumber, itemsPerPage
         $('#pagination_container').hide();
         $("#viewing_contracts").hide();
     }
-};
-
-LayoutManager.vendorIndicator = function(membership, prefix, setaside_code) {
-    //returns X if vendor and socioeconomic indicator match
-    if (membership['setasides'].length > 0) {
-        for (var i = 0; i < membership['setasides'].length; i++) {
-            if (membership['setasides'][i]['code'] == setaside_code) {
-                return '<img alt="X" src="' + static_image_path  + 'green_dot.png" class="green_dot">';
-            }
-        }
-    }
-    return '';
 };

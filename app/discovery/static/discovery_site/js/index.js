@@ -1,7 +1,4 @@
 
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
-'use strict';
-
 // add support for cross-domain requests
 $.support.cors = true;
 
@@ -18,21 +15,12 @@ $.fn.exists = function(callback) {
 
 // initializes the app
 $(document).ready(function() {
-    // http://thejacklawson.com/Mediator.js/
     window.Events = new Mediator() || {};
 
-    InputHandler.init();
-    RequestsManager.init();
+    DataManager.init();
     LayoutManager.init();
-    URLManager.init();
 
-    //fix for select2 IE disable bug
-    $('#placeholder').select2({
-        'placeholder': 'Select a vehicle',
-        minimumResultsForSearch: -1,
-        width: "170px"
-    });
-    $('#naics-code').fireOnDisable().select2();
+    DataManager.bootstrap();
 });
 
 // removes empty strings

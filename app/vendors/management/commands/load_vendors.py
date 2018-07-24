@@ -22,7 +22,7 @@ def format_ascii(text):
     return re.sub(r'^nan$', '', re.sub(r'[^\x00-\x7F]+', '', str(text).strip()))
 
 def format_name(text):
-    name = format_ascii(text).title()
+    name = format_ascii(text).upper()
     name = re.sub(r'\s+L\.?l\.?c\.?', ' LLC', name, re.IGNORECASE)
     return name
 
@@ -187,6 +187,12 @@ def get_setasides(record):
     except Exception as e:
         pass
     
+    try:
+        if check_bool(record['SB']):
+            setasides.append('SB')
+    except Exception as e:
+        pass
+    
     return setasides
 
 
@@ -331,7 +337,7 @@ class Command(BaseCommand):
         
         for name in sheets:
             try:
-                pool = re.search(r'Pool\s+([0-9A-Z]+)', name, re.IGNORECASE).group(1)
+                pool = re.search(r'\(\s*([0-9a-zA-Z]+)\s*\)', name, re.IGNORECASE).group(1)
                 
                 if len(pools) == 0 or pool in pools:
                     self.update_pool(vehicle, pool, wb.parse(name), options)

@@ -8,8 +8,9 @@ version: 2
 jobs:
   unit-tests:
     docker:
-      - image: debian:stretch-slim
+      - image: python:3.6-slim-stretch
         environment:
+          LANG: C.UTF-8
           PYTHONUNBUFFERED: 1
 
       - image: postgres:9.4
@@ -21,32 +22,30 @@ jobs:
     working_directory: /var/local
 
     steps:
-      - run: echo 'export PATH=/venv/bin:$PATH' >> $BASH_ENV
-
       - run:
-          name: Install Git
+          name: Install development tools
           command: |
             apt-get update
-            apt-get install -y git
+            apt-get install -y git gcc
 
       - checkout
 
       - run:
-          name: Install Python dependencies
-          command: |
-            scripts/setup-python.sh /dev/stderr
-
-      - run:
           name: Set CircleCI configuration
           command: |
-            cp app/discovery/local_settings.circle.py app/discovery/local_settings.py
+            cp ./app/discovery/local_settings.circle.py ./app/discovery/local_settings.py
+
+      - run:
+          name: Install requirements
+          command: |
+            pip install --no-cache-dir -r ./requirements.txt
+            pip install --no-cache-dir -r ./requirements-dev.txt
 
       - run:
           name: Run unit tests
           no_output_timeout: 2h
           command: |
-            source /venv/bin/activate
-            scripts/init-webserver.sh /dev/stderr
+            ./scripts/init-webserver.sh /dev/stderr
             ./run test --parallel=5 discovery api categories vendors contracts
 
       - store_artifacts:
@@ -55,8 +54,9 @@ jobs:
 
   acceptance-tests:
     docker:
-      - image: debian:stretch-slim
+      - image: python:3.6-slim-stretch
         environment:
+          LANG: C.UTF-8
           PYTHONUNBUFFERED: 1
 
       - image: postgres:9.4
@@ -68,30 +68,29 @@ jobs:
     working_directory: /var/local
 
     steps:
-      - run: echo 'export PATH=/venv/bin:$PATH' >> $BASH_ENV
-
       - run:
-          name: Install Git
+          name: Install development tools
           command: |
             apt-get update
-            apt-get install -y git
+            apt-get install -y git gcc
 
       - checkout
 
       - run:
-          name: Install Python dependencies
+          name: Set CircleCI configuration
           command: |
-            scripts/setup-python.sh /dev/stderr
+            cp ./app/discovery/local_settings.circle.py ./app/discovery/local_settings.py
+
+      - run:
+          name: Install requirements
+          command: |
+            pip install --no-cache-dir -r ./requirements.txt
+            pip install --no-cache-dir -r ./requirements-dev.txt
 
       - run:
           name: Install Chrome web driver
           command: |
-            scripts/setup-chrome.sh /dev/stderr
-
-      - run:
-          name: Set CircleCI configuration
-          command: |
-            cp app/discovery/local_settings.circle.py app/discovery/local_settings.py
+            ./scripts/setup-chrome.sh /dev/stderr
 
       - run:
           background: true
@@ -101,19 +100,17 @@ jobs:
           name: Import fixtures and run test server
           background: true
           command: |
-            source /venv/bin/activate
-            scripts/init-db.sh /dev/stderr
-            scripts/init-webserver.sh /dev/stderr
-            scripts/load-fixtures.sh
+            ./scripts/init-db.sh /dev/stderr
+            ./scripts/init-webserver.sh /dev/stderr
+            ./scripts/load-fixtures.sh
             cd app
             waitress-serve --expose-tracebacks --port=8080 discovery.wsgi:application
 
       - run:
           name: Run acceptance tests
           command: |
-            scripts/wait-for-it.sh --host="localhost" --port=8080 --timeout=300
-            source /venv/bin/activate
-            ./run test acceptance
+            ./scripts/wait-for-it.sh --host="localhost" --port=8080 --timeout=300
+            ./run test --parallel=5 acceptance
 
       - store_artifacts:
           path: logs
@@ -139,12 +136,12 @@ jobs:
       - run:
           name: Setup CloudFoundry client CLI
           command: |
-            scripts/setup-cf.sh /dev/stderr
+            ./scripts/setup-cf.sh /dev/stderr
 
       - run:
           name: Deploy development applications
           command: |
-            scripts/deploy-dev.sh
+            ./scripts/deploy-dev.sh
 
   deploy-prod:
     docker:
@@ -166,44 +163,43 @@ jobs:
       - run:
           name: Setup CloudFoundry client CLI
           command: |
-            scripts/setup-cf.sh /dev/stderr
+            ./scripts/setup-cf.sh /dev/stderr
 
       - run:
           name: Deploy production applications
           command: |
-            scripts/deploy-prod.sh
+            ./scripts/deploy-prod.sh
 
   deploy-docs:
     docker:
-      - image: debian:stretch-slim
+      - image: python:3.6-slim-stretch
         environment:
+          LANG: C.UTF-8
           PYTHONUNBUFFERED: 1
 
     working_directory: /var/local
 
     steps:
-      - run: echo 'export PATH=/venv/bin:$PATH' >> $BASH_ENV
-
       - run:
-          name: Install Git
+          name: Install development tools
           command: |
             apt-get update
-            apt-get install -y git
+            apt-get install -y git gcc
 
       - checkout
 
       - run:
-          name: Install Python dependencies
+          name: Install requirements
           command: |
-            scripts/setup-python.sh /dev/stderr
+            pip install --no-cache-dir -r ./requirements.txt
+            pip install --no-cache-dir -r ./requirements-dev.txt
 
       - run:
           name: Deploy documentation
           command: |
-            source /venv/bin/activate
             git config --global user.name "CircleCI ( ${CIRCLE_USERNAME} )"
             git config --global user.email "${CIRCLE_USERNAME}@${CIRCLE_BRANCH}"
-            scripts/deploy-docs.sh "${CIRCLE_BRANCH}"
+            ./scripts/deploy-docs.sh "${CIRCLE_BRANCH}"
 
       - store_artifacts:
           path: logs

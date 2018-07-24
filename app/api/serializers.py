@@ -6,6 +6,8 @@ from categories import models as categories
 from vendors import models as vendors
 from contracts import models as contracts
 
+import os
+
 
 class KeywordSerializer(ModelSerializer):
     class Meta:
@@ -21,30 +23,47 @@ class KeywordTestSerializer(ModelSerializer):
         fields = ['name']
 
 
+class SinSerializer(ModelSerializer):
+    class Meta:
+        model = categories.SIN
+        fields = ['code']
+        
+    def to_representation(self, instance):
+        return instance.code
+    
+class SinTestSerializer(ModelSerializer):
+    class Meta:
+        model = categories.SIN
+        fields = ['code']
+
+
 class BaseNaicsSerializer(HyperlinkedModelSerializer):
     url = HyperlinkedIdentityField(view_name="naics-detail", lookup_field='code')
     
     class Meta:
         model = categories.Naics
-        fields = ['code', 'root_code', 'description']
+        fields = ['code', 'description']
 
 class NaicsLinkSerializer(BaseNaicsSerializer):
     class Meta(BaseNaicsSerializer.Meta):
         fields = ['code', 'url']
 
 class NaicsSummarySerializer(BaseNaicsSerializer):
+    sin = SinSerializer(many=True)
     keywords = KeywordSerializer(many=True)
     
     class Meta(BaseNaicsSerializer.Meta):
-        fields = BaseNaicsSerializer.Meta.fields + ['keywords', 'url']
+        fields = BaseNaicsSerializer.Meta.fields + ['sin', 'keywords', 'url']
 
 class NaicsFullSerializer(BaseNaicsSerializer):
+    sin = SinSerializer(many=True)
     keywords = KeywordSerializer(many=True)
     
     class Meta(BaseNaicsSerializer.Meta):
-        fields = BaseNaicsSerializer.Meta.fields + ['keywords']
+        fields = BaseNaicsSerializer.Meta.fields + ['sin', 'keywords']
 
 class NaicsTestSerializer(NaicsFullSerializer):
+    sin = SinTestSerializer(many=True)
     keywords = KeywordTestSerializer(many=True)
     
     class Meta(NaicsFullSerializer.Meta):
@@ -63,20 +82,23 @@ class PscLinkSerializer(BasePscSerializer):
         fields = ['code', 'url']
 
 class PscSummarySerializer(BasePscSerializer):
+    sin = SinSerializer(many=True)
     naics = NaicsSummarySerializer(many=True)
     keywords = KeywordSerializer(many=True)
     
     class Meta(BasePscSerializer.Meta):
-        fields = BasePscSerializer.Meta.fields + ['naics', 'keywords', 'url']
+        fields = BasePscSerializer.Meta.fields + ['sin', 'naics', 'keywords', 'url']
 
 class PscFullSerializer(BasePscSerializer):
+    sin = SinSerializer(many=True)
     naics = NaicsSummarySerializer(many=True)
     keywords = KeywordSerializer(many=True)
     
     class Meta(BasePscSerializer.Meta):
-        fields = BasePscSerializer.Meta.fields + ['naics', 'keywords']
+        fields = BasePscSerializer.Meta.fields + ['sin', 'naics', 'keywords']
 
 class PscTestSerializer(PscFullSerializer):
+    sin = SinTestSerializer(many=True)
     naics = NaicsTestSerializer(many=True)
     keywords = KeywordTestSerializer(many=True)
     
@@ -108,6 +130,8 @@ class PoolFullSerializer(BasePoolSerializer):
         fields = BasePoolSerializer.Meta.fields + ['naics']
 
 class PoolTestSerializer(PoolFullSerializer):
+    naics = NaicsTestSerializer(many=True)
+    
     class Meta(PoolFullSerializer.Meta):
         fields = PoolFullSerializer.Meta.fields + ['url']
 
@@ -182,12 +206,27 @@ class ProjectManagerSerializer(ModelSerializer):
 
 
 class BasePoolMembershipSerializer(ModelSerializer):
+    capability_statement = SerializerMethodField()
+    
     cms = ContractManagerSerializer(many=True)
     pms = ProjectManagerSerializer(many=True)
     
     class Meta:
         model = vendors.PoolMembership
-        fields = ['piid', 'cms', 'pms', 'expiration_8a_date', 'contract_end_date']
+        fields = ['piid', 'cms', 'pms', 'expiration_8a_date', 'contract_end_date', 'capability_statement']
+        
+    def get_capability_statement(self, item):
+        request = self.context.get('request')
+        duns = item.vendor.duns
+        vehicle = item.pool.vehicle
+        
+        cs_path = "static/discovery_site/capability_statements/{}/{}.pdf".format(vehicle, duns)
+        cs_url = request.build_absolute_uri("/discovery_site/capability_statements/{}/{}.pdf".format(vehicle, duns))
+    
+        if vehicle and os.path.isfile(cs_path):
+            return cs_url
+            
+        return ''
     
 class PoolMembershipLinkSerializer(BasePoolMembershipSerializer):
     pool = PoolLinkSerializer(many=False)
@@ -245,11 +284,13 @@ class AnnotatedVendorSerializer(BaseVendorSerializer):
 
 
 class VendorSummarySerializer(AnnotatedVendorSerializer):
+    pools = PoolMembershipLinkSerializer(many=True)
+    
     class Meta(BaseVendorSerializer.Meta):
         fields = BaseVendorSerializer.Meta.fields + [
             'sam_location_citystate', 
             'annual_revenue', 'number_of_employees', 
-            'number_of_contracts', 'setasides',
+            'number_of_contracts', 'setasides', 'pools',
             'url'
         ]
 

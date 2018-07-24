@@ -340,7 +340,7 @@ CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 #
 # REST configuration 
 #
-REST_PAGE_COUNT = 100
+REST_PAGE_COUNT = 50
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'api.schemas.DiscoverySchema',

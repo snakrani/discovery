@@ -68,5 +68,15 @@
     "description": "Veterans VIP",
     "far_order": 10
   }
+},
+{
+  "model": "categories.setaside",
+  "pk": 20,
+  "fields": {
+    "code": "SB",
+    "name": "SB",
+    "description": "Small Business",
+    "far_order": 10
+  }
 }
 ]

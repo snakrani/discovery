@@ -7,7 +7,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.support import expected_conditions as EC
 
 from test.common import normalize_list, get_nested_value
@@ -109,7 +109,7 @@ class BaseValidator(object):
                 
         except Exception as error:
             raise self._wrap_error(error)
-    
+
     
     def compare(self, op, nested_keys, value = None, **params):
         self.compare_data(op, self.get_data_value(nested_keys), value, **params)
@@ -334,7 +334,24 @@ class BaseValidator(object):
         
     def is_quarter_data(self, data_value, quarter):
         self.compare_data('assertQuarter', data_value, quarter)
-
+    
+    def all(self, nested_keys, values):
+        self.compare('assertAll', nested_keys, values)
+        
+    def all_data(self, data_values, values):
+        self.compare_data('assertAll', data_values, values)
+    
+    def any(self, nested_keys, values):
+        self.compare('assertAny', nested_keys, values)
+        
+    def any_data(self, data_values, values):
+        self.compare_data('assertAny', data_values, values)
+    
+    def none(self, nested_keys, values):
+        self.compare('assertNone', nested_keys, values)
+        
+    def none_data(self, data_values, values):
+        self.compare_data('assertNone', data_values, values)
 
 
 class ResponseValidator(BaseValidator):
@@ -507,6 +524,7 @@ class AcceptanceResponseValidator(BaseValidator):
         
         self.driver = driver
         self.url = url
+        self.locator = ''
     
         
     def __getattr__(self, name):
@@ -533,7 +551,7 @@ class AcceptanceResponseValidator(BaseValidator):
     
     def _wrap_error(self, error):
         if self.url:
-            error.args = ("{}\nRequestURL: {}".format(error.args[0], self.url),)
+            error.args = ("{}\nLocator: {}\nRequestURL: {}".format(error.args[0], self.locator, self.url),)
             
         raise error
     
@@ -562,17 +580,18 @@ class AcceptanceResponseValidator(BaseValidator):
     # Wait
     
     def default_wait(self):
-        return 5
+        return 30
     
     
     def wait(self, test_condition):
         WebDriverWait(self.driver, self.default_wait()).until(test_condition)
         
-    def wait_for(self, condition_function):
+    def wait_for(self, condition_function, vars = {}):
         start_time = time.time()
+        cutoff_time = start_time + self.default_wait()
         
-        while time.time() < start_time + 3:
-            if condition_function():
+        while time.time() < cutoff_time:
+            if condition_function(vars):
                 return True
             else:
                 time.sleep(0.1)
@@ -581,6 +600,7 @@ class AcceptanceResponseValidator(BaseValidator):
             'Timeout waiting for {}'.format(condition_function.__name__)
         ))
         
+    
     def wait_for_name(self, name, text = None):
         if text is None:
             self.wait(EC.presence_of_all_elements_located(self._name(name)))
@@ -604,7 +624,7 @@ class AcceptanceResponseValidator(BaseValidator):
             self.wait(EC.presence_of_all_elements_located(self._class(name)))
         else:
             self.wait(EC.text_to_be_present_in_element(self._class(name), text))
-    
+     
     def wait_for_xpath(self, path, text = None):
         if text is None:
             self.wait(EC.presence_of_all_elements_located(self._xpath(path)))
@@ -616,9 +636,84 @@ class AcceptanceResponseValidator(BaseValidator):
             self.wait(EC.presence_of_all_elements_located(self._selector(name)))
         else:
             self.wait(EC.text_to_be_present_in_element(self._selector(name), text))
+    
+           
+    def wait_for_enabled(self, elem, notused = None):
+        def enabled(vars):
+            try: 
+                return self.element(elem).is_enabled()
             
-    def wait_for_stale(self, elem):
-        def stale():
+            except StaleElementReferenceException: 
+                return False
+        
+        self.wait_for(enabled)
+           
+    def wait_for_disabled(self, elem, notused = None):
+        def disabled(vars):
+            try: 
+                return not self.element(elem).is_enabled()
+            
+            except StaleElementReferenceException: 
+                return False
+        
+        self.wait_for(disabled)
+            
+    def wait_for_displayed(self, elem, notused = None):
+        def displayed(vars):
+            try: 
+                return self.element(elem).is_displayed()
+            
+            except StaleElementReferenceException: 
+                return False
+        
+        self.wait_for(displayed)
+           
+    def wait_for_not_displayed(self, elem, notused = None):
+        def not_displayed(vars):
+            try: 
+                return not self.element(elem).is_displayed()
+            
+            except StaleElementReferenceException: 
+                return False
+        
+        self.wait_for(not_displayed)
+               
+    def wait_for_nonempty(self, elem, notused = None):
+        def nonempty(vars):
+            try: 
+                text = self.attr(elem, 'text')
+                
+                if text.strip():
+                    return True
+                else:
+                    return False
+            
+            except StaleElementReferenceException: 
+                return True
+        
+        self.wait_for(nonempty)
+               
+    def wait_for_text(self, elem, text = None):
+        def elem_text(vars):
+            try:
+                local_text = self.attr(elem, 'text')
+                
+                if not text or local_text.strip() == text:
+                    return True
+                else:
+                    return False
+            
+            except StaleElementReferenceException: 
+                return False
+        
+        self.wait_for(elem_text)
+        
+    def wait_for_complete(self, notused = None, notused2 = None):
+        self.wait_for_text('#site_status', 'complete')
+        time.sleep(0.5)
+            
+    def wait_for_stale(self, elem, notused = None):
+        def stale(vars):
             try: 
                 text = self.attr(elem, 'text')
             
@@ -626,8 +721,51 @@ class AcceptanceResponseValidator(BaseValidator):
                 return True
         
         self.wait_for(stale)
-        
             
+    def wait_for_change(self, elem, notused = None):
+        vars = { 'last_text': None }
+        
+        def change(vars):
+            try: 
+                text = self.attr(elem, 'text')
+                
+                if vars['last_text'] is not None and text != vars['last_text']:
+                    return True
+                
+                vars['last_text'] = text
+                return False
+            
+            except StaleElementReferenceException: 
+                return True
+        
+        self.wait_for(change, vars)
+            
+    def wait_for_has_class(self, elem, text = None):
+        def no_class(vars):
+            try:
+                if not text or text in self.attr(elem, 'class'):
+                    return True
+                else:
+                    return False
+            
+            except StaleElementReferenceException: 
+                return False
+        
+        self.wait_for(no_class)
+            
+    def wait_for_no_class(self, elem, text = None):
+        def no_class(vars):
+            try:
+                if not text or text not in self.attr(elem, 'class'):
+                    return True
+                else:
+                    return False
+            
+            except StaleElementReferenceException: 
+                return False
+        
+        self.wait_for(no_class)
+                
     def wait_for_sec(self, sec, notused = None):
         time.sleep(sec)
 
@@ -641,13 +779,23 @@ class AcceptanceResponseValidator(BaseValidator):
     
     def _get_element(self, elem, element_map):
         if isinstance(elem, str):
-            components = elem.split(':')
+            components = elem.split('|')
             
             if len(components) > 1:
-                type = components[0]
-                param = ":".join(components[1:])
+                components.pop(0)
+                elem = "".join(components).strip()
+            
+            components = elem.split(':')
+                        
+            if len(components) > 1:
+                if components[0] in element_map:
+                    type = components[0]
+                    param = ":".join(components[1:])
+                else:
+                    type = 'css'
+                    param = ":".join(components)
             else:
-                type = 'id'
+                type = 'css'
                 param = components[0]
             
             return element_map[type](param)
@@ -655,13 +803,21 @@ class AcceptanceResponseValidator(BaseValidator):
             return elem
 
         
+    def element_wait(self, elem, scope = None):
+        
+        def by_css(selector):
+            return self._selector(selector)
+        
+        def by_xpath(xpath):
+            return self._xpath(xpath)
+                
+        return self._get_element(elem, {
+            'css': by_css,
+            'xpath': by_xpath
+        })
+        
+          
     def element(self, elem, scope = None):
-        
-        def by_id(name):
-            return self._get_scope(scope).find_element_by_id(name)
-        
-        def by_class(name):
-            return self._get_scope(scope).find_element_by_class_name(name)
         
         def by_css(selector):
             return self._get_scope(scope).find_element_by_css_selector(selector)
@@ -673,20 +829,12 @@ class AcceptanceResponseValidator(BaseValidator):
             return self._get_scope(scope).find_element_by_link_text(text)
                 
         return self._get_element(elem, {
-            'id': by_id,
-            'class': by_class,
             'css': by_css,
             'xpath': by_xpath,
             'link_text': by_link_text
         })
     
     def elements(self, elems, scope = None):
-        
-        def by_id(name):
-            return self._get_scope(scope).find_elements_by_id(name)
-        
-        def by_class(name):
-            return self._get_scope(scope).find_elements_by_class_name(name)
         
         def by_css(selector):
             return self._get_scope(scope).find_elements_by_css_selector(selector)
@@ -698,14 +846,16 @@ class AcceptanceResponseValidator(BaseValidator):
             return self._get_scope(scope).find_elements_by_link_text(text)
                 
         return self._get_element(elems, {
-            'id': by_id,
-            'class': by_class,
             'css': by_css,
             'xpath': by_xpath,
             'link_text': by_link_text
         })
         
+        
     def attr(self, elem, name):
+        if name == 'text':
+            return self.element(elem).get_attribute('innerHTML')
+        
         return self.element(elem).get_attribute(name)
         
     
@@ -720,19 +870,112 @@ class AcceptanceResponseValidator(BaseValidator):
         
     # Events
     
-    def execute(self, elem, event):
-        getattr(self.element(elem), event)()
+    def execute(self, elem, event, value = None):
+        
+        def execute_select(elem, values):
+            select = Select(elem)
+            values = values if isinstance(values, (list, tuple)) else [values] 
+            
+            for value in values:
+                select.select_by_value(value)
+        
+        try:        
+            self.wait(EC.element_to_be_clickable(self.element_wait(elem)))
+        
+        except TimeoutException:
+            pass
+        
+        if event == 'select' and value:
+            execute_select(self.element(elem), value)
+        else:
+            getattr(self.element(elem), event)()
+            
+        time.sleep(1)
     
     
     # Validation
+        
+    def compare_data(self, op, data_value, value = None, **params):
+        
+        def _compare(op, data_value, value, **params):
+            if value is not None:
+                getattr(self.test, op)(data_value, value, **params)
+            else:
+                getattr(self.test, op)(data_value, **params)
+        
+        try:
+            if isinstance(value, (list, tuple, QuerySet)):
+                value = list(value)
+            
+            if isinstance(data_value, (list, tuple, QuerySet)):
+                _compare(op, list(data_value), value, **params)
+
+            elif data_value is not None:
+                _compare(op, data_value, value, **params)
+                
+        except Exception as error:
+            raise self._wrap_error(error)
     
     def compare(self, op, data_value, value = None, **params):
         self.compare_data(op, data_value, value, **params)
     
-    
+      
     def title(self, text):
         self.equal(self.driver.title, text)
+
+
+    def count(self, elems, count):
+        self.equal(len(self.elements(elems)), count)
         
+    def value__any(self, elems, values):
+        selected_values = []
+        
+        for element in self.elements(elems):
+            selected_values.append(self.attr(element, 'value'))
+        
+        self.any(selected_values, values)
+        
+    def value__all(self, elems, values):
+        selected_values = []
+        
+        for element in self.elements(elems):
+            selected_values.append(self.attr(element, 'value'))
+        
+        self.all(selected_values, values)
+        
+    def value__none(self, elems, values):
+        selected_values = []
+        
+        for element in self.elements(elems):
+            selected_values.append(self.attr(element, 'value'))
+        
+        self.none(selected_values, values)
+       
+    def text__any(self, elems, values):
+        texts = []
+        
+        for element in self.elements(elems):
+            texts.append(element.text)
+        
+        self.any(texts, values)
+        
+    def text__all(self, elems, values):
+        texts = []
+        
+        for element in self.elements(elems):
+            texts.append(element.text)
+        
+        self.all(texts, values)
+        
+    def text__none(self, elems, values):
+        texts = []
+        
+        for element in self.elements(elems):
+            texts.append(element.text)
+        
+        self.none(texts, values)
+
+              
     def exists(self, elem):
         self.is_true(self.element(elem))
     
@@ -741,6 +984,9 @@ class AcceptanceResponseValidator(BaseValidator):
         
     def has_class(self, elem, class_name):
         self.is_true(class_name in self.attr(elem, 'class'))
+        
+    def no_class(self, elem, class_name):
+        self.is_false(class_name in self.attr(elem, 'class'))
         
     def enabled(self, elem):
         self.is_true(self.element(elem).is_enabled())
@@ -754,18 +1000,27 @@ class AcceptanceResponseValidator(BaseValidator):
     def not_displayed(self, elem):
         self.is_false(self.element(elem).is_displayed())
         
-    def value(self, op, elem, text):
-        getattr(self, op)(self.attr(elem, 'value'), text)
+    def value(self, op, elem, text = None):
+        if text is not None:
+            getattr(self, op)(self.attr(elem, 'value'), text)
+        else:
+            getattr(self, op)(self.attr(elem, 'value'))
         
-    def link(self, op, elem, url):
-        getattr(self, op)(self.attr(elem, 'href'), url)
+    def link(self, op, elem, url = None):
+        if url is not None:
+            getattr(self, op)(self.attr(elem, 'href'), url)
+        else:
+            getattr(self, op)(self.attr(elem, 'href'))
         
-    def text(self, op, elem, text):
-        match = re.match(r'^\s*\<\<(.+)\>\>\s*$', text)
-        if match:
-            text = self.element(match.group(1)).text
-            
-        getattr(self, op)(self.element(elem).text, text)
+    def text(self, op, elem, text = None):
+        if text is not None:
+            match = re.match(r'^\s*\<\<(.+)\>\>\s*$', text)
+            if match:
+                text = self.element(match.group(1)).text
+        
+            getattr(self, op)(self.element(elem).text, text)
+        else:
+            getattr(self, op)(self.element(elem).text)
         
     def int(self, op, elem, num):
         if isinstance(num, str):

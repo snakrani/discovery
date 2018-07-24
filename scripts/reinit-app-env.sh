@@ -14,5 +14,5 @@ cd "$SCRIPT_DIR/.."
 
 # Relaunch all the services and initialize the database...
 docker-compose up -d data tasks auth
-sleep 10
+sleep 20
 "$SCRIPT_DIR/init-db.sh" /dev/stderr localhost

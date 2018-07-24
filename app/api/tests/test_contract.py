@@ -7,8 +7,8 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
     fixtures = data.get_contract_fixtures()
     schema = {
         'object': {
-            '&1': ('piid', 'equal', 'DAAE0799CL001'),
-            '&162': ('piid', 'equal', 'GS00Q14OADS128_19AQMM18F0838'),
+            '&1': ('piid', 'equal', 'DAAE0703CS108'),
+            '&162': ('piid', 'equal', 'GS00Q14OADS128_1605DC17F00172'),
             '&828': ('name', 'equal', 'USZA2202D0015_0194'),
             '#345C': (),
             '#ABCDEFG': ()
@@ -36,7 +36,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
             '@mixed': {'page': 2, 'count': 10}
         },
         'search': {
-            '*search1': ('piid', 'iequal', 'F4162401D9006_0019'),
+            '*search1': ('piid', 'iequal', 'DAAE0703CL525'),
             '@search2': ('agency_name', 'imatches', 'NUCLEAR REGULATORY COMMISSION')
         },
         'fields': {
@@ -50,30 +50,30 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@in': (2, 3, 5)
             },
             'piid': {
-                '*exact': 'W31P4Q09A0016_0003',
-                '*iexact': 'w31p4Q09a0016_0003',
-                '@in': ('N0001412C0203', 'W912DY10A0005_0002', 'EPW13024_0009'),
+                '*exact': 'FA700014D0006_0002',
+                '*iexact': 'fa700014d0006_0002',
+                '@in': ('W9128F11A0021_0001', 'W912DY10A0005_0002', 'EPW13024_0009'),
                 '@contains': 'D0002',
                 '@icontains': 'd0002',
                 '@startswith': 'FA',
                 '@istartswith': 'fa',
                 '@endswith': '_0002',
-                '@iendswith': 'a16p',
+                '@iendswith': '03c00003',
                 '@regex': '\d+_\d+',
-                '@iregex': '[a-z]{2}g15'
+                '@iregex': '[0-9]{3}cl001'
             },
             'base_piid': {
-                '@exact': 'GS21F058AA',
-                '@iexact': 'gs21F058aA',
+                '@exact': 'INP16PC00395',
+                '@iexact': 'inP16pc00395',
                 '@in': ('N0001412C0203', 'W912DY10A0005', 'EPW13024'),
                 '@contains': 'A016',
                 '@icontains': 'a016',
                 '@startswith': 'GS',
                 '@istartswith': 'gs',
-                '@endswith': 'C0255',
-                '@iendswith': 'c0255',
+                '@endswith': 'PC00395',
+                '@iendswith': 'pc00395',
                 '@regex': '[A-Z]+\d+',
-                '@iregex': '[a-z]{2}g15'
+                '@iregex': '[a-z]{4}[0-9]{4}cl001'
             },
             'agency_id': {
                 '@exact': '8000',
@@ -101,8 +101,8 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@icontains': '622',
                 '@startswith': '54',
                 '@istartswith': '2382',
-                '@endswith': '711',
-                '@iendswith': '711',
+                '@endswith': '611',
+                '@iendswith': '611',
                 '@regex': '^\d+622',
                 '@iregex': '^(23|56)'
             },
@@ -120,7 +120,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '^(u0|ad)'
             },
             'date_signed': {
-                '@date': '2016-12-29',
+                '@date': '2016-05-17',
                 '@year': '2007',
                 '@month': '7',
                 '@day': '9',
@@ -237,10 +237,10 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@in': ("United States","United Kingdom"),
                 '@contains': 'United',
                 '@icontains': 'united',
-                '@startswith': 'Ha',
-                '@istartswith': 'ha',
-                '@endswith': 'dom',
-                '@iendswith': 'DOM',
+                '@startswith': 'Moz',
+                '@istartswith': 'moz',
+                '@endswith': 'ia',
+                '@iendswith': 'IA',
                 '@regex': '^United (States|Kingdom)$',
                 '@iregex': '^united (states|kingdom)$'
             },
@@ -312,10 +312,10 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@in': ("07", "04", "08", "01")
             },      
             'vendor__name': {
-                '@exact': 'Dynamics Research Corporation',
-                '@iexact': 'native energy & technology',
-                '@in': ('Engility Corporation', 'CBRE', 'PowerTrain'),
-                '@contains': 'Research',
+                '@exact': 'DYNAMICS RESEARCH CORPORATION',
+                '@iexact': 'native energy & technology, inc.',
+                '@in': ('ENGILITY CORPORATION', 'CBRE', 'POWERTRAIN'),
+                '@contains': 'RESEARCH',
                 '@icontains': 'technologies',
                 '@startswith': 'M',
                 '@istartswith': 'applied',
@@ -500,54 +500,54 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
             },
             'vendor__pools__pool__naics__code': {
                 '@exact': '541330',
-                '@iexact': '541712c',
-                '@in': ("541711", "238290", "561730B"),
-                '@contains': '622',
-                '@icontains': 'b',
-                '@startswith': '54',
-                '@istartswith': '2382',
-                '@endswith': 'A',
-                '@iendswith': 'c',
-                '@regex': '[^\d]+$',
-                '@iregex': '^(23|56)'
-            },
-            'vendor__pools__pool__naics__root_code': {
-                '@exact': '541330',
-                '@iexact': '541712',
+                '@iexact': '561710',
                 '@in': ("541711", "238290", "561730"),
                 '@contains': '622',
-                '@icontains': '990',
-                '@startswith': '61',
-                '@istartswith': '5617',
-                '@endswith': '10',
-                '@iendswith': '20',
-                '@regex': '^[\d]+$',
+                '@icontains': '622',
+                '@startswith': '54',
+                '@istartswith': '2382',
+                '@endswith': '30',
+                '@iendswith': '30',
+                '@regex': '^54\d+0$',
                 '@iregex': '^(23|56)'
             },
             'vendor__pools__pool__naics__description': {
                 '@exact': 'Outdoor Advertising',
-                '@iexact': 'hvac maintenance',
+                '@iexact': 'meDIA representatives',
                 '@in': ("Payroll Services", "Commissioning Services", "Testing Laboratories"),
                 '@contains': 'Accounting',
-                '@icontains': 'rEPair',
+                '@icontains': 'heating',
                 '@startswith': 'Engineering',
                 '@istartswith': 'r',
                 '@endswith': 'Services',
                 '@iendswith': 'advertIsing',
-                '@regex': '[/]+',
-                '@iregex': 'water\s+based'
+                '@regex': 'Services$',
+                '@iregex': 'apprentice(ship)?'
             },
-            'vendor__pools__pool__naics__keyword': {
-                '@exact': 'Cognitive development',
-                '@iexact': 'educational Consultants',
-                '@in': ("Fine arts schools", "Investment advice", "Language schools"),
-                '@contains': 'consulting',
-                '@icontains': 'CONSULTING',
-                '@startswith': 'Management',
+            'vendor__pools__pool__naics__sin:vendor__pools__pool__naics__sin__code': {
+                '@exact': '100-03',
+                '@iexact': 'c871-202',
+                '@in': ("100-03", "520-14", "541-4G", "51-B36-2A"),
+                '@contains': '4B',
+                '@icontains': '-4b',
+                '@startswith': '51',
+                '@istartswith': 'c132',
+                '@endswith': '03',
+                '@iendswith': '2a',
+                '@regex': '[A-Z]\d+\-\d+$',
+                '@iregex': '^(C87|51)'
+            },
+            'vendor__pools__pool__naics__keyword:vendor__pools__pool__naics__keywords__name': {
+                '@exact': 'Cooking Equipment',
+                '@iexact': 'ancillary supplies and / or services',
+                '@in': ("Elemental Analyzers", "Energy Consulting Services", "Environmental Consulting Services"),
+                '@contains': 'Support',
+                '@icontains': 'support',
+                '@startswith': 'Marine',
                 '@istartswith': 'edu',
-                '@endswith': 'services',
-                '@iendswith': 'Services',
-                '@regex': '(training|consulting)',
+                '@endswith': 'Services',
+                '@iendswith': 'services',
+                '@regex': '(Training|Consulting)',
                 '@iregex': '^(vocational|strategic)'
             },
             'vendor__pools__setasides__code': {

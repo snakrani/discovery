@@ -3,7 +3,7 @@
   "model": "vendors.vendor",
   "pk": 1,
   "fields": {
-    "name": "Advanced Concepts And Technologies International, LLC Dba Act-I",
+    "name": "ADVANCED CONCEPTS AND TECHNOLOGIES INTERNATIONAL, LLC DBA ACT-I",
     "duns": "008050242",
     "duns_4": "0080502420000",
     "cage": "1C2H1",
@@ -19,7 +19,7 @@
   "model": "vendors.vendor",
   "pk": 2,
   "fields": {
-    "name": "Advanced Systems Technology And Management, Inc. Dba Adstm",
+    "name": "ADVANCED SYSTEMS TECHNOLOGY AND MANAGEMENT, INC. DBA ADSTM",
     "duns": "049192649",
     "duns_4": "0491926490000",
     "cage": "1NU65",
@@ -35,7 +35,7 @@
   "model": "vendors.vendor",
   "pk": 3,
   "fields": {
-    "name": "Amyx, Inc.",
+    "name": "AMYX, INC.",
     "duns": "136794802",
     "duns_4": "1367948020000",
     "cage": "1QNC9",
@@ -51,7 +51,7 @@
   "model": "vendors.vendor",
   "pk": 4,
   "fields": {
-    "name": "Analytic Strategies, LLC",
+    "name": "ANALYTIC STRATEGIES, LLC",
     "duns": "623876096",
     "duns_4": "6238760960000",
     "cage": "4DZW4",
@@ -67,7 +67,7 @@
   "model": "vendors.vendor",
   "pk": 5,
   "fields": {
-    "name": "Apogee Engineering, LLC",
+    "name": "APOGEE ENGINEERING, LLC",
     "duns": "170203199",
     "duns_4": "1702031990000",
     "cage": "35CZ6",
@@ -83,7 +83,7 @@
   "model": "vendors.vendor",
   "pk": 6,
   "fields": {
-    "name": "Arctic Slope Technical Services, Inc.",
+    "name": "ARCTIC SLOPE TECHNICAL SERVICES, INC.",
     "duns": "968706106",
     "duns_4": "9687061060000",
     "cage": "6HBK6",
@@ -99,7 +99,7 @@
   "model": "vendors.vendor",
   "pk": 7,
   "fields": {
-    "name": "Bb&E, Inc.",
+    "name": "BB&E, INC.",
     "duns": "117755293",
     "duns_4": "1177552930000",
     "cage": "3A3Q8",
@@ -115,7 +115,7 @@
   "model": "vendors.vendor",
   "pk": 8,
   "fields": {
-    "name": "Bevilaqua Research Corporation",
+    "name": "BEVILAQUA RESEARCH CORPORATION",
     "duns": "806849303",
     "duns_4": "8068493030000",
     "cage": "0U9B6",
@@ -131,13 +131,13 @@
   "model": "vendors.vendor",
   "pk": 9,
   "fields": {
-    "name": "Bluewater Federal Solutions, Inc.",
+    "name": "BLUEWATER FEDERAL SOLUTIONS, INC.",
     "duns": "832403948",
     "duns_4": "8324039480000",
     "cage": "5T6A9",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-03-22T14:15:18Z",
-    "sam_expiration_date": "2019-03-22T14:04:50Z",
+    "sam_activation_date": "2018-06-26T12:32:06Z",
+    "sam_expiration_date": "2019-06-22T12:36:08Z",
     "sam_exclusion": false,
     "sam_url": "http://www.bwfed.com",
     "sam_location": 9
@@ -147,13 +147,13 @@
   "model": "vendors.vendor",
   "pk": 10,
   "fields": {
-    "name": "Bowhead Logistics Solutions, LLC",
+    "name": "BOWHEAD LOGISTICS SOLUTIONS, LLC",
     "duns": "626979228",
     "duns_4": "6269792280000",
     "cage": "4NFX9",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-04-02T14:30:17Z",
-    "sam_expiration_date": "2019-04-02T14:15:10Z",
+    "sam_activation_date": "2018-07-02T09:46:23Z",
+    "sam_expiration_date": "2019-05-02T11:31:01Z",
     "sam_exclusion": false,
     "sam_url": null,
     "sam_location": 10
@@ -163,7 +163,7 @@
   "model": "vendors.vendor",
   "pk": 11,
   "fields": {
-    "name": "Addx Corporation",
+    "name": "ADDX CORPORATION",
     "duns": "039872622",
     "duns_4": "0398726220000",
     "cage": "1XPA3",
@@ -179,7 +179,7 @@
   "model": "vendors.vendor",
   "pk": 12,
   "fields": {
-    "name": "Daniel Eke & Associates, P.C.",
+    "name": "DANIEL EKE & ASSOCIATES, P.C.",
     "duns": "793165119",
     "duns_4": "7931651190000",
     "cage": "1DJS7",
@@ -195,13 +195,13 @@
   "model": "vendors.vendor",
   "pk": 13,
   "fields": {
-    "name": "Drt Strategies, Inc.",
+    "name": "DRT STRATEGIES, INC.",
     "duns": "142428783",
     "duns_4": "1424287830000",
     "cage": "3PZT2",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-12-04T07:38:27Z",
-    "sam_expiration_date": "2018-12-04T07:04:22Z",
+    "sam_activation_date": "2018-07-03T11:46:25Z",
+    "sam_expiration_date": "2019-05-07T20:08:07Z",
     "sam_exclusion": false,
     "sam_url": "http://www.drtstrategies.com",
     "sam_location": 13
@@ -211,13 +211,13 @@
   "model": "vendors.vendor",
   "pk": 14,
   "fields": {
-    "name": "Fi Consulting, Inc. Dba Fi Consulting",
+    "name": "FI CONSULTING, INC. DBA FI CONSULTING",
     "duns": "126150056",
     "duns_4": "1261500560000",
     "cage": "4MEL7",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-10-23T12:30:14Z",
-    "sam_expiration_date": "2018-10-23T12:18:05Z",
+    "sam_activation_date": "2018-06-28T10:45:48Z",
+    "sam_expiration_date": "2019-05-02T12:24:31Z",
     "sam_exclusion": false,
     "sam_url": "http://www.FIConsulting.com",
     "sam_location": 14
@@ -227,7 +227,7 @@
   "model": "vendors.vendor",
   "pk": 15,
   "fields": {
-    "name": "Fors Marsh Group, LLC",
+    "name": "FORS MARSH GROUP, LLC",
     "duns": "129842667",
     "duns_4": "1298426670000",
     "cage": "360C2",
@@ -243,7 +243,7 @@
   "model": "vendors.vendor",
   "pk": 16,
   "fields": {
-    "name": "Hamilton Enterprises, LLC Dba Franklin And Turner International",
+    "name": "HAMILTON ENTERPRISES, LLC DBA FRANKLIN AND TURNER INTERNATIONAL",
     "duns": "825487130",
     "duns_4": "8254871300000",
     "cage": "52DB6",
@@ -259,13 +259,13 @@
   "model": "vendors.vendor",
   "pk": 17,
   "fields": {
-    "name": "Miracle Systems, LLC",
+    "name": "MIRACLE SYSTEMS, LLC",
     "duns": "133239397",
     "duns_4": "1332393970000",
     "cage": "8ASY4",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-07-27T09:09:28Z",
-    "sam_expiration_date": "2018-07-27T08:29:48Z",
+    "sam_activation_date": "2018-06-27T16:46:13Z",
+    "sam_expiration_date": "2019-06-25T13:59:58Z",
     "sam_exclusion": false,
     "sam_url": "http://www.miraclesystems.net",
     "sam_location": 17
@@ -275,7 +275,7 @@
   "model": "vendors.vendor",
   "pk": 18,
   "fields": {
-    "name": "Rm Advisory Services, LLC",
+    "name": "RM ADVISORY SERVICES, LLC",
     "duns": "609732198",
     "duns_4": "6097321980000",
     "cage": "48L84",
@@ -291,7 +291,7 @@
   "model": "vendors.vendor",
   "pk": 19,
   "fields": {
-    "name": "Ruchman And Associates, Inc.",
+    "name": "RUCHMAN AND ASSOCIATES, INC.",
     "duns": "101456903",
     "duns_4": "1014569030000",
     "cage": "1JS86",
@@ -307,7 +307,7 @@
   "model": "vendors.vendor",
   "pk": 20,
   "fields": {
-    "name": "Advanced C4 Solutions, Inc.",
+    "name": "ADVANCED C4 SOLUTIONS, INC.",
     "duns": "118498067",
     "duns_4": "1184980670000",
     "cage": "3BEH8",
@@ -323,7 +323,7 @@
   "model": "vendors.vendor",
   "pk": 21,
   "fields": {
-    "name": "Agile Defense, Inc.",
+    "name": "AGILE DEFENSE, INC.",
     "duns": "041054441",
     "duns_4": "0410544410000",
     "cage": "1HXK0",
@@ -339,7 +339,7 @@
   "model": "vendors.vendor",
   "pk": 22,
   "fields": {
-    "name": "Analytical Services And Materials, Inc.",
+    "name": "ANALYTICAL SERVICES AND MATERIALS, INC.",
     "duns": "119069052",
     "duns_4": "1190690520000",
     "cage": "3Y798",
@@ -355,7 +355,7 @@
   "model": "vendors.vendor",
   "pk": 23,
   "fields": {
-    "name": "A-P-T Research, Inc.",
+    "name": "A-P-T RESEARCH, INC.",
     "duns": "791195167",
     "duns_4": "7911951670000",
     "cage": "0S289",
@@ -371,7 +371,7 @@
   "model": "vendors.vendor",
   "pk": 24,
   "fields": {
-    "name": "Atlantic Commtech Corporation",
+    "name": "ATLANTIC COMMTECH CORPORATION",
     "duns": "048870724",
     "duns_4": "0488707240000",
     "cage": "1J0V2",
@@ -387,7 +387,7 @@
   "model": "vendors.vendor",
   "pk": 25,
   "fields": {
-    "name": "Atlas Technologies, Inc.",
+    "name": "ATLAS TECHNOLOGIES, INC.",
     "duns": "799980859",
     "duns_4": "7999808590000",
     "cage": "1B7M7",
@@ -403,7 +403,7 @@
   "model": "vendors.vendor",
   "pk": 26,
   "fields": {
-    "name": "Avion Solutions, Inc. Dba Avion",
+    "name": "AVION SOLUTIONS, INC. DBA AVION",
     "duns": "804859841",
     "duns_4": "8048598410000",
     "cage": "1BFU7",
@@ -419,7 +419,7 @@
   "model": "vendors.vendor",
   "pk": 27,
   "fields": {
-    "name": "Aegis Technologies Group, Inc. The",
+    "name": "AEGIS TECHNOLOGIES GROUP, INC. THE",
     "duns": "625694500",
     "duns_4": "6256945000000",
     "cage": "0EXA1",
@@ -435,7 +435,7 @@
   "model": "vendors.vendor",
   "pk": 28,
   "fields": {
-    "name": "Assurance Technology Corporation",
+    "name": "ASSURANCE TECHNOLOGY CORPORATION",
     "duns": "069338820",
     "duns_4": "0693388200000",
     "cage": "8L918",
@@ -451,13 +451,13 @@
   "model": "vendors.vendor",
   "pk": 29,
   "fields": {
-    "name": "Btas, Inc. Dba Business Technologies & Solutions",
+    "name": "BTAS, INC. DBA BUSINESS TECHNOLOGIES & SOLUTIONS",
     "duns": "883504854",
     "duns_4": "8835048540000",
     "cage": "07GB6",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-03-27T09:46:24Z",
-    "sam_expiration_date": "2019-03-27T09:32:27Z",
+    "sam_activation_date": "2018-07-10T15:46:50Z",
+    "sam_expiration_date": "2019-07-10T15:25:50Z",
     "sam_exclusion": false,
     "sam_url": "http://www.btas.com",
     "sam_location": 29
@@ -467,7 +467,7 @@
   "model": "vendors.vendor",
   "pk": 30,
   "fields": {
-    "name": "Cssi, Inc.",
+    "name": "CSSI, INC.",
     "duns": "621420991",
     "duns_4": "6214209910000",
     "cage": "0YUD7",
@@ -483,13 +483,13 @@
   "model": "vendors.vendor",
   "pk": 31,
   "fields": {
-    "name": "Data Systems Analyst, Inc. (Dsa)",
+    "name": "DATA SYSTEMS ANALYST, INC. (DSA)",
     "duns": "048620512",
     "duns_4": "0486205120000",
     "cage": "4D266",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-03-16T16:45:09Z",
-    "sam_expiration_date": "2019-03-16T16:28:14Z",
+    "sam_activation_date": "2018-07-04T14:40:18Z",
+    "sam_expiration_date": "2019-05-22T17:15:21Z",
     "sam_exclusion": false,
     "sam_url": "http://www.dsainc.com",
     "sam_location": 31
@@ -499,7 +499,7 @@
   "model": "vendors.vendor",
   "pk": 32,
   "fields": {
-    "name": "Decisive Analytics Corporation",
+    "name": "DECISIVE ANALYTICS CORPORATION",
     "duns": "036593457",
     "duns_4": "0365934570000",
     "cage": "06CT8",
@@ -515,7 +515,7 @@
   "model": "vendors.vendor",
   "pk": 33,
   "fields": {
-    "name": "Delta Solutions & Strategies, LLC",
+    "name": "DELTA SOLUTIONS & STRATEGIES, LLC",
     "duns": "124651964",
     "duns_4": "1246519640000",
     "cage": "1RUU6",
@@ -531,7 +531,7 @@
   "model": "vendors.vendor",
   "pk": 34,
   "fields": {
-    "name": "Applied Research Solutions, Inc.",
+    "name": "APPLIED RESEARCH SOLUTIONS, INC.",
     "duns": "807990382",
     "duns_4": "8079903820000",
     "cage": "4YHD4",
@@ -547,7 +547,7 @@
   "model": "vendors.vendor",
   "pk": 35,
   "fields": {
-    "name": "Colsa Corporation",
+    "name": "COLSA CORPORATION",
     "duns": "102067378",
     "duns_4": "1020673780000",
     "cage": "4U825",
@@ -563,7 +563,7 @@
   "model": "vendors.vendor",
   "pk": 36,
   "fields": {
-    "name": "Fulcrum It Services, LLC",
+    "name": "FULCRUM IT SERVICES, LLC",
     "duns": "048382386",
     "duns_4": "0483823860000",
     "cage": "0E1B6",
@@ -579,7 +579,7 @@
   "model": "vendors.vendor",
   "pk": 37,
   "fields": {
-    "name": "Hx5, LLC",
+    "name": "HX5, LLC",
     "duns": "781841080",
     "duns_4": "7818410800000",
     "cage": "4VMT5",
@@ -595,7 +595,7 @@
   "model": "vendors.vendor",
   "pk": 38,
   "fields": {
-    "name": "Intrepid, LLC",
+    "name": "INTREPID, LLC",
     "duns": "136578262",
     "duns_4": "1365782620000",
     "cage": "1VDA4",
@@ -611,7 +611,7 @@
   "model": "vendors.vendor",
   "pk": 39,
   "fields": {
-    "name": "Intuitive Research And Technology Corporation",
+    "name": "INTUITIVE RESEARCH AND TECHNOLOGY CORPORATION",
     "duns": "034964945",
     "duns_4": "0349649450000",
     "cage": "1MQC1",
@@ -627,7 +627,7 @@
   "model": "vendors.vendor",
   "pk": 40,
   "fields": {
-    "name": "Mcr Federal, LLC",
+    "name": "MCR FEDERAL, LLC",
     "duns": "028509656",
     "duns_4": "0285096560000",
     "cage": "0GYV7",
@@ -643,7 +643,7 @@
   "model": "vendors.vendor",
   "pk": 41,
   "fields": {
-    "name": "Mei Technologies, Inc.",
+    "name": "MEI TECHNOLOGIES, INC.",
     "duns": "859145658",
     "duns_4": "8591456580000",
     "cage": "0XBY6",
@@ -659,13 +659,13 @@
   "model": "vendors.vendor",
   "pk": 42,
   "fields": {
-    "name": "Linquest Corporation",
+    "name": "LINQUEST CORPORATION",
     "duns": "140389763",
     "duns_4": "1403897630000",
     "cage": "3MZU6",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-10-24T14:13:56Z",
-    "sam_expiration_date": "2018-10-24T13:57:47Z",
+    "sam_activation_date": "2018-06-21T09:00:36Z",
+    "sam_expiration_date": "2019-06-11T20:16:34Z",
     "sam_exclusion": false,
     "sam_url": "http://www.linquest.com/",
     "sam_location": 42
@@ -675,13 +675,13 @@
   "model": "vendors.vendor",
   "pk": 43,
   "fields": {
-    "name": "Millennium Engineering And Integration Company Dba Millennium",
+    "name": "MILLENNIUM ENGINEERING AND INTEGRATION COMPANY DBA MILLENNIUM",
     "duns": "011971939",
     "duns_4": "0119719390000",
     "cage": "1B5V4",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-10-10T18:08:52Z",
-    "sam_expiration_date": "2018-10-10T17:29:35Z",
+    "sam_activation_date": "2018-07-10T19:00:08Z",
+    "sam_expiration_date": "2019-07-10T18:49:34Z",
     "sam_exclusion": false,
     "sam_url": "http://www.meicompany.com/",
     "sam_location": 43
@@ -691,7 +691,7 @@
   "model": "vendors.vendor",
   "pk": 44,
   "fields": {
-    "name": "Applied Research Associates, Inc., Dba Ara",
+    "name": "APPLIED RESEARCH ASSOCIATES, INC., DBA ARA",
     "duns": "097967608",
     "duns_4": "0979676080000",
     "cage": "9R446",
@@ -707,7 +707,7 @@
   "model": "vendors.vendor",
   "pk": 45,
   "fields": {
-    "name": "Compass Systems, Inc.",
+    "name": "COMPASS SYSTEMS, INC.",
     "duns": "177985561",
     "duns_4": "1779855610000",
     "cage": "08AL5",
@@ -723,7 +723,7 @@
   "model": "vendors.vendor",
   "pk": 46,
   "fields": {
-    "name": "Dcs Corporation",
+    "name": "DCS CORPORATION",
     "duns": "083662916",
     "duns_4": "0836629160000",
     "cage": "1P418",
@@ -739,7 +739,7 @@
   "model": "vendors.vendor",
   "pk": 47,
   "fields": {
-    "name": "Accenture Federal Services LLC",
+    "name": "ACCENTURE FEDERAL SERVICES LLC",
     "duns": "139727148",
     "duns_4": "1397271480000",
     "cage": "1ZD18",
@@ -755,13 +755,13 @@
   "model": "vendors.vendor",
   "pk": 48,
   "fields": {
-    "name": "Ace Info Solutions, Inc.",
+    "name": "ACE INFO SOLUTIONS, INC.",
     "duns": "070993162",
     "duns_4": "0709931620000",
     "cage": "1V1B8",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-11-13T15:44:25Z",
-    "sam_expiration_date": "2018-11-13T15:31:22Z",
+    "sam_activation_date": "2018-07-10T10:15:09Z",
+    "sam_expiration_date": "2019-07-10T10:05:50Z",
     "sam_exclusion": false,
     "sam_url": "http://www.aceinfosolutions.com",
     "sam_location": 48
@@ -771,7 +771,7 @@
   "model": "vendors.vendor",
   "pk": 49,
   "fields": {
-    "name": "Alion Science And Technology Corporation",
+    "name": "ALION SCIENCE AND TECHNOLOGY CORPORATION",
     "duns": "963450866",
     "duns_4": "9634508660000",
     "cage": "3BM47",
@@ -787,13 +787,13 @@
   "model": "vendors.vendor",
   "pk": 50,
   "fields": {
-    "name": "Amec Foster Wheeler Environment & Infrastructure, Inc.",
+    "name": "AMEC FOSTER WHEELER ENVIRONMENT & INFRASTRUCTURE, INC.",
     "duns": "038086125",
     "duns_4": "0380861250000",
     "cage": "1U1W9",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-05-24T08:20:12Z",
-    "sam_expiration_date": "2019-05-09T14:17:59Z",
+    "sam_activation_date": "2018-07-04T20:30:04Z",
+    "sam_expiration_date": "2019-07-02T09:51:16Z",
     "sam_exclusion": false,
     "sam_url": "http://www.woodplc.com",
     "sam_location": 50
@@ -803,7 +803,7 @@
   "model": "vendors.vendor",
   "pk": 51,
   "fields": {
-    "name": "Ball Aerospace & Technologies Corporation",
+    "name": "BALL AEROSPACE & TECHNOLOGIES CORPORATION",
     "duns": "926451519",
     "duns_4": "9264515190000",
     "cage": "13993",
@@ -819,7 +819,7 @@
   "model": "vendors.vendor",
   "pk": 52,
   "fields": {
-    "name": "Battelle Memorial Institute",
+    "name": "BATTELLE MEMORIAL INSTITUTE",
     "duns": "007901598",
     "duns_4": "0079015980000",
     "cage": "79986",
@@ -835,7 +835,7 @@
   "model": "vendors.vendor",
   "pk": 53,
   "fields": {
-    "name": "Boeing Aerospace Operations, Inc.",
+    "name": "BOEING AEROSPACE OPERATIONS, INC.",
     "duns": "175304687",
     "duns_4": "1753046870000",
     "cage": "0LRY9",
@@ -851,7 +851,7 @@
   "model": "vendors.vendor",
   "pk": 54,
   "fields": {
-    "name": "Booz Allen Hamilton",
+    "name": "BOOZ ALLEN HAMILTON",
     "duns": "006928857",
     "duns_4": "0069288570000",
     "cage": "17038",
@@ -867,7 +867,7 @@
   "model": "vendors.vendor",
   "pk": 55,
   "fields": {
-    "name": "Caci Nss, Inc.",
+    "name": "CACI NSS, INC.",
     "duns": "136127482",
     "duns_4": "1361274820000",
     "cage": "3HNV7",
@@ -883,7 +883,7 @@
   "model": "vendors.vendor",
   "pk": 56,
   "fields": {
-    "name": "Deloitte Consulting, Llp",
+    "name": "DELOITTE CONSULTING, LLP",
     "duns": "019121586",
     "duns_4": "0191215860000",
     "cage": "1TTG5",
@@ -899,13 +899,13 @@
   "model": "vendors.vendor",
   "pk": 57,
   "fields": {
-    "name": "Engility Corporation",
+    "name": "ENGILITY CORPORATION",
     "duns": "069341972",
     "duns_4": "0693419720000",
     "cage": "4A457",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-12-12T11:59:22Z",
-    "sam_expiration_date": "2018-12-12T11:39:43Z",
+    "sam_activation_date": "2018-07-12T07:50:13Z",
+    "sam_expiration_date": "2019-07-10T15:40:18Z",
     "sam_exclusion": false,
     "sam_url": null,
     "sam_location": 57
@@ -915,13 +915,13 @@
   "model": "vendors.vendor",
   "pk": 58,
   "fields": {
-    "name": "Ecs Federal Inc.",
+    "name": "ECS FEDERAL INC.",
     "duns": "806026852",
     "duns_4": "8060268520000",
     "cage": "1T1E5",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-11-28T15:38:33Z",
-    "sam_expiration_date": "2018-11-28T15:08:23Z",
+    "sam_activation_date": "2018-07-16T11:30:20Z",
+    "sam_expiration_date": "2019-07-16T11:14:49Z",
     "sam_exclusion": false,
     "sam_url": "http://www.ecs-federal.com",
     "sam_location": 58
@@ -931,7 +931,7 @@
   "model": "vendors.vendor",
   "pk": 59,
   "fields": {
-    "name": "General Dynamics Information Technology, Inc.",
+    "name": "GENERAL DYNAMICS INFORMATION TECHNOLOGY, INC.",
     "duns": "067641597",
     "duns_4": "0676415970000",
     "cage": "07MU1",
@@ -947,13 +947,13 @@
   "model": "vendors.vendor",
   "pk": 60,
   "fields": {
-    "name": "Grant Thornton, Llp",
+    "name": "GRANT THORNTON, LLP",
     "duns": "128159105",
     "duns_4": "1281591050000",
     "cage": "1CDS1",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-07-13T16:14:39Z",
-    "sam_expiration_date": "2018-07-13T15:57:00Z",
+    "sam_activation_date": "2018-07-10T10:30:43Z",
+    "sam_expiration_date": "2019-06-22T18:47:35Z",
     "sam_exclusion": false,
     "sam_url": "http://www.grantthornton.com",
     "sam_location": 60
@@ -963,7 +963,7 @@
   "model": "vendors.vendor",
   "pk": 61,
   "fields": {
-    "name": "Icf Incorporated, LLC",
+    "name": "ICF INCORPORATED, LLC",
     "duns": "072648579",
     "duns_4": "0726485790000",
     "cage": "5M571",
@@ -979,7 +979,7 @@
   "model": "vendors.vendor",
   "pk": 62,
   "fields": {
-    "name": "International Business Machines Corporation Dba Ibm",
+    "name": "INTERNATIONAL BUSINESS MACHINES CORPORATION DBA IBM",
     "duns": "835130485",
     "duns_4": "8351304850000",
     "cage": "3BXY7",
@@ -995,7 +995,7 @@
   "model": "vendors.vendor",
   "pk": 63,
   "fields": {
-    "name": "American Systems Corporation",
+    "name": "AMERICAN SYSTEMS CORPORATION",
     "duns": "077799799",
     "duns_4": "0777997990000",
     "cage": "61443",
@@ -1011,7 +1011,7 @@
   "model": "vendors.vendor",
   "pk": 64,
   "fields": {
-    "name": "Caci, Inc. Federal",
+    "name": "CACI, INC. FEDERAL",
     "duns": "114896066",
     "duns_4": "1148960660000",
     "cage": "1QU78",
@@ -1027,7 +1027,7 @@
   "model": "vendors.vendor",
   "pk": 65,
   "fields": {
-    "name": "Camber Corporation",
+    "name": "CAMBER CORPORATION",
     "duns": "609570742",
     "duns_4": "6095707420000",
     "cage": "0MWW4",
@@ -1043,7 +1043,7 @@
   "model": "vendors.vendor",
   "pk": 66,
   "fields": {
-    "name": "Cgi Federal, Inc.",
+    "name": "CGI FEDERAL, INC.",
     "duns": "145969783",
     "duns_4": "1459697830000",
     "cage": "3YVK7",
@@ -1059,7 +1059,7 @@
   "model": "vendors.vendor",
   "pk": 67,
   "fields": {
-    "name": "Concurrent Technologies Corporation",
+    "name": "CONCURRENT TECHNOLOGIES CORPORATION",
     "duns": "189737810",
     "duns_4": "1897378100000",
     "cage": "0W151",
@@ -1075,7 +1075,7 @@
   "model": "vendors.vendor",
   "pk": 68,
   "fields": {
-    "name": "Jacobs Technology, Inc.",
+    "name": "JACOBS TECHNOLOGY, INC.",
     "duns": "007923014",
     "duns_4": "0079230140000",
     "cage": "07486",
@@ -1091,7 +1091,7 @@
   "model": "vendors.vendor",
   "pk": 69,
   "fields": {
-    "name": "Csra LLC",
+    "name": "CSRA LLC",
     "duns": "079735371",
     "duns_4": "0797353710000",
     "cage": "7C146",
@@ -1107,13 +1107,13 @@
   "model": "vendors.vendor",
   "pk": 70,
   "fields": {
-    "name": "Kbrwyle Technology Solutions, LLC Dba Kbrwyle",
+    "name": "KBRWYLE TECHNOLOGY SOLUTIONS, LLC DBA KBRWYLE",
     "duns": "041014242",
     "duns_4": "0410142420000",
     "cage": "15151",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-11-29T06:58:29Z",
-    "sam_expiration_date": "2018-11-29T06:52:07Z",
+    "sam_activation_date": "2018-07-18T09:15:09Z",
+    "sam_expiration_date": "2019-07-18T09:04:02Z",
     "sam_exclusion": false,
     "sam_url": "https://kbr.com/markets/government/kbr-wyle/",
     "sam_location": 70
@@ -1123,7 +1123,7 @@
   "model": "vendors.vendor",
   "pk": 71,
   "fields": {
-    "name": "Dynamics Research Corporation",
+    "name": "DYNAMICS RESEARCH CORPORATION",
     "duns": "001014182",
     "duns_4": "0010141820000",
     "cage": "23383",
@@ -1139,7 +1139,7 @@
   "model": "vendors.vendor",
   "pk": 72,
   "fields": {
-    "name": "Dynetics, Inc.",
+    "name": "DYNETICS, INC.",
     "duns": "075458455",
     "duns_4": "0754584550000",
     "cage": "7L855",
@@ -1155,13 +1155,13 @@
   "model": "vendors.vendor",
   "pk": 73,
   "fields": {
-    "name": "A P Ventures, LLC",
+    "name": "A P VENTURES, LLC",
     "duns": "005752289",
     "duns_4": "0057522890000",
     "cage": "4ZAE2",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-02-06T15:45:13Z",
-    "sam_expiration_date": "2019-02-06T15:39:39Z",
+    "sam_activation_date": "2018-07-11T12:30:57Z",
+    "sam_expiration_date": "2019-06-18T16:18:43Z",
     "sam_exclusion": false,
     "sam_url": "http://www.APVit.com",
     "sam_location": 73
@@ -1171,7 +1171,7 @@
   "model": "vendors.vendor",
   "pk": 74,
   "fields": {
-    "name": "Abrams Learning And Information Systems, Inc.",
+    "name": "ABRAMS LEARNING AND INFORMATION SYSTEMS, INC.",
     "duns": "169830200",
     "duns_4": "1698302000000",
     "cage": "33JM3",
@@ -1187,13 +1187,13 @@
   "model": "vendors.vendor",
   "pk": 75,
   "fields": {
-    "name": "Ae Strategies, LLC",
+    "name": "AE STRATEGIES, LLC",
     "duns": "136483547",
     "duns_4": "1364835470000",
     "cage": "3H7M0",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-04-13T12:30:12Z",
-    "sam_expiration_date": "2019-04-13T12:13:57Z",
+    "sam_activation_date": "2018-07-06T07:30:40Z",
+    "sam_expiration_date": "2019-06-28T12:56:44Z",
     "sam_exclusion": false,
     "sam_url": "http://www.aestrategies.com",
     "sam_location": 75
@@ -1203,13 +1203,13 @@
   "model": "vendors.vendor",
   "pk": 76,
   "fields": {
-    "name": "Atlas Research, LLC",
+    "name": "ATLAS RESEARCH, LLC",
     "duns": "827560744",
     "duns_4": "8275607440000",
     "cage": "556H5",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-01-22T09:00:08Z",
-    "sam_expiration_date": "2019-01-22T08:46:43Z",
+    "sam_activation_date": "2018-07-13T18:45:08Z",
+    "sam_expiration_date": "2019-07-13T18:31:10Z",
     "sam_exclusion": false,
     "sam_url": "https://www.atlasresearch.us",
     "sam_location": 76
@@ -1219,13 +1219,13 @@
   "model": "vendors.vendor",
   "pk": 77,
   "fields": {
-    "name": "Colleague Consulting, LLC",
+    "name": "COLLEAGUE CONSULTING, LLC",
     "duns": "137058413",
     "duns_4": "1370584130000",
     "cage": "3QVF7",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-07-28T15:59:35Z",
-    "sam_expiration_date": "2018-07-28T15:49:00Z",
+    "sam_activation_date": "2018-07-17T12:42:21Z",
+    "sam_expiration_date": "2019-07-17T11:48:17Z",
     "sam_exclusion": false,
     "sam_url": "http://www.colleagueconsulting.com",
     "sam_location": 77
@@ -1235,13 +1235,13 @@
   "model": "vendors.vendor",
   "pk": 78,
   "fields": {
-    "name": "Deepmile Networks, LLC",
+    "name": "DEEPMILE NETWORKS, LLC",
     "duns": "790984186",
     "duns_4": "7909841860000",
     "cage": "4NES8",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-06-13T13:45:31Z",
-    "sam_expiration_date": "2018-06-13T13:36:31Z",
+    "sam_activation_date": "2018-07-07T16:20:09Z",
+    "sam_expiration_date": "2019-05-29T11:48:07Z",
     "sam_exclusion": false,
     "sam_url": null,
     "sam_location": 78
@@ -1251,7 +1251,7 @@
   "model": "vendors.vendor",
   "pk": 79,
   "fields": {
-    "name": "Metis Solutions",
+    "name": "METIS SOLUTIONS",
     "duns": "833266500",
     "duns_4": "8332665000000",
     "cage": "5X2G4",
@@ -1267,7 +1267,7 @@
   "model": "vendors.vendor",
   "pk": 80,
   "fields": {
-    "name": "Pherson Associates, LLC",
+    "name": "PHERSON ASSOCIATES, LLC.",
     "duns": "136659054",
     "duns_4": "1366590540000",
     "cage": "3HXP9",
@@ -1283,7 +1283,7 @@
   "model": "vendors.vendor",
   "pk": 81,
   "fields": {
-    "name": "Piton Science & Technology LLC",
+    "name": "PITON SCIENCE & TECHNOLOGY LLC",
     "duns": "786931050",
     "duns_4": "7869310500000",
     "cage": "4KW69",
@@ -1299,7 +1299,7 @@
   "model": "vendors.vendor",
   "pk": 82,
   "fields": {
-    "name": "Powertrain, Inc.",
+    "name": "POWERTRAIN, INC.",
     "duns": "837788223",
     "duns_4": "8377882230000",
     "cage": "1ZLY7",
@@ -1315,13 +1315,13 @@
   "model": "vendors.vendor",
   "pk": 83,
   "fields": {
-    "name": "Advanced Computer Learning Company, LLC",
+    "name": "ADVANCED COMPUTER LEARNING COMPANY, LLC",
     "duns": "141415021",
     "duns_4": "1414150210000",
     "cage": "3NJT3",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-01-05T10:43:40Z",
-    "sam_expiration_date": "2019-01-05T10:32:30Z",
+    "sam_activation_date": "2018-07-03T09:46:17Z",
+    "sam_expiration_date": "2019-05-07T10:56:25Z",
     "sam_exclusion": false,
     "sam_url": "http://www.goaclc.com",
     "sam_location": 83
@@ -1331,7 +1331,7 @@
   "model": "vendors.vendor",
   "pk": 84,
   "fields": {
-    "name": "Arc Aspicio LLC",
+    "name": "ARC ASPICIO LLC",
     "duns": "168719552",
     "duns_4": "1687195520000",
     "cage": "418G6",
@@ -1347,13 +1347,13 @@
   "model": "vendors.vendor",
   "pk": 85,
   "fields": {
-    "name": "Barbaricum",
+    "name": "BARBARICUM",
     "duns": "827620308",
     "duns_4": "8276203080000",
     "cage": "55EW9",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-04-18T14:15:15Z",
-    "sam_expiration_date": "2019-04-18T13:56:00Z",
+    "sam_activation_date": "2018-07-11T15:31:03Z",
+    "sam_expiration_date": "2019-06-04T15:24:50Z",
     "sam_exclusion": false,
     "sam_url": null,
     "sam_location": 85
@@ -1363,13 +1363,13 @@
   "model": "vendors.vendor",
   "pk": 86,
   "fields": {
-    "name": "Cherokee Nation Management & Consulting",
+    "name": "CHEROKEE NATION MANAGEMENT & CONSULTING",
     "duns": "079089292",
     "duns_4": "0790892920000",
     "cage": "6YW97",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-12-16T18:13:21Z",
-    "sam_expiration_date": "2018-12-16T17:56:41Z",
+    "sam_activation_date": "2018-06-11T12:36:53Z",
+    "sam_expiration_date": "2019-06-11T11:53:47Z",
     "sam_exclusion": false,
     "sam_url": null,
     "sam_location": 86
@@ -1379,7 +1379,7 @@
   "model": "vendors.vendor",
   "pk": 87,
   "fields": {
-    "name": "Coray Gurnitz Consulting, Inc.",
+    "name": "CORAY GURNITZ CONSULTING, INC.",
     "duns": "838295400",
     "duns_4": "8382954000000",
     "cage": "3EN81",
@@ -1395,13 +1395,13 @@
   "model": "vendors.vendor",
   "pk": 88,
   "fields": {
-    "name": "Dsfederal, Inc.",
+    "name": "DSFEDERAL, INC.",
     "duns": "805643546",
     "duns_4": "8056435460000",
     "cage": "4V8Y3",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-02-23T13:30:08Z",
-    "sam_expiration_date": "2019-02-23T13:16:34Z",
+    "sam_activation_date": "2018-07-09T09:46:21Z",
+    "sam_expiration_date": "2019-06-15T15:00:25Z",
     "sam_exclusion": false,
     "sam_url": "http://www.dsfederal.com",
     "sam_location": 88
@@ -1411,7 +1411,7 @@
   "model": "vendors.vendor",
   "pk": 89,
   "fields": {
-    "name": "Duty First Consulting, LLC",
+    "name": "DUTY FIRST CONSULTING, LLC",
     "duns": "362623170",
     "duns_4": "3626231700000",
     "cage": "4SJK4",
@@ -1427,7 +1427,7 @@
   "model": "vendors.vendor",
   "pk": 90,
   "fields": {
-    "name": "Armed Forces Services Corporation (Afsc)",
+    "name": "ARMED FORCES SERVICES CORPORATION (AFSC)",
     "duns": "830333824",
     "duns_4": "8303338240000",
     "cage": "1Q8F1",
@@ -1443,13 +1443,13 @@
   "model": "vendors.vendor",
   "pk": 91,
   "fields": {
-    "name": "Allen Corporation Of America",
+    "name": "ALLEN CORPORATION OF AMERICA",
     "duns": "007102168",
     "duns_4": "0071021680000",
     "cage": "3FMC7",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-10-11T16:44:06Z",
-    "sam_expiration_date": "2018-10-11T16:27:17Z",
+    "sam_activation_date": "2018-07-03T07:46:10Z",
+    "sam_expiration_date": "2019-05-03T10:54:46Z",
     "sam_exclusion": false,
     "sam_url": "http://www.allencorporation.com",
     "sam_location": 91
@@ -1459,13 +1459,13 @@
   "model": "vendors.vendor",
   "pk": 92,
   "fields": {
-    "name": "C2 Technologies",
+    "name": "C2 TECHNOLOGIES",
     "duns": "807021241",
     "duns_4": "8070212410000",
     "cage": "09UJ3",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-04-05T10:15:19Z",
-    "sam_expiration_date": "2019-04-05T10:05:12Z",
+    "sam_activation_date": "2018-07-11T14:31:10Z",
+    "sam_expiration_date": "2019-07-11T14:11:03Z",
     "sam_exclusion": false,
     "sam_url": "http://www.c2ti.com",
     "sam_location": 92
@@ -1475,7 +1475,7 @@
   "model": "vendors.vendor",
   "pk": 93,
   "fields": {
-    "name": "Calibre Systems, Inc.",
+    "name": "CALIBRE SYSTEMS, INC.",
     "duns": "555498187",
     "duns_4": "5554981870000",
     "cage": "0EUA6",
@@ -1491,13 +1491,13 @@
   "model": "vendors.vendor",
   "pk": 94,
   "fields": {
-    "name": "Carley Corporation",
+    "name": "CARLEY CORPORATION",
     "duns": "626579684",
     "duns_4": "6265796840000",
     "cage": "0TB78",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-10-17T10:58:51Z",
-    "sam_expiration_date": "2018-10-17T10:08:47Z",
+    "sam_activation_date": "2018-06-12T16:45:47Z",
+    "sam_expiration_date": "2019-06-12T16:14:54Z",
     "sam_exclusion": false,
     "sam_url": "http://www.carleycorp.com",
     "sam_location": 94
@@ -1507,13 +1507,13 @@
   "model": "vendors.vendor",
   "pk": 95,
   "fields": {
-    "name": "Carney, Inc.",
+    "name": "CARNEY, INC.",
     "duns": "869205930",
     "duns_4": "8692059300000",
     "cage": "1YYZ3",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-04-27T16:15:11Z",
-    "sam_expiration_date": "2019-04-27T15:57:26Z",
+    "sam_activation_date": "2018-06-28T15:01:08Z",
+    "sam_expiration_date": "2019-05-04T10:54:58Z",
     "sam_exclusion": false,
     "sam_url": "http://www.teamcarney.com",
     "sam_location": 95
@@ -1523,7 +1523,7 @@
   "model": "vendors.vendor",
   "pk": 96,
   "fields": {
-    "name": "American Institutes For Research In The Behavioral Sciences",
+    "name": "AMERICAN INSTITUTES FOR RESEARCH IN THE BEHAVIORAL SCIENCES",
     "duns": "041733197",
     "duns_4": "0417331970000",
     "cage": "9B514",
@@ -1539,7 +1539,7 @@
   "model": "vendors.vendor",
   "pk": 97,
   "fields": {
-    "name": "Acepex Management",
+    "name": "ACEPEX MANAGEMENT",
     "duns": "090967704",
     "duns_4": "0909677040000",
     "cage": "1A9K1",
@@ -1555,7 +1555,7 @@
   "model": "vendors.vendor",
   "pk": 98,
   "fields": {
-    "name": "Action Facilities Management, Inc.",
+    "name": "ACTION FACILITIES MANAGEMENT, INC.",
     "duns": "129304551",
     "duns_4": "1293045510000",
     "cage": "3EET9",
@@ -1571,7 +1571,7 @@
   "model": "vendors.vendor",
   "pk": 99,
   "fields": {
-    "name": "Ben Fitzgerald Real Estate",
+    "name": "BEN FITZGERALD REAL ESTATE",
     "duns": "053117149",
     "duns_4": "0531171490000",
     "cage": "1TG18",
@@ -1587,7 +1587,7 @@
   "model": "vendors.vendor",
   "pk": 100,
   "fields": {
-    "name": "Ceepco Contracting",
+    "name": "CEEPCO CONTRACTING",
     "duns": "187402586",
     "duns_4": "1874025860000",
     "cage": "363W8",
@@ -1603,7 +1603,7 @@
   "model": "vendors.vendor",
   "pk": 101,
   "fields": {
-    "name": "Chenega Facility Mgmt",
+    "name": "CHENEGA FACILITY MGMT",
     "duns": "078650478",
     "duns_4": "0786504780000",
     "cage": "6TLQ7",
@@ -1619,7 +1619,7 @@
   "model": "vendors.vendor",
   "pk": 102,
   "fields": {
-    "name": "Cmi Facilites Management",
+    "name": "CMI FACILITES MANAGEMENT",
     "duns": "602619223",
     "duns_4": "6026192230000",
     "cage": "0YSJ1",
@@ -1635,15 +1635,15 @@
   "model": "vendors.vendor",
   "pk": 103,
   "fields": {
-    "name": "Native Energy & Technology",
-    "duns": "080778868",
-    "duns_4": "0807788680000",
-    "cage": "1L8Y9",
+    "name": "CTSI",
+    "duns": "052648261",
+    "duns_4": "0526482610000",
+    "cage": "6JSM3",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-10-17T13:59:06Z",
-    "sam_expiration_date": "2018-10-17T13:49:48Z",
+    "sam_activation_date": "2018-07-08T10:30:30Z",
+    "sam_expiration_date": "2019-06-08T14:45:35Z",
     "sam_exclusion": false,
-    "sam_url": "http://www.native-energy.com",
+    "sam_url": "http://www.CTSI-FM.com",
     "sam_location": 103
   }
 },
@@ -1651,15 +1651,15 @@
   "model": "vendors.vendor",
   "pk": 104,
   "fields": {
-    "name": "Nve,  Inc",
-    "duns": "141611272",
-    "duns_4": "1416112720000",
-    "cage": "3RKV2",
+    "name": "FOUR SEASONS ENVIRONMENTAL",
+    "duns": "107611246",
+    "duns_4": "1076112460000",
+    "cage": "02PC7",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-03-30T14:20:07Z",
-    "sam_expiration_date": "2019-03-30T13:36:37Z",
+    "sam_activation_date": "2018-04-04T10:50:08Z",
+    "sam_expiration_date": "2019-04-04T10:09:26Z",
     "sam_exclusion": false,
-    "sam_url": "http://www.nvecorp.com",
+    "sam_url": "http://www.fseinc.net",
     "sam_location": 104
   }
 },
@@ -1667,15 +1667,15 @@
   "model": "vendors.vendor",
   "pk": 105,
   "fields": {
-    "name": "Sdac Facility Service",
-    "duns": "079515381",
-    "duns_4": "0795153810000",
-    "cage": "77M00",
+    "name": "GENERAL MECHANICAL SERVICES",
+    "duns": "031432615",
+    "duns_4": "0314326150000",
+    "cage": "1GYD2",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-09-21T15:14:08Z",
-    "sam_expiration_date": "2018-09-21T15:01:47Z",
+    "sam_activation_date": "2017-09-08T10:29:10Z",
+    "sam_expiration_date": "2018-09-08T10:18:39Z",
     "sam_exclusion": false,
-    "sam_url": null,
+    "sam_url": "http://www.gms-hvac.com",
     "sam_location": 105
   }
 },
@@ -1683,15 +1683,15 @@
   "model": "vendors.vendor",
   "pk": 106,
   "fields": {
-    "name": "Trademasters",
-    "duns": "834434649",
-    "duns_4": "8344346490000",
-    "cage": "43NA6",
+    "name": "GLOBAL PRECISION SYSTEMS",
+    "duns": "805596710",
+    "duns_4": "8055967100000",
+    "cage": "4UB21",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-10-12T10:43:57Z",
-    "sam_expiration_date": "2018-10-12T10:27:53Z",
+    "sam_activation_date": "2018-03-28T12:00:17Z",
+    "sam_expiration_date": "2019-03-28T11:17:58Z",
     "sam_exclusion": false,
-    "sam_url": "http://www.gov.trademasters.com",
+    "sam_url": null,
     "sam_location": 106
   }
 },
@@ -1699,15 +1699,15 @@
   "model": "vendors.vendor",
   "pk": 107,
   "fields": {
-    "name": "Urban Services",
-    "duns": "933708141",
-    "duns_4": "9337081410000",
-    "cage": "1H1V6",
+    "name": "B3 ENTERPRISES LLC",
+    "duns": "610940632",
+    "duns_4": "6109406320000",
+    "cage": "47U96",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-09-14T15:59:19Z",
-    "sam_expiration_date": "2018-09-14T15:17:30Z",
+    "sam_activation_date": "2018-01-24T13:15:12Z",
+    "sam_expiration_date": "2019-01-24T13:07:14Z",
     "sam_exclusion": false,
-    "sam_url": "http://www.URBANSERVICESGROUP.COM",
+    "sam_url": "http://www.b3enterprisesllc.com",
     "sam_location": 107
   }
 },
@@ -1715,7 +1715,39 @@
   "model": "vendors.vendor",
   "pk": 108,
   "fields": {
-    "name": "Government Contracting Resources Inc",
+    "name": "BROWN POINT MANAGEMENT SOLUTIONS",
+    "duns": "080438446",
+    "duns_4": "0804384460000",
+    "cage": "7SEA5",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-03-28T09:45:22Z",
+    "sam_expiration_date": "2019-03-28T09:26:33Z",
+    "sam_exclusion": false,
+    "sam_url": null,
+    "sam_location": 108
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 109,
+  "fields": {
+    "name": "FACILITY SERVICES MANAGEMENT",
+    "duns": "884999491",
+    "duns_4": "8849994910000",
+    "cage": "05HC6",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-01-02T09:58:20Z",
+    "sam_expiration_date": "2019-01-02T09:15:40Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.facsvcs.com",
+    "sam_location": 109
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 110,
+  "fields": {
+    "name": "GOVERNMENT CONTRACTING RESOURCES INC",
     "duns": "614155380",
     "duns_4": "6141553800000",
     "cage": null,
@@ -1729,9 +1761,89 @@
 },
 {
   "model": "vendors.vendor",
-  "pk": 109,
+  "pk": 111,
   "fields": {
-    "name": "Raymond Pond Solutions",
+    "name": "INSPECTION EXPERTS,INC.",
+    "duns": "187931717",
+    "duns_4": "1879317170000",
+    "cage": "4AQW8",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-07-11T09:46:45Z",
+    "sam_expiration_date": "2019-07-11T09:36:12Z",
+    "sam_exclusion": false,
+    "sam_url": "https://www.ieinc.net",
+    "sam_location": 110
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 112,
+  "fields": {
+    "name": "NATIVE ENERGY & TECHNOLOGY, INC.",
+    "duns": "080778868",
+    "duns_4": "0807788680000",
+    "cage": "1L8Y9",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-07-06T13:46:33Z",
+    "sam_expiration_date": "2019-05-29T12:50:29Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.native-energy.com",
+    "sam_location": 111
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 113,
+  "fields": {
+    "name": "NVE INC",
+    "duns": "141611272",
+    "duns_4": "1416112720000",
+    "cage": "3RKV2",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-03-30T14:20:07Z",
+    "sam_expiration_date": "2019-03-30T13:36:37Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.nvecorp.com",
+    "sam_location": 112
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 114,
+  "fields": {
+    "name": "PREVENTIVE MAINTENANCE SERVICE COMPANY",
+    "duns": "847316189",
+    "duns_4": "8473161890000",
+    "cage": "004Q5",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-04-27T09:40:07Z",
+    "sam_expiration_date": "2019-04-11T11:55:13Z",
+    "sam_exclusion": false,
+    "sam_url": null,
+    "sam_location": 113
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 115,
+  "fields": {
+    "name": "RAVEN SERVICE CORPORATION",
+    "duns": "064860299",
+    "duns_4": "0648602990000",
+    "cage": "1FAN6",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2017-11-27T09:43:35Z",
+    "sam_expiration_date": "2018-11-27T09:27:57Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.ravenservices.us",
+    "sam_location": 114
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 116,
+  "fields": {
+    "name": "RAYMOND POND SOLUTIONS",
     "duns": "079939977",
     "duns_4": "0799399770000",
     "cage": "7FTE5",
@@ -1740,118 +1852,6 @@
     "sam_expiration_date": "2018-11-09T13:41:12Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 108
-  }
-},
-{
-  "model": "vendors.vendor",
-  "pk": 110,
-  "fields": {
-    "name": "Aecom Technical Services, Inc.",
-    "duns": "003184462",
-    "duns_4": "0031844620000",
-    "cage": "4L767",
-    "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-04-16T12:30:38Z",
-    "sam_expiration_date": "2019-04-16T12:20:15Z",
-    "sam_exclusion": false,
-    "sam_url": "http://www.aecom.com",
-    "sam_location": 109
-  }
-},
-{
-  "model": "vendors.vendor",
-  "pk": 111,
-  "fields": {
-    "name": "Amec Foster Wheeler Programs, Inc.",
-    "duns": "106974876",
-    "duns_4": "1069748760000",
-    "cage": "0FX47",
-    "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-01-04T13:13:17Z",
-    "sam_expiration_date": "2019-01-04T12:54:13Z",
-    "sam_exclusion": false,
-    "sam_url": null,
-    "sam_location": 110
-  }
-},
-{
-  "model": "vendors.vendor",
-  "pk": 112,
-  "fields": {
-    "name": "Cbre",
-    "duns": "039839683",
-    "duns_4": "0398396830000",
-    "cage": "3G5K7",
-    "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-02-15T12:00:56Z",
-    "sam_expiration_date": "2019-02-15T11:49:34Z",
-    "sam_exclusion": false,
-    "sam_url": "http://www.cbre.com",
-    "sam_location": 111
-  }
-},
-{
-  "model": "vendors.vendor",
-  "pk": 113,
-  "fields": {
-    "name": "Complete Building Services",
-    "duns": "808649888",
-    "duns_4": "8086498880000",
-    "cage": "4YAL6",
-    "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-09-18T10:59:12Z",
-    "sam_expiration_date": "2018-09-18T10:15:30Z",
-    "sam_exclusion": false,
-    "sam_url": "http://www.completebuildingservices.com",
-    "sam_location": 112
-  }
-},
-{
-  "model": "vendors.vendor",
-  "pk": 114,
-  "fields": {
-    "name": "Eml LLC",
-    "duns": "012722836",
-    "duns_4": "0127228360000",
-    "cage": "1UVM4",
-    "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-12-28T12:13:16Z",
-    "sam_expiration_date": "2018-12-28T12:07:11Z",
-    "sam_exclusion": false,
-    "sam_url": "http://www.eml1.com",
-    "sam_location": 113
-  }
-},
-{
-  "model": "vendors.vendor",
-  "pk": 115,
-  "fields": {
-    "name": "J&J Worldwide Services",
-    "duns": "055124077",
-    "duns_4": "0551240770000",
-    "cage": "5P021",
-    "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-04-25T16:00:17Z",
-    "sam_expiration_date": "2019-04-25T15:40:43Z",
-    "sam_exclusion": false,
-    "sam_url": "http://www.jjwws.com",
-    "sam_location": 114
-  }
-},
-{
-  "model": "vendors.vendor",
-  "pk": 116,
-  "fields": {
-    "name": "Jones, Lang & Lasalle",
-    "duns": "079859134",
-    "duns_4": "0798591340000",
-    "cage": "7EM20",
-    "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-08-10T12:39:22Z",
-    "sam_expiration_date": "2018-08-10T12:03:26Z",
-    "sam_exclusion": false,
-    "sam_url": "http://www.jll.com",
     "sam_location": 115
   }
 },
@@ -1859,15 +1859,15 @@
   "model": "vendors.vendor",
   "pk": 117,
   "fields": {
-    "name": "M.C. Dean, Inc.",
-    "duns": "043203249",
-    "duns_4": "0432032490000",
-    "cage": "3K773",
+    "name": "SDAC FACILITY SERVICE LLC",
+    "duns": "079515381",
+    "duns_4": "0795153810000",
+    "cage": "77M00",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-06-05T09:00:21Z",
-    "sam_expiration_date": "2019-05-21T06:47:42Z",
+    "sam_activation_date": "2017-09-21T15:14:08Z",
+    "sam_expiration_date": "2018-09-21T15:01:47Z",
     "sam_exclusion": false,
-    "sam_url": "http://www.mcdean.com",
+    "sam_url": null,
     "sam_location": 116
   }
 },
@@ -1875,15 +1875,15 @@
   "model": "vendors.vendor",
   "pk": 118,
   "fields": {
-    "name": "Valiant Integrated Services (Formerly Abm Government Services, LLC)",
-    "duns": "616858908",
-    "duns_4": "6168589080000",
-    "cage": "0UFD5",
+    "name": "TRADEMASTERS",
+    "duns": "834434649",
+    "duns_4": "8344346490000",
+    "cage": "43NA6",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-10-02T14:08:59Z",
-    "sam_expiration_date": "2018-10-02T13:36:27Z",
+    "sam_activation_date": "2017-10-12T10:43:57Z",
+    "sam_expiration_date": "2018-10-12T10:27:53Z",
     "sam_exclusion": false,
-    "sam_url": "http://www.abm.com",
+    "sam_url": "http://www.gov.trademasters.com",
     "sam_location": 117
   }
 },
@@ -1891,13 +1891,13 @@
   "model": "vendors.vendor",
   "pk": 119,
   "fields": {
-    "name": "Lb&B",
-    "duns": "793374034",
-    "duns_4": "7933740340000",
-    "cage": "0V349",
+    "name": "KCORP SUPPORT SERVICES INC.",
+    "duns": "790993252",
+    "duns_4": "7909932520000",
+    "cage": "52TJ5",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-02-05T16:45:17Z",
-    "sam_expiration_date": "2019-02-05T16:28:06Z",
+    "sam_activation_date": "2018-04-26T14:45:16Z",
+    "sam_expiration_date": "2019-04-26T14:29:28Z",
     "sam_exclusion": false,
     "sam_url": null,
     "sam_location": 118
@@ -1907,13 +1907,13 @@
   "model": "vendors.vendor",
   "pk": 120,
   "fields": {
-    "name": "Preventative Maintenance Service Company",
-    "duns": "847316189",
-    "duns_4": "8473161890000",
-    "cage": "004Q5",
+    "name": "AMEC FOSTER WHEELER PROGRAMS, INC.",
+    "duns": "106974876",
+    "duns_4": "1069748760000",
+    "cage": "0FX47",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-04-27T09:40:07Z",
-    "sam_expiration_date": "2019-04-11T11:55:13Z",
+    "sam_activation_date": "2018-01-04T13:13:17Z",
+    "sam_expiration_date": "2019-01-04T12:54:13Z",
     "sam_exclusion": false,
     "sam_url": null,
     "sam_location": 119
@@ -1923,7 +1923,167 @@
   "model": "vendors.vendor",
   "pk": 121,
   "fields": {
-    "name": "3U Technologies, LLC",
+    "name": "CBRE",
+    "duns": "039839683",
+    "duns_4": "0398396830000",
+    "cage": "3G5K7",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-02-15T12:00:56Z",
+    "sam_expiration_date": "2019-02-15T11:49:34Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.cbre.com",
+    "sam_location": 120
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 122,
+  "fields": {
+    "name": "COMPLETE BUILDING SERVICES",
+    "duns": "808649888",
+    "duns_4": "8086498880000",
+    "cage": "4YAL6",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2017-09-18T10:59:12Z",
+    "sam_expiration_date": "2018-09-18T10:15:30Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.completebuildingservices.com",
+    "sam_location": 121
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 123,
+  "fields": {
+    "name": "EML LLC",
+    "duns": "012722836",
+    "duns_4": "0127228360000",
+    "cage": "1UVM4",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-07-08T16:46:37Z",
+    "sam_expiration_date": "2019-06-20T15:05:37Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.eml1.com",
+    "sam_location": 122
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 124,
+  "fields": {
+    "name": "J&J WORLDWIDE SERVICES",
+    "duns": "055124077",
+    "duns_4": "0551240770000",
+    "cage": "5P021",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-04-25T16:00:17Z",
+    "sam_expiration_date": "2019-04-25T15:40:43Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.jjwws.com",
+    "sam_location": 123
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 125,
+  "fields": {
+    "name": "JONES, LANG & LASALLE",
+    "duns": "079859134",
+    "duns_4": "0798591340000",
+    "cage": "7EM20",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2017-08-10T12:39:22Z",
+    "sam_expiration_date": "2018-08-10T12:03:26Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.jll.com",
+    "sam_location": 124
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 126,
+  "fields": {
+    "name": "LB&B",
+    "duns": "793374034",
+    "duns_4": "7933740340000",
+    "cage": "0V349",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-02-05T16:45:17Z",
+    "sam_expiration_date": "2019-02-05T16:28:06Z",
+    "sam_exclusion": false,
+    "sam_url": null,
+    "sam_location": 125
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 127,
+  "fields": {
+    "name": "WW CONTRACTORS",
+    "duns": "175515774",
+    "duns_4": "1755157740000",
+    "cage": "08JS8",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-06-27T17:31:05Z",
+    "sam_expiration_date": "2019-06-27T17:18:25Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.wwcontractors.com",
+    "sam_location": 126
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 128,
+  "fields": {
+    "name": "ABM GOVERNMENT SERVIVCES, LLC",
+    "duns": "616858908",
+    "duns_4": "6168589080000",
+    "cage": "0UFD5",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-07-13T13:00:14Z",
+    "sam_expiration_date": "2019-07-13T12:50:35Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.valiantintegrated.com",
+    "sam_location": 127
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 129,
+  "fields": {
+    "name": "AECOM TECHNICAL SERVICES, INC",
+    "duns": "003184462",
+    "duns_4": "0031844620000",
+    "cage": "4L767",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-06-21T11:45:42Z",
+    "sam_expiration_date": "2019-06-21T11:19:38Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.aecom.com",
+    "sam_location": 128
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 130,
+  "fields": {
+    "name": "M.C. DEAN, INC.",
+    "duns": "043203249",
+    "duns_4": "0432032490000",
+    "cage": "3K773",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-06-05T09:00:21Z",
+    "sam_expiration_date": "2019-05-21T06:47:42Z",
+    "sam_exclusion": false,
+    "sam_url": "http://www.mcdean.com",
+    "sam_location": 129
+  }
+},
+{
+  "model": "vendors.vendor",
+  "pk": 131,
+  "fields": {
+    "name": "3U TECHNOLOGIES, LLC",
     "duns": "808716711",
     "duns_4": "8087167110000",
     "cage": "1TSD9",
@@ -1932,14 +2092,14 @@
     "sam_expiration_date": "2018-08-30T11:30:52Z",
     "sam_exclusion": false,
     "sam_url": "http://www.3utech.com",
-    "sam_location": 120
+    "sam_location": 130
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 122,
+  "pk": 132,
   "fields": {
-    "name": "5-D Systems, Inc.",
+    "name": "5-D SYSTEMS, INC.",
     "duns": "090213369",
     "duns_4": "0902133690000",
     "cage": "1TXR4",
@@ -1948,14 +2108,14 @@
     "sam_expiration_date": "2018-10-11T18:14:03Z",
     "sam_exclusion": false,
     "sam_url": "http://www.5dsystems.com",
-    "sam_location": 121
+    "sam_location": 131
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 123,
+  "pk": 133,
   "fields": {
-    "name": "A2 Systems Engineering, Inc.",
+    "name": "A2 SYSTEMS ENGINEERING, INC.",
     "duns": "809155562",
     "duns_4": "8091555620000",
     "cage": "4YVT3",
@@ -1964,14 +2124,14 @@
     "sam_expiration_date": "2018-10-16T16:27:36Z",
     "sam_exclusion": false,
     "sam_url": "http://www.a2sei.com",
-    "sam_location": 122
+    "sam_location": 132
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 124,
+  "pk": 134,
   "fields": {
-    "name": "Abacus Technology Corporation",
+    "name": "ABACUS TECHNOLOGY CORPORATION",
     "duns": "126505833",
     "duns_4": "1265058330000",
     "cage": "0FVN8",
@@ -1980,14 +2140,14 @@
     "sam_expiration_date": "2019-05-11T16:44:41Z",
     "sam_exclusion": false,
     "sam_url": "http://www.abacustech.com",
-    "sam_location": 123
+    "sam_location": 133
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 125,
+  "pk": 135,
   "fields": {
-    "name": "Abraham Weitzberg",
+    "name": "ABRAHAM WEITZBERG",
     "duns": "122151934",
     "duns_4": "1221519340000",
     "cage": "3L6T3",
@@ -1996,14 +2156,14 @@
     "sam_expiration_date": "2019-01-21T13:36:55Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 124
+    "sam_location": 134
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 126,
+  "pk": 136,
   "fields": {
-    "name": "Absg Consulting Inc.",
+    "name": "ABSG CONSULTING INC.",
     "duns": "075238337",
     "duns_4": "0752383370000",
     "cage": "1LVV1",
@@ -2012,46 +2172,46 @@
     "sam_expiration_date": "2018-11-15T15:45:28Z",
     "sam_exclusion": false,
     "sam_url": "http://www.abs-group.com",
-    "sam_location": 125
+    "sam_location": 135
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 127,
+  "pk": 137,
   "fields": {
-    "name": "Advanced Core Concepts, LLC",
+    "name": "ADVANCED CORE CONCEPTS, LLC",
     "duns": "080117787",
     "duns_4": "0801177870000",
     "cage": "7JRY5",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-04-09T07:10:12Z",
-    "sam_expiration_date": "2019-04-06T17:29:32Z",
+    "sam_activation_date": "2018-07-05T10:46:31Z",
+    "sam_expiration_date": "2019-07-05T10:28:20Z",
     "sam_exclusion": false,
     "sam_url": "http://www.advancedcoreconcepts.com",
-    "sam_location": 126
+    "sam_location": 136
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 128,
+  "pk": 138,
   "fields": {
-    "name": "Advanced Management Strategies Group, Inc.",
+    "name": "ADVANCED MANAGEMENT STRATEGIES GROUP, INC.",
     "duns": "827128187",
     "duns_4": "8271281870000",
     "cage": "551W8",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-12-13T12:28:27Z",
-    "sam_expiration_date": "2018-12-13T12:20:53Z",
+    "sam_activation_date": "2018-06-13T13:00:44Z",
+    "sam_expiration_date": "2019-05-29T14:24:30Z",
     "sam_exclusion": false,
     "sam_url": "http://www.amsgcorp.net",
-    "sam_location": 127
+    "sam_location": 137
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 129,
+  "pk": 139,
   "fields": {
-    "name": "1St Choice, LLC",
+    "name": "1ST CHOICE, LLC",
     "duns": "830910597",
     "duns_4": "8309105970000",
     "cage": "1W2D9",
@@ -2060,14 +2220,14 @@
     "sam_expiration_date": "2019-01-12T14:16:51Z",
     "sam_exclusion": false,
     "sam_url": "http://www.1stchoicegov.com",
-    "sam_location": 128
+    "sam_location": 138
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 130,
+  "pk": 140,
   "fields": {
-    "name": "2020 Company, LLC",
+    "name": "2020 COMPANY, LLC",
     "duns": "169810657",
     "duns_4": "1698106570000",
     "cage": "1SHD7",
@@ -2076,14 +2236,14 @@
     "sam_expiration_date": "2019-03-28T09:44:15Z",
     "sam_exclusion": false,
     "sam_url": "http://www.maximus.com/",
-    "sam_location": 129
+    "sam_location": 139
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 131,
+  "pk": 141,
   "fields": {
-    "name": "22Nd Century Technologies Inc.",
+    "name": "22ND CENTURY TECHNOLOGIES INC.",
     "duns": "028619588",
     "duns_4": "0286195880000",
     "cage": "3DYY9",
@@ -2092,14 +2252,14 @@
     "sam_expiration_date": "2019-03-30T15:31:23Z",
     "sam_exclusion": false,
     "sam_url": "http://www.tscti.com",
-    "sam_location": 130
+    "sam_location": 140
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 132,
+  "pk": 142,
   "fields": {
-    "name": "2M Research Services LLC",
+    "name": "2M RESEARCH SERVICES LLC",
     "duns": "962480070",
     "duns_4": "9624800700000",
     "cage": "60YR4",
@@ -2108,14 +2268,14 @@
     "sam_expiration_date": "2019-02-13T18:07:17Z",
     "sam_exclusion": false,
     "sam_url": "http://www.2mresearchservices.com",
-    "sam_location": 131
+    "sam_location": 141
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 133,
+  "pk": 143,
   "fields": {
-    "name": "360 Patriot Enterprises",
+    "name": "360 PATRIOT ENTERPRISES",
     "duns": "831340356",
     "duns_4": "8313403560000",
     "cage": null,
@@ -2129,41 +2289,41 @@
 },
 {
   "model": "vendors.vendor",
-  "pk": 134,
+  "pk": 144,
   "fields": {
-    "name": "3M Company",
+    "name": "3M COMPANY",
     "duns": "006173082",
     "duns_4": "0061730820000",
     "cage": "76381",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-08-30T16:29:18Z",
-    "sam_expiration_date": "2018-08-30T16:15:45Z",
+    "sam_activation_date": "2018-06-27T12:31:05Z",
+    "sam_expiration_date": "2019-05-24T14:20:38Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 132
+    "sam_location": 142
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 135,
+  "pk": 145,
   "fields": {
-    "name": "6K Systems, Inc.",
+    "name": "6K SYSTEMS, INC.",
     "duns": "114214211",
     "duns_4": "1142142110000",
     "cage": "1ZJK7",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-04-26T15:15:45Z",
-    "sam_expiration_date": "2019-04-26T15:08:16Z",
+    "sam_activation_date": "2018-07-07T10:00:39Z",
+    "sam_expiration_date": "2019-06-28T13:30:31Z",
     "sam_exclusion": false,
     "sam_url": "http://www.6ksystems.com",
-    "sam_location": 133
+    "sam_location": 143
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 136,
+  "pk": 146,
   "fields": {
-    "name": "A-G Associates, Inc.",
+    "name": "A-G ASSOCIATES, INC.",
     "duns": "825173029",
     "duns_4": "8251730290000",
     "cage": "52KP9",
@@ -2172,14 +2332,14 @@
     "sam_expiration_date": "2018-10-29T20:49:33Z",
     "sam_exclusion": false,
     "sam_url": "http://www.a-gassociates.com",
-    "sam_location": 134
+    "sam_location": 144
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 137,
+  "pk": 147,
   "fields": {
-    "name": "A-Sa-Ma-Di (Smart) Business Solutions LLC",
+    "name": "A-SA-MA-DI (SMART) BUSINESS SOLUTIONS LLC",
     "duns": "829307649",
     "duns_4": "8293076490000",
     "cage": "5JKP0",
@@ -2188,14 +2348,14 @@
     "sam_expiration_date": "2019-01-12T16:32:31Z",
     "sam_exclusion": false,
     "sam_url": "http://www.asamadi.com",
-    "sam_location": 135
+    "sam_location": 145
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 138,
+  "pk": 148,
   "fields": {
-    "name": "Accent Controls, Inc.",
+    "name": "ACCENT CONTROLS, INC.",
     "duns": "840338420",
     "duns_4": "8403384200000",
     "cage": "1JPU9",
@@ -2204,14 +2364,14 @@
     "sam_expiration_date": "2019-02-09T15:23:29Z",
     "sam_exclusion": false,
     "sam_url": "http://www.accentcontrols.com",
-    "sam_location": 136
+    "sam_location": 146
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 139,
+  "pk": 149,
   "fields": {
-    "name": "Acuity Packaging And Logistics Solutions, LLC",
+    "name": "ACUITY PACKAGING AND LOGISTICS SOLUTIONS, LLC",
     "duns": "054985679",
     "duns_4": "0549856790000",
     "cage": "735J5",
@@ -2220,14 +2380,14 @@
     "sam_expiration_date": "2019-04-25T09:30:44Z",
     "sam_exclusion": false,
     "sam_url": "http://www.acuitypls.com",
-    "sam_location": 137
+    "sam_location": 147
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 140,
+  "pk": 150,
   "fields": {
-    "name": "Advanced Project Consulting, LLC",
+    "name": "ADVANCED PROJECT CONSULTING, LLC",
     "duns": "135469828",
     "duns_4": "1354698280000",
     "cage": "42QH2",
@@ -2236,30 +2396,30 @@
     "sam_expiration_date": "2019-03-27T13:14:43Z",
     "sam_exclusion": false,
     "sam_url": "http://www.AdvProj.com",
-    "sam_location": 138
+    "sam_location": 148
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 141,
+  "pk": 151,
   "fields": {
-    "name": "Advantech, Inc.",
+    "name": "ADVANTECH, INC.",
     "duns": "160913687",
     "duns_4": "1609136870000",
     "cage": "1J3C7",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-01-26T15:00:14Z",
-    "sam_expiration_date": "2019-01-26T14:54:13Z",
+    "sam_activation_date": "2018-07-08T10:45:57Z",
+    "sam_expiration_date": "2019-06-26T07:56:19Z",
     "sam_exclusion": false,
     "sam_url": "http://www.AdvanTech-Inc.com",
-    "sam_location": 139
+    "sam_location": 149
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 142,
+  "pk": 152,
   "fields": {
-    "name": "Affordable Engineering Services L.L.C.",
+    "name": "AFFORDABLE ENGINEERING SERVICES L.L.C.",
     "duns": "961542078",
     "duns_4": "9615420780000",
     "cage": "6UX43",
@@ -2268,46 +2428,46 @@
     "sam_expiration_date": "2019-04-05T15:01:20Z",
     "sam_exclusion": false,
     "sam_url": "http://www.affordservices.com",
-    "sam_location": 140
+    "sam_location": 150
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 143,
+  "pk": 153,
   "fields": {
-    "name": "Akima Logistics Services LLC",
+    "name": "AKIMA LOGISTICS SERVICES LLC",
     "duns": "363702080",
     "duns_4": "3637020800000",
     "cage": "41VK0",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-02-13T15:16:20Z",
-    "sam_expiration_date": "2019-02-13T15:05:50Z",
+    "sam_activation_date": "2018-07-05T10:46:13Z",
+    "sam_expiration_date": "2019-05-17T10:46:23Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 141
+    "sam_location": 151
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 144,
+  "pk": 154,
   "fields": {
-    "name": "A American High Tech Transcription And Reporting Inc",
+    "name": "A AMERICAN HIGH TECH TRANSCRIPTION AND REPORTING INC",
     "duns": "835878943",
     "duns_4": "8358789430000",
     "cage": "1XND0",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-08-30T12:44:16Z",
-    "sam_expiration_date": "2018-08-30T12:27:34Z",
+    "sam_activation_date": "2018-07-06T16:00:39Z",
+    "sam_expiration_date": "2019-06-15T09:55:24Z",
     "sam_exclusion": false,
     "sam_url": "https://www.htsteno.com",
-    "sam_location": 142
+    "sam_location": 152
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 145,
+  "pk": 155,
   "fields": {
-    "name": "Accent On Languages, Inc.",
+    "name": "ACCENT ON LANGUAGES, INC.",
     "duns": "016590528",
     "duns_4": "0165905280000",
     "cage": "1WJT4",
@@ -2316,14 +2476,14 @@
     "sam_expiration_date": "2019-04-24T18:00:26Z",
     "sam_exclusion": false,
     "sam_url": "http://www.accentonlanguages.com",
-    "sam_location": 143
+    "sam_location": 153
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 146,
+  "pk": 156,
   "fields": {
-    "name": "Acclaim Technical Services, Inc.",
+    "name": "ACCLAIM TECHNICAL SERVICES, INC.",
     "duns": "805616484",
     "duns_4": "8056164840000",
     "cage": "4UJN9",
@@ -2332,14 +2492,14 @@
     "sam_expiration_date": "2019-03-08T13:40:54Z",
     "sam_exclusion": false,
     "sam_url": "http://www.acclaimtechnical.com",
-    "sam_location": 144
+    "sam_location": 154
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 147,
+  "pk": 157,
   "fields": {
-    "name": "Ad Astra Inc.",
+    "name": "AD ASTRA INC.",
     "duns": "962857244",
     "duns_4": "9628572440000",
     "cage": "61VV7",
@@ -2348,14 +2508,14 @@
     "sam_expiration_date": "2019-02-15T11:38:37Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 145
+    "sam_location": 155
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 148,
+  "pk": 158,
   "fields": {
-    "name": "Advanced Language Systems International Inc.",
+    "name": "ADVANCED LANGUAGE SYSTEMS INTERNATIONAL INC.",
     "duns": "148815173",
     "duns_4": "1488151730000",
     "cage": null,
@@ -2369,25 +2529,25 @@
 },
 {
   "model": "vendors.vendor",
-  "pk": 149,
+  "pk": 159,
   "fields": {
-    "name": "Aecom National Security Programs, Inc.",
+    "name": "AECOM NATIONAL SECURITY PROGRAMS, INC.",
     "duns": "193348489",
     "duns_4": "1933484890000",
     "cage": "0DEY3",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-01-18T10:15:09Z",
-    "sam_expiration_date": "2019-01-18T10:06:04Z",
+    "sam_activation_date": "2018-06-25T15:01:17Z",
+    "sam_expiration_date": "2019-06-25T14:20:52Z",
     "sam_exclusion": false,
-    "sam_url": null,
-    "sam_location": 146
+    "sam_url": "http://WWW.AECOM.COM",
+    "sam_location": 156
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 150,
+  "pk": 160,
   "fields": {
-    "name": "Afaf Translations, LLC",
+    "name": "AFAF TRANSLATIONS, LLC",
     "duns": "827964052",
     "duns_4": "8279640520000",
     "cage": "561E5",
@@ -2396,46 +2556,46 @@
     "sam_expiration_date": "2018-12-19T08:03:48Z",
     "sam_exclusion": false,
     "sam_url": "http://www.afaftranslations.com",
-    "sam_location": 147
+    "sam_location": 157
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 151,
+  "pk": 161,
   "fields": {
-    "name": "Allworld Language Consultants Inc.",
+    "name": "ALLWORLD LANGUAGE CONSULTANTS INC.",
     "duns": "949873624",
     "duns_4": "9498736240000",
     "cage": "075P1",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-08-07T14:44:41Z",
-    "sam_expiration_date": "2018-08-07T14:30:38Z",
+    "sam_activation_date": "2018-07-13T15:30:11Z",
+    "sam_expiration_date": "2019-07-13T15:23:46Z",
     "sam_exclusion": false,
     "sam_url": "ALCINC.COM",
-    "sam_location": 148
+    "sam_location": 158
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 152,
+  "pk": 162,
   "fields": {
-    "name": "Als International Inc",
+    "name": "ALS INTERNATIONAL INC",
     "duns": "071378835",
     "duns_4": "0713788350000",
     "cage": "3K8T3",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-10-20T13:13:56Z",
-    "sam_expiration_date": "2018-10-20T13:06:38Z",
+    "sam_activation_date": "2018-07-03T14:40:09Z",
+    "sam_expiration_date": "2019-05-10T13:31:22Z",
     "sam_exclusion": false,
     "sam_url": "http://www.legallanguage.com",
-    "sam_location": 149
+    "sam_location": 159
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 153,
+  "pk": 163,
   "fields": {
-    "name": "Alt Services Inc",
+    "name": "ALT SERVICES INC",
     "duns": "029174617",
     "duns_4": "0291746170000",
     "cage": "1UK41",
@@ -2444,14 +2604,14 @@
     "sam_expiration_date": "2018-10-31T14:21:03Z",
     "sam_exclusion": false,
     "sam_url": "http://www.americanlt.com",
-    "sam_location": 150
+    "sam_location": 160
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 154,
+  "pk": 164,
   "fields": {
-    "name": "522 Capital Partners, LLC",
+    "name": "522 CAPITAL PARTNERS, LLC",
     "duns": "962192162",
     "duns_4": "9621921620000",
     "cage": "63VL7",
@@ -2460,14 +2620,14 @@
     "sam_expiration_date": "2019-01-19T14:07:28Z",
     "sam_exclusion": false,
     "sam_url": "http://www.522capital.com",
-    "sam_location": 151
+    "sam_location": 161
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 155,
+  "pk": 165,
   "fields": {
-    "name": "Alpine Companies, Inc.",
+    "name": "ALPINE COMPANIES, INC.",
     "duns": "789701898",
     "duns_4": "7897018980000",
     "cage": "6D4V6",
@@ -2476,46 +2636,46 @@
     "sam_expiration_date": "2019-02-12T16:16:35Z",
     "sam_exclusion": false,
     "sam_url": "http://www.alpinecompaniesinc.com/",
-    "sam_location": 152
+    "sam_location": 162
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 156,
+  "pk": 166,
   "fields": {
-    "name": "Amerivet Real Estate Services, Inc.",
+    "name": "AMERIVET REAL ESTATE SERVICES, INC.",
     "duns": "828929666",
     "duns_4": "8289296660000",
     "cage": "59C97",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-04-12T08:20:05Z",
-    "sam_expiration_date": "2019-03-29T07:53:13Z",
+    "sam_activation_date": "2018-07-06T07:30:40Z",
+    "sam_expiration_date": "2019-06-27T04:03:29Z",
     "sam_exclusion": false,
     "sam_url": "http://www.amerivetres.com",
-    "sam_location": 153
+    "sam_location": 163
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 157,
+  "pk": 167,
   "fields": {
-    "name": "Answer Title And Escrow LLC",
+    "name": "ANSWER TITLE AND ESCROW LLC",
     "duns": "167205819",
     "duns_4": "1672058190000",
     "cage": "36FK1",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-07-13T17:29:35Z",
-    "sam_expiration_date": "2018-07-13T16:41:13Z",
+    "sam_activation_date": "2018-07-13T17:15:07Z",
+    "sam_expiration_date": "2019-07-13T17:05:14Z",
     "sam_exclusion": false,
     "sam_url": "http://www.answertitle.com",
-    "sam_location": 154
+    "sam_location": 164
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 158,
+  "pk": 168,
   "fields": {
-    "name": "Bankworld, Inc.",
+    "name": "BANKWORLD, INC.",
     "duns": "046680331",
     "duns_4": "0466803310000",
     "cage": "1W3S4",
@@ -2524,14 +2684,14 @@
     "sam_expiration_date": "2019-04-05T19:37:39Z",
     "sam_exclusion": false,
     "sam_url": "http://www.BankworldInc.com",
-    "sam_location": 155
+    "sam_location": 165
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 159,
+  "pk": 169,
   "fields": {
-    "name": "Brooks & Associates Cpas, LLC",
+    "name": "BROOKS & ASSOCIATES CPAS, LLC",
     "duns": "094718637",
     "duns_4": "0947186370000",
     "cage": "3UKL9",
@@ -2540,30 +2700,30 @@
     "sam_expiration_date": "2019-02-22T12:28:51Z",
     "sam_exclusion": false,
     "sam_url": "https://www.brooksandassociates.com",
-    "sam_location": 156
+    "sam_location": 166
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 160,
+  "pk": 170,
   "fields": {
-    "name": "Calloway & Associates, Inc.",
+    "name": "CALLOWAY & ASSOCIATES, INC.",
     "duns": "008169919",
     "duns_4": "0081699190000",
     "cage": "3YUF3",
-    "sam_status": "EXPIRED",
-    "sam_activation_date": "2017-06-05T16:49:53Z",
-    "sam_expiration_date": "2018-06-05T16:02:13Z",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-06-11T10:00:37Z",
+    "sam_expiration_date": "2019-06-05T12:56:19Z",
     "sam_exclusion": false,
     "sam_url": "http://www.calloway-assoc.com",
-    "sam_location": 157
+    "sam_location": 167
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 161,
+  "pk": 171,
   "fields": {
-    "name": "Capital Hotel Management, LLC",
+    "name": "CAPITAL HOTEL MANAGEMENT, LLC",
     "duns": "111834987",
     "duns_4": "1118349870000",
     "cage": "3LSK2",
@@ -2572,14 +2732,14 @@
     "sam_expiration_date": "2018-09-28T08:07:09Z",
     "sam_exclusion": false,
     "sam_url": "http://www.chmgov.com",
-    "sam_location": 158
+    "sam_location": 168
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 162,
+  "pk": 172,
   "fields": {
-    "name": "Cardno Emerging Markets Usa, Ltd.",
+    "name": "CARDNO EMERGING MARKETS USA, LTD.",
     "duns": "877698936",
     "duns_4": "8776989360000",
     "cage": "1R4G2",
@@ -2588,14 +2748,14 @@
     "sam_expiration_date": "2018-10-20T14:47:55Z",
     "sam_exclusion": false,
     "sam_url": "http://www.cardno.com/emergingmarkets",
-    "sam_location": 159
+    "sam_location": 169
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 163,
+  "pk": 173,
   "fields": {
-    "name": "Carpenter/Robbins Commercial Real Estate, Inc.",
+    "name": "CARPENTER/ROBBINS COMMERCIAL REAL ESTATE, INC.",
     "duns": "111371238",
     "duns_4": "1113712380000",
     "cage": "1YMF3",
@@ -2604,14 +2764,14 @@
     "sam_expiration_date": "2018-11-29T15:12:59Z",
     "sam_exclusion": false,
     "sam_url": "http://www.crcre.com",
-    "sam_location": 160
+    "sam_location": 170
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 164,
+  "pk": 174,
   "fields": {
-    "name": "3D Envirologics LLC",
+    "name": "3D ENVIROLOGICS LLC",
     "duns": "102769168",
     "duns_4": "1027691680000",
     "cage": "3PBU9",
@@ -2620,14 +2780,14 @@
     "sam_expiration_date": "2019-03-22T11:35:32Z",
     "sam_exclusion": false,
     "sam_url": "http://www.3d-envirologics.com",
-    "sam_location": 161
+    "sam_location": 171
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 165,
+  "pk": 175,
   "fields": {
-    "name": "A E H S Incorporated",
+    "name": "A E H S INCORPORATED",
     "duns": "941735763",
     "duns_4": "9417357630000",
     "cage": "1ELT2",
@@ -2636,30 +2796,30 @@
     "sam_expiration_date": "2019-01-31T15:02:47Z",
     "sam_exclusion": false,
     "sam_url": null,
-    "sam_location": 162
+    "sam_location": 172
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 166,
+  "pk": 176,
   "fields": {
-    "name": "A.D. Marble & Co., Inc.",
+    "name": "A.D. MARBLE & CO., INC.",
     "duns": "131110793",
     "duns_4": "1311107930000",
     "cage": "1TDR6",
-    "sam_status": "EXPIRED",
-    "sam_activation_date": "2017-03-01T09:07:32Z",
-    "sam_expiration_date": "2018-02-17T14:42:31Z",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-06-25T10:45:56Z",
+    "sam_expiration_date": "2019-06-25T10:12:16Z",
     "sam_exclusion": false,
     "sam_url": "http://www.admarble.com",
-    "sam_location": 163
+    "sam_location": 173
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 167,
+  "pk": 177,
   "fields": {
-    "name": "A.I.S., Inc.",
+    "name": "A.I.S., INC.",
     "duns": "783206659",
     "duns_4": "7832066590000",
     "cage": "1HBX3",
@@ -2668,14 +2828,14 @@
     "sam_expiration_date": "2018-10-18T17:46:19Z",
     "sam_exclusion": false,
     "sam_url": "http://www.aisobservers.com",
-    "sam_location": 164
+    "sam_location": 174
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 168,
+  "pk": 178,
   "fields": {
-    "name": "Aarcher Inc",
+    "name": "AARCHER INC",
     "duns": "008184819",
     "duns_4": "0081848190000",
     "cage": "1DPC6",
@@ -2684,14 +2844,14 @@
     "sam_expiration_date": "2019-03-06T11:06:14Z",
     "sam_exclusion": false,
     "sam_url": "http://www.aarcherinc.com",
-    "sam_location": 165
+    "sam_location": 175
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 169,
+  "pk": 179,
   "fields": {
-    "name": "Abr Inc",
+    "name": "ABR INC",
     "duns": "038523239",
     "duns_4": "0385232390000",
     "cage": "0Y330",
@@ -2700,30 +2860,30 @@
     "sam_expiration_date": "2018-11-20T15:43:12Z",
     "sam_exclusion": false,
     "sam_url": "http://www.abrinc.com",
-    "sam_location": 166
+    "sam_location": 176
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 170,
+  "pk": 180,
   "fields": {
-    "name": "Abt Associates Inc.",
+    "name": "ABT ASSOCIATES INC.",
     "duns": "043397520",
     "duns_4": "0433975200000",
     "cage": "1A018",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-03-27T12:20:07Z",
-    "sam_expiration_date": "2019-03-27T11:34:42Z",
+    "sam_activation_date": "2018-06-27T14:50:09Z",
+    "sam_expiration_date": "2019-06-21T09:11:04Z",
     "sam_exclusion": false,
     "sam_url": "http://www.abtassociates.com/",
-    "sam_location": 167
+    "sam_location": 177
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 171,
+  "pk": 181,
   "fields": {
-    "name": "Active Environmental Technologies, Inc.",
+    "name": "ACTIVE ENVIRONMENTAL TECHNOLOGIES, INC.",
     "duns": "806757316",
     "duns_4": "8067573160000",
     "cage": "083X9",
@@ -2732,14 +2892,14 @@
     "sam_expiration_date": "2019-01-30T14:14:00Z",
     "sam_exclusion": false,
     "sam_url": "HTTP://www.active-env.com",
-    "sam_location": 168
+    "sam_location": 178
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 172,
+  "pk": 182,
   "fields": {
-    "name": "Adanta, Inc.",
+    "name": "ADANTA, INC.",
     "duns": "827627618",
     "duns_4": "8276276180000",
     "cage": "55A73",
@@ -2748,62 +2908,62 @@
     "sam_expiration_date": "2019-05-09T16:44:59Z",
     "sam_exclusion": false,
     "sam_url": "http://www.adanta-inc.com",
-    "sam_location": 169
+    "sam_location": 179
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 173,
+  "pk": 183,
   "fields": {
-    "name": "Adelaide Environmental Health Associates, Inc.",
+    "name": "ADELAIDE ENVIRONMENTAL HEALTH ASSOCIATES, INC.",
     "duns": "119232304",
     "duns_4": "1192323040000",
     "cage": "0MKM2",
-    "sam_status": "ACTIVE",
+    "sam_status": "EXPIRED",
     "sam_activation_date": "2017-07-05T18:44:43Z",
     "sam_expiration_date": "2018-07-05T18:26:10Z",
     "sam_exclusion": false,
     "sam_url": "http://www.adelaidellc.com",
-    "sam_location": 170
+    "sam_location": 180
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 174,
+  "pk": 184,
   "fields": {
-    "name": "A. Bright Idea, LLC",
+    "name": "A. BRIGHT IDEA, LLC",
     "duns": "002833684",
     "duns_4": "0028336840000",
     "cage": "359K4",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-07-26T11:59:39Z",
-    "sam_expiration_date": "2018-07-26T11:40:23Z",
+    "sam_activation_date": "2018-06-18T10:45:58Z",
+    "sam_expiration_date": "2019-06-07T18:11:01Z",
     "sam_exclusion": false,
     "sam_url": "http://www.abrightideaonline.com",
-    "sam_location": 171
+    "sam_location": 181
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 175,
+  "pk": 185,
   "fields": {
-    "name": "Adfero Group, LLC",
+    "name": "ADFERO GROUP, LLC",
     "duns": "025290847",
     "duns_4": "0252908470000",
     "cage": "4ELL0",
-    "sam_status": "EXPIRED",
-    "sam_activation_date": "2017-05-24T13:15:09Z",
-    "sam_expiration_date": "2018-05-24T12:55:56Z",
+    "sam_status": "ACTIVE",
+    "sam_activation_date": "2018-07-11T08:50:07Z",
+    "sam_expiration_date": "2019-05-31T17:19:08Z",
     "sam_exclusion": false,
     "sam_url": "http://www.adfero.com",
-    "sam_location": 172
+    "sam_location": 182
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 176,
+  "pk": 186,
   "fields": {
-    "name": "Adventium LLC",
+    "name": "ADVENTIUM LLC",
     "duns": "118810592",
     "duns_4": "1188105920000",
     "cage": null,
@@ -2817,9 +2977,9 @@
 },
 {
   "model": "vendors.vendor",
-  "pk": 177,
+  "pk": 187,
   "fields": {
-    "name": "Adz Etc., Inc.",
+    "name": "ADZ ETC., INC.",
     "duns": "966451833",
     "duns_4": "9664518330000",
     "cage": "4LFB3",
@@ -2828,14 +2988,14 @@
     "sam_expiration_date": "2018-10-27T15:41:59Z",
     "sam_exclusion": false,
     "sam_url": "https://www.adzetc.com",
-    "sam_location": 173
+    "sam_location": 183
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 178,
+  "pk": 188,
   "fields": {
-    "name": "Alexander & Tom, Inc",
+    "name": "ALEXANDER & TOM, INC",
     "duns": "942202334",
     "duns_4": "9422023340000",
     "cage": "3C932",
@@ -2844,46 +3004,46 @@
     "sam_expiration_date": "2018-11-03T16:49:52Z",
     "sam_exclusion": false,
     "sam_url": "http://www.alextom.com",
-    "sam_location": 174
+    "sam_location": 184
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 179,
+  "pk": 189,
   "fields": {
-    "name": "Antkowiak Design Group, Inc.",
+    "name": "ANTKOWIAK DESIGN GROUP, INC.",
     "duns": "800833733",
     "duns_4": "8008337330000",
     "cage": "1BAJ4",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2018-04-26T19:15:07Z",
-    "sam_expiration_date": "2019-04-26T19:03:07Z",
+    "sam_activation_date": "2018-07-10T05:00:05Z",
+    "sam_expiration_date": "2019-07-10T04:53:12Z",
     "sam_exclusion": false,
     "sam_url": "HTTP://www.adgcreative.net",
-    "sam_location": 175
+    "sam_location": 185
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 180,
+  "pk": 190,
   "fields": {
-    "name": "Aptive Resources LLC",
+    "name": "APTIVE RESOURCES LLC",
     "duns": "828890751",
     "duns_4": "8288907510000",
     "cage": "5AF04",
     "sam_status": "ACTIVE",
-    "sam_activation_date": "2017-07-02T11:59:41Z",
-    "sam_expiration_date": "2018-07-02T11:12:28Z",
+    "sam_activation_date": "2018-07-02T16:00:39Z",
+    "sam_expiration_date": "2019-06-23T09:04:42Z",
     "sam_exclusion": false,
     "sam_url": "http://www.aptiveresources.com",
-    "sam_location": 176
+    "sam_location": 186
   }
 },
 {
   "model": "vendors.vendor",
-  "pk": 181,
+  "pk": 191,
   "fields": {
-    "name": "Arch Street Communications, Inc.",
+    "name": "ARCH STREET COMMUNICATIONS, INC.",
     "duns": "125931159",
     "duns_4": "1259311590000",
     "cage": "3GLE4",
@@ -2892,7 +3052,7 @@
     "sam_expiration_date": "2018-12-26T08:40:04Z",
     "sam_exclusion": false,
     "sam_url": "http://www.asc-pr.com",
-    "sam_location": 177
+    "sam_location": 187
   }
 }
 ]

@@ -12,13 +12,6 @@ then
   rm -f "$LOG_FILE"
 fi
 
-#activate the virtual python environment
-if [ -d /venv ]
-then
-  alias python3="/venv/bin/python3"
-  source /venv/bin/activate
-fi
-
 #run application setup commands
 
 echo "> Collecting Django static files" | tee -a "$LOG_FILE"
