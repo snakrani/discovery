@@ -24,12 +24,19 @@ DataManager.initSearch = function() {
     EventManager.subscribe('filtersChanged', DataManager.update);
 
     // Parameter initialization
+    function splitParam(field, value) {
+        if (value) {
+            value = value.split(',');
+        }
+        return value;
+    };
+
     DataManager.collect('naics');
     DataManager.collect('vehicle');
-    DataManager.collect('pool');
-    DataManager.collect('zone');
+    DataManager.collect('pools', [], splitParam);
+    DataManager.collect('zones', [], splitParam);
 
-    DataManager.collect('setasides', null, function(field, value) {
+    DataManager.collect('setasides', [], function(field, value) {
         if (value) {
             value = value.split(',');
             var len = value.length - 1;
@@ -54,12 +61,15 @@ DataManager.initSearch = function() {
     });
     $('#pool-id').select2({
         placeholder: 'Select a service category',
-        minimumResultsForSearch: -1,
+        //minimumResultsForSearch: -1,
+        allowClear: true,
+        closeOnSelect: false,
         width: '220px'
     });
     $('#zone-id').select2({
         placeholder: 'Select a service zone',
-        minimumResultsForSearch: -1,
+        //minimumResultsForSearch: -1,
+        allowClear: true,
         width: '200px'
     });
 };
@@ -67,8 +77,8 @@ DataManager.initSearch = function() {
 DataManager.requestParams = function(queryData) {
     var naics = DataManager.getNaics();
     var vehicle = DataManager.getVehicle();
-    var pool = DataManager.getPool();
-    var zone = DataManager.getZone();
+    var pools = DataManager.getPools();
+    var zones = DataManager.getZones();
     var setasides = DataManager.getSetasides();
 
     if (naics) {
@@ -77,15 +87,16 @@ DataManager.requestParams = function(queryData) {
     if (vehicle) {
         queryData['vehicle'] = vehicle;
     }
-    if (pool && pool in DataManager.getVehiclePools()) {
-        queryData['pool'] = pool;
+    if (pools.length > 0) {
+        queryData['pools'] = pools.join(',');
     }
-    if (zone) {
-        queryData['zone'] = zone;
+    if (zones.length > 0) {
+        queryData['zones'] = zones.join(',');
     }
     if (setasides.length > 0) {
         queryData['setasides'] = setasides.join(',');
     }
+    console.log("Query data: %o", queryData);
     return queryData;
 };
 
@@ -139,37 +150,39 @@ DataManager.sendVehicleChange = function() {
     EventManager.publish('vehicleChanged');
 };
 
-DataManager.setPool = function(value) {
-    DataManager.set('pool', value);
+DataManager.setPools = function(values) {
+    DataManager.set('pools', values);
 };
 
-DataManager.getPool = function() {
-    return DataManager.get('pool', null);
+DataManager.getPools = function() {
+    return DataManager.get('pools', []);
 };
 
-DataManager.setPoolData = function(value) {
-    DataManager.set('pool_data', value);
+DataManager.setPoolData = function(values) {
+    DataManager.set('pool_data', values);
 };
 
 DataManager.getPoolData = function() {
-    return DataManager.get('pool_data', null);
+    return DataManager.get('pool_data', []);
 };
 
 DataManager.sendPoolChange = function(e) {
-    DataManager.setPool($('#pool-id').val());
+    console.log("Pool value: %o", $('#pool-id').val());
+    DataManager.setPools($('#pool-id').val());
     EventManager.publish('poolChanged');
 };
 
-DataManager.setZone = function(value) {
-    DataManager.set('zone', value);
+DataManager.setZones = function(values) {
+    DataManager.set('zones', values);
 };
 
-DataManager.getZone = function() {
-    return DataManager.get('zone', null);
+DataManager.getZones = function() {
+    return DataManager.get('zones', []);
 };
 
 DataManager.sendZoneChange = function(e) {
-    DataManager.setZone($('#zone-id').val());
+    console.log("Zone value: %o", $('#zone-id').val());
+    DataManager.setZones($('#zone-id').val());
     EventManager.publish('zoneChanged');
 };
 
@@ -271,7 +284,7 @@ DataManager.populateNaicsDropDown = function(data) {
     var naicsMap = DataManager.getNaicsMap();
     var naics = DataManager.getNaics();
     var vehicle = DataManager.getVehicle();
-    var pool = DataManager.getPool();
+    var pools = DataManager.getPools();
 
     DataManager.getAPIRequest(
         "/api/naics/",
@@ -283,7 +296,21 @@ DataManager.populateNaicsDropDown = function(data) {
                     .text("All NAICS codes"));
 
             $.each(data.results, function(key, result) {
-                if (result.code in naicsMap && (! pool || naicsMap[result.code].includes(pool))) {
+                var included = false;
+
+                if (pools.length > 0) {
+                    for (var index = 0; index < pools.length; index++) {
+                        if (naicsMap[result.code].includes(pools[index])) {
+                            included = true;
+                            break;
+                        }
+                    }
+                }
+                else {
+                    included = true;
+                }
+
+                if (included) {
                     $("#naics-code")
                         .append($("<option></option>")
                         .attr("value", result.code)
@@ -352,20 +379,21 @@ DataManager.populateVehicleDropDown = function() {
 
 DataManager.populatePoolDropDown = function() {
     var vehicleMap = DataManager.getVehicleMap();
-    var pools = DataManager.getVehiclePools();
-    var pool = DataManager.getPool();
+    var vehiclePools = DataManager.getVehiclePools();
+    var pools = DataManager.getPools();
+    var poolMatches = pools.filter(function(id) { return Object.keys(vehiclePools).indexOf(id) > -1; });
     var poolMap = {};
     var setasides = DataManager.getSetasides();
     var count = 0;
     var poolId;
 
-    $('#pool-id').empty()
-        .append($("<option></option>")
-            .attr("value", 'all')
-            .text("All service categories"));
+    console.log("Pools: %o", pools);
+    console.log("Pool matches: %o", poolMatches);
 
-    for (var id in pools) {
-        var poolData = pools[id];
+    $('#pool-id').empty();
+
+    for (var id in vehiclePools) {
+        var poolData = vehiclePools[id];
         var poolName = poolData.vehicle.split('_').join(' ') + ' - ' + poolData.name;
 
         if (setasides.length == 0 || vehicleMap[poolData.vehicle]["sb"]) {
@@ -381,24 +409,40 @@ DataManager.populatePoolDropDown = function() {
             .text(name));
     });
 
-    if (pool && pool in pools) {
-        DataManager.setPoolData(pools[pool]);
-        $("#pool-id").val(pool);
+    if (poolMatches.length > 0) {
+        var poolData = [];
+
+        for (var index = 0; index < poolMatches.length; index++) {
+            poolData.push(vehiclePools[poolMatches[index]]);
+        }
+
+        DataManager.setPoolData(poolData);
+        $("#pool-id").val(poolMatches);
     }
     else {
         if (count == 1) {
-            DataManager.setPool(poolId);
-            DataManager.setPoolData(pools[pool]);
-            $("#pool-id").val(poolId);
+            DataManager.setPools([poolId]);
+            DataManager.setPoolData([pools[pool]]);
+            $("#pool-id").val([poolId]);
         }
         else {
-            DataManager.setPool(null);
-            DataManager.setPoolData(null);
-            $("#pool-id").val('all');
+            DataManager.setPools([]);
+            DataManager.setPoolData([]);
+            $("#pool-id").val([]);
         }
     }
 
-    if (DataManager.getPool() != DataManager.getParameterByName('pool')) {
+    var currentSelection = DataManager.getPools().join(',');
+    var paramSelection = DataManager.getParameterByName('pools');
+
+    if (!paramSelection) {
+        paramSelection = "";
+    }
+
+    console.log("Pool parameters: %o", paramSelection);
+    console.log("Current pool selection: %o", currentSelection);
+
+    if (currentSelection != paramSelection) {
         EventManager.publish('poolChanged');
     }
     else {
@@ -407,15 +451,12 @@ DataManager.populatePoolDropDown = function() {
 };
 
 DataManager.populateZoneDropDown = function() {
-    var zone = DataManager.getZone();
+    var zones = DataManager.getZones();
     var url = "/api/zones/";
     var queryData = {count: 1000};
 
     DataManager.getAPIRequest(url, queryData, function(data) {
-        $("#zone-id").empty()
-            .append($("<option></option>")
-                .attr("value", 'all')
-                .text("All zones"));
+        $("#zone-id").empty();
 
         $.each(data.results, function(id, result) {
             $("#zone-id")
@@ -424,15 +465,25 @@ DataManager.populateZoneDropDown = function() {
                 .text("Zone " + result.id + " (" + result.state.join(', ') + ")"));
         });
 
-        if (zone) {
-            $("#zone-id").val(zone);
+        if (zones.length > 0) {
+            $("#zone-id").val(zones);
         }
         else {
-            DataManager.setZone(null);
-            $("#zone-id").val('all');
+            DataManager.setZones([]);
+            $("#zone-id").val([]);
         }
 
-        if (DataManager.getZone() != DataManager.getParameterByName('zone')) {
+        var currentSelection = DataManager.getZones().join(',');
+        var paramSelection = DataManager.getParameterByName('zones');
+
+        if (!paramSelection) {
+            paramSelection = "";
+        }
+
+        console.log("Zone parameters: %o", paramSelection);
+        console.log("Current zone selection: %o", currentSelection);
+
+        if (currentSelection != paramSelection) {
             EventManager.publish('zoneChanged');
         }
         else {
