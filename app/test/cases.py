@@ -2,7 +2,7 @@ from django.conf import settings
 from django.db.models.query import QuerySet
 from django.test import Client, TestCase, LiveServerTestCase
 
-from selenium.common.exceptions import TimeoutException, NoSuchElementException, StaleElementReferenceException
+from selenium.common.exceptions import WebDriverException, TimeoutException, NoSuchElementException, StaleElementReferenceException
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -498,15 +498,24 @@ class AcceptanceTestCase(LiveServerTestCase, TestAssertions, RequestMixin):
     def init_drivers(self):
         self.init_chrome()
 
-    def init_chrome(self):
+    def init_chrome(self, tries = 5):
+        tries = 5
+        
         options = chrome.Options()
         options.add_experimental_option("excludeSwitches",["ignore-certificate-errors"])
         options.add_argument('--disable-gpu')
         options.add_argument("--headless")
         options.add_argument("--no-sandbox")
         
-        driver = webdriver.Chrome(chrome_options=options)
-        driver.set_page_load_timeout(60)
+        try:
+            driver = webdriver.Chrome(chrome_options=options)
+            driver.set_page_load_timeout(60)
+        
+        except WebDriverException as e:
+            if tries == 0:
+                raise(e)
+            else:
+                self.init_chrome(tries - 1)
         
         self.drivers['chrome'] = driver
         
