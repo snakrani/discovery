@@ -388,7 +388,7 @@ DataManager.populateMembershipFilters = function() {
         if (! naics || pools.length > 0) {
             var $membershipRow = $('<tr class="membership_filter"></tr>');
 
-            if (selectedMemberships && $.inArray(piid, selectedMemberships)) {
+            if (selectedMemberships && $.inArray(piid, selectedMemberships) != -1) {
                 checked = "checked";
             }
 
