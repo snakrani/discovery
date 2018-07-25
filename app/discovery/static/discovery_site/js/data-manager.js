@@ -127,11 +127,14 @@ var DataManager = {
         var value = DataManager.getParameterByName(field);
 
         if (preprocessor && typeof preprocessor == 'function') {
-            value = preprocessor.call(field, value);
+            value = preprocessor(field, value);
         }
 
         if (value) {
             DataManager.fields[field] = value;
+        }
+        else {
+            DataManager.fields[field] = defaultValue;
         }
     },
 
