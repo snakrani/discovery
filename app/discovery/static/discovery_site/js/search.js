@@ -283,7 +283,7 @@ DataManager.populateNaicsDropDown = function(data) {
                     .text("All NAICS codes"));
 
             $.each(data.results, function(key, result) {
-                if (result.code in naicsMap && (! pool || naicsMap[result.code].includes(pool))) {
+                if (! pool || $.inArray(pool, naicsMap[result.code]) !== -1) {
                     $("#naics-code")
                         .append($("<option></option>")
                         .attr("value", result.code)
