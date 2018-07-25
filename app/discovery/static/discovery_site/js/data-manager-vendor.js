@@ -94,39 +94,39 @@ DataManager.getMembershipMap = function() {
 
         var vehicle = poolMap[membership.pool.id].vehicle;
         var vehicleName = vehicleMap[vehicle].title;
-        if (!$.inArray(vehicle, membershipMap[membership.piid]['vehicleIds'])) {
+        if ($.inArray(vehicle, membershipMap[membership.piid]['vehicleIds']) == -1) {
             membershipMap[membership.piid]['vehicleIds'].push(vehicle);
             membershipMap[membership.piid]['vehicles'].push(vehicleName);
         }
 
         var pool = membership.pool.id;
         var poolNumber = poolMap[pool].number;
-        if (!$.inArray(pool, membershipMap[membership.piid]['poolIds'])) {
+        if ($.inArray(pool, membershipMap[membership.piid]['poolIds']) == -1) {
             membershipMap[membership.piid]['poolIds'].push(pool);
             membershipMap[membership.piid]['pools'].push(poolNumber);
         }
         for (var zindex = 0; zindex < membership.zones.length; zindex++) {
             var zoneId = membership.zones[zindex].id;
-            if (!$.inArray(zoneId, membershipMap[membership.piid]['zones'])) {
+            if ($.inArray(zoneId, membershipMap[membership.piid]['zones']) == -1) {
                 membershipMap[membership.piid]['zones'].push(zoneId);
             }
         }
 
         var contactName = membership.cms[0].name;
-        if (!$.inArray(contactName, membershipMap[membership.piid]['contacts'])) {
+        if ($.inArray(contactName, membershipMap[membership.piid]['contacts']) == -1) {
             membershipMap[membership.piid]['contacts'].push(contactName);
         }
         var phoneNumber = membership.cms[0].phone.join('<br/>');
-        if (!$.inArray(phoneNumber, membershipMap[membership.piid]['phones'])) {
+        if ($.inArray(phoneNumber, membershipMap[membership.piid]['phones']) == -1) {
             membershipMap[membership.piid]['phones'].push(phoneNumber);
         }
         var emailAddress = membership.cms[0].email.join('<br/>');
-        if (!$.inArray(emailAddress, membershipMap[membership.piid]['emails'])) {
+        if ($.inArray(emailAddress, membershipMap[membership.piid]['emails']) == -1) {
             membershipMap[membership.piid]['emails'].push(emailAddress);
         }
         for (var sindex = 0; sindex < membership.setasides.length; sindex++) {
             var setasideCode = membership.setasides[sindex].code;
-            if (!$.inArray(setasideCode, membershipMap[membership.piid]['setasides'])) {
+            if ($.inArray(setasideCode, membershipMap[membership.piid]['setasides']) == -1) {
                 membershipMap[membership.piid]['setasides'].push(setasideCode);
             }
         }

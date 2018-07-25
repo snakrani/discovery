@@ -83,7 +83,7 @@ LayoutManager.renderBadges = function(memberships) {
             for (var sindex = 0; sindex < memberships[index].setasides.length; sindex++) {
                 var setaside = memberships[index].setasides[sindex];
 
-                if ($.inArray(setaside.code, ['SB', 'SDB', 'A6'])) {
+                if ($.inArray(setaside.code, ['SB', 'SDB', 'A6']) !== -1) {
                     smallBusiness = true;
                     break;
                 }
@@ -110,7 +110,7 @@ LayoutManager.renderResultInfo = function(vendor) {
         var vendorMembership = vendor.pools[index];
         var vehicle = poolMap[vendorMembership.pool.id].vehicle;
 
-        if (memberships.length > 0 && $.inArray(vendorMembership.piid, memberships)) {
+        if (memberships.length > 0 && $.inArray(vendorMembership.piid, memberships) !== -1) {
             vehicles.push(vehicleMap[vehicle].title);
         }
     }
