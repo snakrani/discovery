@@ -499,8 +499,6 @@ class AcceptanceTestCase(LiveServerTestCase, TestAssertions, RequestMixin):
         self.init_chrome()
 
     def init_chrome(self, tries = 5):
-        tries = 5
-        
         options = chrome.Options()
         options.add_experimental_option("excludeSwitches",["ignore-certificate-errors"])
         options.add_argument('--disable-gpu')
