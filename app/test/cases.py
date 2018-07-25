@@ -508,14 +508,14 @@ class AcceptanceTestCase(LiveServerTestCase, TestAssertions, RequestMixin):
         try:
             driver = webdriver.Chrome(chrome_options=options)
             driver.set_page_load_timeout(60)
+            
+            self.drivers['chrome'] = driver
         
         except WebDriverException as e:
             if tries == 0:
                 raise(e)
             else:
-                self.init_chrome(tries - 1)
-        
-        self.drivers['chrome'] = driver
+                self.init_chrome(tries - 1)   
         
     def init_firefox(self):
         options = firefox.Options()
