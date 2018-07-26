@@ -368,11 +368,9 @@ DataManager.populatePoolDropDown = function() {
         var poolData = pools[id];
         var poolName = poolData.vehicle.split('_').join(' ') + ' - ' + poolData.name;
 
-        if (setasides.length == 0 || vehicleMap[poolData.vehicle]["sb"]) {
-            poolMap[poolName] = id;
-            count += 1;
-            poolId = id;
-        }
+        poolMap[poolName] = id;
+        count += 1;
+        poolId = id;
     }
     Object.keys(poolMap).sort().forEach(function(name) {
         $("#pool-id")
