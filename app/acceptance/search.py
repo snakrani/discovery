@@ -9,7 +9,7 @@ def generate_search_tests():
                 'naics': ('238220', 78, True),
                 'vehicle': ('all', 4, True),
                 'pool': ('all', 7, 7, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (35, 'results/csv/?naics=238220'),
                 'vendor_table': (35, 'h_naics_results', 'desc')
@@ -20,7 +20,7 @@ def generate_search_tests():
                 'naics': ('561730', 78, True),
                 'vehicle': ('all', 3, True),
                 'pool': ('all', 4, 4, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (17, 'results/csv/?naics=561730'),
                 'vendor_table': (17, 'h_naics_results', 'desc')
@@ -31,7 +31,7 @@ def generate_search_tests():
                 'naics': ('611710', 78, True),
                 'vehicle': ('all', 4, True),
                 'pool': ('all', 3, 3, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (28, 'results/csv/?naics=611710'),
                 'vendor_table': (28, 'h_naics_results', 'desc')
@@ -42,7 +42,7 @@ def generate_search_tests():
                 'naics': ('541618', 78, True),
                 'vehicle': ('all', 5, True),
                 'pool': ('all', 4, 4, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (37, 'results/csv/?naics=541618'),
                 'vendor_table': (37, 'h_naics_results', 'desc')
@@ -53,7 +53,7 @@ def generate_search_tests():
                 'naics': ('541712', 78, True),
                 'vehicle': ('all', 4, True),
                 'pool': ('all', 9, 9, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (50, 'results/csv/?naics=541712'),
                 'vendor_table': (50, 'h_naics_results', 'desc')
@@ -64,7 +64,7 @@ def generate_search_tests():
                 'naics': ('541810', 78, True),
                 'vehicle': ('all', 4, True),
                 'pool': ('all', 3, 3, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (30, 'results/csv/?naics=541810'),
                 'vendor_table': (30, 'h_naics_results', 'desc')
@@ -75,7 +75,7 @@ def generate_search_tests():
                 'naics': ('236220', 78, True),
                 'vehicle': ('all', 4, True),
                 'pool': ('all', 3, 3, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (28, 'results/csv/?naics=236220'),
                 'vendor_table': (28, 'h_naics_results', 'desc')
@@ -86,8 +86,8 @@ def generate_search_tests():
                 'action': ('#vehicle-id', 'select[BMO]'),
                 'naics': ('all', 15, True),
                 'vehicle': ('BMO', 8, True),
-                'pool': ('all', 17, 17, True),
-                'zone': ('all', 6, True, True),
+                'pool': ('', 17, 17, True),
+                'zone': ('', 6, True, True),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (14, 'results/csv/?vehicle=BMO'),
                 'vendor_table': (14, 'h_naics_results', 'desc')
@@ -97,8 +97,8 @@ def generate_search_tests():
                 'action': ('#vehicle-id', 'select[BMO_SB]'),
                 'naics': ('all', 15, True),
                 'vehicle': ('BMO_SB', 8, True),
-                'pool': ('all', 17, 17, True),
-                'zone': ('all', 6, True, True),
+                'pool': ('', 17, 17, True),
+                'zone': ('', 6, True, True),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (23, 'results/csv/?vehicle=BMO_SB'),
                 'vendor_table': (23, 'h_naics_results', 'desc')
@@ -108,8 +108,8 @@ def generate_search_tests():
                 'action': ('#vehicle-id', 'select[HCATS]'),
                 'naics': ('all', 9, True),
                 'vehicle': ('HCATS', 8, True),
-                'pool': ('all', 2, 2, True),
-                'zone': ('all', 6, False, False),
+                'pool': ('', 2, 2, True),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (12, 'results/csv/?vehicle=HCATS'),
                 'vendor_table': (12, 'h_naics_results', 'desc')
@@ -119,8 +119,8 @@ def generate_search_tests():
                 'action': ('#vehicle-id', 'select[HCATS_SB]'),
                 'naics': ('all', 9, True),
                 'vehicle': ('HCATS_SB', 8, True),
-                'pool': ('all', 2, 2, True),
-                'zone': ('all', 6, False, False),
+                'pool': ('', 2, 2, True),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (17, 'results/csv/?vehicle=HCATS_SB'),
                 'vendor_table': (17, 'h_naics_results', 'desc')
@@ -130,8 +130,8 @@ def generate_search_tests():
                 'action': ('#vehicle-id', 'select[OASIS]'),
                 'naics': ('all', 29, True),
                 'vehicle': ('OASIS', 8, True),
-                'pool': ('all', 7, 7, True),
-                'zone': ('all', 6, False, False),
+                'pool': ('', 7, 7, True),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (29, 'results/csv/?vehicle=OASIS'),
                 'vendor_table': (29, 'h_naics_results', 'desc')
@@ -141,8 +141,8 @@ def generate_search_tests():
                 'action': ('#vehicle-id', 'select[OASIS_SB]'),
                 'naics': ('all', 29, True),
                 'vehicle': ('OASIS_SB', 8, True),
-                'pool': ('all', 7, 7, True),
-                'zone': ('all', 6, False, False),
+                'pool': ('', 7, 7, True),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (46, 'results/csv/?vehicle=OASIS_SB'),
                 'vendor_table': (46, 'h_naics_results', 'desc')
@@ -152,8 +152,8 @@ def generate_search_tests():
                 'action': ('#vehicle-id', 'select[PSS]'),
                 'naics': ('all', 58, True),
                 'vehicle': ('PSS', 8, True),
-                'pool': ('all', 7, 7, True),
-                'zone': ('all', 6, False, False),
+                'pool': ('', 7, 7, True),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (66, 'results/csv/?vehicle=PSS'),
                 'vendor_table': (50, 'h_naics_results', 'desc', ('Prev', '1'), '2')
@@ -165,7 +165,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_1', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=BMO_1'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -176,7 +176,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_2', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=BMO_2'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -187,7 +187,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_3', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=BMO_3'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -198,7 +198,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_4', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=BMO_4'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -209,7 +209,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_5', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (9, 'results/csv/?pool=BMO_5'),
                 'vendor_table': (9, 'h_naics_results', 'desc')
@@ -220,7 +220,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_6', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (9, 'results/csv/?pool=BMO_6'),
                 'vendor_table': (9, 'h_naics_results', 'desc')
@@ -231,7 +231,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_7', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=BMO_7'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -242,7 +242,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_8', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=BMO_8'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -253,7 +253,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_9', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (8, 'results/csv/?pool=BMO_9'),
                 'vendor_table': (8, 'h_naics_results', 'desc')
@@ -264,7 +264,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_10', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (8, 'results/csv/?pool=BMO_10'),
                 'vendor_table': (8, 'h_naics_results', 'desc')
@@ -275,7 +275,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_11', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (8, 'results/csv/?pool=BMO_11'),
                 'vendor_table': (8, 'h_naics_results', 'desc')
@@ -286,7 +286,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_12', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (8, 'results/csv/?pool=BMO_12'),
                 'vendor_table': (8, 'h_naics_results', 'desc')
@@ -297,7 +297,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_13', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (9, 'results/csv/?pool=BMO_13'),
                 'vendor_table': (9, 'h_naics_results', 'desc')
@@ -308,7 +308,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_14', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (9, 'results/csv/?pool=BMO_14'),
                 'vendor_table': (9, 'h_naics_results', 'desc')
@@ -319,7 +319,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_15', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (9, 'results/csv/?pool=BMO_15'),
                 'vendor_table': (9, 'h_naics_results', 'desc')
@@ -330,7 +330,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_16', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (9, 'results/csv/?pool=BMO_16'),
                 'vendor_table': (9, 'h_naics_results', 'desc')
@@ -341,7 +341,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_17', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (3, 'results/csv/?pool=BMO_17'),
                 'vendor_table': (3, 'h_naics_results', 'desc')
@@ -353,7 +353,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_SB_1', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=BMO_SB_1'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -364,7 +364,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_SB_2', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=BMO_SB_2'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -375,7 +375,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_SB_3', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=BMO_SB_3'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -386,7 +386,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_SB_4', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (6, 'results/csv/?pool=BMO_SB_4'),
                 'vendor_table': (6, 'h_naics_results', 'desc')
@@ -397,7 +397,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_SB_5', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=BMO_SB_5'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -408,7 +408,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_SB_6', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=BMO_SB_6'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -419,7 +419,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_SB_7', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=BMO_SB_7'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -430,7 +430,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_SB_8', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=BMO_SB_8'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -441,7 +441,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_SB_9', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=BMO_SB_9'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -452,7 +452,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_SB_10', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=BMO_SB_10'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -463,7 +463,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_SB_11', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=BMO_SB_11'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -474,7 +474,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_SB_12', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=BMO_SB_12'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -485,7 +485,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_SB_13', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=BMO_SB_13'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -496,7 +496,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_SB_14', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=BMO_SB_14'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -507,7 +507,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_SB_15', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=BMO_SB_15'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -518,7 +518,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_SB_16', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=BMO_SB_16'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -529,7 +529,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('BMO_SB_17', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (1, 'results/csv/?pool=BMO_SB_17'),
                 'vendor_table': (1, 'h_naics_results', 'desc')
@@ -540,7 +540,7 @@ def generate_search_tests():
                 'naics': ('all', 4, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('HCATS_1', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=HCATS_1'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -551,7 +551,7 @@ def generate_search_tests():
                 'naics': ('all', 6, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('HCATS_2', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=HCATS_2'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -562,7 +562,7 @@ def generate_search_tests():
                 'naics': ('all', 4, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('HCATS_SB_1', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=HCATS_SB_1'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -573,7 +573,7 @@ def generate_search_tests():
                 'naics': ('all', 6, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('HCATS_SB_2', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=HCATS_SB_2'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -584,7 +584,7 @@ def generate_search_tests():
                 'naics': ('all', 22, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('OASIS_1', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=OASIS_1'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -595,7 +595,7 @@ def generate_search_tests():
                 'naics': ('all', 6, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('OASIS_2', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=OASIS_2'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -606,7 +606,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('OASIS_3', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=OASIS_3'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -617,7 +617,7 @@ def generate_search_tests():
                 'naics': ('all', 3, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('OASIS_4', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=OASIS_4'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -628,7 +628,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('OASIS_5A', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=OASIS_5A'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -639,7 +639,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('OASIS_5B', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=OASIS_5B'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -650,7 +650,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('OASIS_6', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=OASIS_6'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -661,7 +661,7 @@ def generate_search_tests():
                 'naics': ('all', 22, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('OASIS_SB_1', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=OASIS_SB_1'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -672,7 +672,7 @@ def generate_search_tests():
                 'naics': ('all', 6, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('OASIS_SB_2', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=OASIS_SB_2'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -683,7 +683,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('OASIS_SB_3', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=OASIS_SB_3'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -694,7 +694,7 @@ def generate_search_tests():
                 'naics': ('all', 3, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('OASIS_SB_4', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=OASIS_SB_4'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -705,7 +705,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('OASIS_SB_5A', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=OASIS_SB_5A'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -716,7 +716,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('OASIS_SB_5B', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=OASIS_SB_5B'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -727,7 +727,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('OASIS_SB_6', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=OASIS_SB_6'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -738,7 +738,7 @@ def generate_search_tests():
                 'naics': ('all', 2, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('PSS_382', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=PSS_382'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -749,7 +749,7 @@ def generate_search_tests():
                 'naics': ('all', 13, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('PSS_520', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=PSS_520'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -760,7 +760,7 @@ def generate_search_tests():
                 'naics': ('all', 11, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('PSS_541', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=PSS_541'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -771,7 +771,7 @@ def generate_search_tests():
                 'naics': ('all', 5, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('PSS_871', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=PSS_871'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -782,7 +782,7 @@ def generate_search_tests():
                 'naics': ('all', 16, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('PSS_874', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=PSS_874'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -793,7 +793,7 @@ def generate_search_tests():
                 'naics': ('all', 11, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('PSS_874500', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=PSS_874500'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -804,7 +804,7 @@ def generate_search_tests():
                 'naics': ('all', 7, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('PSS_899', 59, 1, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?pool=PSS_899'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -815,7 +815,7 @@ def generate_search_tests():
                 'action': (('#vehicle-id', 'select[BMO]'), ('#zone-id', 'select[1]')),
                 'naics': ('all', 15, True),
                 'vehicle': ('BMO', 8, True),
-                'pool': ('all', 17, 17, True),
+                'pool': ('', 17, 17, True),
                 'zone': ('1', 6, True, True),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (9, 'results/csv/?vehicle=BMO&zone=1'),
@@ -826,7 +826,7 @@ def generate_search_tests():
                 'action': (('#vehicle-id', 'select[BMO_SB]'), ('#zone-id', 'select[2]')),
                 'naics': ('all', 15, True),
                 'vehicle': ('BMO_SB', 8, True),
-                'pool': ('all', 17, 17, True),
+                'pool': ('', 17, 17, True),
                 'zone': ('2', 6, True, True),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (13, 'results/csv/?vehicle=BMO_SB&zone=2'),
@@ -837,7 +837,7 @@ def generate_search_tests():
                 'action': (('#vehicle-id', 'select[BMO]'), ('#zone-id', 'select[3]')),
                 'naics': ('all', 15, True),
                 'vehicle': ('BMO', 8, True),
-                'pool': ('all', 17, 17, True),
+                'pool': ('', 17, 17, True),
                 'zone': ('3', 6, True, True),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (8, 'results/csv/?vehicle=BMO&zone=3'),
@@ -848,7 +848,7 @@ def generate_search_tests():
                 'action': (('#vehicle-id', 'select[BMO_SB]'), ('#zone-id', 'select[4]')),
                 'naics': ('all', 15, True),
                 'vehicle': ('BMO_SB', 8, True),
-                'pool': ('all', 17, 17, True),
+                'pool': ('', 17, 17, True),
                 'zone': ('4', 6, True, True),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (15, 'results/csv/?vehicle=BMO_SB&zone=4'),
@@ -859,7 +859,7 @@ def generate_search_tests():
                 'action': (('#vehicle-id', 'select[BMO]'), ('#zone-id', 'select[5]')),
                 'naics': ('all', 15, True),
                 'vehicle': ('BMO', 8, True),
-                'pool': ('all', 17, 17, True),
+                'pool': ('', 17, 17, True),
                 'zone': ('5', 6, True, True),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (8, 'results/csv/?vehicle=BMO&zone=5'),
@@ -870,7 +870,7 @@ def generate_search_tests():
                 'action': (('#vehicle-id', 'select[BMO_SB]'), ('#zone-id', 'select[6]')),
                 'naics': ('all', 15, True),
                 'vehicle': ('BMO_SB', 8, True),
-                'pool': ('all', 17, 17, True),
+                'pool': ('', 17, 17, True),
                 'zone': ('6', 6, True, True),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (13, 'results/csv/?vehicle=BMO_SB&zone=6'),
@@ -883,7 +883,7 @@ def generate_search_tests():
                 'naics': ('all', 78, True),
                 'vehicle': ('all', 5, True),
                 'pool': ('all', 33, 33, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': ('A6', 1, True),
                 'vendor_result_info': (29, 'results/csv/?setasides=A6'),
                 'vendor_table': (29, 'h_naics_results', 'desc'),
@@ -898,7 +898,7 @@ def generate_search_tests():
                 'naics': ('all', 78, True),
                 'vehicle': ('all', 5, True),
                 'pool': ('all', 33, 33, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': ('XX', 1, True),
                 'vendor_result_info': (3, 'results/csv/?setasides=XX'),
                 'vendor_table': (3, 'h_naics_results', 'desc'),
@@ -911,7 +911,7 @@ def generate_search_tests():
                 'naics': ('all', 78, True),
                 'vehicle': ('all', 5, True),
                 'pool': ('all', 33, 33, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': ('QF', 1, True),
                 'vendor_result_info': (25, 'results/csv/?setasides=QF'),
                 'vendor_table': (25, 'h_naics_results', 'desc'),
@@ -925,7 +925,7 @@ def generate_search_tests():
                 'naics': ('all', 78, True),
                 'vehicle': ('all', 5, True),
                 'pool': ('all', 33, 33, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': ('A2', 1, True),
                 'vendor_result_info': (20, 'results/csv/?setasides=A2'),
                 'vendor_table': (20, 'h_naics_results', 'desc'),
@@ -939,7 +939,7 @@ def generate_search_tests():
                 'naics': ('all', 78, True),
                 'vehicle': ('all', 5, True),
                 'pool': ('all', 33, 33, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': ('A5', 1, True),
                 'vendor_result_info': (20, 'results/csv/?setasides=A5'),
                 'vendor_table': (20, 'h_naics_results', 'desc'),
@@ -953,7 +953,7 @@ def generate_search_tests():
                 'naics': ('all', 78, True),
                 'vehicle': ('all', 5, True),
                 'pool': ('all', 33, 33, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': ('27', 1, True),
                 'vendor_result_info': (35, 'results/csv/?setasides=27'),
                 'vendor_table': (35, 'h_naics_results', 'desc'),

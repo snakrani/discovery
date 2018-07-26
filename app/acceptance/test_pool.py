@@ -18,7 +18,7 @@ class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
                 'naics': ('all', 78, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('all', 59, 59, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (191, 'results/csv/?'),
                 'vendor_table': (50, 'h_naics_results', 'desc', ('Prev', '1'), '4')
@@ -29,7 +29,7 @@ class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
                 'naics': ('all', 2, True),
                 'vehicle': ('BMO_SB', 8, True),
                 'pool': ('BMO_SB_1', 17, 1, True),
-                'zone': ('all', 6, True, True),
+                'zone': ('', 6, True, True),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (10, 'results/csv/?vehicle=BMO_SB&pool=BMO_SB_1&'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
@@ -39,8 +39,8 @@ class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
                 'action': ('xpath://*[@id="pool_vendors"]/tbody/tr[12]/td[3]/a[1]', 'click'),
                 'naics': ('all', 58, True),
                 'vehicle': ('PSS', 8, True),
-                'pool': ('all', 7, 7, True),
-                'zone': ('all', 6, False, False),
+                'pool': ('', 7, 7, True),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (66, 'results/csv/?vehicle=PSS&'),
                 'vendor_table': (50, 'h_naics_results', 'desc', ('Prev', '1'), '2')
@@ -51,7 +51,7 @@ class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
                 'naics': ('all', 78, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('all', 59, 59, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (191, 'results/csv/?ordering=name'),
                 'vendor_table': (50, 'h_vendor_name', 'asc', ('Prev', '1'), '4'),
@@ -67,7 +67,7 @@ class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
                 'naics': ('all', 78, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('all', 59, 59, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (191, 'results/csv/?'),
                 'vendor_table': (50, 'h_naics_results', 'desc', '3', '4')
@@ -77,7 +77,7 @@ class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
                 'naics': ('all', 78, True),
                 'vehicle': ('all', 8, True),
                 'pool': ('all', 59, 59, True),
-                'zone': ('all', 6, False, False),
+                'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (191, 'results/csv/?'),
                 'vendor_table': (10, 'h_naics_results', 'desc', ('Prev', '1'), '4')
