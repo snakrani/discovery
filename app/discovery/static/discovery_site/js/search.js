@@ -205,8 +205,10 @@ DataManager.vendorPools = function(vendor) {
 };
 
 DataManager.loadPools = function() {
+    var vehicleMap = DataManager.getVehicleMap();
     var vehicle = DataManager.getVehicle();
     var naics = DataManager.getNaics();
+    var setasides = DataManager.getSetasides();
     var url = "/api/pools/";
     var queryData = {count: 1000, ordering: 'vehicle'};
 
@@ -222,10 +224,12 @@ DataManager.loadPools = function() {
         for (var index = 0; index < pools.length; index++) {
             var pool = pools[index];
 
-            if (! vehicle || vehicle == pool.vehicle) {
-                vehiclePoolMap[pool.id] = pool;
+            if (setasides.length == 0 || vehicleMap[pool.vehicle]["sb"]) {
+                if (! vehicle || vehicle == pool.vehicle) {
+                    vehiclePoolMap[pool.id] = pool;
+                }
+                naicsPoolMap[pool.id] = pool;
             }
-            naicsPoolMap[pool.id] = pool;
         }
 
         DataManager.setVehiclePools(vehiclePoolMap);
@@ -351,11 +355,8 @@ DataManager.populateVehicleDropDown = function() {
 };
 
 DataManager.populatePoolDropDown = function() {
-    var vehicleMap = DataManager.getVehicleMap();
     var pools = DataManager.getVehiclePools();
     var pool = DataManager.getPool();
-    var poolMap = {};
-    var setasides = DataManager.getSetasides();
     var count = 0;
     var poolId;
 
@@ -368,16 +369,14 @@ DataManager.populatePoolDropDown = function() {
         var poolData = pools[id];
         var poolName = poolData.vehicle.split('_').join(' ') + ' - ' + poolData.name;
 
-        poolMap[poolName] = id;
+        $("#pool-id")
+            .append($("<option></option>")
+            .attr("value", id)
+            .text(poolName));
+
         count += 1;
         poolId = id;
     }
-    Object.keys(poolMap).sort().forEach(function(name) {
-        $("#pool-id")
-            .append($("<option></option>")
-            .attr("value", poolMap[name])
-            .text(name));
-    });
 
     if (pool && pool in pools) {
         DataManager.setPoolData(pools[pool]);
