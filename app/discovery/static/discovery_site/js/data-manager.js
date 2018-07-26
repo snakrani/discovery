@@ -113,7 +113,7 @@ var DataManager = {
             defaultValue = null;
         }
 
-        if (! (field in DataManager.fields)) {
+        if (! (field in DataManager.fields) || ! DataManager.fields[field]) {
             return defaultValue;
         }
         return DataManager.fields[field];
