@@ -382,7 +382,9 @@ DataManager.populateMembershipFilters = function() {
         var checked = '';
 
         if (naics) {
-            pools = pools.filter(value => -1 !== naicsMap[naics].indexOf(value));
+            pools = pools.filter(function(x) {
+                return naicsMap[naics].indexOf(x) !== -1;
+            });
         }
 
         if (! naics || pools.length > 0) {
