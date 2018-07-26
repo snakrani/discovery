@@ -75,7 +75,7 @@ LayoutManager.renderBadges = function(memberships) {
     for (var index = 0; index < memberships.length; index++) {
         var pool = poolMap[memberships[index].pool.id];
 
-        if (pool.vehicle.includes('_SB')) {
+        if (pool.vehicle.indexOf('_SB') !== -1) {
             smallBusiness = true;
             break;
         }
@@ -83,7 +83,7 @@ LayoutManager.renderBadges = function(memberships) {
             for (var sindex = 0; sindex < memberships[index].setasides.length; sindex++) {
                 var setaside = memberships[index].setasides[sindex];
 
-                if (['SB', 'SDB', 'A6'].includes(setaside.code)) {
+                if ($.inArray(setaside.code, ['SB', 'SDB', 'A6']) !== -1) {
                     smallBusiness = true;
                     break;
                 }
@@ -110,12 +110,12 @@ LayoutManager.renderResultInfo = function(vendor) {
         var vendorMembership = vendor.pools[index];
         var vehicle = poolMap[vendorMembership.pool.id].vehicle;
 
-        if (memberships.length > 0 && memberships.includes(vendorMembership.piid)) {
+        if (memberships.length > 0 && $.inArray(vendorMembership.piid, memberships) !== -1) {
             vehicles.push(vehicleMap[vehicle].title);
         }
     }
     if (vehicles.length > 0) {
-        filterMessages.push(Array.from(new Set(vehicles)).join(', '));
+        filterMessages.push(vehicles.unique().join(', '));
     }
 
     if (naics) {
