@@ -218,8 +218,10 @@ DataManager.vendorPools = function(vendor) {
 };
 
 DataManager.loadPools = function() {
+    var vehicleMap = DataManager.getVehicleMap();
     var vehicle = DataManager.getVehicle();
     var naics = DataManager.getNaics();
+    var setasides = DataManager.getSetasides();
     var url = "/api/pools/";
     var queryData = {count: 1000, ordering: 'vehicle'};
 
@@ -235,10 +237,12 @@ DataManager.loadPools = function() {
         for (var index = 0; index < pools.length; index++) {
             var pool = pools[index];
 
-            if (! vehicle || vehicle == pool.vehicle) {
-                vehiclePoolMap[pool.id] = pool;
+            if (setasides.length == 0 || vehicleMap[pool.vehicle]["sb"]) {
+                if (! vehicle || vehicle == pool.vehicle) {
+                    vehiclePoolMap[pool.id] = pool;
+                }
+                naicsPoolMap[pool.id] = pool;
             }
-            naicsPoolMap[pool.id] = pool;
         }
 
         DataManager.setVehiclePools(vehiclePoolMap);
@@ -300,7 +304,7 @@ DataManager.populateNaicsDropDown = function(data) {
 
                 if (pools.length > 0) {
                     for (var index = 0; index < pools.length; index++) {
-                        if (naicsMap[result.code].includes(pools[index])) {
+                        if ($.inArray(pools[index], naicsMap[result.code]) !== -1) {
                             included = true;
                             break;
                         }
@@ -378,12 +382,9 @@ DataManager.populateVehicleDropDown = function() {
 };
 
 DataManager.populatePoolDropDown = function() {
-    var vehicleMap = DataManager.getVehicleMap();
     var vehiclePools = DataManager.getVehiclePools();
     var pools = DataManager.getPools();
     var poolMatches = pools.filter(function(id) { return Object.keys(vehiclePools).indexOf(id) > -1; });
-    var poolMap = {};
-    var setasides = DataManager.getSetasides();
     var count = 0;
     var poolId;
 
@@ -396,18 +397,14 @@ DataManager.populatePoolDropDown = function() {
         var poolData = vehiclePools[id];
         var poolName = poolData.vehicle.split('_').join(' ') + ' - ' + poolData.name;
 
-        if (setasides.length == 0 || vehicleMap[poolData.vehicle]["sb"]) {
-            poolMap[poolName] = id;
-            count += 1;
-            poolId = id;
-        }
-    }
-    Object.keys(poolMap).sort().forEach(function(name) {
         $("#pool-id")
             .append($("<option></option>")
-            .attr("value", poolMap[name])
-            .text(name));
-    });
+            .attr("value", id)
+            .text(poolName));
+
+	    count += 1;
+        poolId = id;
+    }
 
     if (poolMatches.length > 0) {
         var poolData = [];
