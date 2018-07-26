@@ -52,7 +52,7 @@ DataManager.initSearch = function() {
     $('#naics-code').select2({
         placeholder: 'Select a NAICS code',
         minimumResultsForSearch: 1,
-        width: '600px'
+        width: '620px'
     });
     $('#vehicle-id').select2({
         placeholder: 'Select a vehicle',
@@ -60,17 +60,17 @@ DataManager.initSearch = function() {
         width: '150px'
     });
     $('#pool-id').select2({
-        placeholder: 'Select a service category',
-        //minimumResultsForSearch: -1,
+        placeholder: 'Select service categories',
+        minimumResultsForSearch: -1,
         allowClear: true,
-        closeOnSelect: false,
-        width: '220px'
+        dropdownAutoWidth: false,
+        width: '235px'
     });
     $('#zone-id').select2({
         placeholder: 'Select a service zone',
         //minimumResultsForSearch: -1,
         allowClear: true,
-        width: '200px'
+        width: '205px'
     });
 };
 
@@ -557,7 +557,7 @@ LayoutManager.enableZone = function() {
 };
 
 LayoutManager.showZone = function() {
-    $("#pool-id").select2({width: '220px'});
+    $("#pool-search .select2-container--default").css('width', '235px');
     $("div#zone_select").show();
 };
 
@@ -567,7 +567,7 @@ LayoutManager.disableZone = function() {
 
 LayoutManager.hideZone = function() {
     $("div#zone_select").hide();
-    $("#pool-id").select2({width: '435px'});
+    $("#pool-search .select2-container--default").css('width', '455px');
 };
 
 LayoutManager.toggleZone = function() {
