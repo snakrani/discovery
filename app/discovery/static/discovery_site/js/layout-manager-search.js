@@ -21,21 +21,23 @@ LayoutManager.renderPoolInfo = function() {
     var poolNames = [];
 
     if (pools.length == 0) {
-        pools = Object.keys(vehiclePools).sort(function(a, b) {
-            a = vehiclePools[a];
-            b = vehiclePools[b];
-
-            if (a.vehicle == b.vehicle) {
-                if (vehicleMap[a.vehicle].pool_numeric) {
-                    return a.number - b.number;
-                }
-                else {
-                    return a.number > b.number ? 1 : -1;
-                }
-            }
-            return a.vehicle > b.vehicle ? 1 : -1;
-        });
+        pools = Object.keys(vehiclePools);
     }
+
+    pools = pools.sort(function(a, b) {
+        a = vehiclePools[a];
+        b = vehiclePools[b];
+
+        if (a.vehicle == b.vehicle) {
+            if (vehicleMap[a.vehicle].pool_numeric) {
+                return a.number - b.number;
+            }
+            else {
+                return a.number > b.number ? 1 : -1;
+            }
+        }
+        return a.vehicle > b.vehicle ? 1 : -1;
+    });
 
     for (var index = 0; index < pools.length; index++) {
         var poolData = vehiclePools[pools[index]];
