@@ -34,6 +34,15 @@ Array.prototype.removeEmpties = function() {
   return this;
 };
 
+Array.prototype.unique = function() {
+    var temp = {};
+
+    for (var index = 0; index < this.length; index++)
+        temp[this[index]] = true;
+
+    return Object.keys(temp);
+};
+
 // .bind() polyfill
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind#Compatibility
 if (!Function.prototype.bind) {
