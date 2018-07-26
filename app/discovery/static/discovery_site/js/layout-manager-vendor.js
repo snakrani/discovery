@@ -115,7 +115,7 @@ LayoutManager.renderResultInfo = function(vendor) {
         }
     }
     if (vehicles.length > 0) {
-        filterMessages.push(Array.from(new Set(vehicles)).join(', '));
+        filterMessages.push(vehicles.unique().join(', '));
     }
 
     if (naics) {
