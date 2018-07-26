@@ -395,7 +395,7 @@ DataManager.populatePoolDropDown = function() {
 
     for (var id in vehiclePools) {
         var poolData = vehiclePools[id];
-        var poolName = poolData.vehicle.split('_').join(' ') + ' - ' + poolData.name;
+        var poolName = poolData.vehicle.split('_').join(' ') + ' ' + poolData.number + ' - ' + poolData.name;
 
         $("#pool-id")
             .append($("<option></option>")
