@@ -38,7 +38,7 @@ var DataManager = {
             "pool_numeric": true
         },
         "PSS": {
-            "title": "Professional Services",
+            "title": "Professional Services Schedule",
             "sb": true,
             "pool_numeric": false
         }
