@@ -3,7 +3,7 @@
   "model": "categories.pool",
   "pk": "BMO_1",
   "fields": {
-    "name": "HVAC Mainentance",
+    "name": "HVAC Maintenance",
     "number": "1",
     "vehicle": "BMO",
     "threshold": "$15 million",
@@ -816,7 +816,7 @@
   "model": "categories.pool",
   "pk": "PSS_874",
   "fields": {
-    "name": "Mission Oriented Business Integrated Services (MOBIS)",
+    "name": "Mission Oriented Business Integrated Services",
     "number": "874",
     "vehicle": "PSS",
     "threshold": "",
@@ -843,7 +843,7 @@
   "model": "categories.pool",
   "pk": "PSS_874500",
   "fields": {
-    "name": "Logistics Worldwide (LOGWORLD)",
+    "name": "Logistics Worldwide",
     "number": "874500",
     "vehicle": "PSS",
     "threshold": "",
