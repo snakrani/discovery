@@ -47,31 +47,6 @@ DataManager.initSearch = function() {
         }
         return value;
     });
-
-    // Input element initialization
-    $('#naics-code').select2({
-        placeholder: 'Select a NAICS code',
-        minimumResultsForSearch: 1,
-        width: '620px'
-    });
-    $('#vehicle-id').select2({
-        placeholder: 'Select a vehicle',
-        minimumResultsForSearch: -1,
-        width: '150px'
-    });
-    $('#pool-id').select2({
-        placeholder: 'Select service categories',
-        minimumResultsForSearch: -1,
-        allowClear: true,
-        dropdownAutoWidth: false,
-        width: '235px'
-    });
-    $('#zone-id').select2({
-        placeholder: 'Select a service zone',
-        //minimumResultsForSearch: -1,
-        allowClear: true,
-        width: '205px'
-    });
 };
 
 DataManager.requestParams = function(queryData) {
@@ -96,7 +71,6 @@ DataManager.requestParams = function(queryData) {
     if (setasides.length > 0) {
         queryData['setasides'] = setasides.join(',');
     }
-    console.log("Query data: %o", queryData);
     return queryData;
 };
 
@@ -151,6 +125,9 @@ DataManager.sendVehicleChange = function() {
 };
 
 DataManager.setPools = function(values) {
+    if (typeof values == 'string') {
+        values = [values];
+    }
     DataManager.set('pools', values);
 };
 
@@ -167,12 +144,14 @@ DataManager.getPoolData = function() {
 };
 
 DataManager.sendPoolChange = function(e) {
-    console.log("Pool value: %o", $('#pool-id').val());
     DataManager.setPools($('#pool-id').val());
     EventManager.publish('poolChanged');
 };
 
 DataManager.setZones = function(values) {
+    if (typeof values == 'string') {
+        values = [values];
+    }
     DataManager.set('zones', values);
 };
 
@@ -181,7 +160,6 @@ DataManager.getZones = function() {
 };
 
 DataManager.sendZoneChange = function(e) {
-    console.log("Zone value: %o", $('#zone-id').val());
     DataManager.setZones($('#zone-id').val());
     EventManager.publish('zoneChanged');
 };
@@ -367,10 +345,12 @@ DataManager.populateVehicleDropDown = function() {
 
     if (vehicle && vehicle in vehicles) {
         $("#vehicle-id").val(vehicle);
+        $('#pool-id').attr('multiple', 'multiple');
     }
     else {
         DataManager.setVehicle(null);
         $("#vehicle-id").val('all');
+        $('#pool-id').removeAttr('multiple');
     }
 
     if (DataManager.getVehicle() != DataManager.getParameterByName('vehicle')) {
@@ -387,9 +367,6 @@ DataManager.populatePoolDropDown = function() {
     var poolMatches = pools.filter(function(id) { return Object.keys(vehiclePools).indexOf(id) > -1; });
     var count = 0;
     var poolId;
-
-    console.log("Pools: %o", pools);
-    console.log("Pool matches: %o", poolMatches);
 
     $('#pool-id').empty();
 
@@ -436,9 +413,6 @@ DataManager.populatePoolDropDown = function() {
         paramSelection = "";
     }
 
-    console.log("Pool parameters: %o", paramSelection);
-    console.log("Current pool selection: %o", currentSelection);
-
     if (currentSelection != paramSelection) {
         EventManager.publish('poolChanged');
     }
@@ -477,9 +451,6 @@ DataManager.populateZoneDropDown = function() {
             paramSelection = "";
         }
 
-        console.log("Zone parameters: %o", paramSelection);
-        console.log("Current zone selection: %o", currentSelection);
-
         if (currentSelection != paramSelection) {
             EventManager.publish('zoneChanged');
         }
@@ -490,7 +461,14 @@ DataManager.populateZoneDropDown = function() {
 };
 
 LayoutManager.initSearch = function() {
+    // Internal event subscriptions
     EventManager.subscribe('vehicleSelected', LayoutManager.toggleZone);
+
+    // Input element initialization
+    LayoutManager.initNaics('620px');
+    LayoutManager.initVehicle('150px');
+    LayoutManager.initPool('235px');
+    LayoutManager.initZone('205px');
 };
 
 LayoutManager.enableSearch = function() {
@@ -515,12 +493,32 @@ LayoutManager.disableSearch = function() {
     LayoutManager.disableFilters();
 };
 
+LayoutManager.initNaics = function(width) {
+    $('#naics-code').select2({
+        placeholder: 'Select a NAICS code',
+        minimumResultsForSearch: 1,
+        allowClear: true,
+        dropdownAutoWidth: true,
+        width: width
+    });
+};
+
 LayoutManager.enableNaics = function() {
     $("div#naics_select select").attr("disabled", false);
 };
 
 LayoutManager.disableNaics = function() {
     $("div#naics_select select").attr("disabled", true);
+};
+
+LayoutManager.initVehicle = function(width) {
+    $('#vehicle-id').select2({
+        placeholder: 'Select a vehicle',
+        minimumResultsForSearch: -1,
+        allowClear: true,
+        dropdownAutoWidth: true,
+        width: width
+    });
 };
 
 LayoutManager.enableVehicle = function() {
@@ -531,12 +529,32 @@ LayoutManager.disableVehicle = function() {
     $("div#vehicle_select select").attr("disabled", true);
 };
 
+LayoutManager.initPool = function(width) {
+    $('#pool-id').select2({
+        placeholder: 'Select service categories',
+        minimumResultsForSearch: -1,
+        allowClear: true,
+        dropdownAutoWidth: true,
+        width: width
+    });
+};
+
 LayoutManager.enablePool = function() {
     $("div#pool_select select").attr("disabled", false);
 };
 
 LayoutManager.disablePool = function() {
     $("div#pool_select select").attr("disabled", true);
+};
+
+LayoutManager.initZone = function(width) {
+    $('#zone-id').select2({
+        placeholder: 'Select service zones',
+        minimumResultsForSearch: -1,
+        allowClear: true,
+        dropdownAutoWidth: true,
+        width: width
+    });
 };
 
 LayoutManager.zoneActive = function() {
@@ -557,7 +575,7 @@ LayoutManager.enableZone = function() {
 };
 
 LayoutManager.showZone = function() {
-    $("#pool-search .select2-container--default").css('width', '235px');
+    LayoutManager.initPool('235px');
     $("div#zone_select").show();
 };
 
@@ -567,7 +585,7 @@ LayoutManager.disableZone = function() {
 
 LayoutManager.hideZone = function() {
     $("div#zone_select").hide();
-    $("#pool-search .select2-container--default").css('width', '455px');
+    LayoutManager.initPool('455px');
 };
 
 LayoutManager.toggleZone = function() {
