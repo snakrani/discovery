@@ -8,7 +8,7 @@ VEHICLE_CHOICES = (
     ('HCATS', 'HCATS Unrestricted'),
     ('BMO_SB', 'BMO Small Business'),
     ('BMO', 'BMO Unrestricted'),
-    ('PSS', 'Professional Services')
+    ('PSS', 'Professional Services Schedule')
 )
 
 
