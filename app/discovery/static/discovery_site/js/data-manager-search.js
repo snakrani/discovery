@@ -17,8 +17,8 @@ DataManager.getStatusCount = function() {
 
 DataManager.loadVendors = function() {
     var url = "/api/vendors/";
-    var pools = DataManager.getVehiclePools();
-    var pool = DataManager.getPool();
+    var vehiclePools = DataManager.getVehiclePools();
+    var pools = DataManager.getPools();
     var poolIds = [];
 
     var requestVars = DataManager.buildRequestQuery();
@@ -36,19 +36,21 @@ DataManager.loadVendors = function() {
     if ('naics' in requestVars) {
         queryData['contract_naics'] = requestVars['naics'];
     }
-    if (! $.isEmptyObject(pools)) {
-        if (pool) {
-            filters.push('(pools__pool__id' + '=' + pool + ')');
+    if (! $.isEmptyObject(vehiclePools)) {
+        if (pools.length > 0) {
+            for (var index = 0; index < pools.length; index++) {
+                poolIds.push(pools[index]);
+            }
         } else {
-            Object.keys(pools).forEach(function (id) {
+            Object.keys(vehiclePools).forEach(function (id) {
                 poolIds.push(id);
             });
-            filters.push('(pools__pool__id__in' + '=' + poolIds.join(',') + ')');
         }
+        filters.push('(pools__pool__id__in' + '=' + poolIds.join(',') + ')');
     }
 
-    if (LayoutManager.zoneActive() && 'zone' in requestVars) {
-        filters.push('(pools__zones__id' + '=' + requestVars['zone'] + ')');
+    if (LayoutManager.zoneActive() && 'zones' in requestVars) {
+        filters.push('(pools__zones__id__in' + '=' + requestVars['zones'] + ')');
     }
 
     if ('setasides' in requestVars) {

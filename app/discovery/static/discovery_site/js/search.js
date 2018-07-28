@@ -1,10 +1,10 @@
 
 DataManager.initSearch = function() {
     // External action subscriptions
-    $('#vehicle-id').on('click select2:select select2:unselecting', DataManager.sendVehicleChange);
-    $('#pool-id').on('click select2:select select2:unselecting', DataManager.sendPoolChange);
-    $('#naics-code').on('click select2:select select2:unselecting', DataManager.sendNaicsChange);
-    $('#zone-id').on('click select2:select select2:unselecting', DataManager.sendZoneChange);
+    $('#vehicle-id').on('click select2:select select2:unselect', DataManager.sendVehicleChange);
+    $('#pool-id').on('click select2:select select2:unselect', DataManager.sendPoolChange);
+    $('#naics-code').on('click select2:select select2:unselect', DataManager.sendNaicsChange);
+    $('#zone-id').on('click select2:select select2:unselect', DataManager.sendZoneChange);
     $('#setaside-filters').change(DataManager.sendFilterChange);
 
     // Internal event subscriptions
@@ -24,12 +24,19 @@ DataManager.initSearch = function() {
     EventManager.subscribe('filtersChanged', DataManager.update);
 
     // Parameter initialization
+    function splitParam(field, value) {
+        if (value) {
+            value = value.split(',');
+        }
+        return value;
+    };
+
     DataManager.collect('naics');
     DataManager.collect('vehicle');
-    DataManager.collect('pool');
-    DataManager.collect('zone');
+    DataManager.collect('pools', [], splitParam);
+    DataManager.collect('zones', [], splitParam);
 
-    DataManager.collect('setasides', null, function(field, value) {
+    DataManager.collect('setasides', [], function(field, value) {
         if (value) {
             value = value.split(',');
             var len = value.length - 1;
@@ -40,35 +47,13 @@ DataManager.initSearch = function() {
         }
         return value;
     });
-
-    // Input element initialization
-    $('#naics-code').select2({
-        placeholder: 'Select a NAICS code',
-        minimumResultsForSearch: 1,
-        width: '600px'
-    });
-    $('#vehicle-id').select2({
-        placeholder: 'Select a vehicle',
-        minimumResultsForSearch: -1,
-        width: '150px'
-    });
-    $('#pool-id').select2({
-        placeholder: 'Select a service category',
-        minimumResultsForSearch: -1,
-        width: '220px'
-    });
-    $('#zone-id').select2({
-        placeholder: 'Select a service zone',
-        minimumResultsForSearch: -1,
-        width: '200px'
-    });
 };
 
 DataManager.requestParams = function(queryData) {
     var naics = DataManager.getNaics();
     var vehicle = DataManager.getVehicle();
-    var pool = DataManager.getPool();
-    var zone = DataManager.getZone();
+    var pools = DataManager.getPools();
+    var zones = DataManager.getZones();
     var setasides = DataManager.getSetasides();
 
     if (naics) {
@@ -77,11 +62,11 @@ DataManager.requestParams = function(queryData) {
     if (vehicle) {
         queryData['vehicle'] = vehicle;
     }
-    if (pool && pool in DataManager.getVehiclePools()) {
-        queryData['pool'] = pool;
+    if (pools.length > 0) {
+        queryData['pools'] = pools.join(',');
     }
-    if (zone) {
-        queryData['zone'] = zone;
+    if (zones.length > 0) {
+        queryData['zones'] = zones.join(',');
     }
     if (setasides.length > 0) {
         queryData['setasides'] = setasides.join(',');
@@ -113,6 +98,18 @@ DataManager.getNaicsMap = function() {
     return DataManager.get('naics_map', {});
 };
 
+DataManager.defaultNaicsWidth = function() {
+    return '620px';
+};
+
+DataManager.setNaicsWidth = function(width) {
+    DataManager.set('naics_width', width);
+};
+
+DataManager.getNaicsWidth = function() {
+    return DataManager.get('naics_width', DataManager.defaultNaicsWidth());
+};
+
 DataManager.sendNaicsChange = function(e) {
     DataManager.setNaics($('#naics-code').val());
     EventManager.publish('naicsChanged');
@@ -134,42 +131,108 @@ DataManager.getVehiclePools = function() {
     return DataManager.get('vehicle_pools', {});
 };
 
+DataManager.defaultVehicleWidth = function() {
+    return '150px';
+};
+
+DataManager.setVehicleWidth = function(width) {
+    DataManager.set('vehicle_width', width);
+};
+
+DataManager.getVehicleWidth = function() {
+    return DataManager.get('vehicle_width', DataManager.defaultVehicleWidth());
+};
+
 DataManager.sendVehicleChange = function() {
     DataManager.setVehicle($('#vehicle-id').val());
     EventManager.publish('vehicleChanged');
 };
 
-DataManager.setPool = function(value) {
-    DataManager.set('pool', value);
+DataManager.setPools = function(values) {
+    if (typeof values == 'string') {
+        values = [values];
+    }
+    DataManager.set('pools', values);
 };
 
-DataManager.getPool = function() {
-    return DataManager.get('pool', null);
+DataManager.getPools = function() {
+    return DataManager.get('pools', []);
 };
 
-DataManager.setPoolData = function(value) {
-    DataManager.set('pool_data', value);
+DataManager.defaultPoolWidth = function() {
+    return '455px';
 };
 
-DataManager.getPoolData = function() {
-    return DataManager.get('pool_data', null);
+DataManager.compressedPoolWidth = function() {
+    return '235px';
+};
+
+DataManager.setPoolWidth = function(width) {
+    DataManager.set('pool_width', width);
+};
+
+DataManager.getPoolWidth = function() {
+    return DataManager.get('pool_width', DataManager.defaultPoolWidth());
+};
+
+DataManager.getSortedPools = function(pools, defaultPools) {
+    var vehicleMap = DataManager.getVehicleMap();
+    var vehiclePools = DataManager.getVehiclePools();
+    var vehiclePoolIds = Object.keys(vehiclePools);
+
+    if (pools.length == 0 && defaultPools) {
+        pools = defaultPools;
+    }
+    else {
+        pools = pools.filter(function(id) { return vehiclePoolIds.indexOf(id) > -1; });
+    }
+    pools = pools.sort(function(a, b) {
+        a = vehiclePools[a];
+        b = vehiclePools[b];
+
+        if (a.vehicle == b.vehicle) {
+            if (vehicleMap[a.vehicle].pool_numeric) {
+                return a.number - b.number;
+            }
+            else {
+                return a.number > b.number ? 1 : -1;
+            }
+        }
+        return a.vehicle > b.vehicle ? 1 : -1;
+    });
+    return pools;
 };
 
 DataManager.sendPoolChange = function(e) {
-    DataManager.setPool($('#pool-id').val());
+    DataManager.setPools($('#pool-id').val());
     EventManager.publish('poolChanged');
 };
 
-DataManager.setZone = function(value) {
-    DataManager.set('zone', value);
+DataManager.setZones = function(values) {
+    if (typeof values == 'string') {
+        values = [values];
+    }
+    DataManager.set('zones', values);
 };
 
-DataManager.getZone = function() {
-    return DataManager.get('zone', null);
+DataManager.getZones = function() {
+    return DataManager.get('zones', []);
+};
+
+DataManager.defaultZoneWidth = function() {
+    return '205px';
+};
+
+DataManager.setZoneWidth = function(width) {
+    DataManager.set('zone_width', width);
+};
+
+DataManager.getZoneWidth = function() {
+    return DataManager.get('zone_width', DataManager.defaultZoneWidth());
 };
 
 DataManager.sendZoneChange = function(e) {
-    DataManager.setZone($('#zone-id').val());
+    DataManager.setZones($('#zone-id').val());
     EventManager.publish('zoneChanged');
 };
 
@@ -275,7 +338,7 @@ DataManager.populateNaicsDropDown = function(data) {
     var naicsMap = DataManager.getNaicsMap();
     var naics = DataManager.getNaics();
     var vehicle = DataManager.getVehicle();
-    var pool = DataManager.getPool();
+    var pools = DataManager.getPools();
 
     DataManager.getAPIRequest(
         "/api/naics/",
@@ -287,7 +350,21 @@ DataManager.populateNaicsDropDown = function(data) {
                     .text("All NAICS codes"));
 
             $.each(data.results, function(key, result) {
-                if (! pool || $.inArray(pool, naicsMap[result.code]) !== -1) {
+                var included = false;
+
+                if (pools.length > 0) {
+                    for (var index = 0; index < pools.length; index++) {
+                        if ($.inArray(pools[index], naicsMap[result.code]) !== -1) {
+                            included = true;
+                            break;
+                        }
+                    }
+                }
+                else {
+                    included = true;
+                }
+
+                if (included) {
                     $("#naics-code")
                         .append($("<option></option>")
                         .attr("value", result.code)
@@ -340,10 +417,12 @@ DataManager.populateVehicleDropDown = function() {
 
     if (vehicle && vehicle in vehicles) {
         $("#vehicle-id").val(vehicle);
+        $('#pool-id').attr('multiple', 'multiple');
     }
     else {
         DataManager.setVehicle(null);
         $("#vehicle-id").val('all');
+        $('#pool-id').removeAttr('multiple');
     }
 
     if (DataManager.getVehicle() != DataManager.getParameterByName('vehicle')) {
@@ -355,47 +434,78 @@ DataManager.populateVehicleDropDown = function() {
 };
 
 DataManager.populatePoolDropDown = function() {
-    var pools = DataManager.getVehiclePools();
-    var pool = DataManager.getPool();
+    var vehicle = DataManager.getVehicle();
+    var vehiclePools = DataManager.getVehiclePools();
+    var vehiclePoolIds = DataManager.getSortedPools(Object.keys(vehiclePools));
+    var pools = DataManager.getSortedPools(DataManager.getPools());
     var count = 0;
     var poolId;
 
-    $('#pool-id').empty()
-        .append($("<option></option>")
+    if (vehicle) {
+        $('#pool-id').empty();
+    }
+    else {
+        $('#pool-id').empty()
+            .append($("<option></option>")
             .attr("value", 'all')
             .text("All service categories"));
+    }
 
-    for (var id in pools) {
-        var poolData = pools[id];
-        var poolName = poolData.vehicle.split('_').join(' ') + ' - ' + poolData.name;
+    for (var index = 0; index < vehiclePoolIds.length; index++) {
+        var id = vehiclePoolIds[index];
+        var poolData = vehiclePools[id];
+        var poolName = poolData.vehicle.split('_').join(' ') + ' ' + poolData.number + ' - ' + poolData.name;
 
         $("#pool-id")
             .append($("<option></option>")
             .attr("value", id)
             .text(poolName));
 
-        count += 1;
+	    count += 1;
         poolId = id;
     }
 
-    if (pool && pool in pools) {
-        DataManager.setPoolData(pools[pool]);
-        $("#pool-id").val(pool);
+    if (pools.length > 0) {
+        if (vehicle) {
+            DataManager.setPools(pools);
+            $("#pool-id").val(pools);
+        }
+        else {
+            DataManager.setPools([pools[0]]);
+            $("#pool-id").val(pools[0]);
+        }
     }
     else {
         if (count == 1) {
-            DataManager.setPool(poolId);
-            DataManager.setPoolData(pools[pool]);
-            $("#pool-id").val(poolId);
+            DataManager.setPools([poolId]);
+
+            if (vehicle) {
+                $("#pool-id").val([poolId]);
+            }
+            else {
+                $("#pool-id").val(poolId);
+            }
         }
         else {
-            DataManager.setPool(null);
-            DataManager.setPoolData(null);
-            $("#pool-id").val('all');
+            DataManager.setPools([]);
+
+            if (vehicle) {
+                $("#pool-id").val([]);
+            }
+            else {
+                $("#pool-id").val('all');
+            }
         }
     }
 
-    if (DataManager.getPool() != DataManager.getParameterByName('pool')) {
+    var currentSelection = DataManager.getPools().join(',');
+    var paramSelection = DataManager.getParameterByName('pools');
+
+    if (!paramSelection) {
+        paramSelection = "";
+    }
+
+    if (currentSelection != paramSelection) {
         EventManager.publish('poolChanged');
     }
     else {
@@ -404,15 +514,12 @@ DataManager.populatePoolDropDown = function() {
 };
 
 DataManager.populateZoneDropDown = function() {
-    var zone = DataManager.getZone();
+    var zones = DataManager.getZones();
     var url = "/api/zones/";
     var queryData = {count: 1000};
 
     DataManager.getAPIRequest(url, queryData, function(data) {
-        $("#zone-id").empty()
-            .append($("<option></option>")
-                .attr("value", 'all')
-                .text("All zones"));
+        $("#zone-id").empty();
 
         $.each(data.results, function(id, result) {
             $("#zone-id")
@@ -421,15 +528,22 @@ DataManager.populateZoneDropDown = function() {
                 .text("Zone " + result.id + " (" + result.state.join(', ') + ")"));
         });
 
-        if (zone) {
-            $("#zone-id").val(zone);
+        if (zones.length > 0) {
+            $("#zone-id").val(zones);
         }
         else {
-            DataManager.setZone(null);
-            $("#zone-id").val('all');
+            DataManager.setZones([]);
+            $("#zone-id").val([]);
         }
 
-        if (DataManager.getZone() != DataManager.getParameterByName('zone')) {
+        var currentSelection = DataManager.getZones().join(',');
+        var paramSelection = DataManager.getParameterByName('zones');
+
+        if (!paramSelection) {
+            paramSelection = "";
+        }
+
+        if (currentSelection != paramSelection) {
             EventManager.publish('zoneChanged');
         }
         else {
@@ -439,7 +553,28 @@ DataManager.populateZoneDropDown = function() {
 };
 
 LayoutManager.initSearch = function() {
-    EventManager.subscribe('vehicleSelected', LayoutManager.toggleZone);
+    // Internal event subscriptions
+    EventManager.subscribe('dataInitialized', LayoutManager.updateSearch);
+
+    // Input element initialization
+    if (LayoutManager.zoneActive()) {
+        DataManager.setPoolWidth(DataManager.compressedPoolWidth());
+    }
+
+    LayoutManager.initNaics();
+    LayoutManager.initVehicle();
+    LayoutManager.initPool();
+    LayoutManager.initZone();
+};
+
+LayoutManager.updateSearch = function() {
+    // Element actions
+    setTimeout(function(){
+        LayoutManager.initNaics(true);
+        LayoutManager.initVehicle(true);
+        LayoutManager.initPool(true);
+        LayoutManager.initZone(true);
+    }, 50);
 };
 
 LayoutManager.enableSearch = function() {
@@ -450,7 +585,7 @@ LayoutManager.enableSearch = function() {
     LayoutManager.enableVehicle();
     LayoutManager.enablePool();
     LayoutManager.enableZone();
-    LayoutManager.enableFilters();
+    LayoutManager.toggleFilters();
 };
 
 LayoutManager.disableSearch = function() {
@@ -464,12 +599,36 @@ LayoutManager.disableSearch = function() {
     LayoutManager.disableFilters();
 };
 
+LayoutManager.initNaics = function(update) {
+    if (update) {
+        $('#naics-code').select2('destroy');
+    }
+    $('#naics-code').select2({
+        placeholder: 'Select NAICS code',
+        minimumResultsForSearch: 1,
+        dropdownAutoWidth: true,
+        width: DataManager.getNaicsWidth()
+    });
+};
+
 LayoutManager.enableNaics = function() {
     $("div#naics_select select").attr("disabled", false);
 };
 
 LayoutManager.disableNaics = function() {
     $("div#naics_select select").attr("disabled", true);
+};
+
+LayoutManager.initVehicle = function(update) {
+    if (update) {
+        $('#vehicle-id').select2('destroy');
+    }
+    $('#vehicle-id').select2({
+        placeholder: 'Select vehicle',
+        minimumResultsForSearch: -1,
+        dropdownAutoWidth: true,
+        width: DataManager.getVehicleWidth()
+    });
 };
 
 LayoutManager.enableVehicle = function() {
@@ -480,12 +639,43 @@ LayoutManager.disableVehicle = function() {
     $("div#vehicle_select select").attr("disabled", true);
 };
 
+LayoutManager.initPool = function(update) {
+    var vehicle = DataManager.getVehicle();
+    var options = {
+        placeholder: 'Select service categories',
+        minimumResultsForSearch: -1,
+        dropdownAutoWidth: true,
+        width: DataManager.getPoolWidth()
+    };
+    if (vehicle) {
+        options['allowClear'] = true;
+    }
+
+    if (update) {
+        $('#pool-id').select2('destroy');
+    }
+    $('#pool-id').select2(options);
+};
+
 LayoutManager.enablePool = function() {
     $("div#pool_select select").attr("disabled", false);
 };
 
 LayoutManager.disablePool = function() {
     $("div#pool_select select").attr("disabled", true);
+};
+
+LayoutManager.initZone = function(update) {
+    if (update) {
+        $('#zone-id').select2('destroy');
+    }
+    $('#zone-id').select2({
+        placeholder: 'Select service zones',
+        minimumResultsForSearch: -1,
+        allowClear: true,
+        dropdownAutoWidth: true,
+        width: DataManager.getZoneWidth()
+    });
 };
 
 LayoutManager.zoneActive = function() {
@@ -506,7 +696,7 @@ LayoutManager.enableZone = function() {
 };
 
 LayoutManager.showZone = function() {
-    $("#pool-id").select2({width: '220px'});
+    DataManager.setPoolWidth(DataManager.compressedPoolWidth());
     $("div#zone_select").show();
 };
 
@@ -515,8 +705,8 @@ LayoutManager.disableZone = function() {
 };
 
 LayoutManager.hideZone = function() {
+    DataManager.setPoolWidth(DataManager.defaultPoolWidth());
     $("div#zone_select").hide();
-    $("#pool-id").select2({width: '435px'});
 };
 
 LayoutManager.toggleZone = function() {

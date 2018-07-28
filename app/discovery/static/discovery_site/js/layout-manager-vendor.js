@@ -7,6 +7,18 @@ LayoutManager.initializers.vendor = function() {
     EventManager.subscribe('contractsLoaded', LayoutManager.renderContracts);
 
     EventManager.subscribe('pageChanged', DataManager.update);
+
+    // Input element initialization
+    LayoutManager.initNaics();
+};
+
+LayoutManager.initNaics = function() {
+    $('#naics-code').select2({
+        placeholder: 'Select NAICS code',
+        minimumResultsForSearch: 1,
+        dropdownAutoWidth: true,
+        width: DataManager.getNaicsWidth()
+    });
 };
 
 LayoutManager.renderVendor = function() {

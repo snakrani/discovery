@@ -178,6 +178,18 @@ DataManager.getNaicsMap = function() {
     return DataManager.get('naics_map', {});
 };
 
+DataManager.defaultNaicsWidth = function() {
+    return '400px';
+};
+
+DataManager.setNaicsWidth = function(width) {
+    DataManager.set('naics_width', width);
+};
+
+DataManager.getNaicsWidth = function() {
+    return DataManager.get('naics_width', DataManager.defaultNaicsWidth());
+};
+
 DataManager.sendNaicsChange = function(e) {
     DataManager.setNaics($('#naics-code').val());
     EventManager.publish('naicsChanged');
@@ -289,11 +301,6 @@ DataManager.loadContracts = function() {
 DataManager.populateNaicsDropDown = function(data) {
     var naicsMap = DataManager.getNaicsMap();
     var naics = DataManager.getNaics();
-
-    $('#naics-code').select2({
-        minimumResultsForSearch: -1,
-        width: '400px'
-    });
 
     DataManager.getAPIRequest(
         "/api/naics/",

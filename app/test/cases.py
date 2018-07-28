@@ -651,8 +651,10 @@ class MetaAcceptanceSchema(type):
                                 if action_value:
                                     action_value = [value.strip() for value in action_value.split(',')]
                                     action_value = action_value[0] if len(action_value) == 1 else action_value
-                        
+
                             resp.execute(action_elem, action_event, action_value)
+                            #resp.screenshot(name, action)
+
                             tests(resp, action_data)
         
             if 'params' in schema:
