@@ -290,10 +290,17 @@ h4.data {
     max-height: 50px;
 }
 
-.select2-dropdown {
-    border: 5px solid #08415f;
-    border-bottom: 10px solid #08415f;
+.select2-dropdown { /* #08415f */
+    border-left: 5px solid #000;
+    border-right: 5px solid #000;
+    border-bottom: 10px solid #000;
     padding: 5px;
+    margin-top: -6px;
+}
+.select2-container--open .select2-dropdown--below {
+    border-top: 10px solid #000;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 }
 
 .select2-dropdown .select2-search input.select2-search__field {
