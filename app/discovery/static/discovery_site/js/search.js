@@ -1,10 +1,10 @@
 
 DataManager.initSearch = function() {
     // External action subscriptions
-    $('#vehicle-id').on('click select2:select select2:unselecting', DataManager.sendVehicleChange);
-    $('#pool-id').on('click select2:select select2:unselecting', DataManager.sendPoolChange);
-    $('#naics-code').on('click select2:select select2:unselecting', DataManager.sendNaicsChange);
-    $('#zone-id').on('click select2:select select2:unselecting', DataManager.sendZoneChange);
+    $('#vehicle-id').on('click select2:select select2:unselect', DataManager.sendVehicleChange);
+    $('#pool-id').on('click select2:select select2:unselect', DataManager.sendPoolChange);
+    $('#naics-code').on('click select2:select select2:unselect', DataManager.sendNaicsChange);
+    $('#zone-id').on('click select2:select select2:unselect', DataManager.sendZoneChange);
     $('#setaside-filters').change(DataManager.sendFilterChange);
 
     // Internal event subscriptions
@@ -98,6 +98,18 @@ DataManager.getNaicsMap = function() {
     return DataManager.get('naics_map', {});
 };
 
+DataManager.defaultNaicsWidth = function() {
+    return '620px';
+};
+
+DataManager.setNaicsWidth = function(width) {
+    DataManager.set('naics_width', width);
+};
+
+DataManager.getNaicsWidth = function() {
+    return DataManager.get('naics_width', DataManager.defaultNaicsWidth());
+};
+
 DataManager.sendNaicsChange = function(e) {
     DataManager.setNaics($('#naics-code').val());
     EventManager.publish('naicsChanged');
@@ -119,6 +131,18 @@ DataManager.getVehiclePools = function() {
     return DataManager.get('vehicle_pools', {});
 };
 
+DataManager.defaultVehicleWidth = function() {
+    return '150px';
+};
+
+DataManager.setVehicleWidth = function(width) {
+    DataManager.set('vehicle_width', width);
+};
+
+DataManager.getVehicleWidth = function() {
+    return DataManager.get('vehicle_width', DataManager.defaultVehicleWidth());
+};
+
 DataManager.sendVehicleChange = function() {
     DataManager.setVehicle($('#vehicle-id').val());
     EventManager.publish('vehicleChanged');
@@ -135,12 +159,48 @@ DataManager.getPools = function() {
     return DataManager.get('pools', []);
 };
 
-DataManager.setPoolData = function(values) {
-    DataManager.set('pool_data', values);
+DataManager.defaultPoolWidth = function() {
+    return '455px';
 };
 
-DataManager.getPoolData = function() {
-    return DataManager.get('pool_data', []);
+DataManager.compressedPoolWidth = function() {
+    return '235px';
+};
+
+DataManager.setPoolWidth = function(width) {
+    DataManager.set('pool_width', width);
+};
+
+DataManager.getPoolWidth = function() {
+    return DataManager.get('pool_width', DataManager.defaultPoolWidth());
+};
+
+DataManager.getSortedPools = function(pools, defaultPools) {
+    var vehicleMap = DataManager.getVehicleMap();
+    var vehiclePools = DataManager.getVehiclePools();
+    var vehiclePoolIds = Object.keys(vehiclePools);
+
+    if (pools.length == 0 && defaultPools) {
+        pools = defaultPools;
+    }
+    else {
+        pools = pools.filter(function(id) { return vehiclePoolIds.indexOf(id) > -1; });
+    }
+    pools = pools.sort(function(a, b) {
+        a = vehiclePools[a];
+        b = vehiclePools[b];
+
+        if (a.vehicle == b.vehicle) {
+            if (vehicleMap[a.vehicle].pool_numeric) {
+                return a.number - b.number;
+            }
+            else {
+                return a.number > b.number ? 1 : -1;
+            }
+        }
+        return a.vehicle > b.vehicle ? 1 : -1;
+    });
+    return pools;
 };
 
 DataManager.sendPoolChange = function(e) {
@@ -157,6 +217,18 @@ DataManager.setZones = function(values) {
 
 DataManager.getZones = function() {
     return DataManager.get('zones', []);
+};
+
+DataManager.defaultZoneWidth = function() {
+    return '205px';
+};
+
+DataManager.setZoneWidth = function(width) {
+    DataManager.set('zone_width', width);
+};
+
+DataManager.getZoneWidth = function() {
+    return DataManager.get('zone_width', DataManager.defaultZoneWidth());
 };
 
 DataManager.sendZoneChange = function(e) {
@@ -362,15 +434,25 @@ DataManager.populateVehicleDropDown = function() {
 };
 
 DataManager.populatePoolDropDown = function() {
+    var vehicle = DataManager.getVehicle();
     var vehiclePools = DataManager.getVehiclePools();
-    var pools = DataManager.getPools();
-    var poolMatches = pools.filter(function(id) { return Object.keys(vehiclePools).indexOf(id) > -1; });
+    var vehiclePoolIds = DataManager.getSortedPools(Object.keys(vehiclePools));
+    var pools = DataManager.getSortedPools(DataManager.getPools());
     var count = 0;
     var poolId;
 
-    $('#pool-id').empty();
+    if (vehicle) {
+        $('#pool-id').empty();
+    }
+    else {
+        $('#pool-id').empty()
+            .append($("<option></option>")
+            .attr("value", 'all')
+            .text("All service categories"));
+    }
 
-    for (var id in vehiclePools) {
+    for (var index = 0; index < vehiclePoolIds.length; index++) {
+        var id = vehiclePoolIds[index];
         var poolData = vehiclePools[id];
         var poolName = poolData.vehicle.split('_').join(' ') + ' ' + poolData.number + ' - ' + poolData.name;
 
@@ -383,26 +465,36 @@ DataManager.populatePoolDropDown = function() {
         poolId = id;
     }
 
-    if (poolMatches.length > 0) {
-        var poolData = [];
-
-        for (var index = 0; index < poolMatches.length; index++) {
-            poolData.push(vehiclePools[poolMatches[index]]);
+    if (pools.length > 0) {
+        if (vehicle) {
+            DataManager.setPools(pools);
+            $("#pool-id").val(pools);
         }
-
-        DataManager.setPoolData(poolData);
-        $("#pool-id").val(poolMatches);
+        else {
+            DataManager.setPools([pools[0]]);
+            $("#pool-id").val(pools[0]);
+        }
     }
     else {
         if (count == 1) {
             DataManager.setPools([poolId]);
-            DataManager.setPoolData([pools[pool]]);
-            $("#pool-id").val([poolId]);
+
+            if (vehicle) {
+                $("#pool-id").val([poolId]);
+            }
+            else {
+                $("#pool-id").val(poolId);
+            }
         }
         else {
             DataManager.setPools([]);
-            DataManager.setPoolData([]);
-            $("#pool-id").val([]);
+
+            if (vehicle) {
+                $("#pool-id").val([]);
+            }
+            else {
+                $("#pool-id").val('all');
+            }
         }
     }
 
@@ -462,13 +554,29 @@ DataManager.populateZoneDropDown = function() {
 
 LayoutManager.initSearch = function() {
     // Internal event subscriptions
-    EventManager.subscribe('vehicleSelected', LayoutManager.toggleZone);
+    EventManager.subscribe('dataInitialized', LayoutManager.updateSearch);
 
     // Input element initialization
-    LayoutManager.initNaics('620px');
-    LayoutManager.initVehicle('150px');
-    LayoutManager.initPool('235px');
-    LayoutManager.initZone('205px');
+    if (LayoutManager.zoneActive()) {
+        DataManager.setPoolWidth(DataManager.compressedPoolWidth());
+    }
+
+    LayoutManager.initNaics();
+    LayoutManager.initVehicle();
+    LayoutManager.initPool();
+    LayoutManager.initZone();
+};
+
+LayoutManager.updateSearch = function() {
+    // Element actions
+    setTimeout(function(){
+        LayoutManager.initNaics(true);
+        LayoutManager.initVehicle(true);
+        LayoutManager.initPool(true);
+        LayoutManager.initZone(true);
+    }, 50);
+
+    //LayoutManager.toggleZone();
 };
 
 LayoutManager.enableSearch = function() {
@@ -479,7 +587,7 @@ LayoutManager.enableSearch = function() {
     LayoutManager.enableVehicle();
     LayoutManager.enablePool();
     LayoutManager.enableZone();
-    LayoutManager.enableFilters();
+    LayoutManager.toggleFilters();
 };
 
 LayoutManager.disableSearch = function() {
@@ -493,13 +601,15 @@ LayoutManager.disableSearch = function() {
     LayoutManager.disableFilters();
 };
 
-LayoutManager.initNaics = function(width) {
+LayoutManager.initNaics = function(update) {
+    if (update) {
+        $('#naics-code').select2('destroy');
+    }
     $('#naics-code').select2({
-        placeholder: 'Select a NAICS code',
+        placeholder: 'Select NAICS code',
         minimumResultsForSearch: 1,
-        allowClear: true,
         dropdownAutoWidth: true,
-        width: width
+        width: DataManager.getNaicsWidth()
     });
 };
 
@@ -511,13 +621,15 @@ LayoutManager.disableNaics = function() {
     $("div#naics_select select").attr("disabled", true);
 };
 
-LayoutManager.initVehicle = function(width) {
+LayoutManager.initVehicle = function(update) {
+    if (update) {
+        $('#vehicle-id').select2('destroy');
+    }
     $('#vehicle-id').select2({
-        placeholder: 'Select a vehicle',
+        placeholder: 'Select vehicle',
         minimumResultsForSearch: -1,
-        allowClear: true,
         dropdownAutoWidth: true,
-        width: width
+        width: DataManager.getVehicleWidth()
     });
 };
 
@@ -529,14 +641,22 @@ LayoutManager.disableVehicle = function() {
     $("div#vehicle_select select").attr("disabled", true);
 };
 
-LayoutManager.initPool = function(width) {
-    $('#pool-id').select2({
+LayoutManager.initPool = function(update) {
+    var vehicle = DataManager.getVehicle();
+    var options = {
         placeholder: 'Select service categories',
         minimumResultsForSearch: -1,
-        allowClear: true,
         dropdownAutoWidth: true,
-        width: width
-    });
+        width: DataManager.getPoolWidth()
+    };
+    if (vehicle) {
+        options['allowClear'] = true;
+    }
+
+    if (update) {
+        $('#pool-id').select2('destroy');
+    }
+    $('#pool-id').select2(options);
 };
 
 LayoutManager.enablePool = function() {
@@ -547,13 +667,16 @@ LayoutManager.disablePool = function() {
     $("div#pool_select select").attr("disabled", true);
 };
 
-LayoutManager.initZone = function(width) {
+LayoutManager.initZone = function(update) {
+    if (update) {
+        $('#zone-id').select2('destroy');
+    }
     $('#zone-id').select2({
         placeholder: 'Select service zones',
         minimumResultsForSearch: -1,
         allowClear: true,
         dropdownAutoWidth: true,
-        width: width
+        width: DataManager.getZoneWidth()
     });
 };
 
@@ -575,7 +698,7 @@ LayoutManager.enableZone = function() {
 };
 
 LayoutManager.showZone = function() {
-    LayoutManager.initPool('235px');
+    DataManager.setPoolWidth(DataManager.compressedPoolWidth());
     $("div#zone_select").show();
 };
 
@@ -584,8 +707,8 @@ LayoutManager.disableZone = function() {
 };
 
 LayoutManager.hideZone = function() {
+    DataManager.setPoolWidth(DataManager.defaultPoolWidth());
     $("div#zone_select").hide();
-    LayoutManager.initPool('455px');
 };
 
 LayoutManager.toggleZone = function() {
