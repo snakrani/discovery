@@ -83,7 +83,7 @@ class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
                 'vendor_table': (10, 'h_naics_results', 'desc', ('Prev', '1'), '4')
             }
         }
-    }, 'url')
+    })
     
     def initialize(self):
         self.path = 'results'
