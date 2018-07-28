@@ -227,7 +227,7 @@ h4.data {
 
 #combined_search {
     width: 1100px;
-    min-height: 230px;
+    min-height: 200px;
     height: 100%;
     padding-top: 7px;
     margin-left: auto;
@@ -290,6 +290,12 @@ h4.data {
     max-height: 50px;
 }
 
+.select2-dropdown {
+    border: 5px solid #08415f;
+    border-bottom: 10px solid #08415f;
+    padding: 5px;
+}
+
 .select2-dropdown .select2-search input.select2-search__field {
     min-height: 40px;
     max-height: 50px;
@@ -305,6 +311,9 @@ h4.data {
 .select2-container--default .select2-results .select2-results__options {
     background-color: #fff;
     min-width: 200px;
+}
+.select2-container--default .select2-results .select2-results__option {
+    border-bottom: 2px solid #f1f2d0;
 }
 
 .select2-container .select2-selection--multiple .select2-selection__rendered {
