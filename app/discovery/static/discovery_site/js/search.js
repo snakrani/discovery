@@ -575,8 +575,6 @@ LayoutManager.updateSearch = function() {
         LayoutManager.initPool(true);
         LayoutManager.initZone(true);
     }, 50);
-
-    //LayoutManager.toggleZone();
 };
 
 LayoutManager.enableSearch = function() {
