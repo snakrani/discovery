@@ -17,21 +17,21 @@ class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
             'unfiltered': {
                 'naics': ('all', 78, True),
                 'vehicle': ('all', 8, True),
-                'pool': ('all', 59, 59, True),
+                'pool': ('all', 60, 59, True),
                 'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (191, 'results/csv/?'),
                 'vendor_table': (50, 'h_naics_results', 'desc', ('Prev', '1'), '4')
             },
             'pool_links': {
-                'params': {'vehicle': 'BMO_SB', 'pool': 'BMO_SB_1'},
+                'params': {'vehicle': 'BMO_SB', 'pools': 'BMO_SB_1'},
                 'action': ('#link_BMO_SB_1', 'click'),
                 'naics': ('all', 2, True),
                 'vehicle': ('BMO_SB', 8, True),
                 'pool': ('BMO_SB_1', 17, 1, True),
                 'zone': ('', 6, True, True),
                 'setaside_filters': (None, 0, True),
-                'vendor_result_info': (10, 'results/csv/?vehicle=BMO_SB&pool=BMO_SB_1&'),
+                'vendor_result_info': (10, 'results/csv/?vehicle=BMO_SB&pools=BMO_SB_1&'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'vendor_vehicle_links': {
@@ -50,7 +50,7 @@ class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
                 'action': (('th.h_vendor_name', 'click'), ('th.h_vendor_name', 'click')),
                 'naics': ('all', 78, True),
                 'vehicle': ('all', 8, True),
-                'pool': ('all', 59, 59, True),
+                'pool': ('all', 60, 59, True),
                 'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (191, 'results/csv/?ordering=name'),
@@ -66,7 +66,7 @@ class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
                 'action': ('link_text:3', 'click'),
                 'naics': ('all', 78, True),
                 'vehicle': ('all', 8, True),
-                'pool': ('all', 59, 59, True),
+                'pool': ('all', 60, 59, True),
                 'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (191, 'results/csv/?'),
@@ -76,14 +76,14 @@ class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
                 'params': {'count': 10},
                 'naics': ('all', 78, True),
                 'vehicle': ('all', 8, True),
-                'pool': ('all', 59, 59, True),
+                'pool': ('all', 60, 59, True),
                 'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
                 'vendor_result_info': (191, 'results/csv/?'),
                 'vendor_table': (10, 'h_naics_results', 'desc', ('Prev', '1'), '4')
             }
         }
-    })
+    }, 'url')
     
     def initialize(self):
         self.path = 'results'
