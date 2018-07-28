@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.generic import TemplateView
 
-from categories.models import VEHICLE_CHOICES, Naics, PSC, SetAside, Pool
+from categories.models import VEHICLE_CHOICES, Naics, PSC, SetAside, Pool, Zone
 from vendors.models import Vendor, ContractManager
 from contracts.models import Contract
 
@@ -115,7 +115,7 @@ def PoolCSV(request):
     naics = None
     vehicle = None
     pools = []
-    zone = None
+    zones = []
     setasides = []
     
     if 'naics' in request.GET:
@@ -124,9 +124,8 @@ def PoolCSV(request):
     if 'vehicle' in request.GET:
         vehicle = request.GET['vehicle'].upper()
         
-    if 'pool' in request.GET:
-        pools = [request.GET['pool'].upper()]
-        vendors = vendors.filter(pools__pool__id=pools[0])
+    if 'pools' in request.GET:
+        pools = Pool.objects.filter(id__in=request.GET.getlist('pools')[0].split(','))
     else:
         if vehicle:
             pools = Pool.objects.filter(vehicle=vehicle)
@@ -135,11 +134,11 @@ def PoolCSV(request):
         else:
             pools = Pool.objects.all()
             
-        vendors = vendors.filter(pools__pool__id__in=pools.values_list('id', flat=True))
+    vendors = vendors.filter(pools__pool__id__in=pools.values_list('id', flat=True))
         
-    if 'zone' in request.GET:
-        zone = request.GET['zone']
-        vendors = vendors.filter(pools__zone__id=zone)
+    if 'zones' in request.GET:
+        zones = Zone.objects.filter(id__in=request.GET.getlist('zones')[0].split(','))
+        vendors = vendors.filter(pools__zones__id__in=zones.values_list('id', flat=True))
     
     if 'setasides' in request.GET:
         setasides = request.GET.getlist('setasides')[0].split(',')
@@ -157,20 +156,21 @@ def PoolCSV(request):
     if naics:
         writer.writerow(('NAICS code', "{}: {}".format(naics.code, naics.description)))
     
-    if zone:
-        writer.writerow(('Zone', zone))
+    if len(setasides):
+        writer.writerow(('Setasides', ", ".join(setaside_objs.values_list('name', flat=True))))
     
     writer.writerow(('', ))
-    writer.writerow(('Included pools',))
+    writer.writerow(('Included zones:',))
+    for zone in zones:
+        name = "Zone {}: {}".format(zone.id, ", ".join(zone.states()))
+        writer.writerow(('', name))
+    
+    writer.writerow(('', ))
+    writer.writerow(('Included pools:',))
     for pool in pools:
         name = "{} {}: {}".format(" ".join(pool.vehicle.split('_')), pool.number, pool.name)
         writer.writerow(('', name))
     
-    if len(setasides):
-        writer.writerow(('', ))
-        writer.writerow(('Setasides', ", ".join(setasides)))
-    
-    writer.writerow(('',))
     writer.writerow(('',))
     writer.writerow(("Search Results: {0} Vendors".format(len(vendors)),))
     
