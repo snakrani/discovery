@@ -710,7 +710,7 @@ class AcceptanceResponseValidator(BaseValidator):
         
     def wait_for_complete(self, notused = None, notused2 = None):
         self.wait_for_text('#site_status', 'complete')
-        time.sleep(0.5)
+        #time.sleep(0.5)
             
     def wait_for_stale(self, elem, notused = None):
         def stale(vars):
@@ -890,7 +890,7 @@ class AcceptanceResponseValidator(BaseValidator):
         else:
             getattr(self.element(elem), event)()
             
-        time.sleep(1)
+        #time.sleep(1)
     
     
     # Validation
