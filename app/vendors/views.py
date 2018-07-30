@@ -125,7 +125,7 @@ def PoolCSV(request):
         vehicle = request.GET['vehicle'].upper()
         
     if 'pool' in request.GET:
-        pools = [request.GET['pool'].upper()]
+        pools = Pool.objects.filter(id=request.GET['pool'].upper())
         vendors = vendors.filter(pools__pool__id=pools[0])
     else:
         if vehicle:
