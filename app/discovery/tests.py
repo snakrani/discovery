@@ -28,9 +28,15 @@ class SmokeTest(case.RequestTestCase):
     def test_results_found(self):
         self.validated_path('/results/')
     
-    def test_results_csv_found(self):
+    def test_results_csv_found_1(self):
+        self.validated_path('/results/csv/')
+    
+    def test_results_csv_found_2(self):
         self.validated_path('/results/csv/', **{'vehicle': 'HCATS_SB', 'naics': 611710})
     
+    def test_results_csv_found_3(self):
+        self.validated_path('/results/csv/', **{'vehicle': 'PSS', 'pool': 'PSS_874', 'setasides': 'A6'})
+        
     def test_vendor_found(self):
         self.validated_path('/vendor/079939977/')
     
