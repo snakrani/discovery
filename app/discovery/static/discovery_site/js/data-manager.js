@@ -38,7 +38,7 @@ var DataManager = {
             "pool_numeric": true
         },
         "PSS": {
-            "title": "Professional Services",
+            "title": "Professional Services Schedule",
             "sb": true,
             "pool_numeric": false
         }
@@ -113,7 +113,7 @@ var DataManager = {
             defaultValue = null;
         }
 
-        if (! (field in DataManager.fields)) {
+        if (! (field in DataManager.fields) || ! DataManager.fields[field]) {
             return defaultValue;
         }
         return DataManager.fields[field];
@@ -127,11 +127,14 @@ var DataManager = {
         var value = DataManager.getParameterByName(field);
 
         if (preprocessor && typeof preprocessor == 'function') {
-            value = preprocessor.call(field, value);
+            value = preprocessor(field, value);
         }
 
         if (value) {
             DataManager.fields[field] = value;
+        }
+        else {
+            DataManager.fields[field] = defaultValue;
         }
     },
 

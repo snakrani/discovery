@@ -556,6 +556,10 @@ class AcceptanceResponseValidator(BaseValidator):
         raise error
     
     
+    def screenshot(self, name, action):
+        self.driver.save_screenshot("{}/{}_{}-{}.png".format(self.test.screenshot_dir, self.driver.capabilities['browserName'], name, action))
+    
+    
     # Locators
   
     def _name(self, name):
@@ -890,7 +894,7 @@ class AcceptanceResponseValidator(BaseValidator):
         else:
             getattr(self.element(elem), event)()
             
-        time.sleep(1)
+        time.sleep(0.5)
     
     
     # Validation
@@ -926,6 +930,35 @@ class AcceptanceResponseValidator(BaseValidator):
 
     def count(self, elems, count):
         self.equal(len(self.elements(elems)), count)
+ 
+       
+    def select__any(self, elem, values):
+        select = Select(self.element(elem))
+        options = []
+        
+        for option in select.all_selected_options:
+            options.append(self.attr(option, 'value'))
+        
+        self.any(options, values)
+        
+    def select__all(self, elem, values):
+        select = Select(self.element(elem))
+        options = []
+        
+        for option in select.all_selected_options:
+            options.append(self.attr(option, 'value'))
+        
+        self.all(options, values)
+        
+    def select__none(self, elem, values):
+        select = Select(self.element(elem))
+        options = []
+        
+        for option in select.all_selected_options:
+            options.append(self.attr(option, 'value'))
+        
+        self.none(options, values)
+          
         
     def value__any(self, elems, values):
         selected_values = []

@@ -11,50 +11,28 @@ LayoutManager.initializers.listings = function() {
 
 LayoutManager.preprocessors.index = function() {
     LayoutManager.disableSearch();
-    LayoutManager.hideZone();
+    LayoutManager.updateSearch();
+    LayoutManager.toggleZone();
 };
 
 LayoutManager.renderPoolInfo = function() {
-    var vehicleMap = DataManager.getVehicleMap();
     var vehiclePools = DataManager.getVehiclePools();
-    var pool = DataManager.getPool();
+    var pools = DataManager.getSortedPools(DataManager.getPools(), Object.keys(vehiclePools));
     var poolNames = [];
-    var pools;
 
-    if (pool) {
-        pools = [pool];
-    }
-    else {
-        pools = Object.keys(vehiclePools).sort(function(a, b) {
-            a = vehiclePools[a];
-            b = vehiclePools[b];
+    for (var index = 0; index < pools.length; index++) {
+        var poolData = vehiclePools[pools[index]];
 
-            if (a.vehicle == b.vehicle) {
-                if (vehicleMap[a.vehicle].pool_numeric) {
-                    return a.number - b.number;
-                }
-                else {
-                    return a.number > b.number ? 1 : -1;
-                }
-            }
-            return a.vehicle > b.vehicle ? 1 : -1;
-        });
-    }
-
-    if (pools.length > 0) {
-        for (var index = 0; index < pools.length; index++) {
-            var poolData = vehiclePools[pools[index]];
-
-            if (pools.length > 1) {
-                var url = DataManager.getURL({'vehicle': poolData.vehicle, 'pool': poolData.id});
-                poolNames.push('<div class="pool"><div class="spacer"/><a id="link_' + poolData.id + '" class="pool_filter_link" href="' + url + '"><span class="vehicle">' + poolData.vehicle.split('_').join(' ') + " " + poolData.number + ':</span><span class="title">' + poolData.name + '</span></a></div>');
-            }
-            else {
-                poolNames.push('<div class="pool"><div class="spacer"/><span class="vehicle">' + poolData.vehicle.split('_').join(' ') + " " + poolData.number + ':</span><span class="title">' + poolData.name + '</span></div>');
-            }
+        if (pools.length > 1) {
+            var url = DataManager.getURL({'vehicle': poolData.vehicle, 'pools': poolData.id});
+            poolNames.push('<div class="pool"><div class="spacer"/><a id="link_' + poolData.id + '" class="pool_filter_link" href="' + url + '"><span class="vehicle">' + poolData.vehicle.split('_').join(' ') + " " + poolData.number + ':</span><span class="title">' + poolData.name + '</span></a></div>');
         }
-        $(".results_pool_names").html(poolNames.join(''));
+        else {
+            poolNames.push('<div class="pool"><div class="spacer"/><span class="vehicle">' + poolData.vehicle.split('_').join(' ') + " " + poolData.number + ':</span><span class="title">' + poolData.name + '</span></div>');
+        }
     }
+    $(".results_pool_names").html(poolNames.join(''));
+
     DataManager.completeStatus();
 };
 
