@@ -18,10 +18,12 @@ DataManager.getStatusCount = function() {
 DataManager.loadVendors = function() {
     var url = "/api/vendors/";
     var vehiclePools = DataManager.getVehiclePools();
+    var naics = DataManager.getNaics();
     var pools = DataManager.getPools();
-    var poolIds = [];
+    var zones = DataManager.getZones();
+    var setasides = DataManager.getSetasides();
+    var filters = [];
 
-    var requestVars = DataManager.buildRequestQuery();
     var ordering = DataManager.getSortOrdering();
     var queryData = {
         'page': DataManager.getPage(),
@@ -31,35 +33,46 @@ DataManager.loadVendors = function() {
     if (ordering) {
         queryData['ordering'] = ordering;
     }
-    var filters = [];
 
-    if ('naics' in requestVars) {
-        queryData['contract_naics'] = requestVars['naics'];
+    if (naics) {
+        queryData['contract_naics'] = naics;
     }
+
     if (! $.isEmptyObject(vehiclePools)) {
         if (pools.length > 0) {
             for (var index = 0; index < pools.length; index++) {
-                poolIds.push(pools[index]);
+                filters.push('(pools__pool__id' + '=' + pools[index] + ')');
             }
         } else {
+            var poolIds = [];
             Object.keys(vehiclePools).forEach(function (id) {
                 poolIds.push(id);
             });
+            filters.push('(pools__pool__id__in' + '=' + poolIds.join(',') + ')');
         }
-        filters.push('(pools__pool__id__in' + '=' + poolIds.join(',') + ')');
     }
 
-    if (LayoutManager.zoneActive() && 'zones' in requestVars) {
-        filters.push('(pools__zones__id__in' + '=' + requestVars['zones'] + ')');
+    if (pools.length > 0) {
+        for (var index = 0; index < pools.length; index++) {
+            filters.push('(pools__pool__id' + '=' + pools[index] + ')');
+        }
     }
 
-    if ('setasides' in requestVars) {
-        var setasides = requestVars['setasides'].split(',');
+    if (LayoutManager.zoneActive() && zones.length > 0) {
+        for (var index = 0; index < zones.length; index++) {
+            filters.push('(pools__zones__id' + '=' + zones[index] + ')');
+        }
+    }
+
+    if (setasides.length > 0) {
         for (var index = 0; index < setasides.length; index++) {
             filters.push('(pools__setasides__code' + '=' + setasides[index] + ')');
         }
     }
-    queryData['filters'] = encodeURIComponent(filters.join('&'));
+
+    if (filters.length > 0) {
+        queryData['filters'] = encodeURIComponent(filters.join('&'));
+    }
 
     DataManager.getAPIRequest(url, queryData,
         function(response) {
