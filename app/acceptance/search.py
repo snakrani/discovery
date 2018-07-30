@@ -359,8 +359,8 @@ def generate_search_tests():
                 'pool': (('BMO_1', 'BMO_5', 'BMO_17'), 17, 3, True),
                 'zone': ('', 6, True, True),
                 'setaside_filters': (None, 0, False),
-                'vendor_result_info': (14, 'results/csv/?vehicle=BMO&pools=BMO_1,BMO_5,BMO_17'),
-                'vendor_table': (14, 'h_naics_results', 'desc')
+                'vendor_result_info': (2, 'results/csv/?vehicle=BMO&pools=BMO_1,BMO_5,BMO_17'),
+                'vendor_table': (2, 'h_naics_results', 'desc')
             },
                     
             'pool_bmo_sb_1': {
@@ -563,8 +563,8 @@ def generate_search_tests():
                 'pool': (('BMO_SB_1', 'BMO_SB_5', 'BMO_SB_17'), 17, 3, True),
                 'zone': ('', 6, True, True),
                 'setaside_filters': (None, 0, True),
-                'vendor_result_info': (18, 'results/csv/?vehicle=BMO_SB&pools=BMO_SB_1,BMO_SB_5,BMO_SB_17'),
-                'vendor_table': (18, 'h_naics_results', 'desc')
+                'vendor_result_info': (1, 'results/csv/?vehicle=BMO_SB&pools=BMO_SB_1,BMO_SB_5,BMO_SB_17'),
+                'vendor_table': (1, 'h_naics_results', 'desc')
             },
             
             'pool_hcats_1': {
@@ -601,8 +601,8 @@ def generate_search_tests():
                 'pool': (('HCATS_1', 'HCATS_2'), 2, 2, True),
                 'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, False),
-                'vendor_result_info': (12, 'results/csv/?vehicle=HCATS&pools=HCATS_1,HCATS_2'),
-                'vendor_table': (12, 'h_naics_results', 'desc')
+                'vendor_result_info': (8, 'results/csv/?vehicle=HCATS&pools=HCATS_1,HCATS_2'),
+                'vendor_table': (8, 'h_naics_results', 'desc')
             },
             
             'pool_hcats_sb_1': {
@@ -639,8 +639,8 @@ def generate_search_tests():
                 'pool': (('HCATS_SB_1', 'HCATS_SB_2'), 2, 2, True),
                 'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
-                'vendor_result_info': (17, 'results/csv/?vehicle=HCATS_SB&pools=HCATS_SB_1,HCATS_SB_2'),
-                'vendor_table': (17, 'h_naics_results', 'desc')
+                'vendor_result_info': (3, 'results/csv/?vehicle=HCATS_SB&pools=HCATS_SB_1,HCATS_SB_2'),
+                'vendor_table': (3, 'h_naics_results', 'desc')
             },
             
             'pool_oasis_1': {
@@ -734,8 +734,8 @@ def generate_search_tests():
                 'pool': (('OASIS_1', 'OASIS_2', 'OASIS_5B', 'OASIS_6'), 7, 4, True),
                 'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, False),
-                'vendor_result_info': (25, 'results/csv/?vehicle=OASIS&pools=OASIS_1,OASIS_2,OASIS_5B,OASIS_6'),
-                'vendor_table': (25, 'h_naics_results', 'desc')
+                'vendor_result_info': (2, 'results/csv/?vehicle=OASIS&pools=OASIS_1,OASIS_2,OASIS_5B,OASIS_6'),
+                'vendor_table': (2, 'h_naics_results', 'desc')
             },
             
             'pool_oasis_sb_1': {
@@ -828,8 +828,8 @@ def generate_search_tests():
                 'pool': (('OASIS_SB_2', 'OASIS_SB_5A', 'OASIS_SB_5B'), 7, 3, True),
                 'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
-                'vendor_result_info': (24, 'results/csv/?vehicle=OASIS_SB&pools=OASIS_SB_2,OASIS_SB_5A,OASIS_SB_5B'),
-                'vendor_table': (24, 'h_naics_results', 'desc')
+                'vendor_result_info': (0, 'results/csv/?vehicle=OASIS_SB&pools=OASIS_SB_2,OASIS_SB_5A,OASIS_SB_5B'),
+                'vendor_table': (0, 'h_naics_results', 'desc')
             },
             
             'pool_pss_382': {
@@ -922,8 +922,8 @@ def generate_search_tests():
                 'pool': (('PSS_382', 'PSS_541', 'PSS_874'), 7, 3, True),
                 'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
-                'vendor_result_info': (30, 'results/csv/?vehicle=PSS&pools=PSS_382,PSS_541,PSS_874'),
-                'vendor_table': (30, 'h_naics_results', 'desc')
+                'vendor_result_info': (0, 'results/csv/?vehicle=PSS&pools=PSS_382,PSS_541,PSS_874'),
+                'vendor_table': (0, 'h_naics_results', 'desc')
             },
             
             'pool_remove_1': {
@@ -1045,8 +1045,8 @@ def generate_search_tests():
                 'pool': ('', 17, 17, True),
                 'zone': (('1', '3', '6'), 6, True, True),
                 'setaside_filters': (None, 0, False),
-                'vendor_result_info': (14, 'results/csv/?vehicle=BMO&zones=1,3,6'),
-                'vendor_table': (14, 'h_naics_results', 'desc')
+                'vendor_result_info': (3, 'results/csv/?vehicle=BMO&zones=1,3,6'),
+                'vendor_table': (3, 'h_naics_results', 'desc')
             },
             'bmo_sb_zone_mix_1': {
                 'params': {'vehicle': 'BMO_SB', 'zones': '1,2,4'},
@@ -1061,8 +1061,8 @@ def generate_search_tests():
                 'pool': ('', 17, 17, True),
                 'zone': (('1', '2', '4'), 6, True, True),
                 'setaside_filters': (None, 0, True),
-                'vendor_result_info': (20, 'results/csv/?vehicle=BMO_SB&zones=1,2,4'),
-                'vendor_table': (20, 'h_naics_results', 'desc')
+                'vendor_result_info': (4, 'results/csv/?vehicle=BMO_SB&zones=1,2,4'),
+                'vendor_table': (4, 'h_naics_results', 'desc')
             },
             
             'bmo_zone_remove_1': {
@@ -1212,8 +1212,8 @@ def generate_search_tests():
                 'pool': ('BMO_SB_5', 1, 1, True),
                 'zone': (('1', '5'), 6, True, True),
                 'setaside_filters': (('27', 'A2'), 2, True),
-                'vendor_result_info': (2, 'results/csv/?naics=561720&vehicle=BMO_SB&pools=BMO_SB_5&zones=1,5&setasides=27,A2'),
-                'vendor_table': (2, 'h_naics_results', 'desc')
+                'vendor_result_info': (1, 'results/csv/?naics=561720&vehicle=BMO_SB&pools=BMO_SB_5&zones=1,5&setasides=27,A2'),
+                'vendor_table': (1, 'h_naics_results', 'desc')
             }
         }
     }
