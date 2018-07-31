@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 from django.conf import settings
 from django.db.models import Subquery, OuterRef, Value, Q
 from django.db.models.functions import Concat, Coalesce
@@ -9,6 +11,7 @@ from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.response import Response
+from rest_framework.decorators import list_route
 
 from rest_framework_filters.backends import RestFrameworkFilterBackend
 
@@ -26,25 +29,42 @@ import re
 
 @method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
 @method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='retrieve')
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='values')
 class DiscoveryReadOnlyModelViewSet(
     mixins.FilterViewSetMixin,
     mixins.PaginationViewSetMixin,
     mixins.SerializerViewSetMixin, 
     ReadOnlyModelViewSet
 ):
-    def list(self, request, *args, **kwargs):
+    def init_cache(self, request):
         page, created = system.CachePage.objects.get_or_create(url=request.build_absolute_uri())
         page.count += 1
         page.save()
         
+    def list(self, request, *args, **kwargs):
+        self.init_cache(request)
         return super(DiscoveryReadOnlyModelViewSet, self).list(request, *args, **kwargs)
         
     def retrieve(self, request, *args, **kwargs):
-        page, created = system.CachePage.objects.get_or_create(url=request.build_absolute_uri())
-        page.count += 1
-        page.save()
-        
+        self.init_cache(request)
         return super(DiscoveryReadOnlyModelViewSet, self).retrieve(request, *args, **kwargs)
+        
+    def values(self, request, *args, **kwargs):
+        self.init_cache(request)
+        
+        field_lookup = kwargs['field_lookup']
+        queryset = self.filter_queryset(self.get_queryset().order_by(field_lookup))
+        queryset = queryset.exclude(**{"{}__isnull".format(field_lookup): True}).distinct(field_lookup)
+        
+        if check_api_test(request):
+            values = queryset.values(field_lookup)
+        else:
+            values = queryset.values_list(field_lookup, flat=True)
+        
+        return Response(OrderedDict([
+            ('count', len(values)),
+            ('results', values)
+        ]))
     
 
 class NaicsViewSet(DiscoveryReadOnlyModelViewSet):
@@ -62,6 +82,7 @@ class NaicsViewSet(DiscoveryReadOnlyModelViewSet):
     
     action_filters = {
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
     }
     filter_class = filters.NaicsFilter
     search_fields = ['code', 'description', 'sin__code', 'keywords__name']
@@ -91,6 +112,7 @@ class PscViewSet(DiscoveryReadOnlyModelViewSet):
     
     action_filters = {
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
     }
     filter_class = filters.PscFilter
     search_fields = ['code', 'description', 'sin__code', 'naics__code', 'naics__description', 'keywords__name']
@@ -120,6 +142,7 @@ class PoolViewSet(DiscoveryReadOnlyModelViewSet):
     
     action_filters = {
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
     }
     filter_class = filters.PoolFilter
     search_fields = ['id', 'name', 'number', 'vehicle', 'threshold']
@@ -149,6 +172,7 @@ class SetAsideViewSet(DiscoveryReadOnlyModelViewSet):
     
     action_filters = {
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
     }
     filter_class = filters.SetAsideFilter
     search_fields = ['code', 'name', 'description']
@@ -178,6 +202,7 @@ class ZoneViewSet(DiscoveryReadOnlyModelViewSet):
     
     action_filters = {
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, OrderingFilter),
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend)
     }
     filter_class = filters.ZoneFilter
     ordering_fields = ['id']
@@ -206,6 +231,7 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
     
     action_filters = {
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
     }
     filter_class = filters.VendorFilter
     search_fields = ['name', 'duns', 'cage']
@@ -263,6 +289,7 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
     
     action_filters = {
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
     }
     filter_class = filters.ContractFilter
     search_fields = ['piid', 'agency_name']
