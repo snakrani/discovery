@@ -54,7 +54,6 @@ class DiscoveryReadOnlyModelViewSet(
         
         field_lookup = kwargs['field_lookup']
         queryset = self.filter_queryset(self.get_queryset().order_by(field_lookup))
-        queryset = queryset.exclude(**{"{}__isnull".format(field_lookup): True}).distinct(field_lookup)
         
         if check_api_test(request):
             values = queryset.values(field_lookup)
