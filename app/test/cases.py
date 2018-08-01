@@ -53,12 +53,12 @@ class TestTracker(object):
         
     @classmethod
     def init_request(cls, name, url, key):
-        print("Testing {} [{} / {}]: {}".format(
-            name,
-            cls.render_running_time(),
-            cls.render_memory(),  
-            url
-        ))
+        #print("Testing {} [{} / {}]: {}".format(
+        #    name,
+        #    cls.render_running_time(),
+        #    cls.render_memory(),  
+        #    url
+        #))
         pass
 
 
@@ -169,7 +169,8 @@ class APITestCase(RequestTestCase):
         return self._get_url(self._get_object_path(id), params)
     
     def _get_list_path(self, router = None):
-        return "{}/{}".format(self.path, router) if router else self.path
+        path = "{}/{}".format(self.path, router) if router else self.path
+        return path if re.match(r'/$', path) else "{}/".format(path)
     
     def _get_list_url(self, params = {}, router = None):
         return self._get_url(self._get_list_path(router), params)
