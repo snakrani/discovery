@@ -139,6 +139,8 @@ class RequestTestCase(BaseTestCase, RequestMixin):
 class APITestCase(RequestTestCase):
     
     path = None
+    
+    base_path = '/api'
     router = None
     
     
@@ -149,9 +151,7 @@ class APITestCase(RequestTestCase):
         
         if self.router:
             self.router = self.router.lower()
-        
-        if not self.path and self.router:
-            self.path = "/api/{}/".format(self.router)
+            self.path = "{}/{}".format(self.base_path, self.router)
     
         
     # Request
@@ -163,21 +163,25 @@ class APITestCase(RequestTestCase):
   
     
     def _get_object_path(self, id):
-        return self.path + str(id)
+        return self.path + '/' + str(id)
     
     def _get_object_url(self, id, params = {}):
         return self._get_url(self._get_object_path(id), params)
     
-    def _get_list_url(self, params = {}):
-        return self._get_url(self.path, params)
+    def _get_list_path(self, router = None):
+        return "{}/{}".format(self.path, router) if router else self.path
+    
+    def _get_list_url(self, params = {}, router = None):
+        return self._get_url(self._get_list_path(router), params)
     
     
     def fetch_data(self, **params):
+        router = params.pop('_router_', None)
         params = self.prepare_params(params)
-        url = self._get_list_url(params)
+        url = self._get_list_url(params, router)
         
         TestTracker.init_request('request', url, self.__class__.__name__)
-        return APIResponseValidator(self.client.get(self.path, params), self, url)
+        return APIResponseValidator(self.client.get(self._get_list_path(router), params), self, url)
     
     def fetch_object(self, id, **params):
         params = self.prepare_params(params)
@@ -187,11 +191,12 @@ class APITestCase(RequestTestCase):
         return APIResponseValidator(self.client.get(self._get_object_path(id), params), self, url)
     
     def fetch_objects(self, **params):
+        router = params.pop('_router_', None)
         params = self.prepare_params(params)
-        url = self._get_list_url(params)
+        url = self._get_list_url(params, router)
         
         TestTracker.init_request('list', url, self.__class__.__name__)
-        return APIResponseValidator(self.client.get(self.path, params), self, url)
+        return APIResponseValidator(self.client.get(self._get_list_path(router), params), self, url)
     
     
     # Validation
@@ -332,20 +337,21 @@ class MetaAPISchema(type):
         
         for field, lookups in fields.items():
             field_info = cls._field_info(field)
-                
+               
             for lookup, search_value in lookups.items():
                 info = cls._validation_info(lookup, '@')
                 lookup = info['lookup']
                 id = "{}_{}".format(field, lookup)
                 
                 index_map[id] = 1 if id not in index_map else index_map[id] + 1
-                method_name = "test_field_{}_{}".format(id, index_map[id])
-            
+                
                 if isinstance(search_value, (list, tuple, QuerySet)):
                     search_value = list(search_value)
                 
                 params = [search_value]
-                tests[method_name] = cls._field_test_method(field_info, info, params)
+                
+                tests["test_field_{}_{}".format(id, index_map[id])] = cls._field_test_method(field_info, info, params)
+                tests["test_field_values_{}_{}".format(id, index_map[id])] = cls._field_values_test_method(field_info, info, params)
 
 
     @classmethod
@@ -413,19 +419,33 @@ class MetaAPISchema(type):
             validator = VALIDATION_MAP[info['lookup']]
             field_lookup = field['name'] if info['lookup'] in ('exact', 'date') else "{}__{}".format(field['name'], info['lookup'])
             search_value = params[0]
-                        
-            if field['relation']:
-                resp = getattr(self, info['method'])(**{"{}".format(field_lookup): search_value})
-                            
-                if self._check_valid(info):
+            
+            resp = getattr(self, info['method'])(**{"{}".format(field_lookup): search_value})
+            
+            if self._check_valid(info):            
+                if field['relation']:
                     resp.validate(lambda resp, base_key: resp.map(validator, (base_key + [field['base_field']]), field['relation'], search_value))         
-            else:                    
-                resp = getattr(self, info['method'])(**{"{}".format(field_lookup): search_value})
-                            
-                if self._check_valid(info):
+                else:                    
                     resp.validate(lambda resp, base_key: getattr(resp, validator)(base_key + [field['name']], search_value))
         
         return field_test
+    
+    @classmethod
+    def _field_values_test_method(cls, field, info, params):
+        def field_values_test(self):
+            validator = VALIDATION_MAP[info['lookup']]
+            field_lookup = field['name'] if info['lookup'] in ('exact', 'date') else "{}__{}".format(field['name'], info['lookup'])
+            search_value = params[0]
+            
+            resp = getattr(self, info['method'])(**{
+                '_router_': "values/{}".format(field['path']),
+                "{}".format(field_lookup): search_value                
+            })
+            
+            if self._check_valid(info):            
+                resp.validate(lambda resp, base_key: getattr(resp, validator)(base_key + [field['path']], search_value))
+        
+        return field_values_test
 
    
     @classmethod
@@ -466,7 +486,7 @@ class MetaAPISchema(type):
             base_field = field_path
             relation = None
             
-        return { 'name': field_query, 'base_field': base_field, 'relation': relation }
+        return { 'name': field_query, 'path': field_path, 'base_field': base_field, 'relation': relation }
 
 
 class AcceptanceTestCase(LiveServerTestCase, TestAssertions, RequestMixin):
