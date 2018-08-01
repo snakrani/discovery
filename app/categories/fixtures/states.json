@@ -1,0 +1,127 @@
+[
+{
+  "model": "categories.state",
+  "pk": "DE",
+  "fields": {}
+},
+{
+  "model": "categories.state",
+  "pk": "MD",
+  "fields": {}
+},
+{
+  "model": "categories.state",
+  "pk": "NJ",
+  "fields": {}
+},
+{
+  "model": "categories.state",
+  "pk": "NY",
+  "fields": {}
+},
+{
+  "model": "categories.state",
+  "pk": "PA",
+  "fields": {}
+},
+{
+  "model": "categories.state",
+  "pk": "VA",
+  "fields": {}
+},
+{
+  "model": "categories.state",
+  "pk": "CT",
+  "fields": {}
+},
+{
+  "model": "categories.state",
+  "pk": "ME",
+  "fields": {}
+},
+{
+  "model": "categories.state",
+  "pk": "MA",
+  "fields": {}
+},
+{
+  "model": "categories.state",
+  "pk": "NH",
+  "fields": {}
+},
+{
+  "model": "categories.state",
+  "pk": "RI",
+  "fields": {}
+},
+{
+  "model": "categories.state",
+  "pk": "VT",
+  "fields": {}
+},
+{
+  "model": "categories.state",
+  "pk": "FL",
+  "fields": {}
+},
+{
+  "model": "categories.state",
+  "pk": "GA",
+  "fields": {}
+},
+{
+  "model": "categories.state",
+  "pk": "NC",
+  "fields": {}
+},
+{
+  "model": "categories.state",
+  "pk": "SC",
+  "fields": {}
+},
+{
+  "model": "categories.state",
+  "pk": "OK",
+  "fields": {}
+},
+{
+  "model": "categories.state",
+  "pk": "TX",
+  "fields": {}
+},
+{
+  "model": "categories.state",
+  "pk": "CA",
+  "fields": {}
+},
+{
+  "model": "categories.state",
+  "pk": "NV",
+  "fields": {}
+},
+{
+  "model": "categories.state",
+  "pk": "IL",
+  "fields": {}
+},
+{
+  "model": "categories.state",
+  "pk": "IA",
+  "fields": {}
+},
+{
+  "model": "categories.state",
+  "pk": "KS",
+  "fields": {}
+},
+{
+  "model": "categories.state",
+  "pk": "MO",
+  "fields": {}
+},
+{
+  "model": "categories.state",
+  "pk": "NE",
+  "fields": {}
+}
+]
