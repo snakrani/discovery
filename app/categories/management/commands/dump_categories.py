@@ -25,5 +25,6 @@ class Command(BaseCommand):
         call_command('dumpdata', 'categories.pool', indent=2, output="{}/{}".format(settings.BASE_DIR, 'categories/fixtures/pools.json'))
         
         print('> Dumping zones')
+        call_command('dumpdata', 'categories.state', indent=2, output="{}/{}".format(settings.BASE_DIR, 'categories/fixtures/states.json'))
         call_command('dumpdata', 'categories.zone', indent=2, output="{}/{}".format(settings.BASE_DIR, 'categories/fixtures/zones.json'))
-        call_command('dumpdata', 'categories.zonestate', indent=2, output="{}/{}".format(settings.BASE_DIR, 'categories/fixtures/zonestates.json'))          
+                  
