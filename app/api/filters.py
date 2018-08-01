@@ -130,7 +130,7 @@ class MetaFilterSet(FilterSetMetaclass):
 
 class NaicsFilter(FilterSet, metaclass = MetaFilterSet):
     
-    _fuzzy_text = ('code', 'description', 'sin:sin__code', 'keyword:keywords__name')
+    _fuzzy_text = ('code', 'description', 'sin__code', 'keywords__name')
     
     class Meta:
         model = categories.Naics
@@ -139,7 +139,7 @@ class NaicsFilter(FilterSet, metaclass = MetaFilterSet):
 
 class PscFilter(FilterSet, metaclass = MetaFilterSet):
     
-    _fuzzy_text = ('code', 'description', 'sin:sin__code', 'keyword:keywords__name')
+    _fuzzy_text = ('code', 'description', 'sin__code', 'keywords__name')
     
     naics = RelatedFilter(NaicsFilter)
     
@@ -173,7 +173,7 @@ class SetAsideFilter(FilterSet, metaclass = MetaFilterSet):
 
 class ZoneFilter(FilterSet, metaclass = MetaFilterSet):
     
-    _token_text = ('state:state__state',)
+    _token_text = ('state__state',)
     _number = ('id',)
     
     class Meta:
@@ -192,7 +192,7 @@ class LocationFilter(FilterSet, metaclass = MetaFilterSet):
 
 
 class ManagerFilter(FilterSet, metaclass = MetaFilterSet):   
-    _fuzzy_text = ('name', 'phone:phones__number', 'email:emails__address')
+    _fuzzy_text = ('name', 'phones__number', 'emails__address')
 
 
 class ContractManagerFilter(ManagerFilter):
