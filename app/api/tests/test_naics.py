@@ -53,7 +53,7 @@ class NaicsTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': 'Services$',
                 '@iregex': 'similar\s+events'
             },
-            'sin:sin__code': {
+            'sin__code': {
                 '@exact': '100-03',
                 '@iexact': 'c871-202',
                 '@in': ("100-03", "520-14", "541-4G", "51-B36-2A"),
@@ -66,7 +66,7 @@ class NaicsTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': '[A-Z]\d+\-\d+$',
                 '@iregex': '^(C87|51)'
             },
-            'keyword:keywords__name': {
+            'keywords__name': {
                 '@exact': 'Cooking Equipment',
                 '@iexact': 'ancillary supplies and / or services',
                 '@in': ("Elemental Analyzers", "Energy Consulting Services", "Environmental Consulting Services"),

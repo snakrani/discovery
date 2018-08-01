@@ -101,7 +101,7 @@ class PoolTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': 'Services$',
                 '@iregex': 'apprentice(ship)?'
             },
-            'naics__sin:naics__sin__code': {
+            'naics__sin__code': {
                 '@exact': '100-03',
                 '@iexact': 'c871-202',
                 '@in': ("100-03", "520-14", "541-4G", "51-B36-2A"),
@@ -114,7 +114,7 @@ class PoolTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': '[A-Z]\d+\-\d+$',
                 '@iregex': '^(C87|51)'
             },
-            'naics__keyword:naics__keywords__name': {
+            'naics__keywords__name': {
                 '@exact': 'Cooking Equipment',
                 '@iexact': 'ancillary supplies and / or services',
                 '@in': ("Elemental Analyzers", "Energy Consulting Services", "Environmental Consulting Services"),

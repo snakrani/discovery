@@ -524,7 +524,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': 'Services$',
                 '@iregex': 'apprentice(ship)?'
             },
-            'vendor__pools__pool__naics__sin:vendor__pools__pool__naics__sin__code': {
+            'vendor__pools__pool__naics__sin__code': {
                 '@exact': '100-03',
                 '@iexact': 'c871-202',
                 '@in': ("100-03", "520-14", "541-4G", "51-B36-2A"),
@@ -537,7 +537,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': '[A-Z]\d+\-\d+$',
                 '@iregex': '^(C87|51)'
             },
-            'vendor__pools__pool__naics__keyword:vendor__pools__pool__naics__keywords__name': {
+            'vendor__pools__pool__naics__keywords__name': {
                 '@exact': 'Cooking Equipment',
                 '@iexact': 'ancillary supplies and / or services',
                 '@in': ("Elemental Analyzers", "Energy Consulting Services", "Environmental Consulting Services"),
@@ -609,7 +609,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': '^[A-Za-z]{4}\s+',
                 '@iregex': '^da(n|na)'
             },
-            'vendor__pools__cms__phone': {
+            'vendor__pools__cms__phones__number': {
                 '@exact': '703-821-0678',
                 '@iexact': '703-821-0678',
                 '@in': ("703-821-0678", "571-262-3144", "937-912-6102"),
@@ -622,7 +622,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': 'x\s*\d+$',
                 '@iregex': '(304|703)-\d{3}'
             },
-            'vendor__pools__cms__email': {
+            'vendor__pools__cms__emails__address': {
                 '@exact': 'OASIS@act-i.com',
                 '@iexact': 'oasis@act-i.com',
                 '@in': ("OASIS@act-i.com", "hcats_sb@deepmile.com", "Finance@exemplarent.com"),
@@ -648,7 +648,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': '^[A-Za-z]{4}\s+',
                 '@iregex': '^dr\.?'
             },
-            'vendor__pools__pms__phone': {
+            'vendor__pools__pms__phones__number': {
                 '@exact': '240-538-8357',
                 '@iexact': '937-912-6102',
                 '@in': ("240-538-8357", "937-912-6102", "256-882-6229x102"),
@@ -661,7 +661,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': 'x\s*\d+$',
                 '@iregex': '(937|703)-\d{3}'
             },
-            'vendor__pools__pms__email': {
+            'vendor__pools__pms__emails__address': {
                 '@exact': 'ARA_OASIS_SB@ara.com',
                 '@iexact': 'ara_oasis_sb@ARA.com',
                 '@in': ("OASIS@avioninc.com", "contracts@cssiinc.com", "chauhan@battelle.org"),
