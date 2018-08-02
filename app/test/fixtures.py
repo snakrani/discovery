@@ -8,8 +8,8 @@ def get_category_fixtures():
         'psc.json',
         'setasides.json', 
         'pools.json',
-        'zones.json',
-        'zonestates.json'
+        'states.json',
+        'zones.json'
     ]
 
 
@@ -17,11 +17,9 @@ def get_vendor_fixtures():
     return get_category_fixtures() + [
         'locations.json', 
         'vendors.json',
-        'managers.json',
-        'managerphonenumbers.json',
-        'manageremails.json',
-        'contractmanagers.json',
-        'projectmanagers.json', 
+        'contacts.json',
+        'contactphones.json',
+        'contactemails.json',
         'poolmemberships.json'        
     ]
 
