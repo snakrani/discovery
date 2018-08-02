@@ -230,7 +230,8 @@ class ContactSerializer(ModelSerializer):
 
 
 class BasePoolMembershipSerializer(ModelSerializer):
-    capability_statement = SerializerMethodField()  
+    capability_statement = SerializerMethodField()
+    
     contacts = ContactSerializer(many=True)
     
     class Meta:
@@ -246,8 +247,7 @@ class BasePoolMembershipSerializer(ModelSerializer):
         cs_url = request.build_absolute_uri("/discovery_site/capability_statements/{}/{}.pdf".format(vehicle, duns))
     
         if vehicle and os.path.isfile(cs_path):
-            return cs_url
-            
+            return cs_url    
         return ''
     
 class PoolMembershipLinkSerializer(BasePoolMembershipSerializer):
@@ -310,7 +310,6 @@ class VendorSummarySerializer(AnnotatedVendorSerializer):
     
     class Meta(BaseVendorSerializer.Meta):
         fields = BaseVendorSerializer.Meta.fields + [
-            'sam_location_citystate', 
             'annual_revenue', 'number_of_employees', 
             'number_of_contracts', 'setasides', 'pools',
             'url'
