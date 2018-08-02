@@ -173,7 +173,7 @@ class SetAsideFilter(FilterSet, metaclass = MetaFilterSet):
 
 class ZoneFilter(FilterSet, metaclass = MetaFilterSet):
     
-    _token_text = ('state__state',)
+    _token_text = ('states__code',)
     _number = ('id',)
     
     class Meta:
@@ -191,19 +191,11 @@ class LocationFilter(FilterSet, metaclass = MetaFilterSet):
         fields = ()
 
 
-class ManagerFilter(FilterSet, metaclass = MetaFilterSet):   
+class ContactFilter(FilterSet, metaclass = MetaFilterSet):   
     _fuzzy_text = ('name', 'phones__number', 'emails__address')
-
-
-class ContractManagerFilter(ManagerFilter):
+    
     class Meta:
-        model = vendors.ContractManager
-        fields = ()
-
-        
-class ProjectManagerFilter(ManagerFilter):
-    class Meta:
-        model = vendors.ProjectManager
+        model = vendors.Contact
         fields = ()
 
         
@@ -216,9 +208,7 @@ class PoolMembershipFilter(FilterSet, metaclass = MetaFilterSet):
     setasides = RelatedFilter(SetAsideFilter)
     
     zones = RelatedFilter(ZoneFilter)
-    
-    cms = RelatedFilter(ContractManagerFilter)
-    pms = RelatedFilter(ProjectManagerFilter)
+    contacts = RelatedFilter(ContactFilter)
     
     class Meta:
         model = vendors.PoolMembership
