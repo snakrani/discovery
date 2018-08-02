@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.generic import TemplateView
 
 from categories.models import VEHICLE_CHOICES, Naics, PSC, SetAside, Pool, Zone
-from vendors.models import Vendor, ContractManager
+from vendors.models import Vendor, Contact
 from contracts.models import Contract
 
 import csv
@@ -35,10 +35,10 @@ def get_memberships(vendor):
         pool_id = membership.pool.id
         pool_number = membership.pool.number
         
-        cms = membership.cms.all()
-        contact_name = cms[0].name
-        contact_phone = ",".join(cms[0].phone())
-        contact_email = ",".join(cms[0].email())
+        contacts = membership.contacts.all()
+        contact_name = contacts[0].name
+        contact_phone = ",".join(contacts[0].phones.all().values_list('number', flat=True))
+        contact_email = ",".join(contacts[0].emails.all().values_list('address', flat=True))
         
         if piid not in membership_map:
             membership_map[piid] = {
@@ -162,7 +162,7 @@ def PoolCSV(request):
     writer.writerow(('', ))
     writer.writerow(('Included zones:',))
     for zone in zones:
-        name = "Zone {}: {}".format(zone.id, ", ".join(zone.states()))
+        name = "Zone {}: {}".format(zone.id, ", ".join(zone.states.all().values_list('code', flat=True)))
         writer.writerow(('', name))
     
     writer.writerow(('', ))
