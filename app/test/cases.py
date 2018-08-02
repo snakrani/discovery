@@ -208,6 +208,7 @@ class APITestCase(RequestTestCase):
         return resp
     
     def validated_list(self, list_count = None, **params):
+        validate = params.pop('_validate_', True)
         resp = self.fetch_objects(**params)
         resp.success()
         
@@ -216,7 +217,9 @@ class APITestCase(RequestTestCase):
         else:
             resp.countMin(1)
         
-        resp.validate_list()
+        if validate:
+            resp.validate_list()
+        
         return resp
     
     def validated_single_list(self, **params):
@@ -272,6 +275,7 @@ class MetaAPISchema(type):
             cls._generate_pagination_tests(schema.get('pagination', None), attr)
             cls._generate_search_tests(schema.get('search', None), attr)
             cls._generate_field_tests(schema.get('fields', None), attr)
+            cls._generate_request_tests(schema.get('requests', None), attr)
         
         return super(MetaAPISchema, cls).__new__(cls, name, bases, attr)
 
@@ -353,6 +357,16 @@ class MetaAPISchema(type):
                 
                 tests["test_field_{}_{}".format(id, index_map[id])] = cls._field_test_method(field_info, info, params)
                 tests["test_field_values_{}_{}".format(id, index_map[id])] = cls._field_values_test_method(field_info, info, params)
+    
+    @classmethod        
+    def _generate_request_tests(cls, requests, tests): 
+        if requests is None: return
+        
+        for name, config in requests.items():
+            info = cls._validation_info(name, '@')
+            method_name = "test_request_{}".format(info['lookup'])
+            
+            tests[method_name] = cls._request_test_method(info, config)
 
 
     @classmethod
@@ -361,11 +375,14 @@ class MetaAPISchema(type):
             resp = getattr(self, info['method'])(info['lookup'])
                     
             if self._check_valid(info) and len(params) == 3:
-                field = params[0]
-                validator = params[1]
+                field = cls._field_info(params[0])
+                validator = VALIDATION_MAP[params[1]]
                 search_value = params[2]
-                    
-                getattr(resp, validator)(field, search_value)
+                
+                if field['relation']:
+                    resp.map(validator, [field['base_field']], field['relation'], search_value)
+                else:        
+                    getattr(resp, validator)(field['name'], search_value)                
         
         return object_test
   
@@ -403,14 +420,17 @@ class MetaAPISchema(type):
     @classmethod
     def _search_test_method(cls, info, params):
         def search_test(self):
-            field = params[0]
-            validator = params[1]
+            field = cls._field_info(params[0])
+            validator = VALIDATION_MAP[params[1]]
             search_value = params[2]
                 
             resp = getattr(self, info['method'])(**{'q': search_value})
-                    
+                   
             if self._check_valid(info):
-                resp.validate(lambda resp, base_key: getattr(resp, validator)(base_key + [field], search_value))
+                if field['relation']:
+                    resp.validate(lambda resp, base_key: resp.map(validator, (base_key + [field['base_field']]), field['relation'], search_value))         
+                else:                    
+                    resp.validate(lambda resp, base_key: getattr(resp, validator)(base_key + [field['name']], search_value))
         
         return search_test
     
@@ -440,15 +460,41 @@ class MetaAPISchema(type):
             
             resp = getattr(self, info['method'])(**{
                 '_router_': "values/{}".format(field['path']),
+                '_validate_': False,
                 "{}".format(field_lookup): search_value                
             })
             
-            if self._check_valid(info):            
-                resp.validate(lambda resp, base_key: getattr(resp, validator)(base_key + [field['path']], search_value))
+            if self._check_valid(info):
+                resp.validate(lambda resp, base_key: getattr(resp, validator)(base_key, search_value))
         
         return field_values_test
 
-   
+    @classmethod
+    def _request_test_method(cls, info, config):
+        def request_test(self):
+            params = config.get('params', {})
+            tests = config.get('tests', [])                  
+            resp = getattr(self, info['method'])(**params)
+                    
+            if self._check_valid(info):
+                for test in tests:
+                    field = cls._field_info(test[0])
+                    validator = test[1]
+                    search_value = test[2]
+                    
+                    if validator == 'ordering':
+                        resp.validate_ordering(field['name'], search_value)
+                    else:
+                        validator = VALIDATION_MAP[validator]
+                        
+                        if field['relation']:
+                            resp.validate(lambda resp, base_key: resp.map(validator, (base_key + [field['base_field']]), field['relation'], search_value))         
+                        else:                    
+                            resp.validate(lambda resp, base_key: getattr(resp, validator)(base_key + [field['name']], search_value))
+                
+        return request_test
+
+
     @classmethod
     def _validation_info(cls, lookup, default_type = '@'):
         count_specifier = default_type
