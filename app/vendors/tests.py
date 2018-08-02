@@ -20,13 +20,3 @@ class VendorLoadTest(case.BaseTestCase):
     def test_sam_expiration_not_null(self):
         null_vendors = Vendor.objects.filter(sam_expiration_date=None).count()
         self.assertEqual(null_vendors, 0)
-
-
-    def test_cm_not_null(self):
-        for vendor in Vendor.objects.all():
-            self.assertNotEqual(vendor.managers.filter(type='CM').first().phones().count(), 0)
-
-
-    def test_pm_not_null(self):
-        for vendor in Vendor.objects.all():
-            self.assertNotEqual(vendor.managers.filter(type='PM').first().phones().count(), 0)
