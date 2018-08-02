@@ -149,30 +149,40 @@ class TestAssertions(object):
     
     def assertMatch(self, value, pattern, **params):
         if not value or not isinstance(value, str):
-            raise AssertionError("Value must be passed as a alpha-numeric string")
+            raise AssertionError("Value must be passed as a alpha-numeric string: {}".format(value))
         
         if not re.search(pattern, value):
             raise AssertionError("Value ({}) given does not match pattern {}".format(value, pattern))
         
     def assertIMatch(self, value, pattern, **params):
         if not value or not isinstance(value, str):
-            raise AssertionError("Value must be passed as a alpha-numeric string")
+            raise AssertionError("Value must be passed as a alpha-numeric string: {}".format(value))
         
         if not re.search(pattern, value, re.IGNORECASE):
             raise AssertionError("Value ({}) given does not match pattern {}".format(value, pattern))
     
     
     def _convert_date(self, date):
-        if not date or not isinstance(date, str) or not re.search('^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}Z)?$', date):
+        date_obj = None
+        
+        def try_date_format(format):
+            try:
+                return datetime.strptime(date, format)
+            except Exception as e:
+                return None    
+        
+        
+        if not date or not isinstance(date, str):
             raise AssertionError("Value ({}) must be passed as a date string".format(date))
         
-        try:
-            date = datetime.strptime(date, '%Y-%m-%dT%H:%M:%SZ')
+        for format in ('%Y-%m-%dT%H:%M:%SZ', '%Y-%m-%d'):
+            date_obj = try_date_format(format)
+            if date_obj: break
         
-        except Exception as e:
-            date = datetime.strptime(date, '%Y-%m-%d')
+        if not date_obj:
+            raise AssertionError("Value ({}) must be passed as a date string".format(date))
         
-        return date        
+        return date_obj        
         
         
     def assertYear(self, date, year, **params):
