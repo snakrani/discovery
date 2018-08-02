@@ -8,7 +8,7 @@ class MetadataTest(case.APITestCase, metaclass = case.MetaAPISchema):
     schema = {
         'search': {
             '*search1': ('name', 'istartswith', 'Edu'),
-            '*search2': ('name', 'istartswith', 'Financial planni'),
+            '*search2': ('name', 'istartswith', 'Financial'),
             '-search3': ('name', 'istartswith', '0000000000000')
         }
     }

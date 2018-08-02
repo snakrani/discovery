@@ -7,9 +7,9 @@ class PoolTest(case.APITestCase, metaclass = case.MetaAPISchema):
     fixtures = data.get_category_fixtures()
     schema = {
         'object': {
-            '&HCATS_1': ('name', 'iequal', 'HCATS Unrestricted Pool 1'),
-            '&BMO_4': ('name', 'iequal', 'Electrical Maintenance'),
-            '&OASIS_SB_4': ('name', 'iequal', 'Scientific Research and Development'),
+            '&HCATS_1': ('name', 'iexact', 'HCATS Unrestricted Pool 1'),
+            '&BMO_4': ('name', 'iexact', 'Electrical Maintenance'),
+            '&OASIS_SB_4': ('name', 'iexact', 'Scientific Research and Development'),
             '#345': (),
             '#ABCDEFG': ()
         },
@@ -21,9 +21,9 @@ class PoolTest(case.APITestCase, metaclass = case.MetaAPISchema):
             '@mixed': {'page': 2, 'count': 3}
         },
         'search': {
-            '@search1': ('name', 'matches', 'Inspection'),
-            '*search2': ('id', 'equal', 'BMO_SB_3'),
-            '@search3': ('number', 'matches', '2')
+            '@search1': ('name', 'regex', 'Inspection'),
+            '*search2': ('id', 'exact', 'BMO_SB_3'),
+            '@search3': ('number', 'regex', '2')
         },
         'fields': {
             'id': {

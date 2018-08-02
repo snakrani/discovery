@@ -7,9 +7,9 @@ class VendorTest(case.APITestCase, metaclass = case.MetaAPISchema):
     fixtures = data.get_vendor_fixtures()
     schema = {
             'object': {
-                '&007901598': ('name', 'equal', 'BATTELLE MEMORIAL INSTITUTE'),
-                '&133239397': ('name', 'equal', 'MIRACLE SYSTEMS, LLC'),
-                '&001014182': ('name', 'equal', 'DYNAMICS RESEARCH CORPORATION'),
+                '&007901598': ('name', 'exact', 'BATTELLE MEMORIAL INSTITUTE'),
+                '&133239397': ('name', 'exact', 'MIRACLE SYSTEMS, LLC'),
+                '&001014182': ('name', 'exact', 'DYNAMICS RESEARCH CORPORATION'),
                 '#345': (),
                 '#ABCDEFG': ()
             },
@@ -33,9 +33,9 @@ class VendorTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@mixed': {'page': 2, 'count': 10}
             },
             'search': {
-                '@search1': ('name', 'matches', 'SERVICES'),
-                '*search2': ('duns', 'equal', '830333824'),
-                '*search3': ('cage', 'equal', '3K773')
+                '@search1': ('name', 'regex', 'SERVICES'),
+                '*search2': ('duns', 'exact', '830333824'),
+                '*search3': ('cage', 'exact', '3K773')
             },
             'fields': {
                 'name': {
@@ -318,12 +318,12 @@ class VendorTest(case.APITestCase, metaclass = case.MetaAPISchema):
                     '@range': (2, 5),
                     '@in': (2, 3, 5)
                 },
-                'pools__zones__state': {
+                'pools__zones__states__code': {
                     '@exact': 'PA',
                     '@iexact': 'mE',
                     '@in': ('PA', 'NC', 'TX', 'NY')
                 },
-                'pools__cms__name': {
+                'pools__contacts__name': {
                     '@exact': 'Ken Scott',
                     '@iexact': 'daniel eke',
                     '@in': ("Ken Scott", "Daniel Eke"),
@@ -336,7 +336,7 @@ class VendorTest(case.APITestCase, metaclass = case.MetaAPISchema):
                     '@regex': '^[A-Za-z]{4}\s+',
                     '@iregex': '^da(n|na)'
                 },
-                'pools__cms__phones__number': {
+                'pools__contacts__phones__number': {
                     '@exact': '703-821-0678',
                     '@iexact': '703-821-0678',
                     '@in': ("703-821-0678", "571-262-3144", "937-912-6102"),
@@ -349,51 +349,12 @@ class VendorTest(case.APITestCase, metaclass = case.MetaAPISchema):
                     '@regex': 'x\s*\d+$',
                     '@iregex': '(304|703)-\d{3}'
                 },
-                'pools__cms__emails_address': {
+                'pools__contacts__emails__address': {
                     '@exact': 'OASIS@act-i.com',
                     '@iexact': 'oasis@act-i.com',
                     '@in': ("OASIS@act-i.com", "hcats_sb@deepmile.com", "Finance@exemplarent.com"),
                     '@contains': 'ibm',
                     '@icontains': 'IbM',
-                    '@startswith': 'hcats',
-                    '@istartswith': 'HcAtS',
-                    '@endswith': 'com',
-                    '@iendswith': 'cOM',
-                    '@regex': '\d+',
-                    '@iregex': '\.(com|net)$'
-                },
-                'pools__pms__name': {
-                    '@exact': 'Gary Wittlinger',
-                    '@iexact': 'gary wittlinger',
-                    '@in': ("R. Ken Trammell", "Jeffrey Chesko", "Bob"),
-                    '@contains': 'Glass',
-                    '@icontains': 'glass',
-                    '@startswith': 'John',
-                    '@istartswith': 'john',
-                    '@endswith': 'Gendron',
-                    '@iendswith': 'gendron',
-                    '@regex': '^[A-Za-z]{4}\s+',
-                    '@iregex': '^dr\.?'
-                },
-                'pools__pms__phones__number': {
-                    '@exact': '240-538-8357',
-                    '@iexact': '937-912-6102',
-                    '@in': ("240-538-8357", "937-912-6102", "256-882-6229x102"),
-                    '@contains': '-824-',
-                    '@icontains': '-824-',
-                    '@startswith': '719',
-                    '@istartswith': '719',
-                    '@endswith': '6102',
-                    '@iendswith': '6102',
-                    '@regex': 'x\s*\d+$',
-                    '@iregex': '(937|703)-\d{3}'
-                },
-                'pools__pms__emails__address': {
-                    '@exact': 'ARA_OASIS_SB@ara.com',
-                    '@iexact': 'ara_oasis_sb@ARA.com',
-                    '@in': ("OASIS@avioninc.com", "contracts@cssiinc.com", "chauhan@battelle.org"),
-                    '@contains': 'aeg',
-                    '@icontains': 'AEG',
                     '@startswith': 'hcats',
                     '@istartswith': 'HcAtS',
                     '@endswith': 'com',
@@ -413,7 +374,7 @@ class VendorTest(case.APITestCase, metaclass = case.MetaAPISchema):
         resp.is_int(base_key + ['duns'])
         resp.is_int(base_key + ['duns_4'])
                 
-        if resp.check('is_not_in', base_key + ['duns'], ('830341645', '614155380', '605119932', '933706141')):
+        if resp.check('is_not_in', base_key + ['duns'], ('614155380', '148815173', '831340356', '246802545')):
             resp.is_not_empty(base_key + ['cage'])
             resp.is_not_empty(base_key + ['sam_status'])
             resp.is_not_none(base_key + ['sam_exclusion'])

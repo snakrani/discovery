@@ -1,15 +1,18 @@
 from test import cases as case
 from test import fixtures as data
 
+import json
+
 
 class ZoneTest(case.APITestCase, metaclass = case.MetaAPISchema):
     
     fixtures = data.get_category_fixtures()
     schema = {
         'object': {
-            '&1': ('state', 'equal', 'DE'),
-            '&3': ('state', 'equal', 'FL'),
-            '&6': ('state', 'equal', 'KS'),
+            '&1': ('states__code', 'exact', 'DE'),
+            '&3': ('states__code', 'exact', 'FL'),
+            '&4': ('id', 'exact', 4),
+            '&6': ('states__code', 'exact', 'KS'),
             '#345': (),
             '#ABCDEFG': ()
         },
@@ -30,10 +33,31 @@ class ZoneTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@range': (2, 5),
                 '@in': (2, 3, 5)
             },
-            'state': {
+            'states__code': {
                 '*exact': 'PA',
                 '*iexact': 'mE',
                 '@in': ('PA', 'NC', 'TX', 'NY')
+            }
+        },
+        'requests': {
+            '*r1': {
+                'params': {'id': 1, 'states__code__iexact': 'md'},
+                'tests': (
+                    ('id', 'exact', 1),
+                    ('states__code', 'exact', 'MD')
+                )
+            },
+            '@r2': {
+                'params': {'filters': '(states__code__iexact=ct)&(states__code__iexact=nH)'},
+                'tests': (
+                    ('states__code', 'in', ('CT', 'NH')),
+                )
+            },
+            '-r3': {
+                'params': {'id': 625, 'states__code': 'NC'}
+            },
+            '-r4': {
+                'params': {'filters': '(states__code=GA)&(states__code=IA)'}
             }
         }
     }
@@ -44,20 +68,4 @@ class ZoneTest(case.APITestCase, metaclass = case.MetaAPISchema):
         
     def validate_object(self, resp, base_key = []):
         resp.is_int(base_key + ['id'])
-        resp.is_not_empty(base_key + ['state'])
-    
-       
-    def test_mixed_request_found_1(self):
-        resp = self.validated_single_list(id = 1, state__iexact = 'md')
-        resp.validate(lambda resp, base_key: resp.equal(base_key + ['id'], 1))
-        resp.validate(lambda resp, base_key: resp.equal(base_key + ['state'], 'MD'))
-    
-    def test_mixed_request_found_2(self):
-        resp = self.validated_multi_list(filters = self.encode_str('(state__iexact=ct)&(state__iexact=nH)'))
-        resp.validate(lambda resp, base_key: resp.is_in(base_key + ['state'], ['CT', 'NH']))
-    
-    def test_mixed_request_not_found_1(self):
-        self.empty_list(id = 625, state = 'NC')
-    
-    def test_mixed_request_not_found_2(self):
-        self.empty_list(filters = self.encode_str('(state=GA)&(state=IA)'))
+        resp.is_not_empty(base_key + ['states'])

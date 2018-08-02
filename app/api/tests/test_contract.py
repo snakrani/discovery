@@ -7,9 +7,9 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
     fixtures = data.get_contract_fixtures()
     schema = {
         'object': {
-            '&1': ('piid', 'equal', 'DAAE0703CS108'),
-            '&162': ('piid', 'equal', 'GS00Q14OADS128_1605DC17F00172'),
-            '&828': ('name', 'equal', 'USZA2202D0015_0194'),
+            '&1': ('piid', 'exact', 'DAAE0703CS108'),
+            '&162': ('piid', 'exact', 'GS00Q14OADS128_1605DC17F00172'),
+            '&828': ('name', 'exact', 'USZA2202D0015_0194'),
             '#345C': (),
             '#ABCDEFG': ()
         },
@@ -36,8 +36,8 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
             '@mixed': {'page': 2, 'count': 10}
         },
         'search': {
-            '*search1': ('piid', 'iequal', 'DAAE0703CL525'),
-            '@search2': ('agency_name', 'imatches', 'NUCLEAR REGULATORY COMMISSION')
+            '*search1': ('piid', 'iexact', 'DAAE0703CL525'),
+            '@search2': ('agency_name', 'iregex', 'NUCLEAR REGULATORY COMMISSION')
         },
         'fields': {
             'id': {
@@ -591,12 +591,12 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@range': (2, 5),
                 '@in': (2, 3, 5)
             },
-            'vendor__pools__zones__state': {
+            'vendor__pools__zones__states__code': {
                 '@exact': 'PA',
                 '@iexact': 'mE',
                 '@in': ('PA', 'NC', 'TX', 'NY')
             },
-            'vendor__pools__cms__name': {
+            'vendor__pools__contacts__name': {
                 '@exact': 'Ken Scott',
                 '@iexact': 'daniel eke',
                 '@in': ("Ken Scott", "Daniel Eke"),
@@ -609,7 +609,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': '^[A-Za-z]{4}\s+',
                 '@iregex': '^da(n|na)'
             },
-            'vendor__pools__cms__phones__number': {
+            'vendor__pools__contacts__phones__number': {
                 '@exact': '703-821-0678',
                 '@iexact': '703-821-0678',
                 '@in': ("703-821-0678", "571-262-3144", "937-912-6102"),
@@ -622,51 +622,12 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': 'x\s*\d+$',
                 '@iregex': '(304|703)-\d{3}'
             },
-            'vendor__pools__cms__emails__address': {
+            'vendor__pools__contacts__emails__address': {
                 '@exact': 'OASIS@act-i.com',
                 '@iexact': 'oasis@act-i.com',
                 '@in': ("OASIS@act-i.com", "hcats_sb@deepmile.com", "Finance@exemplarent.com"),
                 '@contains': 'ibm',
                 '@icontains': 'IbM',
-                '@startswith': 'hcats',
-                '@istartswith': 'HcAtS',
-                '@endswith': 'com',
-                '@iendswith': 'cOM',
-                '@regex': '\d+',
-                '@iregex': '\.(com|net)$'
-            },
-            'vendor__pools__pms__name': {
-                '@exact': 'Gary Wittlinger',
-                '@iexact': 'gary wittlinger',
-                '@in': ("R. Ken Trammell", "Jeffrey Chesko", "Bob"),
-                '@contains': 'Glass',
-                '@icontains': 'glass',
-                '@startswith': 'John',
-                '@istartswith': 'john',
-                '@endswith': 'Gendron',
-                '@iendswith': 'gendron',
-                '@regex': '^[A-Za-z]{4}\s+',
-                '@iregex': '^dr\.?'
-            },
-            'vendor__pools__pms__phones__number': {
-                '@exact': '240-538-8357',
-                '@iexact': '937-912-6102',
-                '@in': ("240-538-8357", "937-912-6102", "256-882-6229x102"),
-                '@contains': '-824-',
-                '@icontains': '-824-',
-                '@startswith': '719',
-                '@istartswith': '719',
-                '@endswith': '6102',
-                '@iendswith': '6102',
-                '@regex': 'x\s*\d+$',
-                '@iregex': '(937|703)-\d{3}'
-            },
-            'vendor__pools__pms__emails__address': {
-                '@exact': 'ARA_OASIS_SB@ara.com',
-                '@iexact': 'ara_oasis_sb@ARA.com',
-                '@in': ("OASIS@avioninc.com", "contracts@cssiinc.com", "chauhan@battelle.org"),
-                '@contains': 'aeg',
-                '@icontains': 'AEG',
                 '@startswith': 'hcats',
                 '@istartswith': 'HcAtS',
                 '@endswith': 'com',

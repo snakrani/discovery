@@ -7,9 +7,9 @@ class PscTest(case.APITestCase, metaclass = case.MetaAPISchema):
     fixtures = data.get_category_fixtures()
     schema = {
         'object': {
-            '&J039': ('code', 'equal', 'J039'),
-            '&S208': ('code', 'equal', 'S208'),
-            '&H341': ('code', 'equal', 'H341'),
+            '&J039': ('code', 'exact', 'J039'),
+            '&S208': ('code', 'exact', 'S208'),
+            '&H341': ('code', 'exact', 'H341'),
             '#77777777': (),
             '#ABCDEFG': ()
         },
@@ -21,11 +21,11 @@ class PscTest(case.APITestCase, metaclass = case.MetaAPISchema):
             '@mixed': {'page': 2, 'count': 3}
         },
         'search': {
-            '*search1': ('code', 'matches', 'J041'),
-            '*search2': ('description', 'matches', 'Other housekeeping services'),
-            '@search3': ('naics__code', 'equal', '561210'),
-            '@search4': ('naics__description', 'matches', 'Testing Laboratories'),
-            '-search5': ('code', 'matches', '0000000000000')
+            '*search1': ('code', 'regex', 'J041'),
+            '*search2': ('description', 'iregex', 'Other housekeeping services'),
+            '@search3': ('naics__code', 'exact', '561210'),
+            '@search4': ('naics__description', 'regex', 'Testing Laboratories'),
+            '-search5': ('code', 'regex', '0000000000000')
         },
         'fields': {
             'code': {

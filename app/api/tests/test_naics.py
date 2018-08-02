@@ -7,9 +7,9 @@ class NaicsTest(case.APITestCase, metaclass = case.MetaAPISchema):
     fixtures = data.get_category_fixtures()
     schema = {
         'object': {
-            '&541614': ('code', 'equal', '541614'),
-            '&541330': ('code', 'equal', '541330'),
-            '&541840': ('code', 'equal', '541840'),
+            '&541614': ('code', 'exact', '541614'),
+            '&541330': ('code', 'exact', '541330'),
+            '&541840': ('code', 'exact', '541840'),
             '#77777777': (),
             '#ABCDEFG': ()
         },
@@ -21,10 +21,10 @@ class NaicsTest(case.APITestCase, metaclass = case.MetaAPISchema):
             '@mixed': {'page': 4, 'count': 10}
         },
         'search': {
-            '@search1': ('description', 'matches', 'Water Supply and Irrigation Systems'),
-            '*search2': ('code', 'equal', '541910'),
-            '@search3': ('keywords__name', 'equal', 'Automobile driving schools'),
-            '-search4': ('code', 'matches', '0000000000000')
+            '@search1': ('description', 'regex', 'Water Supply and Irrigation Systems'),
+            '*search2': ('code', 'exact', '541910'),
+            '@search3': ('keywords__name', 'regex', 'Instructor Led Training'),
+            '-search4': ('code', 'exact', '0000000000000')
         },
         'fields': {
             'code': {
