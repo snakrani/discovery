@@ -90,7 +90,7 @@ class NaicsViewSet(DiscoveryReadOnlyModelViewSet):
     }
     filter_class = filters.NaicsFilter
     search_fields = ['code', 'description', 'sin__code', 'keywords__name']
-    ordering_fields = ['code', 'description', 'sin__code', 'keywords__name']
+    ordering_fields = ['code', 'description']
     ordering = 'description'
     
     pagination_class = pagination.ResultSetPagination
@@ -120,7 +120,7 @@ class PscViewSet(DiscoveryReadOnlyModelViewSet):
     }
     filter_class = filters.PscFilter
     search_fields = ['code', 'description', 'sin__code', 'naics__code', 'naics__description', 'keywords__name']
-    ordering_fields = ['code', 'description', 'sin__code', 'naics__code', 'naics__description', 'keywords__name']
+    ordering_fields = ['code', 'description']
     ordering = 'description'
     
     pagination_class = pagination.ResultSetPagination
@@ -149,8 +149,8 @@ class PoolViewSet(DiscoveryReadOnlyModelViewSet):
         'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
     }
     filter_class = filters.PoolFilter
-    search_fields = ['id', 'name', 'number', 'vehicle', 'threshold']
-    ordering_fields = ['id', 'name', 'number', 'vehicle', 'threshold', 'naics__code', 'naics__description']
+    search_fields = ['id', 'name', 'number', 'vehicle', 'threshold', 'naics__code', 'naics__description']
+    ordering_fields = ['id', 'name', 'number', 'vehicle', 'threshold']
     ordering = 'name'
     
     pagination_class = pagination.ResultSetPagination
@@ -243,7 +243,7 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
         'name', 'duns', 'cage', 
         'sam_status', 'sam_exclusion', 'sam_url',
         'sam_location__address', 'sam_location__city', 'sam_location__state', 
-        'sam_location__zipcode', 'sam_location__congressional_district', 'sam_location_citystate',
+        'sam_location__zipcode', 'sam_location__congressional_district',
         'annual_revenue', 'number_of_employees', 'number_of_contracts'
     ]
     ordering = '-number_of_contracts'
@@ -264,8 +264,7 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
             ),
             number_of_employees=Subquery(
                 contracts.Contract.objects.filter(vendor=OuterRef('pk')).order_by('-date_signed').values('number_of_employees')[:1]
-            ),
-            sam_location_citystate = Concat('sam_location__city', Value(', '), 'sam_location__state', Value(' '), 'sam_location__zipcode')
+            )
         )
         if naics_param_name in self.request.query_params and self.request.query_params[naics_param_name]:
             naics_code = re.sub(r'[^\d]+$', '', self.request.query_params[naics_param_name])
