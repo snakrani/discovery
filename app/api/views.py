@@ -1,4 +1,5 @@
 from collections import OrderedDict
+from datetime import datetime, date
 
 from django.conf import settings
 from django.db.models import Subquery, OuterRef, Value, Q
@@ -11,7 +12,6 @@ from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.response import Response
-from rest_framework.decorators import list_route
 
 from rest_framework_filters.backends import RestFrameworkFilterBackend
 
@@ -54,11 +54,16 @@ class DiscoveryReadOnlyModelViewSet(
         
         field_lookup = kwargs['field_lookup']
         queryset = self.filter_queryset(self.get_queryset().order_by(field_lookup))
+        values = []
         
-        if check_api_test(request):
-            values = queryset.values(field_lookup)
-        else:
-            values = queryset.values_list(field_lookup, flat=True)
+        for value in queryset.values_list(field_lookup, flat=True):
+            if value is not None:
+                if isinstance(value, (datetime, date)):
+                    value = value.isoformat()
+                    if value.endswith('+00:00'):
+                        value = value[:-6] + 'Z'
+                
+                values.append(value)
         
         return Response(OrderedDict([
             ('count', len(values)),
@@ -347,7 +352,7 @@ class ListKeywordView(ListAPIView):
             queryset = queryset.filter(name__istartswith = request.query_params['q'])
         
         serializer = self.get_serializer(queryset, many=True)
-        return Response({ 'results': serializer.data })
+        return Response({ 'count': len(serializer.data), 'results': serializer.data })
 
 
 @method_decorator(cache_page(60*60), name='get')
