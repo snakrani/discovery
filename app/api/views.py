@@ -149,7 +149,7 @@ class PoolViewSet(DiscoveryReadOnlyModelViewSet):
         'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
     }
     filter_class = filters.PoolFilter
-    search_fields = ['id', 'name', 'number', 'vehicle', 'threshold', 'naics__code', 'naics__description']
+    search_fields = ['id', 'name', 'number', 'vehicle', 'threshold']
     ordering_fields = ['id', 'name', 'number', 'vehicle', 'threshold']
     ordering = 'name'
     
