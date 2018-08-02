@@ -525,7 +525,7 @@ DataManager.populateZoneDropDown = function() {
             $("#zone-id")
                 .append($("<option></option>")
                 .attr("value", result.id)
-                .text("Zone " + result.id + " (" + result.state.join(', ') + ")"));
+                .text("Zone " + result.id + " (" + result.states.join(', ') + ")"));
         });
 
         if (zones.length > 0) {
