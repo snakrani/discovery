@@ -436,8 +436,8 @@ class APIResponseValidator(ResponseValidator):
         if not dir in ['asc', 'desc']:
             raise Exception("Ordering direction ({}) not supported".format(dir))
         
-        for i in range(0, len(self.resp.data['results']) - 1):
-            data_value = get_nested_value(self.resp.data['results'][i], resp_value)
+        for index in range(0, len(self.resp.data['results'])):
+            data_value = get_nested_value(self.resp.data['results'][index], resp_value)
             
             if data_value is not None:
                 if prev_value is not None:
