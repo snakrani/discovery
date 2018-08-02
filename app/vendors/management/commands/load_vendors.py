@@ -255,23 +255,15 @@ class Command(BaseCommand):
                 
             membership.save()
             
-            # Add contract manager
-            cm, cm_created = membership.cms.get_or_create(name=format_ascii(record['POC1']))
+            # Add contacts
+            for index in range(1, 3):
+                contact, contact_created = membership.contacts.get_or_create(name=format_ascii(record["POC{}".format(index)]))
         
-            for number in format_phones(record['Phone1']):
-                cm.phones.get_or_create(number=number)
+                for number in format_phones(record["Phone{}".format(index)]):
+                    contact.phones.get_or_create(number=number)
         
-            for address in format_emails(record['Email1']):
-                cm.emails.get_or_create(address=address)
-                
-            # Add project manager
-            pm, pm_created = membership.pms.get_or_create(name=format_ascii(record['POC2']))
-        
-            for number in format_phones(record['Phone2']):
-                pm.phones.get_or_create(number=number)
-        
-            for address in format_emails(record['Email2']):
-                pm.emails.get_or_create(address=address)
+                for address in format_emails(record["Email{}".format(index)]):
+                    contact.emails.get_or_create(address=address)
             
             # Add zone information (if it exists)
             for zone_id in get_zones(record):
