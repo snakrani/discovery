@@ -102,7 +102,7 @@ class BaseValidator(object):
                         pass
                     
                 if not success:
-                    raise self._wrap_error(AssertionError("No items in value: ({}) {} ({})".format(data_value, op, value))) 
+                    raise AssertionError("No items in value: ({}) {} ({})".format(data_value, op, value))
             
             elif data_value is not None:
                 _compare(op, data_value, value, **params)
@@ -481,7 +481,7 @@ class APIResponseValidator(ResponseValidator):
     # Validation
     
     def validate(self, validate_function):
-        for i in range(0, len(self.resp.data['results']) - 1):
+        for i in range(0, len(self.resp.data['results'])):
             validate_function(self, ['results', i])
     
     def validate_list(self):
@@ -491,7 +491,7 @@ class APIResponseValidator(ResponseValidator):
         self.test.validate_object(self)
 
             
-    def map(self, validator, base_key, lookup_keys, value, **params):
+    def map(self, validator, base_key, lookup_keys, value = None, **params):
         lookup_keys = normalize_list(lookup_keys)
         data_pool = self.get_data_value(base_key)
         success = False
