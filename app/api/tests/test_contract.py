@@ -7,8 +7,8 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
     fixtures = data.get_contract_fixtures()
     schema = {
         'object': {
-            '&1': ('piid', 'exact', 'DAAE0703CS108'),
-            '&162': ('piid', 'exact', 'GS00Q14OADS128_1605DC17F00172'),
+            '&1': ('piid', 'exact', 'DAAE0799CL001'),
+            '&162': ('piid', 'exact', 'AG3198C120007'),
             '&828': ('name', 'exact', 'USZA2202D0015_0194'),
             '#345C': (),
             '#ABCDEFG': ()
@@ -237,8 +237,8 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@in': ("United States","United Kingdom"),
                 '@contains': 'United',
                 '@icontains': 'united',
-                '@startswith': 'Moz',
-                '@istartswith': 'moz',
+                '@startswith': 'G',
+                '@istartswith': 'g',
                 '@endswith': 'ia',
                 '@iendswith': 'IA',
                 '@regex': '^United (States|Kingdom)$',
