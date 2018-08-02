@@ -13,7 +13,7 @@ class PscTest(case.APITestCase, metaclass = case.MetaAPISchema):
             '#77777777': (),
             '#ABCDEFG': ()
         },
-        'ordering': ('code', 'description', 'naics__code', 'naics__description'),
+        'ordering': ('code', 'description'),
         'pagination': {
             '@no_args': {},
             '!page': {'page': 1000},

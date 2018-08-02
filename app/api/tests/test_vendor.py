@@ -16,15 +16,9 @@ class VendorTest(case.APITestCase, metaclass = case.MetaAPISchema):
             'ordering': (
                 'name', 'duns', 'cage', 
                 'sam_status', 'sam_exclusion', 'sam_url',
-                'sam_location__address', 
-                'sam_location__city', 
-                'sam_location__state', 
-                'sam_location__zipcode', 
-                'sam_location__congressional_district', 
-                'sam_location_citystate',
-                'annual_revenue', 
-                'number_of_employees', 
-                'number_of_contracts'
+                'sam_location__address', 'sam_location__city', 'sam_location__state', 
+                'sam_location__zipcode', 'sam_location__congressional_district',
+                'annual_revenue', 'number_of_employees', 'number_of_contracts'
             ),
             'pagination': {
                 '@no_args': {},

@@ -13,7 +13,7 @@ class NaicsTest(case.APITestCase, metaclass = case.MetaAPISchema):
             '#77777777': (),
             '#ABCDEFG': ()
         },
-        'ordering': ('code', 'description', 'sin__code', 'keywords__name'),
+        'ordering': ('code', 'description'),
         'pagination': {
             '@no_args': {},
             '!page': {'page': 1000},

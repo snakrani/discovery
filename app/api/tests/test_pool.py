@@ -13,7 +13,7 @@ class PoolTest(case.APITestCase, metaclass = case.MetaAPISchema):
             '#345': (),
             '#ABCDEFG': ()
         },
-        'ordering': 'id',
+        'ordering': ('id', 'name', 'number', 'vehicle', 'threshold'),
         'pagination': {
             '@no_args': {},
             '!page': {'page': 15},

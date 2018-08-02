@@ -14,7 +14,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
             '#ABCDEFG': ()
         },
         'ordering': (
-            'id', 'piid', 'base_piid', 
+            'id', 'piid', 'base_piid',
             'agency_id', 'agency_name', 
             'NAICS', 'PSC',
             'date_signed', 'completion_date', 'obligated_amount',
