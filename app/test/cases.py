@@ -637,6 +637,7 @@ class MetaAcceptanceSchema(type):
     @classmethod
     def _generate_tests(cls, object, tests):
         for name, schema in object.items():
+            tags = normalize_list(schema.pop('tags', []))
             method_name = "test_{}".format(name)
             single_schema = True
             
@@ -645,14 +646,21 @@ class MetaAcceptanceSchema(type):
                 
                 if isinstance(params, (list, tuple)):
                     for index, param_set in enumerate(list(params)):
+                        sub_method_name = "{}_{}".format(method_name, index+1)
                         sub_schema = copy.deepcopy(schema)
                         sub_schema['params'] = param_set
-                        tests["{}_{}".format(method_name, index+1)] = cls._elem_test_method(name, sub_schema)   
+                        tests[sub_method_name] = cls._elem_test_method(name, sub_schema)
+                        
+                        if len(tags):
+                            tests[sub_method_name].tags = tags
                     
                     single_schema = False
             
             if single_schema:
                 tests[method_name] = cls._elem_test_method(name, copy.deepcopy(schema))
+                
+                if len(tags):
+                    tests[method_name].tags = tags
             
     
     @classmethod
