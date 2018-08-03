@@ -1,3 +1,4 @@
+from test.common import normalize_list
 
 import copy
 import json
@@ -150,10 +151,14 @@ def add_contract_table_tests(schema, result_count, sort_field, sort_direction, p
         schema['t5|#pagination_container'] = 'not_displayed'
 
 
-def generate_test(config):
+def generate_test(config, create_tags = True):
     schema = {}
+    config = copy.deepcopy(config)  
+    tags = normalize_list(config.pop('tags', []))
     
-    config = copy.deepcopy(config)
+    if create_tags:
+        tags.append('url')
+        schema['tags'] = tags
     
     if 'params' in config:
         schema['params'] = config.pop('params')
@@ -216,7 +221,7 @@ def generate_test(config):
 def generate_action_test(config):
     schema = {'wait': 'complete'}
     
-    def add_actions(actions, config, index = 1):
+    def add_actions(actions, local_config, index = 1):
         if not isinstance(actions[0], (list, tuple)):
             actions = [actions]
         else:
@@ -236,14 +241,18 @@ def generate_action_test(config):
         
         if len(actions) > 0:
             schema[event_name] = {}
-            schema[event_name]['actions'] = add_actions(actions, config, (index + 1))
+            schema[event_name]['actions'] = add_actions(actions, local_config, (index + 1))
         else:
-            schema[event_name] = generate_test(config)
+            schema[event_name] = generate_test(local_config, False)
             
-            if 'wait' not in config:
+            if 'wait' not in local_config:
                 schema[event_name]['wait'] = 'complete'
         
         return schema
+    
+    tags = normalize_list(config.pop('tags', []))
+    tags.append('action')
+    schema['tags'] = tags
     
     params = config.pop('params', {})
     schema['params'] = {}
