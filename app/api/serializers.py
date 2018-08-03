@@ -226,13 +226,12 @@ class ContactSerializer(ModelSerializer):
     
     class Meta:
         model = vendors.Contact
-        fields = ['name', 'phones', 'emails']
+        fields = ['order', 'name', 'phones', 'emails']
 
 
 class BasePoolMembershipSerializer(ModelSerializer):
     capability_statement = SerializerMethodField()
-    
-    contacts = ContactSerializer(many=True)
+    contacts = SerializerMethodField()
     
     class Meta:
         model = vendors.PoolMembership
@@ -249,6 +248,11 @@ class BasePoolMembershipSerializer(ModelSerializer):
         if vehicle and os.path.isfile(cs_path):
             return cs_url    
         return ''
+    
+    def get_contacts(self, item):
+        queryset = vendors.Contact.objects.filter(responsibility=item).order_by('order')
+        return ContactSerializer(queryset, many=True, context=self.context).data
+        
     
 class PoolMembershipLinkSerializer(BasePoolMembershipSerializer):
     pool = PoolLinkSerializer(many=False)
