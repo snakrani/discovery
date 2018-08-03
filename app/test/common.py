@@ -5,7 +5,7 @@ from django.db.models.query import QuerySet
 def normalize_list(input_value):
     if isinstance(input_value, (str, int, float)):
         return [input_value]
-    elif isinstance(input_value, tuple):
+    elif isinstance(input_value, (tuple, QuerySet)):
         return list(input_value)
     return input_value
 
