@@ -1,13 +1,17 @@
+from django.test import tag
+
 from test import cases as case
 
 from acceptance.common import generate_schema
 
 
+@tag('vendor')
 class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
  
     schema = generate_schema({
         'actions': {
             'unfiltered': {
+                'tags': ('all',),
                 'params': {'args': '102067378', 'test': 'true'},
                 'naics': ('all', 2),
                 'membership_filters': (None, 4, 0, 0, {
@@ -23,6 +27,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (5, 'h_date_signed', 'desc', ('Prev', '1'), '2')
             },
             'naics_bmo_1': {
+                'tags': ('naics', 'bmo'),
                 'params': {'args': '106974876', 'test': 'true', 'naics': '238220'},
                 'action': ('#naics-code', 'select[238220]'),
                 'naics': ('238220', 15),
@@ -37,6 +42,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (3, 'h_date_signed', 'desc')
             },
             'naics_bmo_2': {
+                'tags': ('naics', 'bmo'),
                 'params': {'args': '616858908', 'test': 'true', 'naics': '238220'},
                 'action': ('#naics-code', 'select[238220]'),
                 'naics': ('238220', 13),
@@ -51,6 +57,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (3, 'h_date_signed', 'desc')
             },
             'naics_bmo_3': {
+                'tags': ('naics', 'bmo'),
                 'params': {'args': '808649888', 'test': 'true', 'naics': '238290'},
                 'action': ('#naics-code', 'select[238290]'),
                 'naics': ('238290', 5),
@@ -65,6 +72,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (0, 'h_date_signed', 'desc')
             },
             'naics_bmo_4': {
+                'tags': ('naics', 'bmo'),
                 'params': {'args': '055124077', 'test': 'true', 'naics': '238210'},
                 'action': ('#naics-code', 'select[238210]'),
                 'naics': ('238210', 15),
@@ -79,6 +87,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (1, 'h_date_signed', 'desc')
             },
             'naics_bmo_5': {
+                'tags': ('naics', 'bmo'),
                 'params': {'args': '847316189', 'test': 'true', 'naics': '561720'},
                 'action': ('#naics-code', 'select[561720]'),
                 'naics': ('561720', 8),
@@ -93,6 +102,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (0, 'h_date_signed', 'desc')
             },
             'naics_bmo_6': {
+                'tags': ('naics', 'bmo'),
                 'params': {'args': '039839683', 'test': 'true', 'naics': '561730'},
                 'action': ('#naics-code', 'select[561730]'),
                 'naics': ('561730', 15),
@@ -107,6 +117,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (1, 'h_date_signed', 'desc')
             },
             'naics_bmo_7': {
+                'tags': ('naics', 'bmo'),
                 'params': {'args': '793374034', 'test': 'true', 'naics': '561621'},
                 'action': ('#naics-code', 'select[561621]'),
                 'naics': ('561621', 11),
@@ -121,6 +132,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (0, 'h_date_signed', 'desc')
             },
             'naics_bmo_8': {
+                'tags': ('naics', 'bmo'),
                 'params': {'args': '079859134', 'test': 'true', 'naics': '238220'},
                 'action': ('#naics-code', 'select[238220]'),
                 'naics': ('238220', 11),
@@ -135,6 +147,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (5, 'h_date_signed', 'desc', ('Prev', '1'), '2')
             },
             'naics_bmo_9': {
+                'tags': ('naics', 'bmo'),
                 'params': {'args': '012722836', 'test': 'true', 'naics': '238160'},
                 'action': ('#naics-code', 'select[238160]'),
                 'naics': ('238160', 15),
@@ -150,6 +163,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (2, 'h_date_signed', 'desc')
             },
             'naics_bmo_10': {
+                'tags': ('naics', 'bmo'),
                 'params': {'args': '039839683', 'test': 'true', 'naics': '531312'},
                 'action': ('#naics-code', 'select[531312]'),
                 'naics': ('531312', 15),
@@ -164,6 +178,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (1, 'h_date_signed', 'desc')
             },
             'naics_bmo_11': {
+                'tags': ('naics', 'bmo'),
                 'params': {'args': '012722836', 'test': 'true', 'naics': '236220'},
                 'action': ('#naics-code', 'select[236220]'),
                 'naics': ('236220', 15),
@@ -179,6 +194,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (3, 'h_date_signed', 'desc')
             },
             'naics_bmo_12': {
+                'tags': ('naics', 'bmo'),
                 'params': {'args': '106974876', 'test': 'true', 'naics': '541330'},
                 'action': ('#naics-code', 'select[541330]'),
                 'naics': ('541330', 15),
@@ -194,6 +210,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (5, 'h_date_signed', 'desc')
             },
             'naics_bmo_13': {
+                'tags': ('naics', 'bmo'),
                 'params': {'args': '080778868', 'test': 'true', 'naics': '541350'},
                 'action': ('#naics-code', 'select[541350]'),
                 'naics': ('541350', 10),
@@ -208,6 +225,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (1, 'h_date_signed', 'desc')
             },
             'naics_bmo_14': {
+                'tags': ('naics', 'bmo'),
                 'params': {'args': '847316189', 'test': 'true', 'naics': '561210'},
                 'action': ('#naics-code', 'select[561210]'),
                 'naics': ('561210', 8),
@@ -222,6 +240,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (4, 'h_date_signed', 'desc')
             },
             'naics_bmo_15': {
+                'tags': ('naics', 'bmo'),
                 'params': {'args': '039839683', 'test': 'true', 'naics': '561710'},
                 'action': ('#naics-code', 'select[561710]'),
                 'naics': ('561710', 15),
@@ -236,6 +255,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (1, 'h_date_signed', 'desc')
             },
             'naics_bmo_16': {
+                'tags': ('naics', 'bmo'),
                 'params': {'args': '793374034', 'test': 'true', 'naics': '562111'},
                 'action': ('#naics-code', 'select[562111]'),
                 'naics': ('562111', 11),
@@ -250,6 +270,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (0, 'h_date_signed', 'desc')
             },
             'naics_bmo_17': {
+                'tags': ('naics', 'bmo'),
                 'params': {'args': '043203249', 'test': 'true', 'naics': '561730'},
                 'action': ('#naics-code', 'select[561730]'),
                 'naics': ('561730', 7),
@@ -264,6 +285,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (0, 'h_date_signed', 'desc')
             },
             'naics_bmo_sb_1': {
+                'tags': ('naics', 'bmo_sb'),
                 'params': {'args': '129304551', 'test': 'true', 'naics': '238220'},
                 'action': ('#naics-code', 'select[238220]'),
                 'naics': ('238220', 15),
@@ -280,6 +302,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (5, 'h_date_signed', 'desc', ('Prev', '1'), '2')
             },
             'naics_bmo_sb_2': {
+                'tags': ('naics', 'bmo_sb'),
                 'params': {'args': '078650478', 'test': 'true', 'naics': '238220'},
                 'action': ('#naics-code', 'select[238220]'),
                 'naics': ('238220', 8),
@@ -296,6 +319,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (5, 'h_date_signed', 'desc')
             },
             'naics_bmo_sb_3': {
+                'tags': ('naics', 'bmo_sb'),
                 'params': {'args': '614155380', 'test': 'true', 'naics': '238290'},
                 'action': ('#naics-code', 'select[238290]'),
                 'naics': ('238290', 13),
@@ -312,6 +336,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (5, 'h_date_signed', 'desc')
             },
             'naics_bmo_sb_4': {
+                'tags': ('naics', 'bmo_sb'),
                 'params': {'args': '090967704', 'test': 'true', 'naics': '238210'},
                 'action': ('#naics-code', 'select[238210]'),
                 'naics': ('238210', 8),
@@ -330,6 +355,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (0, 'h_date_signed', 'desc')
             },
             'naics_bmo_sb_5': {
+                'tags': ('naics', 'bmo_sb'),
                 'params': {'args': '141611272', 'test': 'true', 'naics': '561720'},
                 'action': ('#naics-code', 'select[561720]'),
                 'naics': ('561720', 8),
@@ -346,6 +372,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (5, 'h_date_signed', 'desc', ('Prev', '1'), '2')
             },
             'naics_bmo_sb_6': {
+                'tags': ('naics', 'bmo_sb'),
                 'params': {'args': '129304551', 'test': 'true', 'naics': '561730'},
                 'action': ('#naics-code', 'select[561730]'),
                 'naics': ('561730', 15),
@@ -362,6 +389,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (1, 'h_date_signed', 'desc')
             },
             'naics_bmo_sb_7': {
+                'tags': ('naics', 'bmo_sb'),
                 'params': {'args': '052648261', 'test': 'true', 'naics': '561621'},
                 'action': ('#naics-code', 'select[561621]'),
                 'naics': ('561621', 3),
@@ -378,6 +406,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (0, 'h_date_signed', 'desc')
             },
             'naics_bmo_sb_8': {
+                'tags': ('naics', 'bmo_sb'),
                 'params': {'args': '610940632', 'test': 'true', 'naics': '238220'},
                 'action': ('#naics-code', 'select[238220]'),
                 'naics': ('238220', 3),
@@ -394,6 +423,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (4, 'h_date_signed', 'desc')
             },
             'naics_bmo_sb_9': {
+                'tags': ('naics', 'bmo_sb'),
                 'params': {'args': '884999491', 'test': 'true', 'naics': '238160'},
                 'action': ('#naics-code', 'select[238160]'),
                 'naics': ('238160', 4),
@@ -410,6 +440,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (3, 'h_date_signed', 'desc')
             },
             'naics_bmo_sb_10': {
+                'tags': ('naics', 'bmo_sb'),
                 'params': {'args': '790993252', 'test': 'true', 'naics': '531312'},
                 'action': ('#naics-code', 'select[531312]'),
                 'naics': ('531312', 4),
@@ -426,6 +457,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (0, 'h_date_signed', 'desc')
             },
             'naics_bmo_sb_11': {
+                'tags': ('naics', 'bmo_sb'),
                 'params': {'args': '080778868', 'test': 'true', 'naics': '236220'},
                 'action': ('#naics-code', 'select[236220]'),
                 'naics': ('236220', 10),
@@ -442,6 +474,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (3, 'h_date_signed', 'desc')
             },
             'naics_bmo_sb_12': {
+                'tags': ('naics', 'bmo_sb'),
                 'params': {'args': '064860299', 'test': 'true', 'naics': '541330'},
                 'action': ('#naics-code', 'select[541330]'),
                 'naics': ('541330', 8),
@@ -458,6 +491,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (1, 'h_date_signed', 'desc')
             },
             'naics_bmo_sb_13': {
+                'tags': ('naics', 'bmo_sb'),
                 'params': {'args': '080778868', 'test': 'true', 'naics': '541350'},
                 'action': ('#naics-code', 'select[541350]'),
                 'naics': ('541350', 10),
@@ -474,6 +508,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (1, 'h_date_signed', 'desc')
             },
             'naics_bmo_sb_14': {
+                'tags': ('naics', 'bmo_sb'),
                 'params': {'args': '053117149', 'test': 'true', 'naics': '561210'},
                 'action': ('#naics-code', 'select[561210]'),
                 'naics': ('561210', 15),
@@ -490,6 +525,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (5, 'h_date_signed', 'desc', ('Prev', '1'), '2')
             },
             'naics_bmo_sb_15': {
+                'tags': ('naics', 'bmo_sb'),
                 'params': {'args': '129304551', 'test': 'true', 'naics': '561710'},
                 'action': ('#naics-code', 'select[561710]'),
                 'naics': ('561710', 15),
@@ -506,6 +542,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (1, 'h_date_signed', 'desc')
             },
             'naics_bmo_sb_16': {
+                'tags': ('naics', 'bmo_sb'),
                 'params': {'args': '079515381', 'test': 'true', 'naics': '562111'},
                 'action': ('#naics-code', 'select[562111]'),
                 'naics': ('562111', 8),
@@ -522,6 +559,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (0, 'h_date_signed', 'desc')
             },
             'naics_bmo_sb_17': {
+                'tags': ('naics', 'bmo_sb'),
                 'params': {'args': '053117149', 'test': 'true', 'naics': '561730'},
                 'action': ('#naics-code', 'select[561730]'),
                 'naics': ('561730', 15),
@@ -538,6 +576,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (0, 'h_date_signed', 'desc')
             },
             'naics_hcats_1': {
+                'tags': ('naics', 'hcats'),
                 'params': {'args': '006928857', 'test': 'true', 'naics': '611430'},
                 'action': ('#naics-code', 'select[611430]'),
                 'naics': ('611430', 33),
@@ -552,6 +591,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (5, 'h_date_signed', 'desc', ('Prev', '1'), '2')
             },
             'naics_hcats_2': {
+                'tags': ('naics', 'hcats'),
                 'params': {'args': '830333824', 'test': 'true', 'naics': '541612'},
                 'action': ('#naics-code', 'select[541612]'),
                 'naics': ('541612', 9),
@@ -566,6 +606,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (5, 'h_date_signed', 'desc', ('Prev', '1'), '2')
             },
             'naics_hcats_sb_1': {
+                'tags': ('naics', 'hcats_sb'),
                 'params': {'args': '837788223', 'test': 'true', 'naics': '611430'},
                 'action': ('#naics-code', 'select[611430]'),
                 'naics': ('611430', 4),
@@ -582,6 +623,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (5, 'h_date_signed', 'desc', ('Prev', '1'), '2')
             },
             'naics_hcats_sb_2': {
+                'tags': ('naics', 'hcats_sb'),
                 'params': {'args': '827620308', 'test': 'true', 'naics': '541618'},
                 'action': ('#naics-code', 'select[541618]'),
                 'naics': ('541618', 6),
@@ -598,6 +640,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (2, 'h_date_signed', 'desc')
             },        
             'naics_oasis_1': {
+                'tags': ('naics', 'oasis'),
                 'params': {'args': '963450866', 'test': 'true', 'naics': '541380'},
                 'action': ('#naics-code', 'select[541380]'),
                 'naics': ('541380', 24),
@@ -612,6 +655,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (5, 'h_date_signed', 'desc')
             },
             'naics_oasis_2': {
+                'tags': ('naics', 'oasis'),
                 'params': {'args': '139727148', 'test': 'true', 'naics': '541214'},
                 'action': ('#naics-code', 'select[541214]'),
                 'naics': ('541214', 43),
@@ -626,6 +670,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (0, 'h_date_signed', 'desc')
             },
             'naics_oasis_3': {
+                'tags': ('naics', 'oasis'),
                 'params': {'args': '926451519', 'test': 'true', 'naics': '541330'},
                 'action': ('#naics-code', 'select[541330]'),
                 'naics': ('541330', 24),
@@ -640,6 +685,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (5, 'h_date_signed', 'desc')
             },
             'naics_oasis_4': {
+                'tags': ('naics', 'oasis'),
                 'params': {'args': '097967608', 'test': 'true', 'naics': '541712'},
                 'action': ('#naics-code', 'select[541712]'),
                 'naics': ('541712', 24),
@@ -654,6 +700,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (0, 'h_date_signed', 'desc')
             },
             'naics_oasis_5a': {
+                'tags': ('naics', 'oasis'),
                 'params': {'args': '007901598', 'test': 'true', 'naics': '541712'},
                 'action': ('#naics-code', 'select[541712]'),
                 'naics': ('541712', 29),
@@ -668,6 +715,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (3, 'h_date_signed', 'desc')
             },
             'naics_oasis_5b': {
+                'tags': ('naics', 'oasis'),
                 'params': {'args': '097967608', 'test': 'true', 'naics': '541712'},
                 'action': ('#naics-code', 'select[541712]'),
                 'naics': ('541712', 24),
@@ -682,6 +730,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (0, 'h_date_signed', 'desc')
             },
             'naics_oasis_6': {
+                'tags': ('naics', 'oasis'),
                 'params': {'args': '075458455', 'test': 'true', 'naics': '541712'},
                 'action': ('#naics-code', 'select[541712]'),
                 'naics': ('541712', 2),
@@ -696,6 +745,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (1, 'h_date_signed', 'desc')
             },
             'naics_oasis_sb_1': {
+                'tags': ('naics', 'oasis_sb'),
                 'params': {'args': '170203199', 'test': 'true', 'naics': '541612'},
                 'action': ('#naics-code', 'select[541612]'),
                 'naics': ('541612', 22),
@@ -712,6 +762,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (5, 'h_date_signed', 'desc', ('Prev', '1'), '2')
             },
             'naics_oasis_sb_2': {
+                'tags': ('naics', 'oasis_sb'),
                 'params': {'args': '825487130', 'test': 'true', 'naics': '541214'},
                 'action': ('#naics-code', 'select[541214]'),
                 'naics': ('541214', 6),
@@ -728,6 +779,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (5, 'h_date_signed', 'desc', ('Prev', '1'), '2')
             },
             'naics_oasis_sb_3': {
+                'tags': ('naics', 'oasis_sb'),
                 'params': {'args': '039872622', 'test': 'true', 'naics': '541330'},
                 'action': ('#naics-code', 'select[541330]'),
                 'naics': ('541330', 7),
@@ -744,6 +796,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (5, 'h_date_signed', 'desc', ('Prev', '1'), '2')
             },
             'naics_oasis_sb_4': {
+                'tags': ('naics', 'oasis_sb'),
                 'params': {'args': '124651964', 'test': 'true', 'naics': '541711'},
                 'action': ('#naics-code', 'select[541711]'),
                 'naics': ('541711', 3),
@@ -760,6 +813,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (3, 'h_date_signed', 'desc')
             },
             'naics_oasis_sb_5a': {
+                'tags': ('naics', 'oasis_sb'),
                 'params': {'args': '968706106', 'test': 'true', 'naics': '541712'},
                 'action': ('#naics-code', 'select[541712]'),
                 'naics': ('541712', 24),
@@ -776,6 +830,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (5, 'h_date_signed', 'desc', ('Prev', '1'), '2')
             },
             'naics_oasis_sb_5b': {
+                'tags': ('naics', 'oasis_sb'),
                 'params': {'args': '807990382', 'test': 'true', 'naics': '541712'},
                 'action': ('#naics-code', 'select[541712]'),
                 'naics': ('541712', 2),
@@ -790,6 +845,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (5, 'h_date_signed', 'desc', ('Prev', '1'), '2')
             },
             'naics_oasis_sb_6': {
+                'tags': ('naics', 'oasis_sb'),
                 'params': {'args': '883504854', 'test': 'true', 'naics': '541712'},
                 'action': ('#naics-code', 'select[541712]'),
                 'naics': ('541712', 3),
@@ -806,6 +862,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (4, 'h_date_signed', 'desc')
             },
             'naics_pss_382': {
+                'tags': ('naics', 'pss'),
                 'params': {'args': '962857244', 'test': 'true', 'naics': '541930'},
                 'action': ('#naics-code', 'select[541930]'),
                 'naics': ('541930', 2),
@@ -822,6 +879,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (5, 'h_date_signed', 'desc', ('Prev', '1'), '2')
             },
             'naics_pss_520': {
+                'tags': ('naics', 'pss'),
                 'params': {'args': '621297568', 'test': 'true', 'naics': '541611'},
                 'action': ('#naics-code', 'select[541611]'),
                 'naics': ('541611', 13),
@@ -838,6 +896,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (5, 'h_date_signed', 'desc', ('Prev', '1'), '2')
             },
             'naics_pss_541': {
+                'tags': ('naics', 'pss'),
                 'params': {'args': '013781294', 'test': 'true', 'naics': '541613'},
                 'action': ('#naics-code', 'select[541613]'),
                 'naics': ('541613', 11),
@@ -854,6 +913,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (0, 'h_date_signed', 'desc')
             },
             'naics_pss_871': {
+                'tags': ('naics', 'pss'),
                 'params': {'args': '828985940', 'test': 'true', 'naics': '236220'},
                 'action': ('#naics-code', 'select[236220]'),
                 'naics': ('236220', 5),
@@ -868,6 +928,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (3, 'h_date_signed', 'desc')
             },
             'naics_pss_874': {
+                'tags': ('naics', 'pss'),
                 'params': {'args': '114214211', 'test': 'true', 'naics': '541611'},
                 'action': ('#naics-code', 'select[541611]'),
                 'naics': ('541611', 16),
@@ -884,6 +945,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (5, 'h_date_signed', 'desc', ('Prev', '1'), '2')
             },
             'naics_pss_874500': {
+                'tags': ('naics', 'pss'),
                 'params': {'args': '080117787', 'test': 'true', 'naics': '238220'},
                 'action': ('#naics-code', 'select[238220]'),
                 'naics': ('238220', 11),
@@ -900,6 +962,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (1, 'h_date_signed', 'desc')
             },
             'naics_pss_899': {
+                'tags': ('naics', 'pss'),
                 'params': {'args': '038523239', 'test': 'true', 'naics': '541620'},
                 'action': ('#naics-code', 'select[541620]'),
                 'naics': ('541620', 7),
@@ -916,6 +979,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (5, 'h_date_signed', 'desc', ('Prev', '1'), '2')
             },     
             'membership_pss_382': {
+                'tags': ('membership', 'pss'),
                 'params': {'args': '962857244', 'test': 'true', 'memberships': 'GS10F177AA'},
                 'action': ('#GS10F177AA', 'click'),
                 'naics': ('all', 2),
@@ -932,6 +996,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (3, 'h_date_signed', 'desc')
             },
             'membership_pss_520': {
+                'tags': ('membership', 'pss'),
                 'params': {'args': '621297568', 'test': 'true', 'memberships': 'GS23F006AA'},
                 'action': ('#GS23F006AA', 'click'),
                 'naics': ('all', 13),
@@ -948,6 +1013,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (0, 'h_date_signed', 'desc')
             },
             'membership_pss_541': {
+                'tags': ('membership', 'pss'),
                 'params': {'args': '013781294', 'test': 'true', 'memberships': 'GS00F238DA'},
                 'action': ('#GS00F238DA', 'click'),
                 'naics': ('all', 11),
@@ -964,6 +1030,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (0, 'h_date_signed', 'desc')
             },
             'membership_pss_871': {
+                'tags': ('membership', 'pss'),
                 'params': {'args': '828985940', 'test': 'true', 'memberships': 'GS10F060AA'},
                 'action': ('#GS10F060AA', 'click'),
                 'naics': ('all', 5),
@@ -978,6 +1045,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (1, 'h_date_signed', 'desc')
             },
             'membership_pss_874': {
+                'tags': ('membership', 'pss'),
                 'params': {'args': '114214211', 'test': 'true', 'memberships': 'GS10F0081V'},
                 'action': ('#GS10F0081V', 'click'),
                 'naics': ('all', 16),
@@ -994,6 +1062,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (3, 'h_date_signed', 'desc')
             },
             'membership_pss_874500': {
+                'tags': ('membership', 'pss'),
                 'params': {'args': '080117787', 'test': 'true', 'memberships': 'GS00F0005U'},
                 'action': ('#GS00F0005U', 'click'),
                 'naics': ('all', 11),
@@ -1010,6 +1079,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (2, 'h_date_signed', 'desc')
             },
             'membership_pss_899': {
+                'tags': ('membership', 'pss'),
                 'params': {'args': '038523239', 'test': 'true', 'memberships': 'GS10F0175M'},
                 'action': ('#GS10F0175M', 'click'),
                 'naics': ('all', 7),
@@ -1026,6 +1096,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (5, 'h_date_signed', 'desc', ('Prev', '1'), '2')
             },
             'mixed': {
+                'tags': ('naics', 'membership', 'mixed'),
                 'params': {'args': '114214211', 'test': 'true', 'memberships': 'GS10F0081V', 'naics': '541611'},
                 'action': (('#naics-code', 'select[541611]'), ('#GS10F0081V', 'click')),
                 'naics': ('541611', 16),
@@ -1040,6 +1111,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (3, 'h_date_signed', 'desc')
             },
             'sorting': {
+                'tags': ('sort',),
                 'params': {'args': '129304551', 'test': 'true', 'ordering': '-obligated_amount'},
                 'action': ('th.h_value', 'click'),
                 'naics': ('all', 15),
@@ -1058,6 +1130,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'o4|xpath://*[@id="vendor_contracts"]/tbody/tr[5]/td[6]': ('float__is_min', '<<xpath://*[@id="vendor_contracts"]/tbody/tr[6]/td[6]>>'),
             },
             'paging': {
+                'tags': ('page',),
                 'params': {'args': '008050242', 'test': 'true', 'page': 2},
                 'action': ('link_text:2', 'click'),
                 'naics': ('all', 27),
@@ -1073,6 +1146,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (5, 'h_date_signed', 'desc', ('2', 'Next'), '1'),
             },
             'page_count': {
+                'tags': ('page',),
                 'params': {'args': '039872622', 'test': 'true', 'count': 3},
                 'naics': ('all', 7),
                 'membership_filters': (None, 2, 0, 2, {
@@ -1091,6 +1165,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
             }
         },
         'header': {
+            'tags': ('title',),
             'params': {
                 'args': '926451519'
             },
