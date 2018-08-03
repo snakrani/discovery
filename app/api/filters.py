@@ -192,7 +192,9 @@ class LocationFilter(FilterSet, metaclass = MetaFilterSet):
 
 
 class ContactFilter(FilterSet, metaclass = MetaFilterSet):   
+    
     _fuzzy_text = ('name', 'phones__number', 'emails__address')
+    _number = ('order',)
     
     class Meta:
         model = vendors.Contact
