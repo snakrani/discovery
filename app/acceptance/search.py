@@ -4,7 +4,7 @@ def generate_search_tests():
     return {
         'actions': {
             'naics_bmo': {
-                'tags': ('naics', 'bmo'),
+                'tags': ('naics', 'bmo', 'shared_search', 'shared'),
                 'params': {'naics': '238220'},
                 'action': ('#naics-code', 'select[238220]'),
                 'naics': ('238220', 78, True),
@@ -16,7 +16,7 @@ def generate_search_tests():
                 'vendor_table': (35, 'h_naics_results', 'desc')
             },
             'naics_bmo_sb': {
-                'tags': ('naics', 'bmo_sb'),
+                'tags': ('naics', 'bmo_sb', 'shared_search', 'shared'),
                 'params': {'naics': '561730'},
                 'action': ('#naics-code', 'select[561730]'),
                 'naics': ('561730', 78, True),
@@ -28,7 +28,7 @@ def generate_search_tests():
                 'vendor_table': (17, 'h_naics_results', 'desc')
             },
             'naics_hcats': {
-                'tags': ('naics', 'hcats'),
+                'tags': ('naics', 'hcats', 'shared_search', 'shared'),
                 'params': {'naics': '611710'},
                 'action': ('#naics-code', 'select[611710]'),
                 'naics': ('611710', 78, True),
@@ -40,7 +40,7 @@ def generate_search_tests():
                 'vendor_table': (28, 'h_naics_results', 'desc')
             },
             'naics_hcats_sb': {
-                'tags': ('naics', 'hcats_sb'),
+                'tags': ('naics', 'hcats_sb', 'shared_search', 'shared'),
                 'params': {'naics': '541618'},
                 'action': ('#naics-code', 'select[541618]'),
                 'naics': ('541618', 78, True),
@@ -52,7 +52,7 @@ def generate_search_tests():
                 'vendor_table': (37, 'h_naics_results', 'desc')
             },
             'naics_oasis': {
-                'tags': ('naics', 'oasis'),
+                'tags': ('naics', 'oasis', 'shared_search', 'shared'),
                 'params': {'naics': '541712'},
                 'action': ('#naics-code', 'select[541712]'),
                 'naics': ('541712', 78, True),
@@ -64,7 +64,7 @@ def generate_search_tests():
                 'vendor_table': (50, 'h_naics_results', 'desc')
             },
             'naics_oasis_sb': {
-                'tags': ('naics', 'oasis_sb'),
+                'tags': ('naics', 'oasis_sb', 'shared_search', 'shared'),
                 'params': {'naics': '541810'},
                 'action': ('#naics-code', 'select[541810]'),
                 'naics': ('541810', 78, True),
@@ -76,7 +76,7 @@ def generate_search_tests():
                 'vendor_table': (29, 'h_naics_results', 'desc')
             },
             'naics_pss': {
-                'tags': ('naics', 'pss'),
+                'tags': ('naics', 'pss', 'shared_search', 'shared'),
                 'params': {'naics': '236220'},
                 'action': ('#naics-code', 'select[236220]'),
                 'naics': ('236220', 78, True),
@@ -89,7 +89,7 @@ def generate_search_tests():
             },
             
             'vehicle_bmo': {
-                'tags': ('vehicle', 'bmo'),
+                'tags': ('vehicle', 'bmo', 'shared_search', 'shared'),
                 'params': {'vehicle': 'BMO'},
                 'action': ('#vehicle-id', 'select[BMO]'),
                 'naics': ('all', 15, True),
@@ -101,7 +101,7 @@ def generate_search_tests():
                 'vendor_table': (14, 'h_naics_results', 'desc')
             },
             'vehicle_bmo_sb': {
-                'tags': ('vehicle', 'bmo_sb'),
+                'tags': ('vehicle', 'bmo_sb', 'shared_search', 'shared'),
                 'params': {'vehicle': 'BMO_SB'},
                 'action': ('#vehicle-id', 'select[BMO_SB]'),
                 'naics': ('all', 15, True),
@@ -113,7 +113,7 @@ def generate_search_tests():
                 'vendor_table': (23, 'h_naics_results', 'desc')
             },
             'vehicle_hcats': {
-                'tags': ('vehicle', 'hcats'),
+                'tags': ('vehicle', 'hcats', 'shared_search', 'shared'),
                 'params': {'vehicle': 'HCATS'},
                 'action': ('#vehicle-id', 'select[HCATS]'),
                 'naics': ('all', 9, True),
@@ -125,7 +125,7 @@ def generate_search_tests():
                 'vendor_table': (12, 'h_naics_results', 'desc')
             },
             'vehicle_hcats_sb': {
-                'tags': ('vehicle', 'hcats_sb'),
+                'tags': ('vehicle', 'hcats_sb', 'shared_search', 'shared'),
                 'params': {'vehicle': 'HCATS_SB'},
                 'action': ('#vehicle-id', 'select[HCATS_SB]'),
                 'naics': ('all', 9, True),
@@ -137,7 +137,7 @@ def generate_search_tests():
                 'vendor_table': (17, 'h_naics_results', 'desc')
             },
             'vehicle_oasis': {
-                'tags': ('vehicle', 'oasis'),
+                'tags': ('vehicle', 'oasis', 'shared_search', 'shared'),
                 'params': {'vehicle': 'OASIS'},
                 'action': ('#vehicle-id', 'select[OASIS]'),
                 'naics': ('all', 29, True),
@@ -149,7 +149,7 @@ def generate_search_tests():
                 'vendor_table': (29, 'h_naics_results', 'desc')
             },
             'vehicle_oasis_sb': {
-                'tags': ('vehicle', 'oasis_sb'),
+                'tags': ('vehicle', 'oasis_sb', 'shared_search', 'shared'),
                 'params': {'vehicle': 'OASIS_SB'},
                 'action': ('#vehicle-id', 'select[OASIS_SB]'),
                 'naics': ('all', 29, True),
@@ -161,7 +161,7 @@ def generate_search_tests():
                 'vendor_table': (46, 'h_naics_results', 'desc')
             },
             'vehicle_pss': {
-                'tags': ('vehicle', 'pss'),
+                'tags': ('vehicle', 'pss', 'shared_search', 'shared'),
                 'params': {'vehicle': 'PSS'},
                 'action': ('#vehicle-id', 'select[PSS]'),
                 'naics': ('all', 58, True),
@@ -174,7 +174,7 @@ def generate_search_tests():
             },
             
             'pool_bmo_1': {
-                'tags': ('pool', 'bmo'),
+                'tags': ('pool', 'bmo', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_1'},
                 'action': ('#pool-id', 'select[BMO_1]'),
                 'naics': ('all', 2, True),
@@ -186,7 +186,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_2': {
-                'tags': ('pool', 'bmo'),
+                'tags': ('pool', 'bmo', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_2'},
                 'action': ('#pool-id', 'select[BMO_2]'),
                 'naics': ('all', 2, True),
@@ -198,7 +198,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_3': {
-                'tags': ('pool', 'bmo'),
+                'tags': ('pool', 'bmo', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_3'},
                 'action': ('#pool-id', 'select[BMO_3]'),
                 'naics': ('all', 2, True),
@@ -210,7 +210,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_4': {
-                'tags': ('pool', 'bmo'),
+                'tags': ('pool', 'bmo', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_4'},
                 'action': ('#pool-id', 'select[BMO_4]'),
                 'naics': ('all', 2, True),
@@ -222,7 +222,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_5': {
-                'tags': ('pool', 'bmo'),
+                'tags': ('pool', 'bmo', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_5'},
                 'action': ('#pool-id', 'select[BMO_5]'),
                 'naics': ('all', 2, True),
@@ -234,7 +234,7 @@ def generate_search_tests():
                 'vendor_table': (9, 'h_naics_results', 'desc')
             },
             'pool_bmo_6': {
-                'tags': ('pool', 'bmo'),
+                'tags': ('pool', 'bmo', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_6'},
                 'action': ('#pool-id', 'select[BMO_6]'),
                 'naics': ('all', 2, True),
@@ -246,7 +246,7 @@ def generate_search_tests():
                 'vendor_table': (9, 'h_naics_results', 'desc')
             },
             'pool_bmo_7': {
-                'tags': ('pool', 'bmo'),
+                'tags': ('pool', 'bmo', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_7'},
                 'action': ('#pool-id', 'select[BMO_7]'),
                 'naics': ('all', 2, True),
@@ -258,7 +258,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_8': {
-                'tags': ('pool', 'bmo'),
+                'tags': ('pool', 'bmo', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_8'},
                 'action': ('#pool-id', 'select[BMO_8]'),
                 'naics': ('all', 2, True),
@@ -270,7 +270,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_9': {
-                'tags': ('pool', 'bmo'),
+                'tags': ('pool', 'bmo', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_9'},
                 'action': ('#pool-id', 'select[BMO_9]'),
                 'naics': ('all', 2, True),
@@ -282,7 +282,7 @@ def generate_search_tests():
                 'vendor_table': (8, 'h_naics_results', 'desc')
             },
             'pool_bmo_10': {
-                'tags': ('pool', 'bmo'),
+                'tags': ('pool', 'bmo', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_10'},
                 'action': ('#pool-id', 'select[BMO_10]'),
                 'naics': ('all', 2, True),
@@ -294,7 +294,7 @@ def generate_search_tests():
                 'vendor_table': (8, 'h_naics_results', 'desc')
             },
             'pool_bmo_11': {
-                'tags': ('pool', 'bmo'),
+                'tags': ('pool', 'bmo', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_11'},
                 'action': ('#pool-id', 'select[BMO_11]'),
                 'naics': ('all', 2, True),
@@ -306,7 +306,7 @@ def generate_search_tests():
                 'vendor_table': (8, 'h_naics_results', 'desc')
             },
             'pool_bmo_12': {
-                'tags': ('pool', 'bmo'),
+                'tags': ('pool', 'bmo', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_12'},
                 'action': ('#pool-id', 'select[BMO_12]'),
                 'naics': ('all', 2, True),
@@ -318,7 +318,7 @@ def generate_search_tests():
                 'vendor_table': (8, 'h_naics_results', 'desc')
             },
             'pool_bmo_13': {
-                'tags': ('pool', 'bmo'),
+                'tags': ('pool', 'bmo', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_13'},
                 'action': ('#pool-id', 'select[BMO_13]'),
                 'naics': ('all', 2, True),
@@ -330,7 +330,7 @@ def generate_search_tests():
                 'vendor_table': (9, 'h_naics_results', 'desc')
             },
             'pool_bmo_14': {
-                'tags': ('pool', 'bmo'),
+                'tags': ('pool', 'bmo', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_14'},
                 'action': ('#pool-id', 'select[BMO_14]'),
                 'naics': ('all', 2, True),
@@ -342,7 +342,7 @@ def generate_search_tests():
                 'vendor_table': (9, 'h_naics_results', 'desc')
             },
             'pool_bmo_15': {
-                'tags': ('pool', 'bmo'),
+                'tags': ('pool', 'bmo', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_15'},
                 'action': ('#pool-id', 'select[BMO_15]'),
                 'naics': ('all', 2, True),
@@ -354,7 +354,7 @@ def generate_search_tests():
                 'vendor_table': (9, 'h_naics_results', 'desc')
             },
             'pool_bmo_16': {
-                'tags': ('pool', 'bmo'),
+                'tags': ('pool', 'bmo', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_16'},
                 'action': ('#pool-id', 'select[BMO_16]'),
                 'naics': ('all', 2, True),
@@ -366,7 +366,7 @@ def generate_search_tests():
                 'vendor_table': (9, 'h_naics_results', 'desc')
             },
             'pool_bmo_17': {
-                'tags': ('pool', 'bmo'),
+                'tags': ('pool', 'bmo', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_17'},
                 'action': ('#pool-id', 'select[BMO_17]'),
                 'naics': ('all', 2, True),
@@ -378,7 +378,7 @@ def generate_search_tests():
                 'vendor_table': (3, 'h_naics_results', 'desc')
             },
             'pool_bmo_mix_1': {
-                'tags': ('pool', 'bmo', 'mixed'),
+                'tags': ('pool', 'bmo', 'mixed', 'shared_search', 'shared'),
                 'params': {'vehicle': 'BMO', 'pools': 'BMO_1,BMO_5,BMO_17'},
                 'action': (
                     ('#vehicle-id', 'select[BMO]'),
@@ -391,12 +391,12 @@ def generate_search_tests():
                 'pool': (('BMO_1', 'BMO_5', 'BMO_17'), 17, 3, True),
                 'zone': ('', 6, True, True),
                 'setaside_filters': (None, 0, False),
-                'vendor_result_info': (3, 'results/csv/?vehicle=BMO&pools=BMO_1,BMO_5,BMO_17'),
-                'vendor_table': (3, 'h_naics_results', 'desc')
+                'vendor_result_info': (2, 'results/csv/?vehicle=BMO&pools=BMO_1,BMO_5,BMO_17'),
+                'vendor_table': (2, 'h_naics_results', 'desc')
             },
                     
             'pool_bmo_sb_1': {
-                'tags': ('pool', 'bmo_sb'),
+                'tags': ('pool', 'bmo_sb', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_SB_1'},
                 'action': ('#pool-id', 'select[BMO_SB_1]'),
                 'naics': ('all', 2, True),
@@ -408,7 +408,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_2': {
-                'tags': ('pool', 'bmo_sb'),
+                'tags': ('pool', 'bmo_sb', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_SB_2'},
                 'action': ('#pool-id', 'select[BMO_SB_2]'),
                 'naics': ('all', 2, True),
@@ -420,7 +420,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_3': {
-                'tags': ('pool', 'bmo_sb'),
+                'tags': ('pool', 'bmo_sb', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_SB_3'},
                 'action': ('#pool-id', 'select[BMO_SB_3]'),
                 'naics': ('all', 2, True),
@@ -432,7 +432,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_4': {
-                'tags': ('pool', 'bmo_sb'),
+                'tags': ('pool', 'bmo_sb', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_SB_4'},
                 'action': ('#pool-id', 'select[BMO_SB_4]'),
                 'naics': ('all', 2, True),
@@ -444,7 +444,7 @@ def generate_search_tests():
                 'vendor_table': (6, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_5': {
-                'tags': ('pool', 'bmo_sb'),
+                'tags': ('pool', 'bmo_sb', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_SB_5'},
                 'action': ('#pool-id', 'select[BMO_SB_5]'),
                 'naics': ('all', 2, True),
@@ -456,7 +456,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_6': {
-                'tags': ('pool', 'bmo_sb'),
+                'tags': ('pool', 'bmo_sb', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_SB_6'},
                 'action': ('#pool-id', 'select[BMO_SB_6]'),
                 'naics': ('all', 2, True),
@@ -468,7 +468,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_7': {
-                'tags': ('pool', 'bmo_sb'),
+                'tags': ('pool', 'bmo_sb', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_SB_7'},
                 'action': ('#pool-id', 'select[BMO_SB_7]'),
                 'naics': ('all', 2, True),
@@ -480,7 +480,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_8': {
-                'tags': ('pool', 'bmo_sb'),
+                'tags': ('pool', 'bmo_sb', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_SB_8'},
                 'action': ('#pool-id', 'select[BMO_SB_8]'),
                 'naics': ('all', 2, True),
@@ -492,7 +492,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_9': {
-                'tags': ('pool', 'bmo_sb'),
+                'tags': ('pool', 'bmo_sb', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_SB_9'},
                 'action': ('#pool-id', 'select[BMO_SB_9]'),
                 'naics': ('all', 2, True),
@@ -504,7 +504,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_10': {
-                'tags': ('pool', 'bmo_sb'),
+                'tags': ('pool', 'bmo_sb', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_SB_10'},
                 'action': ('#pool-id', 'select[BMO_SB_10]'),
                 'naics': ('all', 2, True),
@@ -516,7 +516,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_11': {
-                'tags': ('pool', 'bmo_sb'),
+                'tags': ('pool', 'bmo_sb', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_SB_11'},
                 'action': ('#pool-id', 'select[BMO_SB_11]'),
                 'naics': ('all', 2, True),
@@ -528,7 +528,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_12': {
-                'tags': ('pool', 'bmo_sb'),
+                'tags': ('pool', 'bmo_sb', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_SB_12'},
                 'action': ('#pool-id', 'select[BMO_SB_12]'),
                 'naics': ('all', 2, True),
@@ -540,7 +540,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_13': {
-                'tags': ('pool', 'bmo_sb'),
+                'tags': ('pool', 'bmo_sb', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_SB_13'},
                 'action': ('#pool-id', 'select[BMO_SB_13]'),
                 'naics': ('all', 2, True),
@@ -552,7 +552,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_14': {
-                'tags': ('pool', 'bmo_sb'),
+                'tags': ('pool', 'bmo_sb', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_SB_14'},
                 'action': ('#pool-id', 'select[BMO_SB_14]'),
                 'naics': ('all', 2, True),
@@ -564,7 +564,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_15': {
-                'tags': ('pool', 'bmo_sb'),
+                'tags': ('pool', 'bmo_sb', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_SB_15'},
                 'action': ('#pool-id', 'select[BMO_SB_15]'),
                 'naics': ('all', 2, True),
@@ -576,7 +576,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_16': {
-                'tags': ('pool', 'bmo_sb'),
+                'tags': ('pool', 'bmo_sb', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_SB_16'},
                 'action': ('#pool-id', 'select[BMO_SB_16]'),
                 'naics': ('all', 2, True),
@@ -588,7 +588,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_17': {
-                'tags': ('pool', 'bmo_sb'),
+                'tags': ('pool', 'bmo_sb', 'shared_search', 'shared'),
                 'params': {'pools': 'BMO_SB_17'},
                 'action': ('#pool-id', 'select[BMO_SB_17]'),
                 'naics': ('all', 2, True),
@@ -600,7 +600,7 @@ def generate_search_tests():
                 'vendor_table': (1, 'h_naics_results', 'desc')
             },
             'pool_bmo_sb_mix_1': {
-                'tags': ('pool', 'bmo_sb', 'mixed'),
+                'tags': ('pool', 'bmo_sb', 'mixed', 'shared_search', 'shared'),
                 'params': {'vehicle': 'BMO_SB', 'pools': 'BMO_SB_1,BMO_SB_5,BMO_SB_17'},
                 'action': (
                     ('#vehicle-id', 'select[BMO_SB]'),
@@ -613,12 +613,12 @@ def generate_search_tests():
                 'pool': (('BMO_SB_1', 'BMO_SB_5', 'BMO_SB_17'), 17, 3, True),
                 'zone': ('', 6, True, True),
                 'setaside_filters': (None, 0, True),
-                'vendor_result_info': (2, 'results/csv/?vehicle=BMO_SB&pools=BMO_SB_1,BMO_SB_5,BMO_SB_17'),
-                'vendor_table': (2, 'h_naics_results', 'desc')
+                'vendor_result_info': (1, 'results/csv/?vehicle=BMO_SB&pools=BMO_SB_1,BMO_SB_5,BMO_SB_17'),
+                'vendor_table': (1, 'h_naics_results', 'desc')
             },
             
             'pool_hcats_1': {
-                'tags': ('pool', 'hcats'),
+                'tags': ('pool', 'hcats', 'shared_search', 'shared'),
                 'params': {'pools': 'HCATS_1'},
                 'action': ('#pool-id', 'select[HCATS_1]'),
                 'naics': ('all', 4, True),
@@ -630,7 +630,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_hcats_2': {
-                'tags': ('pool', 'hcats'),
+                'tags': ('pool', 'hcats', 'shared_search', 'shared'),
                 'params': {'pools': 'HCATS_2'},
                 'action': ('#pool-id', 'select[HCATS_2]'),
                 'naics': ('all', 6, True),
@@ -642,7 +642,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_hcats_mix_1': {
-                'tags': ('pool', 'hcats', 'mixed'),
+                'tags': ('pool', 'hcats', 'mixed', 'shared_search', 'shared'),
                 'params': {'vehicle': 'HCATS', 'pools': 'HCATS_1,HCATS_2'},
                 'action': (
                     ('#vehicle-id', 'select[HCATS]'),
@@ -654,12 +654,12 @@ def generate_search_tests():
                 'pool': (('HCATS_1', 'HCATS_2'), 2, 2, True),
                 'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, False),
-                'vendor_result_info': (16, 'results/csv/?vehicle=HCATS&pools=HCATS_1,HCATS_2'),
-                'vendor_table': (16, 'h_naics_results', 'desc')
+                'vendor_result_info': (8, 'results/csv/?vehicle=HCATS&pools=HCATS_1,HCATS_2'),
+                'vendor_table': (8, 'h_naics_results', 'desc')
             },
             
             'pool_hcats_sb_1': {
-                'tags': ('pool', 'hcats_sb'),
+                'tags': ('pool', 'hcats_sb', 'shared_search', 'shared'),
                 'params': {'pools': 'HCATS_SB_1'},
                 'action': ('#pool-id', 'select[HCATS_SB_1]'),
                 'naics': ('all', 4, True),
@@ -671,7 +671,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_hcats_sb_2': {
-                'tags': ('pool', 'hcats_sb'),
+                'tags': ('pool', 'hcats_sb', 'shared_search', 'shared'),
                 'params': {'pools': 'HCATS_SB_2'},
                 'action': ('#pool-id', 'select[HCATS_SB_2]'),
                 'naics': ('all', 6, True),
@@ -683,7 +683,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_hcats_sb_mix_1': {
-                'tags': ('pool', 'hcats_sb', 'mixed'),
+                'tags': ('pool', 'hcats_sb', 'mixed', 'shared_search', 'shared'),
                 'params': {'vehicle': 'HCATS_SB', 'pools': 'HCATS_SB_1,HCATS_SB_2'},
                 'action': (
                     ('#vehicle-id', 'select[HCATS_SB]'),
@@ -695,12 +695,12 @@ def generate_search_tests():
                 'pool': (('HCATS_SB_1', 'HCATS_SB_2'), 2, 2, True),
                 'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, True),
-                'vendor_result_info': (6, 'results/csv/?vehicle=HCATS_SB&pools=HCATS_SB_1,HCATS_SB_2'),
-                'vendor_table': (6, 'h_naics_results', 'desc')
+                'vendor_result_info': (3, 'results/csv/?vehicle=HCATS_SB&pools=HCATS_SB_1,HCATS_SB_2'),
+                'vendor_table': (3, 'h_naics_results', 'desc')
             },
             
             'pool_oasis_1': {
-                'tags': ('pool', 'oasis'),
+                'tags': ('pool', 'oasis', 'shared_search', 'shared'),
                 'params': {'pools': 'OASIS_1'},
                 'action': ('#pool-id', 'select[OASIS_1]'),
                 'naics': ('all', 22, True),
@@ -712,7 +712,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_oasis_2': {
-                'tags': ('pool', 'oasis'),
+                'tags': ('pool', 'oasis', 'shared_search', 'shared'),
                 'params': {'pools': 'OASIS_2'},
                 'action': ('#pool-id', 'select[OASIS_2]'),
                 'naics': ('all', 6, True),
@@ -724,7 +724,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_oasis_3': {
-                'tags': ('pool', 'oasis'),
+                'tags': ('pool', 'oasis', 'shared_search', 'shared'),
                 'params': {'pools': 'OASIS_3'},
                 'action': ('#pool-id', 'select[OASIS_3]'),
                 'naics': ('all', 2, True),
@@ -736,7 +736,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_oasis_4': {
-                'tags': ('pool', 'oasis'),
+                'tags': ('pool', 'oasis', 'shared_search', 'shared'),
                 'params': {'pools': 'OASIS_4'},
                 'action': ('#pool-id', 'select[OASIS_4]'),
                 'naics': ('all', 3, True),
@@ -748,7 +748,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_oasis_5a': {
-                'tags': ('pool', 'oasis'),
+                'tags': ('pool', 'oasis', 'shared_search', 'shared'),
                 'params': {'pools': 'OASIS_5A'},
                 'action': ('#pool-id', 'select[OASIS_5A]'),
                 'naics': ('all', 2, True),
@@ -760,7 +760,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_oasis_5b': {
-                'tags': ('pool', 'oasis'),
+                'tags': ('pool', 'oasis', 'shared_search', 'shared'),
                 'params': {'pools': 'OASIS_5B'},
                 'action': ('#pool-id', 'select[OASIS_5B]'),
                 'naics': ('all', 2, True),
@@ -772,7 +772,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_oasis_6': {
-                'tags': ('pool', 'oasis'),
+                'tags': ('pool', 'oasis', 'shared_search', 'shared'),
                 'params': {'pools': 'OASIS_6'},
                 'action': ('#pool-id', 'select[OASIS_6]'),
                 'naics': ('all', 2, True),
@@ -784,7 +784,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_oasis_mix_1': {
-                'tags': ('pool', 'oasis', 'mixed'),
+                'tags': ('pool', 'oasis', 'mixed', 'shared_search', 'shared'),
                 'params': {'vehicle': 'OASIS', 'pools': 'OASIS_1,OASIS_2,OASIS_5B,OASIS_6'},
                 'action': (
                     ('#vehicle-id', 'select[OASIS]'),
@@ -798,12 +798,12 @@ def generate_search_tests():
                 'pool': (('OASIS_1', 'OASIS_2', 'OASIS_5B', 'OASIS_6'), 7, 4, True),
                 'zone': ('', 6, False, False),
                 'setaside_filters': (None, 0, False),
-                'vendor_result_info': (4, 'results/csv/?vehicle=OASIS&pools=OASIS_1,OASIS_2,OASIS_5B,OASIS_6'),
-                'vendor_table': (4, 'h_naics_results', 'desc')
+                'vendor_result_info': (2, 'results/csv/?vehicle=OASIS&pools=OASIS_1,OASIS_2,OASIS_5B,OASIS_6'),
+                'vendor_table': (2, 'h_naics_results', 'desc')
             },
             
             'pool_oasis_sb_1': {
-                'tags': ('pool', 'oasis_sb'),
+                'tags': ('pool', 'oasis_sb', 'shared_search', 'shared'),
                 'params': {'pools': 'OASIS_SB_1'},
                 'action': ('#pool-id', 'select[OASIS_SB_1]'),
                 'naics': ('all', 22, True),
@@ -815,7 +815,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_oasis_sb_2': {
-                'tags': ('pool', 'oasis_sb'),
+                'tags': ('pool', 'oasis_sb', 'shared_search', 'shared'),
                 'params': {'pools': 'OASIS_SB_2'},
                 'action': ('#pool-id', 'select[OASIS_SB_2]'),
                 'naics': ('all', 6, True),
@@ -827,7 +827,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_oasis_sb_3': {
-                'tags': ('pool', 'oasis_sb'),
+                'tags': ('pool', 'oasis_sb', 'shared_search', 'shared'),
                 'params': {'pools': 'OASIS_SB_3'},
                 'action': ('#pool-id', 'select[OASIS_SB_3]'),
                 'naics': ('all', 2, True),
@@ -839,7 +839,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_oasis_sb_4': {
-                'tags': ('pool', 'oasis_sb'),
+                'tags': ('pool', 'oasis_sb', 'shared_search', 'shared'),
                 'params': {'pools': 'OASIS_SB_4'},
                 'action': ('#pool-id', 'select[OASIS_SB_4]'),
                 'naics': ('all', 3, True),
@@ -851,7 +851,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_oasis_sb_5a': {
-                'tags': ('pool', 'oasis_sb'),
+                'tags': ('pool', 'oasis_sb', 'shared_search', 'shared'),
                 'params': {'pools': 'OASIS_SB_5A'},
                 'action': ('#pool-id', 'select[OASIS_SB_5A]'),
                 'naics': ('all', 2, True),
@@ -863,7 +863,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_oasis_sb_5b': {
-                'tags': ('pool', 'oasis_sb'),
+                'tags': ('pool', 'oasis_sb', 'shared_search', 'shared'),
                 'params': {'pools': 'OASIS_SB_5B'},
                 'action': ('#pool-id', 'select[OASIS_SB_5B]'),
                 'naics': ('all', 2, True),
@@ -875,7 +875,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_oasis_sb_6': {
-                'tags': ('pool', 'oasis_sb'),
+                'tags': ('pool', 'oasis_sb', 'shared_search', 'shared'),
                 'params': {'pools': 'OASIS_SB_6'},
                 'action': ('#pool-id', 'select[OASIS_SB_6]'),
                 'naics': ('all', 2, True),
@@ -887,7 +887,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_oasis_sb_mix_1': {
-                'tags': ('pool', 'oasis_sb', 'mixed'),
+                'tags': ('pool', 'oasis_sb', 'mixed', 'shared_search', 'shared'),
                 'params': {'vehicle': 'OASIS_SB', 'pools': 'OASIS_SB_2,OASIS_SB_5A,OASIS_SB_5B'},
                 'action': (
                     ('#vehicle-id', 'select[OASIS_SB]'),
@@ -905,7 +905,7 @@ def generate_search_tests():
             },
             
             'pool_pss_382': {
-                'tags': ('pool', 'pss'),
+                'tags': ('pool', 'pss', 'shared_search', 'shared'),
                 'params': {'pools': 'PSS_382'},
                 'action': ('#pool-id', 'select[PSS_382]'),
                 'naics': ('all', 2, True),
@@ -917,7 +917,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_pss_520': {
-                'tags': ('pool', 'pss'),
+                'tags': ('pool', 'pss', 'shared_search', 'shared'),
                 'params': {'pools': 'PSS_520'},
                 'action': ('#pool-id', 'select[PSS_520]'),
                 'naics': ('all', 13, True),
@@ -929,7 +929,7 @@ def generate_search_tests():
                 'vendor_table': (9, 'h_naics_results', 'desc')
             },
             'pool_pss_541': {
-                'tags': ('pool', 'pss'),
+                'tags': ('pool', 'pss', 'shared_search', 'shared'),
                 'params': {'pools': 'PSS_541'},
                 'action': ('#pool-id', 'select[PSS_541]'),
                 'naics': ('all', 11, True),
@@ -941,7 +941,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_pss_871': {
-                'tags': ('pool', 'pss'),
+                'tags': ('pool', 'pss', 'shared_search', 'shared'),
                 'params': {'pools': 'PSS_871'},
                 'action': ('#pool-id', 'select[PSS_871]'),
                 'naics': ('all', 5, True),
@@ -953,7 +953,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_pss_874': {
-                'tags': ('pool', 'pss'),
+                'tags': ('pool', 'pss', 'shared_search', 'shared'),
                 'params': {'pools': 'PSS_874'},
                 'action': ('#pool-id', 'select[PSS_874]'),
                 'naics': ('all', 16, True),
@@ -965,7 +965,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_pss_874500': {
-                'tags': ('pool', 'pss'),
+                'tags': ('pool', 'pss', 'shared_search', 'shared'),
                 'params': {'pools': 'PSS_874500'},
                 'action': ('#pool-id', 'select[PSS_874500]'),
                 'naics': ('all', 11, True),
@@ -977,7 +977,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_pss_899': {
-                'tags': ('pool', 'pss'),
+                'tags': ('pool', 'pss', 'shared_search', 'shared'),
                 'params': {'pools': 'PSS_899'},
                 'action': ('#pool-id', 'select[PSS_899]'),
                 'naics': ('all', 7, True),
@@ -989,7 +989,7 @@ def generate_search_tests():
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
             'pool_pss_mix_1': {
-                'tags': ('pool', 'pss', 'mixed'),
+                'tags': ('pool', 'pss', 'mixed', 'shared_search', 'shared'),
                 'params': {'vehicle': 'PSS', 'pools': 'PSS_382,PSS_541,PSS_874'},
                 'action': (
                     ('#vehicle-id', 'select[PSS]'),
@@ -1007,7 +1007,7 @@ def generate_search_tests():
             },
             
             'pool_remove_1': {
-                'tags': ('pool', 'oasis', 'remove'),
+                'tags': ('pool', 'oasis', 'remove', 'shared_search', 'shared'),
                 'params': {
                     'test': 'true',
                     'vehicle': 'OASIS'
@@ -1026,7 +1026,7 @@ def generate_search_tests():
                 'vendor_table': (5, 'h_naics_results', 'desc', ('Prev', '1'), '6')
             },
             'pool_clear_1': {
-                'tags': ('pool', 'bmo_sb', 'remove', 'clear'),
+                'tags': ('pool', 'bmo_sb', 'remove', 'clear', 'shared_search', 'shared'),
                 'params': {
                     'test': 'true',
                     'vehicle': 'BMO_SB'
@@ -1048,7 +1048,7 @@ def generate_search_tests():
             },
             
             'bmo_zone_1': {
-                'tags': ('zone', 'bmo', 'mixed'),
+                'tags': ('zone', 'bmo', 'mixed', 'shared_search', 'shared'),
                 'params': {'vehicle': 'BMO', 'zones': '1'},
                 'action': (('#vehicle-id', 'select[BMO]'), ('#zone-id', 'select[1]')),
                 'naics': ('all', 15, True),
@@ -1056,11 +1056,11 @@ def generate_search_tests():
                 'pool': ('', 17, 17, True),
                 'zone': ('1', 6, True, True),
                 'setaside_filters': (None, 0, False),
-                'vendor_result_info': (18, 'results/csv/?vehicle=BMO&zones=1'),
-                'vendor_table': (18, 'h_naics_results', 'desc')
+                'vendor_result_info': (9, 'results/csv/?vehicle=BMO&zones=1'),
+                'vendor_table': (9, 'h_naics_results', 'desc')
             },
             'bmo_sb_zone_2': {
-                'tags': ('zone', 'bmo_sb', 'mixed'),
+                'tags': ('zone', 'bmo_sb', 'mixed', 'shared_search', 'shared'),
                 'params': {'vehicle': 'BMO_SB', 'zones': '2'},
                 'action': (('#vehicle-id', 'select[BMO_SB]'), ('#zone-id', 'select[2]')),
                 'naics': ('all', 15, True),
@@ -1068,11 +1068,11 @@ def generate_search_tests():
                 'pool': ('', 17, 17, True),
                 'zone': ('2', 6, True, True),
                 'setaside_filters': (None, 0, True),
-                'vendor_result_info': (23, 'results/csv/?vehicle=BMO_SB&zones=2'),
-                'vendor_table': (23, 'h_naics_results', 'desc')
+                'vendor_result_info': (13, 'results/csv/?vehicle=BMO_SB&zones=2'),
+                'vendor_table': (13, 'h_naics_results', 'desc')
             },
             'bmo_zone_3': {
-                'tags': ('zone', 'bmo', 'mixed'),
+                'tags': ('zone', 'bmo', 'mixed', 'shared_search', 'shared'),
                 'params': {'vehicle': 'BMO', 'zones': '3'},
                 'action': (('#vehicle-id', 'select[BMO]'), ('#zone-id', 'select[3]')),
                 'naics': ('all', 15, True),
@@ -1080,11 +1080,11 @@ def generate_search_tests():
                 'pool': ('', 17, 17, True),
                 'zone': ('3', 6, True, True),
                 'setaside_filters': (None, 0, False),
-                'vendor_result_info': (13, 'results/csv/?vehicle=BMO&zones=3'),
-                'vendor_table': (13, 'h_naics_results', 'desc')
+                'vendor_result_info': (8, 'results/csv/?vehicle=BMO&zones=3'),
+                'vendor_table': (8, 'h_naics_results', 'desc')
             },
             'bmo_sb_zone_4': {
-                'tags': ('zone', 'bmo_sb', 'mixed'),
+                'tags': ('zone', 'bmo_sb', 'mixed', 'shared_search', 'shared'),
                 'params': {'vehicle': 'BMO_SB', 'zones': '4'},
                 'action': (('#vehicle-id', 'select[BMO_SB]'), ('#zone-id', 'select[4]')),
                 'naics': ('all', 15, True),
@@ -1092,11 +1092,11 @@ def generate_search_tests():
                 'pool': ('', 17, 17, True),
                 'zone': ('4', 6, True, True),
                 'setaside_filters': (None, 0, True),
-                'vendor_result_info': (26, 'results/csv/?vehicle=BMO_SB&zones=4'),
-                'vendor_table': (26, 'h_naics_results', 'desc')
+                'vendor_result_info': (15, 'results/csv/?vehicle=BMO_SB&zones=4'),
+                'vendor_table': (15, 'h_naics_results', 'desc')
             },
             'bmo_zone_5': {
-                'tags': ('zone', 'bmo', 'mixed'),
+                'tags': ('zone', 'bmo', 'mixed', 'shared_search', 'shared'),
                 'params': {'vehicle': 'BMO', 'zones': '5'},
                 'action': (('#vehicle-id', 'select[BMO]'), ('#zone-id', 'select[5]')),
                 'naics': ('all', 15, True),
@@ -1104,11 +1104,11 @@ def generate_search_tests():
                 'pool': ('', 17, 17, True),
                 'zone': ('5', 6, True, True),
                 'setaside_filters': (None, 0, False),
-                'vendor_result_info': (12, 'results/csv/?vehicle=BMO&zones=5'),
-                'vendor_table': (12, 'h_naics_results', 'desc')
+                'vendor_result_info': (8, 'results/csv/?vehicle=BMO&zones=5'),
+                'vendor_table': (8, 'h_naics_results', 'desc')
             },
             'bmo_sb_zone_6': {
-                'tags': ('zone', 'bmo_sb', 'mixed'),
+                'tags': ('zone', 'bmo_sb', 'mixed', 'shared_search', 'shared'),
                 'params': {'vehicle': 'BMO_SB', 'zones': '6'},
                 'action': (('#vehicle-id', 'select[BMO_SB]'), ('#zone-id', 'select[6]')),
                 'naics': ('all', 15, True),
@@ -1116,12 +1116,12 @@ def generate_search_tests():
                 'pool': ('', 17, 17, True),
                 'zone': ('6', 6, True, True),
                 'setaside_filters': (None, 0, True),
-                'vendor_result_info': (23, 'results/csv/?vehicle=BMO_SB&zones=6'),
-                'vendor_table': (23, 'h_naics_results', 'desc')
+                'vendor_result_info': (13, 'results/csv/?vehicle=BMO_SB&zones=6'),
+                'vendor_table': (13, 'h_naics_results', 'desc')
             },
                     
             'bmo_zone_mix_1': {
-                'tags': ('zone', 'bmo', 'mixed'),
+                'tags': ('zone', 'bmo', 'mixed', 'shared_search', 'shared'),
                 'params': {'vehicle': 'BMO', 'zones': '1,3,6'},
                 'action': (
                     ('#vehicle-id', 'select[BMO]'),
@@ -1134,11 +1134,11 @@ def generate_search_tests():
                 'pool': ('', 17, 17, True),
                 'zone': (('1', '3', '6'), 6, True, True),
                 'setaside_filters': (None, 0, False),
-                'vendor_result_info': (5, 'results/csv/?vehicle=BMO&zones=1,3,6'),
-                'vendor_table': (5, 'h_naics_results', 'desc')
+                'vendor_result_info': (3, 'results/csv/?vehicle=BMO&zones=1,3,6'),
+                'vendor_table': (3, 'h_naics_results', 'desc')
             },
             'bmo_sb_zone_mix_1': {
-                'tags': ('zone', 'bmo_sb', 'mixed'),
+                'tags': ('zone', 'bmo_sb', 'mixed', 'shared_search', 'shared'),
                 'params': {'vehicle': 'BMO_SB', 'zones': '1,2,4'},
                 'action': (
                     ('#vehicle-id', 'select[BMO_SB]'),
@@ -1151,12 +1151,12 @@ def generate_search_tests():
                 'pool': ('', 17, 17, True),
                 'zone': (('1', '2', '4'), 6, True, True),
                 'setaside_filters': (None, 0, True),
-                'vendor_result_info': (8, 'results/csv/?vehicle=BMO_SB&zones=1,2,4'),
-                'vendor_table': (8, 'h_naics_results', 'desc')
+                'vendor_result_info': (4, 'results/csv/?vehicle=BMO_SB&zones=1,2,4'),
+                'vendor_table': (4, 'h_naics_results', 'desc')
             },
             
             'bmo_zone_remove_1': {
-                'tags': ('zone', 'bmo', 'mixed', 'remove'),
+                'tags': ('zone', 'bmo', 'mixed', 'remove', 'shared_search', 'shared'),
                 'params': {
                     'test': 'true',
                     'vehicle': 'BMO'
@@ -1175,7 +1175,7 @@ def generate_search_tests():
                 'vendor_table': (5, 'h_naics_results', 'desc', ('Prev', '1'), '3')
             },
             'bmo_sb_zone_clear_1': {
-                'tags': ('zone', 'bmo_sb', 'mixed', 'remove', 'clear'),
+                'tags': ('zone', 'bmo_sb', 'mixed', 'remove', 'clear', 'shared_search', 'shared'),
                 'params': {
                     'test': 'true',
                     'vehicle': 'BMO_SB'
@@ -1197,7 +1197,7 @@ def generate_search_tests():
             },
             
             'setasides_8a': {
-                'tags': ('setaside',),
+                'tags': ('setaside', 'shared_search', 'shared'),
                 'params': {'setasides': 'A6'},
                 'action': ('#eight_a', 'click'),
                 'naics': ('all', 78, True),
@@ -1205,15 +1205,15 @@ def generate_search_tests():
                 'pool': ('all', 34, 33, True),
                 'zone': ('', 6, False, False),
                 'setaside_filters': ('A6', 1, True),
-                'vendor_result_info': (39, 'results/csv/?setasides=A6'),
-                'vendor_table': (39, 'h_naics_results', 'desc'),
+                'vendor_result_info': (25, 'results/csv/?setasides=A6'),
+                'vendor_table': (25, 'h_naics_results', 'desc'),
                 'i1|xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[6]/img': 'exists',
                 'i2|xpath://*[@id="pool_vendors"]/tbody/tr[10]/td[6]/img': 'exists',
                 'i3|xpath://*[@id="pool_vendors"]/tbody/tr[20]/td[6]/img': 'exists',
                 'i4|xpath://*[@id="pool_vendors"]/tbody/tr[29]/td[6]/img': 'exists'
             },
             'setasides_hubz': {
-                'tags': ('setaside',),
+                'tags': ('setaside', 'shared_search', 'shared'),
                 'params': {'setasides': 'XX'},
                 'action': ('#Hubz', 'click'),
                 'naics': ('all', 78, True),
@@ -1221,13 +1221,13 @@ def generate_search_tests():
                 'pool': ('all', 34, 33, True),
                 'zone': ('', 6, False, False),
                 'setaside_filters': ('XX', 1, True),
-                'vendor_result_info': (7, 'results/csv/?setasides=XX'),
-                'vendor_table': (7, 'h_naics_results', 'desc'),
+                'vendor_result_info': (5, 'results/csv/?setasides=XX'),
+                'vendor_table': (5, 'h_naics_results', 'desc'),
                 'i1|xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[7]/img': 'exists',
                 'i2|xpath://*[@id="pool_vendors"]/tbody/tr[3]/td[7]/img': 'exists'
             },
             'setasides_sdvo': {
-                'tags': ('setaside',),
+                'tags': ('setaside', 'shared_search', 'shared'),
                 'params': {'setasides': 'QF'},
                 'action': ('#disvet', 'click'),
                 'naics': ('all', 78, True),
@@ -1242,7 +1242,7 @@ def generate_search_tests():
                 'i3|xpath://*[@id="pool_vendors"]/tbody/tr[24]/td[10]/img': 'exists'
             },
             'setasides_wo': {
-                'tags': ('setaside',),
+                'tags': ('setaside', 'shared_search', 'shared'),
                 'params': {'setasides': 'A2'},
                 'action': ('#woman', 'click'),
                 'naics': ('all', 78, True),
@@ -1250,14 +1250,14 @@ def generate_search_tests():
                 'pool': ('all', 34, 33, True),
                 'zone': ('', 6, False, False),
                 'setaside_filters': ('A2', 1, True),
-                'vendor_result_info': (44, 'results/csv/?setasides=A2'),
-                'vendor_table': (44, 'h_naics_results', 'desc'),
+                'vendor_result_info': (30, 'results/csv/?setasides=A2'),
+                'vendor_table': (30, 'h_naics_results', 'desc'),
                 'i1|xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[8]/img': 'exists',
                 'i2|xpath://*[@id="pool_vendors"]/tbody/tr[10]/td[8]/img': 'exists',
                 'i3|xpath://*[@id="pool_vendors"]/tbody/tr[20]/td[8]/img': 'exists'
             },
             'setasides_vo': {
-                'tags': ('setaside',),
+                'tags': ('setaside', 'shared_search', 'shared'),
                 'params': {'setasides': 'A5'},
                 'action': ('#vet', 'click'),
                 'naics': ('all', 78, True),
@@ -1265,14 +1265,14 @@ def generate_search_tests():
                 'pool': ('all', 34, 33, True),
                 'zone': ('', 6, False, False),
                 'setaside_filters': ('A5', 1, True),
-                'vendor_result_info': (40, 'results/csv/?setasides=A5'),
-                'vendor_table': (40, 'h_naics_results', 'desc'),
+                'vendor_result_info': (24, 'results/csv/?setasides=A5'),
+                'vendor_table': (24, 'h_naics_results', 'desc'),
                 'i1|xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[9]/img': 'exists',
                 'i2|xpath://*[@id="pool_vendors"]/tbody/tr[10]/td[9]/img': 'exists',
                 'i3|xpath://*[@id="pool_vendors"]/tbody/tr[20]/td[9]/img': 'exists'
             },
             'setasides_sdb': {
-                'tags': ('setaside',),
+                'tags': ('setaside', 'shared_search', 'shared'),
                 'params': {'setasides': '27'},
                 'action': ('#smalldis', 'click'),
                 'naics': ('all', 78, True),
@@ -1280,8 +1280,8 @@ def generate_search_tests():
                 'pool': ('all', 34, 33, True),
                 'zone': ('', 6, False, False),
                 'setaside_filters': ('27', 1, True),
-                'vendor_result_info': (47, 'results/csv/?setasides=27'),
-                'vendor_table': (47, 'h_naics_results', 'desc'),
+                'vendor_result_info': (36, 'results/csv/?setasides=27'),
+                'vendor_table': (36, 'h_naics_results', 'desc'),
                 'i1|xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[5]/img': 'exists',
                 'i2|xpath://*[@id="pool_vendors"]/tbody/tr[10]/td[5]/img': 'exists',
                 'i3|xpath://*[@id="pool_vendors"]/tbody/tr[20]/td[5]/img': 'exists',
@@ -1289,7 +1289,7 @@ def generate_search_tests():
             },
             
             'mixed_1': {
-                'tags': ('naics', 'vehicle', 'pool', 'zone', 'setaside', 'mixed', 'bmo_sb'),
+                'tags': ('naics', 'vehicle', 'pool', 'zone', 'setaside', 'mixed', 'bmo_sb', 'shared_search', 'shared'),
                 'params': {
                     'naics': '561720', 
                     'vehicle': 'BMO_SB',
@@ -1311,8 +1311,8 @@ def generate_search_tests():
                 'pool': ('BMO_SB_5', 1, 1, True),
                 'zone': (('1', '5'), 6, True, True),
                 'setaside_filters': (('27', 'A2'), 2, True),
-                'vendor_result_info': (2, 'results/csv/?naics=561720&vehicle=BMO_SB&pools=BMO_SB_5&zones=1,5&setasides=27,A2'),
-                'vendor_table': (2, 'h_naics_results', 'desc')
+                'vendor_result_info': (1, 'results/csv/?naics=561720&vehicle=BMO_SB&pools=BMO_SB_5&zones=1,5&setasides=27,A2'),
+                'vendor_table': (1, 'h_naics_results', 'desc')
             }
         }
     }
