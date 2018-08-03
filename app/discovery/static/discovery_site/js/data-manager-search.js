@@ -52,12 +52,6 @@ DataManager.loadVendors = function() {
         }
     }
 
-    if (pools.length > 0) {
-        for (var index = 0; index < pools.length; index++) {
-            filters.push('(pools__pool__id' + '=' + pools[index] + ')');
-        }
-    }
-
     if (LayoutManager.zoneActive() && zones.length > 0) {
         for (var index = 0; index < zones.length; index++) {
             filters.push('(pools__zones__id' + '=' + zones[index] + ')');
