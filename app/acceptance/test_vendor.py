@@ -289,7 +289,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                     1: ('SB', 'SDB', '8(a)')
                 }),
                 'vendor_sam': ('2/16/19',),
-                'vendor_info': ('CHENEGA FACILITY MGMT', '078650478', '6TLQ7', '74', '$5,352,998'),
+                'vendor_info': ('CHENEGA FACILITY MGMT', '078650478', '6TLQ7', '156', '$12,691,341'),
                 'vendor_address': ('5726 W Hausman Rd Ste 100', 'San Antonio, TX 78249', False),
                 'vendor_badges': (True,),
                 'contract_result_info': ('vendor/078650478/csv/?naics=238220',),
@@ -322,7 +322,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                     1: ('SB', 'SDB'),
                     2: ('SB', 'SDB')
                 }),
-                'vendor_sam': ('0/21/19',),
+                'vendor_sam': ('8/1/19',),
                 'vendor_info': ('ACEPEX MANAGEMENT', '090967704', '1A9K1', '500', '$25,000,000'),
                 'vendor_address': ('10643 Mills Ave', 'Montclair, CA 91763', True),
                 'vendor_badges': (True,),
@@ -544,7 +544,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'membership_filters': (None, 1, 0, 0, {
                     1: ('Moses Moussessian', '703-984-0305', "moussessian_moses@bah.com\nHCaTS@bah.com"),
                 }),
-                'vendor_sam': ('6/6/19',),
+                'vendor_sam': ('7/26/19',),
                 'vendor_info': ('BOOZ ALLEN HAMILTON', '006928857', '17038', 'N/A', 'N/A'),
                 'vendor_address': ('8283 Greensboro Dr', 'Mclean, VA 22102', True),
                 'vendor_badges': (),
@@ -614,8 +614,8 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
             'naics_oasis_2': {
                 'params': {'args': '139727148', 'test': 'true', 'naics': '541214'},
                 'action': ('#naics-code', 'select[541214]'),
-                'naics': ('541214', 31),
-                'membership_filters': (None, 1, 0, 0, {
+                'naics': ('541214', 43),
+                'membership_filters': (None, 2, 0, 0, {
                     1: ('Tania Koles', '571-414-4033', 'OASIS@accenturefederal.com')
                 }),
                 'vendor_sam': ('4/5/19',),
@@ -730,11 +730,11 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
             'naics_oasis_sb_3': {
                 'params': {'args': '039872622', 'test': 'true', 'naics': '541330'},
                 'action': ('#naics-code', 'select[541330]'),
-                'naics': ('541330', 10),
-                'membership_filters': (None, 2, 0, 1, {
+                'naics': ('541330', 7),
+                'membership_filters': (None, 1, 0, 1, {
                     1: ('Lynna S. Hood', '571-257-4785', 'lhood@addxcorp.com')
                 }, {
-                    1: ('VO', 'SDVO')
+                    1: ('SB', 'VO', 'SDVO')
                 }),
                 'vendor_sam': ('10/16/18',),
                 'vendor_info': ('ADDX CORPORATION', '039872622', '1XPA3', '62', '$16,534,185'),
@@ -812,60 +812,60 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'membership_filters': (None, 1, 0, 0, {
                     1: ('', '301-408-4242', 'lena@ad-astrainc.com'),
                 }, {
-                    1: ('SDB', 'WO')
+                    1: ('SB', 'SDB', 'WO')
                 }),
                 'vendor_sam': ('2/15/19',),
-                'vendor_info': ('AD ASTRA INC.', '962857244', '61VV7', '9', '$3,800,000'),
+                'vendor_info': ('AD ASTRA INC.', '962857244', '61VV7', '8', '$3,800,000'),
                 'vendor_address': ('8701 Georgia Ave Ste 800', 'Silver Spring, MD 20910', False),
-                'vendor_badges': (),
+                'vendor_badges': (True,),
                 'contract_result_info': ('vendor/962857244/csv/?naics=541930',),
                 'contract_table': (5, 'h_date_signed', 'desc', ('Prev', '1'), '2')
             },
             'naics_pss_520': {
-                'params': {'args': '008169919', 'test': 'true', 'naics': '541611'},
+                'params': {'args': '621297568', 'test': 'true', 'naics': '541611'},
                 'action': ('#naics-code', 'select[541611]'),
                 'naics': ('541611', 13),
                 'membership_filters': (None, 1, 0, 0, {
-                    1: ('', '919-747-7486', 'cassandra@calloway-assoc.com'),
+                    1: ('', '202-498-5388', 'aclarke@accurateconceptions.com'),
                 }, {
-                    1: ('SDB', '8(a)', 'SDVO')
+                    1: ('SB', 'SDB', '8(a)', 'HubZ')
                 }),
-                'vendor_sam': ('6/5/19',),
-                'vendor_info': ('CALLOWAY & ASSOCIATES, INC.', '008169919', '3YUF3', '49', '$2,250,000'),
-                'vendor_address': ('8961 Harvest Oaks Dr Ste 201', 'Raleigh, NC 27615', True),
+                'vendor_sam': ('4/16/19',),
+                'vendor_info': ('ACCURATE CONCEPTIONS, L.L.C.', '621297568', '4BQH5', '9', '$1,200,000'),
+                'vendor_address': ('19 O St Sw', 'Washington, DC 20024', True),
                 'vendor_badges': (True,),
-                'contract_result_info': ('vendor/008169919/csv/?naics=541611',),
-                'contract_table': (5, 'h_date_signed', 'desc')
+                'contract_result_info': ('vendor/621297568/csv/?naics=541611',),
+                'contract_table': (5, 'h_date_signed', 'desc', ('Prev', '1'), '2')
             },
             'naics_pss_541': {
-                'params': {'args': '828890751', 'test': 'true', 'naics': '541613'},
+                'params': {'args': '013781294', 'test': 'true', 'naics': '541613'},
                 'action': ('#naics-code', 'select[541613]'),
                 'naics': ('541613', 11),
                 'membership_filters': (None, 1, 0, 0, {
-                    1: ('', '703-598-0697', 'rachele.cooper@aptiveresources.com'),
+                    1: ('', '202-962-3955', 'SHERRY.LUPISELLA@720STRATEGIES.COM'),
                 }, {
-                    1: ('SDVO',)
+                    1: ('SB',)
                 }),
-                'vendor_sam': ('6/23/19',),
-                'vendor_info': ('APTIVE RESOURCES LLC', '828890751', '5AF04', '4', '$1,000,000'),
-                'vendor_address': ('916 Prince St #2', 'Alexandria, VA 22314', True),
-                'vendor_badges': (),
-                'contract_result_info': ('vendor/828890751/csv/?naics=541613',),
-                'contract_table': (5, 'h_date_signed', 'desc')
+                'vendor_sam': ('6/4/19',),
+                'vendor_info': ('720 STRATEGIES, LLC', '013781294', '67PL3', '25', '$7,127,114'),
+                'vendor_address': ('1220 19Th St Nw Ste 300', 'Washington, DC 20036', True),
+                'vendor_badges': (True,),
+                'contract_result_info': ('vendor/013781294/csv/?naics=541613',),
+                'contract_table': (0, 'h_date_signed', 'desc')
             },
             'naics_pss_871': {
-                'params': {'args': '791195167', 'test': 'true', 'naics': '236220'},
+                'params': {'args': '828985940', 'test': 'true', 'naics': '236220'},
                 'action': ('#naics-code', 'select[236220]'),
                 'naics': ('236220', 5),
                 'membership_filters': (None, 1, 0, 0, {
-                    1: ('', '256-327-4015', 'rmerrill@apt-research.com'),
+                    1: ('', '732-493-1700', 'nmanheimer@aaski.com'),
                 }),
-                'vendor_sam': ('4/5/19',),
-                'vendor_info': ('A-P-T RESEARCH, INC.', '791195167', '0S289', '150', '$26,130,864'),
-                'vendor_address': ('4950 Research Dr', 'Huntsville, AL 35805', True),
-                'vendor_badges': (True,),
-                'contract_result_info': ('vendor/791195167/csv/?naics=236220',),
-                'contract_table': (5, 'h_date_signed', 'desc', ('Prev', '1'), '2')
+                'vendor_sam': ('2/1/19',),
+                'vendor_info': ('AASKI TECHNOLOGY INC', '828985940', '59JH6', '417', '$241,837,216'),
+                'vendor_address': ('1104 S Philadelphia Blvd #800', 'Aberdeen, MD 21001', True),
+                'vendor_badges': (),
+                'contract_result_info': ('vendor/828985940/csv/?naics=236220',),
+                'contract_table': (3, 'h_date_signed', 'desc')
             },
             'naics_pss_874': {
                 'params': {'args': '114214211', 'test': 'true', 'naics': '541611'},
@@ -886,7 +886,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
             'naics_pss_874500': {
                 'params': {'args': '080117787', 'test': 'true', 'naics': '238220'},
                 'action': ('#naics-code', 'select[238220]'),
-                'naics': ('238220', 15),
+                'naics': ('238220', 11),
                 'membership_filters': (None, 1, 0, 0, {
                     1: ('', '478-923-9041', 'ddomingue@advanced-core.com'),
                 }, {
@@ -905,11 +905,13 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'naics': ('541620', 7),
                 'membership_filters': (None, 1, 0, 0, {
                     1: ('', '907-455-6777', 'tdelong@abrinc.com'),
+                }, {
+                    1: ('SB',)
                 }),
                 'vendor_sam': ('11/20/18',),
                 'vendor_info': ('ABR INC', '038523239', '0Y330', '49', '$13,967,623'),
                 'vendor_address': ('2842 Goldstream Rd', 'Fairbanks, AK 99709', True),
-                'vendor_badges': (),
+                'vendor_badges': (True,),
                 'contract_result_info': ('vendor/038523239/csv/?naics=541620',),
                 'contract_table': (5, 'h_date_signed', 'desc', ('Prev', '1'), '2')
             },     
@@ -920,60 +922,60 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'membership_filters': (None, 1, 1, 0, {
                     1: ('', '301-408-4242', 'lena@ad-astrainc.com'),
                 }, {
-                    1: ('SDB', 'WO')
+                    1: ('SB', 'SDB', 'WO')
                 }),
                 'vendor_sam': ('2/15/19',),
-                'vendor_info': ('AD ASTRA INC.', '962857244', '61VV7', '9', '$3,800,000'),
+                'vendor_info': ('AD ASTRA INC.', '962857244', '61VV7', '8', '$3,800,000'),
                 'vendor_address': ('8701 Georgia Ave Ste 800', 'Silver Spring, MD 20910', False),
-                'vendor_badges': (),
+                'vendor_badges': (True,),
                 'contract_result_info': ('vendor/962857244/csv/?memberships=GS10F177AA',),
                 'contract_table': (3, 'h_date_signed', 'desc')
             },
             'membership_pss_520': {
-                'params': {'args': '008169919', 'test': 'true', 'memberships': 'GS23F037AA'},
-                'action': ('#GS23F037AA', 'click'),
+                'params': {'args': '621297568', 'test': 'true', 'memberships': 'GS23F006AA'},
+                'action': ('#GS23F006AA', 'click'),
                 'naics': ('all', 13),
                 'membership_filters': (None, 1, 1, 0, {
-                    1: ('', '919-747-7486', 'cassandra@calloway-assoc.com'),
+                    1: ('', '202-498-5388', 'aclarke@accurateconceptions.com'),
                 }, {
-                    1: ('SDB', '8(a)', 'SDVO')
+                    1: ('SB', 'SDB', '8(a)', 'HubZ')
                 }),
-                'vendor_sam': ('6/5/19',),
-                'vendor_info': ('CALLOWAY & ASSOCIATES, INC.', '008169919', '3YUF3', '49', '$2,250,000'),
-                'vendor_address': ('8961 Harvest Oaks Dr Ste 201', 'Raleigh, NC 27615', True),
+                'vendor_sam': ('4/16/19',),
+                'vendor_info': ('ACCURATE CONCEPTIONS, L.L.C.', '621297568', '4BQH5', '9', '$1,200,000'),
+                'vendor_address': ('19 O St Sw', 'Washington, DC 20024', True),
                 'vendor_badges': (True,),
-                'contract_result_info': ('vendor/008169919/csv/?memberships=GS23F037AA',),
-                'contract_table': (1, 'h_date_signed', 'desc')
+                'contract_result_info': ('vendor/621297568/csv/?memberships=GS23F006AA',),
+                'contract_table': (0, 'h_date_signed', 'desc')
             },
             'membership_pss_541': {
-                'params': {'args': '828890751', 'test': 'true', 'memberships': 'GS07F281BA'},
-                'action': ('#GS07F281BA', 'click'),
+                'params': {'args': '013781294', 'test': 'true', 'memberships': 'GS00F238DA'},
+                'action': ('#GS00F238DA', 'click'),
                 'naics': ('all', 11),
                 'membership_filters': (None, 1, 1, 0, {
-                    1: ('', '703-598-0697', 'rachele.cooper@aptiveresources.com'),
+                    1: ('', '202-962-3955', 'SHERRY.LUPISELLA@720STRATEGIES.COM'),
                 }, {
-                    1: ('SDVO',)
+                    1: ('SB',)
                 }),
-                'vendor_sam': ('6/23/19',),
-                'vendor_info': ('APTIVE RESOURCES LLC', '828890751', '5AF04', '4', '$1,000,000'),
-                'vendor_address': ('916 Prince St #2', 'Alexandria, VA 22314', True),
-                'vendor_badges': (),
-                'contract_result_info': ('vendor/828890751/csv/?memberships=GS07F281BA',),
-                'contract_table': (5, 'h_date_signed', 'desc')
+                'vendor_sam': ('6/4/19',),
+                'vendor_info': ('720 STRATEGIES, LLC', '013781294', '67PL3', '25', '$7,127,114'),
+                'vendor_address': ('1220 19Th St Nw Ste 300', 'Washington, DC 20036', True),
+                'vendor_badges': (True,),
+                'contract_result_info': ('vendor/013781294/csv/?memberships=GS00F238DA',),
+                'contract_table': (0, 'h_date_signed', 'desc')
             },
             'membership_pss_871': {
-                'params': {'args': '791195167', 'test': 'true', 'memberships': 'GS23F0153L'},
-                'action': ('#GS23F0153L', 'click'),
+                'params': {'args': '828985940', 'test': 'true', 'memberships': 'GS10F060AA'},
+                'action': ('#GS10F060AA', 'click'),
                 'naics': ('all', 5),
-                'membership_filters': (None, 2, 1, 1, {
-                    2: ('', '256-327-4015', 'rmerrill@apt-research.com'),
+                'membership_filters': (None, 1, 1, 0, {
+                    1: ('', '732-493-1700', 'nmanheimer@aaski.com'),
                 }),
-                'vendor_sam': ('4/5/19',),
-                'vendor_info': ('A-P-T RESEARCH, INC.', '791195167', '0S289', '150', '$26,130,864'),
-                'vendor_address': ('4950 Research Dr', 'Huntsville, AL 35805', True),
-                'vendor_badges': (True,),
-                'contract_result_info': ('vendor/791195167/csv/?memberships=GS23F0153L',),
-                'contract_table': (5, 'h_date_signed', 'desc', ('Prev', '1'), '2')
+                'vendor_sam': ('2/1/19',),
+                'vendor_info': ('AASKI TECHNOLOGY INC', '828985940', '59JH6', '417', '$241,837,216'),
+                'vendor_address': ('1104 S Philadelphia Blvd #800', 'Aberdeen, MD 21001', True),
+                'vendor_badges': (),
+                'contract_result_info': ('vendor/828985940/csv/?memberships=GS10F060AA',),
+                'contract_table': (1, 'h_date_signed', 'desc')
             },
             'membership_pss_874': {
                 'params': {'args': '114214211', 'test': 'true', 'memberships': 'GS10F0081V'},
@@ -994,7 +996,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
             'membership_pss_874500': {
                 'params': {'args': '080117787', 'test': 'true', 'memberships': 'GS00F0005U'},
                 'action': ('#GS00F0005U', 'click'),
-                'naics': ('all', 15),
+                'naics': ('all', 11),
                 'membership_filters': (None, 1, 1, 0, {
                     1: ('', '478-923-9041', 'ddomingue@advanced-core.com'),
                 }, {
@@ -1013,11 +1015,13 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'naics': ('all', 7),
                 'membership_filters': (None, 1, 1, 0, {
                     1: ('', '907-455-6777', 'tdelong@abrinc.com'),
+                }, {
+                    1: ('SB',)
                 }),
                 'vendor_sam': ('11/20/18',),
                 'vendor_info': ('ABR INC', '038523239', '0Y330', '49', '$13,967,623'),
                 'vendor_address': ('2842 Goldstream Rd', 'Fairbanks, AK 99709', True),
-                'vendor_badges': (),
+                'vendor_badges': (True,),
                 'contract_result_info': ('vendor/038523239/csv/?memberships=GS10F0175M',),
                 'contract_table': (5, 'h_date_signed', 'desc', ('Prev', '1'), '2')
             },
@@ -1070,14 +1074,13 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
             },
             'page_count': {
                 'params': {'args': '039872622', 'test': 'true', 'count': 3},
-                'naics': ('all', 10),
-                'membership_filters': (None, 3, 0, 2, {
+                'naics': ('all', 7),
+                'membership_filters': (None, 2, 0, 2, {
                     1: ('Lynna S. Hood', '571-257-4785', 'lhood@addxcorp.com'),
-                    2: ('Lynna S. Hood', '571-257-4785', 'lhood@addxcorp.com'),
-                    3: ('', '703-933-7637', 'lhood@addxcorp.com')
+                    2: ('Lynna S. Hood', '571-257-4785', 'lhood@addxcorp.com')
                 }, {
-                    1: ('VO', 'SDVO'),
-                    2: ('VO', 'SDVO')
+                    1: ('SB', 'VO', 'SDVO'),
+                    2: ('SB', 'VO', 'SDVO')
                 }),
                 'vendor_sam': ('10/16/18',),
                 'vendor_info': ('ADDX CORPORATION', '039872622', '1XPA3', '62', '$16,534,185'),
