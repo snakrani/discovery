@@ -256,14 +256,21 @@ class Command(BaseCommand):
             membership.save()
             
             # Add contacts
+            membership.contacts.all().delete()
+            
             for index in range(1, 3):
-                contact, contact_created = membership.contacts.get_or_create(name=format_ascii(record["POC{}".format(index)]))
+                name = format_ascii(record["POC{}".format(index)])
+                phones = format_phones(record["Phone{}".format(index)])
+                emails = format_emails(record["Email{}".format(index)])
+                
+                if name or len(phones) or len(emails):                
+                    contact = membership.contacts.create(name=name, order=index)
+                
+                    for number in phones:
+                        contact.phones.get_or_create(number=number)
         
-                for number in format_phones(record["Phone{}".format(index)]):
-                    contact.phones.get_or_create(number=number)
-        
-                for address in format_emails(record["Email{}".format(index)]):
-                    contact.emails.get_or_create(address=address)
+                    for address in emails:
+                        contact.emails.get_or_create(address=address)
             
             # Add zone information (if it exists)
             for zone_id in get_zones(record):
