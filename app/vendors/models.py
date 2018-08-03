@@ -52,6 +52,7 @@ class PoolMembership(models.Model):
 
 class Contact(models.Model):
     responsibility = models.ForeignKey(PoolMembership, null=True, related_name='contacts', on_delete=models.DO_NOTHING)
+    order = models.IntegerField(null=False, default=1)
     name = models.CharField(null=True, max_length=128)
     
     def __str__(self):
