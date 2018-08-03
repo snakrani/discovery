@@ -925,7 +925,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                     1: ('SB', 'SDB', 'WO')
                 }),
                 'vendor_sam': ('2/15/19',),
-                'vendor_info': ('AD ASTRA INC.', '962857244', '61VV7', '8', '$3,800,000'),
+                'vendor_info': ('AD ASTRA INC.', '962857244', '61VV7', '9', '$3,800,000'),
                 'vendor_address': ('8701 Georgia Ave Ste 800', 'Silver Spring, MD 20910', False),
                 'vendor_badges': (True,),
                 'contract_result_info': ('vendor/962857244/csv/?memberships=GS10F177AA',),
