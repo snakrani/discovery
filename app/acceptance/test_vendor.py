@@ -289,7 +289,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                     1: ('SB', 'SDB', '8(a)')
                 }),
                 'vendor_sam': ('2/16/19',),
-                'vendor_info': ('CHENEGA FACILITY MGMT', '078650478', '6TLQ7', '156', '$12,691,341'),
+                'vendor_info': ('CHENEGA FACILITY MGMT', '078650478', '6TLQ7', '74', '$12,691,341'),
                 'vendor_address': ('5726 W Hausman Rd Ste 100', 'San Antonio, TX 78249', False),
                 'vendor_badges': (True,),
                 'contract_result_info': ('vendor/078650478/csv/?naics=238220',),
@@ -815,7 +815,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                     1: ('SB', 'SDB', 'WO')
                 }),
                 'vendor_sam': ('2/15/19',),
-                'vendor_info': ('AD ASTRA INC.', '962857244', '61VV7', '8', '$3,800,000'),
+                'vendor_info': ('AD ASTRA INC.', '962857244', '61VV7', '9', '$3,800,000'),
                 'vendor_address': ('8701 Georgia Ave Ste 800', 'Silver Spring, MD 20910', False),
                 'vendor_badges': (True,),
                 'contract_result_info': ('vendor/962857244/csv/?naics=541930',),
