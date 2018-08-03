@@ -609,6 +609,15 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': '^[A-Za-z]{4}\s+',
                 '@iregex': '^da(n|na)'
             },
+            'vendor__pools__contacts__order': {
+                '@exact': 1,
+                '@lt': 2,
+                '@lte': 2, 
+                '@gt': 1, 
+                '@gte': 1,
+                '@range': (1, 2),
+                '@in': (1, 2)
+            },
             'vendor__pools__contacts__phones__number': {
                 '@exact': '703-821-0678',
                 '@iexact': '703-821-0678',
