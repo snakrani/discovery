@@ -312,7 +312,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                     1: ('SB', 'SDB', '8(a)')
                 }),
                 'vendor_sam': ('2/16/19',),
-                'vendor_info': ('CHENEGA FACILITY MGMT', '078650478', '6TLQ7', '74', '$12,691,341'),
+                'vendor_info': ('CHENEGA FACILITY MGMT', '078650478', '6TLQ7', '74', '$5,352,998'),
                 'vendor_address': ('5726 W Hausman Rd Ste 100', 'San Antonio, TX 78249', False),
                 'vendor_badges': (True,),
                 'contract_result_info': ('vendor/078650478/csv/?naics=238220',),
