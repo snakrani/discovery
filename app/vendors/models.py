@@ -50,41 +50,29 @@ class PoolMembership(models.Model):
         return "{} {} ({})".format(self.pool.id, self.vendor.name, self.piid)
 
 
-class Manager(models.Model):
+class Contact(models.Model):
+    responsibility = models.ForeignKey(PoolMembership, null=True, related_name='contacts', on_delete=models.DO_NOTHING)
+    order = models.IntegerField(null=False, default=1)
     name = models.CharField(null=True, max_length=128)
     
     def __str__(self):
         return "{}".format(self.name)
     
-    def phone(self):
-        return self.phones.values_list('number', flat=True)
-    
-    def email(self):
-        return self.emails.values_list('address', flat=True)
-    
 
-class ContractManager(Manager):
-    responsibility = models.ForeignKey(PoolMembership, null=True, related_name='cms', on_delete=models.DO_NOTHING)
-
-
-class ProjectManager(Manager):
-    responsibility = models.ForeignKey(PoolMembership, null=True, related_name='pms', on_delete=models.DO_NOTHING)
-
-
-class ManagerPhoneNumber(models.Model):
-    manager = models.ForeignKey(Manager, null=True, related_name='phones', on_delete=models.CASCADE)
+class ContactPhone(models.Model):
+    contact = models.ForeignKey(Contact, null=True, related_name='phones', on_delete=models.CASCADE)
     number = models.CharField(null=True, max_length=128)
 
     def __str__(self):
-        return "{0} ({1})".format(self.manager.name, self.number)
+        return "{0} ({1})".format(self.contact.name, self.number)
 
 
-class ManagerEmail(models.Model):
-    manager = models.ForeignKey(Manager, null=True, related_name='emails', on_delete=models.CASCADE)
+class ContactEmail(models.Model):
+    contact = models.ForeignKey(Contact, null=True, related_name='emails', on_delete=models.CASCADE)
     address = models.CharField(null=True, max_length=128)
 
     def __str__(self):
-        return "{0} ({1})".format(self.manager.name, self.address)
+        return "{0} ({1})".format(self.contact.name, self.address)
 
 
 class SamLoad(models.Model):

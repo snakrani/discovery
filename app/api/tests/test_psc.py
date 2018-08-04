@@ -1,34 +1,44 @@
+from django.test import tag
+
 from test import cases as case
 from test import fixtures as data
 
 
+@tag('psc')
 class PscTest(case.APITestCase, metaclass = case.MetaAPISchema):
     
     fixtures = data.get_category_fixtures()
     schema = {
         'object': {
-            '&J039': ('code', 'equal', 'J039'),
-            '&S208': ('code', 'equal', 'S208'),
-            '&H341': ('code', 'equal', 'H341'),
+            'tags': ('psc_object',),
+            '&J039': ('code', 'exact', 'J039'),
+            '&S208': ('code', 'exact', 'S208'),
+            '&H341': ('code', 'exact', 'H341'),
             '#77777777': (),
             '#ABCDEFG': ()
         },
-        'ordering': ('code', 'description', 'naics__code', 'naics__description'),
+        'ordering': {
+            'tags': ('psc_ordering',),
+            'fields': ('code', 'description')
+        },
         'pagination': {
+            'tags': ('psc_pagination',),
             '@no_args': {},
             '!page': {'page': 1000},
             '@count': {'count': 2},
             '@mixed': {'page': 2, 'count': 3}
         },
         'search': {
-            '*search1': ('code', 'matches', 'J041'),
-            '*search2': ('description', 'matches', 'Other housekeeping services'),
-            '@search3': ('naics__code', 'equal', '561210'),
-            '@search4': ('naics__description', 'matches', 'Testing Laboratories'),
-            '-search5': ('code', 'matches', '0000000000000')
+            'tags': ('psc_search',),
+            '*search1': ('code', 'regex', 'J041'),
+            '*search2': ('description', 'iregex', 'Other housekeeping services'),
+            '@search3': ('naics__code', 'exact', '561210'),
+            '@search4': ('naics__description', 'regex', 'Testing Laboratories'),
+            '-search5': ('code', 'regex', '0000000000000')
         },
         'fields': {
             'code': {
+                'tags': ('psc_field', 'fuzzy_text'),
                 '*exact': 'N045',
                 '*iexact': 's299',
                 '@in': ("S202", "Z1DZ", "J034"),
@@ -42,6 +52,7 @@ class PscTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '^(S2|Z1)'
             },
             'description': {
+                'tags': ('psc_field', 'fuzzy_text'),
                 '@exact': 'Abrasive Materials',
                 '@iexact': 'ADP backup and security services',
                 '@in': ("Aerial Seeding Services", "Aircraft Components / Accessories"),
@@ -55,6 +66,7 @@ class PscTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '^air(craft)?'
             },
             'naics__code': {
+                'tags': ('psc_field', 'naics_field', 'fuzzy_text'),
                 '@exact': '541330',
                 '@iexact': '561710',
                 '@in': ("541711", "238290", "561730"),
@@ -68,6 +80,7 @@ class PscTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '^(23|56)'
             },
             'naics__description': {
+                'tags': ('psc_field', 'naics_field', 'fuzzy_text'),
                 '@exact': 'Outdoor Advertising',
                 '@iexact': 'outdoor advertising',
                 '@in': ("Payroll Services", "Commissioning Services", "Testing Laboratories"),
@@ -80,7 +93,8 @@ class PscTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': 'Services$',
                 '@iregex': 'apprentice(ship)?'
             },
-            'naics__sin:naics__sin__code': {
+            'naics__sin__code': {
+                'tags': ('psc_field', 'naics_field', 'sin_field', 'fuzzy_text'),
                 '@exact': '100-03',
                 '@iexact': 'c871-202',
                 '@in': ("100-03", "520-14", "541-4G", "51-B36-2A"),
@@ -93,7 +107,8 @@ class PscTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': '[A-Z]\d+\-\d+$',
                 '@iregex': '^(C87|51)'
             },
-            'naics__keyword:naics__keywords__name': {
+            'naics__keywords__name': {
+                'tags': ('psc_field', 'naics_field', 'keyword_field', 'fuzzy_text'),
                 '@exact': 'Cooking Equipment',
                 '@iexact': 'ancillary supplies and / or services',
                 '@in': ("Elemental Analyzers", "Energy Consulting Services", "Environmental Consulting Services"),

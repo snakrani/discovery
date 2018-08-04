@@ -67,21 +67,18 @@ class Pool(models.Model):
     threshold = models.CharField(null=True, max_length=128)
 
     def __str__(self):
-        return "{0} - Pool {1}".format(self.vehicle, self.number)
+        return "{0} {1}".format(self.vehicle, self.number)
 
+
+class State(models.Model):
+    code = models.CharField(primary_key=True, max_length=50)
+
+    def __str__(self):
+        return "{0}".format(self.code)
 
 class Zone(models.Model):
-
-    def states(self):
-        return self.state.values_list('state', flat=True)
-    
-    def __str__(self):
-        return "Zone {0} - {1}".format(self.id, ",".join(self.states()))
-
-
-class ZoneState(models.Model):
-    zone = models.ForeignKey(Zone, null=True, related_name='state', on_delete=models.CASCADE)
-    state = models.CharField(max_length=50)
+    states = models.ManyToManyField(State, blank=True)
 
     def __str__(self):
-        return "{0} - {1}".format(self.zone.id, self.state)
+        return "Zone {0}".format(self.id)
+

@@ -110,7 +110,7 @@ jobs:
           name: Run acceptance tests
           command: |
             ./scripts/wait-for-it.sh --host="localhost" --port=8080 --timeout=300
-            ./run test --parallel=5 acceptance
+            ./run test --parallel=3 acceptance
 
       - store_artifacts:
           path: logs

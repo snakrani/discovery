@@ -1,46 +1,56 @@
+from django.test import tag
+
 from test import cases as case
 from test import fixtures as data
 
 
+@tag('contract')
 class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema): 
     
     fixtures = data.get_contract_fixtures()
     schema = {
         'object': {
-            '&1': ('piid', 'equal', 'DAAE0703CS108'),
-            '&162': ('piid', 'equal', 'GS00Q14OADS128_1605DC17F00172'),
-            '&828': ('name', 'equal', 'USZA2202D0015_0194'),
+            'tags': ('contract_object',),
+            '&1': ('piid', 'exact', 'DAAE0703CS111'),
+            '&162': ('piid', 'exact', 'AG3198C120007'),
+            '&828': ('name', 'exact', 'USZA2202D0015_0194'),
             '#345C': (),
             '#ABCDEFG': ()
         },
-        'ordering': (
-            'id', 'piid', 'base_piid', 
-            'agency_id', 'agency_name', 
-            'NAICS', 'PSC',
-            'date_signed', 'completion_date', 'obligated_amount',
-            'vendor__duns', 'vendor__cage', 'vendor__name',
-            'point_of_contact', 'vendor_phone',
-            'vendor_location__address', 
-            'vendor_location__city', 
-            'vendor_location__state', 
-            'vendor_location__zipcode', 
-            'vendor_location__congressional_district', 
-            'status__name', 'pricing_type__name',
-            'place_of_performance_location',
-            'annual_revenue', 'number_of_employees'
-        ),
+        'ordering': {
+            'tags': ('contract_ordering',),
+            'fields': (
+                'id', 'piid', 'base_piid',
+                'agency_id', 'agency_name', 
+                'NAICS', 'PSC',
+                'date_signed', 'completion_date', 'obligated_amount',
+                'vendor__duns', 'vendor__cage', 'vendor__name',
+                'point_of_contact', 'vendor_phone',
+                'vendor_location__address', 
+                'vendor_location__city', 
+                'vendor_location__state', 
+                'vendor_location__zipcode', 
+                'vendor_location__congressional_district', 
+                'status__name', 'pricing_type__name',
+                'place_of_performance_location',
+                'annual_revenue', 'number_of_employees'
+            )
+        },
         'pagination': {
+            'tags': ('contract_pagination',),
             '@no_args': {},
             '@page': {'page': 3},
             '@count': {'count': 10},
             '@mixed': {'page': 2, 'count': 10}
         },
         'search': {
-            '*search1': ('piid', 'iequal', 'DAAE0703CL525'),
-            '@search2': ('agency_name', 'imatches', 'NUCLEAR REGULATORY COMMISSION')
+            'tags': ('contract_search',),
+            '*search1': ('piid', 'iexact', 'DAAE0703CL525'),
+            '@search2': ('agency_name', 'iregex', 'NUCLEAR REGULATORY COMMISSION')
         },
         'fields': {
             'id': {
+                'tags': ('contract_field', 'number'),
                 '*exact': 256,
                 '@lt': 500,
                 '@lte': 500, 
@@ -50,6 +60,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@in': (2, 3, 5)
             },
             'piid': {
+                'tags': ('contract_field', 'fuzzy_text'),
                 '*exact': 'FA700014D0006_0002',
                 '*iexact': 'fa700014d0006_0002',
                 '@in': ('W9128F11A0021_0001', 'W912DY10A0005_0002', 'EPW13024_0009'),
@@ -63,6 +74,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '[0-9]{3}cl001'
             },
             'base_piid': {
+                'tags': ('contract_field', 'fuzzy_text'),
                 '@exact': 'INP16PC00395',
                 '@iexact': 'inP16pc00395',
                 '@in': ('N0001412C0203', 'W912DY10A0005', 'EPW13024'),
@@ -76,11 +88,13 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '[a-z]{4}[0-9]{4}cl001'
             },
             'agency_id': {
+                'tags': ('contract_field', 'token_text'),
                 '@exact': '8000',
                 '@iexact': '8000',
                 '@in': ('8000', '6800', '2050')
             },
             'agency_name': {
+                'tags': ('contract_field', 'fuzzy_text'),
                 '@exact': 'INTERNAL REVENUE SERVICE',
                 '@iexact': 'Internal Revenue Service',
                 '@in': ('INTERNAL REVENUE SERVICE', 'CONSUMER FINANCIAL PROTECTION BUREAU', 'FEDERAL ACQUISITION SERVICE'),
@@ -94,6 +108,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': 'office\s+'
             },
             'NAICS': {
+                'tags': ('contract_field', 'fuzzy_text'),
                 '@exact': '541330',
                 '@iexact': '541712',
                 '@in': ("541711", "238290", "561730"),
@@ -107,6 +122,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '^(23|56)'
             },
             'PSC': {
+                'tags': ('contract_field', 'fuzzy_text'),
                 '@exact': 'U099',
                 '@iexact': 'ad26',
                 '@in': ("U099", "AD260", "R425"),
@@ -120,6 +136,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '^(u0|ad)'
             },
             'date_signed': {
+                'tags': ('contract_field', 'date_time'),
                 '@date': '2016-05-17',
                 '@year': '2007',
                 '@month': '7',
@@ -129,6 +146,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@quarter': '2'
             },
             'completion_date': {
+                'tags': ('contract_field', 'date_time'),
                 '@date': '2010-10-08',
                 '@year': '2012',
                 '@month': '5',
@@ -138,6 +156,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@quarter': '3'
             },
             'obligated_amount': {
+                'tags': ('contract_field', 'number'),
                 '@exact': 150000,
                 '@lt': 0,
                 '@lte': 10000, 
@@ -147,6 +166,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@in': (162340, -43000, 416700)
             },
             'point_of_contact': {
+                'tags': ('contract_field', 'fuzzy_text'),
                 '@exact': 'PADDS.W31P4Q@KO.ARMY.MIL',
                 '@iexact': 'padds.w31P4Q@KO.army.mil',
                 '@in': ("PADDS.W31P4Q@KO.ARMY.MIL", "USERCW@SA5700.FA8604", "MARASHULTZ@GSA.GOV"),
@@ -160,6 +180,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '\.[a-z]+\d+$'
             },
             'vendor_phone': {
+                'tags': ('contract_field', 'fuzzy_text'),
                 '@exact': '702-816-5088',
                 '@iexact': '702-816-5088',
                 '@in': ("702-816-5088", "571-482-2501", "404-315-1940"),
@@ -173,6 +194,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '(571|202)-\d{3}'
             },
             'annual_revenue': {
+                'tags': ('contract_field', 'number'),
                 '@exact': 1200000,
                 '@lt': 500000,
                 '@lte': 300000, 
@@ -182,6 +204,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@in': (250000, 27019000, 15000000)
             },
             'number_of_employees': {
+                'tags': ('contract_field', 'number'),
                 '@exact': 210,
                 '@lt': 190,
                 '@lte': 200, 
@@ -191,11 +214,13 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@in': (580, 70, 900)
             },
             'status__code': {
+                'tags': ('contract_field', 'token_text'),
                 '@exact': 'C1',
                 '@iexact': 'c1',
                 '@in': ('A', 'C2', 'X', 'F')
             },
             'status__name': {
+                'tags': ('contract_field', 'fuzzy_text'),
                 '@exact': 'Completed',
                 '@iexact': 'currEnt',
                 '@in': ("Current", "Completed", "Close out"),
@@ -209,11 +234,13 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '(current|completed)'
             },
             'pricing_type__code': {
+                'tags': ('contract_field', 'token_text'),
                 '@exact': 'Y',
                 '@iexact': 'u',
                 '@in': ('M', '3', 'K', 'Z')
             },
             'pricing_type__name': {
+                'tags': ('contract_field', 'fuzzy_text'),
                 '@exact': 'Firm Fixed Price',
                 '@iexact': 'firm fixed price',
                 '@in': ("Firm Fixed Price", "Time and Materials"),
@@ -227,29 +254,33 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '^fixed\s+'
             },
             'place_of_performance__country_code': {
+                'tags': ('contract_field', 'location_field', 'token_text'),
                 '@exact': 'USA',
                 '@iexact': 'usa',
                 '@in': ("USA","JPN","MDA","GBR")
             },
             'place_of_performance__country_name': {
+                'tags': ('contract_field', 'location_field', 'fuzzy_text'),
                 '@exact': 'United States',
                 '@iexact': 'united states',
                 '@in': ("United States","United Kingdom"),
                 '@contains': 'United',
                 '@icontains': 'united',
-                '@startswith': 'Moz',
-                '@istartswith': 'moz',
+                '@startswith': 'G',
+                '@istartswith': 'g',
                 '@endswith': 'ia',
                 '@iendswith': 'IA',
                 '@regex': '^United (States|Kingdom)$',
                 '@iregex': '^united (states|kingdom)$'
             },
             'place_of_performance__state': {
+                'tags': ('contract_field', 'location_field', 'token_text'),
                 '@exact': 'DC',
                 '@iexact': 'dc',
                 '@in': ("DC","CA","TX","VA")
             },
             'place_of_performance__zipcode': {
+                'tags': ('contract_field', 'location_field', 'fuzzy_text'),
                 '@exact': '20190',
                 '@iexact': '20190',
                 '@in': ("20190", "93033", "22102"),
@@ -263,6 +294,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '^[13579]+'
             },
             'vendor_location__address': {
+                'tags': ('contract_field', 'location_field', 'fuzzy_text'),
                 '@exact': '7000 Muirkirk Meadows Dr',
                 '@iexact': '7000 muirkirk meadows dr',
                 '@in': ("1002 Explorer Blvd", "8600 Boeing Dr"),
@@ -276,6 +308,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': 'ste \d+$'
             },
             'vendor_location__city': {
+                'tags': ('contract_field', 'location_field', 'fuzzy_text'),
                 '@exact': 'Carlisle',
                 '@iexact': 'arlington',
                 '@in': ("Atlanta", "Reston", "Northville"),
@@ -289,11 +322,13 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': 'TOWN'
             },
             'vendor_location__state': {
+                'tags': ('contract_field', 'location_field', 'token_text'),
                 '@exact': 'DC',
                 '@iexact': 'dc',
                 '@in': ("DC","CA","TX","VA")
             },
             'vendor_location__zipcode': {
+                'tags': ('contract_field', 'location_field', 'fuzzy_text'),
                 '@exact': '20190',
                 '@iexact': '20190',
                 '@in': ("20190", "93033", "22102"),
@@ -307,11 +342,13 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '^[13579]+'
             },
             'vendor_location__congressional_district': {
+                'tags': ('contract_field', 'location_field', 'token_text'),
                 '@exact': '07',
                 '@iexact': '07',
                 '@in': ("07", "04", "08", "01")
             },      
             'vendor__name': {
+                'tags': ('contract_field', 'vendor_field', 'fuzzy_text'),
                 '@exact': 'DYNAMICS RESEARCH CORPORATION',
                 '@iexact': 'native energy & technology, inc.',
                 '@in': ('ENGILITY CORPORATION', 'CBRE', 'POWERTRAIN'),
@@ -325,6 +362,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': 'inc\.?$'
             },
             'vendor__duns': {
+                'tags': ('contract_field', 'vendor_field', 'number'),
                 '@exact': '097967608',
                 '@lt': '193460839',
                 '@lte': '193460839', 
@@ -334,16 +372,19 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@in': ('055124077', '838295400', '003184462')
             },
             'vendor__cage': {
+                'tags': ('contract_field', 'vendor_field', 'token_text'),
                 '@exact': '3A3Q8',
                 '@iexact': '3A3Q8',
                 '@in': ('4L767', '4SJK4', '4U825')
             },
             'vendor__sam_status': {
+                'tags': ('contract_field', 'vendor_field', 'token_text'),
                 '@exact': 'ACTIVE',
                 '@iexact': 'active',
                 '@in': "ACTIVE"
             },
             'vendor__sam_activation_date': {
+                'tags': ('contract_field', 'vendor_field', 'date_time'),
                 '@date': '2018-02-09',
                 '@year': '2018',
                 '@month': '2',
@@ -353,6 +394,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@quarter': '1'
             },
             'vendor__sam_expiration_date': {
+                'tags': ('contract_field', 'vendor_field', 'date_time'),
                 '@date': '2019-02-09',
                 '@year': '2019',
                 '@month': '2',
@@ -362,10 +404,12 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@quarter': '1'
             },
             'vendor__sam_exclusion': {
+                'tags': ('contract_field', 'vendor_field', 'boolean'),
                 '-exact': True,
                 '@exact': False,
             },
             'vendor__sam_url': {
+                'tags': ('contract_field', 'vendor_field', 'fuzzy_text'),
                 '@exact': 'http://www.act-corp.com',
                 '@iexact': 'http://WWW.ACT-CORP.COM',
                 '@in': ("http://www.sainc.com", "https://www.atlasresearch.us"),
@@ -379,6 +423,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': 'www\.[^\.]+\.com'
             },
             'vendor__sam_location__address': {
+                'tags': ('contract_field', 'vendor_field', 'location_field', 'fuzzy_text'),
                 '@exact': '7000 Muirkirk Meadows Dr',
                 '@iexact': '7000 muirkirk meadows dr',
                 '@in': ("1002 Explorer Blvd", "8600 Boeing Dr"),
@@ -392,6 +437,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': 'ste \d+$'
             },
             'vendor__sam_location__city': {
+                'tags': ('contract_field', 'vendor_field', 'location_field', 'fuzzy_text'),
                 '@exact': 'Carlisle',
                 '@iexact': 'arlington',
                 '@in': ("Atlanta", "Reston", "Northville"),
@@ -405,11 +451,13 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': 'TOWN'
             },
             'vendor__sam_location__state': {
+                'tags': ('contract_field', 'vendor_field', 'location_field', 'token_text'),
                 '@exact': 'DC',
                 '@iexact': 'dc',
                 '@in': ("DC","CA","TX","VA")
             },
             'vendor__sam_location__zipcode': {
+                'tags': ('contract_field', 'vendor_field', 'location_field', 'fuzzy_text'),
                 '@exact': '20190',
                 '@iexact': '20190',
                 '@in': ("20190", "93033", "22102"),
@@ -423,16 +471,19 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '^[13579]+'
             },
             'vendor__sam_location__congressional_district': {
+                'tags': ('contract_field', 'vendor_field', 'location_field', 'token_text'),
                 '@exact': '07',
                 '@iexact': '07',
                 '@in': ("07", "04", "08", "01")
             },
             'vendor__pools__pool__id': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'token_text'),
                 '@exact': 'BMO_SB_10',
                 '@iexact': 'hcaTs_Sb_2',
                 '@in': ("BMO_8", "OASIS_4", "HCATS_SB_1")
             },
             'vendor__pools__piid': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'fuzzy_text'),
                 '@exact': 'GS00Q14OADU208',
                 '@iexact': 'gs00Q14Oadu208',
                 '@in': ("GS00Q14OADU343", "GS02Q16DCR0086"),
@@ -446,6 +497,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '^(gs06|gs00)'
             },
             'vendor__pools__expiration_8a_date': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'date_time'),
                 '@date': '2022-07-19',
                 '@year': '2017',
                 '@month': '7',
@@ -455,6 +507,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@quarter': '1'
             },
             'vendor__pools__pool__name': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'fuzzy_text'),
                 '@exact': 'Elevator Maintenance',
                 '@iexact': 'janitoRial',
                 '@in': ("Roofing Services", "Plumbing and Pipefitting"),
@@ -468,11 +521,13 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': 'air.*development$'
             },
             'vendor__pools__pool__number': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'token_text'),
                 '@exact': '8',
                 '@iexact': '9',
                 '@in': ('1', '3', '5B', '16')
             },
             'vendor__pools__pool__vehicle': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'fuzzy_text'),
                 '@exact': 'OASIS_SB',
                 '@iexact': 'oasis',
                 '@in': ("HCATS", "BMO_SB"),
@@ -486,6 +541,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '^(oaSis|hCaTs)_Sb$'
             },
             'vendor__pools__pool__threshold': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'fuzzy_text'),
                 '@exact': '$15 million',
                 '@iexact': '$7.5 MILLION',
                 '@in': ("1000 employee", "$18 million", "500 employee"),
@@ -499,6 +555,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '(500 EMPLOYEE|MILLION)'
             },
             'vendor__pools__pool__naics__code': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'naics_field', 'fuzzy_text'),
                 '@exact': '541330',
                 '@iexact': '561710',
                 '@in': ("541711", "238290", "561730"),
@@ -512,6 +569,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '^(23|56)'
             },
             'vendor__pools__pool__naics__description': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'naics_field', 'fuzzy_text'),
                 '@exact': 'Outdoor Advertising',
                 '@iexact': 'meDIA representatives',
                 '@in': ("Payroll Services", "Commissioning Services", "Testing Laboratories"),
@@ -524,7 +582,8 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': 'Services$',
                 '@iregex': 'apprentice(ship)?'
             },
-            'vendor__pools__pool__naics__sin:vendor__pools__pool__naics__sin__code': {
+            'vendor__pools__pool__naics__sin__code': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'naics_field', 'sin_field', 'fuzzy_text'),
                 '@exact': '100-03',
                 '@iexact': 'c871-202',
                 '@in': ("100-03", "520-14", "541-4G", "51-B36-2A"),
@@ -537,7 +596,8 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': '[A-Z]\d+\-\d+$',
                 '@iregex': '^(C87|51)'
             },
-            'vendor__pools__pool__naics__keyword:vendor__pools__pool__naics__keywords__name': {
+            'vendor__pools__pool__naics__keywords__name': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'naics_field', 'keyword_field', 'fuzzy_text'),
                 '@exact': 'Cooking Equipment',
                 '@iexact': 'ancillary supplies and / or services',
                 '@in': ("Elemental Analyzers", "Energy Consulting Services", "Environmental Consulting Services"),
@@ -551,16 +611,19 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '^(vocational|strategic)'
             },
             'vendor__pools__setasides__code': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'setaside_field', 'token_text'),
                 '@exact': 'QF',
                 '@iexact': 'a2',
                 '@in': ('XX', 'A5', '27')
             },
             'vendor__pools__setasides__name': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'setaside_field', 'token_text'),
                 '@exact': 'WO',
                 '@iexact': 'hubz',
                 '@in': ('8(A)', 'SDVO', 'HubZ')
             },
             'vendor__pools__setasides__description': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'setaside_field', 'fuzzy_text'),
                 '@exact': 'Veteran Owned',
                 '@iexact': 'hubzone',
                 '@in': ("8(A)", "Woman Owned", "Small Disadvantaged Business"),
@@ -574,6 +637,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': 'Vet(eran)?'
             },
             'vendor__pools__setasides__far_order': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'setaside_field', 'number'),
                 '@exact': 3,
                 '@lt': 4,
                 '@lte': 4, 
@@ -583,6 +647,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@in': (2, 3, 5)
             },
             'vendor__pools__zones__id': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'zone_field', 'number'),
                 '@exact': 2,
                 '@lt': 4,
                 '@lte': 4, 
@@ -591,12 +656,14 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@range': (2, 5),
                 '@in': (2, 3, 5)
             },
-            'vendor__pools__zones__state': {
+            'vendor__pools__zones__states__code': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'zone_field', 'token_text'),
                 '@exact': 'PA',
                 '@iexact': 'mE',
                 '@in': ('PA', 'NC', 'TX', 'NY')
             },
-            'vendor__pools__cms__name': {
+            'vendor__pools__contacts__name': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'contact_field', 'fuzzy_text'),
                 '@exact': 'Ken Scott',
                 '@iexact': 'daniel eke',
                 '@in': ("Ken Scott", "Daniel Eke"),
@@ -609,7 +676,18 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': '^[A-Za-z]{4}\s+',
                 '@iregex': '^da(n|na)'
             },
-            'vendor__pools__cms__phone': {
+            'vendor__pools__contacts__order': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'contact_field', 'number'),
+                '@exact': 1,
+                '@lt': 2,
+                '@lte': 2, 
+                '@gt': 1, 
+                '@gte': 1,
+                '@range': (1, 2),
+                '@in': (1, 2)
+            },
+            'vendor__pools__contacts__phones__number': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'contact_field', 'fuzzy_text'),
                 '@exact': '703-821-0678',
                 '@iexact': '703-821-0678',
                 '@in': ("703-821-0678", "571-262-3144", "937-912-6102"),
@@ -622,7 +700,8 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': 'x\s*\d+$',
                 '@iregex': '(304|703)-\d{3}'
             },
-            'vendor__pools__cms__email': {
+            'vendor__pools__contacts__emails__address': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'contact_field', 'fuzzy_text'),
                 '@exact': 'OASIS@act-i.com',
                 '@iexact': 'oasis@act-i.com',
                 '@in': ("OASIS@act-i.com", "hcats_sb@deepmile.com", "Finance@exemplarent.com"),
@@ -634,45 +713,19 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iendswith': 'cOM',
                 '@regex': '\d+',
                 '@iregex': '\.(com|net)$'
+            }
+        },
+        'requests': {
+            '@r1': {
+                'tags': ('contract_request',),
+                'params': {'psc_naics': '238220', 'ordering': 'date_signed'},
+                'tests': (
+                    ('date_signed', 'ordering', 'asc'),
+                )
             },
-            'vendor__pools__pms__name': {
-                '@exact': 'Gary Wittlinger',
-                '@iexact': 'gary wittlinger',
-                '@in': ("R. Ken Trammell", "Jeffrey Chesko", "Bob"),
-                '@contains': 'Glass',
-                '@icontains': 'glass',
-                '@startswith': 'John',
-                '@istartswith': 'john',
-                '@endswith': 'Gendron',
-                '@iendswith': 'gendron',
-                '@regex': '^[A-Za-z]{4}\s+',
-                '@iregex': '^dr\.?'
-            },
-            'vendor__pools__pms__phone': {
-                '@exact': '240-538-8357',
-                '@iexact': '937-912-6102',
-                '@in': ("240-538-8357", "937-912-6102", "256-882-6229x102"),
-                '@contains': '-824-',
-                '@icontains': '-824-',
-                '@startswith': '719',
-                '@istartswith': '719',
-                '@endswith': '6102',
-                '@iendswith': '6102',
-                '@regex': 'x\s*\d+$',
-                '@iregex': '(937|703)-\d{3}'
-            },
-            'vendor__pools__pms__email': {
-                '@exact': 'ARA_OASIS_SB@ara.com',
-                '@iexact': 'ara_oasis_sb@ARA.com',
-                '@in': ("OASIS@avioninc.com", "contracts@cssiinc.com", "chauhan@battelle.org"),
-                '@contains': 'aeg',
-                '@icontains': 'AEG',
-                '@startswith': 'hcats',
-                '@istartswith': 'HcAtS',
-                '@endswith': 'com',
-                '@iendswith': 'cOM',
-                '@regex': '\d+',
-                '@iregex': '\.(com|net)$'
+            '-r2': {
+                'tags': ('contract_request',),
+                'params': {'psc_naics': '000000', 'ordering': '-date_signed'}
             }
         }
     }
@@ -693,11 +746,3 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
         
         resp.is_float(base_key + ['annual_revenue'])
         resp.is_int(base_key + ['number_of_employees'])
-    
-        
-    def test_psc_naics_found(self):
-        resp = self.validated_multi_list(psc_naics = '238220', ordering = '-date_signed')
-        resp.validate_ordering('date_signed', 'desc')
-        
-    def test_psc_naics_not_found_1(self):
-        self.empty_list(psc_naics = '000000', ordering = '-date_signed')

@@ -1,3 +1,6 @@
+from collections import OrderedDict
+from datetime import datetime, date
+
 from django.conf import settings
 from django.db.models import Subquery, OuterRef, Value, Q
 from django.db.models.functions import Concat, Coalesce
@@ -26,25 +29,46 @@ import re
 
 @method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
 @method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='retrieve')
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='values')
 class DiscoveryReadOnlyModelViewSet(
     mixins.FilterViewSetMixin,
     mixins.PaginationViewSetMixin,
     mixins.SerializerViewSetMixin, 
     ReadOnlyModelViewSet
 ):
-    def list(self, request, *args, **kwargs):
+    def init_cache(self, request):
         page, created = system.CachePage.objects.get_or_create(url=request.build_absolute_uri())
         page.count += 1
         page.save()
         
+    def list(self, request, *args, **kwargs):
+        self.init_cache(request)
         return super(DiscoveryReadOnlyModelViewSet, self).list(request, *args, **kwargs)
         
     def retrieve(self, request, *args, **kwargs):
-        page, created = system.CachePage.objects.get_or_create(url=request.build_absolute_uri())
-        page.count += 1
-        page.save()
-        
+        self.init_cache(request)
         return super(DiscoveryReadOnlyModelViewSet, self).retrieve(request, *args, **kwargs)
+        
+    def values(self, request, *args, **kwargs):
+        self.init_cache(request)
+        
+        field_lookup = kwargs['field_lookup']
+        queryset = self.filter_queryset(self.get_queryset().order_by(field_lookup))
+        values = []
+        
+        for value in queryset.values_list(field_lookup, flat=True):
+            if value is not None:
+                if isinstance(value, (datetime, date)):
+                    value = value.isoformat()
+                    if value.endswith('+00:00'):
+                        value = value[:-6] + 'Z'
+                
+                values.append(value)
+        
+        return Response(OrderedDict([
+            ('count', len(values)),
+            ('results', values)
+        ]))
     
 
 class NaicsViewSet(DiscoveryReadOnlyModelViewSet):
@@ -62,10 +86,11 @@ class NaicsViewSet(DiscoveryReadOnlyModelViewSet):
     
     action_filters = {
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
     }
     filter_class = filters.NaicsFilter
     search_fields = ['code', 'description', 'sin__code', 'keywords__name']
-    ordering_fields = ['code', 'description', 'sin__code', 'keywords__name']
+    ordering_fields = ['code', 'description']
     ordering = 'description'
     
     pagination_class = pagination.ResultSetPagination
@@ -91,10 +116,11 @@ class PscViewSet(DiscoveryReadOnlyModelViewSet):
     
     action_filters = {
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
     }
     filter_class = filters.PscFilter
     search_fields = ['code', 'description', 'sin__code', 'naics__code', 'naics__description', 'keywords__name']
-    ordering_fields = ['code', 'description', 'sin__code', 'naics__code', 'naics__description', 'keywords__name']
+    ordering_fields = ['code', 'description']
     ordering = 'description'
     
     pagination_class = pagination.ResultSetPagination
@@ -120,10 +146,11 @@ class PoolViewSet(DiscoveryReadOnlyModelViewSet):
     
     action_filters = {
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
     }
     filter_class = filters.PoolFilter
     search_fields = ['id', 'name', 'number', 'vehicle', 'threshold']
-    ordering_fields = ['id', 'name', 'number', 'vehicle', 'threshold', 'naics__code', 'naics__description']
+    ordering_fields = ['id', 'name', 'number', 'vehicle', 'threshold']
     ordering = 'name'
     
     pagination_class = pagination.ResultSetPagination
@@ -149,6 +176,7 @@ class SetAsideViewSet(DiscoveryReadOnlyModelViewSet):
     
     action_filters = {
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
     }
     filter_class = filters.SetAsideFilter
     search_fields = ['code', 'name', 'description']
@@ -178,6 +206,7 @@ class ZoneViewSet(DiscoveryReadOnlyModelViewSet):
     
     action_filters = {
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, OrderingFilter),
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend)
     }
     filter_class = filters.ZoneFilter
     ordering_fields = ['id']
@@ -206,6 +235,7 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
     
     action_filters = {
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
     }
     filter_class = filters.VendorFilter
     search_fields = ['name', 'duns', 'cage']
@@ -213,7 +243,7 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
         'name', 'duns', 'cage', 
         'sam_status', 'sam_exclusion', 'sam_url',
         'sam_location__address', 'sam_location__city', 'sam_location__state', 
-        'sam_location__zipcode', 'sam_location__congressional_district', 'sam_location_citystate',
+        'sam_location__zipcode', 'sam_location__congressional_district',
         'annual_revenue', 'number_of_employees', 'number_of_contracts'
     ]
     ordering = '-number_of_contracts'
@@ -234,8 +264,7 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
             ),
             number_of_employees=Subquery(
                 contracts.Contract.objects.filter(vendor=OuterRef('pk')).order_by('-date_signed').values('number_of_employees')[:1]
-            ),
-            sam_location_citystate = Concat('sam_location__city', Value(', '), 'sam_location__state', Value(' '), 'sam_location__zipcode')
+            )
         )
         if naics_param_name in self.request.query_params and self.request.query_params[naics_param_name]:
             naics_code = re.sub(r'[^\d]+$', '', self.request.query_params[naics_param_name])
@@ -263,6 +292,7 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
     
     action_filters = {
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
     }
     filter_class = filters.ContractFilter
     search_fields = ['piid', 'agency_name']
@@ -321,7 +351,7 @@ class ListKeywordView(ListAPIView):
             queryset = queryset.filter(name__istartswith = request.query_params['q'])
         
         serializer = self.get_serializer(queryset, many=True)
-        return Response({ 'results': serializer.data })
+        return Response({ 'count': len(serializer.data), 'results': serializer.data })
 
 
 @method_decorator(cache_page(60*60), name='get')

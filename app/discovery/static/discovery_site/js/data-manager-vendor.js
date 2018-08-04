@@ -112,15 +112,19 @@ DataManager.getMembershipMap = function() {
             }
         }
 
-        var contactName = membership.cms[0].name;
+        var contactName = membership.contacts[0].name;
         if ($.inArray(contactName, membershipMap[membership.piid]['contacts']) == -1) {
             membershipMap[membership.piid]['contacts'].push(contactName);
         }
-        var phoneNumber = membership.cms[0].phone.join('<br/>');
+        var phoneNumber = membership.contacts[0].phones.map(function(obj) {
+            return obj.number;
+        }).join('<br/>');
         if ($.inArray(phoneNumber, membershipMap[membership.piid]['phones']) == -1) {
             membershipMap[membership.piid]['phones'].push(phoneNumber);
         }
-        var emailAddress = membership.cms[0].email.join('<br/>');
+        var emailAddress = membership.contacts[0].emails.map(function(obj) {
+            return obj.address;
+        }).join('<br/>');
         if ($.inArray(emailAddress, membershipMap[membership.piid]['emails']) == -1) {
             membershipMap[membership.piid]['emails'].push(emailAddress);
         }
