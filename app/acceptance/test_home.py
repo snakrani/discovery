@@ -15,6 +15,7 @@ class HomeTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
         },
         'header': {
             'tags': ('title',),
+            'wait': 'complete',
             'Discovery': 'title'
         },
         'vehicle_info_display': {

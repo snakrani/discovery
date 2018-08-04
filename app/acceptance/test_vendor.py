@@ -9,6 +9,14 @@ from acceptance.common import generate_schema
 class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
  
     schema = generate_schema({
+        'header': {
+            'tags': ('title',),
+            'params': {
+                'args': '926451519'
+            },
+            'wait': 'complete',
+            'BALL AEROSPACE & TECHNOLOGIES CORPORATION - Discovery': 'title'
+        },
         'actions': {
             'unfiltered': {
                 'tags': ('all',),
@@ -1163,14 +1171,6 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_result_info': ('vendor/039872622/csv/?count=3',),
                 'contract_table': (3, 'h_date_signed', 'desc', ('Prev', '1'), '4'),
             }
-        },
-        'header': {
-            'tags': ('title',),
-            'params': {
-                'args': '926451519'
-            },
-            'wait': 'complete',
-            'BALL AEROSPACE & TECHNOLOGIES CORPORATION - Discovery': 'title'
         }
     })
     

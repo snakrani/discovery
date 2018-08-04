@@ -15,7 +15,8 @@ class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
         },
         'header': {
             'tags': ('title',),
-            'Discovery': 'title'
+            'wait': 'complete',
+            'Results - Discovery': 'title'
         },
         'actions': {
             'unfiltered': {
