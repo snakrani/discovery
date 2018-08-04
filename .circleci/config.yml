@@ -6,7 +6,7 @@
 #
 version: 2
 jobs:
-  unit-tests:
+  component-tests:
     docker:
       - image: python:3.6-slim-stretch
         environment:
@@ -44,14 +44,51 @@ jobs:
 
       - run:
           name: Run component tests
-          background: true
           command: |
             ./run test --parallel=4 discovery categories vendors contracts
-            touch /tmp/components
+
+      - store_artifacts:
+          path: logs
+          destination: component-test-reports
+
+  core-api-tests:
+    docker:
+      - image: python:3.6-slim-stretch
+        environment:
+          LANG: C.UTF-8
+          PYTHONUNBUFFERED: 1
+
+      - image: postgres:9.4
+        environment:
+          POSTGRES_USER: circleci
+          POSTGRES_PASSWORD: circleci
+          POSTGRES_DB: circle-test
+
+    working_directory: /var/local
+
+    steps:
+      - run:
+          name: Install development tools
+          command: |
+            apt-get update
+            apt-get install -y git gcc
+
+      - checkout
+
+      - run:
+          name: Set CircleCI configuration
+          command: |
+            cp ./app/discovery/local_settings.circle.py ./app/discovery/local_settings.py
+
+      - run:
+          name: Install requirements
+          command: |
+            pip install --no-cache-dir -r ./requirements.txt
+            pip install --no-cache-dir -r ./requirements-dev.txt
+            ./scripts/init-webserver.sh /dev/stderr
 
       - run:
           name: Run core API tests
-          background: true
           command: |
             ./run test api --tag=object
             ./run test api --tag=ordering
@@ -59,36 +96,101 @@ jobs:
             ./run test api --tag=search
             ./run test api --tag=request
             ./run test api --tag=info
-            touch /tmp/core_api
+
+      - store_artifacts:
+          path: logs
+          destination: core-api-test-reports
+
+  api-field-tests:
+    docker:
+      - image: python:3.6-slim-stretch
+        environment:
+          LANG: C.UTF-8
+          PYTHONUNBUFFERED: 1
+
+      - image: postgres:9.4
+        environment:
+          POSTGRES_USER: circleci
+          POSTGRES_PASSWORD: circleci
+          POSTGRES_DB: circle-test
+
+    working_directory: /var/local
+
+    steps:
+      - run:
+          name: Install development tools
+          command: |
+            apt-get update
+            apt-get install -y git gcc
+
+      - checkout
+
+      - run:
+          name: Set CircleCI configuration
+          command: |
+            cp ./app/discovery/local_settings.circle.py ./app/discovery/local_settings.py
+
+      - run:
+          name: Install requirements
+          command: |
+            pip install --no-cache-dir -r ./requirements.txt
+            pip install --no-cache-dir -r ./requirements-dev.txt
+            ./scripts/init-webserver.sh /dev/stderr
 
       - run:
           name: Run API field tests
-          background: true
           command: |
             ./run test api --tag=field_test
-            touch /tmp/fields
+
+      - store_artifacts:
+          path: logs
+          destination: api-field-test-reports
+
+  api-values-tests:
+    docker:
+      - image: python:3.6-slim-stretch
+        environment:
+          LANG: C.UTF-8
+          PYTHONUNBUFFERED: 1
+
+      - image: postgres:9.4
+        environment:
+          POSTGRES_USER: circleci
+          POSTGRES_PASSWORD: circleci
+          POSTGRES_DB: circle-test
+
+    working_directory: /var/local
+
+    steps:
+      - run:
+          name: Install development tools
+          command: |
+            apt-get update
+            apt-get install -y git gcc
+
+      - checkout
+
+      - run:
+          name: Set CircleCI configuration
+          command: |
+            cp ./app/discovery/local_settings.circle.py ./app/discovery/local_settings.py
+
+      - run:
+          name: Install requirements
+          command: |
+            pip install --no-cache-dir -r ./requirements.txt
+            pip install --no-cache-dir -r ./requirements-dev.txt
+            ./scripts/init-webserver.sh /dev/stderr
 
       - run:
           name: Run API values tests
           background: true
           command: |
             ./run test api --tag=values_test
-            touch /tmp/values
-
-      - run:
-          name: Keepalive
-          command: |
-            while true
-            do
-              if [[ -f /tmp/components && -f /tmp/core_api && -f /tmp/fields && -f /tmp/values ]]
-              then
-                break
-              fi
-            done
 
       - store_artifacts:
           path: logs
-          destination: unit-test-reports
+          destination: api-values-test-reports
 
   acceptance-tests:
     docker:
@@ -247,26 +349,32 @@ workflows:
   version: 2
   test-and-deploy:
     jobs:
-      - unit-tests
+      - component-tests
+      - core-api-tests
+      - api-field-tests
+      - api-values-tests
       - acceptance-tests
       - deploy-dev:
           requires:
-            - unit-tests
+            - component-tests
+            - core-api-tests
+            - api-field-tests
+            - api-values-tests
             - acceptance-tests
           filters:
             branches:
               only: develop
       - deploy-prod:
           requires:
-            - unit-tests
+            - component-tests
+            - core-api-tests
+            - api-field-tests
+            - api-values-tests
             - acceptance-tests
           filters:
             branches:
               only: master
       - deploy-docs:
-          requires:
-            - unit-tests
-            - acceptance-tests
           filters:
             branches:
               only:
