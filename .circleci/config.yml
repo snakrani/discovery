@@ -40,13 +40,36 @@ jobs:
           command: |
             pip install --no-cache-dir -r ./requirements.txt
             pip install --no-cache-dir -r ./requirements-dev.txt
+            ./scripts/init-webserver.sh /dev/stderr
 
       - run:
-          name: Run unit tests
-          no_output_timeout: 2h
+          name: Run component tests
+          background: true
           command: |
-            ./scripts/init-webserver.sh /dev/stderr
-            ./run test --parallel=5 discovery api categories vendors contracts
+            ./run test --parallel=4 discovery categories vendors contracts
+
+      - run:
+          name: Run core API tests
+          background: true
+          command: |
+            ./run test api --tag=object
+            ./run test api --tag=ordering
+            ./run test api --tag=pagination
+            ./run test api --tag=search
+            ./run test api --tag=request
+            ./run test api --tag=info
+
+      - run:
+          name: Run API field tests
+          background: true
+          command: |
+            ./run test api --tag=field_test
+
+      - run:
+          name: Run API values tests
+          background: true
+          command: |
+            ./run test api --tag=values_test
 
       - store_artifacts:
           path: logs
