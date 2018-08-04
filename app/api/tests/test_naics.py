@@ -1,26 +1,35 @@
+from django.test import tag
+
 from test import cases as case
 from test import fixtures as data
 
 
+@tag('naics')
 class NaicsTest(case.APITestCase, metaclass = case.MetaAPISchema):
     
     fixtures = data.get_category_fixtures()
     schema = {
         'object': {
+            'tags': ('naics_object',),
             '&541614': ('code', 'exact', '541614'),
             '&541330': ('code', 'exact', '541330'),
             '&541840': ('code', 'exact', '541840'),
             '#77777777': (),
             '#ABCDEFG': ()
         },
-        'ordering': ('code', 'description'),
+        'ordering': {
+            'tags': ('naics_ordering',),
+            'fields': ('code', 'description')
+        },
         'pagination': {
+            'tags': ('naics_pagination',),
             '@no_args': {},
             '!page': {'page': 1000},
             '@count': {'count': 5},
             '@mixed': {'page': 4, 'count': 10}
         },
         'search': {
+            'tags': ('naics_search',),
             '@search1': ('description', 'regex', 'Water Supply and Irrigation Systems'),
             '*search2': ('code', 'exact', '541910'),
             '@search3': ('keywords__name', 'regex', 'Instructor Led Training'),
@@ -28,6 +37,7 @@ class NaicsTest(case.APITestCase, metaclass = case.MetaAPISchema):
         },
         'fields': {
             'code': {
+                'tags': ('naics_field', 'fuzzy_text'),
                 '*exact': '541330',
                 '*iexact': '541713',
                 '@in': ("541711", "238290", "561730"),
@@ -41,6 +51,7 @@ class NaicsTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '^(23|56)'
             },
             'description': {
+                'tags': ('naics_field', 'fuzzy_text'),
                 '@exact': 'Outdoor Advertising',
                 '@iexact': 'adhesive manufacturing',
                 '@in': ("Payroll Services", "Commissioning Services", "Testing Laboratories"),
@@ -54,6 +65,7 @@ class NaicsTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': 'similar\s+events'
             },
             'sin__code': {
+                'tags': ('naics_field', 'sin_field', 'fuzzy_text'),
                 '@exact': '100-03',
                 '@iexact': 'c871-202',
                 '@in': ("100-03", "520-14", "541-4G", "51-B36-2A"),
@@ -67,6 +79,7 @@ class NaicsTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '^(C87|51)'
             },
             'keywords__name': {
+                'tags': ('naics_field', 'keyword_field', 'fuzzy_text'),
                 '@exact': 'Cooking Equipment',
                 '@iexact': 'ancillary supplies and / or services',
                 '@in': ("Elemental Analyzers", "Energy Consulting Services", "Environmental Consulting Services"),
