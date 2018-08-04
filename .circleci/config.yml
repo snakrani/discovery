@@ -47,6 +47,7 @@ jobs:
           background: true
           command: |
             ./run test --parallel=4 discovery categories vendors contracts
+            touch /tmp/components
 
       - run:
           name: Run core API tests
@@ -58,18 +59,32 @@ jobs:
             ./run test api --tag=search
             ./run test api --tag=request
             ./run test api --tag=info
+            touch /tmp/core_api
 
       - run:
           name: Run API field tests
           background: true
           command: |
             ./run test api --tag=field_test
+            touch /tmp/fields
 
       - run:
           name: Run API values tests
           background: true
           command: |
             ./run test api --tag=values_test
+            touch /tmp/values
+
+      - run:
+          name: Keepalive
+          command: |
+            while true
+            do
+              if [[ -f /tmp/components && -f /tmp/core_api && -f /tmp/fields && -f /tmp/values ]]
+              then
+                break
+              fi
+            done
 
       - store_artifacts:
           path: logs
