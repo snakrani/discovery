@@ -184,7 +184,6 @@ jobs:
 
       - run:
           name: Run API values tests
-          background: true
           command: |
             ./run test api --tag=values_test
 
