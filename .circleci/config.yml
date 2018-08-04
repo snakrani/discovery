@@ -6,7 +6,7 @@
 #
 version: 2
 jobs:
-  component-tests:
+  ut-components:
     docker:
       - image: python:3.6-slim-stretch
         environment:
@@ -52,7 +52,7 @@ jobs:
           path: logs
           destination: component-test-reports
 
-  core-api-tests:
+  ut-core-api:
     docker:
       - image: python:3.6-slim-stretch
         environment:
@@ -103,7 +103,7 @@ jobs:
           path: logs
           destination: core-api-test-reports
 
-  api-field-tests:
+  ut-api-fields:
     docker:
       - image: python:3.6-slim-stretch
         environment:
@@ -149,7 +149,7 @@ jobs:
           path: logs
           destination: api-field-test-reports
 
-  api-values-tests:
+  ut-api-values:
     docker:
       - image: python:3.6-slim-stretch
         environment:
@@ -195,7 +195,7 @@ jobs:
           path: logs
           destination: api-values-test-reports
 
-  acceptance-tests:
+  at-all:
     docker:
       - image: python:3.6-slim-stretch
         environment:
@@ -251,6 +251,7 @@ jobs:
 
       - run:
           name: Run acceptance tests
+          no_output_timeout: 1h
           command: |
             ./scripts/wait-for-it.sh --host="localhost" --port=8080 --timeout=300
             ./run test --parallel=3 acceptance
@@ -259,7 +260,7 @@ jobs:
           path: logs
           destination: acceptance-test-reports
 
-  deploy-dev:
+  dep-dev:
     docker:
       - image: debian:stretch-slim
         environment:
@@ -286,7 +287,7 @@ jobs:
           command: |
             ./scripts/deploy-dev.sh
 
-  deploy-prod:
+  dep-prod:
     docker:
       - image: debian:stretch-slim
         environment:
@@ -313,7 +314,7 @@ jobs:
           command: |
             ./scripts/deploy-prod.sh
 
-  deploy-docs:
+  dep-docs:
     docker:
       - image: python:3.6-slim-stretch
         environment:
@@ -352,34 +353,34 @@ workflows:
   version: 2
   test-and-deploy:
     jobs:
-      - component-tests
-      - core-api-tests
-      - api-field-tests
-      - api-values-tests
-      - acceptance-tests
-      - deploy-dev:
+      - ut-components
+      - ut-core-api
+      - ut-api-fields
+      - ut-api-values
+      - at-all
+      - dep-dev:
           requires:
-            - component-tests
-            - core-api-tests
-            - api-field-tests
-            - api-values-tests
-            - acceptance-tests
+            - ut-components
+            - ut-core-api
+            - ut-api-fields
+            - ut-api-values
+            - at-all
           filters:
             branches:
               only: develop
-      - deploy-prod:
+      - dep-prod:
           requires:
-            - component-tests
-            - core-api-tests
-            - api-field-tests
-            - api-values-tests
-            - acceptance-tests
+            - ut-components
+            - ut-core-api
+            - ut-api-fields
+            - ut-api-values
+            - at-all
           filters:
             branches:
               only: master
-      - deploy-docs:
+      - dep-docs:
           requires:
-            - component-tests
+            - ut-components
           filters:
             branches:
               only:
