@@ -44,6 +44,7 @@ jobs:
 
       - run:
           name: Run component tests
+          no_output_timeout: 1h
           command: |
             ./run test --parallel=4 discovery categories vendors contracts
 
@@ -89,6 +90,7 @@ jobs:
 
       - run:
           name: Run core API tests
+          no_output_timeout: 1h
           command: |
             ./run test api --tag=object
             ./run test api --tag=ordering
@@ -139,6 +141,7 @@ jobs:
 
       - run:
           name: Run API field tests
+          no_output_timeout: 1h
           command: |
             ./run test api --tag=field_test
 
@@ -184,6 +187,7 @@ jobs:
 
       - run:
           name: Run API values tests
+          no_output_timeout: 1h
           command: |
             ./run test api --tag=values_test
 
@@ -374,6 +378,8 @@ workflows:
             branches:
               only: master
       - deploy-docs:
+          requires:
+            - component-tests
           filters:
             branches:
               only:
