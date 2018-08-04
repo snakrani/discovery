@@ -283,6 +283,9 @@ class MetaAPISchema(type):
     def _generate_object_tests(cls, object, tests):
         if object is None: return
         
+        tags = normalize_list(object.pop('tags', []))
+        tags.append('object')
+        
         index = 1
             
         for id, params in object.items():
@@ -290,22 +293,34 @@ class MetaAPISchema(type):
             method_name = "test_object_{}".format(index)
             
             tests[method_name] = cls._object_test_method(info, params)
+            tests[method_name].tags = tags
             index += 1
 
     @classmethod
     def _generate_ordering_tests(cls, ordering, tests):
         if ordering is None: return
-            
-        for field in normalize_list(ordering):
+        
+        fields = normalize_list(ordering['fields'])
+        tags = normalize_list(ordering.pop('tags', []))
+        tags.append('ordering')
+           
+        for field in fields:
+            asc_name = 'test_ordering_{}_asc'.format(field)
             info = {'field': field, 'order': 'asc'}
-            tests['test_ordering_{}_asc'.format(field)] = cls._ordering_test_method(info)
+            tests[asc_name] = cls._ordering_test_method(info)
+            tests[asc_name].tags = tags + ['asc_test']
             
+            desc_name = 'test_ordering_{}_desc'.format(field)
             info = {'field': field, 'order': 'desc'}
-            tests['test_ordering_{}_desc'.format(field)] = cls._ordering_test_method(info)
+            tests[desc_name] = cls._ordering_test_method(info)
+            tests[desc_name].tags = tags + ['desc_test']
 
     @classmethod    
     def _generate_pagination_tests(cls, pagination, tests):
         if pagination is None: return
+        
+        tags = normalize_list(pagination.pop('tags', []))
+        tags.append('pagination')
         
         index_map = {}
         
@@ -317,10 +332,14 @@ class MetaAPISchema(type):
             method_name = "test_pagination_{}_{}".format(lookup, index_map[lookup])
             
             tests[method_name] = cls._pagination_test_method(info, params)
+            tests[method_name].tags = tags
 
     @classmethod    
     def _generate_search_tests(cls, search, tests):
         if search is None: return
+        
+        tags = normalize_list(search.pop('tags', []))
+        tags.append('search')
         
         index_map = {}
         
@@ -332,6 +351,7 @@ class MetaAPISchema(type):
             method_name = "test_search_{}_{}".format(lookup, index_map[lookup])
             
             tests[method_name] = cls._search_test_method(info, params)
+            tests[method_name].tags = tags
             
     @classmethod        
     def _generate_field_tests(cls, fields, tests):   
@@ -341,7 +361,10 @@ class MetaAPISchema(type):
         
         for field, lookups in fields.items():
             field_info = cls._field_info(field)
-               
+            
+            tags = normalize_list(lookups.pop('tags', []))
+            tags.append('field')
+           
             for lookup, search_value in lookups.items():
                 info = cls._validation_info(lookup, '@')
                 lookup = info['lookup']
@@ -352,10 +375,15 @@ class MetaAPISchema(type):
                 if isinstance(search_value, (list, tuple, QuerySet)):
                     search_value = list(search_value)
                 
+                field_method_name = "test_field_{}_{}".format(id, index_map[id])
+                values_method_name = "test_field_values_{}_{}".format(id, index_map[id])
                 params = [search_value]
                 
-                tests["test_field_{}_{}".format(id, index_map[id])] = cls._field_test_method(field_info, info, params)
-                tests["test_field_values_{}_{}".format(id, index_map[id])] = cls._field_values_test_method(field_info, info, params)
+                tests[field_method_name] = cls._field_test_method(field_info, info, params)
+                tests[field_method_name].tags = tags + ['field_test']
+                
+                tests[values_method_name] = cls._field_values_test_method(field_info, info, params)
+                tests[values_method_name].tags = tags + ['values_test']
     
     @classmethod        
     def _generate_request_tests(cls, requests, tests): 
@@ -365,7 +393,11 @@ class MetaAPISchema(type):
             info = cls._validation_info(name, '@')
             method_name = "test_request_{}".format(info['lookup'])
             
+            tags = normalize_list(config.pop('tags', []))
+            tags.append('request')
+           
             tests[method_name] = cls._request_test_method(info, config)
+            tests[method_name].tags = tags
 
 
     @classmethod
