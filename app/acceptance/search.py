@@ -1210,7 +1210,7 @@ def generate_search_tests():
                 'i1|xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[6]/img': 'exists',
                 'i2|xpath://*[@id="pool_vendors"]/tbody/tr[10]/td[6]/img': 'exists',
                 'i3|xpath://*[@id="pool_vendors"]/tbody/tr[20]/td[6]/img': 'exists',
-                'i4|xpath://*[@id="pool_vendors"]/tbody/tr[29]/td[6]/img': 'exists'
+                'i4|xpath://*[@id="pool_vendors"]/tbody/tr[24]/td[6]/img': 'exists'
             },
             'setasides_hubz': {
                 'tags': ('setaside', 'shared_search', 'shared'),
@@ -1224,7 +1224,7 @@ def generate_search_tests():
                 'vendor_result_info': (5, 'results/csv/?setasides=XX'),
                 'vendor_table': (5, 'h_naics_results', 'desc'),
                 'i1|xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[7]/img': 'exists',
-                'i2|xpath://*[@id="pool_vendors"]/tbody/tr[3]/td[7]/img': 'exists'
+                'i2|xpath://*[@id="pool_vendors"]/tbody/tr[4]/td[7]/img': 'exists'
             },
             'setasides_sdvo': {
                 'tags': ('setaside', 'shared_search', 'shared'),
@@ -1235,11 +1235,11 @@ def generate_search_tests():
                 'pool': ('all', 34, 33, True),
                 'zone': ('', 6, False, False),
                 'setaside_filters': ('QF', 1, True),
-                'vendor_result_info': (36, 'results/csv/?setasides=QF'),
-                'vendor_table': (36, 'h_naics_results', 'desc'),
+                'vendor_result_info': (20, 'results/csv/?setasides=QF'),
+                'vendor_table': (20, 'h_naics_results', 'desc'),
                 'i1|xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[10]/img': 'exists',
                 'i2|xpath://*[@id="pool_vendors"]/tbody/tr[10]/td[10]/img': 'exists',
-                'i3|xpath://*[@id="pool_vendors"]/tbody/tr[24]/td[10]/img': 'exists'
+                'i3|xpath://*[@id="pool_vendors"]/tbody/tr[19]/td[10]/img': 'exists'
             },
             'setasides_wo': {
                 'tags': ('setaside', 'shared_search', 'shared'),
@@ -1254,7 +1254,8 @@ def generate_search_tests():
                 'vendor_table': (30, 'h_naics_results', 'desc'),
                 'i1|xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[8]/img': 'exists',
                 'i2|xpath://*[@id="pool_vendors"]/tbody/tr[10]/td[8]/img': 'exists',
-                'i3|xpath://*[@id="pool_vendors"]/tbody/tr[20]/td[8]/img': 'exists'
+                'i3|xpath://*[@id="pool_vendors"]/tbody/tr[20]/td[8]/img': 'exists',
+                'i4|xpath://*[@id="pool_vendors"]/tbody/tr[29]/td[8]/img': 'exists'
             },
             'setasides_vo': {
                 'tags': ('setaside', 'shared_search', 'shared'),
@@ -1269,7 +1270,7 @@ def generate_search_tests():
                 'vendor_table': (24, 'h_naics_results', 'desc'),
                 'i1|xpath://*[@id="pool_vendors"]/tbody/tr[2]/td[9]/img': 'exists',
                 'i2|xpath://*[@id="pool_vendors"]/tbody/tr[10]/td[9]/img': 'exists',
-                'i3|xpath://*[@id="pool_vendors"]/tbody/tr[20]/td[9]/img': 'exists'
+                'i3|xpath://*[@id="pool_vendors"]/tbody/tr[23]/td[9]/img': 'exists'
             },
             'setasides_sdb': {
                 'tags': ('setaside', 'shared_search', 'shared'),
