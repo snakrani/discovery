@@ -720,7 +720,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 'tags': ('contract_request',),
                 'params': {'psc_naics': '238220', 'ordering': 'date_signed'},
                 'tests': (
-                    ('date_signed', 'ordering', 'asc')
+                    ('date_signed', 'ordering', 'asc'),
                 )
             },
             '-r2': {
