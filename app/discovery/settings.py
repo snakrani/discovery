@@ -89,6 +89,11 @@ ALLOWED_HOSTS = [
 ]
 
 #
+# Testing configurations
+#
+TEST_RUNNER = 'test.runner.DiscoveryTestRunner'
+
+#
 # Database configurations
 #
 DATABASES = {}
