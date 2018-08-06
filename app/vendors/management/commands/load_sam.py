@@ -1,5 +1,6 @@
 from optparse import make_option
 from time import sleep
+from datetime import datetime
 
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
@@ -93,7 +94,8 @@ class Command(BaseCommand):
         order = []
         
         for update in SamLoad.objects.all():
-            vendors[update.vendor] = update.load_date
+            if update.load_time:
+                vendors[update.vendor.id] = update.load_time
             
         # Load all unloaded vendors first
         for vid in vendor_list:
@@ -187,8 +189,8 @@ class Command(BaseCommand):
 
             vendor.save()
             
-            sam_load, created = SamLoad.objects.get_or_create(vendor = vendor, load_date = timezone.now())
-            sam_load.load_date = timezone.now()
+            sam_load, created = SamLoad.objects.get_or_create(vendor = vendor)
+            sam_load.load_time = datetime.now()
             sam_load.save()
                       
             log_memory("Final vendor [ {} | {} ]".format(vendor.id, vendor.name))
