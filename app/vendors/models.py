@@ -77,4 +77,4 @@ class ContactEmail(models.Model):
 
 class SamLoad(models.Model):
     vendor = models.OneToOneField(Vendor, unique=True, null=True, on_delete=models.CASCADE)
-    load_date = models.DateField()
+    load_time = models.DateTimeField(null=True)
