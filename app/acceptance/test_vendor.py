@@ -520,7 +520,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'params': {'args': '053117149', 'test': 'true', 'naics': '561210'},
                 'action': ('#naics-code', 'select[561210]'),
                 'naics': ('561210', 15),
-                'membership_filters': (None, 1, 0, 0, {
+                'membership_filters': (None, 2, 0, 0, {
                     1: ("Jerry Tate\nJonathan Tate", "903-597-8040\n903-780-0703", "jerry.tate@rosemarkonline.com\njonathan.tate@rosemarkonline.com"),
                 }, {
                     1: ('SB',)
