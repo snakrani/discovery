@@ -521,9 +521,11 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'action': ('#naics-code', 'select[561210]'),
                 'naics': ('561210', 15),
                 'membership_filters': (None, 2, 0, 0, {
-                    1: ("Jerry Tate\nJonathan Tate", "903-597-8040\n903-780-0703", "jerry.tate@rosemarkonline.com\njonathan.tate@rosemarkonline.com"),
+                    1: ("Jonathan Tate", "903-780-0703", "jonathan.tate@rosemarkonline.com"),
+                    2: ("Jerry Tate\nJonathan Tate", "903-597-8040\n903-780-0703", "jerry.tate@rosemarkonline.com\njonathan.tate@rosemarkonline.com"),
                 }, {
-                    1: ('SB',)
+                    1: ('SB',),
+                    2: ('SB',)
                 }),
                 'vendor_sam': ('4/6/19',),
                 'vendor_info': ('BEN FITZGERALD REAL ESTATE', '053117149', '1TG18', '100', '$8,679,181'),
