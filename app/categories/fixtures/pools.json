@@ -8,7 +8,8 @@
     "vehicle": "BMO",
     "threshold": "$15 million",
     "naics": [
-      "238220"
+      "238220",
+      "561210"
     ]
   }
 },
@@ -21,7 +22,8 @@
     "vehicle": "BMO",
     "threshold": "$7.5 million",
     "naics": [
-      "531312"
+      "531312",
+      "561210"
     ]
   }
 },
@@ -34,7 +36,8 @@
     "vehicle": "BMO",
     "threshold": "$36.5 million",
     "naics": [
-      "236220"
+      "236220",
+      "561210"
     ]
   }
 },
@@ -47,7 +50,8 @@
     "vehicle": "BMO",
     "threshold": "$15 million",
     "naics": [
-      "541330"
+      "541330",
+      "561210"
     ]
   }
 },
@@ -60,7 +64,8 @@
     "vehicle": "BMO",
     "threshold": "$7.5 million",
     "naics": [
-      "541350"
+      "541350",
+      "561210"
     ]
   }
 },
@@ -86,6 +91,7 @@
     "vehicle": "BMO",
     "threshold": "$11 million",
     "naics": [
+      "561210",
       "561710"
     ]
   }
@@ -99,6 +105,7 @@
     "vehicle": "BMO",
     "threshold": "$38.5 million",
     "naics": [
+      "561210",
       "562111"
     ]
   }
@@ -112,6 +119,7 @@
     "vehicle": "BMO",
     "threshold": "$7.5 million",
     "naics": [
+      "561210",
       "561730"
     ]
   }
@@ -125,7 +133,8 @@
     "vehicle": "BMO",
     "threshold": "$15 million",
     "naics": [
-      "238220"
+      "238220",
+      "561210"
     ]
   }
 },
@@ -138,7 +147,8 @@
     "vehicle": "BMO",
     "threshold": "$7.5 million",
     "naics": [
-      "238290"
+      "238290",
+      "561210"
     ]
   }
 },
@@ -151,7 +161,8 @@
     "vehicle": "BMO",
     "threshold": "$15 million",
     "naics": [
-      "238210"
+      "238210",
+      "561210"
     ]
   }
 },
@@ -164,6 +175,7 @@
     "vehicle": "BMO",
     "threshold": "$18 million",
     "naics": [
+      "561210",
       "561720"
     ]
   }
@@ -177,6 +189,7 @@
     "vehicle": "BMO",
     "threshold": "$7.5 million",
     "naics": [
+      "561210",
       "561730"
     ]
   }
@@ -190,6 +203,7 @@
     "vehicle": "BMO",
     "threshold": "$20.5 million",
     "naics": [
+      "561210",
       "561621"
     ]
   }
@@ -203,7 +217,8 @@
     "vehicle": "BMO",
     "threshold": "$15 million",
     "naics": [
-      "238220"
+      "238220",
+      "561210"
     ]
   }
 },
@@ -216,7 +231,8 @@
     "vehicle": "BMO",
     "threshold": "$15 million",
     "naics": [
-      "238160"
+      "238160",
+      "561210"
     ]
   }
 },
@@ -229,7 +245,8 @@
     "vehicle": "BMO_SB",
     "threshold": "$15 million",
     "naics": [
-      "238220"
+      "238220",
+      "561210"
     ]
   }
 },
@@ -242,7 +259,8 @@
     "vehicle": "BMO_SB",
     "threshold": "$7.5 million",
     "naics": [
-      "531312"
+      "531312",
+      "561210"
     ]
   }
 },
@@ -255,7 +273,8 @@
     "vehicle": "BMO_SB",
     "threshold": "$36.5 million",
     "naics": [
-      "236220"
+      "236220",
+      "561210"
     ]
   }
 },
@@ -268,7 +287,8 @@
     "vehicle": "BMO_SB",
     "threshold": "$15 million",
     "naics": [
-      "541330"
+      "541330",
+      "561210"
     ]
   }
 },
@@ -281,7 +301,8 @@
     "vehicle": "BMO_SB",
     "threshold": "$7.5 million",
     "naics": [
-      "541350"
+      "541350",
+      "561210"
     ]
   }
 },
@@ -307,6 +328,7 @@
     "vehicle": "BMO_SB",
     "threshold": "$11 million",
     "naics": [
+      "561210",
       "561710"
     ]
   }
@@ -320,6 +342,7 @@
     "vehicle": "BMO_SB",
     "threshold": "$38.5 million",
     "naics": [
+      "561210",
       "562111"
     ]
   }
@@ -333,6 +356,7 @@
     "vehicle": "BMO_SB",
     "threshold": "$7.5 million",
     "naics": [
+      "561210",
       "561730"
     ]
   }
@@ -346,7 +370,8 @@
     "vehicle": "BMO_SB",
     "threshold": "$15 million",
     "naics": [
-      "238220"
+      "238220",
+      "561210"
     ]
   }
 },
@@ -359,7 +384,8 @@
     "vehicle": "BMO_SB",
     "threshold": "$7.5 million",
     "naics": [
-      "238290"
+      "238290",
+      "561210"
     ]
   }
 },
@@ -372,7 +398,8 @@
     "vehicle": "BMO_SB",
     "threshold": "$15 million",
     "naics": [
-      "238210"
+      "238210",
+      "561210"
     ]
   }
 },
@@ -385,6 +412,7 @@
     "vehicle": "BMO_SB",
     "threshold": "$18 million",
     "naics": [
+      "561210",
       "561720"
     ]
   }
@@ -398,6 +426,7 @@
     "vehicle": "BMO_SB",
     "threshold": "$7.5 million",
     "naics": [
+      "561210",
       "561730"
     ]
   }
@@ -411,6 +440,7 @@
     "vehicle": "BMO_SB",
     "threshold": "$20.5 million",
     "naics": [
+      "561210",
       "561621"
     ]
   }
@@ -424,7 +454,8 @@
     "vehicle": "BMO_SB",
     "threshold": "$15 million",
     "naics": [
-      "238220"
+      "238220",
+      "561210"
     ]
   }
 },
@@ -437,7 +468,8 @@
     "vehicle": "BMO_SB",
     "threshold": "$15 million",
     "naics": [
-      "238160"
+      "238160",
+      "561210"
     ]
   }
 },
