@@ -33,7 +33,7 @@ class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
                 'tags': ('pool', 'link', 'bmo_sb'),
                 'params': {'vehicle': 'BMO_SB', 'pools': 'BMO_SB_1'},
                 'action': ('#link_BMO_SB_1', 'click'),
-                'naics': ('all', 2, True),
+                'naics': ('all', 3, True),
                 'vehicle': ('BMO_SB', 8, True),
                 'pool': ('BMO_SB_1', 17, 1, True),
                 'zone': ('', 6, True, True),
@@ -94,7 +94,7 @@ class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
                 'vendor_table': (10, 'h_naics_results', 'desc', ('Prev', '1'), '4')
             }
         }
-    })
+    }, 'url')
     
     def initialize(self):
         self.path = 'results'

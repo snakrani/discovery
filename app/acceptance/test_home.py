@@ -44,4 +44,4 @@ class HomeTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
             'link_text:Check out our code on GitHub': ('link__equal', 'https://github.com/PSHCDevOps/discovery'),
             'span.cta_email_address': ('text__equal', 'pshc-dev@gsa.gov')
         } 
-    })
+    }, 'url')
