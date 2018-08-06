@@ -68,7 +68,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'tags': ('naics', 'bmo'),
                 'params': {'args': '808649888', 'test': 'true', 'naics': '238290'},
                 'action': ('#naics-code', 'select[238290]'),
-                'naics': ('238290', 5),
+                'naics': ('238290', 6),
                 'membership_filters': (None, 1, 0, 0, {
                     1: ('Ian Hada', '202-625-4239', 'Ianh@donohoe.com')
                 }),
@@ -128,7 +128,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'tags': ('naics', 'bmo'),
                 'params': {'args': '793374034', 'test': 'true', 'naics': '561621'},
                 'action': ('#naics-code', 'select[561621]'),
-                'naics': ('561621', 11),
+                'naics': ('561621', 12),
                 'membership_filters': (None, 1, 0, 0, {
                     1: ('John Civitelli', '301-596-2440', 'jcivitelli@lbbassociates.com')
                 }),
@@ -143,7 +143,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'tags': ('naics', 'bmo'),
                 'params': {'args': '079859134', 'test': 'true', 'naics': '238220'},
                 'action': ('#naics-code', 'select[238220]'),
-                'naics': ('238220', 11),
+                'naics': ('238220', 12),
                 'membership_filters': (None, 1, 0, 0, {
                     1: ('Doug Rowles', '678-525-0722', 'doug.rowles@am.jll.com')
                 }),
@@ -266,7 +266,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'tags': ('naics', 'bmo'),
                 'params': {'args': '793374034', 'test': 'true', 'naics': '562111'},
                 'action': ('#naics-code', 'select[562111]'),
-                'naics': ('562111', 11),
+                'naics': ('562111', 12),
                 'membership_filters': (None, 1, 0, 0, {
                     1: ('John Civitelli', '301-596-2440', 'jcivitelli@lbbassociates.com')
                 }),
@@ -313,7 +313,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'tags': ('naics', 'bmo_sb'),
                 'params': {'args': '078650478', 'test': 'true', 'naics': '238220'},
                 'action': ('#naics-code', 'select[238220]'),
-                'naics': ('238220', 8),
+                'naics': ('238220', 9),
                 'membership_filters': (None, 2, 0, 0, {
                     1: ('Katherine Scott', '907-771-5070', 'Katherine.Scott@Chenega.com')
                 }, {
@@ -347,7 +347,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'tags': ('naics', 'bmo_sb'),
                 'params': {'args': '090967704', 'test': 'true', 'naics': '238210'},
                 'action': ('#naics-code', 'select[238210]'),
-                'naics': ('238210', 8),
+                'naics': ('238210', 9),
                 'membership_filters': (None, 3, 0, 0, {
                     1: ('Richard Cooke', '909-625-6900', 'Richard.cooke@acepex.com'),
                     2: ("Henry Rhee\nRichard Cooke", '909-625-6900', "Henry.rhee@acepex.com\nRichard.cooke@acepex.com")
@@ -400,7 +400,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'tags': ('naics', 'bmo_sb'),
                 'params': {'args': '052648261', 'test': 'true', 'naics': '561621'},
                 'action': ('#naics-code', 'select[561621]'),
-                'naics': ('561621', 3),
+                'naics': ('561621', 4),
                 'membership_filters': (None, 1, 0, 0, {
                     1: ('Weedon Gallagher', '410-379-0080', 'wgallagher@ctsi-fm.com'),
                 }, {
@@ -417,7 +417,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'tags': ('naics', 'bmo_sb'),
                 'params': {'args': '610940632', 'test': 'true', 'naics': '238220'},
                 'action': ('#naics-code', 'select[238220]'),
-                'naics': ('238220', 3),
+                'naics': ('238220', 4),
                 'membership_filters': (None, 1, 0, 0, {
                     1: ('Burnie Peters', '703-963-5476', 'burnie@b3enterprisesllc.com'),
                 }, {
@@ -434,7 +434,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'tags': ('naics', 'bmo_sb'),
                 'params': {'args': '884999491', 'test': 'true', 'naics': '238160'},
                 'action': ('#naics-code', 'select[238160]'),
-                'naics': ('238160', 4),
+                'naics': ('238160', 5),
                 'membership_filters': (None, 1, 0, 0, {
                     1: ('Jill Workman', '931-552-7044', 'jworkman@facsvcs.com'),
                 }, {
@@ -451,7 +451,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'tags': ('naics', 'bmo_sb'),
                 'params': {'args': '790993252', 'test': 'true', 'naics': '531312'},
                 'action': ('#naics-code', 'select[531312]'),
-                'naics': ('531312', 4),
+                'naics': ('531312', 5),
                 'membership_filters': (None, 1, 0, 0, {
                     1: ('Charles Quinlan', '480-245-6730', 'Chuck.quinlan@koyitlotsina.com'),
                 }, {
@@ -520,10 +520,12 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'params': {'args': '053117149', 'test': 'true', 'naics': '561210'},
                 'action': ('#naics-code', 'select[561210]'),
                 'naics': ('561210', 15),
-                'membership_filters': (None, 1, 0, 0, {
-                    1: ("Jerry Tate\nJonathan Tate", "903-597-8040\n903-780-0703", "jerry.tate@rosemarkonline.com\njonathan.tate@rosemarkonline.com"),
+                'membership_filters': (None, 2, 0, 0, {
+                    1: ("Jonathan Tate", "903-780-0703", "jonathan.tate@rosemarkonline.com"),
+                    2: ("Jerry Tate\nJonathan Tate", "903-597-8040\n903-780-0703", "jerry.tate@rosemarkonline.com\njonathan.tate@rosemarkonline.com"),
                 }, {
-                    1: ('SB',)
+                    1: ('SB',),
+                    2: ('SB',)
                 }),
                 'vendor_sam': ('4/6/19',),
                 'vendor_info': ('BEN FITZGERALD REAL ESTATE', '053117149', '1TG18', '100', '$8,679,181'),
