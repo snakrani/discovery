@@ -1174,7 +1174,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'contract_table': (3, 'h_date_signed', 'desc', ('Prev', '1'), '4'),
             }
         }
-    }, 'url')
+    })
     
     def initialize(self):
         self.path = 'vendor'
