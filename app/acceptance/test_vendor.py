@@ -10,7 +10,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
  
     schema = generate_schema({
         'header': {
-            'tags': ('title',),
+            'tags': ('info', 'title'),
             'params': {
                 'args': '926451519'
             },
