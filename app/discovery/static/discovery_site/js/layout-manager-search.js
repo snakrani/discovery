@@ -117,12 +117,13 @@ LayoutManager.renderVendor = function(vendor, qs) {
     $vendorRow.append($('<td class="naics_results">' + vendor.number_of_contracts + '</td>'));
 
     // Vehicle memberships
+    var vehicleMap = DataManager.getVehicleMap();
     var vendorPools = DataManager.vendorPools(vendor);
     var renderedPools = [];
 
     for (var index = 0; index < vendorPools.length; index++) {
         var vehicleId = vendorPools[index];
-        renderedPools.push('<a href="/results/' + qs + '&vehicle=' + vehicleId + '" class="link_style">' + DataManager.getVehicleMap()[vehicleId].title + '</a>');
+        renderedPools.push(vehicleMap[vehicleId].title);
     }
     $vendorRow.append($('<td class="vendor_pools">' + renderedPools.join(', ') + '</td>'));
 
