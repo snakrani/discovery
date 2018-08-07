@@ -41,18 +41,6 @@ class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
                 'vendor_result_info': (10, 'results/csv/?vehicle=BMO_SB&pools=BMO_SB_1&'),
                 'vendor_table': (10, 'h_naics_results', 'desc')
             },
-            'vendor_vehicle_links': {
-                'tags': ('vehicle', 'link', 'pss'),
-                'params': {'vehicle': 'PSS'},
-                'action': ('xpath://*[@id="pool_vendors"]/tbody/tr[21]/td[3]/a[1]', 'click'),
-                'naics': ('all', 58, True),
-                'vehicle': ('PSS', 8, True),
-                'pool': ('', 7, 7, True),
-                'zone': ('', 6, False, False),
-                'setaside_filters': (None, 0, True),
-                'vendor_result_info': (65, 'results/csv/?vehicle=PSS&'),
-                'vendor_table': (50, 'h_naics_results', 'desc', ('Prev', '1'), '2')
-            }, 
             'sorting': {
                 'tags': ('sort',),
                 'params': {'ordering': 'name'},

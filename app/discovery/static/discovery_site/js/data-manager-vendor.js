@@ -79,6 +79,7 @@ DataManager.getMembershipMap = function() {
 
         if (!(membership.piid in membershipMap)) {
             membershipMap[membership.piid] = {
+                'piid': membership.piid,
                 'vehicleIds': [],
                 'vehicles': [],
                 'pools': [],
@@ -148,9 +149,11 @@ DataManager.getMembershipName = function(membershipInfo) {
         return Number(a) - Number(b);
     });
 
-    // Vehicle - Pool - Zone
+    // Vehicle - PIID - Pool - Zone
     membershipName = '<div class="membership_vehicles">' + membershipInfo.vehicles.join(', ') + '</div>'
+        + '<div class="membership_piid"><span class="admin_label">Contract number:</span> ' + membershipInfo.piid + '</div>'
         + '<div class="membership_pools"><span class="admin_label">Service category:</span> ' + membershipInfo.pools.join(', ') + '</div>';
+
     if (membershipInfo.zones.length > 0) {
         membershipName += '<div class="membership_zones"><span class="admin_label">Zone:</span> ' + membershipInfo.zones.join(', ') + '</div>';
     }

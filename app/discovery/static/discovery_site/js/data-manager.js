@@ -10,37 +10,44 @@ var DataManager = {
         "OASIS_SB": {
             "title": "OASIS Small Business",
             "sb": true,
-            "pool_numeric": false
+            "pool_numeric": false,
+            "display_number": true
         },
         "OASIS": {
             "title": "OASIS Unrestricted",
             "sb": false,
-            "pool_numeric": false
+            "pool_numeric": false,
+            "display_number": true
         },
         "HCATS_SB": {
             "title": "HCATS Small Business",
             "sb": true,
-            "pool_numeric": true
+            "pool_numeric": true,
+            "display_number": false
         },
         "HCATS": {
             "title": "HCATS Unrestricted",
             "sb": false,
-            "pool_numeric": true
+            "pool_numeric": true,
+            "display_number": false
         },
         "BMO_SB": {
             "title": "BMO Small Business",
             "sb": true,
-            "pool_numeric": true
+            "pool_numeric": true,
+            "display_number": false
         },
         "BMO": {
             "title": "BMO Unrestricted",
             "sb": false,
-            "pool_numeric": true
+            "pool_numeric": true,
+            "display_number": false
         },
         "PSS": {
             "title": "Professional Services Schedule",
             "sb": true,
-            "pool_numeric": false
+            "pool_numeric": false,
+            "display_number": true
         }
     },
 
