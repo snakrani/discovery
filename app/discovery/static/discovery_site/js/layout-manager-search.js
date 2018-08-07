@@ -16,19 +16,29 @@ LayoutManager.preprocessors.index = function() {
 };
 
 LayoutManager.renderPoolInfo = function() {
+    var vehicleMap = DataManager.getVehicleMap();
     var vehiclePools = DataManager.getVehiclePools();
     var pools = DataManager.getSortedPools(DataManager.getPools(), Object.keys(vehiclePools));
     var poolNames = [];
 
     for (var index = 0; index < pools.length; index++) {
         var poolData = vehiclePools[pools[index]];
+        var vehicleInfo = vehicleMap[poolData.vehicle];
+        var poolName;
+
+        if (vehicleInfo.display_number) {
+            poolName = '<span class="vehicle">' + poolData.vehicle.split('_').join(' ') + " " + poolData.number + ':</span><span class="title">' + poolData.name + '</span>';
+        }
+        else {
+            poolName = '<span class="vehicle">' + poolData.vehicle.split('_').join(' ') + ':</span><span class="title">' + poolData.name + '</span>';
+        }
 
         if (pools.length > 1) {
             var url = DataManager.getURL({'vehicle': poolData.vehicle, 'pools': poolData.id});
-            poolNames.push('<div class="pool"><div class="spacer"/><a id="link_' + poolData.id + '" class="pool_filter_link" href="' + url + '"><span class="vehicle">' + poolData.vehicle.split('_').join(' ') + " " + poolData.number + ':</span><span class="title">' + poolData.name + '</span></a></div>');
+            poolNames.push('<div class="pool"><div class="spacer"/><a id="link_' + poolData.id + '" class="pool_filter_link" href="' + url + '">' + poolName + '</a></div>');
         }
         else {
-            poolNames.push('<div class="pool"><div class="spacer"/><span class="vehicle">' + poolData.vehicle.split('_').join(' ') + " " + poolData.number + ':</span><span class="title">' + poolData.name + '</span></div>');
+            poolNames.push('<div class="pool"><div class="spacer"/>' + poolName + '</div>');
         }
     }
     $(".results_pool_names").html(poolNames.join(''));
