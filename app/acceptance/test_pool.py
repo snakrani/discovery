@@ -14,7 +14,7 @@ class PoolTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
             'search': generate_search_tests()
         },
         'header': {
-            'tags': ('title',),
+            'tags': ('info', 'title'),
             'wait': 'complete',
             'Results - Discovery': 'title'
         },

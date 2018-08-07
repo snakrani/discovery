@@ -14,12 +14,12 @@ class HomeTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
             'search': generate_search_tests()
         },
         'header': {
-            'tags': ('title',),
+            'tags': ('info', 'title'),
             'wait': 'complete',
             'Discovery': 'title'
         },
         'vehicle_info_display': {
-            'tags': ('info',),
+            'tags': ('info', 'collapsible_list', 'oasis', 'bmo', 'hcats', 'pss'),
             'h1.vehicle span': ('has_class', 'arrow-d'),
             'xpath://*[@id="discovery_vehicles"]/h1[1]': ('text__equal', 'One Acquisition Solution for Integrated Services (OASIS)'),
             'xpath://*[@id="discovery_vehicles"]/h1[1]/span': ('has_class', 'arrow-d'),
@@ -31,15 +31,15 @@ class HomeTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema):
             'xpath://*[@id="discovery_vehicles"]/h1[4]/span': ('has_class', 'arrow-d')
         },
         'sam_load_date': {
-            'tags': ('info',),
+            'tags': ('info', 'date'),
             '#data_source_date_sam': ('text__matches', r'^[\d]*/[\d]*/[\d]*$')
         },
         'fpds_load_date': {
-            'tags': ('info',),
+            'tags': ('info', 'date'),
             '#data_source_date_fpds': ('text__matches', r'^[\d]*/[\d]*/[\d]*$')
         },
         'footer': {
-            'tags': ('info',),
+            'tags': ('info', 'footer'),
             'link_text:OASIS Program Home': ('link__equal', 'http://www.gsa.gov/oasis'),
             'link_text:Check out our code on GitHub': ('link__equal', 'https://github.com/PSHCDevOps/discovery'),
             'span.cta_email_address': ('text__equal', 'pshc-dev@gsa.gov')
