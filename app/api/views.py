@@ -43,7 +43,11 @@ class DiscoveryReadOnlyModelViewSet(
         
     def list(self, request, *args, **kwargs):
         self.init_cache(request)
-        return super(DiscoveryReadOnlyModelViewSet, self).list(request, *args, **kwargs)
+        
+        try:
+            return super(DiscoveryReadOnlyModelViewSet, self).list(request, *args, **kwargs)
+        except AssertionError:
+            return Response({'count': 0, 'previous': None, 'next': None, 'results': []})
         
     def retrieve(self, request, *args, **kwargs):
         self.init_cache(request)
@@ -69,7 +73,7 @@ class DiscoveryReadOnlyModelViewSet(
             ('count', len(values)),
             ('results', values)
         ]))
-    
+   
 
 class NaicsViewSet(DiscoveryReadOnlyModelViewSet):
     """
