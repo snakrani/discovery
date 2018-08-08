@@ -388,6 +388,8 @@ CSP_IMG_SRC = ("'self'", 'www.google-analytics.com')
 CSP_FONT_SRC = ("'self'", 'fonts.gstatic.com')
 CSP_OBJECT_SRC = ("'none'",)
 
+SECURE_BROWSER_XSS_FILTER = True
+
 
 #-------------------------------------------------------------------------------
 #
