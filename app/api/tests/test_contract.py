@@ -582,34 +582,6 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': 'Services$',
                 '@iregex': 'apprentice(ship)?'
             },
-            'vendor__pools__pool__naics__sin__code': {
-                'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'naics_field', 'sin_field', 'fuzzy_text'),
-                '@exact': '100-03',
-                '@iexact': 'c871-202',
-                '@in': ("100-03", "520-14", "541-4G", "51-B36-2A"),
-                '@contains': '4B',
-                '@icontains': '-4b',
-                '@startswith': '51',
-                '@istartswith': 'c132',
-                '@endswith': '03',
-                '@iendswith': '2a',
-                '@regex': '[A-Z]\d+\-\d+$',
-                '@iregex': '^(C87|51)'
-            },
-            'vendor__pools__pool__naics__keywords__name': {
-                'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'naics_field', 'keyword_field', 'fuzzy_text'),
-                '@exact': 'Cooking Equipment',
-                '@iexact': 'ancillary supplies and / or services',
-                '@in': ("Elemental Analyzers", "Energy Consulting Services", "Environmental Consulting Services"),
-                '@contains': 'Support',
-                '@icontains': 'support',
-                '@startswith': 'Marine',
-                '@istartswith': 'edu',
-                '@endswith': 'Services',
-                '@iendswith': 'services',
-                '@regex': '(Training|Consulting)',
-                '@iregex': '^(vocational|strategic)'
-            },
             'vendor__pools__setasides__code': {
                 'tags': ('contract_field', 'vendor_field', 'membership_field', 'setaside_field', 'token_text'),
                 '@exact': 'QF',
