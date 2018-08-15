@@ -323,19 +323,24 @@ h4.data {
 }
 
 .select2-container--default .select2-selection--multiple {
+    padding-right: 5px;
     background: #fff url(../../images/add.png);
     background-size: 15px 15px;
     background-repeat: no-repeat;
-    background-position: 97.5%;
+    background-position: right 60%;
+    background-origin: content-box;
     cursor: pointer;
 }
 
 .select2-container .select2-selection--multiple .select2-selection__rendered {
     white-space: normal;
+    margin-right: 0;
+    padding-right: 0;
 }
 
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
     width: 85%;
+    min-height: 38px;
     padding: 5px;
     background-color: #efefff;
     vertical-align: top;
@@ -356,7 +361,7 @@ h4.data {
 
 .select2-container--default .select2-selection--multiple .select2-selection__clear {
     width: 15px;
-    margin: 0;
+    margin: 0 0 5px 0;
     padding: 0;
     background: url(../../images/remove.png);
     background-size: 15px 15px;
@@ -365,6 +370,7 @@ h4.data {
     text-indent: 100%;
     white-space: nowrap;
     overflow: hidden;
+    display: block;
 }
 
 .search_text_style {
