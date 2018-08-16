@@ -102,7 +102,7 @@ class BaseValidator(object):
                         pass
                     
                 if not success:
-                    raise self._wrap_error(AssertionError("No items in value: ({}) {} ({})".format(data_value, op, value))) 
+                    raise AssertionError("No items in value: ({}) {} ({})".format(data_value, op, value))
             
             elif data_value is not None:
                 _compare(op, data_value, value, **params)
@@ -436,8 +436,8 @@ class APIResponseValidator(ResponseValidator):
         if not dir in ['asc', 'desc']:
             raise Exception("Ordering direction ({}) not supported".format(dir))
         
-        for i in range(0, len(self.resp.data['results']) - 1):
-            data_value = get_nested_value(self.resp.data['results'][i], resp_value)
+        for index in range(0, len(self.resp.data['results'])):
+            data_value = get_nested_value(self.resp.data['results'][index], resp_value)
             
             if data_value is not None:
                 if prev_value is not None:
@@ -481,7 +481,7 @@ class APIResponseValidator(ResponseValidator):
     # Validation
     
     def validate(self, validate_function):
-        for i in range(0, len(self.resp.data['results']) - 1):
+        for i in range(0, len(self.resp.data['results'])):
             validate_function(self, ['results', i])
     
     def validate_list(self):
@@ -491,7 +491,7 @@ class APIResponseValidator(ResponseValidator):
         self.test.validate_object(self)
 
             
-    def map(self, validator, base_key, lookup_keys, value, **params):
+    def map(self, validator, base_key, lookup_keys, value = None, **params):
         lookup_keys = normalize_list(lookup_keys)
         data_pool = self.get_data_value(base_key)
         success = False
@@ -554,6 +554,10 @@ class AcceptanceResponseValidator(BaseValidator):
             error.args = ("{}\nLocator: {}\nRequestURL: {}".format(error.args[0], self.locator, self.url),)
             
         raise error
+    
+    
+    def screenshot(self, name, action):
+        self.driver.save_screenshot("{}/{}_{}-{}.png".format(self.test.screenshot_dir, self.driver.capabilities['browserName'], name, action))
     
     
     # Locators
@@ -890,7 +894,7 @@ class AcceptanceResponseValidator(BaseValidator):
         else:
             getattr(self.element(elem), event)()
             
-        time.sleep(1)
+        time.sleep(0.5)
     
     
     # Validation
@@ -926,6 +930,35 @@ class AcceptanceResponseValidator(BaseValidator):
 
     def count(self, elems, count):
         self.equal(len(self.elements(elems)), count)
+ 
+       
+    def select__any(self, elem, values):
+        select = Select(self.element(elem))
+        options = []
+        
+        for option in select.all_selected_options:
+            options.append(self.attr(option, 'value'))
+        
+        self.any(options, values)
+        
+    def select__all(self, elem, values):
+        select = Select(self.element(elem))
+        options = []
+        
+        for option in select.all_selected_options:
+            options.append(self.attr(option, 'value'))
+        
+        self.all(options, values)
+        
+    def select__none(self, elem, values):
+        select = Select(self.element(elem))
+        options = []
+        
+        for option in select.all_selected_options:
+            options.append(self.attr(option, 'value'))
+        
+        self.none(options, values)
+          
         
     def value__any(self, elems, values):
         selected_values = []

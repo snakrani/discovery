@@ -25,5 +25,5 @@ class Command(BaseCommand):
         call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/pools.json'))
         
         print('> Loading zones')
+        call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/states.json'))
         call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/zones.json'))
-        call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/zonestates.json'))          

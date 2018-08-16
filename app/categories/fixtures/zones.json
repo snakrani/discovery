@@ -2,31 +2,74 @@
 {
   "model": "categories.zone",
   "pk": 1,
-  "fields": {}
+  "fields": {
+    "states": [
+      "NJ",
+      "VA",
+      "MD",
+      "NY",
+      "DE",
+      "PA"
+    ]
+  }
 },
 {
   "model": "categories.zone",
   "pk": 2,
-  "fields": {}
+  "fields": {
+    "states": [
+      "RI",
+      "ME",
+      "MA",
+      "VT",
+      "NH",
+      "CT"
+    ]
+  }
 },
 {
   "model": "categories.zone",
   "pk": 3,
-  "fields": {}
+  "fields": {
+    "states": [
+      "FL",
+      "GA",
+      "NC",
+      "SC"
+    ]
+  }
 },
 {
   "model": "categories.zone",
   "pk": 4,
-  "fields": {}
+  "fields": {
+    "states": [
+      "OK",
+      "TX"
+    ]
+  }
 },
 {
   "model": "categories.zone",
   "pk": 5,
-  "fields": {}
+  "fields": {
+    "states": [
+      "CA",
+      "NV"
+    ]
+  }
 },
 {
   "model": "categories.zone",
   "pk": 6,
-  "fields": {}
+  "fields": {
+    "states": [
+      "MO",
+      "KS",
+      "IL",
+      "IA",
+      "NE"
+    ]
+  }
 }
 ]

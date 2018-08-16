@@ -3,12 +3,13 @@
   "model": "categories.pool",
   "pk": "BMO_1",
   "fields": {
-    "name": "HVAC Mainentance",
+    "name": "HVAC Maintenance",
     "number": "1",
     "vehicle": "BMO",
     "threshold": "$15 million",
     "naics": [
-      "238220"
+      "238220",
+      "561210"
     ]
   }
 },
@@ -21,7 +22,8 @@
     "vehicle": "BMO",
     "threshold": "$7.5 million",
     "naics": [
-      "531312"
+      "531312",
+      "561210"
     ]
   }
 },
@@ -34,7 +36,8 @@
     "vehicle": "BMO",
     "threshold": "$36.5 million",
     "naics": [
-      "236220"
+      "236220",
+      "561210"
     ]
   }
 },
@@ -47,7 +50,8 @@
     "vehicle": "BMO",
     "threshold": "$15 million",
     "naics": [
-      "541330"
+      "541330",
+      "561210"
     ]
   }
 },
@@ -60,7 +64,8 @@
     "vehicle": "BMO",
     "threshold": "$7.5 million",
     "naics": [
-      "541350"
+      "541350",
+      "561210"
     ]
   }
 },
@@ -86,6 +91,7 @@
     "vehicle": "BMO",
     "threshold": "$11 million",
     "naics": [
+      "561210",
       "561710"
     ]
   }
@@ -99,6 +105,7 @@
     "vehicle": "BMO",
     "threshold": "$38.5 million",
     "naics": [
+      "561210",
       "562111"
     ]
   }
@@ -112,6 +119,7 @@
     "vehicle": "BMO",
     "threshold": "$7.5 million",
     "naics": [
+      "561210",
       "561730"
     ]
   }
@@ -125,7 +133,8 @@
     "vehicle": "BMO",
     "threshold": "$15 million",
     "naics": [
-      "238220"
+      "238220",
+      "561210"
     ]
   }
 },
@@ -138,7 +147,8 @@
     "vehicle": "BMO",
     "threshold": "$7.5 million",
     "naics": [
-      "238290"
+      "238290",
+      "561210"
     ]
   }
 },
@@ -151,7 +161,8 @@
     "vehicle": "BMO",
     "threshold": "$15 million",
     "naics": [
-      "238210"
+      "238210",
+      "561210"
     ]
   }
 },
@@ -164,6 +175,7 @@
     "vehicle": "BMO",
     "threshold": "$18 million",
     "naics": [
+      "561210",
       "561720"
     ]
   }
@@ -177,6 +189,7 @@
     "vehicle": "BMO",
     "threshold": "$7.5 million",
     "naics": [
+      "561210",
       "561730"
     ]
   }
@@ -190,6 +203,7 @@
     "vehicle": "BMO",
     "threshold": "$20.5 million",
     "naics": [
+      "561210",
       "561621"
     ]
   }
@@ -203,7 +217,8 @@
     "vehicle": "BMO",
     "threshold": "$15 million",
     "naics": [
-      "238220"
+      "238220",
+      "561210"
     ]
   }
 },
@@ -216,7 +231,8 @@
     "vehicle": "BMO",
     "threshold": "$15 million",
     "naics": [
-      "238160"
+      "238160",
+      "561210"
     ]
   }
 },
@@ -229,7 +245,8 @@
     "vehicle": "BMO_SB",
     "threshold": "$15 million",
     "naics": [
-      "238220"
+      "238220",
+      "561210"
     ]
   }
 },
@@ -242,7 +259,8 @@
     "vehicle": "BMO_SB",
     "threshold": "$7.5 million",
     "naics": [
-      "531312"
+      "531312",
+      "561210"
     ]
   }
 },
@@ -255,7 +273,8 @@
     "vehicle": "BMO_SB",
     "threshold": "$36.5 million",
     "naics": [
-      "236220"
+      "236220",
+      "561210"
     ]
   }
 },
@@ -268,7 +287,8 @@
     "vehicle": "BMO_SB",
     "threshold": "$15 million",
     "naics": [
-      "541330"
+      "541330",
+      "561210"
     ]
   }
 },
@@ -281,7 +301,8 @@
     "vehicle": "BMO_SB",
     "threshold": "$7.5 million",
     "naics": [
-      "541350"
+      "541350",
+      "561210"
     ]
   }
 },
@@ -307,6 +328,7 @@
     "vehicle": "BMO_SB",
     "threshold": "$11 million",
     "naics": [
+      "561210",
       "561710"
     ]
   }
@@ -320,6 +342,7 @@
     "vehicle": "BMO_SB",
     "threshold": "$38.5 million",
     "naics": [
+      "561210",
       "562111"
     ]
   }
@@ -333,6 +356,7 @@
     "vehicle": "BMO_SB",
     "threshold": "$7.5 million",
     "naics": [
+      "561210",
       "561730"
     ]
   }
@@ -346,7 +370,8 @@
     "vehicle": "BMO_SB",
     "threshold": "$15 million",
     "naics": [
-      "238220"
+      "238220",
+      "561210"
     ]
   }
 },
@@ -359,7 +384,8 @@
     "vehicle": "BMO_SB",
     "threshold": "$7.5 million",
     "naics": [
-      "238290"
+      "238290",
+      "561210"
     ]
   }
 },
@@ -372,7 +398,8 @@
     "vehicle": "BMO_SB",
     "threshold": "$15 million",
     "naics": [
-      "238210"
+      "238210",
+      "561210"
     ]
   }
 },
@@ -385,6 +412,7 @@
     "vehicle": "BMO_SB",
     "threshold": "$18 million",
     "naics": [
+      "561210",
       "561720"
     ]
   }
@@ -398,6 +426,7 @@
     "vehicle": "BMO_SB",
     "threshold": "$7.5 million",
     "naics": [
+      "561210",
       "561730"
     ]
   }
@@ -411,6 +440,7 @@
     "vehicle": "BMO_SB",
     "threshold": "$20.5 million",
     "naics": [
+      "561210",
       "561621"
     ]
   }
@@ -424,7 +454,8 @@
     "vehicle": "BMO_SB",
     "threshold": "$15 million",
     "naics": [
-      "238220"
+      "238220",
+      "561210"
     ]
   }
 },
@@ -437,7 +468,8 @@
     "vehicle": "BMO_SB",
     "threshold": "$15 million",
     "naics": [
-      "238160"
+      "238160",
+      "561210"
     ]
   }
 },
@@ -466,9 +498,9 @@
     "threshold": "$15 million",
     "naics": [
       "541611",
-      "611710",
       "541613",
       "541618",
+      "611710",
       "541612"
     ]
   }
@@ -498,9 +530,9 @@
     "threshold": "$15 million",
     "naics": [
       "541611",
-      "611710",
       "541613",
       "541618",
+      "611710",
       "541612"
     ]
   }
@@ -548,10 +580,10 @@
     "threshold": "$19 million",
     "naics": [
       "541214",
-      "541720",
-      "541219",
       "541211",
-      "541213"
+      "541213",
+      "541219",
+      "541720"
     ]
   }
 },
@@ -577,8 +609,8 @@
     "vehicle": "OASIS",
     "threshold": "500 employee",
     "naics": [
-      "541711",
-      "541712"
+      "541712",
+      "541711"
     ]
   }
 },
@@ -664,10 +696,10 @@
     "threshold": "$19 million",
     "naics": [
       "541214",
-      "541720",
-      "541219",
       "541211",
-      "541213"
+      "541213",
+      "541219",
+      "541720"
     ]
   }
 },
@@ -693,8 +725,8 @@
     "vehicle": "OASIS_SB",
     "threshold": "500 employee",
     "naics": [
-      "541711",
-      "541712"
+      "541712",
+      "541711"
     ]
   }
 },
@@ -759,18 +791,18 @@
     "vehicle": "PSS",
     "threshold": "",
     "naics": [
-      "522310",
-      "541211",
-      "541219",
-      "523110",
+      "541611",
       "541990",
-      "561450",
-      "524292",
       "561440",
       "541214",
+      "541211",
+      "522310",
+      "541219",
+      "561450",
       "541110",
       "531210",
-      "541611"
+      "524292",
+      "523110"
     ]
   }
 },
@@ -783,16 +815,16 @@
     "vehicle": "PSS",
     "threshold": "",
     "naics": [
-      "541810",
-      "541613",
-      "541910",
-      "512110",
-      "541850",
       "561920",
       "541430",
-      "541511",
+      "541820",
+      "541850",
       "541922",
-      "541820"
+      "541613",
+      "541511",
+      "512110",
+      "541810",
+      "541910"
     ]
   }
 },
@@ -805,10 +837,10 @@
     "vehicle": "PSS",
     "threshold": "",
     "naics": [
-      "541712",
       "236220",
-      "541711",
-      "541330"
+      "541330",
+      "541712",
+      "541711"
     ]
   }
 },
@@ -816,7 +848,7 @@
   "model": "categories.pool",
   "pk": "PSS_874",
   "fields": {
-    "name": "Mission Oriented Business Integrated Services (MOBIS)",
+    "name": "Mission Oriented Business Integrated Services",
     "number": "874",
     "vehicle": "PSS",
     "threshold": "",
@@ -843,21 +875,21 @@
   "model": "categories.pool",
   "pk": "PSS_874500",
   "fields": {
-    "name": "Logistics Worldwide (LOGWORLD)",
+    "name": "Logistics Worldwide",
     "number": "874500",
     "vehicle": "PSS",
     "threshold": "",
     "naics": [
-      "238990",
-      "238140",
-      "238130",
-      "238160",
-      "238320",
-      "238310",
-      "561210",
-      "238220",
       "238350",
-      "541614"
+      "238310",
+      "238160",
+      "238220",
+      "561210",
+      "238320",
+      "541614",
+      "238990",
+      "238130",
+      "238140"
     ]
   }
 },
@@ -870,12 +902,12 @@
     "vehicle": "PSS",
     "threshold": "",
     "naics": [
-      "562910",
+      "562920",
       "541370",
       "541380",
-      "562920",
-      "541620",
-      "562112"
+      "562910",
+      "562112",
+      "541620"
     ]
   }
 }

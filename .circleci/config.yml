@@ -6,7 +6,7 @@
 #
 version: 2
 jobs:
-  unit-tests:
+  ut-components:
     docker:
       - image: python:3.6-slim-stretch
         environment:
@@ -40,19 +40,162 @@ jobs:
           command: |
             pip install --no-cache-dir -r ./requirements.txt
             pip install --no-cache-dir -r ./requirements-dev.txt
+            ./scripts/init-webserver.sh /dev/stderr
 
       - run:
-          name: Run unit tests
-          no_output_timeout: 2h
+          name: Run component tests
+          no_output_timeout: 1h
           command: |
-            ./scripts/init-webserver.sh /dev/stderr
-            ./run test --parallel=5 discovery api categories vendors contracts
+            ./run test --parallel=4 discovery categories vendors contracts
 
       - store_artifacts:
           path: logs
-          destination: unit-test-reports
+          destination: component-test-reports
 
-  acceptance-tests:
+  ut-core-api:
+    docker:
+      - image: python:3.6-slim-stretch
+        environment:
+          LANG: C.UTF-8
+          PYTHONUNBUFFERED: 1
+
+      - image: postgres:9.4
+        environment:
+          POSTGRES_USER: circleci
+          POSTGRES_PASSWORD: circleci
+          POSTGRES_DB: circle-test
+
+    working_directory: /var/local
+
+    steps:
+      - run:
+          name: Install development tools
+          command: |
+            apt-get update
+            apt-get install -y git gcc
+
+      - checkout
+
+      - run:
+          name: Set CircleCI configuration
+          command: |
+            cp ./app/discovery/local_settings.circle.py ./app/discovery/local_settings.py
+
+      - run:
+          name: Install requirements
+          command: |
+            pip install --no-cache-dir -r ./requirements.txt
+            pip install --no-cache-dir -r ./requirements-dev.txt
+            ./scripts/init-webserver.sh /dev/stderr
+
+      - run:
+          name: Run core API tests
+          no_output_timeout: 1h
+          command: |
+            ./run test api --tag=object
+            ./run test api --tag=ordering
+            ./run test api --tag=pagination
+            ./run test api --tag=search
+            ./run test api --tag=request
+            ./run test api --tag=info
+
+      - store_artifacts:
+          path: logs
+          destination: core-api-test-reports
+
+  ut-api-fields:
+    docker:
+      - image: python:3.6-slim-stretch
+        environment:
+          LANG: C.UTF-8
+          PYTHONUNBUFFERED: 1
+
+      - image: postgres:9.4
+        environment:
+          POSTGRES_USER: circleci
+          POSTGRES_PASSWORD: circleci
+          POSTGRES_DB: circle-test
+
+    working_directory: /var/local
+
+    steps:
+      - run:
+          name: Install development tools
+          command: |
+            apt-get update
+            apt-get install -y git gcc
+
+      - checkout
+
+      - run:
+          name: Set CircleCI configuration
+          command: |
+            cp ./app/discovery/local_settings.circle.py ./app/discovery/local_settings.py
+
+      - run:
+          name: Install requirements
+          command: |
+            pip install --no-cache-dir -r ./requirements.txt
+            pip install --no-cache-dir -r ./requirements-dev.txt
+            ./scripts/init-webserver.sh /dev/stderr
+
+      - run:
+          name: Run API field tests
+          no_output_timeout: 1h
+          command: |
+            ./run test api --tag=field_test
+
+      - store_artifacts:
+          path: logs
+          destination: api-field-test-reports
+
+  ut-api-values:
+    docker:
+      - image: python:3.6-slim-stretch
+        environment:
+          LANG: C.UTF-8
+          PYTHONUNBUFFERED: 1
+
+      - image: postgres:9.4
+        environment:
+          POSTGRES_USER: circleci
+          POSTGRES_PASSWORD: circleci
+          POSTGRES_DB: circle-test
+
+    working_directory: /var/local
+
+    steps:
+      - run:
+          name: Install development tools
+          command: |
+            apt-get update
+            apt-get install -y git gcc
+
+      - checkout
+
+      - run:
+          name: Set CircleCI configuration
+          command: |
+            cp ./app/discovery/local_settings.circle.py ./app/discovery/local_settings.py
+
+      - run:
+          name: Install requirements
+          command: |
+            pip install --no-cache-dir -r ./requirements.txt
+            pip install --no-cache-dir -r ./requirements-dev.txt
+            ./scripts/init-webserver.sh /dev/stderr
+
+      - run:
+          name: Run API values tests
+          no_output_timeout: 1h
+          command: |
+            ./run test api --tag=values_test
+
+      - store_artifacts:
+          path: logs
+          destination: api-values-test-reports
+
+  at-all:
     docker:
       - image: python:3.6-slim-stretch
         environment:
@@ -108,15 +251,16 @@ jobs:
 
       - run:
           name: Run acceptance tests
+          no_output_timeout: 1h
           command: |
             ./scripts/wait-for-it.sh --host="localhost" --port=8080 --timeout=300
-            ./run test --parallel=5 acceptance
+            ./run test --parallel=3 acceptance
 
       - store_artifacts:
           path: logs
           destination: acceptance-test-reports
 
-  deploy-dev:
+  dep-dev:
     docker:
       - image: debian:stretch-slim
         environment:
@@ -143,7 +287,7 @@ jobs:
           command: |
             ./scripts/deploy-dev.sh
 
-  deploy-prod:
+  dep-prod:
     docker:
       - image: debian:stretch-slim
         environment:
@@ -170,7 +314,7 @@ jobs:
           command: |
             ./scripts/deploy-prod.sh
 
-  deploy-docs:
+  dep-docs:
     docker:
       - image: python:3.6-slim-stretch
         environment:
@@ -209,26 +353,34 @@ workflows:
   version: 2
   test-and-deploy:
     jobs:
-      - unit-tests
-      - acceptance-tests
-      - deploy-dev:
+      - ut-components
+      - ut-core-api
+      - ut-api-fields
+      - ut-api-values
+      - at-all
+      - dep-dev:
           requires:
-            - unit-tests
-            - acceptance-tests
+            - ut-components
+            - ut-core-api
+            - ut-api-fields
+            - ut-api-values
+            - at-all
           filters:
             branches:
               only: develop
-      - deploy-prod:
+      - dep-prod:
           requires:
-            - unit-tests
-            - acceptance-tests
+            - ut-components
+            - ut-core-api
+            - ut-api-fields
+            - ut-api-values
+            - at-all
           filters:
             branches:
               only: master
-      - deploy-docs:
+      - dep-docs:
           requires:
-            - unit-tests
-            - acceptance-tests
+            - ut-components
           filters:
             branches:
               only:

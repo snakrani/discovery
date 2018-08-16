@@ -17,11 +17,13 @@ DataManager.getStatusCount = function() {
 
 DataManager.loadVendors = function() {
     var url = "/api/vendors/";
-    var pools = DataManager.getVehiclePools();
-    var pool = DataManager.getPool();
-    var poolIds = [];
+    var vehiclePools = DataManager.getVehiclePools();
+    var naics = DataManager.getNaics();
+    var pools = DataManager.getPools();
+    var zones = DataManager.getZones();
+    var setasides = DataManager.getSetasides();
+    var filters = [];
 
-    var requestVars = DataManager.buildRequestQuery();
     var ordering = DataManager.getSortOrdering();
     var queryData = {
         'page': DataManager.getPage(),
@@ -31,33 +33,40 @@ DataManager.loadVendors = function() {
     if (ordering) {
         queryData['ordering'] = ordering;
     }
-    var filters = [];
 
-    if ('naics' in requestVars) {
-        queryData['contract_naics'] = requestVars['naics'];
+    if (naics) {
+        queryData['contract_naics'] = naics;
     }
-    if (! $.isEmptyObject(pools)) {
-        if (pool) {
-            filters.push('(pools__pool__id' + '=' + pool + ')');
+
+    if (! $.isEmptyObject(vehiclePools)) {
+        if (pools.length > 0) {
+            for (var index = 0; index < pools.length; index++) {
+                filters.push('(pools__pool__id' + '=' + pools[index] + ')');
+            }
         } else {
-            Object.keys(pools).forEach(function (id) {
+            var poolIds = [];
+            Object.keys(vehiclePools).forEach(function (id) {
                 poolIds.push(id);
             });
             filters.push('(pools__pool__id__in' + '=' + poolIds.join(',') + ')');
         }
     }
 
-    if (LayoutManager.zoneActive() && 'zone' in requestVars) {
-        filters.push('(pools__zones__id' + '=' + requestVars['zone'] + ')');
+    if (LayoutManager.zoneActive() && zones.length > 0) {
+        for (var index = 0; index < zones.length; index++) {
+            filters.push('(pools__zones__id' + '=' + zones[index] + ')');
+        }
     }
 
-    if ('setasides' in requestVars) {
-        var setasides = requestVars['setasides'].split(',');
+    if (setasides.length > 0) {
         for (var index = 0; index < setasides.length; index++) {
             filters.push('(pools__setasides__code' + '=' + setasides[index] + ')');
         }
     }
-    queryData['filters'] = encodeURIComponent(filters.join('&'));
+
+    if (filters.length > 0) {
+        queryData['filters'] = encodeURIComponent(filters.join('&'));
+    }
 
     DataManager.getAPIRequest(url, queryData,
         function(response) {

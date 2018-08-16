@@ -79,6 +79,7 @@ DataManager.getMembershipMap = function() {
 
         if (!(membership.piid in membershipMap)) {
             membershipMap[membership.piid] = {
+                'piid': membership.piid,
                 'vehicleIds': [],
                 'vehicles': [],
                 'pools': [],
@@ -112,15 +113,19 @@ DataManager.getMembershipMap = function() {
             }
         }
 
-        var contactName = membership.cms[0].name;
+        var contactName = membership.contacts[0].name;
         if ($.inArray(contactName, membershipMap[membership.piid]['contacts']) == -1) {
             membershipMap[membership.piid]['contacts'].push(contactName);
         }
-        var phoneNumber = membership.cms[0].phone.join('<br/>');
+        var phoneNumber = membership.contacts[0].phones.map(function(obj) {
+            return obj.number;
+        }).join('<br/>');
         if ($.inArray(phoneNumber, membershipMap[membership.piid]['phones']) == -1) {
             membershipMap[membership.piid]['phones'].push(phoneNumber);
         }
-        var emailAddress = membership.cms[0].email.join('<br/>');
+        var emailAddress = membership.contacts[0].emails.map(function(obj) {
+            return obj.address;
+        }).join('<br/>');
         if ($.inArray(emailAddress, membershipMap[membership.piid]['emails']) == -1) {
             membershipMap[membership.piid]['emails'].push(emailAddress);
         }
@@ -144,9 +149,11 @@ DataManager.getMembershipName = function(membershipInfo) {
         return Number(a) - Number(b);
     });
 
-    // Vehicle - Pool - Zone
+    // Vehicle - PIID - Pool - Zone
     membershipName = '<div class="membership_vehicles">' + membershipInfo.vehicles.join(', ') + '</div>'
+        + '<div class="membership_piid"><span class="admin_label">Contract number:</span> ' + membershipInfo.piid + '</div>'
         + '<div class="membership_pools"><span class="admin_label">Service category:</span> ' + membershipInfo.pools.join(', ') + '</div>';
+
     if (membershipInfo.zones.length > 0) {
         membershipName += '<div class="membership_zones"><span class="admin_label">Zone:</span> ' + membershipInfo.zones.join(', ') + '</div>';
     }
@@ -176,6 +183,18 @@ DataManager.setNaicsMap = function(value) {
 
 DataManager.getNaicsMap = function() {
     return DataManager.get('naics_map', {});
+};
+
+DataManager.defaultNaicsWidth = function() {
+    return '400px';
+};
+
+DataManager.setNaicsWidth = function(width) {
+    DataManager.set('naics_width', width);
+};
+
+DataManager.getNaicsWidth = function() {
+    return DataManager.get('naics_width', DataManager.defaultNaicsWidth());
 };
 
 DataManager.sendNaicsChange = function(e) {
@@ -289,11 +308,6 @@ DataManager.loadContracts = function() {
 DataManager.populateNaicsDropDown = function(data) {
     var naicsMap = DataManager.getNaicsMap();
     var naics = DataManager.getNaics();
-
-    $('#naics-code').select2({
-        minimumResultsForSearch: -1,
-        width: '400px'
-    });
 
     DataManager.getAPIRequest(
         "/api/naics/",

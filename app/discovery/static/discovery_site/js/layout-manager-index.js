@@ -14,7 +14,7 @@ LayoutManager.preprocessors.index = function() {
 LayoutManager.route = function() {
     var queryObject = DataManager.buildRequestQuery();
 
-    if ('naics' in queryObject || 'vehicle' in queryObject || 'pool' in queryObject || 'setasides' in queryObject) {
+    if ('naics' in queryObject || 'vehicle' in queryObject || 'pools' in queryObject || 'setasides' in queryObject) {
         var qs = DataManager.getQueryString();
         window.location.href = '/results' + qs;
     }

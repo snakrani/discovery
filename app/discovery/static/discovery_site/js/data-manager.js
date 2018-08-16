@@ -10,37 +10,44 @@ var DataManager = {
         "OASIS_SB": {
             "title": "OASIS Small Business",
             "sb": true,
-            "pool_numeric": false
+            "pool_numeric": false,
+            "display_number": true
         },
         "OASIS": {
             "title": "OASIS Unrestricted",
             "sb": false,
-            "pool_numeric": false
+            "pool_numeric": false,
+            "display_number": true
         },
         "HCATS_SB": {
             "title": "HCATS Small Business",
             "sb": true,
-            "pool_numeric": true
+            "pool_numeric": true,
+            "display_number": false
         },
         "HCATS": {
             "title": "HCATS Unrestricted",
             "sb": false,
-            "pool_numeric": true
+            "pool_numeric": true,
+            "display_number": false
         },
         "BMO_SB": {
             "title": "BMO Small Business",
             "sb": true,
-            "pool_numeric": true
+            "pool_numeric": true,
+            "display_number": false
         },
         "BMO": {
             "title": "BMO Unrestricted",
             "sb": false,
-            "pool_numeric": true
+            "pool_numeric": true,
+            "display_number": false
         },
         "PSS": {
-            "title": "Professional Services",
+            "title": "Professional Services Schedule",
             "sb": true,
-            "pool_numeric": false
+            "pool_numeric": false,
+            "display_number": true
         }
     },
 
@@ -113,7 +120,7 @@ var DataManager = {
             defaultValue = null;
         }
 
-        if (! (field in DataManager.fields)) {
+        if (! (field in DataManager.fields) || ! DataManager.fields[field]) {
             return defaultValue;
         }
         return DataManager.fields[field];
@@ -127,11 +134,14 @@ var DataManager = {
         var value = DataManager.getParameterByName(field);
 
         if (preprocessor && typeof preprocessor == 'function') {
-            value = preprocessor.call(field, value);
+            value = preprocessor(field, value);
         }
 
         if (value) {
             DataManager.fields[field] = value;
+        }
+        else {
+            DataManager.fields[field] = defaultValue;
         }
     },
 

@@ -160,30 +160,46 @@ class SetasideTestSerializer(SetasideFullSerializer):
         fields = SetasideFullSerializer.Meta.fields + ['url']
 
 
+class StateSerializer(ModelSerializer):
+    class Meta:
+        model = categories.State
+        fields = ['code']
+                
+    def to_representation(self, instance):
+        return instance.code
+
+class StateTestSerializer(ModelSerializer):
+    class Meta:
+        model = categories.State
+        fields = ['code']
+
+
 class BaseZoneSerializer(HyperlinkedModelSerializer):
     url = HyperlinkedIdentityField(view_name="zone-detail", lookup_field='id')
-    state = SerializerMethodField()
     
     class Meta:
         model = categories.Zone
-        fields = ['id', 'state']
-        
-    def get_state(self, item):
-        return item.states()
+        fields = ['id']
     
 class ZoneLinkSerializer(BaseZoneSerializer):
     class Meta(BaseZoneSerializer.Meta):
         fields = ['id', 'url']
 
 class ZoneSummarySerializer(BaseZoneSerializer):
+    states = StateSerializer(many=True)
+    
     class Meta(BaseZoneSerializer.Meta):
-        fields = BaseZoneSerializer.Meta.fields + ['url']
+        fields = BaseZoneSerializer.Meta.fields + ['states', 'url']
 
 class ZoneFullSerializer(BaseZoneSerializer):
+    states = StateSerializer(many=True)
+    
     class Meta(BaseZoneSerializer.Meta):
-        pass
+        fields = BaseZoneSerializer.Meta.fields + ['states']
 
 class ZoneTestSerializer(ZoneFullSerializer):
+    states = StateTestSerializer(many=True)
+    
     class Meta(ZoneFullSerializer.Meta):
         fields = ZoneFullSerializer.Meta.fields + ['url']
 
@@ -194,26 +210,32 @@ class LocationSerializer(ModelSerializer):
         fields = ['address', 'city', 'state', 'zipcode', 'congressional_district']
 
 
-class ContractManagerSerializer(ModelSerializer):
+class PhoneSerializer(ModelSerializer):
     class Meta:
-        model = vendors.ContractManager
-        fields = ['name', 'phone', 'email']
+        model = vendors.ContactPhone
+        fields = ['number']
 
-class ProjectManagerSerializer(ModelSerializer):
+class EmailSerializer(ModelSerializer):
     class Meta:
-        model = vendors.ProjectManager
-        fields = ['name', 'phone', 'email']
+        model = vendors.ContactEmail
+        fields = ['address']
+
+class ContactSerializer(ModelSerializer):
+    phones = PhoneSerializer(many=True)
+    emails = EmailSerializer(many=True)
+    
+    class Meta:
+        model = vendors.Contact
+        fields = ['order', 'name', 'phones', 'emails']
 
 
 class BasePoolMembershipSerializer(ModelSerializer):
     capability_statement = SerializerMethodField()
-    
-    cms = ContractManagerSerializer(many=True)
-    pms = ProjectManagerSerializer(many=True)
+    contacts = SerializerMethodField()
     
     class Meta:
         model = vendors.PoolMembership
-        fields = ['piid', 'cms', 'pms', 'expiration_8a_date', 'contract_end_date', 'capability_statement']
+        fields = ['piid', 'contacts', 'expiration_8a_date', 'contract_end_date', 'capability_statement']
         
     def get_capability_statement(self, item):
         request = self.context.get('request')
@@ -224,9 +246,13 @@ class BasePoolMembershipSerializer(ModelSerializer):
         cs_url = request.build_absolute_uri("/discovery_site/capability_statements/{}/{}.pdf".format(vehicle, duns))
     
         if vehicle and os.path.isfile(cs_path):
-            return cs_url
-            
+            return cs_url    
         return ''
+    
+    def get_contacts(self, item):
+        queryset = vendors.Contact.objects.filter(responsibility=item).order_by('order')
+        return ContactSerializer(queryset, many=True, context=self.context).data
+        
     
 class PoolMembershipLinkSerializer(BasePoolMembershipSerializer):
     pool = PoolLinkSerializer(many=False)
@@ -288,7 +314,6 @@ class VendorSummarySerializer(AnnotatedVendorSerializer):
     
     class Meta(BaseVendorSerializer.Meta):
         fields = BaseVendorSerializer.Meta.fields + [
-            'sam_location_citystate', 
             'annual_revenue', 'number_of_employees', 
             'number_of_contracts', 'setasides', 'pools',
             'url'

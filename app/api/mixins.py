@@ -9,12 +9,18 @@ class FilterViewSetMixin(object):
     
     def get_filter_classes(self):
         try:
-            return self.action_filters[self.action]
+            filters = self.action_filters[self.action]
+                        
+            if isinstance(filters, str):
+                filters = self.action_filters[filters]
+            
+            return filters
+        
         except (KeyError, AttributeError):
             return ()
     
     def filter_queryset(self, queryset):
-        self.filter_backends = self.get_filter_classes()            
+        self.filter_backends = self.get_filter_classes()
         return super(FilterViewSetMixin, self).filter_queryset(queryset)
 
 

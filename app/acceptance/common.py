@@ -1,3 +1,4 @@
+from test.common import normalize_list
 
 import copy
 import json
@@ -16,18 +17,26 @@ def add_vehicle_tests(schema, id, option_count, enabled = True, displayed = True
     schema['v3|#vehicle-id'] = 'enabled' if enabled else 'disabled'
     schema['v4|#vehicle-id'] = 'displayed' if displayed else 'not_displayed'
 
-def add_pool_tests(schema, id, option_count, display_count, enabled = True, displayed = True):
-    schema['p1|#pool-id'] = ('value__equal', id)
-    schema['p2|#pool-id option'] = ('count', option_count)
-    schema['p3|#pool-id'] = 'enabled' if enabled else 'disabled'
-    schema['p4|#pool-id'] = 'displayed' if displayed else 'not_displayed'
-    schema['p5|div.pool'] = ('count', display_count)
+def add_pool_tests(schema, ids, option_count, display_count, enabled = True, displayed = True):
+    if isinstance(ids, (list, tuple)):
+        schema['p1|#pool-id'] = ('select__all', ids)
+    else:
+        schema['p2|#pool-id'] = ('value__equal', ids)
+    
+    schema['p3|#pool-id option'] = ('count', option_count)
+    schema['p4|#pool-id'] = 'enabled' if enabled else 'disabled'
+    schema['p5|#pool-id'] = 'displayed' if displayed else 'not_displayed'
+    schema['p6|div.pool'] = ('count', display_count)
 
-def add_zone_tests(schema, id, option_count, enabled = True, displayed = True):
-    schema['z1|#zone-id'] = ('value__equal', id)
-    schema['z2|#zone-id option'] = ('count', option_count)
-    schema['z3|#zone-id'] = 'enabled' if enabled else 'disabled'
-    schema['z4|#zone-id'] = 'displayed' if displayed else 'not_displayed'
+def add_zone_tests(schema, ids, option_count, enabled = True, displayed = True):
+    if isinstance(ids, (list, tuple)):
+        schema['z1|#zone-id'] = ('select__all', ids)
+    else:
+        schema['z2|#zone-id'] = ('value__equal', ids)
+    
+    schema['z3|#zone-id option'] = ('count', option_count)
+    schema['z4|#zone-id'] = 'enabled' if enabled else 'disabled'
+    schema['z5|#zone-id'] = 'displayed' if displayed else 'not_displayed'
 
 def add_setaside_filter_tests(schema, values, selection_count, enabled = True, displayed = True):
     if values:
@@ -41,7 +50,7 @@ def add_setaside_filter_tests(schema, values, selection_count, enabled = True, d
         schema['s1|#setaside-filters input:checked'] = (comparison, values)
         
     schema['s2|#setaside-filters input:checked'] = ('count', selection_count)
-    schema['s3|#setaside-filters'] = 'enabled' if enabled else 'disabled'
+    schema['s3|.se_filter'] = 'enabled' if enabled else 'disabled'
     schema['s4|#setaside-filters'] = 'displayed' if displayed else 'not_displayed'
 
 def add_vendor_result_info_tests(schema, result_count, csv_path):
@@ -142,10 +151,14 @@ def add_contract_table_tests(schema, result_count, sort_field, sort_direction, p
         schema['t5|#pagination_container'] = 'not_displayed'
 
 
-def generate_test(config):
+def generate_test(config, create_tags = True):
     schema = {}
+    config = copy.deepcopy(config)  
+    tags = normalize_list(config.pop('tags', []))
     
-    config = copy.deepcopy(config)
+    if create_tags:
+        tags.append('url')
+        schema['tags'] = tags
     
     if 'params' in config:
         schema['params'] = config.pop('params')
@@ -208,7 +221,7 @@ def generate_test(config):
 def generate_action_test(config):
     schema = {'wait': 'complete'}
     
-    def add_actions(actions, config, index = 1):
+    def add_actions(actions, local_config, index = 1):
         if not isinstance(actions[0], (list, tuple)):
             actions = [actions]
         else:
@@ -228,14 +241,18 @@ def generate_action_test(config):
         
         if len(actions) > 0:
             schema[event_name] = {}
-            schema[event_name]['actions'] = add_actions(actions, config, (index + 1))
+            schema[event_name]['actions'] = add_actions(actions, local_config, (index + 1))
         else:
-            schema[event_name] = generate_test(config)
+            schema[event_name] = generate_test(local_config, False)
             
-            if 'wait' not in config:
+            if 'wait' not in local_config:
                 schema[event_name]['wait'] = 'complete'
         
         return schema
+    
+    tags = normalize_list(config.pop('tags', []))
+    tags.append('action')
+    schema['tags'] = tags
     
     params = config.pop('params', {})
     schema['params'] = {}

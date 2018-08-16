@@ -89,6 +89,11 @@ ALLOWED_HOSTS = [
 ]
 
 #
+# Testing configurations
+#
+TEST_RUNNER = 'test.runner.DiscoveryTestRunner'
+
+#
 # Database configurations
 #
 DATABASES = {}
@@ -381,6 +386,9 @@ CSP_SCRIPT_SRC = ("'self'", "'unsafe-inline'", 'www.google-analytics.com', 'dap.
 CSP_STYLE_SRC = ("'self'", "'unsafe-inline'", "fonts.googleapis.com")
 CSP_IMG_SRC = ("'self'", 'www.google-analytics.com')
 CSP_FONT_SRC = ("'self'", 'fonts.gstatic.com')
+CSP_OBJECT_SRC = ("'none'",)
+
+SECURE_BROWSER_XSS_FILTER = True
 
 
 #-------------------------------------------------------------------------------
