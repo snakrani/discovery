@@ -235,13 +235,15 @@ class VendorFilter(FilterSet, metaclass = MetaFilterSet):
         fields = ()
         
     def filter_setasides(self, qs, name, value):
-        params = { 'setasides__code__in': value.split(',') }
+        memberships = vendors.PoolMembership.objects.all()
+        
+        for code in value.split(','):
+            memberships = memberships.filter(setasides__code=code)
         
         if 'pool' in self.request.query_params:
-            params['pool__id__in'] = self.request.query_params['pool'].split(',')
+            memberships = memberships.filter(pool__id__in=self.request.query_params['pool'].split(','))
         
-        piids = vendors.PoolMembership.objects.filter(**params).values_list('piid', flat=True)
-        return qs.filter(pools__piid__in=piids)
+        return qs.filter(pools__piid__in=memberships.values_list('piid', flat=True))
 
 
 class ContractStatusFilter(FilterSet, metaclass = MetaFilterSet):
