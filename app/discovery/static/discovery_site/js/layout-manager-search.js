@@ -128,15 +128,17 @@ LayoutManager.renderVendor = function(vendor, qs) {
     $vendorRow.append($('<td class="vendor_pools">' + renderedPools.join(', ') + '</td>'));
 
     // Setasides
-    if (vendor.setasides.length > 0) {
-        $vendorRow.append(LayoutManager.renderSetaside(vendor, 'sb', 'SB'));
-        $vendorRow.append(LayoutManager.renderSetaside(vendor, 'sdb', '27'));
-        $vendorRow.append(LayoutManager.renderSetaside(vendor, '8a', 'A6'));
-        $vendorRow.append(LayoutManager.renderSetaside(vendor, 'Hubz', 'XX'));
-        $vendorRow.append(LayoutManager.renderSetaside(vendor, 'wo', 'A2'));
-        $vendorRow.append(LayoutManager.renderSetaside(vendor, 'vo', 'A5'));
-        $vendorRow.append(LayoutManager.renderSetaside(vendor, 'sdvo', 'QF'));
-        $vendorRow.append(LayoutManager.renderSetaside(vendor, 'vip', 'VIP'));
+    var setasides = DataManager.vendorSetasides(vendor);
+
+    if (setasides.length > 0) {
+        $vendorRow.append(LayoutManager.renderSetaside(setasides, 'sb', 'SB'));
+        $vendorRow.append(LayoutManager.renderSetaside(setasides, 'sdb', '27'));
+        $vendorRow.append(LayoutManager.renderSetaside(setasides, '8a', 'A6'));
+        $vendorRow.append(LayoutManager.renderSetaside(setasides, 'Hubz', 'XX'));
+        $vendorRow.append(LayoutManager.renderSetaside(setasides, 'wo', 'A2'));
+        $vendorRow.append(LayoutManager.renderSetaside(setasides, 'vo', 'A5'));
+        $vendorRow.append(LayoutManager.renderSetaside(setasides, 'sdvo', 'QF'));
+        $vendorRow.append(LayoutManager.renderSetaside(setasides, 'vip', 'VIP'));
     }
     else {
         $vendorRow.append($('<td colspan="8" class="unrestricted"></td>'));
@@ -144,11 +146,11 @@ LayoutManager.renderVendor = function(vendor, qs) {
     return $vendorRow;
 };
 
-LayoutManager.renderSetaside = function(vendor, prefix, setaside) {
+LayoutManager.renderSetaside = function(setasides, prefix, setaside) {
     var $col = $('<td class="' + prefix + '"></td>');
 
-    for (var index = 0; index < vendor.setasides.length; index++) {
-        if (vendor.setasides[index]['code'] == setaside) {
+    for (var index = 0; index < setasides.length; index++) {
+        if (setasides[index] == setaside) {
             $col.html('<img src="'+ static_image_path + 'green_dot.png" class="green_dot">');
             break;
         }
