@@ -267,6 +267,31 @@ DataManager.vendorPools = function(vendor) {
     return Object.keys(pools);
 };
 
+DataManager.vendorSetasides = function(vendor) {
+    var vehicleMap = DataManager.getVehicleMap();
+    var vehicle = DataManager.getVehicle();
+    var vehiclePools = DataManager.getVehiclePools();
+    var pools = DataManager.getPools();
+    var setasides = {};
+
+    if ('pools' in vendor) {
+        for (var mindex = 0; mindex < vendor.pools.length; mindex++) {
+            var membership = vendor.pools[mindex];
+
+            if (membership.pool.id in vehiclePools && (pools.length == 0 || $.inArray(membership.pool.id, pools) != -1)) {
+                var vehicle = vehiclePools[membership.pool.id].vehicle;
+
+                if (membership.setasides.length > 0 && vehicleMap[vehicle]["sb"]) {
+                    for (var sindex = 0; sindex < membership.setasides.length; sindex++) {
+                        setasides[membership.setasides[sindex].code] = true;
+                    }
+                }
+            }
+        }
+    }
+    return Object.keys(setasides);
+};
+
 DataManager.loadPools = function() {
     var vehicleMap = DataManager.getVehicleMap();
     var vehicle = DataManager.getVehicle();
