@@ -228,9 +228,20 @@ class VendorFilter(FilterSet, metaclass = MetaFilterSet):
     sam_location = RelatedFilter(LocationFilter)
     pools = RelatedFilter(PoolMembershipFilter)
     
+    setaside = CharFilter(field_name='setaside', method='filter_setasides')
+    
     class Meta:
         model = vendors.Vendor
         fields = ()
+        
+    def filter_setasides(self, qs, name, value):
+        params = { 'setasides__code__in': value.split(',') }
+        
+        if 'pool' in self.request.query_params:
+            params['pool__id__in'] = self.request.query_params['pool'].split(',')
+        
+        piids = vendors.PoolMembership.objects.filter(**params).values_list('piid', flat=True)
+        return qs.filter(pools__piid__in=piids)
 
 
 class ContractStatusFilter(FilterSet, metaclass = MetaFilterSet):
