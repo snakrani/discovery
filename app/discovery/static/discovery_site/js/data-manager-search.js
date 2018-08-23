@@ -39,16 +39,22 @@ DataManager.loadVendors = function() {
     }
 
     if (! $.isEmptyObject(vehiclePools)) {
+        var poolIds = [];
+
         if (pools.length > 0) {
             for (var index = 0; index < pools.length; index++) {
                 filters.push('(pools__pool__id' + '=' + pools[index] + ')');
+                poolIds.push(pools[index]);
             }
         } else {
-            var poolIds = [];
             Object.keys(vehiclePools).forEach(function (id) {
                 poolIds.push(id);
             });
             filters.push('(pools__pool__id__in' + '=' + poolIds.join(',') + ')');
+        }
+
+        if (setasides.length > 0) {
+            queryData['pool'] = poolIds.join(',');
         }
     }
 
@@ -59,9 +65,7 @@ DataManager.loadVendors = function() {
     }
 
     if (setasides.length > 0) {
-        for (var index = 0; index < setasides.length; index++) {
-            filters.push('(pools__setasides__code' + '=' + setasides[index] + ')');
-        }
+        queryData['setaside'] = setasides.join(',');
     }
 
     if (filters.length > 0) {
