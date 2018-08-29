@@ -58,16 +58,26 @@ class SetAside(models.Model):
         return self.name
 
 
+class Vehicle(models.Model):
+    id = models.CharField(primary_key=True, max_length=128)
+    name = models.CharField(max_length=128)
+    small_business = models.NullBooleanField(null=True)
+    numeric_pool = models.NullBooleanField(null=True)
+    display_number = models.NullBooleanField(null=True)
+
+    def __str__(self):
+        return "{0} {1}".format(self.id, self.name)
+
 class Pool(models.Model):
     id = models.CharField(primary_key=True, max_length=128)
     name = models.CharField(max_length=128, default='Pool')
     number = models.CharField(max_length=128)
-    vehicle = models.CharField(choices=VEHICLE_CHOICES, max_length=20)
+    vehicle = models.ForeignKey(Vehicle, null=True, on_delete=models.CASCADE)
     naics = models.ManyToManyField(Naics)
     threshold = models.CharField(null=True, max_length=128)
 
     def __str__(self):
-        return "{0} {1}".format(self.vehicle, self.number)
+        return "{0} {1}".format(self.name, self.number)
 
 
 class State(models.Model):
