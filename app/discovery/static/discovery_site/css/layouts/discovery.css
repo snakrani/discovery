@@ -789,19 +789,22 @@ h4.data {
 .logo_container {
     margin-left: 35px;
     float: left;
-
+}
+.logo_container img {
+    height: 100px;
+    width: 100px;
 }
 
 .built_by {
     width: 100%;
     color: #FFF;
     font-size: .7em;
+    margin-bottom: 5px;
 }
 
 .logo1 {
     display: inline-block;
 }
-
 .logo2 {
     margin-left: 30px;
     display: inline-block;
