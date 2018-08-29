@@ -183,8 +183,8 @@ class PoolViewSet(DiscoveryReadOnlyModelViewSet):
         'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
     }
     filter_class = filters.PoolFilter
-    search_fields = ['id', 'name', 'number', 'vehicle', 'threshold']
-    ordering_fields = ['id', 'name', 'number', 'vehicle', 'threshold']
+    search_fields = ['id', 'name', 'number', 'threshold', 'vehicle__id', 'vehicle__name']
+    ordering_fields = ['id', 'name', 'number', 'threshold', 'vehicle__id', 'vehicle__name']
     ordering = 'name'
     
     pagination_class = pagination.ResultSetPagination
