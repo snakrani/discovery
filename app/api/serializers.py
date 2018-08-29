@@ -305,7 +305,19 @@ class AnnotatedVendorSerializer(BaseVendorSerializer):
     number_of_contracts = IntegerField()
     
     def get_setasides(self, item):
-        queryset = categories.SetAside.objects.filter(id__in=vendors.PoolMembership.objects.filter(vendor=item).values('setasides'))
+        params = {'vendor': item}
+        
+        if 'setaside' in self.context['request'].query_params:
+            params['setasides__code__in'] = self.context['request'].query_params['setaside'].split(',')
+        
+        if 'pools__pool__id__in' in self.context['request'].query_params:
+            params['pool__id__in'] = self.context['request'].query_params['pools__pool__id__in'].split(',')
+        elif 'pool' in self.context['request'].query_params:
+            params['pool__id__in'] = self.context['request'].query_params['pool'].split(',')
+        
+        setasides = vendors.PoolMembership.objects.filter(**params).values('setasides')
+        queryset = categories.SetAside.objects.filter(id__in=setasides)
+        
         return SetasideLinkSerializer(queryset, many=True, context=self.context).data
 
 
