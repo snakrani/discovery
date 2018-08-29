@@ -228,22 +228,37 @@ class VendorFilter(FilterSet, metaclass = MetaFilterSet):
     sam_location = RelatedFilter(LocationFilter)
     pools = RelatedFilter(PoolMembershipFilter)
     
-    setaside = CharFilter(field_name='setaside', method='filter_setasides')
+    setasides = CharFilter(field_name='setasides', method='filter_setasides')
     
     class Meta:
         model = vendors.Vendor
         fields = ()
         
     def filter_setasides(self, qs, name, value):
-        memberships = vendors.PoolMembership.objects.all()
-        
+        setaside_query = Q()
+        pool_ids = []
+                
         for code in value.split(','):
-            memberships = memberships.filter(setasides__code=code)
+            setaside_query.add(Q(setasides__code=code), Q.AND)
         
-        if 'pool' in self.request.query_params:
-            memberships = memberships.filter(pool__id__in=self.request.query_params['pool'].split(','))
+        memberships = vendors.PoolMembership.objects.filter(setaside_query)
         
-        return qs.filter(pools__piid__in=memberships.values_list('piid', flat=True))
+        if 'pools__pool__id__in' in self.request.query_params:
+            pool_ids = self.request.query_params['pools__pool__id__in'].split(',')
+        elif 'pool' in self.request.query_params:
+            pool_ids = self.request.query_params['pool'].split(',')
+        
+        if len(pool_ids):
+            memberships = memberships.filter(pool__id__in=pool_ids)
+        
+        piids = memberships.values_list('piid', flat=True)
+        
+        if len(piids) > 0:
+            qs = qs.filter(pools__piid__in=piids)
+        else:
+            qs = qs.filter(pools__piid=0)
+        
+        return qs
 
 
 class ContractStatusFilter(FilterSet, metaclass = MetaFilterSet):
