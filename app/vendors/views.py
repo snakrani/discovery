@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.generic import TemplateView
 
-from categories.models import VEHICLE_CHOICES, Naics, PSC, SetAside, Pool, Zone
+from categories.models import Naics, PSC, SetAside, Vehicle, Pool, Zone
 from vendors.models import Vendor, Contact
 from contracts.models import Contract
 
@@ -19,9 +19,11 @@ def format_duns(text):
 
 
 def get_vehicle_name(id):
-    for vehicle_info in VEHICLE_CHOICES:
-        if vehicle_info[0] == id:
-            return vehicle_info[1];
+    vehicle = Vehicle.objects.filter(id=id)
+    
+    if vehicle:
+        return vehicle.name
+    
     return ''
 
 
