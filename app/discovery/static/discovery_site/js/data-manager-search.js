@@ -46,15 +46,12 @@ DataManager.loadVendors = function() {
                 filters.push('(pools__pool__id' + '=' + pools[index] + ')');
                 poolIds.push(pools[index]);
             }
+            queryData['pool'] = poolIds.join(',');
         } else {
             Object.keys(vehiclePools).forEach(function (id) {
                 poolIds.push(id);
             });
             filters.push('(pools__pool__id__in' + '=' + poolIds.join(',') + ')');
-        }
-
-        if (setasides.length > 0) {
-            queryData['pool'] = poolIds.join(',');
         }
     }
 
@@ -65,7 +62,9 @@ DataManager.loadVendors = function() {
     }
 
     if (setasides.length > 0) {
-        queryData['setaside'] = setasides.join(',');
+        for (var index = 0; index < setasides.length; index++) {
+            filters.push('(setasides' + '=' + setasides[index] + ')');
+        }
     }
 
     if (filters.length > 0) {
