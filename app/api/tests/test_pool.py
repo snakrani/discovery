@@ -19,7 +19,7 @@ class PoolTest(case.APITestCase, metaclass = case.MetaAPISchema):
         },
         'ordering': {
             'tags': ('pool_ordering',),
-            'fields': ('id', 'name', 'number', 'vehicle', 'threshold')
+            'fields': ('id', 'name', 'number', 'threshold', 'vehicle__id', 'vehicle__name')
         },
         'pagination': {
             'tags': ('pool_pagination',),
@@ -61,20 +61,6 @@ class PoolTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iexact': '9',
                 '@in': ('1', '3', '5B', '16')
             },
-            'vehicle': {
-                'tags': ('pool_field', 'fuzzy_text'),
-                '@exact': 'OASIS_SB',
-                '@iexact': 'oasis',
-                '@in': ("HCATS", "BMO_SB"),
-                '@contains': 'SB',
-                '@icontains': 'oasis',
-                '@startswith': 'O',
-                '@istartswith': 'bm',
-                '@endswith': 'SB',
-                '@iendswith': '_sb',
-                '@regex': '^(OASIS|HCATS)_SB$',
-                '@iregex': '^(oaSis|hCaTs)_Sb$'
-            },
             'threshold': {
                 'tags': ('pool_field', 'fuzzy_text'),
                 '@exact': '$15 million',
@@ -88,6 +74,41 @@ class PoolTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iendswith': 'MillIon',
                 '@regex': '^\d+\s+',
                 '@iregex': '(500 EMPLOYEE|MILLION)'
+            },
+            'vehicle__id': {
+                'tags': ('pool_field', 'vehicle_field', 'token_text'),
+                '*exact': 'BMO_SB',
+                '*iexact': 'hcaTs_Sb',
+                '@in': ("BMO", "OASIS", "HCATS_SB")
+            },
+            'vehicle__name': {
+                'tags': ('pool_field', 'vehicle_field', 'fuzzy_text'),
+                '@exact': 'HCATS Small Business',
+                '@iexact': 'hcats small business',
+                '@in': ("BMO Small Business", "OASIS Unrestricted"),
+                '@contains': 'OASIS',
+                '@icontains': 'bmo',
+                '@startswith': 'HCATS',
+                '@istartswith': 'hcats',
+                '@endswith': 'Business',
+                '@iendswith': 'unrestricted',
+                '@regex': 'Prof.*$',
+                '@iregex': 'prof.*$'
+            },
+            'vehicle__small_business': {
+                'tags': ('pool_field', 'vehicle_field', 'boolean'),
+                '[1]@exact': True,
+                '[2]@exact': False,
+            },
+            'vehicle__numeric_pool': {
+                'tags': ('pool_field', 'vehicle_field', 'boolean'),
+                '[1]@exact': True,
+                '[2]@exact': False,
+            },
+            'vehicle__display_number': {
+                'tags': ('pool_field', 'vehicle_field', 'boolean'),
+                '[1]@exact': True,
+                '[2]@exact': False,
             },
             'naics__code': {
                 'tags': ('pool_field', 'naics_field', 'fuzzy_text'),
