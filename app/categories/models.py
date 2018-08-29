@@ -1,17 +1,6 @@
 from django.db import models
 
 
-VEHICLE_CHOICES = (
-    ('OASIS_SB', 'OASIS Small Business'),
-    ('OASIS', 'OASIS Unrestricted'),
-    ('HCATS_SB', 'HCATS Small Business'),
-    ('HCATS', 'HCATS Unrestricted'),
-    ('BMO_SB', 'BMO Small Business'),
-    ('BMO', 'BMO Unrestricted'),
-    ('PSS', 'Professional Services Schedule')
-)
-
-
 class Keyword(models.Model):
     name = models.CharField(max_length=1000, null=True)
     
