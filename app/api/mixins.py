@@ -1,5 +1,5 @@
 from discovery.utils import check_api_test
-from api.pagination import TestResultSetPagination
+from api.pagination import TestResultSetPagination, ResultNoPagination
 
 
 class FilterViewSetMixin(object):
@@ -33,10 +33,18 @@ class PaginationViewSetMixin(object):
                 self._paginator = None
             elif check_api_test(self.request):
                 self._paginator = TestResultSetPagination()
+            elif not self._allow_pagination(self.request):
+                self._paginator = ResultNoPagination()
             else:
                 self._paginator = self.pagination_class()
         
         return self._paginator
+    
+    
+    def _allow_pagination(self, request = None):
+        if request and 'page' in request.query_params and int(request.query_params['page']) == 0:
+            return False
+        return True
 
 
 class SerializerViewSetMixin(object):
