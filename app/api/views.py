@@ -135,6 +135,36 @@ class PscViewSet(DiscoveryReadOnlyModelViewSet):
     }
 
 
+class VehicleViewSet(DiscoveryReadOnlyModelViewSet):
+    """
+    API endpoint that allows for access to Discovery related vendor vehicle information.
+    
+    retrieve:
+    Returns information for a single vendor vehicle.
+    
+    list:
+    Returns all of the vendor vehicles in the Discovery universe.
+    """
+    queryset = categories.Vehicle.objects.all().distinct()
+    lookup_field = 'id'
+    
+    action_filters = {
+        'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
+    }
+    filter_class = filters.VehicleFilter
+    search_fields = ['id', 'name']
+    ordering_fields = ['id', 'name', 'small_business', 'numeric_pool', 'display_number']
+    ordering = 'name'
+    
+    pagination_class = pagination.ResultSetPagination
+    action_serializers = {
+        'list': serializers.VehicleSummarySerializer,
+        'retrieve': serializers.VehicleFullSerializer,
+        'test': serializers.VehicleTestSerializer
+    }
+
+
 class PoolViewSet(DiscoveryReadOnlyModelViewSet):
     """
     API endpoint that allows for access to Discovery related vendor pool information.
