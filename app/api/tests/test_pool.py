@@ -77,8 +77,8 @@ class PoolTest(case.APITestCase, metaclass = case.MetaAPISchema):
             },
             'vehicle__id': {
                 'tags': ('pool_field', 'vehicle_field', 'token_text'),
-                '*exact': 'BMO_SB',
-                '*iexact': 'hcaTs_Sb',
+                '@exact': 'BMO_SB',
+                '@iexact': 'hcaTs_Sb',
                 '@in': ("BMO", "OASIS", "HCATS_SB")
             },
             'vehicle__name': {

@@ -542,8 +542,8 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
             },
             'vendor__pools__pool__vehicle__id': {
                 'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'vehicle_field', 'token_text'),
-                '*exact': 'BMO_SB',
-                '*iexact': 'hcaTs_Sb',
+                '@exact': 'BMO_SB',
+                '@iexact': 'hcaTs_Sb',
                 '@in': ("BMO", "OASIS", "HCATS_SB")
             },
             'vendor__pools__pool__vehicle__name': {
