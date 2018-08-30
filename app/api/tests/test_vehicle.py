@@ -32,7 +32,7 @@ class VehicleTest(case.APITestCase, metaclass = case.MetaAPISchema):
             'tags': ('vehicle_search',),
             '@search1': ('name', 'istartswith', 'OASIS'),
             '*search2': ('id', 'exact', 'BMO_SB'),
-            '!search3': ('name', 'exact', 'junk')
+            '-search3': ('name', 'exact', 'junk')
         },
         'fields': {
             'id': {
