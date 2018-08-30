@@ -267,7 +267,7 @@ class BasePoolMembershipSerializer(ModelSerializer):
     def get_capability_statement(self, item):
         request = self.context.get('request')
         duns = item.vendor.duns
-        vehicle = item.pool.vehicle
+        vehicle = item.pool.vehicle.id
         
         cs_path = "static/discovery_site/capability_statements/{}/{}.pdf".format(vehicle, duns)
         cs_url = request.build_absolute_uri("/discovery_site/capability_statements/{}/{}.pdf".format(vehicle, duns))
