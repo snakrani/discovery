@@ -93,8 +93,8 @@ DataManager.getMembershipMap = function() {
             };
         }
 
-        var vehicle = poolMap[membership.pool.id].vehicle;
-        var vehicleName = vehicleMap[vehicle].title;
+        var vehicle = poolMap[membership.pool.id].vehicle.id;
+        var vehicleName = vehicleMap[vehicle].name;
         if ($.inArray(vehicle, membershipMap[membership.piid]['vehicleIds']) == -1) {
             membershipMap[membership.piid]['vehicleIds'].push(vehicle);
             membershipMap[membership.piid]['vehicles'].push(vehicleName);
@@ -420,7 +420,7 @@ DataManager.populateMembershipFilters = function() {
             $membershipRow.append('<td class="phone">' + membership.phones.join('<br/>') + '</td>');
             $membershipRow.append('<td class="email">' + membership.emails.join('<br/>') + '</td>');
 
-            if (membership.vehicleIds.length == 1 && vehicleMap[membership.vehicleIds[0]].sb) {
+            if (membership.vehicleIds.length == 1 && vehicleMap[membership.vehicleIds[0]].small_business) {
                 var exp_8a_date = '';
 
                 $membershipRow.append(DataManager.setasideColumn(membership.setasides, 'sb', 'SB'));
