@@ -19,7 +19,7 @@ def format_duns(text):
 
 
 def get_vehicle_name(id):
-    vehicle = Vehicle.objects.filter(id=id)
+    vehicle = Vehicle.objects.get(id=id)
     
     if vehicle:
         return vehicle.name
@@ -32,7 +32,7 @@ def get_memberships(vendor):
     
     for membership in vendor.pools.all():
         piid = membership.piid
-        vehicle_id = membership.pool.vehicle
+        vehicle_id = membership.pool.vehicle.id
         vehicle_name = get_vehicle_name(vehicle_id)
         pool_id = membership.pool.id
         pool_number = membership.pool.number
@@ -130,7 +130,7 @@ def PoolCSV(request):
         pools = Pool.objects.filter(id__in=request.GET.getlist('pools')[0].split(','))
     else:
         if vehicle:
-            pools = Pool.objects.filter(vehicle=vehicle)
+            pools = Pool.objects.filter(vehicle__id=vehicle)
         elif naics:
             pools = Pool.objects.filter(naics=naics.code)
         else:
@@ -170,7 +170,7 @@ def PoolCSV(request):
     writer.writerow(('', ))
     writer.writerow(('Included pools:',))
     for pool in pools:
-        name = "{} {}: {}".format(" ".join(pool.vehicle.split('_')), pool.number, pool.name)
+        name = "{} {}: {}".format(" ".join(pool.vehicle.id.split('_')), pool.number, pool.name)
         writer.writerow(('', name))
     
     writer.writerow(('',))
@@ -205,9 +205,9 @@ def PoolCSV(request):
         vehicleMap = {}
         vendor_vehicles = []  
         for v_pool in v.pools.all():
-            if v_pool.pool.vehicle not in vehicleMap:
-                vendor_vehicles.append(" ".join(v_pool.pool.vehicle.split('_')))
-                vehicleMap[v_pool.pool.vehicle] = True      
+            if v_pool.pool.vehicle.id not in vehicleMap:
+                vendor_vehicles.append(" ".join(v_pool.pool.vehicle.id.split('_')))
+                vehicleMap[v_pool.pool.vehicle.id] = True      
         
         v_row = [format_duns(v.duns), v.name, location, contract_list.count(), ", ".join(vendor_vehicles)]
         v_row.extend(setaside_list)
