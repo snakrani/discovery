@@ -240,9 +240,37 @@ class VendorFilter(FilterSet, metaclass = MetaFilterSet):
     sam_location = RelatedFilter(LocationFilter)
     pools = RelatedFilter(PoolMembershipFilter)
     
+    setasides = CharFilter(field_name='setasides', method='filter_setasides')
+    
     class Meta:
         model = vendors.Vendor
         fields = ()
+        
+    def filter_setasides(self, qs, name, value):
+        setaside_query = Q()
+        pool_ids = []
+                
+        for code in value.split(','):
+            setaside_query.add(Q(setasides__code=code), Q.AND)
+        
+        memberships = vendors.PoolMembership.objects.filter(setaside_query)
+        
+        if 'pools__pool__id__in' in self.request.query_params:
+            pool_ids = self.request.query_params['pools__pool__id__in'].split(',')
+        elif 'pool' in self.request.query_params:
+            pool_ids = self.request.query_params['pool'].split(',')
+        
+        if len(pool_ids):
+            memberships = memberships.filter(pool__id__in=pool_ids)
+        
+        piids = memberships.values_list('piid', flat=True)
+        
+        if len(piids) > 0:
+            qs = qs.filter(pools__piid__in=piids)
+        else:
+            qs = qs.filter(pools__piid=0)
+        
+        return qs
 
 
 class ContractStatusFilter(FilterSet, metaclass = MetaFilterSet):
