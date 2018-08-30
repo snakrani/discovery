@@ -148,11 +148,23 @@ class PscFilter(FilterSet, metaclass = MetaFilterSet):
         fields = ()
 
 
+class VehicleFilter(FilterSet, metaclass = MetaFilterSet):
+    
+    _token_text = ('id',)
+    _fuzzy_text = ('name',)
+    _boolean = ('small_business', 'numeric_pool', 'display_number')
+    
+    class Meta:
+        model = categories.Vehicle
+        fields = ()
+
+
 class PoolFilter(FilterSet, metaclass = MetaFilterSet):
     
     _token_text = ('id', 'number')
-    _fuzzy_text = ('name','vehicle', 'threshold')
+    _fuzzy_text = ('name', 'threshold')
     
+    vehicle = RelatedFilter(VehicleFilter)
     naics = RelatedFilter(NaicsFilter)
     
     class Meta:

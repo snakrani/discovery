@@ -23,18 +23,18 @@ LayoutManager.renderPoolInfo = function() {
 
     for (var index = 0; index < pools.length; index++) {
         var poolData = vehiclePools[pools[index]];
-        var vehicleInfo = vehicleMap[poolData.vehicle];
+        var vehicleInfo = vehicleMap[poolData.vehicle.id];
         var poolName;
 
         if (vehicleInfo.display_number) {
-            poolName = '<span class="vehicle">' + poolData.vehicle.split('_').join(' ') + " " + poolData.number + ':</span><span class="title">' + poolData.name + '</span>';
+            poolName = '<span class="vehicle">' + poolData.vehicle.id.split('_').join(' ') + " " + poolData.number + ':</span><span class="title">' + poolData.name + '</span>';
         }
         else {
-            poolName = '<span class="vehicle">' + poolData.vehicle.split('_').join(' ') + ':</span><span class="title">' + poolData.name + '</span>';
+            poolName = '<span class="vehicle">' + poolData.vehicle.id.split('_').join(' ') + ':</span><span class="title">' + poolData.name + '</span>';
         }
 
         if (pools.length > 1) {
-            var url = DataManager.getURL({'vehicle': poolData.vehicle, 'pools': poolData.id});
+            var url = DataManager.getURL({'vehicle': poolData.vehicle.id, 'pools': poolData.id});
             poolNames.push('<div class="pool"><div class="spacer"/><a id="link_' + poolData.id + '" class="pool_filter_link" href="' + url + '">' + poolName + '</a></div>');
         }
         else {
@@ -123,7 +123,7 @@ LayoutManager.renderVendor = function(vendor, qs) {
 
     for (var index = 0; index < vendorPools.length; index++) {
         var vehicleId = vendorPools[index];
-        renderedPools.push(vehicleMap[vehicleId].title);
+        renderedPools.push(vehicleMap[vehicleId].name);
     }
     $vendorRow.append($('<td class="vendor_pools">' + renderedPools.join(', ') + '</td>'));
 
@@ -191,4 +191,3 @@ LayoutManager.renderPager = function(data) {
         $('#viewing_vendors').hide();
     }
 };
-

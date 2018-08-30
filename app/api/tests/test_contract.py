@@ -526,20 +526,6 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iexact': '9',
                 '@in': ('1', '3', '5B', '16')
             },
-            'vendor__pools__pool__vehicle': {
-                'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'fuzzy_text'),
-                '@exact': 'OASIS_SB',
-                '@iexact': 'oasis',
-                '@in': ("HCATS", "BMO_SB"),
-                '@contains': 'SB',
-                '@icontains': 'oasis',
-                '@startswith': 'O',
-                '@istartswith': 'bm',
-                '@endswith': 'SB',
-                '@iendswith': '_sb',
-                '@regex': '^(OASIS|HCATS)_SB$',
-                '@iregex': '^(oaSis|hCaTs)_Sb$'
-            },
             'vendor__pools__pool__threshold': {
                 'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'fuzzy_text'),
                 '@exact': '$15 million',
@@ -553,6 +539,41 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iendswith': 'MillIon',
                 '@regex': '^\d+\s+',
                 '@iregex': '(500 EMPLOYEE|MILLION)'
+            },
+            'vendor__pools__pool__vehicle__id': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'vehicle_field', 'token_text'),
+                '@exact': 'BMO_SB',
+                '@iexact': 'hcaTs_Sb',
+                '@in': ("BMO", "OASIS", "HCATS_SB")
+            },
+            'vendor__pools__pool__vehicle__name': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'vehicle_field', 'fuzzy_text'),
+                '@exact': 'HCATS Small Business',
+                '@iexact': 'hcats small business',
+                '@in': ("BMO Small Business", "OASIS Unrestricted"),
+                '@contains': 'OASIS',
+                '@icontains': 'bmo',
+                '@startswith': 'HCATS',
+                '@istartswith': 'hcats',
+                '@endswith': 'Business',
+                '@iendswith': 'unrestricted',
+                '@regex': 'Prof.*$',
+                '@iregex': 'prof.*$'
+            },
+            'vendor__pools__pool__vehicle__small_business': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'vehicle_field', 'boolean'),
+                '[1]@exact': True,
+                '[2]@exact': False,
+            },
+            'vendor__pools__pool__vehicle__numeric_pool': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'vehicle_field', 'boolean'),
+                '[1]@exact': True,
+                '[2]@exact': False,
+            },
+            'vendor__pools__pool__vehicle__display_number': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'vehicle_field', 'boolean'),
+                '[1]@exact': True,
+                '[2]@exact': False,
             },
             'vendor__pools__pool__naics__code': {
                 'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'naics_field', 'fuzzy_text'),

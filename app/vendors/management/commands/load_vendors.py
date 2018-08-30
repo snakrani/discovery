@@ -307,7 +307,7 @@ class Command(BaseCommand):
         print("Processing pool: {}".format(pool))
         
         try:
-            pool_data = Pool.objects.get(number=pool, vehicle__iexact=vehicle)
+            pool_data = Pool.objects.get(number=pool, vehicle__id__iexact=vehicle)
             
             for index, record in df.iterrows():
                 self.update_vendor(columns, record, pool_data, options)

@@ -6,61 +6,22 @@ var DataManager = {
 
     title: 'Discovery',
 
-    vehicleMap: {
-        "OASIS_SB": {
-            "title": "OASIS Small Business",
-            "sb": true,
-            "pool_numeric": false,
-            "display_number": true
-        },
-        "OASIS": {
-            "title": "OASIS Unrestricted",
-            "sb": false,
-            "pool_numeric": false,
-            "display_number": true
-        },
-        "HCATS_SB": {
-            "title": "HCATS Small Business",
-            "sb": true,
-            "pool_numeric": true,
-            "display_number": false
-        },
-        "HCATS": {
-            "title": "HCATS Unrestricted",
-            "sb": false,
-            "pool_numeric": true,
-            "display_number": false
-        },
-        "BMO_SB": {
-            "title": "BMO Small Business",
-            "sb": true,
-            "pool_numeric": true,
-            "display_number": false
-        },
-        "BMO": {
-            "title": "BMO Unrestricted",
-            "sb": false,
-            "pool_numeric": true,
-            "display_number": false
-        },
-        "PSS": {
-            "title": "Professional Services Schedule",
-            "sb": true,
-            "pool_numeric": false,
-            "display_number": true
-        }
-    },
-
     init: function() {
         DataManager.collect('page', 1);
         DataManager.collect('count');
         DataManager.collect('ordering');
 
+        EventManager.subscribe('vehicleMapUpdated', DataManager.runInitializers);
         EventManager.subscribe('pageUpdated', DataManager.bootstrap);
 
+        DataManager.loadVehicles();
+    },
+
+    runInitializers: function() {
         for (var handler in DataManager.initializers){
             DataManager.initializers[handler].call(this);
         }
+        DataManager.bootstrap();
     },
 
     update: function() {
@@ -177,8 +138,12 @@ var DataManager = {
         }
     },
 
+    setVehicleMap: function(value) {
+        DataManager.set('vehicleMap', value);
+    },
+
     getVehicleMap: function() {
-        return DataManager.vehicleMap;
+        return DataManager.get('vehicleMap', {});
     },
 
     setPage: function(value) {
@@ -276,5 +241,23 @@ var DataManager = {
               console.log('Failed to load: ', url);
               console.log(error);
             });
+    },
+
+    loadVehicles: function() {
+        var url = "/api/vehicles/";
+        var queryData = {page: 0, ordering: 'id'};
+
+        DataManager.getAPIRequest(url, queryData, function(data) {
+            var vehicles = data['results'];
+            var vehicleMap = {};
+
+            for (var index = 0; index < vehicles.length; index++) {
+                var vehicle = vehicles[index];
+                vehicleMap[vehicle.id] = vehicle;
+            }
+
+            DataManager.setVehicleMap(vehicleMap);
+            EventManager.publish('vehicleMapUpdated');
+        });
     }
 };

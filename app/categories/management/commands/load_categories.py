@@ -21,6 +21,9 @@ class Command(BaseCommand):
         print('> Loading vendor setasides')
         call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/setasides.json'))
         
+        print('> Loading vendor vehicles')
+        call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/vehicles.json'))
+        
         print('> Loading vendor pools')
         call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/pools.json'))
         

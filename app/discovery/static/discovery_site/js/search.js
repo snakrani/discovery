@@ -190,15 +190,15 @@ DataManager.getSortedPools = function(pools, defaultPools) {
         a = vehiclePools[a];
         b = vehiclePools[b];
 
-        if (a.vehicle == b.vehicle) {
-            if (vehicleMap[a.vehicle].pool_numeric) {
+        if (a.vehicle.id == b.vehicle.id) {
+            if (vehicleMap[a.vehicle.id].numeric_pool) {
                 return a.number - b.number;
             }
             else {
                 return a.number > b.number ? 1 : -1;
             }
         }
-        return a.vehicle > b.vehicle ? 1 : -1;
+        return a.vehicle.id > b.vehicle.id ? 1 : -1;
     });
     return pools;
 };
@@ -279,9 +279,9 @@ DataManager.vendorSetasides = function(vendor) {
             var membership = vendor.pools[mindex];
 
             if (membership.pool.id in vehiclePools && (pools.length == 0 || $.inArray(membership.pool.id, pools) != -1)) {
-                var vehicle = vehiclePools[membership.pool.id].vehicle;
+                var vehicle = vehiclePools[membership.pool.id].vehicle.id;
 
-                if (membership.setasides.length > 0 && vehicleMap[vehicle]["sb"]) {
+                if (membership.setasides.length > 0 && vehicleMap[vehicle].small_business) {
                     for (var sindex = 0; sindex < membership.setasides.length; sindex++) {
                         setasides[membership.setasides[sindex].code] = true;
                     }
@@ -312,8 +312,8 @@ DataManager.loadPools = function() {
         for (var index = 0; index < pools.length; index++) {
             var pool = pools[index];
 
-            if (setasides.length == 0 || vehicleMap[pool.vehicle]["sb"]) {
-                if (! vehicle || vehicle == pool.vehicle) {
+            if (setasides.length == 0 || vehicleMap[pool.vehicle.id].small_business) {
+                if (! vehicle || vehicle == pool.vehicle.id) {
                     vehiclePoolMap[pool.id] = pool;
                 }
                 naicsPoolMap[pool.id] = pool;
@@ -343,7 +343,7 @@ DataManager.loadNaicsMap = function() {
         for (var poolIndex = 0; poolIndex < data.results.length; poolIndex++) {
             pool = data.results[poolIndex];
 
-            if (! vehicle || pool.vehicle == vehicle.toUpperCase()) {
+            if (! vehicle || pool.vehicle.id == vehicle.toUpperCase()) {
                 for (var naicsIndex = 0; naicsIndex < pool.naics.length; naicsIndex++) {
                     naics = pool.naics[naicsIndex].code;
 
@@ -430,13 +430,13 @@ DataManager.populateVehicleDropDown = function() {
     Object.keys(pools).forEach(function(id) {
         var pool = pools[id];
 
-        if (!(pool.vehicle in vehicles) && (setasides.length == 0 || vehicleMap[pool.vehicle]["sb"])) {
+        if (!(pool.vehicle.id in vehicles) && (setasides.length == 0 || vehicleMap[pool.vehicle.id].small_business)) {
             $("#vehicle-id")
                 .append($("<option></option>")
-                .attr("value", pool.vehicle)
-                .text(vehicleMap[pool.vehicle]["title"]));
+                .attr("value", pool.vehicle.id)
+                .text(vehicleMap[pool.vehicle.id].name));
 
-            vehicles[pool.vehicle] = true;
+            vehicles[pool.vehicle.id] = true;
         }
     });
 
@@ -479,7 +479,7 @@ DataManager.populatePoolDropDown = function() {
     for (var index = 0; index < vehiclePoolIds.length; index++) {
         var id = vehiclePoolIds[index];
         var poolData = vehiclePools[id];
-        var poolName = poolData.vehicle.split('_').join(' ') + ' ' + poolData.number + ' - ' + poolData.name;
+        var poolName = poolData.vehicle.id.split('_').join(' ') + ' ' + poolData.number + ' - ' + poolData.name;
 
         $("#pool-id")
             .append($("<option></option>")
@@ -756,7 +756,7 @@ LayoutManager.disableFilters = function() {
 };
 
 LayoutManager.toggleFilters = function() {
-    if (! DataManager.getVehicle() || DataManager.getVehicleMap()[DataManager.getVehicle()]["sb"]) {
+    if (! DataManager.getVehicle() || DataManager.getVehicleMap()[DataManager.getVehicle()].small_business) {
         LayoutManager.enableFilters();
     }
     else {
