@@ -3,14 +3,11 @@
 
 require 'yaml'
 
-# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
-VAGRANTFILE_API_VERSION = "2"
-
 # Load Vagrant configurations (versioned and unversioned)
 vm_config = YAML.load_file("vagrant/config.default.yml")
 vm_config.merge!(YAML.load_file("vagrant/config.yml")) if File.exist?("vagrant/config.yml")
 
-Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+Vagrant.configure("2") do |config|
   vagrant_home = "/home/vagrant"
   project_directory = "/vagrant"
 
