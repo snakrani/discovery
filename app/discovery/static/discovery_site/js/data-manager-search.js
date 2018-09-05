@@ -46,7 +46,6 @@ DataManager.loadVendors = function() {
                 filters.push('(pools__pool__id' + '=' + pools[index] + ')');
                 poolIds.push(pools[index]);
             }
-            queryData['pool'] = poolIds.join(',');
         } else {
             Object.keys(vehiclePools).forEach(function (id) {
                 poolIds.push(id);
@@ -62,8 +61,11 @@ DataManager.loadVendors = function() {
     }
 
     if (setasides.length > 0) {
-        for (var index = 0; index < setasides.length; index++) {
-            filters.push('(setasides' + '=' + setasides[index] + ')');
+        if (poolIds.length) {
+            filters.push('(setasides' + '=' + setasides.join(',') + ':' + poolIds.join(',') + ')');
+        }
+        else {
+            filters.push('(setasides' + '=' + setasides.join(',') + ')');
         }
     }
 
