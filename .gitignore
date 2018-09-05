@@ -8,6 +8,8 @@ __pycache__
 /.project
 /.pydevproject
 /.settings/
+/.vscode/
+/.code-workspace
 /_book/
 /.coverage
 /.vagrant/
