@@ -247,28 +247,28 @@ class VendorFilter(FilterSet, metaclass = MetaFilterSet):
         fields = ()
         
     def filter_setasides(self, qs, name, value):
-        setaside_query = Q()
-        pool_ids = []
-                
-        for code in value.split(','):
-            setaside_query.add(Q(setasides__code=code), Q.AND)
-        
-        memberships = vendors.PoolMembership.objects.filter(setaside_query)
-        
-        if 'pools__pool__id__in' in self.request.query_params:
-            pool_ids = self.request.query_params['pools__pool__id__in'].split(',')
-        elif 'pool' in self.request.query_params:
-            pool_ids = self.request.query_params['pool'].split(',')
-        
+        value_components = value.split(':')
+        setasides = value_components[0].split(',')
+        pool_ids = value_components[1].split(',') if len(value_components) > 1 else []
+
         if len(pool_ids):
-            memberships = memberships.filter(pool__id__in=pool_ids)
-        
-        piids = memberships.values_list('piid', flat=True)
-        
-        if len(piids) > 0:
-            qs = qs.filter(pools__piid__in=piids)
+            ids = list(vendors.PoolMembership.objects.filter(pool__id__in=pool_ids).values_list('id', flat=True))
         else:
-            qs = qs.filter(pools__piid=0)
+            ids = []
+
+        for code in setasides:
+            if len(ids):
+                memberships = vendors.PoolMembership.objects.filter(setasides__code=code, id__in=ids)
+            else:
+                memberships = vendors.PoolMembership.objects.filter(setasides__code=code)
+
+            setaside_ids = list(memberships.values_list('id', flat=True))
+            ids = list(set(ids) & set(setaside_ids))
+
+        if len(ids) > 0:
+            qs = qs.filter(pools__id__in=ids)
+        else:
+            qs = qs.filter(pools__id=0)
         
         return qs
 
