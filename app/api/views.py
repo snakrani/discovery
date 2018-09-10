@@ -73,6 +73,13 @@ class DiscoveryReadOnlyModelViewSet(
             ('count', len(values)),
             ('results', values)
         ]))
+    
+    def count(self, request, *args, **kwargs):
+        self.init_cache(request)
+        
+        field_lookup = kwargs['field_lookup']
+        queryset = self.filter_queryset(self.get_queryset())
+        return Response({'count': queryset.values_list(field_lookup, flat=True).count()})
    
 
 class NaicsViewSet(DiscoveryReadOnlyModelViewSet):
