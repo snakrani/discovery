@@ -19,8 +19,6 @@ $(document).ready(function() {
 
     DataManager.init();
     LayoutManager.init();
-
-    DataManager.bootstrap();
 });
 
 // removes empty strings

@@ -529,7 +529,8 @@ class MetaAPISchema(type):
     @classmethod
     def _validation_info(cls, lookup, default_type = '@'):
         count_specifier = default_type
-                    
+        lookup = re.sub(r'^\[\d+\]\s*', '', lookup)
+                            
         if re.search('^[\-\*\@\!\&\#]', lookup):
             count_specifier = lookup[0]
             lookup = lookup[1:]

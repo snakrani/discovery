@@ -106,6 +106,30 @@ class PscTestSerializer(PscFullSerializer):
         fields = PscFullSerializer.Meta.fields + ['url']
 
 
+class BaseVehicleSerializer(HyperlinkedModelSerializer):
+    url = HyperlinkedIdentityField(view_name="vehicle-detail", lookup_field='id')
+    
+    class Meta:
+        model = categories.Vehicle
+        fields = ['id', 'name', 'small_business', 'numeric_pool', 'display_number']
+
+class VehicleLinkSerializer(BaseVehicleSerializer):
+    class Meta(BaseVehicleSerializer.Meta):
+        fields = ['id', 'url']
+
+class VehicleSummarySerializer(BaseVehicleSerializer):
+    class Meta(BaseVehicleSerializer.Meta):
+        fields = BaseVehicleSerializer.Meta.fields + ['url']
+
+class VehicleFullSerializer(BaseVehicleSerializer): 
+    class Meta(BaseVehicleSerializer.Meta):
+        fields = BaseVehicleSerializer.Meta.fields
+
+class VehicleTestSerializer(VehicleFullSerializer):
+    class Meta(VehicleFullSerializer.Meta):
+        fields = VehicleFullSerializer.Meta.fields + ['url']
+
+
 class BasePoolSerializer(HyperlinkedModelSerializer):
     url = HyperlinkedIdentityField(view_name="pool-detail", lookup_field='id')
     
@@ -118,18 +142,21 @@ class PoolLinkSerializer(BasePoolSerializer):
         fields = ['id', 'url']
 
 class PoolSummarySerializer(BasePoolSerializer):
+    vehicle = VehicleSummarySerializer()
     naics = NaicsSummarySerializer(many=True)
     
     class Meta(BasePoolSerializer.Meta):
         fields = BasePoolSerializer.Meta.fields + ['naics', 'url']
 
 class PoolFullSerializer(BasePoolSerializer):
+    vehicle = VehicleSummarySerializer()
     naics = NaicsSummarySerializer(many=True)
     
     class Meta(BasePoolSerializer.Meta):
         fields = BasePoolSerializer.Meta.fields + ['naics']
 
 class PoolTestSerializer(PoolFullSerializer):
+    vehicle = VehicleTestSerializer()
     naics = NaicsTestSerializer(many=True)
     
     class Meta(PoolFullSerializer.Meta):
@@ -240,7 +267,7 @@ class BasePoolMembershipSerializer(ModelSerializer):
     def get_capability_statement(self, item):
         request = self.context.get('request')
         duns = item.vendor.duns
-        vehicle = item.pool.vehicle
+        vehicle = item.pool.vehicle.id
         
         cs_path = "static/discovery_site/capability_statements/{}/{}.pdf".format(vehicle, duns)
         cs_url = request.build_absolute_uri("/discovery_site/capability_statements/{}/{}.pdf".format(vehicle, duns))
@@ -296,17 +323,11 @@ class VendorLinkSerializer(BaseVendorSerializer):
         fields = ['duns', 'url']
 
 class AnnotatedVendorSerializer(BaseVendorSerializer):
-    setasides = SerializerMethodField()
-    
     sam_location_citystate = CharField()
     
     annual_revenue = IntegerField()
     number_of_employees = IntegerField()
     number_of_contracts = IntegerField()
-    
-    def get_setasides(self, item):
-        queryset = categories.SetAside.objects.filter(id__in=vendors.PoolMembership.objects.filter(vendor=item).values('setasides'))
-        return SetasideLinkSerializer(queryset, many=True, context=self.context).data
 
 
 class VendorSummarySerializer(AnnotatedVendorSerializer):
@@ -315,7 +336,7 @@ class VendorSummarySerializer(AnnotatedVendorSerializer):
     class Meta(BaseVendorSerializer.Meta):
         fields = BaseVendorSerializer.Meta.fields + [
             'annual_revenue', 'number_of_employees', 
-            'number_of_contracts', 'setasides', 'pools',
+            'number_of_contracts', 'pools',
             'url'
         ]
 
@@ -326,7 +347,7 @@ class VendorFullSerializer(AnnotatedVendorSerializer):
     class Meta(BaseVendorSerializer.Meta):
         fields = BaseVendorSerializer.Meta.fields + [
             'sam_location', 
-            'setasides', 'pools',
+            'pools',
             'annual_revenue', 'number_of_employees', 
             'number_of_contracts'
         ]

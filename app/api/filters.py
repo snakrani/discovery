@@ -148,11 +148,23 @@ class PscFilter(FilterSet, metaclass = MetaFilterSet):
         fields = ()
 
 
+class VehicleFilter(FilterSet, metaclass = MetaFilterSet):
+    
+    _token_text = ('id',)
+    _fuzzy_text = ('name',)
+    _boolean = ('small_business', 'numeric_pool', 'display_number')
+    
+    class Meta:
+        model = categories.Vehicle
+        fields = ()
+
+
 class PoolFilter(FilterSet, metaclass = MetaFilterSet):
     
     _token_text = ('id', 'number')
-    _fuzzy_text = ('name','vehicle', 'threshold')
+    _fuzzy_text = ('name', 'threshold')
     
+    vehicle = RelatedFilter(VehicleFilter)
     naics = RelatedFilter(NaicsFilter)
     
     class Meta:
@@ -228,9 +240,37 @@ class VendorFilter(FilterSet, metaclass = MetaFilterSet):
     sam_location = RelatedFilter(LocationFilter)
     pools = RelatedFilter(PoolMembershipFilter)
     
+    setasides = CharFilter(field_name='setasides', method='filter_setasides')
+    
     class Meta:
         model = vendors.Vendor
         fields = ()
+        
+    def filter_setasides(self, qs, name, value):
+        value_components = value.split(':')
+        setasides = value_components[0].split(',')
+        pool_ids = value_components[1].split(',') if len(value_components) > 1 else []
+
+        if len(pool_ids):
+            ids = list(vendors.PoolMembership.objects.filter(pool__id__in=pool_ids).values_list('id', flat=True))
+        else:
+            ids = []
+
+        for code in setasides:
+            if len(ids):
+                memberships = vendors.PoolMembership.objects.filter(setasides__code=code, id__in=ids)
+            else:
+                memberships = vendors.PoolMembership.objects.filter(setasides__code=code)
+
+            setaside_ids = list(memberships.values_list('id', flat=True))
+            ids = list(set(ids) & set(setaside_ids))
+
+        if len(ids) > 0:
+            qs = qs.filter(pools__id__in=ids)
+        else:
+            qs = qs.filter(pools__id=0)
+        
+        return qs
 
 
 class ContractStatusFilter(FilterSet, metaclass = MetaFilterSet):

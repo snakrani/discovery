@@ -1,0 +1,72 @@
+[
+{
+  "model": "categories.vehicle",
+  "pk": "OASIS_SB",
+  "fields": {
+    "name": "OASIS Small Business",
+    "small_business": true,
+    "numeric_pool": false,
+    "display_number": true
+  }
+},
+{
+  "model": "categories.vehicle",
+  "pk": "OASIS",
+  "fields": {
+    "name": "OASIS Unrestricted",
+    "small_business": false,
+    "numeric_pool": false,
+    "display_number": true
+  }
+},
+{
+  "model": "categories.vehicle",
+  "pk": "HCATS_SB",
+  "fields": {
+    "name": "HCATS Small Business",
+    "small_business": true,
+    "numeric_pool": true,
+    "display_number": false
+  }
+},
+{
+  "model": "categories.vehicle",
+  "pk": "HCATS",
+  "fields": {
+    "name": "HCATS Unrestricted",
+    "small_business": false,
+    "numeric_pool": true,
+    "display_number": false
+  }
+},
+{
+  "model": "categories.vehicle",
+  "pk": "BMO_SB",
+  "fields": {
+    "name": "BMO Small Business",
+    "small_business": true,
+    "numeric_pool": true,
+    "display_number": false
+  }
+},
+{
+  "model": "categories.vehicle",
+  "pk": "BMO",
+  "fields": {
+    "name": "BMO Unrestricted",
+    "small_business": false,
+    "numeric_pool": true,
+    "display_number": false
+  }
+},
+{
+  "model": "categories.vehicle",
+  "pk": "PSS",
+  "fields": {
+    "name": "Professional Services Schedule",
+    "small_business": true,
+    "numeric_pool": false,
+    "display_number": true
+  }
+}
+]
