@@ -32,6 +32,15 @@ class DiscoveryAPIRouter(SimpleRouter):
             },
             name='{basename}-values',
             initkwargs={'suffix': 'Values'}
+        ),
+        # Count route.
+        Route(
+            url=r'^{prefix}/count/{field_lookup}{trailing_slash}$',
+            mapping={
+                'get': 'count'
+            },
+            name='{basename}-count',
+            initkwargs={'suffix': 'Count'}
         )
     ]
     
