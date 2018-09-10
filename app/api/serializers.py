@@ -139,7 +139,7 @@ class BasePoolSerializer(HyperlinkedModelSerializer):
 
 class PoolLinkSerializer(BasePoolSerializer):
     class Meta(BasePoolSerializer.Meta):
-        fields = ['id', 'url']
+        fields = ['id', 'vehicle', 'url']
 
 class PoolSummarySerializer(BasePoolSerializer):
     vehicle = VehicleSummarySerializer()
