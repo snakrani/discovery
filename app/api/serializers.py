@@ -132,7 +132,7 @@ class VehicleTestSerializer(VehicleFullSerializer):
 
 class BasePoolSerializer(HyperlinkedModelSerializer):
     url = HyperlinkedIdentityField(view_name="pool-detail", lookup_field='id')
-    vehicle = VehicleSummarySerializer()
+    vehicle = VehicleLinkSerializer()
     
     class Meta:
         model = categories.Pool
@@ -144,6 +144,7 @@ class PoolLinkSerializer(BasePoolSerializer):
 
 class PoolSummarySerializer(BasePoolSerializer):
     naics = NaicsSummarySerializer(many=True)
+    vehicle = VehicleSummarySerializer()
     
     class Meta(BasePoolSerializer.Meta):
         fields = BasePoolSerializer.Meta.fields + ['naics', 'url']
