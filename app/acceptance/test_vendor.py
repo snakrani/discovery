@@ -147,7 +147,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'membership_filters': (None, 1, 0, 0, {
                     1: ('Doug Rowles', '678-525-0722', 'doug.rowles@am.jll.com')
                 }),
-                'vendor_sam': ('8/10/18',),
+                'vendor_sam': ('8/10/18', True),
                 'vendor_info': ('JONES, LANG & LASALLE', '079859134', '7EM20', '77,300', '$6,066,366,464'),
                 'vendor_address': ('200 E Randolph Dr', 'Chicago, IL 60601', True),
                 'vendor_badges': (),
