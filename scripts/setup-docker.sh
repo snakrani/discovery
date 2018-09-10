@@ -40,6 +40,6 @@ initctl emit docker-ready >>"$LOG_FILE" 2>&1
 if ! which docker-compose >/dev/null
 then
   echo "> Installing Docker Compose" | tee -a "$LOG_FILE"
-  curl -L -o /usr/local/bin/docker-compose https://github.com/docker/compose/releases/download/1.18.0/docker-compose-Linux-x86_64 >>"$LOG_FILE" 2>&1
+  curl -L -o /usr/local/bin/docker-compose https://github.com/docker/compose/releases/download/1.22.0/docker-compose-Linux-x86_64 >>"$LOG_FILE" 2>&1
   chmod +x /usr/local/bin/docker-compose >>"$LOG_FILE" 2>&1
 fi

@@ -323,29 +323,11 @@ class VendorLinkSerializer(BaseVendorSerializer):
         fields = ['duns', 'url']
 
 class AnnotatedVendorSerializer(BaseVendorSerializer):
-    setasides = SerializerMethodField()
-    
     sam_location_citystate = CharField()
     
     annual_revenue = IntegerField()
     number_of_employees = IntegerField()
     number_of_contracts = IntegerField()
-    
-    def get_setasides(self, item):
-        params = {'vendor': item}
-        
-        if 'setaside' in self.context['request'].query_params:
-            params['setasides__code__in'] = self.context['request'].query_params['setaside'].split(',')
-        
-        if 'pools__pool__id__in' in self.context['request'].query_params:
-            params['pool__id__in'] = self.context['request'].query_params['pools__pool__id__in'].split(',')
-        elif 'pool' in self.context['request'].query_params:
-            params['pool__id__in'] = self.context['request'].query_params['pool'].split(',')
-        
-        setasides = vendors.PoolMembership.objects.filter(**params).values('setasides')
-        queryset = categories.SetAside.objects.filter(id__in=setasides)
-        
-        return SetasideLinkSerializer(queryset, many=True, context=self.context).data
 
 
 class VendorSummarySerializer(AnnotatedVendorSerializer):
@@ -354,7 +336,7 @@ class VendorSummarySerializer(AnnotatedVendorSerializer):
     class Meta(BaseVendorSerializer.Meta):
         fields = BaseVendorSerializer.Meta.fields + [
             'annual_revenue', 'number_of_employees', 
-            'number_of_contracts', 'setasides', 'pools',
+            'number_of_contracts', 'pools',
             'url'
         ]
 
@@ -365,7 +347,7 @@ class VendorFullSerializer(AnnotatedVendorSerializer):
     class Meta(BaseVendorSerializer.Meta):
         fields = BaseVendorSerializer.Meta.fields + [
             'sam_location', 
-            'setasides', 'pools',
+            'pools',
             'annual_revenue', 'number_of_employees', 
             'number_of_contracts'
         ]

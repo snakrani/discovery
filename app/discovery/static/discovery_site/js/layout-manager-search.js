@@ -128,15 +128,17 @@ LayoutManager.renderVendor = function(vendor, qs) {
     $vendorRow.append($('<td class="vendor_pools">' + renderedPools.join(', ') + '</td>'));
 
     // Setasides
-    if (vendor.setasides.length > 0) {
-        $vendorRow.append(LayoutManager.renderSetaside(vendor.setasides, 'sb', 'SB'));
-        $vendorRow.append(LayoutManager.renderSetaside(vendor.setasides, 'sdb', '27'));
-        $vendorRow.append(LayoutManager.renderSetaside(vendor.setasides, '8a', 'A6'));
-        $vendorRow.append(LayoutManager.renderSetaside(vendor.setasides, 'Hubz', 'XX'));
-        $vendorRow.append(LayoutManager.renderSetaside(vendor.setasides, 'wo', 'A2'));
-        $vendorRow.append(LayoutManager.renderSetaside(vendor.setasides, 'vo', 'A5'));
-        $vendorRow.append(LayoutManager.renderSetaside(vendor.setasides, 'sdvo', 'QF'));
-        $vendorRow.append(LayoutManager.renderSetaside(vendor.setasides, 'vip', 'VIP'));
+    var setasides = DataManager.vendorSetasides(vendor);
+
+    if (setasides.length > 0) {
+        $vendorRow.append(LayoutManager.renderSetaside(setasides, 'sb', 'SB'));
+        $vendorRow.append(LayoutManager.renderSetaside(setasides, 'sdb', '27'));
+        $vendorRow.append(LayoutManager.renderSetaside(setasides, '8a', 'A6'));
+        $vendorRow.append(LayoutManager.renderSetaside(setasides, 'Hubz', 'XX'));
+        $vendorRow.append(LayoutManager.renderSetaside(setasides, 'wo', 'A2'));
+        $vendorRow.append(LayoutManager.renderSetaside(setasides, 'vo', 'A5'));
+        $vendorRow.append(LayoutManager.renderSetaside(setasides, 'sdvo', 'QF'));
+        $vendorRow.append(LayoutManager.renderSetaside(setasides, 'vip', 'VIP'));
     }
     else {
         $vendorRow.append($('<td colspan="8" class="unrestricted"></td>'));
@@ -148,7 +150,7 @@ LayoutManager.renderSetaside = function(setasides, prefix, setaside) {
     var $col = $('<td class="' + prefix + '"></td>');
 
     for (var index = 0; index < setasides.length; index++) {
-        if (setasides[index].code == setaside) {
+        if (setasides[index] == setaside) {
             $col.html('<img src="'+ static_image_path + 'green_dot.png" class="green_dot">');
             break;
         }
