@@ -30,6 +30,7 @@ import re
 @method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
 @method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='retrieve')
 @method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='values')
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='count')
 class DiscoveryReadOnlyModelViewSet(
     mixins.FilterViewSetMixin,
     mixins.PaginationViewSetMixin,
