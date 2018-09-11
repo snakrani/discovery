@@ -78,6 +78,16 @@ class NaicsTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': '[A-Z]\d+\-\d+$',
                 '@iregex': '^(C87|51)'
             },
+            'keywords__id': {
+                'tags': ('naics_field', 'keyword_field', 'number'),
+                '@exact': 66,
+                '@lt': 500,
+                '@lte': 500, 
+                '@gt': 250, 
+                '@gte': 250,
+                '@range': (50, 100),
+                '@in': (7, 450, 916)
+            },
             'keywords__name': {
                 'tags': ('naics_field', 'keyword_field', 'fuzzy_text'),
                 '@exact': 'Cooking Equipment',
