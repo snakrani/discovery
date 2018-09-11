@@ -130,6 +130,7 @@ class MetaFilterSet(FilterSetMetaclass):
 
 class NaicsFilter(FilterSet, metaclass = MetaFilterSet):
     
+    _number = ('keywords__id',)
     _fuzzy_text = ('code', 'description', 'sin__code', 'keywords__name')
     
     class Meta:
@@ -139,6 +140,7 @@ class NaicsFilter(FilterSet, metaclass = MetaFilterSet):
 
 class PscFilter(FilterSet, metaclass = MetaFilterSet):
     
+    _number = ('keywords__id',)
     _fuzzy_text = ('code', 'description', 'sin__code', 'keywords__name')
     
     naics = RelatedFilter(NaicsFilter)
