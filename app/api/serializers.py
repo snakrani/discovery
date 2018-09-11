@@ -104,7 +104,6 @@ class PscTestSerializer(PscFullSerializer):
 
 
 class TierSerializer(ModelSerializer):
-
     class Meta:
         model = categories.Tier
         fields = ['number', 'name']
