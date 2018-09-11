@@ -311,6 +311,16 @@ class VendorTest(case.APITestCase, metaclass = case.MetaAPISchema):
                     '@regex': '[A-Z]\d+\-\d+$',
                     '@iregex': '^(C87|51)'
                 },
+                'pools__pool__naics__keywords__id': {
+                    'tags': ('vendor_field', 'membership_field', 'pool_field', 'naics_field', 'keyword_field', 'number'),
+                    '@exact': 66,
+                    '@lt': 250,
+                    '@lte': 250, 
+                    '@gt': 600, 
+                    '@gte': 600,
+                    '@range': (50, 100),
+                    '@in': (7, 450, 916)
+                },
                 'pools__pool__naics__keywords__name': {
                     'tags': ('vendor_field', 'membership_field', 'pool_field', 'naics_field', 'keyword_field', 'fuzzy_text'),
                     '@exact': 'Cooking Equipment',
