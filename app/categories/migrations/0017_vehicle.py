@@ -4,10 +4,6 @@ from django.db import migrations, models
 from django.core.management import call_command
 
 
-def populate_vehicles(apps, schema_editor):
-    call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/vehicles.json'))
-
-
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -25,5 +21,4 @@ class Migration(migrations.Migration):
                 ('display_number', models.NullBooleanField()),
             ],
         ),
-        migrations.RunPython(populate_vehicles),
     ]
