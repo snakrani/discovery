@@ -12,15 +12,12 @@ import os
 class KeywordSerializer(ModelSerializer):
     class Meta:
         model = categories.Keyword
-        fields = ['name']
-        
-    def to_representation(self, instance):
-        return instance.name
-    
+        fields = ['id', 'name']
+   
 class KeywordTestSerializer(ModelSerializer):
     class Meta:
         model = categories.Keyword
-        fields = ['name']
+        fields = ['id', 'name']
 
 
 class SinSerializer(ModelSerializer):
