@@ -230,6 +230,7 @@ class Command(BaseCommand):
         call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/setasides.json'))
                 
         print('> Loading vendor vehicles')
+        call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/tiers.json'))
         call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/vehicles.json'))
                 
         print("Loading vendor pools")

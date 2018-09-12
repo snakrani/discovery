@@ -30,6 +30,7 @@ import re
 @method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='list')
 @method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='retrieve')
 @method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='values')
+@method_decorator(cache_page(60*60*settings.API_CACHE_LIFETIME), name='count')
 class DiscoveryReadOnlyModelViewSet(
     mixins.FilterViewSetMixin,
     mixins.PaginationViewSetMixin,
@@ -73,6 +74,13 @@ class DiscoveryReadOnlyModelViewSet(
             ('count', len(values)),
             ('results', values)
         ]))
+    
+    def count(self, request, *args, **kwargs):
+        self.init_cache(request)
+        
+        field_lookup = kwargs['field_lookup']
+        queryset = self.filter_queryset(self.get_queryset())
+        return Response({'count': queryset.values_list(field_lookup, flat=True).count()})
    
 
 class NaicsViewSet(DiscoveryReadOnlyModelViewSet):
@@ -154,7 +162,7 @@ class VehicleViewSet(DiscoveryReadOnlyModelViewSet):
     }
     filter_class = filters.VehicleFilter
     search_fields = ['id', 'name']
-    ordering_fields = ['id', 'name', 'small_business', 'numeric_pool', 'display_number']
+    ordering_fields = ['id', 'name', 'tier__number', 'tier__name', 'poc', 'ordering_guide', 'small_business', 'numeric_pool', 'display_number']
     ordering = 'name'
     
     pagination_class = pagination.ResultSetPagination

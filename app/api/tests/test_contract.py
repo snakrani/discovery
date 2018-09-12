@@ -560,6 +560,58 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': 'Prof.*$',
                 '@iregex': 'prof.*$'
             },
+            'vendor__pools__pool__vehicle__tier__number': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'vehicle_field', 'tier_field', 'number'),
+                '@exact': 3,
+                '@lt': 3,
+                '@lte': 2, 
+                '@gt': 2, 
+                '@gte': 2,
+                '@range': (2, 3),
+                '@in': (1, 2, 3)
+            },
+            'vendor__pools__pool__vehicle__tier__name': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'vehicle_field', 'tier_field', 'fuzzy_text'),
+                '@exact': 'Multi-Agency Solutions',
+                '@iexact': 'multi-agency solutions',
+                '@in': ("Multi-Agency Solutions", "Best-in-Class (BIC)"),
+                '@contains': 'Agency',
+                '@icontains': 'agency',
+                '@startswith': 'Multi',
+                '@istartswith': 'multi',
+                '@endswith': 'Solutions',
+                '@iendswith': 'solutions',
+                '@regex': 'Best-in-Class.*$',
+                '@iregex': '(multi|class)'
+            },
+            'vendor__pools__pool__vehicle__poc': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'vehicle_field', 'fuzzy_text'),
+                '@exact': 'oasissb@gsa.gov',
+                '@iexact': 'OASIS@GSA.GOV',
+                '@in': ("oasissb@gsa.gov", "sbhcats@gsa.gov", "fssi.bmo@gsa.gov"),
+                '@contains': 'professionalservices',
+                '@icontains': 'ProfessionalServices',
+                '@startswith': 'oasis',
+                '@istartswith': 'OASIS',
+                '@endswith': 'gsa.gov',
+                '@iendswith': 'GSA.GOV',
+                '@regex': '\.gov$',
+                '@iregex': '(OASIS|HCATS)'
+            },
+            'vendor__pools__pool__vehicle__ordering_guide': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'vehicle_field', 'fuzzy_text'),
+                '@exact': 'https://www.gsa.gov/cdnstatic/CONSOLIDATED_OASIS_U_SB_Ordering_Guide_8-15-2018.pdf',
+                '@iexact': 'https://WWW.GSA.GOV/cdnstatic/CONSOLIDATED_OASIS_U_SB_Ordering_Guide_8-15-2018.pdf',
+                '@in': ("https://www.gsa.gov/cdnstatic/CONSOLIDATED_OASIS_U_SB_Ordering_Guide_8-15-2018.pdf", "https://www.gsa.gov/cdnstatic/General_Supplies__Services/Ordering%20Guide%20V5_0.pdf"),
+                '@contains': 'OASIS',
+                '@icontains': 'oasis',
+                '@startswith': 'https',
+                '@istartswith': 'HTTPS',
+                '@endswith': 'pdf',
+                '@iendswith': 'PDF',
+                '@regex': '(OASIS|HCaTS)',
+                '@iregex': '(oasis|hcats)'
+            },
             'vendor__pools__pool__vehicle__small_business': {
                 'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'vehicle_field', 'boolean'),
                 '[1]@exact': True,
