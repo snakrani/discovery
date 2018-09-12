@@ -19,7 +19,7 @@ class VehicleTest(case.APITestCase, metaclass = case.MetaAPISchema):
         },
         'ordering': {
             'tags': ('vehicle_ordering',),
-            'fields': ('id', 'name', 'small_business', 'numeric_pool', 'display_number')
+            'fields': ('id', 'name', 'tier__number', 'tier__name', 'poc', 'ordering_guide', 'small_business', 'numeric_pool', 'display_number')
         },
         'pagination': {
             'tags': ('vehicle_pagination',),
@@ -54,6 +54,58 @@ class VehicleTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iendswith': 'unrestricted',
                 '@regex': 'Prof.*$',
                 '@iregex': 'prof.*$'
+            },
+            'tier__number': {
+                'tags': ('vehicle_field', 'tier_field', 'number'),
+                '@exact': 3,
+                '@lt': 3,
+                '@lte': 2, 
+                '@gt': 2, 
+                '@gte': 2,
+                '@range': (2, 3),
+                '@in': (1, 2, 3)
+            },
+            'tier__name': {
+                'tags': ('vehicle_field', 'tier_field', 'fuzzy_text'),
+                '@exact': 'Multi-Agency Solutions',
+                '@iexact': 'multi-agency solutions',
+                '@in': ("Multi-Agency Solutions", "Best-in-Class (BIC)"),
+                '@contains': 'Agency',
+                '@icontains': 'agency',
+                '@startswith': 'Multi',
+                '@istartswith': 'multi',
+                '@endswith': 'Solutions',
+                '@iendswith': 'solutions',
+                '@regex': 'Best-in-Class.*$',
+                '@iregex': '(multi|class)'
+            },
+            'poc': {
+                'tags': ('vehicle_field', 'fuzzy_text'),
+                '@exact': 'oasissb@gsa.gov',
+                '@iexact': 'OASIS@GSA.GOV',
+                '@in': ("oasissb@gsa.gov", "sbhcats@gsa.gov", "fssi.bmo@gsa.gov"),
+                '@contains': 'professionalservices',
+                '@icontains': 'ProfessionalServices',
+                '@startswith': 'oasis',
+                '@istartswith': 'OASIS',
+                '@endswith': 'gsa.gov',
+                '@iendswith': 'GSA.GOV',
+                '@regex': '\.gov$',
+                '@iregex': '(OASIS|HCATS)'
+            },
+            'ordering_guide': {
+                'tags': ('vehicle_field', 'fuzzy_text'),
+                '@exact': 'https://www.gsa.gov/cdnstatic/CONSOLIDATED_OASIS_U_SB_Ordering_Guide_8-15-2018.pdf',
+                '@iexact': 'https://WWW.GSA.GOV/cdnstatic/CONSOLIDATED_OASIS_U_SB_Ordering_Guide_8-15-2018.pdf',
+                '@in': ("https://www.gsa.gov/cdnstatic/CONSOLIDATED_OASIS_U_SB_Ordering_Guide_8-15-2018.pdf", "https://www.gsa.gov/cdnstatic/General_Supplies__Services/Ordering%20Guide%20V5_0.pdf"),
+                '@contains': 'OASIS',
+                '@icontains': 'oasis',
+                '@startswith': 'https',
+                '@istartswith': 'HTTPS',
+                '@endswith': 'pdf',
+                '@iendswith': 'PDF',
+                '@regex': '(OASIS|HCaTS)',
+                '@iregex': '(oasis|hcats)'
             },
             'small_business': {
                 'tags': ('vehicle_field', 'boolean'),
