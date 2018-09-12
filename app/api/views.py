@@ -162,7 +162,7 @@ class VehicleViewSet(DiscoveryReadOnlyModelViewSet):
     }
     filter_class = filters.VehicleFilter
     search_fields = ['id', 'name']
-    ordering_fields = ['id', 'name', 'small_business', 'numeric_pool', 'display_number']
+    ordering_fields = ['id', 'name', 'tier__number', 'tier__name', 'poc', 'ordering_guide', 'small_business', 'numeric_pool', 'display_number']
     ordering = 'name'
     
     pagination_class = pagination.ResultSetPagination

@@ -47,9 +47,17 @@ class SetAside(models.Model):
         return self.name
 
 
+class Tier(models.Model):
+    number = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=128)
+  
+
 class Vehicle(models.Model):
     id = models.CharField(primary_key=True, max_length=128)
     name = models.CharField(max_length=128)
+    tier = models.ForeignKey(Tier, null=True, on_delete=models.CASCADE)
+    poc = models.CharField(max_length=256, null=True)
+    ordering_guide = models.CharField(max_length=256, null=True)
     small_business = models.NullBooleanField(null=True)
     numeric_pool = models.NullBooleanField(null=True)
     display_number = models.NullBooleanField(null=True)

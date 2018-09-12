@@ -4,6 +4,9 @@
   "pk": "OASIS_SB",
   "fields": {
     "name": "OASIS Small Business",
+    "tier": 3,
+    "poc": "oasissb@gsa.gov",
+    "ordering_guide": "https://www.gsa.gov/cdnstatic/CONSOLIDATED_OASIS_U_SB_Ordering_Guide_8-15-2018.pdf",
     "small_business": true,
     "numeric_pool": false,
     "display_number": true
@@ -14,6 +17,9 @@
   "pk": "OASIS",
   "fields": {
     "name": "OASIS Unrestricted",
+    "tier": 3,
+    "poc": "oasis@gsa.gov",
+    "ordering_guide": "https://www.gsa.gov/cdnstatic/CONSOLIDATED_OASIS_U_SB_Ordering_Guide_8-15-2018.pdf",
     "small_business": false,
     "numeric_pool": false,
     "display_number": true
@@ -24,6 +30,9 @@
   "pk": "HCATS_SB",
   "fields": {
     "name": "HCATS Small Business",
+    "tier": 3,
+    "poc": "sbhcats@gsa.gov",
+    "ordering_guide": "https://www.gsa.gov/cdnstatic/HCaTS%20Ordering%20Guide%20-%20Rev%2015%20%20Aug%202018.pdf",
     "small_business": true,
     "numeric_pool": true,
     "display_number": false
@@ -34,6 +43,9 @@
   "pk": "HCATS",
   "fields": {
     "name": "HCATS Unrestricted",
+    "tier": 3,
+    "poc": "hcats@gsa.gov",
+    "ordering_guide": "https://www.gsa.gov/cdnstatic/HCaTS%20Ordering%20Guide%20-%20Rev%2015%20%20Aug%202018.pdf",
     "small_business": false,
     "numeric_pool": true,
     "display_number": false
@@ -44,6 +56,9 @@
   "pk": "BMO_SB",
   "fields": {
     "name": "BMO Small Business",
+    "tier": 3,
+    "poc": "fssi.bmo@gsa.gov",
+    "ordering_guide": "https://www.gsa.gov/cdnstatic/General_Supplies__Services/Ordering%20Guide%20V5_0.pdf",
     "small_business": true,
     "numeric_pool": true,
     "display_number": false
@@ -54,6 +69,9 @@
   "pk": "BMO",
   "fields": {
     "name": "BMO Unrestricted",
+    "tier": 3,
+    "poc": "fssi.bmo@gsa.gov",
+    "ordering_guide": "https://www.gsa.gov/cdnstatic/General_Supplies__Services/Ordering%20Guide%20V5_0.pdf",
     "small_business": false,
     "numeric_pool": true,
     "display_number": false
@@ -64,6 +82,9 @@
   "pk": "PSS",
   "fields": {
     "name": "Professional Services Schedule",
+    "tier": 2,
+    "poc": "professionalservices@gsa.gov",
+    "ordering_guide": "https://www.gsa.gov/acquisition/products-services/professional-services/professional-services-schedule/buy-off-the-professional-services-schedule",
     "small_business": true,
     "numeric_pool": false,
     "display_number": true

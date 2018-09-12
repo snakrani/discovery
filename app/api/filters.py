@@ -152,8 +152,9 @@ class PscFilter(FilterSet, metaclass = MetaFilterSet):
 
 class VehicleFilter(FilterSet, metaclass = MetaFilterSet):
     
+    _number = ('tier__number',)
     _token_text = ('id',)
-    _fuzzy_text = ('name',)
+    _fuzzy_text = ('name', 'poc', 'ordering_guide', 'tier__name')
     _boolean = ('small_business', 'numeric_pool', 'display_number')
     
     class Meta:

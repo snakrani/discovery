@@ -6,7 +6,9 @@ def get_category_fixtures():
         'sin.json',
         'naics.json',
         'psc.json',
-        'setasides.json', 
+        'setasides.json',
+        'tiers.json',
+        'vehicles.json', 
         'pools.json',
         'states.json',
         'zones.json'
