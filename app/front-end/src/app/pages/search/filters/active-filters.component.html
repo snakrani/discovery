@@ -1,0 +1,20 @@
+<ul class="active-filters usa-accordion" *ngIf="filters.length>0">
+  <li>
+    <button class="usa-accordion-button" aria-expanded="true" aria-controls="af-1">
+      <strong>1</strong> Active Filter(s)
+    </button>
+    <hr>
+    <div id="af-1" class="usa-accordion-content" aria-hidden="false">
+      <div class="usa-grid-full">
+        <div class="usa-width-one-fourth" *ngFor="let filter of filters">
+          <strong>{{filter.description}}:</strong>
+          <ul class="ul-filters">
+            <li *ngFor="let selected of filter.selected">{{selected.title}}</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </li>
+</ul>
+<!-- <button (click)="setFilters()">Set filters</button> -->

@@ -1,0 +1,23 @@
+<button class="usa-accordion-button" [attr.aria-expanded]="opened" [attr.aria-controls]="id">
+  {{name}}
+</button>
+<div id="{{id}}" class="usa-accordion-content" [attr.aria-hidden]="!opened">
+
+  <fieldset class="usa-fieldset-inputs usa-sans">
+    <legend class="usa-sr-only">$0 to $10+ Million</legend>
+    <ul class="usa-unstyled-list">
+      <li *ngFor="let item of items; let i = index">
+        <input id="{{id + '-' + i}}" type="radio" [checked]="item.checked" name="threshold" value="{{item.id}}" (change)="onChange(item.id, item.description, $event.target.checked)">
+        <label for="{{id + '-' + i}}">{{item.description}}</label>
+      </li>
+
+    </ul>
+  </fieldset>
+  <!-- <input id="pricing_plan" name="pricing_plan" type="range" [min]="min" [max]="max" step="500" [(ngModel)]="pricing_plan">
+  <span class="usa-width-one-third text-right pull-right">{{max | currency}}</span>
+  <span class="usa-width-one-third">{{min | currency}}</span>
+  <div class="text-center cb usa-width-one-whole bordered">
+    <strong>{{pricing_plan | currency}}</strong>
+  </div> -->
+
+</div>
