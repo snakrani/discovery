@@ -14,7 +14,6 @@
       <span class="usa-sr-only">Add Service Category to list</span>
     </button>
   </div>
-
   <ul *ngIf="items_selected" class="items-selected">
     <li *ngFor="let category of items_selected">
       <a (click)="removeItem(category.value)" title="Remove {{category.description}}"><span class="usa-sr-only">Remove

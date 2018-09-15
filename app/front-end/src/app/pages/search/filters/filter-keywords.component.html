@@ -6,6 +6,7 @@
   <div class="usa-search">
 
     <div class="autocomplete form-horizontal">
+      <discovery-spinner *ngIf="keywords_results.length === 0"></discovery-spinner>
       <input id="keywords-input" class="items-input" pattern=".+" type="text" [(ngModel)]="keywords" name="keywords"
         [disabled]="keywords_results.length === 0" [placeholder]="placeholder" autocomplete="off">
       <button class="icon-plus btn-plus" type="submit" (click)="addKeywords()" [disabled]="keywords.length === 0">

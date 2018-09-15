@@ -53,7 +53,7 @@ export class FilterSbdComponent implements OnInit {
     this.searchService.getSetAsides().subscribe(
       data => {
         this.items = data['results'];
-        this.emmitLoaded.emit(1);
+
         /** Grab the queryparams and sets default values
          *  on inputs Ex. checked, selected, keywords, etc */
         if (this.route.snapshot.queryParamMap.has(this.queryName)) {
@@ -74,6 +74,7 @@ export class FilterSbdComponent implements OnInit {
         } else {
           this.opened = false;
         }
+        this.emmitLoaded.emit(1);
       },
       error => (this.error_message = <any>error)
     );

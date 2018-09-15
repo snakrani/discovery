@@ -41,23 +41,13 @@ export class FilterServiceCategoriesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    /** Check if vehicles ids where submitted */
-    if (this.route.snapshot.queryParamMap.has('vehicles')) {
-      const vehicles = this.route.snapshot.queryParamMap
-        .get('vehicles')
-        .split('__');
-      this.initServiceCategories(vehicles);
-    } else {
-      this.initServiceCategories(['All']);
-    }
+    this.initServiceCategories(['All']);
   }
   initServiceCategories(vehicles) {
     this.searchService.getServiceCategories(vehicles).subscribe(
       data => {
         this.items = this.buildItems(data['results']);
-        this.items_filtered =
-          vehicles[0] !== 'All' ? this.filterByVehicles(vehicles) : this.items;
-        this.items_filtered.sort(sortByVehicleAsc);
+        this.setFilteredItems(vehicles);
         this.emmitLoaded.emit(1);
         /** Grab the queryparams and sets default values
          *  on inputs Ex. checked, selected, keywords, etc */
@@ -69,20 +59,45 @@ export class FilterServiceCategoriesComponent implements OnInit {
           for (const item of values) {
             this.addItem(item);
           }
+
           /** Open accordion */
           this.opened = true;
         } else {
           this.opened = false;
         }
+        /** Check if there are selected vehicles
+         *  and sort dropdown based on vehicle id
+         */
+        if (this.route.snapshot.queryParamMap.has('vehicles')) {
+          const values: string[] = this.route.snapshot.queryParamMap
+            .get('vehicles')
+            .split('__');
+
+          this.setFilteredItems(values);
+        }
       },
       error => (this.error_message = <any>error)
     );
+  }
+  setFilteredItems(vehicles) {
+    this.items_filtered =
+      vehicles[0] !== 'All' ? this.filterByVehicles(vehicles) : this.items;
+    this.items_filtered.sort(sortByVehicleAsc);
+    /** Remove all selected items
+     *  that are not within filtered list
+     */
+    for (const item of this.items_selected) {
+      if (!this.existsIn(this.items_filtered, item['value'], 'id')) {
+        this.removeItem(item['value']);
+        this.category = '0';
+      }
+    }
   }
   filterByVehicles(vehicles: any[]) {
     const items: any[] = [];
     for (const item of vehicles) {
       for (const prop of this.items) {
-        if (prop.vehicle_id === item) {
+        if (prop['vehicle_id'] === item) {
           items.push(prop);
         }
       }
@@ -92,7 +107,7 @@ export class FilterServiceCategoriesComponent implements OnInit {
   getServiceCategoriesByVehicle(vehicle: string): any[] {
     const items: any[] = [];
     for (const item of this.items) {
-      if (item.vehicle_id === vehicle) {
+      if (item['vehicle_id'] === vehicle) {
         items.push(item);
       }
     }
@@ -111,13 +126,16 @@ export class FilterServiceCategoriesComponent implements OnInit {
     return categories;
   }
   addCategory() {
-    if (!this.exists(this.category) && this.category !== '0') {
+    if (
+      !this.existsIn(this.items_selected, this.category, 'value') &&
+      this.category !== '0'
+    ) {
       this.addItem(this.category);
     }
   }
-  exists(value: string): boolean {
-    for (let i = 0; i < this.items_selected.length; i++) {
-      if (this.items_selected[i]['value'] === value) {
+  existsIn(obj: any[], value: string, key: string): boolean {
+    for (let i = 0; i < obj.length; i++) {
+      if (obj[i][key] === value) {
         return true;
       }
     }

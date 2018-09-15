@@ -50,7 +50,7 @@ export class FilterKeywordsComponent implements OnInit {
         document.getElementById('keywords-input'),
         this.keywords_results
       );
-      this.emmitLoaded.emit(1);
+
       /** Grab the queryparams and sets default values
        *  on inputs Ex. checked, selected, keywords, etc */
       if (this.route.snapshot.queryParamMap.has(this.queryName)) {
@@ -58,14 +58,16 @@ export class FilterKeywordsComponent implements OnInit {
           .get(this.queryName)
           .split('__');
 
-        for (const item of values) {
-          this.addItem(item);
+        for (const id of values) {
+          const desc = this.getItemDescription(+id);
+          this.addItem(id, desc);
         }
         /** Open accordion */
         this.opened = true;
       } else {
         this.opened = false;
       }
+      this.emmitLoaded.emit(1);
     });
   }
   buildKeywordsDropdown(obj: any[]): any[] {
@@ -84,10 +86,19 @@ export class FilterKeywordsComponent implements OnInit {
       }
     }
   }
+  getItemDescription(id: number): string {
+    if (id) {
+      for (let i = 0; i < this.items.length; i++) {
+        if (this.items[i][this.json_value] === id) {
+          return this.items[i][this.json_description];
+        }
+      }
+    }
+  }
   addKeywords() {
     this.keywords = document.getElementById('keywords-input').value;
     if (!this.exists(this.keywords)) {
-      this.addItem(this.keywords);
+      this.addItem('', this.keywords);
     }
     this.keywords = '';
   }
@@ -98,15 +109,6 @@ export class FilterKeywordsComponent implements OnInit {
       }
     }
     return false;
-  }
-  searchKeywords() {
-    this.keywords = document.getElementById('keywords-input').value;
-    this.searchService.setSearchOptions('keyword', [
-      { keyword: this.keywords }
-    ]);
-    this.router.navigate(['/search/contracts', 'results'], {
-      queryParams: { keywords: this.keywords }
-    });
   }
   getSelected(): any[] {
     const item = [];
@@ -120,10 +122,15 @@ export class FilterKeywordsComponent implements OnInit {
   reset() {
     this.items_selected = [];
   }
-  addItem(value: string) {
+  addItem(id: string, desc: string) {
     const item = {};
-    item['value'] = this.getItemId(value);
-    item['description'] = value;
+    if (id && id !== '') {
+      item['value'] = id;
+    } else {
+      item['value'] = this.getItemId(desc);
+    }
+    item['description'] = desc;
+
     this.items_selected.push(item);
     this.emmitSelected.emit(1);
   }

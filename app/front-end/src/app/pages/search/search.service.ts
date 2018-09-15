@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, tap, delay } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Injectable({
@@ -132,6 +132,7 @@ export class SearchService {
   }
 
   getKeywords(): Observable<any[]> {
+    // return this.http.get<any[]>(this.apiUrl + 'keywords').pipe(delay(3000));
     return this.http.get<any[]>(this.apiUrl + 'keywords').pipe(
       tap(data => data),
       catchError(this.handleError)
@@ -168,8 +169,12 @@ export class SearchService {
 
   getVendors(filters: any[]): Observable<any[]> {
     let params = '';
-    // console.log(filters);
     for (const filter of filters) {
+      if (filter['name'] === 'keywords') {
+        params +=
+          '&pools__pool__naics__keywords__id__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
       if (filter['name'] === 'vehicles') {
         params +=
           '&pools__pool__vehicle__id__in=' +
@@ -192,7 +197,7 @@ export class SearchService {
       }
       if (filter['name'] === 'zone') {
         params +=
-          '&pools__zones__states__code__in=' +
+          '&pools__zones__id__in=' +
           this.getSelectedFilterList(filter['selected'], ',');
       }
     }

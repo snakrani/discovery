@@ -12,10 +12,10 @@ declare let $: any;
 export class FilterNaicsComponent implements OnInit {
   @Input()
   items: any[];
-  items_filtered: any[];
+  items_filtered: any[] = [];
   items_selected: any[] = [];
   @Input()
-  opened = false;
+  opened = true;
   @Output()
   emmitSelected: EventEmitter<number> = new EventEmitter();
   @Output()
@@ -44,15 +44,7 @@ export class FilterNaicsComponent implements OnInit {
     private router: Router
   ) {}
   ngOnInit() {
-    /** Check if vehicles ids where submitted */
-    if (this.route.snapshot.queryParamMap.has('vehicles')) {
-      const vehicles = this.route.snapshot.queryParamMap
-        .get('vehicles')
-        .split('__');
-      this.initNaicsList(vehicles);
-    } else {
-      this.initNaicsList(['All']);
-    }
+    this.initNaicsList(['All']);
   }
 
   initNaicsList(vehicles) {
@@ -60,11 +52,8 @@ export class FilterNaicsComponent implements OnInit {
       data => {
         this.items = this.buildItems(data['results']);
         this.items.sort(sortByCodeAsc);
-        this.items_filtered =
-          vehicles[0] !== 'All' ? this.filterByVehicles(vehicles) : this.items;
-        this.items_filtered.sort(sortByCodeAsc);
-        this.emmitLoaded.emit(1);
-        this.emmitNaics.emit(this.items_filtered);
+        this.setFilteredItems(vehicles);
+
         /** Grab the queryparams and sets default values
          *  on inputs Ex. checked, selected, keywords, etc */
         if (this.route.snapshot.queryParamMap.has(this.queryName)) {
@@ -78,17 +67,44 @@ export class FilterNaicsComponent implements OnInit {
           /** Open accordion */
           this.opened = true;
         } else {
-          this.opened = false;
+          // this.opened = false;
         }
+        /** Check if there are selected vehicles
+         *  and sort dropdown based on vehicle id
+         */
+        if (this.route.snapshot.queryParamMap.has('vehicles')) {
+          const values: string[] = this.route.snapshot.queryParamMap
+            .get('vehicles')
+            .split('__');
+
+          this.setFilteredItems(values);
+        }
+        this.emmitLoaded.emit(1);
+        this.emmitNaics.emit(this.items_filtered);
       },
       error => (this.error_message = <any>error)
     );
+  }
+  setFilteredItems(vehicles) {
+    this.items_filtered =
+      vehicles[0] !== 'All' ? this.filterByVehicles(vehicles) : this.items;
+    this.items_filtered.sort(sortByCodeAsc);
+    this.ln = this.items_filtered.length;
+    /** Remove all selected items
+     *  that are not within filtered list
+     */
+    for (const item of this.items_selected) {
+      if (!this.existsIn(this.items_filtered, item['value'], 'id')) {
+        this.removeItem(item['value']);
+        this.naic = '0';
+      }
+    }
   }
   filterByVehicles(vehicles: any[]) {
     const items: any[] = [];
     for (const item of vehicles) {
       for (const prop of this.items) {
-        if (prop.vehicle_id === item) {
+        if (prop['vehicle_id'] === item) {
           items.push(prop);
         }
       }
@@ -109,7 +125,7 @@ export class FilterNaicsComponent implements OnInit {
         item['code'] = naic.code;
         item['description'] = naic.description;
         item['vehicle_id'] = pool.vehicle.id;
-        if (!this.existsIn(naic.code, 'code', naics)) {
+        if (!this.existsIn(naics, naic.code, 'code')) {
           naics.push(item);
         }
       }
@@ -122,7 +138,7 @@ export class FilterNaicsComponent implements OnInit {
       const item = {};
       item['vehicle_id'] = pool.vehicle.id;
       item['naics'] = this.setNaics(pool.naics);
-      if (!this.existsIn(naics['vehicle_id'], 'vehicle_id', naics)) {
+      if (!this.existsIn(naics, naics['vehicle_id'], 'vehicle_id')) {
         naics.push(item);
       }
     }
@@ -134,7 +150,7 @@ export class FilterNaicsComponent implements OnInit {
       const item = {};
       item['code'] = i.code;
       item['description'] = i.description;
-      if (!this.existsIn(i.code, 'code', items)) {
+      if (!this.existsIn(items, i.code, 'code')) {
         items.push(item);
       }
     }
@@ -145,9 +161,9 @@ export class FilterNaicsComponent implements OnInit {
       this.addItem(this.naic);
     }
   }
-  existsIn(value: string, key: string, arr: any[]): boolean {
-    for (const i of arr) {
-      if (i[key] === value) {
+  existsIn(obj: any[], value: string, key: string): boolean {
+    for (let i = 0; i < obj.length; i++) {
+      if (obj[i][key] === value) {
         return true;
       }
     }

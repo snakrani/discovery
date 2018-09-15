@@ -9,6 +9,7 @@ declare let document: any;
   styleUrls: ['./hero.component.css']
 })
 export class HeroComponent implements OnInit {
+  items: any[] = [];
   _keywords = '';
   keywords_results: any[] = [];
   keywords_input;
@@ -23,6 +24,7 @@ export class HeroComponent implements OnInit {
   }
   ngOnInit() {
     this.searchService.getKeywords().subscribe(data => {
+      this.items = data['results'];
       this.keywords_results = this.buildKeywordsDropdown(data['results']);
       autocomplete(this.input.nativeElement, this.keywords_results);
     });
@@ -34,13 +36,25 @@ export class HeroComponent implements OnInit {
     }
     return keywords;
   }
+  getItemId(value: string): string {
+    if (value) {
+      for (let i = 0; i < this.items.length; i++) {
+        if (this.items[i]['name'] === value) {
+          return this.items[i]['id'];
+        }
+      }
+    }
+  }
   searchKeywords() {
     this.keywords = this.input.nativeElement.value;
-    this.searchService.setSearchOptions('keyword', [
-      { keyword: this.keywords }
-    ]);
+    const keyword_id = this.getItemId(this.keywords);
+    if (keyword_id === undefined) {
+      console.log('Add note or select first element of autocomplete');
+      return;
+    }
+    this.searchService.setSearchOptions('keyword', [{ keyword: keyword_id }]);
     this.router.navigate(['/search'], {
-      queryParams: { keywords: this.keywords }
+      queryParams: { keywords: keyword_id }
     });
   }
 }

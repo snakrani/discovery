@@ -137,27 +137,24 @@ export class FiltersComponent implements OnInit {
     this.emmitFilters.emit(filters);
   }
   filterOthersByVehicles(vehicles: any[]) {
-    let values = [];
+    let arr = [];
     if (vehicles[0] === 'All') {
-      values = vehicles;
+      arr = vehicles;
     } else {
       for (const i of vehicles) {
-        values.push(i.value);
+        arr.push(i.value);
       }
     }
-    this.filterServiceCategories.reset();
-    this.filterServiceCategories.initServiceCategories(values);
-
-    this.filterNaicsComponent.reset();
-    this.filterNaicsComponent.initNaicsList(values);
+    this.filterServiceCategories.setFilteredItems(arr);
+    this.filterNaicsComponent.setFilteredItems(arr);
   }
   filterPSCsByNaics(naics: any[]) {
     const codes = [];
     for (const item of naics) {
       codes.push(item['code']);
     }
-    this.filterPscComponent.reset();
-    this.filterPscComponent.getPSCsbyNAICs(codes);
+    // this.filterPscComponent.reset();
+    // this.filterPscComponent.getPSCsbyNAICs(codes);
   }
   getServiceCategoriesByVehicle(vehicle: string) {
     const obj: any[] = this.filterServiceCategories.getServiceCategoriesByVehicle(

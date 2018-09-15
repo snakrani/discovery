@@ -49,7 +49,7 @@ export class FilterContractVehiclesComponent implements OnInit {
     this.searchService.getContractVehicles().subscribe(
       data => {
         this.items = data['results'];
-        this.emmitLoaded.emit(1);
+
         /** Grab the queryparams and sets default values
          *  on inputs Ex. checked, selected, keywords, etc */
         if (this.route.snapshot.queryParamMap.has(this.queryName)) {
@@ -70,6 +70,7 @@ export class FilterContractVehiclesComponent implements OnInit {
         } else {
           this.opened = false;
         }
+        this.emmitLoaded.emit(1);
       },
       error => (this.error_message = <any>error)
     );
