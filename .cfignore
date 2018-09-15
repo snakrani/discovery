@@ -13,6 +13,7 @@ __pycache__
 /tmp/
 
 /app/discovery/local_settings.py
+/app/static/
 /cf/
 /db/
 /docker/
