@@ -278,6 +278,11 @@ jobs:
       - checkout
 
       - run:
+          name: Build Discovery files
+          command: |
+            ./scripts/init-webserver.sh /dev/stderr
+
+      - run:
           name: Setup CloudFoundry client CLI
           command: |
             ./scripts/setup-cf.sh /dev/stderr
@@ -303,6 +308,11 @@ jobs:
             apt-get install -y git
 
       - checkout
+
+      - run:
+          name: Build Discovery files
+          command: |
+            ./scripts/init-webserver.sh /dev/stderr
 
       - run:
           name: Setup CloudFoundry client CLI
