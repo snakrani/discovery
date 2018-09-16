@@ -104,8 +104,11 @@ export class FilterNaicsComponent implements OnInit {
     const items: any[] = [];
     for (const item of vehicles) {
       for (const prop of this.items) {
-        if (prop['vehicle_id'] === item) {
-          items.push(prop);
+        const arr = item.split('_');
+        if (prop['vehicle_id'].indexOf(arr[0]) !== -1) {
+          if (!this.searchService.existsIn(items, prop.code, 'code')) {
+            items.push(prop);
+          }
         }
       }
     }

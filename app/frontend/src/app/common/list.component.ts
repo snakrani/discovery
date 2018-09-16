@@ -59,18 +59,4 @@ export class ListComponent implements OnInit {
       this.showElements();
     }
   }
-  // toggleMore(id: string, qty: number, event: any) {
-  //   // for (let i = 0; i < qty; ++i) {
-  //   //   if (i > this.qty_items_to_show) {
-  //   //     const li = document.getElementById(id + i).style;
-  //   //     if (li.display === 'none') {
-  //   //       event.target.innerHTML = this.less;
-  //   //       li.display = 'block';
-  //   //     } else {
-  //   //       li.display = 'none';
-  //   //       event.target.innerHTML = this.more;
-  //   //     }
-  //   //   }
-  //   // }
-  // }
 }

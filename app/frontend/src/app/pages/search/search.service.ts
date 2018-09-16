@@ -209,6 +209,12 @@ export class SearchService {
         catchError(this.handleError)
       );
   }
+  getVendorDetails(duns: string): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl + 'vendors/' + duns).pipe(
+      tap(data => data),
+      catchError(this.handleError)
+    );
+  }
 
   // searchDiscovery(filters: any[]): void {
   //   // let route = '';
@@ -287,5 +293,52 @@ export class SearchService {
       obj[filter.name] = this.getSelectedFilterList(filter.selected, '__');
     }
     return obj;
+  }
+  existsIn(obj: any[], value: string, key: string): boolean {
+    for (let i = 0; i < obj.length; i++) {
+      if (obj[i][key] === value) {
+        return true;
+      }
+    }
+    return false;
+  }
+  getItemDescription(
+    obj: any[],
+    value: string,
+    key_id: string,
+    key_desc: string
+  ): string {
+    if (value) {
+      for (let i = 0; i < obj.length; i++) {
+        if (obj[i][key_id] === value) {
+          return obj[i][key_desc];
+        }
+      }
+    }
+  }
+  commaSeparatedList(obj: any[], key: string) {
+    let items = '';
+    for (const i of obj) {
+      items += i[key] + ', ';
+    }
+    return items.slice(0, -2);
+  }
+  sortByNameAsc(i1, i2) {
+    if (i1 > i2) {
+      return 1;
+    } else if (i1 === i2) {
+      return 0;
+    } else {
+      return -1;
+    }
+  }
+  sortByIdAsc(i1, i2) {
+    if (i1.id > i2.id) {
+      return 1;
+    } else if (i1.id === i2.id) {
+      return 0;
+    } else {
+      return -1;
+    }
   }
 }

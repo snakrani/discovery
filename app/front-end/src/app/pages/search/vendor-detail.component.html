@@ -1,0 +1,132 @@
+<!-- Spinner -->
+<div id="search-spinner" class="overlay" *ngIf="spinner">
+  <div class="spinner-container text-center">
+    <img src="/assets/images/loader.gif" alt="Loading data..." />
+    <h2>Loading</h2>
+  </div>
+</div>
+<!-- End Spinner -->
+<div class="well">
+  <div class="usa-grid col-container pad-top-bottom">
+    <div *ngIf="vendor" class="usa-width-one-whole">
+      <div class="pad-all"><a [routerLink]="['/search']" queryParamsHandling="preserve">Back to search
+          results</a>
+        <h2>{{vendor.name | titlecase}}</h2>
+        <hr>
+        <div class="usa-grid">
+          <div class="usa-width-one-third">
+            <h6 class="usa-heading-alt">SAM Registration Expires on:</h6>
+            <blockquote><strong>{{vendor?.sam_expiration_date | date}}</strong></blockquote>
+            <h6 class="usa-heading-alt">DUNS:</h6>
+            <blockquote><strong>{{vendor?.duns}}</strong></blockquote>
+          </div>
+          <div class="usa-width-one-third">
+            <h6 class="us`a-heading-alt">CAGE Code:</h6>
+            <blockquote><strong>{{vendor?.cage}}</strong></blockquote>
+            <h6 class="usa-heading-alt">Employees:</h6>
+            <blockquote><strong>{{vendor?.number_of_employees}}</strong></blockquote>
+          </div>
+          <div class="usa-width-one-third">
+            <h6 class="usa-heading-alt">Annual Revenue:</h6>
+            <blockquote><strong>{{vendor?.annual_revenue | currency}}</strong></blockquote>
+            <h6 class="usa-heading-alt">Address:</h6>
+            <blockquote>
+              <strong>{{vendor.sam_location.address}}</strong><br>
+              <strong>{{vendor.sam_location.city}}</strong><br>
+              <strong>{{vendor.sam_location.state}} {{vendor.sam_location.zipcode}}</strong>
+            </blockquote>
+          </div>
+
+        </div>
+        <div class="usa-grid">
+          <div class="usa-width-one-whole">
+            <h6 class="usa-heading-alt">Vendor website:</h6>
+            <blockquote><a href="//{{vendor?.sam_url}}" target="_blank">{{vendor?.sam_url}}</a></blockquote>
+          </div>
+        </div>
+        <div class="pad-top">
+          <hr>
+          <div class="usa-width-one-whole pad-top">
+            <div class="overflow">
+              <a (click)="toggleSBD()" class="btn-toggle pull-right">{{!sbd_col ? 'Show' : 'Hide'}} Set Asides</a>
+
+              <table class="usa-table-borderless">
+                <caption>Choose one or more to show only contract history for that selection</caption>
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th scope="col">Contract Membership</th>
+                    <th scope="col" class="sbd">Contact Info</th>
+                    <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Small Disadvantaged Business">SB</th>
+                    <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Small Disadvantaged Business">SDB</th>
+                    <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="8(A)">8(A)</th>
+                    <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="HUBZone">HubZ</th>
+                    <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Woman Owned">WO</th>
+                    <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Veteran Owned">VO</th>
+                    <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Service Disabled Veteran Owned">SDVO</th>
+                    <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Veterans Affair VIP">VA
+                      VIP</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of vendor.pools">
+                    <td></td>
+                    <td scope="row"><strong class="db" [innerHTML]="getVehicleDescription(item.pool.vehicle.id)"></strong>
+                      <blockquote><span class="uppercase db">Contract Number: </span><strong class="pad-left">{{item.piid}}</strong></blockquote>
+                      <blockquote><span class="uppercase db">Service Categories: </span><strong class="pad-left db"
+                          *ngFor="let cat of item.service_categories" [innerHTML]="getServiceCategoryDescription(cat.id)"></strong></blockquote>
+                      <blockquote><span class="uppercase db">Zone(s): </span><strong class="pad-left" [innerHTML]="getZones(item.zones)"></strong></blockquote>
+                    </td>
+                    <td [innerHTML]="getContactInfo(item.contacts)"></td>
+                    <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'SB') ? '&bull;' : ''"></td>
+                    <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, '27') ? '&bull;' : ''"></td>
+                    <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'A6') ? '&bull;' : ''"></td>
+                    <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'XX') ? '&bull;' : ''"></td>
+                    <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'A2') ? '&bull;' : ''"></td>
+                    <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'A5') ? '&bull;' : ''"></td>
+                    <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'QF') ? '&bull;' : ''"></td>
+                    <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'VIP') ? '&bull;' : ''"></td>
+                  </tr>
+
+
+                </tbody>
+              </table>
+            </div>
+
+            <table class="usa-table-borderless">
+              <caption>Showing vendor's indexed 5 year contract history</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Date Signed</th>
+                  <th scope="col">PIID</th>
+                  <th scope="col">Agency</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Point of Contact</th>
+                  <th scope="col">Value ($)</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Codes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"></th>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
