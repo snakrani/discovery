@@ -23,4 +23,3 @@ apt-get install -y nodejs >>"$LOG_FILE" 2>&1
 
 echo "> Installing Angular JS environment" | tee -a "$LOG_FILE"
 npm install -g @angular/cli@latest >>"$LOG_FILE" 2>&1
-npm install -g webpack-bundle-tracker >>"$LOG_FILE" 2>&1
