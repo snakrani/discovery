@@ -36,6 +36,11 @@ jobs:
             cp ./app/discovery/local_settings.circle.py ./app/discovery/local_settings.py
 
       - run:
+          name: Install Angular CLI
+          command: |
+            ./scripts/setup-angular.sh /dev/stderr
+
+      - run:
           name: Install requirements
           command: |
             pip install --no-cache-dir -r ./requirements.txt
@@ -80,6 +85,11 @@ jobs:
           name: Set CircleCI configuration
           command: |
             cp ./app/discovery/local_settings.circle.py ./app/discovery/local_settings.py
+
+      - run:
+          name: Install Angular CLI
+          command: |
+            ./scripts/setup-angular.sh /dev/stderr
 
       - run:
           name: Install requirements
@@ -133,6 +143,11 @@ jobs:
             cp ./app/discovery/local_settings.circle.py ./app/discovery/local_settings.py
 
       - run:
+          name: Install Angular CLI
+          command: |
+            ./scripts/setup-angular.sh /dev/stderr
+
+      - run:
           name: Install requirements
           command: |
             pip install --no-cache-dir -r ./requirements.txt
@@ -177,6 +192,11 @@ jobs:
           name: Set CircleCI configuration
           command: |
             cp ./app/discovery/local_settings.circle.py ./app/discovery/local_settings.py
+
+      - run:
+          name: Install Angular CLI
+          command: |
+            ./scripts/setup-angular.sh /dev/stderr
 
       - run:
           name: Install requirements
@@ -234,6 +254,11 @@ jobs:
           name: Install Chrome web driver
           command: |
             ./scripts/setup-chrome.sh /dev/stderr
+
+      - run:
+          name: Install Angular CLI
+          command: |
+            ./scripts/setup-angular.sh /dev/stderr
 
       - run:
           background: true
