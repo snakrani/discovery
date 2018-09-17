@@ -4,9 +4,9 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "$([ `readlink "$0"` ] && echo "`readlink "$0"`" || echo "$0")")"; pwd -P)"
-cd "$SCRIPT_DIR/.."
+cd "$SCRIPT_DIR/../app/frontend"
 
-LOG_FILE="${1:-./logs/discovery-angular.log}"
+LOG_FILE="${1:-../../logs/discovery-angular.log}"
 if [ "$LOG_FILE" != "/dev/stdout" -a "$LOG_FILE" != "/dev/stderr" ]
 then
   rm -f "$LOG_FILE"
@@ -23,3 +23,4 @@ apt-get install -y nodejs >>"$LOG_FILE" 2>&1
 
 echo "> Installing Angular JS environment" | tee -a "$LOG_FILE"
 npm install -g @angular/cli@latest >>"$LOG_FILE" 2>&1
+npm install -g webpack-bundle-tracker >>"$LOG_FILE" 2>&1
