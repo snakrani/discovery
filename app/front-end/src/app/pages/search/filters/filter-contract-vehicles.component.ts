@@ -114,7 +114,6 @@ export class FilterContractVehiclesComponent implements OnInit {
         this._items_selected.splice(i, 1);
       }
     }
-
     this.emmitSelected.emit(0);
   }
   onChange(key: string, title: string, isChecked: boolean) {

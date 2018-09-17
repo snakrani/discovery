@@ -20,6 +20,7 @@ import { FilterAgencyPerformanceComponent } from './filters/filter-agency-perfor
 import { FilterPscComponent } from './filters/filter-psc.component';
 import { FilterZoneComponent } from './filters/filter-zone.component';
 import { ListComponent } from '../../common/list.component';
+import { VendorDetailComponent } from './vendor-detail.component';
 
 @NgModule({
   imports: [CommonModule, SearchRoutingModule, FormsModule],
@@ -41,7 +42,8 @@ import { ListComponent } from '../../common/list.component';
     FilterPscComponent,
     FilterZoneComponent,
     SpinnerComponent,
-    ListComponent
+    ListComponent,
+    VendorDetailComponent
   ]
 })
 export class SearchModule {}

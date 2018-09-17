@@ -23,6 +23,7 @@ export class SearchComponent implements OnInit {
   contracts_results = [];
   vendors_results;
   vendors_no_results = false;
+  show_details = false;
   show_results = false;
   sbd_col = false;
   spinner = false;
@@ -34,6 +35,7 @@ export class SearchComponent implements OnInit {
   results;
   filtered_results;
   _sort_by: string;
+  num_show = 3;
 
   constructor(
     private searchService: SearchService,
@@ -80,7 +82,6 @@ export class SearchComponent implements OnInit {
         }
         this.results = this.buildVendorByVehicle(data['results']);
         this.filtered_results = this.results;
-
         this.vendors_no_results = false;
         this.show_results = true;
         this.spinner = false;
@@ -111,6 +112,10 @@ export class SearchComponent implements OnInit {
     return this.results.vendors.filter(
       vendor => vendor.vehicles.indexOf(vehicle) !== -1
     );
+  }
+  showVendorDetails(vendor: number) {
+    console.log(vendor);
+    this.show_details = true;
   }
   clearActiveFilters(bool) {
     this.activeFiltersComponent.clear();
@@ -167,7 +172,7 @@ export class SearchComponent implements OnInit {
     for (const i of obj) {
       arr.push(i['value']);
     }
-    return arr.sort(sortByNameAsc);
+    return arr.sort(this.searchService.sortByNameAsc);
   }
   returnVehicleVendors(obj: any[]) {
     const vendors = [];
@@ -238,20 +243,11 @@ export class SearchComponent implements OnInit {
   closeModal(id: string) {
     this.modalService.close(id);
   }
-  returnSetAside(arr: any[], code: never): boolean {
+  returnSetAside(arr: any[], code: string): boolean {
     if (arr.length > 0) {
       return arr.includes(code);
     } else {
       return false;
     }
-  }
-}
-function sortByNameAsc(i1, i2) {
-  if (i1 > i2) {
-    return 1;
-  } else if (i1 === i2) {
-    return 0;
-  } else {
-    return -1;
   }
 }

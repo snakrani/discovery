@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'discovery-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styles: [``]
 })
 export class AppComponent {
   title = 'discovery';

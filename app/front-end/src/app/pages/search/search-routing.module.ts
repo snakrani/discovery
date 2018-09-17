@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SearchComponent } from './search.component';
-import { ChooseFiltersComponent } from './choose-filters.component';
+import { VendorDetailComponent } from './vendor-detail.component';
 
 const routes: Routes = [
   {
     path: 'search',
     component: SearchComponent
-  }
+  },
+  { path: 'vendor/:dun', component: VendorDetailComponent },
+  { path: 'vendor', redirectTo: '/search', pathMatch: 'full' }
 ];
 // const routes: Routes = [
 //   {

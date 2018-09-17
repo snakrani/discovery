@@ -29,6 +29,12 @@ a {
 .relative {
   position: relative;
 }
+.db {
+  display: block;
+}
+.uppercase {
+  text-transform: uppercase;
+}
 .pull-right {
   float: right;
 }
@@ -336,6 +342,32 @@ ul.items-selected li a {
 .usa-search button {
   float: left;
 }
+.overlay {
+  background-color: rgba(244, 247, 249, 0.8);
+  position: absolute;
+  top: 0;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9900;
+}
+.overlay.show {
+  left: 0px;
+  width: 100%;
+  height: 100%;
+}
+#search-spinner div.spinner-container {
+  margin: auto;
+  position: absolute;
+  top: 250px;
+  left: 45%;
+}
+#search-spinner div.spinner-container h2 {
+  font-family: 'Source Sans Pro', 'Helvetica Neue', 'Helvetica', 'Roboto', Arial,
+    sans-serif;
+  padding: 10px;
+  margin: 0px !important;
+}
 .spinner img {
   width: 30px;
   height: 30px;
@@ -347,6 +379,7 @@ ul.items-selected li a {
   width: 100%;
   min-height: 35px;
 }
+
 /* END Auto Complete Styles */
 /* START CSS Overrides For USWDS Styles */
 body {
@@ -368,6 +401,9 @@ h3 {
   font-size: 1.5em;
   font-weight: 400;
   padding: 0px 15px 10px 15px !important;
+}
+h3,
+caption {
   font-family: 'Source Sans Pro', 'Helvetica Neue', 'Helvetica', 'Roboto', Arial,
     sans-serif;
 }
@@ -377,6 +413,7 @@ table {
 caption {
   font-size: 1.3em;
   border-bottom: 1px solid #14286d;
+  padding-left: 0px;
 }
 th a,
 td a {
@@ -394,8 +431,26 @@ table.usa-table-borderless tbody td {
 table.usa-table-borderless tbody td:first-child {
   border-left: 0px !important;
 }
+
+thead th {
+  border-bottom: 3px solid #0071bc;
+}
+tbody td,
+tbody th {
+  border-color: #a4a4a5 !important;
+}
 th {
   vertical-align: bottom !important;
+}
+th.sbd,
+td.sbd {
+  min-width: auto !important;
+}
+td.sbd {
+  font-size: 2em;
+  color: #5f9b4c;
+  line-height: 0.5em;
+  text-align: center;
 }
 td {
   vertical-align: top !important;
