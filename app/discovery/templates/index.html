@@ -1,95 +1,33 @@
-{% extends "search_base.html" %}
-{% load staticfiles %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Discovery</title>
+        <base href="/">
+      
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/x-icon" href="{% static 'frontend/favicon.ico' %}">
+        <link rel="stylesheet" href="{% static 'frontend/assets/uswds/css/uswds.min.css' %}">
+    </head>
+    <body>
+        <app-root>Loading...</app-root>
+        
+        <script type="text/javascript">
+            var API_HOST = "{{API_HOST}}";
+            if (API_HOST.substring(API_HOST.length - 1) == '/') {
+                API_HOST = API_HOST.substring(0, API_HOST.length - 1);
+            }
+        </script>
 
-{% block content %}
-        <!-- BEGIN LANDING HTML -->
-        <div id="about_discovery">
-            <h1>About Discovery</h1>
-
-            <h3>Discovery</h3>
-            <p class="about_discovery_text">Discovery is a market research tool for GSA Contract Vehicles. Currently, it features GSA IDIQ vehicles, with more contracts coming in the future. Use Discovery to search vendor history for the awarded contractors and NAICs of the various IDIQs. Some contracts are separated into Unrestricted and Small Business (SB) based on their contract structure. For all other contracts, you can apply small business filters to narrow your results based on any set aside needs you have.</p>
-
-            <h3>How to use Discovery</h3>
-            <p class="about_discovery_text">Discovery lets you pick and choose different criteria in order to narrow down contracts to find one that suits your needs.  Select any of the listed filters to view lists of vendors available based on the selected criteria.  The other filters will update as you select certain fields.  Select the “All” options to clear them. Once you’ve selected one or more options from the dropdowns, you can then click through to the vendor’s pages to see contract history and registration data for each vendor.</p>
-
-            <h3>Contract Vehicles</h3>
-            <div id="discovery_vehicles" class="about_discovery_text collapse-container">
-                <h1 class="vehicle"><span class="arrow-d"></span>One Acquisition Solution for Integrated Services (<b>OASIS</b>)</h1>
-                <div>
-                    <ul class="attr">
-                        <li>Specifically designed for the acquisition of professional services</li>
-                        <li>Enables the use of ANY contract type</li>
-                        <li>All vendors have DCAA-vetted financial systems</li>
-                        <li><a href="https://www.gsa.gov/cdnstatic/NAICS%20Code%20Definitions%20for%20OASIS.pdf" target="_blank" rel="noopener noreferrer">Download the NAICS description document showing NAICS Codes per pool</a></li>
-                        <li><a class="learn_more" href="https://www.gsa.gov/acquisition/products-services/professional-services/one-acquisition-solution-for-integrated-services-oasis">Learn more about OASIS</a></li>
-                    </ul>
-                </div>
-                <h1 class="vehicle"><span class="arrow-d"></span>Building Maintenance and Operations (<b>BMO</b>)</h1>
-                <div>
-                    <ul class="attr">
-                        <li>Provides a broad and comprehensive range of BMO services for use throughout</li>
-                        <li>Provides a regionally focused pool of highly qualified large and small contractors</li>
-                        <li>Allows flexibility for contract types, including fixed price, labor hour, time and materials, and hybrids</li>
-                        <li>Leverages spend in acquiring services in an effective, economical, and expedient manner resulting in both significant cost and time savings</li>
-                        <li>Following FAR Subpart 16.505 Ordering Procedures, all BMO vendors that can meet the exact specifications of your requirement should be notified (given Fair Opportunity to compete)</li>
-                        <li><a class="bmo_descriptions" href="{% static 'discovery_site/files/BMO_Phase_II_Service_Category_Descriptions.pdf' %}" target="_blank" rel="noopener noreferrer">BMO Phase II Service Category Descriptions</a></li>
-                        <li><a class="learn_more" href="https://www.gsa.gov/acquisition/purchasing-programs/federal-strategic-sourcing-initiative/building-maintenance-and-operations)">Learn more about BMO</a></li>
-                    </ul>
-                </div>
-                <h1 class="vehicle"><span class="arrow-d"></span>Human Capital and Training Solutions (<b>HCaTS</b>)</h1>
-                <div>
-                    <ul class="attr">
-                        <li>Result of partnership between Office of Personnel Management (OPM) and General Services Administration (GSA)</li>
-                        <li>Provides customized Training and Development, Human Capital Strategy, and  Organizational Performance Improvement Services</li>
-                        <li>Highest Technically Rated with Fair and Reasonable (HTR-FRP) Contractors that have been pre-screened by HC specialists</li>
-                        <li>Leveraged Category and Performance Management Strength</li>
-                        <li><a class="learn_more" href="https://www.gsa.gov/hcats">Learn more about HCaTS</a></li>
-                    </ul>
-                </div>
-                <h1 class="vehicle"><span class="arrow-d"></span>Professional Services Schedule (<b>PSS</b>)</h1>
-                <div>
-                    <ul class="attr">
-                        <li>Allows use of streamlined procurement procedures in FAR Subpart 8.4 Federal Supply Schedules</li>
-                        <li>Provides direct access to simple or complex fixed-price or labor-hour professional services</li>
-                        <li>Offers federal agencies access to more than 3,300 experienced contractors</li>
-                        <li>Please note, PSS small business designation may be incorrect for up to 20% of listings due to lack of updates by vendors</li>
-                        <li><a class="learn_more" href="https://www.gsa.gov/acquisition/products-services/professional-services/professional-services-schedule-pss">Learn more about PSS</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div><!-- end about_discovery -->
-
-        <div id="data_sources">
-            <h1>Data Sources</h1>
-
-            <div id="data_source_sam" class="data_sources_row">
-                <h4 class="data data_source_name">SAM</h4>
-
-                <span id="data_source_date_sam"></span>
-                <span id="data_source_last_updated">last updated</span>
-                <span id="data_source_description_sam" class="data_source_description">We pull SAM data directly from the System for Award Management (SAM) to provide supplemental information on all of the vendors on the included contracts, including their SAM registration date, any potential suspensions or debarments, and the NAICS codes that a vendor may contract under. Set aside information is based on contract awarded designations and may not be consistent with the current SAM registration. Contract awarded designations are valid for the term of the contract.</span>
-                <div id="data_source_dialog_sam_wrapper"><div id="data_source_dialog_sam" style="display: none"><span>Contractors are required to re-certify size/socioeconimic at least annually in SAM in accordance with <a href="https://www.acquisition.gov/sites/default/files/current/far/html/Subpart%204_12.html#wp1073667" target="_blank" rel="noopener noreferrer">FAR 4.120(b)(1)</a>. Contrast that with the contract frequency every five years (or Novation/merger) in accordance with <a href="https://www.acquisition.gov/sites/default/files/current/far/html/52_217_221.html#wp1139913" target="_blank" rel="noopener noreferrer">FAR 52.219-28</a>. Hence the size/socioeconomic status shown in SAM may differ from the contract and thus cannot be relied upon for orders issued under the contract which default to the size/socioeconomic status in the contract. Refer to the contract vehicle website to determine the current size/socioeconomic status of a particular contractor under that contract vehicle. )</span></div></div>
-            </div><!-- end data_sources_row -->
-
-            <div id="data_source_fpds"  class="data_sources_row">
-                <h4 class="data data_source_name">FPDS</h4>
-                <span id="data_source_date_fpds"></span>
-                <span id="data_source_last_updated">last updated</span>
-                <span id="data_source_description_fpds"  class="data_source_description">Discovery loads data from the Federal Procurement Data System (FPDS) to automatically provide you with a context-rich contract history for each vendor, including the amount of the contract, the primary NAICS code and the pricing type.</span>
-            </div><!-- end data_sources_row -->
-
-            <h3>What are Service Categories?</h3>
-            <ul class="about_discovery_text">
-                <li>Discovery’s IDIQs are divided into functional categories that are referred to as service categories</li>
-                <li>If your contracting need spans multiple categories, choose the one that contains the preponderance of your work. Selecting the most relevant NAICS code above will guide you to the correct service category</li>
-            </ul>
-        </div><!-- end data_sources -->
-    <!-- END LANDING HTML -->
-{% endblock %}
-
-{% block page_js %}
-    <script src="{% static 'discovery_site/js/contrib/jquery.collapsible.min.js' %}"></script>
-    <script src="{% static 'discovery_site/js/search.js' %}"></script>
-    <script src="{% static 'discovery_site/js/data-manager-index.js' %}"></script>
-    <script src="{% static 'discovery_site/js/layout-manager-index.js' %}"></script>
-{% endblock %}
+        <script src="{% static 'frontend/assets/uswds/js/uswds.min.js' %}"></script>
+        <script src="{% static 'frontend/assets/js/autocomplete.js' %}"></script>
+        
+        <script type="text/javascript" src="{% static 'frontend/vendor.js' %}"></script>
+        <script type="text/javascript" src="{% static 'frontend/runtime.js' %}"></script> 
+        <script type="text/javascript" src="{% static 'frontend/polyfills.js' %}"></script>
+        <script type="text/javascript" src="{% static 'frontend/scripts.js' %}"></script>
+        <script type="text/javascript" src="{% static 'frontend/styles.js' %}"></script>
+        <script type="text/javascript" src="{% static 'frontend/main.js' %}"></script>
+    </body>
+</html>
