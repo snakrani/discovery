@@ -93,6 +93,15 @@ export class SearchService {
         catchError(this.handleError)
       );
   }
+  getContracts(duns: string, page): Observable<any[]> {
+    console.log(this.apiUrl + 'contracts?duns=' + duns + page);
+    return this.http
+      .get<any[]>(this.apiUrl + 'contracts?duns=' + duns + page)
+      .pipe(
+        tap(data => data),
+        catchError(this.handleError)
+      );
+  }
   getSetAsides(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl + 'setasides?description').pipe(
       tap(data => data),

@@ -26,7 +26,7 @@ export class SearchComponent implements OnInit {
   show_details = false;
   show_results = false;
   sbd_col = false;
-  spinner = false;
+  _spinner: boolean;
   set_asides;
   vehicles_selected;
   vehicles_radios;
@@ -36,6 +36,7 @@ export class SearchComponent implements OnInit {
   filtered_results;
   _sort_by: string;
   num_show = 3;
+  spinner = false;
 
   constructor(
     private searchService: SearchService,
@@ -44,7 +45,13 @@ export class SearchComponent implements OnInit {
     private modalService: ModalService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    /** Check to see if there are any queryparams */
+    console.log(this.route.snapshot.queryParamMap.keys);
+    if (this.route.snapshot.queryParamMap.keys.length > 0) {
+      this.spinner = true;
+    }
+  }
   get sort_by(): string {
     return this._sort_by;
   }

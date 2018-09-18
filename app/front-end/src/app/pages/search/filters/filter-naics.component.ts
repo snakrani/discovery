@@ -15,7 +15,7 @@ export class FilterNaicsComponent implements OnInit {
   items_filtered: any[] = [];
   items_selected: any[] = [];
   @Input()
-  opened = true;
+  opened = false;
   @Output()
   emmitSelected: EventEmitter<number> = new EventEmitter();
   @Output()

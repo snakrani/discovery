@@ -1,0 +1,38 @@
+<table class="usa-table-borderless history">
+  <caption>Showing vendor's indexed 5 year contract history</caption>
+  <thead>
+    <tr>
+      <th scope="col">Date Signed</th>
+      <th scope="col">PIID</th>
+      <th scope="col">Agency</th>
+      <th scope="col">Type</th>
+      <!-- <th scope="col">Point of Contact</th> -->
+      <th scope="col">Value ($)</th>
+      <th scope="col">Status</th>
+      <th scope="col">Codes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let contract of contracts_results">
+      <th scope="row">{{contract.date_signed | date}}</th>
+      <td>{{contract.piid}}</td>
+      <td><strong class="db">{{contract.agency_name}}</strong><span><a href="mailto:{{contract.point_of_contact}}"
+            *ngIf="contract.point_of_contact">Contact e-mail</a></span></td>
+      <td>{{contract.pricing_type.name}}</td>
+      <!-- <td><a href="mailto:{{contract.point_of_contact}}" *ngIf="contract.point_of_contact">{{contract.point_of_contact}}</a></td> -->
+      <td>{{contract.annual_revenue | currency: 'USD' : 'symbol' : '1.0'}}</td>
+      <td>{{contract.status.name}}</td>
+      <td>
+        <span class="db">NAICS:</span><strong>{{contract.NAICS}}</strong>
+        <span class="db">PSC:</span><strong>{{contract.PSC}}</strong>
+      </td>
+
+    </tr>
+
+  </tbody>
+</table>
+<div *ngIf="items_total > items_per_page">
+  Viewing <strong [innerHTML]="getViewingItems()"></strong> of <strong>{{items_total}}</strong> total results
+  <button (click)="prevPage()" title="{{prev}}" style="margin-right:10px">Previous</button>
+  <button (click)="nextPage()" title="{{next}}">Next</button>
+</div>

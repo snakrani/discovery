@@ -15,7 +15,6 @@ import { HeroComponent } from './common/hero.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { Error404Component } from './pages/error404/error404.component';
 import { SearchModule } from './pages/search/search.module';
-
 @NgModule({
   declarations: [
     AppComponent,

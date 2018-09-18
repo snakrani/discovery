@@ -1,10 +1,5 @@
 <!-- Spinner -->
-<div id="search-spinner" class="overlay" *ngIf="spinner">
-  <div class="spinner-container text-center">
-    <img src="/assets/images/loader.gif" alt="Loading data..." />
-    <h2>Loading</h2>
-  </div>
-</div>
+<discovery-search-spinner [show]="spinner"></discovery-search-spinner>
 <!-- End Spinner -->
 <div class="usa-grid col-container pad-top-bottom">
   <div>

@@ -13,6 +13,7 @@ export class VendorDetailComponent implements OnInit {
   sbd_col = true;
   contract_vehicles;
   service_categories;
+  duns: string;
   constructor(
     private searchService: SearchService,
     private router: Router,
@@ -31,18 +32,6 @@ export class VendorDetailComponent implements OnInit {
       error => (this.error_message = <any>error)
     );
   }
-  getVendorDetails() {
-    const id = this.route.snapshot.params['dun'];
-    this.searchService.getVendorDetails(id).subscribe(
-      data => {
-        this.spinner = false;
-        this.vendor = data;
-        this.vendor['pools'] = this.buildPoolsByUniqueContractNumber(data);
-        console.log(this.vendor);
-      },
-      error => (this.error_message = <any>error)
-    );
-  }
   getServiceCategories() {
     this.searchService.getServiceCategories(['All']).subscribe(
       data => {
@@ -52,6 +41,19 @@ export class VendorDetailComponent implements OnInit {
       error => (this.error_message = <any>error)
     );
   }
+  getVendorDetails() {
+    const id = this.route.snapshot.params['dun'];
+    this.searchService.getVendorDetails(id).subscribe(
+      data => {
+        this.spinner = false;
+        this.vendor = data;
+        this.duns = data['duns'];
+        this.vendor['pools'] = this.buildPoolsByUniqueContractNumber(data);
+      },
+      error => (this.error_message = <any>error)
+    );
+  }
+
   buildItems(obj: any[]) {
     const categories = [];
     for (const category of obj) {
@@ -135,9 +137,6 @@ export class VendorDetailComponent implements OnInit {
           cat['service_categories'].push(item.pool);
         }
       }
-    }
-    for (const i of contracts) {
-      console.log(i.service_categories);
     }
 
     return contracts;
