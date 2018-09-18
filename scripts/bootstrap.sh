@@ -36,8 +36,8 @@ sudo apt-get install -y git >/dev/null 2>&1
 #install Docker and Docker Compose
 ./scripts/setup-docker.sh
 
-#run Docker applications
-echo "> Running all Docker services"
+#build Docker applications
+echo "> Building all Docker services"
 
 # Remove any previously running containers and start fresh
 docker-compose rm --stop --force web scheduler worker

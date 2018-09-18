@@ -25,10 +25,4 @@ urlpatterns.extend([
     url(r'^api/', include_docs_urls(title="Discovery API", public=True)),
     url(r'^docs/', RedirectView.as_view(url='/api', permanent=False)),
     url(r'^developers?/', RedirectView.as_view(url='/api', permanent=False)),
-        
-    url(r'^results/$', TemplateView.as_view(template_name='pool.html')),
-    url(r'^results/csv', vendors.PoolCSV, name="pool-csv"),
-    
-    url(r'^vendor/(?P<vendor_duns>\w+)/$', TemplateView.as_view(template_name='vendor.html')),
-    url(r'^vendor/(?P<vendor_duns>\w+)/csv/$', vendors.VendorCSV, name="vendor-csv"),
 ])

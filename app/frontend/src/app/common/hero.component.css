@@ -7,6 +7,6 @@
   font-weight: normal !important;
 }
 .usa-hero {
-  background-image: url('/../assets/images/hero.jpg');
+  background-image: url('/frontend/assets/images/hero.jpg');
   box-shadow: 0 2px 5px rgb(177, 177, 177);
 }
