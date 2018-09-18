@@ -312,14 +312,12 @@ workflows:
       - ut-core-api
       - ut-api-fields
       - ut-api-values
-      - at-all
       - dep-dev:
           requires:
             - ut-components
             - ut-core-api
             - ut-api-fields
             - ut-api-values
-            - at-all
           filters:
             branches:
               only: develop
@@ -329,7 +327,6 @@ workflows:
             - ut-core-api
             - ut-api-fields
             - ut-api-values
-            - at-all
           filters:
             branches:
               only: master
