@@ -4,9 +4,9 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "$([ `readlink "$0"` ] && echo "`readlink "$0"`" || echo "$0")")"; pwd -P)"
-cd "$SCRIPT_DIR/../app/frontend"
+cd "$SCRIPT_DIR/.."
 
-LOG_FILE="${1:-../../logs/discovery-angular.log}"
+LOG_FILE="${1:-./logs/discovery-angular.log}"
 if [ "$LOG_FILE" != "/dev/stdout" -a "$LOG_FILE" != "/dev/stderr" ]
 then
   rm -f "$LOG_FILE"
