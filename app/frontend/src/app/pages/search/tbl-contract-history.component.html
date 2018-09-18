@@ -2,6 +2,7 @@
   <caption>Showing vendor's indexed 5 year contract history</caption>
   <thead>
     <tr>
+      <th scope="col"></th>
       <th scope="col">Date Signed</th>
       <th scope="col">PIID</th>
       <th scope="col">Agency</th>
@@ -12,8 +13,10 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let contract of contracts_results">
-      <th scope="row">{{contract.date_signed | date}}</th>
+    <tr *ngFor="let contract of contracts_results; let i = index">
+
+      <th scope="row">{{i+1*current_page}}.</th>
+      <td>{{contract.piid}}</td>
       <td>{{contract.piid}}</td>
       <td><strong class="db">{{contract.agency_name}}</strong><span><a href="mailto:{{contract.point_of_contact}}"
             *ngIf="contract.point_of_contact">Contact e-mail</a></span></td>
@@ -29,6 +32,7 @@
 
   </tbody>
 </table>
+{{current_page}}
 <div *ngIf="items_total > items_per_page">
   Viewing <strong [innerHTML]="getViewingItems()"></strong> of <strong>{{items_total}}</strong> total results
   <button (click)="prevPage()" title="{{prev}}" style="margin-right:10px">Previous</button>

@@ -13,6 +13,7 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
   contracts_results: any[];
   items_per_page = 50;
   items_total: number;
+  current_page = 1;
   error_message;
   page = 0;
   next = 0;
@@ -63,10 +64,12 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
   prevPage() {
     console.log(this.prev);
     this.getContracts(this.duns, this.prev);
+    this.current_page--;
   }
   nextPage() {
     console.log(this.next);
     this.getContracts(this.duns, this.next);
+    this.current_page++;
   }
   buildPaging() {}
   getViewingItems(): string {

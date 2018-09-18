@@ -3,13 +3,15 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap, delay } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
-
+declare let API_HOST: string;
 @Injectable({
   providedIn: 'root'
 })
 export class SearchService {
   // private apiUrl = window['API_HOST'] + '/api/';
-  private apiUrl = 'http://localhost:8080/api/';
+  // private apiUrl = window.location.hostname + '/api/';
+
+  private apiUrl = API_HOST;
   _active_filters: any[];
   _contract_results: any[];
 
