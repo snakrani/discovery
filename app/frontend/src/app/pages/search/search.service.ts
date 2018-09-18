@@ -8,8 +8,8 @@ import { Router, ActivatedRoute } from '@angular/router';
   providedIn: 'root'
 })
 export class SearchService {
-  private apiUrl = window['API_HOST'] + '/api/';
-  // vendors/values/pools__setasides__name
+  // private apiUrl = window['API_HOST'] + '/api/';
+  private apiUrl = 'http://localhost:8080/api/';
   _active_filters: any[];
   _contract_results: any[];
 

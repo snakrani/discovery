@@ -23,7 +23,6 @@ tbody th {
   border-left: 0px !important;
   min-width: 120px;
 }
-
 @media (min-width: 1040px) {
   .usa-grid div.usa-width-one-third {
     margin-right: 2.35765%;

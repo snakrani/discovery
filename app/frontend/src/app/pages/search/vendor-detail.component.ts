@@ -53,7 +53,6 @@ export class VendorDetailComponent implements OnInit {
       error => (this.error_message = <any>error)
     );
   }
-
   buildItems(obj: any[]) {
     const categories = [];
     for (const category of obj) {

@@ -21,8 +21,8 @@ import { FilterPscComponent } from './filters/filter-psc.component';
 import { FilterZoneComponent } from './filters/filter-zone.component';
 import { ListComponent } from '../../common/list.component';
 import { VendorDetailComponent } from './vendor-detail.component';
-import { SearchSpinnerComponent } from './search-spinner.component';
 import { TblContractHistoryComponent } from './tbl-contract-history.component';
+import { SearchSpinnerComponent } from './search-spinner.component';
 
 @NgModule({
   imports: [CommonModule, SearchRoutingModule, FormsModule],

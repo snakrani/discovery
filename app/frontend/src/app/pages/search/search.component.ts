@@ -121,7 +121,6 @@ export class SearchComponent implements OnInit {
     );
   }
   showVendorDetails(vendor: number) {
-    console.log(vendor);
     this.show_details = true;
   }
   clearActiveFilters(bool) {

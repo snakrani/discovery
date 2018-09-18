@@ -35,7 +35,6 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
         this.contracts = data;
         this.contracts_results = data['results'];
         this.items_total = data['count'];
-        console.log(this.contracts);
         this.setPreviousNext();
       },
       error => (this.error_message = <any>error)
