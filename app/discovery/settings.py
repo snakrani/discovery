@@ -104,7 +104,6 @@ DATABASES['default'] = dj_database_url.config()
 #
 INSTALLED_APPS = [
     'test',
-    'acceptance',
     
     'discovery',
     'api',
