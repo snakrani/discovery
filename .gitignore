@@ -25,3 +25,5 @@ _*/
 /logs/*.csv
 /logs/celerybeat.pid
 /vagrant/config.yml
+
+/app/static/frontend/
