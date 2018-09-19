@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
   styles: [``]
 })
 export class AppComponent {
+  APP_ASSETS = '/frontend/';
   title = 'discovery';
   another: string;
   constructor(private route: ActivatedRoute) {}

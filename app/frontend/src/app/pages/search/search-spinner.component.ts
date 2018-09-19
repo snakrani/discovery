@@ -8,6 +8,7 @@ declare let document: any;
 export class SearchSpinnerComponent implements OnInit {
   @Input()
   show = true;
+  APP_ASSETS = '/frontend/';
   constructor() {}
 
   ngOnInit() {}

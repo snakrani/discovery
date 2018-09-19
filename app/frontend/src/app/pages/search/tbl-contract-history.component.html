@@ -15,26 +15,25 @@
   <tbody>
     <tr *ngFor="let contract of contracts_results; let i = index">
 
-      <th scope="row">{{i+1*current_page}}.</th>
-      <td>{{contract.piid}}</td>
-      <td>{{contract.piid}}</td>
-      <td><strong class="db">{{contract.agency_name}}</strong><span><a href="mailto:{{contract.point_of_contact}}"
-            *ngIf="contract.point_of_contact">Contact e-mail</a></span></td>
-      <td>{{contract.pricing_type.name}}</td>
-      <td>{{contract.annual_revenue | currency: 'USD' : 'symbol' : '1.0'}}</td>
-      <td>{{contract.status.name}}</td>
+      <td scope="row"><span [innerHTML]="getRowNum(i)"></span>.</td>
+      <td>{{contract?.date_signed | date}}</td>
+      <td>{{contract?.base_piid}}</td>
+      <td><strong class="db">{{contract?.agency_name}}</strong><span><a href="mailto:{{contract?.point_of_contact}}"
+            *ngIf="contract?.point_of_contact">Contact e-mail</a></span></td>
+      <td>{{contract.pricing_type?.name}}</td>
+      <td>{{contract?.annual_revenue | currency: 'USD' : 'symbol' : '1.0'}}</td>
+      <td>{{contract?.status.name}}</td>
       <td>
-        <span class="db">NAICS:</span><strong>{{contract.NAICS}}</strong>
-        <span class="db">PSC:</span><strong>{{contract.PSC}}</strong>
+        <span class="db">NAICS:</span><strong>{{contract?.NAICS}}</strong>
+        <span class="db">PSC:</span><strong>{{contract?.PSC}}</strong>
       </td>
 
     </tr>
 
   </tbody>
 </table>
-{{current_page}}
 <div *ngIf="items_total > items_per_page">
-  Viewing <strong [innerHTML]="getViewingItems()"></strong> of <strong>{{items_total}}</strong> total results
-  <button (click)="prevPage()" title="{{prev}}" style="margin-right:10px">Previous</button>
-  <button (click)="nextPage()" title="{{next}}">Next</button>
+  <p>Viewing <strong [innerHTML]="getViewingItems()"></strong> of <strong>{{items_total}}</strong> total results</p>
+  <button class="usa-button-secondary" (click)="prevPage()" title="{{prev}}" style="margin-right:10px" [disabled]="current_page===1">Previous</button>
+  <button class="usa-button-secondary" (click)="nextPage()" title="{{next}}" [disabled]="current_page===num_total_pages">Next</button>
 </div>

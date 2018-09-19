@@ -19,7 +19,6 @@ export class VendorDetailComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {}
-
   ngOnInit() {
     this.getContractVehicles();
   }

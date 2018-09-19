@@ -27,9 +27,9 @@
             <div *ngIf="vendor.sam_location.address">
               <h6 class="usa-heading-alt">Address:</h6>
               <blockquote>
-                <strong>{{vendor.sam_location.address}}</strong><br>
-                <strong>{{vendor.sam_location.city}}</strong><br>
-                <strong>{{vendor.sam_location.state}} {{vendor.sam_location.zipcode}}</strong>
+                <strong>{{vendor.sam_location?.address}}</strong><br>
+                <strong>{{vendor.sam_location?.city}}</strong><br>
+                <strong>{{vendor.sam_location?.state}} {{vendor.sam_location?.zipcode}}</strong>
               </blockquote>
             </div>
           </div>
@@ -47,7 +47,7 @@
             <div class="overflow">
               <a (click)="toggleSBD()" class="btn-toggle pull-right">{{!sbd_col ? 'Show' : 'Hide'}} Set Asides</a>
 
-              <table class="usa-table-borderless" [hidden]="true">
+              <table class="usa-table-borderless">
                 <caption>Choose one or more to show only contract history for that selection</caption>
                 <thead>
                   <tr>

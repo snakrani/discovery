@@ -13,6 +13,7 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
   contracts_results: any[];
   items_per_page = 50;
   items_total: number;
+  num_total_pages: number;
   current_page = 1;
   error_message;
   page = 0;
@@ -36,6 +37,10 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
         this.contracts = data;
         this.contracts_results = data['results'];
         this.items_total = data['count'];
+        console.log(data['results'].length);
+        this.num_total_pages = Math.floor(
+          (this.items_total + this.items_per_page - 1) / this.items_per_page
+        );
         this.setPreviousNext();
       },
       error => (this.error_message = <any>error)
@@ -62,24 +67,21 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
     }
   }
   prevPage() {
-    console.log(this.prev);
     this.getContracts(this.duns, this.prev);
     this.current_page--;
   }
   nextPage() {
-    console.log(this.next);
     this.getContracts(this.duns, this.next);
     this.current_page++;
   }
-  buildPaging() {}
+  getRowNum(n: number) {
+    return (
+      n + this.current_page * this.items_per_page - (this.items_per_page - 1)
+    );
+  }
   getViewingItems(): string {
-    let items = '';
-    if (this.prev === 0) {
-      items = '1 - ' + this.items_per_page;
-    } else {
-      const page_items = this.items_per_page * this.next;
-      items = '' + page_items;
-    }
-    return items;
+    const start = this.getRowNum(this.current_page) - this.current_page;
+    const end = start + this.items_per_page - 1;
+    return start + ' - ' + end;
   }
 }
