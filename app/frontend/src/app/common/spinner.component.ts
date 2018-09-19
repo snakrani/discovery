@@ -4,7 +4,7 @@ import { Component, OnInit, Input } from '@angular/core';
   selector: 'discovery-spinner',
   template: `
     <div class="spinner">
-      <img src="/assets/images/loader.gif" alt="Loading" class="pull-left" /><strong class="pull-left">Loading</strong>
+      <img src="{{APP_ASSETS}}/assets/images/loader.gif" alt="Loading" class="pull-left" /><strong class="pull-left">Loading</strong>
     </div>
   `,
   styles: []
@@ -12,6 +12,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class SpinnerComponent implements OnInit {
   @Input()
   show = true;
+  APP_ASSETS = '/frontend/';
 
   constructor() {}
 
