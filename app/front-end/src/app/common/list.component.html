@@ -1,5 +1,0 @@
-<ul class="ul-no-bullets">
-  <li *ngFor="let item of items; let i = index" [style.display]="i > items_to_show ? 'none' : ''" [id]="'li-'+id+'-'+i"
-    [innerHTML]="getValue(item)"></li>
-</ul>
-<a (click)="toggleMore()" *ngIf="items.length-1 > items_to_show">{{title_more}}</a>
