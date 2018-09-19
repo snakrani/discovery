@@ -8,10 +8,8 @@ declare let API_HOST: string;
   providedIn: 'root'
 })
 export class SearchService {
-  // private apiUrl = window['API_HOST'] + '/api/';
-  // private apiUrl = window.location.hostname + '/api/';
-
-  private apiUrl = API_HOST;
+  private apiUrl = API_HOST + '/api/';
+  
   _active_filters: any[];
   _contract_results: any[];
 
