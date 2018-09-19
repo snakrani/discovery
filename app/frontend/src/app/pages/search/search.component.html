@@ -1,0 +1,249 @@
+<!-- Spinner -->
+<discovery-search-spinner [show]="spinner"></discovery-search-spinner>
+<!-- End Spinner -->
+<div class="usa-grid col-container pad-top-bottom">
+  <div>
+    <!-- ///////////////// -->
+    <!-- FITLERS -->
+    <!-- ///////////////// -->
+    <div id="filters-container" class="usa-width-one-third bordered">
+      <discovery-filters (emmitFilters)="submitSelectedFilters($event)"></discovery-filters>
+    </div>
+
+    <!-- ///////////////// -->
+    <!-- TABS AREA -->
+    <!-- ///////////////// -->
+    <div class="usa-width-two-thirds bordered relative">
+      <discovery-choose-filters *ngIf="!show_results && !spinner"></discovery-choose-filters>
+
+      <div *ngIf="show_results">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" [class.active]="vw_contracts">
+            <a aria-controls="contracts" role="tab" data-toggle="tab" (click)="viewContracts()">
+              <h3>Contracts</h3>
+            </a>
+          </li>
+          <li role="presentation" [class.active]="vw_vendors">
+            <a aria-controls="vendors" role="tab" data-toggle="tab" (click)="viewVendors()">
+              <h3>Vendors</h3>
+            </a>
+          </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane bordered">
+            <discovery-active-filters></discovery-active-filters>
+
+            <!-- Contracts results -->
+            <div *ngIf="vw_contracts">
+              <div *ngIf="vendors_no_results">
+                <h2>No results based on your criteria</h2>
+                <p>Please change your criteria and re-submit.</p>
+              </div>
+              <div class="overflow" *ngIf="!vendors_no_results">
+                <table class="usa-table-borderless">
+                  <thead>
+                    <tr>
+                      <th scope="col"></th>
+                      <th scope="col" *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.description}}
+                        <!--<span
+                            class="info-tip"></span>-->
+                      </th>
+                      <!-- <th scope="col" *ngFor="let vehicle of compare_tbl"><a (click)="openModal(vehicle.id)">{{vehicle.description}}
+                          <span
+                            class="info-tip"></span></a></th> -->
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Total vendors</th>
+                      <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.vendors_total}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Vendors that meet your criteria </th>
+                      <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0"><span *ngIf="vehicle.vendors_results_total===0">{{vehicle.vendors_results_total}}</span><button
+                          *ngIf="vehicle.vendors_results_total!=0" (click)="viewVehicleVendors(vehicle.id)">{{vehicle.vendors_results_total}}</button></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Eligible Service category(s)</th>
+                      <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">
+                        <discovery-list [id]="vehicle.id" [items_to_show]="num_show" [items]="vehicle.service_categories"
+                          [key]="'name'"></discovery-list>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Top capabilities</th>
+                      <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.capabilities}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">NAICs</th>
+                      <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">
+                        <discovery-list [id]="vehicle.id" [items_to_show]="num_show" [items]="vehicle.naics" [key]="'code'"></discovery-list>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">PSCs</th>
+                      <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.pscs}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">SUM Tier</th>
+                      <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.tier}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">GSA Point of Contact</th>
+                      <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.gsa}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Solution Website</th>
+                      <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.website}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Ordering Guide</th>
+                      <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.ordering_guide}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- Vendors results -->
+            <div *ngIf="vw_vendors">
+              <div *ngIf="vendors_no_results">
+                <h2>No results based on your criteria</h2>
+                <p>Please change your criteria and re-submit.</p>
+              </div>
+              <div *ngIf="!vendors_no_results">
+                <div class="usa-grid-full">
+                  <div class="usa-width-one-whole">
+
+                    <h3 class="no-pad-left">{{results.vendors.length}} vendors match your filter criteria</h3>
+                    <fieldset class="usa-fieldset-inputs usa-sans inputs-inline" *ngIf="results.vehicles.length>1">
+                      <legend>List by:</legend>
+
+                      <ul class="usa-unstyled-list">
+                        <li *ngFor="let vehicle of compare_tbl; let i = index" [hidden]="vehicle.vendors_results_total===0">
+                          <input id="r-{{vehicle.id}}" type="radio" [checked]="i===0" [(ngModel)]="sort_by" name="sort_by"
+                            value="{{vehicle.id}}">
+                          <label for="r-{{vehicle.id}}">{{vehicle.description}}</label>
+                        </li>
+                      </ul>
+                    </fieldset>
+                  </div>
+
+                </div>
+
+                <div class="overflow">
+                  <a (click)="toggleSBD()" class="btn-toggle pull-right">{{!sbd_col ? 'Show' : 'Hide'}} Set Asides</a>
+
+                  <table class="usa-table-borderless">
+                    <thead>
+                      <tr>
+                        <th scope="col">Company</th>
+                        <th scope="col" class="sbd">Contracts</th>
+                        <!-- <th scope="col">POC Email</th>
+                        <th scope="col">Capability Statement</th> -->
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Small Disadvantaged Business">SB</th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Small Disadvantaged Business">SDB</th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="8(A)">8(A)</th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="HUBZone">HubZ</th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Woman Owned">WO</th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Veteran Owned">VO</th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Service Disabled Veteran Owned">SDVO</th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Veterans Affair VIP">VA
+                          VIP</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of filtered_results">
+                        <td scope="row"><a [routerLink]="['/vendor', item.duns]" queryParamsHandling="preserve">{{item.name
+                            | titlecase}}</a></td>
+                        <td>{{item.contracts}}</td>
+                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'SB') ? '&bull;' : ''"></td>
+                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, '27') ? '&bull;' : ''"></td>
+                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'A6') ? '&bull;' : ''"></td>
+                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'XX') ? '&bull;' : ''"></td>
+                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'A2') ? '&bull;' : ''"></td>
+                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'A5') ? '&bull;' : ''"></td>
+                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'QF') ? '&bull;' : ''"></td>
+                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'VIP') ? '&bull;' : ''"></td>
+                      </tr>
+
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- Modals -->
+<discovery-modal id="m-OASISSB" title="One Acquisition Solution for Integrated Services (OASIS)">
+  <p>
+    OASIS and OASIS Small Business (SB) are multiple award, Indefinite Delivery Indefinite Quantity (IDIQ) contracts
+    that provide
+    flexible and innovative solutions for complex professional services. Details of OASIS Contract include: Span many
+    areas
+    of expertise and mission space; Span multiple professional service disciplines; Allow flexibility for all contract
+    types,
+    including hybrids and cost-reimbursement, at the task order level; and Allow ancillary support components, commonly
+    referred
+    to as Other Direct Costs (ODC), at the task order level.
+
+  </p>
+  <p>
+    OASIS and OASIS Small Business (SB) are multiple award, Indefinite Delivery Indefinite Quantity (IDIQ) contracts
+    that provide
+    flexible and innovative solutions for complex professional services. Details of OASIS Contract include: Span many
+    areas
+    of expertise and mission space; Span multiple professional service disciplines; Allow flexibility for all contract
+    types,
+    including hybrids and cost-reimbursement, at the task order level; and Allow ancillary support components, commonly
+    referred
+    to as Other Direct Costs (ODC), at the task order level.
+
+  </p>
+  <p>
+    OASIS and OASIS Small Business (SB) are multiple award, Indefinite Delivery Indefinite Quantity (IDIQ) contracts
+    that provide
+    flexible and innovative solutions for complex professional services. Details of OASIS Contract include: Span many
+    areas
+    of expertise and mission space; Span multiple professional service disciplines; Allow flexibility for all contract
+    types,
+    including hybrids and cost-reimbursement, at the task order level; and Allow ancillary support components, commonly
+    referred
+    to as Other Direct Costs (ODC), at the task order level.
+
+  </p>
+  <p>
+    OASIS and OASIS Small Business (SB) are multiple award, Indefinite Delivery Indefinite Quantity (IDIQ) contracts
+    that provide
+    flexible and innovative solutions for complex professional services. Details of OASIS Contract include: Span many
+    areas
+    of expertise and mission space; Span multiple professional service disciplines; Allow flexibility for all contract
+    types,
+    including hybrids and cost-reimbursement, at the task order level; and Allow ancillary support components, commonly
+    referred
+    to as Other Direct Costs (ODC), at the task order level.
+
+  </p>
+</discovery-modal>
+<discovery-modal id="HCATSSB">
+  <p>
+    HCATSSB Content here
+
+  </p>
+</discovery-modal>
+<discovery-modal id="PSS">
+  <p>
+    PSS Content here
+
+  </p>
+</discovery-modal>
