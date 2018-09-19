@@ -1,0 +1,35 @@
+.usa-grid {
+  padding: 30px 0px 30px 0px;
+}
+.usa-width-two-thirds {
+  background-color: transparent !important;
+  padding: 0px !important;
+  border: none !important;
+}
+.btn-toggle {
+  padding: 20px 15px;
+  margin-top: 5px;
+  cursor: pointer;
+}
+th {
+  vertical-align: top !important;
+  min-width: 170px !important;
+}
+tbody th {
+  min-width: 200px !important;
+}
+
+.toggle {
+  border-left: 0px !important;
+  min-width: 120px;
+}
+@media (min-width: 1040px) {
+  .usa-grid div.usa-width-one-third {
+    margin-right: 2.35765%;
+    width: 23.23176%;
+  }
+  .usa-grid div.usa-width-two-thirds {
+    margin-right: 0;
+    width: 74.31059%;
+  }
+}

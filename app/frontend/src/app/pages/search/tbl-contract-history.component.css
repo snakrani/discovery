@@ -1,0 +1,6 @@
+.history th {
+  min-width: auto !important;
+}
+tbody th {
+  vertical-align: top !important;
+}
