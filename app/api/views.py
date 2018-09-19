@@ -98,7 +98,8 @@ class NaicsViewSet(DiscoveryReadOnlyModelViewSet):
     
     action_filters = {
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
-        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter),
+        'count': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
     }
     filter_class = filters.NaicsFilter
     search_fields = ['code', 'description', 'sin__code', 'keywords__name']
@@ -128,7 +129,8 @@ class PscViewSet(DiscoveryReadOnlyModelViewSet):
     
     action_filters = {
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
-        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter),
+        'count': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
     }
     filter_class = filters.PscFilter
     search_fields = ['code', 'description', 'sin__code', 'naics__code', 'naics__description', 'keywords__name']
@@ -158,7 +160,8 @@ class VehicleViewSet(DiscoveryReadOnlyModelViewSet):
     
     action_filters = {
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
-        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter),
+        'count': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
     }
     filter_class = filters.VehicleFilter
     search_fields = ['id', 'name']
@@ -188,7 +191,8 @@ class PoolViewSet(DiscoveryReadOnlyModelViewSet):
     
     action_filters = {
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
-        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter),
+        'count': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
     }
     filter_class = filters.PoolFilter
     search_fields = ['id', 'name', 'number', 'threshold', 'vehicle__id', 'vehicle__name']
@@ -218,7 +222,8 @@ class SetAsideViewSet(DiscoveryReadOnlyModelViewSet):
     
     action_filters = {
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
-        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter),
+        'count': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
     }
     filter_class = filters.SetAsideFilter
     search_fields = ['code', 'name', 'description']
@@ -248,7 +253,8 @@ class ZoneViewSet(DiscoveryReadOnlyModelViewSet):
     
     action_filters = {
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, OrderingFilter),
-        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend)
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend),
+        'count': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend)
     }
     filter_class = filters.ZoneFilter
     ordering_fields = ['id']
@@ -277,7 +283,8 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
     
     action_filters = {
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
-        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter),
+        'count': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
     }
     filter_class = filters.VendorFilter
     search_fields = ['name', 'duns', 'cage']
@@ -334,7 +341,8 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
     
     action_filters = {
         'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
-        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter),
+        'count': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
     }
     filter_class = filters.ContractFilter
     search_fields = ['piid', 'agency_name']
