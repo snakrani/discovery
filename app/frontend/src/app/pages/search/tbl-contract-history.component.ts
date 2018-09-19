@@ -37,7 +37,7 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
         this.contracts = data;
         this.contracts_results = data['results'];
         this.items_total = data['count'];
-        console.log(data['results'].length);
+        // console.log(data['results'].length);
         this.num_total_pages = Math.floor(
           (this.items_total + this.items_per_page - 1) / this.items_per_page
         );
