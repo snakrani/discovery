@@ -233,6 +233,12 @@ jobs:
       - checkout
 
       - run:
+          name: Build static files
+          command: |
+            ./scripts/setup-angular.sh /dev/stderr
+            ./scripts/init-webserver.sh /dev/stderr
+
+      - run:
           name: Setup CloudFoundry client CLI
           command: |
             ./scripts/setup-cf.sh /dev/stderr
@@ -258,6 +264,12 @@ jobs:
             apt-get install -y git
 
       - checkout
+
+      - run:
+          name: Build static files
+          command: |
+            ./scripts/setup-angular.sh /dev/stderr
+            ./scripts/init-webserver.sh /dev/stderr
 
       - run:
           name: Setup CloudFoundry client CLI
