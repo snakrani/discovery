@@ -18,7 +18,7 @@ export class FilterPscComponent implements OnInit {
   @Output()
   emmitSelected: EventEmitter<number> = new EventEmitter();
   @Output()
-  emmitLoaded: EventEmitter<number> = new EventEmitter();
+  emmitLoaded: EventEmitter<string> = new EventEmitter();
   @Output()
   emmitNaics: EventEmitter<number> = new EventEmitter();
   name = 'PSCs';
@@ -58,7 +58,7 @@ export class FilterPscComponent implements OnInit {
         // this.items = this.buildList(data['results']);
         this.items = data['results'];
         console.log(data['results']);
-        this.emmitLoaded.emit(1);
+
         // this.items_w_codes = data['results'];
         // autocomplete(document.getElementById('pscs-input'), this.items);
         /** Grab the queryparams and sets default values
@@ -75,6 +75,7 @@ export class FilterPscComponent implements OnInit {
         } else {
           this.opened = false;
         }
+        this.emmitLoaded.emit(this.queryName);
       },
       error => (this.error_message = <any>error)
     );
@@ -86,7 +87,7 @@ export class FilterPscComponent implements OnInit {
           // this.items = this.buildList(data['results']);
           this.items = data['results'];
           console.log(data['results']);
-          this.emmitLoaded.emit(1);
+          this.emmitLoaded.emit(this.queryName);
           // this.items_w_codes = data['results'];
           // autocomplete(document.getElementById('pscs-input'), this.items);
           /** Grab the queryparams and sets default values

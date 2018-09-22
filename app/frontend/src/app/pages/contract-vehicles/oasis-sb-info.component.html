@@ -1,101 +1,124 @@
-<div class="usa-grid pad-top-bottom">
-  <div class="usa-width-one-whole">
+<main id="main-content">
+  <section class="usa-hero">
+    <div class="usa-grid text-center">
+      <h1>OASIS</h1>
+      <h3>One Acquisition Solution for Integrated Service</h3>
+    </div>
+  </section>
 
-    <h1>One Acquisition Solution for Integrated Service (OASIS)</h1>
+  <section class="usa-section">
+    <div class="usa-grid">
+      <div class="usa-width-one-sixth best-in-class"></div>
+      <div class="usa-width-two-thirds">
+        <p class="usa-font-lead">OASIS and OASIS Small Business (SB) are multiple award, Indefinite Delivery Indefinite
+          Quantity (IDIQ) contracts that provide flexible and innovative solutions for complex professional services.
+          Details of OASIS Contract include:
+          OASIS and OASIS Small Business (SB) are multiple award, Indefinite Delivery Indefinite Quantity (IDIQ)
+          contracts that provide flexible and innovative solutions for complex professional services. Details of OASIS
+          Contract include:
+        </p>
+        <ul class="usa-font-lead">
+          <li><strong>Best-in-Class</strong></li>
+          <li>Span many areas of expertise and mission space</li>
+          <li>Span multiple professional service disciplines</li>
+          <li>Allow flexibility for all contract types, including hybrids and cost-reimbursement, at the task order
+            level</li>
+          <li>Allow ancillary support components, commonly referred to as Other Direct Costs (ODC), at the task order
+            level</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-  </div>
+  <section class="usa-section">
+    <div class="usa-grid">
+      <div class="usa-width-one-half">
+        <h3>OASIS and OASIS SB Pool Disciplines</h3>
+        <div *ngIf="pools.length===0">Loading...</div>
+        <ul *ngIf="pools.length>0">
+          <li *ngFor="let pool of pools"><a [routerLink]="['/search']" [queryParams]="{vehicles: 'OASIS_SB', service_categories: pool.id}">{{pool.name}}</a></li>
+        </ul>
+      </div>
+      <div class="usa-width-one-half">
+        <h3>OASIS Links:</h3>
+        <ul>
+          <li><a href="mailto:oasiscustomersupport@gsa.gov">OASIS Customer Support</a></li>
+          <li><a href="https://www.gsa.gov/cdnstatic/CONSOLIDATED_OASIS_U_SB_Ordering_Guide_8-15-2018.pdf" target="_blank">OASIS
+              Ordering Guide</a></li>
+          <li><a href="https://www.gsa.gov/acquisition/products-services/professional-services/oasis/oasis-contracts"
+              target="_blank">OASIS Contracts</a></li>
+          <li><a href="https://www.gsa.gov/acquisition/products-services/professional-services/oasis/training-and-scope-reviews"
+              target="_blank">Upcoming Trainings</a></li>
+          <li><a href="https://www.gsa.gov/cdnstatic/NAICS%20Code%20Definitions%20for%20OASIS.pdf" target="_blank">NAICS
+              Codes per Pool</a></li>
+          <li><a href="https://www.gsa.gov/cdnstatic/OASIS FAQs as of 8202018 (3).xlsx" target="_blank">OASIS FAQs</a></li>
+          <li><a href="mailto:Oasis@gsa.gov" target="_blank">Contact OASIS</a></li>
+          <li><a href="mailto:OasisSB@gsa.gov" target="_blank">Contact OASIS SB</a></li>
+        </ul>
 
-</div>
-<div class="usa-grid">
+      </div>
+    </div>
+  </section>
+  <!-- <section class="usa-section">
+    <div class="usa-grid">
+      <h3>Recent Contract Actions on OASIS SB</h3>
+      <table class="usa-table-borderless">
+        <thead>
+          <tr>
+            <th scope="col">Date Signed</th>
+            <th scope="col">PIID</th>
+            <th scope="col">Agency</th>
+            <th scope="col">Company Name</th>
+            <th scope="col">Type</th>
+            <th scope="col">Value ($)</th>
+            <th scope="col">Status</th>
+            <th scope="col">NAICS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">9/10/2015</th>
+            <td>####</td>
+            <td>Agency name</td>
+            <td>Company name</td>
+            <td>Type</td>
+            <td>$$$</td>
+            <td>Status here</td>
+            <td>Codes here</td>
+          </tr>
+          <tr>
+            <th scope="row">9/10/2015</th>
+            <td>####</td>
+            <td>Agency name</td>
+            <td>Company name</td>
+            <td>Type</td>
+            <td>$$$</td>
+            <td>Status here</td>
+            <td>Codes here</td>
+          </tr>
+          <tr>
+            <th scope="row">9/10/2015</th>
+            <td>####</td>
+            <td>Agency name</td>
+            <td>Company name</td>
+            <td>Type</td>
+            <td>$$$</td>
+            <td>Status here</td>
+            <td>Codes here</td>
+          </tr>
+          <tr>
+            <th scope="row">9/10/2015</th>
+            <td>####</td>
+            <td>Agency name</td>
+            <td>Company name</td>
+            <td>Type</td>
+            <td>$$$</td>
+            <td>Status here</td>
+            <td>Codes here</td>
+          </tr>
 
-  <div class="usa-width-two-thirds bordered pad-all margin-bottom">
-    <p>OASIS and OASIS Small Business (SB) are multiple award, Indefinite Delivery Indefinite Quantity (IDIQ) contracts that
-      provide flexible and innovative solutions for complex professional services. </p>
-    <p><strong>OASIS Contract include:</strong></p>
-    <ul>
-      <li>Span many areas of expertise and mission space;</li>
-      <li>Span multiple professional service disciplines;</li>
-      <li>Allow flexibility for all contract types, including hybrids and cost-reimbursement, at the task order level; and
-      </li>
-      <li>Allow ancillary support components, commonly referred to as Other Direct Costs (ODC), at the task order level.</li>
-    </ul>
-    <p><strong>OASIS Pools</strong></p>
-    <ul>
-      <li>Info goes here</li>
-      <li>Info goes here</li>
-      <li>Info goes here</li>
-      <li>Info goes here</li>
-    </ul>
-    <table class="usa-table-borderless">
-      <caption>Recent Contract Actions on OASIS SB</caption>
-      <thead>
-        <tr>
-          <th scope="col">Date Signed</th>
-          <th scope="col">PIID</th>
-          <th scope="col">Agency</th>
-          <th scope="col">Company Name</th>
-          <th scope="col">Type</th>
-          <th scope="col">Value ($)</th>
-          <th scope="col">Status</th>
-          <th scope="col">NAICS</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">9/10/2015</th>
-          <td>####</td>
-          <td>Agency name</td>
-          <td>Company name</td>
-          <td>Type</td>
-          <td>$$$</td>
-          <td>Status here</td>
-          <td>Codes here</td>
-        </tr>
-        <tr>
-          <th scope="row">9/10/2015</th>
-          <td>####</td>
-          <td>Agency name</td>
-          <td>Company name</td>
-          <td>Type</td>
-          <td>$$$</td>
-          <td>Status here</td>
-          <td>Codes here</td>
-        </tr>
-        <tr>
-          <th scope="row">9/10/2015</th>
-          <td>####</td>
-          <td>Agency name</td>
-          <td>Company name</td>
-          <td>Type</td>
-          <td>$$$</td>
-          <td>Status here</td>
-          <td>Codes here</td>
-        </tr>
-        <tr>
-          <th scope="row">9/10/2015</th>
-          <td>####</td>
-          <td>Agency name</td>
-          <td>Company name</td>
-          <td>Type</td>
-          <td>$$$</td>
-          <td>Status here</td>
-          <td>Codes here</td>
-        </tr>
-
-      </tbody>
-    </table>
-  </div>
-  <div class="usa-width-one-third bordered pad-all">
-    <h3 class="underline">OASIS Links</h3>
-    <ul>
-      <li><a href="#">OASIS Customer Support</a></li>
-      <li><a href="#">OASIS Ordering Guide</a></li>
-      <li><a href="#">OASIS Contracts</a></li>
-      <li><a href="#">Upcoming Trainings</a></li>
-      <li><a href="#">NAICS Codes per Pool</a></li>
-      <li><a href="#">OASIS FAQs</a></li>
-    </ul>
-    <button class="usa-button-secondary">More about OASIS</button>
-  </div>
-
-</div>
+        </tbody>
+      </table>
+    </div>
+  </section> -->
+</main>

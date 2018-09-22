@@ -1,0 +1,11 @@
+.usa-hero {
+  padding-top: 4em;
+  padding-bottom: 4em;
+  background-image: url(/frontend/assets/images/hero-about-us.jpg);
+}
+.usa-section-dark p {
+  color: #02bfe7 !important;
+}
+.usa-width-one-half p {
+  color: #fff !important;
+}

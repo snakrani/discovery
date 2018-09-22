@@ -6,3 +6,26 @@ blockquote {
   background: #fff !important;
   background-color: #fff !important;
 }
+.td-checkbox input {
+  -webkit-appearance: checkbox !important;
+  left: 0px !important;
+  z-index: 800;
+}
+.icon-arrow-left {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+}
+a.back {
+  display: block;
+  padding: 15px 15px 15px 0px;
+  font-size: 1.2em;
+}
+a.back:hover span,
+a.back:focus span,
+a.back:active span {
+  opacity: 1;
+}
+a.back span {
+  margin-right: 15px;
+}

@@ -1,19 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SearchService } from './search.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { TblContractHistoryComponent } from './tbl-contract-history.component';
 
 @Component({
   templateUrl: './vendor-detail.component.html',
   styleUrls: ['./vendor-detail.component.css']
 })
 export class VendorDetailComponent implements OnInit {
+  @ViewChild(TblContractHistoryComponent)
+  tblContractHistory: TblContractHistoryComponent;
   error_message;
   vendor: any;
+  piids_selected: any[] = [];
   spinner = true;
   sbd_col = true;
   contract_vehicles;
   service_categories;
   duns: string;
+  contract_nums: any[] = [];
+  num_show = 3;
   constructor(
     private searchService: SearchService,
     private router: Router,
@@ -48,6 +54,7 @@ export class VendorDetailComponent implements OnInit {
         this.vendor = data;
         this.duns = data['duns'];
         this.vendor['pools'] = this.buildPoolsByUniqueContractNumber(data);
+        console.log(this.vendor['pools']);
       },
       error => (this.error_message = <any>error)
     );
@@ -139,6 +146,16 @@ export class VendorDetailComponent implements OnInit {
 
     return contracts;
   }
+  addItem(num: string) {
+    this.piids_selected.push(num);
+  }
+  removeItem(num: string) {
+    for (let i = 0; i < this.piids_selected.length; i++) {
+      if (this.piids_selected[i] === num) {
+        this.piids_selected.splice(i, 1);
+      }
+    }
+  }
   returnSetAside(arr: any[], code: string): boolean {
     if (arr.length > 0) {
       return arr.includes(code);
@@ -146,4 +163,21 @@ export class VendorDetailComponent implements OnInit {
       return false;
     }
   }
+  // onChange(contract: string, isChecked: boolean) {
+  //   if (isChecked) {
+  //     this.addItem(contract);
+  //   } else {
+  //     this.removeItem(contract);
+  //   }
+  //   if (this.piids_selected.length > 0) {
+  //     this.tblContractHistory.getContracts(
+  //       this.duns,
+  //       1,
+  //       this.piids_selected,
+  //       'all'
+  //     );
+  //   } else {
+  //     this.tblContractHistory.getContracts(this.duns, 1, [], 'all');
+  //   }
+  // }
 }

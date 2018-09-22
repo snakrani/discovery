@@ -9,7 +9,7 @@ declare let API_HOST: string;
 })
 export class SearchService {
   private apiUrl = API_HOST + '/api/';
-  
+
   _active_filters: any[];
   _contract_results: any[];
 
@@ -93,15 +93,7 @@ export class SearchService {
         catchError(this.handleError)
       );
   }
-  getContracts(duns: string, page): Observable<any[]> {
-    console.log(this.apiUrl + 'contracts?duns=' + duns + page);
-    return this.http
-      .get<any[]>(this.apiUrl + 'contracts?duns=' + duns + page)
-      .pipe(
-        tap(data => data),
-        catchError(this.handleError)
-      );
-  }
+
   getSetAsides(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl + 'setasides?description').pipe(
       tap(data => data),
@@ -128,7 +120,7 @@ export class SearchService {
   arrToString(arr) {
     let str = '';
     for (const selected of arr) {
-      str += arr + ',';
+      str += selected + ',';
     }
     str = str.slice(0, -1);
     return str;
@@ -146,6 +138,14 @@ export class SearchService {
       tap(data => data),
       catchError(this.handleError)
     );
+  }
+  getPoolsByVehicle(vehicle: string): Observable<any[]> {
+    return this.http
+      .get<any[]>(this.apiUrl + 'pools?vehicle__id=' + vehicle)
+      .pipe(
+        tap(data => data),
+        catchError(this.handleError)
+      );
   }
 
   getNaics(vehicles): Observable<any[]> {
@@ -176,8 +176,11 @@ export class SearchService {
       );
   }
 
-  getVendors(filters: any[]): Observable<any[]> {
+  getVendors(filters: any[], page: string): Observable<any[]> {
     let params = '';
+    if (page) {
+      params = page;
+    }
     for (const filter of filters) {
       if (filter['name'] === 'keywords') {
         params +=
@@ -218,60 +221,54 @@ export class SearchService {
         catchError(this.handleError)
       );
   }
+  getVendorsCountByVehicle(vehicle: string): Observable<any[]> {
+    console.log(
+      this.apiUrl + 'vendors/count/id?pools__pool__vehicle__id=' + vehicle
+    );
+    return this.http
+      .get<any[]>(
+        this.apiUrl + 'vendors/count/id?pools__pool__vehicle__id=' + vehicle
+      )
+      .pipe(
+        tap(data => data),
+        catchError(this.handleError)
+      );
+  }
   getVendorDetails(duns: string): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl + 'vendors/' + duns).pipe(
       tap(data => data),
       catchError(this.handleError)
     );
   }
+  getVendorContractHistory(
+    duns: string,
+    page: string,
+    piid: string,
+    naic: string,
+    ordering: string
+  ): Observable<any[]> {
+    let params = 'contracts?vendor__duns=' + duns;
+    if (naic !== 'all') {
+      params += '&NAICS=' + naic;
+    }
+    if (piid !== 'all') {
+      params += '&piid=' + piid;
+    }
+    if (ordering !== '') {
+      params += '&ordering=' + ordering;
+    }
+    console.log(this.apiUrl + params + page);
+    return this.http.get<any[]>(this.apiUrl + params + page).pipe(
+      tap(data => data),
+      catchError(this.handleError)
+    );
+  }
 
-  // searchDiscovery(filters: any[]): void {
-  //   // let route = '';
-  //   // const href = this.router.url;
-
-  //   const params = this.getQueryParams(filters);
-  //   // if (href.indexOf('vendors') > 0) {
-  //   //   route = '/search/vendors';
-  //   // } else {
-  //   //   route = '/search/contracts';
-  //   // }
-
-  //   this.router.navigate(['search'], {
-  //     queryParams: params
-  //   });
-  //   // this.router.navigate([route, 'results'], {
-  //   //   queryParams: params
-  //   // });
-  //   // this.router.navigate([route, 'results'], {
-  //   //   queryParams: params,
-  //   //   queryParamsHandling: 'merge'
-  //   // });
-
-  //   // Get results from API
-  // }
   setQueryParams(filters: any[]): void {
-    // let route = '';
-    // const href = this.router.url;
-
     const params = this.getQueryParams(filters);
-    // if (href.indexOf('vendors') > 0) {
-    //   route = '/search/vendors';
-    // } else {
-    //   route = '/search/contracts';
-    // }
-
     this.router.navigate(['search'], {
       queryParams: params
     });
-    // this.router.navigate([route, 'results'], {
-    //   queryParams: params
-    // });
-    // this.router.navigate([route, 'results'], {
-    //   queryParams: params,
-    //   queryParamsHandling: 'merge'
-    // });
-
-    // Get results from API
   }
   private handleError(err: HttpErrorResponse) {
     let errorMessage = '';
@@ -332,6 +329,17 @@ export class SearchService {
     }
     return items.slice(0, -2);
   }
+  getPageNumber(str): number {
+    const params = str.split('&');
+    let n = 0;
+    for (const item of params) {
+      if (item.indexOf('page=') !== -1) {
+        const arr = item.split('=');
+        n = arr[1];
+      }
+    }
+    return n;
+  }
   sortByNameAsc(i1, i2) {
     if (i1 > i2) {
       return 1;
@@ -345,6 +353,15 @@ export class SearchService {
     if (i1.id > i2.id) {
       return 1;
     } else if (i1.id === i2.id) {
+      return 0;
+    } else {
+      return -1;
+    }
+  }
+  sortByCodeAsc(i1, i2) {
+    if (i1.code > i2.code) {
+      return 1;
+    } else if (i1.code === i2.code) {
       return 0;
     } else {
       return -1;
