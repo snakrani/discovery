@@ -1,114 +1,121 @@
-<div class="usa-grid pad-top-bottom">
-  <div class="usa-width-one-whole">
+<main id="main-content">
+  <section class="usa-hero">
+    <div class="usa-grid text-center">
+      <h1>BMO</h1>
+      <h3>Building Maintenance and Operations</h3>
+    </div>
+  </section>
 
-    <h1>Building Maintenance and Operations (BMO)</h1>
+  <section class="usa-section">
+    <div class="usa-grid">
 
-  </div>
+      <p class="usa-font-lead">Building Maintenance and Operations (BMO) strategic sourcing solution is a comprehensive
+        and flexible solution covering all high-demand BMO services. It is an open market, multiple-award, indefinite
+        delivery, indefinite quantity (MA-IDIQ), government-wide contract vehicle supporting the strategic sourcing
+        initiative to reduce costs and drive efficient purchasing by federal agencies.
+      </p>
+      <ul class="usa-font-lead">
+        <li>Provides a broad and comprehensive range of BMO services for use throughout</li>
+        <li>Provides a regionally focused pool of highly qualified large and small contractors</li>
+        <li>Allows flexibility for contract types, including fixed price, labor hour, time and materials, and hybrids</li>
+        <li>Leverages spend in acquiring services in an effective, economical, and expedient manner resulting in both
+          significant cost and time savings</li>
+        <li>Following FAR Subpart 16.505 Ordering Procedures, all BMO vendors that can meet the exact specifications of
+          your requirement should be notified (given Fair Opportunity to compete)</li>
+      </ul>
+      <h3><a href="https://discovery-dev.app.cloud.gov/static/discovery_site/files/BMO_Phase_II_Service_Category_Descriptions.pdf"
+          target="_blank">BMO Phase Service Category Descriptions
+        </a></h3>
 
-</div>
-<div class="usa-grid">
+    </div>
+  </section>
 
-  <div class="usa-width-two-thirds bordered pad-all margin-bottom">
-    <div class="usa-alert usa-alert-info">
-      <div class="usa-alert-body">
-        <p class="usa-alert-text">GSA’s BMO vehicle is the first governmentwide solution to receive a best-in-class designation
-          by meeting five rigorous category management performance criteria as defined by Office of Management and Budget
-          guidance. <a href="https://www.gsa.gov/acquisition/category-management/bestinclass">Read more about this designation
-            and the evaluation criteria</a> on the GSA Blog.</p>
+  <section class="usa-section">
+    <div class="usa-grid">
+      <div class="usa-width-one-half">
+        <h3>BMO Service Categories</h3>
+        <div *ngIf="pools.length===0">Loading...</div>
+        <ul *ngIf="pools.length>0">
+          <li *ngFor="let pool of pools"><a [routerLink]="['/search']" [queryParams]="{vehicles: 'BMO', service_categories: pool.id}">{{pool.name}}</a></li>
+        </ul>
+      </div>
+      <div class="usa-width-one-half">
+        <h3>BMO Links:</h3>
+        <ul>
+          <li><a href="https://www.gsa.gov/acquisition/purchasing-programs/federal-strategic-sourcing-initiative/building-maintenance-and-operations"
+              target="_blank">BMO Home Page</a></li>
+          <li><a href="https://www.gsa.gov/cdnstatic/General_Supplies__Services/Ordering Guide V5_0.pdf" target="_blank">BMO
+              Ordering Guide</a></li>
+          <li><a href="https://www.gsa.gov/acquisition/purchasing-programs/federal-strategic-sourcing-initiative/building-maintenance-operations/bmo-training"
+              target="_blank">BMO Training</a></li>
+          <li><a href="https://www.gsa.gov/acquisition/purchasing-programs/federal-strategic-sourcing-initiative/building-maintenance-operations/fssi-bmo-faq"
+              target="_blank">BMO Contract(s)</a></li>
+          <li><a href="mailto:fssi.bmo@gsa.gov" target="_blank">Contact BMO</a></li>
+        </ul>
+
       </div>
     </div>
-    <p>Building Maintenance and Operations (BMO) strategic sourcing solution is a comprehensive and flexible solution covering
-      all high-demand BMO services. It is an open market, multiple-award, indefinite delivery, indefinite quantity (MA-IDIQ),
-      governmentwide contract vehicle supporting the strategic sourcing initiative to reduce costs and drive efficient purchasing
-      by federal agencies.</p>
-    <p>There are both unrestricted and small business set aside programs available in the BMO vehicle to allow for large
-      and small business participation. The BMO Small Business (SB) has additional socio-economic categories to help agencies
-      meet their goals.</p>
-    <p>The BMO vehicle is a 10-year contract with one 5-year base and one 5-year option at the parent contract level. Agencies
-      seeking longer than a 5-year task order (1 year base period and four 1-year options) must request a deviation from
-      their own agency. BMO allows for the following contract types at the task-order level:</p>
-    <ul>
-      <li>Firm, fixed price</li>
-      <li>Time and materials</li>
-      <li>Labor hours</li>
-    </ul>
-    <p><strong>BMO Pools</strong></p>
-    <ul>
-      <li>Info goes here</li>
-      <li>Info goes here</li>
-      <li>Info goes here</li>
-      <li>Info goes here</li>
-    </ul>
-    <table class="usa-table-borderless">
-      <caption>Recent Contract Actions on BMO</caption>
-      <thead>
-        <tr>
-          <th scope="col">Date Signed</th>
-          <th scope="col">PIID</th>
-          <th scope="col">Agency</th>
-          <th scope="col">Company Name</th>
-          <th scope="col">Type</th>
-          <th scope="col">Value ($)</th>
-          <th scope="col">Status</th>
-          <th scope="col">NAICS</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">9/10/2015</th>
-          <td>####</td>
-          <td>Agency name</td>
-          <td>Company name</td>
-          <td>Type</td>
-          <td>$$$</td>
-          <td>Status here</td>
-          <td>Codes here</td>
-        </tr>
-        <tr>
-          <th scope="row">9/10/2015</th>
-          <td>####</td>
-          <td>Agency name</td>
-          <td>Company name</td>
-          <td>Type</td>
-          <td>$$$</td>
-          <td>Status here</td>
-          <td>Codes here</td>
-        </tr>
-        <tr>
-          <th scope="row">9/10/2015</th>
-          <td>####</td>
-          <td>Agency name</td>
-          <td>Company name</td>
-          <td>Type</td>
-          <td>$$$</td>
-          <td>Status here</td>
-          <td>Codes here</td>
-        </tr>
-        <tr>
-          <th scope="row">9/10/2015</th>
-          <td>####</td>
-          <td>Agency name</td>
-          <td>Company name</td>
-          <td>Type</td>
-          <td>$$$</td>
-          <td>Status here</td>
-          <td>Codes here</td>
-        </tr>
+  </section>
+  <!-- <section class="usa-section">
+        <div class="usa-grid">
+          <h3>Recent Contract Actions on OASIS SB</h3>
+          <table class="usa-table-borderless">
+            <thead>
+              <tr>
+                <th scope="col">Date Signed</th>
+                <th scope="col">PIID</th>
+                <th scope="col">Agency</th>
+                <th scope="col">Company Name</th>
+                <th scope="col">Type</th>
+                <th scope="col">Value ($)</th>
+                <th scope="col">Status</th>
+                <th scope="col">NAICS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">9/10/2015</th>
+                <td>####</td>
+                <td>Agency name</td>
+                <td>Company name</td>
+                <td>Type</td>
+                <td>$$$</td>
+                <td>Status here</td>
+                <td>Codes here</td>
+              </tr>
+              <tr>
+                <th scope="row">9/10/2015</th>
+                <td>####</td>
+                <td>Agency name</td>
+                <td>Company name</td>
+                <td>Type</td>
+                <td>$$$</td>
+                <td>Status here</td>
+                <td>Codes here</td>
+              </tr>
+              <tr>
+                <th scope="row">9/10/2015</th>
+                <td>####</td>
+                <td>Agency name</td>
+                <td>Company name</td>
+                <td>Type</td>
+                <td>$$$</td>
+                <td>Status here</td>
+                <td>Codes here</td>
+              </tr>
+              <tr>
+                <th scope="row">9/10/2015</th>
+                <td>####</td>
+                <td>Agency name</td>
+                <td>Company name</td>
+                <td>Type</td>
+                <td>$$$</td>
+                <td>Status here</td>
+                <td>Codes here</td>
+              </tr>
 
-      </tbody>
-    </table>
-  </div>
-  <div class="usa-width-one-third bordered pad-all">
-    <h3 class="underline">BMO Links</h3>
-    <ul>
-      <li><a href="#">BMO Customer Support</a></li>
-      <li><a href="#">BMO Ordering Guide</a></li>
-      <li><a href="#">BMO Contracts</a></li>
-      <li><a href="#">Upcoming Trainings</a></li>
-      <li><a href="#">NAICS Codes per Pool</a></li>
-      <li><a href="#">BMO FAQs</a></li>
-    </ul>
-    <button class="usa-button-secondary">More about BMO</button>
-  </div>
-
-</div>
+            </tbody>
+          </table>
+        </div>
+      </section> -->
+</main>

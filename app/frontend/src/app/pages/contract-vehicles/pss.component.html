@@ -1,126 +1,118 @@
-<div class="usa-grid pad-top-bottom">
-  <div class="usa-width-one-whole">
+<main id="main-content">
+  <section class="usa-hero">
+    <div class="usa-grid text-center">
+      <h1>PSS</h1>
+      <h3>Professional Services Schedule</h3>
+    </div>
+  </section>
 
-    <h1>Professional Services Schedule (PSS)</h1>
+  <section class="usa-section">
+    <div class="usa-grid">
 
-  </div>
+      <p class="usa-font-lead">The Professional Services Schedule (PSS) is an indefinite delivery/indefinite quantity
+        (IDIQ) multiple award schedule, providing direct access to simple or complex fixed-price or labor-hour
+        professional services.
+      </p>
+      <ul class="usa-font-lead">
+        <li>Allows use of streamlined procurement procedures in FAR Subpart 8.4 Federal Supply Schedules
+        </li>
+        <li>Provides direct access to simple or complex fixed-price or labor-hour professional services
+        </li>
+        <li>Offers federal agencies access to more than 3,300 experienced contractors
+        </li>
+        <li>Please note, PSS small business designation may be incorrect for up to 20% of listings due to lack of
+          updates by vendors
+        </li>
+      </ul>
+    </div>
+  </section>
 
-</div>
-<div class="usa-grid">
+  <section class="usa-section">
+    <div class="usa-grid">
+      <div class="usa-width-one-half">
+        <h3>PSS Service Categories – SINs</h3>
+        <div *ngIf="pools.length===0">Loading...</div>
+        <ul *ngIf="pools.length>0">
+          <li *ngFor="let pool of pools"><a [routerLink]="['/search']" [queryParams]="{vehicles: 'PSS', service_categories: pool.id}">{{pool.name}}</a></li>
+        </ul>
+      </div>
+      <div class="usa-width-one-half">
+        <h3>PSS Links:</h3>
+        <ul>
+          <li><a href="https://www.gsa.gov/acquisition/products-services/professional-services/professional-services-schedule-pss">PSS
+              Customer Support</a></li>
+          <li><a href="https://www.gsa.gov/acquisition/purchasing-programs/gsa-schedules/for-federal-agency-customers-ordering-from-schedules"
+              target="_blank">Schedules Ordering</a></li>
+          <li><a href="https://www.gsa.gov/acquisition/purchasing-programs/gsa-schedules/schedules-news-training"
+              target="_blank">Schedules Training</a></li>
+          <li><a href="https://www.gsa.gov/acquisition/purchasing-programs/gsa-schedules/gsa-schedules-frequently-asked-questions"
+              target="_blank">Schedules FAQs</a></li>
+          <li><a href="mailto:ProfessionalServices@gsa.gov" target="_blank">Contact PSS</a></li>
+        </ul>
 
-  <div class="usa-width-two-thirds bordered pad-all margin-bottom">
-    <p>The Professional Services Schedule (PSS) is an indefinite delivery/indefinite quantity (IDIQ) multiple award schedule,
-      providing direct access to simple or complex fixed-price or labor-hour professional services including:
-    </p>
-    <ul>
-      <li>
-        <a href="/acquisition/products-services/professional-services/professional-services-schedule/what-the-schedule-offers/advertising-integrated-marketing-solutions-aims"
-          target="_self" id="anch_411">Advertising and marketing solutions</a>;</li>
-      <li>
-        <a href="/acquisition/products-services/professional-services/professional-services-schedule/what-the-schedule-offers/business-consulting-solutions"
-          target="_self" id="anch_412">Business consulting solutions</a>;</li>
-      <li>
-        <a href="/acquisition/products-services/professional-services/professional-services-schedule/what-the-schedule-offers/environmental-solutions"
-          target="_self" id="anch_413">Environmental solutions</a>;</li>
-      <li>
-        <a href="/acquisition/products-services/professional-services/professional-services-schedule/what-the-schedule-offers/financial-business-solutions"
-          target="_self" id="anch_414">Financial and business solutions</a>;</li>
-      <li>
-        <a href="/acquisition/products-services/professional-services/professional-services-schedule/what-the-schedule-offers/language-services"
-          target="_self" id="anch_415">Language services</a>;</li>
-      <li>
-        <a href="/acquisition/products-services/professional-services/professional-services-schedule/what-the-schedule-offers/logistics-solutions"
-          target="_self" id="anch_416">Logistics solutions</a>; and </li>
-      <li>
-        <a href="/acquisition/products-services/professional-services/professional-services-schedule/what-the-schedule-offers/professional-engineering-solutions"
-          target="_self" id="anch_417">Professional engineering solutions</a>.</li>
-    </ul>
-    <p>Using the streamlined procurement procedures in FAR Subpart 8.4 Federal Supply Schedules, PSS offers federal agencies
-      access to more than 3,300 experienced contractors who provide a range of commercial professional services at discounted
-      and competitive prices. Review the <a href="/cdnstatic/PSS_Slipsheet_June_2016_%281%29.pdf" target="_self" title="PSS Fact Sheet pdf version"
-        id="anch_418">PSS Fact Sheet</a><span> [PDF - 771 KB]</span> to learn more.
-    </p>
-    <p>The PSS consists of seven formerly separate schedules that were consolidated in 2015 to give federal agency acquisition
-      professionals the ability to obtain total contract solutions for their professional services requirements using one
-      contract vehicle.
-    </p>
-    <p><strong>PSS Pools</strong></p>
-    <ul>
-      <li>Info goes here</li>
-      <li>Info goes here</li>
-      <li>Info goes here</li>
-      <li>Info goes here</li>
-    </ul>
-    <table class="usa-table-borderless">
-      <caption>Recent Contract Actions on PSS</caption>
-      <thead>
-        <tr>
-          <th scope="col">Date Signed</th>
-          <th scope="col">PIID</th>
-          <th scope="col">Agency</th>
-          <th scope="col">Company Name</th>
-          <th scope="col">Type</th>
-          <th scope="col">Value ($)</th>
-          <th scope="col">Status</th>
-          <th scope="col">NAICS</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">9/10/2015</th>
-          <td>####</td>
-          <td>Agency name</td>
-          <td>Company name</td>
-          <td>Type</td>
-          <td>$$$</td>
-          <td>Status here</td>
-          <td>Codes here</td>
-        </tr>
-        <tr>
-          <th scope="row">9/10/2015</th>
-          <td>####</td>
-          <td>Agency name</td>
-          <td>Company name</td>
-          <td>Type</td>
-          <td>$$$</td>
-          <td>Status here</td>
-          <td>Codes here</td>
-        </tr>
-        <tr>
-          <th scope="row">9/10/2015</th>
-          <td>####</td>
-          <td>Agency name</td>
-          <td>Company name</td>
-          <td>Type</td>
-          <td>$$$</td>
-          <td>Status here</td>
-          <td>Codes here</td>
-        </tr>
-        <tr>
-          <th scope="row">9/10/2015</th>
-          <td>####</td>
-          <td>Agency name</td>
-          <td>Company name</td>
-          <td>Type</td>
-          <td>$$$</td>
-          <td>Status here</td>
-          <td>Codes here</td>
-        </tr>
+      </div>
+    </div>
+  </section>
+  <!-- <section class="usa-section">
+      <div class="usa-grid">
+        <h3>Recent Contract Actions on OASIS SB</h3>
+        <table class="usa-table-borderless">
+          <thead>
+            <tr>
+              <th scope="col">Date Signed</th>
+              <th scope="col">PIID</th>
+              <th scope="col">Agency</th>
+              <th scope="col">Company Name</th>
+              <th scope="col">Type</th>
+              <th scope="col">Value ($)</th>
+              <th scope="col">Status</th>
+              <th scope="col">NAICS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">9/10/2015</th>
+              <td>####</td>
+              <td>Agency name</td>
+              <td>Company name</td>
+              <td>Type</td>
+              <td>$$$</td>
+              <td>Status here</td>
+              <td>Codes here</td>
+            </tr>
+            <tr>
+              <th scope="row">9/10/2015</th>
+              <td>####</td>
+              <td>Agency name</td>
+              <td>Company name</td>
+              <td>Type</td>
+              <td>$$$</td>
+              <td>Status here</td>
+              <td>Codes here</td>
+            </tr>
+            <tr>
+              <th scope="row">9/10/2015</th>
+              <td>####</td>
+              <td>Agency name</td>
+              <td>Company name</td>
+              <td>Type</td>
+              <td>$$$</td>
+              <td>Status here</td>
+              <td>Codes here</td>
+            </tr>
+            <tr>
+              <th scope="row">9/10/2015</th>
+              <td>####</td>
+              <td>Agency name</td>
+              <td>Company name</td>
+              <td>Type</td>
+              <td>$$$</td>
+              <td>Status here</td>
+              <td>Codes here</td>
+            </tr>
 
-      </tbody>
-    </table>
-  </div>
-  <div class="usa-width-one-third bordered pad-all">
-    <h3 class="underline">PSS Links</h3>
-    <ul>
-      <li><a href="#">PSS Customer Support</a></li>
-      <li><a href="#">PSS Ordering Guide</a></li>
-      <li><a href="#">PSS Contracts</a></li>
-      <li><a href="#">Upcoming Trainings</a></li>
-      <li><a href="#">NAICS Codes per Pool</a></li>
-      <li><a href="#">PSS FAQs</a></li>
-    </ul>
-    <button class="usa-button-secondary">More about PSS</button>
-  </div>
-
-</div>
+          </tbody>
+        </table>
+      </div>
+    </section> -->
+</main>

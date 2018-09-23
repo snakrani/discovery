@@ -18,7 +18,7 @@ export class FilterKeywordsComponent implements OnInit {
   @Output()
   emmitSelected: EventEmitter<number> = new EventEmitter();
   @Output()
-  emmitLoaded: EventEmitter<number> = new EventEmitter();
+  emmitLoaded: EventEmitter<string> = new EventEmitter();
   name = 'Keywords';
   queryName = 'keywords';
   id = 'filter-keywords';
@@ -67,7 +67,7 @@ export class FilterKeywordsComponent implements OnInit {
       } else {
         this.opened = false;
       }
-      this.emmitLoaded.emit(1);
+      this.emmitLoaded.emit(this.queryName);
     });
   }
   buildKeywordsDropdown(obj: any[]): any[] {

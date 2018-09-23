@@ -21,6 +21,7 @@ export class SearchComponent implements OnInit {
   error_message;
   contracts_compare;
   contracts_results = [];
+  contracts_w_no_records = [];
   vendors_results;
   vendors_no_results = false;
   show_details = false;
@@ -47,7 +48,6 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     /** Check to see if there are any queryparams */
-    console.log(this.route.snapshot.queryParamMap.keys);
     if (this.route.snapshot.queryParamMap.keys.length > 0) {
       this.spinner = true;
     }
@@ -197,7 +197,7 @@ export class SearchComponent implements OnInit {
   }
   buildContractCompare() {
     const compare: any[] = [];
-
+    this.contracts_w_no_records = [];
     for (const vehicle of this.results.vehicles) {
       const item: any[] = [];
       item['id'] = vehicle;
@@ -217,6 +217,9 @@ export class SearchComponent implements OnInit {
       item['website'] = '';
       item['ordering_guide'] = '';
       compare.push(item);
+      if (item['vendors_results_total'] === 0) {
+        this.contracts_w_no_records.push({ name: item['description'] });
+      }
     }
     this.compare_tbl = compare;
   }

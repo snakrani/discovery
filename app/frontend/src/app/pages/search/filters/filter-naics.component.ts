@@ -19,7 +19,7 @@ export class FilterNaicsComponent implements OnInit {
   @Output()
   emmitSelected: EventEmitter<number> = new EventEmitter();
   @Output()
-  emmitLoaded: EventEmitter<number> = new EventEmitter();
+  emmitLoaded: EventEmitter<string> = new EventEmitter();
   @Output()
   emmitNaics: EventEmitter<any> = new EventEmitter();
   name = 'NAICs';
@@ -79,7 +79,7 @@ export class FilterNaicsComponent implements OnInit {
 
           this.setFilteredItems(values);
         }
-        this.emmitLoaded.emit(1);
+        this.emmitLoaded.emit(this.queryName);
         this.emmitNaics.emit(this.items_filtered);
       },
       error => (this.error_message = <any>error)

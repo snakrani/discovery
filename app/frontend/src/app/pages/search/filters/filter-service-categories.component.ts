@@ -17,7 +17,7 @@ export class FilterServiceCategoriesComponent implements OnInit {
   @Output()
   emmitSelected: EventEmitter<number> = new EventEmitter();
   @Output()
-  emmitLoaded: EventEmitter<number> = new EventEmitter();
+  emmitLoaded: EventEmitter<string> = new EventEmitter();
   name = 'Service Categories';
   queryName = 'service_categories';
   id = 'filter-service-cat';
@@ -48,7 +48,6 @@ export class FilterServiceCategoriesComponent implements OnInit {
       data => {
         this.items = this.buildItems(data['results']);
         this.setFilteredItems(vehicles);
-        this.emmitLoaded.emit(1);
         /** Grab the queryparams and sets default values
          *  on inputs Ex. checked, selected, keywords, etc */
         if (this.route.snapshot.queryParamMap.has(this.queryName)) {
@@ -75,6 +74,8 @@ export class FilterServiceCategoriesComponent implements OnInit {
 
           this.setFilteredItems(values);
         }
+
+        this.emmitLoaded.emit(this.queryName);
       },
       error => (this.error_message = <any>error)
     );

@@ -9,70 +9,134 @@ import { SearchService } from './search.service';
 export class TblContractHistoryComponent implements OnInit, OnChanges {
   @Input()
   duns;
-  contracts: any[];
+  @Input()
+  pools: any[];
+  @Input()
+  contract_vehicles: any[];
+  _contracts: any[];
   contracts_results: any[];
+
   items_per_page = 50;
   items_total: number;
   num_total_pages: number;
+  num_results: number;
   current_page = 1;
   error_message;
-  page = 0;
-  next = 0;
-  prev = 0;
+  naics: any[] = [];
+  naic_code = 'all';
+  piid = 'all';
+  next: number;
+  prev: number;
+  enable_paging = false;
+  history_no_results = false;
+  spinner = false;
+
   constructor(private searchService: SearchService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.initNaicsList();
+  }
   ngOnChanges() {
     if (this.duns) {
-      this.getContracts(this.duns, this.page);
+      this.getContracts(
+        this.duns,
+        this.current_page,
+        this.piid,
+        this.naic_code
+      );
     }
   }
-  getContracts(duns: string, page: number) {
+  get contracts() {
+    return this._contracts;
+  }
+  set contracts(contracts) {
+    this._contracts = contracts;
+  }
+  getContracts(duns: string, page: number, piid: string, naic: string) {
+    console.log(duns + '/' + page + '/' + piid + '/' + naic);
     let page_path = '';
-    if (page > 0) {
+    if (page > 1) {
       page_path = '&page=' + page;
     }
-    this.searchService.getContracts(duns, page_path).subscribe(
+    this.current_page = page;
+    this.enable_paging = false;
+    this.history_no_results = false;
+    this.spinner = true;
+    this.searchService
+      .getVendorContractHistory(duns, page_path, piid, naic)
+      .subscribe(
+        data => {
+          this.contracts = data;
+          this.contracts_results = data['results'];
+          this.items_total = data['count'];
+          this.num_results = data['results'].length;
+          this.num_total_pages = Math.floor(
+            (this.items_total + this.items_per_page - 1) / this.items_per_page
+          );
+          this.setPreviousNext();
+          this.enable_paging = true;
+          this.spinner = false;
+          if (this.num_results === 0) {
+            this.history_no_results = true;
+          }
+        },
+        error => (this.error_message = <any>error)
+      );
+  }
+  getVehicleDescription(vehicle: string) {
+    return this.searchService.getItemDescription(
+      this.contract_vehicles,
+      vehicle,
+      'id',
+      'name'
+    );
+  }
+  initNaicsList() {
+    this.searchService.getNaics(['All']).subscribe(
       data => {
-        this.contracts = data;
-        this.contracts_results = data['results'];
-        this.items_total = data['count'];
-        // console.log(data['results'].length);
-        this.num_total_pages = Math.floor(
-          (this.items_total + this.items_per_page - 1) / this.items_per_page
-        );
-        this.setPreviousNext();
+        this.naics = this.buildNaicsItems(data['results']);
+        this.naics.sort(this.searchService.sortByCodeAsc);
       },
       error => (this.error_message = <any>error)
     );
+  }
+  buildNaicsItems(obj: any[]) {
+    const naics = [];
+    for (const pool of obj) {
+      for (const naic of pool.naics) {
+        const item = {};
+        item['code'] = naic.code;
+        item['description'] = naic.description;
+        if (!this.searchService.existsIn(naics, naic.code, 'code')) {
+          naics.push(item);
+        }
+      }
+    }
+    return naics;
   }
   setPreviousNext() {
     if (this.contracts['next'] !== null) {
       const str = this.contracts['next'];
       if (str.indexOf('&page=') !== -1) {
         const arr_next = str.split('&page=');
-        this.next = arr_next[1];
+        this.next = +arr_next[1];
       }
-    } else {
-      this.next = 0;
     }
     if (this.contracts['previous'] !== null) {
       const str = this.contracts['previous'];
       if (str.indexOf('&page=') !== -1) {
         const arr_prev = str.split('&page=');
-        this.prev = arr_prev[1];
+        this.prev = +arr_prev[1];
       } else {
-        this.prev = 0;
+        this.prev = 1;
       }
     }
   }
   prevPage() {
-    this.getContracts(this.duns, this.prev);
-    this.current_page--;
+    this.getContracts(this.duns, this.prev, this.piid, this.naic_code);
   }
   nextPage() {
-    this.getContracts(this.duns, this.next);
-    this.current_page++;
+    this.getContracts(this.duns, this.next, this.piid, this.naic_code);
   }
   getRowNum(n: number) {
     return (
@@ -81,7 +145,24 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
   }
   getViewingItems(): string {
     const start = this.getRowNum(this.current_page) - this.current_page;
-    const end = start + this.items_per_page - 1;
+    const end = start + this.num_results - 1;
     return start + ' - ' + end;
+  }
+  filterByContracts(contracts: any[]) {
+    const items: any[] = [];
+    for (const item of contracts) {
+      for (const prop of this.contracts_results) {
+        if (prop['base_piid'] === item) {
+          items.push(prop);
+        }
+      }
+    }
+    return items;
+  }
+  onChangeNaic() {
+    this.getContracts(this.duns, 1, this.piid, this.naic_code);
+  }
+  onChangeMembership() {
+    this.getContracts(this.duns, 1, this.piid, this.naic_code);
   }
 }

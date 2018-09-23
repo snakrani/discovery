@@ -64,7 +64,7 @@ export class FiltersComponent implements OnInit {
   emmitResetFilters: EventEmitter<any> = new EventEmitter();
   disabled_btn = true;
   num_items_selected = 0;
-  loaded_filters = 0;
+  loaded_filters: any[] = [];
   error_message;
   filters_submitted: any[];
   params_submitted = false;
@@ -134,6 +134,7 @@ export class FiltersComponent implements OnInit {
   emmitSelectedFilters() {
     this.params_submitted = true;
     const filters: any[] = this.getSelectedFilters();
+    console.log(filters);
     this.emmitFilters.emit(filters);
   }
   filterOthersByVehicles(vehicles: any[]) {
@@ -180,12 +181,18 @@ export class FiltersComponent implements OnInit {
     const vehicles: any[] = this.filterContractVehiclesComponent.getSelected();
     return vehicles;
   }
-  getResults(n: number) {
-    this.loaded_filters++;
+  getResults(filter: string) {
+    if (!this.searchService.existsIn(this.loaded_filters, filter, 'name')) {
+      const item = {};
+      item['name'] = filter;
+      this.loaded_filters.push(item);
+    }
+
     /** Filters need to be loaded before
      *  displaying compare table.
      */
-    if (this.loaded_filters >= this.filters_list.length) {
+
+    if (this.loaded_filters.length === this.filters_list.length) {
       if (
         this.num_items_selected > 0 &&
         this.route.snapshot.queryParamMap.keys.length > 0 &&

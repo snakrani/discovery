@@ -16,7 +16,7 @@ export class FilterZoneComponent implements OnInit {
   @Output()
   emmitSelected: EventEmitter<number> = new EventEmitter();
   @Output()
-  emmitLoaded: EventEmitter<number> = new EventEmitter();
+  emmitLoaded: EventEmitter<string> = new EventEmitter();
   name = 'Zone';
   queryName = 'zone';
   id = 'filter-zone';
@@ -59,7 +59,7 @@ export class FilterZoneComponent implements OnInit {
         } else {
           this.opened = false;
         }
-        this.emmitLoaded.emit(1);
+        this.emmitLoaded.emit(this.queryName);
       },
       error => (this.error_message = <any>error)
     );
