@@ -217,8 +217,10 @@ jobs:
 
   dep-dev:
     docker:
-      - image: debian:stretch-slim
+      - image: python:3.6-slim-stretch
         environment:
+          LANG: C.UTF-8
+          PYTHONUNBUFFERED: 1
           CF_LOGIN_URL: 'https://api.fr.cloud.gov'
 
     working_directory: /var/local
@@ -233,8 +235,15 @@ jobs:
       - checkout
 
       - run:
+          name: Set CircleCI configuration
+          command: |
+            cp ./app/discovery/local_settings.circle.py ./app/discovery/local_settings.py
+
+      - run:
           name: Build static files
           command: |
+            pip install --no-cache-dir -r ./requirements.txt
+            pip install --no-cache-dir -r ./requirements-dev.txt
             ./scripts/setup-angular.sh /dev/stderr
             ./scripts/init-webserver.sh /dev/stderr
 
@@ -250,8 +259,10 @@ jobs:
 
   dep-prod:
     docker:
-      - image: debian:stretch-slim
+      - image: python:3.6-slim-stretch
         environment:
+          LANG: C.UTF-8
+          PYTHONUNBUFFERED: 1
           CF_LOGIN_URL: 'https://api.fr.cloud.gov'
 
     working_directory: /var/local
@@ -266,8 +277,15 @@ jobs:
       - checkout
 
       - run:
+          name: Set CircleCI configuration
+          command: |
+            cp ./app/discovery/local_settings.circle.py ./app/discovery/local_settings.py
+
+      - run:
           name: Build static files
           command: |
+            pip install --no-cache-dir -r ./requirements.txt
+            pip install --no-cache-dir -r ./requirements-dev.txt
             ./scripts/setup-angular.sh /dev/stderr
             ./scripts/init-webserver.sh /dev/stderr
 
