@@ -227,10 +227,10 @@ jobs:
 
     steps:
       - run:
-          name: Install Git
+          name: Install development tools
           command: |
             apt-get update
-            apt-get install -y git
+            apt-get install -y git gcc
 
       - checkout
 
@@ -269,10 +269,10 @@ jobs:
 
     steps:
       - run:
-          name: Install Git
+          name: Install development tools
           command: |
             apt-get update
-            apt-get install -y git
+            apt-get install -y git gcc
 
       - checkout
 
