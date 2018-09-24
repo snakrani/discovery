@@ -176,8 +176,11 @@ export class SearchService {
       );
   }
 
-  getVendors(filters: any[]): Observable<any[]> {
+  getVendors(filters: any[], page: string): Observable<any[]> {
     let params = '';
+    if (page) {
+      params = page;
+    }
     for (const filter of filters) {
       if (filter['name'] === 'keywords') {
         params +=
@@ -241,7 +244,8 @@ export class SearchService {
     duns: string,
     page: string,
     piid: string,
-    naic: string
+    naic: string,
+    ordering: string
   ): Observable<any[]> {
     let params = 'contracts?vendor__duns=' + duns;
     if (naic !== 'all') {
@@ -249,6 +253,9 @@ export class SearchService {
     }
     if (piid !== 'all') {
       params += '&piid=' + piid;
+    }
+    if (ordering !== '') {
+      params += '&ordering=' + ordering;
     }
     console.log(this.apiUrl + params + page);
     return this.http.get<any[]>(this.apiUrl + params + page).pipe(
@@ -321,6 +328,17 @@ export class SearchService {
       items += i[key] + ', ';
     }
     return items.slice(0, -2);
+  }
+  getPageNumber(str): number {
+    const params = str.split('&');
+    let n = 0;
+    for (const item of params) {
+      if (item.indexOf('page=') !== -1) {
+        const arr = item.split('=');
+        n = arr[1];
+      }
+    }
+    return n;
   }
   sortByNameAsc(i1, i2) {
     if (i1 > i2) {

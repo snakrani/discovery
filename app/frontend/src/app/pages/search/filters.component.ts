@@ -134,7 +134,6 @@ export class FiltersComponent implements OnInit {
   emmitSelectedFilters() {
     this.params_submitted = true;
     const filters: any[] = this.getSelectedFilters();
-    console.log(filters);
     this.emmitFilters.emit(filters);
   }
   filterOthersByVehicles(vehicles: any[]) {

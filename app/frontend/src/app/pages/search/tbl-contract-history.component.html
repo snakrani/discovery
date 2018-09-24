@@ -30,12 +30,29 @@
   <thead>
     <tr>
       <th scope="col"></th>
-      <th scope="col">Date Signed</th>
-      <th scope="col">PIID</th>
-      <th scope="col">Agency</th>
-      <th scope="col">Type</th>
-      <th scope="col">Value ($)</th>
-      <th scope="col">Status</th>
+      <th scope="col">
+        <discovery-th-sort [label]="'Date Signed'" [ordering]="'date_signed'" [selectedParentOrdering]="ordering"
+          (emmitOrdering)="orderBy($event)"></discovery-th-sort>
+      </th>
+      <th scope="col">
+        <discovery-th-sort [label]="'PIID'" [ordering]="'piid'" [selectedParentOrdering]="ordering" (emmitOrdering)="orderBy($event)"></discovery-th-sort>
+      </th>
+      <th scope="col">
+        <discovery-th-sort [label]="'Agency'" [ordering]="'agency_name'" [selectedParentOrdering]="ordering"
+          (emmitOrdering)="orderBy($event)"></discovery-th-sort>
+      </th>
+      <th scope="col">
+        <discovery-th-sort [label]="'Type'" [ordering]="'pricing_type_name'" [selectedParentOrdering]="ordering"
+          (emmitOrdering)="orderBy($event)"></discovery-th-sort>
+      </th>
+      <th scope="col">
+        <discovery-th-sort [label]="'Value ($)'" [ordering]="'obligated_amount'" [selectedParentOrdering]="ordering"
+          (emmitOrdering)="orderBy($event)"></discovery-th-sort>
+      </th>
+      <th scope="col">
+        <discovery-th-sort [label]="'Status'" [ordering]="'status_name'" [selectedParentOrdering]="ordering"
+          (emmitOrdering)="orderBy($event)"></discovery-th-sort>
+      </th>
       <th scope="col">Codes</th>
     </tr>
   </thead>

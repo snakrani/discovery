@@ -23,6 +23,8 @@ import { ListComponent } from '../../common/list.component';
 import { VendorDetailComponent } from './vendor-detail.component';
 import { TblContractHistoryComponent } from './tbl-contract-history.component';
 import { SearchSpinnerComponent } from './search-spinner.component';
+import { ThSortComponent } from './th-sort.component';
+import { TblVendorsComponent } from './tbl-vendors.component';
 
 @NgModule({
   imports: [CommonModule, SearchRoutingModule, FormsModule],
@@ -47,7 +49,9 @@ import { SearchSpinnerComponent } from './search-spinner.component';
     ListComponent,
     VendorDetailComponent,
     SearchSpinnerComponent,
-    TblContractHistoryComponent
+    TblContractHistoryComponent,
+    TblVendorsComponent,
+    ThSortComponent
   ]
 })
 export class SearchModule {}

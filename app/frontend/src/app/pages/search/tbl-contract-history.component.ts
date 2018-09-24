@@ -15,7 +15,6 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
   contract_vehicles: any[];
   _contracts: any[];
   contracts_results: any[];
-
   items_per_page = 50;
   items_total: number;
   num_total_pages: number;
@@ -30,6 +29,7 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
   enable_paging = false;
   history_no_results = false;
   spinner = false;
+  ordering = '';
 
   constructor(private searchService: SearchService) {}
 
@@ -42,7 +42,8 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
         this.duns,
         this.current_page,
         this.piid,
-        this.naic_code
+        this.naic_code,
+        this.ordering
       );
     }
   }
@@ -52,8 +53,13 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
   set contracts(contracts) {
     this._contracts = contracts;
   }
-  getContracts(duns: string, page: number, piid: string, naic: string) {
-    console.log(duns + '/' + page + '/' + piid + '/' + naic);
+  getContracts(
+    duns: string,
+    page: number,
+    piid: string,
+    naic: string,
+    ordering: string
+  ) {
     let page_path = '';
     if (page > 1) {
       page_path = '&page=' + page;
@@ -63,7 +69,7 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
     this.history_no_results = false;
     this.spinner = true;
     this.searchService
-      .getVendorContractHistory(duns, page_path, piid, naic)
+      .getVendorContractHistory(duns, page_path, piid, naic, ordering)
       .subscribe(
         data => {
           this.contracts = data;
@@ -82,6 +88,11 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
         },
         error => (this.error_message = <any>error)
       );
+  }
+  orderBy(ordering: any[]) {
+    const order_by = ordering['sort'] + ordering['ordering'];
+    this.ordering = ordering['ordering'];
+    this.getContracts(this.duns, 1, this.piid, this.naic_code, order_by);
   }
   getVehicleDescription(vehicle: string) {
     return this.searchService.getItemDescription(
@@ -133,10 +144,22 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
     }
   }
   prevPage() {
-    this.getContracts(this.duns, this.prev, this.piid, this.naic_code);
+    this.getContracts(
+      this.duns,
+      this.prev,
+      this.piid,
+      this.naic_code,
+      this.ordering
+    );
   }
   nextPage() {
-    this.getContracts(this.duns, this.next, this.piid, this.naic_code);
+    this.getContracts(
+      this.duns,
+      this.next,
+      this.piid,
+      this.naic_code,
+      this.ordering
+    );
   }
   getRowNum(n: number) {
     return (
@@ -160,9 +183,9 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
     return items;
   }
   onChangeNaic() {
-    this.getContracts(this.duns, 1, this.piid, this.naic_code);
+    this.getContracts(this.duns, 1, this.piid, this.naic_code, this.ordering);
   }
   onChangeMembership() {
-    this.getContracts(this.duns, 1, this.piid, this.naic_code);
+    this.getContracts(this.duns, 1, this.piid, this.naic_code, this.ordering);
   }
 }

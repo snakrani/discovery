@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ActiveFiltersComponent } from './filters/active-filters.component';
 import { ModalService } from '../../common/modal.service';
 import { FiltersComponent } from './filters.component';
+import { TblVendorsComponent } from './tbl-vendors.component';
 @Component({
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
@@ -26,18 +27,13 @@ export class SearchComponent implements OnInit {
   vendors_no_results = false;
   show_details = false;
   show_results = false;
-  sbd_col = false;
-  _spinner: boolean;
-  set_asides;
-  vehicles_selected;
-  vehicles_radios;
   compare_tbl;
   vehicles;
   results;
-  filtered_results;
   _sort_by: string;
   num_show = 3;
-  spinner = false;
+  _spinner: boolean;
+  filters: any[];
 
   constructor(
     private searchService: SearchService,
@@ -57,9 +53,12 @@ export class SearchComponent implements OnInit {
   }
   set sort_by(value: string) {
     this._sort_by = value;
-    this.filtered_results = this.sort_by
-      ? this.filterResultsByVehicle(this.sort_by)
-      : this.results;
+  }
+  get spinner(): boolean {
+    return this._spinner;
+  }
+  set spinner(value: boolean) {
+    this._spinner = value;
   }
 
   buildSelectedItems(arr: string[]): any[] {
@@ -74,30 +73,34 @@ export class SearchComponent implements OnInit {
 
   submitSelectedFilters(filters) {
     this.spinner = true;
+    this.filters = filters;
     this.searchService.activeFilters = filters;
     this.searchService.setQueryParams(filters);
 
-    this.searchService.getVendors(this.searchService.activeFilters).subscribe(
-      data => {
-        if (data['count'] === 0) {
-          this.spinner = false;
-          this.vendors_no_results = true;
+    this.searchService
+      .getVendors(this.searchService.activeFilters, '&page=0')
+      .subscribe(
+        data => {
+          if (data['count'] === 0) {
+            this.spinner = false;
+            this.vendors_no_results = true;
+            this.show_results = true;
+            this.results = [];
+            return;
+          }
+          this.results = this.buildVendorByVehicle(data['results']);
+          this.vendors_no_results = false;
           this.show_results = true;
-          this.results = [];
-          this.filtered_results = [];
-          return;
-        }
-        this.results = this.buildVendorByVehicle(data['results']);
-        this.filtered_results = this.results;
-        this.vendors_no_results = false;
-        this.show_results = true;
-        this.spinner = false;
-        this.buildContractCompare();
-        this.sort_by = this.getFirstVehicleWithVendors();
-        this.viewContracts();
-      },
-      error => (this.error_message = <any>error)
-    );
+          this.spinner = false;
+          this.buildContractCompare();
+          this.sort_by = this.getFirstVehicleWithVendors();
+          this.viewContracts();
+        },
+        error => (this.error_message = <any>error)
+      );
+  }
+  showSpinner(bool: boolean) {
+    this.spinner = bool;
   }
   getFirstVehicleWithVendors() {
     for (const item of this.compare_tbl) {
@@ -119,9 +122,6 @@ export class SearchComponent implements OnInit {
     return this.results.vendors.filter(
       vendor => vendor.vehicles.indexOf(vehicle) !== -1
     );
-  }
-  showVendorDetails(vendor: number) {
-    this.show_details = true;
   }
   clearActiveFilters(bool) {
     this.activeFiltersComponent.clear();
@@ -170,7 +170,6 @@ export class SearchComponent implements OnInit {
       vehicles.push(vendor);
     }
     results['vendors'] = vehicles;
-    // console.log(results);
     return results;
   }
   returnVehicleValues(obj: any[]) {
@@ -223,19 +222,6 @@ export class SearchComponent implements OnInit {
     }
     this.compare_tbl = compare;
   }
-  viewVehicleVendors(vehicle: string) {
-    this.sort_by = vehicle;
-    this.viewVendors();
-  }
-  exists(value: string, key: string, arr: any[]): boolean {
-    for (const i of arr) {
-      if (i[key] === value) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   commaSeparatedList(obj: any[], key: string) {
     let items = '';
     for (const i of obj) {
@@ -243,20 +229,14 @@ export class SearchComponent implements OnInit {
     }
     return items.slice(0, -2);
   }
+  viewVehicleVendors(vehicle: string) {
+    this.sort_by = vehicle;
+    this.viewVendors();
+  }
   openModal(id: string) {
     this.modalService.open(id);
   }
-  toggleSBD() {
-    this.sbd_col = !this.sbd_col;
-  }
   closeModal(id: string) {
     this.modalService.close(id);
-  }
-  returnSetAside(arr: any[], code: string): boolean {
-    if (arr.length > 0) {
-      return arr.includes(code);
-    } else {
-      return false;
-    }
   }
 }

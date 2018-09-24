@@ -1,0 +1,5 @@
+.usa-table-borderless thead th:first-child,
+.usa-table-borderless tbody td:first-child {
+  min-width: auto !important;
+  max-width: auto !important;
+}

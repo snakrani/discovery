@@ -147,45 +147,7 @@
                 </div>
 
                 <div class="overflow">
-                  <a (click)="toggleSBD()" class="btn-toggle pull-right">{{!sbd_col ? 'Show' : 'Hide'}} Set Asides</a>
-
-                  <table class="usa-table-borderless">
-                    <thead>
-                      <tr>
-                        <th scope="col">Company</th>
-                        <th scope="col" class="sbd">Contracts</th>
-                        <!-- <th scope="col">POC Email</th>
-                        <th scope="col">Capability Statement</th> -->
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Small Disadvantaged Business">SB</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Small Disadvantaged Business">SDB</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="8(A)">8(A)</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="HUBZone">HubZ</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Woman Owned">WO</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Veteran Owned">VO</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Service Disabled Veteran Owned">SDVO</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Veterans Affair VIP">VA
-                          VIP</th>
-
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let item of filtered_results">
-                        <td scope="row"><a [routerLink]="['/vendor', item.duns]" queryParamsHandling="preserve">{{item.name
-                            | titlecase}}</a></td>
-                        <td>{{item.contracts}}</td>
-                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'SB') ? '&bull;' : ''"></td>
-                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, '27') ? '&bull;' : ''"></td>
-                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'A6') ? '&bull;' : ''"></td>
-                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'XX') ? '&bull;' : ''"></td>
-                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'A2') ? '&bull;' : ''"></td>
-                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'A5') ? '&bull;' : ''"></td>
-                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'QF') ? '&bull;' : ''"></td>
-                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'VIP') ? '&bull;' : ''"></td>
-                      </tr>
-
-
-                    </tbody>
-                  </table>
+                  <discovery-tbl-vendors [vehicle]="sort_by" (emitActivateSpinner)="showSpinner($event)"></discovery-tbl-vendors>
                 </div>
               </div>
             </div>
