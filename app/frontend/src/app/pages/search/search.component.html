@@ -21,12 +21,12 @@
         <ul class="nav nav-tabs" role="tablist">
           <li role="presentation" [class.active]="vw_contracts">
             <a aria-controls="contracts" role="tab" data-toggle="tab" (click)="viewContracts()">
-              <h3>Contracts</h3>
+              <h3 class="alt">Contracts</h3>
             </a>
           </li>
           <li role="presentation" [class.active]="vw_vendors">
             <a aria-controls="vendors" role="tab" data-toggle="tab" (click)="viewVendors()">
-              <h3>Vendors</h3>
+              <h3 class="alt">Vendors</h3>
             </a>
           </li>
         </ul>
@@ -38,11 +38,21 @@
 
             <!-- Contracts results -->
             <div *ngIf="vw_contracts">
-              <div *ngIf="vendors_no_results">
-                <h2>No results based on your criteria</h2>
-                <p>Please change your criteria and re-submit.</p>
+              <div class="usa-alert usa-alert-info" *ngIf="vendors_no_results">
+                <div class="usa-alert-body">
+                  <h3 class="usa-alert-heading">No results based on your criteria</h3>
+                  <p class="usa-alert-text">Please change your criteria and re-submit.</p>
+                </div>
               </div>
               <div class="overflow" *ngIf="!vendors_no_results">
+                <div class="usa-alert usa-alert-info" *ngIf="contracts_w_no_records.length>0">
+                  <div class="usa-alert-body">
+                    <h3 class="usa-alert-heading">There are no vendor results for:
+                    </h3>
+                    <strong class="db" [innerHTML]="commaSeparatedList(contracts_w_no_records, 'name')"></strong>
+                    <p class="usa-alert-text">Please change your criteria and re-submit.</p>
+                  </div>
+                </div>
                 <table class="usa-table-borderless">
                   <thead>
                     <tr>
@@ -74,10 +84,10 @@
                           [key]="'name'"></discovery-list>
                       </td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                       <th scope="row">Top capabilities</th>
                       <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.capabilities}}</td>
-                    </tr>
+                    </tr> -->
                     <tr>
                       <th scope="row">NAICs</th>
                       <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">
@@ -88,7 +98,7 @@
                       <th scope="row">PSCs</th>
                       <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.pscs}}</td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                       <th scope="row">SUM Tier</th>
                       <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.tier}}</td>
                     </tr>
@@ -103,16 +113,18 @@
                     <tr>
                       <th scope="row">Ordering Guide</th>
                       <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.ordering_guide}}</td>
-                    </tr>
+                    </tr> -->
                   </tbody>
                 </table>
               </div>
             </div>
             <!-- Vendors results -->
             <div *ngIf="vw_vendors">
-              <div *ngIf="vendors_no_results">
-                <h2>No results based on your criteria</h2>
-                <p>Please change your criteria and re-submit.</p>
+              <div class="usa-alert usa-alert-info" *ngIf="vendors_no_results">
+                <div class="usa-alert-body">
+                  <h3 class="usa-alert-heading">No results based on your criteria</h3>
+                  <p class="usa-alert-text">Please change your criteria and re-submit.</p>
+                </div>
               </div>
               <div *ngIf="!vendors_no_results">
                 <div class="usa-grid-full">
@@ -135,45 +147,7 @@
                 </div>
 
                 <div class="overflow">
-                  <a (click)="toggleSBD()" class="btn-toggle pull-right">{{!sbd_col ? 'Show' : 'Hide'}} Set Asides</a>
-
-                  <table class="usa-table-borderless">
-                    <thead>
-                      <tr>
-                        <th scope="col">Company</th>
-                        <th scope="col" class="sbd">Contracts</th>
-                        <!-- <th scope="col">POC Email</th>
-                        <th scope="col">Capability Statement</th> -->
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Small Disadvantaged Business">SB</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Small Disadvantaged Business">SDB</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="8(A)">8(A)</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="HUBZone">HubZ</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Woman Owned">WO</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Veteran Owned">VO</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Service Disabled Veteran Owned">SDVO</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Veterans Affair VIP">VA
-                          VIP</th>
-
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let item of filtered_results">
-                        <td scope="row"><a [routerLink]="['/vendor', item.duns]" queryParamsHandling="preserve">{{item.name
-                            | titlecase}}</a></td>
-                        <td>{{item.contracts}}</td>
-                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'SB') ? '&bull;' : ''"></td>
-                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, '27') ? '&bull;' : ''"></td>
-                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'A6') ? '&bull;' : ''"></td>
-                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'XX') ? '&bull;' : ''"></td>
-                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'A2') ? '&bull;' : ''"></td>
-                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'A5') ? '&bull;' : ''"></td>
-                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'QF') ? '&bull;' : ''"></td>
-                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'VIP') ? '&bull;' : ''"></td>
-                      </tr>
-
-
-                    </tbody>
-                  </table>
+                  <discovery-tbl-vendors [vehicle]="sort_by" (emitActivateSpinner)="showSpinner($event)"></discovery-tbl-vendors>
                 </div>
               </div>
             </div>

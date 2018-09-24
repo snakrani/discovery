@@ -24,7 +24,7 @@ export class FilterContractThresholdComponent implements OnInit {
   @Output()
   emmitSelected: EventEmitter<number> = new EventEmitter();
   @Output()
-  emmitLoaded: EventEmitter<number> = new EventEmitter();
+  emmitLoaded: EventEmitter<string> = new EventEmitter();
   name = 'Vendor Contract Value History';
   queryName = 'threshold';
   id = 'filter-threshold';

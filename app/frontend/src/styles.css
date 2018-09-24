@@ -362,7 +362,7 @@ body {
 }
 h1,
 h2,
-h3,
+h3.alt,
 caption {
   color: #14286d !important;
 }
@@ -370,24 +370,24 @@ h1 {
   font-size: 1.8em;
   padding: 20px 0px 30px 0px;
 }
-h3 {
+h3.alt {
   margin: 0px !important;
   font-size: 1.5em;
   font-weight: 400;
   padding: 0px 15px 10px 15px !important;
 }
 h2.alt,
-h3,
+h3.alt,
 caption {
   font-family: 'Source Sans Pro', 'Helvetica Neue', 'Helvetica', 'Roboto', Arial,
     sans-serif;
 }
 table {
   width: 100%;
+  border-top: 3px solid #0071bc;
 }
 caption {
   font-size: 1.3em;
-  border-bottom: 1px solid #14286d;
   padding-left: 0px;
 }
 th a,
@@ -413,6 +413,8 @@ thead th {
 tbody td,
 tbody th {
   border-color: #a4a4a5 !important;
+  background: transparent !important;
+  background-color: transparent !important;
 }
 th {
   vertical-align: bottom !important;
@@ -439,7 +441,25 @@ td {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
-
+.best-in-class {
+  min-height: 200px;
+  background-position: center top;
+  background-size: 70%;
+  background-repeat: no-repeat;
+  background-image: url(/frontend/assets/images/best-in-class.png);
+  background-image: url(/frontend/assets/images/best-in-class.svg);
+}
+.usa-hero {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  background-position: 50%;
+  background-size: cover;
+}
+.usa-hero h1 {
+  padding-bottom: 0px;
+  color: #fff !important;
+  font-size: 3em;
+}
 .usa-header {
   background: #fff !important;
   box-shadow: 0px 2px 4px #535353;

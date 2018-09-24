@@ -15,7 +15,7 @@ export class FilterSbdComponent implements OnInit {
   @Output()
   emmitSelected: EventEmitter<number> = new EventEmitter();
   @Output()
-  emmitLoaded: EventEmitter<number> = new EventEmitter();
+  emmitLoaded: EventEmitter<string> = new EventEmitter();
   name = 'Type of Set Asides';
   queryName = 'setasides';
   id = 'filter-sbd';
@@ -74,7 +74,7 @@ export class FilterSbdComponent implements OnInit {
         } else {
           this.opened = false;
         }
-        this.emmitLoaded.emit(1);
+        this.emmitLoaded.emit(this.queryName);
       },
       error => (this.error_message = <any>error)
     );

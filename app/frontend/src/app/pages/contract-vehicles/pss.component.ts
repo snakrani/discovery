@@ -3,10 +3,29 @@ import { SearchService } from '../search/search.service';
 
 @Component({
   selector: 'discovery-pss',
-  templateUrl: './pss.component.html'
+  templateUrl: './pss.component.html',
+  styles: [
+    `
+      .usa-hero {
+        padding: 100px 0px 100px 0px;
+        background-image: url(/frontend/assets/images/hero-generic-vehicles.jpg);
+        color: #fff !important;
+      }
+    `
+  ]
 })
 export class PssComponent implements OnInit {
+  pools: any[] = [];
+  vehicle = 'PSS';
+  error_message;
   constructor(private searchService: SearchService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.searchService.getPoolsByVehicle(this.vehicle).subscribe(
+      data => {
+        this.pools = data['results'];
+      },
+      error => (this.error_message = <any>error)
+    );
+  }
 }
