@@ -133,7 +133,7 @@ class PscViewSet(DiscoveryReadOnlyModelViewSet):
         'count': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
     }
     filter_class = filters.PscFilter
-    search_fields = ['code', 'description', 'sin__code', 'naics__code', 'naics__description', 'keywords__name']
+    search_fields = ['code', 'description', 'sin__code', 'keywords__name']
     ordering_fields = ['code', 'description']
     ordering = 'description'
     

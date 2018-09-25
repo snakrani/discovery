@@ -80,23 +80,20 @@ class PscLinkSerializer(BasePscSerializer):
 
 class PscSummarySerializer(BasePscSerializer):
     sin = SinSerializer(many=True)
-    naics = NaicsSummarySerializer(many=True)
     keywords = KeywordSerializer(many=True)
     
     class Meta(BasePscSerializer.Meta):
-        fields = BasePscSerializer.Meta.fields + ['sin', 'naics', 'keywords', 'url']
+        fields = BasePscSerializer.Meta.fields + ['sin', 'keywords', 'url']
 
 class PscFullSerializer(BasePscSerializer):
     sin = SinSerializer(many=True)
-    naics = NaicsSummarySerializer(many=True)
     keywords = KeywordSerializer(many=True)
     
     class Meta(BasePscSerializer.Meta):
-        fields = BasePscSerializer.Meta.fields + ['sin', 'naics', 'keywords']
+        fields = BasePscSerializer.Meta.fields + ['sin', 'keywords']
 
 class PscTestSerializer(PscFullSerializer):
     sin = SinTestSerializer(many=True)
-    naics = NaicsTestSerializer(many=True)
     keywords = KeywordTestSerializer(many=True)
     
     class Meta(PscFullSerializer.Meta):
@@ -157,21 +154,24 @@ class PoolLinkSerializer(BasePoolSerializer):
 
 class PoolSummarySerializer(BasePoolSerializer):
     naics = NaicsSummarySerializer(many=True)
+    psc = PscSummarySerializer(many=True)
     vehicle = VehicleSummarySerializer()
     
     class Meta(BasePoolSerializer.Meta):
-        fields = BasePoolSerializer.Meta.fields + ['naics', 'url']
+        fields = BasePoolSerializer.Meta.fields + ['naics', 'psc', 'url']
 
 class PoolFullSerializer(BasePoolSerializer):
     vehicle = VehicleSummarySerializer()
     naics = NaicsSummarySerializer(many=True)
+    psc = PscSummarySerializer(many=True)
     
     class Meta(BasePoolSerializer.Meta):
-        fields = BasePoolSerializer.Meta.fields + ['naics']
+        fields = BasePoolSerializer.Meta.fields + ['naics', 'psc']
 
 class PoolTestSerializer(PoolFullSerializer):
     vehicle = VehicleTestSerializer()
     naics = NaicsTestSerializer(many=True)
+    psc = PscTestSerializer(many=True)
     
     class Meta(PoolFullSerializer.Meta):
         fields = PoolFullSerializer.Meta.fields + ['url']

@@ -188,7 +188,7 @@ class PoolTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@endswith': 'Services',
                 '@iendswith': 'advertIsing',
                 '@regex': 'Services$',
-                '@iregex': 'apprentice(ship)?'
+                '@iregex': 'environment(al)?'
             },
             'naics__sin__code': {
                 'tags': ('pool_field', 'naics_field', 'sin_field', 'fuzzy_text'),
@@ -227,6 +227,72 @@ class PoolTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iendswith': 'services',
                 '@regex': '(Training|Consulting)',
                 '@iregex': '^(vocational|strategic)'
+            },
+            'psc__code': {
+                'tags': ('pool_field', 'psc_field', 'fuzzy_text'),
+                '@exact': 'R413',
+                '@iexact': 'r413',
+                '@in': ("S202", "Z1DZ", "R413"),
+                '@contains': 'R4',
+                '@icontains': 'r4',
+                '@startswith': 'R',
+                '@istartswith': 'r',
+                '@endswith': '06',
+                '@iendswith': '06',
+                '@regex': '[^\d]+$',
+                '@iregex': '^(r|s)'
+            },
+            'psc__description': {
+                'tags': ('pool_field', 'psc_field', 'fuzzy_text'),
+                '@exact': 'Advertising Services',
+                '@iexact': 'advertising services',
+                '@in': ("Advertising Services", "Aircraft Components / Accessories"),
+                '@contains': 'Services',
+                '@icontains': 'services',
+                '@startswith': 'Logistics',
+                '@istartswith': 'logisticS',
+                '@endswith': 'Services',
+                '@iendswith': 'SERVICES',
+                '@regex': '[/]+',
+                '@iregex': '^air(craft)?'
+            },
+            'psc__sin__code': {
+                'tags': ('pool_field', 'psc_field', 'sin_field', 'fuzzy_text'),
+                '@exact': '520-19',
+                '@iexact': 'c871-202',
+                '@in': ("100-03", "520-14", "541-4G", "51-B36-2A"),
+                '@contains': '1-5',
+                '@icontains': 'c54',
+                '@startswith': '51',
+                '@istartswith': 'c5',
+                '@endswith': 'C',
+                '@iendswith': 'c',
+                '@regex': '[A-Z]\d+\-\d+$',
+                '@iregex': '^(C87|51)'
+            },
+            'psc__keywords__id': {
+                'tags': ('pool_field', 'psc_field', 'keyword_field', 'number'),
+                '@exact': 66,
+                '@lt': 500,
+                '@lte': 500, 
+                '@gt': 250, 
+                '@gte': 250,
+                '@range': (50, 100),
+                '@in': (7, 450, 916)
+            },
+            'psc__keywords__name': {
+                'tags': ('pool_field', 'psc_field', 'keyword_field', 'fuzzy_text'),
+                '@exact': 'Distribution And Transportation Logistics Services',
+                '@iexact': 'ancillary supplies and / or services',
+                '@in': ("Elemental Analyzers", "Energy Consulting Services", "Environmental Consulting Services"),
+                '@contains': 'Support',
+                '@icontains': 'support',
+                '@startswith': 'Distribution',
+                '@istartswith': 'edu',
+                '@endswith': 'Services',
+                '@iendswith': 'services',
+                '@regex': '(Training|Consulting)',
+                '@iregex': '^(vocational|strategic)'
             }
         }
     }
@@ -242,3 +308,4 @@ class PoolTest(case.APITestCase, metaclass = case.MetaAPISchema):
         resp.is_not_empty(base_key + ['vehicle'])
         #resp.is_not_empty(base_key + ['threshold'])
         resp.is_not_empty(base_key + ['naics'])
+        #resp.is_not_empty(base_key + ['psc'])

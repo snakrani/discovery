@@ -1,30 +1,30 @@
 [
-  {
-    "model": "categories.tier",
-    "pk": "3",
-    "fields": {
-      "name": "Best-in-Class (BIC)"
-    }
-  },
-  {
-    "model": "categories.tier",
-    "pk": "2",
-    "fields": {
-      "name": "Multi-Agency Solutions"
-    }
-  },
-  {
-    "model": "categories.tier",
-    "pk": "1",
-    "fields": {
-      "name": "Mandatory-Use Agency-Wide"
-    }
-  },
-  {
-    "model": "categories.tier",
-    "pk": "0",
-    "fields": {
-      "name": "Spend NOT Aligned to Category Management Principals"
-    }
+{
+  "model": "categories.tier",
+  "pk": 0,
+  "fields": {
+    "name": "Spend NOT Aligned to Category Management Principals"
   }
+},
+{
+  "model": "categories.tier",
+  "pk": 1,
+  "fields": {
+    "name": "Mandatory-Use Agency-Wide"
+  }
+},
+{
+  "model": "categories.tier",
+  "pk": 2,
+  "fields": {
+    "name": "Multi-Agency Solutions"
+  }
+},
+{
+  "model": "categories.tier",
+  "pk": 3,
+  "fields": {
+    "name": "Best-in-Class (BIC)"
+  }
+}
 ]
