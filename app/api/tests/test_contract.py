@@ -787,19 +787,6 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': '\d+',
                 '@iregex': '\.(com|net)$'
             }
-        },
-        'requests': {
-            '@r1': {
-                'tags': ('contract_request',),
-                'params': {'psc_naics': '238220', 'ordering': 'date_signed'},
-                'tests': (
-                    ('date_signed', 'ordering', 'asc'),
-                )
-            },
-            '-r2': {
-                'tags': ('contract_request',),
-                'params': {'psc_naics': '000000', 'ordering': '-date_signed'}
-            }
         }
     }
         
