@@ -29,7 +29,6 @@ class Naics(models.Model):
 class PSC(models.Model):
     code = models.CharField(primary_key=True, max_length=25)
     description = models.TextField()
-    naics = models.ManyToManyField(Naics)
     sin = models.ManyToManyField(SIN, blank=True)
     keywords = models.ManyToManyField(Keyword, blank=True)
      
