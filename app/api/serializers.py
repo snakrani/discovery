@@ -157,21 +157,24 @@ class PoolLinkSerializer(BasePoolSerializer):
 
 class PoolSummarySerializer(BasePoolSerializer):
     naics = NaicsSummarySerializer(many=True)
+    psc = PscSummarySerializer(many=True)
     vehicle = VehicleSummarySerializer()
     
     class Meta(BasePoolSerializer.Meta):
-        fields = BasePoolSerializer.Meta.fields + ['naics', 'url']
+        fields = BasePoolSerializer.Meta.fields + ['naics', 'psc', 'url']
 
 class PoolFullSerializer(BasePoolSerializer):
     vehicle = VehicleSummarySerializer()
     naics = NaicsSummarySerializer(many=True)
+    psc = PscSummarySerializer(many=True)
     
     class Meta(BasePoolSerializer.Meta):
-        fields = BasePoolSerializer.Meta.fields + ['naics']
+        fields = BasePoolSerializer.Meta.fields + ['naics', 'psc']
 
 class PoolTestSerializer(PoolFullSerializer):
     vehicle = VehicleTestSerializer()
     naics = NaicsTestSerializer(many=True)
+    psc = PscTestSerializer(many=True)
     
     class Meta(PoolFullSerializer.Meta):
         fields = PoolFullSerializer.Meta.fields + ['url']
