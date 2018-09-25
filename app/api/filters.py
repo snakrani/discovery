@@ -143,8 +143,6 @@ class PscFilter(FilterSet, metaclass = MetaFilterSet):
     _number = ('keywords__id',)
     _fuzzy_text = ('code', 'description', 'sin__code', 'keywords__name')
     
-    naics = RelatedFilter(NaicsFilter)
-    
     class Meta:
         model = categories.PSC
         fields = ()
