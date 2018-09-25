@@ -10,7 +10,6 @@ class Keyword(models.Model):
 
 class SIN(models.Model):
     code = models.CharField(primary_key=True, max_length=25)
-    keywords = models.ManyToManyField(Keyword, blank=True)
     
     def __str__(self):
         return "{0}".format(self.code)
