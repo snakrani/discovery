@@ -133,21 +133,13 @@ class Command(BaseCommand):
     
     def map_naics_code(self, sin, sin_label, naics_code):
         sin_obj, created = SIN.objects.get_or_create(code=sin)
-        keyword, created = Keyword.objects.get_or_create(name=sin_label)
         
-        # Ensure SIN label
-        if sin_label not in list(sin_obj.keywords.all().values_list('name')):
-            sin_obj.keywords.add(keyword)
-                
-        # Include SIN, keyword, and NAICS codes
+        # Include SIN on NAICS codes
         try:
             naics = Naics.objects.get(code=naics_code)
             
             if sin not in naics.sin.all():
                 naics.sin.add(sin)
-                
-            if sin_label not in list(naics.keywords.all().values_list('name')):
-                naics.keywords.add(keyword)
 
         except Naics.DoesNotExist as error:
             pass    
@@ -192,21 +184,13 @@ class Command(BaseCommand):
     
     def map_psc_code(self, sin, sin_label, psc_code):
         sin_obj, created = SIN.objects.get_or_create(code=sin)
-        keyword, created = Keyword.objects.get_or_create(name=sin_label)
         
-        # Ensure SIN label
-        if sin_label not in list(sin_obj.keywords.all().values_list('name')):
-            sin_obj.keywords.add(keyword)
-                
-        # Include SIN and keyword
+        # Include SIN on PSC codes
         try:
             psc = PSC.objects.get(code=psc_code)
             
             if sin not in psc.sin.all():
                 psc.sin.add(sin)
-                
-            if sin_label not in list(psc.keywords.all().values_list('name')):
-                psc.keywords.add(keyword)
 
         except PSC.DoesNotExist as error:
             pass
