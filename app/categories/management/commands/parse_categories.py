@@ -148,11 +148,6 @@ class Command(BaseCommand):
                 
             if sin_label not in list(naics.keywords.all().values_list('name')):
                 naics.keywords.add(keyword)
-                
-            # Include NAICS code
-            for psc in PSC.objects.filter(sin=sin):
-                if naics.code not in list(psc.naics.all().values_list('code')):
-                    psc.naics.add(naics)
 
         except Naics.DoesNotExist as error:
             pass    
