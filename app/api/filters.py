@@ -169,6 +169,7 @@ class PoolFilter(FilterSet, metaclass = MetaFilterSet):
     
     vehicle = RelatedFilter(VehicleFilter)
     naics = RelatedFilter(NaicsFilter)
+    psc = RelatedFilter(PscFilter)
     
     class Meta:
         model = categories.Pool
