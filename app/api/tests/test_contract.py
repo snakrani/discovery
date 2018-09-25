@@ -653,7 +653,35 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@endswith': 'Services',
                 '@iendswith': 'advertIsing',
                 '@regex': 'Services$',
-                '@iregex': 'apprentice(ship)?'
+                '@iregex': 'environment(al)?'
+            },
+            'vendor__pools__pool__psc__code': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'psc_field', 'fuzzy_text'),
+                '@exact': 'R413',
+                '@iexact': 'r413',
+                '@in': ("S202", "Z1DZ", "R413"),
+                '@contains': 'R4',
+                '@icontains': 'r4',
+                '@startswith': 'R',
+                '@istartswith': 'r',
+                '@endswith': '06',
+                '@iendswith': '06',
+                '@regex': '[^\d]+$',
+                '@iregex': '^(r|s)'
+            },
+            'vendor__pools__pool__psc__description': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'psc_field', 'fuzzy_text'),
+                '@exact': 'Advertising Services',
+                '@iexact': 'advertising services',
+                '@in': ("Advertising Services", "Aircraft Components / Accessories"),
+                '@contains': 'Services',
+                '@icontains': 'services',
+                '@startswith': 'Logistics',
+                '@istartswith': 'logisticS',
+                '@endswith': 'Services',
+                '@iendswith': 'SERVICES',
+                '@regex': '[/]+',
+                '@iregex': '^air(craft)?'
             },
             'vendor__pools__setasides__code': {
                 'tags': ('contract_field', 'vendor_field', 'membership_field', 'setaside_field', 'token_text'),
@@ -758,19 +786,6 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iendswith': 'cOM',
                 '@regex': '\d+',
                 '@iregex': '\.(com|net)$'
-            }
-        },
-        'requests': {
-            '@r1': {
-                'tags': ('contract_request',),
-                'params': {'psc_naics': '238220', 'ordering': 'date_signed'},
-                'tests': (
-                    ('date_signed', 'ordering', 'asc'),
-                )
-            },
-            '-r2': {
-                'tags': ('contract_request',),
-                'params': {'psc_naics': '000000', 'ordering': '-date_signed'}
             }
         }
     }

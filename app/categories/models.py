@@ -29,7 +29,6 @@ class Naics(models.Model):
 class PSC(models.Model):
     code = models.CharField(primary_key=True, max_length=25)
     description = models.TextField()
-    naics = models.ManyToManyField(Naics)
     sin = models.ManyToManyField(SIN, blank=True)
     keywords = models.ManyToManyField(Keyword, blank=True)
      
@@ -70,8 +69,9 @@ class Pool(models.Model):
     name = models.CharField(max_length=128, default='Pool')
     number = models.CharField(max_length=128)
     vehicle = models.ForeignKey(Vehicle, null=True, on_delete=models.CASCADE)
-    naics = models.ManyToManyField(Naics)
     threshold = models.CharField(null=True, max_length=128)
+    naics = models.ManyToManyField(Naics)
+    psc = models.ManyToManyField(PSC)
 
     def __str__(self):
         return "{0} {1}".format(self.name, self.number)
