@@ -3,10 +3,29 @@ import { SearchService } from '../search/search.service';
 
 @Component({
   selector: 'discovery-hcats',
-  templateUrl: './hcats.component.html'
+  templateUrl: './hcats.component.html',
+  styles: [
+    `
+      .usa-hero {
+        padding: 100px 0px 100px 0px;
+        background-image: url(/frontend/assets/images/hero-generic-vehicles.jpg);
+        color: #fff !important;
+      }
+    `
+  ]
 })
 export class HcatsComponent implements OnInit {
+  pools: any[] = [];
+  vehicle = 'HCATS';
+  error_message;
   constructor(private searchService: SearchService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.searchService.getPoolsByVehicle(this.vehicle).subscribe(
+      data => {
+        this.pools = data['results'];
+      },
+      error => (this.error_message = <any>error)
+    );
+  }
 }
