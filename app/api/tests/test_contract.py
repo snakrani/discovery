@@ -655,6 +655,20 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': 'Services$',
                 '@iregex': 'environment(al)?'
             },
+            'vendor__pools__pool__naics__sin__code': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'naics_field', 'sin_field', 'fuzzy_text'),
+                '@exact': '100-03',
+                '@iexact': 'c871-202',
+                '@in': ("100-03", "520-14", "541-4G", "51-B36-2A"),
+                '@contains': '4B',
+                '@icontains': '-4b',
+                '@startswith': '51',
+                '@istartswith': 'c132',
+                '@endswith': '03',
+                '@iendswith': '2a',
+                '@regex': '[A-Z]\d+\-\d+$',
+                '@iregex': '^(C87|51)'
+            },
             'vendor__pools__pool__psc__code': {
                 'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'psc_field', 'fuzzy_text'),
                 '@exact': 'R413',
@@ -682,6 +696,20 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iendswith': 'SERVICES',
                 '@regex': '[/]+',
                 '@iregex': '^air(craft)?'
+            },
+            'vendor__pools__pool__psc__sin__code': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'psc_field', 'sin_field', 'fuzzy_text'),
+                '@exact': '520-19',
+                '@iexact': 'c871-202',
+                '@in': ("100-03", "520-14", "541-4G", "51-B36-2A"),
+                '@contains': '1-5',
+                '@icontains': 'c54',
+                '@startswith': '51',
+                '@istartswith': 'c5',
+                '@endswith': 'C',
+                '@iendswith': 'c',
+                '@regex': '[A-Z]\d+\-\d+$',
+                '@iregex': '^(C87|51)'
             },
             'vendor__pools__setasides__code': {
                 'tags': ('contract_field', 'vendor_field', 'membership_field', 'setaside_field', 'token_text'),

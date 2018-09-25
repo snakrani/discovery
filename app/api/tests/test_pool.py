@@ -204,30 +204,6 @@ class PoolTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': '[A-Z]\d+\-\d+$',
                 '@iregex': '^(C87|51)'
             },
-            'naics__keywords__id': {
-                'tags': ('pool_field', 'naics_field', 'keyword_field', 'number'),
-                '@exact': 66,
-                '@lt': 500,
-                '@lte': 500, 
-                '@gt': 250, 
-                '@gte': 250,
-                '@range': (50, 100),
-                '@in': (7, 450, 916)
-            },
-            'naics__keywords__name': {
-                'tags': ('pool_field', 'naics_field', 'keyword_field', 'fuzzy_text'),
-                '@exact': 'Cooking Equipment',
-                '@iexact': 'ancillary supplies and / or services',
-                '@in': ("Elemental Analyzers", "Energy Consulting Services", "Environmental Consulting Services"),
-                '@contains': 'Support',
-                '@icontains': 'support',
-                '@startswith': 'Marine',
-                '@istartswith': 'edu',
-                '@endswith': 'Services',
-                '@iendswith': 'services',
-                '@regex': '(Training|Consulting)',
-                '@iregex': '^(vocational|strategic)'
-            },
             'psc__code': {
                 'tags': ('pool_field', 'psc_field', 'fuzzy_text'),
                 '@exact': 'R413',
@@ -269,30 +245,6 @@ class PoolTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iendswith': 'c',
                 '@regex': '[A-Z]\d+\-\d+$',
                 '@iregex': '^(C87|51)'
-            },
-            'psc__keywords__id': {
-                'tags': ('pool_field', 'psc_field', 'keyword_field', 'number'),
-                '@exact': 66,
-                '@lt': 500,
-                '@lte': 500, 
-                '@gt': 250, 
-                '@gte': 250,
-                '@range': (50, 100),
-                '@in': (7, 450, 916)
-            },
-            'psc__keywords__name': {
-                'tags': ('pool_field', 'psc_field', 'keyword_field', 'fuzzy_text'),
-                '@exact': 'Distribution And Transportation Logistics Services',
-                '@iexact': 'ancillary supplies and / or services',
-                '@in': ("Elemental Analyzers", "Energy Consulting Services", "Environmental Consulting Services"),
-                '@contains': 'Support',
-                '@icontains': 'support',
-                '@startswith': 'Distribution',
-                '@istartswith': 'edu',
-                '@endswith': 'Services',
-                '@iendswith': 'services',
-                '@regex': '(Training|Consulting)',
-                '@iregex': '^(vocational|strategic)'
             }
         }
     }
