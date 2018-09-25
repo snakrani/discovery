@@ -308,4 +308,4 @@ class PoolTest(case.APITestCase, metaclass = case.MetaAPISchema):
         resp.is_not_empty(base_key + ['vehicle'])
         #resp.is_not_empty(base_key + ['threshold'])
         resp.is_not_empty(base_key + ['naics'])
-        resp.is_not_empty(base_key + ['psc'])
+        #resp.is_not_empty(base_key + ['psc'])
