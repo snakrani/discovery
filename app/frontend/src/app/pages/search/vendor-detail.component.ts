@@ -20,6 +20,8 @@ export class VendorDetailComponent implements OnInit {
   duns: string;
   contract_nums: any[] = [];
   num_show = 3;
+  vw_details = true;
+  vw_history = false;
   constructor(
     private searchService: SearchService,
     private router: Router,
@@ -45,6 +47,14 @@ export class VendorDetailComponent implements OnInit {
       },
       error => (this.error_message = <any>error)
     );
+  }
+  viewDetails() {
+    this.vw_details = true;
+    this.vw_history = false;
+  }
+  viewHistory() {
+    this.vw_details = false;
+    this.vw_history = true;
   }
   getVendorDetails() {
     const id = this.route.snapshot.params['dun'];

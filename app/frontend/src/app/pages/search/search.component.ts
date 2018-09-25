@@ -5,6 +5,7 @@ import { ActiveFiltersComponent } from './filters/active-filters.component';
 import { ModalService } from '../../common/modal.service';
 import { FiltersComponent } from './filters.component';
 import { TblVendorsComponent } from './tbl-vendors.component';
+declare const document: any;
 @Component({
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
@@ -221,6 +222,18 @@ export class SearchComponent implements OnInit {
       }
     }
     this.compare_tbl = compare;
+  }
+  toggleTDHeights(id: string) {
+    console.log(id);
+    const doc = document.getElementsByClassName(id);
+    for (const ele of doc) {
+      console.log(ele);
+      ele.classList.toggle('show_all');
+    }
+    // for (let i = 0; i < ele.length; i++) {
+    //   console.log();
+    //   ele[i].style.backgroundColor = 'red';
+    // }
   }
   commaSeparatedList(obj: any[], key: string) {
     let items = '';
