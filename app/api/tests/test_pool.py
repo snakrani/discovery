@@ -188,7 +188,7 @@ class PoolTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@endswith': 'Services',
                 '@iendswith': 'advertIsing',
                 '@regex': 'Services$',
-                '@iregex': 'apprentice(ship)?'
+                '@iregex': 'environment(al)?'
             },
             'naics__sin__code': {
                 'tags': ('pool_field', 'naics_field', 'sin_field', 'fuzzy_text'),

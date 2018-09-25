@@ -347,7 +347,7 @@ class VendorTest(case.APITestCase, metaclass = case.MetaAPISchema):
                     '@endswith': 'Services',
                     '@iendswith': 'advertIsing',
                     '@regex': 'Services$',
-                    '@iregex': 'apprentice(ship)?'
+                    '@iregex': 'environment(al)?'
                 },
                 'pools__pool__naics__sin__code': {
                     'tags': ('vendor_field', 'membership_field', 'pool_field', 'naics_field', 'sin_field', 'fuzzy_text'),

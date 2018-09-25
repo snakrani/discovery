@@ -653,7 +653,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@endswith': 'Services',
                 '@iendswith': 'advertIsing',
                 '@regex': 'Services$',
-                '@iregex': 'apprentice(ship)?'
+                '@iregex': 'environment(al)?'
             },
             'vendor__pools__pool__psc__code': {
                 'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'psc_field', 'fuzzy_text'),
