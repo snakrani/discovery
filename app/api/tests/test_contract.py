@@ -655,6 +655,34 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': 'Services$',
                 '@iregex': 'apprentice(ship)?'
             },
+            'vendor__pools__pool__psc__code': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'psc_field', 'fuzzy_text'),
+                '@exact': 'N045',
+                '@iexact': 's299',
+                '@in': ("S202", "Z1DZ", "J034"),
+                '@contains': '44',
+                '@icontains': '1d',
+                '@startswith': 'S2',
+                '@istartswith': 's2',
+                '@endswith': 'DB',
+                '@iendswith': 'db',
+                '@regex': '[^\d]+$',
+                '@iregex': '^(S2|Z1)'
+            },
+            'vendor__pools__pool__psc__description': {
+                'tags': ('contract_field', 'vendor_field', 'membership_field', 'pool_field', 'psc_field', 'fuzzy_text'),
+                '@exact': 'Abrasive Materials',
+                '@iexact': 'ADP backup and security services',
+                '@in': ("Aerial Seeding Services", "Aircraft Components / Accessories"),
+                '@contains': 'Snow',
+                '@icontains': 'houseKEEPING',
+                '@startswith': 'Installation',
+                '@istartswith': 'installatION',
+                '@endswith': 'System',
+                '@iendswith': 'SYSTEM',
+                '@regex': '[/]+',
+                '@iregex': '^air(craft)?'
+            },
             'vendor__pools__setasides__code': {
                 'tags': ('contract_field', 'vendor_field', 'membership_field', 'setaside_field', 'token_text'),
                 '@exact': 'QF',
