@@ -1,13 +1,6 @@
 from django.db import models
 
 
-class Keyword(models.Model):
-    name = models.CharField(max_length=1000, null=True)
-    
-    def __str__(self):
-        return "{0} ({1})".format(self.name, self.id)
-
-
 class SIN(models.Model):
     code = models.CharField(primary_key=True, max_length=25)
     
@@ -31,6 +24,19 @@ class PSC(models.Model):
      
     def __str__(self):
         return "{0} - {1}".format(self.code, self.description)
+
+
+class Keyword(models.Model):
+    name = models.CharField(max_length=1000, null=True)
+    parent = models.ForeignKey("Keyword", null=True, on_delete=models.CASCADE)
+    calc = models.CharField(max_length=1000, null=True)
+
+    sin = models.ForeignKey(SIN, null=True, on_delete=models.CASCADE)
+    naics = models.ForeignKey(Naics, null=True, on_delete=models.CASCADE)
+    psc = models.ForeignKey(PSC, null=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "{0} ({1})".format(self.name, self.id)
 
 
 class SetAside(models.Model):
