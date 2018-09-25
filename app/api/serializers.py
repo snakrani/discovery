@@ -80,23 +80,20 @@ class PscLinkSerializer(BasePscSerializer):
 
 class PscSummarySerializer(BasePscSerializer):
     sin = SinSerializer(many=True)
-    naics = NaicsSummarySerializer(many=True)
     keywords = KeywordSerializer(many=True)
     
     class Meta(BasePscSerializer.Meta):
-        fields = BasePscSerializer.Meta.fields + ['sin', 'naics', 'keywords', 'url']
+        fields = BasePscSerializer.Meta.fields + ['sin', 'keywords', 'url']
 
 class PscFullSerializer(BasePscSerializer):
     sin = SinSerializer(many=True)
-    naics = NaicsSummarySerializer(many=True)
     keywords = KeywordSerializer(many=True)
     
     class Meta(BasePscSerializer.Meta):
-        fields = BasePscSerializer.Meta.fields + ['sin', 'naics', 'keywords']
+        fields = BasePscSerializer.Meta.fields + ['sin', 'keywords']
 
 class PscTestSerializer(PscFullSerializer):
     sin = SinTestSerializer(many=True)
-    naics = NaicsTestSerializer(many=True)
     keywords = KeywordTestSerializer(many=True)
     
     class Meta(PscFullSerializer.Meta):
