@@ -227,6 +227,72 @@ class PoolTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iendswith': 'services',
                 '@regex': '(Training|Consulting)',
                 '@iregex': '^(vocational|strategic)'
+            },
+            'psc__code': {
+                'tags': ('pool_field', 'psc_field', 'fuzzy_text'),
+                '@exact': 'N045',
+                '@iexact': 's299',
+                '@in': ("S202", "Z1DZ", "J034"),
+                '@contains': '44',
+                '@icontains': '1d',
+                '@startswith': 'S2',
+                '@istartswith': 's2',
+                '@endswith': 'DB',
+                '@iendswith': 'db',
+                '@regex': '[^\d]+$',
+                '@iregex': '^(S2|Z1)'
+            },
+            'psc__description': {
+                'tags': ('pool_field', 'psc_field', 'fuzzy_text'),
+                '@exact': 'Abrasive Materials',
+                '@iexact': 'ADP backup and security services',
+                '@in': ("Aerial Seeding Services", "Aircraft Components / Accessories"),
+                '@contains': 'Snow',
+                '@icontains': 'houseKEEPING',
+                '@startswith': 'Installation',
+                '@istartswith': 'installatION',
+                '@endswith': 'System',
+                '@iendswith': 'SYSTEM',
+                '@regex': '[/]+',
+                '@iregex': '^air(craft)?'
+            },
+            'psc__sin__code': {
+                'tags': ('pool_field', 'psc_field', 'sin_field', 'fuzzy_text'),
+                '@exact': '520-19',
+                '@iexact': 'c871-202',
+                '@in': ("100-03", "520-14", "541-4G", "51-B36-2A"),
+                '@contains': '60E',
+                '@icontains': '-60e',
+                '@startswith': '51',
+                '@istartswith': 'c132',
+                '@endswith': '03',
+                '@iendswith': 'lsv',
+                '@regex': '[A-Z]\d+\-\d+$',
+                '@iregex': '^(C87|51)'
+            },
+            'psc__keywords__id': {
+                'tags': ('pool_field', 'psc_field', 'keyword_field', 'number'),
+                '@exact': 66,
+                '@lt': 500,
+                '@lte': 500, 
+                '@gt': 250, 
+                '@gte': 250,
+                '@range': (50, 100),
+                '@in': (7, 450, 916)
+            },
+            'psc__keywords__name': {
+                'tags': ('pool_field', 'psc_field', 'keyword_field', 'fuzzy_text'),
+                '@exact': 'Utility Trucks, Platform Trucks, Handtrucks And Mail Carts',
+                '@iexact': 'ancillary supplies and / or services',
+                '@in': ("Elemental Analyzers", "Energy Consulting Services", "Environmental Consulting Services"),
+                '@contains': 'Support',
+                '@icontains': 'support',
+                '@startswith': 'Plumbing',
+                '@istartswith': 'edu',
+                '@endswith': 'Services',
+                '@iendswith': 'services',
+                '@regex': '(Training|Consulting)',
+                '@iregex': '^(vocational|strategic)'
             }
         }
     }
@@ -242,3 +308,4 @@ class PoolTest(case.APITestCase, metaclass = case.MetaAPISchema):
         resp.is_not_empty(base_key + ['vehicle'])
         #resp.is_not_empty(base_key + ['threshold'])
         resp.is_not_empty(base_key + ['naics'])
+        resp.is_not_empty(base_key + ['psc'])
