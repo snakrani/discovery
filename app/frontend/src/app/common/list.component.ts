@@ -21,6 +21,8 @@ export class ListComponent implements OnInit {
   @Input()
   items: any[];
   @Input()
+  show_all = false;
+  @Input()
   items_to_show = 5;
   @Input()
   key: string;

@@ -46,8 +46,7 @@ export class FilterServiceCategoriesComponent implements OnInit {
   initServiceCategories(vehicles) {
     this.searchService.getServiceCategories(vehicles).subscribe(
       data => {
-        this.items = this.buildItems(data['results']);
-        this.setFilteredItems(vehicles);
+        this.buildItems(data['results'], vehicles);
         /** Grab the queryparams and sets default values
          *  on inputs Ex. checked, selected, keywords, etc */
         if (this.route.snapshot.queryParamMap.has(this.queryName)) {
@@ -114,7 +113,7 @@ export class FilterServiceCategoriesComponent implements OnInit {
     }
     return items.sort(sortByVehicleAsc);
   }
-  buildItems(obj: any[]) {
+  buildItems(obj: any[], vehicles) {
     const categories = [];
     for (const category of obj) {
       const item = {};
@@ -124,7 +123,8 @@ export class FilterServiceCategoriesComponent implements OnInit {
       item['vehicle'] = category['vehicle']['id'].replace('_', ' ');
       categories.push(item);
     }
-    return categories;
+    this.items = categories;
+    this.setFilteredItems(vehicles);
   }
   addCategory() {
     if (

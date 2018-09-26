@@ -5,6 +5,8 @@ import { ActiveFiltersComponent } from './filters/active-filters.component';
 import { ModalService } from '../../common/modal.service';
 import { FiltersComponent } from './filters.component';
 import { TblVendorsComponent } from './tbl-vendors.component';
+declare const document: any;
+declare const $: any;
 @Component({
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
@@ -34,6 +36,7 @@ export class SearchComponent implements OnInit {
   num_show = 3;
   _spinner: boolean;
   filters: any[];
+  scroll_buttons = false;
 
   constructor(
     private searchService: SearchService,
@@ -221,6 +224,18 @@ export class SearchComponent implements OnInit {
       }
     }
     this.compare_tbl = compare;
+    console.log(this.compare_tbl.length > 3);
+    if (this.compare_tbl.length > 3) {
+      this.scroll_buttons = true;
+    } else {
+      this.scroll_buttons = false;
+    }
+  }
+  toggleTDHeights(id: string) {
+    const doc = document.getElementsByClassName(id);
+    for (const ele of doc) {
+      ele.classList.toggle('show_all');
+    }
   }
   commaSeparatedList(obj: any[], key: string) {
     let items = '';
@@ -238,5 +253,27 @@ export class SearchComponent implements OnInit {
   }
   closeModal(id: string) {
     this.modalService.close(id);
+  }
+  scrollRight() {
+    const container = document.getElementById('overflow-compare');
+    let scrollAmount = 0;
+    const slideTimer = setInterval(() => {
+      container.scrollLeft += 20;
+      scrollAmount += 10;
+      if (scrollAmount >= 100) {
+        clearInterval(slideTimer);
+      }
+    }, 25);
+  }
+  scrollLeft() {
+    const container = document.getElementById('overflow-compare');
+    let scrollAmount = 0;
+    const slideTimer = setInterval(() => {
+      container.scrollLeft -= 20;
+      scrollAmount += 10;
+      if (scrollAmount >= 100) {
+        clearInterval(slideTimer);
+      }
+    }, 25);
   }
 }
