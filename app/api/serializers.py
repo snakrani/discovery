@@ -9,17 +9,6 @@ from contracts import models as contracts
 import os
 
 
-class KeywordSerializer(ModelSerializer):
-    class Meta:
-        model = categories.Keyword
-        fields = ['id', 'name']
-   
-class KeywordTestSerializer(ModelSerializer):
-    class Meta:
-        model = categories.Keyword
-        fields = ['id', 'name']
-
-
 class SinSerializer(ModelSerializer):
     class Meta:
         model = categories.SIN
@@ -92,6 +81,42 @@ class PscTestSerializer(PscFullSerializer):
     
     class Meta(PscFullSerializer.Meta):
         fields = PscFullSerializer.Meta.fields + ['url']
+
+
+class BaseKeywordSerializer(ModelSerializer):
+    url = HyperlinkedIdentityField(view_name="keyword-detail", lookup_field='id')
+
+    class Meta:
+        model = categories.Keyword
+        fields = ['id', 'name']
+
+class KeywordLinkSerializer(BaseKeywordSerializer):
+    class Meta(BaseKeywordSerializer.Meta):
+        fields = ['id', 'name', 'url']
+
+class KeywordSummarySerializer(BaseKeywordSerializer):
+    parent = KeywordLinkSerializer()
+    sin = SinSerializer()
+    naics = NaicsLinkSerializer()
+    psc = PscLinkSerializer()
+    
+    class Meta(BaseKeywordSerializer.Meta):
+        fields = BaseKeywordSerializer.Meta.fields + ['parent', 'sin', 'naics', 'psc', 'calc', 'url']
+
+class KeywordFullSerializer(KeywordSummarySerializer):
+    naics = NaicsSummarySerializer()
+    psc = PscSummarySerializer()
+
+    class Meta(BaseKeywordSerializer.Meta):
+        fields = BaseKeywordSerializer.Meta.fields + ['parent', 'sin', 'naics', 'psc', 'calc']
+
+class KeywordTestSerializer(KeywordFullSerializer):
+    sin = SinTestSerializer()
+    naics = NaicsTestSerializer()
+    psc = PscTestSerializer()
+    
+    class Meta(KeywordFullSerializer.Meta):
+        fields = KeywordFullSerializer.Meta.fields + ['url']
 
 
 class TierSerializer(ModelSerializer):
