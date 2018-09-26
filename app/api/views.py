@@ -408,33 +408,6 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
 
 
 @method_decorator(cache_page(60*60), name='get')
-class ListKeywordView(ListAPIView):
-    """
-    This endpoint returns keyword autocomplete results based on input text.
-    """
-    queryset = categories.Keyword.objects.all()
-    
-    def get_filter_classes(self):
-        return [] # This doesn't work but is required for the API generation page
-    
-    def get_serializer_class(self):
-        if check_api_test(self.request):
-            return serializers.KeywordTestSerializer
-        else:
-            return serializers.KeywordSerializer
-    
-    
-    def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        
-        if 'q' in request.query_params and request.query_params['q']:
-            queryset = queryset.filter(name__icontains = request.query_params['q'])
-        
-        serializer = self.get_serializer(queryset, many=True)
-        return Response({ 'count': len(serializer.data), 'results': serializer.data })
-
-
-@method_decorator(cache_page(60*60), name='get')
 class ListMetadataView(APIView):
     """
     This endpoint returns metadata for the most recent data loads of SAM and FPDS data. It takes no parameters.
