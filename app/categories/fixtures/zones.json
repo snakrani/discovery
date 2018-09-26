@@ -4,12 +4,12 @@
   "pk": 1,
   "fields": {
     "states": [
-      "VA",
+      "NY",
       "DE",
       "PA",
+      "VA",
       "MD",
-      "NJ",
-      "NY"
+      "NJ"
     ]
   }
 },
@@ -18,12 +18,12 @@
   "pk": 2,
   "fields": {
     "states": [
-      "ME",
-      "NH",
+      "RI",
       "MA",
+      "NH",
       "VT",
       "CT",
-      "RI"
+      "ME"
     ]
   }
 },
@@ -32,10 +32,10 @@
   "pk": 3,
   "fields": {
     "states": [
-      "NC",
       "GA",
+      "FL",
       "SC",
-      "FL"
+      "NC"
     ]
   }
 },
@@ -44,8 +44,8 @@
   "pk": 4,
   "fields": {
     "states": [
-      "OK",
-      "TX"
+      "TX",
+      "OK"
     ]
   }
 },
@@ -54,8 +54,8 @@
   "pk": 5,
   "fields": {
     "states": [
-      "NV",
-      "CA"
+      "CA",
+      "NV"
     ]
   }
 },
@@ -64,11 +64,11 @@
   "pk": 6,
   "fields": {
     "states": [
-      "KS",
-      "MO",
       "IL",
+      "NE",
       "IA",
-      "NE"
+      "KS",
+      "MO"
     ]
   }
 }
