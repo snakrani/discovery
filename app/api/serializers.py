@@ -183,14 +183,16 @@ class PoolFullSerializer(BasePoolSerializer):
     vehicle = VehicleSummarySerializer()
     naics = NaicsSummarySerializer(many=True)
     psc = PscSummarySerializer(many=True)
+    keywords = KeywordSummarySerializer(many=True)
     
     class Meta(BasePoolSerializer.Meta):
-        fields = BasePoolSerializer.Meta.fields + ['naics', 'psc']
+        fields = BasePoolSerializer.Meta.fields + ['naics', 'psc', 'keywords']
 
 class PoolTestSerializer(PoolFullSerializer):
     vehicle = VehicleTestSerializer()
     naics = NaicsTestSerializer(many=True)
     psc = PscTestSerializer(many=True)
+    keywords = KeywordTestSerializer(many=True)
     
     class Meta(PoolFullSerializer.Meta):
         fields = PoolFullSerializer.Meta.fields + ['url']
