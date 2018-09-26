@@ -8,6 +8,8 @@ declare let document: any;
 })
 export class FilterContractVehiclesComponent implements OnInit {
   @Input()
+  sharedFiltersLoaded = false;
+  @Input()
   items: any[] = [];
   _items_selected: any[] = [];
   @Input()

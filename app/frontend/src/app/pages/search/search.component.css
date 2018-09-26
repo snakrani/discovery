@@ -44,7 +44,7 @@ td {
   bottom: 0;
   width: 100%;
   height: 70px;
-  background-image: url(/assets/images/td-gradient.png);
+  background-image: url(/frontend/assets/images/td-gradient.png);
   background-size: 100% 100%;
 }
 .toggle_more.show_all {
@@ -52,6 +52,32 @@ td {
 }
 .toggle_more.show_all div.gradient {
   display: none;
+}
+
+.wrapper1,
+.wrapper2 {
+  width: 300px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.wrapper1 {
+  height: 20px;
+}
+.wrapper2 {
+  height: 200px;
+}
+
+.div1 {
+  width: 1000px;
+  height: 20px;
+}
+
+.div2 {
+  width: 1000px;
+  height: 200px;
+  background-color: #88ff88;
+  overflow: auto;
 }
 @media (min-width: 1040px) {
   .usa-grid div.usa-width-one-third {
