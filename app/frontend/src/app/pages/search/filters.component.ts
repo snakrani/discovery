@@ -68,6 +68,7 @@ export class FiltersComponent implements OnInit {
   error_message;
   filters_submitted: any[];
   params_submitted = false;
+  sharedFiltersLoaded = false;
 
   constructor(
     private searchService: SearchService,
@@ -192,6 +193,7 @@ export class FiltersComponent implements OnInit {
      */
 
     if (this.loaded_filters.length === this.filters_list.length) {
+      this.sharedFiltersLoaded = true;
       if (
         this.num_items_selected > 0 &&
         this.route.snapshot.queryParamMap.keys.length > 0 &&
