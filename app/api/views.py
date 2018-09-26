@@ -145,6 +145,36 @@ class PscViewSet(DiscoveryReadOnlyModelViewSet):
     }
 
 
+class KeywordViewSet(DiscoveryReadOnlyModelViewSet):
+    """
+    API endpoint that allows for access to Discovery keyword information.
+    
+    retrieve:
+    Returns information for a keyword.
+    
+    list:
+    Returns all of the keywords that are relevant to the acquisition vehicles in the Discovery universe.
+    """
+    queryset = categories.Keyword.objects.all().distinct()
+    lookup_field = 'id'
+    
+    action_filters = {
+        'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, OrderingFilter),
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend),
+        'count': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend)
+    }
+    filter_class = filters.KeywordFilter
+    ordering_fields = ['id', 'name', 'calc', 'parent', 'sin', 'naics', 'psc']
+    ordering = 'id'
+    
+    pagination_class = pagination.ResultSetPagination
+    action_serializers = {
+        'list': serializers.KeywordSummarySerializer,
+        'retrieve': serializers.KeywordFullSerializer,
+        'test': serializers.KeywordTestSerializer
+    }
+
+
 class VehicleViewSet(DiscoveryReadOnlyModelViewSet):
     """
     API endpoint that allows for access to Discovery related vendor vehicle information.
@@ -195,7 +225,7 @@ class PoolViewSet(DiscoveryReadOnlyModelViewSet):
         'count': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
     }
     filter_class = filters.PoolFilter
-    search_fields = ['id', 'name', 'number', 'threshold', 'vehicle__id', 'vehicle__name']
+    search_fields = ['id', 'name', 'number', 'threshold', 'vehicle__id', 'vehicle__name', 'keywords__name']
     ordering_fields = ['id', 'name', 'number', 'threshold', 'vehicle__id', 'vehicle__name']
     ordering = 'name'
     
@@ -398,7 +428,7 @@ class ListKeywordView(ListAPIView):
         queryset = self.get_queryset()
         
         if 'q' in request.query_params and request.query_params['q']:
-            queryset = queryset.filter(name__istartswith = request.query_params['q'])
+            queryset = queryset.filter(name__icontains = request.query_params['q'])
         
         serializer = self.get_serializer(queryset, many=True)
         return Response({ 'count': len(serializer.data), 'results': serializer.data })
