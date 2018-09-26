@@ -146,6 +146,19 @@ class PscFilter(FilterSet, metaclass = MetaFilterSet):
         fields = ()
 
 
+class KeywordFilter(FilterSet, metaclass = MetaFilterSet):
+    
+    _number = ('id', 'parent__id')
+    _fuzzy_text = ('name', 'parent__name', 'calc', 'sin__code')
+
+    naics = RelatedFilter(NaicsFilter)
+    psc = RelatedFilter(PscFilter)
+    
+    class Meta:
+        model = categories.Keyword
+        fields = ()
+
+
 class VehicleFilter(FilterSet, metaclass = MetaFilterSet):
     
     _number = ('tier__number',)
