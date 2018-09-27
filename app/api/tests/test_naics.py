@@ -32,8 +32,7 @@ class NaicsTest(case.APITestCase, metaclass = case.MetaAPISchema):
             'tags': ('naics_search',),
             '@search1': ('description', 'regex', 'Water Supply and Irrigation Systems'),
             '*search2': ('code', 'exact', '541910'),
-            '@search3': ('keywords__name', 'regex', 'Instructor Led Training'),
-            '-search4': ('code', 'exact', '0000000000000')
+            '-search3': ('code', 'exact', '0000000000000')
         },
         'fields': {
             'code': {
