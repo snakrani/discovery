@@ -159,12 +159,13 @@ class KeywordViewSet(DiscoveryReadOnlyModelViewSet):
     lookup_field = 'id'
     
     action_filters = {
-        'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, OrderingFilter),
-        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend),
-        'count': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend)
+        'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter),
+        'count': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
     }
     filter_class = filters.KeywordFilter
-    ordering_fields = ['id', 'name', 'calc', 'parent', 'sin', 'naics', 'psc']
+    search_fields = ['id', 'name', 'calc']
+    ordering_fields = ['id', 'name', 'calc', 'parent__id', 'sin__code', 'naics__code', 'psc__code']
     ordering = 'id'
     
     pagination_class = pagination.ResultSetPagination
