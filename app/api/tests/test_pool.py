@@ -30,9 +30,8 @@ class PoolTest(case.APITestCase, metaclass = case.MetaAPISchema):
         },
         'search': {
             'tags': ('pool_search',),
-            '@search1': ('name', 'regex', 'Inspection'),
-            '*search2': ('id', 'exact', 'BMO_SB_3'),
-            '@search3': ('number', 'regex', '2')
+            '*search1': ('id', 'exact', 'BMO_SB_3'),
+            '@search2': ('number', 'regex', '2')
         },
         'fields': {
             'id': {
