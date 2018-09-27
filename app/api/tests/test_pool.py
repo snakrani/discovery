@@ -244,6 +244,54 @@ class PoolTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iendswith': 'c',
                 '@regex': '[A-Z]\d+\-\d+$',
                 '@iregex': '^(C87|51)'
+            },
+            'keywords__id': {
+                'tags': ('pool_field', 'keyword_field', 'number'),
+                '@exact': 54,
+                '@lt': 500,
+                '@lte': 500, 
+                '@gt': 500, 
+                '@gte': 500,
+                '@range': (100, 300),
+                '@in': (43, 3, 54)
+            },
+            'keywords__parent__id': {
+                'tags': ('pool_field', 'keyword_field', 'number'),
+                '@exact': 43,
+                '@lt': 500,
+                '@lte': 500, 
+                '@gt': 500, 
+                '@gte': 500,
+                '@range': (100, 300),
+                '@in': (43, 326, 568)
+            },
+            'keywords__name': {
+                'tags': ('pool_field', 'keyword_field', 'fuzzy_text'),
+                '@exact': 'Disaster Management',
+                '@iexact': 'disaster MANAGEMENT',
+                '@in': ("Inventory Management", "Disaster Management"),
+                '@contains': 'Processing',
+                '@icontains': 'processing',
+                '@startswith': 'Integrated',
+                '@istartswith': 'INTEGRATED',
+                '@endswith': 'Services',
+                '@iendswith': 'services',
+                '@regex': '[/]+',
+                '@iregex': 'clearing(house)'
+            },
+            'keywords__calc': {
+                'tags': ('pool_field', 'keyword_field', 'fuzzy_text'),
+                '@exact': 'Logistician',
+                '@iexact': 'logisticIAN',
+                '@in': ("Clerk", "Logistician"),
+                '@contains': 'Res',
+                '@icontains': 'res',
+                '@startswith': 'Consult',
+                '@istartswith': 'consult',
+                '@endswith': 'Analyst',
+                '@iendswith': 'analyst',
+                '@regex': '(Business|Data)\s+Analyst',
+                '@iregex': '^(business|data)'
             }
         }
     }
