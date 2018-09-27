@@ -125,7 +125,7 @@ class Command(BaseCommand):
                     
                         # Save NAICS object
                         naics, created = Naics.objects.get_or_create(code=code)
-                        naics.description = title
+                        naics.description = title.strip()
                         naics.save()
                     
                     except Exception as e:
@@ -176,7 +176,7 @@ class Command(BaseCommand):
                         
                         # Save PSC object
                         psc, created = PSC.objects.get_or_create(code=code)
-                        psc.description = title
+                        psc.description = title.strip()
                         psc.save()
                 
                 elif re.match(r'PSC', code, re.IGNORECASE):
