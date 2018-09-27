@@ -2936,7 +2936,7 @@
   "model": "categories.psc",
   "pk": "49",
   "fields": {
-    "description": " Maintenance / Repair Shop Eqpt",
+    "description": "Maintenance / Repair Shop Eqpt",
     "sin": []
   }
 },
@@ -7010,7 +7010,7 @@
   "model": "categories.psc",
   "pk": "AB17",
   "fields": {
-    "description": "R&D-Community Service / Development: Crime Prevention / Control (Commercialized) ",
+    "description": "R&D-Community Service / Development: Crime Prevention / Control (Commercialized)",
     "sin": []
   }
 },
@@ -7074,7 +7074,7 @@
   "model": "categories.psc",
   "pk": "AB27",
   "fields": {
-    "description": "R&D-Community Service / Development: Fire Prevention / Control (Commercialized) ",
+    "description": "R&D-Community Service / Development: Fire Prevention / Control (Commercialized)",
     "sin": []
   }
 },
@@ -7138,7 +7138,7 @@
   "model": "categories.psc",
   "pk": "AB37",
   "fields": {
-    "description": "R&D-Community Service / Development: Rural (Commercialized) ",
+    "description": "R&D-Community Service / Development: Rural (Commercialized)",
     "sin": []
   }
 },
@@ -7266,7 +7266,7 @@
   "model": "categories.psc",
   "pk": "AB97",
   "fields": {
-    "description": "R&D-Community Service / Development: Other (Commercialized) ",
+    "description": "R&D-Community Service / Development: Other (Commercialized)",
     "sin": []
   }
 },
@@ -7402,7 +7402,7 @@
   "model": "categories.psc",
   "pk": "AC27",
   "fields": {
-    "description": "R&D-Defense System: Missile / Space Systems (Commercialized) ",
+    "description": "R&D-Defense System: Missile / Space Systems (Commercialized)",
     "sin": []
   }
 },
@@ -7858,7 +7858,7 @@
   "model": "categories.psc",
   "pk": "AD27",
   "fields": {
-    "description": "R&D-Defense Other: Services (Commercialized) ",
+    "description": "R&D-Defense Other: Services (Commercialized)",
     "sin": []
   }
 },
@@ -8250,7 +8250,7 @@
   "model": "categories.psc",
   "pk": "AE17",
   "fields": {
-    "description": "R&D-Economic Growth: Employment Growth / Productivity (Commercialized) ",
+    "description": "R&D-Economic Growth: Employment Growth / Productivity (Commercialized)",
     "sin": []
   }
 },
@@ -8314,7 +8314,7 @@
   "model": "categories.psc",
   "pk": "AE27",
   "fields": {
-    "description": "R&D-Economic Growth: Product / Service Improvement (Commercialized) ",
+    "description": "R&D-Economic Growth: Product / Service Improvement (Commercialized)",
     "sin": []
   }
 },
@@ -8378,7 +8378,7 @@
   "model": "categories.psc",
   "pk": "AE37",
   "fields": {
-    "description": "R&D-Economic Growth: Manufacturing Technology (Commercialized) ",
+    "description": "R&D-Economic Growth: Manufacturing Technology (Commercialized)",
     "sin": []
   }
 },
@@ -8842,7 +8842,7 @@
   "model": "categories.psc",
   "pk": "AG57",
   "fields": {
-    "description": "R&D-Energy: Nuclear (Commercialized) ",
+    "description": "R&D-Energy: Nuclear (Commercialized)",
     "sin": []
   }
 },
@@ -9098,7 +9098,7 @@
   "model": "categories.psc",
   "pk": "AG97",
   "fields": {
-    "description": "R&D-Energy: Other (Commercialized) ",
+    "description": "R&D-Energy: Other (Commercialized)",
     "sin": []
   }
 },
@@ -9170,7 +9170,7 @@
   "model": "categories.psc",
   "pk": "AH17",
   "fields": {
-    "description": "R&D-Environmental Protection: Pollution Control / Abatement (Commercialized) ",
+    "description": "R&D-Environmental Protection: Pollution Control / Abatement (Commercialized)",
     "sin": []
   }
 },
@@ -9234,7 +9234,7 @@
   "model": "categories.psc",
   "pk": "AH27",
   "fields": {
-    "description": "R&D-Environmental Protection: Air Pollution (Commercialized) ",
+    "description": "R&D-Environmental Protection: Air Pollution (Commercialized)",
     "sin": []
   }
 },
@@ -9298,7 +9298,7 @@
   "model": "categories.psc",
   "pk": "AH37",
   "fields": {
-    "description": "R&D-Environmental Protection: Water Pollution (Commercialized) ",
+    "description": "R&D-Environmental Protection: Water Pollution (Commercialized)",
     "sin": []
   }
 },
@@ -9362,7 +9362,7 @@
   "model": "categories.psc",
   "pk": "AH47",
   "fields": {
-    "description": "R&D-Environmental Protection: Noise Pollution (Commercialized) ",
+    "description": "R&D-Environmental Protection: Noise Pollution (Commercialized)",
     "sin": []
   }
 },
@@ -10034,7 +10034,7 @@
   "model": "categories.psc",
   "pk": "AK17",
   "fields": {
-    "description": "R&D-Housing: Housing (Commercialized) ",
+    "description": "R&D-Housing: Housing (Commercialized)",
     "sin": []
   }
 },
@@ -10506,7 +10506,7 @@
   "model": "categories.psc",
   "pk": "AN37",
   "fields": {
-    "description": "R&D-Medical: Alcohol Dependency (Commercialized) ",
+    "description": "R&D-Medical: Alcohol Dependency (Commercialized)",
     "sin": []
   }
 },
@@ -10762,7 +10762,7 @@
   "model": "categories.psc",
   "pk": "AN77",
   "fields": {
-    "description": "R&D-Medical: Specialized Medical Services (Commercialized) ",
+    "description": "R&D-Medical: Specialized Medical Services (Commercialized)",
     "sin": []
   }
 },
@@ -10882,7 +10882,7 @@
   "model": "categories.psc",
   "pk": "AN97",
   "fields": {
-    "description": "R&D-Medical: Other (Commercialized) ",
+    "description": "R&D-Medical: Other (Commercialized)",
     "sin": []
   }
 },
@@ -11082,7 +11082,7 @@
   "model": "categories.psc",
   "pk": "AP37",
   "fields": {
-    "description": "R&D-Natural Resource: Mineral (Commercialized) ",
+    "description": "R&D-Natural Resource: Mineral (Commercialized)",
     "sin": []
   }
 },
@@ -11146,7 +11146,7 @@
   "model": "categories.psc",
   "pk": "AP47",
   "fields": {
-    "description": "R&D-Natural Resource: Recreation (Commercialized) ",
+    "description": "R&D-Natural Resource: Recreation (Commercialized)",
     "sin": []
   }
 },
@@ -11210,7 +11210,7 @@
   "model": "categories.psc",
   "pk": "AP57",
   "fields": {
-    "description": "R&D-Natural Resource: Marine And Oceanographic (Commercialized) ",
+    "description": "R&D-Natural Resource: Marine And Oceanographic (Commercialized)",
     "sin": []
   }
 },
@@ -11266,7 +11266,7 @@
   "model": "categories.psc",
   "pk": "AP67",
   "fields": {
-    "description": "R&D-Natural Resource: Marine Fisheries (Commercialized) ",
+    "description": "R&D-Natural Resource: Marine Fisheries (Commercialized)",
     "sin": []
   }
 },
@@ -11458,7 +11458,7 @@
   "model": "categories.psc",
   "pk": "AQ17",
   "fields": {
-    "description": "R&D-Social Services: Geriatric Other Than Medical (Commercialized) ",
+    "description": "R&D-Social Services: Geriatric Other Than Medical (Commercialized)",
     "sin": []
   }
 },
@@ -11594,7 +11594,7 @@
   "model": "categories.psc",
   "pk": "AR17",
   "fields": {
-    "description": "R&D-Space: Aeronautics / Space Technology (Commercialized) ",
+    "description": "R&D-Space: Aeronautics / Space Technology (Commercialized)",
     "sin": []
   }
 },
@@ -11658,7 +11658,7 @@
   "model": "categories.psc",
   "pk": "AR27",
   "fields": {
-    "description": "R&D-Space: Science / Applications (Commercialized) ",
+    "description": "R&D-Space: Science / Applications (Commercialized)",
     "sin": []
   }
 },
@@ -11722,7 +11722,7 @@
   "model": "categories.psc",
   "pk": "AR37",
   "fields": {
-    "description": "R&D-Space: Flight (Commercialized) ",
+    "description": "R&D-Space: Flight (Commercialized)",
     "sin": []
   }
 },
@@ -12178,7 +12178,7 @@
   "model": "categories.psc",
   "pk": "AS27",
   "fields": {
-    "description": "R&D-Modal Transportation: Surface Motor Vehicles (Commercialized) ",
+    "description": "R&D-Modal Transportation: Surface Motor Vehicles (Commercialized)",
     "sin": []
   }
 },
@@ -12242,7 +12242,7 @@
   "model": "categories.psc",
   "pk": "AS37",
   "fields": {
-    "description": "R&D-Modal Transportation: Rail (Commercialized) ",
+    "description": "R&D-Modal Transportation: Rail (Commercialized)",
     "sin": []
   }
 },
@@ -12306,7 +12306,7 @@
   "model": "categories.psc",
   "pk": "AS47",
   "fields": {
-    "description": "R&D-Modal Transportation: Marine (Commercialized) ",
+    "description": "R&D-Modal Transportation: Marine (Commercialized)",
     "sin": []
   }
 },
@@ -12370,7 +12370,7 @@
   "model": "categories.psc",
   "pk": "AS97",
   "fields": {
-    "description": "R&D-Modal Transportation: Other Modal (Commercialized) ",
+    "description": "R&D-Modal Transportation: Other Modal (Commercialized)",
     "sin": []
   }
 },
@@ -12570,7 +12570,7 @@
   "model": "categories.psc",
   "pk": "AT37",
   "fields": {
-    "description": "R&D-Other Transportation: Navigation And Navigational Aids (Commercialized) ",
+    "description": "R&D-Other Transportation: Navigation And Navigational Aids (Commercialized)",
     "sin": []
   }
 },
@@ -12634,7 +12634,7 @@
   "model": "categories.psc",
   "pk": "AT47",
   "fields": {
-    "description": "R&D-Other Transportation: Passenger Safety And Security (Commercialized) ",
+    "description": "R&D-Other Transportation: Passenger Safety And Security (Commercialized)",
     "sin": []
   }
 },
@@ -12762,7 +12762,7 @@
   "model": "categories.psc",
   "pk": "AT67",
   "fields": {
-    "description": "R&D-Other Transportation: Traffic Management (Commercialized) ",
+    "description": "R&D-Other Transportation: Traffic Management (Commercialized)",
     "sin": []
   }
 },
@@ -12954,7 +12954,7 @@
   "model": "categories.psc",
   "pk": "AU",
   "fields": {
-    "description": "Transportation (Obsolete Group) ",
+    "description": "Transportation (Obsolete Group)",
     "sin": []
   }
 },
@@ -13154,7 +13154,7 @@
   "model": "categories.psc",
   "pk": "AV17",
   "fields": {
-    "description": "R&D-Mining: Subsurface Mining Equipment (Commercialized) ",
+    "description": "R&D-Mining: Subsurface Mining Equipment (Commercialized)",
     "sin": []
   }
 },
@@ -13282,7 +13282,7 @@
   "model": "categories.psc",
   "pk": "AV37",
   "fields": {
-    "description": "R&D-Mining: Subsurface Mining Methods (Commercialized) ",
+    "description": "R&D-Mining: Subsurface Mining Methods (Commercialized)",
     "sin": []
   }
 },
@@ -13410,7 +13410,7 @@
   "model": "categories.psc",
   "pk": "AV57",
   "fields": {
-    "description": "R&D-Mining: Mining Reclamation Methods (Commercialized) ",
+    "description": "R&D-Mining: Mining Reclamation Methods (Commercialized)",
     "sin": []
   }
 },
@@ -13538,7 +13538,7 @@
   "model": "categories.psc",
   "pk": "AV77",
   "fields": {
-    "description": "R&D-Mining: Metallurgical (Commercialized) ",
+    "description": "R&D-Mining: Metallurgical (Commercialized)",
     "sin": []
   }
 },
@@ -13674,7 +13674,7 @@
   "model": "categories.psc",
   "pk": "AZ17",
   "fields": {
-    "description": "R&D-Other Research And Development (Commercialized) ",
+    "description": "R&D-Other Research And Development (Commercialized)",
     "sin": []
   }
 },
@@ -13730,7 +13730,7 @@
   "model": "categories.psc",
   "pk": "B506",
   "fields": {
-    "description": "Data Analyses (Other Than Scientific) ",
+    "description": "Data Analyses (Other Than Scientific)",
     "sin": []
   }
 },
@@ -13778,7 +13778,7 @@
   "model": "categories.psc",
   "pk": "B513",
   "fields": {
-    "description": "Feasibility Studies (Non-Construction) ",
+    "description": "Feasibility Studies (Non-Construction)",
     "sin": []
   }
 },
@@ -13994,7 +13994,7 @@
   "model": "categories.psc",
   "pk": "B546",
   "fields": {
-    "description": "Security Studies (Physical And Personal) ",
+    "description": "Security Studies (Physical And Personal)",
     "sin": []
   }
 },
@@ -14186,7 +14186,7 @@
   "model": "categories.psc",
   "pk": "C123",
   "fields": {
-    "description": "Electric Power Generation (Epg) ",
+    "description": "Electric Power Generation (Epg)",
     "sin": []
   }
 },
@@ -14754,7 +14754,7 @@
   "model": "categories.psc",
   "pk": "C1PA",
   "fields": {
-    "description": "Architect And Engineering-Construction: Recreational Facilities (Non-Building) ",
+    "description": "Architect And Engineering-Construction: Recreational Facilities (Non-Building)",
     "sin": []
   }
 },
@@ -14762,7 +14762,7 @@
   "model": "categories.psc",
   "pk": "C1PB",
   "fields": {
-    "description": "Architect And Engineering-Construction: Exhibit Design (Non-Building) ",
+    "description": "Architect And Engineering-Construction: Exhibit Design (Non-Building)",
     "sin": []
   }
 },
@@ -14770,7 +14770,7 @@
   "model": "categories.psc",
   "pk": "C1PC",
   "fields": {
-    "description": "Architect And Engineering-Construction: Unimproved Real Property (Land) ",
+    "description": "Architect And Engineering-Construction: Unimproved Real Property (Land)",
     "sin": []
   }
 },
@@ -14794,7 +14794,7 @@
   "model": "categories.psc",
   "pk": "C1QA",
   "fields": {
-    "description": "Architect And Engineering-Construction: Restoration Of Real Property (Public Or Private) ",
+    "description": "Architect And Engineering-Construction: Restoration Of Real Property (Public Or Private)",
     "sin": []
   }
 },
@@ -14810,7 +14810,7 @@
   "model": "categories.psc",
   "pk": "C211",
   "fields": {
-    "description": "Architect-Engineer Services (Including Landscaping, Interior Layout, And Designing) ",
+    "description": "Architect-Engineer Services (Including Landscaping, Interior Layout, And Designing)",
     "sin": []
   }
 },
@@ -14826,7 +14826,7 @@
   "model": "categories.psc",
   "pk": "C213",
   "fields": {
-    "description": "A&E Inspection Services (Non-Construction) ",
+    "description": "A&E Inspection Services (Non-Construction)",
     "sin": []
   }
 },
@@ -14842,7 +14842,7 @@
   "model": "categories.psc",
   "pk": "C215",
   "fields": {
-    "description": "A&E Production Engineering Services (Including Design And Control, And Building Programming) ",
+    "description": "A&E Production Engineering Services (Including Design And Control, And Building Programming)",
     "sin": []
   }
 },
@@ -15131,7 +15131,7 @@
   "model": "categories.psc",
   "pk": "D399",
   "fields": {
-    "description": "Other Adp And Telecommunications Services (Includes Data Storage On Tapes, Compact Disks, Etc.) ",
+    "description": "Other Adp And Telecommunications Services (Includes Data Storage On Tapes, Compact Disks, Etc.)",
     "sin": [
       "C132-51",
       "132-51",
@@ -16030,7 +16030,7 @@
   "model": "categories.psc",
   "pk": "E1PA",
   "fields": {
-    "description": "Purchase Of Recreational Facilities (Non-Building) ",
+    "description": "Purchase Of Recreational Facilities (Non-Building)",
     "sin": []
   }
 },
@@ -16038,7 +16038,7 @@
   "model": "categories.psc",
   "pk": "E1PB",
   "fields": {
-    "description": "Purchase Of Exhibit Design (Non-Building) ",
+    "description": "Purchase Of Exhibit Design (Non-Building)",
     "sin": []
   }
 },
@@ -16046,7 +16046,7 @@
   "model": "categories.psc",
   "pk": "E1PC",
   "fields": {
-    "description": "Purchase Of Unimproved Real Property (Land) ",
+    "description": "Purchase Of Unimproved Real Property (Land)",
     "sin": []
   }
 },
@@ -16070,7 +16070,7 @@
   "model": "categories.psc",
   "pk": "E1QA",
   "fields": {
-    "description": "Purchase Of Restoration Of Real Property (Public Or Private) ",
+    "description": "Purchase Of Restoration Of Real Property (Public Or Private)",
     "sin": []
   }
 },
@@ -16150,7 +16150,7 @@
   "model": "categories.psc",
   "pk": "E222",
   "fields": {
-    "description": "Purchase Of Highways, Roads, Streets, Bridges, And Railways (Includes Resurfacing) ",
+    "description": "Purchase Of Highways, Roads, Streets, Bridges, And Railways (Includes Resurfacing)",
     "sin": []
   }
 },
@@ -16286,7 +16286,7 @@
   "model": "categories.psc",
   "pk": "E291",
   "fields": {
-    "description": "Purchase Of Recreation Facilities (Non-Building) ",
+    "description": "Purchase Of Recreation Facilities (Non-Building)",
     "sin": []
   }
 },
@@ -16294,7 +16294,7 @@
   "model": "categories.psc",
   "pk": "E292",
   "fields": {
-    "description": "Purchase Of Exhibit Design (Non-Building) ",
+    "description": "Purchase Of Exhibit Design (Non-Building)",
     "sin": []
   }
 },
@@ -16302,7 +16302,7 @@
   "model": "categories.psc",
   "pk": "E293",
   "fields": {
-    "description": "Purchase Of Unimproved Real Property (Land) ",
+    "description": "Purchase Of Unimproved Real Property (Land)",
     "sin": []
   }
 },
@@ -16382,7 +16382,7 @@
   "model": "categories.psc",
   "pk": "F004",
   "fields": {
-    "description": "Forest / Range Fire Rehabilitation Services (Non-Construction) ",
+    "description": "Forest / Range Fire Rehabilitation Services (Non-Construction)",
     "sin": []
   }
 },
@@ -16398,7 +16398,7 @@
   "model": "categories.psc",
   "pk": "F006",
   "fields": {
-    "description": "Land Treatment Practices Services (Plowing / Clearing, Etc.) ",
+    "description": "Land Treatment Practices Services (Plowing / Clearing, Etc.)",
     "sin": []
   }
 },
@@ -16406,7 +16406,7 @@
   "model": "categories.psc",
   "pk": "F007",
   "fields": {
-    "description": "Range Seeding Services (Ground Equipment) ",
+    "description": "Range Seeding Services (Ground Equipment)",
     "sin": []
   }
 },
@@ -16414,7 +16414,7 @@
   "model": "categories.psc",
   "pk": "F008",
   "fields": {
-    "description": "Recreation Site Maintenance Services (Non-Construction) ",
+    "description": "Recreation Site Maintenance Services (Non-Construction)",
     "sin": []
   }
 },
@@ -16438,7 +16438,7 @@
   "model": "categories.psc",
   "pk": "F011",
   "fields": {
-    "description": "Surface Mining Reclamation Services (Non-Construction) ",
+    "description": "Surface Mining Reclamation Services (Non-Construction)",
     "sin": []
   }
 },
@@ -16486,7 +16486,7 @@
   "model": "categories.psc",
   "pk": "F018",
   "fields": {
-    "description": "Other Range / Forest Improvements Services (Non-Construction) ",
+    "description": "Other Range / Forest Improvements Services (Non-Construction)",
     "sin": []
   }
 },
@@ -19459,7 +19459,7 @@
   "model": "categories.psc",
   "pk": "J",
   "fields": {
-    "description": " Maintenance, Repair, Rebuild Equipment",
+    "description": "Maintenance, Repair, Rebuild Equipment",
     "sin": []
   }
 },
@@ -19467,7 +19467,7 @@
   "model": "categories.psc",
   "pk": "J0",
   "fields": {
-    "description": " Maintenance, Repair, Rebuild Of Equipment",
+    "description": "Maintenance, Repair, Rebuild Of Equipment",
     "sin": []
   }
 },
@@ -22327,7 +22327,7 @@
   "model": "categories.psc",
   "pk": "M1PA",
   "fields": {
-    "description": "Operation Of Recreation Facilities (Non-Building) ",
+    "description": "Operation Of Recreation Facilities (Non-Building)",
     "sin": []
   }
 },
@@ -22335,7 +22335,7 @@
   "model": "categories.psc",
   "pk": "M1PB",
   "fields": {
-    "description": "Operation Of Exhibit Design (Non-Building) ",
+    "description": "Operation Of Exhibit Design (Non-Building)",
     "sin": []
   }
 },
@@ -22343,7 +22343,7 @@
   "model": "categories.psc",
   "pk": "M1PC",
   "fields": {
-    "description": "Operation Of Unimproved Real Property (Land) ",
+    "description": "Operation Of Unimproved Real Property (Land)",
     "sin": []
   }
 },
@@ -22367,7 +22367,7 @@
   "model": "categories.psc",
   "pk": "M1QA",
   "fields": {
-    "description": "Operation Of Restoration Of Real Property (Public Or Private) ",
+    "description": "Operation Of Restoration Of Real Property (Public Or Private)",
     "sin": []
   }
 },
@@ -22447,7 +22447,7 @@
   "model": "categories.psc",
   "pk": "M222",
   "fields": {
-    "description": "Operation Of Highways, Roads, Streets, Bridges, And Railways (Includes Resurfacing) ",
+    "description": "Operation Of Highways, Roads, Streets, Bridges, And Railways (Includes Resurfacing)",
     "sin": []
   }
 },
@@ -22583,7 +22583,7 @@
   "model": "categories.psc",
   "pk": "M291",
   "fields": {
-    "description": "Operation Of Recreation Facilities (Non-Building) ",
+    "description": "Operation Of Recreation Facilities (Non-Building)",
     "sin": []
   }
 },
@@ -22591,7 +22591,7 @@
   "model": "categories.psc",
   "pk": "M292",
   "fields": {
-    "description": "Operation Of Exhibit Design (Non-Building) ",
+    "description": "Operation Of Exhibit Design (Non-Building)",
     "sin": []
   }
 },
@@ -22599,7 +22599,7 @@
   "model": "categories.psc",
   "pk": "M293",
   "fields": {
-    "description": "Operation Of Unimproved Real Property (Land) ",
+    "description": "Operation Of Unimproved Real Property (Land)",
     "sin": []
   }
 },
@@ -23379,7 +23379,7 @@
   "model": "categories.psc",
   "pk": "P500",
   "fields": {
-    "description": "Demolition Of Structures Or Facilities (Other Than Buildings) ",
+    "description": "Demolition Of Structures Or Facilities (Other Than Buildings)",
     "sin": []
   }
 },
@@ -23811,7 +23811,7 @@
   "model": "categories.psc",
   "pk": "R",
   "fields": {
-    "description": "Support Services (Prof, Admin, Mgmt) ",
+    "description": "Support Services (Prof, Admin, Mgmt)",
     "sin": []
   }
 },
@@ -23819,7 +23819,7 @@
   "model": "categories.psc",
   "pk": "R1",
   "fields": {
-    "description": "Buildings And Facilities (Obsolete) ",
+    "description": "Buildings And Facilities (Obsolete)",
     "sin": []
   }
 },
@@ -23947,7 +23947,7 @@
   "model": "categories.psc",
   "pk": "R2",
   "fields": {
-    "description": "Architect-Engineer (Obsolete Codes) ",
+    "description": "Architect-Engineer (Obsolete Codes)",
     "sin": []
   }
 },
@@ -24011,7 +24011,7 @@
   "model": "categories.psc",
   "pk": "R3",
   "fields": {
-    "description": "Adp Services (Obsolete Codes) ",
+    "description": "Adp Services (Obsolete Codes)",
     "sin": []
   }
 },
@@ -24091,7 +24091,7 @@
   "model": "categories.psc",
   "pk": "R401",
   "fields": {
-    "description": "Personal Care Services (Includes Such Services As Barber And Beauty Shop, Shoe Repairs, Tailoring, Etc.) ",
+    "description": "Personal Care Services (Includes Such Services As Barber And Beauty Shop, Shoe Repairs, Tailoring, Etc.)",
     "sin": []
   }
 },
@@ -24115,7 +24115,7 @@
   "model": "categories.psc",
   "pk": "R404",
   "fields": {
-    "description": "Land Surveys, Cadastral Services (Non-Construction) ",
+    "description": "Land Surveys, Cadastral Services (Non-Construction)",
     "sin": []
   }
 },
@@ -24174,7 +24174,7 @@
   "model": "categories.psc",
   "pk": "R411",
   "fields": {
-    "description": "Real Property Appraisals Services (Sic 6531) ",
+    "description": "Real Property Appraisals Services (Sic 6531)",
     "sin": []
   }
 },
@@ -24258,7 +24258,7 @@
   "model": "categories.psc",
   "pk": "R422",
   "fields": {
-    "description": "Market Research And Public Opinion Services (Includes Telephone And Field Interviews, Focus Testing, And Surveys) ",
+    "description": "Market Research And Public Opinion Services (Includes Telephone And Field Interviews, Focus Testing, And Surveys)",
     "sin": [
       "541-4A",
       "C541-4A"
@@ -24431,7 +24431,7 @@
   "model": "categories.psc",
   "pk": "R5",
   "fields": {
-    "description": "Studies (Obsolete Codes) ",
+    "description": "Studies (Obsolete Codes)",
     "sin": []
   }
 },
@@ -24883,7 +24883,7 @@
   "model": "categories.psc",
   "pk": "R608",
   "fields": {
-    "description": "Translation And Interpreting Services (Including Sign Language) ",
+    "description": "Translation And Interpreting Services (Including Sign Language)",
     "sin": [
       "382-1",
       "382-2",
@@ -25014,7 +25014,7 @@
   "model": "categories.psc",
   "pk": "R703",
   "fields": {
-    "description": "Accounting Services (Note: New Code Created For Financial Services See R710 Below) ",
+    "description": "Accounting Services (Note: New Code Created For Financial Services See R710 Below)",
     "sin": [
       "520-11",
       "520-22",
@@ -25117,7 +25117,7 @@
   "model": "categories.psc",
   "pk": "R708",
   "fields": {
-    "description": "Public Relations Services (Includes Writing Services, Event Planning And Management, Media Relations, Radio And Television Analysis, And Press Services) ",
+    "description": "Public Relations Services (Includes Writing Services, Event Planning And Management, Media Relations, Radio And Television Analysis, And Press Services)",
     "sin": [
       "541-2",
       "C541-2"
@@ -25136,7 +25136,7 @@
   "model": "categories.psc",
   "pk": "R710",
   "fields": {
-    "description": "Financial Services (Includes Credit Card Services And Any Other Financial Services. See Revision To Description For Code R703 Above) ",
+    "description": "Financial Services (Includes Credit Card Services And Any Other Financial Services. See Revision To Description For Code R703 Above)",
     "sin": [
       "520-3",
       "C520-3"
@@ -25147,7 +25147,7 @@
   "model": "categories.psc",
   "pk": "R711",
   "fields": {
-    "description": "Banking Services (Includes Accepting And Cashing Government Checks And Other Payment Instruments, Accepting Direct Deposits, Accepting Payments To The Government From The Public) ",
+    "description": "Banking Services (Includes Accepting And Cashing Government Checks And Other Payment Instruments, Accepting Direct Deposits, Accepting Payments To The Government From The Public)",
     "sin": []
   }
 },
@@ -25224,7 +25224,7 @@
   "model": "categories.psc",
   "pk": "S113",
   "fields": {
-    "description": "Telephone And / Or Communications Services (Includes Telegraph, Telex, And Cablevision Services) ",
+    "description": "Telephone And / Or Communications Services (Includes Telegraph, Telex, And Cablevision Services)",
     "sin": []
   }
 },
@@ -25396,7 +25396,7 @@
   "model": "categories.psc",
   "pk": "S218",
   "fields": {
-    "description": "Snow Removal / Salt Service (Also Spreading Aggregate Or Other Snow Melting Material) ",
+    "description": "Snow Removal / Salt Service (Also Spreading Aggregate Or Other Snow Melting Material)",
     "sin": []
   }
 },
@@ -25636,7 +25636,7 @@
   "model": "categories.psc",
   "pk": "U003",
   "fields": {
-    "description": "Reserve Training (Military) ",
+    "description": "Reserve Training (Military)",
     "sin": []
   }
 },
@@ -27694,7 +27694,7 @@
   "model": "categories.psc",
   "pk": "X1PA",
   "fields": {
-    "description": "Lease / Rental Of Recreation Facilities (Non-Building) ",
+    "description": "Lease / Rental Of Recreation Facilities (Non-Building)",
     "sin": []
   }
 },
@@ -27702,7 +27702,7 @@
   "model": "categories.psc",
   "pk": "X1PB",
   "fields": {
-    "description": "Lease / Rental Of Exhibit Design (Non-Building) ",
+    "description": "Lease / Rental Of Exhibit Design (Non-Building)",
     "sin": []
   }
 },
@@ -27710,7 +27710,7 @@
   "model": "categories.psc",
   "pk": "X1PC",
   "fields": {
-    "description": "Lease / Rental Of Unimproved Real Property (Land) ",
+    "description": "Lease / Rental Of Unimproved Real Property (Land)",
     "sin": []
   }
 },
@@ -27734,7 +27734,7 @@
   "model": "categories.psc",
   "pk": "X1QA",
   "fields": {
-    "description": "Lease / Rental Of Restoration Of Real Property (Public Or Private) ",
+    "description": "Lease / Rental Of Restoration Of Real Property (Public Or Private)",
     "sin": []
   }
 },
@@ -27814,7 +27814,7 @@
   "model": "categories.psc",
   "pk": "X222",
   "fields": {
-    "description": "Lease / Rental Of Highways, Roads, Streets, Bridges, And Railways (Includes Resurfacing) ",
+    "description": "Lease / Rental Of Highways, Roads, Streets, Bridges, And Railways (Includes Resurfacing)",
     "sin": []
   }
 },
@@ -27950,7 +27950,7 @@
   "model": "categories.psc",
   "pk": "X291",
   "fields": {
-    "description": "Lease / Rental Of Recreation Facilities (Non-Building) ",
+    "description": "Lease / Rental Of Recreation Facilities (Non-Building)",
     "sin": []
   }
 },
@@ -27958,7 +27958,7 @@
   "model": "categories.psc",
   "pk": "X292",
   "fields": {
-    "description": "Lease / Rental Of Exhibit Design (Non-Building) ",
+    "description": "Lease / Rental Of Exhibit Design (Non-Building)",
     "sin": []
   }
 },
@@ -27966,7 +27966,7 @@
   "model": "categories.psc",
   "pk": "X293",
   "fields": {
-    "description": "Lease / Rental Of Unimproved Real Property (Land) ",
+    "description": "Lease / Rental Of Unimproved Real Property (Land)",
     "sin": []
   }
 },
@@ -28886,7 +28886,7 @@
   "model": "categories.psc",
   "pk": "Y1PA",
   "fields": {
-    "description": "Construction Of Recreation Facilities (Non-Building) ",
+    "description": "Construction Of Recreation Facilities (Non-Building)",
     "sin": []
   }
 },
@@ -28894,7 +28894,7 @@
   "model": "categories.psc",
   "pk": "Y1PB",
   "fields": {
-    "description": "Construction Of Exhibit Design (Non-Building) ",
+    "description": "Construction Of Exhibit Design (Non-Building)",
     "sin": [
       "541-4C",
       "C541-4C"
@@ -28905,7 +28905,7 @@
   "model": "categories.psc",
   "pk": "Y1PC",
   "fields": {
-    "description": "Construction Of Unimproved Real Property (Land) ",
+    "description": "Construction Of Unimproved Real Property (Land)",
     "sin": []
   }
 },
@@ -28929,7 +28929,7 @@
   "model": "categories.psc",
   "pk": "Y1QA",
   "fields": {
-    "description": "Construction Of Restoration Of Real Property (Public Or Private) ",
+    "description": "Construction Of Restoration Of Real Property (Public Or Private)",
     "sin": []
   }
 },
@@ -29017,7 +29017,7 @@
   "model": "categories.psc",
   "pk": "Y222",
   "fields": {
-    "description": "Construction Of Highways, Roads, Streets, Bridges, And Railways (Includes Resurfacing) ",
+    "description": "Construction Of Highways, Roads, Streets, Bridges, And Railways (Includes Resurfacing)",
     "sin": []
   }
 },
@@ -29155,7 +29155,7 @@
   "model": "categories.psc",
   "pk": "Y291",
   "fields": {
-    "description": "Construction Of Recreation Facilities (Non-Building) ",
+    "description": "Construction Of Recreation Facilities (Non-Building)",
     "sin": []
   }
 },
@@ -29163,7 +29163,7 @@
   "model": "categories.psc",
   "pk": "Y292",
   "fields": {
-    "description": "Construction Of Exhibit Design (Non-Building) ",
+    "description": "Construction Of Exhibit Design (Non-Building)",
     "sin": []
   }
 },
@@ -29171,7 +29171,7 @@
   "model": "categories.psc",
   "pk": "Y293",
   "fields": {
-    "description": "Construction Of Unimproved Real Property (Land) ",
+    "description": "Construction Of Unimproved Real Property (Land)",
     "sin": []
   }
 },
@@ -29211,7 +29211,7 @@
   "model": "categories.psc",
   "pk": "Z",
   "fields": {
-    "description": " Maintenance, Repair, Alteration Real Property",
+    "description": "Maintenance, Repair, Alteration Real Property",
     "sin": []
   }
 },
@@ -29219,7 +29219,7 @@
   "model": "categories.psc",
   "pk": "Z1",
   "fields": {
-    "description": " Maintenance, Alteration, Repair Buildings",
+    "description": "Maintenance, Alteration, Repair Buildings",
     "sin": []
   }
 },
@@ -30101,7 +30101,7 @@
   "model": "categories.psc",
   "pk": "Z1PA",
   "fields": {
-    "description": "Maintenance Of Recreation Facilities (Non-Building) ",
+    "description": "Maintenance Of Recreation Facilities (Non-Building)",
     "sin": []
   }
 },
@@ -30109,7 +30109,7 @@
   "model": "categories.psc",
   "pk": "Z1PB",
   "fields": {
-    "description": "Maintenance Of Exhibit Design (Non-Building) ",
+    "description": "Maintenance Of Exhibit Design (Non-Building)",
     "sin": []
   }
 },
@@ -30117,7 +30117,7 @@
   "model": "categories.psc",
   "pk": "Z1PC",
   "fields": {
-    "description": "Maintenance Of Unimproved Real Property (Land) ",
+    "description": "Maintenance Of Unimproved Real Property (Land)",
     "sin": []
   }
 },
@@ -30141,7 +30141,7 @@
   "model": "categories.psc",
   "pk": "Z1QA",
   "fields": {
-    "description": "Maintenance Of Restoration Of Real Property (Public Or Private) ",
+    "description": "Maintenance Of Restoration Of Real Property (Public Or Private)",
     "sin": []
   }
 },
@@ -30149,7 +30149,7 @@
   "model": "categories.psc",
   "pk": "Z2",
   "fields": {
-    "description": " Maintenance, Alteration, Repair Nonbuildings",
+    "description": "Maintenance, Alteration, Repair Nonbuildings",
     "sin": []
   }
 },
@@ -30229,7 +30229,7 @@
   "model": "categories.psc",
   "pk": "Z222",
   "fields": {
-    "description": "Maintenance, Repair Or Alteration Of Highways, Roads, Streets, Bridges, And Railways (Includes Resurfacing) ",
+    "description": "Maintenance, Repair Or Alteration Of Highways, Roads, Streets, Bridges, And Railways (Includes Resurfacing)",
     "sin": []
   }
 },
@@ -30368,7 +30368,7 @@
   "model": "categories.psc",
   "pk": "Z291",
   "fields": {
-    "description": "Maintenance, Repair Or Alteration Of Recreation Facilities (Non-Building) ",
+    "description": "Maintenance, Repair Or Alteration Of Recreation Facilities (Non-Building)",
     "sin": []
   }
 },
@@ -30376,7 +30376,7 @@
   "model": "categories.psc",
   "pk": "Z292",
   "fields": {
-    "description": "Maintenance, Repair Or Alteration Of Exhibit Design (Non-Building) ",
+    "description": "Maintenance, Repair Or Alteration Of Exhibit Design (Non-Building)",
     "sin": []
   }
 },
@@ -30384,7 +30384,7 @@
   "model": "categories.psc",
   "pk": "Z293",
   "fields": {
-    "description": "Maintenance, Repair Or Alteration Of Unimproved Real Property (Land) ",
+    "description": "Maintenance, Repair Or Alteration Of Unimproved Real Property (Land)",
     "sin": []
   }
 },
@@ -30946,7 +30946,7 @@
   "model": "categories.psc",
   "pk": "Z2PA",
   "fields": {
-    "description": "Repair Or Alteration Of Recreation Facilities (Non-Building) ",
+    "description": "Repair Or Alteration Of Recreation Facilities (Non-Building)",
     "sin": []
   }
 },
@@ -30954,7 +30954,7 @@
   "model": "categories.psc",
   "pk": "Z2PB",
   "fields": {
-    "description": "Repair Or Alteration Of Exhibit Design (Non-Building) ",
+    "description": "Repair Or Alteration Of Exhibit Design (Non-Building)",
     "sin": []
   }
 },
@@ -30962,7 +30962,7 @@
   "model": "categories.psc",
   "pk": "Z2PC",
   "fields": {
-    "description": "Repair Or Alteration Of Unimproved Real Property (Land) ",
+    "description": "Repair Or Alteration Of Unimproved Real Property (Land)",
     "sin": []
   }
 },
@@ -30986,7 +30986,7 @@
   "model": "categories.psc",
   "pk": "Z2QA",
   "fields": {
-    "description": "Repair Or Alteration Of Restoration Of Real Property (Public Or Private) ",
+    "description": "Repair Or Alteration Of Restoration Of Real Property (Public Or Private)",
     "sin": []
   }
 },
@@ -30994,7 +30994,7 @@
   "model": "categories.psc",
   "pk": "Z3",
   "fields": {
-    "description": " Maintenance, Alteration, Repair Restor Acvivs",
+    "description": "Maintenance, Alteration, Repair Restor Acvivs",
     "sin": []
   }
 },
