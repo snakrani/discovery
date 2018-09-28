@@ -6,8 +6,8 @@
     <discovery-spinner *ngIf="!items"></discovery-spinner>
     <ul class="usa-unstyled-list">
       <li *ngFor="let item of items">
-        <input id="{{id}}-{{item.id}}" (change)="onChange(item.id, item.name, $event.target.checked)" name="{{id}}-{{item.id}}" type="checkbox"
-          value="{{item.id}}" [checked]="item.checked">
+        <input id="{{id}}-{{item.id}}" (change)="onChange(item.id, item.name, $event.target.checked)" name="{{id}}-{{item.id}}"
+          type="checkbox" value="{{item.id}}" [checked]="item.checked">
         <label for="{{id}}-{{item.id}}">{{item.name}}</label>
       </li>
     </ul>

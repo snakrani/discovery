@@ -29,6 +29,18 @@ import { FilterZoneComponent } from './filters/filter-zone.component';
       [type='button'].primary {
         width: 46.7% !important;
       }
+      .overlay {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        padding: 5px;
+        z-index: 888;
+        left: 0;
+        top: 0;
+        background-color: rgba(255, 255, 255, 0.9);
+        overflow-x: hidden;
+        transition: 0.5s;
+      }
     `
   ]
 })
@@ -58,6 +70,8 @@ export class FiltersComponent implements OnInit {
   filterZoneComponent: FilterZoneComponent;
   filters_list: any[];
   /** END Define filter components */
+  @Input()
+  parentSpinner: boolean;
   @Output()
   emmitFilters: EventEmitter<any> = new EventEmitter();
   @Output()
@@ -68,6 +82,10 @@ export class FiltersComponent implements OnInit {
   error_message;
   filters_submitted: any[];
   params_submitted = false;
+  sharedFiltersLoaded = false;
+  vehicles: any[] = [];
+  pools: any[] = [];
+  spinner = true;
 
   constructor(
     private searchService: SearchService,
@@ -78,21 +96,62 @@ export class FiltersComponent implements OnInit {
   ngOnInit() {
     /** Set the filters that are going to be used */
     this.filters_list = [
+      this.filterKeywordsComponent,
       this.filterContractVehiclesComponent,
       this.filterSbdComponent,
-      this.filterKeywordsComponent,
-      this.filterNaicsComponent,
       this.filterServiceCategories,
+      this.filterNaicsComponent,
+      this.filterPscComponent,
       this.filterZoneComponent
     ];
     /**
+     *
+      this.filterZoneComponent
       this.filterCertifications,
       this.filterContractPricing,
       this.filterContractThreshold,
-      this.filterAgencyPerformance,
-      this.filterPscComponent, */
+      this.filterAgencyPerformance
+       */
+    this.initPools(['All']);
   }
-
+  initVehicles() {
+    this.searchService.getContractVehicles().subscribe(
+      data => {
+        this.vehicles = data['results'];
+        const queryName = 'vehicles';
+        /** Grab the queryparams and sets default values
+         *  on inputs Ex. checked, selected, keywords, etc */
+        if (this.route.snapshot.queryParamMap.has(queryName)) {
+          const values: string[] = this.route.snapshot.queryParamMap
+            .get(queryName)
+            .split('__');
+          for (let i = 0; i < this.vehicles.length; i++) {
+            if (values.includes(this.vehicles[i]['id'])) {
+              this.vehicles[i]['checked'] = true;
+              this.filterContractVehiclesComponent.addItem(
+                this.vehicles[i]['id'],
+                this.vehicles[i]['name']
+              );
+            }
+          }
+          /** Open accordion */
+          this.filterContractVehiclesComponent.opened = true;
+        }
+        this.spinner = false;
+        this.filterContractVehiclesComponent.loaded();
+      },
+      error => (this.error_message = <any>error)
+    );
+  }
+  initPools(vehicles) {
+    this.searchService.getPools(vehicles).subscribe(
+      data => {
+        this.pools = data['results'];
+        this.initVehicles();
+      },
+      error => (this.error_message = <any>error)
+    );
+  }
   resetFilters() {
     this.num_items_selected = 0;
     this.disabled_btn = true;
@@ -147,14 +206,7 @@ export class FiltersComponent implements OnInit {
     }
     this.filterServiceCategories.setFilteredItems(arr);
     this.filterNaicsComponent.setFilteredItems(arr);
-  }
-  filterPSCsByNaics(naics: any[]) {
-    const codes = [];
-    for (const item of naics) {
-      codes.push(item['code']);
-    }
-    // this.filterPscComponent.reset();
-    // this.filterPscComponent.getPSCsbyNAICs(codes);
+    this.filterPscComponent.setFilteredItems(arr);
   }
   getServiceCategoriesByVehicle(vehicle: string) {
     const obj: any[] = this.filterServiceCategories.getServiceCategoriesByVehicle(
@@ -172,6 +224,10 @@ export class FiltersComponent implements OnInit {
     const obj: any[] = this.filterNaicsComponent.getNaicsByVehicle(vehicle);
     return obj;
   }
+  getPSCsByVehicle(vehicle: string) {
+    const obj: any[] = this.filterPscComponent.getPSCsByVehicle(vehicle);
+    return obj;
+  }
   getSetAsides() {
     const setasides = this.filterSbdComponent.getItems();
     return setasides;
@@ -179,6 +235,10 @@ export class FiltersComponent implements OnInit {
   getSelectedVehicles(): any[] {
     const vehicles: any[] = this.filterContractVehiclesComponent.getSelected();
     return vehicles;
+  }
+  getVehicleData(vehicle: string) {
+    const obj = this.filterContractVehiclesComponent.getVehicleInfo(vehicle);
+    return obj;
   }
   getResults(filter: string) {
     if (!this.searchService.existsIn(this.loaded_filters, filter, 'name')) {

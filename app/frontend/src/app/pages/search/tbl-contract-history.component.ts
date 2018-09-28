@@ -22,14 +22,15 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
   current_page = 1;
   error_message;
   naics: any[] = [];
-  naic_code = 'all';
-  piid = 'all';
+  naic_code = 'All';
+  piid = 'All';
   next: number;
   prev: number;
   enable_paging = false;
   history_no_results = false;
   spinner = false;
   ordering = '';
+  params: string;
 
   constructor(private searchService: SearchService) {}
 
@@ -182,10 +183,27 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
     }
     return items;
   }
+  setParams() {
+    let params = '';
+    if (this.naic_code !== 'All') {
+      params += 'naics=' + this.naic_code;
+    } else {
+      params = '';
+    }
+    if (this.piid !== 'All') {
+      if (params !== '') {
+        params += '&';
+      }
+      params += 'memberships=' + this.piid;
+    }
+    this.params = params;
+  }
   onChangeNaic() {
     this.getContracts(this.duns, 1, this.piid, this.naic_code, this.ordering);
+    this.setParams();
   }
   onChangeMembership() {
     this.getContracts(this.duns, 1, this.piid, this.naic_code, this.ordering);
+    this.setParams();
   }
 }

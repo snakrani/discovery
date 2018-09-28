@@ -5,6 +5,8 @@ import { ActiveFiltersComponent } from './filters/active-filters.component';
 import { ModalService } from '../../common/modal.service';
 import { FiltersComponent } from './filters.component';
 import { TblVendorsComponent } from './tbl-vendors.component';
+declare const document: any;
+declare const $: any;
 @Component({
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
@@ -34,6 +36,7 @@ export class SearchComponent implements OnInit {
   num_show = 3;
   _spinner: boolean;
   filters: any[];
+  scroll_buttons = false;
 
   constructor(
     private searchService: SearchService,
@@ -46,6 +49,8 @@ export class SearchComponent implements OnInit {
     /** Check to see if there are any queryparams */
     if (this.route.snapshot.queryParamMap.keys.length > 0) {
       this.spinner = true;
+    } else {
+      this.spinner = false;
     }
   }
   get sort_by(): string {
@@ -145,6 +150,7 @@ export class SearchComponent implements OnInit {
       vendor['name'] = item.name;
       vendor['duns'] = item.duns;
       vendor['contracts'] = item.number_of_contracts;
+      // vendor['tier'] = item.number_of_contracts;
       vendor['vehicles'] = this.returnVehicleVendors(item.pools);
 
       if (vehicles_submitted['selected']) {
@@ -199,28 +205,40 @@ export class SearchComponent implements OnInit {
     this.contracts_w_no_records = [];
     for (const vehicle of this.results.vehicles) {
       const item: any[] = [];
+      const vehicle_obj = this.filtersComponent.getVehicleData(vehicle);
+
       item['id'] = vehicle;
       item['vendors_total'] = 0;
       item['vendors_results_total'] = this.countVendorsByVehicle(vehicle);
-      item['description'] = this.filtersComponent.getVehicleDescription(
-        vehicle
-      );
+      item['description'] = vehicle_obj['name'];
       item[
         'service_categories'
       ] = this.filtersComponent.getServiceCategoriesByVehicle(vehicle);
       item['capabilities'] = 0;
       item['naics'] = this.filtersComponent.getNaicsByVehicle(vehicle);
-      item['pscs'] = [];
-      item['tier'] = '';
-      item['gsa'] = '';
-      item['website'] = '';
-      item['ordering_guide'] = '';
+      item['pscs'] = this.filtersComponent.getPSCsByVehicle(vehicle);
+
+      item['tier'] = vehicle_obj['tier']['name'];
+      item['gsa'] = vehicle_obj['poc'];
+      // item['website'] = vehicle_obj['url'];
+      item['ordering_guide'] = vehicle_obj['ordering_guide'];
       compare.push(item);
       if (item['vendors_results_total'] === 0) {
         this.contracts_w_no_records.push({ name: item['description'] });
       }
     }
     this.compare_tbl = compare;
+    if (this.compare_tbl.length > 3) {
+      this.scroll_buttons = true;
+    } else {
+      this.scroll_buttons = false;
+    }
+  }
+  toggleTDHeights(id: string) {
+    const doc = document.getElementsByClassName(id);
+    for (const ele of doc) {
+      ele.classList.toggle('show_all');
+    }
   }
   commaSeparatedList(obj: any[], key: string) {
     let items = '';
@@ -238,5 +256,27 @@ export class SearchComponent implements OnInit {
   }
   closeModal(id: string) {
     this.modalService.close(id);
+  }
+  scrollRight() {
+    const container = document.getElementById('overflow-compare');
+    let scrollAmount = 0;
+    const slideTimer = setInterval(() => {
+      container.scrollLeft += 20;
+      scrollAmount += 10;
+      if (scrollAmount >= 100) {
+        clearInterval(slideTimer);
+      }
+    }, 25);
+  }
+  scrollLeft() {
+    const container = document.getElementById('overflow-compare');
+    let scrollAmount = 0;
+    const slideTimer = setInterval(() => {
+      container.scrollLeft -= 20;
+      scrollAmount += 10;
+      if (scrollAmount >= 100) {
+        clearInterval(slideTimer);
+      }
+    }, 25);
   }
 }

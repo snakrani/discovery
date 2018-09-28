@@ -29,3 +29,6 @@ a.back:active span {
 a.back span {
   margin-right: 15px;
 }
+.tab-pane {
+  border-top: 2px solid #e1e6ea !important;
+}
