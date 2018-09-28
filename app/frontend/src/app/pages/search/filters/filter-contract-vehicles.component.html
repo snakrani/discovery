@@ -3,11 +3,11 @@
 </button>
 <div id="{{id}}" class="usa-accordion-content" [attr.aria-hidden]="!opened">
   <fieldset class="usa-fieldset-inputs usa-sans">
-    <discovery-spinner *ngIf="!items"></discovery-spinner>
-    <ul class="usa-unstyled-list">
+    <discovery-spinner *ngIf="!items || !sharedFiltersLoaded"></discovery-spinner>
+    <ul class="usa-unstyled-list" *ngIf="sharedFiltersLoaded">
       <li *ngFor="let item of items">
-        <input id="{{id}}-{{item.id}}" (change)="onChange(item.id, item.name, $event.target.checked)" name="{{id}}-{{item.id}}" type="checkbox"
-          value="{{item.id}}" [checked]="item.checked">
+        <input id="{{id}}-{{item.id}}" (change)="onChange(item.id, item.name, $event.target.checked)" name="{{id}}-{{item.id}}"
+          type="checkbox" value="{{item.id}}" [checked]="item.checked" [disabled]="!sharedFiltersLoaded">
         <label for="{{id}}-{{item.id}}">{{item.name}}</label>
       </li>
     </ul>

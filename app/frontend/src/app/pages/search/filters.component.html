@@ -10,7 +10,7 @@
 
   <li>
     <discovery-filter-contract-vehicles (emmitSelected)="activateSubmit($event)" (emmitItem)="filterOthersByVehicles($event)"
-      (emmitLoaded)="getResults($event)"></discovery-filter-contract-vehicles>
+      (emmitLoaded)="getResults($event)" [sharedFiltersLoaded]="sharedFiltersLoaded"></discovery-filter-contract-vehicles>
 
   </li>
   <li>

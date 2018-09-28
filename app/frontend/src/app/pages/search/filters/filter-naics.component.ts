@@ -50,9 +50,7 @@ export class FilterNaicsComponent implements OnInit {
   initNaicsList(vehicles) {
     this.searchService.getNaics(vehicles).subscribe(
       data => {
-        this.items = this.buildItems(data['results']);
-        this.items.sort(sortByCodeAsc);
-        this.setFilteredItems(vehicles);
+        this.buildItems(data['results'], vehicles);
 
         /** Grab the queryparams and sets default values
          *  on inputs Ex. checked, selected, keywords, etc */
@@ -120,7 +118,7 @@ export class FilterNaicsComponent implements OnInit {
     items = this.items.filter(naics => naics.vehicle_id.indexOf(abr) !== -1);
     return items;
   }
-  buildItems(obj: any[]) {
+  buildItems(obj: any[], vehicles) {
     const naics = [];
     for (const pool of obj) {
       for (const naic of pool.naics) {
@@ -133,7 +131,9 @@ export class FilterNaicsComponent implements OnInit {
         }
       }
     }
-    return naics;
+    this.items = naics;
+    this.items.sort(sortByCodeAsc);
+    this.setFilteredItems(vehicles);
   }
   buildItemsByVehicle(obj: any[]) {
     const naics = [];

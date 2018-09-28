@@ -9,17 +9,6 @@ from contracts import models as contracts
 import os
 
 
-class KeywordSerializer(ModelSerializer):
-    class Meta:
-        model = categories.Keyword
-        fields = ['id', 'name']
-   
-class KeywordTestSerializer(ModelSerializer):
-    class Meta:
-        model = categories.Keyword
-        fields = ['id', 'name']
-
-
 class SinSerializer(ModelSerializer):
     class Meta:
         model = categories.SIN
@@ -47,21 +36,18 @@ class NaicsLinkSerializer(BaseNaicsSerializer):
 
 class NaicsSummarySerializer(BaseNaicsSerializer):
     sin = SinSerializer(many=True)
-    keywords = KeywordSerializer(many=True)
     
     class Meta(BaseNaicsSerializer.Meta):
-        fields = BaseNaicsSerializer.Meta.fields + ['sin', 'keywords', 'url']
+        fields = BaseNaicsSerializer.Meta.fields + ['sin', 'url']
 
 class NaicsFullSerializer(BaseNaicsSerializer):
     sin = SinSerializer(many=True)
-    keywords = KeywordSerializer(many=True)
     
     class Meta(BaseNaicsSerializer.Meta):
-        fields = BaseNaicsSerializer.Meta.fields + ['sin', 'keywords']
+        fields = BaseNaicsSerializer.Meta.fields + ['sin']
 
 class NaicsTestSerializer(NaicsFullSerializer):
     sin = SinTestSerializer(many=True)
-    keywords = KeywordTestSerializer(many=True)
     
     class Meta(NaicsFullSerializer.Meta):
         fields = NaicsFullSerializer.Meta.fields + ['url']
@@ -80,24 +66,57 @@ class PscLinkSerializer(BasePscSerializer):
 
 class PscSummarySerializer(BasePscSerializer):
     sin = SinSerializer(many=True)
-    keywords = KeywordSerializer(many=True)
     
     class Meta(BasePscSerializer.Meta):
-        fields = BasePscSerializer.Meta.fields + ['sin', 'keywords', 'url']
+        fields = BasePscSerializer.Meta.fields + ['sin', 'url']
 
 class PscFullSerializer(BasePscSerializer):
     sin = SinSerializer(many=True)
-    keywords = KeywordSerializer(many=True)
     
     class Meta(BasePscSerializer.Meta):
-        fields = BasePscSerializer.Meta.fields + ['sin', 'keywords']
+        fields = BasePscSerializer.Meta.fields + ['sin']
 
 class PscTestSerializer(PscFullSerializer):
     sin = SinTestSerializer(many=True)
-    keywords = KeywordTestSerializer(many=True)
     
     class Meta(PscFullSerializer.Meta):
         fields = PscFullSerializer.Meta.fields + ['url']
+
+
+class BaseKeywordSerializer(ModelSerializer):
+    url = HyperlinkedIdentityField(view_name="keyword-detail", lookup_field='id')
+
+    class Meta:
+        model = categories.Keyword
+        fields = ['id', 'name']
+
+class KeywordLinkSerializer(BaseKeywordSerializer):
+    class Meta(BaseKeywordSerializer.Meta):
+        fields = ['id', 'name', 'url']
+
+class KeywordSummarySerializer(BaseKeywordSerializer):
+    parent = KeywordLinkSerializer()
+    sin = SinSerializer()
+    naics = NaicsLinkSerializer()
+    psc = PscLinkSerializer()
+    
+    class Meta(BaseKeywordSerializer.Meta):
+        fields = BaseKeywordSerializer.Meta.fields + ['parent', 'sin', 'naics', 'psc', 'calc', 'url']
+
+class KeywordFullSerializer(KeywordSummarySerializer):
+    naics = NaicsSummarySerializer()
+    psc = PscSummarySerializer()
+
+    class Meta(BaseKeywordSerializer.Meta):
+        fields = BaseKeywordSerializer.Meta.fields + ['parent', 'sin', 'naics', 'psc', 'calc']
+
+class KeywordTestSerializer(KeywordFullSerializer):
+    sin = SinTestSerializer()
+    naics = NaicsTestSerializer()
+    psc = PscTestSerializer()
+    
+    class Meta(KeywordFullSerializer.Meta):
+        fields = KeywordFullSerializer.Meta.fields + ['url']
 
 
 class TierSerializer(ModelSerializer):
@@ -164,14 +183,16 @@ class PoolFullSerializer(BasePoolSerializer):
     vehicle = VehicleSummarySerializer()
     naics = NaicsSummarySerializer(many=True)
     psc = PscSummarySerializer(many=True)
+    keywords = KeywordSummarySerializer(many=True)
     
     class Meta(BasePoolSerializer.Meta):
-        fields = BasePoolSerializer.Meta.fields + ['naics', 'psc']
+        fields = BasePoolSerializer.Meta.fields + ['naics', 'psc', 'keywords']
 
 class PoolTestSerializer(PoolFullSerializer):
     vehicle = VehicleTestSerializer()
     naics = NaicsTestSerializer(many=True)
     psc = PscTestSerializer(many=True)
+    keywords = KeywordTestSerializer(many=True)
     
     class Meta(PoolFullSerializer.Meta):
         fields = PoolFullSerializer.Meta.fields + ['url']
