@@ -8,35 +8,30 @@
 
   <section class="usa-section">
     <div class="usa-grid">
-
-      <p class="usa-font-lead">The Professional Services Schedule (PSS) is an indefinite delivery/indefinite quantity
-        (IDIQ) multiple award schedule, providing direct access to simple or complex fixed-price or labor-hour
-        professional services.
-      </p>
-      <ul class="usa-font-lead">
-        <li>Allows use of streamlined procurement procedures in FAR Subpart 8.4 Federal Supply Schedules
-        </li>
-        <li>Provides direct access to simple or complex fixed-price or labor-hour professional services
-        </li>
-        <li>Offers federal agencies access to more than 3,300 experienced contractors
-        </li>
-        <li>Please note, PSS small business designation may be incorrect for up to 20% of listings due to lack of
-          updates by vendors
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="usa-section">
-    <div class="usa-grid">
+      <div class="usa-width-one-sixth best-in-class"></div>
       <div class="usa-width-one-half">
+        <p class="usa-font-lead">The Professional Services Schedule (PSS) is an indefinite delivery/indefinite quantity
+          (IDIQ) multiple award schedule, providing direct access to simple or complex fixed-price or labor-hour
+          professional services.
+        </p>
+        <ul class="usa-font-lead">
+          <li>Allows use of streamlined procurement procedures in FAR Subpart 8.4 Federal Supply Schedules
+          </li>
+          <li>Provides direct access to simple or complex fixed-price or labor-hour professional services
+          </li>
+          <li>Offers federal agencies access to more than 3,300 experienced contractors
+          </li>
+          <li>Please note, PSS small business designation may be incorrect for up to 20% of listings due to lack of
+            updates by vendors
+          </li>
+        </ul>
         <h3>PSS Service Categories – SINs</h3>
         <div *ngIf="pools.length===0">Loading...</div>
-        <ul *ngIf="pools.length>0">
+        <ul *ngIf="pools.length>0" class="usa-font-lead">
           <li *ngFor="let pool of pools"><a [routerLink]="['/search']" [queryParams]="{vehicles: 'PSS', service_categories: pool.id}">{{pool.name}}</a></li>
         </ul>
       </div>
-      <div class="usa-width-one-half">
+      <div class="usa-width-one-fourth">
         <h3>PSS Links:</h3>
         <ul>
           <li><a href="https://www.gsa.gov/acquisition/products-services/professional-services/professional-services-schedule-pss">PSS
@@ -49,70 +44,8 @@
               target="_blank">Schedules FAQs</a></li>
           <li><a href="mailto:ProfessionalServices@gsa.gov" target="_blank">Contact PSS</a></li>
         </ul>
-
       </div>
+
     </div>
   </section>
-  <!-- <section class="usa-section">
-      <div class="usa-grid">
-        <h3>Recent Contract Actions on OASIS SB</h3>
-        <table class="usa-table-borderless">
-          <thead>
-            <tr>
-              <th scope="col">Date Signed</th>
-              <th scope="col">PIID</th>
-              <th scope="col">Agency</th>
-              <th scope="col">Company Name</th>
-              <th scope="col">Type</th>
-              <th scope="col">Value ($)</th>
-              <th scope="col">Status</th>
-              <th scope="col">NAICS</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">9/10/2015</th>
-              <td>####</td>
-              <td>Agency name</td>
-              <td>Company name</td>
-              <td>Type</td>
-              <td>$$$</td>
-              <td>Status here</td>
-              <td>Codes here</td>
-            </tr>
-            <tr>
-              <th scope="row">9/10/2015</th>
-              <td>####</td>
-              <td>Agency name</td>
-              <td>Company name</td>
-              <td>Type</td>
-              <td>$$$</td>
-              <td>Status here</td>
-              <td>Codes here</td>
-            </tr>
-            <tr>
-              <th scope="row">9/10/2015</th>
-              <td>####</td>
-              <td>Agency name</td>
-              <td>Company name</td>
-              <td>Type</td>
-              <td>$$$</td>
-              <td>Status here</td>
-              <td>Codes here</td>
-            </tr>
-            <tr>
-              <th scope="row">9/10/2015</th>
-              <td>####</td>
-              <td>Agency name</td>
-              <td>Company name</td>
-              <td>Type</td>
-              <td>$$$</td>
-              <td>Status here</td>
-              <td>Codes here</td>
-            </tr>
-
-          </tbody>
-        </table>
-      </div>
-    </section> -->
 </main>

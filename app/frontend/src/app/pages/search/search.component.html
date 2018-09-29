@@ -1,3 +1,4 @@
+<div id="overlay-filter-mobile"></div>
 <!-- Spinner -->
 <discovery-search-spinner [show]="spinner"></discovery-search-spinner>
 <!-- End Spinner -->
@@ -6,14 +7,14 @@
     <!-- ///////////////// -->
     <!-- FITLERS -->
     <!-- ///////////////// -->
-    <div id="filters-container" class="usa-width-one-third bordered">
-      <discovery-filters [parentSpinner]="spinner" (emmitFilters)="submitSelectedFilters($event)"></discovery-filters>
-    </div>
-
+    <discovery-filters [parentSpinner]="spinner" (emitHideFilters)="hideSideNavFilters()" (emmitFilters)="submitSelectedFilters($event)">
+    </discovery-filters>
     <!-- ///////////////// -->
     <!-- TABS AREA -->
     <!-- ///////////////// -->
     <div class="usa-width-two-thirds bordered relative">
+      <button id="btn-show-filters" class="usa-button-secondary" (click)="showSideNavFilters()"><span class="icon-filter"></span>Show
+        filters</button>
       <discovery-choose-filters *ngIf="!show_results && !spinner"></discovery-choose-filters>
 
       <div *ngIf="show_results">

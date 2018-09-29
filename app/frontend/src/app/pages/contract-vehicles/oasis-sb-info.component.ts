@@ -7,7 +7,6 @@ import { SearchService } from '../search/search.service';
   styles: [
     `
       .usa-hero {
-        padding: 100px 0px 100px 0px;
         background-image: url(/frontend/assets/images/hero-generic-vehicles.jpg);
         color: #fff !important;
       }

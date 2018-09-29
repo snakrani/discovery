@@ -1,6 +1,12 @@
 a {
   cursor: pointer !important;
 }
+#discovery {
+  transition: margin-left 0.5s;
+}
+#discovery.push {
+  margin-left: 310px;
+}
 .discovery-logo a img,
 .discovery-logo a strong,
 .discovery-logo a em {
@@ -462,7 +468,7 @@ td {
 }
 .usa-header {
   background: #fff !important;
-  box-shadow: 0px 2px 4px #535353;
+  box-shadow: 0px 2px 4px #d1d1d1;
   z-index: 999;
 }
 .usa-grid,
@@ -484,6 +490,7 @@ footer.usa-section-dark ul li {
   float: left;
   margin-right: 10px;
   margin-top: 6px;
+  background-image: url('/frontend/assets/uswds/img/icon-filter.png');
   background-image: url('/frontend/assets/uswds/img/icon-filter.svg');
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -796,4 +803,32 @@ body.modal-open {
     background: transparent !important;
   }
 }
+
 /* END CSS Overrides For USWDS Styles */
+@media (max-width: 950px) {
+  #discovery.push {
+    margin-left: 0px;
+  }
+  .discovery-logo {
+    float: left !important;
+  }
+  .discovery-logo a,
+  .discovery-logo img {
+    height: 40px !important;
+    min-height: auto !important;
+    width: auto !important;
+  }
+  .discovery-logo a strong {
+    padding-top: 5px !important;
+    font-size: 1.3em !important;
+  }
+  .discovery-logo a em {
+    display: none !important;
+  }
+  nav.usa-nav.is-visible {
+    background: #fff !important;
+  }
+  nav.usa-nav.is-visible button {
+    color: inherit !important;
+  }
+}

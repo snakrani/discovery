@@ -1,4 +1,10 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewChild,
+  HostListener
+} from '@angular/core';
 import { SearchService } from './search.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ActiveFiltersComponent } from './filters/active-filters.component';
@@ -37,7 +43,12 @@ export class SearchComponent implements OnInit {
   _spinner: boolean;
   filters: any[];
   scroll_buttons = false;
-
+  @HostListener('window:resize')
+  onResize() {
+    if (document.getElementById('discovery').style.marginLeft === '310px') {
+      this.hideSideNavFilters();
+    }
+  }
   constructor(
     private searchService: SearchService,
     private router: Router,
@@ -239,6 +250,19 @@ export class SearchComponent implements OnInit {
     for (const ele of doc) {
       ele.classList.toggle('show_all');
     }
+  }
+  showSideNavFilters() {
+    document.getElementById('filters-container').style.left = '0px';
+    document.getElementById('discovery').classList.add('push');
+    document.getElementById('overlay-filter-mobile').classList.add('show');
+    document.getElementById('btn-show-filters').style.display = 'none';
+  }
+  hideSideNavFilters() {
+    document.getElementById('filters-container').style.left = '-310px';
+    document.getElementById('discovery').classList.remove('push');
+    document.getElementById('overlay-filter-mobile').classList.remove('show');
+
+    document.getElementById('btn-show-filters').style.display = 'block';
   }
   commaSeparatedList(obj: any[], key: string) {
     let items = '';

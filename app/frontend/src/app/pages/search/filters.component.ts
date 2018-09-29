@@ -23,26 +23,7 @@ import { FilterZoneComponent } from './filters/filter-zone.component';
 @Component({
   selector: 'discovery-filters',
   templateUrl: './filters.component.html',
-  styles: [
-    `
-      [type='button'].link,
-      [type='button'].primary {
-        width: 46.7% !important;
-      }
-      .overlay {
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        padding: 5px;
-        z-index: 888;
-        left: 0;
-        top: 0;
-        background-color: rgba(255, 255, 255, 0.9);
-        overflow-x: hidden;
-        transition: 0.5s;
-      }
-    `
-  ]
+  styleUrls: ['./filters.component.css']
 })
 export class FiltersComponent implements OnInit {
   /** START Define filter components */
@@ -76,6 +57,9 @@ export class FiltersComponent implements OnInit {
   emmitFilters: EventEmitter<any> = new EventEmitter();
   @Output()
   emmitResetFilters: EventEmitter<any> = new EventEmitter();
+  @Output()
+  emitHideFilters: EventEmitter<number> = new EventEmitter();
+  APP_ASSETS = '';
   disabled_btn = true;
   num_items_selected = 0;
   loaded_filters: any[] = [];
@@ -194,6 +178,7 @@ export class FiltersComponent implements OnInit {
     this.params_submitted = true;
     const filters: any[] = this.getSelectedFilters();
     this.emmitFilters.emit(filters);
+    this.hideFilters();
   }
   filterOthersByVehicles(vehicles: any[]) {
     let arr = [];
@@ -260,5 +245,8 @@ export class FiltersComponent implements OnInit {
         this.emmitSelectedFilters();
       }
     }
+  }
+  hideFilters() {
+    this.emitHideFilters.emit(1);
   }
 }
