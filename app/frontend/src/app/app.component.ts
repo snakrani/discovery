@@ -13,9 +13,10 @@ export class AppComponent {
 
   constructor(private router: Router) {
     router.events.subscribe(() => {
-      if (document.getElementById('discovery').style.marginLeft === '310px') {
-        document.getElementById('discovery').style.marginLeft = '0px';
+      if (document.getElementById('discovery').classList.contains('push')) {
+        document.getElementById('discovery').classList.remove('push');
       }
+      window.scrollTo(0, 0);
     });
   }
 }

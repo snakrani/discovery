@@ -46,7 +46,7 @@ export class SearchComponent implements OnInit {
   server_error = false;
   @HostListener('window:resize')
   onResize() {
-    if (document.getElementById('discovery').style.marginLeft === '310px') {
+    if (document.getElementById('discovery').classList.contains('push')) {
       this.hideSideNavFilters();
     }
   }
@@ -271,7 +271,6 @@ export class SearchComponent implements OnInit {
     document.getElementById('filters-container').style.left = '-310px';
     document.getElementById('discovery').classList.remove('push');
     document.getElementById('overlay-filter-mobile').classList.remove('show');
-
     document.getElementById('btn-show-filters').style.display = 'block';
   }
   commaSeparatedList(obj: any[], key: string) {
