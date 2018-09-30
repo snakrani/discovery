@@ -2,12 +2,26 @@
 <!-- Spinner -->
 <discovery-search-spinner [show]="spinner"></discovery-search-spinner>
 <!-- End Spinner -->
-<div class="usa-grid col-container pad-top-bottom">
+<!-- Server Error Notification -->
+<div class="usa-grid" *ngIf="server_error">
+  <div class="usa-width-one-whole">
+    <div class="usa-alert usa-alert-warning" role="alert">
+      <div class="usa-alert-body">
+        <h3 class="usa-alert-heading">This area is currently down for maintenance.</h3>
+        <p class="usa-alert-text">We expect to be back in a couple hours. Thanks for your patience.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Server Error Notification -->
+<div class="usa-grid col-container pad-top-bottom" *ngIf="!server_error">
   <div>
     <!-- ///////////////// -->
     <!-- FITLERS -->
     <!-- ///////////////// -->
-    <discovery-filters [parentSpinner]="spinner" (emitHideFilters)="hideSideNavFilters()" (emmitFilters)="submitSelectedFilters($event)">
+    <discovery-filters [parentSpinner]="spinner" (emitServerError)="showServerError($event)" (emitHideFilters)="hideSideNavFilters()"
+      (emmitFilters)="submitSelectedFilters($event)">
     </discovery-filters>
     <!-- ///////////////// -->
     <!-- TABS AREA -->

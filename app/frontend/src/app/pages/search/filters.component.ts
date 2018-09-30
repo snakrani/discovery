@@ -59,7 +59,9 @@ export class FiltersComponent implements OnInit {
   emmitResetFilters: EventEmitter<any> = new EventEmitter();
   @Output()
   emitHideFilters: EventEmitter<number> = new EventEmitter();
-  APP_ASSETS = '';
+  @Output()
+  emitServerError: EventEmitter<number> = new EventEmitter();
+  APP_ASSETS = '/frontend/';
   disabled_btn = true;
   num_items_selected = 0;
   loaded_filters: any[] = [];
@@ -124,7 +126,10 @@ export class FiltersComponent implements OnInit {
         this.spinner = false;
         this.filterContractVehiclesComponent.loaded();
       },
-      error => (this.error_message = <any>error)
+      error => {
+        this.error_message = <any>error;
+        this.emitServerError.emit(1);
+      }
     );
   }
   initPools(vehicles) {
@@ -133,7 +138,10 @@ export class FiltersComponent implements OnInit {
         this.pools = data['results'];
         this.initVehicles();
       },
-      error => (this.error_message = <any>error)
+      error => {
+        this.error_message = <any>error;
+        this.emitServerError.emit(1);
+      }
     );
   }
   resetFilters() {

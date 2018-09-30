@@ -43,6 +43,7 @@ export class SearchComponent implements OnInit {
   _spinner: boolean;
   filters: any[];
   scroll_buttons = false;
+  server_error = false;
   @HostListener('window:resize')
   onResize() {
     if (document.getElementById('discovery').style.marginLeft === '310px') {
@@ -88,6 +89,7 @@ export class SearchComponent implements OnInit {
   }
 
   submitSelectedFilters(filters) {
+    this.server_error = false;
     this.spinner = true;
     this.filters = filters;
     this.searchService.activeFilters = filters;
@@ -112,7 +114,10 @@ export class SearchComponent implements OnInit {
           this.sort_by = this.getFirstVehicleWithVendors();
           this.viewContracts();
         },
-        error => (this.error_message = <any>error)
+        error => {
+          this.error_message = <any>error;
+          this.server_error = true;
+        }
       );
   }
   showSpinner(bool: boolean) {
@@ -243,6 +248,11 @@ export class SearchComponent implements OnInit {
       this.scroll_buttons = true;
     } else {
       this.scroll_buttons = false;
+    }
+  }
+  showServerError(error: number) {
+    if (error === 1) {
+      this.server_error = true;
     }
   }
   toggleTDHeights(id: string) {
