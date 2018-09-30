@@ -64,7 +64,6 @@ export class VendorDetailComponent implements OnInit {
         this.vendor = data;
         this.duns = data['duns'];
         this.vendor['pools'] = this.buildPoolsByUniqueContractNumber(data);
-        console.log(this.vendor['pools']);
       },
       error => (this.error_message = <any>error)
     );

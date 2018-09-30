@@ -65,53 +65,54 @@
                 <div class="usa-width-one-whole">
                   <div class="text-right"><a (click)="toggleSBD()" class="btn-toggle">{{!sbd_col ?
                       'Show' : 'Hide'}} Set Asides</a></div>
+                  <div class="overflow">
+                    <table class="usa-table-borderless">
 
-                  <table class="usa-table-borderless">
+                      <thead>
+                        <tr>
+                          <!-- <th></th> -->
+                          <th scope="col">Contract Membership</th>
+                          <th scope="col" class="sbd">Contact Info</th>
+                          <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Small Disadvantaged Business">SB</th>
+                          <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Small Disadvantaged Business">SDB</th>
+                          <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="8(A)">8(A)</th>
+                          <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="HUBZone">HubZ</th>
+                          <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Woman Owned">WO</th>
+                          <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Veteran Owned">VO</th>
+                          <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Service Disabled Veteran Owned">SDVO</th>
+                          <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Veterans Affair VIP">VA
+                            VIP</th>
 
-                    <thead>
-                      <tr>
-                        <!-- <th></th> -->
-                        <th scope="col">Contract Membership</th>
-                        <th scope="col" class="sbd">Contact Info</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Small Disadvantaged Business">SB</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Small Disadvantaged Business">SDB</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="8(A)">8(A)</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="HUBZone">HubZ</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Woman Owned">WO</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Veteran Owned">VO</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Service Disabled Veteran Owned">SDVO</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Veterans Affair VIP">VA
-                          VIP</th>
-
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let item of vendor.pools; let i = index">
-                        <!-- <td class="relative td-checkbox">
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of vendor.pools; let i = index">
+                          <!-- <td class="relative td-checkbox">
                           <input (change)="onChange(item.piid, $event.target.checked)" name="contracts" type="checkbox"
                             value="{{item.piid}}">
                         </td> -->
-                        <td scope="row"><strong class="db" [innerHTML]="getVehicleDescription(item.pool.vehicle.id)"></strong>
-                          <blockquote><span class="uppercase db">Contract Number: </span><strong class="pad-left">{{item.piid}}</strong></blockquote>
-                          <blockquote><span class="uppercase db">Service Categories: </span>
-                            <!-- <discovery-list [id]="'ul-serv_cat-'+i" [items_to_show]="num_show" [items]="item.service_categories"
+                          <td scope="row"><strong class="db" [innerHTML]="getVehicleDescription(item.pool.vehicle.id)"></strong>
+                            <blockquote><span class="uppercase db">Contract Number: </span><strong class="pad-left">{{item.piid}}</strong></blockquote>
+                            <blockquote><span class="uppercase db">Service Categories: </span>
+                              <!-- <discovery-list [id]="'ul-serv_cat-'+i" [items_to_show]="num_show" [items]="item.service_categories"
                               [key]="'name'"></discovery-list> -->
-                            <strong class="pad-left db" *ngFor="let cat of item.service_categories" [innerHTML]="getServiceCategoryDescription(cat.id)"></strong></blockquote>
-                          <blockquote><span class="uppercase db">Zone(s): </span><strong class="pad-left" [innerHTML]="getZones(item.zones)"></strong></blockquote>
-                        </td>
-                        <td [innerHTML]="getContactInfo(item.contacts)"></td>
-                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'SB') ? '&bull;' : ''"></td>
-                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, '27') ? '&bull;' : ''"></td>
-                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'A6') ? '&bull;' : ''"></td>
-                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'XX') ? '&bull;' : ''"></td>
-                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'A2') ? '&bull;' : ''"></td>
-                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'A5') ? '&bull;' : ''"></td>
-                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'QF') ? '&bull;' : ''"></td>
-                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'VIP') ? '&bull;' : ''"></td>
-                      </tr>
+                              <strong class="pad-left db" *ngFor="let cat of item.service_categories" [innerHTML]="getServiceCategoryDescription(cat.id)"></strong></blockquote>
+                            <blockquote><span class="uppercase db">Zone(s): </span><strong class="pad-left" [innerHTML]="getZones(item.zones)"></strong></blockquote>
+                          </td>
+                          <td [innerHTML]="getContactInfo(item.contacts)"></td>
+                          <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'SB') ? '&bull;' : ''"></td>
+                          <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, '27') ? '&bull;' : ''"></td>
+                          <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'A6') ? '&bull;' : ''"></td>
+                          <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'XX') ? '&bull;' : ''"></td>
+                          <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'A2') ? '&bull;' : ''"></td>
+                          <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'A5') ? '&bull;' : ''"></td>
+                          <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'QF') ? '&bull;' : ''"></td>
+                          <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'VIP') ? '&bull;' : ''"></td>
+                        </tr>
 
-                    </tbody>
-                  </table>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
@@ -120,7 +121,9 @@
             <div *ngIf="vw_history">
               <div class="usa-width-one-whole">
                 <!-- Contract History -->
-                <discovery-tbl-contract-history [contract_vehicles]="contract_vehicles" [pools]="vendor.pools" [duns]="duns"></discovery-tbl-contract-history>
+                <div class="overflow">
+                  <discovery-tbl-contract-history [contract_vehicles]="contract_vehicles" [pools]="vendor.pools" [duns]="duns"></discovery-tbl-contract-history>
+                </div>
               </div>
             </div>
             <!-- End History content -->
