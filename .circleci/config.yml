@@ -215,6 +215,57 @@ jobs:
           path: logs
           destination: api-values-test-reports
 
+  ut-frontend:
+    docker:
+      - image: python:3.6-slim-stretch
+        environment:
+          LANG: C.UTF-8
+          PYTHONUNBUFFERED: 1
+
+      - image: postgres:9.4
+        environment:
+          POSTGRES_USER: circleci
+          POSTGRES_PASSWORD: circleci
+          POSTGRES_DB: circle-test
+
+    working_directory: /var/local
+
+    steps:
+      - run:
+          name: Install development tools
+          command: |
+            apt-get update
+            apt-get install -y git gcc
+
+      - checkout
+
+      - run:
+          name: Set CircleCI configuration
+          command: |
+            cp ./app/discovery/local_settings.circle.py ./app/discovery/local_settings.py
+
+      - run:
+          name: Install Angular CLI
+          command: |
+            ./scripts/setup-angular.sh /dev/stderr
+
+      - run:
+          name: Install requirements
+          command: |
+            pip install --no-cache-dir -r ./requirements.txt
+            pip install --no-cache-dir -r ./requirements-dev.txt
+            ./scripts/init-webserver.sh /dev/stderr
+
+      - run:
+          name: Run Angular tests
+          no_output_timeout: 1h
+          command: |
+            ./scripts/test-frontend.sh /dev/stderr
+
+      - store_artifacts:
+          path: logs
+          destination: angular-test-reports
+
   dep-dev:
     docker:
       - image: python:3.6-slim-stretch
