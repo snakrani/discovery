@@ -30,9 +30,8 @@ class PoolTest(case.APITestCase, metaclass = case.MetaAPISchema):
         },
         'search': {
             'tags': ('pool_search',),
-            '@search1': ('name', 'regex', 'Inspection'),
-            '*search2': ('id', 'exact', 'BMO_SB_3'),
-            '@search3': ('number', 'regex', '2')
+            '*search1': ('id', 'exact', 'BMO_SB_3'),
+            '@search2': ('number', 'regex', '2')
         },
         'fields': {
             'id': {
@@ -204,30 +203,6 @@ class PoolTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': '[A-Z]\d+\-\d+$',
                 '@iregex': '^(C87|51)'
             },
-            'naics__keywords__id': {
-                'tags': ('pool_field', 'naics_field', 'keyword_field', 'number'),
-                '@exact': 66,
-                '@lt': 500,
-                '@lte': 500, 
-                '@gt': 250, 
-                '@gte': 250,
-                '@range': (50, 100),
-                '@in': (7, 450, 916)
-            },
-            'naics__keywords__name': {
-                'tags': ('pool_field', 'naics_field', 'keyword_field', 'fuzzy_text'),
-                '@exact': 'Cooking Equipment',
-                '@iexact': 'ancillary supplies and / or services',
-                '@in': ("Elemental Analyzers", "Energy Consulting Services", "Environmental Consulting Services"),
-                '@contains': 'Support',
-                '@icontains': 'support',
-                '@startswith': 'Marine',
-                '@istartswith': 'edu',
-                '@endswith': 'Services',
-                '@iendswith': 'services',
-                '@regex': '(Training|Consulting)',
-                '@iregex': '^(vocational|strategic)'
-            },
             'psc__code': {
                 'tags': ('pool_field', 'psc_field', 'fuzzy_text'),
                 '@exact': 'R413',
@@ -270,29 +245,53 @@ class PoolTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': '[A-Z]\d+\-\d+$',
                 '@iregex': '^(C87|51)'
             },
-            'psc__keywords__id': {
-                'tags': ('pool_field', 'psc_field', 'keyword_field', 'number'),
-                '@exact': 66,
+            'keywords__id': {
+                'tags': ('pool_field', 'keyword_field', 'number'),
+                '@exact': 54,
                 '@lt': 500,
                 '@lte': 500, 
-                '@gt': 250, 
-                '@gte': 250,
-                '@range': (50, 100),
-                '@in': (7, 450, 916)
+                '@gt': 500, 
+                '@gte': 500,
+                '@range': (100, 300),
+                '@in': (43, 3, 54)
             },
-            'psc__keywords__name': {
-                'tags': ('pool_field', 'psc_field', 'keyword_field', 'fuzzy_text'),
-                '@exact': 'Distribution And Transportation Logistics Services',
-                '@iexact': 'ancillary supplies and / or services',
-                '@in': ("Elemental Analyzers", "Energy Consulting Services", "Environmental Consulting Services"),
-                '@contains': 'Support',
-                '@icontains': 'support',
-                '@startswith': 'Distribution',
-                '@istartswith': 'edu',
+            'keywords__parent__id': {
+                'tags': ('pool_field', 'keyword_field', 'number'),
+                '@exact': 43,
+                '@lt': 500,
+                '@lte': 500, 
+                '@gt': 500, 
+                '@gte': 500,
+                '@range': (100, 300),
+                '@in': (43, 326, 568)
+            },
+            'keywords__name': {
+                'tags': ('pool_field', 'keyword_field', 'fuzzy_text'),
+                '@exact': 'Disaster Management',
+                '@iexact': 'disaster MANAGEMENT',
+                '@in': ("Inventory Management", "Disaster Management"),
+                '@contains': 'Processing',
+                '@icontains': 'processing',
+                '@startswith': 'Integrated',
+                '@istartswith': 'INTEGRATED',
                 '@endswith': 'Services',
                 '@iendswith': 'services',
-                '@regex': '(Training|Consulting)',
-                '@iregex': '^(vocational|strategic)'
+                '@regex': '[/]+',
+                '@iregex': 'clearing(house)'
+            },
+            'keywords__calc': {
+                'tags': ('pool_field', 'keyword_field', 'fuzzy_text'),
+                '@exact': 'Logistician',
+                '@iexact': 'logisticIAN',
+                '@in': ("Clerk", "Logistician"),
+                '@contains': 'Res',
+                '@icontains': 'res',
+                '@startswith': 'Consult',
+                '@istartswith': 'consult',
+                '@endswith': 'Analyst',
+                '@iendswith': 'analyst',
+                '@regex': '(Business|Data)\s+Analyst',
+                '@iregex': '^(business|data)'
             }
         }
     }

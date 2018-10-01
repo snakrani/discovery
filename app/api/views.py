@@ -102,7 +102,7 @@ class NaicsViewSet(DiscoveryReadOnlyModelViewSet):
         'count': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
     }
     filter_class = filters.NaicsFilter
-    search_fields = ['code', 'description', 'sin__code', 'keywords__name']
+    search_fields = ['code', 'description', 'sin__code']
     ordering_fields = ['code', 'description']
     ordering = 'description'
     
@@ -133,7 +133,7 @@ class PscViewSet(DiscoveryReadOnlyModelViewSet):
         'count': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
     }
     filter_class = filters.PscFilter
-    search_fields = ['code', 'description', 'sin__code', 'keywords__name']
+    search_fields = ['code', 'description', 'sin__code']
     ordering_fields = ['code', 'description']
     ordering = 'description'
     
@@ -142,6 +142,37 @@ class PscViewSet(DiscoveryReadOnlyModelViewSet):
         'list': serializers.PscSummarySerializer,
         'retrieve': serializers.PscFullSerializer,
         'test': serializers.PscTestSerializer
+    }
+
+
+class KeywordViewSet(DiscoveryReadOnlyModelViewSet):
+    """
+    API endpoint that allows for access to Discovery keyword information.
+    
+    retrieve:
+    Returns information for a keyword.
+    
+    list:
+    Returns all of the keywords that are relevant to the acquisition vehicles in the Discovery universe.
+    """
+    queryset = categories.Keyword.objects.all().distinct()
+    lookup_field = 'id'
+    
+    action_filters = {
+        'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter),
+        'count': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
+    }
+    filter_class = filters.KeywordFilter
+    search_fields = ['id', 'name', 'calc']
+    ordering_fields = ['id', 'name', 'calc', 'parent__id', 'sin__code', 'naics__code', 'psc__code']
+    ordering = 'id'
+    
+    pagination_class = pagination.ResultSetPagination
+    action_serializers = {
+        'list': serializers.KeywordSummarySerializer,
+        'retrieve': serializers.KeywordFullSerializer,
+        'test': serializers.KeywordTestSerializer
     }
 
 
@@ -195,7 +226,7 @@ class PoolViewSet(DiscoveryReadOnlyModelViewSet):
         'count': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
     }
     filter_class = filters.PoolFilter
-    search_fields = ['id', 'name', 'number', 'threshold', 'vehicle__id', 'vehicle__name']
+    search_fields = ['id', 'name', 'number', 'threshold', 'vehicle__id', 'vehicle__name', 'keywords__name']
     ordering_fields = ['id', 'name', 'number', 'threshold', 'vehicle__id', 'vehicle__name']
     ordering = 'name'
     
@@ -375,33 +406,6 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
         return self.queryset.annotate(
             place_of_performance_location = Concat('place_of_performance__country_name', Value(' '), Coalesce('place_of_performance__state', Value('')))
         )
-
-
-@method_decorator(cache_page(60*60), name='get')
-class ListKeywordView(ListAPIView):
-    """
-    This endpoint returns keyword autocomplete results based on input text.
-    """
-    queryset = categories.Keyword.objects.all()
-    
-    def get_filter_classes(self):
-        return [] # This doesn't work but is required for the API generation page
-    
-    def get_serializer_class(self):
-        if check_api_test(self.request):
-            return serializers.KeywordTestSerializer
-        else:
-            return serializers.KeywordSerializer
-    
-    
-    def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        
-        if 'q' in request.query_params and request.query_params['q']:
-            queryset = queryset.filter(name__istartswith = request.query_params['q'])
-        
-        serializer = self.get_serializer(queryset, many=True)
-        return Response({ 'count': len(serializer.data), 'results': serializer.data })
 
 
 @method_decorator(cache_page(60*60), name='get')
