@@ -130,8 +130,7 @@ class MetaFilterSet(FilterSetMetaclass):
 
 class NaicsFilter(FilterSet, metaclass = MetaFilterSet):
     
-    _number = ('keywords__id',)
-    _fuzzy_text = ('code', 'description', 'sin__code', 'keywords__name')
+    _fuzzy_text = ('code', 'description', 'sin__code')
     
     class Meta:
         model = categories.Naics
@@ -140,11 +139,23 @@ class NaicsFilter(FilterSet, metaclass = MetaFilterSet):
 
 class PscFilter(FilterSet, metaclass = MetaFilterSet):
     
-    _number = ('keywords__id',)
-    _fuzzy_text = ('code', 'description', 'sin__code', 'keywords__name')
+    _fuzzy_text = ('code', 'description', 'sin__code')
     
     class Meta:
         model = categories.PSC
+        fields = ()
+
+
+class KeywordFilter(FilterSet, metaclass = MetaFilterSet):
+    
+    _number = ('id', 'parent__id')
+    _fuzzy_text = ('name', 'parent__name', 'calc', 'sin__code')
+
+    naics = RelatedFilter(NaicsFilter)
+    psc = RelatedFilter(PscFilter)
+    
+    class Meta:
+        model = categories.Keyword
         fields = ()
 
 
@@ -168,6 +179,7 @@ class PoolFilter(FilterSet, metaclass = MetaFilterSet):
     vehicle = RelatedFilter(VehicleFilter)
     naics = RelatedFilter(NaicsFilter)
     psc = RelatedFilter(PscFilter)
+    keywords = RelatedFilter(KeywordFilter)
     
     class Meta:
         model = categories.Pool
