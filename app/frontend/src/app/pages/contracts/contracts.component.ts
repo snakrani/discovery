@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'discovery-resources',
-  templateUrl: './resources.component.html',
+  selector: 'discovery-contracts',
+  templateUrl: './contracts.component.html',
   styles: [
     `
       .usa-hero {
@@ -28,7 +28,7 @@ import { Component, OnInit } from '@angular/core';
     `
   ]
 })
-export class ResourcesComponent implements OnInit {
+export class ContractsComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}

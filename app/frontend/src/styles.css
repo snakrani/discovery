@@ -132,6 +132,9 @@ h2.section-head::before {
 .margin-top {
   margin-top: 20px !important;
 }
+.margin-right {
+  margin-right: 20px !important;
+}
 .margin-bottom {
   margin-bottom: 20px !important;
 }
@@ -452,8 +455,13 @@ td {
   background-position: center top;
   background-size: 70%;
   background-repeat: no-repeat;
-  background-image: url(/frontend/assets/images/best-in-class.png);
-  background-image: url(/frontend/assets/images/best-in-class.svg);
+  background-image: url(/frontend/assets/images/BIC2.png);
+}
+[type='checkbox'] + label:before {
+  margin-left: -30px !important;
+}
+[type='checkbox'] + label {
+  padding-left: 30px !important;
 }
 .usa-hero {
   padding-top: 3rem;
@@ -511,6 +519,22 @@ footer.usa-section-dark ul li {
 .usa-accordion-content {
   position: relative;
   overflow: inherit !important;
+}
+.usa-accordion-button.usa-accordion-button-as-link {
+  background-color: transparent !important;
+  background-position: right 0.8em center;
+  background-size: 1.2rem;
+  width: auto;
+  padding-left: 0px;
+  color: #0071bc;
+  font-weight: normal;
+  border-top: none !important;
+}
+.usa-accordion
+  .usa-accordion-button.usa-accordion-button-as-link[aria-expanded='true'] {
+  border-left: 0px !important;
+  font-weight: normal !important;
+  padding-left: 0px !important;
 }
 button.default,
 button.link {

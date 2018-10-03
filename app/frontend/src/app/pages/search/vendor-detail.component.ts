@@ -22,6 +22,8 @@ export class VendorDetailComponent implements OnInit {
   num_show = 3;
   vw_details = true;
   vw_history = false;
+  zones: any = [];
+  zindex = 30;
   constructor(
     private searchService: SearchService,
     private router: Router,
@@ -34,6 +36,15 @@ export class VendorDetailComponent implements OnInit {
     this.searchService.getContractVehicles().subscribe(
       data => {
         this.contract_vehicles = data['results'];
+        this.getZones();
+      },
+      error => (this.error_message = <any>error)
+    );
+  }
+  getZones() {
+    this.searchService.getZone().subscribe(
+      data => {
+        this.zones = data['results'];
         this.getServiceCategories();
       },
       error => (this.error_message = <any>error)
@@ -48,6 +59,7 @@ export class VendorDetailComponent implements OnInit {
       error => (this.error_message = <any>error)
     );
   }
+
   viewDetails() {
     this.vw_details = true;
     this.vw_history = false;
@@ -55,6 +67,13 @@ export class VendorDetailComponent implements OnInit {
   viewHistory() {
     this.vw_details = false;
     this.vw_history = true;
+  }
+  onChange(ele) {
+    if (ele.getAttribute('aria-expanded') === 'false') {
+      ele.innerHTML = 'Less';
+    } else {
+      ele.innerHTML = 'More';
+    }
   }
   getVendorDetails() {
     const id = this.route.snapshot.params['dun'];
@@ -96,6 +115,7 @@ export class VendorDetailComponent implements OnInit {
       'name'
     );
   }
+
   getContactInfo(contacts: any[]): string {
     let html = '';
     for (const item of contacts) {
@@ -105,31 +125,40 @@ export class VendorDetailComponent implements OnInit {
       if (item.name) {
         name = '<span class="db">' + item.name + '</span>';
       }
-      if (item.phones[0].number) {
-        phone = '<span class="db">' + item.phones[0].number + '</span>';
+      if (item.phones.length > 0) {
+        for (const i of item.phones) {
+          phone = '<span class="db">' + i.number + '</span>';
+        }
       }
-      if (item.emails[0].address) {
-        email =
-          '<span class="db pad-bottom"><a href="mailto:' +
-          item.emails[0].address +
-          '">' +
-          item.emails[0].address +
-          '</a></span>';
+      if (item.emails.length > 0) {
+        for (const i of item.emails) {
+          email =
+            '<span class="db pad-bottom"><a href="mailto:' +
+            i.address +
+            '">' +
+            i.address +
+            '</a></span>';
+        }
       }
       html += name + phone + email;
     }
     return html;
   }
-  getZones(zones: any[]) {
-    let str = '';
-    for (const item of zones) {
-      str += item.id + ', ';
+  getZoneStates(zone: number): string {
+    let states = '';
+    for (const item of this.zones) {
+      if (+item.id === zone) {
+        states = this.searchService.commaSeparatedList(item.states, '');
+      }
     }
-
-    return str.slice(0, -2);
+    return states;
   }
   toggleSBD() {
     this.sbd_col = !this.sbd_col;
+  }
+  onTop(ele) {
+    this.zindex++;
+    ele.style.zIndex = this.zindex;
   }
   buildPoolsByUniqueContractNumber(data: any[]) {
     const contracts: any[] = [];

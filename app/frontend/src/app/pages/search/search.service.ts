@@ -344,8 +344,14 @@ export class SearchService {
   }
   commaSeparatedList(obj: any[], key: string) {
     let items = '';
-    for (const i of obj) {
-      items += i[key] + ', ';
+    if (key !== '') {
+      for (const i of obj) {
+        items += i[key] + ', ';
+      }
+    } else {
+      for (const i of obj) {
+        items += i + ', ';
+      }
     }
     return items.slice(0, -2);
   }

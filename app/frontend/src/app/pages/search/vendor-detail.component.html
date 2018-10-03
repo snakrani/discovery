@@ -8,6 +8,7 @@
       <div class="pad-all"><a [routerLink]="['/search']" queryParamsHandling="preserve" class="back"><span class="icon-arrow-left pull-left"></span>Back
           to search
           results</a>
+        <h2>{{vendor.name | titlecase}}</h2>
         <!-- Nav tabs -->
         <ul class="nav nav-tabs margin-top" role="tablist">
           <li role="presentation" [class.active]="vw_details">
@@ -26,8 +27,7 @@
             <!-- Details content -->
             <div *ngIf="vw_details">
 
-              <h3>{{vendor.name | titlecase}}</h3>
-              <hr>
+
               <div class="usa-grid">
                 <div class="usa-width-one-third">
                   <h6 class="usa-heading-alt">SAM Registration Expires on:</h6>
@@ -71,7 +71,7 @@
                       <thead>
                         <tr>
                           <!-- <th></th> -->
-                          <th scope="col">Contract Membership</th>
+                          <th scope="col" class="col-contract-membership">Contract Membership</th>
                           <th scope="col" class="sbd">Contact Info</th>
                           <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Small Disadvantaged Business">SB</th>
                           <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Small Disadvantaged Business">SDB</th>
@@ -87,17 +87,22 @@
                       </thead>
                       <tbody>
                         <tr *ngFor="let item of vendor.pools; let i = index">
-                          <!-- <td class="relative td-checkbox">
-                          <input (change)="onChange(item.piid, $event.target.checked)" name="contracts" type="checkbox"
-                            value="{{item.piid}}">
-                        </td> -->
-                          <td scope="row"><strong class="db" [innerHTML]="getVehicleDescription(item.pool.vehicle.id)"></strong>
+                          <td scope="row" class="col-contract-membership"><strong class="db" [innerHTML]="getVehicleDescription(item.pool.vehicle.id)"></strong>
                             <blockquote><span class="uppercase db">Contract Number: </span><strong class="pad-left">{{item.piid}}</strong></blockquote>
-                            <blockquote><span class="uppercase db">Service Categories: </span>
-                              <!-- <discovery-list [id]="'ul-serv_cat-'+i" [items_to_show]="num_show" [items]="item.service_categories"
-                              [key]="'name'"></discovery-list> -->
-                              <strong class="pad-left db" *ngFor="let cat of item.service_categories" [innerHTML]="getServiceCategoryDescription(cat.id)"></strong></blockquote>
-                            <blockquote><span class="uppercase db">Zone(s): </span><strong class="pad-left" [innerHTML]="getZones(item.zones)"></strong></blockquote>
+                            <div class="usa-accordion">
+                              <button class="usa-accordion-button usa-accordion-button-as-link" (click)="onChange($event.target)"
+                                aria-expanded="false" [attr.aria-controls]="item?.piid">More
+                              </button>
+                              <div [id]="item.piid" class="usa-accordion-content">
+                                <blockquote><span class="uppercase db">Service Categories: </span>
+                                  <strong class="pad-left db" *ngFor="let cat of item.service_categories" [innerHTML]="getServiceCategoryDescription(cat.id)"></strong></blockquote>
+                                <blockquote *ngIf="item?.zones && item.zones.length>0"><span class="uppercase db">Zone(s):
+                                  </span><a href="javascript://" (mouseover)="onTop($event.target)" [style.zIndex]="3"
+                                    class="tooltip-right" *ngFor="let zone of item?.zones" [attr.data-tooltip]="getZoneStates(zone.id)">{{zone.id}}</a></blockquote>
+                              </div>
+                            </div>
+
+
                           </td>
                           <td [innerHTML]="getContactInfo(item.contacts)"></td>
                           <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'SB') ? '&bull;' : ''"></td>

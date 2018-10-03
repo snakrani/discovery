@@ -97,7 +97,7 @@
                     </tr>
                     <tr>
                       <th scope="row">Eligible Service category(s) <discovery-lnk-toggle-heights [toggle_id]="'row-serv-cat'"
-                          [label]="'categories'" (emitToggleId)="toggleTDHeights($event)"></discovery-lnk-toggle-heights>
+                          (emitToggleId)="toggleTDHeights($event)"></discovery-lnk-toggle-heights>
                       </th>
                       <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">
                         <div class="row-serv-cat toggle_more">
@@ -112,8 +112,7 @@
                         <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.capabilities}}</td>
                       </tr> -->
                     <tr>
-                      <th scope="row">NAICs <discovery-lnk-toggle-heights [toggle_id]="'row-naics'" [label]="'NAIC codes'"
-                          (emitToggleId)="toggleTDHeights($event)"></discovery-lnk-toggle-heights>
+                      <th scope="row">NAICs <discovery-lnk-toggle-heights [toggle_id]="'row-naics'" (emitToggleId)="toggleTDHeights($event)"></discovery-lnk-toggle-heights>
                       </th>
                       <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">
                         <div class="row-naics toggle_more">
@@ -124,13 +123,12 @@
                       </td>
                     </tr>
                     <tr>
-                      <th scope="row">PSCs <discovery-lnk-toggle-heights [toggle_id]="'row-pscs'" [label]="'PSCs'"
-                          (emitToggleId)="toggleTDHeights($event)"></discovery-lnk-toggle-heights>
+                      <th scope="row">PSCs <discovery-lnk-toggle-heights [toggle_id]="'row-pscs'" (emitToggleId)="toggleTDHeights($event)"></discovery-lnk-toggle-heights>
                       </th>
                       <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">
                         <div class="row-pscs toggle_more">
                           <discovery-list [show_all]="true" [id]="vehicle.id" [items_to_show]="num_show" [items]="vehicle.pscs"
-                            [key]="'description'"></discovery-list>
+                            [key]="'code'"></discovery-list>
                           <div class="gradient"></div>
                         </div>
                       </td>

@@ -32,3 +32,11 @@ a.back span {
 .tab-pane {
   border-top: 2px solid #e1e6ea !important;
 }
+.col-contract-membership {
+  width: 260px;
+  max-width: 260px;
+}
+.tooltip-right {
+  padding: 1px 5px 3px 5px;
+  margin-right: 5px;
+}

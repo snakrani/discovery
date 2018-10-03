@@ -47,7 +47,7 @@
           <a href="/" title="Home" aria-label="Home">
             <img src="{{APP_ASSETS}}assets/images/discovery-icon.png" width="95" height="95" alt="Discovery icon" />
             <strong>Discovery</strong>
-            <em>Marque Research Tool</em>
+            <em>Marquet Research Tool</em>
           </a>
         </div>
         <button class="usa-menu-btn">Menu</button>
@@ -75,8 +75,8 @@
               </button>
             </li>
             <li>
-              <button class="usa-nav-link" [routerLink]="['/resources']" routerLinkActive="usa-current">
-                <span>Resources</span>
+              <button class="usa-nav-link" [routerLink]="['/contracts']" routerLinkActive="usa-current">
+                <span>Contracts</span>
               </button>
             </li>
             <li>
@@ -162,22 +162,24 @@
 
   <footer class="usa-section usa-section-dark usa-graphic_list">
     <div class="usa-grid">
-      <div class="usa-width-one-third">
+      <div class="usa-width-one-fourth">
         <h3>Need Help?</h3>
-        <p class="usa-width-two-thirds">For further assistance, please contact:
-          <br>GSA Technology Solutions 24 hours a day, Mon - Fri
+        <p>
+          For further assistance or to request information regarding GSA products and services go to <a href="https://ask.gsa.gov/eresolveLogin"
+            target="_blank">AskGSA</a>
           <br>
-          <a [routerLink]="['/resources']">Need Help with finding a contract?</a>
+          Available: Sun 9:00pm EST to Friday 9:30pm EST
+
         </p>
       </div>
-      <div class="usa-width-one-third">
+      <div class="usa-width-one-fourth">
         <h3>Discovery</h3>
         <ul>
           <li>
             <a [routerLink]="['/about']">About</a>
           </li>
           <li>
-            <a [routerLink]="['/resources']">Resources</a>
+            <a [routerLink]="['/contracts']">Contracts</a>
           </li>
           <li>
             <a href="mailto:pshc-dev@gsa.gov">Contact</a>
@@ -185,7 +187,26 @@
 
         </ul>
       </div>
-      <div class="usa-width-one-third">
+      <div class="usa-width-one-fourth">
+        <h3>Other GSA Tools</h3>
+        <ul>
+          <li>
+            <a href="https://CALC.gsa.gov" target="_blank">CALC</a>
+          </li>
+          <li>
+            <a href="https://hallways.cap.gsa.gov" target="_blank">Acquisition Gateway </a>
+          </li>
+          <li>
+            <a href="https://navigator.gsa.gov" target="_blank">IT Solutions Navigator</a>
+          </li>
+          <li>
+            <a href="https://gsaelibrary.gsa.gov" target="_blank">eLibrary</a>
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="usa-width-one-fourth">
         <h3>Your Opinion Matters!</h3>
         <p>Tell us what you think by submitting
           <a href="#">feedback</a>.</p>

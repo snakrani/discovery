@@ -8,7 +8,7 @@
 
   <section class="usa-section">
     <div class="usa-grid">
-      <div class="usa-width-one-sixth"></div>
+      <div class="usa-width-one-sixth best-in-class"></div>
       <div class="usa-width-one-half">
         <p class="usa-font-lead">Building Maintenance and Operations (BMO) strategic sourcing solution is a
           comprehensive
@@ -17,6 +17,7 @@
           initiative to reduce costs and drive efficient purchasing by federal agencies.
         </p>
         <ul class="usa-font-lead">
+          <li><strong>Best-in-Class</strong></li>
           <li>Provides a broad and comprehensive range of BMO services for use throughout</li>
           <li>Provides a regionally focused pool of highly qualified large and small contractors</li>
           <li>Allows flexibility for contract types, including fixed price, labor hour, time and materials, and hybrids</li>
@@ -32,7 +33,8 @@
         <h3>BMO Service Categories</h3>
         <div *ngIf="pools.length===0">Loading...</div>
         <ul *ngIf="pools.length>0" class="usa-font-lead">
-          <li *ngFor="let pool of pools"><a [routerLink]="['/search']" [queryParams]="{vehicles: 'BMO', service_categories: pool.id}">{{pool.name}}</a></li>
+          <li *ngFor="let pool of pools"><a [routerLink]="['/search']" [queryParams]="{vehicles: 'BMO', service_categories: pool.id}">
+              {{pool.name}} - {{pool.number}}</a></li>
         </ul>
       </div>
       <div class="usa-width-one-fourth">
