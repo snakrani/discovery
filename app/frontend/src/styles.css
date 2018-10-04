@@ -189,7 +189,7 @@ ul.items-selected {
 }
 ul.items-selected li {
   list-style: none !important;
-  padding: 10px 0px 10px 12px !important;
+  padding: 10px 20px 10px 12px !important;
   border-bottom: 1px solid #252525;
   color: #488248;
 }
@@ -201,7 +201,7 @@ ul.items-selected li a {
   float: right;
   padding: 10px;
   margin-top: 5px;
-  margin-left: 10px;
+  margin-right: -10px;
   background-image: url('/frontend/assets/images/close.png');
   background-image: url('/frontend/assets/images/close.svg');
   background-repeat: no-repeat;

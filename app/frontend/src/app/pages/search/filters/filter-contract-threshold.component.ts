@@ -70,15 +70,10 @@ export class FilterContractThresholdComponent implements OnInit {
   }
   set threshold(value: string) {
     this._threshold = value;
-    if (value === '0' && this.value_set) {
-      this.emmitSelected.emit(0);
-      this.value_set = false;
-    } else {
-      if (!this.value_set) {
-        /** Only emit this once */
-        this.emmitSelected.emit(1);
-        this.value_set = true;
-      }
+    if (!this.value_set) {
+      /** Only emit this once */
+      this.emmitSelected.emit(1);
+      this.value_set = true;
     }
   }
   getSelected(): any[] {
@@ -92,6 +87,6 @@ export class FilterContractThresholdComponent implements OnInit {
   }
   reset() {
     /** Set default values */
-    this.threshold = '';
+    this.threshold = '0';
   }
 }
