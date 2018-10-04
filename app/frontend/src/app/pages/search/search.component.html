@@ -1,19 +1,34 @@
+<div id="overlay-filter-mobile"></div>
 <!-- Spinner -->
 <discovery-search-spinner [show]="spinner"></discovery-search-spinner>
 <!-- End Spinner -->
-<div class="usa-grid col-container pad-top-bottom">
+<!-- Server Error Notification -->
+<div class="usa-grid" *ngIf="server_error">
+  <div class="usa-width-one-whole">
+    <div class="usa-alert usa-alert-warning" role="alert">
+      <div class="usa-alert-body">
+        <h3 class="usa-alert-heading">This area is currently down for maintenance.</h3>
+        <p class="usa-alert-text">We expect to be back in a couple hours. Thanks for your patience.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Server Error Notification -->
+<div class="usa-grid col-container pad-top-bottom" *ngIf="!server_error">
   <div>
     <!-- ///////////////// -->
     <!-- FITLERS -->
     <!-- ///////////////// -->
-    <div id="filters-container" class="usa-width-one-third bordered">
-      <discovery-filters (emmitFilters)="submitSelectedFilters($event)"></discovery-filters>
-    </div>
-
+    <discovery-filters [parentSpinner]="spinner" (emitServerError)="showServerError($event)" (emitHideFilters)="hideSideNavFilters()"
+      (emmitFilters)="submitSelectedFilters($event)">
+    </discovery-filters>
     <!-- ///////////////// -->
     <!-- TABS AREA -->
     <!-- ///////////////// -->
     <div class="usa-width-two-thirds bordered relative">
+      <button id="btn-show-filters" class="usa-button-secondary" (click)="showSideNavFilters()"><span class="icon-filter"></span>Show
+        filters</button>
       <discovery-choose-filters *ngIf="!show_results && !spinner"></discovery-choose-filters>
 
       <div *ngIf="show_results">
@@ -82,7 +97,7 @@
                     </tr>
                     <tr>
                       <th scope="row">Eligible Service category(s) <discovery-lnk-toggle-heights [toggle_id]="'row-serv-cat'"
-                          [label]="'categories'" (emitToggleId)="toggleTDHeights($event)"></discovery-lnk-toggle-heights>
+                          (emitToggleId)="toggleTDHeights($event)"></discovery-lnk-toggle-heights>
                       </th>
                       <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">
                         <div class="row-serv-cat toggle_more">
@@ -97,8 +112,7 @@
                         <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.capabilities}}</td>
                       </tr> -->
                     <tr>
-                      <th scope="row">NAICs <discovery-lnk-toggle-heights [toggle_id]="'row-naics'" [label]="'NAIC codes'"
-                          (emitToggleId)="toggleTDHeights($event)"></discovery-lnk-toggle-heights>
+                      <th scope="row">NAICs <discovery-lnk-toggle-heights [toggle_id]="'row-naics'" (emitToggleId)="toggleTDHeights($event)"></discovery-lnk-toggle-heights>
                       </th>
                       <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">
                         <div class="row-naics toggle_more">
@@ -109,25 +123,35 @@
                       </td>
                     </tr>
                     <tr>
-                      <th scope="row">PSCs</th>
-                      <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.pscs}}</td>
+                      <th scope="row">PSCs <discovery-lnk-toggle-heights [toggle_id]="'row-pscs'" (emitToggleId)="toggleTDHeights($event)"></discovery-lnk-toggle-heights>
+                      </th>
+                      <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">
+                        <div class="row-pscs toggle_more">
+                          <discovery-list [show_all]="true" [id]="vehicle.id" [items_to_show]="num_show" [items]="vehicle.pscs"
+                            [key]="'code'"></discovery-list>
+                          <div class="gradient"></div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">SUM Tier</th>
+                      <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.tier}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">GSA Point of Contact</th>
+                      <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0"><a href="mailto:{{vehicle.gsa}}"
+                          *ngIf="vehicle.gsa !== ''">Contact email</a></td>
                     </tr>
                     <!-- <tr>
-                        <th scope="row">SUM Tier</th>
-                        <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.tier}}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">GSA Point of Contact</th>
-                        <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.gsa}}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Solution Website</th>
-                        <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.website}}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Ordering Guide</th>
-                        <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.ordering_guide}}</td>
-                      </tr> -->
+                      <th scope="row">Solution Website</th>
+                      <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.website}}</td>
+                    </tr> -->
+                    <tr>
+                      <th scope="row">Ordering Guide</th>
+                      <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0"><a href="{{vehicle.ordering_guide}}"
+                          title="Ordering guide for " *ngIf="vehicle.ordering_guide !== ''" target="_blank">Download
+                          Guide</a></td>
+                    </tr>
                   </tbody>
                 </table>
 

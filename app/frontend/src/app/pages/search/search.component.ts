@@ -1,4 +1,10 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewChild,
+  HostListener
+} from '@angular/core';
 import { SearchService } from './search.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ActiveFiltersComponent } from './filters/active-filters.component';
@@ -37,7 +43,13 @@ export class SearchComponent implements OnInit {
   _spinner: boolean;
   filters: any[];
   scroll_buttons = false;
-
+  server_error = false;
+  @HostListener('window:resize')
+  onResize() {
+    if (document.getElementById('discovery').classList.contains('push')) {
+      this.hideSideNavFilters();
+    }
+  }
   constructor(
     private searchService: SearchService,
     private router: Router,
@@ -49,6 +61,8 @@ export class SearchComponent implements OnInit {
     /** Check to see if there are any queryparams */
     if (this.route.snapshot.queryParamMap.keys.length > 0) {
       this.spinner = true;
+    } else {
+      this.spinner = false;
     }
   }
   get sort_by(): string {
@@ -75,6 +89,7 @@ export class SearchComponent implements OnInit {
   }
 
   submitSelectedFilters(filters) {
+    this.server_error = false;
     this.spinner = true;
     this.filters = filters;
     this.searchService.activeFilters = filters;
@@ -99,7 +114,10 @@ export class SearchComponent implements OnInit {
           this.sort_by = this.getFirstVehicleWithVendors();
           this.viewContracts();
         },
-        error => (this.error_message = <any>error)
+        error => {
+          this.error_message = <any>error;
+          this.server_error = true;
+        }
       );
   }
   showSpinner(bool: boolean) {
@@ -148,6 +166,7 @@ export class SearchComponent implements OnInit {
       vendor['name'] = item.name;
       vendor['duns'] = item.duns;
       vendor['contracts'] = item.number_of_contracts;
+      // vendor['tier'] = item.number_of_contracts;
       vendor['vehicles'] = this.returnVehicleVendors(item.pools);
 
       if (vehicles_submitted['selected']) {
@@ -202,33 +221,38 @@ export class SearchComponent implements OnInit {
     this.contracts_w_no_records = [];
     for (const vehicle of this.results.vehicles) {
       const item: any[] = [];
+      const vehicle_obj = this.filtersComponent.getVehicleData(vehicle);
+
       item['id'] = vehicle;
       item['vendors_total'] = 0;
       item['vendors_results_total'] = this.countVendorsByVehicle(vehicle);
-      item['description'] = this.filtersComponent.getVehicleDescription(
-        vehicle
-      );
+      item['description'] = vehicle_obj['name'];
       item[
         'service_categories'
       ] = this.filtersComponent.getServiceCategoriesByVehicle(vehicle);
       item['capabilities'] = 0;
       item['naics'] = this.filtersComponent.getNaicsByVehicle(vehicle);
-      item['pscs'] = [];
-      item['tier'] = '';
-      item['gsa'] = '';
-      item['website'] = '';
-      item['ordering_guide'] = '';
+      item['pscs'] = this.filtersComponent.getPSCsByVehicle(vehicle);
+
+      item['tier'] = vehicle_obj['tier']['name'];
+      item['gsa'] = vehicle_obj['poc'];
+      // item['website'] = vehicle_obj['url'];
+      item['ordering_guide'] = vehicle_obj['ordering_guide'];
       compare.push(item);
       if (item['vendors_results_total'] === 0) {
         this.contracts_w_no_records.push({ name: item['description'] });
       }
     }
     this.compare_tbl = compare;
-    console.log(this.compare_tbl.length > 3);
     if (this.compare_tbl.length > 3) {
       this.scroll_buttons = true;
     } else {
       this.scroll_buttons = false;
+    }
+  }
+  showServerError(error: number) {
+    if (error === 1) {
+      this.server_error = true;
     }
   }
   toggleTDHeights(id: string) {
@@ -236,6 +260,18 @@ export class SearchComponent implements OnInit {
     for (const ele of doc) {
       ele.classList.toggle('show_all');
     }
+  }
+  showSideNavFilters() {
+    document.getElementById('filters-container').style.left = '0px';
+    document.getElementById('discovery').classList.add('push');
+    document.getElementById('overlay-filter-mobile').classList.add('show');
+    document.getElementById('btn-show-filters').style.display = 'none';
+  }
+  hideSideNavFilters() {
+    document.getElementById('filters-container').style.left = '-310px';
+    document.getElementById('discovery').classList.remove('push');
+    document.getElementById('overlay-filter-mobile').classList.remove('show');
+    document.getElementById('btn-show-filters').style.display = 'block';
   }
   commaSeparatedList(obj: any[], key: string) {
     let items = '';

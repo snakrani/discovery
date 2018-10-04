@@ -16,7 +16,7 @@ export class FilterSbdComponent implements OnInit {
   emmitSelected: EventEmitter<number> = new EventEmitter();
   @Output()
   emmitLoaded: EventEmitter<string> = new EventEmitter();
-  name = 'Type of Set Asides';
+  name = 'Small Business Designation';
   queryName = 'setasides';
   id = 'filter-sbd';
   error_message;
