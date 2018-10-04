@@ -93,7 +93,6 @@ export class SearchService {
         catchError(this.handleError)
       );
   }
-
   getSetAsides(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl + 'setasides?description').pipe(
       tap(data => data),
@@ -117,14 +116,24 @@ export class SearchService {
         );
     }
   }
-  arrToString(arr) {
-    let str = '';
-    for (const selected of arr) {
-      str += selected + ',';
+  getPools(vehicles): Observable<any[]> {
+    if (vehicles[0] === 'All') {
+      return this.http.get<any[]>(this.apiUrl + 'pools?page=0').pipe(
+        tap(data => data),
+        catchError(this.handleError)
+      );
+    } else {
+      return this.http
+        .get<any[]>(
+          this.apiUrl + 'pools?vehicle__id__in=' + this.arrToString(vehicles)
+        )
+        .pipe(
+          tap(data => data),
+          catchError(this.handleError)
+        );
     }
-    str = str.slice(0, -1);
-    return str;
   }
+
   getZone(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl + 'zones/?page=0').pipe(
       tap(data => data),
@@ -147,7 +156,6 @@ export class SearchService {
         catchError(this.handleError)
       );
   }
-
   getNaics(vehicles): Observable<any[]> {
     if (vehicles[0] === 'All') {
       return this.http.get<any[]>(this.apiUrl + 'pools').pipe(
@@ -207,9 +215,27 @@ export class SearchService {
           '&pools__pool__naics__code__in=' +
           this.getSelectedFilterList(filter['selected'], ',');
       }
+      if (filter['name'] === 'pscs') {
+        params +=
+          '&pools__pool__psc__code__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
       if (filter['name'] === 'zone') {
         params +=
           '&pools__zones__id__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
+      if (filter['name'] === 'threshold') {
+        const threshold = filter['selected'][0].value.split('-');
+        params +=
+          '&pools__pool__threshold__between=' +
+          threshold[0] +
+          ',' +
+          threshold[1];
+      }
+      if (filter['name'] === 'agency_performance') {
+        params +=
+          '&pools__pool__vehicle__tier__number__in=' +
           this.getSelectedFilterList(filter['selected'], ',');
       }
     }
@@ -248,10 +274,10 @@ export class SearchService {
     ordering: string
   ): Observable<any[]> {
     let params = 'contracts?vendor__duns=' + duns;
-    if (naic !== 'all') {
+    if (naic !== 'All') {
       params += '&NAICS=' + naic;
     }
-    if (piid !== 'all') {
+    if (piid !== 'All') {
       params += '&piid=' + piid;
     }
     if (ordering !== '') {
@@ -263,7 +289,14 @@ export class SearchService {
       catchError(this.handleError)
     );
   }
-
+  arrToString(arr) {
+    let str = '';
+    for (const selected of arr) {
+      str += selected + ',';
+    }
+    str = str.slice(0, -1);
+    return str;
+  }
   setQueryParams(filters: any[]): void {
     const params = this.getQueryParams(filters);
     this.router.navigate(['search'], {
@@ -324,8 +357,14 @@ export class SearchService {
   }
   commaSeparatedList(obj: any[], key: string) {
     let items = '';
-    for (const i of obj) {
-      items += i[key] + ', ';
+    if (key !== '') {
+      for (const i of obj) {
+        items += i[key] + ', ';
+      }
+    } else {
+      for (const i of obj) {
+        items += i + ', ';
+      }
     }
     return items.slice(0, -2);
   }
@@ -362,6 +401,24 @@ export class SearchService {
     if (i1.code > i2.code) {
       return 1;
     } else if (i1.code === i2.code) {
+      return 0;
+    } else {
+      return -1;
+    }
+  }
+  sortByDescriptionAsc(i1, i2) {
+    if (i1.description > i2.description) {
+      return 1;
+    } else if (i1.description === i2.description) {
+      return 0;
+    } else {
+      return -1;
+    }
+  }
+  sortByVehicleAsc(i1, i2) {
+    if (i1.vehicle > i2.vehicle) {
+      return 1;
+    } else if (i1.vehicle === i2.vehicle) {
       return 0;
     } else {
       return -1;

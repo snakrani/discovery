@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges
+} from '@angular/core';
 import { SearchService } from '../search.service';
 import { ActivatedRoute } from '@angular/router';
 declare let document: any;
@@ -7,9 +14,9 @@ declare let document: any;
   templateUrl: './filter-service-categories.component.html',
   styles: []
 })
-export class FilterServiceCategoriesComponent implements OnInit {
+export class FilterServiceCategoriesComponent implements OnInit, OnChanges {
   @Input()
-  items: any[];
+  items: any[] = [];
   items_filtered: any[];
   items_selected: any[] = [];
   @Input()
@@ -25,11 +32,7 @@ export class FilterServiceCategoriesComponent implements OnInit {
   category = '0';
   sortBy = 'vehicle';
   ascending = true;
-  /** Sample json
-  {
 
-  };
-  */
   /** Generate inputs labels & values
    *  with these
    */
@@ -41,12 +44,17 @@ export class FilterServiceCategoriesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.initServiceCategories(['All']);
+    // this.initServiceCategories(['All']);
+  }
+  ngOnChanges() {
+    if (this.items.length > 1) {
+      this.buildItems(this.items);
+    }
   }
   initServiceCategories(vehicles) {
-    this.searchService.getServiceCategories(vehicles).subscribe(
+    this.searchService.getPools(vehicles).subscribe(
       data => {
-        this.buildItems(data['results'], vehicles);
+        this.buildItems(data['results']);
         /** Grab the queryparams and sets default values
          *  on inputs Ex. checked, selected, keywords, etc */
         if (this.route.snapshot.queryParamMap.has(this.queryName)) {
@@ -79,16 +87,20 @@ export class FilterServiceCategoriesComponent implements OnInit {
       error => (this.error_message = <any>error)
     );
   }
+  loaded() {
+    this.emmitLoaded.emit(this.queryName);
+  }
   setFilteredItems(vehicles) {
     this.items_filtered =
       vehicles[0] !== 'All' ? this.filterByVehicles(vehicles) : this.items;
-    this.items_filtered.sort(sortByVehicleAsc);
+    this.items_filtered.sort(this.searchService.sortByVehicleAsc);
     /** Remove all selected items
      *  that are not within filtered list
      */
     for (const item of this.items_selected) {
-      if (!this.existsIn(this.items_filtered, item['value'], 'id')) {
-        this.removeItem(item['value']);
+      if (
+        !this.searchService.existsIn(this.items_filtered, item['value'], 'id')
+      ) {
         this.category = '0';
       }
     }
@@ -111,9 +123,9 @@ export class FilterServiceCategoriesComponent implements OnInit {
         items.push(item);
       }
     }
-    return items.sort(sortByVehicleAsc);
+    return items.sort(this.searchService.sortByVehicleAsc);
   }
-  buildItems(obj: any[], vehicles) {
+  buildItems(obj: any[]) {
     const categories = [];
     for (const category of obj) {
       const item = {};
@@ -124,23 +136,50 @@ export class FilterServiceCategoriesComponent implements OnInit {
       categories.push(item);
     }
     this.items = categories;
-    this.setFilteredItems(vehicles);
+    this.items_filtered = this.items;
+
+    /** Grab the queryparams and sets default values
+     *  on inputs Ex. checked, selected, keywords, etc */
+    if (this.route.snapshot.queryParamMap.has(this.queryName)) {
+      const values: string[] = this.route.snapshot.queryParamMap
+        .get(this.queryName)
+        .split('__');
+
+      for (const item of values) {
+        this.addItem(item);
+      }
+
+      /** Open accordion */
+      this.opened = true;
+    } else {
+      this.opened = false;
+    }
+    /** Check if there are selected vehicles
+     *  and sort dropdown based on vehicle id
+     */
+    if (this.route.snapshot.queryParamMap.has('vehicles')) {
+      const values: string[] = this.route.snapshot.queryParamMap
+        .get('vehicles')
+        .split('__');
+
+      this.setFilteredItems(values);
+    } else {
+      this.setFilteredItems(['All']);
+    }
+
+    this.emmitLoaded.emit(this.queryName);
   }
   addCategory() {
     if (
-      !this.existsIn(this.items_selected, this.category, 'value') &&
+      !this.searchService.existsIn(
+        this.items_selected,
+        this.category,
+        'value'
+      ) &&
       this.category !== '0'
     ) {
       this.addItem(this.category);
     }
-  }
-  existsIn(obj: any[], value: string, key: string): boolean {
-    for (let i = 0; i < obj.length; i++) {
-      if (obj[i][key] === value) {
-        return true;
-      }
-    }
-    return false;
   }
   getSelected(): any[] {
     const item = [];
@@ -178,14 +217,5 @@ export class FilterServiceCategoriesComponent implements OnInit {
       }
     }
     this.emmitSelected.emit(0);
-  }
-}
-function sortByVehicleAsc(i1, i2) {
-  if (i1.vehicle > i2.vehicle) {
-    return 1;
-  } else if (i1.vehicle === i2.vehicle) {
-    return 0;
-  } else {
-    return -1;
   }
 }

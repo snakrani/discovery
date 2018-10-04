@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges
+} from '@angular/core';
 import { SearchService } from '../search.service';
 import { ActivatedRoute } from '@angular/router';
 declare let document: any;
@@ -7,7 +14,7 @@ declare let document: any;
   templateUrl: './filter-agency-performance.component.html',
   styles: []
 })
-export class FilterAgencyPerformanceComponent implements OnInit {
+export class FilterAgencyPerformanceComponent implements OnInit, OnChanges {
   @Input()
   items: any[] = [];
   items_selected: any[] = [];
@@ -16,7 +23,7 @@ export class FilterAgencyPerformanceComponent implements OnInit {
   @Output()
   emmitSelected: EventEmitter<number> = new EventEmitter();
   @Output()
-  emmitLoaded: EventEmitter<number> = new EventEmitter();
+  emmitLoaded: EventEmitter<string> = new EventEmitter();
   name = 'Agency Performance History';
   queryName = 'agency_performance';
   id = 'filter-agency-performance';
@@ -30,44 +37,57 @@ export class FilterAgencyPerformanceComponent implements OnInit {
   /** Generate inputs labels & values
    *  with these
    */
-  json_value = 'id';
+  json_value = 'code';
   json_description = 'description';
   constructor(
     private searchService: SearchService,
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit() {
-    this.setInputItems();
-  }
-  setInputItems() {
-    // this.searchService.getAgencies().subscribe(
-    //   data => {
-    //     this.items = data['results'];
-    //     this.emmitLoaded.emit(1);
-    //     /** Grab the queryparams and sets default values
-    //      *  on inputs Ex. checked, selected, keywords, etc */
-    //     if (this.route.snapshot.queryParamMap.has(this.queryName)) {
-    //       const values: string[] = this.route.snapshot.queryParamMap
-    //         .get(this.queryName)
-    //         .split('__');
-    //       for (const item of values) {
-    //         this.addItem(item);
-    //       }
-    //       /** Open accordion */
-    //       this.opened = true;
-    //     } else {
-    //       this.opened = false;
-    //     }
-    //   },
-    //   error => (this.error_message = <any>error)
-    // );
-  }
-  addAgency() {
-    if (!this.exists(this.agency) && this.agency !== '0') {
-      this.addItem(this.agency);
+  ngOnInit() {}
+  ngOnChanges() {
+    if (this.items.length > 1) {
+      this.buildItems(this.items);
+      this.emmitLoaded.emit(this.queryName);
     }
   }
+
+  buildItems(obj: any[]) {
+    const agency = [];
+    for (const vehicle of obj) {
+      const item = {};
+      item['code'] = vehicle.tier.number.toString();
+      item['description'] = vehicle.tier.name;
+      item['vehicle_id'] = vehicle.id;
+      if (!this.searchService.existsIn(agency, item['code'], 'code')) {
+        agency.push(item);
+      }
+    }
+    this.items = agency;
+    this.items.sort(this.searchService.sortByDescriptionAsc);
+    /** Grab the queryparams and sets default values
+     *  on inputs Ex. checked, selected, keywords, etc */
+    if (this.route.snapshot.queryParamMap.has(this.queryName)) {
+      const values: string[] = this.route.snapshot.queryParamMap
+        .get(this.queryName)
+        .split('__');
+      for (let i = 0; i < this.items.length; i++) {
+        if (values.includes(this.items[i][this.json_value])) {
+          this.items[i]['checked'] = true;
+          this.addItem(
+            this.items[i][this.json_value],
+            this.items[i][this.json_description]
+          );
+        }
+      }
+      /** Open accordion */
+      this.opened = true;
+    } else {
+      this.opened = false;
+    }
+    this.emmitLoaded.emit(this.queryName);
+  }
+
   exists(value: string): boolean {
     for (let i = 0; i < this.items_selected.length; i++) {
       if (this.items_selected[i]['value'] === value) {
@@ -87,21 +107,16 @@ export class FilterAgencyPerformanceComponent implements OnInit {
   }
   reset() {
     this.items_selected = [];
-    this.agency = '0';
-  }
-  getItemDescription(value: string): string {
-    if (value) {
-      for (let i = 0; i < this.items.length; i++) {
-        if (this.items[i][this.json_value] === value) {
-          return this.items[i][this.json_description];
-        }
-      }
+    for (let i = 0; i < this.items.length; ++i) {
+      document.getElementById(
+        this.id + '-' + this.items[i][this.json_value]
+      ).checked = false;
     }
   }
-  addItem(value: string) {
+  addItem(code: string, title: string) {
     const item = {};
-    item['value'] = value;
-    item['description'] = this.getItemDescription(value);
+    item['description'] = title;
+    item['value'] = code;
     this.items_selected.push(item);
     this.emmitSelected.emit(1);
   }
@@ -112,5 +127,12 @@ export class FilterAgencyPerformanceComponent implements OnInit {
       }
     }
     this.emmitSelected.emit(0);
+  }
+  onChange(key: string, title: string, isChecked: boolean) {
+    if (isChecked) {
+      this.addItem(key, title);
+    } else {
+      this.removeItem(key);
+    }
   }
 }

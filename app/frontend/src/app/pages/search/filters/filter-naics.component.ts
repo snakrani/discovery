@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges
+} from '@angular/core';
 import { SearchService } from '../search.service';
 import { ActivatedRoute, Router } from '@angular/router';
 declare let autocomplete: any;
@@ -9,7 +16,7 @@ declare let $: any;
   templateUrl: './filter-naics.component.html',
   styles: []
 })
-export class FilterNaicsComponent implements OnInit {
+export class FilterNaicsComponent implements OnInit, OnChanges {
   @Input()
   items: any[];
   items_filtered: any[] = [];
@@ -43,57 +50,25 @@ export class FilterNaicsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {}
-  ngOnInit() {
-    this.initNaicsList(['All']);
+  ngOnInit() {}
+  ngOnChanges() {
+    if (this.items.length > 1) {
+      this.buildItems(this.items);
+    }
   }
 
-  initNaicsList(vehicles) {
-    this.searchService.getNaics(vehicles).subscribe(
-      data => {
-        this.buildItems(data['results'], vehicles);
-
-        /** Grab the queryparams and sets default values
-         *  on inputs Ex. checked, selected, keywords, etc */
-        if (this.route.snapshot.queryParamMap.has(this.queryName)) {
-          const values: string[] = this.route.snapshot.queryParamMap
-            .get(this.queryName)
-            .split('__');
-
-          for (const item of values) {
-            this.addItem(item);
-          }
-          /** Open accordion */
-          this.opened = true;
-        } else {
-          // this.opened = false;
-        }
-        /** Check if there are selected vehicles
-         *  and sort dropdown based on vehicle id
-         */
-        if (this.route.snapshot.queryParamMap.has('vehicles')) {
-          const values: string[] = this.route.snapshot.queryParamMap
-            .get('vehicles')
-            .split('__');
-
-          this.setFilteredItems(values);
-        }
-        this.emmitLoaded.emit(this.queryName);
-        this.emmitNaics.emit(this.items_filtered);
-      },
-      error => (this.error_message = <any>error)
-    );
-  }
   setFilteredItems(vehicles) {
     this.items_filtered =
       vehicles[0] !== 'All' ? this.filterByVehicles(vehicles) : this.items;
-    this.items_filtered.sort(sortByCodeAsc);
+    this.items_filtered.sort(this.searchService.sortByCodeAsc);
     this.ln = this.items_filtered.length;
     /** Remove all selected items
      *  that are not within filtered list
      */
     for (const item of this.items_selected) {
-      if (!this.existsIn(this.items_filtered, item['value'], 'id')) {
-        this.removeItem(item['value']);
+      if (
+        !this.searchService.existsIn(this.items_filtered, item['value'], 'id')
+      ) {
         this.naic = '0';
       }
     }
@@ -118,7 +93,7 @@ export class FilterNaicsComponent implements OnInit {
     items = this.items.filter(naics => naics.vehicle_id.indexOf(abr) !== -1);
     return items;
   }
-  buildItems(obj: any[], vehicles) {
+  buildItems(obj: any[]) {
     const naics = [];
     for (const pool of obj) {
       for (const naic of pool.naics) {
@@ -126,14 +101,41 @@ export class FilterNaicsComponent implements OnInit {
         item['code'] = naic.code;
         item['description'] = naic.description;
         item['vehicle_id'] = pool.vehicle.id;
-        if (!this.existsIn(naics, naic.code, 'code')) {
+        if (!this.searchService.existsIn(naics, naic.code, 'code')) {
           naics.push(item);
         }
       }
     }
     this.items = naics;
-    this.items.sort(sortByCodeAsc);
-    this.setFilteredItems(vehicles);
+    this.items.sort(this.searchService.sortByCodeAsc);
+    /** Grab the queryparams and sets default values
+     *  on inputs Ex. checked, selected, keywords, etc */
+    if (this.route.snapshot.queryParamMap.has(this.queryName)) {
+      const values: string[] = this.route.snapshot.queryParamMap
+        .get(this.queryName)
+        .split('__');
+
+      for (const item of values) {
+        this.addItem(item);
+      }
+      /** Open accordion */
+      this.opened = true;
+    } else {
+      // this.opened = false;
+    }
+    /** Check if there are selected vehicles
+     *  and sort dropdown based on vehicle id
+     */
+    if (this.route.snapshot.queryParamMap.has('vehicles')) {
+      const values: string[] = this.route.snapshot.queryParamMap
+        .get('vehicles')
+        .split('__');
+
+      this.setFilteredItems(values);
+    } else {
+      this.setFilteredItems(['All']);
+    }
+    this.emmitLoaded.emit(this.queryName);
   }
   buildItemsByVehicle(obj: any[]) {
     const naics = [];
@@ -141,7 +143,9 @@ export class FilterNaicsComponent implements OnInit {
       const item = {};
       item['vehicle_id'] = pool.vehicle.id;
       item['naics'] = this.setNaics(pool.naics);
-      if (!this.existsIn(naics, naics['vehicle_id'], 'vehicle_id')) {
+      if (
+        !this.searchService.existsIn(naics, naics['vehicle_id'], 'vehicle_id')
+      ) {
         naics.push(item);
       }
     }
@@ -153,7 +157,7 @@ export class FilterNaicsComponent implements OnInit {
       const item = {};
       item['code'] = i.code;
       item['description'] = i.description;
-      if (!this.existsIn(items, i.code, 'code')) {
+      if (!this.searchService.existsIn(items, i.code, 'code')) {
         items.push(item);
       }
     }
@@ -163,14 +167,6 @@ export class FilterNaicsComponent implements OnInit {
     if (!this.exists(this.naic) && this.naic !== '0') {
       this.addItem(this.naic);
     }
-  }
-  existsIn(obj: any[], value: string, key: string): boolean {
-    for (let i = 0; i < obj.length; i++) {
-      if (obj[i][key] === value) {
-        return true;
-      }
-    }
-    return false;
   }
   exists(value: string): boolean {
     for (let i = 0; i < this.items_selected.length; i++) {
@@ -216,14 +212,5 @@ export class FilterNaicsComponent implements OnInit {
       }
     }
     this.emmitSelected.emit(0);
-  }
-}
-function sortByCodeAsc(i1, i2) {
-  if (i1.code > i2.code) {
-    return 1;
-  } else if (i1.code === i2.code) {
-    return 0;
-  } else {
-    return -1;
   }
 }

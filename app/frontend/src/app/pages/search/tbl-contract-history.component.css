@@ -1,6 +1,9 @@
 .history th {
   min-width: auto !important;
 }
+table {
+  margin-top: 0px !important;
+}
 tbody th {
   vertical-align: top !important;
 }

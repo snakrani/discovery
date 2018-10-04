@@ -27,4 +27,4 @@ _*/
 /logs/celerybeat.pid
 /vagrant/config.yml
 
-/app/static/frontend/
+/app/front-end/node_modules

@@ -7,7 +7,6 @@ import { SearchService } from '../search/search.service';
   styles: [
     `
       .usa-hero {
-        padding: 100px 0px 100px 0px;
         background-image: url(/frontend/assets/images/hero-generic-vehicles.jpg);
         color: #fff !important;
       }
@@ -24,6 +23,7 @@ export class OasisSbInfoComponent implements OnInit {
     this.searchService.getPoolsByVehicle(this.vehicle).subscribe(
       data => {
         this.pools = data['results'];
+        this.pools.sort(this.searchService.sortByNameAsc);
       },
       error => (this.error_message = <any>error)
     );

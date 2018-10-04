@@ -44,38 +44,10 @@ export class FilterContractVehiclesComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit() {
-    this.setInputItems();
-  }
-  setInputItems() {
-    this.searchService.getContractVehicles().subscribe(
-      data => {
-        this.items = data['results'];
+  ngOnInit() {}
 
-        /** Grab the queryparams and sets default values
-         *  on inputs Ex. checked, selected, keywords, etc */
-        if (this.route.snapshot.queryParamMap.has(this.queryName)) {
-          const values: string[] = this.route.snapshot.queryParamMap
-            .get(this.queryName)
-            .split('__');
-          for (let i = 0; i < this.items.length; i++) {
-            if (values.includes(this.items[i][this.json_value])) {
-              this.items[i]['checked'] = true;
-              this.addItem(
-                this.items[i][this.json_value],
-                this.items[i][this.json_description]
-              );
-            }
-          }
-          /** Open accordion */
-          this.opened = true;
-        } else {
-          this.opened = false;
-        }
-        this.emmitLoaded.emit(this.queryName);
-      },
-      error => (this.error_message = <any>error)
-    );
+  loaded() {
+    this.emmitLoaded.emit(this.queryName);
   }
   getSelected(): any[] {
     const item = [];
@@ -85,6 +57,14 @@ export class FilterContractVehiclesComponent implements OnInit {
       item['items'] = this._items_selected;
     }
     return item;
+  }
+  getVehicleInfo(vehicle: string): any[] {
+    for (const item of this.items) {
+      if (item['id'] === vehicle) {
+        return item;
+      }
+    }
+    return [];
   }
   reset() {
     this._items_selected = [];
