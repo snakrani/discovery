@@ -225,6 +225,19 @@ export class SearchService {
           '&pools__zones__id__in=' +
           this.getSelectedFilterList(filter['selected'], ',');
       }
+      if (filter['name'] === 'threshold') {
+        const threshold = filter['selected'][0].value.split('-');
+        params +=
+          '&pools__pool__threshold__between=' +
+          threshold[0] +
+          ',' +
+          threshold[1];
+      }
+      if (filter['name'] === 'agency_performance') {
+        params +=
+          '&pools__pool__vehicle__tier__number__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
     }
     console.log(this.apiUrl + 'vendors?' + params.substr(1));
     return this.http
@@ -388,6 +401,15 @@ export class SearchService {
     if (i1.code > i2.code) {
       return 1;
     } else if (i1.code === i2.code) {
+      return 0;
+    } else {
+      return -1;
+    }
+  }
+  sortByDescriptionAsc(i1, i2) {
+    if (i1.description > i2.description) {
+      return 1;
+    } else if (i1.description === i2.description) {
       return 0;
     } else {
       return -1;

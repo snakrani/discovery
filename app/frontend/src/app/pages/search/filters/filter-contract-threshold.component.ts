@@ -12,13 +12,15 @@ export class FilterContractThresholdComponent implements OnInit {
   min = 0;
   max = 10000000;
   items = [
-    { description: 'All', id: '10000000', checked: true },
-    { description: '$0 - $500K', id: '0-500000', checked: false },
-    { description: '$500K - $1M', id: '500001-1000000', checked: false },
+    { description: 'All', id: '0', checked: true },
+    { description: '$0 - $250K', id: '0-250000', checked: false },
+    { description: '$250K - $1M', id: '250001-1000000', checked: false },
     { description: '$1M - $5M', id: '1000001-5000000', checked: false },
-    { description: '$5M - $10M', id: '5000001-10000000', checked: false }
+    { description: '$5M - $10M', id: '5000001-10000000', checked: false },
+    { description: '$10M - $100M', id: '10000001-100000000', checked: false },
+    { description: '$100M+', id: '100000001-1000000000', checked: false }
   ];
-  item_selected = { description: '', value: '' };
+  item_selected: any[] = [];
   @Input()
   opened = false;
   @Output()
@@ -30,18 +32,9 @@ export class FilterContractThresholdComponent implements OnInit {
   id = 'filter-threshold';
   error_message;
   count = 0;
+  _threshold = '0';
+  value_set = false;
 
-  /** Sample json
- {
-  "results": [
-    { "description": "All", "id": "10000000" },
-    { "description": "$0 - $500K", "id": "0-500000" },
-    { "description": "$500K - $1M", "id": "500001-1000000" },
-    { "description": "$1M - $5M", "id": "1000001-5000000" },
-    { "description": "$5M - $10M", "id": "5000001-10000000" }
-  ]
-  }
-  */
   /** Generate inputs labels & values
    *  with these
    */
@@ -62,82 +55,43 @@ export class FilterContractThresholdComponent implements OnInit {
       for (let i = 0; i < this.items.length; i++) {
         if (values[0] === this.items[i][this.json_value]) {
           this.items[i]['checked'] = true;
-          this.setValue(
-            this.items[i][this.json_value].toString(),
-            this.items[i][this.json_description]
-          );
+          this.threshold = values[0];
         }
       }
       /** Open accordion */
       this.opened = true;
-      console.log('open ' + this.id);
     } else {
       this.opened = false;
     }
+    this.emmitLoaded.emit(this.queryName);
   }
-  // setInputItems() {
-  //   this.searchService.getContractValueHistory().subscribe(
-  //     data => {
-  //       this.items = data['results'];
-  //       this.emmitLoaded.emit(1);
-  //       /** Grab the queryparams and sets default values
-  //        *  on inputs Ex. checked, selected, keywords, etc */
-  //       if (this.route.snapshot.queryParamMap.has(this.queryName)) {
-  //         const values: string[] = this.route.snapshot.queryParamMap
-  //           .get(this.queryName)
-  //           .split('__');
-  //         for (let i = 0; i < this.items.length; i++) {
-  //           if (values[0] === this.items[i][this.json_value]) {
-  //             this.items[i]['checked'] = true;
-  //             this.setValue(
-  //               this.items[i][this.json_value].toString(),
-  //               this.items[i][this.json_description]
-  //             );
-  //           }
-  //         }
-  //         /** Open accordion */
-  //         this.opened = true;
-  //         console.log('open ' + this.id);
-  //       } else {
-  //         this.opened = false;
-  //       }
-  //     },
-  //     error => (this.error_message = <any>error)
-  //   );
-  // }
+  get threshold(): string {
+    return this._threshold;
+  }
+  set threshold(value: string) {
+    this._threshold = value;
+    if (value === '0' && this.value_set) {
+      this.emmitSelected.emit(0);
+      this.value_set = false;
+    } else {
+      if (!this.value_set) {
+        /** Only emit this once */
+        this.emmitSelected.emit(1);
+        this.value_set = true;
+      }
+    }
+  }
   getSelected(): any[] {
     const item = [];
-    const value = this.item_selected.value;
-    if (value !== '' && value !== this.max.toString()) {
-      // ** Build obj only if is not default value */
+    if (this.threshold !== '0') {
       item['name'] = this.queryName;
       item['description'] = this.name;
-      item['items'] = [this.item_selected];
+      item['items'] = [{ value: this.threshold }];
     }
     return item;
   }
   reset() {
     /** Set default values */
-    this.item_selected.value = this.max.toString();
-    this.item_selected.description = 'All';
-    for (let i = 0; i < this.items.length; ++i) {
-      document.getElementById(this.id + '-' + i).checked = false;
-    }
-    document.getElementById(this.id + '-0').checked = true;
-  }
-  setValue(value: string, title: string) {
-    this.item_selected.description = title;
-    this.item_selected.value = value;
-  }
-  onChange(value: string, description: string, isChecked: boolean) {
-    if (isChecked) {
-      this.setValue(value, description);
-      if (this.count === 0) {
-        this.emmitSelected.emit(1);
-      }
-      // if (description === 'All') {
-      //   this.emmitSelected.emit(0);
-      // }
-    }
+    this.threshold = '';
   }
 }

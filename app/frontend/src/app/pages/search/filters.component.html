@@ -41,12 +41,12 @@
       <!-- <li>
         <discovery-filter-certifications (emmitSelected)="activateSubmit($event)"></discovery-filter-certifications>
       </li> -->
-      <!-- <li>
-        <discovery-filter-contract-threshold (emmitSelected)="activateSubmit($event)"></discovery-filter-contract-threshold>
-      </li> -->
-      <!-- <li>
-        <discovery-filter-agency-performance (emmitSelected)="activateSubmit($event)"></discovery-filter-agency-performance>
-      </li> -->
+      <li>
+        <discovery-filter-contract-threshold (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-contract-threshold>
+      </li>
+      <li>
+        <discovery-filter-agency-performance [items]="vehicles" (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-agency-performance>
+      </li>
       <li>
         <discovery-filter-zone (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-zone>
       </li>

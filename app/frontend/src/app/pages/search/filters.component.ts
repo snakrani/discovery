@@ -88,14 +88,16 @@ export class FiltersComponent implements OnInit {
       this.filterServiceCategories,
       this.filterNaicsComponent,
       this.filterPscComponent,
-      this.filterZoneComponent
+      this.filterContractThreshold,
+      this.filterZoneComponent,
+      this.filterAgencyPerformance
     ];
     /**
      *
       this.filterZoneComponent
       this.filterCertifications,
       this.filterContractPricing,
-      this.filterContractThreshold,
+
       this.filterAgencyPerformance
        */
     this.initPools(['All']);
@@ -239,7 +241,6 @@ export class FiltersComponent implements OnInit {
       item['name'] = filter;
       this.loaded_filters.push(item);
     }
-
     /** Filters need to be loaded before
      *  displaying compare table.
      */
