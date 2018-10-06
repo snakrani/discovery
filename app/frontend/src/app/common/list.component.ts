@@ -3,17 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'discovery-list',
   templateUrl: './list.component.html',
-  styles: [
-    `
-      .ul-no-bullets {
-        margin: 0;
-        padding: 0;
-      }
-      .ul-no-bullets li {
-        list-style: none;
-      }
-    `
-  ]
+  styles: [``]
 })
 export class ListComponent implements OnInit {
   @Input()

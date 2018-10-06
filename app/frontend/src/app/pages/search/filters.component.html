@@ -1,4 +1,16 @@
-<div id="filters-container" class="usa-width-one-third usa-section-dark bordered sidenav">
+<!-- Server Error Notification -->
+<div class="usa-grid" *ngIf="server_error">
+  <div class="usa-width-one-whole">
+    <div class="usa-alert usa-alert-warning" role="alert">
+      <div class="usa-alert-body">
+        <h3 class="usa-alert-heading">This area is currently down for maintenance.</h3>
+        <p class="usa-alert-text">We expect to be back in a couple hours. Thanks for your patience.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Server Error Notification -->
+<div [hidden]="server_error" id="filters-container" class="usa-width-one-third usa-section-dark bordered sidenav">
   <div class="relative">
     <div class="overlay" *ngIf="spinner && !parentSpinner">
       <div class="spinner">
@@ -42,11 +54,11 @@
         <discovery-filter-certifications (emmitSelected)="activateSubmit($event)"></discovery-filter-certifications>
       </li> -->
       <li>
-        <discovery-filter-contract-threshold (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-contract-threshold>
+        <discovery-filter-contract-obligated-amount (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-contract-obligated-amount>
       </li>
-      <li>
-        <discovery-filter-agency-performance [items]="vehicles" (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-agency-performance>
-      </li>
+      <!-- <li>
+        <discovery-filter-agency-performance (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-agency-performance>
+      </li> -->
       <li>
         <discovery-filter-zone (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-zone>
       </li>

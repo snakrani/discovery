@@ -15,7 +15,7 @@ import { FilterNaicsComponent } from './filters/filter-naics.component';
 import { FilterServiceCategoriesComponent } from './filters/filter-service-categories.component';
 import { FilterCertificationsComponent } from './filters/filter-certifications.component';
 import { FilterContractPricingTypeComponent } from './filters/filter-contract-pricing-type.component';
-import { FilterContractThresholdComponent } from './filters/filter-contract-threshold.component';
+import { FilterContractObligatedAmountComponent } from './filters/filter-contract-obligated-amount.component';
 import { FilterAgencyPerformanceComponent } from './filters/filter-agency-performance.component';
 import { FilterPscComponent } from './filters/filter-psc.component';
 import { FilterZoneComponent } from './filters/filter-zone.component';
@@ -41,8 +41,8 @@ export class FiltersComponent implements OnInit {
   filterCertifications: FilterCertificationsComponent;
   @ViewChild(FilterContractPricingTypeComponent)
   filterContractPricing: FilterContractPricingTypeComponent;
-  @ViewChild(FilterContractThresholdComponent)
-  filterContractThreshold: FilterContractThresholdComponent;
+  @ViewChild(FilterContractObligatedAmountComponent)
+  filterContractObligated: FilterContractObligatedAmountComponent;
   @ViewChild(FilterAgencyPerformanceComponent)
   filterAgencyPerformance: FilterAgencyPerformanceComponent;
   @ViewChild(FilterPscComponent)
@@ -66,6 +66,7 @@ export class FiltersComponent implements OnInit {
   num_items_selected = 0;
   loaded_filters: any[] = [];
   error_message;
+  server_error = false;
   filters_submitted: any[];
   params_submitted = false;
   sharedFiltersLoaded = false;
@@ -88,21 +89,20 @@ export class FiltersComponent implements OnInit {
       this.filterServiceCategories,
       this.filterNaicsComponent,
       this.filterPscComponent,
-      this.filterContractThreshold,
-      this.filterZoneComponent,
-      this.filterAgencyPerformance
+      this.filterContractObligated,
+      this.filterZoneComponent
     ];
     /**
      *
-      this.filterZoneComponent
+      this.filterAgencyPerformance,
+      this.filterZoneComponent,
       this.filterCertifications,
-      this.filterContractPricing,
-
-      this.filterAgencyPerformance
+      this.filterContractPricing
        */
     this.initPools(['All']);
   }
   initVehicles() {
+    this.server_error = false;
     this.searchService.getContractVehicles().subscribe(
       data => {
         this.vehicles = data['results'];
@@ -129,20 +129,25 @@ export class FiltersComponent implements OnInit {
         this.filterContractVehiclesComponent.loaded();
       },
       error => {
+        this.server_error = true;
         this.error_message = <any>error;
         this.emitServerError.emit(1);
+        this.spinner = false;
       }
     );
   }
   initPools(vehicles) {
+    this.server_error = false;
     this.searchService.getPools(vehicles).subscribe(
       data => {
         this.pools = data['results'];
         this.initVehicles();
       },
       error => {
+        this.server_error = true;
         this.error_message = <any>error;
         this.emitServerError.emit(1);
+        this.spinner = false;
       }
     );
   }
@@ -179,6 +184,10 @@ export class FiltersComponent implements OnInit {
             selected: filter_items['items']
           };
           filters.push(item);
+        }
+        /** Request Obligated Amounts Duns */
+        if (filter_items['name'] === 'obligated_amount') {
+          this.filterContractObligated.getObligatedAmountDuns();
         }
       }
     }
@@ -217,6 +226,10 @@ export class FiltersComponent implements OnInit {
   }
   getNaicsByVehicle(vehicle: string) {
     const obj: any[] = this.filterNaicsComponent.getNaicsByVehicle(vehicle);
+    return obj;
+  }
+  getObligatedAmountDunsList() {
+    const obj: any[] = this.filterContractObligated.getDunsList();
     return obj;
   }
   getPSCsByVehicle(vehicle: string) {

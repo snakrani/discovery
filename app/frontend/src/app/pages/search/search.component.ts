@@ -44,6 +44,13 @@ export class SearchComponent implements OnInit {
   filters: any[];
   scroll_buttons = false;
   server_error = false;
+  obligated_amounts_list: any = [];
+  agency_performance_list: any = [];
+  vehicle_vendors_total: number;
+  more_info = false;
+  interval;
+  total_vendors_met_criteria = 0;
+
   @HostListener('window:resize')
   onResize() {
     if (document.getElementById('discovery').classList.contains('push')) {
@@ -70,6 +77,7 @@ export class SearchComponent implements OnInit {
   }
   set sort_by(value: string) {
     this._sort_by = value;
+    this.vehicle_vendors_total = this.getVendorTotalByVehicle(value);
   }
   get spinner(): boolean {
     return this._spinner;
@@ -87,13 +95,28 @@ export class SearchComponent implements OnInit {
     }
     return items;
   }
-
+  resetTableScrolling() {
+    this.interval = setInterval(() => {
+      if (document.getElementById('tbl-compare')) {
+        /** Reset scroll window widths on re submit */
+        $('#overflow-compare .scroll-div1, #overflow-compare .scroll-div2').css(
+          'width',
+          '100%'
+        );
+      }
+      if (!this.spinner) {
+        this.initScrollBars();
+        clearInterval(this.interval);
+      }
+    }, 500);
+  }
   submitSelectedFilters(filters) {
     this.server_error = false;
     this.spinner = true;
     this.filters = filters;
     this.searchService.activeFilters = filters;
     this.searchService.setQueryParams(filters);
+    this.resetTableScrolling();
 
     this.searchService
       .getVendors(this.searchService.activeFilters, '&page=0')
@@ -117,8 +140,18 @@ export class SearchComponent implements OnInit {
         error => {
           this.error_message = <any>error;
           this.server_error = true;
+          this.spinner = false;
         }
       );
+  }
+  getVendorTotalByVehicle(vehicle: string): number {
+    let total = 0;
+    for (const item of this.compare_tbl) {
+      if (item.id === vehicle) {
+        total = item['vendors_results_total'];
+      }
+    }
+    return total;
   }
   showSpinner(bool: boolean) {
     this.spinner = bool;
@@ -160,6 +193,10 @@ export class SearchComponent implements OnInit {
     const results = {};
     results['vehicles'] = [];
     const vehicles: any[] = [];
+
+    this.obligated_amounts_list = this.filtersComponent.getObligatedAmountDunsList();
+    // this.agency_performance_list = this.filtersComponent.getObligatedAmountDunsList();
+
     for (const item of obj) {
       const vendor = {};
       const asides_arr = [];
@@ -189,7 +226,14 @@ export class SearchComponent implements OnInit {
       } else {
         vendor['setasides'] = [];
       }
-      vehicles.push(vendor);
+      if (
+        this.obligated_amounts_list.length > 0 &&
+        this.searchService.existsIn(this.obligated_amounts_list, item.duns, '')
+      ) {
+        vehicles.push(vendor);
+      } else if (this.obligated_amounts_list.length === 0) {
+        vehicles.push(vendor);
+      }
     }
     results['vendors'] = vehicles;
     return results;
@@ -215,6 +259,28 @@ export class SearchComponent implements OnInit {
       item => item.vehicles.indexOf(vehicle) !== -1
     );
     return count.length;
+  }
+  initScrollBars() {
+    if (document.getElementById('tbl-compare')) {
+      const w = document.getElementById('tbl-compare').offsetWidth + 'px';
+      $('#overflow-compare .scroll-div1, #overflow-compare .scroll-div2').css(
+        'width',
+        w
+      );
+    }
+    $('.scroll-view-topscroll').scroll(function() {
+      $('.scroll-view').scrollLeft($('.scroll-view-topscroll').scrollLeft());
+    });
+    $('.scroll-view').scroll(function() {
+      $('.scroll-view-topscroll').scrollLeft($('.scroll-view').scrollLeft());
+    });
+  }
+  getTotalVendorsMetCriteria(): number {
+    let total = 0;
+    for (const item of this.compare_tbl) {
+      total += +item['vendors_results_total'];
+    }
+    return total;
   }
   buildContractCompare() {
     const compare: any[] = [];
@@ -244,11 +310,7 @@ export class SearchComponent implements OnInit {
       }
     }
     this.compare_tbl = compare;
-    if (this.compare_tbl.length > 3) {
-      this.scroll_buttons = true;
-    } else {
-      this.scroll_buttons = false;
-    }
+    this.total_vendors_met_criteria = this.getTotalVendorsMetCriteria();
   }
   showServerError(error: number) {
     if (error === 1) {
@@ -260,6 +322,9 @@ export class SearchComponent implements OnInit {
     for (const ele of doc) {
       ele.classList.toggle('show_all');
     }
+  }
+  toggleMoreInfo() {
+    this.more_info = !this.more_info;
   }
   showSideNavFilters() {
     document.getElementById('filters-container').style.left = '0px';
@@ -289,27 +354,5 @@ export class SearchComponent implements OnInit {
   }
   closeModal(id: string) {
     this.modalService.close(id);
-  }
-  scrollRight() {
-    const container = document.getElementById('overflow-compare');
-    let scrollAmount = 0;
-    const slideTimer = setInterval(() => {
-      container.scrollLeft += 20;
-      scrollAmount += 10;
-      if (scrollAmount >= 100) {
-        clearInterval(slideTimer);
-      }
-    }, 25);
-  }
-  scrollLeft() {
-    const container = document.getElementById('overflow-compare');
-    let scrollAmount = 0;
-    const slideTimer = setInterval(() => {
-      container.scrollLeft -= 20;
-      scrollAmount += 10;
-      if (scrollAmount >= 100) {
-        clearInterval(slideTimer);
-      }
-    }, 25);
   }
 }

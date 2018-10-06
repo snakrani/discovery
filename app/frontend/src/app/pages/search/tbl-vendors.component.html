@@ -1,5 +1,11 @@
 <div *ngIf="!loading">
-    <a (click)="toggleSBD()" class="btn-toggle pull-right">{{!sbd_col ? 'Show' : 'Hide'}} Set Asides</a>
+
+    <div class="text-right pad-top-bottom">
+        <button class="usa-button-secondary" (click)="toggleSBD()">{{!sbd_col
+            ?
+            'Show' : 'Hide'}} Small Business Designation</button>
+    </div>
+
     <table class="usa-table-borderless">
         <thead>
             <tr>

@@ -15,7 +15,6 @@ declare let document: any;
   styles: []
 })
 export class FilterAgencyPerformanceComponent implements OnInit, OnChanges {
-  @Input()
   items: any[] = [];
   items_selected: any[] = [];
   @Input()
@@ -29,6 +28,7 @@ export class FilterAgencyPerformanceComponent implements OnInit, OnChanges {
   id = 'filter-agency-performance';
   error_message;
   agency = '0';
+  duns_list: any[] = [];
   /** Sample json
   {
 
@@ -44,12 +44,37 @@ export class FilterAgencyPerformanceComponent implements OnInit, OnChanges {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.searchService.getAgencyPerformanceNames().subscribe(
+      data => {
+        this.items = data['results'];
+
+        /** Grab the queryparams and sets default values
+         *  on inputs Ex. checked, selected, keywords, etc */
+        if (this.route.snapshot.queryParamMap.has(this.queryName)) {
+          const values: string[] = this.route.snapshot.queryParamMap
+            .get(this.queryName)
+            .split('__');
+          for (const item of values) {
+            this.addItem(item);
+          }
+          /** Open accordion */
+          this.opened = true;
+        } else {
+          this.opened = false;
+        }
+        this.emmitLoaded.emit(this.queryName);
+      },
+      error => {
+        this.error_message = <any>error;
+      }
+    );
+  }
   ngOnChanges() {
-    if (this.items.length > 1) {
-      this.buildItems(this.items);
-      this.emmitLoaded.emit(this.queryName);
-    }
+    // if (this.items.length > 1) {
+    //   this.buildItems(this.items);
+    //   this.emmitLoaded.emit(this.queryName);
+    // }
   }
 
   buildItems(obj: any[]) {
@@ -65,29 +90,27 @@ export class FilterAgencyPerformanceComponent implements OnInit, OnChanges {
     }
     this.items = agency;
     this.items.sort(this.searchService.sortByDescriptionAsc);
-    /** Grab the queryparams and sets default values
-     *  on inputs Ex. checked, selected, keywords, etc */
-    if (this.route.snapshot.queryParamMap.has(this.queryName)) {
-      const values: string[] = this.route.snapshot.queryParamMap
-        .get(this.queryName)
-        .split('__');
-      for (let i = 0; i < this.items.length; i++) {
-        if (values.includes(this.items[i][this.json_value])) {
-          this.items[i]['checked'] = true;
-          this.addItem(
-            this.items[i][this.json_value],
-            this.items[i][this.json_description]
-          );
-        }
-      }
-      /** Open accordion */
-      this.opened = true;
-    } else {
-      this.opened = false;
-    }
+
     this.emmitLoaded.emit(this.queryName);
   }
-
+  getAgencyPerformanceDuns() {
+    this.duns_list = [];
+    // Set agency IDs
+    const ids = '';
+    this.searchService.getAgencyPerformanceDuns(ids).subscribe(
+      data => {
+        this.duns_list = data['results'];
+      },
+      error => (this.error_message = <any>error)
+    );
+  }
+  getDunsList(): any[] {
+    let list = [];
+    if (this.items_selected.length > 0) {
+      list = this.duns_list;
+    }
+    return list;
+  }
   exists(value: string): boolean {
     for (let i = 0; i < this.items_selected.length; i++) {
       if (this.items_selected[i]['value'] === value) {
@@ -113,10 +136,24 @@ export class FilterAgencyPerformanceComponent implements OnInit, OnChanges {
       ).checked = false;
     }
   }
-  addItem(code: string, title: string) {
+  addAgency() {
+    if (!this.exists(this.agency) && this.agency !== '0') {
+      this.addItem(this.agency);
+    }
+  }
+  getItemDescription(value: string): string {
+    if (value) {
+      for (let i = 0; i < this.items.length; i++) {
+        if (this.items[i][this.json_value] === value) {
+          return this.items[i][this.json_description];
+        }
+      }
+    }
+  }
+  addItem(value: string) {
     const item = {};
-    item['description'] = title;
-    item['value'] = code;
+    item['value'] = value;
+    item['description'] = this.getItemDescription(value);
     this.items_selected.push(item);
     this.emmitSelected.emit(1);
   }
@@ -127,12 +164,5 @@ export class FilterAgencyPerformanceComponent implements OnInit, OnChanges {
       }
     }
     this.emmitSelected.emit(0);
-  }
-  onChange(key: string, title: string, isChecked: boolean) {
-    if (isChecked) {
-      this.addItem(key, title);
-    } else {
-      this.removeItem(key);
-    }
   }
 }

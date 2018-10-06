@@ -15,6 +15,7 @@ export class VendorDetailComponent implements OnInit {
   piids_selected: any[] = [];
   spinner = true;
   sbd_col = true;
+  more_info = false;
   contract_vehicles;
   service_categories;
   duns: string;
@@ -123,7 +124,7 @@ export class VendorDetailComponent implements OnInit {
       let phone = '';
       let email = '';
       if (item.name) {
-        name = '<span class="db">' + item.name + '</span>';
+        name = '<strong class="db">' + item.name + '</strong>';
       }
       if (item.phones.length > 0) {
         for (const i of item.phones) {
@@ -155,6 +156,9 @@ export class VendorDetailComponent implements OnInit {
   }
   toggleSBD() {
     this.sbd_col = !this.sbd_col;
+  }
+  toggleMoreInfo() {
+    this.more_info = !this.more_info;
   }
   onTop(ele) {
     this.zindex++;

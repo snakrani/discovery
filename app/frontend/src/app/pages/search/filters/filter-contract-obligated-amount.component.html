@@ -7,7 +7,7 @@
     <legend class="usa-sr-only">$0 to $100+ Million</legend>
     <ul class="usa-unstyled-list">
       <li *ngFor="let item of items; let i = index">
-        <input id="{{id + '-' + i}}" type="radio" [checked]="item.checked" value="{{item.id}}" [(ngModel)]="threshold">
+        <input id="{{id + '-' + i}}" type="radio" [checked]="item.checked" value="{{item.id}}" [(ngModel)]="obligated_amount">
         <label for="{{id + '-' + i}}">{{item.description}}</label>
       </li>
 
