@@ -348,7 +348,7 @@ export class SearchComponent implements OnInit {
     document.getElementById('slide-search').classList.add('fadeOut');
     document.getElementById('slides-container').style.marginLeft = -w + 'px';
   }
-  hideVendorDetail() {
+  hideVendorDetail(bool) {
     this.show_vendor_details = false;
     document.getElementById('slide-vendor').classList.remove('fadeIn');
     document.getElementById('slide-search').classList.remove('fadeOut');

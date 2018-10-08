@@ -52,7 +52,7 @@ export class ThSortComponent implements OnChanges {
       this.reset();
     }
   }
-  order(ele) {
+  order() {
     switch (this.orderClass) {
       case '':
         this.orderClass = 'asc';
