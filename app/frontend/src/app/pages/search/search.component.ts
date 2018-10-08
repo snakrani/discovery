@@ -31,11 +31,14 @@ export class SearchComponent implements OnInit {
   contracts_compare;
   contracts_results = [];
   contracts_w_no_records = [];
+  contract_vehicles;
+  zones;
+  service_categories;
   vendors_results;
   vendors_no_results = false;
   show_details = false;
   show_results = false;
-  compare_tbl;
+  compare_tbl: any[] = [];
   vehicles;
   results;
   _sort_by: string;
@@ -50,12 +53,15 @@ export class SearchComponent implements OnInit {
   more_info = false;
   interval;
   total_vendors_met_criteria = 0;
+  selected_duns = '';
+  show_vendor_details = false;
 
   @HostListener('window:resize')
   onResize() {
     if (document.getElementById('discovery').classList.contains('push')) {
       this.hideSideNavFilters();
     }
+    this.initSlider();
   }
   constructor(
     private searchService: SearchService,
@@ -71,6 +77,7 @@ export class SearchComponent implements OnInit {
     } else {
       this.spinner = false;
     }
+    this.initSlider();
   }
   get sort_by(): string {
     return this._sort_by;
@@ -96,16 +103,35 @@ export class SearchComponent implements OnInit {
     return items;
   }
   resetTableScrolling() {
+    if (document.getElementById('tbl-compare')) {
+      /** Reset scroll window widths on re submit */
+      $('#overflow-compare .scroll-div1, #overflow-compare .scroll-div2').css(
+        'width',
+        '100%'
+      );
+    }
+  }
+  initScrollBars() {
+    this.resetTableScrolling();
     this.interval = setInterval(() => {
       if (document.getElementById('tbl-compare')) {
         /** Reset scroll window widths on re submit */
+        const w = $('#tbl-compare').css('width');
         $('#overflow-compare .scroll-div1, #overflow-compare .scroll-div2').css(
           'width',
-          '100%'
+          w
         );
-      }
-      if (!this.spinner) {
-        this.initScrollBars();
+
+        $('.scroll-view-topscroll').scroll(function() {
+          $('.scroll-view').scrollLeft(
+            $('.scroll-view-topscroll').scrollLeft()
+          );
+        });
+        $('.scroll-view').scroll(function() {
+          $('.scroll-view-topscroll').scrollLeft(
+            $('.scroll-view').scrollLeft()
+          );
+        });
         clearInterval(this.interval);
       }
     }, 500);
@@ -116,8 +142,10 @@ export class SearchComponent implements OnInit {
     this.filters = filters;
     this.searchService.activeFilters = filters;
     this.searchService.setQueryParams(filters);
-    this.resetTableScrolling();
 
+    this.compare_tbl = [];
+    this.initScrollBars();
+    this.zones = this.filtersComponent.getZones();
     this.searchService
       .getVendors(this.searchService.activeFilters, '&page=0')
       .subscribe(
@@ -133,6 +161,8 @@ export class SearchComponent implements OnInit {
           this.vendors_no_results = false;
           this.show_results = true;
           this.spinner = false;
+          this.contract_vehicles = this.filtersComponent.getContractVehicles();
+          this.service_categories = this.filtersComponent.getServiceCategories();
           this.buildContractCompare();
           this.sort_by = this.getFirstVehicleWithVendors();
           this.viewContracts();
@@ -172,6 +202,15 @@ export class SearchComponent implements OnInit {
     }
     return [];
   }
+  initSlider() {
+    const w = window.innerWidth;
+    document.getElementById('slides-container').style.width = w * 2 + 30 + 'px';
+    document.getElementById('slide-search').style.width = w + 'px';
+    document.getElementById('slide-vendor').style.width = w + 'px';
+    if (this.show_vendor_details) {
+      document.getElementById('slides-container').style.marginLeft = -w + 'px';
+    }
+  }
   filterResultsByVehicle(vehicle: string) {
     return this.results.vendors.filter(
       vendor => vendor.vehicles.indexOf(vehicle) !== -1
@@ -187,6 +226,7 @@ export class SearchComponent implements OnInit {
   viewContracts() {
     this.vw_contracts = true;
     this.vw_vendors = false;
+    this.initScrollBars();
   }
   buildVendorByVehicle(obj: any[]) {
     const vehicles_submitted = this.returnSubmittedVehicles();
@@ -260,21 +300,6 @@ export class SearchComponent implements OnInit {
     );
     return count.length;
   }
-  initScrollBars() {
-    if (document.getElementById('tbl-compare')) {
-      const w = document.getElementById('tbl-compare').offsetWidth + 'px';
-      $('#overflow-compare .scroll-div1, #overflow-compare .scroll-div2').css(
-        'width',
-        w
-      );
-    }
-    $('.scroll-view-topscroll').scroll(function() {
-      $('.scroll-view').scrollLeft($('.scroll-view-topscroll').scrollLeft());
-    });
-    $('.scroll-view').scroll(function() {
-      $('.scroll-view-topscroll').scrollLeft($('.scroll-view').scrollLeft());
-    });
-  }
   getTotalVendorsMetCriteria(): number {
     let total = 0;
     for (const item of this.compare_tbl) {
@@ -311,6 +336,25 @@ export class SearchComponent implements OnInit {
     }
     this.compare_tbl = compare;
     this.total_vendors_met_criteria = this.getTotalVendorsMetCriteria();
+  }
+  showVendorDetail(duns) {
+    this.spinner = true;
+    this.selected_duns = duns;
+    this.show_vendor_details = true;
+    const w = window.innerWidth;
+    document.getElementById('slide-vendor').classList.remove('fadeOut');
+    document.getElementById('slide-search').classList.remove('fadeIn');
+    document.getElementById('slide-vendor').classList.add('fadeIn');
+    document.getElementById('slide-search').classList.add('fadeOut');
+    document.getElementById('slides-container').style.marginLeft = -w + 'px';
+  }
+  hideVendorDetail() {
+    this.show_vendor_details = false;
+    document.getElementById('slide-vendor').classList.remove('fadeIn');
+    document.getElementById('slide-search').classList.remove('fadeOut');
+    document.getElementById('slide-vendor').classList.add('fadeOut');
+    document.getElementById('slide-search').classList.add('fadeIn');
+    document.getElementById('slides-container').style.marginLeft = '0px';
   }
   showServerError(error: number) {
     if (error === 1) {

@@ -26,6 +26,8 @@ export class TblVendorsComponent implements OnInit, OnChanges {
   emitActivateSpinner: EventEmitter<boolean> = new EventEmitter();
   @Output()
   emitVehicle: EventEmitter<string> = new EventEmitter();
+  @Output()
+  emitDuns: EventEmitter<string> = new EventEmitter();
   sbd_col = false;
   items_per_page = 50;
   items_total: number;
@@ -136,6 +138,9 @@ export class TblVendorsComponent implements OnInit, OnChanges {
         this.prev = 1;
       }
     }
+  }
+  showVendorDetails(duns: string) {
+    this.emitDuns.emit(duns);
   }
   prevPage() {
     this.getVendors(this.prev);

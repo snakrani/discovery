@@ -40,7 +40,7 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    if (this.duns) {
+    if (this.duns && this.duns !== '') {
       this.getContracts(
         this.duns,
         this.current_page,
@@ -70,6 +70,7 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
     this.current_page = page;
     this.enable_paging = false;
     this.history_no_results = false;
+    this.initScrollBars();
     this.spinner = true;
     this.resetTableScrolling();
     this.searchService
@@ -94,35 +95,44 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
       );
   }
   resetTableScrolling() {
+    if (document.getElementById('tbl-contract-history')) {
+      /** Reset scroll window widths on re submit */
+      $(
+        '#overflow-contract-history .scroll-div1, #overflow-contract-history .scroll-div2'
+      ).css('width', '100%');
+    }
+  }
+  initScrollBars() {
+    this.resetTableScrolling();
     this.interval = setInterval(() => {
       if (document.getElementById('tbl-contract-history')) {
         /** Reset scroll window widths on re submit */
+        const w =
+          document.getElementById('tbl-contract-history').offsetWidth + 'px';
         $(
           '#overflow-contract-history .scroll-div1, #overflow-contract-history .scroll-div2'
-        ).css('width', '100%');
-      }
-      if (!this.spinner) {
-        this.initScrollBars();
+        ).css('width', w);
+        if (
+          $('#scroll-view').css('width') ===
+          $('#tbl-contract-history').css('width')
+        ) {
+          $(
+            '#overflow-contract-history .scroll-div1, #overflow-contract-history .scroll-div2'
+          ).css('width', '100%');
+        }
+        $('.scroll-view-topscroll').scroll(function() {
+          $('.scroll-view').scrollLeft(
+            $('.scroll-view-topscroll').scrollLeft()
+          );
+        });
+        $('.scroll-view').scroll(function() {
+          $('.scroll-view-topscroll').scrollLeft(
+            $('.scroll-view').scrollLeft()
+          );
+        });
         clearInterval(this.interval);
       }
     }, 500);
-  }
-  initScrollBars() {
-    if (document.getElementById('tbl-contract-history')) {
-      const w =
-        document.getElementById('tbl-contract-history').offsetWidth + 'px';
-
-      $(
-        '#overflow-contract-history .scroll-div1, #overflow-contract-history .scroll-div2'
-      ).css('width', w);
-
-      $('.scroll-view-topscroll').scroll(function() {
-        $('.scroll-view').scrollLeft($('.scroll-view-topscroll').scrollLeft());
-      });
-      $('.scroll-view').scroll(function() {
-        $('.scroll-view-topscroll').scrollLeft($('.scroll-view').scrollLeft());
-      });
-    }
   }
   orderBy(ordering: any[]) {
     const order_by = ordering['sort'] + ordering['ordering'];

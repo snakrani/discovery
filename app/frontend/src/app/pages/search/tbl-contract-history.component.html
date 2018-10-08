@@ -1,4 +1,4 @@
-<h2>Showing vendor's indexed 5 year contract history</h2>
+<h3>Showing vendor's indexed 5 year contract history</h3>
 <em>Work performed by a vendor is often reported under a different NAICS code due to FPDS restrictions.</em>
 <div class="filters-container">
   <div class="usa-width-one-twelfth"><strong class="db" style="padding-top:12px">Filter By:</strong></div>
@@ -36,7 +36,7 @@
     <div class="scroll-div1">
     </div>
   </div>
-  <div class="scroll-view scrollbar">
+  <div id="scroll-view" class="scroll-view scrollbar">
     <div class="scroll-div2 pad-top">
 
       <table id="tbl-contract-history" class="usa-table-borderless history" *ngIf="!history_no_results">
@@ -44,11 +44,11 @@
           <tr>
             <th scope="col"></th>
             <th scope="col" class="tooltip-bottom" data-tooltip="Sort by Date Signed">
-              <discovery-th-sort [label]="'Date Signed'" [ordering]="'date_signed'" [selectedParentOrdering]="ordering"
-                (emmitOrdering)="orderBy($event)"></discovery-th-sort>
+              <discovery-th-sort [label]="'Date Signed'" [width]="'auto'" [ordering]="'date_signed'"
+                [selectedParentOrdering]="ordering" (emmitOrdering)="orderBy($event)"></discovery-th-sort>
             </th>
             <th scope="col" class="tooltip-bottom" data-tooltip="Sort by PIID">
-              <discovery-th-sort [label]="'PIID'" [ordering]="'piid'" [selectedParentOrdering]="ordering"
+              <discovery-th-sort [label]="'PIID'" [width]="'auto'" [ordering]="'piid'" [selectedParentOrdering]="ordering"
                 (emmitOrdering)="orderBy($event)"></discovery-th-sort>
             </th>
             <th scope="col" class="tooltip-bottom" data-tooltip="Sort by Agency">
@@ -56,8 +56,8 @@
                 [selectedParentOrdering]="ordering" (emmitOrdering)="orderBy($event)"></discovery-th-sort>
             </th>
             <th scope="col" class="tooltip-bottom" data-tooltip="Sort by Price Type">
-              <discovery-th-sort [label]="'Type'" [ordering]="'pricing_type_name'" [selectedParentOrdering]="ordering"
-                (emmitOrdering)="orderBy($event)"></discovery-th-sort>
+              <discovery-th-sort [label]="'Type'" [width]="'auto'" [ordering]="'pricing_type_name'"
+                [selectedParentOrdering]="ordering" (emmitOrdering)="orderBy($event)"></discovery-th-sort>
             </th>
             <th scope="col" class="tooltip-bottom" data-tooltip="Sort by Obligated Amount">
               <discovery-th-sort [label]="'Value ($)'" [ordering]="'obligated_amount'" [selectedParentOrdering]="ordering"

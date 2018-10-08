@@ -116,6 +116,9 @@ export class FilterServiceCategoriesComponent implements OnInit, OnChanges {
     }
     return items;
   }
+  getItems() {
+    return this.items;
+  }
   getServiceCategoriesByVehicle(vehicle: string): any[] {
     const items: any[] = [];
     for (const item of this.items) {

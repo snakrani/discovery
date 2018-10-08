@@ -58,6 +58,9 @@ export class FilterContractVehiclesComponent implements OnInit {
     }
     return item;
   }
+  getItems() {
+    return this.items;
+  }
   getVehicleInfo(vehicle: string): any[] {
     for (const item of this.items) {
       if (item['id'] === vehicle) {

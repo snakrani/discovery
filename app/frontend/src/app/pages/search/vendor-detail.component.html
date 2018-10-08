@@ -1,11 +1,10 @@
-<!-- Spinner -->
-<discovery-search-spinner [show]="spinner"></discovery-search-spinner>
-<!-- End Spinner -->
 <div class="well">
   <div class="usa-grid col-container pad-top-bottom">
-
+    <div *ngIf="loading">
+      <h3>Loading Vendor Information</h3>
+    </div>
     <div *ngIf="vendor" class="usa-width-one-whole">
-      <div class="pad-all"><a [routerLink]="['/search']" queryParamsHandling="preserve" class="back"><span class="icon-arrow-left pull-left"></span>Back
+      <div class="pad-all"><a (click)="backToSearchResults()" class="back"><span class="icon-arrow-left pull-left"></span>Back
           to search
           results</a>
         <h2>{{vendor.name | titlecase}}</h2>
@@ -26,8 +25,6 @@
           <div role="tabpanel" class="tab-pane">
             <!-- Details content -->
             <div *ngIf="vw_details">
-
-
               <div class="usa-grid">
                 <div class="usa-width-one-third">
                   <h6 class="usa-heading-alt">SAM Registration Expires on:</h6>
@@ -47,9 +44,9 @@
                   <div *ngIf="vendor.sam_location.address">
                     <h6 class="usa-heading-alt">Address:</h6>
                     <blockquote>
-                      <strong>{{vendor.sam_location?.address}}</strong><br>
-                      <strong>{{vendor.sam_location?.city}}</strong><br>
-                      <strong>{{vendor.sam_location?.state}} {{vendor.sam_location?.zipcode}}</strong>
+                      <strong>{{vendor?.sam_location?.address}}</strong><br>
+                      <strong>{{vendor?.sam_location?.city}}</strong><br>
+                      <strong>{{vendor?.sam_location?.state}} {{vendor?.sam_location?.zipcode}}</strong>
                     </blockquote>
                   </div>
                 </div>
@@ -142,7 +139,7 @@
               <div class="usa-width-one-whole">
                 <!-- Contract History -->
                 <div>
-                  <discovery-tbl-contract-history [contract_vehicles]="contract_vehicles" [pools]="vendor.pools" [duns]="duns"></discovery-tbl-contract-history>
+                  <discovery-tbl-contract-history [contract_vehicles]="contract_vehicles" [pools]="vendor.pools" [duns]="duns_number"></discovery-tbl-contract-history>
                 </div>
               </div>
             </div>

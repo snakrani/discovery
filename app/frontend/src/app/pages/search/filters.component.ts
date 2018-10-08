@@ -212,11 +212,19 @@ export class FiltersComponent implements OnInit {
     this.filterNaicsComponent.setFilteredItems(arr);
     this.filterPscComponent.setFilteredItems(arr);
   }
+  getServiceCategories() {
+    const service_categories = this.filterServiceCategories.getItems();
+    return service_categories;
+  }
   getServiceCategoriesByVehicle(vehicle: string) {
     const obj: any[] = this.filterServiceCategories.getServiceCategoriesByVehicle(
       vehicle
     );
     return obj;
+  }
+  getContractVehicles() {
+    const contract_vehicles = this.filterContractVehiclesComponent.getItems();
+    return contract_vehicles;
   }
   getVehicleDescription(vehicle: string) {
     const desc = this.filterContractVehiclesComponent.getItemDescription(
@@ -239,6 +247,10 @@ export class FiltersComponent implements OnInit {
   getSetAsides() {
     const setasides = this.filterSbdComponent.getItems();
     return setasides;
+  }
+  getZones() {
+    const zones = this.filterZoneComponent.getItems();
+    return zones;
   }
   getSelectedVehicles(): any[] {
     const vehicles: any[] = this.filterContractVehiclesComponent.getSelected();

@@ -1,10 +1,10 @@
-.history th {
+/* .history th {
   min-width: auto !important;
-}
+} */
 table {
   margin: 0px !important;
   margin-bottom: 20px !important;
-  width: 99.5% !important;
+  width: 100% !important;
 }
 tbody th {
   vertical-align: top !important;
