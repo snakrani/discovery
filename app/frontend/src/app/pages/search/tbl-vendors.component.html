@@ -1,5 +1,11 @@
 <div *ngIf="!loading">
-    <a (click)="toggleSBD()" class="btn-toggle pull-right">{{!sbd_col ? 'Show' : 'Hide'}} Set Asides</a>
+
+    <div class="text-right pad-top-bottom">
+        <button class="usa-button-secondary" (click)="toggleSBD()">{{!sbd_col
+            ?
+            'Show' : 'Hide'}} Small Business Designation</button>
+    </div>
+
     <table class="usa-table-borderless">
         <thead>
             <tr>
@@ -23,7 +29,7 @@
         <tbody>
             <tr *ngFor="let item of vendors.vendors; let i = index">
                 <td><span [innerHTML]="getRowNum(i)"></span>.</td>
-                <td scope="row"><a [routerLink]="['/vendor', item.duns]" queryParamsHandling="preserve">{{item.name
+                <td scope="row"><a (click)="showVendorDetails(item.duns)">{{item.name
                         | titlecase}}</a></td>
                 <td>{{item.contracts}}</td>
                 <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'SB') ? '&bull;' : ''"></td>

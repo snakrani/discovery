@@ -1,65 +1,64 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  Input,
+  OnChanges,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import { SearchService } from './search.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { TblContractHistoryComponent } from './tbl-contract-history.component';
 
 @Component({
+  selector: 'discovery-vendor-detail',
   templateUrl: './vendor-detail.component.html',
   styleUrls: ['./vendor-detail.component.css']
 })
-export class VendorDetailComponent implements OnInit {
+export class VendorDetailComponent implements OnInit, OnChanges {
   @ViewChild(TblContractHistoryComponent)
+  @Input()
+  duns: string;
+  @Input()
+  contract_vehicles;
+  @Input()
+  service_categories;
+  @Input()
+  zones;
+  @Output()
+  emitBack: EventEmitter<boolean> = new EventEmitter();
+  @Output()
+  emitHideSpinner: EventEmitter<boolean> = new EventEmitter();
   tblContractHistory: TblContractHistoryComponent;
   error_message;
   vendor: any;
   piids_selected: any[] = [];
   spinner = true;
   sbd_col = true;
-  contract_vehicles;
-  service_categories;
-  duns: string;
+  more_info = false;
   contract_nums: any[] = [];
   num_show = 3;
   vw_details = true;
   vw_history = false;
-  zones: any = [];
   zindex = 30;
+  loading = false;
+  duns_number;
   constructor(
     private searchService: SearchService,
-    private router: Router,
     private route: ActivatedRoute
   ) {}
-  ngOnInit() {
-    this.getContractVehicles();
+  ngOnInit() {}
+  ngOnChanges() {
+    if (this.duns && this.duns !== '') {
+      this.loading = true;
+      this.duns_number = this.duns;
+      this.getVendorDetails(this.duns);
+    }
   }
-  getContractVehicles() {
-    this.searchService.getContractVehicles().subscribe(
-      data => {
-        this.contract_vehicles = data['results'];
-        this.getZones();
-      },
-      error => (this.error_message = <any>error)
-    );
+  backToSearchResults() {
+    this.emitBack.emit(true);
   }
-  getZones() {
-    this.searchService.getZone().subscribe(
-      data => {
-        this.zones = data['results'];
-        this.getServiceCategories();
-      },
-      error => (this.error_message = <any>error)
-    );
-  }
-  getServiceCategories() {
-    this.searchService.getServiceCategories(['All']).subscribe(
-      data => {
-        this.service_categories = this.buildItems(data['results']);
-        this.getVendorDetails();
-      },
-      error => (this.error_message = <any>error)
-    );
-  }
-
   viewDetails() {
     this.vw_details = true;
     this.vw_history = false;
@@ -75,14 +74,13 @@ export class VendorDetailComponent implements OnInit {
       ele.innerHTML = 'More';
     }
   }
-  getVendorDetails() {
-    const id = this.route.snapshot.params['dun'];
-    this.searchService.getVendorDetails(id).subscribe(
+  getVendorDetails(duns) {
+    this.searchService.getVendorDetails(duns).subscribe(
       data => {
-        this.spinner = false;
         this.vendor = data;
-        this.duns = data['duns'];
+        this.loading = false;
         this.vendor['pools'] = this.buildPoolsByUniqueContractNumber(data);
+        this.emitHideSpinner.emit(false);
       },
       error => (this.error_message = <any>error)
     );
@@ -123,7 +121,7 @@ export class VendorDetailComponent implements OnInit {
       let phone = '';
       let email = '';
       if (item.name) {
-        name = '<span class="db">' + item.name + '</span>';
+        name = '<strong class="db">' + item.name + '</strong>';
       }
       if (item.phones.length > 0) {
         for (const i of item.phones) {
@@ -155,6 +153,9 @@ export class VendorDetailComponent implements OnInit {
   }
   toggleSBD() {
     this.sbd_col = !this.sbd_col;
+  }
+  toggleMoreInfo() {
+    this.more_info = !this.more_info;
   }
   onTop(ele) {
     this.zindex++;
@@ -201,21 +202,4 @@ export class VendorDetailComponent implements OnInit {
       return false;
     }
   }
-  // onChange(contract: string, isChecked: boolean) {
-  //   if (isChecked) {
-  //     this.addItem(contract);
-  //   } else {
-  //     this.removeItem(contract);
-  //   }
-  //   if (this.piids_selected.length > 0) {
-  //     this.tblContractHistory.getContracts(
-  //       this.duns,
-  //       1,
-  //       this.piids_selected,
-  //       'all'
-  //     );
-  //   } else {
-  //     this.tblContractHistory.getContracts(this.duns, 1, [], 'all');
-  //   }
-  // }
 }

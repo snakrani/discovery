@@ -1,11 +1,10 @@
-<!-- Spinner -->
-<discovery-search-spinner [show]="spinner"></discovery-search-spinner>
-<!-- End Spinner -->
 <div class="well">
   <div class="usa-grid col-container pad-top-bottom">
-
+    <div *ngIf="loading">
+      <h3>Loading Vendor Information</h3>
+    </div>
     <div *ngIf="vendor" class="usa-width-one-whole">
-      <div class="pad-all"><a [routerLink]="['/search']" queryParamsHandling="preserve" class="back"><span class="icon-arrow-left pull-left"></span>Back
+      <div class="pad-all"><a (click)="backToSearchResults()" class="back"><span class="icon-arrow-left pull-left"></span>Back
           to search
           results</a>
         <h2>{{vendor.name | titlecase}}</h2>
@@ -26,8 +25,6 @@
           <div role="tabpanel" class="tab-pane">
             <!-- Details content -->
             <div *ngIf="vw_details">
-
-
               <div class="usa-grid">
                 <div class="usa-width-one-third">
                   <h6 class="usa-heading-alt">SAM Registration Expires on:</h6>
@@ -47,9 +44,9 @@
                   <div *ngIf="vendor.sam_location.address">
                     <h6 class="usa-heading-alt">Address:</h6>
                     <blockquote>
-                      <strong>{{vendor.sam_location?.address}}</strong><br>
-                      <strong>{{vendor.sam_location?.city}}</strong><br>
-                      <strong>{{vendor.sam_location?.state}} {{vendor.sam_location?.zipcode}}</strong>
+                      <strong>{{vendor?.sam_location?.address}}</strong><br>
+                      <strong>{{vendor?.sam_location?.city}}</strong><br>
+                      <strong>{{vendor?.sam_location?.state}} {{vendor?.sam_location?.zipcode}}</strong>
                     </blockquote>
                   </div>
                 </div>
@@ -61,63 +58,78 @@
                   <blockquote><a href="//{{vendor?.sam_url}}" target="_blank">{{vendor?.sam_url}}</a></blockquote>
                 </div>
               </div>
+
               <div class="usa-grid">
-                <div class="usa-width-one-whole">
-                  <div class="text-right"><a (click)="toggleSBD()" class="btn-toggle">{{!sbd_col ?
-                      'Show' : 'Hide'}} Set Asides</a></div>
-                  <div class="overflow">
-                    <table class="usa-table-borderless">
 
-                      <thead>
-                        <tr>
-                          <!-- <th></th> -->
-                          <th scope="col" class="col-contract-membership">Contract Membership</th>
-                          <th scope="col" class="sbd">Contact Info</th>
-                          <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Small Disadvantaged Business">SB</th>
-                          <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Small Disadvantaged Business">SDB</th>
-                          <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="8(A)">8(A)</th>
-                          <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="HUBZone">HubZ</th>
-                          <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Woman Owned">WO</th>
-                          <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Veteran Owned">VO</th>
-                          <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Service Disabled Veteran Owned">SDVO</th>
-                          <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Veterans Affair VIP">VA
-                            VIP</th>
+                <div class="usa-width-one-whole pad-top">
+                  <button class="usa-button-secondary" (click)="toggleMoreInfo()">{{!more_info
+                    ?
+                    'Show' : 'Hide'}} contract details</button> <button class="usa-button-secondary" (click)="toggleSBD()">{{!sbd_col
+                    ?
+                    'Show' : 'Hide'}} Small Business Designation</button>
+                  <table class="usa-table-borderless">
 
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let item of vendor.pools; let i = index">
-                          <td scope="row" class="col-contract-membership"><strong class="db" [innerHTML]="getVehicleDescription(item.pool.vehicle.id)"></strong>
-                            <blockquote><span class="uppercase db">Contract Number: </span><strong class="pad-left">{{item.piid}}</strong></blockquote>
-                            <div class="usa-accordion">
-                              <button class="usa-accordion-button usa-accordion-button-as-link" (click)="onChange($event.target)"
-                                aria-expanded="false" [attr.aria-controls]="item?.piid">More
-                              </button>
-                              <div [id]="item.piid" class="usa-accordion-content">
-                                <blockquote><span class="uppercase db">Service Categories: </span>
-                                  <strong class="pad-left db" *ngFor="let cat of item.service_categories" [innerHTML]="getServiceCategoryDescription(cat.id)"></strong></blockquote>
-                                <blockquote *ngIf="item?.zones && item.zones.length>0"><span class="uppercase db">Zone(s):
-                                  </span><a href="javascript://" (mouseover)="onTop($event.target)" [style.zIndex]="3"
-                                    class="tooltip-right" *ngFor="let zone of item?.zones" [attr.data-tooltip]="getZoneStates(zone.id)">{{zone.id}}</a></blockquote>
+                    <thead>
+                      <tr>
+                        <!-- <th></th> -->
+                        <th scope="col">Contract Membership</th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Small Disadvantaged Business">SB</th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Small Disadvantaged Business">SDB</th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="8(A)">8(A)</th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="HUBZone">HubZ</th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Woman Owned">WO</th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Veteran Owned">VO</th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Service Disabled Veteran Owned">SDVO</th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Veterans Affair VIP">VA
+                          VIP</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of vendor.pools; let i = index">
+                        <td scope="row"><strong class="db" [innerHTML]="getVehicleDescription(item.pool.vehicle.id)"></strong>
+                          <div class="pad-top">
+                            <span class="uppercase db">Contract Number: </span>
+                            <strong class="pad-left">{{item.piid}}</strong>
+                          </div>
+                          <div class="other-info" [class.hide]="!more_info">
+                            <div class="pad-top">
+                              <span class="uppercase db">Contact info: </span>
+                              <div class="pad-left" [innerHTML]="getContactInfo(item.contacts)"></div>
+                            </div>
+                            <div class="pad-top">
+                              <span class="uppercase db">Service Categories: </span>
+                              <ul class="ul-no-bullets pad-left">
+                                <li *ngFor="let cat of item.service_categories"><strong [innerHTML]="getServiceCategoryDescription(cat.id)"></strong></li>
+                              </ul>
+                            </div>
+
+                            <div class="pad-top" *ngIf="item?.zones && item.zones.length>0">
+                              <span class="uppercase db">Zone(s):</span>
+                              <div class="pad-left">
+                                <a href="javascript://" (mouseover)="onTop($event.target)" [style.zIndex]="3" class="tooltip-right"
+                                  *ngFor="let zone of item?.zones" [attr.data-tooltip]="getZoneStates(zone.id)">{{zone.id}}</a>
                               </div>
                             </div>
 
+                          </div>
 
-                          </td>
-                          <td [innerHTML]="getContactInfo(item.contacts)"></td>
-                          <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'SB') ? '&bull;' : ''"></td>
-                          <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, '27') ? '&bull;' : ''"></td>
-                          <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'A6') ? '&bull;' : ''"></td>
-                          <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'XX') ? '&bull;' : ''"></td>
-                          <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'A2') ? '&bull;' : ''"></td>
-                          <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'A5') ? '&bull;' : ''"></td>
-                          <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'QF') ? '&bull;' : ''"></td>
-                          <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'VIP') ? '&bull;' : ''"></td>
-                        </tr>
 
-                      </tbody>
-                    </table>
-                  </div>
+                        </td>
+
+                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'SB') ? '&bull;' : ''"></td>
+                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, '27') ? '&bull;' : ''"></td>
+                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'A6') ? '&bull;' : ''"></td>
+                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'XX') ? '&bull;' : ''"></td>
+                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'A2') ? '&bull;' : ''"></td>
+                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'A5') ? '&bull;' : ''"></td>
+                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'QF') ? '&bull;' : ''"></td>
+                        <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'VIP') ? '&bull;' : ''"></td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+
                 </div>
               </div>
             </div>
@@ -126,8 +138,8 @@
             <div *ngIf="vw_history">
               <div class="usa-width-one-whole">
                 <!-- Contract History -->
-                <div class="overflow">
-                  <discovery-tbl-contract-history [contract_vehicles]="contract_vehicles" [pools]="vendor.pools" [duns]="duns"></discovery-tbl-contract-history>
+                <div>
+                  <discovery-tbl-contract-history [contract_vehicles]="contract_vehicles" [pools]="vendor.pools" [duns]="duns_number"></discovery-tbl-contract-history>
                 </div>
               </div>
             </div>

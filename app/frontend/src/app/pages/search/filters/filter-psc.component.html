@@ -6,7 +6,7 @@
     <span *ngIf="items_filtered.length===0">There are <strong>no PSCs</strong> for the selected vehicle(s).</span>
     <select id="select_psc" [disabled]="items_filtered.length===0" [(ngModel)]="psc" class="items-input">
       <option value="0" selected="selected">Select PSC --</option>
-      <option *ngFor="let item of items_filtered" value="{{item.code}}">{{item.description}}</option>
+      <option *ngFor="let item of items_filtered" value="{{item.code}}">{{item.code}} - {{item.description}}</option>
     </select>
     <button class="icon-plus btn-plus" type="submit" (click)="addPSC()" [disabled]="!items || psc === '0'">
       <span class="usa-sr-only">Add PSC to list</span>
@@ -15,7 +15,7 @@
   <ul *ngIf="items_selected" class="items-selected">
     <li *ngFor="let psc of items_selected">
       <a (click)="removeItem(psc.value)" title="Remove {{psc.description}}"><span class="usa-sr-only">Remove
-          {{psc.description}}</span></a>{{psc.description}}
+          {{psc.value}} - {{psc.description}}</span></a>{{psc.description}}
     </li>
   </ul>
 

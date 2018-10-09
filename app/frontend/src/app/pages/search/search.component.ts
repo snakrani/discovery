@@ -31,11 +31,14 @@ export class SearchComponent implements OnInit {
   contracts_compare;
   contracts_results = [];
   contracts_w_no_records = [];
+  contract_vehicles;
+  zones;
+  service_categories;
   vendors_results;
   vendors_no_results = false;
   show_details = false;
   show_results = false;
-  compare_tbl;
+  compare_tbl: any[] = [];
   vehicles;
   results;
   _sort_by: string;
@@ -44,11 +47,21 @@ export class SearchComponent implements OnInit {
   filters: any[];
   scroll_buttons = false;
   server_error = false;
+  obligated_amounts_list: any = [];
+  agency_performance_list: any = [];
+  vehicle_vendors_total: number;
+  more_info = false;
+  interval;
+  total_vendors_met_criteria = 0;
+  selected_duns = '';
+  show_vendor_details = false;
+
   @HostListener('window:resize')
   onResize() {
     if (document.getElementById('discovery').classList.contains('push')) {
       this.hideSideNavFilters();
     }
+    this.initSlider();
   }
   constructor(
     private searchService: SearchService,
@@ -64,12 +77,14 @@ export class SearchComponent implements OnInit {
     } else {
       this.spinner = false;
     }
+    this.initSlider();
   }
   get sort_by(): string {
     return this._sort_by;
   }
   set sort_by(value: string) {
     this._sort_by = value;
+    this.vehicle_vendors_total = this.getVendorTotalByVehicle(value);
   }
   get spinner(): boolean {
     return this._spinner;
@@ -87,7 +102,40 @@ export class SearchComponent implements OnInit {
     }
     return items;
   }
+  resetTableScrolling() {
+    if (document.getElementById('tbl-compare')) {
+      /** Reset scroll window widths on re submit */
+      $('#overflow-compare .scroll-div1, #overflow-compare .scroll-div2').css(
+        'width',
+        '100%'
+      );
+    }
+  }
+  initScrollBars() {
+    this.resetTableScrolling();
+    this.interval = setInterval(() => {
+      if (document.getElementById('tbl-compare')) {
+        /** Reset scroll window widths on re submit */
+        const w = $('#tbl-compare').css('width');
+        $('#overflow-compare .scroll-div1, #overflow-compare .scroll-div2').css(
+          'width',
+          w
+        );
 
+        $('.scroll-view-topscroll').scroll(function() {
+          $('.scroll-view').scrollLeft(
+            $('.scroll-view-topscroll').scrollLeft()
+          );
+        });
+        $('.scroll-view').scroll(function() {
+          $('.scroll-view-topscroll').scrollLeft(
+            $('.scroll-view').scrollLeft()
+          );
+        });
+        clearInterval(this.interval);
+      }
+    }, 500);
+  }
   submitSelectedFilters(filters) {
     this.server_error = false;
     this.spinner = true;
@@ -95,6 +143,9 @@ export class SearchComponent implements OnInit {
     this.searchService.activeFilters = filters;
     this.searchService.setQueryParams(filters);
 
+    this.compare_tbl = [];
+    this.initScrollBars();
+    this.zones = this.filtersComponent.getZones();
     this.searchService
       .getVendors(this.searchService.activeFilters, '&page=0')
       .subscribe(
@@ -110,6 +161,8 @@ export class SearchComponent implements OnInit {
           this.vendors_no_results = false;
           this.show_results = true;
           this.spinner = false;
+          this.contract_vehicles = this.filtersComponent.getContractVehicles();
+          this.service_categories = this.filtersComponent.getServiceCategories();
           this.buildContractCompare();
           this.sort_by = this.getFirstVehicleWithVendors();
           this.viewContracts();
@@ -117,8 +170,18 @@ export class SearchComponent implements OnInit {
         error => {
           this.error_message = <any>error;
           this.server_error = true;
+          this.spinner = false;
         }
       );
+  }
+  getVendorTotalByVehicle(vehicle: string): number {
+    let total = 0;
+    for (const item of this.compare_tbl) {
+      if (item.id === vehicle) {
+        total = item['vendors_results_total'];
+      }
+    }
+    return total;
   }
   showSpinner(bool: boolean) {
     this.spinner = bool;
@@ -139,6 +202,15 @@ export class SearchComponent implements OnInit {
     }
     return [];
   }
+  initSlider() {
+    const w = window.innerWidth;
+    document.getElementById('slides-container').style.width = w * 2 + 30 + 'px';
+    document.getElementById('slide-search').style.width = w + 'px';
+    document.getElementById('slide-vendor').style.width = w + 'px';
+    if (this.show_vendor_details) {
+      document.getElementById('slides-container').style.marginLeft = -w + 'px';
+    }
+  }
   filterResultsByVehicle(vehicle: string) {
     return this.results.vendors.filter(
       vendor => vendor.vehicles.indexOf(vehicle) !== -1
@@ -154,12 +226,17 @@ export class SearchComponent implements OnInit {
   viewContracts() {
     this.vw_contracts = true;
     this.vw_vendors = false;
+    this.initScrollBars();
   }
   buildVendorByVehicle(obj: any[]) {
     const vehicles_submitted = this.returnSubmittedVehicles();
     const results = {};
     results['vehicles'] = [];
     const vehicles: any[] = [];
+
+    this.obligated_amounts_list = this.filtersComponent.getObligatedAmountDunsList();
+    // this.agency_performance_list = this.filtersComponent.getObligatedAmountDunsList();
+
     for (const item of obj) {
       const vendor = {};
       const asides_arr = [];
@@ -189,7 +266,14 @@ export class SearchComponent implements OnInit {
       } else {
         vendor['setasides'] = [];
       }
-      vehicles.push(vendor);
+      if (
+        this.obligated_amounts_list.length > 0 &&
+        this.searchService.existsIn(this.obligated_amounts_list, item.duns, '')
+      ) {
+        vehicles.push(vendor);
+      } else if (this.obligated_amounts_list.length === 0) {
+        vehicles.push(vendor);
+      }
     }
     results['vendors'] = vehicles;
     return results;
@@ -215,6 +299,13 @@ export class SearchComponent implements OnInit {
       item => item.vehicles.indexOf(vehicle) !== -1
     );
     return count.length;
+  }
+  getTotalVendorsMetCriteria(): number {
+    let total = 0;
+    for (const item of this.compare_tbl) {
+      total += +item['vendors_results_total'];
+    }
+    return total;
   }
   buildContractCompare() {
     const compare: any[] = [];
@@ -244,11 +335,26 @@ export class SearchComponent implements OnInit {
       }
     }
     this.compare_tbl = compare;
-    if (this.compare_tbl.length > 3) {
-      this.scroll_buttons = true;
-    } else {
-      this.scroll_buttons = false;
-    }
+    this.total_vendors_met_criteria = this.getTotalVendorsMetCriteria();
+  }
+  showVendorDetail(duns) {
+    this.spinner = true;
+    this.selected_duns = duns;
+    this.show_vendor_details = true;
+    const w = window.innerWidth;
+    document.getElementById('slide-vendor').classList.remove('fadeOut');
+    document.getElementById('slide-search').classList.remove('fadeIn');
+    document.getElementById('slide-vendor').classList.add('fadeIn');
+    document.getElementById('slide-search').classList.add('fadeOut');
+    document.getElementById('slides-container').style.marginLeft = -w + 'px';
+  }
+  hideVendorDetail(bool) {
+    this.show_vendor_details = false;
+    document.getElementById('slide-vendor').classList.remove('fadeIn');
+    document.getElementById('slide-search').classList.remove('fadeOut');
+    document.getElementById('slide-vendor').classList.add('fadeOut');
+    document.getElementById('slide-search').classList.add('fadeIn');
+    document.getElementById('slides-container').style.marginLeft = '0px';
   }
   showServerError(error: number) {
     if (error === 1) {
@@ -260,6 +366,9 @@ export class SearchComponent implements OnInit {
     for (const ele of doc) {
       ele.classList.toggle('show_all');
     }
+  }
+  toggleMoreInfo() {
+    this.more_info = !this.more_info;
   }
   showSideNavFilters() {
     document.getElementById('filters-container').style.left = '0px';
@@ -289,27 +398,5 @@ export class SearchComponent implements OnInit {
   }
   closeModal(id: string) {
     this.modalService.close(id);
-  }
-  scrollRight() {
-    const container = document.getElementById('overflow-compare');
-    let scrollAmount = 0;
-    const slideTimer = setInterval(() => {
-      container.scrollLeft += 20;
-      scrollAmount += 10;
-      if (scrollAmount >= 100) {
-        clearInterval(slideTimer);
-      }
-    }, 25);
-  }
-  scrollLeft() {
-    const container = document.getElementById('overflow-compare');
-    let scrollAmount = 0;
-    const slideTimer = setInterval(() => {
-      container.scrollLeft -= 20;
-      scrollAmount += 10;
-      if (scrollAmount >= 100) {
-        clearInterval(slideTimer);
-      }
-    }, 25);
   }
 }

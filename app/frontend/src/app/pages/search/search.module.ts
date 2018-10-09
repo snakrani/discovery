@@ -15,7 +15,7 @@ import { FilterNaicsComponent } from './filters/filter-naics.component';
 import { FilterServiceCategoriesComponent } from './filters/filter-service-categories.component';
 import { FilterCertificationsComponent } from './filters/filter-certifications.component';
 import { FilterContractPricingTypeComponent } from './filters/filter-contract-pricing-type.component';
-import { FilterContractThresholdComponent } from './filters/filter-contract-threshold.component';
+import { FilterContractObligatedAmountComponent } from './filters/filter-contract-obligated-amount.component';
 import { FilterAgencyPerformanceComponent } from './filters/filter-agency-performance.component';
 import { FilterPscComponent } from './filters/filter-psc.component';
 import { FilterZoneComponent } from './filters/filter-zone.component';
@@ -42,7 +42,7 @@ import { LnkToggleHeightsComponent } from './lnk-toggle-heights.component';
     FilterServiceCategoriesComponent,
     FilterCertificationsComponent,
     FilterContractPricingTypeComponent,
-    FilterContractThresholdComponent,
+    FilterContractObligatedAmountComponent,
     FilterAgencyPerformanceComponent,
     FilterPscComponent,
     FilterZoneComponent,
