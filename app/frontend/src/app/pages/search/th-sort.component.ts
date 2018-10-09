@@ -9,12 +9,11 @@ import {
 @Component({
   selector: 'discovery-th-sort',
   template: `
-    <a (click)="order()" [class]="orderClass">{{label}}</a>
+    <a (click)="order()" [class]="orderClass" [style.minWidth]="width">{{label}}</a>
   `,
   styles: [
     `
       a {
-        min-width: 120px;
         text-decoration: none;
         display: block;
         padding-right: 25px;
@@ -42,6 +41,8 @@ export class ThSortComponent implements OnChanges {
   selectedParentOrdering: string;
   @Input()
   ordering: string;
+  @Input()
+  width = '90px';
   @Output()
   emmitOrdering: EventEmitter<any> = new EventEmitter();
   orderClass = '';
@@ -51,7 +52,7 @@ export class ThSortComponent implements OnChanges {
       this.reset();
     }
   }
-  order(ele) {
+  order() {
     switch (this.orderClass) {
       case '':
         this.orderClass = 'asc';

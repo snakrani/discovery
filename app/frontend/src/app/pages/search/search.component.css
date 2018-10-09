@@ -96,6 +96,21 @@ td {
   background-color: rgba(0, 0, 0, 0.8);
   overflow-x: hidden;
 }
+.mask {
+  position: relative;
+  overflow-x: hidden;
+}
+#slides-container {
+  margin-left: 0px;
+  -webkit-transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  -o-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
+}
+.slide {
+  float: left;
+}
+
 @media (min-width: 1040px) {
   .usa-grid div.usa-width-one-third {
     margin-right: 2.35765%;
@@ -121,7 +136,7 @@ td {
     float: none !important;
   }
 }
-@media (max-width: 640px) {
+@media (max-width: 950px) {
   #overlay-filter-mobile.show {
     width: 100%;
   }

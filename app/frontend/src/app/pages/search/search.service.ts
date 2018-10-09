@@ -142,8 +142,7 @@ export class SearchService {
   }
 
   getKeywords(): Observable<any[]> {
-    // return this.http.get<any[]>(this.apiUrl + 'keywords').pipe(delay(3000));
-    return this.http.get<any[]>(this.apiUrl + 'keywords').pipe(
+    return this.http.get<any[]>(this.apiUrl + 'keywords?page=0').pipe(
       tap(data => data),
       catchError(this.handleError)
     );
@@ -192,7 +191,7 @@ export class SearchService {
     for (const filter of filters) {
       if (filter['name'] === 'keywords') {
         params +=
-          '&pools__pool__naics__keywords__id__in=' +
+          '&pools__pool__keywords__id__in=' +
           this.getSelectedFilterList(filter['selected'], ',');
       }
       if (filter['name'] === 'vehicles') {
@@ -225,19 +224,19 @@ export class SearchService {
           '&pools__zones__id__in=' +
           this.getSelectedFilterList(filter['selected'], ',');
       }
-      if (filter['name'] === 'threshold') {
-        const threshold = filter['selected'][0].value.split('-');
-        params +=
-          '&pools__pool__threshold__between=' +
-          threshold[0] +
-          ',' +
-          threshold[1];
-      }
-      if (filter['name'] === 'agency_performance') {
-        params +=
-          '&pools__pool__vehicle__tier__number__in=' +
-          this.getSelectedFilterList(filter['selected'], ',');
-      }
+      // if (filter['name'] === 'threshold') {
+      //   const threshold = filter['selected'][0].value.split('-');
+      //   params +=
+      //     '&pools__pool__obligated_amount__range=' +
+      //     threshold[0] +
+      //     ',' +
+      //     threshold[1];
+      // }
+      // if (filter['name'] === 'agency_performance') {
+      //   params +=
+      //     '&pools__pool__vehicle__tier__number__in=' +
+      //     this.getSelectedFilterList(filter['selected'], ',');
+      // }
     }
     console.log(this.apiUrl + 'vendors?' + params.substr(1));
     return this.http
@@ -247,13 +246,46 @@ export class SearchService {
         catchError(this.handleError)
       );
   }
+
   getVendorsCountByVehicle(vehicle: string): Observable<any[]> {
-    console.log(
-      this.apiUrl + 'vendors/count/id?pools__pool__vehicle__id=' + vehicle
-    );
     return this.http
       .get<any[]>(
         this.apiUrl + 'vendors/count/id?pools__pool__vehicle__id=' + vehicle
+      )
+      .pipe(
+        tap(data => data),
+        catchError(this.handleError)
+      );
+  }
+  getObligatedAmountDuns(range: string): Observable<any[]> {
+    const arr = range.split('-');
+    const from = arr[0];
+    const to = arr[1];
+    return this.http
+      .get<any[]>(
+        this.apiUrl +
+          'contracts/values/vendor__duns?obligated_amount__range=' +
+          from +
+          ',' +
+          to
+      )
+      .pipe(
+        tap(data => data),
+        catchError(this.handleError)
+      );
+  }
+  getAgencyPerformanceNames(): Observable<any[]> {
+    return this.http
+      .get<any[]>(this.apiUrl + 'contracts/values/agency_name')
+      .pipe(
+        tap(data => data),
+        catchError(this.handleError)
+      );
+  }
+  getAgencyPerformanceDuns(ids: string): Observable<any[]> {
+    return this.http
+      .get<any[]>(
+        this.apiUrl + 'contracts/values/vendor__duns?agency_id__in=' + ids
       )
       .pipe(
         tap(data => data),
@@ -335,8 +367,14 @@ export class SearchService {
   }
   existsIn(obj: any[], value: string, key: string): boolean {
     for (let i = 0; i < obj.length; i++) {
-      if (obj[i][key] === value) {
-        return true;
+      if (key !== '') {
+        if (obj[i][key] === value) {
+          return true;
+        }
+      } else {
+        if (obj[i] === value) {
+          return true;
+        }
       }
     }
     return false;
