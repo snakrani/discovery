@@ -14,4 +14,4 @@ fi
 
 echo "> Building Angular files" | tee -a "$LOG_FILE"
 cd frontend
-ng build >>"$LOG_FILE" 2>&1
+ng build --prod >>"$LOG_FILE" 2>&1
