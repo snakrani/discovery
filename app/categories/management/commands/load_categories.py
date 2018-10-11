@@ -6,9 +6,6 @@ from django.core.management import call_command
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        print('> Loading keywords')
-        call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/keywords.json'))
-        
         print('> Loading SIN codes')
         call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/sin.json'))
         
@@ -17,6 +14,9 @@ class Command(BaseCommand):
         
         print('> Loading PSC codes')
         call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/psc.json'))
+        
+        print('> Loading keywords')
+        call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/keywords.json'))
         
         print('> Loading vendor setasides')
         call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/setasides.json'))
