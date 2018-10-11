@@ -4,11 +4,11 @@ import { ActivatedRoute } from '@angular/router';
 declare let document: any;
 
 @Component({
-  selector: 'discovery-filter-contract-threshold',
-  templateUrl: './filter-contract-threshold.component.html',
+  selector: 'discovery-filter-contract-obligated-amount',
+  templateUrl: './filter-contract-obligated-amount.component.html',
   styles: []
 })
-export class FilterContractThresholdComponent implements OnInit {
+export class FilterContractObligatedAmountComponent implements OnInit {
   min = 0;
   max = 10000000;
   items = [
@@ -21,6 +21,7 @@ export class FilterContractThresholdComponent implements OnInit {
     { description: '$100M+', id: '100000001-1000000000', checked: false }
   ];
   item_selected: any[] = [];
+  duns_list: any[] = [];
   @Input()
   opened = false;
   @Output()
@@ -28,11 +29,11 @@ export class FilterContractThresholdComponent implements OnInit {
   @Output()
   emmitLoaded: EventEmitter<string> = new EventEmitter();
   name = 'Vendor Contract Value History';
-  queryName = 'threshold';
-  id = 'filter-threshold';
+  queryName = 'obligated_amount';
+  id = 'filter-obligated_amount';
   error_message;
   count = 0;
-  _threshold = '0';
+  _obligated_amount = '0';
   value_set = false;
 
   /** Generate inputs labels & values
@@ -55,7 +56,8 @@ export class FilterContractThresholdComponent implements OnInit {
       for (let i = 0; i < this.items.length; i++) {
         if (values[0] === this.items[i][this.json_value]) {
           this.items[i]['checked'] = true;
-          this.threshold = values[0];
+          this.obligated_amount = values[0];
+          this.getObligatedAmountDuns();
         }
       }
       /** Open accordion */
@@ -65,28 +67,44 @@ export class FilterContractThresholdComponent implements OnInit {
     }
     this.emmitLoaded.emit(this.queryName);
   }
-  get threshold(): string {
-    return this._threshold;
+  get obligated_amount(): string {
+    return this._obligated_amount;
   }
-  set threshold(value: string) {
-    this._threshold = value;
+  set obligated_amount(value: string) {
+    this._obligated_amount = value;
     if (!this.value_set) {
       /** Only emit this once */
       this.emmitSelected.emit(1);
       this.value_set = true;
     }
   }
+  getObligatedAmountDuns() {
+    this.duns_list = [];
+    this.searchService.getObligatedAmountDuns(this.obligated_amount).subscribe(
+      data => {
+        this.duns_list = data['results'];
+      },
+      error => (this.error_message = <any>error)
+    );
+  }
+  getDunsList(): any[] {
+    let list = [];
+    if (this.obligated_amount !== '0') {
+      list = this.duns_list;
+    }
+    return list;
+  }
   getSelected(): any[] {
     const item = [];
-    if (this.threshold !== '0') {
+    if (this.obligated_amount !== '0') {
       item['name'] = this.queryName;
       item['description'] = this.name;
-      item['items'] = [{ value: this.threshold }];
+      item['items'] = [{ value: this.obligated_amount }];
     }
     return item;
   }
   reset() {
     /** Set default values */
-    this.threshold = '0';
+    this.obligated_amount = '0';
   }
 }

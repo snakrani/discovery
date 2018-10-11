@@ -15,7 +15,6 @@ const routes: Routes = [
   { path: 'contracts', component: ContractsComponent },
   { path: 'oasis', component: OasisSbInfoComponent },
   { path: 'bmo', component: BmoInfoComponent },
-  { path: 'help', component: HelpComponent },
   { path: 'hcats', component: HcatsComponent },
   { path: 'pss', component: PssComponent },
   { path: '', component: WelcomeComponent },

@@ -95,6 +95,9 @@ export class FilterZoneComponent implements OnInit {
       this.addItem(this.zone);
     }
   }
+  getItems() {
+    return this.items;
+  }
   exists(value: string): boolean {
     for (let i = 0; i < this.items_selected.length; i++) {
       if (this.items_selected[i]['value'] === value) {

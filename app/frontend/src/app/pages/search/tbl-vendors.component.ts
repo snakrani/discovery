@@ -16,8 +16,18 @@ declare const window: any;
 export class TblVendorsComponent implements OnInit, OnChanges {
   @Input()
   vehicle = '';
+  @Input()
+  obligated_amounts_list: any[] = [];
+  @Input()
+  agency_performance_list: any[] = [];
+  @Input()
+  total_vendors: number;
   @Output()
   emitActivateSpinner: EventEmitter<boolean> = new EventEmitter();
+  @Output()
+  emitVehicle: EventEmitter<string> = new EventEmitter();
+  @Output()
+  emitDuns: EventEmitter<string> = new EventEmitter();
   sbd_col = false;
   items_per_page = 50;
   items_total: number;
@@ -81,7 +91,7 @@ export class TblVendorsComponent implements OnInit, OnChanges {
     this.enable_paging = false;
     this.searchService.getVendors(this.filters, page_path).subscribe(
       data => {
-        if (data['count'] === 0) {
+        if (this.total_vendors === 0) {
           this.loading = false;
           this.vendors_no_results = true;
           this.show_results = true;
@@ -90,13 +100,13 @@ export class TblVendorsComponent implements OnInit, OnChanges {
           this.vendors = [];
           return;
         }
-        this.items_total = data['count'];
+        this.items_total = this.total_vendors;
         this.num_results = data['results'].length;
         this.num_total_pages = Math.floor(
           (this.items_total + this.items_per_page - 1) / this.items_per_page
         );
 
-        this.items_total = data['count'];
+        this.items_total = this.total_vendors;
         this.results = data;
         this.vendors = this.buildVendorByVehicle(data['results']);
         this.vendors_no_results = false;
@@ -128,6 +138,9 @@ export class TblVendorsComponent implements OnInit, OnChanges {
         this.prev = 1;
       }
     }
+  }
+  showVendorDetails(duns: string) {
+    this.emitDuns.emit(duns);
   }
   prevPage() {
     this.getVendors(this.prev);
@@ -190,7 +203,15 @@ export class TblVendorsComponent implements OnInit, OnChanges {
       } else {
         vendor['setasides'] = [];
       }
-      vehicles.push(vendor);
+
+      if (
+        this.obligated_amounts_list.length > 0 &&
+        this.searchService.existsIn(this.obligated_amounts_list, item.duns, '')
+      ) {
+        vehicles.push(vendor);
+      } else if (this.obligated_amounts_list.length === 0) {
+        vehicles.push(vendor);
+      }
     }
     results['vendors'] = vehicles;
     // console.log(results);
