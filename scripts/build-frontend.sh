@@ -21,3 +21,7 @@ npm install >>"$LOG_FILE" 2>&1
 
 echo "> Building Angular files" | tee -a "$LOG_FILE"
 ng build --prod >>"$LOG_FILE" 2>&1
+
+echo "> Fixing file permissions" | tee -a "$LOG_FILE"
+find node_modules/.cache -type d -exec chmod 750 {} \; >>"$LOG_FILE" 2>&1
+find node_modules/.cache -type f -exec chmod 640 {} \; >>"$LOG_FILE" 2>&1
