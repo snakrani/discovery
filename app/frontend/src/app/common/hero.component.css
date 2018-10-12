@@ -1,12 +1,13 @@
 .usa-hero {
-  padding-top: 100px;
-  padding-bottom: 100px;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 .usa-hero h2 {
-  font-size: 2em !important;
+  font-size: 1.5em !important;
   font-weight: normal !important;
 }
 .usa-hero {
+  background-color: #112e51;
   background-image: url('/frontend/assets/images/hero.jpg');
   box-shadow: 0 2px 5px rgb(177, 177, 177);
 }

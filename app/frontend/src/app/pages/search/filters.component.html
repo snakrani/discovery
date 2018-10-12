@@ -10,7 +10,7 @@
   </div>
 </div>
 <!-- Server Error Notification -->
-<div [hidden]="server_error" id="filters-container" class="usa-width-one-third usa-section-dark bordered sidenav">
+<div [hidden]="server_error" id="filters-container" class="usa-width-one-fourth usa-section-dark bordered sidenav">
   <div class="relative">
     <div class="overlay" *ngIf="spinner && !parentSpinner">
       <div class="spinner">
@@ -29,7 +29,13 @@
     <div class="cb" style="display: block;clear:both"></div>
     <ul class="usa-accordion" aria-multiselectable="true">
       <li>
-        <discovery-filter-keywords (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-keywords>
+        <discovery-filter-keywords [opened]="true" (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-keywords>
+      </li>
+      <li>
+        <discovery-filter-naics [items]="pools" (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-naics>
+      </li>
+      <li>
+        <discovery-filter-psc [items]="pools" (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-psc>
       </li>
       <li>
         <discovery-filter-contract-vehicles [items]="vehicles" (emmitSelected)="activateSubmit($event)" (emmitItem)="filterOthersByVehicles($event)"
@@ -41,12 +47,7 @@
       <li>
         <discovery-filter-sbd (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-sbd>
       </li>
-      <li>
-        <discovery-filter-naics [items]="pools" (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-naics>
-      </li>
-      <li>
-        <discovery-filter-psc [items]="pools" (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-psc>
-      </li>
+
       <!-- <li>
         <discovery-filter-contract-pricing-type (emmitSelected)="activateSubmit($event)"></discovery-filter-contract-pricing-type>
       </li> -->

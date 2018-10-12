@@ -1,4 +1,4 @@
-<h3>Showing vendor's indexed 5 year contract history</h3>
+<h3>Show vendor’s 5 year contract history based on the following filters:</h3>
 <em>Work performed by a vendor is often reported under a different NAICS code due to FPDS restrictions.</em>
 <div class="filters-container">
   <div class="usa-width-one-twelfth"><strong class="db" style="padding-top:12px">Filter By:</strong></div>
@@ -30,6 +30,10 @@
   <a href="assets/download-csv.html?vendor={{duns}}&{{params}}" target="_blank">
     Download
     vendor data(CSV)</a></div> -->
+<div class="pad-bottom text-right" *ngIf="!history_no_results">
+  <a href="/vendor/{{duns}}/csv/?{{params}}" target="_blank">
+    Download
+    vendor data(CSV)</a></div>
 <div id="overflow-contract-history" class="pad-bottom">
   <!-- Start Scroll Window -->
   <div class="scroll-view-topscroll scrollbar">

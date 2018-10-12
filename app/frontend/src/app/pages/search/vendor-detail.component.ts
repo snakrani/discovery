@@ -39,8 +39,8 @@ export class VendorDetailComponent implements OnInit, OnChanges {
   more_info = false;
   contract_nums: any[] = [];
   num_show = 3;
-  vw_details = true;
-  vw_history = false;
+  vw_details = false;
+  vw_history = true;
   zindex = 30;
   loading = false;
   duns_number;

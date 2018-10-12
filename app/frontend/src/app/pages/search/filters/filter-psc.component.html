@@ -8,8 +8,8 @@
       <option value="0" selected="selected">Select PSC --</option>
       <option *ngFor="let item of items_filtered" value="{{item.code}}">{{item.code}} - {{item.description}}</option>
     </select>
-    <button class="icon-plus btn-plus" type="submit" (click)="addPSC()" [disabled]="!items || psc === '0'">
-      <span class="usa-sr-only">Add PSC to list</span>
+    <button class="btn-add" type="submit" (click)="addPSC()" [disabled]="!items || psc === '0'">
+      <span>Add</span>
     </button>
   </div>
   <ul *ngIf="items_selected" class="items-selected">
@@ -18,5 +18,5 @@
           {{psc.value}} - {{psc.description}}</span></a>{{psc.description}}
     </li>
   </ul>
-
+  <discovery-filter-selected [id]="'msg-psc-selected'" [label]="'Added PSC code'"></discovery-filter-selected>
 </div>

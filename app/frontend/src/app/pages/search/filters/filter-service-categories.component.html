@@ -10,8 +10,8 @@
       <option *ngFor="let item of items_filtered" value="{{item.id}}">{{item.vehicle + ' - ' +
         item.name}}</option>
     </select>
-    <button class="icon-plus btn-plus" type="submit" (click)="addCategory()" [disabled]="!items || category === '0'">
-      <span class="usa-sr-only">Add Service Category to list</span>
+    <button class="btn-add" type="submit" (click)="addCategory()" [disabled]="!items || category === '0'">
+      <span>Add</span>
     </button>
   </div>
   <ul *ngIf="items_selected" class="items-selected">
@@ -20,5 +20,5 @@
           {{category.description}}</span></a>{{category.description}}
     </li>
   </ul>
-
+  <discovery-filter-selected [id]="'msg-sev-cat-selected'" [label]="'Added service category'"></discovery-filter-selected>
 </div>

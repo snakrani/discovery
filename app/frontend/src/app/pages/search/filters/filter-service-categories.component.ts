@@ -4,10 +4,12 @@ import {
   Input,
   Output,
   EventEmitter,
-  OnChanges
+  OnChanges,
+  ViewChild
 } from '@angular/core';
 import { SearchService } from '../search.service';
 import { ActivatedRoute } from '@angular/router';
+import { FilterSelectedComponent } from './filter-selected.component';
 declare let document: any;
 @Component({
   selector: 'discovery-filter-service-categories',
@@ -15,6 +17,8 @@ declare let document: any;
   styles: []
 })
 export class FilterServiceCategoriesComponent implements OnInit, OnChanges {
+  @ViewChild(FilterSelectedComponent)
+  msgAddedItem: FilterSelectedComponent;
   @Input()
   items: any[] = [];
   items_filtered: any[];
@@ -212,6 +216,7 @@ export class FilterServiceCategoriesComponent implements OnInit, OnChanges {
     item['description'] = this.getItemDescription(value);
     this.items_selected.push(item);
     this.emmitSelected.emit(1);
+    this.msgAddedItem.showMsg();
   }
   removeItem(key: string) {
     for (let i = 0; i < this.items_selected.length; i++) {

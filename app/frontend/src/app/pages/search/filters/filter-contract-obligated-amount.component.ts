@@ -1,6 +1,14 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ViewChild
+} from '@angular/core';
 import { SearchService } from '../search.service';
 import { ActivatedRoute } from '@angular/router';
+import { FilterSelectedComponent } from './filter-selected.component';
 declare let document: any;
 
 @Component({
@@ -9,6 +17,8 @@ declare let document: any;
   styles: []
 })
 export class FilterContractObligatedAmountComponent implements OnInit {
+  @ViewChild(FilterSelectedComponent)
+  msgAddedItem: FilterSelectedComponent;
   min = 0;
   max = 10000000;
   items = [
@@ -76,6 +86,7 @@ export class FilterContractObligatedAmountComponent implements OnInit {
       /** Only emit this once */
       this.emmitSelected.emit(1);
       this.value_set = true;
+      this.msgAddedItem.showMsg();
     }
   }
   getObligatedAmountDuns() {

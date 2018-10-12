@@ -133,6 +133,7 @@ export class SearchComponent implements OnInit {
           );
         });
         clearInterval(this.interval);
+        this.showScrollTip();
       }
     }, 500);
   }
@@ -209,6 +210,17 @@ export class SearchComponent implements OnInit {
     document.getElementById('slide-vendor').style.width = w + 'px';
     if (this.show_vendor_details) {
       document.getElementById('slides-container').style.marginLeft = -w + 'px';
+    }
+
+    this.showScrollTip();
+  }
+  showScrollTip() {
+    if (
+      $('#compare-scroll .scroll-div1').width() > $('#compare-scroll').width()
+    ) {
+      $('#scroll-tip').removeClass('hide slideInLeft');
+    } else {
+      $('#scroll-tip').addClass('hide slideInLeft');
     }
   }
   filterResultsByVehicle(vehicle: string) {
@@ -327,7 +339,6 @@ export class SearchComponent implements OnInit {
 
       item['tier'] = vehicle_obj['tier']['name'];
       item['gsa'] = vehicle_obj['poc'];
-      // item['website'] = vehicle_obj['url'];
       item['ordering_guide'] = vehicle_obj['ordering_guide'];
       compare.push(item);
       if (item['vendors_results_total'] === 0) {
@@ -372,13 +383,13 @@ export class SearchComponent implements OnInit {
   }
   showSideNavFilters() {
     document.getElementById('filters-container').style.left = '0px';
-    document.getElementById('discovery').classList.add('push');
+    // document.getElementById('discovery').classList.add('push');
     document.getElementById('overlay-filter-mobile').classList.add('show');
     document.getElementById('btn-show-filters').style.display = 'none';
   }
   hideSideNavFilters() {
-    document.getElementById('filters-container').style.left = '-310px';
-    document.getElementById('discovery').classList.remove('push');
+    document.getElementById('filters-container').style.left = '-360px';
+    // document.getElementById('discovery').classList.remove('push');
     document.getElementById('overlay-filter-mobile').classList.remove('show');
     document.getElementById('btn-show-filters').style.display = 'block';
   }

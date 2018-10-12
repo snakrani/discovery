@@ -26,6 +26,7 @@ import { SearchSpinnerComponent } from './search-spinner.component';
 import { ThSortComponent } from './th-sort.component';
 import { TblVendorsComponent } from './tbl-vendors.component';
 import { LnkToggleHeightsComponent } from './lnk-toggle-heights.component';
+import { FilterSelectedComponent } from './filters/filter-selected.component';
 
 @NgModule({
   imports: [CommonModule, SearchRoutingModule, FormsModule],
@@ -53,7 +54,8 @@ import { LnkToggleHeightsComponent } from './lnk-toggle-heights.component';
     TblContractHistoryComponent,
     TblVendorsComponent,
     ThSortComponent,
-    LnkToggleHeightsComponent
+    LnkToggleHeightsComponent,
+    FilterSelectedComponent
   ]
 })
 export class SearchModule {}
