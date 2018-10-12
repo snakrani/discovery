@@ -10,16 +10,17 @@
         <h2>{{vendor.name | titlecase}}</h2>
         <!-- Nav tabs -->
         <ul class="nav nav-tabs margin-top" role="tablist">
-          <li role="presentation" [class.active]="vw_details">
-            <a aria-controls="details" role="tab" data-toggle="tab" (click)="viewDetails()">
-              <h3 class="alt">Details</h3>
-            </a>
-          </li>
           <li role="presentation" [class.active]="vw_history">
             <a aria-controls="history" role="tab" data-toggle="tab" (click)="viewHistory()">
               <h3 class="alt">Contract History</h3>
             </a>
           </li>
+          <li role="presentation" [class.active]="vw_details">
+            <a aria-controls="details" role="tab" data-toggle="tab" (click)="viewDetails()">
+              <h3 class="alt">Vendor Details</h3>
+            </a>
+          </li>
+
         </ul>
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane">

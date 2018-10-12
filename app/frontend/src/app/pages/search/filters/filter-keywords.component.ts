@@ -1,6 +1,14 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ViewChild
+} from '@angular/core';
 import { SearchService } from '../search.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FilterSelectedComponent } from './filter-selected.component';
 declare let autocomplete: any;
 declare let document: any;
 @Component({
@@ -9,12 +17,14 @@ declare let document: any;
   styles: []
 })
 export class FilterKeywordsComponent implements OnInit {
+  @ViewChild(FilterSelectedComponent)
+  msgAddedItem: FilterSelectedComponent;
   items: any[] = [];
   keywords_results: any[] = [];
   _keywords = '';
   items_selected: any[] = [];
   @Input()
-  opened = false;
+  opened = true;
   @Output()
   emmitSelected: EventEmitter<number> = new EventEmitter();
   @Output()
@@ -64,8 +74,6 @@ export class FilterKeywordsComponent implements OnInit {
         }
         /** Open accordion */
         this.opened = true;
-      } else {
-        this.opened = false;
       }
       this.emmitLoaded.emit(this.queryName);
     });
@@ -133,6 +141,7 @@ export class FilterKeywordsComponent implements OnInit {
 
     this.items_selected.push(item);
     this.emmitSelected.emit(1);
+    this.msgAddedItem.showMsg();
   }
   removeItem(value: string) {
     for (let i = 0; i < this.items_selected.length; i++) {

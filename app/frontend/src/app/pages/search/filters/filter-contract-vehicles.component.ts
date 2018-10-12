@@ -1,12 +1,22 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ViewChild
+} from '@angular/core';
 import { SearchService } from '../search.service';
 import { ActivatedRoute } from '@angular/router';
+import { FilterSelectedComponent } from './filter-selected.component';
 declare let document: any;
 @Component({
   selector: 'discovery-filter-contract-vehicles',
   templateUrl: './filter-contract-vehicles.component.html'
 })
 export class FilterContractVehiclesComponent implements OnInit {
+  @ViewChild(FilterSelectedComponent)
+  msgAddedItem: FilterSelectedComponent;
   @Input()
   sharedFiltersLoaded = false;
   @Input()
@@ -92,6 +102,7 @@ export class FilterContractVehiclesComponent implements OnInit {
     item['value'] = key;
     this._items_selected.push(item);
     this.emmitSelected.emit(1);
+    this.msgAddedItem.showMsg();
   }
   removeItem(key: string) {
     for (let i = 0; i < this._items_selected.length; i++) {

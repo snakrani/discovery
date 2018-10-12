@@ -29,7 +29,7 @@
             <!-- ///////////////// -->
             <!-- TABS AREA -->
             <!-- ///////////////// -->
-            <div class="usa-width-two-thirds bordered relative">
+            <div class="usa-width-three-fourths relative">
               <button id="btn-show-filters" class="usa-button-secondary" (click)="showSideNavFilters()"><span class="icon-filter"></span>Show
                 filters</button>
               <discovery-choose-filters *ngIf="!show_results && !spinner"></discovery-choose-filters>
@@ -63,10 +63,12 @@
                         </div>
                       </div>
 
-
+                      <div id="scroll-tip" class="text-right pad-top-bottom hide animated">
+                        <strong>Scroll right</strong> to see more <span class="icon-arrow-right pull-right"></span>
+                      </div>
                       <div id="overflow-compare" *ngIf="!vendors_no_results">
                         <!-- Start Scroll Window -->
-                        <div class="scroll-view-topscroll scrollbar">
+                        <div id="compare-scroll" class="scroll-view-topscroll scrollbar">
                           <div class="scroll-div1">
                           </div>
                         </div>
@@ -82,9 +84,14 @@
                             </div>
                             <div *ngIf="compare_tbl.length>0" [hidden]="total_vendors_met_criteria===0">
                               <div class="pad-top">
-                                <button class="usa-button-secondary" (click)="toggleMoreInfo()">{{!more_info
+                                <h3 class="alt">Comparing <strong>{{compare_tbl.length}}</strong> Contract Vehicles
+                                  with a total of
+                                  <strong>{{total_vendors_met_criteria}} vendors</strong></h3>
+
+                                <!-- <button class="usa-button-secondary" (click)="toggleMoreInfo()">{{!more_info
                                   ?
-                                  'Show' : 'Hide'}} more contract details</button></div>
+                                  'Show' : 'Hide'}} more contract details</button> -->
+                              </div>
 
                               <table id="tbl-compare" class="usa-table-borderless margin-bottom" *ngIf="compare_tbl.length>0">
                                 <thead>
@@ -92,19 +99,19 @@
                                     <th scope="col"></th>
                                     <th scope="col" class="th-vehicle" *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.description}}
                                       <!--<span
-                              class="info-tip"></span>-->
+                                class="info-tip"></span>-->
                                     </th>
                                     <!-- <th scope="col" *ngFor="let vehicle of compare_tbl"><a (click)="openModal(vehicle.id)">{{vehicle.description}}
-                            <span
-                              class="info-tip"></span></a></th> -->
+                              <span
+                                class="info-tip"></span></a></th> -->
 
                                   </tr>
                                 </thead>
                                 <tbody>
                                   <!-- <tr>
-                                      <th scope="row">Total vendors</th>
-                                      <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.vendors_total}}</td>
-                                    </tr> -->
+                                        <th scope="row">Total vendors</th>
+                                        <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.vendors_total}}</td>
+                                      </tr> -->
                                   <tr>
                                     <th scope="row">Vendors that meet your criteria </th>
                                     <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0"><span
@@ -113,8 +120,7 @@
                                   </tr>
                                   <tr>
                                     <th scope="row">Eligible Service category(s)
-                                      <!-- <discovery-lnk-toggle-heights [toggle_id]="'row-serv-cat'"
-                                          (emitToggleId)="toggleTDHeights($event)"></discovery-lnk-toggle-heights> -->
+                                      <discovery-lnk-toggle-heights [toggle_id]="'row-serv-cat'" (emitToggleId)="toggleTDHeights($event)"></discovery-lnk-toggle-heights>
                                     </th>
                                     <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">
                                       <div class="row-serv-cat toggle_more" [class.show_all]="more_info">
@@ -125,12 +131,12 @@
                                     </td>
                                   </tr>
                                   <!-- <tr>
-                        <th scope="row">Top capabilities</th>
-                        <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.capabilities}}</td>
-                      </tr> -->
+                          <th scope="row">Top capabilities</th>
+                          <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.capabilities}}</td>
+                        </tr> -->
                                   <tr>
                                     <th scope="row">NAICs
-                                      <!-- <discovery-lnk-toggle-heights [toggle_id]="'row-naics'" (emitToggleId)="toggleTDHeights($event)"></discovery-lnk-toggle-heights> -->
+                                      <discovery-lnk-toggle-heights [toggle_id]="'row-naics'" (emitToggleId)="toggleTDHeights($event)"></discovery-lnk-toggle-heights>
                                     </th>
                                     <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">
                                       <div class="row-naics toggle_more" [class.show_all]="more_info">
@@ -142,7 +148,7 @@
                                   </tr>
                                   <tr>
                                     <th scope="row">PSCs
-                                      <!-- <discovery-lnk-toggle-heights [toggle_id]="'row-pscs'" (emitToggleId)="toggleTDHeights($event)"></discovery-lnk-toggle-heights> -->
+                                      <discovery-lnk-toggle-heights [toggle_id]="'row-pscs'" (emitToggleId)="toggleTDHeights($event)"></discovery-lnk-toggle-heights>
                                     </th>
                                     <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">
                                       <div class="row-pscs toggle_more" [class.show_all]="more_info">
@@ -162,9 +168,9 @@
                                         href="mailto:{{vehicle.gsa}}" *ngIf="vehicle.gsa !== ''">Contact email</a></td>
                                   </tr>
                                   <!-- <tr>
-                      <th scope="row">Solution Website</th>
-                      <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.website}}</td>
-                    </tr> -->
+                        <th scope="row">Solution Website</th>
+                        <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.website}}</td>
+                      </tr> -->
                                   <tr>
                                     <th scope="row">Ordering Guide</th>
                                     <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0"><a
@@ -194,7 +200,7 @@
                         <div class="usa-grid-full">
                           <div class="usa-width-one-whole" [hidden]="spinner">
                             <fieldset class="usa-fieldset-inputs usa-sans inputs-inline" *ngIf="results.vehicles.length>1">
-                              <legend>List by:</legend>
+                              <legend>Showing all vendors based on your criteria for the following eligible contract:</legend>
                               <ul class="usa-unstyled-list">
                                 <li *ngFor="let vehicle of compare_tbl; let i = index" [hidden]="vehicle.vendors_results_total===0">
                                   <input id="r-{{vehicle.id}}" type="radio" [checked]="i===0" [(ngModel)]="sort_by"
@@ -218,7 +224,6 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -235,21 +240,21 @@
 </div>
 <!-- START Modals -->
 <!-- <discovery-modal id="m-OASISSB" title="One Acquisition Solution for Integrated Services (OASIS)">
-  <p>
-    OASIS
+    <p>
+      OASIS
 
-  </p>
-</discovery-modal>
-<discovery-modal id="HCATSSB">
-  <p>
-    HCATSSB Content here
+    </p>
+  </discovery-modal>
+  <discovery-modal id="HCATSSB">
+    <p>
+      HCATSSB Content here
 
-  </p>
-</discovery-modal>
-<discovery-modal id="PSS">
-  <p>
-    PSS Content here
+    </p>
+  </discovery-modal>
+  <discovery-modal id="PSS">
+    <p>
+      PSS Content here
 
-  </p>
-</discovery-modal> -->
+    </p>
+  </discovery-modal> -->
 <!-- END Modals -->

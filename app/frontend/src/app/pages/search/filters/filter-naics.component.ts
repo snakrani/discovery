@@ -4,10 +4,12 @@ import {
   Input,
   Output,
   EventEmitter,
-  OnChanges
+  OnChanges,
+  ViewChild
 } from '@angular/core';
 import { SearchService } from '../search.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FilterSelectedComponent } from './filter-selected.component';
 declare let autocomplete: any;
 declare let document: any;
 declare let $: any;
@@ -17,6 +19,8 @@ declare let $: any;
   styles: []
 })
 export class FilterNaicsComponent implements OnInit, OnChanges {
+  @ViewChild(FilterSelectedComponent)
+  msgAddedItem: FilterSelectedComponent;
   @Input()
   items: any[];
   items_filtered: any[] = [];
@@ -204,6 +208,7 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
     item['description'] = this.getItemDescription(value);
     this.items_selected.push(item);
     this.emmitSelected.emit(1);
+    this.msgAddedItem.showMsg();
   }
   removeItem(value: string) {
     for (let i = 0; i < this.items_selected.length; i++) {

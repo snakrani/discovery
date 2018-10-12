@@ -1,6 +1,14 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ViewChild
+} from '@angular/core';
 import { SearchService } from '../search.service';
 import { ActivatedRoute } from '@angular/router';
+import { FilterSelectedComponent } from './filter-selected.component';
 declare let document: any;
 @Component({
   selector: 'discovery-filter-contract-pricing-type',
@@ -8,6 +16,8 @@ declare let document: any;
   styles: []
 })
 export class FilterContractPricingTypeComponent implements OnInit {
+  @ViewChild(FilterSelectedComponent)
+  msgAddedItem: FilterSelectedComponent;
   @Input()
   items: any[] = [];
   items_selected: any[] = [];
@@ -139,6 +149,7 @@ export class FilterContractPricingTypeComponent implements OnInit {
     item['value'] = key;
     this.items_selected.push(item);
     this.emmitSelected.emit(1);
+    this.msgAddedItem.showMsg();
   }
   removeItem(key: string) {
     for (let i = 0; i < this.items_selected.length; i++) {

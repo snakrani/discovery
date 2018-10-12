@@ -1,5 +1,5 @@
 #filters-container {
-  width: 310px !important;
+  max-width: 360px;
   margin-right: 20px;
   z-index: 9000;
 }
@@ -28,7 +28,15 @@
   display: none;
   width: auto;
 }
-@media (max-width: 1330px) {
+@media (min-width: 980px) {
+  .usa-width-one-fourth {
+    float: left;
+    display: block;
+    margin-right: 4.82916%;
+    width: 23% !important;
+  }
+}
+@media (max-width: 1180px) {
   .filters-close {
     display: block;
   }
@@ -37,7 +45,8 @@
     position: fixed !important;
     z-index: 600;
     top: 0;
-    left: -310px;
+    min-width: 310px;
+    left: -360px;
     border-color: #fff !important;
     border-right: 1px solid #d1d1d1 !important;
     color: #fff !important;

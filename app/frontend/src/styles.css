@@ -5,7 +5,7 @@ a {
   transition: margin-left 0.5s;
 }
 #discovery.push {
-  margin-left: 310px;
+  margin-left: 360px;
 }
 .discovery-logo a img,
 .discovery-logo a strong,
@@ -64,6 +64,16 @@ a {
   height: 70px;
   background-image: url('/frontend/assets/images/arrow-circle-left.png');
   background-image: url('/frontend/assets/images/arrow-circle-left.svg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  opacity: 0.4;
+}
+.icon-arrow-right {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  background-image: url('/frontend/assets/uswds/img/arrow-right.png');
+  background-image: url('/frontend/assets/uswds/img/arrow-right.svg');
   background-repeat: no-repeat;
   background-size: 100% 100%;
   opacity: 0.4;
@@ -191,6 +201,12 @@ footer hr {
   width: 3.6rem !important;
   height: 4.4rem !important;
   margin-top: 0px !important;
+}
+.btn-add {
+  width: 50px !important;
+  height: 4.4rem !important;
+  margin-top: 0px !important;
+  position: absolute;
 }
 ul.items-selected {
   padding: 0;
@@ -330,6 +346,10 @@ ul.items-selected li a {
   animation-duration: 1s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 @-webkit-keyframes slideInLeft {
   from {
@@ -507,7 +527,7 @@ ul.items-selected li a {
   margin: 0 !important;
 }
 #filters-container .items-input {
-  width: 210px !important;
+  width: 185px !important;
 }
 .usa-search button {
   float: left;
@@ -707,14 +727,25 @@ footer.usa-section-dark ul li {
   font-weight: normal !important;
   padding-left: 0px !important;
 }
+.usa-accordion .usa-accordion-button {
+  background-image: url(/frontend/assets/uswds/img/arrow-right.png) !important;
+  background-image: url(/frontend/assets/uswds/img/arrow-right.svg) !important;
+  background-position: left 2rem center !important;
+  padding: 1.5rem 5.5rem 1.5rem 4rem !important;
+  background-size: 1.1rem !important;
+  border-left: 0.4rem solid #fff !important;
+}
+.usa-accordion .usa-accordion-button[aria-expanded='true'] {
+  padding-left: 4rem !important;
+  background-image: url(/frontend/assets/uswds/img/arrow-down.png) !important;
+  background-image: url(/frontend/assets/uswds/img/arrow-down.svg) !important;
+}
 button.default,
 button.link {
   background: #fff;
   color: #0071bc;
 }
-#filters-container {
-  min-width: 310px !important;
-}
+
 .hide {
   display: none;
 }

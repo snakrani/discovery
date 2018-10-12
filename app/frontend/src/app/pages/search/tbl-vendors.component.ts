@@ -109,6 +109,7 @@ export class TblVendorsComponent implements OnInit, OnChanges {
         this.items_total = this.total_vendors;
         this.results = data;
         this.vendors = this.buildVendorByVehicle(data['results']);
+
         this.vendors_no_results = false;
         this.show_results = true;
         this.loading = false;
@@ -214,7 +215,6 @@ export class TblVendorsComponent implements OnInit, OnChanges {
       }
     }
     results['vendors'] = vehicles;
-    // console.log(results);
     return results;
   }
   countVendorsByVehicle(vehicle: string) {
