@@ -12,6 +12,12 @@ then
   rm -f "$LOG_FILE"
 fi
 
-echo "> Building Angular files" | tee -a "$LOG_FILE"
 cd frontend
-ng build >>"$LOG_FILE" 2>&1
+
+
+echo "> Building node modules" | tee -a "$LOG_FILE"
+rm -Rf node_modules
+npm install >>"$LOG_FILE" 2>&1
+
+echo "> Building Angular files" | tee -a "$LOG_FILE"
+ng build --prod >>"$LOG_FILE" 2>&1

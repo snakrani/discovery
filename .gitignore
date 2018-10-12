@@ -19,6 +19,7 @@ _*/
 .~lock.*
 
 /app/discovery/local_settings.py
+/app/frontend/node_modules
 /db/*.sql
 /docker/django-env.vars
 /docs/build
