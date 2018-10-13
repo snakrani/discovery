@@ -1,6 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { identifierModuleUrl } from '@angular/compiler';
-import { ThSortComponent } from '../th-sort.component';
 declare const $: any;
 @Component({
   selector: 'discovery-filter-selected',
