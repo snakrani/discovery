@@ -4,7 +4,8 @@ import {
   Input,
   Output,
   EventEmitter,
-  ViewChild
+  ViewChild,
+  OnChanges
 } from '@angular/core';
 import { SearchService } from '../search.service';
 import { ActivatedRoute } from '@angular/router';
@@ -14,7 +15,7 @@ declare let document: any;
   selector: 'discovery-filter-contract-vehicles',
   templateUrl: './filter-contract-vehicles.component.html'
 })
-export class FilterContractVehiclesComponent implements OnInit {
+export class FilterContractVehiclesComponent implements OnInit, OnChanges {
   @ViewChild(FilterSelectedComponent)
   msgAddedItem: FilterSelectedComponent;
   @Input()
@@ -22,6 +23,7 @@ export class FilterContractVehiclesComponent implements OnInit {
   @Input()
   items: any[] = [];
   _items_selected: any[] = [];
+  all_vehicles: any[] = [];
   @Input()
   opened = false;
   @Output()
@@ -34,16 +36,7 @@ export class FilterContractVehiclesComponent implements OnInit {
   queryName = 'vehicles';
   id = 'filter-vehicles';
   error_message;
-  /** Sample json
-  {
-    id: "BMO_SB",
-    name: "BMO Small Business",
-    small_business: true,
-    numeric_pool: true,
-    display_number:
-    false
-  };
-  */
+
   /** Generate inputs labels & values
    *  with these
    */
@@ -55,9 +48,24 @@ export class FilterContractVehiclesComponent implements OnInit {
   ) {}
 
   ngOnInit() {}
-
+  ngOnChanges() {
+    if (this.items && this.items.length > 0) {
+      this.setAllVehicles();
+    }
+  }
   loaded() {
     this.emmitLoaded.emit(this.queryName);
+  }
+  setAllVehicles() {
+    for (const i of this.items) {
+      const item = {};
+      item['description'] = i.name;
+      item['value'] = i.id;
+      this.all_vehicles.push(item);
+    }
+  }
+  getAllVehicles() {
+    return this.all_vehicles;
   }
   getSelected(): any[] {
     const item = [];
@@ -65,12 +73,17 @@ export class FilterContractVehiclesComponent implements OnInit {
       item['name'] = this.queryName;
       item['description'] = this.name;
       item['items'] = this._items_selected;
+    } else {
+      item['name'] = this.queryName;
+      item['description'] = this.name;
+      item['items'] = this.all_vehicles;
     }
     return item;
   }
   getItems() {
     return this.items;
   }
+
   getVehicleInfo(vehicle: string): any[] {
     for (const item of this.items) {
       if (item['id'] === vehicle) {

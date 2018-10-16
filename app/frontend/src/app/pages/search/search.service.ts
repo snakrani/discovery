@@ -4,21 +4,35 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, tap, delay } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 declare let API_HOST: string;
+declare const $: any;
 @Injectable({
   providedIn: 'root'
 })
 export class SearchService {
   private apiUrl = API_HOST + '/api/';
-
+  _pools;
+  _keywords;
   _active_filters: any[];
   _contract_results: any[];
-
   search_options = {};
+
   constructor(
     private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute
   ) {}
+  get pools(): any[] {
+    return this._pools;
+  }
+  set pools(arr: any[]) {
+    this._pools = arr;
+  }
+  get keywords(): any[] {
+    return this._keywords;
+  }
+  set keywords(arr: any[]) {
+    this._keywords = arr;
+  }
   get activeFilters(): any[] {
     return this._active_filters;
   }
@@ -246,6 +260,53 @@ export class SearchService {
         catchError(this.handleError)
       );
   }
+  getVehicleVendorsMeetCriteria(
+    filters: any[],
+    vehicle: string
+  ): Observable<any[]> {
+    let params = '';
+    params += '&pools__pool__vehicle__id=' + vehicle;
+    for (const filter of filters) {
+      if (filter['name'] === 'keywords') {
+        params +=
+          '&pools__pool__keywords__id__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
+
+      if (filter['name'] === 'service_categories') {
+        params +=
+          '&pools__pool__id__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
+      if (filter['name'] === 'setasides') {
+        params +=
+          '&pools__setasides__code__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
+      if (filter['name'] === 'naics') {
+        params +=
+          '&pools__pool__naics__code__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
+      if (filter['name'] === 'pscs') {
+        params +=
+          '&pools__pool__psc__code__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
+      if (filter['name'] === 'zone') {
+        params +=
+          '&pools__zones__id__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
+    }
+    console.log(this.apiUrl + 'vendors/count/duns?' + params.substr(1));
+    return this.http
+      .get<any[]>(this.apiUrl + 'vendors/count/duns?' + params.substr(1))
+      .pipe(
+        tap(data => data),
+        catchError(this.handleError)
+      );
+  }
 
   getVendorsCountByVehicle(vehicle: string): Observable<any[]> {
     return this.http
@@ -353,16 +414,19 @@ export class SearchService {
   getSelectedFilterList(arr: any[], concat: string): string {
     let str = '';
     for (const selected of arr) {
+      console.log(selected['value']);
       str += selected['value'] + concat;
     }
     str = str.slice(0, -concat.length);
     return str;
   }
   getQueryParams(arr: any[]): any[] {
+    // console.log(arr);
     const obj = [];
     for (const filter of arr) {
-      obj[filter.name] = this.getSelectedFilterList(filter.selected, '__');
+      obj[filter.name] = this.getSelectedFilterList(filter['selected'], '__');
     }
+    // console.log(obj);
     return obj;
   }
   existsIn(obj: any[], value: string, key: string): boolean {
@@ -416,6 +480,43 @@ export class SearchService {
       }
     }
     return n;
+  }
+  buildKeywordsDropdown(obj: any[]): any[] {
+    const keywords = [];
+    for (const item of obj) {
+      const keyword = {};
+      keyword['name'] = item['name'];
+      keyword['code'] = item['id'];
+      keywords.push(keyword);
+    }
+    return keywords;
+  }
+  setKeywordAutoComplete(data: any[], id: string) {
+    $('#' + id + '-value, #' + id + '-input').val('');
+    const options = {
+      data: data,
+      theme: 'square',
+      getValue: 'name',
+      list: {
+        match: {
+          enabled: true
+        },
+        onSelectItemEvent: function() {
+          $('#' + id + '-value').val(
+            $('#' + id + '-input').getSelectedItemData().code
+          );
+          // $('#error-msg').addClass('hide');
+          $('#' + id + '-input').removeClass('input-error');
+        },
+        onHideListEvent: function() {
+          if ($('#' + id + '-value').val() === '') {
+            $('#' + id + '-input').val('');
+          }
+        }
+      }
+    };
+    console.log($('#' + id + '-input'));
+    $('#' + id + '-input').easyAutocomplete(options);
   }
   sortByNameAsc(i1, i2) {
     if (i1 > i2) {

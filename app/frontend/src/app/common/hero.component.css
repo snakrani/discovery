@@ -11,3 +11,21 @@
   background-image: url('/frontend/assets/images/hero.jpg');
   box-shadow: 0 2px 5px rgb(177, 177, 177);
 }
+select {
+  width: 130px;
+  margin: 0px;
+  border-top-color: #fff;
+  border-bottom-color: #fff;
+  border-left-color: #fff;
+}
+.autocomplete input[type='text'] {
+  border-radius: 0px;
+  width: 300px;
+}
+
+#error-msg {
+  color: #fff;
+  padding: 15px;
+  width: 280px;
+  text-align: left;
+}

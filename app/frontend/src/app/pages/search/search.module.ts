@@ -27,6 +27,7 @@ import { ThSortComponent } from './th-sort.component';
 import { TblVendorsComponent } from './tbl-vendors.component';
 import { LnkToggleHeightsComponent } from './lnk-toggle-heights.component';
 import { FilterSelectedComponent } from './filters/filter-selected.component';
+import { AutocompleteComponent } from './filters/autocomplete.component';
 
 @NgModule({
   imports: [CommonModule, SearchRoutingModule, FormsModule],
@@ -55,7 +56,8 @@ import { FilterSelectedComponent } from './filters/filter-selected.component';
     TblVendorsComponent,
     ThSortComponent,
     LnkToggleHeightsComponent,
-    FilterSelectedComponent
+    FilterSelectedComponent,
+    AutocompleteComponent
   ]
 })
 export class SearchModule {}
