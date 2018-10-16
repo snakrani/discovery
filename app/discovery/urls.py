@@ -19,15 +19,30 @@ if settings.UAA_AUTH:
     urlpatterns.append(url(r'^auth/', include('uaa_client.urls')))
 
 urlpatterns.extend([
+    # Administration related endpoints
     url(r'^admin/', admin.site.urls),
+    url(r'^admin$', RedirectView.as_view(url='/admin/', permanent=False)),
 
-    url(r'^vendors/csv', vendors.VendorCSV, name="vendor-csv"),
-    url(r'^contracts/(?P<vendor_duns>\w+)/csv', contracts.ContractCSV, name="contract-csv"),
-        
+    # API related endpoints        
     url(r'^api/', include('api.urls')),
     url(r'^api/', include_docs_urls(title="Discovery API", public=True)),
-    url(r'^docs/', RedirectView.as_view(url='/api', permanent=False)),
-    url(r'^developers?/', RedirectView.as_view(url='/api', permanent=False)),
+    url(r'^api$', RedirectView.as_view(url='/api/', permanent=False)),
+    url(r'^docs/?', RedirectView.as_view(url='/api/', permanent=False)),
+    url(r'^developers?/?', RedirectView.as_view(url='/api/', permanent=False)),
 
-    url(r'^.*$', TemplateView.as_view(template_name='index.html')),
+    # Data export endpoints
+    url(r'^csv/vendors', vendors.VendorCSV, name="vendor-csv"),
+    url(r'^csv/contracts/(?P<vendor_duns>\w+)', contracts.ContractCSV, name="contract-csv"),
+
+    # Frontend routes
+    url(r'^404$', TemplateView.as_view(template_name='index.html')),
+    url(r'^$', TemplateView.as_view(template_name='index.html')),
+    url(r'^search.*$', TemplateView.as_view(template_name='index.html')),
+    url(r'^about.*$', TemplateView.as_view(template_name='index.html')),
+    url(r'^contracts.*$', TemplateView.as_view(template_name='index.html')),
+    url(r'^oasis.*$', TemplateView.as_view(template_name='index.html')),
+    url(r'^hcats.*$', TemplateView.as_view(template_name='index.html')),
+    url(r'^bmo.*$', TemplateView.as_view(template_name='index.html')),
+    url(r'^pss.*$', TemplateView.as_view(template_name='index.html')),
+    url(r'^.*$', RedirectView.as_view(url='/404', permanent=False)),
 ])

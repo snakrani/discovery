@@ -9,16 +9,18 @@ import { PssComponent } from './pages/contract-vehicles/pss.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { Error404Component } from './pages/error404/error404.component';
 import { ContractsComponent } from './pages/contracts/contracts.component';
+import { SearchComponent } from './pages/search/search.component';
 
 const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'contracts', component: ContractsComponent },
+  { path: 'search', component: SearchComponent },
   { path: 'oasis', component: OasisSbInfoComponent },
   { path: 'bmo', component: BmoInfoComponent },
   { path: 'hcats', component: HcatsComponent },
   { path: 'pss', component: PssComponent },
-  { path: '', component: WelcomeComponent },
-  { path: '**', component: Error404Component }
+  { path: '404', component: Error404Component },
+  { path: '', component: WelcomeComponent }
 ];
 
 @NgModule({
