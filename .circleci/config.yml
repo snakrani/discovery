@@ -245,6 +245,7 @@ jobs:
             pip install --no-cache-dir -r ./requirements.txt
             pip install --no-cache-dir -r ./requirements-dev.txt
             ./scripts/setup-angular.sh /dev/stderr
+            ./scripts/build-frontend.sh /dev/stderr
             ./scripts/init-webserver.sh /dev/stderr
 
       - run:
@@ -287,6 +288,7 @@ jobs:
             pip install --no-cache-dir -r ./requirements.txt
             pip install --no-cache-dir -r ./requirements-dev.txt
             ./scripts/setup-angular.sh /dev/stderr
+            ./scripts/build-frontend.sh /dev/stderr
             ./scripts/init-webserver.sh /dev/stderr
 
       - run:
