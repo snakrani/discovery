@@ -549,7 +549,7 @@ ul.items-selected li a {
   min-height: 35px;
 }
 .input-spinner {
-  background-image: url(/assets/images/input-loader.gif);
+  background-image: url(/frontend/assets/images/input-loader.gif);
   background-repeat: no-repeat;
   background-size: auto 50%;
   background-position: 8px 50%;
