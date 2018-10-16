@@ -22,9 +22,10 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
   @ViewChild(FilterSelectedComponent)
   msgAddedItem: FilterSelectedComponent;
   @Input()
-  items: any[];
+  items: any[] = [];
   items_filtered: any[] = [];
   items_selected: any[] = [];
+  keywords_results: any[] = [];
   @Input()
   opened = false;
   @Output()
@@ -39,7 +40,7 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
   placeholder;
   error_message;
   filtered_naics;
-  naic = '0';
+  naics;
   ln;
   /** Sample json
   {
@@ -57,15 +58,46 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
   ngOnInit() {}
   ngOnChanges() {
     if (this.items.length > 1) {
-      this.buildItems(this.items);
+      this.setKeywordsList();
     }
   }
+  setKeywordsList() {
+    this.items = this.buildNaicsItems(this.items);
+    /** Grab the queryparams and sets default values
+     *  on inputs Ex. checked, selected, keywords, etc */
+    if (this.route.snapshot.queryParamMap.has(this.queryName)) {
+      const values: string[] = this.route.snapshot.queryParamMap
+        .get(this.queryName)
+        .split('__');
 
+      for (const id of values) {
+        this.addItem(id);
+      }
+      /** Open accordion */
+      this.opened = true;
+    }
+    /** Check if there are selected vehicles
+     *  and sort dropdown based on vehicle id
+     */
+    if (this.route.snapshot.queryParamMap.has('vehicles')) {
+      const values: string[] = this.route.snapshot.queryParamMap
+        .get('vehicles')
+        .split('__');
+
+      this.setFilteredItems(values);
+    } else {
+      this.setFilteredItems(['All']);
+    }
+
+    this.placeholder = 'Enter NAIC or keywords...';
+    this.emmitLoaded.emit(this.queryName);
+  }
   setFilteredItems(vehicles) {
     this.items_filtered =
       vehicles[0] !== 'All' ? this.filterByVehicles(vehicles) : this.items;
     this.items_filtered.sort(this.searchService.sortByCodeAsc);
-    this.ln = this.items_filtered.length;
+    this.keywords_results = this.items_filtered;
+
     /** Remove all selected items
      *  that are not within filtered list
      */
@@ -73,9 +105,61 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
       if (
         !this.searchService.existsIn(this.items_filtered, item['value'], 'id')
       ) {
-        this.naic = '0';
+        // this.removeItem(item['value']);
       }
     }
+  }
+  buildNaicsItems(obj: any[]): any[] {
+    const naics = [];
+    for (const pool of obj) {
+      for (const naic of pool.naics) {
+        const item = {};
+        item['code'] = naic.code;
+        item['name'] = naic.code + ' - ' + naic.description;
+        item['vehicle_id'] = pool.vehicle.id;
+        if (!this.searchService.existsIn(naics, naic.code, 'code')) {
+          naics.push(item);
+        }
+      }
+    }
+    naics.sort(this.searchService.sortByCodeAsc);
+    return naics;
+  }
+  getItemId(value: string): string {
+    if (value) {
+      for (let i = 0; i < this.items.length; i++) {
+        if (this.items[i][this.json_description] === value) {
+          return this.items[i][this.json_value];
+        }
+      }
+    }
+  }
+  getItemDescription(id: number): string {
+    if (id) {
+      for (let i = 0; i < this.items.length; i++) {
+        if (+this.items[i][this.json_value] === id) {
+          return this.items[i]['name'];
+        }
+      }
+    }
+  }
+  addKeywords(code) {
+    if (
+      !this.searchService.existsIn(this.items_selected, code, 'value') &&
+      this.searchService.existsIn(this.items_filtered, code, 'code')
+    ) {
+      this.addItem(code);
+    }
+  }
+  addItem(id: string) {
+    const item = {};
+    if (id && id !== '') {
+      item['value'] = id;
+      item['description'] = this.getItemDescription(+id);
+    }
+    this.items_selected.push(item);
+    this.emmitSelected.emit(1);
+    this.msgAddedItem.showMsg();
   }
   filterByVehicles(vehicles: any[]) {
     const items: any[] = [];
@@ -92,55 +176,13 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
     return items;
   }
   getNaicsByVehicle(vehicle: string): any[] {
+    // console.log(vehicle);
     let items: any[] = [];
     const abr = vehicle.substr(0, 3);
     items = this.items.filter(naics => naics.vehicle_id.indexOf(abr) !== -1);
     return items;
   }
-  buildItems(obj: any[]) {
-    const naics = [];
-    for (const pool of obj) {
-      for (const naic of pool.naics) {
-        const item = {};
-        item['code'] = naic.code;
-        item['description'] = naic.description;
-        item['vehicle_id'] = pool.vehicle.id;
-        if (!this.searchService.existsIn(naics, naic.code, 'code')) {
-          naics.push(item);
-        }
-      }
-    }
-    this.items = naics;
-    this.items.sort(this.searchService.sortByCodeAsc);
-    /** Grab the queryparams and sets default values
-     *  on inputs Ex. checked, selected, keywords, etc */
-    if (this.route.snapshot.queryParamMap.has(this.queryName)) {
-      const values: string[] = this.route.snapshot.queryParamMap
-        .get(this.queryName)
-        .split('__');
 
-      for (const item of values) {
-        this.addItem(item);
-      }
-      /** Open accordion */
-      this.opened = true;
-    } else {
-      // this.opened = false;
-    }
-    /** Check if there are selected vehicles
-     *  and sort dropdown based on vehicle id
-     */
-    if (this.route.snapshot.queryParamMap.has('vehicles')) {
-      const values: string[] = this.route.snapshot.queryParamMap
-        .get('vehicles')
-        .split('__');
-
-      this.setFilteredItems(values);
-    } else {
-      this.setFilteredItems(['All']);
-    }
-    this.emmitLoaded.emit(this.queryName);
-  }
   buildItemsByVehicle(obj: any[]) {
     const naics = [];
     for (const pool of obj) {
@@ -167,19 +209,7 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
     }
     return items;
   }
-  addNaic() {
-    if (!this.exists(this.naic) && this.naic !== '0') {
-      this.addItem(this.naic);
-    }
-  }
-  exists(value: string): boolean {
-    for (let i = 0; i < this.items_selected.length; i++) {
-      if (this.items_selected[i][this.json_value] === value) {
-        return true;
-      }
-    }
-    return false;
-  }
+
   getSelected(): any[] {
     const item = [];
     if (this.items_selected.length > 0) {
@@ -190,25 +220,7 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
     return item;
   }
   reset() {
-    this.naic = '0';
     this.items_selected = [];
-  }
-  getItemDescription(value: string): string {
-    if (value) {
-      for (let i = 0; i < this.items.length; i++) {
-        if (this.items[i][this.json_value] === value) {
-          return this.items[i][this.json_description];
-        }
-      }
-    }
-  }
-  addItem(value: string) {
-    const item = {};
-    item['value'] = value;
-    item['description'] = this.getItemDescription(value);
-    this.items_selected.push(item);
-    this.emmitSelected.emit(1);
-    this.msgAddedItem.showMsg();
   }
   removeItem(value: string) {
     for (let i = 0; i < this.items_selected.length; i++) {

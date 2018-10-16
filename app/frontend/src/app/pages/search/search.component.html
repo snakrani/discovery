@@ -199,7 +199,7 @@
                       <div *ngIf="!vendors_no_results">
                         <div class="usa-grid-full">
                           <div class="usa-width-one-whole" [hidden]="spinner">
-                            <fieldset class="usa-fieldset-inputs usa-sans inputs-inline" *ngIf="results.vehicles.length>1">
+                            <fieldset class="usa-fieldset-inputs usa-sans inputs-inline" *ngIf="total_vendors_met_criteria>0">
                               <legend>Showing all vendors based on your criteria for the following eligible contract:</legend>
                               <ul class="usa-unstyled-list">
                                 <li *ngFor="let vehicle of compare_tbl; let i = index" [hidden]="vehicle.vendors_results_total===0">

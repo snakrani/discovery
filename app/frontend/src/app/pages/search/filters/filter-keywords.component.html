@@ -5,14 +5,7 @@
 
   <div class="usa-search">
 
-    <div class="autocomplete form-horizontal">
-      <discovery-spinner *ngIf="keywords_results.length === 0"></discovery-spinner>
-      <input id="keywords-input" class="items-input" pattern=".+" type="text" [(ngModel)]="keywords" name="keywords"
-        [disabled]="keywords_results.length === 0" [placeholder]="placeholder" autocomplete="off">
-      <button class="btn-add pull-right" type="submit" (click)="addKeywords()" [disabled]="keywords.length === 0">
-        <span>Add</span>
-      </button>
-    </div>
+    <discovery-autocomplete (emitCode)="addKeywords($event)" [id]="id" [placeholder]="placeholder" [keywords_results]="keywords_results"></discovery-autocomplete>
 
   </div>
   <ul *ngIf="items_selected" class="items-selected">

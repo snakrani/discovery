@@ -99,7 +99,28 @@ export class FiltersComponent implements OnInit {
       this.filterCertifications,
       this.filterContractPricing
        */
+    // if (this.searchService.pools && this.searchService.pools.length > 0) {
+    //   this.pools = this.searchService.pools;
+    //   this.initVehicles();
+    // } else {
     this.initPools(['All']);
+    // }
+  }
+  initPools(vehicles) {
+    this.server_error = false;
+    this.searchService.getPools(vehicles).subscribe(
+      data => {
+        this.pools = data['results'];
+        this.searchService.pools = this.pools;
+        this.initVehicles();
+      },
+      error => {
+        this.server_error = true;
+        this.error_message = <any>error;
+        this.emitServerError.emit(1);
+        this.spinner = false;
+      }
+    );
   }
   initVehicles() {
     this.server_error = false;
@@ -136,21 +157,7 @@ export class FiltersComponent implements OnInit {
       }
     );
   }
-  initPools(vehicles) {
-    this.server_error = false;
-    this.searchService.getPools(vehicles).subscribe(
-      data => {
-        this.pools = data['results'];
-        this.initVehicles();
-      },
-      error => {
-        this.server_error = true;
-        this.error_message = <any>error;
-        this.emitServerError.emit(1);
-        this.spinner = false;
-      }
-    );
-  }
+
   resetFilters() {
     this.num_items_selected = 0;
     this.disabled_btn = true;
@@ -223,8 +230,7 @@ export class FiltersComponent implements OnInit {
     return obj;
   }
   getContractVehicles() {
-    const contract_vehicles = this.filterContractVehiclesComponent.getItems();
-    return contract_vehicles;
+    return this.vehicles;
   }
   getVehicleDescription(vehicle: string) {
     const desc = this.filterContractVehiclesComponent.getItemDescription(
@@ -242,6 +248,12 @@ export class FiltersComponent implements OnInit {
   }
   getPSCsByVehicle(vehicle: string) {
     const obj: any[] = this.filterPscComponent.getPSCsByVehicle(vehicle);
+    return obj;
+  }
+  getVehicleInfo(vehicle: string) {
+    const obj: any[] = this.filterContractVehiclesComponent.getVehicleInfo(
+      vehicle
+    );
     return obj;
   }
   getSetAsides() {
@@ -269,8 +281,10 @@ export class FiltersComponent implements OnInit {
     /** Filters need to be loaded before
      *  displaying compare table.
      */
-
-    if (this.loaded_filters.length === this.filters_list.length) {
+    if (
+      this.loaded_filters.length === this.filters_list.length &&
+      this.vehicles.length > 0
+    ) {
       if (
         this.num_items_selected > 0 &&
         this.route.snapshot.queryParamMap.keys.length > 0 &&

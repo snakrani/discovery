@@ -100,13 +100,13 @@ export class TblVendorsComponent implements OnInit, OnChanges {
           this.vendors = [];
           return;
         }
-        this.items_total = this.total_vendors;
+        this.items_total = data['count'];
         this.num_results = data['results'].length;
         this.num_total_pages = Math.floor(
           (this.items_total + this.items_per_page - 1) / this.items_per_page
         );
 
-        this.items_total = this.total_vendors;
+        this.items_total = data['count'];
         this.results = data;
         this.vendors = this.buildVendorByVehicle(data['results']);
 
