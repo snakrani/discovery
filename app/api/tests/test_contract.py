@@ -21,7 +21,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
             'tags': ('contract_ordering',),
             'fields': (
                 'id', 'piid', 'base_piid',
-                'agency_id', 'agency_name', 
+                'agency__id', 'agency__name', 
                 'NAICS', 'PSC',
                 'date_signed', 'completion_date', 'obligated_amount',
                 'vendor__duns', 'vendor__cage', 'vendor__name',
@@ -46,7 +46,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
         'search': {
             'tags': ('contract_search',),
             '*search1': ('piid', 'iexact', 'DAAE0703CL525'),
-            '@search2': ('agency_name', 'iregex', 'NUCLEAR REGULATORY COMMISSION')
+            '@search2': ('agency__name', 'iregex', 'NUCLEAR REGULATORY COMMISSION')
         },
         'fields': {
             'id': {
@@ -87,14 +87,14 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': '[A-Z]+\d+',
                 '@iregex': '[a-z]{4}[0-9]{4}cl001'
             },
-            'agency_id': {
-                'tags': ('contract_field', 'token_text'),
+            'agency__id': {
+                'tags': ('contract_field', 'agency_field', 'token_text'),
                 '@exact': '8000',
                 '@iexact': '8000',
                 '@in': ('8000', '6800', '2050')
             },
-            'agency_name': {
-                'tags': ('contract_field', 'fuzzy_text'),
+            'agency__name': {
+                'tags': ('contract_field', 'agency_field', 'fuzzy_text'),
                 '@exact': 'INTERNAL REVENUE SERVICE',
                 '@iexact': 'Internal Revenue Service',
                 '@in': ('INTERNAL REVENUE SERVICE', 'CONSUMER FINANCIAL PROTECTION BUREAU', 'FEDERAL ACQUISITION SERVICE'),

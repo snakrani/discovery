@@ -13,6 +13,7 @@ router.register('vehicles', views.VehicleViewSet)
 router.register('pools', views.PoolViewSet)
 router.register('zones', views.ZoneViewSet)
 router.register('vendors', views.VendorViewSet)
+router.register('agencies', views.AgencyViewSet)
 router.register('contracts', views.ContractViewSet)
 
 urlpatterns = [

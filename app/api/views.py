@@ -357,6 +357,37 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
         return queryset.annotate(number_of_contracts = query.QueryCount(contract_list))
 
 
+class AgencyViewSet(DiscoveryReadOnlyModelViewSet):
+    """
+    API endpoint that allows for access to Discovery related agency information.
+    
+    retrieve:
+    Returns information for a single agency.
+    
+    list:
+    Returns all of the agencies that are relevant to the acquisition vehicles in the Discovery universe.
+    """
+    queryset = contracts.Agency.objects.all().distinct()
+    lookup_field = 'id'
+    
+    action_filters = {
+        'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter),
+        'count': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
+    }
+    filter_class = filters.AgencyFilter
+    search_fields = ['id', 'name']
+    ordering_fields = ['id', 'name']
+    ordering = 'name'
+    
+    pagination_class = pagination.ResultSetPagination
+    action_serializers = {
+        'list': serializers.AgencySummarySerializer,
+        'retrieve': serializers.AgencyFullSerializer,
+        'test': serializers.AgencyTestSerializer
+    }
+
+
 class ContractViewSet(DiscoveryReadOnlyModelViewSet):
     """
     API endpoint that allows for access to contract information for vendors in the Discovery universe.
@@ -376,10 +407,10 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
         'count': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
     }
     filter_class = filters.ContractFilter
-    search_fields = ['piid', 'agency_name']
+    search_fields = ['piid', 'agency__name']
     ordering_fields = [
         'id', 'piid', 'base_piid',
-        'agency_id', 'agency_name', 
+        'agency__id', 'agency__name', 
         'NAICS', 'PSC',
         'date_signed', 'completion_date', 'obligated_amount',
         'vendor__duns', 'vendor__cage', 'vendor__name',
