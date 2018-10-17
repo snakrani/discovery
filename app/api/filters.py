@@ -317,19 +317,28 @@ class PlaceOfPerformanceFilter(FilterSet, metaclass = MetaFilterSet):
         fields = ()
 
 
+class AgencyFilter(FilterSet, metaclass = MetaFilterSet):
+    
+    _token_text = ('id',)
+    _fuzzy_text = ('name',)
+    
+    class Meta:
+        model = contracts.Agency
+        fields = ()
+
+
 class ContractFilter(FilterSet, metaclass = MetaFilterSet):
     
-    _token_text = ('agency_id',)
-    _fuzzy_text = ('piid', 'base_piid', 'agency_name', 'NAICS', 'PSC', 'point_of_contact', 'vendor_phone')
+    _fuzzy_text = ('piid', 'base_piid', 'NAICS', 'PSC', 'point_of_contact', 'vendor_phone')
     _number = ('id', 'obligated_amount', 'annual_revenue', 'number_of_employees')
     _date_time = ('date_signed', 'completion_date')
     
     status = RelatedFilter(ContractStatusFilter)
     pricing_type = RelatedFilter(PricingStructureFilter)
-        
+    
+    agency = RelatedFilter(AgencyFilter)
     vendor = RelatedFilter(VendorFilter)
     vendor_location = RelatedFilter(LocationFilter)
-    
     place_of_performance = RelatedFilter(PlaceOfPerformanceFilter)
     
     psc_naics = CharFilter(field_name='NAICS', method='filter_psc_naics')
