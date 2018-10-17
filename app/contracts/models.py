@@ -36,6 +36,14 @@ class PlaceOfPerformance(models.Model):
         return "{0} - {1}".format(self.country_code, self.country_name)
 
 
+class Agency(models.Model):
+    id = models.CharField(max_length=128, null=False, primary_key=True)
+    name = models.CharField(max_length=128, null=False)
+    
+    def __str__(self):
+        return "{} ({})".format(self.name, self.id)
+
+
 class Contract(models.Model):
     piid = models.CharField(max_length=128, db_index=True)
     base_piid = models.CharField(max_length=128, db_index=True, null=True)
@@ -43,11 +51,10 @@ class Contract(models.Model):
     date_signed = models.DateTimeField(null=True)
     completion_date = models.DateTimeField(null=True)
     
-    NAICS = models.CharField(max_length=128, null=True) #should be foreign key, when we get all NAICS
-    PSC = models.CharField(max_length=128, null=True)   
+    NAICS = models.CharField(max_length=128, null=True) # TODO: change to foreign key
+    PSC = models.CharField(max_length=128, null=True) # TODO: change to foreign key  
     
-    agency_id = models.CharField(max_length=128, null=True)
-    agency_name = models.CharField(max_length=128, null=True)
+    agency = models.ForeignKey(Agency, null=True, on_delete=models.DO_NOTHING)
     
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
     point_of_contact = models.EmailField(null=True)
@@ -67,7 +74,7 @@ class Contract(models.Model):
 
     def save(self, *args, **kwargs):    
         try:
-            obj = Contract.objects.get(piid=self.piid, agency_id=self.agency_id)
+            obj = Contract.objects.get(piid=self.piid, agency_id=self.agency.id)
             #piid with that vendor already exists
             if obj.id == self.id:
                 super(Contract, self).save(*args, **kwargs)
