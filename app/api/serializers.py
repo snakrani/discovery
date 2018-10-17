@@ -416,6 +416,30 @@ class PlaceOfPerformanceSerializer(ModelSerializer):
         fields = ['country_code', 'country_name', 'state', 'zipcode']
 
 
+class BaseAgencySerializer(HyperlinkedModelSerializer):
+    url = HyperlinkedIdentityField(view_name="agency-detail", lookup_field='id')
+    
+    class Meta:
+        model = contracts.Agency
+        fields = ['id', 'name']
+
+class AgencyLinkSerializer(BaseAgencySerializer):
+    class Meta(BaseAgencySerializer.Meta):
+        fields = ['id', 'url']
+
+class AgencySummarySerializer(BaseAgencySerializer):
+    class Meta(BaseAgencySerializer.Meta):
+        fields = BaseAgencySerializer.Meta.fields + ['url']
+
+class AgencyFullSerializer(BaseAgencySerializer):
+    class Meta(BaseAgencySerializer.Meta):
+        fields = BaseAgencySerializer.Meta.fields
+
+class AgencyTestSerializer(AgencyFullSerializer):
+    class Meta(AgencyFullSerializer.Meta):
+        fields = AgencyFullSerializer.Meta.fields + ['url']
+
+
 class BaseContractSerializer(HyperlinkedModelSerializer):
     url = HyperlinkedIdentityField(view_name="contract-detail", lookup_field='id')
     
@@ -424,7 +448,7 @@ class BaseContractSerializer(HyperlinkedModelSerializer):
     
     class Meta:
         model = contracts.Contract
-        fields = ['id', 'piid', 'base_piid', 'agency_id', 'agency_name', 'NAICS', 'PSC',
+        fields = ['id', 'piid', 'base_piid', 'NAICS', 'PSC', 'agency',
                   'point_of_contact', 'vendor_phone',
                   'date_signed', 'completion_date', 'status', 'pricing_type', 'obligated_amount', 
                   'annual_revenue', 'number_of_employees']
@@ -437,6 +461,8 @@ class AnnotatedContractSerializer(BaseContractSerializer):
     place_of_performance_location = CharField()
 
 class ContractSummarySerializer(AnnotatedContractSerializer):
+    agency = AgencySummarySerializer(many=False)
+    
     class Meta(BaseContractSerializer.Meta):
         fields = BaseContractSerializer.Meta.fields + [
             'place_of_performance_location',
@@ -448,6 +474,8 @@ class ContractFullSerializer(AnnotatedContractSerializer):
     vendor_location = LocationSerializer(many=False)
     
     place_of_performance = PlaceOfPerformanceSerializer(many=False)
+    
+    agency = AgencyFullSerializer(many=False)
         
     class Meta(BaseContractSerializer.Meta):
         fields = BaseContractSerializer.Meta.fields + [
@@ -460,6 +488,8 @@ class ContractTestSerializer(BaseContractSerializer):
     vendor_location = LocationSerializer(many=False)
     
     place_of_performance = PlaceOfPerformanceSerializer(many=False)
+    
+    agency = AgencyTestSerializer(many=False)
     
     class Meta(BaseContractSerializer.Meta):
         fields = BaseContractSerializer.Meta.fields + [
