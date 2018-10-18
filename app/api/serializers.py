@@ -398,18 +398,6 @@ class VendorTestSerializer(BaseVendorSerializer):
         ]
 
 
-class ContractStatusSerializer(ModelSerializer):
-    class Meta:
-        model = contracts.ContractStatus
-        fields = ['code', 'name']
-
-
-class PricingStructureSerializer(ModelSerializer):
-    class Meta:
-        model = contracts.PricingStructure
-        fields = ['code', 'name']
-
-
 class PlaceOfPerformanceSerializer(ModelSerializer):
     class Meta:
         model = contracts.PlaceOfPerformance
@@ -440,11 +428,81 @@ class AgencyTestSerializer(AgencyFullSerializer):
         fields = AgencyFullSerializer.Meta.fields + ['url']
 
 
+class BasePricingStructureSerializer(HyperlinkedModelSerializer):
+    url = HyperlinkedIdentityField(view_name="pricingstructure-detail", lookup_field='code')
+    
+    class Meta:
+        model = contracts.PricingStructure
+        fields = ['code', 'name']
+
+class PricingStructureLinkSerializer(BasePricingStructureSerializer):
+    class Meta(BasePricingStructureSerializer.Meta):
+        fields = ['code', 'url']
+
+class PricingStructureSummarySerializer(BasePricingStructureSerializer):
+    class Meta(BasePricingStructureSerializer.Meta):
+        fields = BasePricingStructureSerializer.Meta.fields + ['url']
+
+class PricingStructureFullSerializer(BasePricingStructureSerializer):
+    class Meta(BasePricingStructureSerializer.Meta):
+        fields = BasePricingStructureSerializer.Meta.fields
+
+class PricingStructureTestSerializer(PricingStructureFullSerializer):
+    class Meta(PricingStructureFullSerializer.Meta):
+        fields = PricingStructureFullSerializer.Meta.fields + ['url']
+
+
+
+class BaseContractStatusSerializer(HyperlinkedModelSerializer):
+    url = HyperlinkedIdentityField(view_name="contractstatus-detail", lookup_field='code')
+    
+    class Meta:
+        model = contracts.ContractStatus
+        fields = ['code', 'name']
+
+class ContractStatusLinkSerializer(BaseContractStatusSerializer):
+    class Meta(BaseContractStatusSerializer.Meta):
+        fields = ['code', 'url']
+
+class ContractStatusSummarySerializer(BaseContractStatusSerializer):
+    class Meta(BaseContractStatusSerializer.Meta):
+        fields = BaseContractStatusSerializer.Meta.fields + ['url']
+
+class ContractStatusFullSerializer(BaseContractStatusSerializer):
+    class Meta(BaseContractStatusSerializer.Meta):
+        fields = BaseContractStatusSerializer.Meta.fields
+
+class ContractStatusTestSerializer(ContractStatusFullSerializer):
+    class Meta(ContractStatusFullSerializer.Meta):
+        fields = ContractStatusFullSerializer.Meta.fields + ['url']
+
+
+class BasePlaceOfPerformanceSerializer(HyperlinkedModelSerializer):
+    url = HyperlinkedIdentityField(view_name="placeofperformance-detail", lookup_field='id')
+    
+    class Meta:
+        model = contracts.PlaceOfPerformance
+        fields = ['id', 'country_code', 'country_name', 'state', 'zipcode']
+
+class PlaceOfPerformanceLinkSerializer(BasePlaceOfPerformanceSerializer):
+    class Meta(BasePlaceOfPerformanceSerializer.Meta):
+        fields = ['id', 'url']
+
+class PlaceOfPerformanceSummarySerializer(BasePlaceOfPerformanceSerializer):
+    class Meta(BasePlaceOfPerformanceSerializer.Meta):
+        fields = BasePlaceOfPerformanceSerializer.Meta.fields + ['url']
+
+class PlaceOfPerformanceFullSerializer(BasePlaceOfPerformanceSerializer):
+    class Meta(BasePlaceOfPerformanceSerializer.Meta):
+        fields = BasePlaceOfPerformanceSerializer.Meta.fields
+
+class PlaceOfPerformanceTestSerializer(PlaceOfPerformanceFullSerializer):
+    class Meta(PlaceOfPerformanceFullSerializer.Meta):
+        fields = PlaceOfPerformanceFullSerializer.Meta.fields + ['url']
+
+
 class BaseContractSerializer(HyperlinkedModelSerializer):
     url = HyperlinkedIdentityField(view_name="contract-detail", lookup_field='id')
-    
-    status = ContractStatusSerializer(many=False)
-    pricing_type = PricingStructureSerializer(many=False)
     
     class Meta:
         model = contracts.Contract
@@ -461,7 +519,10 @@ class AnnotatedContractSerializer(BaseContractSerializer):
     place_of_performance_location = CharField()
 
 class ContractSummarySerializer(AnnotatedContractSerializer):
+    place_of_performance = PlaceOfPerformanceSummarySerializer(many=False)
     agency = AgencySummarySerializer(many=False)
+    pricing_type = PricingStructureSummarySerializer(many=False)
+    status = ContractStatusSummarySerializer(many=False)
     
     class Meta(BaseContractSerializer.Meta):
         fields = BaseContractSerializer.Meta.fields + [
@@ -473,9 +534,10 @@ class ContractFullSerializer(AnnotatedContractSerializer):
     vendor = VendorSummarySerializer(many=False)
     vendor_location = LocationSerializer(many=False)
     
-    place_of_performance = PlaceOfPerformanceSerializer(many=False)
-    
+    place_of_performance = PlaceOfPerformanceFullSerializer(many=False)
     agency = AgencyFullSerializer(many=False)
+    pricing_type = PricingStructureFullSerializer(many=False)
+    status = ContractStatusFullSerializer(many=False)
         
     class Meta(BaseContractSerializer.Meta):
         fields = BaseContractSerializer.Meta.fields + [
@@ -487,9 +549,10 @@ class ContractTestSerializer(BaseContractSerializer):
     vendor = VendorTestSerializer(many=False)
     vendor_location = LocationSerializer(many=False)
     
-    place_of_performance = PlaceOfPerformanceSerializer(many=False)
-    
+    place_of_performance = PlaceOfPerformanceTestSerializer(many=False)
     agency = AgencyTestSerializer(many=False)
+    pricing_type = PricingStructureTestSerializer(many=False)
+    status = ContractStatusTestSerializer(many=False)
     
     class Meta(BaseContractSerializer.Meta):
         fields = BaseContractSerializer.Meta.fields + [

@@ -388,6 +388,99 @@ class AgencyViewSet(DiscoveryReadOnlyModelViewSet):
     }
 
 
+class PricingViewSet(DiscoveryReadOnlyModelViewSet):
+    """
+    API endpoint that allows for access to Discovery pricing related contract information.
+    
+    retrieve:
+    Returns information for a single pricing type.
+    
+    list:
+    Returns all of the pricing types that are relevant to the contracts in the Discovery universe.
+    """
+    queryset = contracts.PricingStructure.objects.all().distinct()
+    lookup_field = 'code'
+    
+    action_filters = {
+        'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter),
+        'count': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
+    }
+    filter_class = filters.PricingStructureFilter
+    search_fields = ['name']
+    ordering_fields = ['code', 'name']
+    ordering = 'name'
+    
+    pagination_class = pagination.ResultSetPagination
+    action_serializers = {
+        'list': serializers.PricingStructureSummarySerializer,
+        'retrieve': serializers.PricingStructureFullSerializer,
+        'test': serializers.PricingStructureTestSerializer
+    }
+
+
+class StatusViewSet(DiscoveryReadOnlyModelViewSet):
+    """
+    API endpoint that allows for access to Discovery status related contract information.
+    
+    retrieve:
+    Returns information for a single contract status.
+    
+    list:
+    Returns all of the statuses that are relevant to the contracts in the Discovery universe.
+    """
+    queryset = contracts.ContractStatus.objects.all().distinct()
+    lookup_field = 'code'
+    
+    action_filters = {
+        'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter),
+        'count': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
+    }
+    filter_class = filters.ContractStatusFilter
+    search_fields = ['name']
+    ordering_fields = ['code', 'name']
+    ordering = 'name'
+    
+    pagination_class = pagination.ResultSetPagination
+    action_serializers = {
+        'list': serializers.ContractStatusSummarySerializer,
+        'retrieve': serializers.ContractStatusFullSerializer,
+        'test': serializers.ContractStatusTestSerializer
+    }
+
+
+class PlaceOfPerformanceViewSet(DiscoveryReadOnlyModelViewSet):
+    """
+    API endpoint that allows for access to places of performance for contracts in the Discovery universe.
+    
+    retrieve:
+    Returns information for a single place of performance.
+    
+    list:
+    Returns all of the places of performance that are relevant to the contracts in the Discovery universe.
+    """
+    queryset = contracts.PlaceOfPerformance.objects.all().distinct()
+    lookup_field = 'id'
+    
+    action_filters = {
+        'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter),
+        'count': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
+    }
+    filter_class = filters.PlaceOfPerformanceFilter
+    search_fields = ['country_name', 'state', 'zipcode']
+    ordering_fields = ['id', 'country_code', 'country_name', 'state', 'zipcode']
+    ordering = 'state'
+    
+    pagination_class = pagination.ResultSetPagination
+    action_serializers = {
+        'list': serializers.PlaceOfPerformanceSummarySerializer,
+        'retrieve': serializers.PlaceOfPerformanceFullSerializer,
+        'test': serializers.PlaceOfPerformanceTestSerializer
+    }
+
+
 class ContractViewSet(DiscoveryReadOnlyModelViewSet):
     """
     API endpoint that allows for access to contract information for vendors in the Discovery universe.

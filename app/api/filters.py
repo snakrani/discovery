@@ -311,6 +311,7 @@ class PlaceOfPerformanceFilter(FilterSet, metaclass = MetaFilterSet):
     
     _token_text = ('country_code', 'state')
     _fuzzy_text = ('country_name', 'zipcode')
+    _number = ('id',)
     
     class Meta:
         model = contracts.PlaceOfPerformance
