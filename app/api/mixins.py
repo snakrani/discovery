@@ -33,7 +33,7 @@ class PaginationViewSetMixin(object):
                 self._paginator = None
             elif check_api_test(self.request):
                 self._paginator = TestResultSetPagination()
-            elif not self._allow_pagination(self.request):
+            elif self.bypass_pagination and not self._allow_pagination(self.request):
                 self._paginator = ResultNoPagination()
             else:
                 self._paginator = self.pagination_class()
