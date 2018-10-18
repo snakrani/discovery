@@ -1,20 +1,32 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ViewChild,
+  AfterContentInit
+} from '@angular/core';
 import { SearchService } from '../search.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FilterSelectedComponent } from './filter-selected.component';
 declare let autocomplete: any;
 declare let document: any;
+declare const $: any;
 @Component({
   selector: 'discovery-filter-keywords',
   templateUrl: './filter-keywords.component.html',
   styles: []
 })
-export class FilterKeywordsComponent implements OnInit {
+export class FilterKeywordsComponent implements OnInit, AfterContentInit {
+  @ViewChild(FilterSelectedComponent)
+  msgAddedItem: FilterSelectedComponent;
   items: any[] = [];
   keywords_results: any[] = [];
   _keywords = '';
   items_selected: any[] = [];
   @Input()
-  opened = false;
+  opened = true;
   @Output()
   emmitSelected: EventEmitter<number> = new EventEmitter();
   @Output()
@@ -37,20 +49,24 @@ export class FilterKeywordsComponent implements OnInit {
   get keywords(): string {
     return this._keywords;
   }
-  ngOnInit() {
+  ngOnInit() {}
+  ngAfterContentInit() {
     this.setKeywordsList();
   }
+
   setKeywordsList() {
     this.placeholder = 'Loading keywords...';
+
     this.searchService.getKeywords().subscribe(data => {
       this.items = data['results'];
-      this.keywords_results = this.buildKeywordsDropdown(this.items);
-      this.placeholder = 'Enter keywords...';
-      autocomplete(
-        document.getElementById('keywords-input'),
-        this.keywords_results
+      this.searchService.keywords = data['results'];
+      this.keywords_results = this.searchService.buildKeywordsDropdown(
+        this.items
       );
-
+      // this.searchService.setKeywordAutoComplete(
+      //   this.keywords_results,
+      //   this.id
+      // );
       /** Grab the queryparams and sets default values
        *  on inputs Ex. checked, selected, keywords, etc */
       if (this.route.snapshot.queryParamMap.has(this.queryName)) {
@@ -59,23 +75,14 @@ export class FilterKeywordsComponent implements OnInit {
           .split('__');
 
         for (const id of values) {
-          const desc = this.getItemDescription(+id);
-          this.addItem(id, desc);
+          this.addItem(id);
         }
         /** Open accordion */
         this.opened = true;
-      } else {
-        this.opened = false;
       }
       this.emmitLoaded.emit(this.queryName);
+      this.placeholder = 'Enter keywords...';
     });
-  }
-  buildKeywordsDropdown(obj: any[]): any[] {
-    const keywords = [];
-    for (const item of obj) {
-      keywords.push(item['name']);
-    }
-    return keywords;
   }
   getItemId(value: string): string {
     if (value) {
@@ -89,26 +96,16 @@ export class FilterKeywordsComponent implements OnInit {
   getItemDescription(id: number): string {
     if (id) {
       for (let i = 0; i < this.items.length; i++) {
-        if (this.items[i][this.json_value] === id) {
+        if (+this.items[i][this.json_value] === id) {
           return this.items[i][this.json_description];
         }
       }
     }
   }
-  addKeywords() {
-    this.keywords = document.getElementById('keywords-input').value;
-    if (!this.exists(this.keywords)) {
-      this.addItem('', this.keywords);
+  addKeywords(code) {
+    if (!this.searchService.existsIn(this.items_selected, code, 'value')) {
+      this.addItem(code);
     }
-    this.keywords = '';
-  }
-  exists(value: string): boolean {
-    for (let i = 0; i < this.items_selected.length; i++) {
-      if (this.items_selected[i]['value'] === value) {
-        return true;
-      }
-    }
-    return false;
   }
   getSelected(): any[] {
     const item = [];
@@ -122,17 +119,15 @@ export class FilterKeywordsComponent implements OnInit {
   reset() {
     this.items_selected = [];
   }
-  addItem(id: string, desc: string) {
+  addItem(id: string) {
     const item = {};
     if (id && id !== '') {
       item['value'] = id;
-    } else {
-      item['value'] = this.getItemId(desc);
+      item['description'] = this.getItemDescription(+id);
     }
-    item['description'] = desc;
-
     this.items_selected.push(item);
     this.emmitSelected.emit(1);
+    this.msgAddedItem.showMsg();
   }
   removeItem(value: string) {
     for (let i = 0; i < this.items_selected.length; i++) {

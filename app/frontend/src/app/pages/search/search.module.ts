@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SearchRoutingModule } from './search-routing.module';
 import { SearchComponent } from './search.component';
 import { FiltersComponent } from './filters.component';
 import { ActiveFiltersComponent } from './filters/active-filters.component';
@@ -15,7 +14,7 @@ import { FilterNaicsComponent } from './filters/filter-naics.component';
 import { FilterServiceCategoriesComponent } from './filters/filter-service-categories.component';
 import { FilterCertificationsComponent } from './filters/filter-certifications.component';
 import { FilterContractPricingTypeComponent } from './filters/filter-contract-pricing-type.component';
-import { FilterContractThresholdComponent } from './filters/filter-contract-threshold.component';
+import { FilterContractObligatedAmountComponent } from './filters/filter-contract-obligated-amount.component';
 import { FilterAgencyPerformanceComponent } from './filters/filter-agency-performance.component';
 import { FilterPscComponent } from './filters/filter-psc.component';
 import { FilterZoneComponent } from './filters/filter-zone.component';
@@ -26,9 +25,11 @@ import { SearchSpinnerComponent } from './search-spinner.component';
 import { ThSortComponent } from './th-sort.component';
 import { TblVendorsComponent } from './tbl-vendors.component';
 import { LnkToggleHeightsComponent } from './lnk-toggle-heights.component';
+import { FilterSelectedComponent } from './filters/filter-selected.component';
+import { AutocompleteComponent } from './filters/autocomplete.component';
 
 @NgModule({
-  imports: [CommonModule, SearchRoutingModule, FormsModule],
+  imports: [CommonModule, FormsModule],
   declarations: [
     SearchComponent,
     ModalComponent,
@@ -42,7 +43,7 @@ import { LnkToggleHeightsComponent } from './lnk-toggle-heights.component';
     FilterServiceCategoriesComponent,
     FilterCertificationsComponent,
     FilterContractPricingTypeComponent,
-    FilterContractThresholdComponent,
+    FilterContractObligatedAmountComponent,
     FilterAgencyPerformanceComponent,
     FilterPscComponent,
     FilterZoneComponent,
@@ -53,7 +54,9 @@ import { LnkToggleHeightsComponent } from './lnk-toggle-heights.component';
     TblContractHistoryComponent,
     TblVendorsComponent,
     ThSortComponent,
-    LnkToggleHeightsComponent
+    LnkToggleHeightsComponent,
+    FilterSelectedComponent,
+    AutocompleteComponent
   ]
 })
 export class SearchModule {}

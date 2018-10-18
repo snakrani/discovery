@@ -21,7 +21,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
             'tags': ('contract_ordering',),
             'fields': (
                 'id', 'piid', 'base_piid',
-                'agency_id', 'agency_name', 
+                'agency__id', 'agency__name', 
                 'NAICS', 'PSC',
                 'date_signed', 'completion_date', 'obligated_amount',
                 'vendor__duns', 'vendor__cage', 'vendor__name',
@@ -46,7 +46,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
         'search': {
             'tags': ('contract_search',),
             '*search1': ('piid', 'iexact', 'DAAE0703CL525'),
-            '@search2': ('agency_name', 'iregex', 'NUCLEAR REGULATORY COMMISSION')
+            '@search2': ('agency__name', 'iregex', 'NUCLEAR REGULATORY COMMISSION')
         },
         'fields': {
             'id': {
@@ -87,14 +87,14 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': '[A-Z]+\d+',
                 '@iregex': '[a-z]{4}[0-9]{4}cl001'
             },
-            'agency_id': {
-                'tags': ('contract_field', 'token_text'),
+            'agency__id': {
+                'tags': ('contract_field', 'agency_field', 'token_text'),
                 '@exact': '8000',
                 '@iexact': '8000',
                 '@in': ('8000', '6800', '2050')
             },
-            'agency_name': {
-                'tags': ('contract_field', 'fuzzy_text'),
+            'agency__name': {
+                'tags': ('contract_field', 'agency_field', 'fuzzy_text'),
                 '@exact': 'INTERNAL REVENUE SERVICE',
                 '@iexact': 'Internal Revenue Service',
                 '@in': ('INTERNAL REVENUE SERVICE', 'CONSUMER FINANCIAL PROTECTION BUREAU', 'FEDERAL ACQUISITION SERVICE'),
@@ -214,13 +214,13 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@in': (580, 70, 900)
             },
             'status__code': {
-                'tags': ('contract_field', 'token_text'),
+                'tags': ('contract_field', 'status_field', 'token_text'),
                 '@exact': 'C1',
                 '@iexact': 'c1',
                 '@in': ('A', 'C2', 'X', 'F')
             },
             'status__name': {
-                'tags': ('contract_field', 'fuzzy_text'),
+                'tags': ('contract_field', 'status_field', 'fuzzy_text'),
                 '@exact': 'Completed',
                 '@iexact': 'currEnt',
                 '@in': ("Current", "Completed", "Close out"),
@@ -234,13 +234,13 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '(current|completed)'
             },
             'pricing_type__code': {
-                'tags': ('contract_field', 'token_text'),
+                'tags': ('contract_field', 'pricing_field', 'token_text'),
                 '@exact': 'Y',
                 '@iexact': 'u',
                 '@in': ('M', '3', 'K', 'Z')
             },
             'pricing_type__name': {
-                'tags': ('contract_field', 'fuzzy_text'),
+                'tags': ('contract_field', 'pricing_field', 'fuzzy_text'),
                 '@exact': 'Firm Fixed Price',
                 '@iexact': 'firm fixed price',
                 '@in': ("Firm Fixed Price", "Time and Materials"),
@@ -254,13 +254,13 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '^fixed\s+'
             },
             'place_of_performance__country_code': {
-                'tags': ('contract_field', 'location_field', 'token_text'),
+                'tags': ('contract_field', 'placeofperformance_field', 'location_field', 'token_text'),
                 '@exact': 'USA',
                 '@iexact': 'usa',
                 '@in': ("USA","JPN","MDA","GBR")
             },
             'place_of_performance__country_name': {
-                'tags': ('contract_field', 'location_field', 'fuzzy_text'),
+                'tags': ('contract_field', 'placeofperformance_field', 'location_field', 'fuzzy_text'),
                 '@exact': 'United States',
                 '@iexact': 'united states',
                 '@in': ("United States","United Kingdom"),
@@ -274,13 +274,13 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iregex': '^united (states|kingdom)$'
             },
             'place_of_performance__state': {
-                'tags': ('contract_field', 'location_field', 'token_text'),
+                'tags': ('contract_field', 'placeofperformance_field', 'location_field', 'token_text'),
                 '@exact': 'DC',
                 '@iexact': 'dc',
                 '@in': ("DC","CA","TX","VA")
             },
             'place_of_performance__zipcode': {
-                'tags': ('contract_field', 'location_field', 'fuzzy_text'),
+                'tags': ('contract_field', 'placeofperformance_field', 'location_field', 'fuzzy_text'),
                 '@exact': '20190',
                 '@iexact': '20190',
                 '@in': ("20190", "93033", "22102"),

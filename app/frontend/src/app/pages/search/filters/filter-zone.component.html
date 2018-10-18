@@ -8,8 +8,8 @@
       <option value="0" selected="selected">Select Zone --</option>
       <option *ngFor="let item of items; let i = index" value="{{item.value}}">{{item.description}}</option>
     </select>
-    <button class="icon-plus btn-plus" type="submit" (click)="addZone()" [disabled]="!items || zone === '0'">
-      <span class="usa-sr-only">Add Zone to list</span>
+    <button class="btn-add" type="submit" (click)="addZone()" [disabled]="!items || zone === '0'">
+      <span>Add</span>
     </button>
   </div>
   <ul *ngIf="items_selected" class="items-selected">
@@ -18,5 +18,5 @@
           {{zone.description}}</span></a>{{zone.description}}
     </li>
   </ul>
-
+  <discovery-filter-selected [id]="'msg-zone-selected'" [label]="'Added Zone'"></discovery-filter-selected>
 </div>

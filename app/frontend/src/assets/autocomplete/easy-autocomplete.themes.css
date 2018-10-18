@@ -1,0 +1,50 @@
+/*
+ * easy-autocomplete
+ * jQuery plugin for autocompletion
+ *
+ * @author Łukasz Pawełczak (http://github.com/pawelczak)
+ * @version 1.3.5
+ * Copyright  License:
+ */
+
+.easy-autocomplete {
+  /* Theme Square */
+  /* Round */
+  /* Funky */
+  /* Solid */
+  /* Plate */
+}
+.easy-autocomplete.eac-square input {
+  border-radius: 0;
+  border-color: #000;
+}
+.easy-autocomplete.eac-square ul {
+  border-color: #7f8c8d;
+  border-top: 0;
+  box-shadow: none;
+  top: 45px;
+}
+.easy-autocomplete.eac-square ul li,
+.easy-autocomplete.eac-square ul .eac-category {
+  border-color: #7f8c8d;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 300;
+  padding: 6px 12px;
+  margin: 0px;
+  transition: all 0.4s ease 0s;
+}
+.easy-autocomplete.eac-square ul li *,
+.easy-autocomplete.eac-square ul .eac-category * {
+  font-weight: 300;
+  text-align: left !important;
+}
+.easy-autocomplete.eac-square ul li.selected,
+.easy-autocomplete.eac-square ul .eac-category.selected {
+  background-color: #f1f1f1;
+  font-weight: 300;
+}
+.easy-autocomplete.eac-square ul li b,
+.easy-autocomplete.eac-square ul .eac-category b {
+  font-weight: 600;
+}

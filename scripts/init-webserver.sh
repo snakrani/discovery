@@ -12,10 +12,5 @@ then
   rm -f "$LOG_FILE"
 fi
 
-#run application setup commands
-
-echo "> Building site frontend" | tee -a "$LOG_FILE"
-"$SCRIPT_DIR/build-frontend.sh" "$LOG_FILE"
-
 echo "> Collecting Django static files" | tee -a "$LOG_FILE"
 python3 manage.py collectstatic --noinput >>"$LOG_FILE" 2>&1

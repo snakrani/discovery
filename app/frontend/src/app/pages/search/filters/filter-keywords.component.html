@@ -5,14 +5,7 @@
 
   <div class="usa-search">
 
-    <div class="autocomplete form-horizontal">
-      <discovery-spinner *ngIf="keywords_results.length === 0"></discovery-spinner>
-      <input id="keywords-input" class="items-input" pattern=".+" type="text" [(ngModel)]="keywords" name="keywords"
-        [disabled]="keywords_results.length === 0" [placeholder]="placeholder" autocomplete="off">
-      <button class="icon-plus btn-plus" type="submit" (click)="addKeywords()" [disabled]="keywords.length === 0">
-        <span class="usa-sr-only">Add Keyword to list</span>
-      </button>
-    </div>
+    <discovery-autocomplete (emitCode)="addKeywords($event)" [id]="id" [placeholder]="placeholder" [keywords_results]="keywords_results"></discovery-autocomplete>
 
   </div>
   <ul *ngIf="items_selected" class="items-selected">
@@ -21,4 +14,5 @@
           {{keyword.value}}</span></a>{{keyword.description}}
     </li>
   </ul>
+  <discovery-filter-selected [id]="'msg-keyword-selected'" [label]="'Added keyword'"></discovery-filter-selected>
 </div>

@@ -3,19 +3,22 @@
 </button>
 <div id="{{id}}" class="usa-accordion-content" [attr.aria-hidden]="!opened">
   <div class="usa-search form-horizontal">
-    <discovery-spinner *ngIf="!items"></discovery-spinner>
-    <select id="select_agency" [disabled]="!items" [(ngModel)]="agency" class="items-input">
+
+    <select id="select_agency" [disabled]="items.length===0" [(ngModel)]="agency" class="items-input">
       <option value="0" selected="selected">Select agency --</option>
-      <option *ngFor="let item of items" value="{{item.id}}">{{item.description}}</option>
+      <option *ngFor="let item of items" value="{{item}}">{{item}}</option>
     </select>
     <button class="icon-plus btn-plus" type="submit" (click)="addAgency()" [disabled]="!items || agency === '0'">
-      <span class="usa-sr-only">Add Agency to list</span>
+      <span class="usa-sr-only">Add agency to list</span>
     </button>
   </div>
+
   <ul *ngIf="items_selected" class="items-selected">
     <li *ngFor="let agency of items_selected">
-      <a (click)="removeItem(agency.value)" title="Remove {{agency.description}}"><span class="usa-sr-only">Remove {{agency.description}}</span></a>{{agency.description}}
+      <a (click)="removeItem(agency.value)" title="Remove {{agency.value}}"><span class="usa-sr-only">Remove
+          {{agency.value}}</span></a>{{agency.value
+      + ' - ' + agency.description}}
     </li>
   </ul>
-
+  <discovery-filter-selected [id]="'msg-agency-selected'" [label]="'Added agency'"></discovery-filter-selected>
 </div>

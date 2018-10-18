@@ -4,21 +4,35 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, tap, delay } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 declare let API_HOST: string;
+declare const $: any;
 @Injectable({
   providedIn: 'root'
 })
 export class SearchService {
   private apiUrl = API_HOST + '/api/';
-
+  _pools;
+  _keywords;
   _active_filters: any[];
   _contract_results: any[];
-
   search_options = {};
+
   constructor(
     private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute
   ) {}
+  get pools(): any[] {
+    return this._pools;
+  }
+  set pools(arr: any[]) {
+    this._pools = arr;
+  }
+  get keywords(): any[] {
+    return this._keywords;
+  }
+  set keywords(arr: any[]) {
+    this._keywords = arr;
+  }
   get activeFilters(): any[] {
     return this._active_filters;
   }
@@ -93,7 +107,6 @@ export class SearchService {
         catchError(this.handleError)
       );
   }
-
   getSetAsides(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl + 'setasides?description').pipe(
       tap(data => data),
@@ -117,14 +130,24 @@ export class SearchService {
         );
     }
   }
-  arrToString(arr) {
-    let str = '';
-    for (const selected of arr) {
-      str += selected + ',';
+  getPools(vehicles): Observable<any[]> {
+    if (vehicles[0] === 'All') {
+      return this.http.get<any[]>(this.apiUrl + 'pools?page=0').pipe(
+        tap(data => data),
+        catchError(this.handleError)
+      );
+    } else {
+      return this.http
+        .get<any[]>(
+          this.apiUrl + 'pools?vehicle__id__in=' + this.arrToString(vehicles)
+        )
+        .pipe(
+          tap(data => data),
+          catchError(this.handleError)
+        );
     }
-    str = str.slice(0, -1);
-    return str;
   }
+
   getZone(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl + 'zones/?page=0').pipe(
       tap(data => data),
@@ -133,8 +156,7 @@ export class SearchService {
   }
 
   getKeywords(): Observable<any[]> {
-    // return this.http.get<any[]>(this.apiUrl + 'keywords').pipe(delay(3000));
-    return this.http.get<any[]>(this.apiUrl + 'keywords').pipe(
+    return this.http.get<any[]>(this.apiUrl + 'keywords?page=0').pipe(
       tap(data => data),
       catchError(this.handleError)
     );
@@ -147,7 +169,6 @@ export class SearchService {
         catchError(this.handleError)
       );
   }
-
   getNaics(vehicles): Observable<any[]> {
     if (vehicles[0] === 'All') {
       return this.http.get<any[]>(this.apiUrl + 'pools').pipe(
@@ -184,7 +205,7 @@ export class SearchService {
     for (const filter of filters) {
       if (filter['name'] === 'keywords') {
         params +=
-          '&pools__pool__naics__keywords__id__in=' +
+          '&pools__pool__keywords__id__in=' +
           this.getSelectedFilterList(filter['selected'], ',');
       }
       if (filter['name'] === 'vehicles') {
@@ -207,11 +228,29 @@ export class SearchService {
           '&pools__pool__naics__code__in=' +
           this.getSelectedFilterList(filter['selected'], ',');
       }
+      if (filter['name'] === 'pscs') {
+        params +=
+          '&pools__pool__psc__code__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
       if (filter['name'] === 'zone') {
         params +=
           '&pools__zones__id__in=' +
           this.getSelectedFilterList(filter['selected'], ',');
       }
+      // if (filter['name'] === 'threshold') {
+      //   const threshold = filter['selected'][0].value.split('-');
+      //   params +=
+      //     '&pools__pool__obligated_amount__range=' +
+      //     threshold[0] +
+      //     ',' +
+      //     threshold[1];
+      // }
+      // if (filter['name'] === 'agency_performance') {
+      //   params +=
+      //     '&pools__pool__vehicle__tier__number__in=' +
+      //     this.getSelectedFilterList(filter['selected'], ',');
+      // }
     }
     console.log(this.apiUrl + 'vendors?' + params.substr(1));
     return this.http
@@ -221,13 +260,93 @@ export class SearchService {
         catchError(this.handleError)
       );
   }
+  getVehicleVendorsMeetCriteria(
+    filters: any[],
+    vehicle: string
+  ): Observable<any[]> {
+    let params = '';
+    params += '&pools__pool__vehicle__id=' + vehicle;
+    for (const filter of filters) {
+      if (filter['name'] === 'keywords') {
+        params +=
+          '&pools__pool__keywords__id__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
+
+      if (filter['name'] === 'service_categories') {
+        params +=
+          '&pools__pool__id__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
+      if (filter['name'] === 'setasides') {
+        params +=
+          '&pools__setasides__code__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
+      if (filter['name'] === 'naics') {
+        params +=
+          '&pools__pool__naics__code__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
+      if (filter['name'] === 'pscs') {
+        params +=
+          '&pools__pool__psc__code__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
+      if (filter['name'] === 'zone') {
+        params +=
+          '&pools__zones__id__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
+    }
+    console.log(this.apiUrl + 'vendors/count/duns?' + params.substr(1));
+    return this.http
+      .get<any[]>(this.apiUrl + 'vendors/count/duns?' + params.substr(1))
+      .pipe(
+        tap(data => data),
+        catchError(this.handleError)
+      );
+  }
+
   getVendorsCountByVehicle(vehicle: string): Observable<any[]> {
-    console.log(
-      this.apiUrl + 'vendors/count/id?pools__pool__vehicle__id=' + vehicle
-    );
     return this.http
       .get<any[]>(
         this.apiUrl + 'vendors/count/id?pools__pool__vehicle__id=' + vehicle
+      )
+      .pipe(
+        tap(data => data),
+        catchError(this.handleError)
+      );
+  }
+  getObligatedAmountDuns(range: string): Observable<any[]> {
+    const arr = range.split('-');
+    const from = arr[0];
+    const to = arr[1];
+    return this.http
+      .get<any[]>(
+        this.apiUrl +
+          'contracts/values/vendor__duns?obligated_amount__range=' +
+          from +
+          ',' +
+          to
+      )
+      .pipe(
+        tap(data => data),
+        catchError(this.handleError)
+      );
+  }
+  getAgencyPerformanceNames(): Observable<any[]> {
+    return this.http
+      .get<any[]>(this.apiUrl + 'contracts/values/agency_name')
+      .pipe(
+        tap(data => data),
+        catchError(this.handleError)
+      );
+  }
+  getAgencyPerformanceDuns(ids: string): Observable<any[]> {
+    return this.http
+      .get<any[]>(
+        this.apiUrl + 'contracts/values/vendor__duns?agency_id__in=' + ids
       )
       .pipe(
         tap(data => data),
@@ -248,10 +367,10 @@ export class SearchService {
     ordering: string
   ): Observable<any[]> {
     let params = 'contracts?vendor__duns=' + duns;
-    if (naic !== 'all') {
+    if (naic !== 'All') {
       params += '&NAICS=' + naic;
     }
-    if (piid !== 'all') {
+    if (piid !== 'All') {
       params += '&piid=' + piid;
     }
     if (ordering !== '') {
@@ -263,7 +382,14 @@ export class SearchService {
       catchError(this.handleError)
     );
   }
-
+  arrToString(arr) {
+    let str = '';
+    for (const selected of arr) {
+      str += selected + ',';
+    }
+    str = str.slice(0, -1);
+    return str;
+  }
   setQueryParams(filters: any[]): void {
     const params = this.getQueryParams(filters);
     this.router.navigate(['search'], {
@@ -288,22 +414,31 @@ export class SearchService {
   getSelectedFilterList(arr: any[], concat: string): string {
     let str = '';
     for (const selected of arr) {
+      console.log(selected['value']);
       str += selected['value'] + concat;
     }
     str = str.slice(0, -concat.length);
     return str;
   }
   getQueryParams(arr: any[]): any[] {
+    // console.log(arr);
     const obj = [];
     for (const filter of arr) {
-      obj[filter.name] = this.getSelectedFilterList(filter.selected, '__');
+      obj[filter.name] = this.getSelectedFilterList(filter['selected'], '__');
     }
+    // console.log(obj);
     return obj;
   }
   existsIn(obj: any[], value: string, key: string): boolean {
     for (let i = 0; i < obj.length; i++) {
-      if (obj[i][key] === value) {
-        return true;
+      if (key !== '') {
+        if (obj[i][key] === value) {
+          return true;
+        }
+      } else {
+        if (obj[i] === value) {
+          return true;
+        }
       }
     }
     return false;
@@ -324,8 +459,14 @@ export class SearchService {
   }
   commaSeparatedList(obj: any[], key: string) {
     let items = '';
-    for (const i of obj) {
-      items += i[key] + ', ';
+    if (key !== '') {
+      for (const i of obj) {
+        items += i[key] + ', ';
+      }
+    } else {
+      for (const i of obj) {
+        items += i + ', ';
+      }
     }
     return items.slice(0, -2);
   }
@@ -339,6 +480,43 @@ export class SearchService {
       }
     }
     return n;
+  }
+  buildKeywordsDropdown(obj: any[]): any[] {
+    const keywords = [];
+    for (const item of obj) {
+      const keyword = {};
+      keyword['name'] = item['name'];
+      keyword['code'] = item['id'];
+      keywords.push(keyword);
+    }
+    return keywords;
+  }
+  setKeywordAutoComplete(data: any[], id: string) {
+    $('#' + id + '-value, #' + id + '-input').val('');
+    const options = {
+      data: data,
+      theme: 'square',
+      getValue: 'name',
+      list: {
+        match: {
+          enabled: true
+        },
+        onSelectItemEvent: function() {
+          $('#' + id + '-value').val(
+            $('#' + id + '-input').getSelectedItemData().code
+          );
+          // $('#error-msg').addClass('hide');
+          $('#' + id + '-input').removeClass('input-error');
+        },
+        onHideListEvent: function() {
+          if ($('#' + id + '-value').val() === '') {
+            $('#' + id + '-input').val('');
+          }
+        }
+      }
+    };
+    console.log($('#' + id + '-input'));
+    $('#' + id + '-input').easyAutocomplete(options);
   }
   sortByNameAsc(i1, i2) {
     if (i1 > i2) {
@@ -362,6 +540,24 @@ export class SearchService {
     if (i1.code > i2.code) {
       return 1;
     } else if (i1.code === i2.code) {
+      return 0;
+    } else {
+      return -1;
+    }
+  }
+  sortByDescriptionAsc(i1, i2) {
+    if (i1.description > i2.description) {
+      return 1;
+    } else if (i1.description === i2.description) {
+      return 0;
+    } else {
+      return -1;
+    }
+  }
+  sortByVehicleAsc(i1, i2) {
+    if (i1.vehicle > i2.vehicle) {
+      return 1;
+    } else if (i1.vehicle === i2.vehicle) {
       return 0;
     } else {
       return -1;

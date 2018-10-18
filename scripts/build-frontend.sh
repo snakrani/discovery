@@ -12,6 +12,16 @@ then
   rm -f "$LOG_FILE"
 fi
 
-echo "> Building Angular files" | tee -a "$LOG_FILE"
 cd frontend
-ng build >>"$LOG_FILE" 2>&1
+
+
+echo "> Building node modules" | tee -a "$LOG_FILE"
+rm -Rf node_modules
+npm install >>"$LOG_FILE" 2>&1
+
+echo "> Building Angular files" | tee -a "$LOG_FILE"
+ng build --prod --output-hashing none >>"$LOG_FILE" 2>&1
+
+echo "> Fixing file permissions" | tee -a "$LOG_FILE"
+find node_modules/.cache -type d -exec chmod 750 {} \; >>"$LOG_FILE" 2>&1
+find node_modules/.cache -type f -exec chmod 640 {} \; >>"$LOG_FILE" 2>&1

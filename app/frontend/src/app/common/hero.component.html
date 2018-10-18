@@ -2,17 +2,30 @@
   <div class="usa-grid">
     <div class="usa-width-one-whole text-center">
       <h2>
-        <span class="usa-hero-callout-alt">Find the contract to meet your needs.</span>
+        <span class="usa-hero-callout-alt">Search by keywords, NAICS or PSC to compare contracts</span>
       </h2>
       <div id="search-gen" role="search">
-        <div class="autocomplete">
-          <input #keywordInput id="hero-keywords-input" pattern=".+" type="text" [(ngModel)]="keywords" name="keywords" placeholder="Start typing your keywords..."
-            autocomplete="off">
-          <button type="submit" (click)="searchKeywords()" [disabled]="keywords.length === 0">
+        <div class="pull-left">
+          <select [(ngModel)]="option" [disabled]="loading">
+            <option value="keyword">Keyword</option>
+            <option value="naic">NAICs</option>
+            <option value="psc">PSC</option>
+          </select>
+        </div>
+        <div class="autocomplete pull-left">
+          <input #keywordInput id="hero-keywords-input" class="eac-square" [class.input-spinner]="loading" pattern=".+" type="text" [(ngModel)]="keywords"
+            name="keywords" [placeholder]="loading?'Loading keywords...':'Start typing your keywords...'" autocomplete="off"
+            [disabled]="loading">
+          <div id="error-msg" class="hide"><em>Please choose from the suggested keywords list.</em></div>
+          <input id="keyword" type="hidden">
+        </div>
+        <div class="pull-left">
+          <button type="submit" (click)="searchKeywords()" [disabled]="loading">
             <span class="usa-search-submit-text">Search</span>
           </button>
         </div>
       </div>
+
     </div>
   </div>
 </section>

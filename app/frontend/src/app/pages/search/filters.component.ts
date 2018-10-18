@@ -15,7 +15,7 @@ import { FilterNaicsComponent } from './filters/filter-naics.component';
 import { FilterServiceCategoriesComponent } from './filters/filter-service-categories.component';
 import { FilterCertificationsComponent } from './filters/filter-certifications.component';
 import { FilterContractPricingTypeComponent } from './filters/filter-contract-pricing-type.component';
-import { FilterContractThresholdComponent } from './filters/filter-contract-threshold.component';
+import { FilterContractObligatedAmountComponent } from './filters/filter-contract-obligated-amount.component';
 import { FilterAgencyPerformanceComponent } from './filters/filter-agency-performance.component';
 import { FilterPscComponent } from './filters/filter-psc.component';
 import { FilterZoneComponent } from './filters/filter-zone.component';
@@ -23,14 +23,7 @@ import { FilterZoneComponent } from './filters/filter-zone.component';
 @Component({
   selector: 'discovery-filters',
   templateUrl: './filters.component.html',
-  styles: [
-    `
-      [type='button'].link,
-      [type='button'].primary {
-        width: 46.7% !important;
-      }
-    `
-  ]
+  styleUrls: ['./filters.component.css']
 })
 export class FiltersComponent implements OnInit {
   /** START Define filter components */
@@ -48,8 +41,8 @@ export class FiltersComponent implements OnInit {
   filterCertifications: FilterCertificationsComponent;
   @ViewChild(FilterContractPricingTypeComponent)
   filterContractPricing: FilterContractPricingTypeComponent;
-  @ViewChild(FilterContractThresholdComponent)
-  filterContractThreshold: FilterContractThresholdComponent;
+  @ViewChild(FilterContractObligatedAmountComponent)
+  filterContractObligated: FilterContractObligatedAmountComponent;
   @ViewChild(FilterAgencyPerformanceComponent)
   filterAgencyPerformance: FilterAgencyPerformanceComponent;
   @ViewChild(FilterPscComponent)
@@ -58,17 +51,28 @@ export class FiltersComponent implements OnInit {
   filterZoneComponent: FilterZoneComponent;
   filters_list: any[];
   /** END Define filter components */
+  @Input()
+  parentSpinner: boolean;
   @Output()
   emmitFilters: EventEmitter<any> = new EventEmitter();
   @Output()
   emmitResetFilters: EventEmitter<any> = new EventEmitter();
+  @Output()
+  emitHideFilters: EventEmitter<number> = new EventEmitter();
+  @Output()
+  emitServerError: EventEmitter<number> = new EventEmitter();
+  APP_ASSETS = '/frontend/';
   disabled_btn = true;
   num_items_selected = 0;
   loaded_filters: any[] = [];
   error_message;
+  server_error = false;
   filters_submitted: any[];
   params_submitted = false;
   sharedFiltersLoaded = false;
+  vehicles: any[] = [];
+  pools: any[] = [];
+  spinner = true;
 
   constructor(
     private searchService: SearchService,
@@ -79,19 +83,79 @@ export class FiltersComponent implements OnInit {
   ngOnInit() {
     /** Set the filters that are going to be used */
     this.filters_list = [
+      this.filterKeywordsComponent,
       this.filterContractVehiclesComponent,
       this.filterSbdComponent,
-      this.filterKeywordsComponent,
-      this.filterNaicsComponent,
       this.filterServiceCategories,
+      this.filterNaicsComponent,
+      this.filterPscComponent,
+      this.filterContractObligated,
       this.filterZoneComponent
     ];
     /**
-      this.filterCertifications,
-      this.filterContractPricing,
-      this.filterContractThreshold,
+     *
       this.filterAgencyPerformance,
-      this.filterPscComponent, */
+      this.filterZoneComponent,
+      this.filterCertifications,
+      this.filterContractPricing
+       */
+    // if (this.searchService.pools && this.searchService.pools.length > 0) {
+    //   this.pools = this.searchService.pools;
+    //   this.initVehicles();
+    // } else {
+    this.initPools(['All']);
+    // }
+  }
+  initPools(vehicles) {
+    this.server_error = false;
+    this.searchService.getPools(vehicles).subscribe(
+      data => {
+        this.pools = data['results'];
+        this.searchService.pools = this.pools;
+        this.initVehicles();
+      },
+      error => {
+        this.server_error = true;
+        this.error_message = <any>error;
+        this.emitServerError.emit(1);
+        this.spinner = false;
+      }
+    );
+  }
+  initVehicles() {
+    this.server_error = false;
+    this.searchService.getContractVehicles().subscribe(
+      data => {
+        this.vehicles = data['results'];
+        const queryName = 'vehicles';
+        /** Grab the queryparams and sets default values
+         *  on inputs Ex. checked, selected, keywords, etc */
+        if (this.route.snapshot.queryParamMap.has(queryName)) {
+          const values: string[] = this.route.snapshot.queryParamMap
+            .get(queryName)
+            .split('__');
+          for (let i = 0; i < this.vehicles.length; i++) {
+            if (values.includes(this.vehicles[i]['id'])) {
+              this.vehicles[i]['checked'] = true;
+              this.filterContractVehiclesComponent.addItem(
+                this.vehicles[i]['id'],
+                this.vehicles[i]['name']
+              );
+            }
+          }
+          /** Open accordion */
+          this.filterContractVehiclesComponent.opened = true;
+        }
+        this.spinner = false;
+        this.filterContractVehiclesComponent.loaded();
+      },
+      error => {
+        this.server_error = true;
+        this.error_message = <any>error;
+        this.emitServerError.emit(1);
+        this.spinner = false;
+      }
+    );
   }
 
   resetFilters() {
@@ -128,6 +192,10 @@ export class FiltersComponent implements OnInit {
           };
           filters.push(item);
         }
+        /** Request Obligated Amounts Duns */
+        if (filter_items['name'] === 'obligated_amount') {
+          this.filterContractObligated.getObligatedAmountDuns();
+        }
       }
     }
     return filters;
@@ -136,6 +204,7 @@ export class FiltersComponent implements OnInit {
     this.params_submitted = true;
     const filters: any[] = this.getSelectedFilters();
     this.emmitFilters.emit(filters);
+    this.hideFilters();
   }
   filterOthersByVehicles(vehicles: any[]) {
     let arr = [];
@@ -148,20 +217,20 @@ export class FiltersComponent implements OnInit {
     }
     this.filterServiceCategories.setFilteredItems(arr);
     this.filterNaicsComponent.setFilteredItems(arr);
+    this.filterPscComponent.setFilteredItems(arr);
   }
-  filterPSCsByNaics(naics: any[]) {
-    const codes = [];
-    for (const item of naics) {
-      codes.push(item['code']);
-    }
-    // this.filterPscComponent.reset();
-    // this.filterPscComponent.getPSCsbyNAICs(codes);
+  getServiceCategories() {
+    const service_categories = this.filterServiceCategories.getItems();
+    return service_categories;
   }
   getServiceCategoriesByVehicle(vehicle: string) {
     const obj: any[] = this.filterServiceCategories.getServiceCategoriesByVehicle(
       vehicle
     );
     return obj;
+  }
+  getContractVehicles() {
+    return this.vehicles;
   }
   getVehicleDescription(vehicle: string) {
     const desc = this.filterContractVehiclesComponent.getItemDescription(
@@ -173,13 +242,35 @@ export class FiltersComponent implements OnInit {
     const obj: any[] = this.filterNaicsComponent.getNaicsByVehicle(vehicle);
     return obj;
   }
+  getObligatedAmountDunsList() {
+    const obj: any[] = this.filterContractObligated.getDunsList();
+    return obj;
+  }
+  getPSCsByVehicle(vehicle: string) {
+    const obj: any[] = this.filterPscComponent.getPSCsByVehicle(vehicle);
+    return obj;
+  }
+  getVehicleInfo(vehicle: string) {
+    const obj: any[] = this.filterContractVehiclesComponent.getVehicleInfo(
+      vehicle
+    );
+    return obj;
+  }
   getSetAsides() {
     const setasides = this.filterSbdComponent.getItems();
     return setasides;
   }
+  getZones() {
+    const zones = this.filterZoneComponent.getItems();
+    return zones;
+  }
   getSelectedVehicles(): any[] {
     const vehicles: any[] = this.filterContractVehiclesComponent.getSelected();
     return vehicles;
+  }
+  getVehicleData(vehicle: string) {
+    const obj = this.filterContractVehiclesComponent.getVehicleInfo(vehicle);
+    return obj;
   }
   getResults(filter: string) {
     if (!this.searchService.existsIn(this.loaded_filters, filter, 'name')) {
@@ -187,13 +278,13 @@ export class FiltersComponent implements OnInit {
       item['name'] = filter;
       this.loaded_filters.push(item);
     }
-
     /** Filters need to be loaded before
      *  displaying compare table.
      */
-
-    if (this.loaded_filters.length === this.filters_list.length) {
-      this.sharedFiltersLoaded = true;
+    if (
+      this.loaded_filters.length === this.filters_list.length &&
+      this.vehicles.length > 0
+    ) {
       if (
         this.num_items_selected > 0 &&
         this.route.snapshot.queryParamMap.keys.length > 0 &&
@@ -202,5 +293,8 @@ export class FiltersComponent implements OnInit {
         this.emmitSelectedFilters();
       }
     }
+  }
+  hideFilters() {
+    this.emitHideFilters.emit(1);
   }
 }

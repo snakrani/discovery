@@ -12,7 +12,13 @@ router.register('setasides', views.SetAsideViewSet)
 router.register('vehicles', views.VehicleViewSet)
 router.register('pools', views.PoolViewSet)
 router.register('zones', views.ZoneViewSet)
+
 router.register('vendors', views.VendorViewSet)
+
+router.register('agencies', views.AgencyViewSet)
+router.register('pricing', views.PricingViewSet)
+router.register('statuses', views.StatusViewSet)
+router.register('placesofperformance', views.PlaceOfPerformanceViewSet)
 router.register('contracts', views.ContractViewSet)
 
 urlpatterns = [
