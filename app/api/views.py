@@ -107,6 +107,8 @@ class NaicsViewSet(DiscoveryReadOnlyModelViewSet):
     ordering = 'description'
     
     pagination_class = pagination.ResultSetPagination
+    bypass_pagination = True
+    
     action_serializers = {
         'list': serializers.NaicsSummarySerializer,
         'retrieve': serializers.NaicsFullSerializer,
@@ -138,6 +140,8 @@ class PscViewSet(DiscoveryReadOnlyModelViewSet):
     ordering = 'description'
     
     pagination_class = pagination.ResultSetPagination
+    bypass_pagination = True
+    
     action_serializers = {
         'list': serializers.PscSummarySerializer,
         'retrieve': serializers.PscFullSerializer,
@@ -169,6 +173,8 @@ class KeywordViewSet(DiscoveryReadOnlyModelViewSet):
     ordering = 'id'
     
     pagination_class = pagination.ResultSetPagination
+    bypass_pagination = True
+    
     action_serializers = {
         'list': serializers.KeywordSummarySerializer,
         'retrieve': serializers.KeywordFullSerializer,
@@ -200,6 +206,8 @@ class VehicleViewSet(DiscoveryReadOnlyModelViewSet):
     ordering = 'name'
     
     pagination_class = pagination.ResultSetPagination
+    bypass_pagination = True
+    
     action_serializers = {
         'list': serializers.VehicleSummarySerializer,
         'retrieve': serializers.VehicleFullSerializer,
@@ -231,6 +239,8 @@ class PoolViewSet(DiscoveryReadOnlyModelViewSet):
     ordering = 'name'
     
     pagination_class = pagination.ResultSetPagination
+    bypass_pagination = True
+    
     action_serializers = {
         'list': serializers.PoolSummarySerializer,
         'retrieve': serializers.PoolFullSerializer,
@@ -262,6 +272,8 @@ class SetAsideViewSet(DiscoveryReadOnlyModelViewSet):
     ordering = 'name'
     
     pagination_class = pagination.ResultSetPagination
+    bypass_pagination = True
+    
     action_serializers = {
         'list': serializers.SetasideSummarySerializer,
         'retrieve': serializers.SetasideFullSerializer,
@@ -292,6 +304,8 @@ class ZoneViewSet(DiscoveryReadOnlyModelViewSet):
     ordering = 'id'
     
     pagination_class = pagination.ResultSetPagination
+    bypass_pagination = True
+    
     action_serializers = {
         'list': serializers.ZoneSummarySerializer,
         'retrieve': serializers.ZoneFullSerializer,
@@ -329,6 +343,8 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
     ordering = '-number_of_contracts'
     
     pagination_class = pagination.ResultSetPagination
+    bypass_pagination = False
+    
     action_serializers = {
         'list': serializers.VendorSummarySerializer,
         'retrieve': serializers.VendorFullSerializer,
@@ -381,6 +397,8 @@ class AgencyViewSet(DiscoveryReadOnlyModelViewSet):
     ordering = 'name'
     
     pagination_class = pagination.ResultSetPagination
+    bypass_pagination = True
+    
     action_serializers = {
         'list': serializers.AgencySummarySerializer,
         'retrieve': serializers.AgencyFullSerializer,
@@ -412,6 +430,8 @@ class PricingViewSet(DiscoveryReadOnlyModelViewSet):
     ordering = 'name'
     
     pagination_class = pagination.ResultSetPagination
+    bypass_pagination = True
+    
     action_serializers = {
         'list': serializers.PricingStructureSummarySerializer,
         'retrieve': serializers.PricingStructureFullSerializer,
@@ -443,6 +463,8 @@ class StatusViewSet(DiscoveryReadOnlyModelViewSet):
     ordering = 'name'
     
     pagination_class = pagination.ResultSetPagination
+    bypass_pagination = True
+    
     action_serializers = {
         'list': serializers.ContractStatusSummarySerializer,
         'retrieve': serializers.ContractStatusFullSerializer,
@@ -474,6 +496,8 @@ class PlaceOfPerformanceViewSet(DiscoveryReadOnlyModelViewSet):
     ordering = 'state'
     
     pagination_class = pagination.ResultSetPagination
+    bypass_pagination = True
+    
     action_serializers = {
         'list': serializers.PlaceOfPerformanceSummarySerializer,
         'retrieve': serializers.PlaceOfPerformanceFullSerializer,
@@ -520,6 +544,8 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
     ordering = '-date_signed'
     
     pagination_class = pagination.ResultSetPagination
+    bypass_pagination = False
+    
     action_serializers = {
         'list': serializers.ContractSummarySerializer,
         'retrieve': serializers.ContractFullSerializer,
