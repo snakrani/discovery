@@ -21,7 +21,7 @@ export class HeroComponent implements OnInit {
   loading = true;
   server_error = false;
   error_message;
-  _option = 'keyword';
+  _option = 'naic';
   constructor(private searchService: SearchService, private router: Router) {}
   set option(value: string) {
     this._option = value;
@@ -64,7 +64,7 @@ export class HeroComponent implements OnInit {
         this.searchService.pools = data['results'];
         this.buildNaicsItems(this.searchService.pools);
         this.buildPscsItems(this.searchService.pools);
-        this.option = 'keyword';
+        this.option = 'naic';
         this.loading = false;
       },
       error => {
@@ -112,6 +112,7 @@ export class HeroComponent implements OnInit {
       theme: 'square',
       getValue: 'name',
       list: {
+        maxNumberOfElements: 100,
         match: {
           enabled: true
         },

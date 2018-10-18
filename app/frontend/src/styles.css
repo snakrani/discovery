@@ -36,6 +36,7 @@ a {
   position: relative;
 }
 .db {
+  clear: both;
   display: block;
 }
 .uppercase {

@@ -24,7 +24,7 @@
     </div>
     <h3 class="underline alt">
       <span class="icon-filter"></span>Filters</h3>
-    <button type="button" [disabled]="disabled_btn" class="primary" (click)="emmitSelectedFilters()">Submit</button>
+    <button type="button" [disabled]="disabled_btn" class="primary" (click)="emmitSelectedFilters($event)">Submit</button>
     <button type="button" class="link" (click)="resetFilters()">Reset</button>
     <div class="cb" style="display: block;clear:both"></div>
     <ul class="usa-accordion" aria-multiselectable="true">

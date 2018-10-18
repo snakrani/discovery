@@ -8,7 +8,7 @@ import {
   EventEmitter
 } from '@angular/core';
 import { SearchService } from './search.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TblContractHistoryComponent } from './tbl-contract-history.component';
 
 @Component({
@@ -44,10 +44,7 @@ export class VendorDetailComponent implements OnInit, OnChanges {
   zindex = 30;
   loading = false;
   duns_number;
-  constructor(
-    private searchService: SearchService,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private searchService: SearchService, private router: Router) {}
   ngOnInit() {}
   ngOnChanges() {
     if (this.duns && this.duns !== '') {
@@ -57,6 +54,10 @@ export class VendorDetailComponent implements OnInit, OnChanges {
     }
   }
   backToSearchResults() {
+    this.router.navigate(['/search'], {
+      queryParams: { vendor: null },
+      queryParamsHandling: 'merge'
+    });
     this.emitBack.emit(true);
   }
   viewDetails() {

@@ -220,7 +220,7 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
     const items: any[] = [];
     for (const item of contracts) {
       for (const prop of this.contracts_results) {
-        if (prop['base_piid'] === item) {
+        if (prop['piid'] === item) {
           items.push(prop);
         }
       }

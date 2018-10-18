@@ -307,6 +307,38 @@ export class SearchService {
         catchError(this.handleError)
       );
   }
+  getVehiclesToCompare(filters: any[]): Observable<any[]> {
+    let params = '';
+    for (const filter of filters) {
+      if (filter['name'] === 'vehicles') {
+        params +=
+          '&vehicle__id__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
+      if (filter['name'] === 'keywords') {
+        params +=
+          '&keywords__id__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
+      if (filter['name'] === 'naics') {
+        params +=
+          '&naics__code__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
+      if (filter['name'] === 'pscs') {
+        params +=
+          '&psc__code__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
+    }
+    console.log(this.apiUrl + 'pools/values/vehicle?' + params.substr(1));
+    return this.http
+      .get<any[]>(this.apiUrl + 'pools/values/vehicle?' + params.substr(1))
+      .pipe(
+        tap(data => data),
+        catchError(this.handleError)
+      );
+  }
 
   getVendorsCountByVehicle(vehicle: string): Observable<any[]> {
     return this.http
@@ -371,7 +403,7 @@ export class SearchService {
       params += '&NAICS=' + naic;
     }
     if (piid !== 'All') {
-      params += '&piid=' + piid;
+      params += '&base__piid=' + piid;
     }
     if (ordering !== '') {
       params += '&ordering=' + ordering;
@@ -414,19 +446,16 @@ export class SearchService {
   getSelectedFilterList(arr: any[], concat: string): string {
     let str = '';
     for (const selected of arr) {
-      console.log(selected['value']);
       str += selected['value'] + concat;
     }
     str = str.slice(0, -concat.length);
     return str;
   }
   getQueryParams(arr: any[]): any[] {
-    // console.log(arr);
     const obj = [];
     for (const filter of arr) {
       obj[filter.name] = this.getSelectedFilterList(filter['selected'], '__');
     }
-    // console.log(obj);
     return obj;
   }
   existsIn(obj: any[], value: string, key: string): boolean {

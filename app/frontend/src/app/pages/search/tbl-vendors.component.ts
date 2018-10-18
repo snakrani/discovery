@@ -7,6 +7,7 @@ import {
   EventEmitter
 } from '@angular/core';
 import { SearchService } from './search.service';
+import { Router, ActivatedRoute } from '@angular/router';
 declare const window: any;
 @Component({
   selector: 'discovery-tbl-vendors',
@@ -51,7 +52,11 @@ export class TblVendorsComponent implements OnInit, OnChanges {
   filters;
   loading = true;
 
-  constructor(private searchService: SearchService) {}
+  constructor(
+    private searchService: SearchService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {}
   ngOnChanges() {
@@ -121,6 +126,9 @@ export class TblVendorsComponent implements OnInit, OnChanges {
           left: 0,
           behavior: 'smooth'
         });
+        if (this.route.snapshot.queryParamMap.has('duns')) {
+          this.showVendorDetails(this.route.snapshot.queryParamMap.get('duns'));
+        }
       },
       error => (this.error_message = <any>error)
     );
@@ -141,6 +149,10 @@ export class TblVendorsComponent implements OnInit, OnChanges {
     }
   }
   showVendorDetails(duns: string) {
+    this.router.navigate(['/search'], {
+      queryParams: { duns: duns },
+      queryParamsHandling: 'merge'
+    });
     this.emitDuns.emit(duns);
   }
   prevPage() {

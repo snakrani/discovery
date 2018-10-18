@@ -24,7 +24,7 @@
             <!-- FITLERS -->
             <!-- ///////////////// -->
             <discovery-filters [parentSpinner]="spinner" (emitServerError)="showServerError($event)" (emitHideFilters)="hideSideNavFilters()"
-              (emmitFilters)="submitSelectedFilters($event)">
+              (emmitFilters)="submitSelectedFilters($event)" (emitReset)="reset($event)">
             </discovery-filters>
             <!-- ///////////////// -->
             <!-- TABS AREA -->

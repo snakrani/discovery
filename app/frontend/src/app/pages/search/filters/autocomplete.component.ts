@@ -40,6 +40,7 @@ export class AutocompleteComponent implements OnChanges {
       theme: 'square',
       getValue: 'name',
       list: {
+        maxNumberOfElements: 100,
         match: {
           enabled: true
         },

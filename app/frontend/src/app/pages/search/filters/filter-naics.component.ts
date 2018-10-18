@@ -94,37 +94,67 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
   }
   setFilteredItems(vehicles) {
     this.items_filtered =
-      vehicles[0] !== 'All' ? this.filterByVehicles(vehicles) : this.items;
+      vehicles[0] !== 'All'
+        ? this.filterByVehicles(vehicles)
+        : this.returnUnique(this.items);
     this.items_filtered.sort(this.searchService.sortByCodeAsc);
     this.keywords_results = this.items_filtered;
 
     /** Remove all selected items
      *  that are not within filtered list
-     */
-    for (const item of this.items_selected) {
-      if (
-        !this.searchService.existsIn(this.items_filtered, item['value'], 'id')
-      ) {
-        // this.removeItem(item['value']);
+     //  */
+    // for (const item of this.items_selected) {
+    //   if (
+    //     !this.searchService.existsIn(this.items_filtered, item['value'], 'id')
+    //   ) {
+    //     // this.removeItem(item['value']);
+    //   }
+    // }
+  }
+  returnUnique(items: any[]): any[] {
+    const unique_items = [];
+    for (const item of items) {
+      if (!this.searchService.existsIn(unique_items, item.code, 'code')) {
+        unique_items.push(item);
       }
     }
+    return unique_items;
   }
   buildNaicsItems(obj: any[]): any[] {
     const naics = [];
+    // naics['all'] = [];
+    // naics['vehicles'] = [];
     for (const pool of obj) {
       for (const naic of pool.naics) {
         const item = {};
         item['code'] = naic.code;
         item['name'] = naic.code + ' - ' + naic.description;
         item['vehicle_id'] = pool.vehicle.id;
-        if (!this.searchService.existsIn(naics, naic.code, 'code')) {
-          naics.push(item);
-        }
+        // if (!this.searchService.existsIn(naics, naic.code, 'code')) {
+        naics.push(item);
+        // }
       }
     }
     naics.sort(this.searchService.sortByCodeAsc);
     return naics;
   }
+  // buildNaicsItems(obj: any[]): any[] {
+  //   const naics = [];
+  //   for (const pool of obj) {
+  //     for (const naic of pool.naics) {
+  //       const item = {};
+  //       item['code'] = naic.code;
+  //       item['name'] = naic.code + ' - ' + naic.description;
+  //       item['vehicle_id'] = pool.vehicle.id;
+  //       if (!this.searchService.existsIn(naics, naic.code, 'code')) {
+  //         naics.push(item);
+  //       }
+  //     }
+  //   }
+  //   console.log(naics);
+  //   naics.sort(this.searchService.sortByCodeAsc);
+  //   return naics;
+  // }
   getItemId(value: string): string {
     if (value) {
       for (let i = 0; i < this.items.length; i++) {
@@ -179,7 +209,8 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
     // console.log(vehicle);
     let items: any[] = [];
     const abr = vehicle.substr(0, 3);
-    items = this.items.filter(naics => naics.vehicle_id.indexOf(abr) !== -1);
+    const unique_items = this.filterByVehicles([vehicle]);
+    items = unique_items.filter(naics => naics.vehicle_id !== -1);
     return items;
   }
 

@@ -73,11 +73,12 @@ export class FilterContractVehiclesComponent implements OnInit, OnChanges {
       item['name'] = this.queryName;
       item['description'] = this.name;
       item['items'] = this._items_selected;
-    } else {
-      item['name'] = this.queryName;
-      item['description'] = this.name;
-      item['items'] = this.all_vehicles;
     }
+    // else {
+    //   item['name'] = this.queryName;
+    //   item['description'] = this.name;
+    //   item['items'] = this.all_vehicles;
+    // }
     return item;
   }
   getItems() {

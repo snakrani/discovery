@@ -61,6 +61,8 @@ export class FiltersComponent implements OnInit {
   emitHideFilters: EventEmitter<number> = new EventEmitter();
   @Output()
   emitServerError: EventEmitter<number> = new EventEmitter();
+  @Output()
+  emitReset: EventEmitter<boolean> = new EventEmitter();
   APP_ASSETS = '/frontend/';
   disabled_btn = true;
   num_items_selected = 0;
@@ -159,13 +161,15 @@ export class FiltersComponent implements OnInit {
   }
 
   resetFilters() {
-    this.num_items_selected = 0;
-    this.disabled_btn = true;
     for (let i = 0; i < this.filters_list.length; i++) {
       if (this.filters_list[i]) {
         this.filters_list[i].reset();
       }
     }
+    this.router.navigate(['search']);
+    this.num_items_selected = 0;
+    this.disabled_btn = true;
+    this.emitReset.emit(true);
   }
   activateSubmit(n: number): void {
     if (n === 1) {
@@ -200,7 +204,14 @@ export class FiltersComponent implements OnInit {
     }
     return filters;
   }
-  emmitSelectedFilters() {
+  emmitSelectedFilters(event) {
+    if (event !== null) {
+      /** Clear duns */
+      this.router.navigate(['/search'], {
+        queryParams: { vendors: null, duns: null },
+        queryParamsHandling: 'merge'
+      });
+    }
     this.params_submitted = true;
     const filters: any[] = this.getSelectedFilters();
     this.emmitFilters.emit(filters);
@@ -290,7 +301,7 @@ export class FiltersComponent implements OnInit {
         this.route.snapshot.queryParamMap.keys.length > 0 &&
         !this.params_submitted
       ) {
-        this.emmitSelectedFilters();
+        this.emmitSelectedFilters(null);
       }
     }
   }
