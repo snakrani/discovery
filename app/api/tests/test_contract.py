@@ -32,7 +32,8 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 'vendor_location__zipcode', 
                 'vendor_location__congressional_district', 
                 'status__name', 'pricing_type__name',
-                'place_of_performance_location',
+                'place_of_performance__country_code', 'place_of_performance__country_name',
+                'place_of_performance__state',
                 'annual_revenue', 'number_of_employees'
             )
         },
