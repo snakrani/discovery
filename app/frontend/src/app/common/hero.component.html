@@ -4,6 +4,7 @@
       <h2>
         <span class="usa-hero-callout-alt">Search by NAICS, PSC or Keywords to compare contracts</span>
       </h2>
+
       <div id="search-gen" role="search">
         <div class="pull-left">
           <select [(ngModel)]="option" [disabled]="loading">
@@ -13,11 +14,16 @@
           </select>
         </div>
         <div class="autocomplete pull-left">
-          <input #keywordInput id="hero-keywords-input" class="eac-square" [class.input-spinner]="loading" pattern=".+"
+          <p class="text-white">{{keywords}}</p>
+          <!-- <select id="keyword" name="keywords" class="autocomplete-drop select2-container--default" tabindex="-1"
+            aria-hidden="true" [class.input-spinner]="loading" [disabled]="loading">
+            <option value="0">All</option>
+          </select> -->
+          <!-- <input #keywordInput id="hero-keywords-input" class="eac-square" [class.input-spinner]="loading" pattern=".+"
             type="text" [(ngModel)]="keywords" name="keywords" [placeholder]="loading?'Loading keywords...':'Start typing your keywords...'"
             autocomplete="off" [disabled]="loading">
           <div id="error-msg" class="hide"><em>Please choose from the suggested keywords list.</em></div>
-          <input id="keyword" type="hidden">
+          <input id="keyword" type="hidden"> -->
         </div>
         <div class="pull-left">
           <button type="submit" (click)="searchKeywords()" [disabled]="loading">

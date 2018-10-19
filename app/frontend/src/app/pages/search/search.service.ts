@@ -514,39 +514,13 @@ export class SearchService {
     const keywords = [];
     for (const item of obj) {
       const keyword = {};
-      keyword['name'] = item['name'];
-      keyword['code'] = item['id'];
+      keyword['text'] = item['name'];
+      keyword['id'] = item['id'];
       keywords.push(keyword);
     }
     return keywords;
   }
-  setKeywordAutoComplete(data: any[], id: string) {
-    $('#' + id + '-value, #' + id + '-input').val('');
-    const options = {
-      data: data,
-      theme: 'square',
-      getValue: 'name',
-      list: {
-        match: {
-          enabled: true
-        },
-        onSelectItemEvent: function() {
-          $('#' + id + '-value').val(
-            $('#' + id + '-input').getSelectedItemData().code
-          );
-          // $('#error-msg').addClass('hide');
-          $('#' + id + '-input').removeClass('input-error');
-        },
-        onHideListEvent: function() {
-          if ($('#' + id + '-value').val() === '') {
-            $('#' + id + '-input').val('');
-          }
-        }
-      }
-    };
-    console.log($('#' + id + '-input'));
-    $('#' + id + '-input').easyAutocomplete(options);
-  }
+
   sortByNameAsc(i1, i2) {
     if (i1 > i2) {
       return 1;
@@ -569,6 +543,15 @@ export class SearchService {
     if (i1.code > i2.code) {
       return 1;
     } else if (i1.code === i2.code) {
+      return 0;
+    } else {
+      return -1;
+    }
+  }
+  sortById(i1, i2) {
+    if (i1.id > i2.id) {
+      return 1;
+    } else if (i1.id === i2.id) {
       return 0;
     } else {
       return -1;

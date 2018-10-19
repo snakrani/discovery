@@ -37,16 +37,12 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
   name = 'NAICs';
   queryName = 'naics';
   id = 'filter-naics';
+
   placeholder;
   error_message;
   filtered_naics;
   naics;
   ln;
-  /** Sample json
-  {
-
-  };
-  */
 
   json_value = 'code';
   json_description = 'description';
@@ -97,24 +93,13 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
       vehicles[0] !== 'All'
         ? this.filterByVehicles(vehicles)
         : this.returnUnique(this.items);
-    this.items_filtered.sort(this.searchService.sortByCodeAsc);
+    this.items_filtered.sort(this.searchService.sortById);
     this.keywords_results = this.items_filtered;
-
-    /** Remove all selected items
-     *  that are not within filtered list
-     //  */
-    // for (const item of this.items_selected) {
-    //   if (
-    //     !this.searchService.existsIn(this.items_filtered, item['value'], 'id')
-    //   ) {
-    //     // this.removeItem(item['value']);
-    //   }
-    // }
   }
   returnUnique(items: any[]): any[] {
     const unique_items = [];
     for (const item of items) {
-      if (!this.searchService.existsIn(unique_items, item.code, 'code')) {
+      if (!this.searchService.existsIn(unique_items, item.id, 'id')) {
         unique_items.push(item);
       }
     }
@@ -122,39 +107,19 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
   }
   buildNaicsItems(obj: any[]): any[] {
     const naics = [];
-    // naics['all'] = [];
-    // naics['vehicles'] = [];
     for (const pool of obj) {
       for (const naic of pool.naics) {
         const item = {};
-        item['code'] = naic.code;
-        item['name'] = naic.code + ' - ' + naic.description;
+        item['id'] = naic.code;
+        item['text'] = naic.code + ' - ' + naic.description;
         item['vehicle_id'] = pool.vehicle.id;
-        // if (!this.searchService.existsIn(naics, naic.code, 'code')) {
         naics.push(item);
-        // }
       }
     }
-    naics.sort(this.searchService.sortByCodeAsc);
+    naics.sort(this.searchService.sortById);
     return naics;
   }
-  // buildNaicsItems(obj: any[]): any[] {
-  //   const naics = [];
-  //   for (const pool of obj) {
-  //     for (const naic of pool.naics) {
-  //       const item = {};
-  //       item['code'] = naic.code;
-  //       item['name'] = naic.code + ' - ' + naic.description;
-  //       item['vehicle_id'] = pool.vehicle.id;
-  //       if (!this.searchService.existsIn(naics, naic.code, 'code')) {
-  //         naics.push(item);
-  //       }
-  //     }
-  //   }
-  //   console.log(naics);
-  //   naics.sort(this.searchService.sortByCodeAsc);
-  //   return naics;
-  // }
+
   getItemId(value: string): string {
     if (value) {
       for (let i = 0; i < this.items.length; i++) {
@@ -167,16 +132,20 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
   getItemDescription(id: number): string {
     if (id) {
       for (let i = 0; i < this.items.length; i++) {
-        if (+this.items[i][this.json_value] === id) {
-          return this.items[i]['name'];
+        if (+this.items[i]['id'] === id) {
+          return this.items[i]['text'];
         }
       }
     }
   }
   addKeywords(code) {
+    if (code === '0') {
+      this.reset();
+      return;
+    }
     if (
       !this.searchService.existsIn(this.items_selected, code, 'value') &&
-      this.searchService.existsIn(this.items_filtered, code, 'code')
+      this.searchService.existsIn(this.items_filtered, code, 'id')
     ) {
       this.addItem(code);
     }
@@ -197,7 +166,7 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
       for (const prop of this.items) {
         const arr = item.split('_');
         if (prop['vehicle_id'].indexOf(arr[0]) !== -1) {
-          if (!this.searchService.existsIn(items, prop.code, 'code')) {
+          if (!this.searchService.existsIn(items, prop.id, 'id')) {
             items.push(prop);
           }
         }

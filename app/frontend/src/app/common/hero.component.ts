@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SearchService } from '../pages/search/search.service';
 import { Router } from '@angular/router';
+import { ThSortComponent } from '../pages/search/th-sort.component';
 declare let autocomplete: any;
 declare const $: any;
 declare let document: any;
@@ -11,6 +12,7 @@ declare let document: any;
 })
 export class HeroComponent implements OnInit {
   items: any[] = [];
+
   _keywords = '';
   keywords_results: any[] = [];
   keywords_input;
@@ -22,6 +24,7 @@ export class HeroComponent implements OnInit {
   server_error = false;
   error_message;
   _option = 'naic';
+  interval;
   constructor(private searchService: SearchService, private router: Router) {}
   set option(value: string) {
     this._option = value;
@@ -39,25 +42,24 @@ export class HeroComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.searchService.getKeywords().subscribe(data => {
-      this.items = data['results'];
       this.keywords_results = this.buildKeywordsDropdown(data['results']);
       this.searchService.keywords = this.keywords_results;
       this.initPools();
     });
   }
   setInputData(value: string) {
-    switch (value) {
-      case 'keyword':
-        this.setKeywordAutoComplete(this.keywords_results);
-        break;
-      case 'naic':
-        this.setKeywordAutoComplete(this.naics);
-        break;
-      case 'psc':
-        this.setKeywordAutoComplete(this.pscs);
-        break;
+    if (value === 'keyword') {
+      this.items = this.keywords_results;
+    } else if (value === 'naic') {
+      this.items = this.naics;
+    } else if (value === 'psc') {
+      this.items = this.pscs;
     }
+    $('.autocomplete-drop').select2({
+      data: this.items
+    });
   }
+
   initPools() {
     this.searchService.getPools(['All']).subscribe(
       data => {
@@ -75,79 +77,80 @@ export class HeroComponent implements OnInit {
   }
   onChange() {}
   buildNaicsItems(obj: any[]) {
-    const naics = [];
+    const results = [];
     for (const pool of obj) {
       for (const naic of pool.naics) {
         const item = {};
-        item['code'] = naic.code;
-        item['name'] = naic.code + ' - ' + naic.description;
-        if (!this.searchService.existsIn(naics, naic.code, 'code')) {
-          naics.push(item);
+        item['id'] = naic.code;
+        item['text'] = naic.code + ' - ' + naic.description;
+        if (!this.searchService.existsIn(results, naic.code, 'id')) {
+          results.push(item);
         }
       }
     }
-    this.naics = naics;
-    this.naics.sort(this.searchService.sortByCodeAsc);
+    this.naics = results;
+    this.naics.sort(this.searchService.sortById);
   }
   buildPscsItems(obj: any[]) {
-    const naics = [];
-    const pscs = [];
+    const results = [];
     for (const pool of obj) {
       for (const psc of pool.psc) {
         const item = {};
-        item['code'] = psc.code;
-        item['name'] = psc.code + ' - ' + psc.description;
-        if (!this.searchService.existsIn(pscs, psc.code, 'code')) {
-          pscs.push(item);
+        item['id'] = psc.code;
+        item['text'] = psc.code + ' - ' + psc.description;
+        if (!this.searchService.existsIn(results, psc.code, 'id')) {
+          results.push(item);
         }
       }
     }
-    this.pscs = pscs;
-    this.pscs.sort(this.searchService.sortByCodeAsc);
+    this.pscs = results;
+    this.pscs.sort(this.searchService.sortById);
   }
-  setKeywordAutoComplete(data) {
-    $('#keyword, #hero-keywords-input').val('');
-    const options = {
-      data: data,
-      theme: 'square',
-      getValue: 'name',
-      list: {
-        maxNumberOfElements: 100,
-        match: {
-          enabled: true
-        },
-        onSelectItemEvent: function() {
-          $('#keyword').val(
-            $('#hero-keywords-input').getSelectedItemData().code
-          );
-          $('#error-msg').addClass('hide');
-          $('#hero-keywords-input').removeClass('input-error');
-        }
-      }
-    };
-    $('#hero-keywords-input').easyAutocomplete(options);
-  }
+  // setKeywordAutoComplete(data) {
+  //   $('#keyword, #hero-keywords-input').val('');
+  //   const options = {
+  //     data: data,
+  //     theme: 'square',
+  //     getValue: 'name',
+  //     list: {
+  //       maxNumberOfElements: 100,
+  //       match: {
+  //         enabled: true
+  //       },
+  //       onSelectItemEvent: function() {
+  //         $('#keyword').val(
+  //           $('#hero-keywords-input').getSelectedItemData().code
+  //         );
+  //         $('#error-msg').addClass('hide');
+  //         $('#hero-keywords-input').removeClass('input-error');
+  //       }
+  //     }
+  //   };
+  //   $('#hero-keywords-input').easyAutocomplete(options);
+  // }
   buildKeywordsDropdown(obj: any[]): any[] {
     const keywords = [];
     for (const item of obj) {
       const keyword = {};
-      keyword['name'] = item['name'];
-      keyword['code'] = item['id'];
+      keyword['text'] = item['name'];
+      keyword['id'] = item['id'];
       keywords.push(keyword);
     }
     return keywords;
   }
-  getItemId(value: string): string {
-    if (value) {
-      for (let i = 0; i < this.items.length; i++) {
-        if (this.items[i]['name'] === value) {
-          return this.items[i]['id'];
-        }
-      }
-    }
-  }
+  // getItemId(value: string): string {
+  //   if (value) {
+  //     for (let i = 0; i < this.items.length; i++) {
+  //       if (this.items[i]['name'] === value) {
+  //         return this.items[i]['id'];
+  //       }
+  //     }
+  //   }
+  // }
   searchKeywords() {
     const keyword_id = $('#keyword').val();
+    console.log(keyword_id);
+    // return;
     if (keyword_id === '') {
       $('#error-msg').removeClass('hide');
       $('#hero-keywords-input').addClass('input-error');

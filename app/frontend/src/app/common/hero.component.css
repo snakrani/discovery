@@ -18,9 +18,10 @@ select {
   border-bottom-color: #fff;
   border-left-color: #fff;
 }
-.autocomplete input[type='text'] {
+
+.autocomplete-drop {
   border-radius: 0px;
-  width: 300px;
+  width: 360px;
 }
 
 #error-msg {

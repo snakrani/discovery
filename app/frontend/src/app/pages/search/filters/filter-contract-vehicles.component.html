@@ -4,6 +4,7 @@
 <div id="{{id}}" class="usa-accordion-content" [attr.aria-hidden]="!opened">
   <fieldset class="usa-fieldset-inputs usa-sans">
     <discovery-spinner *ngIf="!items"></discovery-spinner>
+
     <ul class="usa-unstyled-list">
       <li *ngFor="let item of items">
         <input id="{{id}}-{{item.id}}" (change)="onChange(item.id, item.name, $event.target.checked)" name="{{id}}-{{item.id}}"

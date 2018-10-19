@@ -63,10 +63,7 @@ export class FilterKeywordsComponent implements OnInit, AfterContentInit {
       this.keywords_results = this.searchService.buildKeywordsDropdown(
         this.items
       );
-      // this.searchService.setKeywordAutoComplete(
-      //   this.keywords_results,
-      //   this.id
-      // );
+
       /** Grab the queryparams and sets default values
        *  on inputs Ex. checked, selected, keywords, etc */
       if (this.route.snapshot.queryParamMap.has(this.queryName)) {
@@ -103,6 +100,10 @@ export class FilterKeywordsComponent implements OnInit, AfterContentInit {
     }
   }
   addKeywords(code) {
+    if (code === '0') {
+      this.reset();
+      return;
+    }
     if (!this.searchService.existsIn(this.items_selected, code, 'value')) {
       this.addItem(code);
     }

@@ -136,6 +136,7 @@ export class FiltersComponent implements OnInit {
           const values: string[] = this.route.snapshot.queryParamMap
             .get(queryName)
             .split('__');
+
           for (let i = 0; i < this.vehicles.length; i++) {
             if (values.includes(this.vehicles[i]['id'])) {
               this.vehicles[i]['checked'] = true;
@@ -243,6 +244,9 @@ export class FiltersComponent implements OnInit {
   getContractVehicles() {
     return this.vehicles;
   }
+  setContractVehiclesInFilter(id: string, title: string) {
+    this.filterContractVehiclesComponent.addItem(id, title);
+  }
   getVehicleDescription(vehicle: string) {
     const desc = this.filterContractVehiclesComponent.getItemDescription(
       vehicle
@@ -292,10 +296,7 @@ export class FiltersComponent implements OnInit {
     /** Filters need to be loaded before
      *  displaying compare table.
      */
-    if (
-      this.loaded_filters.length === this.filters_list.length &&
-      this.vehicles.length > 0
-    ) {
+    if (this.loaded_filters.length === this.filters_list.length) {
       if (
         this.num_items_selected > 0 &&
         this.route.snapshot.queryParamMap.keys.length > 0 &&
