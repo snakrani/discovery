@@ -527,6 +527,7 @@ class ContractSummarySerializer(AnnotatedContractSerializer):
     class Meta(BaseContractSerializer.Meta):
         fields = BaseContractSerializer.Meta.fields + [
             'place_of_performance_location',
+            'place_of_performance',
             'url'
         ]
    
