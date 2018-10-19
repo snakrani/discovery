@@ -538,7 +538,8 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
         'vendor_location__zipcode', 
         'vendor_location__congressional_district', 
         'status__name', 'pricing_type__name',
-        'place_of_performance_location',
+        'place_of_performance__country_code', 'place_of_performance__country_name',
+        'place_of_performance__state',
         'annual_revenue', 'number_of_employees'
     ]
     ordering = '-date_signed'
@@ -551,11 +552,6 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
         'retrieve': serializers.ContractFullSerializer,
         'test': serializers.ContractTestSerializer
     }
-    
-    def get_queryset(self):
-        return self.queryset.annotate(
-            place_of_performance_location = Concat('place_of_performance__country_name', Value(' '), Coalesce('place_of_performance__state', Value('')))
-        )
 
 
 @method_decorator(cache_page(60*60), name='get')
