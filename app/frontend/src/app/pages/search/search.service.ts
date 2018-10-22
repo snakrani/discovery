@@ -14,6 +14,10 @@ export class SearchService {
   _keywords;
   _active_filters: any[];
   _contract_results: any[];
+  _total_vendors_per_vehicle: any[];
+  _countries: any[];
+  _states: any[];
+
   search_options = {};
 
   constructor(
@@ -33,6 +37,12 @@ export class SearchService {
   set keywords(arr: any[]) {
     this._keywords = arr;
   }
+  get total_vendors_per_vehicle(): any[] {
+    return this._total_vendors_per_vehicle;
+  }
+  set total_vendors_per_vehicle(arr: any[]) {
+    this._total_vendors_per_vehicle = arr;
+  }
   get activeFilters(): any[] {
     return this._active_filters;
   }
@@ -44,6 +54,18 @@ export class SearchService {
   }
   set contractResults(arr: any[]) {
     this._contract_results = arr;
+  }
+  get countries(): any[] {
+    return this._countries;
+  }
+  set countries(arr: any[]) {
+    this._countries = arr;
+  }
+  get states(): any[] {
+    return this._states;
+  }
+  set states(arr: any[]) {
+    this._states = arr;
   }
   setSearchOptions(key: string, values: any[]): void {
     this.search_options[key] = values;
@@ -196,6 +218,14 @@ export class SearchService {
         catchError(this.handleError)
       );
   }
+  getPlaceOfPerformance(): Observable<any[]> {
+    return this.http
+      .get<any[]>(this.apiUrl + 'placesofperformance/?page=0')
+      .pipe(
+        tap(data => data),
+        catchError(this.handleError)
+      );
+  }
 
   getVendors(filters: any[], page: string): Observable<any[]> {
     let params = '';
@@ -237,6 +267,14 @@ export class SearchService {
         params +=
           '&pools__zones__id__in=' +
           this.getSelectedFilterList(filter['selected'], ',');
+      }
+      if (filter['name'] === 'pop') {
+        console.log(filter['selected'][0].country);
+        let pop = filter['selected'][0].country;
+        if (filter['selected'][0].state) {
+          pop += '__' + filter['selected'][0].state;
+        }
+        params += '&pop=' + pop;
       }
       // if (filter['name'] === 'threshold') {
       //   const threshold = filter['selected'][0].value.split('-');
@@ -298,6 +336,16 @@ export class SearchService {
           '&pools__zones__id__in=' +
           this.getSelectedFilterList(filter['selected'], ',');
       }
+      // if (filter['name'] === 'agency_performance') {
+      //   params +=
+      //     '&pools__pool__vehicle__tier__number__in=' +
+      //     this.getSelectedFilterList(filter['selected'], ',');
+      // }
+      // if (filter['name'] === 'poc') {
+      //   params +=
+      //     '&pools__pool__vehicle__poc__in=' +
+      //     this.getSelectedFilterList(filter['selected'], ',');
+      // }
     }
     console.log(this.apiUrl + 'vendors/count/duns?' + params.substr(1));
     return this.http
@@ -368,12 +416,10 @@ export class SearchService {
       );
   }
   getAgencyPerformanceNames(): Observable<any[]> {
-    return this.http
-      .get<any[]>(this.apiUrl + 'contracts/values/agency_name')
-      .pipe(
-        tap(data => data),
-        catchError(this.handleError)
-      );
+    return this.http.get<any[]>(this.apiUrl + 'agencies/?page=0').pipe(
+      tap(data => data),
+      catchError(this.handleError)
+    );
   }
   getAgencyPerformanceDuns(ids: string): Observable<any[]> {
     return this.http
@@ -396,14 +442,22 @@ export class SearchService {
     page: string,
     piid: string,
     naic: string,
+    country: string,
+    state: string,
     ordering: string
   ): Observable<any[]> {
     let params = 'contracts?vendor__duns=' + duns;
     if (naic !== 'All') {
-      params += '&NAICS=' + naic;
+      params += '&psc_naics=' + naic;
     }
     if (piid !== 'All') {
       params += '&base__piid=' + piid;
+    }
+    if (country !== '0') {
+      params += '&place_of_performance__country_code=' + country;
+    }
+    if (state !== '0') {
+      params += '&place_of_performance__state=' + state;
     }
     if (ordering !== '') {
       params += '&ordering=' + ordering;
@@ -548,10 +602,10 @@ export class SearchService {
       return -1;
     }
   }
-  sortById(i1, i2) {
-    if (i1.id > i2.id) {
+  sortByTextAsc(i1, i2) {
+    if (i1.text > i2.text) {
       return 1;
-    } else if (i1.id === i2.id) {
+    } else if (i1.text === i2.text) {
       return 0;
     } else {
       return -1;

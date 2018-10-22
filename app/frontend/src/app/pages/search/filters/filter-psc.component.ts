@@ -108,7 +108,7 @@ export class FilterPscComponent implements OnInit, OnChanges {
         }
       }
     }
-    pscs.sort(this.searchService.sortById);
+    pscs.sort(this.searchService.sortByIdAsc);
     return pscs;
   }
   getItemId(value: string): string {

@@ -1,24 +1,33 @@
 <h3>Show vendor’s 5 year contract history based on the following filters:</h3>
 <em>Work performed by a vendor is often reported under a different NAICS code due to FPDS restrictions.</em>
 <div class="filters-container">
-  <div class="usa-width-one-twelfth"><strong class="db" style="padding-top:12px">Filter By:</strong></div>
-  <div class="usa-width-one-third">
 
+  <div>
+    <strong class="pull-left" style="padding:12px;">Filter By:</strong>
     <select id="contract_membership" [(ngModel)]="piid" (change)="onChangeMembership()">
       <option value="All">All Contract Memberships</option>
       <option *ngFor="let item of pools" value="{{item.piid}}" [innerHTML]="getVehicleDescription(item.pool.vehicle.id) + '-'+ item.piid"></option>
 
     </select>
-  </div>
-  <div class="usa-width-one-third">
     <select id="select_naic" [disabled]="naics.length===0" (change)="onChangeNaic()" [(ngModel)]="naic_code" class="items-input">
       <option value="All" selected="selected" [innerHTML]="naics.length===0 ? 'Loading...':'All NAICs Codes'"></option>
       <option *ngFor="let item of naics" value="{{item.code}}">{{item.code + ' - ' +
         item.description}}</option>
     </select>
-  </div>
+    <select id="select_country" (change)="onChangeCountry()" [disabled]="!countries" [(ngModel)]="country" class="items-input">
+      <option value="0" selected="selected" [innerHTML]="!countries?'Loading countries...':'Country --'"></option>
+      <option *ngFor="let item of countries" value="{{item.code}}">{{
+        item.name}}</option>
+    </select>
+    <select id="select_state" (change)="onChangeCountry()" [disabled]="!states || country!=='USA'" [(ngModel)]="state"
+      class="items-input" [class.hide]="country!=='USA'">
+      <option value="0" selected="selected">State --</option>
+      <option *ngFor="let item of states" value="{{item.code}}">{{
+        item.code}}</option>
+    </select></div>
+
 </div>
-<div class="pad-top-bottom">
+<div class="pad-top-bottom db">
   <div class="usa-alert usa-alert-info usa-alert-slim" *ngIf="history_no_results">
     <div class="usa-alert-body">
       <p class="usa-alert-text">There are no matching contracts to display</p>
@@ -26,7 +35,7 @@
   </div>
 </div>
 <discovery-spinner *ngIf="spinner"></discovery-spinner>
-<div class="pad-bottom text-right" *ngIf="!history_no_results">
+<div class="pad-bottom text-right" *ngIf="!history_no_results && !spinner">
   <a href="/vendor/{{duns}}/csv/?{{params}}" target="_blank">
     Download
     vendor data(CSV)</a></div>
@@ -38,7 +47,7 @@
   </div> -->
   <!-- <div id="scroll-view" class="scroll-view scrollbar">
     <div class="scroll-div2 pad-top"> -->
-  <table id="tbl-contract-history" class="usa-table-borderless history" *ngIf="!history_no_results">
+  <table id="tbl-contract-history" class="usa-table-borderless history" *ngIf="!history_no_results && !spinner">
     <thead>
       <tr>
         <th scope="col"></th>

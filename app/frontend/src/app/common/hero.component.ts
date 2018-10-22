@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { SearchService } from '../pages/search/search.service';
 import { Router } from '@angular/router';
 import { ThSortComponent } from '../pages/search/th-sort.component';
@@ -12,7 +12,6 @@ declare let document: any;
 })
 export class HeroComponent implements OnInit {
   items: any[] = [];
-
   _keywords = '';
   keywords_results: any[] = [];
   keywords_input;
@@ -24,6 +23,7 @@ export class HeroComponent implements OnInit {
   server_error = false;
   error_message;
   _option = 'naic';
+  placeholder = '';
   interval;
   constructor(private searchService: SearchService, private router: Router) {}
   set option(value: string) {
@@ -40,13 +40,23 @@ export class HeroComponent implements OnInit {
     return this._keywords;
   }
   ngOnInit() {
-    this.loading = true;
-    this.searchService.getKeywords().subscribe(data => {
-      this.keywords_results = this.buildKeywordsDropdown(data['results']);
-      this.searchService.keywords = this.keywords_results;
-      this.initPools();
-    });
+    if (this.searchService.keywords && this.searchService.keywords.length) {
+      this.buildKeywordsDropdown(this.searchService.keywords);
+      this.buildNaicsItems(this.searchService.pools);
+      this.buildPscsItems(this.searchService.pools);
+      this.loading = false;
+      this.option = 'naic';
+    } else {
+      this.loading = true;
+      this.searchService.getKeywords().subscribe(data => {
+        this.searchService.keywords = this.keywords_results;
+        this.buildKeywordsDropdown(data['results']);
+
+        this.initPools();
+      });
+    }
   }
+  onChange() {}
   setInputData(value: string) {
     if (value === 'keyword') {
       this.items = this.keywords_results;
@@ -55,11 +65,16 @@ export class HeroComponent implements OnInit {
     } else if (value === 'psc') {
       this.items = this.pscs;
     }
-    $('.autocomplete-drop').select2({
-      data: this.items
+    this.setKeywordAutoComplete(this.items);
+  }
+  setKeywordAutoComplete(data) {
+    $('#keyword')
+      .children('option:not(:first)')
+      .remove();
+    $('#keyword').select2({
+      data: data
     });
   }
-
   initPools() {
     this.searchService.getPools(['All']).subscribe(
       data => {
@@ -75,7 +90,7 @@ export class HeroComponent implements OnInit {
       }
     );
   }
-  onChange() {}
+
   buildNaicsItems(obj: any[]) {
     const results = [];
     for (const pool of obj) {
@@ -89,7 +104,7 @@ export class HeroComponent implements OnInit {
       }
     }
     this.naics = results;
-    this.naics.sort(this.searchService.sortById);
+    this.naics.sort(this.searchService.sortByIdAsc);
   }
   buildPscsItems(obj: any[]) {
     const results = [];
@@ -104,31 +119,10 @@ export class HeroComponent implements OnInit {
       }
     }
     this.pscs = results;
-    this.pscs.sort(this.searchService.sortById);
+    this.pscs.sort(this.searchService.sortByIdAsc);
   }
-  // setKeywordAutoComplete(data) {
-  //   $('#keyword, #hero-keywords-input').val('');
-  //   const options = {
-  //     data: data,
-  //     theme: 'square',
-  //     getValue: 'name',
-  //     list: {
-  //       maxNumberOfElements: 100,
-  //       match: {
-  //         enabled: true
-  //       },
-  //       onSelectItemEvent: function() {
-  //         $('#keyword').val(
-  //           $('#hero-keywords-input').getSelectedItemData().code
-  //         );
-  //         $('#error-msg').addClass('hide');
-  //         $('#hero-keywords-input').removeClass('input-error');
-  //       }
-  //     }
-  //   };
-  //   $('#hero-keywords-input').easyAutocomplete(options);
-  // }
-  buildKeywordsDropdown(obj: any[]): any[] {
+
+  buildKeywordsDropdown(obj: any[]) {
     const keywords = [];
     for (const item of obj) {
       const keyword = {};
@@ -136,22 +130,14 @@ export class HeroComponent implements OnInit {
       keyword['id'] = item['id'];
       keywords.push(keyword);
     }
-    return keywords;
+    this.keywords_results = keywords;
+    // this.keywords_results.sort(this.searchService.sortByTextAsc);
   }
-  // getItemId(value: string): string {
-  //   if (value) {
-  //     for (let i = 0; i < this.items.length; i++) {
-  //       if (this.items[i]['name'] === value) {
-  //         return this.items[i]['id'];
-  //       }
-  //     }
-  //   }
-  // }
+
   searchKeywords() {
     const keyword_id = $('#keyword').val();
-    console.log(keyword_id);
     // return;
-    if (keyword_id === '') {
+    if (keyword_id === '0') {
       $('#error-msg').removeClass('hide');
       $('#hero-keywords-input').addClass('input-error');
       return;

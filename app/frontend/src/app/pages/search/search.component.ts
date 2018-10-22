@@ -87,7 +87,9 @@ export class SearchComponent implements OnInit {
   }
   set sort_by(value: string) {
     this._sort_by = value;
-    this.vehicle_vendors_total = this.getVendorTotalByVehicle(value);
+    this.vehicle_vendors_total = this.returnVendorsMeetCriteriaTotalByVehicle(
+      value
+    );
   }
   get spinner(): boolean {
     return this._spinner;
@@ -160,6 +162,7 @@ export class SearchComponent implements OnInit {
     this.reset(true);
     this.spinner = true;
     this.searchService.activeFilters = filters;
+
     this.zones = this.filtersComponent.getZones();
     this.contract_vehicles = this.filtersComponent.getContractVehicles();
     this.service_categories = this.filtersComponent.getServiceCategories();
@@ -189,8 +192,11 @@ export class SearchComponent implements OnInit {
 
           this.filters = this.filtersComponent.getSelectedFilters();
           this.searchService.activeFilters = this.filters;
-          this.searchService.setQueryParams(this.searchService.activeFilters);
-          this.getContractCompareResults(vehicles);
+          if (!this.route.snapshot.queryParamMap.has('vendors')) {
+            this.searchService.setQueryParams(this.searchService.activeFilters);
+          }
+
+          this.getVendorsTotalByVehicle(vehicles);
         },
         error => {
           this.error_message = <any>error;
@@ -214,7 +220,9 @@ export class SearchComponent implements OnInit {
           data => {
             const item = {};
             item['id'] = vehicle.id;
-            item['vendors_total'] = 0;
+            item['vendors_total'] = this.returnVehicleCountByVehicle(
+              vehicle.id
+            );
             item['vendors_results_total'] = data['count'];
             item['description'] = vehicle.name;
             item[
@@ -235,15 +243,18 @@ export class SearchComponent implements OnInit {
             count++;
             /** On Complte do this */
             if (count === vehicles.length) {
+              this.spinner = false;
+              this.show_results = true;
+              this.server_error = false;
               if (total_vendors === 0) {
                 this.vendors_no_results = true;
               } else {
-                this.spinner = false;
-                this.show_results = true;
-                this.server_error = false;
                 this.sort_by = this.compare_tbl[0]['id'];
                 this.total_vendors_met_criteria = total_vendors;
-                if (this.route.snapshot.queryParamMap.has('vendors')) {
+                if (
+                  this.route.snapshot.queryParamMap.has('vendors') ||
+                  this.vw_vendors
+                ) {
                   this.viewVendors();
                 } else {
                   this.viewContracts();
@@ -259,7 +270,44 @@ export class SearchComponent implements OnInit {
         );
     }
   }
-  getVendorTotalByVehicle(vehicle: string): number {
+  returnVehicleCountByVehicle(vehicle: string): any {
+    let count = 0;
+    for (const item of this.searchService.total_vendors_per_vehicle) {
+      if (item.id === vehicle) {
+        count = item.total;
+      }
+    }
+    return count;
+  }
+  getVendorsTotalByVehicle(vehicles) {
+    let count = 0;
+    const vendor_totals = [];
+    for (const vehicle of vehicles) {
+      this.searchService
+        .getVehicleVendorsMeetCriteria([], vehicle.id)
+        .subscribe(
+          data => {
+            const item = {};
+            item['id'] = vehicle.id;
+            item['total'] = data['count'];
+            if (!this.searchService.existsIn(vendor_totals, vehicle.id, 'id')) {
+              vendor_totals.push(item);
+            }
+            count++;
+            if (count === vehicles.length) {
+              this.searchService.total_vendors_per_vehicle = vendor_totals;
+              this.getContractCompareResults(vehicles);
+            }
+          },
+          error => {
+            this.error_message = <any>error;
+            this.server_error = true;
+            this.spinner = false;
+          }
+        );
+    }
+  }
+  returnVendorsMeetCriteriaTotalByVehicle(vehicle: string): number {
     let total = 0;
     for (const item of this.compare_tbl) {
       if (item.id === vehicle) {

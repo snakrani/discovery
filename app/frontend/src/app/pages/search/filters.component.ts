@@ -19,6 +19,7 @@ import { FilterContractObligatedAmountComponent } from './filters/filter-contrac
 import { FilterAgencyPerformanceComponent } from './filters/filter-agency-performance.component';
 import { FilterPscComponent } from './filters/filter-psc.component';
 import { FilterZoneComponent } from './filters/filter-zone.component';
+import { FilterPlaceOfPerformanceComponent } from './filters/filter-place-of-performance.component';
 
 @Component({
   selector: 'discovery-filters',
@@ -49,6 +50,8 @@ export class FiltersComponent implements OnInit {
   filterPscComponent: FilterPscComponent;
   @ViewChild(FilterZoneComponent)
   filterZoneComponent: FilterZoneComponent;
+  @ViewChild(FilterPlaceOfPerformanceComponent)
+  filterPoP: FilterPlaceOfPerformanceComponent;
   filters_list: any[];
   /** END Define filter components */
   @Input()
@@ -91,22 +94,19 @@ export class FiltersComponent implements OnInit {
       this.filterServiceCategories,
       this.filterNaicsComponent,
       this.filterPscComponent,
-      this.filterContractObligated,
       this.filterZoneComponent
     ];
     /**
      *
+     *
+     *  this.filterContractObligated,
+     * this.filterPoP
       this.filterAgencyPerformance,
-      this.filterZoneComponent,
-      this.filterCertifications,
-      this.filterContractPricing
+      this.filterPoc
+      this.filterCertifications
        */
-    // if (this.searchService.pools && this.searchService.pools.length > 0) {
-    //   this.pools = this.searchService.pools;
-    //   this.initVehicles();
-    // } else {
+
     this.initPools(['All']);
-    // }
   }
   initPools(vehicles) {
     this.server_error = false;

@@ -20,3 +20,11 @@ tbody td:first-child {
   width: 50px !important;
   min-width: auto !important;
 }
+select {
+  max-width: 250px !important;
+  float: left;
+  margin-right: 10px;
+}
+#select_state {
+  max-width: 80px !important;
+}

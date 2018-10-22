@@ -20,6 +20,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  text-align: left;
 }
 .select2-container .select2-selection--single .select2-selection__clear {
   position: relative;
@@ -160,6 +161,7 @@
   .select2-selection__rendered {
   color: #444;
   line-height: 28px;
+  text-align: left;
 }
 .select2-container--default
   .select2-selection--single
@@ -239,12 +241,14 @@
   margin: 0;
   padding: 0 5px;
   width: 100%;
+  text-align: left;
 }
 .select2-container--default
   .select2-selection--multiple
   .select2-selection__rendered
   li {
   list-style: none;
+  text-align: left;
 }
 .select2-container--default
   .select2-selection--multiple

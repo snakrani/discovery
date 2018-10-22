@@ -5,7 +5,8 @@ import {
   Output,
   EventEmitter,
   ViewChild,
-  AfterContentInit
+  AfterContentInit,
+  OnChanges
 } from '@angular/core';
 import { SearchService } from '../search.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,7 +19,8 @@ declare const $: any;
   templateUrl: './filter-keywords.component.html',
   styles: []
 })
-export class FilterKeywordsComponent implements OnInit, AfterContentInit {
+export class FilterKeywordsComponent
+  implements OnInit, OnChanges, AfterContentInit {
   @ViewChild(FilterSelectedComponent)
   msgAddedItem: FilterSelectedComponent;
   items: any[] = [];
@@ -38,6 +40,7 @@ export class FilterKeywordsComponent implements OnInit, AfterContentInit {
   error_message;
   json_value = 'id';
   json_description = 'name';
+  timer: any;
   constructor(
     private searchService: SearchService,
     private route: ActivatedRoute,
@@ -51,12 +54,36 @@ export class FilterKeywordsComponent implements OnInit, AfterContentInit {
   }
   ngOnInit() {}
   ngAfterContentInit() {
-    this.setKeywordsList();
+    if (this.searchService.keywords && this.searchService.keywords.length > 0) {
+      const items = this.searchService.buildKeywordsDropdown(
+        this.searchService.keywords
+      );
+      this.emmitLoaded.emit(this.queryName);
+      this.timer = setTimeout(() => {
+        this.keywords_results = items;
+        /** Grab the queryparams and sets default values
+         *  on inputs Ex. checked, selected, keywords, etc */
+        if (this.route.snapshot.queryParamMap.has(this.queryName)) {
+          const values: string[] = this.route.snapshot.queryParamMap
+            .get(this.queryName)
+            .split('__');
+
+          for (const id of values) {
+            this.addItem(id);
+          }
+          /** Open accordion */
+          this.opened = true;
+        }
+
+        clearTimeout(this.timer);
+      }, 300);
+    } else {
+      this.setKeywordsList();
+    }
   }
+  ngOnChanges() {}
 
   setKeywordsList() {
-    this.placeholder = 'Loading keywords...';
-
     this.searchService.getKeywords().subscribe(data => {
       this.items = data['results'];
       this.searchService.keywords = data['results'];
@@ -78,23 +105,22 @@ export class FilterKeywordsComponent implements OnInit, AfterContentInit {
         this.opened = true;
       }
       this.emmitLoaded.emit(this.queryName);
-      this.placeholder = 'Enter keywords...';
     });
   }
   getItemId(value: string): string {
     if (value) {
       for (let i = 0; i < this.items.length; i++) {
-        if (this.items[i][this.json_description] === value) {
-          return this.items[i][this.json_value];
+        if (this.items[i]['id'] === value) {
+          return this.items[i]['text'];
         }
       }
     }
   }
   getItemDescription(id: number): string {
     if (id) {
-      for (let i = 0; i < this.items.length; i++) {
-        if (+this.items[i][this.json_value] === id) {
-          return this.items[i][this.json_description];
+      for (let i = 0; i < this.keywords_results.length; i++) {
+        if (+this.keywords_results[i]['id'] === id) {
+          return this.keywords_results[i]['text'];
         }
       }
     }

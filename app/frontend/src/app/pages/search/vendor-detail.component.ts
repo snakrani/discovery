@@ -55,7 +55,7 @@ export class VendorDetailComponent implements OnInit, OnChanges {
   }
   backToSearchResults() {
     this.router.navigate(['/search'], {
-      queryParams: { vendor: null },
+      queryParams: { duns: null },
       queryParamsHandling: 'merge'
     });
     this.emitBack.emit(true);

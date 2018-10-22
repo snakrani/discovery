@@ -61,6 +61,7 @@ export class TblVendorsComponent implements OnInit, OnChanges {
   ngOnInit() {}
   ngOnChanges() {
     if (this.vehicle) {
+      this.current_page = 1;
       this.filters = this.setOnlyVehicleSelected(this.vehicle);
       this.getVendors(this.current_page);
     }

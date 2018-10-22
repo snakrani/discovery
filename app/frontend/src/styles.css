@@ -684,16 +684,7 @@ footer.usa-section-dark ul li {
   position: relative;
   overflow: inherit !important;
 }
-.usa-accordion-button.usa-accordion-button-as-link {
-  background-color: transparent !important;
-  background-position: right 0.8em center;
-  background-size: 1.2rem;
-  width: auto;
-  padding-left: 0px;
-  color: #0071bc;
-  font-weight: normal;
-  border-top: none !important;
-}
+
 .usa-accordion
   .usa-accordion-button.usa-accordion-button-as-link[aria-expanded='true'] {
   border-left: 0px !important;

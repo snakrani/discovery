@@ -86,6 +86,9 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
     }
 
     this.placeholder = 'Enter NAIC or keywords...';
+    this.loaded();
+  }
+  loaded() {
     this.emmitLoaded.emit(this.queryName);
   }
   setFilteredItems(vehicles) {
@@ -93,7 +96,7 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
       vehicles[0] !== 'All'
         ? this.filterByVehicles(vehicles)
         : this.returnUnique(this.items);
-    this.items_filtered.sort(this.searchService.sortById);
+    this.items_filtered.sort(this.searchService.sortByIdAsc);
     this.keywords_results = this.items_filtered;
   }
   returnUnique(items: any[]): any[] {
@@ -116,7 +119,7 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
         naics.push(item);
       }
     }
-    naics.sort(this.searchService.sortById);
+    naics.sort(this.searchService.sortByIdAsc);
     return naics;
   }
 
@@ -155,8 +158,9 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
     if (id && id !== '') {
       item['value'] = id;
       item['description'] = this.getItemDescription(+id);
+      this.items_selected.push(item);
     }
-    this.items_selected.push(item);
+
     this.emmitSelected.emit(1);
     this.msgAddedItem.showMsg();
   }

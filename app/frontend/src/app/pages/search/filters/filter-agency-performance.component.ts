@@ -5,7 +5,8 @@ import {
   Output,
   EventEmitter,
   OnChanges,
-  ViewChild
+  ViewChild,
+  AfterContentInit
 } from '@angular/core';
 import { SearchService } from '../search.service';
 import { ActivatedRoute } from '@angular/router';
@@ -16,11 +17,13 @@ declare let document: any;
   templateUrl: './filter-agency-performance.component.html',
   styles: []
 })
-export class FilterAgencyPerformanceComponent implements OnInit, OnChanges {
+export class FilterAgencyPerformanceComponent
+  implements OnInit, OnChanges, AfterContentInit {
   @ViewChild(FilterSelectedComponent)
   msgAddedItem: FilterSelectedComponent;
   items: any[] = [];
   items_selected: any[] = [];
+  keywords_results: any[] = [];
   @Input()
   opened = false;
   @Output()
@@ -33,14 +36,7 @@ export class FilterAgencyPerformanceComponent implements OnInit, OnChanges {
   error_message;
   agency = '0';
   duns_list: any[] = [];
-  /** Sample json
-  {
 
-  };
-  */
-  /** Generate inputs labels & values
-   *  with these
-   */
   json_value = 'code';
   json_description = 'description';
   constructor(
@@ -48,10 +44,19 @@ export class FilterAgencyPerformanceComponent implements OnInit, OnChanges {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+  ngAfterContentInit() {
+    this.setKeywordsList();
+  }
+  ngOnChanges() {}
+  setKeywordsList() {
     this.searchService.getAgencyPerformanceNames().subscribe(
       data => {
         this.items = data['results'];
+        this.searchService.keywords = data['results'];
+        this.keywords_results = this.searchService.buildKeywordsDropdown(
+          this.items
+        );
 
         /** Grab the queryparams and sets default values
          *  on inputs Ex. checked, selected, keywords, etc */
@@ -74,55 +79,32 @@ export class FilterAgencyPerformanceComponent implements OnInit, OnChanges {
       }
     );
   }
-  ngOnChanges() {
-    // if (this.items.length > 1) {
-    //   this.buildItems(this.items);
-    //   this.emmitLoaded.emit(this.queryName);
-    // }
-  }
-
-  buildItems(obj: any[]) {
-    const agency = [];
-    for (const vehicle of obj) {
-      const item = {};
-      item['code'] = vehicle.tier.number.toString();
-      item['description'] = vehicle.tier.name;
-      item['vehicle_id'] = vehicle.id;
-      if (!this.searchService.existsIn(agency, item['code'], 'code')) {
-        agency.push(item);
-      }
-    }
-    this.items = agency;
-    this.items.sort(this.searchService.sortByDescriptionAsc);
-
-    this.emmitLoaded.emit(this.queryName);
-  }
-  getAgencyPerformanceDuns() {
-    this.duns_list = [];
-    // Set agency IDs
-    const ids = '';
-    this.searchService.getAgencyPerformanceDuns(ids).subscribe(
-      data => {
-        this.duns_list = data['results'];
-      },
-      error => (this.error_message = <any>error)
-    );
-  }
-  getDunsList(): any[] {
-    let list = [];
-    if (this.items_selected.length > 0) {
-      list = this.duns_list;
-    }
-    return list;
-  }
-  exists(value: string): boolean {
-    for (let i = 0; i < this.items_selected.length; i++) {
-      if (this.items_selected[i]['value'] === value) {
-        return true;
-      }
-    }
-    return false;
-  }
+  // getAgencyPerformanceDuns() {
+  //   this.duns_list = [];
+  //   // Set agency IDs
+  //   const ids = '';
+  //   this.searchService.getAgencyPerformanceDuns(ids).subscribe(
+  //     data => {
+  //       this.duns_list = data['results'];
+  //     },
+  //     error => (this.error_message = <any>error)
+  //   );
+  // }
+  // getDunsList(): any[] {
+  //   let list = [];
+  //   if (this.items_selected.length > 0) {
+  //     list = this.duns_list;
+  //   }
+  //   return list;
+  // }
+  // exists(value: string): boolean {
+  //   for (let i = 0; i < this.items_selected.length; i++) {
+  //     if (this.items_selected[i]['value'] === value) {
+  //       return true;
+  //     }
+  //   }
+  //   return false;
+  // }
   getSelected(): any[] {
     const item = [];
     if (this.items_selected.length > 0) {
@@ -134,31 +116,34 @@ export class FilterAgencyPerformanceComponent implements OnInit, OnChanges {
   }
   reset() {
     this.items_selected = [];
-    for (let i = 0; i < this.items.length; ++i) {
-      document.getElementById(
-        this.id + '-' + this.items[i][this.json_value]
-      ).checked = false;
-    }
   }
-  addAgency() {
-    if (!this.exists(this.agency) && this.agency !== '0') {
-      this.addItem(this.agency);
-    }
-  }
-  getItemDescription(value: string): string {
-    if (value) {
-      for (let i = 0; i < this.items.length; i++) {
-        if (this.items[i][this.json_value] === value) {
-          return this.items[i][this.json_description];
+
+  getItemDescription(id: string): string {
+    if (id) {
+      for (let i = 0; i < this.keywords_results.length; i++) {
+        if (this.keywords_results[i]['id'] === id) {
+          return this.keywords_results[i]['text'];
         }
       }
     }
   }
-  addItem(value: string) {
+  addKeywords(code) {
+    if (code === '0') {
+      this.reset();
+      return;
+    }
+    if (!this.searchService.existsIn(this.items_selected, code, 'value')) {
+      this.addItem(code);
+    }
+  }
+  addItem(id: string) {
     const item = {};
-    item['value'] = value;
-    item['description'] = this.getItemDescription(value);
-    this.items_selected.push(item);
+    if (id && id !== '') {
+      item['value'] = id;
+      item['description'] = this.getItemDescription(id);
+      this.items_selected.push(item);
+    }
+
     this.emmitSelected.emit(1);
     this.msgAddedItem.showMsg();
   }
