@@ -45,7 +45,6 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     if (this.duns && this.duns !== '') {
-      console.log(this.searchService.countries);
       if (!this.searchService.countries) {
         this.searchService.getPlaceOfPerformance().subscribe(
           data => {
