@@ -1,9 +1,13 @@
-<div class="autocomplete form-horizontal">
+<div id="{{id}}-autocomplete" class="autocomplete form-horizontal">
     <discovery-spinner *ngIf="keywords_results.length === 0"></discovery-spinner>
-    <input *ngIf="id" id="{{id}}-input" class="items-input" pattern=".+" type="text" [(ngModel)]="keywords" name="keywords"
-        [disabled]="keywords_results.length === 0" [placeholder]="placeholder" autocomplete="off">
-    <input *ngIf="id" id="{{id}}-value" type="hidden">
-    <button class="btn-add pull-right" type="submit" (click)="addKeywords()" [disabled]="keywords.length === 0">
-        <span>Add</span>
-    </button>
+
+    <div [hidden]="keywords_results.length === 0">
+        <select id="{{id}}-input" [style.width]="width" class="autocomplete-drop select2-container--default" tabindex="-1"
+            aria-hidden="true" [class.input-spinner]="keywords_results.length === 0" [disabled]="keywords_results.length === 0">
+            <option value="0">All</option>
+        </select>
+        <button id="{{id}}-add-btn" class="btn-add pull-right" type="submit" (click)="addKeywords()" [disabled]="keywords_results.length === 0">
+            <span>Add</span>
+        </button>
+    </div>
 </div>

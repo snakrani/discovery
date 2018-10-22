@@ -19,6 +19,7 @@ import { FilterContractObligatedAmountComponent } from './filters/filter-contrac
 import { FilterAgencyPerformanceComponent } from './filters/filter-agency-performance.component';
 import { FilterPscComponent } from './filters/filter-psc.component';
 import { FilterZoneComponent } from './filters/filter-zone.component';
+import { FilterPlaceOfPerformanceComponent } from './filters/filter-place-of-performance.component';
 
 @Component({
   selector: 'discovery-filters',
@@ -49,6 +50,8 @@ export class FiltersComponent implements OnInit {
   filterPscComponent: FilterPscComponent;
   @ViewChild(FilterZoneComponent)
   filterZoneComponent: FilterZoneComponent;
+  @ViewChild(FilterPlaceOfPerformanceComponent)
+  filterPoP: FilterPlaceOfPerformanceComponent;
   filters_list: any[];
   /** END Define filter components */
   @Input()
@@ -61,6 +64,8 @@ export class FiltersComponent implements OnInit {
   emitHideFilters: EventEmitter<number> = new EventEmitter();
   @Output()
   emitServerError: EventEmitter<number> = new EventEmitter();
+  @Output()
+  emitReset: EventEmitter<boolean> = new EventEmitter();
   APP_ASSETS = '/frontend/';
   disabled_btn = true;
   num_items_selected = 0;
@@ -89,22 +94,19 @@ export class FiltersComponent implements OnInit {
       this.filterServiceCategories,
       this.filterNaicsComponent,
       this.filterPscComponent,
-      this.filterContractObligated,
       this.filterZoneComponent
     ];
     /**
      *
+     *
+     *  this.filterContractObligated,
+     * this.filterPoP
       this.filterAgencyPerformance,
-      this.filterZoneComponent,
-      this.filterCertifications,
-      this.filterContractPricing
+      this.filterPoc
+      this.filterCertifications
        */
-    // if (this.searchService.pools && this.searchService.pools.length > 0) {
-    //   this.pools = this.searchService.pools;
-    //   this.initVehicles();
-    // } else {
+
     this.initPools(['All']);
-    // }
   }
   initPools(vehicles) {
     this.server_error = false;
@@ -134,6 +136,7 @@ export class FiltersComponent implements OnInit {
           const values: string[] = this.route.snapshot.queryParamMap
             .get(queryName)
             .split('__');
+
           for (let i = 0; i < this.vehicles.length; i++) {
             if (values.includes(this.vehicles[i]['id'])) {
               this.vehicles[i]['checked'] = true;
@@ -159,13 +162,15 @@ export class FiltersComponent implements OnInit {
   }
 
   resetFilters() {
-    this.num_items_selected = 0;
-    this.disabled_btn = true;
     for (let i = 0; i < this.filters_list.length; i++) {
       if (this.filters_list[i]) {
         this.filters_list[i].reset();
       }
     }
+    this.router.navigate(['search']);
+    this.num_items_selected = 0;
+    this.disabled_btn = true;
+    this.emitReset.emit(true);
   }
   activateSubmit(n: number): void {
     if (n === 1) {
@@ -200,7 +205,14 @@ export class FiltersComponent implements OnInit {
     }
     return filters;
   }
-  emmitSelectedFilters() {
+  emmitSelectedFilters(event) {
+    if (event !== null) {
+      /** Clear duns */
+      this.router.navigate(['/search'], {
+        queryParams: { vendors: null, duns: null },
+        queryParamsHandling: 'merge'
+      });
+    }
     this.params_submitted = true;
     const filters: any[] = this.getSelectedFilters();
     this.emmitFilters.emit(filters);
@@ -231,6 +243,9 @@ export class FiltersComponent implements OnInit {
   }
   getContractVehicles() {
     return this.vehicles;
+  }
+  setContractVehiclesInFilter(id: string, title: string) {
+    this.filterContractVehiclesComponent.addItem(id, title);
   }
   getVehicleDescription(vehicle: string) {
     const desc = this.filterContractVehiclesComponent.getItemDescription(
@@ -281,16 +296,13 @@ export class FiltersComponent implements OnInit {
     /** Filters need to be loaded before
      *  displaying compare table.
      */
-    if (
-      this.loaded_filters.length === this.filters_list.length &&
-      this.vehicles.length > 0
-    ) {
+    if (this.loaded_filters.length === this.filters_list.length) {
       if (
         this.num_items_selected > 0 &&
         this.route.snapshot.queryParamMap.keys.length > 0 &&
         !this.params_submitted
       ) {
-        this.emmitSelectedFilters();
+        this.emmitSelectedFilters(null);
       }
     }
   }

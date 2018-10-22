@@ -13,16 +13,27 @@
 }
 select {
   width: 130px;
-  margin: 0px;
+  margin: 1px 0px;
   border-top-color: #fff;
   border-bottom-color: #fff;
   border-left-color: #fff;
 }
-.autocomplete input[type='text'] {
-  border-radius: 0px;
-  width: 300px;
+#search-gen button {
+  margin-top: 1px !important;
 }
-
+.autocomplete .loader-container {
+  position: absolute;
+  text-align: left;
+  background-color: #fff;
+  width: 300px;
+  padding-top: 10px;
+  margin-top: 1px;
+  height: 4.4rem;
+}
+.autocomplete-drop {
+  border-radius: 0px;
+  width: 360px;
+}
 #error-msg {
   color: #fff;
   padding: 15px;

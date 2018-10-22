@@ -59,34 +59,6 @@ export class FilterServiceCategoriesComponent implements OnInit, OnChanges {
     this.searchService.getPools(vehicles).subscribe(
       data => {
         this.buildItems(data['results']);
-        /** Grab the queryparams and sets default values
-         *  on inputs Ex. checked, selected, keywords, etc */
-        if (this.route.snapshot.queryParamMap.has(this.queryName)) {
-          const values: string[] = this.route.snapshot.queryParamMap
-            .get(this.queryName)
-            .split('__');
-
-          for (const item of values) {
-            this.addItem(item);
-          }
-
-          /** Open accordion */
-          this.opened = true;
-        } else {
-          this.opened = false;
-        }
-        /** Check if there are selected vehicles
-         *  and sort dropdown based on vehicle id
-         */
-        if (this.route.snapshot.queryParamMap.has('vehicles')) {
-          const values: string[] = this.route.snapshot.queryParamMap
-            .get('vehicles')
-            .split('__');
-
-          this.setFilteredItems(values);
-        }
-
-        this.emmitLoaded.emit(this.queryName);
       },
       error => (this.error_message = <any>error)
     );
@@ -173,7 +145,6 @@ export class FilterServiceCategoriesComponent implements OnInit, OnChanges {
     } else {
       this.setFilteredItems(['All']);
     }
-
     this.emmitLoaded.emit(this.queryName);
   }
   addCategory() {

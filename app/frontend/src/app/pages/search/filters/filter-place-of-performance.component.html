@@ -1,0 +1,23 @@
+<button class="usa-accordion-button" [attr.aria-expanded]="opened" [attr.aria-controls]="id">
+  {{name}}
+</button>
+<div id="{{id}}" class="usa-accordion-content" [attr.aria-hidden]="!opened">
+  <div class="usa-search form-horizontal">
+    <discovery-spinner *ngIf="!items"></discovery-spinner>
+
+    <select id="select_country" (change)="countryChange()" [disabled]="!countries" [(ngModel)]="country" class="items-input">
+      <option value="0" selected="selected">Country --</option>
+      <option *ngFor="let item of countries" value="{{item.code}}">{{
+        item.name}}</option>
+    </select>
+    <select id="select_state" [disabled]="!states || country!=='USA'" [(ngModel)]="state" class="items-input margin-top db"
+      [class.hide]="country!=='USA'">
+      <option value="0" selected="selected">State --</option>
+      <option *ngFor="let item of states" value="{{item.code}}">{{
+        item.code}}</option>
+    </select>
+
+  </div>
+
+  <discovery-filter-selected [id]="'msg-sev-cat-selected'" [label]="'Added place of performance'"></discovery-filter-selected>
+</div>
