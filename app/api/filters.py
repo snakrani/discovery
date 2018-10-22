@@ -350,6 +350,14 @@ class ContractFilter(FilterSet, metaclass = MetaFilterSet):
         
     def filter_psc_naics(self, qs, name, value):
         naics_code = re.sub(r'[^\d]+$', '', value)
-        psc_codes = list(categories.PSC.objects.filter(naics__code=naics_code).distinct().values_list('code', flat=True))
         
-        return qs.filter(Q(PSC__in=psc_codes) | Q(NAICS=naics_code))
+        try:
+            naics = categories.Naics.objects.get(code=naics_code)
+            sin_codes = list(naics.sin.all().values_list('code', flat=True))
+            psc_codes = list(categories.PSC.objects.filter(sin__code__in=sin_codes).distinct().values_list('code', flat=True))
+            return qs.filter(Q(PSC__in=psc_codes) | Q(NAICS=naics_code))
+        
+        except Exception:
+            pass
+        
+        return qs.filter(NAICS=naics_code)
