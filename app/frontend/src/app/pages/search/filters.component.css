@@ -28,6 +28,9 @@
   display: none;
   width: auto;
 }
+select {
+  height: 4.6rem;
+}
 @media (min-width: 980px) {
   .usa-width-one-fourth {
     float: left;

@@ -19,6 +19,8 @@ export class AutocompleteComponent implements OnChanges {
   keywords_results: any[];
   @Input()
   placeholder: string;
+  @Input()
+  width = '200px';
   @Output()
   emitCode: EventEmitter<string> = new EventEmitter();
   keywords = '';
@@ -29,34 +31,17 @@ export class AutocompleteComponent implements OnChanges {
     }
   }
   addKeywords() {
-    const code = $('#' + this.id + '-value').val();
-    this.emitCode.emit(code);
-    $('#' + this.id + '-input').val('');
+    const code = $('#' + this.id + '-input').val();
+    if (code !== null) {
+      this.emitCode.emit(code);
+    }
   }
   setKeywordAutoComplete(data, id) {
-    $('#' + id + '-value, #' + id + '-input').val('');
-    const options = {
-      data: data,
-      theme: 'square',
-      getValue: 'name',
-      list: {
-        match: {
-          enabled: true
-        },
-        onSelectItemEvent: function() {
-          $('#' + id + '-value').val(
-            $('#' + id + '-input').getSelectedItemData().code
-          );
-          // $('#error-msg').addClass('hide');
-          $('#' + id + '-input').removeClass('input-error');
-        },
-        onHideListEvent: function() {
-          if ($('#' + id + '-value').val() === '') {
-            $('#' + id + '-input').val('');
-          }
-        }
-      }
-    };
-    $('#' + this.id + '-input').easyAutocomplete(options);
+    $('#' + id + '-input')
+      .children('option:not(:first)')
+      .remove();
+    $('#' + id + '-autocomplete .autocomplete-drop').select2({
+      data: data
+    });
   }
 }

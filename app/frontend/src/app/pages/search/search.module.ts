@@ -27,6 +27,7 @@ import { TblVendorsComponent } from './tbl-vendors.component';
 import { LnkToggleHeightsComponent } from './lnk-toggle-heights.component';
 import { FilterSelectedComponent } from './filters/filter-selected.component';
 import { AutocompleteComponent } from './filters/autocomplete.component';
+import { FilterPlaceOfPerformanceComponent } from './filters/filter-place-of-performance.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule],
@@ -47,6 +48,7 @@ import { AutocompleteComponent } from './filters/autocomplete.component';
     FilterAgencyPerformanceComponent,
     FilterPscComponent,
     FilterZoneComponent,
+    FilterPlaceOfPerformanceComponent,
     SpinnerComponent,
     ListComponent,
     VendorDetailComponent,

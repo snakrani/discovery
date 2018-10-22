@@ -2,11 +2,31 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'discovery-lnk-toggle-heights',
-  template: `<button (click)="toggleMore()" class="usa-accordion-button usa-accordion-button-as-link db" [attr.aria-expanded]="opened">
+  template: `<button (click)="toggleMore()" class="button-link-more db" [class.less]="opened" [attr.aria-expanded]="opened">
   {{title_more}}
 </button>
 `,
-  styles: [``]
+  styles: [
+    `
+      .button-link-more {
+        background-color: transparent !important;
+        background-position: right 0.8em center;
+        background-image: url(/frontend/assets/uswds/img/angle-arrow-down-primary.png) !important;
+        background-image: url(/frontend/assets/uswds/img/angle-arrow-down-primary.svg) !important;
+        padding: 1rem 4rem 1rem 0 !important;
+        background-size: 1.1rem !important;
+        background-repeat: no-repeat;
+        width: auto;
+        min-width: 90px;
+        color: #0071bc;
+        font-weight: normal;
+      }
+      .button-link-more.less {
+        background-image: url(/frontend/assets/uswds/img/angle-arrow-up-primary.png) !important;
+        background-image: url(/frontend/assets/uswds/img/angle-arrow-up-primary.svg);
+      }
+    `
+  ]
 })
 export class LnkToggleHeightsComponent implements OnInit {
   @Input()

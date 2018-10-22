@@ -44,8 +44,8 @@ export class FilterPscComponent implements OnInit, OnChanges {
   };
   */
 
-  json_value = 'code';
-  json_description = 'description';
+  json_value = 'id';
+  json_description = 'text';
   constructor(
     private searchService: SearchService,
     private route: ActivatedRoute,
@@ -94,32 +94,21 @@ export class FilterPscComponent implements OnInit, OnChanges {
       vehicles[0] !== 'All' ? this.filterByVehicles(vehicles) : this.items;
     this.items_filtered.sort(this.searchService.sortByCodeAsc);
     this.keywords_results = this.items_filtered;
-
-    /** Remove all selected items
-     *  that are not within filtered list
-     */
-    for (const item of this.items_selected) {
-      if (
-        !this.searchService.existsIn(this.items_filtered, item['value'], 'id')
-      ) {
-        // this.removeItem(item['value']);
-      }
-    }
   }
   buildPSCsItems(obj: any[]): any[] {
     const pscs = [];
     for (const pool of obj) {
       for (const psc of pool.psc) {
         const item = {};
-        item['code'] = psc.code;
-        item['name'] = psc.code + ' - ' + psc.description;
+        item['id'] = psc.code;
+        item['text'] = psc.code + ' - ' + psc.description;
         item['vehicle_id'] = pool.vehicle.id;
-        if (!this.searchService.existsIn(pscs, psc.code, 'code')) {
+        if (!this.searchService.existsIn(pscs, psc.id, 'id')) {
           pscs.push(item);
         }
       }
     }
-    pscs.sort(this.searchService.sortByCodeAsc);
+    pscs.sort(this.searchService.sortByIdAsc);
     return pscs;
   }
   getItemId(value: string): string {
@@ -135,15 +124,19 @@ export class FilterPscComponent implements OnInit, OnChanges {
     if (id) {
       for (let i = 0; i < this.items.length; i++) {
         if (this.items[i][this.json_value] === id) {
-          return this.items[i]['name'];
+          return this.items[i][this.json_description];
         }
       }
     }
   }
   addKeywords(code) {
+    if (code === '0') {
+      this.reset();
+      return;
+    }
     if (
       !this.searchService.existsIn(this.items_selected, code, 'value') &&
-      this.searchService.existsIn(this.items_filtered, code, 'code')
+      this.searchService.existsIn(this.items_filtered, code, 'id')
     ) {
       this.addItem(code);
     }
@@ -164,7 +157,7 @@ export class FilterPscComponent implements OnInit, OnChanges {
       for (const prop of this.items) {
         const arr = item.split('_');
         if (prop['vehicle_id'].indexOf(arr[0]) !== -1) {
-          if (!this.searchService.existsIn(items, prop.code, 'code')) {
+          if (!this.searchService.existsIn(items, prop.id, 'id')) {
             items.push(prop);
           }
         }

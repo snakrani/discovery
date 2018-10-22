@@ -11,6 +11,7 @@ import { SearchService } from '../search.service';
 import { ActivatedRoute } from '@angular/router';
 import { FilterSelectedComponent } from './filter-selected.component';
 declare let document: any;
+declare let $: any;
 @Component({
   selector: 'discovery-filter-contract-vehicles',
   templateUrl: './filter-contract-vehicles.component.html'
@@ -36,10 +37,6 @@ export class FilterContractVehiclesComponent implements OnInit, OnChanges {
   queryName = 'vehicles';
   id = 'filter-vehicles';
   error_message;
-
-  /** Generate inputs labels & values
-   *  with these
-   */
   json_value = 'id';
   json_description = 'name';
   constructor(
@@ -48,35 +45,24 @@ export class FilterContractVehiclesComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit() {}
-  ngOnChanges() {
-    if (this.items && this.items.length > 0) {
-      this.setAllVehicles();
-    }
-  }
+  ngOnChanges() {}
   loaded() {
     this.emmitLoaded.emit(this.queryName);
   }
-  setAllVehicles() {
-    for (const i of this.items) {
-      const item = {};
-      item['description'] = i.name;
-      item['value'] = i.id;
-      this.all_vehicles.push(item);
-    }
-  }
-  getAllVehicles() {
-    return this.all_vehicles;
-  }
+  // setAllVehicles() {
+  //   for (const i of this.items) {
+  //     const item = {};
+  //     item['description'] = i.name;
+  //     item['value'] = i.id;
+  //     this.all_vehicles.push(item);
+  //   }
+  // }
   getSelected(): any[] {
     const item = [];
     if (this._items_selected.length > 0) {
       item['name'] = this.queryName;
       item['description'] = this.name;
       item['items'] = this._items_selected;
-    } else {
-      item['name'] = this.queryName;
-      item['description'] = this.name;
-      item['items'] = this.all_vehicles;
     }
     return item;
   }
@@ -113,7 +99,10 @@ export class FilterContractVehiclesComponent implements OnInit, OnChanges {
     const item = {};
     item['description'] = title;
     item['value'] = key;
-    this._items_selected.push(item);
+    if (!this.searchService.existsIn(this._items_selected, key, 'value')) {
+      this._items_selected.push(item);
+      $('#' + this.id + '-' + key).prop('checked', true);
+    }
     this.emmitSelected.emit(1);
     this.msgAddedItem.showMsg();
   }
@@ -121,6 +110,7 @@ export class FilterContractVehiclesComponent implements OnInit, OnChanges {
     for (let i = 0; i < this._items_selected.length; i++) {
       if (this._items_selected[i]['value'] === key) {
         this._items_selected.splice(i, 1);
+        $('#' + this.id + '-' + key).prop('checked', false);
       }
     }
     this.emmitSelected.emit(0);

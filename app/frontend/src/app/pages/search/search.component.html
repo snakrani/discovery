@@ -24,7 +24,7 @@
             <!-- FITLERS -->
             <!-- ///////////////// -->
             <discovery-filters [parentSpinner]="spinner" (emitServerError)="showServerError($event)" (emitHideFilters)="hideSideNavFilters()"
-              (emmitFilters)="submitSelectedFilters($event)">
+              (emmitFilters)="submitSelectedFilters($event)" (emitReset)="reset($event)">
             </discovery-filters>
             <!-- ///////////////// -->
             <!-- TABS AREA -->
@@ -108,10 +108,10 @@
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <!-- <tr>
-                                        <th scope="row">Total vendors</th>
-                                        <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.vendors_total}}</td>
-                                      </tr> -->
+                                  <tr>
+                                    <th scope="row">Total Vendors in Vehicle</th>
+                                    <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.vendors_total}}</td>
+                                  </tr>
                                   <tr>
                                     <th scope="row">Vendors that meet your criteria </th>
                                     <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0"><span
@@ -135,25 +135,25 @@
                           <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.capabilities}}</td>
                         </tr> -->
                                   <tr>
-                                    <th scope="row">NAICs
+                                    <th scope="row">NAICs in Vehicle
                                       <discovery-lnk-toggle-heights [toggle_id]="'row-naics'" (emitToggleId)="toggleTDHeights($event)"></discovery-lnk-toggle-heights>
                                     </th>
                                     <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">
                                       <div class="row-naics toggle_more" [class.show_all]="more_info">
                                         <discovery-list [show_all]="true" [id]="vehicle.id" [items_to_show]="num_show"
-                                          [items]="vehicle.naics" [key]="'code'"></discovery-list>
+                                          [items]="vehicle.naics" [key]="'id'"></discovery-list>
                                         <div class="gradient"></div>
                                       </div>
                                     </td>
                                   </tr>
                                   <tr>
-                                    <th scope="row">PSCs
+                                    <th scope="row">PSCs in Vehicle
                                       <discovery-lnk-toggle-heights [toggle_id]="'row-pscs'" (emitToggleId)="toggleTDHeights($event)"></discovery-lnk-toggle-heights>
                                     </th>
                                     <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">
                                       <div class="row-pscs toggle_more" [class.show_all]="more_info">
                                         <discovery-list [show_all]="true" [id]="vehicle.id" [items_to_show]="num_show"
-                                          [items]="vehicle.pscs" [key]="'code'"></discovery-list>
+                                          [items]="vehicle.pscs" [key]="'id'"></discovery-list>
                                         <div class="gradient"></div>
                                       </div>
                                     </td>
