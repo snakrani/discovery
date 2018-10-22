@@ -21,15 +21,9 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
-              "src/assets/select2/select2.min.js",
-              "src/assets/autocomplete/jquery.easy-autocomplete.min.js"
+              "src/assets/select2/select2.min.js"
             ],
-            "styles": [
-              "src/styles.css",
-              "src/assets/select2/select2.min.css",
-              "src/assets/autocomplete/easy-autocomplete.css",
-              "src/assets/autocomplete/easy-autocomplete.themes.css"
-            ]
+            "styles": ["src/styles.css", "src/assets/select2/select2.min.css"]
           },
           "configurations": {
             "production": {
