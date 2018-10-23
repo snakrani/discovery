@@ -7,7 +7,7 @@ from test import fixtures as data
 @tag('vendor')
 class VendorTest(case.APITestCase, metaclass = case.MetaAPISchema):
     
-    fixtures = data.get_vendor_fixtures()
+    fixtures = data.get_contract_fixtures()
     schema = {
             'object': {
                 'tags': ('vendor_object',),
