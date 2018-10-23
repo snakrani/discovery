@@ -254,6 +254,8 @@ class VendorFilter(FilterSet, metaclass = MetaFilterSet):
     sam_location = RelatedFilter(LocationFilter)
     pools = RelatedFilter(PoolMembershipFilter)
     
+    contract = RelatedFilter("ContractBaseFilter")
+    
     setasides = CharFilter(field_name='setasides', method='filter_setasides')
     
     class Meta:
@@ -328,7 +330,7 @@ class AgencyFilter(FilterSet, metaclass = MetaFilterSet):
         fields = ()
 
 
-class ContractFilter(FilterSet, metaclass = MetaFilterSet):
+class ContractBaseFilter(FilterSet, metaclass = MetaFilterSet):
     
     _fuzzy_text = ('piid', 'base_piid', 'NAICS', 'PSC', 'point_of_contact', 'vendor_phone')
     _number = ('id', 'obligated_amount', 'annual_revenue', 'number_of_employees')
@@ -338,9 +340,17 @@ class ContractFilter(FilterSet, metaclass = MetaFilterSet):
     pricing_type = RelatedFilter(PricingStructureFilter)
     
     agency = RelatedFilter(AgencyFilter)
-    vendor = RelatedFilter(VendorFilter)
     vendor_location = RelatedFilter(LocationFilter)
     place_of_performance = RelatedFilter(PlaceOfPerformanceFilter)
+    
+    class Meta:
+        model = contracts.Contract
+        fields = ()
+
+
+class ContractFilter(ContractBaseFilter, metaclass = MetaFilterSet):
+
+    vendor = RelatedFilter(VendorFilter)
     
     psc_naics = CharFilter(field_name='NAICS', method='filter_psc_naics')
         
