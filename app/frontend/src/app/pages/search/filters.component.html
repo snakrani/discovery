@@ -68,7 +68,7 @@
       </li>
 
     </ul>
-    <button type="button" [disabled]="disabled_btn" class="primary" (click)="emmitSelectedFilters()">Submit</button>
+    <button type="button" [disabled]="disabled_btn" class="primary" (click)="emmitSelectedFilters($event)">Submit</button>
     <button type="button" class="link" (click)="resetFilters()">Reset</button>
   </div>
 </div>
