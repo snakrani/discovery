@@ -2,22 +2,14 @@
   {{name}}
 </button>
 <div id="{{id}}" class="usa-accordion-content" [attr.aria-hidden]="!opened">
-  <div class="usa-search form-horizontal">
-
-    <select id="select_agency" [disabled]="items.length===0" [(ngModel)]="agency" class="items-input">
-      <option value="0" selected="selected">Select agency --</option>
-      <option *ngFor="let item of items" value="{{item}}">{{item}}</option>
-    </select>
-    <button class="icon-plus btn-plus" type="submit" (click)="addAgency()" [disabled]="!items || agency === '0'">
-      <span class="usa-sr-only">Add agency to list</span>
-    </button>
+  <div class="usa-search">
+    <discovery-autocomplete (emitCode)="addKeywords($event)" [id]="id" [keywords_results]="keywords_results"></discovery-autocomplete>
   </div>
 
   <ul *ngIf="items_selected" class="items-selected">
     <li *ngFor="let agency of items_selected">
       <a (click)="removeItem(agency.value)" title="Remove {{agency.value}}"><span class="usa-sr-only">Remove
-          {{agency.value}}</span></a>{{agency.value
-      + ' - ' + agency.description}}
+          {{agency.value}}</span></a>{{agency.description | titlecase}}
     </li>
   </ul>
   <discovery-filter-selected [id]="'msg-agency-selected'" [label]="'Added agency'"></discovery-filter-selected>

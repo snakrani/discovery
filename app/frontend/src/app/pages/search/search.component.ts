@@ -87,7 +87,9 @@ export class SearchComponent implements OnInit {
   }
   set sort_by(value: string) {
     this._sort_by = value;
-    this.vehicle_vendors_total = this.getVendorTotalByVehicle(value);
+    this.vehicle_vendors_total = this.returnVendorsMeetCriteriaTotalByVehicle(
+      value
+    );
   }
   get spinner(): boolean {
     return this._spinner;
@@ -145,66 +147,91 @@ export class SearchComponent implements OnInit {
     for (const item of filters) {
       if (item['name'] === 'vehicles') {
         items = item['selected'];
-        console.log(item['selected']);
       }
     }
     return items;
   }
-  submitSelectedFilters(filters) {
+  reset(bool) {
     this.server_error = false;
-    this.spinner = true;
-    this.filters = filters;
     this.show_results = false;
-    this.searchService.activeFilters = filters;
-
     this.vendors_no_results = false;
     this.compare_tbl = [];
     this.initScrollBars();
+  }
+  submitSelectedFilters(filters) {
+    this.reset(true);
+    this.spinner = true;
+    this.searchService.activeFilters = filters;
+
     this.zones = this.filtersComponent.getZones();
     this.contract_vehicles = this.filtersComponent.getContractVehicles();
     this.service_categories = this.filtersComponent.getServiceCategories();
+    this.searchService
+      .getVehiclesToCompare(this.searchService.activeFilters)
+      .subscribe(
+        data => {
+          if (data['count'] === 0) {
+            this.spinner = false;
+            this.show_results = true;
+            this.vendors_no_results = true;
+            return;
+          }
 
-    // const vehicles = this.filtersComponent.getSelectedVehicles();
-    const vehicles = this.getFilterVehicles(filters);
-    this.int_vehicles = setInterval(() => {
-      if (vehicles.length > 0) {
-        clearInterval(this.int_vehicles);
-        this.searchService.setQueryParams(filters);
-        this.getContractCompareResults(vehicles);
-      }
-    }, 500);
+          const vehicles = [];
+          for (const item of data['results']) {
+            for (const vehicle of this.contract_vehicles) {
+              if (item === vehicle.id) {
+                vehicles.push(vehicle);
+                this.filtersComponent.setContractVehiclesInFilter(
+                  vehicle.id,
+                  vehicle.name
+                );
+              }
+            }
+          }
+
+          this.filters = this.filtersComponent.getSelectedFilters();
+          this.searchService.activeFilters = this.filters;
+          if (!this.route.snapshot.queryParamMap.has('vendors')) {
+            this.searchService.setQueryParams(this.searchService.activeFilters);
+          }
+
+          this.getVendorsTotalByVehicle(vehicles);
+        },
+        error => {
+          this.error_message = <any>error;
+          this.server_error = true;
+          this.spinner = false;
+        }
+      );
   }
+
   getContractCompareResults(vehicles) {
-    // console.log(vehicles.length);
     let count = 0;
     let total_vendors = 0;
+
     for (const vehicle of vehicles) {
-      console.log(vehicle);
       this.searchService
         .getVehicleVendorsMeetCriteria(
           this.searchService.activeFilters,
-          vehicle.value
+          vehicle.id
         )
         .subscribe(
           data => {
             const item = {};
-            item['id'] = vehicle.value;
-            item['vendors_total'] = 0;
+            item['id'] = vehicle.id;
+            item['vendors_total'] = this.returnVehicleCountByVehicle(
+              vehicle.id
+            );
             item['vendors_results_total'] = data['count'];
-            item['description'] = vehicle.description;
+            item['description'] = vehicle.name;
             item[
               'service_categories'
-            ] = this.filtersComponent.getServiceCategoriesByVehicle(
-              vehicle.value
-            );
+            ] = this.filtersComponent.getServiceCategoriesByVehicle(vehicle.id);
             item['capabilities'] = 0;
-            item['naics'] = this.filtersComponent.getNaicsByVehicle(
-              vehicle.value
-            );
-            item['pscs'] = this.filtersComponent.getPSCsByVehicle(
-              vehicle.value
-            );
-            const info = this.filtersComponent.getVehicleInfo(vehicle.value);
+            item['naics'] = this.filtersComponent.getNaicsByVehicle(vehicle.id);
+            item['pscs'] = this.filtersComponent.getPSCsByVehicle(vehicle.id);
+            const info = this.filtersComponent.getVehicleInfo(vehicle.id);
             item['tier'] = info['tier'].name;
             item['gsa'] = info['poc'];
             item['ordering_guide'] = info['ordering_guide'];
@@ -216,16 +243,22 @@ export class SearchComponent implements OnInit {
             count++;
             /** On Complte do this */
             if (count === vehicles.length) {
-              console.log(total_vendors);
               this.spinner = false;
               this.show_results = true;
+              this.server_error = false;
               if (total_vendors === 0) {
                 this.vendors_no_results = true;
               } else {
-                this.server_error = false;
                 this.sort_by = this.compare_tbl[0]['id'];
                 this.total_vendors_met_criteria = total_vendors;
-                this.viewContracts();
+                if (
+                  this.route.snapshot.queryParamMap.has('vendors') ||
+                  this.vw_vendors
+                ) {
+                  this.viewVendors();
+                } else {
+                  this.viewContracts();
+                }
               }
             }
           },
@@ -237,45 +270,44 @@ export class SearchComponent implements OnInit {
         );
     }
   }
-  // submitSelectedFilters(filters) {
-  //   this.server_error = false;
-  //   this.spinner = true;
-  //   this.filters = filters;
-  //   this.searchService.activeFilters = filters;
-  //   this.searchService.setQueryParams(filters);
-
-  //   this.compare_tbl = [];
-  //   this.initScrollBars();
-  //   this.zones = this.filtersComponent.getZones();
-  //   this.searchService
-  //     .getVendors(this.searchService.activeFilters, '&page=0')
-  //     .subscribe(
-  //       data => {
-  //         if (data['count'] === 0) {
-  //           this.spinner = false;
-  //           this.vendors_no_results = true;
-  //           this.show_results = true;
-  //           this.results = [];
-  //           return;
-  //         }
-  //         this.results = this.buildVendorByVehicle(data['results']);
-  //         this.vendors_no_results = false;
-  //         this.show_results = true;
-  //         this.spinner = false;
-  //         this.contract_vehicles = this.filtersComponent.getContractVehicles();
-  //         this.service_categories = this.filtersComponent.getServiceCategories();
-  //         this.buildContractCompare();
-  //         this.sort_by = this.getFirstVehicleWithVendors();
-  //         this.viewContracts();
-  //       },
-  //       error => {
-  //         this.error_message = <any>error;
-  //         this.server_error = true;
-  //         this.spinner = false;
-  //       }
-  //     );
-  // }
-  getVendorTotalByVehicle(vehicle: string): number {
+  returnVehicleCountByVehicle(vehicle: string): any {
+    let count = 0;
+    for (const item of this.searchService.total_vendors_per_vehicle) {
+      if (item.id === vehicle) {
+        count = item.total;
+      }
+    }
+    return count;
+  }
+  getVendorsTotalByVehicle(vehicles) {
+    let count = 0;
+    const vendor_totals = [];
+    for (const vehicle of vehicles) {
+      this.searchService
+        .getVehicleVendorsMeetCriteria([], vehicle.id)
+        .subscribe(
+          data => {
+            const item = {};
+            item['id'] = vehicle.id;
+            item['total'] = data['count'];
+            if (!this.searchService.existsIn(vendor_totals, vehicle.id, 'id')) {
+              vendor_totals.push(item);
+            }
+            count++;
+            if (count === vehicles.length) {
+              this.searchService.total_vendors_per_vehicle = vendor_totals;
+              this.getContractCompareResults(vehicles);
+            }
+          },
+          error => {
+            this.error_message = <any>error;
+            this.server_error = true;
+            this.spinner = false;
+          }
+        );
+    }
+  }
+  returnVendorsMeetCriteriaTotalByVehicle(vehicle: string): number {
     let total = 0;
     for (const item of this.compare_tbl) {
       if (item.id === vehicle) {
@@ -334,10 +366,18 @@ export class SearchComponent implements OnInit {
   viewVendors() {
     this.vw_vendors = true;
     this.vw_contracts = false;
+    this.router.navigate(['/search'], {
+      queryParams: { vendors: 'list' },
+      queryParamsHandling: 'merge'
+    });
   }
   viewContracts() {
     this.vw_contracts = true;
     this.vw_vendors = false;
+    this.router.navigate(['/search'], {
+      queryParams: { vendors: null },
+      queryParamsHandling: 'merge'
+    });
     this.initScrollBars();
   }
   buildVendorByVehicle(obj: any[]) {
@@ -419,35 +459,35 @@ export class SearchComponent implements OnInit {
     }
     return total;
   }
-  buildContractCompare() {
-    const compare: any[] = [];
-    this.contracts_w_no_records = [];
-    for (const vehicle of this.results.vehicles) {
-      const item: any[] = [];
-      const vehicle_obj = this.filtersComponent.getVehicleData(vehicle);
+  // buildContractCompare() {
+  //   const compare: any[] = [];
+  //   this.contracts_w_no_records = [];
+  //   for (const vehicle of this.results.vehicles) {
+  //     const item: any[] = [];
+  //     const vehicle_obj = this.filtersComponent.getVehicleData(vehicle);
 
-      item['id'] = vehicle;
-      item['vendors_total'] = 0;
-      item['vendors_results_total'] = this.countVendorsByVehicle(vehicle);
-      item['description'] = vehicle_obj['name'];
-      item[
-        'service_categories'
-      ] = this.filtersComponent.getServiceCategoriesByVehicle(vehicle);
-      item['capabilities'] = 0;
-      item['naics'] = this.filtersComponent.getNaicsByVehicle(vehicle);
-      item['pscs'] = this.filtersComponent.getPSCsByVehicle(vehicle);
+  //     item['id'] = vehicle;
+  //     item['vendors_total'] = 0;
+  //     item['vendors_results_total'] = this.countVendorsByVehicle(vehicle);
+  //     item['description'] = vehicle_obj['name'];
+  //     item[
+  //       'service_categories'
+  //     ] = this.filtersComponent.getServiceCategoriesByVehicle(vehicle);
+  //     item['capabilities'] = 0;
+  //     item['naics'] = this.filtersComponent.getNaicsByVehicle(vehicle);
+  //     item['pscs'] = this.filtersComponent.getPSCsByVehicle(vehicle);
 
-      item['tier'] = vehicle_obj['tier']['name'];
-      item['gsa'] = vehicle_obj['poc'];
-      item['ordering_guide'] = vehicle_obj['ordering_guide'];
-      compare.push(item);
-      if (item['vendors_results_total'] === 0) {
-        this.contracts_w_no_records.push({ name: item['description'] });
-      }
-    }
-    this.compare_tbl = compare;
-    this.total_vendors_met_criteria = this.getTotalVendorsMetCriteria();
-  }
+  //     item['tier'] = vehicle_obj['tier']['name'];
+  //     item['gsa'] = vehicle_obj['poc'];
+  //     item['ordering_guide'] = vehicle_obj['ordering_guide'];
+  //     compare.push(item);
+  //     if (item['vendors_results_total'] === 0) {
+  //       this.contracts_w_no_records.push({ name: item['description'] });
+  //     }
+  //   }
+  //   this.compare_tbl = compare;
+  //   this.total_vendors_met_criteria = this.getTotalVendorsMetCriteria();
+  // }
   showVendorDetail(duns) {
     this.spinner = true;
     this.selected_duns = duns;
@@ -460,6 +500,7 @@ export class SearchComponent implements OnInit {
     document.getElementById('slides-container').style.marginLeft = -w + 'px';
   }
   hideVendorDetail(bool) {
+    this.spinner = false;
     this.show_vendor_details = false;
     document.getElementById('slide-vendor').classList.remove('fadeIn');
     document.getElementById('slide-search').classList.remove('fadeOut');

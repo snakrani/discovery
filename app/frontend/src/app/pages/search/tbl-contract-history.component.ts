@@ -32,6 +32,10 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
   ordering = '';
   params: string;
   interval;
+  countries: any[];
+  states: any[];
+  country = '0';
+  state = '0';
 
   constructor(private searchService: SearchService) {}
 
@@ -41,11 +45,25 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     if (this.duns && this.duns !== '') {
+      if (!this.searchService.countries) {
+        this.searchService.getPlaceOfPerformance().subscribe(
+          data => {
+            this.buildPlaceOfPerformance(data['results']);
+          },
+          error => (this.error_message = <any>error)
+        );
+      } else {
+        this.countries = this.searchService.countries;
+        this.states = this.searchService.states;
+      }
+
       this.getContracts(
         this.duns,
         this.current_page,
         this.piid,
         this.naic_code,
+        this.country,
+        this.state,
         this.ordering
       );
     }
@@ -56,11 +74,38 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
   set contracts(contracts) {
     this._contracts = contracts;
   }
+  buildPlaceOfPerformance(obj: any[]) {
+    const countries = [];
+    const states = [];
+    for (const country of obj) {
+      const item = {};
+      const state = {};
+      item['code'] = country['country_code'];
+      item['name'] = country['country_name'];
+      if (!this.searchService.existsIn(countries, item['name'], 'name')) {
+        countries.push(item);
+      }
+      if (country['state'] !== null) {
+        state['code'] = country['state'];
+        if (!this.searchService.existsIn(states, country['state'], 'code')) {
+          states.push(state);
+        }
+      }
+    }
+    this.countries = countries;
+    this.countries.sort(this.searchService.sortByNameAsc);
+    this.searchService.countries = this.countries;
+    this.states = states;
+    this.states.sort(this.searchService.sortByCodeAsc);
+    this.searchService.states = this.states;
+  }
   getContracts(
     duns: string,
     page: number,
     piid: string,
     naic: string,
+    country: string,
+    state: string,
     ordering: string
   ) {
     let page_path = '';
@@ -74,7 +119,15 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
     this.spinner = true;
     this.resetTableScrolling();
     this.searchService
-      .getVendorContractHistory(duns, page_path, piid, naic, ordering)
+      .getVendorContractHistory(
+        duns,
+        page_path,
+        piid,
+        naic,
+        country,
+        state,
+        ordering
+      )
       .subscribe(
         data => {
           this.contracts = data;
@@ -91,7 +144,12 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
             this.history_no_results = true;
           }
         },
-        error => (this.error_message = <any>error)
+
+        error => {
+          this.error_message = <any>error;
+          this.spinner = false;
+          this.history_no_results = true;
+        }
       );
   }
   resetTableScrolling() {
@@ -134,10 +192,19 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
       }
     }, 500);
   }
+
   orderBy(ordering: any[]) {
     const order_by = ordering['sort'] + ordering['ordering'];
     this.ordering = ordering['ordering'];
-    this.getContracts(this.duns, 1, this.piid, this.naic_code, order_by);
+    this.getContracts(
+      this.duns,
+      1,
+      this.piid,
+      this.naic_code,
+      this.country,
+      this.state,
+      order_by
+    );
   }
   getVehicleDescription(vehicle: string) {
     return this.searchService.getItemDescription(
@@ -148,13 +215,18 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
     );
   }
   initNaicsList() {
-    this.searchService.getNaics(['All']).subscribe(
-      data => {
-        this.naics = this.buildNaicsItems(data['results']);
-        this.naics.sort(this.searchService.sortByCodeAsc);
-      },
-      error => (this.error_message = <any>error)
-    );
+    if (this.searchService.pools && this.searchService.pools.length > 0) {
+      this.naics = this.buildNaicsItems(this.searchService.pools);
+      this.naics.sort(this.searchService.sortByCodeAsc);
+    } else {
+      this.searchService.getNaics(['All']).subscribe(
+        data => {
+          this.naics = this.buildNaicsItems(data['results']);
+          this.naics.sort(this.searchService.sortByCodeAsc);
+        },
+        error => (this.error_message = <any>error)
+      );
+    }
   }
   buildNaicsItems(obj: any[]) {
     const naics = [];
@@ -194,6 +266,8 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
       this.prev,
       this.piid,
       this.naic_code,
+      this.country,
+      this.state,
       this.ordering
     );
   }
@@ -203,6 +277,8 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
       this.next,
       this.piid,
       this.naic_code,
+      this.country,
+      this.state,
       this.ordering
     );
   }
@@ -220,7 +296,7 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
     const items: any[] = [];
     for (const item of contracts) {
       for (const prop of this.contracts_results) {
-        if (prop['base_piid'] === item) {
+        if (prop['piid'] === item) {
           items.push(prop);
         }
       }
@@ -243,11 +319,38 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
     this.params = params;
   }
   onChangeNaic() {
-    this.getContracts(this.duns, 1, this.piid, this.naic_code, this.ordering);
+    this.getContracts(
+      this.duns,
+      1,
+      this.piid,
+      this.naic_code,
+      this.country,
+      this.state,
+      this.ordering
+    );
     this.setParams();
   }
   onChangeMembership() {
-    this.getContracts(this.duns, 1, this.piid, this.naic_code, this.ordering);
+    this.getContracts(
+      this.duns,
+      1,
+      this.piid,
+      this.naic_code,
+      this.country,
+      this.state,
+      this.ordering
+    );
     this.setParams();
+  }
+  onChangeCountry() {
+    this.getContracts(
+      this.duns,
+      this.current_page,
+      this.piid,
+      this.naic_code,
+      this.country,
+      this.state,
+      this.ordering
+    );
   }
 }

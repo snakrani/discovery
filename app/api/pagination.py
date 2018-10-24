@@ -21,7 +21,7 @@ class BasePagination(PageNumberPagination):
 
 class ResultSetPagination(BasePagination): 
     page_size = settings.REST_PAGE_COUNT
-    max_page_size = 1000
+    max_page_size = 100
 
 
 class ResultNoPagination(BasePagination):

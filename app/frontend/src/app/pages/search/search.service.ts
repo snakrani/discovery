@@ -14,6 +14,10 @@ export class SearchService {
   _keywords;
   _active_filters: any[];
   _contract_results: any[];
+  _total_vendors_per_vehicle: any[];
+  _countries: any[];
+  _states: any[];
+
   search_options = {};
 
   constructor(
@@ -33,6 +37,12 @@ export class SearchService {
   set keywords(arr: any[]) {
     this._keywords = arr;
   }
+  get total_vendors_per_vehicle(): any[] {
+    return this._total_vendors_per_vehicle;
+  }
+  set total_vendors_per_vehicle(arr: any[]) {
+    this._total_vendors_per_vehicle = arr;
+  }
   get activeFilters(): any[] {
     return this._active_filters;
   }
@@ -44,6 +54,18 @@ export class SearchService {
   }
   set contractResults(arr: any[]) {
     this._contract_results = arr;
+  }
+  get countries(): any[] {
+    return this._countries;
+  }
+  set countries(arr: any[]) {
+    this._countries = arr;
+  }
+  get states(): any[] {
+    return this._states;
+  }
+  set states(arr: any[]) {
+    this._states = arr;
   }
   setSearchOptions(key: string, values: any[]): void {
     this.search_options[key] = values;
@@ -196,6 +218,14 @@ export class SearchService {
         catchError(this.handleError)
       );
   }
+  getPlaceOfPerformance(): Observable<any[]> {
+    return this.http
+      .get<any[]>(this.apiUrl + 'placesofperformance/?page=0')
+      .pipe(
+        tap(data => data),
+        catchError(this.handleError)
+      );
+  }
 
   getVendors(filters: any[], page: string): Observable<any[]> {
     let params = '';
@@ -237,6 +267,14 @@ export class SearchService {
         params +=
           '&pools__zones__id__in=' +
           this.getSelectedFilterList(filter['selected'], ',');
+      }
+      if (filter['name'] === 'pop') {
+        console.log(filter['selected'][0].country);
+        let pop = filter['selected'][0].country;
+        if (filter['selected'][0].state) {
+          pop += '__' + filter['selected'][0].state;
+        }
+        params += '&pop=' + pop;
       }
       // if (filter['name'] === 'threshold') {
       //   const threshold = filter['selected'][0].value.split('-');
@@ -298,10 +336,52 @@ export class SearchService {
           '&pools__zones__id__in=' +
           this.getSelectedFilterList(filter['selected'], ',');
       }
+      // if (filter['name'] === 'agency_performance') {
+      //   params +=
+      //     '&pools__pool__vehicle__tier__number__in=' +
+      //     this.getSelectedFilterList(filter['selected'], ',');
+      // }
+      // if (filter['name'] === 'poc') {
+      //   params +=
+      //     '&pools__pool__vehicle__poc__in=' +
+      //     this.getSelectedFilterList(filter['selected'], ',');
+      // }
     }
     console.log(this.apiUrl + 'vendors/count/duns?' + params.substr(1));
     return this.http
       .get<any[]>(this.apiUrl + 'vendors/count/duns?' + params.substr(1))
+      .pipe(
+        tap(data => data),
+        catchError(this.handleError)
+      );
+  }
+  getVehiclesToCompare(filters: any[]): Observable<any[]> {
+    let params = '';
+    for (const filter of filters) {
+      if (filter['name'] === 'vehicles') {
+        params +=
+          '&vehicle__id__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
+      if (filter['name'] === 'keywords') {
+        params +=
+          '&keywords__id__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
+      if (filter['name'] === 'naics') {
+        params +=
+          '&naics__code__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
+      if (filter['name'] === 'pscs') {
+        params +=
+          '&psc__code__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
+    }
+    console.log(this.apiUrl + 'pools/values/vehicle?' + params.substr(1));
+    return this.http
+      .get<any[]>(this.apiUrl + 'pools/values/vehicle?' + params.substr(1))
       .pipe(
         tap(data => data),
         catchError(this.handleError)
@@ -336,12 +416,10 @@ export class SearchService {
       );
   }
   getAgencyPerformanceNames(): Observable<any[]> {
-    return this.http
-      .get<any[]>(this.apiUrl + 'contracts/values/agency_name')
-      .pipe(
-        tap(data => data),
-        catchError(this.handleError)
-      );
+    return this.http.get<any[]>(this.apiUrl + 'agencies/?page=0').pipe(
+      tap(data => data),
+      catchError(this.handleError)
+    );
   }
   getAgencyPerformanceDuns(ids: string): Observable<any[]> {
     return this.http
@@ -364,14 +442,22 @@ export class SearchService {
     page: string,
     piid: string,
     naic: string,
+    country: string,
+    state: string,
     ordering: string
   ): Observable<any[]> {
     let params = 'contracts?vendor__duns=' + duns;
     if (naic !== 'All') {
-      params += '&NAICS=' + naic;
+      params += '&psc_naics=' + naic;
     }
     if (piid !== 'All') {
-      params += '&piid=' + piid;
+      params += '&base__piid=' + piid;
+    }
+    if (country !== '0') {
+      params += '&place_of_performance__country_code=' + country;
+    }
+    if (state !== '0') {
+      params += '&place_of_performance__state=' + state;
     }
     if (ordering !== '') {
       params += '&ordering=' + ordering;
@@ -414,19 +500,16 @@ export class SearchService {
   getSelectedFilterList(arr: any[], concat: string): string {
     let str = '';
     for (const selected of arr) {
-      console.log(selected['value']);
       str += selected['value'] + concat;
     }
     str = str.slice(0, -concat.length);
     return str;
   }
   getQueryParams(arr: any[]): any[] {
-    // console.log(arr);
     const obj = [];
     for (const filter of arr) {
       obj[filter.name] = this.getSelectedFilterList(filter['selected'], '__');
     }
-    // console.log(obj);
     return obj;
   }
   existsIn(obj: any[], value: string, key: string): boolean {
@@ -485,39 +568,13 @@ export class SearchService {
     const keywords = [];
     for (const item of obj) {
       const keyword = {};
-      keyword['name'] = item['name'];
-      keyword['code'] = item['id'];
+      keyword['text'] = item['name'];
+      keyword['id'] = item['id'];
       keywords.push(keyword);
     }
     return keywords;
   }
-  setKeywordAutoComplete(data: any[], id: string) {
-    $('#' + id + '-value, #' + id + '-input').val('');
-    const options = {
-      data: data,
-      theme: 'square',
-      getValue: 'name',
-      list: {
-        match: {
-          enabled: true
-        },
-        onSelectItemEvent: function() {
-          $('#' + id + '-value').val(
-            $('#' + id + '-input').getSelectedItemData().code
-          );
-          // $('#error-msg').addClass('hide');
-          $('#' + id + '-input').removeClass('input-error');
-        },
-        onHideListEvent: function() {
-          if ($('#' + id + '-value').val() === '') {
-            $('#' + id + '-input').val('');
-          }
-        }
-      }
-    };
-    console.log($('#' + id + '-input'));
-    $('#' + id + '-input').easyAutocomplete(options);
-  }
+
   sortByNameAsc(i1, i2) {
     if (i1 > i2) {
       return 1;
@@ -540,6 +597,15 @@ export class SearchService {
     if (i1.code > i2.code) {
       return 1;
     } else if (i1.code === i2.code) {
+      return 0;
+    } else {
+      return -1;
+    }
+  }
+  sortByTextAsc(i1, i2) {
+    if (i1.text > i2.text) {
+      return 1;
+    } else if (i1.text === i2.text) {
       return 0;
     } else {
       return -1;

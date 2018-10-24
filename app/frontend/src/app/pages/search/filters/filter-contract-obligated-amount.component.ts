@@ -45,10 +45,6 @@ export class FilterContractObligatedAmountComponent implements OnInit {
   count = 0;
   _obligated_amount = '0';
   value_set = false;
-
-  /** Generate inputs labels & values
-   *  with these
-   */
   json_value = 'id';
   json_description = 'description';
   constructor(

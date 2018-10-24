@@ -37,16 +37,12 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
   name = 'NAICs';
   queryName = 'naics';
   id = 'filter-naics';
+
   placeholder;
   error_message;
   filtered_naics;
   naics;
   ln;
-  /** Sample json
-  {
-
-  };
-  */
 
   json_value = 'code';
   json_description = 'description';
@@ -90,41 +86,43 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
     }
 
     this.placeholder = 'Enter NAIC or keywords...';
+    this.loaded();
+  }
+  loaded() {
     this.emmitLoaded.emit(this.queryName);
   }
   setFilteredItems(vehicles) {
     this.items_filtered =
-      vehicles[0] !== 'All' ? this.filterByVehicles(vehicles) : this.items;
-    this.items_filtered.sort(this.searchService.sortByCodeAsc);
+      vehicles[0] !== 'All'
+        ? this.filterByVehicles(vehicles)
+        : this.returnUnique(this.items);
+    this.items_filtered.sort(this.searchService.sortByIdAsc);
     this.keywords_results = this.items_filtered;
-
-    /** Remove all selected items
-     *  that are not within filtered list
-     */
-    for (const item of this.items_selected) {
-      if (
-        !this.searchService.existsIn(this.items_filtered, item['value'], 'id')
-      ) {
-        // this.removeItem(item['value']);
+  }
+  returnUnique(items: any[]): any[] {
+    const unique_items = [];
+    for (const item of items) {
+      if (!this.searchService.existsIn(unique_items, item.id, 'id')) {
+        unique_items.push(item);
       }
     }
+    return unique_items;
   }
   buildNaicsItems(obj: any[]): any[] {
     const naics = [];
     for (const pool of obj) {
       for (const naic of pool.naics) {
         const item = {};
-        item['code'] = naic.code;
-        item['name'] = naic.code + ' - ' + naic.description;
+        item['id'] = naic.code;
+        item['text'] = naic.code + ' - ' + naic.description;
         item['vehicle_id'] = pool.vehicle.id;
-        if (!this.searchService.existsIn(naics, naic.code, 'code')) {
-          naics.push(item);
-        }
+        naics.push(item);
       }
     }
-    naics.sort(this.searchService.sortByCodeAsc);
+    naics.sort(this.searchService.sortByIdAsc);
     return naics;
   }
+
   getItemId(value: string): string {
     if (value) {
       for (let i = 0; i < this.items.length; i++) {
@@ -137,16 +135,20 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
   getItemDescription(id: number): string {
     if (id) {
       for (let i = 0; i < this.items.length; i++) {
-        if (+this.items[i][this.json_value] === id) {
-          return this.items[i]['name'];
+        if (+this.items[i]['id'] === id) {
+          return this.items[i]['text'];
         }
       }
     }
   }
   addKeywords(code) {
+    if (code === '0') {
+      this.reset();
+      return;
+    }
     if (
       !this.searchService.existsIn(this.items_selected, code, 'value') &&
-      this.searchService.existsIn(this.items_filtered, code, 'code')
+      this.searchService.existsIn(this.items_filtered, code, 'id')
     ) {
       this.addItem(code);
     }
@@ -156,8 +158,9 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
     if (id && id !== '') {
       item['value'] = id;
       item['description'] = this.getItemDescription(+id);
+      this.items_selected.push(item);
     }
-    this.items_selected.push(item);
+
     this.emmitSelected.emit(1);
     this.msgAddedItem.showMsg();
   }
@@ -167,7 +170,7 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
       for (const prop of this.items) {
         const arr = item.split('_');
         if (prop['vehicle_id'].indexOf(arr[0]) !== -1) {
-          if (!this.searchService.existsIn(items, prop.code, 'code')) {
+          if (!this.searchService.existsIn(items, prop.id, 'id')) {
             items.push(prop);
           }
         }
@@ -179,7 +182,8 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
     // console.log(vehicle);
     let items: any[] = [];
     const abr = vehicle.substr(0, 3);
-    items = this.items.filter(naics => naics.vehicle_id.indexOf(abr) !== -1);
+    const unique_items = this.filterByVehicles([vehicle]);
+    items = unique_items.filter(naics => naics.vehicle_id !== -1);
     return items;
   }
 
