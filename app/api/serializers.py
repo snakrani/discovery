@@ -7,7 +7,6 @@ from vendors import models as vendors
 from contracts import models as contracts
 
 import os
-import re
 
 
 class SinSerializer(ModelSerializer):
@@ -388,13 +387,14 @@ class VendorFullSerializer(AnnotatedVendorSerializer):
             'number_of_contracts'
         ]
 
-class VendorBaseTestSerializer(BaseVendorSerializer):
+class VendorTestSerializer(BaseVendorSerializer):
     sam_location = LocationSerializer(many=False)
     pools = PoolMembershipTestSerializer(many=True)
     
     class Meta(BaseVendorSerializer.Meta):
         fields = BaseVendorSerializer.Meta.fields + [
-            'sam_location', 'pools', 'url'
+            'sam_location', 'pools',
+            'url'
         ]
 
 
@@ -500,7 +500,7 @@ class BaseContractSerializer(HyperlinkedModelSerializer):
     
     class Meta:
         model = contracts.Contract
-        fields = ['id', 'piid', 'base_piid', 'NAICS', 'PSC', 'agency',
+        fields = ['id', 'piid', 'base_piid', 'NAICS', 'PSC', 'agency', 'vendor',
                   'point_of_contact', 'vendor_phone', 'place_of_performance',
                   'date_signed', 'completion_date', 'status', 'pricing_type', 'obligated_amount', 
                   'annual_revenue', 'number_of_employees']
@@ -518,7 +518,7 @@ class ContractSummarySerializer(BaseContractSerializer):
     status = ContractStatusSummarySerializer(many=False)
     
     class Meta(BaseContractSerializer.Meta):
-        fields = BaseContractSerializer.Meta.fields + ['vendor', 'url']
+        fields = BaseContractSerializer.Meta.fields + ['url']
    
 class ContractFullSerializer(BaseContractSerializer):
     vendor = VendorLinkSerializer(many=False)
@@ -530,9 +530,10 @@ class ContractFullSerializer(BaseContractSerializer):
     status = ContractStatusFullSerializer(many=False)
         
     class Meta(BaseContractSerializer.Meta):
-        fields = BaseContractSerializer.Meta.fields + ['vendor', 'vendor_location']
+        fields = BaseContractSerializer.Meta.fields + ['vendor_location']
 
-class ContractBaseTestSerializer(BaseContractSerializer):
+class ContractTestSerializer(BaseContractSerializer):
+    vendor = VendorTestSerializer(many=False)
     vendor_location = LocationSerializer(many=False)
     
     place_of_performance = PlaceOfPerformanceTestSerializer(many=False)
@@ -542,30 +543,6 @@ class ContractBaseTestSerializer(BaseContractSerializer):
     
     class Meta(BaseContractSerializer.Meta):
         fields = BaseContractSerializer.Meta.fields + ['vendor_location', 'url']
-
-class ContractTestSerializer(ContractBaseTestSerializer):
-    vendor = VendorBaseTestSerializer(many=False)
-    
-    class Meta(ContractBaseTestSerializer.Meta):
-        fields = ContractBaseTestSerializer.Meta.fields + ['vendor']
-
-
-class VendorTestSerializer(VendorBaseTestSerializer):
-    contract = SerializerMethodField()
-    
-    class Meta(VendorBaseTestSerializer.Meta):
-        fields = VendorBaseTestSerializer.Meta.fields + ['contract']
-        
-    def get_contract(self, item):
-        filters = {}
-        
-        for name, value in self.context['request'].query_params.items():
-            check = re.match(r'^contract__(.+)', name)
-            if check:
-                filters[check.group(1)] = value
-        
-        queryset = contracts.Contract.objects.filter(**filters)
-        return ContractBaseTestSerializer(queryset, many=True, context=self.context).data
 
 
 class MetadataSerializer(Serializer):
