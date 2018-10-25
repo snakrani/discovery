@@ -33,7 +33,7 @@
         <div class="bordered">
           <h2 style="margin-top:0px">Data Sources</h2>
           <h3>SAM</h3>
-          <p><em>last updated: <strong>08/25/2018</strong></em><br></p>
+          <p><em>last updated: <strong [innerHTML]="loading?'Loading...':sam_load_date|date:'MM/dd/yyyy'"></strong></em><br></p>
 
           <p>We pull SAM data directly from the System for Award Management (SAM) to provide
             supplemental information on
@@ -48,7 +48,7 @@
             term
             of the contract.</p>
           <h3>FPDS</h3>
-          <p><em>last updated: <strong>08/24/2018</strong></em>
+          <p><em>last updated: <strong [innerHTML]="loading?'Loading...':fpds_load_date|date:'MM/dd/yyyy'"></strong></em>
             <p>Discovery loads data from the Federal Procurement Data System (FPDS) to automatically
               provide you with a
               context-rich

@@ -13,6 +13,7 @@
             <tr>
                 <th></th>
                 <th scope="col">Company</th>
+                <!-- <th scope="col"></th> -->
                 <th scope="col" class="sbd">Contracts</th>
                 <!-- <th scope="col">POC Email</th>
                             <th scope="col">Capability Statement</th> -->
@@ -33,6 +34,7 @@
                 <td><span [innerHTML]="getRowNum(i)"></span>.</td>
                 <td scope="row"><a (click)="showVendorDetails(item.duns)">{{item.name
                         | titlecase}}</a></td>
+                <!-- <td [innerHTML]="showPoolMeetCriteria(item.pools)"></td> -->
                 <td>{{item.contracts}}</td>
                 <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, 'SB') ? '&bull;' : ''"></td>
                 <td [class.hide]="!sbd_col" class="sbd" [innerHtml]="returnSetAside(item.setasides, '27') ? '&bull;' : ''"></td>

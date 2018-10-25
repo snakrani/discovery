@@ -437,6 +437,14 @@ export class SearchService {
       catchError(this.handleError)
     );
   }
+  // getMetadata(): Observable<any[]> {
+  //   return this.http
+  //     .get<any[]>('https://discovery-dev.app.cloud.gov/api/metadata/')
+  //     .pipe(
+  //       tap(data => data),
+  //       catchError(this.handleError)
+  //     );
+  // }
   getVendorContractHistory(
     duns: string,
     page: string,
@@ -451,7 +459,7 @@ export class SearchService {
       params += '&psc_naics=' + naic;
     }
     if (piid !== 'All') {
-      params += '&base__piid=' + piid;
+      params += '&base_piid=' + piid;
     }
     if (country !== '0') {
       params += '&place_of_performance__country_code=' + country;
@@ -576,6 +584,15 @@ export class SearchService {
   }
 
   sortByNameAsc(i1, i2) {
+    if (i1.name > i2.name) {
+      return 1;
+    } else if (i1.name === i2.name) {
+      return 0;
+    } else {
+      return -1;
+    }
+  }
+  sortByValueAsc(i1, i2) {
     if (i1 > i2) {
       return 1;
     } else if (i1 === i2) {

@@ -54,7 +54,9 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
         );
       } else {
         this.countries = this.searchService.countries;
+        this.countries.sort(this.searchService.sortByNameAsc);
         this.states = this.searchService.states;
+        this.states.sort(this.searchService.sortByCodeAsc);
       }
 
       this.getContracts(
@@ -93,7 +95,9 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
       }
     }
     this.countries = countries;
+
     this.countries.sort(this.searchService.sortByNameAsc);
+    console.log(this.countries);
     this.searchService.countries = this.countries;
     this.states = states;
     this.states.sort(this.searchService.sortByCodeAsc);
@@ -192,7 +196,26 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
       }
     }, 500);
   }
-
+  setPiid(value: string): string {
+    const arr = value.split('_');
+    return (
+      '<span class="pull-left">' +
+      arr[0] +
+      '_</span><span class="pull-left">' +
+      arr[1] +
+      '</span>'
+    );
+  }
+  setPoP(obj: any[]): string {
+    let pop = '';
+    if (obj['country_name']) {
+      pop += obj['country_name'];
+    }
+    if (obj['state'] !== null) {
+      pop += ', ' + obj['state'];
+    }
+    return pop;
+  }
   orderBy(ordering: any[]) {
     const order_by = ordering['sort'] + ordering['ordering'];
     this.ordering = ordering['ordering'];
@@ -343,6 +366,9 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
     this.setParams();
   }
   onChangeCountry() {
+    if (this.country !== 'USA') {
+      this.state = '0';
+    }
     this.getContracts(
       this.duns,
       this.current_page,

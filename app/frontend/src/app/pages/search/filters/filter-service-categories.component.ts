@@ -81,11 +81,28 @@ export class FilterServiceCategoriesComponent implements OnInit, OnChanges {
       }
     }
   }
+  returnFilteredItems(pools: any[]) {
+    let items = [];
+    items = this.filterByPool(pools);
+    items.sort(this.searchService.sortByNameAsc);
+    return items;
+  }
   filterByVehicles(vehicles: any[]) {
     const items: any[] = [];
     for (const item of vehicles) {
       for (const prop of this.items) {
         if (prop['vehicle_id'] === item) {
+          items.push(prop);
+        }
+      }
+    }
+    return items;
+  }
+  filterByPool(pools: any[]) {
+    const items: any[] = [];
+    for (const item of pools) {
+      for (const prop of this.items) {
+        if (prop['id'] === item) {
           items.push(prop);
         }
       }

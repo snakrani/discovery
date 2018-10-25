@@ -85,6 +85,7 @@ export class FilterContractVehiclesComponent implements OnInit, OnChanges {
         this.id + '-' + this.items[i][this.json_value]
       ).checked = false;
     }
+    this.emmitItem.emit(['All']);
   }
   getItemDescription(value: string): string {
     if (value) {
@@ -113,6 +114,7 @@ export class FilterContractVehiclesComponent implements OnInit, OnChanges {
         $('#' + this.id + '-' + key).prop('checked', false);
       }
     }
+
     this.emmitSelected.emit(0);
   }
   onChange(key: string, title: string, isChecked: boolean) {
