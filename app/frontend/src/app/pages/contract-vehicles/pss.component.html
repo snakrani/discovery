@@ -28,8 +28,8 @@
         <h3>PSS Service Categories – SINs</h3>
         <div *ngIf="pools.length===0">Loading...</div>
         <ul *ngIf="pools.length>0" class="usa-font-lead">
-          <li *ngFor="let pool of pools"><a [routerLink]="['/search']" [queryParams]="{vehicles: 'PSS', service_categories: pool.id}">{{pool.name}}
-              - {{pool.number}}</a></li>
+          <li *ngFor="let pool of pools"><a [routerLink]="['/search']" [queryParams]="{vehicles: 'PSS', service_categories: pool.id}">{{pool.number}}
+              - {{pool.name}}</a></li>
         </ul>
       </div>
       <div class="usa-width-one-fourth">

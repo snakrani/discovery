@@ -29,8 +29,8 @@
         <h3>OASIS and OASIS SB Pool Disciplines</h3>
         <div *ngIf="pools.length===0">Loading...</div>
         <ul *ngIf="pools.length>0" class="usa-font-lead">
-          <li *ngFor="let pool of pools"><a [routerLink]="['/search']" [queryParams]="{vehicles: 'OASIS_SB', service_categories: pool.id}">{{pool.name}}
-              - {{pool.number}}</a></li>
+          <li *ngFor="let pool of pools"><a [routerLink]="['/search']" [queryParams]="{vehicles: 'OASIS_SB', service_categories: pool.id}">
+              {{pool.number}} - {{pool.name}}</a></li>
         </ul>
       </div>
       <div class="usa-width-one-fourth">
@@ -46,8 +46,8 @@
           <li><a href="https://www.gsa.gov/cdnstatic/NAICS%20Code%20Definitions%20for%20OASIS.pdf" target="_blank">NAICS
               Codes per Pool</a></li>
           <li><a href="https://www.gsa.gov/cdnstatic/OASIS FAQs as of 8202018 (3).xlsx" target="_blank">OASIS FAQs</a></li>
-          <li><a href="mailto:Oasis@gsa.gov" target="_blank">Contact OASIS</a></li>
-          <li><a href="mailto:OasisSB@gsa.gov" target="_blank">Contact OASIS SB</a></li>
+          <li><a href="mailto:Oasis@gsa.gov">Contact OASIS</a></li>
+          <li><a href="mailto:OasisSB@gsa.gov">Contact OASIS SB</a></li>
         </ul>
       </div>
 

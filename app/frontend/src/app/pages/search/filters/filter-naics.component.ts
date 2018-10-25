@@ -99,6 +99,14 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
     this.items_filtered.sort(this.searchService.sortByIdAsc);
     this.keywords_results = this.items_filtered;
   }
+  returnFilteredItems(vehicles) {
+    this.items_filtered =
+      vehicles[0] !== 'All'
+        ? this.filterByVehicles(vehicles)
+        : this.returnUnique(this.items);
+    this.items_filtered.sort(this.searchService.sortByIdAsc);
+    this.keywords_results = this.items_filtered;
+  }
   returnUnique(items: any[]): any[] {
     const unique_items = [];
     for (const item of items) {
@@ -116,6 +124,7 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
         item['id'] = naic.code;
         item['text'] = naic.code + ' - ' + naic.description;
         item['vehicle_id'] = pool.vehicle.id;
+        item['pool_id'] = pool.id;
         naics.push(item);
       }
     }
@@ -158,11 +167,21 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
     if (id && id !== '') {
       item['value'] = id;
       item['description'] = this.getItemDescription(+id);
+      item['pools_ids'] = this.getPoolsIds(id);
       this.items_selected.push(item);
     }
 
     this.emmitSelected.emit(1);
     this.msgAddedItem.showMsg();
+  }
+  getPoolsIds(id: string): any[] {
+    const ids = [];
+    for (const prop of this.items) {
+      if (prop.id === id) {
+        ids.push(prop.pool_id);
+      }
+    }
+    return ids;
   }
   filterByVehicles(vehicles: any[]) {
     const items: any[] = [];
