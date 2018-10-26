@@ -125,7 +125,7 @@ def ContractCSV(request, vendor_duns):
     
     writer.writerow(('Date Signed', 'PIID', 'Agency', 'Type', 'Value ($)', 'Email POC', 'Status'))
 
-    for contract in contracts:
+    for contract in contracts.iterator():
         pricing_type = ''
         status = ''
         
