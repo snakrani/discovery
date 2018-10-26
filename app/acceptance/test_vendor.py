@@ -72,7 +72,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 'membership_filters': (None, 1, 0, 0, {
                     1: ('Ian Hada', '202-625-4239', 'Ianh@donohoe.com')
                 }),
-                'vendor_sam': ('9/18/18',),
+                'vendor_sam': ('9/18/18', True),
                 'vendor_info': ('COMPLETE BUILDING SERVICES', '808649888', '4YAL6', '550', '$26'),
                 'vendor_address': ('5151 Wisconsin Ave Nw Ste 400', 'Washington, DC 20016', True),
                 'vendor_badges': (),
@@ -561,7 +561,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 }, {
                     1: ('SB', 'SDB', 'VO', 'SDVO')
                 }),
-                'vendor_sam': ('9/21/18',),
+                'vendor_sam': ('9/21/18', True),
                 'vendor_info': ('SDAC FACILITY SERVICE LLC', '079515381', '77M00', '1', '$1'),
                 'vendor_address': ('14510 Sw 284Th St', 'Homestead, FL 33033', False),
                 'vendor_badges': (True,),

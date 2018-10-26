@@ -183,7 +183,7 @@ def PoolCSV(request):
 
     lines = []
 
-    for v in vendors:
+    for v in vendors.iterator():
         setaside_list = []
         for sa in setasides_all:
             if sa.id in v.pools.all().values_list('setasides', flat=True):
@@ -332,7 +332,7 @@ def VendorCSV(request, vendor_duns):
     
     writer.writerow(('Date Signed', 'PIID', 'Agency', 'Type', 'Value ($)', 'Email POC', 'Status'))
 
-    for contract in contracts:
+    for contract in contracts.iterator():
         pricing_type = ''
         status = ''
         
