@@ -91,7 +91,7 @@ def VendorCSV(request):
 
     lines = []
 
-    for v in vendors:
+    for v in vendors.iterator():
         setaside_list = []
         for sa in setasides_all:
             if sa.id in v.pools.all().values_list('setasides', flat=True):
