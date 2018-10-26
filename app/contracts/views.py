@@ -16,7 +16,7 @@ import time
 
 class ContractCSV(View):
 
-    def render_vendor(self, writer, vendor_duns):
+    def render_vendor(self, request, writer, vendor_duns):
         vendor = Vendor.objects.get(duns=vendor_duns)
         contracts = Contract.objects.filter(vendor=vendor).order_by('-date_signed')[:1]
         
@@ -114,16 +114,55 @@ class ContractCSV(View):
         writer.writerow(('', ))
         return memberships
     
+    
+    def render_location(self, request, writer):
+        country_code = None
+        state = None
+        
+        if 'country' in request.GET:
+            country_code = request.GET['country']
+            
+        if 'state' in request.GET:
+            state = request.GET['state']
+            
+        if country_code or state:
+            location = ['Location']
+            
+            if country_code:
+                location.append(country_code)
+            if state:
+                location.append(state)
+            
+            writer.writerow(('', 'Country code', 'State code'))
+            writer.writerow(location)
+            writer.writerow(('', ))
+            
+        return {
+            'country': country_code,
+            'state': state
+        }
+    
 
-    def render_contracts(self, writer, vendor, naics, memberships):
+    def render_contracts(self, writer, vendor, naics, memberships, location):
         if naics:
-            psc_codes = list(PSC.objects.filter(naics__code=naics.code).distinct().values_list('code', flat=True))    
-            contracts = Contract.objects.filter(Q(PSC__in=psc_codes) | Q(NAICS=naics.code), vendor=vendor).order_by('-date_signed')
+            try:
+                sin_codes = list(naics.sin.all().values_list('code', flat=True))
+                psc_codes = list(PSC.objects.filter(sin__code__in=sin_codes).distinct().values_list('code', flat=True))
+                contracts = Contract.objects.filter(Q(PSC__in=psc_codes) | Q(NAICS=naics.code), vendor=vendor).order_by('-date_signed')
+        
+            except Exception:
+                contracts = Contract.objects.filter(NAICS=naics.code, vendor=vendor).order_by('-date_signed')
         else:
             contracts = Contract.objects.filter(vendor=vendor).order_by('-date_signed')
         
         if len(memberships) > 0:
             contracts = contracts.filter(base_piid__in = memberships)
+            
+        if location['country']:
+            contracts = contracts.filter(place_of_performance__country_code = location['country'])
+        
+        if location['state']:
+            contracts = contracts.filter(place_of_performance__state = location['state'])
          
         writer.writerow(("Work performed by a vendor is often reported under a different NAICS code due to FPDS restrictions.",))
         writer.writerow(('', ))
@@ -140,7 +179,7 @@ class ContractCSV(View):
             if contract.status:
                 status = contract.status.name
                     
-            writer.writerow((contract.date_signed.strftime("%m/%d/%Y"), contract.piid, titlecase(contract.agency_name), pricing_type, contract.obligated_amount, (contract.point_of_contact or "").lower(), status))
+            writer.writerow((contract.date_signed.strftime("%m/%d/%Y"), contract.piid, titlecase(contract.agency.name), pricing_type, contract.obligated_amount, (contract.point_of_contact or "").lower(), status))
     
         writer.writerow(('', ))
         return contracts
@@ -150,12 +189,11 @@ class ContractCSV(View):
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="vendor_contracts.csv"'
         
-        raise Exception(args)
-        
         writer = csv.writer(response)
-        vendor = render_vendor(request, writer, vendor_duns)
-        naics = render_naics(request, writer)
-        memberships = render_memberships(request, writer, vendor)
+        vendor = self.render_vendor(request, writer, kwargs['vendor_duns'])
+        naics = self.render_naics(request, writer)
+        memberships = self.render_memberships(request, writer, vendor)
+        location = self.render_location(request, writer)
         
-        render_contracts(writer, vendor, naics, memberships)
+        self.render_contracts(writer, vendor, naics, memberships, location)
         return response
