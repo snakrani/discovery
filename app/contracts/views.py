@@ -14,6 +14,14 @@ import csv
 import time
 
 
+# Filters:
+# 
+#     naics
+#     memberships,...
+#     places_of_performance (country, state)
+#
+
+
 class ContractCSV(View):
 
     def render_vendor(self, request, writer, vendor_duns):
@@ -27,11 +35,6 @@ class ContractCSV(View):
         else:
             number_of_employees = 'NA'
             annual_revenue = 'NA'
-            
-        writer.writerow(('GSA Discovery research results',))
-        writer.writerow(('URL: ' + request.build_absolute_uri(),))
-        writer.writerow(('Time: ' + time.strftime('%b %d, %Y %l:%M%p %Z'),))
-        writer.writerow(('', ))
         
         writer.writerow((vendor.name,))
         writer.writerow(('SAM registration expires: ', vendor.sam_expiration_date.strftime("%m/%d/%Y")))
@@ -189,7 +192,12 @@ class ContractCSV(View):
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="vendor_contracts.csv"'
         
-        writer = csv.writer(response)
+        writer = csv.writer(response)    
+        writer.writerow(('GSA Discovery vendor contract research results',))
+        writer.writerow(('URL: ' + request.build_absolute_uri(),))
+        writer.writerow(('Time: ' + time.strftime('%b %d, %Y %l:%M%p %Z'),))
+        writer.writerow(('', ))
+        
         vendor = self.render_vendor(request, writer, kwargs['vendor_duns'])
         naics = self.render_naics(request, writer)
         memberships = self.render_memberships(request, writer, vendor)
