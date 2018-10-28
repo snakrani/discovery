@@ -34,7 +34,7 @@ class VendorCSV(BaseCSVView):
         super(VendorCSV, self).__init__(**kwargs)
         
         # Filters
-        self.keyword_param = 'keywords'
+        self.keywords_param = 'keywords'
         self.keywords = []
         
         self.naics_param = 'naics'
@@ -77,12 +77,10 @@ class VendorCSV(BaseCSVView):
     def _render_keywords(self, writer):
         keyword_data = categories.Keywords.objects.filter(id__in=self.keywords)
         
-        writer.writerow(('Service category keywords:',))
-        writer.writerow(('', ))
-        writer.writerow(('Name',))
+        writer.writerow(('Service category keywords:', 'Name'))
         
         for keyword in keyword_data:
-            writer.writerow((keyword.name,))
+            writer.writerow(('', keyword.name))
         
         writer.writerow(('', ))       
     
@@ -97,12 +95,10 @@ class VendorCSV(BaseCSVView):
     def _render_naics(self, writer):
         naics_data = categories.Naics.objects.filter(code__in=self.naics)
         
-        writer.writerow(('Service category NAICS codes:',))
-        writer.writerow(('', ))
-        writer.writerow(('Code', 'Description'))
+        writer.writerow(('Service category NAICS codes:', 'Code', 'Description'))
         
         for naics in naics_data:
-            writer.writerow((naics.code, naics.description))
+            writer.writerow(('', naics.code, naics.description))
         
         writer.writerow(('', ))       
     
@@ -117,12 +113,10 @@ class VendorCSV(BaseCSVView):
     def _render_psc(self, writer):
         psc_data = categories.PSC.objects.filter(code__in=self.psc)
         
-        writer.writerow(('Service category PSC codes:',))
-        writer.writerow(('', ))
-        writer.writerow(('Code', 'Description'))
+        writer.writerow(('Service category PSC codes:', 'Code', 'Description'))
         
         for psc in psc_data:
-            writer.writerow((psc.code, psc.description))
+            writer.writerow(('', psc.code, psc.description))
         
         writer.writerow(('', ))       
     
@@ -137,12 +131,10 @@ class VendorCSV(BaseCSVView):
     def _render_vehicles(self, writer):
         vehicle_data = categories.Vehicles.objects.filter(id__in=self.vehicles)
         
-        writer.writerow(('Service category vehicles:',))
-        writer.writerow(('', ))
-        writer.writerow(('Id', 'Name', 'Point of Contact', 'Ordering Guide'))
+        writer.writerow(('Service category vehicles:', 'Id', 'Name', 'Point of Contact', 'Ordering Guide'))
         
         for vehicle in vehicle_data:
-            writer.writerow((vehicle.id, vehicle.name, vehicle.poc, vehicle.ordering_guide))
+            writer.writerow(('', vehicle.id, vehicle.name, vehicle.poc, vehicle.ordering_guide))
         
         writer.writerow(('', ))       
     
@@ -157,12 +149,10 @@ class VendorCSV(BaseCSVView):
     def _render_pools(self, writer):
         pool_data = categories.Pool.objects.filter(id__in=self.pools)
         
-        writer.writerow(('Service category pools:',))
-        writer.writerow(('', ))
-        writer.writerow(('Id', 'Name', 'Threshold'))
+        writer.writerow(('Service category pools:', 'Id', 'Name', 'Threshold'))
         
         for pool in pool_data:
-            writer.writerow((pool.id, pool.name, pool.threshold))
+            writer.writerow(('', pool.id, pool.name, pool.threshold))
         
         writer.writerow(('', ))       
     
@@ -178,12 +168,10 @@ class VendorCSV(BaseCSVView):
     def _render_setasides(self, writer):
         setaside_data = categories.SetAside.objects.filter(id__in=self.setasides)
         
-        writer.writerow(('Vendor setasides:',))
-        writer.writerow(('', ))
-        writer.writerow(('Code', 'Name', 'Description'))
+        writer.writerow(('Vendor setasides:', 'Code', 'Name', 'Description'))
         
         for setaside in setaside_data:
-            writer.writerow((setaside.code, setaside.name, setaside.description))
+            writer.writerow(('', setaside.code, setaside.name, setaside.description))
         
         writer.writerow(('', ))       
     
@@ -198,12 +186,10 @@ class VendorCSV(BaseCSVView):
     def _render_zones(self, writer):
         zone_data = categories.Zone.objects.filter(id__in=self.zones)
         
-        writer.writerow(('Vendor zones:',))
-        writer.writerow(('', ))
-        writer.writerow(('Id', 'States'))
+        writer.writerow(('Vendor zones:', 'Id', 'States'))
         
         for zone in zone_data:
-            writer.writerow((zone.id, ", ".join(zone.states.all().values_list('code', flat=True))))
+            writer.writerow(('', zone.id, ", ".join(zone.states.all().values_list('code', flat=True))))
         
         writer.writerow(('', ))       
     
@@ -216,19 +202,17 @@ class VendorCSV(BaseCSVView):
 
  
     def _render_amount(self, writer):
-        writer.writerow(('Vendor contract obligated amounts:',))
-        writer.writerow(('', ))
-        writer.writerow(('Low', 'High'))
-        writer.writerow((self.amount_low, self.amount_high))
+        writer.writerow(('Vendor contract obligated amounts:', 'Low', 'High'))
+        writer.writerow(('', self.amount_low, self.amount_high))
         writer.writerow(('', ))       
     
     def _process_amount(self, writer):
         range = self.get_params(self.amount_param)
         
-        self.amount_low = range[0]
-        self.amount_high = range[1]
+        if len(range) > 0:
+            self.amount_low = range[0]
+            self.amount_high = range[1] if len(range) > 1 else None
         
-        if self.amount_low or self.amount_high:
             if self.amount_low and self.amount_high:
                 self.vendor_data = self.vendor_data.filter(contract__obligated_amount_range=[self.amount_low, self.amount_high])
             elif self.amount_low:
@@ -242,12 +226,10 @@ class VendorCSV(BaseCSVView):
     def _render_agencies(self, writer):
         agency_data = contracts.Agency.objects.filter(id__in=self.agencies)
         
-        writer.writerow(('Vendor agencies contracted with:',))
-        writer.writerow(('', ))
-        writer.writerow(('Id', 'Name'))
+        writer.writerow(('Vendor agencies contracted with:', 'Id', 'Name'))
         
         for agency in agency_data:
-            writer.writerow((agency.id, agency.name))
+            writer.writerow(('', agency.id, agency.name))
         
         writer.writerow(('', ))       
     
@@ -260,12 +242,10 @@ class VendorCSV(BaseCSVView):
 
   
     def _render_countries(self, writer):
-        writer.writerow(('Vendor contract place of performance countries:',))
-        writer.writerow(('', ))
-        writer.writerow(('Code'))
+        writer.writerow(('Vendor contract place of performance countries:', 'Code'))
         
         for country in self.countries:
-            writer.writerow((country,))
+            writer.writerow(('', country))
         
         writer.writerow(('', ))       
     
@@ -278,12 +258,10 @@ class VendorCSV(BaseCSVView):
 
   
     def _render_states(self, writer):
-        writer.writerow(('Vendor contract place of performance states:',))
-        writer.writerow(('', ))
-        writer.writerow(('Code'))
+        writer.writerow(('Vendor contract place of performance states:', 'Code'))
         
         for state in self.states:
-            writer.writerow((state,))
+            writer.writerow(('', state))
         
         writer.writerow(('', ))       
     
@@ -297,14 +275,14 @@ class VendorCSV(BaseCSVView):
  
     def _render_vendors(self, writer):
         labels = ['Vendor DUNS', 'Vendor Name', 'Location', 'No. of Contracts', 'Vehicles']
-        labels.extend([sa_obj.name for sa_obj in self.setasides_data])
+        labels.extend([sa_obj.name for sa_obj in self.setaside_data])
         writer.writerow(labels)
         
         for vendor in self.vendor_data.iterator():
             setaside_list = []
             v_pools = vendor.pools.all()
             
-            for sa in self.setasides_data:
+            for sa in self.setaside_data:
                 if sa.id in v_pools.values_list('setasides', flat=True):
                     setaside_list.append('X')
                 else:
@@ -324,9 +302,9 @@ class VendorCSV(BaseCSVView):
                         sin_codes[sin_code] = True
                 
                 psc_codes = list(categories.PSC.objects.filter(sin__code__in=sin_codes.keys()).distinct().values_list('code', flat=True))
-                contracts = contracts.Contract.objects.filter(Q(PSC__in=psc_codes) | Q(NAICS__in=self.naics), vendor=vendor)
+                contract_list = contracts.Contract.objects.filter(Q(PSC__in=psc_codes) | Q(NAICS__in=self.naics), vendor=vendor)
             else:
-                contracts = contracts.Contract.objects.filter(vendor=vendor)
+                contract_list = contracts.Contract.objects.filter(vendor=vendor)
             
             vehicle_map = {}
             vendor_vehicles = []  
