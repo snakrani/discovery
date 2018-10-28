@@ -4,7 +4,7 @@ from test import fixtures as data
 from django.core.management import call_command
 
 
-class FPDSLoaderTest(case.RequestTestCase):
+class ContractsTest(case.RequestTestCase):
 
     fixtures = data.get_vendor_fixtures()
 
