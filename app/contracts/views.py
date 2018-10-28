@@ -2,13 +2,12 @@ from titlecase import titlecase
 
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseBadRequest
-from django.views import View
 
-from categories.models import Naics, PSC, SetAside
-from vendors.models import Vendor, Contact
-from contracts.models import Contract
+from discovery.csv import get_memberships, get_membership_name, BaseCSVView
 
-from discovery.csv import get_memberships, get_membership_name
+from categories import models as categories
+from vendors import models as vendors
+from contracts import models as contracts
 
 import csv
 import time
@@ -22,157 +21,174 @@ import time
 #
 
 
-class ContractCSV(View):
+class ContractCSV(BaseCSVView):
+    
+    def __init__(self, **kwargs):
+        super(ContractCSV, self).__init__(**kwargs)
+        
+        # Filters
+        self.vendor = None
+        self.number_of_employees = 'NA'
+        self.annual_revenue = 'NA'
+        
+        self.naics_param = 'naics'
+        self.naics = []
+        
+        self.memberships_param = 'memberships'
+        self.memberships = []
+        
+        self.countries_param = 'countries'
+        self.countries = []
+        
+        self.states_param = 'states'
+        self.states = []
+        
+        # Queries
+        self.setaside_data = categories.SetAside.objects.all().order_by('far_order')
+        self.contract_data = contracts.Contract.objects.all().order_by('-date_signed')
 
-    def render_vendor(self, request, writer, vendor_duns):
-        vendor = Vendor.objects.get(duns=vendor_duns)
-        contracts = Contract.objects.filter(vendor=vendor).order_by('-date_signed')[:1]
+
+    def _render_vendor(self, writer):
+        writer.writerow((self.vendor.name,))
+        writer.writerow(('SAM registration expires: ', self.vendor.sam_expiration_date.strftime("%m/%d/%Y")))
+        writer.writerow(('', ))
+        writer.writerow(('DUNS', self.vendor.duns))
+        writer.writerow(('CAGE Code', self.vendor.cage))
+        writer.writerow(('Employees', self.number_of_employees))
+        writer.writerow(('Annual Revenue', self.annual_revenue))
+        writer.writerow(('', ))
+        writer.writerow(('Address',))
+        writer.writerow((titlecase(self.vendor.sam_location.address),))
+        writer.writerow((titlecase(self.vendor.sam_location.city) + ', ' + self.vendor.sam_location.state.upper() + ', ' + self.vendor.sam_location.zipcode,))
+        
+        writer.writerow(('', ))
+
+    def _process_vendor(self, writer, duns):
+        self.vendor = vendors.Vendor.objects.get(duns=duns)
+        contracts = Contract.objects.filter(vendor=self.vendor).order_by('-date_signed')[:1]
         
         if contracts.count() > 0:
             latest_contract = contracts[0]
-            number_of_employees = latest_contract.number_of_employees    
-            annual_revenue = latest_contract.annual_revenue
-        else:
-            number_of_employees = 'NA'
-            annual_revenue = 'NA'
+            self.number_of_employees = latest_contract.number_of_employees    
+            self.annual_revenue = latest_contract.annual_revenue
         
-        writer.writerow((vendor.name,))
-        writer.writerow(('SAM registration expires: ', vendor.sam_expiration_date.strftime("%m/%d/%Y")))
-        writer.writerow(('', ))
-        writer.writerow(('DUNS', vendor.duns))
-        writer.writerow(('CAGE Code', vendor.cage))
-        writer.writerow(('Employees', number_of_employees))
-        writer.writerow(('Annual Revenue', annual_revenue))
-        writer.writerow(('', ))
-        writer.writerow(('Address',))
-        writer.writerow((titlecase(vendor.sam_location.address),))
-        writer.writerow((titlecase(vendor.sam_location.city) + ', ' + vendor.sam_location.state.upper() + ', ' + vendor.sam_location.zipcode,))
-        
-        writer.writerow(('', ))
-        return vendor
+        self.contract_data = self.contract_data.filter(vendor=self.vendor)
+        self._render_vendor(writer)
 
-
-    def render_naics(self, request, writer):
-        naics = None
-        
-        if 'naics' in request.GET:
-            naics = Naics.objects.get(code=request.GET['naics'])
-        
-        if naics:
-            writer.writerow(('Showing vendor contract history for PSCs related to {}'.format(naics.code), ))
-            writer.writerow(('NAICS: ', "{} - {}".format(naics.code, naics.description),))
-        else:
-            writer.writerow(("Showing this vendor's indexed contract history", ))
     
-        writer.writerow(('', ))
-        return naics
-
-
-    def render_memberships(self, request, writer, vendor):
-        setasides_all = SetAside.objects.all().order_by('far_order')
-        membership_map = get_memberships(vendor)
-        membership_rows = []
-        memberships = []
+    def _render_naics(self, writer):
+        naics_data = categories.Naics.objects.filter(code__in=self.naics)
         
-        if 'memberships' in request.GET:
-            memberships = request.GET['memberships'].split(',')
+        writer.writerow(('Contract NAICS codes:',))
+        writer.writerow(('', ))
+        writer.writerow(('Code', 'Description'))
+        
+        for naics in naics_data:
+            writer.writerow((naics.code, naics.description))
+        
+        writer.writerow(('', ))       
+    
+    def _process_naics(self, writer):
+        self.naics = self.get_params(self.naics_param)
+        
+        if len(self.naics) > 0:
+            naics_data = categories.Naics.objects.filter(code__in=self.naics)
+            sin_codes = {}
+                
+            for naics in naics_data:
+                for sin_code in list(naics.sin.all().values_list('code', flat=True)):
+                    sin_codes[sin_code] = True
+                
+            psc_codes = list(categories.PSC.objects.filter(sin__code__in=sin_codes.keys()).distinct().values_list('code', flat=True))
+            
+            self.contract_data = self.contract_data.filter(Q(PSC__in=psc_codes) | Q(NAICS__in=self.naics))
+            self._render_naics(writer)
+
+  
+    def _render_memberships(self, writer):
+        membership_map = get_memberships(self.vendor)
+        membership_rows = []
+        
+        writer.writerow(('Vendor vehicle memberships:',))
+        writer.writerow(('', ))
+        
+        labels = ['Filter', 'Contract PIID', 'Name', 'Contact name', 'Contact phone', 'Contact email']
+        labels.extend([sa_obj.name for sa_obj in self.setasides_data])
+        writer.writerow(labels)
         
         for piid, info in membership_map.items():
-            row = {}
             setasides = []
             
-            row['filter'] = piid in memberships
-            row['piid'] = piid
-            row['name'] = get_membership_name(membership_map, piid)
-            row['contact_name'] = ",".join(info['contacts'])
-            row['contact_phone'] = ",".join(info['phones'])
-            row['contact_email'] = ",".join(info['emails'])
-            
-            for sa in setasides_all:
+            for sa in self.setasides_data:
                 if sa.code in info['setasides']:
                     setasides.append('X')
                 else:
                     setasides.append('')
             
-            row['setasides'] = setasides
-            
-            membership_rows.append(row)
-        
-        labels = ['Filter', 'Contract PIID', 'Name', 'Contact name', 'Contact phone', 'Contact email']
-        labels.extend([sa_obj.name for sa_obj in setasides_all])
-        
-        writer.writerow(labels)
-        for filter_row in membership_rows:
             filter_data = [
-                'X' if filter_row['filter'] else '',
-                filter_row['piid'],
-                filter_row['name'],
-                filter_row['contact_name'],
-                filter_row['contact_phone'],
-                filter_row['contact_email']
+                'X' if piid in memberships else '',
+                piid,
+                get_membership_name(membership_map, piid),
+                ",".join(info['contacts']),
+                ",".join(info['phones']),
+                ",".join(info['emails'])
             ]
-            filter_data.extend(filter_row['setasides'])
+            filter_data.extend(setasides)
             writer.writerow(filter_data)
-    
-        writer.writerow(('', ))
-        return memberships
-    
-    
-    def render_location(self, request, writer):
-        country_code = None
-        state = None
         
-        if 'country' in request.GET:
-            country_code = request.GET['country']
-            
-        if 'state' in request.GET:
-            state = request.GET['state']
-            
-        if country_code or state:
-            location = ['Location']
-            
-            if country_code:
-                location.append(country_code)
-            if state:
-                location.append(state)
-            
-            writer.writerow(('', 'Country code', 'State code'))
-            writer.writerow(location)
-            writer.writerow(('', ))
-            
-        return {
-            'country': country_code,
-            'state': state
-        }
+        writer.writerow(('', ))       
     
+    def _process_memberships(self, writer):
+        self.memberships = self.get_params(self.memberships_param)
+        
+        if len(self.memberships) > 0:
+            self.contract_data = self.contract_data.filter(base_piid__in = self.memberships)
+            self._render_memberships(writer)
 
-    def render_contracts(self, writer, vendor, naics, memberships, location):
-        if naics:
-            try:
-                sin_codes = list(naics.sin.all().values_list('code', flat=True))
-                psc_codes = list(PSC.objects.filter(sin__code__in=sin_codes).distinct().values_list('code', flat=True))
-                contracts = Contract.objects.filter(Q(PSC__in=psc_codes) | Q(NAICS=naics.code), vendor=vendor).order_by('-date_signed')
+  
+    def _render_countries(self, writer):
+        writer.writerow(('Contract place of performance countries:',))
+        writer.writerow(('', ))
+        writer.writerow(('Code'))
         
-            except Exception:
-                contracts = Contract.objects.filter(NAICS=naics.code, vendor=vendor).order_by('-date_signed')
-        else:
-            contracts = Contract.objects.filter(vendor=vendor).order_by('-date_signed')
+        for country in self.countries:
+            writer.writerow((country,))
         
-        if len(memberships) > 0:
-            contracts = contracts.filter(base_piid__in = memberships)
-            
-        if location['country']:
-            contracts = contracts.filter(place_of_performance__country_code = location['country'])
+        writer.writerow(('', ))       
+    
+    def _process_countries(self, writer):
+        self.countries = self.get_params(self.countries_param)
         
-        if location['state']:
-            contracts = contracts.filter(place_of_performance__state = location['state'])
-         
+        if len(self.countries) > 0:
+            self.contract_data = self.contract_data.filter(place_of_performance__country_code__in=self.countries)
+            self._render_countries(writer)
+
+  
+    def _render_states(self, writer):
+        writer.writerow(('Contract place of performance states:',))
+        writer.writerow(('', ))
+        writer.writerow(('Code'))
+        
+        for state in self.states:
+            writer.writerow((state,))
+        
+        writer.writerow(('', ))       
+    
+    def _process_states(self, writer):
+        self.states = self.get_params(self.states_param)
+        
+        if len(self.states) > 0:
+            self.contract_data = self.contract_data.filter(place_of_performance__state__in=self.states)
+            self._render_states(writer)
+
+
+    def _render_contracts(self, writer):
         writer.writerow(("Work performed by a vendor is often reported under a different NAICS code due to FPDS restrictions.",))
         writer.writerow(('', ))
       
         writer.writerow(('Date Signed', 'PIID', 'Agency', 'Type', 'Value ($)', 'Email POC', 'Status'))
     
-        for contract in contracts.iterator():
+        for contract in self.contract_data.iterator():
             pricing_type = ''
             status = ''
             
@@ -185,7 +201,6 @@ class ContractCSV(View):
             writer.writerow((contract.date_signed.strftime("%m/%d/%Y"), contract.piid, titlecase(contract.agency.name), pricing_type, contract.obligated_amount, (contract.point_of_contact or "").lower(), status))
     
         writer.writerow(('', ))
-        return contracts
 
 
     def get(self, request, *args, **kwargs):
@@ -194,14 +209,16 @@ class ContractCSV(View):
         
         writer = csv.writer(response)    
         writer.writerow(('GSA Discovery vendor contract research results',))
-        writer.writerow(('URL: ' + request.build_absolute_uri(),))
+        writer.writerow(('URL: ' + self.request.build_absolute_uri(),))
         writer.writerow(('Time: ' + time.strftime('%b %d, %Y %l:%M%p %Z'),))
         writer.writerow(('', ))
         
-        vendor = self.render_vendor(request, writer, kwargs['vendor_duns'])
-        naics = self.render_naics(request, writer)
-        memberships = self.render_memberships(request, writer, vendor)
-        location = self.render_location(request, writer)
+        self._process_vendor(writer, kwargs['vendor_duns'])
+        self._process_naics(writer)
+        self._process_memberships(writer)
+        self._process_countries(writer)
+        self._process_states(writer)
         
-        self.render_contracts(writer, vendor, naics, memberships, location)
+        self._render_contracts(writer)
+        
         return response
