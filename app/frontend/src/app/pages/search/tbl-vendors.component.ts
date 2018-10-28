@@ -86,6 +86,37 @@ export class TblVendorsComponent implements OnInit, OnChanges {
     }
     return filters;
   }
+  showPoolMeetCriteria(pools: any[]) {
+    // let meet = '';
+    const service_categories = [];
+    for (const pool of pools) {
+      console.log(pool.id);
+      for (const filter of this.searchService.activeFilters) {
+        if (
+          filter.name === 'naics' ||
+          filter.name === 'pscs' ||
+          filter.name === 'service_categories'
+        ) {
+          for (const item of filter.selected) {
+            if (pool.id === item.pool_id) {
+              if (
+                this.searchService.existsIn(
+                  service_categories,
+                  item.pool_id,
+                  'pool_id'
+                )
+              ) {
+                service_categories.push({ pool_id: item.pool_id });
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // console.log(service_categories);
+    // return meet;
+  }
   getVendors(page) {
     this.loading = true;
     this.showSpinner(true);
@@ -208,6 +239,7 @@ export class TblVendorsComponent implements OnInit, OnChanges {
           }
         }
       }
+      vendor['pools'] = item.pools;
 
       if (item.pools[0].setasides) {
         for (const asides of item.pools[0].setasides) {

@@ -15,16 +15,73 @@
         item.description}}</option>
     </select>
     <select id="select_country" (change)="onChangeCountry()" [disabled]="!countries" [(ngModel)]="country" class="items-input">
-      <option value="0" selected="selected" [innerHTML]="!countries?'Loading countries...':'Country --'"></option>
+      <option value="0" selected="selected" [innerHTML]="!countries?'Loading countries...':'All Countries --'"></option>
       <option *ngFor="let item of countries" value="{{item.code}}">{{
         item.name}}</option>
     </select>
-    <select id="select_state" (change)="onChangeCountry()" [disabled]="!states || country!=='USA'" [(ngModel)]="state"
+    <!-- <select id="select_state" (change)="onChangeCountry()" [disabled]="!states || country!=='USA'" [(ngModel)]="state"
       class="items-input" [class.hide]="country!=='USA'">
       <option value="0" selected="selected">State --</option>
       <option *ngFor="let item of states" value="{{item.code}}">{{
         item.code}}</option>
-    </select></div>
+    </select> -->
+    <select id="select_state" (change)="onChangeCountry()" [disabled]="country!=='USA'" [(ngModel)]="state" class="items-input"
+      [class.hide]="country!=='USA'">
+      <option value="0" selected="selected">All States --</option>
+      <option value="AL">Alabama</option>
+      <option value="AK">Alaska</option>
+      <option value="AZ">Arizona</option>
+      <option value="AR">Arkansas</option>
+      <option value="CA">California</option>
+      <option value="CO">Colorado</option>
+      <option value="CT">Connecticut</option>
+      <option value="DE">Delaware</option>
+      <option value="DC">District Of Columbia</option>
+      <option value="FL">Florida</option>
+      <option value="GA">Georgia</option>
+      <option value="HI">Hawaii</option>
+      <option value="ID">Idaho</option>
+      <option value="IL">Illinois</option>
+      <option value="IN">Indiana</option>
+      <option value="IA">Iowa</option>
+      <option value="KS">Kansas</option>
+      <option value="KY">Kentucky</option>
+      <option value="LA">Louisiana</option>
+      <option value="ME">Maine</option>
+      <option value="MD">Maryland</option>
+      <option value="MA">Massachusetts</option>
+      <option value="MI">Michigan</option>
+      <option value="MN">Minnesota</option>
+      <option value="MS">Mississippi</option>
+      <option value="MO">Missouri</option>
+      <option value="MT">Montana</option>
+      <option value="NE">Nebraska</option>
+      <option value="NV">Nevada</option>
+      <option value="NH">New Hampshire</option>
+      <option value="NJ">New Jersey</option>
+      <option value="NM">New Mexico</option>
+      <option value="NY">New York</option>
+      <option value="NC">North Carolina</option>
+      <option value="ND">North Dakota</option>
+      <option value="OH">Ohio</option>
+      <option value="OK">Oklahoma</option>
+      <option value="OR">Oregon</option>
+      <option value="PA">Pennsylvania</option>
+      <option value="RI">Rhode Island</option>
+      <option value="SC">South Carolina</option>
+      <option value="SD">South Dakota</option>
+      <option value="TN">Tennessee</option>
+      <option value="TX">Texas</option>
+      <option value="UT">Utah</option>
+      <option value="VT">Vermont</option>
+      <option value="VA">Virginia</option>
+      <option value="WA">Washington</option>
+      <option value="WV">West Virginia</option>
+      <option value="WI">Wisconsin</option>
+      <option value="WY">Wyoming</option>
+    </select>
+
+  </div>
 
 </div>
 <div class="pad-top-bottom db">
@@ -36,10 +93,10 @@
 </div>
 <discovery-spinner *ngIf="spinner"></discovery-spinner>
 <div class="pad-bottom text-right" *ngIf="!history_no_results && !spinner">
-  <a href="/vendor/{{duns}}/csv/?{{params}}" target="_blank">
+  <a href="csv/contracts/{{duns}}/?{{params}}" target="_blank">
     Download
     vendor data(CSV)</a></div>
-<div id="overflow-contract-historyx" class="pad-bottom">
+<div id="overflow-contract-history" class="pad-bottom">
   <!-- Start Scroll Window -->
   <!-- <div class="scroll-view-topscroll scrollbar">
     <div class="scroll-div1">
@@ -71,10 +128,10 @@
           <discovery-th-sort [label]="'Value ($)'" [ordering]="'obligated_amount'" [selectedParentOrdering]="ordering"
             (emmitOrdering)="orderBy($event)"></discovery-th-sort>
         </th>
-        <!-- <th scope="col" class="tooltip-bottom col-small" data-tooltip="Sort by Status">
-              <discovery-th-sort [label]="'Status'" [width]="'60px'" [ordering]="'status_name'"
-                [selectedParentOrdering]="ordering" (emmitOrdering)="orderBy($event)"></discovery-th-sort>
-            </th> -->
+        <th scope="col" class="tooltip-bottom" data-tooltip="Sort by Place of Performance">
+          <discovery-th-sort [label]="'Place of Performance'" [width]="'auto'" [ordering]="'place_of_performance_location'"
+            [selectedParentOrdering]="ordering" (emmitOrdering)="orderBy($event)"></discovery-th-sort>
+        </th>
         <th scope="col" class="tooltip-bottom col-small" data-tooltip="Sort by NAIC">
           <discovery-th-sort [label]="'NAIC'" [width]="'40px'" [ordering]="'NAICS'" [selectedParentOrdering]="ordering"
             (emmitOrdering)="orderBy($event)"></discovery-th-sort>
@@ -90,12 +147,14 @@
 
         <td scope="row"><span [innerHTML]="getRowNum(i)"></span>.</td>
         <td>{{contract?.date_signed | date}}<br>{{contract.status?.name}}</td>
-        <td>{{contract?.piid}}<br>{{contract.pricing_type?.name}}</td>
-        <td><strong class="db">{{contract?.agency_name | titlecase}}</strong><span><a href="mailto:{{contract?.point_of_contact}}"
-              *ngIf="contract?.point_of_contact">Contact e-mail</a></span></td>
+        <td><span [innerHTML]="setPiid(contract.piid)"></span><span class="db"><a href="mailto:{{contract?.point_of_contact}}"
+              *ngIf="contract?.point_of_contact">Contact
+              e-mail</a></span></td>
+        <td><strong class="db">{{contract?.agency?.name | titlecase}}</strong></td>
 
-        <td>{{contract?.annual_revenue | currency: 'USD' : 'symbol' : '1.0'}}</td>
+        <td>{{contract?.annual_revenue | currency: 'USD' : 'symbol' : '1.0'}}<br>{{contract.pricing_type?.name}}</td>
 
+        <td [innerHTML]="setPoP(contract.place_of_performance)"></td>
         <td>
           {{contract?.NAICS}}
         </td>

@@ -1,3 +1,5 @@
+from django.views import View
+
 from categories.models import Vehicle
 
 
@@ -90,3 +92,19 @@ def get_membership_name(membership_map, piid):
         name += ' (Zones: ' + ",".join(zones) + ')'
     
     return name.strip()
+
+
+class BaseCSVView(View):
+    
+    def get_param(self, name, default = None):
+        if name in self.request.GET:
+            return self.request.GET[name]
+        
+        return default
+    
+    def get_params(self, name, default = []):
+        if name in self.request.GET:
+            return self.request.GET[name].split(',')
+        
+        return default
+

@@ -72,7 +72,8 @@ export class HeroComponent implements OnInit {
       .children('option:not(:first)')
       .remove();
     $('#keyword').select2({
-      data: data
+      data: data,
+      selectOnClose: true
     });
   }
   initPools() {
@@ -98,6 +99,7 @@ export class HeroComponent implements OnInit {
         const item = {};
         item['id'] = naic.code;
         item['text'] = naic.code + ' - ' + naic.description;
+        item['pool_id'] = pool.id;
         if (!this.searchService.existsIn(results, naic.code, 'id')) {
           results.push(item);
         }
@@ -113,6 +115,7 @@ export class HeroComponent implements OnInit {
         const item = {};
         item['id'] = psc.code;
         item['text'] = psc.code + ' - ' + psc.description;
+        item['pool_id'] = pool.id;
         if (!this.searchService.existsIn(results, psc.code, 'id')) {
           results.push(item);
         }

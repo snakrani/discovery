@@ -31,8 +31,8 @@ urlpatterns.extend([
     url(r'^developers?/?', RedirectView.as_view(url='/api/', permanent=False)),
 
     # Data export endpoints
-    url(r'^csv/vendors', vendors.VendorCSV, name="vendor-csv"),
-    url(r'^csv/contracts/(?P<vendor_duns>\w+)', contracts.ContractCSV, name="contract-csv"),
+    url(r'^csv/vendors', vendors.VendorCSV.as_view(), name="vendor-csv"),
+    url(r'^csv/contracts/(?P<vendor_duns>\w+)', contracts.ContractCSV.as_view(), name="contract-csv"),
 
     # Frontend routes
     url(r'^404$', TemplateView.as_view(template_name='index.html')),

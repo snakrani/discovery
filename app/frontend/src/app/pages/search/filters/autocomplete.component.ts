@@ -41,7 +41,8 @@ export class AutocompleteComponent implements OnChanges {
       .children('option:not(:first)')
       .remove();
     $('#' + id + '-autocomplete .autocomplete-drop').select2({
-      data: data
+      data: data,
+      selectOnClose: true
     });
   }
 }

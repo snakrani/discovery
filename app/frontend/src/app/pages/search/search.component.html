@@ -124,8 +124,8 @@
                                     </th>
                                     <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">
                                       <div class="row-serv-cat toggle_more" [class.show_all]="more_info">
-                                        <discovery-list [show_all]="true" [id]="vehicle.id" [items_to_show]="num_show"
-                                          [items]="vehicle.service_categories" [key]="'name'"></discovery-list>
+                                        <discovery-list [selected]="service_categories_selected" [show_all]="true" [id]="vehicle.id"
+                                          [items_to_show]="num_show" [items]="vehicle.service_categories" [key]="'name'"></discovery-list>
                                         <div class="gradient"></div>
                                       </div>
                                     </td>
@@ -140,8 +140,8 @@
                                     </th>
                                     <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">
                                       <div class="row-naics toggle_more" [class.show_all]="more_info">
-                                        <discovery-list [show_all]="true" [id]="vehicle.id" [items_to_show]="num_show"
-                                          [items]="vehicle.naics" [key]="'id'"></discovery-list>
+                                        <discovery-list [selected]="naics_selected" [columns]="'2'" [show_all]="true"
+                                          [id]="vehicle.id" [items_to_show]="num_show" [items]="vehicle.naics" [key]="'id'"></discovery-list>
                                         <div class="gradient"></div>
                                       </div>
                                     </td>
@@ -152,8 +152,8 @@
                                     </th>
                                     <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">
                                       <div class="row-pscs toggle_more" [class.show_all]="more_info">
-                                        <discovery-list [show_all]="true" [id]="vehicle.id" [items_to_show]="num_show"
-                                          [items]="vehicle.pscs" [key]="'id'"></discovery-list>
+                                        <discovery-list [selected]="pscs_selected" [columns]="'2'" [show_all]="true"
+                                          [id]="vehicle.id" [items_to_show]="num_show" [items]="vehicle.pscs" [key]="'id'"></discovery-list>
                                         <div class="gradient"></div>
                                       </div>
                                     </td>

@@ -244,8 +244,24 @@ export class FiltersComponent implements OnInit {
   getContractVehicles() {
     return this.vehicles;
   }
+  // getPscsSelected(): any[] {
+  //   let items = [];
+  //   if (this.filterPscComponent.getSelected().length > 0) {
+  //     items = this.filterPscComponent.getSelected();
+  //   }
+  //   return items;
+  // }
   setContractVehiclesInFilter(id: string, title: string) {
     this.filterContractVehiclesComponent.addItem(id, title);
+  }
+  filterNaicsByVehiclesInFilter(vehicles: any[]) {
+    this.filterNaicsComponent.setFilteredItems(vehicles);
+  }
+  filterPscsByVehiclesInFilter(vehicles: any[]) {
+    this.filterPscComponent.setFilteredItems(vehicles);
+  }
+  filterServiceCategoriesByVehiclesInFilter(vehicles: any[]) {
+    this.filterServiceCategories.setFilteredItems(vehicles);
   }
   getVehicleDescription(vehicle: string) {
     const desc = this.filterContractVehiclesComponent.getItemDescription(

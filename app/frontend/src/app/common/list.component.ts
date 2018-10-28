@@ -3,7 +3,14 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'discovery-list',
   templateUrl: './list.component.html',
-  styles: [``]
+  styles: [
+    `
+      .cols-2 li {
+        float: left;
+        width: 49.5% !important;
+      }
+    `
+  ]
 })
 export class ListComponent implements OnInit {
   @Input()
@@ -16,6 +23,10 @@ export class ListComponent implements OnInit {
   items_to_show = 5;
   @Input()
   key: string;
+  @Input()
+  columns = '1';
+  @Input()
+  selected: any[] = [];
 
   show_more = false;
   title_more = 'Show more';
@@ -31,7 +42,16 @@ export class ListComponent implements OnInit {
     }
   }
   getValue(item: any) {
-    return item[this.key];
+    return '<span>' + item[this.key] + '</span>';
+  }
+  isSelected(id: string): boolean {
+    let bool = false;
+    for (const items of this.selected) {
+      if (items === id) {
+        bool = true;
+      }
+    }
+    return bool;
   }
   showElements() {
     for (let i = 0; i < this.items.length; ++i) {
