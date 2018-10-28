@@ -76,7 +76,7 @@ class VendorCSV(BaseCSVView):
 
 
     def _render_keywords(self, writer):
-        keyword_data = categories.Keywords.objects.filter(id__in=self.keywords)
+        keyword_data = categories.Keyword.objects.filter(id__in=self.keywords)
         
         writer.writerow(('Service category keywords:', 'Name'))
         
@@ -130,7 +130,7 @@ class VendorCSV(BaseCSVView):
 
    
     def _render_vehicles(self, writer):
-        vehicle_data = categories.Vehicles.objects.filter(id__in=self.vehicles)
+        vehicle_data = categories.Vehicle.objects.filter(id__in=self.vehicles)
         
         writer.writerow(('Service category vehicles:', 'Id', 'Name', 'Point of Contact', 'Ordering Guide'))
         
@@ -167,7 +167,7 @@ class VendorCSV(BaseCSVView):
 
   
     def _render_setasides(self, writer):
-        setaside_data = categories.SetAside.objects.filter(id__in=self.setasides)
+        setaside_data = categories.SetAside.objects.filter(code__in=self.setasides)
         
         writer.writerow(('Vendor setasides:', 'Code', 'Name', 'Description'))
         
