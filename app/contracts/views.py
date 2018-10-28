@@ -65,10 +65,10 @@ class ContractCSV(BaseCSVView):
 
     def _process_vendor(self, writer, duns):
         self.vendor = vendors.Vendor.objects.get(duns=duns)
-        contracts = Contract.objects.filter(vendor=self.vendor).order_by('-date_signed')[:1]
+        contract_data = contracts.Contract.objects.filter(vendor=self.vendor).order_by('-date_signed')[:1]
         
-        if contracts.count() > 0:
-            latest_contract = contracts[0]
+        if contract_data.count() > 0:
+            latest_contract = contract_data[0]
             self.number_of_employees = latest_contract.number_of_employees    
             self.annual_revenue = latest_contract.annual_revenue
         
@@ -79,12 +79,10 @@ class ContractCSV(BaseCSVView):
     def _render_naics(self, writer):
         naics_data = categories.Naics.objects.filter(code__in=self.naics)
         
-        writer.writerow(('Contract NAICS codes:',))
-        writer.writerow(('', ))
-        writer.writerow(('Code', 'Description'))
+        writer.writerow(('Contract NAICS codes:', 'Code', 'Description'))
         
         for naics in naics_data:
-            writer.writerow((naics.code, naics.description))
+            writer.writerow(('', naics.code, naics.description))
         
         writer.writerow(('', ))       
     
@@ -109,24 +107,22 @@ class ContractCSV(BaseCSVView):
         membership_map = get_memberships(self.vendor)
         membership_rows = []
         
-        writer.writerow(('Vendor vehicle memberships:',))
-        writer.writerow(('', ))
-        
-        labels = ['Filter', 'Contract PIID', 'Name', 'Contact name', 'Contact phone', 'Contact email']
-        labels.extend([sa_obj.name for sa_obj in self.setasides_data])
+        labels = ['Vendor vehicle memberships:', 'Filter', 'Contract PIID', 'Name', 'Contact name', 'Contact phone', 'Contact email']
+        labels.extend([sa_obj.name for sa_obj in self.setaside_data])
         writer.writerow(labels)
         
         for piid, info in membership_map.items():
             setasides = []
             
-            for sa in self.setasides_data:
+            for sa in self.setaside_data:
                 if sa.code in info['setasides']:
                     setasides.append('X')
                 else:
                     setasides.append('')
             
             filter_data = [
-                'X' if piid in memberships else '',
+                '',
+                'X' if piid in self.memberships else '',
                 piid,
                 get_membership_name(membership_map, piid),
                 ",".join(info['contacts']),
@@ -147,12 +143,10 @@ class ContractCSV(BaseCSVView):
 
   
     def _render_countries(self, writer):
-        writer.writerow(('Contract place of performance countries:',))
-        writer.writerow(('', ))
-        writer.writerow(('Code'))
+        writer.writerow(('Contract place of performance countries:', 'Code'))
         
         for country in self.countries:
-            writer.writerow((country,))
+            writer.writerow(('', country))
         
         writer.writerow(('', ))       
     
@@ -165,12 +159,10 @@ class ContractCSV(BaseCSVView):
 
   
     def _render_states(self, writer):
-        writer.writerow(('Contract place of performance states:',))
-        writer.writerow(('', ))
-        writer.writerow(('Code'))
+        writer.writerow(('Contract place of performance states:', 'Code'))
         
         for state in self.states:
-            writer.writerow((state,))
+            writer.writerow(('', state))
         
         writer.writerow(('', ))       
     
