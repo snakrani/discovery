@@ -70,7 +70,7 @@ class VendorCSV(BaseCSVView):
         
         # Queries
         self.setaside_data = categories.SetAside.objects.all().order_by('far_order')
-        self.pool_data = vategories.Pool.objects.all().distinct()
+        self.pool_data = categories.Pool.objects.all().distinct()
         self.vendor_data = vendors.Vendor.objects.all().distinct()
 
 
@@ -90,7 +90,7 @@ class VendorCSV(BaseCSVView):
         self.keywords = self.get_params(self.keywords_param)
         
         if len(self.keywords) > 0:
-            self.pool_data.filter(keywords__id__in=self.keywords)
+            self.pool_data = self.pool_data.filter(keywords__id__in=self.keywords)
             self._render_keywords(writer)
     
     
@@ -110,7 +110,7 @@ class VendorCSV(BaseCSVView):
         self.naics = self.get_params(self.naics_param)
         
         if len(self.naics) > 0:
-            self.pool_data.filter(naics__in=self.naics)
+            self.pool_data = self.pool_data.filter(naics__in=self.naics)
             self._render_naics(writer)
 
    
@@ -130,7 +130,7 @@ class VendorCSV(BaseCSVView):
         self.psc = self.get_params(self.psc_param)
         
         if len(self.psc) > 0:
-            self.pool_data.filter(psc__in=self.psc)
+            self.pool_data = self.pool_data.filter(psc__in=self.psc)
             self._render_psc(writer)
 
    
@@ -150,7 +150,7 @@ class VendorCSV(BaseCSVView):
         self.vehicles = self.get_params(self.vehicles_param)
         
         if len(self.vehicles) > 0:
-            self.pool_data.filter(vehicle__in=self.vehicles)
+            self.pool_data = self.pool_data.filter(vehicle__in=self.vehicles)
             self._render_vehicles(writer)
 
    
@@ -170,8 +170,8 @@ class VendorCSV(BaseCSVView):
         self.pools = self.get_params(self.pools_param)
         
         if len(self.pools) > 0:
-            self.pool_data.filter(id__in=self.pools)
-            self.vendor_data.filter(pools__pool__id__in=list(self.pool_data.values_list('id', flat=True)))
+            self.pool_data = self.pool_data.filter(id__in=self.pools)
+            self.vendor_data = self.vendor_data.filter(pools__pool__id__in=list(self.pool_data.values_list('id', flat=True)))
             self._render_pools(writer)
 
   
@@ -191,7 +191,7 @@ class VendorCSV(BaseCSVView):
         self.setasides = self.get_params(self.setasides_param)
         
         if len(self.setasides) > 0:
-            self.vendor_data.filter(pools__setasides__code__in=self.setasides)
+            self.vendor_data = self.vendor_data.filter(pools__setasides__code__in=self.setasides)
             self._render_setasides(writer)
 
   
@@ -211,7 +211,7 @@ class VendorCSV(BaseCSVView):
         self.zones = self.get_params(self.zones_param)
         
         if len(self.zones) > 0:
-            self.vendor_data.filter(pools__zones__id__in=self.zones)
+            self.vendor_data = self.vendor_data.filter(pools__zones__id__in=self.zones)
             self._render_zones(writer)
 
  
@@ -230,11 +230,11 @@ class VendorCSV(BaseCSVView):
         
         if self.amount_low or self.amount_high:
             if self.amount_low and self.amount_high:
-                self.vendor_data.filter(contract__obligated_amount_range=[self.amount_low, self.amount_high])
+                self.vendor_data = self.vendor_data.filter(contract__obligated_amount_range=[self.amount_low, self.amount_high])
             elif self.amount_low:
-                self.vendor_data.filter(contract__obligated_amount_gte=self.amount_low)
+                self.vendor_data = self.vendor_data.filter(contract__obligated_amount_gte=self.amount_low)
             else:
-                self.vendor_data.filter(contract__obligated_amount_lte=self.amount_high)
+                self.vendor_data = self.vendor_data.filter(contract__obligated_amount_lte=self.amount_high)
             
             self._render_amount(writer)
 
@@ -255,7 +255,7 @@ class VendorCSV(BaseCSVView):
         self.agencies = self.get_params(self.agencies_param)
         
         if len(self.agencies) > 0:
-            self.vendor_data.filter(contract__agency__id__in=self.agencies)
+            self.vendor_data = self.vendor_data.filter(contract__agency__id__in=self.agencies)
             self._render_agencies(writer)
 
   
@@ -273,7 +273,7 @@ class VendorCSV(BaseCSVView):
         self.countries = self.get_params(self.countries_param)
         
         if len(self.countries) > 0:
-            self.vendor_data.filter(contract__place_of_performance__country_code__in=self.countries)
+            self.vendor_data = self.vendor_data.filter(contract__place_of_performance__country_code__in=self.countries)
             self._render_countries(writer)
 
   
@@ -291,7 +291,7 @@ class VendorCSV(BaseCSVView):
         self.states = self.get_params(self.states_param)
         
         if len(self.states) > 0:
-            self.vendor_data.filter(contract__place_of_performance__state__in=self.states)
+            self.vendor_data = self.vendor_data.filter(contract__place_of_performance__state__in=self.states)
             self._render_states(writer)
 
  
@@ -323,7 +323,7 @@ class VendorCSV(BaseCSVView):
                     for sin_code in list(naics.sin.all().values_list('code', flat=True)):
                         sin_codes[sin_code] = True
                 
-                psc_codes = list(categories.PSC.objects.filter(sin__code__in=sin_codes).distinct().values_list('code', flat=True))
+                psc_codes = list(categories.PSC.objects.filter(sin__code__in=sin_codes.keys()).distinct().values_list('code', flat=True))
                 contracts = contracts.Contract.objects.filter(Q(PSC__in=psc_codes) | Q(NAICS__in=self.naics), vendor=vendor)
             else:
                 contracts = contracts.Contract.objects.filter(vendor=vendor)
@@ -347,7 +347,7 @@ class VendorCSV(BaseCSVView):
         
         writer = csv.writer(response)    
         writer.writerow(('GSA Discovery vendor research results',))
-        writer.writerow(('URL: ' + request.build_absolute_uri(),))
+        writer.writerow(('URL: ' + self.request.build_absolute_uri(),))
         writer.writerow(('Time: ' + time.strftime('%b %d, %Y %l:%M%p %Z'),))
         writer.writerow(('', ))
         
