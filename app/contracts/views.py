@@ -3,138 +3,215 @@ from titlecase import titlecase
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseBadRequest
 
-from categories.models import Naics, PSC, SetAside
-from vendors.models import Vendor, Contact
-from contracts.models import Contract
+from discovery.csv import get_memberships, get_membership_name, BaseCSVView
 
-from discovery.csv import get_memberships, get_membership_name
+from categories import models as categories
+from vendors import models as vendors
+from contracts import models as contracts
 
 import csv
 import time
 
 
-def ContractCSV(request, vendor_duns):
-    response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="vendor_contracts.csv"'
-    writer = csv.writer(response)
+# Filters:
+# 
+#     naics={CODE},...
+#     memberships={PIID},...
+#     countries={CODE},...
+#     states={CODE},...
+#
 
-    # Vendor loading
-    vendor = Vendor.objects.get(duns=vendor_duns)
-    membership_map = get_memberships(vendor)
-    membership_rows = []
-    
-    naics = None    
-    memberships = []
-    
-    setasides_all = SetAside.objects.all().order_by('far_order')
-    
-    if 'naics' in request.GET:
-        naics = Naics.objects.get(code=request.GET['naics'])
-   
-    if 'memberships' in request.GET:
-        memberships = request.GET['memberships'].split(',')
-        
-    for piid, info in membership_map.items():
-        row = {}
-        setasides = []
-        
-        row['filter'] = piid in memberships
-        row['piid'] = piid
-        row['name'] = get_membership_name(membership_map, piid)
-        row['contact_name'] = ",".join(info['contacts'])
-        row['contact_phone'] = ",".join(info['phones'])
-        row['contact_email'] = ",".join(info['emails'])
-        
-        for sa in setasides_all:
-            if sa.code in info['setasides']:
-                setasides.append('X')
-            else:
-                setasides.append('')
-        
-        row['setasides'] = setasides
-        
-        membership_rows.append(row)
-                    
-    contracts = Contract.objects.filter(vendor=vendor).order_by('-date_signed')[:1]
-    
-    if contracts.count() > 0:
-        latest_contract = contracts[0]
-        number_of_employees = latest_contract.number_of_employees    
-        annual_revenue = latest_contract.annual_revenue
-    else:
-        number_of_employees = 'NA'
-        annual_revenue = 'NA'
-    
-    # Contract filtering
-    if naics:
-        psc_codes = list(PSC.objects.filter(naics__code=naics.code).distinct().values_list('code', flat=True))    
-        contracts = Contract.objects.filter(Q(PSC__in=psc_codes) | Q(NAICS=naics.code), vendor=vendor).order_by('-date_signed')
-    else:
-        contracts = Contract.objects.filter(vendor=vendor).order_by('-date_signed')
-    
-    if len(memberships) > 0:
-        contracts = contracts.filter(base_piid__in = memberships) 
-        
-    # CSV generation
-    writer.writerow(('GSA Discovery research results',))
-    writer.writerow(('URL: ' + request.build_absolute_uri(),))
-    writer.writerow(('Time: ' + time.strftime('%b %d, %Y %l:%M%p %Z'),))
-    writer.writerow(('', ))
-    
-    writer.writerow((vendor.name,))
-    writer.writerow(('SAM registration expires: ', vendor.sam_expiration_date.strftime("%m/%d/%Y")))
-    writer.writerow(('', ))
-    writer.writerow(('DUNS', vendor.duns))
-    writer.writerow(('CAGE Code', vendor.cage))
-    writer.writerow(('Employees', number_of_employees))
-    writer.writerow(('Annual Revenue', annual_revenue))
-    writer.writerow(('', ))
-    writer.writerow(('Address',))
-    writer.writerow((titlecase(vendor.sam_location.address),))
-    writer.writerow((titlecase(vendor.sam_location.city) + ', ' + vendor.sam_location.state.upper() + ', ' + vendor.sam_location.zipcode,))
-    
-    writer.writerow(('', ))
-    
-    filter_labels = ['Filter', 'Contract PIID', 'Name', 'Contact name', 'Contact phone', 'Contact email']
-    filter_labels.extend([sa_obj.name for sa_obj in setasides_all])
-    
-    writer.writerow(filter_labels)
-    for filter_row in membership_rows:
-        filter_data = [
-            'X' if filter_row['filter'] else '',
-            filter_row['piid'],
-            filter_row['name'],
-            filter_row['contact_name'],
-            filter_row['contact_phone'],
-            filter_row['contact_email']
-        ]
-        filter_data.extend(filter_row['setasides'])
-        writer.writerow(filter_data)
 
-    writer.writerow(('', ))
+class ContractCSV(BaseCSVView):
     
-    if naics:
-        writer.writerow(('Showing vendor contract history for PSCs related to {}'.format(naics.code), ))
-        writer.writerow(('NAICS: ', "{} - {}".format(naics.code, naics.description),))
-    else:
-        writer.writerow(("Showing this vendor's indexed contract history", ))
+    def __init__(self, **kwargs):
+        super(ContractCSV, self).__init__(**kwargs)
+        
+        # Filters
+        self.vendor = None
+        self.number_of_employees = 'NA'
+        self.annual_revenue = 'NA'
+        
+        self.naics_param = 'naics'
+        self.naics = []
+        
+        self.memberships_param = 'memberships'
+        self.memberships = []
+        
+        self.countries_param = 'countries'
+        self.countries = []
+        
+        self.states_param = 'states'
+        self.states = []
+        
+        # Queries
+        self.setaside_data = categories.SetAside.objects.all().order_by('far_order')
+        self.contract_data = contracts.Contract.objects.all().order_by('-date_signed')
 
-    writer.writerow(('', ))
-    writer.writerow(("Work performed by a vendor is often reported under a different NAICS code due to FPDS restrictions.",))
-    writer.writerow(('', ))
+
+    def _render_vendor(self, writer):
+        writer.writerow((self.vendor.name,))
+        writer.writerow(('SAM registration expires: ', self.vendor.sam_expiration_date.strftime("%m/%d/%Y")))
+        writer.writerow(('', ))
+        writer.writerow(('DUNS', self.vendor.duns))
+        writer.writerow(('CAGE Code', self.vendor.cage))
+        writer.writerow(('Employees', self.number_of_employees))
+        writer.writerow(('Annual Revenue', self.annual_revenue))
+        writer.writerow(('', ))
+        writer.writerow(('Address',))
+        writer.writerow((titlecase(self.vendor.sam_location.address),))
+        writer.writerow((titlecase(self.vendor.sam_location.city) + ', ' + self.vendor.sam_location.state.upper() + ', ' + self.vendor.sam_location.zipcode,))
+        
+        writer.writerow(('', ))
+
+    def _process_vendor(self, writer, duns):
+        self.vendor = vendors.Vendor.objects.get(duns=duns)
+        contract_data = contracts.Contract.objects.filter(vendor=self.vendor).order_by('-date_signed')[:1]
+        
+        if contract_data.count() > 0:
+            latest_contract = contract_data[0]
+            self.number_of_employees = latest_contract.number_of_employees    
+            self.annual_revenue = latest_contract.annual_revenue
+        
+        self.contract_data = self.contract_data.filter(vendor=self.vendor)
+        self._render_vendor(writer)
+
     
-    writer.writerow(('Date Signed', 'PIID', 'Agency', 'Type', 'Value ($)', 'Email POC', 'Status'))
-
-    for contract in contracts:
-        pricing_type = ''
-        status = ''
+    def _render_naics(self, writer):
+        naics_data = categories.Naics.objects.filter(code__in=self.naics)
         
-        if contract.pricing_type:
-            pricing_type = contract.pricing_type.name
+        writer.writerow(('Contract NAICS codes:', 'Code', 'Description'))
         
-        if contract.status:
-            status = contract.status.name
+        for naics in naics_data:
+            writer.writerow(('', naics.code, naics.description))
+        
+        writer.writerow(('', ))       
+    
+    def _process_naics(self, writer):
+        self.naics = self.get_params(self.naics_param)
+        
+        if len(self.naics) > 0:
+            naics_data = categories.Naics.objects.filter(code__in=self.naics)
+            sin_codes = {}
                 
-        writer.writerow((contract.date_signed.strftime("%m/%d/%Y"), contract.piid, titlecase(contract.agency_name), pricing_type, contract.obligated_amount, (contract.point_of_contact or "").lower(), status))
+            for naics in naics_data:
+                for sin_code in list(naics.sin.all().values_list('code', flat=True)):
+                    sin_codes[sin_code] = True
+                
+            psc_codes = list(categories.PSC.objects.filter(sin__code__in=sin_codes.keys()).distinct().values_list('code', flat=True))
+            
+            self.contract_data = self.contract_data.filter(Q(PSC__in=psc_codes) | Q(NAICS__in=self.naics))
+            self._render_naics(writer)
 
-    return response
+  
+    def _render_memberships(self, writer):
+        membership_map = get_memberships(self.vendor)
+        membership_rows = []
+        
+        labels = ['Vendor vehicle memberships:', 'Filter', 'Contract PIID', 'Name', 'Contact name', 'Contact phone', 'Contact email']
+        labels.extend([sa_obj.name for sa_obj in self.setaside_data])
+        writer.writerow(labels)
+        
+        for piid, info in membership_map.items():
+            setasides = []
+            
+            for sa in self.setaside_data:
+                if sa.code in info['setasides']:
+                    setasides.append('X')
+                else:
+                    setasides.append('')
+            
+            filter_data = [
+                '',
+                'X' if piid in self.memberships else '',
+                piid,
+                get_membership_name(membership_map, piid),
+                ",".join(info['contacts']),
+                ",".join(info['phones']),
+                ",".join(info['emails'])
+            ]
+            filter_data.extend(setasides)
+            writer.writerow(filter_data)
+        
+        writer.writerow(('', ))       
+    
+    def _process_memberships(self, writer):
+        self.memberships = self.get_params(self.memberships_param)
+        
+        if len(self.memberships) > 0:
+            self.contract_data = self.contract_data.filter(base_piid__in = self.memberships)
+            self._render_memberships(writer)
+
+  
+    def _render_countries(self, writer):
+        writer.writerow(('Contract place of performance countries:', 'Code'))
+        
+        for country in self.countries:
+            writer.writerow(('', country))
+        
+        writer.writerow(('', ))       
+    
+    def _process_countries(self, writer):
+        self.countries = self.get_params(self.countries_param)
+        
+        if len(self.countries) > 0:
+            self.contract_data = self.contract_data.filter(place_of_performance__country_code__in=self.countries)
+            self._render_countries(writer)
+
+  
+    def _render_states(self, writer):
+        writer.writerow(('Contract place of performance states:', 'Code'))
+        
+        for state in self.states:
+            writer.writerow(('', state))
+        
+        writer.writerow(('', ))       
+    
+    def _process_states(self, writer):
+        self.states = self.get_params(self.states_param)
+        
+        if len(self.states) > 0:
+            self.contract_data = self.contract_data.filter(place_of_performance__state__in=self.states)
+            self._render_states(writer)
+
+
+    def _render_contracts(self, writer):
+        writer.writerow(("Work performed by a vendor is often reported under a different NAICS code due to FPDS restrictions.",))
+        writer.writerow(('', ))
+      
+        writer.writerow(('Date Signed', 'PIID', 'Agency', 'Type', 'Value ($)', 'Email POC', 'Status'))
+    
+        for contract in self.contract_data.iterator():
+            pricing_type = ''
+            status = ''
+            
+            if contract.pricing_type:
+                pricing_type = contract.pricing_type.name
+            
+            if contract.status:
+                status = contract.status.name
+                    
+            writer.writerow((contract.date_signed.strftime("%m/%d/%Y"), contract.piid, titlecase(contract.agency.name), pricing_type, contract.obligated_amount, (contract.point_of_contact or "").lower(), status))
+    
+        writer.writerow(('', ))
+
+
+    def get(self, request, *args, **kwargs):
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="vendor_contracts.csv"'
+        
+        writer = csv.writer(response)    
+        writer.writerow(('GSA Discovery vendor contract research results',))
+        writer.writerow(('URL: ' + self.request.build_absolute_uri(),))
+        writer.writerow(('Time: ' + time.strftime('%b %d, %Y %l:%M%p %Z'),))
+        writer.writerow(('', ))
+        
+        self._process_vendor(writer, kwargs['vendor_duns'])
+        self._process_naics(writer)
+        self._process_memberships(writer)
+        self._process_countries(writer)
+        self._process_states(writer)
+        
+        self._render_contracts(writer)
+        
+        return response
