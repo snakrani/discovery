@@ -1,6 +1,15 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+  ViewChild
+} from '@angular/core';
 import { SearchService } from '../search.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FilterSelectedComponent } from './filter-selected.component';
 declare let document: any;
 declare let autocomplete: any;
 @Component({
@@ -8,11 +17,14 @@ declare let autocomplete: any;
   templateUrl: './filter-psc.component.html',
   styles: []
 })
-export class FilterPscComponent implements OnInit {
+export class FilterPscComponent implements OnInit, OnChanges {
+  @ViewChild(FilterSelectedComponent)
+  msgAddedItem: FilterSelectedComponent;
   @Input()
-  items: any[] = [];
-  items_w_codes: any[] = [];
+  items: any[];
+  items_filtered: any[] = [];
   items_selected: any[] = [];
+  keywords_results: any[] = [];
   @Input()
   opened = false;
   @Output()
@@ -20,111 +32,203 @@ export class FilterPscComponent implements OnInit {
   @Output()
   emmitLoaded: EventEmitter<string> = new EventEmitter();
   @Output()
-  emmitNaics: EventEmitter<number> = new EventEmitter();
+  emmitPSCs: EventEmitter<any> = new EventEmitter();
+  @Output()
+  emitClearedSelected: EventEmitter<boolean> = new EventEmitter();
   name = 'PSCs';
-  queryName = 'psc_performance';
-  id = 'filter-psc-performance';
+  queryName = 'pscs';
+  id = 'filter-pscs';
+  placeholder;
   error_message;
-  psc;
   /** Sample json
   {
 
   };
   */
-  /** Generate inputs labels & values
-   *  with these
-   */
+
   json_value = 'id';
-  json_description = 'description';
+  json_description = 'text';
   constructor(
     private searchService: SearchService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
-
   ngOnInit() {}
-  // setInputItems() {
-  //   // Stop observable
-  //   this.searchService.getPSCs(this.psc).subscribe(
-  //     data => {
-  //       this.items = this.buildList(data['results']);
-  //       autocomplete(document.getElementById('pscs-input'), this.items);
-  //     },
-  //     error => (this.error_message = <any>error)
-  //   );
-  // }
-  getPSCsbyNAICs(naics) {
-    this.searchService.getPSCsByNAICs(naics).subscribe(
-      data => {
-        // this.items = this.buildList(data['results']);
-        this.items = data['results'];
-        console.log(data['results']);
+  ngOnChanges() {
+    if (this.items.length > 1) {
+      this.setKeywordsList();
+    }
+  }
+  setKeywordsList() {
+    this.items = this.buildPSCsItems(this.items);
 
-        // this.items_w_codes = data['results'];
-        // autocomplete(document.getElementById('pscs-input'), this.items);
-        /** Grab the queryparams and sets default values
-         *  on inputs Ex. checked, selected, keywords, etc */
-        if (this.route.snapshot.queryParamMap.has(this.queryName)) {
-          const values: string[] = this.route.snapshot.queryParamMap
-            .get(this.queryName)
-            .split('__');
-          for (const item of values) {
-            this.addItem(item);
-          }
-          /** Open accordion */
-          this.opened = true;
-        } else {
-          this.opened = false;
+    /** Grab the queryparams and sets default values
+     *  on inputs Ex. checked, selected, keywords, etc */
+    if (this.route.snapshot.queryParamMap.has(this.queryName)) {
+      const values: string[] = this.route.snapshot.queryParamMap
+        .get(this.queryName)
+        .split('__');
+
+      for (const id of values) {
+        if (!this.searchService.existsIn(this.items_selected, id, 'value')) {
+          this.addItem(id);
         }
-        this.emmitLoaded.emit(this.queryName);
-      },
-      error => (this.error_message = <any>error)
-    );
-  }
-  searchTerm(term: string) {
-    if (term !== '') {
-      this.searchService.getPSCsByTerm(term).subscribe(
-        data => {
-          // this.items = this.buildList(data['results']);
-          this.items = data['results'];
-          console.log(data['results']);
-          this.emmitLoaded.emit(this.queryName);
-          // this.items_w_codes = data['results'];
-          // autocomplete(document.getElementById('pscs-input'), this.items);
-          /** Grab the queryparams and sets default values
-           *  on inputs Ex. checked, selected, keywords, etc */
-          if (this.route.snapshot.queryParamMap.has(this.queryName)) {
-            const values: string[] = this.route.snapshot.queryParamMap
-              .get(this.queryName)
-              .split('__');
-            for (const item of values) {
-              this.addItem(item);
-            }
-            /** Open accordion */
-            this.opened = true;
-          } else {
-            this.opened = false;
-          }
-        },
-        error => (this.error_message = <any>error)
-      );
+      }
+      /** Open accordion */
+      this.opened = true;
     }
-  }
-  addPSC() {
-    const value = document.getElementById('pscs-input').value;
-    if (!this.exists(value) && value !== '0') {
-      this.addItem(value);
+    /** Check if there are selected vehicles
+     *  and sort dropdown based on vehicle id
+     */
+    if (this.route.snapshot.queryParamMap.has('vehicles')) {
+      const values: string[] = this.route.snapshot.queryParamMap
+        .get('vehicles')
+        .split('__');
+
+      this.setFilteredItems(values);
+    } else {
+      this.setFilteredItems(['All']);
     }
+
+    this.placeholder = 'Enter PSC or keywords...';
+    this.emmitLoaded.emit(this.queryName);
   }
-  exists(value: string): boolean {
-    for (let i = 0; i < this.items_selected.length; i++) {
-      if (this.items_selected[i]['value'] === value) {
-        return true;
+  setFilteredItems(vehicles) {
+    this.items_filtered =
+      vehicles[0] !== 'All' ? this.filterByVehicles(vehicles) : this.items;
+    this.items_filtered.sort(this.searchService.sortByCodeAsc);
+    this.keywords_results = this.items_filtered;
+  }
+  buildPSCsItems(obj: any[]): any[] {
+    const pscs = [];
+    for (const pool of obj) {
+      for (const psc of pool.psc) {
+        const item = {};
+        item['id'] = psc.code;
+        item['text'] = psc.code + ' - ' + psc.description;
+        item['description'] = psc.description;
+        item['vehicle_id'] = pool.vehicle.id;
+        item['pool_id'] = pool.id;
+        if (!this.searchService.existsIn(pscs, psc.code, 'id')) {
+          pscs.push(item);
+        }
       }
     }
-    return false;
+    pscs.sort(this.searchService.sortByIdAsc);
+    return pscs;
   }
-  getSelected(): any[] {
+  returnUnique(items: any[]): any[] {
+    const unique_items = [];
+    for (const item of items) {
+      if (!this.searchService.existsIn(unique_items, item.id, 'id')) {
+        unique_items.push(item);
+      }
+    }
+    return unique_items;
+  }
+  getItemId(value: string): string {
+    if (value) {
+      for (let i = 0; i < this.items.length; i++) {
+        if (this.items[i][this.json_description] === value) {
+          return this.items[i][this.json_value];
+        }
+      }
+    }
+  }
+  getItemDescription(id: string): string {
+    if (id) {
+      for (let i = 0; i < this.items.length; i++) {
+        if (this.items[i][this.json_value] === id) {
+          return this.items[i]['description'];
+        }
+      }
+    }
+  }
+  addKeywords(code) {
+    if (code === '0') {
+      this.reset();
+      return;
+    }
+    if (
+      !this.searchService.existsIn(this.items_selected, code, 'value') &&
+      this.searchService.existsIn(this.items_filtered, code, 'id')
+    ) {
+      this.addItem(code);
+    }
+  }
+  addItem(id: string) {
+    const item = {};
+    if (id && id !== '') {
+      item['value'] = id;
+      item['description'] = this.getItemDescription(id);
+      item['pools_ids'] = this.getPoolsIds(id);
+      this.items_selected.push(item);
+    }
+    this.emmitSelected.emit(1);
+    this.msgAddedItem.showMsg();
+  }
+  getPoolsIds(id: string): any[] {
+    const ids = [];
+    for (const prop of this.items) {
+      if (prop.id === id) {
+        ids.push(prop.pool_id);
+      }
+    }
+    return ids;
+  }
+  filterByVehicles(vehicles: any[]) {
+    const items: any[] = [];
+    for (const item of vehicles) {
+      for (const prop of this.items) {
+        const arr = item.split('_');
+        if (prop['vehicle_id'].indexOf(arr[0]) !== -1) {
+          if (!this.searchService.existsIn(items, prop.id, 'id')) {
+            items.push(prop);
+          }
+        }
+      }
+    }
+    return items;
+  }
+  getPSCsByVehicle(vehicle: string): any[] {
+    let items: any[] = [];
+    const abr = vehicle.substr(0, 3);
+    items = this.items.filter(pscs => pscs.vehicle_id.indexOf(abr) !== -1);
+    return items;
+  }
+
+  buildItemsByVehicle(obj: any[]) {
+    const pscs = [];
+    for (const pool of obj) {
+      const item = {};
+      item['vehicle_id'] = pool.vehicle.id;
+      item['pscs'] = this.setPSCs(pool.pscs);
+      if (
+        !this.searchService.existsIn(pscs, pscs['vehicle_id'], 'vehicle_id')
+      ) {
+        pscs.push(item);
+      }
+    }
+    return pscs;
+  }
+  setPSCs(obj: any[]) {
+    const items: any[] = [];
+    for (const i of obj) {
+      const item = {};
+      item['code'] = i.code;
+      item['description'] = i.description;
+      if (!this.searchService.existsIn(items, i.code, 'code')) {
+        items.push(item);
+      }
+    }
+    return items;
+  }
+
+  getSelected(selectedOnly: boolean): any[] {
     const item = [];
+    if (selectedOnly) {
+      return this.items_selected;
+    }
     if (this.items_selected.length > 0) {
       item['name'] = this.queryName;
       item['description'] = this.name;
@@ -132,39 +236,19 @@ export class FilterPscComponent implements OnInit {
     }
     return item;
   }
-  buildList(arr): any[] {
-    const results: any[] = [];
-    for (const ele of arr) {
-      if (ele['description']) {
-        results.push(ele['description']);
-      }
-    }
-    return results;
-  }
   reset() {
     this.items_selected = [];
-    this.psc = '0';
+    this.opened = false;
+    this.emitClearedSelected.emit(true);
   }
-  getItemCode(term: string): string {
-    for (let i = 0; i < this.items_w_codes.length; i++) {
-      if (this.items_w_codes[i]['description'] === term) {
-        return this.items_w_codes[i]['code'];
-      }
-    }
-  }
-  addItem(value: string) {
-    console.log(value);
-    const item = {};
-    item['value'] = this.getItemCode(value);
-    item['description'] = value;
-    this.items_selected.push(item);
-    this.emmitSelected.emit(1);
-  }
-  removeItem(key: string) {
+  removeItem(value: string) {
     for (let i = 0; i < this.items_selected.length; i++) {
-      if (this.items_selected[i]['value'] === key) {
+      if (this.items_selected[i]['value'] === value) {
         this.items_selected.splice(i, 1);
       }
+    }
+    if (this.items_selected.length === 0) {
+      this.emitClearedSelected.emit(true);
     }
     this.emmitSelected.emit(0);
   }

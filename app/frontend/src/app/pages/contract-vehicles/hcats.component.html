@@ -9,7 +9,7 @@
   <section class="usa-section">
     <div class="usa-grid">
       <div class="usa-width-one-sixth best-in-class"></div>
-      <div class="usa-width-two-thirds">
+      <div class="usa-width-one-half">
         <p class="usa-font-lead">The HCaTS Program is the result of partnership between Office of Personnel Management
           (OPM) and General Services Administration (GSA). HCaTS is comprised of two indefinite-delivery
           indefinite-quantity (IDIQ) governmentwide contract vehicles: HCaTS and HCaTS SB. These vehicles provide
@@ -28,20 +28,14 @@
           <li>Allows ancillary services & other direct costs at the task order level
           </li>
         </ul>
-      </div>
-    </div>
-  </section>
-
-  <section class="usa-section">
-    <div class="usa-grid">
-      <div class="usa-width-one-half">
         <h3>HCaTS and HCaTS SB Pool Disciplines</h3>
         <div *ngIf="pools.length===0">Loading...</div>
-        <ul *ngIf="pools.length>0">
-          <li *ngFor="let pool of pools"><a [routerLink]="['/search']" [queryParams]="{vehicles: 'HCATS', service_categories: pool.id}">{{pool.name}}</a></li>
+        <ul *ngIf="pools.length>0" class="usa-font-lead">
+          <li *ngFor="let pool of pools"><a [routerLink]="['/search']" [queryParams]="{vehicles: 'HCATS', service_categories: pool.id}">
+              {{pool.number}} - {{pool.name}}</a></li>
         </ul>
       </div>
-      <div class="usa-width-one-half">
+      <div class="usa-width-one-fourth">
         <h3>OASIS Links:</h3>
         <ul>
           <li><a href="https://www.gsa.gov/acquisition/products-services/human-capital/human-capital-and-training-solutions"
@@ -55,70 +49,8 @@
           <li><a href="mailto:hcats@gsa.gov" target="_blank">Contact HCaTS</a></li>
           <li><a href="mailto:sbhcats@gsa.gov" target="_blank">Contact HCaTS SB</a></li>
         </ul>
-
       </div>
+
     </div>
   </section>
-  <!-- <section class="usa-section">
-      <div class="usa-grid">
-        <h3>Recent Contract Actions on OASIS SB</h3>
-        <table class="usa-table-borderless">
-          <thead>
-            <tr>
-              <th scope="col">Date Signed</th>
-              <th scope="col">PIID</th>
-              <th scope="col">Agency</th>
-              <th scope="col">Company Name</th>
-              <th scope="col">Type</th>
-              <th scope="col">Value ($)</th>
-              <th scope="col">Status</th>
-              <th scope="col">NAICS</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">9/10/2015</th>
-              <td>####</td>
-              <td>Agency name</td>
-              <td>Company name</td>
-              <td>Type</td>
-              <td>$$$</td>
-              <td>Status here</td>
-              <td>Codes here</td>
-            </tr>
-            <tr>
-              <th scope="row">9/10/2015</th>
-              <td>####</td>
-              <td>Agency name</td>
-              <td>Company name</td>
-              <td>Type</td>
-              <td>$$$</td>
-              <td>Status here</td>
-              <td>Codes here</td>
-            </tr>
-            <tr>
-              <th scope="row">9/10/2015</th>
-              <td>####</td>
-              <td>Agency name</td>
-              <td>Company name</td>
-              <td>Type</td>
-              <td>$$$</td>
-              <td>Status here</td>
-              <td>Codes here</td>
-            </tr>
-            <tr>
-              <th scope="row">9/10/2015</th>
-              <td>####</td>
-              <td>Agency name</td>
-              <td>Company name</td>
-              <td>Type</td>
-              <td>$$$</td>
-              <td>Status here</td>
-              <td>Codes here</td>
-            </tr>
-
-          </tbody>
-        </table>
-      </div>
-    </section> -->
 </main>

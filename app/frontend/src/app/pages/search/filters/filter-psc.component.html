@@ -2,26 +2,14 @@
   {{name}}
 </button>
 <div id="{{id}}" class="usa-accordion-content" [attr.aria-hidden]="!opened">
-
   <div class="usa-search">
-
-    <div class="autocomplete form-horizontal">
-      <input id="pscs-input" class="items-input" pattern=".+" [(ngModel)]="psc" type="text" (ngModelChange)="searchTerm($event)"
-        placeholder="Enter PSC Keyword" autocomplete="off">
-      <button class="icon-plus btn-plus" type="submit" (click)="addPSC()">
-        <span class="usa-sr-only">Add NAIC to list</span>
-      </button>
-      <select id="pscs-select" [disabled]="!items" class="items-input">
-        <option *ngFor="let item of items" value="{{item.code}}">{{item.description}}</option>
-      </select>
-    </div>
-
+    <discovery-autocomplete (emitCode)="addKeywords($event)" [id]="id" [placeholder]="placeholder" [keywords_results]="keywords_results"></discovery-autocomplete>
   </div>
   <ul *ngIf="items_selected" class="items-selected">
-    <li *ngFor="let psc of items_selected">
-      <a (click)="removeItem(psc.value)" title="Remove {{psc.description}}"><span class="usa-sr-only">Remove
-          {{psc.description}}</span></a>{{psc.description}}
+    <li *ngFor="let keyword of items_selected">
+      <a (click)="removeItem(keyword.value)" title="Remove {{keyword.description}}"><span class="usa-sr-only">Remove
+          {{keyword.value}}</span></a>{{keyword.value}} - {{keyword.description}}
     </li>
   </ul>
-
+  <discovery-filter-selected [id]="'msg-psc-selected'" [label]="'Added PSC code'"></discovery-filter-selected>
 </div>

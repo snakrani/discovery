@@ -7,6 +7,7 @@ import {
   EventEmitter
 } from '@angular/core';
 import { SearchService } from './search.service';
+import { Router, ActivatedRoute } from '@angular/router';
 declare const window: any;
 @Component({
   selector: 'discovery-tbl-vendors',
@@ -16,8 +17,24 @@ declare const window: any;
 export class TblVendorsComponent implements OnInit, OnChanges {
   @Input()
   vehicle = '';
+  @Input()
+  obligated_amounts_list: any[] = [];
+  @Input()
+  agency_performance_list: any[] = [];
+  @Input()
+  total_vendors: number;
+  @Input()
+  service_categories_selected: any[] = [];
+  @Input()
+  params: string;
   @Output()
   emitActivateSpinner: EventEmitter<boolean> = new EventEmitter();
+  @Output()
+  emitVehicle: EventEmitter<string> = new EventEmitter();
+  @Output()
+  emitDuns: EventEmitter<string> = new EventEmitter();
+  @Output()
+  emitNoResults: EventEmitter<boolean> = new EventEmitter();
   sbd_col = false;
   items_per_page = 50;
   items_total: number;
@@ -41,11 +58,16 @@ export class TblVendorsComponent implements OnInit, OnChanges {
   filters;
   loading = true;
 
-  constructor(private searchService: SearchService) {}
+  constructor(
+    private searchService: SearchService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {}
   ngOnChanges() {
     if (this.vehicle) {
+      this.current_page = 1;
       this.filters = this.setOnlyVehicleSelected(this.vehicle);
       this.getVendors(this.current_page);
     }
@@ -70,6 +92,30 @@ export class TblVendorsComponent implements OnInit, OnChanges {
     }
     return filters;
   }
+
+  poolMeetCriteria(pools: any[]): string {
+    const categories = [];
+    let str = '';
+    for (const pool of pools) {
+      for (const category of this.service_categories_selected) {
+        if (pool === category.value) {
+          if (
+            !this.searchService.existsIn(categories, category.description, '')
+          ) {
+            categories.push(category.description);
+          }
+        }
+      }
+    }
+    if (categories.length > 0) {
+      str = '<ul class="ul-comma-separated">';
+      for (const cat of categories) {
+        str += '<li>' + cat + '</li>';
+      }
+      str += '</ul>';
+    }
+    return str;
+  }
   getVendors(page) {
     this.loading = true;
     this.showSpinner(true);
@@ -79,40 +125,47 @@ export class TblVendorsComponent implements OnInit, OnChanges {
     }
     this.current_page = +page;
     this.enable_paging = false;
-    this.searchService.getVendors(this.filters, page_path).subscribe(
-      data => {
-        if (data['count'] === 0) {
-          this.loading = false;
-          this.vendors_no_results = true;
-          this.show_results = true;
-          this.enable_paging = false;
-          this.results = [];
-          this.vendors = [];
-          return;
-        }
-        this.items_total = data['count'];
-        this.num_results = data['results'].length;
-        this.num_total_pages = Math.floor(
-          (this.items_total + this.items_per_page - 1) / this.items_per_page
-        );
+    this.searchService
+      .getVendors(this.filters, page_path, this.vehicle)
+      .subscribe(
+        data => {
+          if (this.total_vendors === 0 || data['count'] === 0) {
+            this.emitNoResults.emit(true);
+            this.loading = false;
+            this.enable_paging = false;
+            this.results = [];
+            this.vendors = [];
+            return;
+          }
+          this.items_total = data['count'];
+          this.num_results = data['results'].length;
+          this.num_total_pages = Math.floor(
+            (this.items_total + this.items_per_page - 1) / this.items_per_page
+          );
 
-        this.items_total = data['count'];
-        this.results = data;
-        this.vendors = this.buildVendorByVehicle(data['results']);
-        this.vendors_no_results = false;
-        this.show_results = true;
-        this.loading = false;
-        this.showSpinner(false);
-        this.setPreviousNext();
-        this.enable_paging = true;
-        window.scroll({
-          top: 90,
-          left: 0,
-          behavior: 'smooth'
-        });
-      },
-      error => (this.error_message = <any>error)
-    );
+          this.items_total = data['count'];
+          this.results = data;
+          this.vendors = this.buildVendorByVehicle(data['results']);
+
+          this.vendors_no_results = false;
+          this.show_results = true;
+          this.loading = false;
+          this.showSpinner(false);
+          this.setPreviousNext();
+          this.enable_paging = true;
+          window.scroll({
+            top: 90,
+            left: 0,
+            behavior: 'smooth'
+          });
+          if (this.route.snapshot.queryParamMap.has('duns')) {
+            this.showVendorDetails(
+              this.route.snapshot.queryParamMap.get('duns')
+            );
+          }
+        },
+        error => (this.error_message = <any>error)
+      );
   }
 
   setPreviousNext() {
@@ -128,6 +181,13 @@ export class TblVendorsComponent implements OnInit, OnChanges {
         this.prev = 1;
       }
     }
+  }
+  showVendorDetails(duns: string) {
+    this.router.navigate(['/search'], {
+      queryParams: { duns: duns },
+      queryParamsHandling: 'merge'
+    });
+    this.emitDuns.emit(duns);
   }
   prevPage() {
     this.getVendors(this.prev);
@@ -165,6 +225,7 @@ export class TblVendorsComponent implements OnInit, OnChanges {
     for (const item of obj) {
       const vendor = {};
       const asides_arr = [];
+      const pools_ids_arr = [];
       vendor['name'] = item.name;
       vendor['duns'] = item.duns;
       vendor['contracts'] = item.number_of_contracts;
@@ -181,6 +242,10 @@ export class TblVendorsComponent implements OnInit, OnChanges {
           }
         }
       }
+      for (const pool of item.pools) {
+        pools_ids_arr.push(pool.pool.id);
+      }
+      vendor['pools_ids'] = pools_ids_arr;
 
       if (item.pools[0].setasides) {
         for (const asides of item.pools[0].setasides) {
@@ -190,10 +255,17 @@ export class TblVendorsComponent implements OnInit, OnChanges {
       } else {
         vendor['setasides'] = [];
       }
-      vehicles.push(vendor);
+
+      if (
+        this.obligated_amounts_list.length > 0 &&
+        this.searchService.existsIn(this.obligated_amounts_list, item.duns, '')
+      ) {
+        vehicles.push(vendor);
+      } else if (this.obligated_amounts_list.length === 0) {
+        vehicles.push(vendor);
+      }
     }
     results['vendors'] = vehicles;
-    // console.log(results);
     return results;
   }
   countVendorsByVehicle(vehicle: string) {

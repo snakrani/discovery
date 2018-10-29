@@ -2,16 +2,35 @@
   <div class="usa-grid">
     <div class="usa-width-one-whole text-center">
       <h2>
-        <span class="usa-hero-callout-alt">Find the contract to meet your needs.</span>
+        <span class="usa-hero-callout-alt">Search by NAICS, PSC, or Keywords to compare contracts</span>
       </h2>
+
       <div id="search-gen" role="search">
-        <div class="autocomplete">
-          <input #keywordInput id="hero-keywords-input" pattern=".+" type="text" [(ngModel)]="keywords" name="keywords" placeholder="Start typing your keywords..."
-            autocomplete="off">
-          <button type="submit" (click)="searchKeywords()" [disabled]="keywords.length === 0">
+        <div class="pull-left">
+          <select [(ngModel)]="option" [disabled]="loading">
+            <option value="naic">NAICs</option>
+            <option value="psc">PSC</option>
+            <option value="keyword">Keyword</option>
+          </select>
+        </div>
+        <div class="autocomplete pull-left">
+          <div class="loader-container" [class.input-spinner]="loading" *ngIf="loading">Loading keywords...</div>
+          <select id="keyword" name="keywords" class="autocomplete-drop select2-container--default" tabindex="-1"
+            aria-hidden="true" [disabled]="loading">
+            <option id="keyword-0" value="0">Enter your keyword...</option>
+          </select>
+
+        </div>
+        <div class="pull-left">
+          <button type="submit" (click)="searchKeywords()" [disabled]="loading">
             <span class="usa-search-submit-text">Search</span>
           </button>
         </div>
+      </div>
+      <div class="db text-white pad-top" style="max-width:600px;margin:auto">
+        <p><strong>Discovery</strong> is a market research tool that helps you explore GSA services contracts, vendors,
+          and
+          vendor contract history to determine whether a GSA contract can meet your needs.</p>
       </div>
     </div>
   </div>

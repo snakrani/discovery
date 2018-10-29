@@ -4,10 +4,12 @@ import {
   Input,
   Output,
   EventEmitter,
-  AfterViewInit
+  AfterViewInit,
+  ViewChild
 } from '@angular/core';
 import { SearchService } from '../search.service';
 import { ActivatedRoute } from '@angular/router';
+import { FilterSelectedComponent } from './filter-selected.component';
 declare let document: any;
 @Component({
   selector: 'discovery-filter-certifications',
@@ -15,6 +17,8 @@ declare let document: any;
   styles: []
 })
 export class FilterCertificationsComponent implements OnInit, AfterViewInit {
+  @ViewChild(FilterSelectedComponent)
+  msgAddedItem: FilterSelectedComponent;
   @Input()
   items: any[] = [];
   items_selected: any[] = [];
@@ -87,8 +91,11 @@ export class FilterCertificationsComponent implements OnInit, AfterViewInit {
     //   error => (this.error_message = <any>error)
     // );
   }
-  getSelected(): any[] {
+  getSelected(selectedOnly: boolean): any[] {
     const item = [];
+    if (selectedOnly) {
+      return this.items_selected;
+    }
     if (this.items_selected.length > 0) {
       item['name'] = this.queryName;
       item['description'] = this.name;
@@ -127,6 +134,7 @@ export class FilterCertificationsComponent implements OnInit, AfterViewInit {
     for (let i = 0; i < this.items.length; ++i) {
       document.getElementById(this.id + '-' + i).checked = false;
     }
+    this.opened = false;
   }
   addItem(key: string, title: string) {
     const item = {};
@@ -134,6 +142,7 @@ export class FilterCertificationsComponent implements OnInit, AfterViewInit {
     item['value'] = key;
     this.items_selected.push(item);
     this.emmitSelected.emit(1);
+    this.msgAddedItem.showMsg();
   }
   removeItem(key: string) {
     for (let i = 0; i < this.items_selected.length; i++) {

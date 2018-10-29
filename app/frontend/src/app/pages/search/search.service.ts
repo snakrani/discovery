@@ -3,22 +3,47 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap, delay } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
+import { PARAMETERS } from '@angular/core/src/util/decorators';
 declare let API_HOST: string;
+declare const $: any;
 @Injectable({
   providedIn: 'root'
 })
 export class SearchService {
   private apiUrl = API_HOST + '/api/';
-
+  _pools;
+  _keywords;
   _active_filters: any[];
   _contract_results: any[];
+  _total_vendors_per_vehicle: any[];
+  _countries: any[];
+  _states: any[];
 
   search_options = {};
+
   constructor(
     private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute
   ) {}
+  get pools(): any[] {
+    return this._pools;
+  }
+  set pools(arr: any[]) {
+    this._pools = arr;
+  }
+  get keywords(): any[] {
+    return this._keywords;
+  }
+  set keywords(arr: any[]) {
+    this._keywords = arr;
+  }
+  get total_vendors_per_vehicle(): any[] {
+    return this._total_vendors_per_vehicle;
+  }
+  set total_vendors_per_vehicle(arr: any[]) {
+    this._total_vendors_per_vehicle = arr;
+  }
   get activeFilters(): any[] {
     return this._active_filters;
   }
@@ -30,6 +55,18 @@ export class SearchService {
   }
   set contractResults(arr: any[]) {
     this._contract_results = arr;
+  }
+  get countries(): any[] {
+    return this._countries;
+  }
+  set countries(arr: any[]) {
+    this._countries = arr;
+  }
+  get states(): any[] {
+    return this._states;
+  }
+  set states(arr: any[]) {
+    this._states = arr;
   }
   setSearchOptions(key: string, values: any[]): void {
     this.search_options[key] = values;
@@ -44,12 +81,6 @@ export class SearchService {
     );
   }
   // getCertifications(): Observable<any[]> {
-  //   return this.http.get<any[]>(this.apiUrl).pipe(
-  //     tap(data => data),
-  //     catchError(this.handleError)
-  //   );
-  // }
-  // getAgencies(): Observable<any[]> {
   //   return this.http.get<any[]>(this.apiUrl).pipe(
   //     tap(data => data),
   //     catchError(this.handleError)
@@ -73,18 +104,6 @@ export class SearchService {
         catchError(this.handleError)
       );
   }
-  // getPSCs(term: string): Observable<any[]> {
-  //   return this.http.get<any[]>(this.apiUrl + 'psc?description__icontains=' + term).pipe(
-  //     tap(data => data),
-  //     catchError(this.handleError)
-  //   );
-  // }
-  // getContractValueHistory(): Observable<any[]> {
-  //   return this.http.get<any[]>().pipe(
-  //     tap(data => data),
-  //     catchError(this.handleError)
-  //   );
-  // }
   getContractPricingType(): Observable<any[]> {
     return this.http
       .get<any[]>(this.apiUrl + 'contracts/values/pricing_type__name')
@@ -93,7 +112,6 @@ export class SearchService {
         catchError(this.handleError)
       );
   }
-
   getSetAsides(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl + 'setasides?description').pipe(
       tap(data => data),
@@ -117,14 +135,24 @@ export class SearchService {
         );
     }
   }
-  arrToString(arr) {
-    let str = '';
-    for (const selected of arr) {
-      str += selected + ',';
+  getPools(vehicles): Observable<any[]> {
+    if (vehicles[0] === 'All') {
+      return this.http.get<any[]>(this.apiUrl + 'pools?page=0').pipe(
+        tap(data => data),
+        catchError(this.handleError)
+      );
+    } else {
+      return this.http
+        .get<any[]>(
+          this.apiUrl + 'pools?vehicle__id__in=' + this.arrToString(vehicles)
+        )
+        .pipe(
+          tap(data => data),
+          catchError(this.handleError)
+        );
     }
-    str = str.slice(0, -1);
-    return str;
   }
+
   getZone(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl + 'zones/?page=0').pipe(
       tap(data => data),
@@ -133,8 +161,7 @@ export class SearchService {
   }
 
   getKeywords(): Observable<any[]> {
-    // return this.http.get<any[]>(this.apiUrl + 'keywords').pipe(delay(3000));
-    return this.http.get<any[]>(this.apiUrl + 'keywords').pipe(
+    return this.http.get<any[]>(this.apiUrl + 'keywords?page=0').pipe(
       tap(data => data),
       catchError(this.handleError)
     );
@@ -147,7 +174,6 @@ export class SearchService {
         catchError(this.handleError)
       );
   }
-
   getNaics(vehicles): Observable<any[]> {
     if (vehicles[0] === 'All') {
       return this.http.get<any[]>(this.apiUrl + 'pools').pipe(
@@ -175,21 +201,45 @@ export class SearchService {
         catchError(this.handleError)
       );
   }
+  getPlaceOfPerformance(): Observable<any[]> {
+    return this.http
+      .get<any[]>(this.apiUrl + 'placesofperformance/?page=0')
+      .pipe(
+        tap(data => data),
+        catchError(this.handleError)
+      );
+  }
 
-  getVendors(filters: any[], page: string): Observable<any[]> {
+  getVendors(filters: any[], page: string, vehicle: string): Observable<any[]> {
     let params = '';
     if (page) {
       params = page;
     }
     for (const filter of filters) {
-      if (filter['name'] === 'keywords') {
-        params +=
-          '&pools__pool__naics__keywords__id__in=' +
-          this.getSelectedFilterList(filter['selected'], ',');
-      }
       if (filter['name'] === 'vehicles') {
         params +=
           '&pools__pool__vehicle__id__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
+    }
+
+    if (vehicle) {
+      params += '&pools__pool__vehicle__id__in=' + vehicle;
+    }
+    params += this.buildOtherParams(filters);
+    return this.http
+      .get<any[]>(this.apiUrl + 'vendors?' + params.substr(1))
+      .pipe(
+        tap(data => data),
+        catchError(this.handleError)
+      );
+  }
+  buildOtherParams(filters): string {
+    let params = '';
+    for (const filter of filters) {
+      if (filter['name'] === 'keywords') {
+        params +=
+          '&pools__pool__keywords__id__in=' +
           this.getSelectedFilterList(filter['selected'], ',');
       }
       if (filter['name'] === 'service_categories') {
@@ -207,24 +257,91 @@ export class SearchService {
           '&pools__pool__naics__code__in=' +
           this.getSelectedFilterList(filter['selected'], ',');
       }
+      if (filter['name'] === 'pscs') {
+        params +=
+          '&pools__pool__psc__code__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
       if (filter['name'] === 'zone') {
         params +=
           '&pools__zones__id__in=' +
           this.getSelectedFilterList(filter['selected'], ',');
       }
+      if (filter['name'] === 'pop') {
+        params +=
+          '&contract__place_of_performance__country_code=' +
+          filter['selected'][0].value;
+        if (filter['selected'][1]) {
+          params +=
+            '&contract__place_of_performance__state=' +
+            filter['selected'][1].value;
+        }
+      }
+      if (filter['name'] === 'obligated_amount') {
+        const threshold = filter['selected'][0].value.split('-');
+        params +=
+          '&contract__obligated_amount__range=' +
+          threshold[0] +
+          ',' +
+          threshold[1];
+      }
+      if (filter['name'] === 'agency_performance') {
+        params +=
+          '&contract__agency__id__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
     }
-    console.log(this.apiUrl + 'vendors?' + params.substr(1));
+    return params;
+  }
+  getVehicleVendorsMeetCriteria(
+    filters: any[],
+    vehicle: string
+  ): Observable<any[]> {
+    let params = '';
+    params += '&pools__pool__vehicle__id=' + vehicle;
+    params += this.buildOtherParams(filters);
+    console.log(this.apiUrl + 'vendors/count/duns?' + params.substr(1));
     return this.http
-      .get<any[]>(this.apiUrl + 'vendors?' + params.substr(1))
+      .get<any[]>(this.apiUrl + 'vendors/count/duns?' + params.substr(1))
       .pipe(
         tap(data => data),
         catchError(this.handleError)
       );
   }
+  getVehiclesToCompare(filters: any[]): Observable<any[]> {
+    let params = '';
+    for (const filter of filters) {
+      if (filter['name'] === 'vehicles') {
+        params +=
+          '&vehicle__id__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
+      if (filter['name'] === 'keywords') {
+        params +=
+          '&keywords__id__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
+      if (filter['name'] === 'naics') {
+        params +=
+          '&naics__code__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
+      if (filter['name'] === 'pscs') {
+        params +=
+          '&psc__code__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
+    }
+    console.log(this.apiUrl + 'pools/values/vehicle?' + params.substr(1));
+    return this.http
+      .get<any[]>(this.apiUrl + 'pools/values/vehicle?' + params.substr(1))
+      .pipe(
+        tap(data => data),
+        catchError(this.handleError)
+      );
+  }
+
   getVendorsCountByVehicle(vehicle: string): Observable<any[]> {
-    console.log(
-      this.apiUrl + 'vendors/count/id?pools__pool__vehicle__id=' + vehicle
-    );
     return this.http
       .get<any[]>(
         this.apiUrl + 'vendors/count/id?pools__pool__vehicle__id=' + vehicle
@@ -234,7 +351,41 @@ export class SearchService {
         catchError(this.handleError)
       );
   }
+  getObligatedAmountDuns(range: string): Observable<any[]> {
+    const arr = range.split('-');
+    const from = arr[0];
+    const to = arr[1];
+    return this.http
+      .get<any[]>(
+        this.apiUrl +
+          'contracts/values/vendor__duns?obligated_amount__range=' +
+          from +
+          ',' +
+          to
+      )
+      .pipe(
+        tap(data => data),
+        catchError(this.handleError)
+      );
+  }
+  getAgencyPerformanceNames(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl + 'agencies/?page=0').pipe(
+      tap(data => data),
+      catchError(this.handleError)
+    );
+  }
+  getAgencyPerformanceDuns(ids: string): Observable<any[]> {
+    return this.http
+      .get<any[]>(
+        this.apiUrl + 'contracts/values/vendor__duns?agency_id__in=' + ids
+      )
+      .pipe(
+        tap(data => data),
+        catchError(this.handleError)
+      );
+  }
   getVendorDetails(duns: string): Observable<any[]> {
+    console.log(this.apiUrl + 'vendors/' + duns);
     return this.http.get<any[]>(this.apiUrl + 'vendors/' + duns).pipe(
       tap(data => data),
       catchError(this.handleError)
@@ -245,14 +396,22 @@ export class SearchService {
     page: string,
     piid: string,
     naic: string,
+    country: string,
+    state: string,
     ordering: string
   ): Observable<any[]> {
     let params = 'contracts?vendor__duns=' + duns;
-    if (naic !== 'all') {
-      params += '&NAICS=' + naic;
+    if (naic !== 'All') {
+      params += '&psc_naics=' + naic;
     }
-    if (piid !== 'all') {
-      params += '&piid=' + piid;
+    if (piid !== 'All') {
+      params += '&base_piid__in=' + piid;
+    }
+    if (country !== '0') {
+      params += '&place_of_performance__country_code=' + country;
+    }
+    if (state !== '0') {
+      params += '&place_of_performance__state=' + state;
     }
     if (ordering !== '') {
       params += '&ordering=' + ordering;
@@ -263,7 +422,14 @@ export class SearchService {
       catchError(this.handleError)
     );
   }
-
+  arrToString(arr) {
+    let str = '';
+    for (const selected of arr) {
+      str += selected + ',';
+    }
+    str = str.slice(0, -1);
+    return str;
+  }
   setQueryParams(filters: any[]): void {
     const params = this.getQueryParams(filters);
     this.router.navigate(['search'], {
@@ -296,14 +462,20 @@ export class SearchService {
   getQueryParams(arr: any[]): any[] {
     const obj = [];
     for (const filter of arr) {
-      obj[filter.name] = this.getSelectedFilterList(filter.selected, '__');
+      obj[filter.name] = this.getSelectedFilterList(filter['selected'], '__');
     }
     return obj;
   }
   existsIn(obj: any[], value: string, key: string): boolean {
     for (let i = 0; i < obj.length; i++) {
-      if (obj[i][key] === value) {
-        return true;
+      if (key !== '') {
+        if (obj[i][key] === value) {
+          return true;
+        }
+      } else {
+        if (obj[i] === value) {
+          return true;
+        }
       }
     }
     return false;
@@ -324,8 +496,14 @@ export class SearchService {
   }
   commaSeparatedList(obj: any[], key: string) {
     let items = '';
-    for (const i of obj) {
-      items += i[key] + ', ';
+    if (key !== '') {
+      for (const i of obj) {
+        items += i[key] + ', ';
+      }
+    } else {
+      for (const i of obj) {
+        items += i + ', ';
+      }
     }
     return items.slice(0, -2);
   }
@@ -340,7 +518,27 @@ export class SearchService {
     }
     return n;
   }
+  buildKeywordsDropdown(obj: any[]): any[] {
+    const keywords = [];
+    for (const item of obj) {
+      const keyword = {};
+      keyword['text'] = item['name'];
+      keyword['id'] = item['id'];
+      keywords.push(keyword);
+    }
+    return keywords;
+  }
+
   sortByNameAsc(i1, i2) {
+    if (i1.name > i2.name) {
+      return 1;
+    } else if (i1.name === i2.name) {
+      return 0;
+    } else {
+      return -1;
+    }
+  }
+  sortByValueAsc(i1, i2) {
     if (i1 > i2) {
       return 1;
     } else if (i1 === i2) {
@@ -362,6 +560,33 @@ export class SearchService {
     if (i1.code > i2.code) {
       return 1;
     } else if (i1.code === i2.code) {
+      return 0;
+    } else {
+      return -1;
+    }
+  }
+  sortByTextAsc(i1, i2) {
+    if (i1.text > i2.text) {
+      return 1;
+    } else if (i1.text === i2.text) {
+      return 0;
+    } else {
+      return -1;
+    }
+  }
+  sortByDescriptionAsc(i1, i2) {
+    if (i1.description > i2.description) {
+      return 1;
+    } else if (i1.description === i2.description) {
+      return 0;
+    } else {
+      return -1;
+    }
+  }
+  sortByVehicleAsc(i1, i2) {
+    if (i1.vehicle > i2.vehicle) {
+      return 1;
+    } else if (i1.vehicle === i2.vehicle) {
       return 0;
     } else {
       return -1;

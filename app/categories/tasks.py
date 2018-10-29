@@ -23,7 +23,7 @@ def update_categories():
     try:
         with db_mutex(lock_id):
             # Commands don't return anything
-            call_command('load_categories')
+            call_command('parse_categories')
     
     except DBMutexError:
         success = False

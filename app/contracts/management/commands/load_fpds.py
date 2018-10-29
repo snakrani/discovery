@@ -10,7 +10,7 @@ from pyfpds import Contracts
 from discovery.utils import csv_memory
 from vendors.models import Vendor, Location
 from contracts import catch_key_error
-from contracts.models import Contract, PlaceOfPerformance, FPDSLoad
+from contracts.models import Agency, Contract, PlaceOfPerformance, FPDSLoad
 
 import os
 import sys
@@ -419,8 +419,15 @@ class Command(BaseCommand):
             
             con.date_signed = mod.get('signed_date') 
             con.completion_date = mod.get('current_completion_date') or mod.get('ultimate_completion_date')
-            con.agency_id = mod.get('agency_id')
-            con.agency_name = mod.get('agency_name')
+            
+            agency_id = mod.get('agency_id')
+            if agency_id:
+                agency, created = Agency.objects.get_or_create(id = agency_id)
+                agency.name = mod.get('agency_name')
+                agency.save()
+                
+            con.agency_id = agency_id
+            
             con.pricing_type_id = mod.get('type_of_contract_pricing_id')
             
             if mod.get('reason_for_modification') in ['X', 'E', 'F']:

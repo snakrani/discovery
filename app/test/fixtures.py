@@ -28,6 +28,7 @@ def get_vendor_fixtures():
 
 def get_contract_fixtures():
     return get_vendor_fixtures() + [
+        'agencies.json',
         'contractstatuses.json',
         'pricingstructures.json',
         'placesofperformance.json', 

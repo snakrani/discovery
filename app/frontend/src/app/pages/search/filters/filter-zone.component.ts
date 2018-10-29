@@ -1,6 +1,14 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ViewChild
+} from '@angular/core';
 import { SearchService } from '../search.service';
 import { ActivatedRoute } from '@angular/router';
+import { FilterSelectedComponent } from './filter-selected.component';
 declare let document: any;
 @Component({
   selector: 'discovery-filter-zone',
@@ -8,6 +16,8 @@ declare let document: any;
   styles: []
 })
 export class FilterZoneComponent implements OnInit {
+  @ViewChild(FilterSelectedComponent)
+  msgAddedItem: FilterSelectedComponent;
   @Input()
   items: any[] = [];
   items_selected: any[] = [];
@@ -95,6 +105,9 @@ export class FilterZoneComponent implements OnInit {
       this.addItem(this.zone);
     }
   }
+  getItems() {
+    return this.items;
+  }
   exists(value: string): boolean {
     for (let i = 0; i < this.items_selected.length; i++) {
       if (this.items_selected[i]['value'] === value) {
@@ -103,8 +116,11 @@ export class FilterZoneComponent implements OnInit {
     }
     return false;
   }
-  getSelected(): any[] {
+  getSelected(selectedOnly: boolean): any[] {
     const item = [];
+    if (selectedOnly) {
+      return this.items_selected;
+    }
     if (this.items_selected.length > 0) {
       item['name'] = this.queryName;
       item['description'] = this.name;
@@ -115,6 +131,7 @@ export class FilterZoneComponent implements OnInit {
   reset() {
     this.items_selected = [];
     this.zone = '0';
+    this.opened = false;
   }
   getItemDescription(value: string): string {
     if (value) {
@@ -131,6 +148,7 @@ export class FilterZoneComponent implements OnInit {
     item['description'] = this.getItemDescription(value);
     this.items_selected.push(item);
     this.emmitSelected.emit(1);
+    this.msgAddedItem.showMsg();
   }
   removeItem(key: string) {
     for (let i = 0; i < this.items_selected.length; i++) {

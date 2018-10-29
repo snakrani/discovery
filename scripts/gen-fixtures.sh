@@ -20,6 +20,7 @@ cd "$SCRIPT_DIR/../app"
 
 # Generate contract related fixtures
 
+./manage.py dumpdata contracts.agency --indent=2 > contracts/fixtures/agencies.json
 ./manage.py dumpdata contracts.placeofperformance --indent=2 > contracts/fixtures/placesofperformance.json
-./manage.py dumpdata contracts.contract --indent=2 > contracts/fixtures/contracts.json #reqs: naics, vendor, piid
+./manage.py dumpdata contracts.contract --indent=2 > contracts/fixtures/contracts.json #reqs: naics, vendor, agency, placeofperformance
 ./manage.py dumpdata contracts.fpdsload --indent=2 > contracts/fixtures/fpdsloads.json #reqs: vendor

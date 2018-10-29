@@ -1,17 +1,30 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ViewChild,
+  OnChanges
+} from '@angular/core';
 import { SearchService } from '../search.service';
 import { ActivatedRoute } from '@angular/router';
+import { FilterSelectedComponent } from './filter-selected.component';
 declare let document: any;
+declare let $: any;
 @Component({
   selector: 'discovery-filter-contract-vehicles',
   templateUrl: './filter-contract-vehicles.component.html'
 })
-export class FilterContractVehiclesComponent implements OnInit {
+export class FilterContractVehiclesComponent implements OnInit, OnChanges {
+  @ViewChild(FilterSelectedComponent)
+  msgAddedItem: FilterSelectedComponent;
   @Input()
   sharedFiltersLoaded = false;
   @Input()
   items: any[] = [];
   _items_selected: any[] = [];
+  all_vehicles: any[] = [];
   @Input()
   opened = false;
   @Output()
@@ -24,19 +37,6 @@ export class FilterContractVehiclesComponent implements OnInit {
   queryName = 'vehicles';
   id = 'filter-vehicles';
   error_message;
-  /** Sample json
-  {
-    id: "BMO_SB",
-    name: "BMO Small Business",
-    small_business: true,
-    numeric_pool: true,
-    display_number:
-    false
-  };
-  */
-  /** Generate inputs labels & values
-   *  with these
-   */
   json_value = 'id';
   json_description = 'name';
   constructor(
@@ -44,47 +44,34 @@ export class FilterContractVehiclesComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit() {
-    this.setInputItems();
+  ngOnInit() {}
+  ngOnChanges() {}
+  loaded() {
+    this.emmitLoaded.emit(this.queryName);
   }
-  setInputItems() {
-    this.searchService.getContractVehicles().subscribe(
-      data => {
-        this.items = data['results'];
-
-        /** Grab the queryparams and sets default values
-         *  on inputs Ex. checked, selected, keywords, etc */
-        if (this.route.snapshot.queryParamMap.has(this.queryName)) {
-          const values: string[] = this.route.snapshot.queryParamMap
-            .get(this.queryName)
-            .split('__');
-          for (let i = 0; i < this.items.length; i++) {
-            if (values.includes(this.items[i][this.json_value])) {
-              this.items[i]['checked'] = true;
-              this.addItem(
-                this.items[i][this.json_value],
-                this.items[i][this.json_description]
-              );
-            }
-          }
-          /** Open accordion */
-          this.opened = true;
-        } else {
-          this.opened = false;
-        }
-        this.emmitLoaded.emit(this.queryName);
-      },
-      error => (this.error_message = <any>error)
-    );
-  }
-  getSelected(): any[] {
+  getSelected(selectedOnly: boolean): any[] {
     const item = [];
+    if (selectedOnly) {
+      return this._items_selected;
+    }
     if (this._items_selected.length > 0) {
       item['name'] = this.queryName;
       item['description'] = this.name;
       item['items'] = this._items_selected;
     }
     return item;
+  }
+  getItems() {
+    return this.items;
+  }
+
+  getVehicleInfo(vehicle: string): any[] {
+    for (const item of this.items) {
+      if (item['id'] === vehicle) {
+        return item;
+      }
+    }
+    return [];
   }
   reset() {
     this._items_selected = [];
@@ -93,6 +80,8 @@ export class FilterContractVehiclesComponent implements OnInit {
         this.id + '-' + this.items[i][this.json_value]
       ).checked = false;
     }
+    this.opened = false;
+    this.emmitItem.emit(['All']);
   }
   getItemDescription(value: string): string {
     if (value) {
@@ -103,19 +92,29 @@ export class FilterContractVehiclesComponent implements OnInit {
       }
     }
   }
+  selectItem(vehicle: string) {
+    const description = this.getItemDescription(vehicle);
+    this.addItem(vehicle, description);
+  }
   addItem(key: string, title: string) {
     const item = {};
     item['description'] = title;
     item['value'] = key;
-    this._items_selected.push(item);
+    if (!this.searchService.existsIn(this._items_selected, key, 'value')) {
+      this._items_selected.push(item);
+      $('#' + this.id + '-' + key).prop('checked', true);
+    }
     this.emmitSelected.emit(1);
+    this.msgAddedItem.showMsg();
   }
   removeItem(key: string) {
     for (let i = 0; i < this._items_selected.length; i++) {
       if (this._items_selected[i]['value'] === key) {
         this._items_selected.splice(i, 1);
+        $('#' + this.id + '-' + key).prop('checked', false);
       }
     }
+
     this.emmitSelected.emit(0);
   }
   onChange(key: string, title: string, isChecked: boolean) {

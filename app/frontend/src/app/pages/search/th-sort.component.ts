@@ -9,7 +9,7 @@ import {
 @Component({
   selector: 'discovery-th-sort',
   template: `
-    <a (click)="order()" [class]="orderClass">{{label}}</a>
+    <a (click)="order()" [class]="orderClass" [style.minWidth]="width">{{label}}</a>
   `,
   styles: [
     `
@@ -17,19 +17,19 @@ import {
         text-decoration: none;
         display: block;
         padding-right: 25px;
-        background-image: url(/assets/images/icon-sort-default.png);
-        background-image: url(/assets/images/icon-sort-default.svg);
+        background-image: url(/frontend/assets/images/icon-sort-default.png);
+        background-image: url(/frontend/assets/images/icon-sort-default.svg);
         background-repeat: no-repeat;
-        background-size: auto 95%;
+        background-size: auto 20px;
         background-position: right center;
       }
       a.asc {
-        background-image: url(/assets/images/icon-sort-asc.png);
-        background-image: url(/assets/images/icon-sort-asc.svg);
+        background-image: url(/frontend/assets/images/icon-sort-asc.png);
+        background-image: url(/frontend/assets/images/icon-sort-asc.svg);
       }
       a.desc {
-        background-image: url(/assets/images/icon-sort-desc.png);
-        background-image: url(/assets/images/icon-sort-desc.svg);
+        background-image: url(/frontend/assets/images/icon-sort-desc.png);
+        background-image: url(/frontend/assets/images/icon-sort-desc.svg);
       }
     `
   ]
@@ -41,6 +41,8 @@ export class ThSortComponent implements OnChanges {
   selectedParentOrdering: string;
   @Input()
   ordering: string;
+  @Input()
+  width = '90px';
   @Output()
   emmitOrdering: EventEmitter<any> = new EventEmitter();
   orderClass = '';
@@ -50,7 +52,7 @@ export class ThSortComponent implements OnChanges {
       this.reset();
     }
   }
-  order(ele) {
+  order() {
     switch (this.orderClass) {
       case '':
         this.orderClass = 'asc';

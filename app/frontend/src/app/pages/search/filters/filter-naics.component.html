@@ -2,22 +2,14 @@
   {{name}}
 </button>
 <div id="{{id}}" class="usa-accordion-content" [attr.aria-hidden]="!opened">
-  <div class="usa-search form-horizontal">
-    <span *ngIf="items_filtered.length===0">There are <strong>no NAICs</strong> for the selected vehicle(s).</span>
-    <select id="select_naic" [disabled]="items_filtered.length===0" [(ngModel)]="naic" class="items-input">
-      <option value="0" selected="selected">Select NAIC --</option>
-      <option *ngFor="let item of items_filtered" value="{{item.code}}">{{item.code + ' - ' +
-        item.description}}</option>
-    </select>
-    <button class="icon-plus btn-plus" type="submit" (click)="addNaic()" [disabled]="!items || naic === '0'">
-      <span class="usa-sr-only">Add NAIC to list</span>
-    </button>
+  <div class="usa-search">
+    <discovery-autocomplete (emitCode)="addKeywords($event)" [id]="id" [placeholder]="placeholder" [keywords_results]="keywords_results"></discovery-autocomplete>
   </div>
-
   <ul *ngIf="items_selected" class="items-selected">
-    <li *ngFor="let naic of items_selected">
-      <a (click)="removeItem(naic.value)" title="Remove {{naic.value}}"><span class="usa-sr-only">Remove {{naic.value}}</span></a>{{naic.value
-      + ' - ' + naic.description}}
+    <li *ngFor="let keyword of items_selected">
+      <a (click)="removeItem(keyword.value)" title="Remove {{keyword.description}}"><span class="usa-sr-only">Remove
+          {{keyword.value}}</span></a>{{keyword.value}} - {{keyword.description}}
     </li>
   </ul>
+  <discovery-filter-selected [id]="'msg-naics-selected'" [label]="'Added NAIC code'"></discovery-filter-selected>
 </div>

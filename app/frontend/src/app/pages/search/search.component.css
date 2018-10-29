@@ -67,25 +67,91 @@ td {
 .wrapper2 {
   height: 200px;
 }
-
 .div1 {
   width: 1000px;
   height: 20px;
 }
-
 .div2 {
   width: 1000px;
   height: 200px;
   background-color: #88ff88;
   overflow: auto;
 }
+
+#btn-show-filters {
+  display: none;
+}
+#btn-show-filters span.icon-filter {
+  margin: 1px 6px 0 0;
+  width: 16px;
+  height: 16px;
+}
+#overlay-filter-mobile {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 9000;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  overflow-x: hidden;
+}
+.mask {
+  position: relative;
+  overflow-x: hidden;
+}
+#slides-container {
+  margin-left: 0px;
+  -webkit-transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  -o-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
+}
+.slide {
+  float: left;
+}
+.icon-arrow-right {
+  margin-top: 4px;
+  margin-left: 5px;
+}
+@media (min-width: 1180px) {
+  .usa-width-three-fourths {
+    width: 72% !important;
+  }
+}
+@media (max-width: 1180px) {
+  .usa-width-three-fourths {
+    width: 99%;
+    margin: 0.4em;
+  }
+}
 @media (min-width: 1040px) {
-  .usa-grid div.usa-width-one-third {
+  /* .usa-grid div.usa-width-one-fourth {
     margin-right: 2.35765%;
     width: 23.23176%;
   }
-  .usa-grid div.usa-width-two-thirds {
+  .usa-grid div.usa-width-three-fourths {
     margin-right: 0;
     width: 74.31059%;
+  } */
+}
+@media (min-width: 1180px) {
+  #btn-show-filters {
+    display: none !important;
+  }
+}
+@media (max-width: 1180px) {
+  #btn-show-filters {
+    display: block;
+  }
+  .usa-width-two-thirds {
+    width: 95% !important;
+    margin: auto !important;
+    float: none !important;
+  }
+}
+@media (max-width: 1180px) {
+  #overlay-filter-mobile.show {
+    width: 100%;
   }
 }

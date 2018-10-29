@@ -5,17 +5,17 @@
       <h3>One Acquisition Solution for Integrated Service</h3>
     </div>
   </section>
-
   <section class="usa-section">
     <div class="usa-grid">
       <div class="usa-width-one-sixth best-in-class"></div>
-      <div class="usa-width-two-thirds">
+      <div class="usa-width-one-half">
         <p class="usa-font-lead">OASIS and OASIS Small Business (SB) are multiple award, Indefinite Delivery Indefinite
           Quantity (IDIQ) contracts that provide flexible and innovative solutions for complex professional services.
           Details of OASIS Contract include:
           OASIS and OASIS Small Business (SB) are multiple award, Indefinite Delivery Indefinite Quantity (IDIQ)
           contracts that provide flexible and innovative solutions for complex professional services. Details of OASIS
           Contract include:
+
         </p>
         <ul class="usa-font-lead">
           <li><strong>Best-in-Class</strong></li>
@@ -26,20 +26,14 @@
           <li>Allow ancillary support components, commonly referred to as Other Direct Costs (ODC), at the task order
             level</li>
         </ul>
-      </div>
-    </div>
-  </section>
-
-  <section class="usa-section">
-    <div class="usa-grid">
-      <div class="usa-width-one-half">
         <h3>OASIS and OASIS SB Pool Disciplines</h3>
         <div *ngIf="pools.length===0">Loading...</div>
-        <ul *ngIf="pools.length>0">
-          <li *ngFor="let pool of pools"><a [routerLink]="['/search']" [queryParams]="{vehicles: 'OASIS_SB', service_categories: pool.id}">{{pool.name}}</a></li>
+        <ul *ngIf="pools.length>0" class="usa-font-lead">
+          <li *ngFor="let pool of pools"><a [routerLink]="['/search']" [queryParams]="{vehicles: 'OASIS_SB', service_categories: pool.id}">
+              {{pool.number}} - {{pool.name}}</a></li>
         </ul>
       </div>
-      <div class="usa-width-one-half">
+      <div class="usa-width-one-fourth">
         <h3>OASIS Links:</h3>
         <ul>
           <li><a href="mailto:oasiscustomersupport@gsa.gov">OASIS Customer Support</a></li>
@@ -52,73 +46,11 @@
           <li><a href="https://www.gsa.gov/cdnstatic/NAICS%20Code%20Definitions%20for%20OASIS.pdf" target="_blank">NAICS
               Codes per Pool</a></li>
           <li><a href="https://www.gsa.gov/cdnstatic/OASIS FAQs as of 8202018 (3).xlsx" target="_blank">OASIS FAQs</a></li>
-          <li><a href="mailto:Oasis@gsa.gov" target="_blank">Contact OASIS</a></li>
-          <li><a href="mailto:OasisSB@gsa.gov" target="_blank">Contact OASIS SB</a></li>
+          <li><a href="mailto:Oasis@gsa.gov">Contact OASIS</a></li>
+          <li><a href="mailto:OasisSB@gsa.gov">Contact OASIS SB</a></li>
         </ul>
-
       </div>
+
     </div>
   </section>
-  <!-- <section class="usa-section">
-    <div class="usa-grid">
-      <h3>Recent Contract Actions on OASIS SB</h3>
-      <table class="usa-table-borderless">
-        <thead>
-          <tr>
-            <th scope="col">Date Signed</th>
-            <th scope="col">PIID</th>
-            <th scope="col">Agency</th>
-            <th scope="col">Company Name</th>
-            <th scope="col">Type</th>
-            <th scope="col">Value ($)</th>
-            <th scope="col">Status</th>
-            <th scope="col">NAICS</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">9/10/2015</th>
-            <td>####</td>
-            <td>Agency name</td>
-            <td>Company name</td>
-            <td>Type</td>
-            <td>$$$</td>
-            <td>Status here</td>
-            <td>Codes here</td>
-          </tr>
-          <tr>
-            <th scope="row">9/10/2015</th>
-            <td>####</td>
-            <td>Agency name</td>
-            <td>Company name</td>
-            <td>Type</td>
-            <td>$$$</td>
-            <td>Status here</td>
-            <td>Codes here</td>
-          </tr>
-          <tr>
-            <th scope="row">9/10/2015</th>
-            <td>####</td>
-            <td>Agency name</td>
-            <td>Company name</td>
-            <td>Type</td>
-            <td>$$$</td>
-            <td>Status here</td>
-            <td>Codes here</td>
-          </tr>
-          <tr>
-            <th scope="row">9/10/2015</th>
-            <td>####</td>
-            <td>Agency name</td>
-            <td>Company name</td>
-            <td>Type</td>
-            <td>$$$</td>
-            <td>Status here</td>
-            <td>Codes here</td>
-          </tr>
-
-        </tbody>
-      </table>
-    </div>
-  </section> -->
 </main>
