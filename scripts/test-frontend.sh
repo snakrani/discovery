@@ -6,12 +6,14 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "$([ `readlink "$0"` ] && echo "`readlink "$0"`" || echo "$0")")"; pwd -P)"
 cd "$SCRIPT_DIR/../app"
 
-LOG_FILE="${1:-$SCRIPT_DIR/../logs/discovery-angular-test.log}"
+TEST_ENGINE="${1:-test}"
+
+LOG_FILE="${2:-$SCRIPT_DIR/../logs/discovery-angular-${TEST_ENGINE}.log}"
 if [ "$LOG_FILE" != "/dev/stdout" -a "$LOG_FILE" != "/dev/stderr" ]
 then
   rm -f "$LOG_FILE"
 fi
 
-echo "> Testing Angular application" | tee -a "$LOG_FILE"
+echo "> Testing Angular application (${TEST_ENGINE})" | tee -a "$LOG_FILE"
 cd frontend
-ng test >>"$LOG_FILE" 2>&1
+ng "$TEST_ENGINE" >>"$LOG_FILE" 2>&1
