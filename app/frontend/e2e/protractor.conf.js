@@ -14,6 +14,7 @@ exports.config = {
       args: [ "--headless", "--no-sandbox", "--disable-gpu", "--window-size=1280x1024" ]
     }
   },
+  logLevel: 'DEBUG',
   directConnect: true,
   baseUrl: 'http://localhost:8080/',
   framework: 'jasmine',
