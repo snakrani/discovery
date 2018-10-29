@@ -60,6 +60,11 @@ cloudfoundry: &cloudfoundry
   command: |
     ./scripts/setup-cf.sh /dev/stderr
 
+chrome: &chrome
+  name: Install Chrome web driver
+  command: |
+    ./scripts/setup-chrome.sh /dev/stderr
+
 
 logging: &logging
   path: logs
@@ -151,6 +156,7 @@ jobs:
       - checkout
       - run: *django
       - run: *angular
+      - run: *chrome
 
       - run:
           name: Run Angular tests
