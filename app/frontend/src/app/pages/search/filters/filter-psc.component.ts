@@ -33,6 +33,8 @@ export class FilterPscComponent implements OnInit, OnChanges {
   emmitLoaded: EventEmitter<string> = new EventEmitter();
   @Output()
   emmitPSCs: EventEmitter<any> = new EventEmitter();
+  @Output()
+  emitClearedSelected: EventEmitter<boolean> = new EventEmitter();
   name = 'PSCs';
   queryName = 'pscs';
   id = 'filter-pscs';
@@ -104,6 +106,7 @@ export class FilterPscComponent implements OnInit, OnChanges {
         const item = {};
         item['id'] = psc.code;
         item['text'] = psc.code + ' - ' + psc.description;
+        item['description'] = psc.description;
         item['vehicle_id'] = pool.vehicle.id;
         item['pool_id'] = pool.id;
         if (!this.searchService.existsIn(pscs, psc.code, 'id')) {
@@ -136,7 +139,7 @@ export class FilterPscComponent implements OnInit, OnChanges {
     if (id) {
       for (let i = 0; i < this.items.length; i++) {
         if (this.items[i][this.json_value] === id) {
-          return this.items[i][this.json_description];
+          return this.items[i]['description'];
         }
       }
     }
@@ -221,8 +224,11 @@ export class FilterPscComponent implements OnInit, OnChanges {
     return items;
   }
 
-  getSelected(): any[] {
+  getSelected(selectedOnly: boolean): any[] {
     const item = [];
+    if (selectedOnly) {
+      return this.items_selected;
+    }
     if (this.items_selected.length > 0) {
       item['name'] = this.queryName;
       item['description'] = this.name;
@@ -232,12 +238,17 @@ export class FilterPscComponent implements OnInit, OnChanges {
   }
   reset() {
     this.items_selected = [];
+    this.opened = false;
+    this.emitClearedSelected.emit(true);
   }
   removeItem(value: string) {
     for (let i = 0; i < this.items_selected.length; i++) {
       if (this.items_selected[i]['value'] === value) {
         this.items_selected.splice(i, 1);
       }
+    }
+    if (this.items_selected.length === 0) {
+      this.emitClearedSelected.emit(true);
     }
     this.emmitSelected.emit(0);
   }

@@ -116,8 +116,11 @@ export class FilterZoneComponent implements OnInit {
     }
     return false;
   }
-  getSelected(): any[] {
+  getSelected(selectedOnly: boolean): any[] {
     const item = [];
+    if (selectedOnly) {
+      return this.items_selected;
+    }
     if (this.items_selected.length > 0) {
       item['name'] = this.queryName;
       item['description'] = this.name;
@@ -128,6 +131,7 @@ export class FilterZoneComponent implements OnInit {
   reset() {
     this.items_selected = [];
     this.zone = '0';
+    this.opened = false;
   }
   getItemDescription(value: string): string {
     if (value) {

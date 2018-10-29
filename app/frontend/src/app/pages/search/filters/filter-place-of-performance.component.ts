@@ -25,7 +25,6 @@ declare let $: any;
       }
       #select_state {
         margin-top: 10px !important;
-        max-width: 80px !important;
       }
     `
   ]
@@ -127,7 +126,7 @@ export class FilterPlaceOfPerformanceComponent implements OnInit, OnChanges {
     }
   }
 
-  getSelected(): any[] {
+  getSelected(selectedOnly: boolean): any[] {
     const item = [];
     const selected = [];
     if (this.country !== '0') {
@@ -143,10 +142,14 @@ export class FilterPlaceOfPerformanceComponent implements OnInit, OnChanges {
       }
       item['items'] = selected;
     }
+    if (selectedOnly) {
+      return selected;
+    }
     return item;
   }
   reset() {
     this.country = '0';
     this.state = '0';
+    this.opened = false;
   }
 }

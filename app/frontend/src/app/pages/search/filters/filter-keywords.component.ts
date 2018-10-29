@@ -33,6 +33,8 @@ export class FilterKeywordsComponent
   emmitSelected: EventEmitter<number> = new EventEmitter();
   @Output()
   emmitLoaded: EventEmitter<string> = new EventEmitter();
+  @Output()
+  emitClearedSelected: EventEmitter<boolean> = new EventEmitter();
   name = 'Keywords';
   queryName = 'keywords';
   id = 'filter-keywords';
@@ -134,8 +136,11 @@ export class FilterKeywordsComponent
       this.addItem(code);
     }
   }
-  getSelected(): any[] {
+  getSelected(selectedOnly: boolean): any[] {
     const item = [];
+    if (selectedOnly) {
+      return this.items_selected;
+    }
     if (this.items_selected.length > 0) {
       item['name'] = this.queryName;
       item['description'] = this.name;
@@ -145,6 +150,7 @@ export class FilterKeywordsComponent
   }
   reset() {
     this.items_selected = [];
+    this.emitClearedSelected.emit(true);
   }
   addItem(id: string) {
     const item = {};
@@ -161,6 +167,9 @@ export class FilterKeywordsComponent
       if (this.items_selected[i]['value'] === value) {
         this.items_selected.splice(i, 1);
       }
+    }
+    if (this.items_selected.length === 0) {
+      this.emitClearedSelected.emit(true);
     }
     this.emmitSelected.emit(0);
   }

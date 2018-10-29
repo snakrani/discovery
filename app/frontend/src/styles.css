@@ -43,7 +43,6 @@ a {
   text-transform: uppercase;
 }
 .ul-no-bullets li span {
-  display: inline-block;
   padding: 3px 6px 3px 6px !important;
   width: 80% !important;
 }
@@ -61,12 +60,28 @@ a {
   margin: 0;
   padding: 0 0 0 10px;
 }
-.ul-no-bullets li {
+.ul-no-bullets li,
+.ul-comma-separated li {
   list-style: none;
 }
 .ul-no-bullets li:before {
   content: '- ';
   margin-left: -10px;
+}
+.ul-comma-separated,
+.ul-comma-separated li {
+  padding: 0px;
+  margin: 0px;
+}
+.ul-comma-separated li {
+  display: inline-block;
+  padding-right: 6px;
+}
+.ul-comma-separated li:after {
+  content: ', ';
+}
+.ul-comma-separated li:last-child:after {
+  content: '' !important;
 }
 .icon-arrow-left {
   display: inline-block;
