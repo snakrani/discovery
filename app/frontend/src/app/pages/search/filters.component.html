@@ -29,23 +29,30 @@
     <div class="cb" style="display: block;clear:both"></div>
     <ul class="usa-accordion" aria-multiselectable="true">
       <li>
-        <discovery-filter-keywords [opened]="true" (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-keywords>
+        <discovery-filter-keywords [opened]="true" (emitClearedSelected)="clearContractVehicles($event)"
+          (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-keywords>
       </li>
       <li>
-        <discovery-filter-naics [items]="pools" (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-naics>
+        <discovery-filter-naics [items]="pools" (emitClearedSelected)="clearContractVehicles($event)" (emmitSelected)="activateSubmit($event)"
+          (emmitLoaded)="getResults($event)"></discovery-filter-naics>
       </li>
       <li>
-        <discovery-filter-psc [items]="pools" (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-psc>
+        <discovery-filter-psc [items]="pools" (emitClearedSelected)="clearContractVehicles($event)" (emmitSelected)="activateSubmit($event)"
+          (emmitLoaded)="getResults($event)"></discovery-filter-psc>
       </li>
       <li>
         <discovery-filter-contract-vehicles [items]="vehicles" (emmitSelected)="activateSubmit($event)" (emmitItem)="filterOthersByVehicles($event)"
           (emmitLoaded)="getResults($event)"></discovery-filter-contract-vehicles>
       </li>
       <li>
-        <discovery-filter-service-categories [items]="pools" (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-service-categories>
+        <discovery-filter-service-categories [items]="pools" (emitVehicleId)="selectContractVehicleInFilter($event)"
+          (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-service-categories>
       </li>
       <li>
         <discovery-filter-sbd (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-sbd>
+      </li>
+      <li>
+        <discovery-filter-zone (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-zone>
       </li>
 
       <!-- <li>
@@ -54,18 +61,16 @@
       <!-- <li>
         <discovery-filter-certifications (emmitSelected)="activateSubmit($event)"></discovery-filter-certifications>
       </li> -->
-      <!-- <li>
-        <discovery-filter-contract-obligated-amount (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-contract-obligated-amount>
-      </li> -->
-      <!-- <li>
-        <discovery-filter-place-of-performance (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-place-of-performance>
-      </li> -->
-      <!-- <li>
-        <discovery-filter-agency-performance (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-agency-performance>
-      </li> -->
       <li>
-        <discovery-filter-zone (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-zone>
+        <discovery-filter-contract-obligated-amount (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-contract-obligated-amount>
       </li>
+      <li>
+        <discovery-filter-place-of-performance (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-place-of-performance>
+      </li>
+      <li>
+        <discovery-filter-agency-performance (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-agency-performance>
+      </li>
+
 
     </ul>
     <button type="button" [disabled]="disabled_btn" class="primary" (click)="emmitSelectedFilters($event)">Submit</button>

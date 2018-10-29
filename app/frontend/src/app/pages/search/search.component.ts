@@ -61,6 +61,7 @@ export class SearchComponent implements OnInit {
   naics_selected: any[] = [];
   pscs_selected: any[] = [];
   service_categories_selected: any[] = [];
+  params: string;
 
   @HostListener('window:resize')
   onResize() {
@@ -166,13 +167,53 @@ export class SearchComponent implements OnInit {
     for (const item of filters) {
       if (item.name === key) {
         for (const i of item.selected) {
-          items.push(i.value);
+          items.push(i);
         }
       }
     }
     return items;
   }
+  returnSelectedServiceCategories(filters): any[] {
+    let categories = [];
+    const naics = this.filtersComponent.getNaicsSelected();
+    const pscs = this.filtersComponent.getPscsSelected();
+    categories = this.getSelected(filters, 'service_categories');
+    if (naics.length > 0) {
+      for (const naic of naics) {
+        for (const pool of naic.pools_ids) {
+          if (!this.searchService.existsIn(categories, pool, 'value')) {
+            categories.push({
+              value: pool,
+              description: this.filtersComponent.getServiceCategoriesDescription(
+                pool
+              )
+            });
+          }
+        }
+      }
+    }
+    if (pscs.length > 0) {
+      for (const psc of pscs) {
+        for (const pool of psc.pools_ids) {
+          if (!this.searchService.existsIn(categories, pool, 'value')) {
+            categories.push({
+              value: pool,
+              description: this.filtersComponent.getServiceCategoriesDescription(
+                pool
+              )
+            });
+          }
+        }
+      }
+    }
+    return categories;
+  }
   submitSelectedFilters(filters) {
+    if (filters.length === 0) {
+      this.filtersComponent.resetFilters();
+      this.reset(true);
+      return;
+    }
     this.reset(true);
     this.spinner = true;
     this.searchService.activeFilters = filters;
@@ -181,18 +222,15 @@ export class SearchComponent implements OnInit {
     this.service_categories = this.filtersComponent.getServiceCategories();
     this.naics_selected = this.getSelected(filters, 'naics');
     this.pscs_selected = this.getSelected(filters, 'pscs');
-    this.service_categories_selected = this.getSelected(
-      filters,
-      'service_categories'
+    this.service_categories_selected = this.returnSelectedServiceCategories(
+      filters
     );
     this.searchService
       .getVehiclesToCompare(this.searchService.activeFilters)
       .subscribe(
         data => {
           if (data['count'] === 0) {
-            this.spinner = false;
-            this.show_results = true;
-            this.vendors_no_results = true;
+            this.noResults();
             return;
           }
 
@@ -203,10 +241,12 @@ export class SearchComponent implements OnInit {
               if (item === vehicle.id) {
                 vehicles.push(vehicle);
                 vehicles_ids.push(vehicle.id);
-                this.filtersComponent.setContractVehiclesInFilter(
-                  vehicle.id,
-                  vehicle.name
-                );
+                if (this.contract_vehicles.length !== data['results'].length) {
+                  this.filtersComponent.setContractVehiclesInFilter(
+                    vehicle.id,
+                    vehicle.name
+                  );
+                }
               }
             }
           }
@@ -220,7 +260,7 @@ export class SearchComponent implements OnInit {
           if (!this.route.snapshot.queryParamMap.has('vendors')) {
             this.searchService.setQueryParams(this.searchService.activeFilters);
           }
-
+          this.setParams(this.filters);
           this.getVendorsTotalByVehicle(vehicles);
         },
         error => {
@@ -230,7 +270,67 @@ export class SearchComponent implements OnInit {
         }
       );
   }
-
+  noResults() {
+    this.spinner = false;
+    this.show_results = true;
+    this.vendors_no_results = true;
+  }
+  setParams(filters) {
+    let params = '';
+    for (const filter of filters) {
+      if (filter['name'] === 'keywords') {
+        params +=
+          '&keywords=' +
+          this.searchService.getSelectedFilterList(filter['selected'], ',');
+      }
+      if (filter['name'] === 'vehicles') {
+        params +=
+          '&vehicles=' +
+          this.searchService.getSelectedFilterList(filter['selected'], ',');
+      }
+      if (filter['name'] === 'service_categories') {
+        params +=
+          '&pools=' +
+          this.searchService.getSelectedFilterList(filter['selected'], ',');
+      }
+      if (filter['name'] === 'setasides') {
+        params +=
+          '&setasides=' +
+          this.searchService.getSelectedFilterList(filter['selected'], ',');
+      }
+      if (filter['name'] === 'naics') {
+        params +=
+          '&naics=' +
+          this.searchService.getSelectedFilterList(filter['selected'], ',');
+      }
+      if (filter['name'] === 'pscs') {
+        params +=
+          '&pscs=' +
+          this.searchService.getSelectedFilterList(filter['selected'], ',');
+      }
+      if (filter['name'] === 'zone') {
+        params +=
+          '&zones=' +
+          this.searchService.getSelectedFilterList(filter['selected'], ',');
+      }
+      if (filter['name'] === 'pop') {
+        params += '&countries=' + filter['selected'][0].value;
+        if (filter['selected'][1]) {
+          params += '&states=' + filter['selected'][1].value;
+        }
+      }
+      if (filter['name'] === 'obligated_amount') {
+        const threshold = filter['selected'][0].value.split('-');
+        params += '&amount=' + threshold[0] + ',' + threshold[1];
+      }
+      if (filter['name'] === 'agency_performance') {
+        params +=
+          '&agencies=' +
+          this.searchService.getSelectedFilterList(filter['selected'], ',');
+      }
+      this.params = params;
+    }
+  }
   getContractCompareResults(vehicles) {
     let count = 0;
     let total_vendors = 0;

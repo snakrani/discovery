@@ -49,16 +49,11 @@ export class FilterContractVehiclesComponent implements OnInit, OnChanges {
   loaded() {
     this.emmitLoaded.emit(this.queryName);
   }
-  // setAllVehicles() {
-  //   for (const i of this.items) {
-  //     const item = {};
-  //     item['description'] = i.name;
-  //     item['value'] = i.id;
-  //     this.all_vehicles.push(item);
-  //   }
-  // }
-  getSelected(): any[] {
+  getSelected(selectedOnly: boolean): any[] {
     const item = [];
+    if (selectedOnly) {
+      return this._items_selected;
+    }
     if (this._items_selected.length > 0) {
       item['name'] = this.queryName;
       item['description'] = this.name;
@@ -85,6 +80,7 @@ export class FilterContractVehiclesComponent implements OnInit, OnChanges {
         this.id + '-' + this.items[i][this.json_value]
       ).checked = false;
     }
+    this.opened = false;
     this.emmitItem.emit(['All']);
   }
   getItemDescription(value: string): string {
@@ -95,6 +91,10 @@ export class FilterContractVehiclesComponent implements OnInit, OnChanges {
         }
       }
     }
+  }
+  selectItem(vehicle: string) {
+    const description = this.getItemDescription(vehicle);
+    this.addItem(vehicle, description);
   }
   addItem(key: string, title: string) {
     const item = {};

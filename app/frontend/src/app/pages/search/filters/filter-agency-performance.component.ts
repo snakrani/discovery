@@ -105,8 +105,11 @@ export class FilterAgencyPerformanceComponent
   //   }
   //   return false;
   // }
-  getSelected(): any[] {
+  getSelected(selectedOnly: boolean): any[] {
     const item = [];
+    if (selectedOnly) {
+      return this.items_selected;
+    }
     if (this.items_selected.length > 0) {
       item['name'] = this.queryName;
       item['description'] = this.name;
@@ -116,6 +119,7 @@ export class FilterAgencyPerformanceComponent
   }
   reset() {
     this.items_selected = [];
+    this.opened = false;
   }
 
   getItemDescription(id: string): string {

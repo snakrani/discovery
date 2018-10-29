@@ -1,6 +1,6 @@
 <ul class="ul-no-bullets" [class.cols-2]="columns==='2'">
-  <li *ngFor="let item of items; let i = index" [class.highlight]="isSelected(item.id)" [style.display]="i > items_to_show && !show_all ? 'none' : ''"
-    [id]="'li-'+id+'-'+i" [innerHTML]="getValue(item)"></li>
+  <li *ngFor="let item of items; let i = index" [hidden]="hideOthers(item.id)" [class.highlight]="isSelected(item.id) && !hide_others"
+    [style.display]="i > items_to_show && !show_all ? 'none' : ''" [id]="'li-'+id+'-'+i" [innerHTML]="getValue(item)"></li>
 </ul>
 <span class="db"></span>
 <a [hidden]="show_all" (click)="toggleMore()" *ngIf="items.length-1 > items_to_show">{{title_more}}</a>

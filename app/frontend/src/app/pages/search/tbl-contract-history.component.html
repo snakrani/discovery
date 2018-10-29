@@ -6,7 +6,7 @@
     <strong class="pull-left" style="padding:12px;">Filter By:</strong>
     <select id="contract_membership" [(ngModel)]="piid" (change)="onChangeMembership()">
       <option value="All">All Contract Memberships</option>
-      <option *ngFor="let item of pools" value="{{item.piid}}" [innerHTML]="getVehicleDescription(item.pool.vehicle.id) + '-'+ item.piid"></option>
+      <option *ngFor="let item of pools" [value]="poolPiids(item.piids)" [innerHTML]="getVehicleDescription(item.vehicle_id)"></option>
 
     </select>
     <select id="select_naic" [disabled]="naics.length===0" (change)="onChangeNaic()" [(ngModel)]="naic_code" class="items-input">
@@ -39,6 +39,7 @@
       <option value="DC">District Of Columbia</option>
       <option value="FL">Florida</option>
       <option value="GA">Georgia</option>
+      <option value="GU">Guam</option>
       <option value="HI">Hawaii</option>
       <option value="ID">Idaho</option>
       <option value="IL">Illinois</option>
@@ -67,6 +68,7 @@
       <option value="OK">Oklahoma</option>
       <option value="OR">Oregon</option>
       <option value="PA">Pennsylvania</option>
+      <option value="PR">Puerto Rico</option>
       <option value="RI">Rhode Island</option>
       <option value="SC">South Carolina</option>
       <option value="SD">South Dakota</option>
@@ -79,6 +81,7 @@
       <option value="WV">West Virginia</option>
       <option value="WI">Wisconsin</option>
       <option value="WY">Wyoming</option>
+      <option value="VI">Virgin Islands</option>
     </select>
 
   </div>
@@ -93,9 +96,8 @@
 </div>
 <discovery-spinner *ngIf="spinner"></discovery-spinner>
 <div class="pad-bottom text-right" *ngIf="!history_no_results && !spinner">
-  <a href="csv/contracts/{{duns}}/?{{params}}" target="_blank">
-    Download
-    vendor data(CSV)</a></div>
+  <a href="contracts/{{duns}}/csv?{{params}}" target="_blank">
+    Download contracts data(CSV)</a></div>
 <div id="overflow-contract-history" class="pad-bottom">
   <!-- Start Scroll Window -->
   <!-- <div class="scroll-view-topscroll scrollbar">
@@ -120,10 +122,6 @@
           <discovery-th-sort [label]="'Agency'" [width]="'auto'" [ordering]="'agency_name'" [selectedParentOrdering]="ordering"
             (emmitOrdering)="orderBy($event)"></discovery-th-sort>
         </th>
-        <!-- <th scope="col" class="tooltip-bottom" data-tooltip="Sort by Price Type">
-              <discovery-th-sort [label]="'Type'" [width]="'auto'" [ordering]="'pricing_type_name'"
-                [selectedParentOrdering]="ordering" (emmitOrdering)="orderBy($event)"></discovery-th-sort>
-            </th> -->
         <th scope="col" class="tooltip-bottom" data-tooltip="Sort by Obligated Amount">
           <discovery-th-sort [label]="'Value ($)'" [ordering]="'obligated_amount'" [selectedParentOrdering]="ordering"
             (emmitOrdering)="orderBy($event)"></discovery-th-sort>

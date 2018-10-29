@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { SearchService } from '../pages/search/search.service';
 
 @Component({
   selector: 'discovery-list',
@@ -27,10 +28,12 @@ export class ListComponent implements OnInit {
   columns = '1';
   @Input()
   selected: any[] = [];
+  @Input()
+  hide_others = false;
 
   show_more = false;
   title_more = 'Show more';
-  constructor() {}
+  constructor(private searchService: SearchService) {}
 
   ngOnInit() {}
   hideElements() {
@@ -44,14 +47,19 @@ export class ListComponent implements OnInit {
   getValue(item: any) {
     return '<span>' + item[this.key] + '</span>';
   }
-  isSelected(id: string): boolean {
-    let bool = false;
-    for (const items of this.selected) {
-      if (items === id) {
-        bool = true;
-      }
+  hideOthers(id: string): boolean {
+    if (
+      this.hide_others &&
+      !this.searchService.existsIn(this.selected, id, 'value') &&
+      this.selected.length > 0
+    ) {
+      return true;
+    } else {
+      return false;
     }
-    return bool;
+  }
+  isSelected(id: string): boolean {
+    return this.searchService.existsIn(this.selected, id, 'value');
   }
   showElements() {
     for (let i = 0; i < this.items.length; ++i) {

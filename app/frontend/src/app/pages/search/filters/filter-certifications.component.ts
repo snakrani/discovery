@@ -91,8 +91,11 @@ export class FilterCertificationsComponent implements OnInit, AfterViewInit {
     //   error => (this.error_message = <any>error)
     // );
   }
-  getSelected(): any[] {
+  getSelected(selectedOnly: boolean): any[] {
     const item = [];
+    if (selectedOnly) {
+      return this.items_selected;
+    }
     if (this.items_selected.length > 0) {
       item['name'] = this.queryName;
       item['description'] = this.name;
@@ -131,6 +134,7 @@ export class FilterCertificationsComponent implements OnInit, AfterViewInit {
     for (let i = 0; i < this.items.length; ++i) {
       document.getElementById(this.id + '-' + i).checked = false;
     }
+    this.opened = false;
   }
   addItem(key: string, title: string) {
     const item = {};

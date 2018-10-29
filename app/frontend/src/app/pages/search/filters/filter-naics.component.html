@@ -8,7 +8,7 @@
   <ul *ngIf="items_selected" class="items-selected">
     <li *ngFor="let keyword of items_selected">
       <a (click)="removeItem(keyword.value)" title="Remove {{keyword.description}}"><span class="usa-sr-only">Remove
-          {{keyword.value}}</span></a>{{keyword.description}}
+          {{keyword.value}}</span></a>{{keyword.value}} - {{keyword.description}}
     </li>
   </ul>
   <discovery-filter-selected [id]="'msg-naics-selected'" [label]="'Added NAIC code'"></discovery-filter-selected>

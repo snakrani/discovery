@@ -80,7 +80,10 @@ export class VendorDetailComponent implements OnInit, OnChanges {
       data => {
         this.vendor = data;
         this.loading = false;
-        this.vendor['pools'] = this.buildPoolsByUniqueContractNumber(data);
+        console.log(this.buildPoolsInfo(data));
+        this.vendor['pools'] = this.buildPoolsInfo(data);
+        // console.log(this.buildPoolsInfo(data));
+        // this.vendor['pools'] = this.buildPoolsByUniqueContractNumber(data);
         this.emitHideSpinner.emit(false);
       },
       error => (this.error_message = <any>error)
@@ -162,29 +165,50 @@ export class VendorDetailComponent implements OnInit, OnChanges {
     this.zindex++;
     ele.style.zIndex = this.zindex;
   }
-  buildPoolsByUniqueContractNumber(data: any[]) {
-    const contracts: any[] = [];
+
+  buildPoolsInfo(data: any[]) {
+    const vehicles: any[] = [];
+    // const contracts: any[] = [];
     for (const item of data['pools']) {
-      let pool = {};
-      if (!this.searchService.existsIn(contracts, item.piid, 'piid')) {
-        pool = item;
-        pool['service_categories'] = [];
-        pool['setasides'] = this.searchService.commaSeparatedList(
+      const vehicle = {};
+      if (
+        !this.searchService.existsIn(
+          vehicles,
+          item.pool.vehicle.id,
+          'vehicle_id'
+        )
+      ) {
+        vehicle['vehicle_id'] = item.pool.vehicle.id;
+        vehicle['contacts'] = item.contacts;
+        vehicle['piids'] = [{ piid: item.piid }];
+        vehicle['service_categories'] = [{ pool_id: item.pool.id }];
+        vehicle['capability'] = item.capability_statement;
+        vehicle['setasides'] = this.searchService.commaSeparatedList(
           item.setasides,
           'code'
         );
-        pool['zones'] = item.zones.sort(this.searchService.sortByIdAsc);
-        contracts.push(pool);
+        vehicle['zones'] = item.zones.sort(this.searchService.sortByIdAsc);
+        vehicles.push(vehicle);
       }
-      /** Push service categories to contracts */
-      for (const cat of contracts) {
-        if (cat['piid'] === item.piid) {
-          cat['service_categories'].push(item.pool);
+      for (const v of vehicles) {
+        if (v.vehicle_id === item.pool.vehicle.id) {
+          if (!this.searchService.existsIn(v['piids'], item.piid, 'piid')) {
+            v['piids'].push({ piid: item.piid });
+          }
+          if (
+            !this.searchService.existsIn(
+              v['service_categories'],
+              item.pool.id,
+              'pool_id'
+            )
+          ) {
+            v['service_categories'].push({ pool_id: item.pool.id });
+          }
         }
       }
     }
 
-    return contracts;
+    return vehicles;
   }
   addItem(num: string) {
     this.piids_selected.push(num);
