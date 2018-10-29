@@ -2,7 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'discovery-lnk-toggle-heights',
-  template: `<button (click)="toggleMore()" class="button-link-more db" [class.less]="opened" [attr.aria-expanded]="opened">
+  template: `<button id="btn-{{toggle_id}}"
+  (click)="toggleMore()" class="button-link-more db" [class.less]="opened" [attr.aria-expanded]="opened">
   {{title_more}}
 </button>
 `,

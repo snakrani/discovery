@@ -94,7 +94,10 @@ export class FiltersComponent implements OnInit {
       this.filterServiceCategories,
       this.filterNaicsComponent,
       this.filterPscComponent,
-      this.filterZoneComponent
+      this.filterZoneComponent,
+      this.filterContractObligated,
+      this.filterPoP,
+      this.filterAgencyPerformance
     ];
     /**
      *
@@ -188,7 +191,7 @@ export class FiltersComponent implements OnInit {
     const filters: any[] = [];
     for (let i = 0; i < this.filters_list.length; i++) {
       if (this.filters_list[i]) {
-        const filter_items = this.filters_list[i].getSelected();
+        const filter_items = this.filters_list[i].getSelected(false);
         if (filter_items['name']) {
           const item = {
             name: filter_items['name'],
@@ -206,7 +209,8 @@ export class FiltersComponent implements OnInit {
     return filters;
   }
   emmitSelectedFilters(event) {
-    if (event !== null) {
+    const filters: any[] = this.getSelectedFilters();
+    if (event !== null || filters.length === 0) {
       /** Clear duns */
       this.router.navigate(['/search'], {
         queryParams: { vendors: null, duns: null },
@@ -214,7 +218,6 @@ export class FiltersComponent implements OnInit {
       });
     }
     this.params_submitted = true;
-    const filters: any[] = this.getSelectedFilters();
     this.emmitFilters.emit(filters);
     this.hideFilters();
   }
@@ -231,6 +234,10 @@ export class FiltersComponent implements OnInit {
     this.filterNaicsComponent.setFilteredItems(arr);
     this.filterPscComponent.setFilteredItems(arr);
   }
+  selectContractVehicleInFilter(vehicle: string) {
+    console.log(vehicle);
+    this.filterContractVehiclesComponent.selectItem(vehicle);
+  }
   getServiceCategories() {
     const service_categories = this.filterServiceCategories.getItems();
     return service_categories;
@@ -241,18 +248,40 @@ export class FiltersComponent implements OnInit {
     );
     return obj;
   }
+  getServiceCategoriesDescription(pool: string) {
+    return this.filterServiceCategories.getItemDescription(pool);
+  }
   getContractVehicles() {
     return this.vehicles;
   }
-  // getPscsSelected(): any[] {
-  //   let items = [];
-  //   if (this.filterPscComponent.getSelected().length > 0) {
-  //     items = this.filterPscComponent.getSelected();
-  //   }
-  //   return items;
-  // }
+  getNaicsSelected(): any[] {
+    let items = [];
+    if (this.filterNaicsComponent.getSelected(true).length > 0) {
+      items = this.filterNaicsComponent.getSelected(true);
+    }
+    return items;
+  }
+  getPscsSelected(): any[] {
+    let items = [];
+    if (this.filterPscComponent.getSelected(true).length > 0) {
+      items = this.filterPscComponent.getSelected(true);
+    }
+    return items;
+  }
+  clearContractVehicles(bool: boolean) {
+    if (bool) {
+      if (
+        this.filterKeywordsComponent.getSelected(true).length === 0 &&
+        this.filterNaicsComponent.getSelected(true).length === 0 &&
+        this.filterPscComponent.getSelected(true).length === 0
+      ) {
+        this.filterContractVehiclesComponent.reset();
+      }
+    }
+  }
   setContractVehiclesInFilter(id: string, title: string) {
     this.filterContractVehiclesComponent.addItem(id, title);
+    this.filterContractVehiclesComponent.opened = true;
   }
   filterNaicsByVehiclesInFilter(vehicles: any[]) {
     this.filterNaicsComponent.setFilteredItems(vehicles);
@@ -296,7 +325,9 @@ export class FiltersComponent implements OnInit {
     return zones;
   }
   getSelectedVehicles(): any[] {
-    const vehicles: any[] = this.filterContractVehiclesComponent.getSelected();
+    const vehicles: any[] = this.filterContractVehiclesComponent.getSelected(
+      false
+    );
     return vehicles;
   }
   getVehicleData(vehicle: string) {
@@ -319,6 +350,8 @@ export class FiltersComponent implements OnInit {
         !this.params_submitted
       ) {
         this.emmitSelectedFilters(null);
+      } else if (this.route.snapshot.queryParamMap.keys.length === 1) {
+        this.emmitSelectedFilters(true);
       }
     }
   }

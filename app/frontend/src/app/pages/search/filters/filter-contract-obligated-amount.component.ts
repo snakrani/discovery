@@ -101,8 +101,11 @@ export class FilterContractObligatedAmountComponent implements OnInit {
     }
     return list;
   }
-  getSelected(): any[] {
+  getSelected(selectedOnly: boolean): any[] {
     const item = [];
+    if (selectedOnly) {
+      return [{ value: this.obligated_amount }];
+    }
     if (this.obligated_amount !== '0') {
       item['name'] = this.queryName;
       item['description'] = this.name;
@@ -113,5 +116,6 @@ export class FilterContractObligatedAmountComponent implements OnInit {
   reset() {
     /** Set default values */
     this.obligated_amount = '0';
+    this.opened = false;
   }
 }

@@ -30,26 +30,6 @@ export class FilterSbdComponent implements OnInit {
   queryName = 'setasides';
   id = 'filter-sbd';
   error_message;
-
-  /** Sample json
-  {
-    count: 8,
-    next: null,
-    previous: null,
-    results: [
-      {
-        code: 'A6',
-        name: '8(A)',
-        description: '8(A)',
-        far_order: 1,
-        url: 'http://localhost:8080/api/setasides/A6'
-      }
-    ]
-  };
-  */
-  /** Generate inputs labels & values
-   *  with these
-   */
   json_value = 'code';
   json_description = 'description';
   constructor(
@@ -89,8 +69,11 @@ export class FilterSbdComponent implements OnInit {
       error => (this.error_message = <any>error)
     );
   }
-  getSelected(): any[] {
+  getSelected(selectedOnly: boolean): any[] {
     const item = [];
+    if (selectedOnly) {
+      return this.items_selected;
+    }
     if (this.items_selected.length > 0) {
       item['name'] = this.queryName;
       item['description'] = this.name;
@@ -108,6 +91,7 @@ export class FilterSbdComponent implements OnInit {
         this.id + '-' + this.items[i][this.json_value]
       ).checked = false;
     }
+    this.opened = false;
   }
   addItem(key: string, title: string) {
     const item = {};

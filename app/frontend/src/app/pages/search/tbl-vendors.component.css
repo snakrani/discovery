@@ -3,3 +3,7 @@
   width: 50px;
   max-width: auto !important;
 }
+h3.alt a {
+  font-size: 0.7em !important;
+  padding-top: 8px;
+}

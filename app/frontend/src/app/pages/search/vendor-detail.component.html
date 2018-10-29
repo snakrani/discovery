@@ -63,6 +63,10 @@
               <div class="usa-grid">
 
                 <div class="usa-width-one-whole pad-top">
+                  <div class="pull-right text-right pad-top">
+                    <a href="vendor/{{vendor?.duns}}/csv" target="_blank">
+                      Download
+                      vendor data(CSV)</a></div>
                   <button class="usa-button-secondary" (click)="toggleMoreInfo()">{{!more_info
                     ?
                     'Show' : 'Hide'}} contract details</button> <button class="usa-button-secondary" (click)="toggleSBD()">{{!sbd_col
@@ -88,20 +92,26 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let item of vendor.pools; let i = index">
-                        <td scope="row"><strong class="db" [innerHTML]="getVehicleDescription(item.pool.vehicle.id)"></strong>
+                        <td scope="row"><strong class="db" [innerHTML]="getVehicleDescription(item.vehicle_id)"></strong>
                           <div class="pad-top">
-                            <span class="uppercase db">Contract Number: </span>
-                            <strong class="pad-left">{{item.piid}}</strong>
+                            <span class="uppercase db">Contract Numbers: </span>
+                            <ul class="ul-no-bullets pad-left">
+                              <li *ngFor="let p of item.piids"><strong>{{p.piid}}</strong></li>
+                            </ul>
                           </div>
                           <div class="other-info" [class.hide]="!more_info">
                             <div class="pad-top">
                               <span class="uppercase db">Contact info: </span>
                               <div class="pad-left" [innerHTML]="getContactInfo(item.contacts)"></div>
                             </div>
+                            <div class="pad-top" *ngIf="item?.capability && item.capability!==''">
+                              <span class="uppercase db">Capability Statement: </span>
+                              <div class="pad-left"><a href="{{item.capability}}" target="_blank">Download</a></div>
+                            </div>
                             <div class="pad-top">
                               <span class="uppercase db">Service Categories: </span>
                               <ul class="ul-no-bullets pad-left">
-                                <li *ngFor="let cat of item.service_categories"><strong [innerHTML]="getServiceCategoryDescription(cat.id)"></strong></li>
+                                <li *ngFor="let cat of item.service_categories"><strong [innerHTML]="getServiceCategoryDescription(cat.pool_id)"></strong></li>
                               </ul>
                             </div>
 

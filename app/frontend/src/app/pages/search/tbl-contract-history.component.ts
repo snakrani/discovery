@@ -19,23 +19,23 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
   items_total: number;
   num_total_pages: number;
   num_results: number;
-  current_page = 1;
   error_message;
+  current_page = 1;
   naics: any[] = [];
   naic_code = 'All';
   piid = 'All';
+  countries: any[];
+  states: any[];
+  country = '0';
+  state = '0';
+  params: string;
   next: number;
   prev: number;
   enable_paging = false;
   history_no_results = false;
   spinner = false;
   ordering = '';
-  params: string;
   interval;
-  countries: any[];
-  states: any[];
-  country = '0';
-  state = '0';
 
   constructor(private searchService: SearchService) {}
 
@@ -44,6 +44,12 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
+    this.current_page = 1;
+    this.naic_code = 'All';
+    this.piid = 'All';
+    this.country = '0';
+    this.state = '0';
+    this.params = '';
     if (this.duns && this.duns !== '') {
       if (!this.searchService.countries) {
         this.searchService.getPlaceOfPerformance().subscribe(
@@ -95,9 +101,7 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
       }
     }
     this.countries = countries;
-
     this.countries.sort(this.searchService.sortByNameAsc);
-    console.log(this.countries);
     this.searchService.countries = this.countries;
     this.states = states;
     this.states.sort(this.searchService.sortByCodeAsc);
@@ -156,6 +160,13 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
         }
       );
   }
+  poolPiids(obj: any[]): string {
+    let items = '';
+    for (const i of obj) {
+      items += i['piid'] + ',';
+    }
+    return items.slice(0, -1);
+  }
   resetTableScrolling() {
     if (document.getElementById('tbl-contract-history')) {
       /** Reset scroll window widths on re submit */
@@ -197,14 +208,18 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
     }, 500);
   }
   setPiid(value: string): string {
-    const arr = value.split('_');
-    return (
-      '<span class="pull-left">' +
-      arr[0] +
-      '_</span><span class="pull-left">' +
-      arr[1] +
-      '</span>'
-    );
+    if (value.indexOf('_') !== -1) {
+      const arr = value.split('_');
+      return (
+        '<span class="pull-left">' +
+        arr[0] +
+        '_</span><span class="pull-left">' +
+        arr[1] +
+        '</span>'
+      );
+    } else {
+      return value;
+    }
   }
   setPoP(obj: any[]): string {
     let pop = '';
@@ -339,6 +354,18 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
       }
       params += 'memberships=' + this.piid;
     }
+    if (this.country !== '0') {
+      if (params !== '') {
+        params += '&';
+      }
+      params += 'countries=' + this.country;
+    }
+    if (this.state !== '0') {
+      if (params !== '') {
+        params += '&';
+      }
+      params += 'states=' + this.state;
+    }
     this.params = params;
   }
   onChangeNaic() {
@@ -378,5 +405,6 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
       this.state,
       this.ordering
     );
+    this.setParams();
   }
 }

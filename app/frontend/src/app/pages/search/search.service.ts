@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap, delay } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
+import { PARAMETERS } from '@angular/core/src/util/decorators';
 declare let API_HOST: string;
 declare const $: any;
 @Injectable({
@@ -85,12 +86,6 @@ export class SearchService {
   //     catchError(this.handleError)
   //   );
   // }
-  // getAgencies(): Observable<any[]> {
-  //   return this.http.get<any[]>(this.apiUrl).pipe(
-  //     tap(data => data),
-  //     catchError(this.handleError)
-  //   );
-  // }
   getPSCsByTerm(str: string): Observable<any[]> {
     return this.http
       .get<any[]>(this.apiUrl + 'psc?description__contains=' + str)
@@ -109,18 +104,6 @@ export class SearchService {
         catchError(this.handleError)
       );
   }
-  // getPSCs(term: string): Observable<any[]> {
-  //   return this.http.get<any[]>(this.apiUrl + 'psc?description__icontains=' + term).pipe(
-  //     tap(data => data),
-  //     catchError(this.handleError)
-  //   );
-  // }
-  // getContractValueHistory(): Observable<any[]> {
-  //   return this.http.get<any[]>().pipe(
-  //     tap(data => data),
-  //     catchError(this.handleError)
-  //   );
-  // }
   getContractPricingType(): Observable<any[]> {
     return this.http
       .get<any[]>(this.apiUrl + 'contracts/values/pricing_type__name')
@@ -227,20 +210,36 @@ export class SearchService {
       );
   }
 
-  getVendors(filters: any[], page: string): Observable<any[]> {
+  getVendors(filters: any[], page: string, vehicle: string): Observable<any[]> {
     let params = '';
     if (page) {
       params = page;
     }
     for (const filter of filters) {
-      if (filter['name'] === 'keywords') {
-        params +=
-          '&pools__pool__keywords__id__in=' +
-          this.getSelectedFilterList(filter['selected'], ',');
-      }
       if (filter['name'] === 'vehicles') {
         params +=
           '&pools__pool__vehicle__id__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
+    }
+
+    if (vehicle) {
+      params += '&pools__pool__vehicle__id__in=' + vehicle;
+    }
+    params += this.buildOtherParams(filters);
+    return this.http
+      .get<any[]>(this.apiUrl + 'vendors?' + params.substr(1))
+      .pipe(
+        tap(data => data),
+        catchError(this.handleError)
+      );
+  }
+  buildOtherParams(filters): string {
+    let params = '';
+    for (const filter of filters) {
+      if (filter['name'] === 'keywords') {
+        params +=
+          '&pools__pool__keywords__id__in=' +
           this.getSelectedFilterList(filter['selected'], ',');
       }
       if (filter['name'] === 'service_categories') {
@@ -269,34 +268,30 @@ export class SearchService {
           this.getSelectedFilterList(filter['selected'], ',');
       }
       if (filter['name'] === 'pop') {
-        console.log(filter['selected'][0].country);
-        let pop = filter['selected'][0].country;
-        if (filter['selected'][0].state) {
-          pop += '__' + filter['selected'][0].state;
+        params +=
+          '&contract__place_of_performance__country_code=' +
+          filter['selected'][0].value;
+        if (filter['selected'][1]) {
+          params +=
+            '&contract__place_of_performance__state=' +
+            filter['selected'][1].value;
         }
-        params += '&pop=' + pop;
       }
-      // if (filter['name'] === 'threshold') {
-      //   const threshold = filter['selected'][0].value.split('-');
-      //   params +=
-      //     '&pools__pool__obligated_amount__range=' +
-      //     threshold[0] +
-      //     ',' +
-      //     threshold[1];
-      // }
-      // if (filter['name'] === 'agency_performance') {
-      //   params +=
-      //     '&pools__pool__vehicle__tier__number__in=' +
-      //     this.getSelectedFilterList(filter['selected'], ',');
-      // }
+      if (filter['name'] === 'obligated_amount') {
+        const threshold = filter['selected'][0].value.split('-');
+        params +=
+          '&contract__obligated_amount__range=' +
+          threshold[0] +
+          ',' +
+          threshold[1];
+      }
+      if (filter['name'] === 'agency_performance') {
+        params +=
+          '&contract__agency__id__in=' +
+          this.getSelectedFilterList(filter['selected'], ',');
+      }
     }
-    console.log(this.apiUrl + 'vendors?' + params.substr(1));
-    return this.http
-      .get<any[]>(this.apiUrl + 'vendors?' + params.substr(1))
-      .pipe(
-        tap(data => data),
-        catchError(this.handleError)
-      );
+    return params;
   }
   getVehicleVendorsMeetCriteria(
     filters: any[],
@@ -304,49 +299,7 @@ export class SearchService {
   ): Observable<any[]> {
     let params = '';
     params += '&pools__pool__vehicle__id=' + vehicle;
-    for (const filter of filters) {
-      if (filter['name'] === 'keywords') {
-        params +=
-          '&pools__pool__keywords__id__in=' +
-          this.getSelectedFilterList(filter['selected'], ',');
-      }
-
-      if (filter['name'] === 'service_categories') {
-        params +=
-          '&pools__pool__id__in=' +
-          this.getSelectedFilterList(filter['selected'], ',');
-      }
-      if (filter['name'] === 'setasides') {
-        params +=
-          '&pools__setasides__code__in=' +
-          this.getSelectedFilterList(filter['selected'], ',');
-      }
-      if (filter['name'] === 'naics') {
-        params +=
-          '&pools__pool__naics__code__in=' +
-          this.getSelectedFilterList(filter['selected'], ',');
-      }
-      if (filter['name'] === 'pscs') {
-        params +=
-          '&pools__pool__psc__code__in=' +
-          this.getSelectedFilterList(filter['selected'], ',');
-      }
-      if (filter['name'] === 'zone') {
-        params +=
-          '&pools__zones__id__in=' +
-          this.getSelectedFilterList(filter['selected'], ',');
-      }
-      // if (filter['name'] === 'agency_performance') {
-      //   params +=
-      //     '&pools__pool__vehicle__tier__number__in=' +
-      //     this.getSelectedFilterList(filter['selected'], ',');
-      // }
-      // if (filter['name'] === 'poc') {
-      //   params +=
-      //     '&pools__pool__vehicle__poc__in=' +
-      //     this.getSelectedFilterList(filter['selected'], ',');
-      // }
-    }
+    params += this.buildOtherParams(filters);
     console.log(this.apiUrl + 'vendors/count/duns?' + params.substr(1));
     return this.http
       .get<any[]>(this.apiUrl + 'vendors/count/duns?' + params.substr(1))
@@ -432,19 +385,12 @@ export class SearchService {
       );
   }
   getVendorDetails(duns: string): Observable<any[]> {
+    console.log(this.apiUrl + 'vendors/' + duns);
     return this.http.get<any[]>(this.apiUrl + 'vendors/' + duns).pipe(
       tap(data => data),
       catchError(this.handleError)
     );
   }
-  // getMetadata(): Observable<any[]> {
-  //   return this.http
-  //     .get<any[]>('https://discovery-dev.app.cloud.gov/api/metadata/')
-  //     .pipe(
-  //       tap(data => data),
-  //       catchError(this.handleError)
-  //     );
-  // }
   getVendorContractHistory(
     duns: string,
     page: string,
@@ -459,7 +405,7 @@ export class SearchService {
       params += '&psc_naics=' + naic;
     }
     if (piid !== 'All') {
-      params += '&base_piid=' + piid;
+      params += '&base_piid__in=' + piid;
     }
     if (country !== '0') {
       params += '&place_of_performance__country_code=' + country;

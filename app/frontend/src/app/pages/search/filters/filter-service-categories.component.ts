@@ -29,6 +29,8 @@ export class FilterServiceCategoriesComponent implements OnInit, OnChanges {
   emmitSelected: EventEmitter<number> = new EventEmitter();
   @Output()
   emmitLoaded: EventEmitter<string> = new EventEmitter();
+  @Output()
+  emitVehicleId: EventEmitter<string> = new EventEmitter();
   name = 'Service Categories';
   queryName = 'service_categories';
   id = 'filter-service-cat';
@@ -47,9 +49,7 @@ export class FilterServiceCategoriesComponent implements OnInit, OnChanges {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit() {
-    // this.initServiceCategories(['All']);
-  }
+  ngOnInit() {}
   ngOnChanges() {
     if (this.items.length > 1) {
       this.buildItems(this.items);
@@ -164,6 +164,13 @@ export class FilterServiceCategoriesComponent implements OnInit, OnChanges {
     }
     this.emmitLoaded.emit(this.queryName);
   }
+  returnVehicleId(pool_id: string): string {
+    for (const item of this.items) {
+      if (item.id === pool_id) {
+        return item.vehicle_id;
+      }
+    }
+  }
   addCategory() {
     if (
       !this.searchService.existsIn(
@@ -176,8 +183,11 @@ export class FilterServiceCategoriesComponent implements OnInit, OnChanges {
       this.addItem(this.category);
     }
   }
-  getSelected(): any[] {
+  getSelected(selectedOnly: boolean): any[] {
     const item = [];
+    if (selectedOnly) {
+      return this.items_selected;
+    }
     if (this.items_selected.length > 0) {
       item['name'] = this.queryName;
       item['description'] = this.name;
@@ -188,6 +198,7 @@ export class FilterServiceCategoriesComponent implements OnInit, OnChanges {
   reset() {
     this.items_selected = [];
     this.category = '0';
+    this.opened = false;
   }
   getItemDescription(value: string): string {
     if (this.items) {
@@ -203,6 +214,7 @@ export class FilterServiceCategoriesComponent implements OnInit, OnChanges {
     item['value'] = value;
     item['description'] = this.getItemDescription(value);
     this.items_selected.push(item);
+    this.emitVehicleId.emit(this.returnVehicleId(value));
     this.emmitSelected.emit(1);
     this.msgAddedItem.showMsg();
   }

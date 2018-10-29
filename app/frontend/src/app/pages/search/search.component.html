@@ -87,10 +87,6 @@
                                 <h3 class="alt">Comparing <strong>{{compare_tbl.length}}</strong> Contract Vehicles
                                   with a total of
                                   <strong>{{total_vendors_met_criteria}} vendors</strong></h3>
-
-                                <!-- <button class="usa-button-secondary" (click)="toggleMoreInfo()">{{!more_info
-                                  ?
-                                  'Show' : 'Hide'}} more contract details</button> -->
                               </div>
 
                               <table id="tbl-compare" class="usa-table-borderless margin-bottom" *ngIf="compare_tbl.length>0">
@@ -98,12 +94,8 @@
                                   <tr>
                                     <th scope="col"></th>
                                     <th scope="col" class="th-vehicle" *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.description}}
-                                      <!--<span
-                                class="info-tip"></span>-->
+
                                     </th>
-                                    <!-- <th scope="col" *ngFor="let vehicle of compare_tbl"><a (click)="openModal(vehicle.id)">{{vehicle.description}}
-                              <span
-                                class="info-tip"></span></a></th> -->
 
                                   </tr>
                                 </thead>
@@ -119,21 +111,18 @@
                                         *ngIf="vehicle.vendors_results_total!=0" (click)="viewVehicleVendors(vehicle.id)">{{vehicle.vendors_results_total}}</button></td>
                                   </tr>
                                   <tr>
-                                    <th scope="row">Eligible Service category(s)
+                                    <th scope="row">Eligible Service Categories
                                       <discovery-lnk-toggle-heights [toggle_id]="'row-serv-cat'" (emitToggleId)="toggleTDHeights($event)"></discovery-lnk-toggle-heights>
                                     </th>
                                     <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">
                                       <div class="row-serv-cat toggle_more" [class.show_all]="more_info">
-                                        <discovery-list [selected]="service_categories_selected" [show_all]="true" [id]="vehicle.id"
-                                          [items_to_show]="num_show" [items]="vehicle.service_categories" [key]="'name'"></discovery-list>
+                                        <discovery-list [hide_others]="true" [selected]="service_categories_selected"
+                                          [show_all]="true" [id]="vehicle.id" [items_to_show]="num_show" [items]="vehicle.service_categories"
+                                          [key]="'name'"></discovery-list>
                                         <div class="gradient"></div>
                                       </div>
                                     </td>
                                   </tr>
-                                  <!-- <tr>
-                          <th scope="row">Top capabilities</th>
-                          <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.capabilities}}</td>
-                        </tr> -->
                                   <tr>
                                     <th scope="row">NAICs in Vehicle
                                       <discovery-lnk-toggle-heights [toggle_id]="'row-naics'" (emitToggleId)="toggleTDHeights($event)"></discovery-lnk-toggle-heights>
@@ -167,10 +156,7 @@
                                     <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0"><a
                                         href="mailto:{{vehicle.gsa}}" *ngIf="vehicle.gsa !== ''">Contact email</a></td>
                                   </tr>
-                                  <!-- <tr>
-                        <th scope="row">Solution Website</th>
-                        <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0">{{vehicle.website}}</td>
-                      </tr> -->
+
                                   <tr>
                                     <th scope="row">Ordering Guide</th>
                                     <td *ngFor="let vehicle of compare_tbl" [hidden]="vehicle.vendors_results_total===0"><a
@@ -184,7 +170,6 @@
                           </div>
                         </div>
                         <!-- End Scroll Window -->
-
 
                       </div>
                     </div>
@@ -214,8 +199,10 @@
                         </div>
 
                         <div class="overflow">
-                          <discovery-tbl-vendors [total_vendors]="vehicle_vendors_total" [obligated_amounts_list]="obligated_amounts_list"
-                            [vehicle]="sort_by" (emitActivateSpinner)="showSpinner($event)" (emitDuns)="showVendorDetail($event)"></discovery-tbl-vendors>
+                          <discovery-tbl-vendors [params]="params" [service_categories_selected]="service_categories_selected"
+                            [total_vendors]="vehicle_vendors_total" [obligated_amounts_list]="obligated_amounts_list"
+                            [vehicle]="sort_by" (emitNoResults)="noResults($event)" (emitActivateSpinner)="showSpinner($event)"
+                            (emitDuns)="showVendorDetail($event)"></discovery-tbl-vendors>
                         </div>
                       </div>
                     </div>
@@ -238,23 +225,3 @@
     <div class="clearfix"></div>
   </div>
 </div>
-<!-- START Modals -->
-<!-- <discovery-modal id="m-OASISSB" title="One Acquisition Solution for Integrated Services (OASIS)">
-    <p>
-      OASIS
-
-    </p>
-  </discovery-modal>
-  <discovery-modal id="HCATSSB">
-    <p>
-      HCATSSB Content here
-
-    </p>
-  </discovery-modal>
-  <discovery-modal id="PSS">
-    <p>
-      PSS Content here
-
-    </p>
-  </discovery-modal> -->
-<!-- END Modals -->
