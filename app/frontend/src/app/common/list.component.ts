@@ -30,7 +30,6 @@ export class ListComponent implements OnInit {
   selected: any[] = [];
   @Input()
   hide_others = false;
-
   show_more = false;
   title_more = 'Show more';
   constructor(private searchService: SearchService) {}

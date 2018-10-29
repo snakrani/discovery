@@ -80,10 +80,7 @@ export class VendorDetailComponent implements OnInit, OnChanges {
       data => {
         this.vendor = data;
         this.loading = false;
-        console.log(this.buildPoolsInfo(data));
         this.vendor['pools'] = this.buildPoolsInfo(data);
-        // console.log(this.buildPoolsInfo(data));
-        // this.vendor['pools'] = this.buildPoolsByUniqueContractNumber(data);
         this.emitHideSpinner.emit(false);
       },
       error => (this.error_message = <any>error)
