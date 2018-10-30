@@ -180,7 +180,7 @@ jobs:
           no_output_timeout: 1h
           command: |
             ./scripts/wait-for-it.sh --host="localhost" --port=8080 --timeout=300
-            ./scripts/test-frontend.sh test /dev/stderr
+            ./scripts/test-frontend.sh karma /dev/stderr
 
       - store_artifacts:
           <<: *logging
