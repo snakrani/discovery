@@ -2,8 +2,6 @@
 #
 # Check https://circleci.com/docs/2.0/language-python/ for more details
 #
-# TODO: Get rid of all this CircleCI caching in favor of extended Docker images
-#
 version: 2
 
 
@@ -176,7 +174,7 @@ jobs:
       - run: *discovery
 
       - run:
-          name: Run Angular Karma tests
+          name: Run Angular unit tests
           no_output_timeout: 1h
           command: |
             ./scripts/wait-for-it.sh --host="localhost" --port=8080 --timeout=300
@@ -185,6 +183,29 @@ jobs:
       - store_artifacts:
           <<: *logging
           destination: angular-test-reports
+
+  at-backend:
+    <<: *application
+
+    steps:
+      - run: *core
+      - checkout
+      - run: *django
+      - run: *angular
+      - run: *chrome
+      - run: *xvfb
+      - run: *discovery
+
+      - run:
+          name: Run Django acceptance tests
+          no_output_timeout: 1h
+          command: |
+            ./scripts/wait-for-it.sh --host="localhost" --port=8080 --timeout=300
+            ./run test --parallel=3 acceptance
+
+      - store_artifacts:
+          <<: *logging
+          destination: django-acceptance-reports
 
   at-frontend:
     <<: *application
@@ -199,7 +220,7 @@ jobs:
       - run: *discovery
 
       - run:
-          name: Run Angular Protractor tests
+          name: Run Angular acceptance tests
           no_output_timeout: 1h
           command: |
             ./scripts/wait-for-it.sh --host="localhost" --port=8080 --timeout=300
@@ -207,7 +228,7 @@ jobs:
 
       - store_artifacts:
           <<: *logging
-          destination: angular-test-reports
+          destination: angular-acceptance-reports
 
   dep-dev:
     <<: *deployer
@@ -275,6 +296,7 @@ workflows:
       - ut-api-fields
       - ut-api-values
       - ut-frontend
+      - at-backend
       - at-frontend
       - dep-dev:
           requires:
@@ -283,6 +305,7 @@ workflows:
             - ut-api-fields
             - ut-api-values
             - ut-frontend
+            - at-backend
             - at-frontend
           filters:
             branches:
@@ -294,6 +317,7 @@ workflows:
             - ut-api-fields
             - ut-api-values
             - ut-frontend
+            - at-backend
             - at-frontend
           filters:
             branches:
