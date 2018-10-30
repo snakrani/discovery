@@ -2,50 +2,95 @@
 #
 # Check https://circleci.com/docs/2.0/language-python/ for more details
 #
-# TODO: Get rid of all this CircleCI caching in favor of extended Docker images
-#
 version: 2
+
+
+application: &application
+  docker:
+    - image: python:3.6-slim-stretch
+      environment:
+        LANG: C.UTF-8
+        PYTHONUNBUFFERED: 1
+
+    - image: postgres:9.4
+      environment:
+        POSTGRES_USER: circleci
+        POSTGRES_PASSWORD: circleci
+        POSTGRES_DB: circle-test
+
+  working_directory: /var/local
+
+deployer: &deployer
+  docker:
+    - image: python:3.6-slim-stretch
+      environment:
+        LANG: C.UTF-8
+        PYTHONUNBUFFERED: 1
+        CF_LOGIN_URL: 'https://api.fr.cloud.gov'
+
+  working_directory: /var/local
+
+
+core: &core
+  name: Install development tools
+  command: |
+    apt-get update
+    apt-get install -y git gcc procps
+
+django: &django
+  name: Install requirements
+  command: |
+    cp ./app/discovery/local_settings.circle.py ./app/discovery/local_settings.py
+
+    pip install --no-cache-dir -r ./requirements.txt
+    pip install --no-cache-dir -r ./requirements-dev.txt
+
+    ./scripts/init-webserver.sh /dev/stderr
+
+angular: &angular
+  name: Install Angular CLI
+  command: |
+    ./scripts/setup-angular.sh /dev/stderr
+    ./scripts/build-frontend.sh /dev/stderr
+
+cloudfoundry: &cloudfoundry
+  name: Setup CloudFoundry client CLI
+  command: |
+    ./scripts/setup-cf.sh /dev/stderr
+
+chrome: &chrome
+  name: Install Chrome web driver
+  command: |
+    ./scripts/setup-chrome.sh /dev/stderr
+
+xvfb: &xvfb
+  name: Running Xvfb server
+  background: true
+  command: Xvfb -ac :99 -screen 0 1280x1024x16 +extension RANDR > /dev/null 2>&1
+
+discovery: &discovery
+  name: Import fixtures and run test server
+  background: true
+  command: |
+    ./scripts/init-db.sh /dev/stderr
+    ./scripts/init-webserver.sh /dev/stderr
+    ./scripts/load-fixtures.sh
+    cd app
+    waitress-serve --expose-tracebacks --port=8080 discovery.wsgi:application
+
+
+logging: &logging
+  path: logs
+
+
 jobs:
   ut-components:
-    docker:
-      - image: python:3.6-slim-stretch
-        environment:
-          LANG: C.UTF-8
-          PYTHONUNBUFFERED: 1
-
-      - image: postgres:9.4
-        environment:
-          POSTGRES_USER: circleci
-          POSTGRES_PASSWORD: circleci
-          POSTGRES_DB: circle-test
-
-    working_directory: /var/local
+    <<: *application
 
     steps:
-      - run:
-          name: Install development tools
-          command: |
-            apt-get update
-            apt-get install -y git gcc
-
+      - run: *core
       - checkout
-
-      - run:
-          name: Set CircleCI configuration
-          command: |
-            cp ./app/discovery/local_settings.circle.py ./app/discovery/local_settings.py
-
-      - run:
-          name: Install Angular CLI
-          command: |
-            ./scripts/setup-angular.sh /dev/stderr
-
-      - run:
-          name: Install requirements
-          command: |
-            pip install --no-cache-dir -r ./requirements.txt
-            pip install --no-cache-dir -r ./requirements-dev.txt
-            ./scripts/init-webserver.sh /dev/stderr
+      - run: *django
 
       - run:
           name: Run component tests
@@ -54,49 +99,16 @@ jobs:
             ./run test --parallel=4 discovery categories vendors contracts
 
       - store_artifacts:
-          path: logs
+          <<: *logging
           destination: component-test-reports
 
   ut-core-api:
-    docker:
-      - image: python:3.6-slim-stretch
-        environment:
-          LANG: C.UTF-8
-          PYTHONUNBUFFERED: 1
-
-      - image: postgres:9.4
-        environment:
-          POSTGRES_USER: circleci
-          POSTGRES_PASSWORD: circleci
-          POSTGRES_DB: circle-test
-
-    working_directory: /var/local
+    <<: *application
 
     steps:
-      - run:
-          name: Install development tools
-          command: |
-            apt-get update
-            apt-get install -y git gcc
-
+      - run: *core
       - checkout
-
-      - run:
-          name: Set CircleCI configuration
-          command: |
-            cp ./app/discovery/local_settings.circle.py ./app/discovery/local_settings.py
-
-      - run:
-          name: Install Angular CLI
-          command: |
-            ./scripts/setup-angular.sh /dev/stderr
-
-      - run:
-          name: Install requirements
-          command: |
-            pip install --no-cache-dir -r ./requirements.txt
-            pip install --no-cache-dir -r ./requirements-dev.txt
-            ./scripts/init-webserver.sh /dev/stderr
+      - run: *django
 
       - run:
           name: Run core API tests
@@ -110,49 +122,16 @@ jobs:
             ./run test api --tag=info
 
       - store_artifacts:
-          path: logs
+          <<: *logging
           destination: core-api-test-reports
 
   ut-api-fields:
-    docker:
-      - image: python:3.6-slim-stretch
-        environment:
-          LANG: C.UTF-8
-          PYTHONUNBUFFERED: 1
-
-      - image: postgres:9.4
-        environment:
-          POSTGRES_USER: circleci
-          POSTGRES_PASSWORD: circleci
-          POSTGRES_DB: circle-test
-
-    working_directory: /var/local
+    <<: *application
 
     steps:
-      - run:
-          name: Install development tools
-          command: |
-            apt-get update
-            apt-get install -y git gcc
-
+      - run: *core
       - checkout
-
-      - run:
-          name: Set CircleCI configuration
-          command: |
-            cp ./app/discovery/local_settings.circle.py ./app/discovery/local_settings.py
-
-      - run:
-          name: Install Angular CLI
-          command: |
-            ./scripts/setup-angular.sh /dev/stderr
-
-      - run:
-          name: Install requirements
-          command: |
-            pip install --no-cache-dir -r ./requirements.txt
-            pip install --no-cache-dir -r ./requirements-dev.txt
-            ./scripts/init-webserver.sh /dev/stderr
+      - run: *django
 
       - run:
           name: Run API field tests
@@ -161,49 +140,16 @@ jobs:
             ./run test api --tag=field_test
 
       - store_artifacts:
-          path: logs
+          <<: *logging
           destination: api-field-test-reports
 
   ut-api-values:
-    docker:
-      - image: python:3.6-slim-stretch
-        environment:
-          LANG: C.UTF-8
-          PYTHONUNBUFFERED: 1
-
-      - image: postgres:9.4
-        environment:
-          POSTGRES_USER: circleci
-          POSTGRES_PASSWORD: circleci
-          POSTGRES_DB: circle-test
-
-    working_directory: /var/local
+    <<: *application
 
     steps:
-      - run:
-          name: Install development tools
-          command: |
-            apt-get update
-            apt-get install -y git gcc
-
+      - run: *core
       - checkout
-
-      - run:
-          name: Set CircleCI configuration
-          command: |
-            cp ./app/discovery/local_settings.circle.py ./app/discovery/local_settings.py
-
-      - run:
-          name: Install Angular CLI
-          command: |
-            ./scripts/setup-angular.sh /dev/stderr
-
-      - run:
-          name: Install requirements
-          command: |
-            pip install --no-cache-dir -r ./requirements.txt
-            pip install --no-cache-dir -r ./requirements-dev.txt
-            ./scripts/init-webserver.sh /dev/stderr
+      - run: *django
 
       - run:
           name: Run API values tests
@@ -212,118 +158,123 @@ jobs:
             ./run test api --tag=values_test
 
       - store_artifacts:
-          path: logs
+          <<: *logging
           destination: api-values-test-reports
 
-  dep-dev:
-    docker:
-      - image: python:3.6-slim-stretch
-        environment:
-          LANG: C.UTF-8
-          PYTHONUNBUFFERED: 1
-          CF_LOGIN_URL: 'https://api.fr.cloud.gov'
-
-    working_directory: /var/local
+  ut-frontend:
+    <<: *application
 
     steps:
-      - run:
-          name: Install development tools
-          command: |
-            apt-get update
-            apt-get install -y git gcc
-
+      - run: *core
       - checkout
+      - run: *django
+      - run: *angular
+      - run: *chrome
+      - run: *xvfb
+      - run: *discovery
 
       - run:
-          name: Set CircleCI configuration
+          name: Run Angular unit tests
+          no_output_timeout: 1h
           command: |
-            cp ./app/discovery/local_settings.circle.py ./app/discovery/local_settings.py
+            ./scripts/wait-for-it.sh --host="localhost" --port=8080 --timeout=300
+            ./scripts/test-frontend.sh karma /dev/stderr
+
+      - store_artifacts:
+          <<: *logging
+          destination: angular-test-reports
+
+  at-backend:
+    <<: *application
+
+    steps:
+      - run: *core
+      - checkout
+      - run: *django
+      - run: *angular
+      - run: *chrome
+      - run: *xvfb
+      - run: *discovery
 
       - run:
-          name: Build static files
+          name: Run Django acceptance tests
+          no_output_timeout: 1h
           command: |
-            pip install --no-cache-dir -r ./requirements.txt
-            pip install --no-cache-dir -r ./requirements-dev.txt
-            ./scripts/setup-angular.sh /dev/stderr
-            ./scripts/build-frontend.sh /dev/stderr
-            ./scripts/init-webserver.sh /dev/stderr
+            ./scripts/wait-for-it.sh --host="localhost" --port=8080 --timeout=300
+            ./run test --parallel=3 acceptance
+
+      - store_artifacts:
+          <<: *logging
+          destination: django-acceptance-reports
+
+  at-frontend:
+    <<: *application
+
+    steps:
+      - run: *core
+      - checkout
+      - run: *django
+      - run: *angular
+      - run: *chrome
+      - run: *xvfb
+      - run: *discovery
 
       - run:
-          name: Setup CloudFoundry client CLI
+          name: Run Angular acceptance tests
+          no_output_timeout: 1h
           command: |
-            ./scripts/setup-cf.sh /dev/stderr
+            ./scripts/wait-for-it.sh --host="localhost" --port=8080 --timeout=300
+            ./scripts/test-frontend.sh e2e /dev/stderr
+
+      - store_artifacts:
+          <<: *logging
+          destination: angular-acceptance-reports
+
+  dep-dev:
+    <<: *deployer
+
+    steps:
+      - run: *core
+      - checkout
+      - run: *django
+      - run: *angular
+      - run: *cloudfoundry
 
       - run:
           name: Deploy development applications
           command: |
             ./scripts/deploy-dev.sh
 
-  dep-prod:
-    docker:
-      - image: python:3.6-slim-stretch
-        environment:
-          LANG: C.UTF-8
-          PYTHONUNBUFFERED: 1
-          CF_LOGIN_URL: 'https://api.fr.cloud.gov'
+      - store_artifacts:
+          <<: *logging
+          destination: dev-deploy-reports
 
-    working_directory: /var/local
+  dep-prod:
+    <<: *deployer
 
     steps:
-      - run:
-          name: Install development tools
-          command: |
-            apt-get update
-            apt-get install -y git gcc
-
+      - run: *core
       - checkout
-
-      - run:
-          name: Set CircleCI configuration
-          command: |
-            cp ./app/discovery/local_settings.circle.py ./app/discovery/local_settings.py
-
-      - run:
-          name: Build static files
-          command: |
-            pip install --no-cache-dir -r ./requirements.txt
-            pip install --no-cache-dir -r ./requirements-dev.txt
-            ./scripts/setup-angular.sh /dev/stderr
-            ./scripts/build-frontend.sh /dev/stderr
-            ./scripts/init-webserver.sh /dev/stderr
-
-      - run:
-          name: Setup CloudFoundry client CLI
-          command: |
-            ./scripts/setup-cf.sh /dev/stderr
+      - run: *django
+      - run: *angular
+      - run: *cloudfoundry
 
       - run:
           name: Deploy production applications
           command: |
             ./scripts/deploy-prod.sh
 
-  dep-docs:
-    docker:
-      - image: python:3.6-slim-stretch
-        environment:
-          LANG: C.UTF-8
-          PYTHONUNBUFFERED: 1
+      - store_artifacts:
+          <<: *logging
+          destination: prod-deploy-reports
 
-    working_directory: /var/local
+  dep-docs:
+    <<: *deployer
 
     steps:
-      - run:
-          name: Install development tools
-          command: |
-            apt-get update
-            apt-get install -y git gcc make
-
+      - run: *core
       - checkout
-
-      - run:
-          name: Install requirements
-          command: |
-            pip install --no-cache-dir -r ./requirements.txt
-            pip install --no-cache-dir -r ./requirements-dev.txt
+      - run: *django
 
       - run:
           name: Deploy documentation
@@ -333,8 +284,8 @@ jobs:
             ./scripts/deploy-docs.sh "${CIRCLE_BRANCH}"
 
       - store_artifacts:
-          path: logs
-          destination: docs-reports
+          <<: *logging
+          destination: docs-deploy-reports
 
 workflows:
   version: 2
@@ -344,12 +295,18 @@ workflows:
       - ut-core-api
       - ut-api-fields
       - ut-api-values
+      - ut-frontend
+      - at-backend
+      - at-frontend
       - dep-dev:
           requires:
             - ut-components
             - ut-core-api
             - ut-api-fields
             - ut-api-values
+            - ut-frontend
+            - at-backend
+            - at-frontend
           filters:
             branches:
               only: develop
@@ -359,6 +316,9 @@ workflows:
             - ut-core-api
             - ut-api-fields
             - ut-api-values
+            - ut-frontend
+            - at-backend
+            - at-frontend
           filters:
             branches:
               only: master
