@@ -86,7 +86,7 @@ export class FiltersComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    /** Set the filters that are going to be used */
+    /** Set filters that will return selected items */
     this.filters_list = [
       this.filterKeywordsComponent,
       this.filterContractVehiclesComponent,
@@ -94,19 +94,13 @@ export class FiltersComponent implements OnInit {
       this.filterServiceCategories,
       this.filterNaicsComponent,
       this.filterPscComponent,
-      this.filterZoneComponent,
+      this.filterZoneComponent
+    ];
+    /**
       this.filterContractObligated,
       this.filterPoP,
       this.filterAgencyPerformance
-    ];
-    /**
-     *
-     *
-     *  this.filterContractObligated,
-     * this.filterPoP
-      this.filterAgencyPerformance,
-      this.filterPoc
-      this.filterCertifications
+
        */
 
     this.initPools(['All']);
@@ -200,10 +194,6 @@ export class FiltersComponent implements OnInit {
           };
           filters.push(item);
         }
-        /** Request Obligated Amounts Duns */
-        if (filter_items['name'] === 'obligated_amount') {
-          this.filterContractObligated.getObligatedAmountDuns();
-        }
       }
     }
     return filters;
@@ -235,7 +225,6 @@ export class FiltersComponent implements OnInit {
     this.filterPscComponent.setFilteredItems(arr);
   }
   selectContractVehicleInFilter(vehicle: string) {
-    console.log(vehicle);
     this.filterContractVehiclesComponent.selectItem(vehicle);
   }
   getServiceCategories() {

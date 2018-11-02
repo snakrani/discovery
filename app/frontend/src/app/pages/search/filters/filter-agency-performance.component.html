@@ -1,9 +1,14 @@
-<button class="usa-accordion-button" [attr.aria-expanded]="opened" [attr.aria-controls]="id">
-  {{name}}
-</button>
+<div class="tooltip-top" data-tooltip="Thanks for your interest! We haven't implemented this filter yet, but your clicks let us know if it would be worth including. Check back later to explore new features!">
+  <button [disabled]="disable" class="usa-accordion-button" [attr.aria-expanded]="opened" [attr.aria-controls]="id">
+    <!-- <span class="info-tip db tooltip-right pull-right" data-tooltip="Select agency to see only vendors that have
+    performed work for the selected agency(s). (FPDS
+    Reported)"></span> -->
+    {{name}}
+  </button>
+</div>
 <div id="{{id}}" class="usa-accordion-content" [attr.aria-hidden]="!opened">
-  <div class="usa-search">
-    <discovery-autocomplete (emitCode)="addKeywords($event)" [id]="id" [keywords_results]="keywords_results"></discovery-autocomplete>
+  <div class="usa-search tooltip-top">
+    <discovery-autocomplete (emitCode)="addKeywords($event)" [placeholder]="name" [id]="id" [keywords_results]="keywords_results"></discovery-autocomplete>
   </div>
 
   <ul *ngIf="items_selected" class="items-selected">

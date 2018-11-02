@@ -20,7 +20,7 @@ export class FilterContractObligatedAmountComponent implements OnInit {
   @ViewChild(FilterSelectedComponent)
   msgAddedItem: FilterSelectedComponent;
   min = 0;
-  max = 10000000;
+  max = 100000000;
   items = [
     { description: 'All', id: '0', checked: true },
     { description: '$0 - $250K', id: '0-250000', checked: false },
@@ -34,6 +34,8 @@ export class FilterContractObligatedAmountComponent implements OnInit {
   duns_list: any[] = [];
   @Input()
   opened = false;
+  @Input()
+  disable = false;
   @Output()
   emmitSelected: EventEmitter<number> = new EventEmitter();
   @Output()
@@ -53,19 +55,16 @@ export class FilterContractObligatedAmountComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // this.initObligatedAmounts();
+  }
+  initObligatedAmounts() {
     /** Grab the queryparams and sets default values
      *  on inputs Ex. checked, selected, keywords, etc */
     if (this.route.snapshot.queryParamMap.has(this.queryName)) {
-      const values: string[] = this.route.snapshot.queryParamMap
-        .get(this.queryName)
-        .split('__');
-      for (let i = 0; i < this.items.length; i++) {
-        if (values[0] === this.items[i][this.json_value]) {
-          this.items[i]['checked'] = true;
-          this.obligated_amount = values[0];
-          this.getObligatedAmountDuns();
-        }
-      }
+      this.obligated_amount = this.route.snapshot.queryParamMap.get(
+        this.queryName
+      );
+
       /** Open accordion */
       this.opened = true;
     } else {
@@ -103,6 +102,8 @@ export class FilterContractObligatedAmountComponent implements OnInit {
   }
   getSelected(selectedOnly: boolean): any[] {
     const item = [];
+    // Disable return item
+    // return item;
     if (selectedOnly) {
       return [{ value: this.obligated_amount }];
     }
@@ -116,6 +117,7 @@ export class FilterContractObligatedAmountComponent implements OnInit {
   reset() {
     /** Set default values */
     this.obligated_amount = '0';
+    this.value_set = false;
     this.opened = false;
   }
 }

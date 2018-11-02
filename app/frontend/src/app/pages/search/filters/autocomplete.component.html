@@ -3,8 +3,8 @@
 
     <div [hidden]="keywords_results.length === 0">
         <select id="{{id}}-input" [style.width]="width" class="autocomplete-drop select2-container--default" tabindex="-1"
-            aria-hidden="true" [class.input-spinner]="keywords_results.length === 0" [disabled]="keywords_results.length === 0">
-            <option value="0">All</option>
+            aria-hidden="true" title="Select" [class.input-spinner]="keywords_results.length === 0" [disabled]="keywords_results.length === 0">
+            <option value="0">Select {{placeholder}}</option>
         </select>
         <button id="{{id}}-add-btn" class="btn-add pull-right" type="submit" (click)="addKeywords()" [disabled]="keywords_results.length === 0">
             <span>Add</span>

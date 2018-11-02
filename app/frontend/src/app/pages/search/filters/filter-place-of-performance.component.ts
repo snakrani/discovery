@@ -39,6 +39,8 @@ export class FilterPlaceOfPerformanceComponent implements OnInit, OnChanges {
   items_selected: any[] = [];
   @Input()
   opened = false;
+  @Input()
+  disable = false;
   @Output()
   emmitSelected: EventEmitter<number> = new EventEmitter();
   @Output()
@@ -60,7 +62,7 @@ export class FilterPlaceOfPerformanceComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit() {
-    this.initPocs();
+    // this.initPocs();
   }
   ngOnChanges() {}
   initPocs() {
@@ -128,24 +130,26 @@ export class FilterPlaceOfPerformanceComponent implements OnInit, OnChanges {
 
   getSelected(selectedOnly: boolean): any[] {
     const item = [];
-    const selected = [];
-    if (this.country !== '0') {
-      item['name'] = this.queryName;
-      item['description'] = this.name;
-      const country = {};
-      country['value'] = this.country;
-      selected.push(country);
-      if (this.country === 'USA' && this.state !== '0') {
-        const state = {};
-        state['value'] = this.state;
-        selected.push(state);
-      }
-      item['items'] = selected;
-    }
-    if (selectedOnly) {
-      return selected;
-    }
+    // Disable return item
     return item;
+    // const selected = [];
+    // if (this.country !== '0') {
+    //   item['name'] = this.queryName;
+    //   item['description'] = this.name;
+    //   const country = {};
+    //   country['value'] = this.country;
+    //   selected.push(country);
+    //   if (this.country === 'USA' && this.state !== '0') {
+    //     const state = {};
+    //     state['value'] = this.state;
+    //     selected.push(state);
+    //   }
+    //   item['items'] = selected;
+    // }
+    // if (selectedOnly) {
+    //   return selected;
+    // }
+    // return item;
   }
   reset() {
     this.country = '0';

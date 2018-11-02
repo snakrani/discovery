@@ -305,6 +305,7 @@ ul.items-selected li a {
   width: 25px;
   height: 23px;
   margin-left: 5px;
+  background-image: url('/frontend/assets/uswds/img/alerts/info.png');
   background-image: url('/frontend/assets/uswds/img/alerts/info.svg');
   background-size: 130% 130%;
   background-position: -5px -3px;
@@ -660,7 +661,8 @@ td[hidden='true'] {
 .usa-hero h1 {
   padding-bottom: 0px;
   color: #fff !important;
-  font-size: 3em;
+  font-size: 1.5em !important;
+  font-weight: normal !important;
 }
 .usa-header {
   background: #fff !important;
@@ -703,6 +705,9 @@ footer.usa-section-dark ul li {
   color: #0071bc !important;
   font-weight: 700 !important;
   padding-left: 1.6rem !important;
+}
+.usa-accordion .usa-accordion-button:disabled {
+  opacity: 0.6;
 }
 .usa-accordion-content {
   position: relative;
@@ -870,7 +875,7 @@ body.modal-open {
 [data-tooltip]:after {
   z-index: 1000;
   padding: 8px;
-  width: 160px;
+  width: 240px;
   background-color: #000;
   background-color: hsla(0, 0%, 20%, 0.9);
   color: #fff;
@@ -1012,6 +1017,7 @@ body.modal-open {
   margin-left: 0;
   margin-bottom: -16px;
 }
+
 @media (min-width: 768px) {
   .usa-nav {
     background: transparent !important;

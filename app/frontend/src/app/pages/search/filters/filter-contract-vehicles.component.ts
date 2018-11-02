@@ -123,7 +123,6 @@ export class FilterContractVehiclesComponent implements OnInit, OnChanges {
     } else {
       this.removeItem(key);
     }
-
     if (this._items_selected.length === 0) {
       /** If none are selected, get All */
       this.emmitItem.emit(['All']);

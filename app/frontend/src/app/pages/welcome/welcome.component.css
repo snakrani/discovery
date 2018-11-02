@@ -3,10 +3,10 @@ a.vehicle {
   display: block;
   width: 100%;
 }
-a.vehicle p {
-  text-decoration: none !important;
-}
 a.vehicle:hover {
   background-color: #fff;
   box-shadow: 0px 0px 2px #eee;
+}
+a {
+  text-decoration: none !important;
 }

@@ -25,7 +25,7 @@
     <h3 class="underline alt">
       <span class="icon-filter"></span>Filters</h3>
     <button type="button" [disabled]="disabled_btn" class="primary" (click)="emmitSelectedFilters($event)">Submit</button>
-    <button type="button" class="link" (click)="resetFilters()">Reset</button>
+    <button type="button" class="link" (click)="resetFilters()" title="Clear all filters">Reset</button>
     <div class="cb" style="display: block;clear:both"></div>
     <ul class="usa-accordion" aria-multiselectable="true">
       <li>
@@ -61,19 +61,21 @@
       <!-- <li>
         <discovery-filter-certifications (emmitSelected)="activateSubmit($event)"></discovery-filter-certifications>
       </li> -->
+
       <li>
-        <discovery-filter-contract-obligated-amount (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-contract-obligated-amount>
+        <discovery-filter-contract-obligated-amount [disable]="true" (emmitSelected)="activateSubmit($event)"
+          (emmitLoaded)="getResults($event)"></discovery-filter-contract-obligated-amount>
       </li>
       <li>
-        <discovery-filter-place-of-performance (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-place-of-performance>
+        <discovery-filter-place-of-performance [disable]="true" (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-place-of-performance>
       </li>
       <li>
-        <discovery-filter-agency-performance (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-agency-performance>
+        <discovery-filter-agency-performance [disable]="true" (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-agency-performance>
       </li>
 
 
     </ul>
     <button type="button" [disabled]="disabled_btn" class="primary" (click)="emmitSelectedFilters($event)">Submit</button>
-    <button type="button" class="link" (click)="resetFilters()">Reset</button>
+    <button type="button" class="link" (click)="resetFilters()" title="Clear all filters">Reset</button>
   </div>
 </div>

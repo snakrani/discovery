@@ -26,6 +26,8 @@ export class FilterAgencyPerformanceComponent
   keywords_results: any[] = [];
   @Input()
   opened = false;
+  @Input()
+  disable = false;
   @Output()
   emmitSelected: EventEmitter<number> = new EventEmitter();
   @Output()
@@ -44,10 +46,10 @@ export class FilterAgencyPerformanceComponent
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit() {}
-  ngAfterContentInit() {
-    this.setKeywordsList();
+  ngOnInit() {
+    // this.setKeywordsList();
   }
+  ngAfterContentInit() {}
   ngOnChanges() {}
   setKeywordsList() {
     this.searchService.getAgencyPerformanceNames().subscribe(
@@ -79,43 +81,19 @@ export class FilterAgencyPerformanceComponent
       }
     );
   }
-  // getAgencyPerformanceDuns() {
-  //   this.duns_list = [];
-  //   // Set agency IDs
-  //   const ids = '';
-  //   this.searchService.getAgencyPerformanceDuns(ids).subscribe(
-  //     data => {
-  //       this.duns_list = data['results'];
-  //     },
-  //     error => (this.error_message = <any>error)
-  //   );
-  // }
-  // getDunsList(): any[] {
-  //   let list = [];
-  //   if (this.items_selected.length > 0) {
-  //     list = this.duns_list;
-  //   }
-  //   return list;
-  // }
-  // exists(value: string): boolean {
-  //   for (let i = 0; i < this.items_selected.length; i++) {
-  //     if (this.items_selected[i]['value'] === value) {
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-  // }
   getSelected(selectedOnly: boolean): any[] {
     const item = [];
-    if (selectedOnly) {
-      return this.items_selected;
-    }
-    if (this.items_selected.length > 0) {
-      item['name'] = this.queryName;
-      item['description'] = this.name;
-      item['items'] = this.items_selected;
-    }
+    // Disable return item
     return item;
+    // if (selectedOnly) {
+    //   return this.items_selected;
+    // }
+    // if (this.items_selected.length > 0) {
+    //   item['name'] = this.queryName;
+    //   item['description'] = this.name;
+    //   item['items'] = this.items_selected;
+    // }
+    // return item;
   }
   reset() {
     this.items_selected = [];
