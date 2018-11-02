@@ -48,12 +48,17 @@ export class HeroComponent implements OnInit {
       this.option = 'naic';
     } else {
       this.loading = true;
-      this.searchService.getKeywords().subscribe(data => {
-        this.searchService.keywords = this.keywords_results;
-        this.buildKeywordsDropdown(data['results']);
-
-        this.initPools();
-      });
+      this.searchService.getKeywords().subscribe(
+        data => {
+          this.searchService.keywords = this.keywords_results;
+          this.buildKeywordsDropdown(data['results']);
+          this.initPools();
+        },
+        error => {
+          this.error_message = <any>error;
+          this.server_error = true;
+        }
+      );
     }
   }
   onChange() {}

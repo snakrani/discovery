@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { SearchService } from '../pages/search/search.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { SearchService } from '../pages/search/search.service';
     `
   ]
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, OnChanges {
   @Input()
   id;
   @Input()
@@ -35,6 +35,11 @@ export class ListComponent implements OnInit {
   constructor(private searchService: SearchService) {}
 
   ngOnInit() {}
+  ngOnChanges() {
+    if (this.id && this.id !== '') {
+      this.id = this.uniqueId(this.id);
+    }
+  }
   hideElements() {
     for (let i = 0; i < this.items.length; ++i) {
       if (i > this.items_to_show) {
@@ -67,6 +72,9 @@ export class ListComponent implements OnInit {
           'block';
       }
     }
+  }
+  uniqueId(vehicle: string): string {
+    return this.searchService.generateUniqueID() + vehicle;
   }
   toggleMore() {
     this.show_more = !this.show_more;

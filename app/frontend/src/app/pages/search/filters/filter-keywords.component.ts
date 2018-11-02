@@ -154,10 +154,12 @@ export class FilterKeywordsComponent
   }
   addItem(id: string) {
     const item = {};
+
     if (id && id !== '') {
       item['value'] = id;
       item['description'] = this.getItemDescription(+id);
     }
+
     this.items_selected.push(item);
     this.emmitSelected.emit(1);
     this.msgAddedItem.showMsg();

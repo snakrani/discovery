@@ -1,5 +1,6 @@
 <h3>Show vendor’s 5 year contract history based on the following filters:</h3>
-<em>Work performed by a vendor is often reported under a different NAICS code due to FPDS restrictions.</em>
+<em>Work performed by a vendor is often reported under a different NAICS code due to FPDS restrictions. Results by
+  NAICS include contracts based on related PSC codes.</em>
 <div class="filters-container">
 
   <div>
@@ -95,9 +96,11 @@
   </div>
 </div>
 <discovery-spinner *ngIf="spinner"></discovery-spinner>
-<div class="pad-bottom text-right" *ngIf="!history_no_results && !spinner">
-  <a href="contracts/{{duns}}/csv?{{params}}" target="_blank">
-    Download contracts data(CSV)</a></div>
+<div class="pad-bottom" *ngIf="!history_no_results && !spinner">
+  <a href="contracts/{{duns}}/csv?{{params}}" class="pull-right" target="_blank">
+    Download contracts data(CSV)</a>
+  <span *ngIf="items_total>0">Total of <strong>{{items_total}}</strong> contract results.</span>
+</div>
 <div id="overflow-contract-history" class="pad-bottom">
   <!-- Start Scroll Window -->
   <!-- <div class="scroll-view-topscroll scrollbar">
@@ -106,6 +109,7 @@
   </div> -->
   <!-- <div id="scroll-view" class="scroll-view scrollbar">
     <div class="scroll-div2 pad-top"> -->
+
   <table id="tbl-contract-history" class="usa-table-borderless history" *ngIf="!history_no_results && !spinner">
     <thead>
       <tr>
@@ -114,8 +118,8 @@
           <discovery-th-sort [label]="'Date Signed'" [width]="'auto'" [ordering]="'date_signed'"
             [selectedParentOrdering]="ordering" (emmitOrdering)="orderBy($event)"></discovery-th-sort>
         </th>
-        <th scope="col" class="tooltip-bottom" data-tooltip="Sort by PIID">
-          <discovery-th-sort [label]="'PIID & Type'" [width]="'auto'" [ordering]="'piid'" [selectedParentOrdering]="ordering"
+        <th scope="col" class="tooltip-bottom" data-tooltip="Sort by RefID">
+          <discovery-th-sort [label]="'RefID & AwardID'" [width]="'auto'" [ordering]="'piid'" [selectedParentOrdering]="ordering"
             (emmitOrdering)="orderBy($event)"></discovery-th-sort>
         </th>
         <th scope="col" class="tooltip-bottom" data-tooltip="Sort by Agency">
@@ -169,7 +173,8 @@
   <!-- End Scroll Window -->
 </div>
 <div *ngIf="items_total > items_per_page">
-  <!-- <p>Viewing <strong [innerHTML]="getViewingItems()"></strong> of <strong>{{items_total}}</strong> total results</p> -->
+  <p>next = {{next}}</p>
+  <p>prev = {{prev}}</p>
   <p>Page <strong>{{current_page}}</strong> of <strong>{{num_total_pages}}</strong></p>
   <button class="usa-button-secondary" (click)="prevPage()" title="Go to page {{prev}}" style="margin-right:10px"
     [disabled]="current_page===1 || !enable_paging">Previous</button>

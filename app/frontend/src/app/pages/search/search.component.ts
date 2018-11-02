@@ -10,7 +10,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ActiveFiltersComponent } from './filters/active-filters.component';
 import { ModalService } from '../../common/modal.service';
 import { FiltersComponent } from './filters.component';
-import { TblVendorsComponent } from './tbl-vendors.component';
 declare const document: any;
 declare const $: any;
 @Component({
@@ -62,6 +61,7 @@ export class SearchComponent implements OnInit {
   pscs_selected: any[] = [];
   service_categories_selected: any[] = [];
   params: string;
+  table_scroll_set = false;
 
   @HostListener('window:resize')
   onResize() {
@@ -85,6 +85,11 @@ export class SearchComponent implements OnInit {
       this.spinner = false;
     }
     this.initSlider();
+    window.onpopstate = function(event) {
+      if (document.location.href.substr('/search') !== -1) {
+        window.location.reload();
+      }
+    };
   }
   get sort_by(): string {
     return this._sort_by;
@@ -112,7 +117,7 @@ export class SearchComponent implements OnInit {
     return items;
   }
   resetTableScrolling() {
-    $('#scroll-tip').addClass('hide slideInLeft');
+    $('.scroll-tip').addClass('hide slideInLeft');
     if (document.getElementById('tbl-compare')) {
       /** Reset scroll window widths on re submit */
       $('#overflow-compare .scroll-div1, #overflow-compare .scroll-div2').css(
@@ -124,9 +129,21 @@ export class SearchComponent implements OnInit {
   initScrollBars() {
     this.resetTableScrolling();
     this.interval = setInterval(() => {
-      if (document.getElementById('tbl-compare')) {
+      if (document.getElementById('tbl-compare') && !this.table_scroll_set) {
         /** Reset scroll window widths on re submit */
-        const w = $('#tbl-compare').css('width');
+        let margin_comp = 0;
+        if (this.compare_tbl.length > 2) {
+          /* Set the first column to be fixed */
+          margin_comp = 220;
+          $('#tbl-compare-container, #tbl-compare, #col-white').addClass(
+            'fixed'
+          );
+        } else {
+          $('#tbl-compare-container, #tbl-compare, #col-white').removeClass(
+            'fixed'
+          );
+        }
+        const w = $('#tbl-compare').innerWidth() + margin_comp + 'px';
         $('#overflow-compare .scroll-div1, #overflow-compare .scroll-div2').css(
           'width',
           w
@@ -143,9 +160,11 @@ export class SearchComponent implements OnInit {
         });
         clearInterval(this.interval);
         this.showScrollTip();
+        this.table_scroll_set = true;
       }
     }, 500);
   }
+
   getFilterVehicles(filters: any[]): any[] {
     let items = [];
     for (const item of filters) {
@@ -216,9 +235,11 @@ export class SearchComponent implements OnInit {
     }
     this.reset(true);
     this.spinner = true;
+    this.table_scroll_set = false;
     this.searchService.activeFilters = filters;
     this.zones = this.filtersComponent.getZones();
     this.contract_vehicles = this.filtersComponent.getContractVehicles();
+
     this.service_categories = this.filtersComponent.getServiceCategories();
     this.naics_selected = this.getSelected(filters, 'naics');
     this.pscs_selected = this.getSelected(filters, 'pscs');
@@ -236,6 +257,7 @@ export class SearchComponent implements OnInit {
 
           const vehicles = [];
           const vehicles_ids = [];
+
           for (const item of data['results']) {
             for (const vehicle of this.contract_vehicles) {
               if (item === vehicle.id) {
@@ -320,8 +342,8 @@ export class SearchComponent implements OnInit {
         }
       }
       if (filter['name'] === 'obligated_amount') {
-        const threshold = filter['selected'][0].value.split('-');
-        params += '&amount=' + threshold[0] + ',' + threshold[1];
+        const threshold = filter['selected'][0].value;
+        params += '&amount=0' + ',' + threshold;
       }
       if (filter['name'] === 'agency_performance') {
         params +=
@@ -477,9 +499,9 @@ export class SearchComponent implements OnInit {
     if (
       $('#compare-scroll .scroll-div1').width() > $('#compare-scroll').width()
     ) {
-      $('#scroll-tip').removeClass('hide slideInLeft');
+      $('.scroll-tip').removeClass('hide slideInLeft');
     } else {
-      $('#scroll-tip').addClass('hide slideInLeft');
+      $('.scroll-tip').addClass('hide slideInLeft');
     }
   }
   filterResultsByVehicle(vehicle: string) {

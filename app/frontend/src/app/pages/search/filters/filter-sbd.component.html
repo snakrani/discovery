@@ -4,7 +4,7 @@
 <div id="{{id}}" class="usa-accordion-content" [attr.aria-hidden]="!opened">
   <fieldset class="usa-fieldset-inputs usa-sans">
     <discovery-spinner *ngIf="!items"></discovery-spinner>
-    <ul class="usa-unstyled-list">
+    <ul class="usa-unstyled-list" title="Select Set Asides">
       <li *ngFor="let item of items">
         <input (change)="onChange(item.code, item.description, $event.target.checked)" id="{{id}}-{{item.code}}" name="{{id}}-{{item.code}}"
           type="checkbox" value="{{item.code}}" [checked]="item.checked">

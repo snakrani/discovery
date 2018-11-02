@@ -1,3 +1,7 @@
+#h1-advanced {
+  position: absolute;
+  left: -9999px;
+}
 .usa-grid {
   padding: 30px 0px 30px 0px;
 }
@@ -11,7 +15,31 @@
   margin-top: 5px;
   cursor: pointer;
 }
-th {
+#overflow-compare {
+  position: relative;
+}
+#tbl-compare-container.fixed {
+  margin-left: 220px;
+}
+#col-white {
+  display: none;
+}
+#col-white.fixed {
+  display: block;
+  width: 222px;
+  background: white;
+  border-right: 1px solid #a4a4a5;
+  box-shadow: 2px 0px 2px #ddd;
+  position: absolute;
+  left: 0px;
+  z-index: 40;
+  height: 94.6%;
+  margin-bottom: 90px;
+}
+#tbl-compare thead th,
+#tbl-compare tbody th,
+#tbl-compare thead th,
+#tbl-compare tbody td {
   vertical-align: top !important;
   position: relative;
 }
@@ -19,6 +47,23 @@ thead th:first-child,
 tbody th:first-child {
   width: auto !important;
   min-width: 160px !important;
+}
+#tbl-compare.fixed thead th:first-child,
+#tbl-compare.fixed tbody th:first-child {
+  position: absolute !important;
+  width: 220px !important;
+  left: 0px;
+  top: auto !important;
+  background: #fff !important;
+  z-index: 50;
+  border-bottom: 0px;
+  /* height: 100%; */
+}
+#tbl-compare button {
+  z-index: 30;
+}
+.min-h {
+  min-height: 40px !important;
 }
 tbody th a {
   position: absolute;
@@ -113,6 +158,9 @@ td {
 .icon-arrow-right {
   margin-top: 4px;
   margin-left: 5px;
+}
+.lnk-more {
+  width: 60px !important;
 }
 @media (min-width: 1180px) {
   .usa-width-three-fourths {

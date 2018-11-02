@@ -5,14 +5,16 @@
   <div class="usa-search form-horizontal">
     <discovery-spinner *ngIf="!items"></discovery-spinner>
 
-    <select id="select_categories" [disabled]="!items" [(ngModel)]="category" class="items-input">
-      <option value="0" selected="selected">Select category --</option>
-      <option *ngFor="let item of items_filtered" value="{{item.id}}">{{item.vehicle + ' - ' +
-        item.name}}</option>
-    </select>
-    <button class="btn-add" type="submit" (click)="addCategory()" [disabled]="!items || category === '0'">
-      <span>Add</span>
-    </button>
+    <div>
+      <select id="select_categories" title="Select Category" [disabled]="!items" [(ngModel)]="category" class="items-input">
+        <option value="0" selected="selected">Select Category --</option>
+        <option *ngFor="let item of items_filtered" value="{{item.id}}">{{item.vehicle + ' - ' +
+          item.name}}</option>
+      </select>
+      <button class="btn-add" type="submit" (click)="addCategory()" [disabled]="!items || category === '0'">
+        <span>Add</span>
+      </button>
+    </div>
   </div>
   <ul *ngIf="items_selected" class="items-selected">
     <li *ngFor="let category of items_selected">

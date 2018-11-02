@@ -285,14 +285,25 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
       const str = this.contracts['next'];
       if (str.indexOf('&page=') !== -1) {
         const arr_next = str.split('&page=');
-        this.next = +arr_next[1];
+        console.log(str.indexOf('&page='));
+        if (arr_next[1].indexOf('&') !== -1) {
+          const page = arr_next[1].split('&');
+          this.next = +page[0];
+        } else {
+          this.next = +arr_next[1];
+        }
       }
     }
     if (this.contracts['previous'] !== null) {
       const str = this.contracts['previous'];
       if (str.indexOf('&page=') !== -1) {
         const arr_prev = str.split('&page=');
-        this.prev = +arr_prev[1];
+        if (arr_prev[1].indexOf('&') !== -1) {
+          const page = arr_prev[1].split('&');
+          this.prev = +page[0];
+        } else {
+          this.prev = +arr_prev[1];
+        }
       } else {
         this.prev = 1;
       }

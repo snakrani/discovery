@@ -18,9 +18,9 @@ export class AutocompleteComponent implements OnChanges {
   @Input()
   keywords_results: any[];
   @Input()
-  placeholder: string;
+  placeholder = '';
   @Input()
-  width = '200px';
+  width = '185px';
   @Output()
   emitCode: EventEmitter<string> = new EventEmitter();
   keywords = '';

@@ -1,56 +1,54 @@
-<main id="main-content">
-  <section class="usa-hero">
-    <div class="usa-grid text-center">
-      <h1>OASIS</h1>
-      <h3>One Acquisition Solution for Integrated Service</h3>
-    </div>
-  </section>
-  <section class="usa-section">
-    <div class="usa-grid">
-      <div class="usa-width-one-sixth best-in-class"></div>
-      <div class="usa-width-one-half">
-        <p class="usa-font-lead">OASIS and OASIS Small Business (SB) are multiple award, Indefinite Delivery Indefinite
-          Quantity (IDIQ) contracts that provide flexible and innovative solutions for complex professional services.
-          Details of OASIS Contract include:
-          OASIS and OASIS Small Business (SB) are multiple award, Indefinite Delivery Indefinite Quantity (IDIQ)
-          contracts that provide flexible and innovative solutions for complex professional services. Details of OASIS
-          Contract include:
+<section class="usa-hero">
+  <div class="usa-grid text-center">
+    <h1>OASIS</h1>
+    <h3>One Acquisition Solution for Integrated Service</h3>
+  </div>
+</section>
+<section class="usa-section">
+  <div class="usa-grid">
+    <div class="usa-width-one-sixth best-in-class"></div>
+    <div class="usa-width-one-half">
+      <p class="usa-font-lead">OASIS and OASIS Small Business (SB) are multiple award, Indefinite Delivery Indefinite
+        Quantity (IDIQ) contracts that provide flexible and innovative solutions for complex professional services.
+        Details of OASIS Contract include:
+        OASIS and OASIS Small Business (SB) are multiple award, Indefinite Delivery Indefinite Quantity (IDIQ)
+        contracts that provide flexible and innovative solutions for complex professional services. Details of OASIS
+        Contract include:
 
-        </p>
-        <ul class="usa-font-lead">
-          <li><strong>Best-in-Class</strong></li>
-          <li>Span many areas of expertise and mission space</li>
-          <li>Span multiple professional service disciplines</li>
-          <li>Allow flexibility for all contract types, including hybrids and cost-reimbursement, at the task order
-            level</li>
-          <li>Allow ancillary support components, commonly referred to as Other Direct Costs (ODC), at the task order
-            level</li>
-        </ul>
-        <h3>OASIS and OASIS SB Pool Disciplines</h3>
-        <div *ngIf="pools.length===0">Loading...</div>
-        <ul *ngIf="pools.length>0" class="usa-font-lead">
-          <li *ngFor="let pool of pools"><a [routerLink]="['/search']" [queryParams]="{vehicles: 'OASIS_SB', service_categories: pool.id}">
-              {{pool.number}} - {{pool.name}}</a></li>
-        </ul>
-      </div>
-      <div class="usa-width-one-fourth">
-        <h3>OASIS Links:</h3>
-        <ul>
-          <li><a href="mailto:oasiscustomersupport@gsa.gov">OASIS Customer Support</a></li>
-          <li><a href="https://www.gsa.gov/cdnstatic/CONSOLIDATED_OASIS_U_SB_Ordering_Guide_8-15-2018.pdf" target="_blank">OASIS
-              Ordering Guide</a></li>
-          <li><a href="https://www.gsa.gov/acquisition/products-services/professional-services/oasis/oasis-contracts"
-              target="_blank">OASIS Contracts</a></li>
-          <li><a href="https://www.gsa.gov/acquisition/products-services/professional-services/oasis/training-and-scope-reviews"
-              target="_blank">Upcoming Trainings</a></li>
-          <li><a href="https://www.gsa.gov/cdnstatic/NAICS%20Code%20Definitions%20for%20OASIS.pdf" target="_blank">NAICS
-              Codes per Pool</a></li>
-          <li><a href="https://www.gsa.gov/cdnstatic/OASIS FAQs as of 8202018 (3).xlsx" target="_blank">OASIS FAQs</a></li>
-          <li><a href="mailto:Oasis@gsa.gov">Contact OASIS</a></li>
-          <li><a href="mailto:OasisSB@gsa.gov">Contact OASIS SB</a></li>
-        </ul>
-      </div>
-
+      </p>
+      <ul class="usa-font-lead">
+        <li><strong>Best-in-Class</strong></li>
+        <li>Span many areas of expertise and mission space</li>
+        <li>Span multiple professional service disciplines</li>
+        <li>Allow flexibility for all contract types, including hybrids and cost-reimbursement, at the task order
+          level</li>
+        <li>Allow ancillary support components, commonly referred to as Other Direct Costs (ODC), at the task order
+          level</li>
+      </ul>
+      <h3>OASIS and OASIS SB Pool Disciplines</h3>
+      <div *ngIf="pools.length===0">Loading...</div>
+      <ul *ngIf="pools.length>0" class="usa-font-lead">
+        <li *ngFor="let pool of pools"><a [routerLink]="['/search']" [queryParams]="{vehicles: 'OASIS_SB', service_categories: pool.id}">
+            {{pool.number}} - {{pool.name}}</a></li>
+      </ul>
     </div>
-  </section>
-</main>
+    <div class="usa-width-one-fourth">
+      <h3>OASIS Links:</h3>
+      <ul>
+        <li><a href="mailto:oasiscustomersupport@gsa.gov">OASIS Customer Support</a></li>
+        <li><a href="https://www.gsa.gov/cdnstatic/CONSOLIDATED_OASIS_U_SB_Ordering_Guide_8-15-2018.pdf" target="_blank">OASIS
+            Ordering Guide</a></li>
+        <li><a href="https://www.gsa.gov/acquisition/products-services/professional-services/oasis/oasis-contracts"
+            target="_blank">OASIS Contracts</a></li>
+        <li><a href="https://www.gsa.gov/acquisition/products-services/professional-services/oasis/training-and-scope-reviews"
+            target="_blank">Upcoming Trainings</a></li>
+        <li><a href="https://www.gsa.gov/cdnstatic/NAICS%20Code%20Definitions%20for%20OASIS.pdf" target="_blank">NAICS
+            Codes per Pool</a></li>
+        <li><a href="https://www.gsa.gov/cdnstatic/OASIS FAQs as of 8202018 (3).xlsx" target="_blank">OASIS FAQs</a></li>
+        <li><a href="mailto:Oasis@gsa.gov">Contact OASIS</a></li>
+        <li><a href="mailto:OasisSB@gsa.gov">Contact OASIS SB</a></li>
+      </ul>
+    </div>
+
+  </div>
+</section>

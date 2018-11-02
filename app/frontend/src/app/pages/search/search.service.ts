@@ -215,16 +215,16 @@ export class SearchService {
     if (page) {
       params = page;
     }
-    for (const filter of filters) {
-      if (filter['name'] === 'vehicles') {
-        params +=
-          '&pools__pool__vehicle__id__in=' +
-          this.getSelectedFilterList(filter['selected'], ',');
-      }
-    }
+    // for (const filter of filters) {
+    //   if (filter['name'] === 'vehicles') {
+    //     params +=
+    //       '&pools__pool__vehicle__id__in=' +
+    //       this.getSelectedFilterList(filter['selected'], ',');
+    //   }
+    // }
 
     if (vehicle) {
-      params += '&pools__pool__vehicle__id__in=' + vehicle;
+      params += '&pools__pool__vehicle__id=' + vehicle;
     }
     params += this.buildOtherParams(filters);
     return this.http
@@ -278,12 +278,8 @@ export class SearchService {
         }
       }
       if (filter['name'] === 'obligated_amount') {
-        const threshold = filter['selected'][0].value.split('-');
-        params +=
-          '&contract__obligated_amount__range=' +
-          threshold[0] +
-          ',' +
-          threshold[1];
+        const threshold = filter['selected'][0].value;
+        params += '&contract__obligated_amount__range=0,' + threshold;
       }
       if (filter['name'] === 'agency_performance') {
         params +=
@@ -307,6 +303,14 @@ export class SearchService {
         tap(data => data),
         catchError(this.handleError)
       );
+  }
+  generateUniqueID(): string {
+    return (
+      '_' +
+      Math.random()
+        .toString(36)
+        .substr(2, 9)
+    );
   }
   getVehiclesToCompare(filters: any[]): Observable<any[]> {
     let params = '';
