@@ -15,7 +15,14 @@ declare let document: any;
 @Component({
   selector: 'discovery-filter-agency-performance',
   templateUrl: './filter-agency-performance.component.html',
-  styles: []
+  styles: [
+    `
+      .tooltip .tooltiptext {
+        width: 200px;
+        margin-left: -100px;
+      }
+    `
+  ]
 })
 export class FilterAgencyPerformanceComponent
   implements OnInit, OnChanges, AfterContentInit {

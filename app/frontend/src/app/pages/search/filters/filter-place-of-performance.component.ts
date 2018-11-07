@@ -26,6 +26,10 @@ declare let $: any;
       #select_state {
         margin-top: 10px !important;
       }
+      .tooltip .tooltiptext {
+        width: 200px;
+        margin-left: -100px;
+      }
     `
   ]
 })
