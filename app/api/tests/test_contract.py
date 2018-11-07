@@ -11,8 +11,8 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
     schema = {
         'object': {
             'tags': ('contract_object',),
-            '&1': ('piid', 'exact', 'DAAE0703CS111'),
-            '&162': ('piid', 'exact', 'AG3198C120007'),
+            '&1': ('piid', 'exact', 'N0017812D6749_4Y01'),
+            '&162': ('piid', 'exact', 'GS00Q14OADS128_19AQMM18F1804'),
             '&828': ('name', 'exact', 'USZA2202D0015_0194'),
             '#345C': (),
             '#ABCDEFG': ()
