@@ -248,6 +248,9 @@ export class SearchService {
           this.getSelectedFilterList(filter['selected'], ',');
       }
       if (filter['name'] === 'setasides') {
+        // for (const setaside of filter['selected']) {
+        //   params += '&pools__setasides__code=' + setaside['value'];
+        // }
         params +=
           '&pools__setasides__code__in=' +
           this.getSelectedFilterList(filter['selected'], ',');

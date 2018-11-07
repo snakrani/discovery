@@ -816,7 +816,60 @@ body.modal-open {
  * Tooltip Styles
  */
 
-/* Base styles for the element that has a tooltip */
+.tooltip {
+  position: relative;
+  display: block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px;
+  position: absolute;
+  font-size: 0.9em;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+  opacity: 0;
+  transition: opacity 0.6s;
+}
+
+.tooltip .tooltiptext::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+.tooltip.left .tooltiptext {
+  top: inherit;
+  margin-left: -180px;
+  bottom: 0;
+  left: 0 !important;
+}
+.tooltip.left .tooltiptext::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-top: -5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+/*
+
 [data-tooltip],
 .tooltip {
   position: relative;
@@ -824,7 +877,6 @@ body.modal-open {
   z-index: 300;
 }
 
-/* Base styles for the entire tooltip */
 [data-tooltip]:before,
 [data-tooltip]:after,
 .tooltip:before,
@@ -846,7 +898,6 @@ body.modal-open {
   pointer-events: none;
 }
 
-/* Show the entire tooltip on hover and focus */
 [data-tooltip]:hover:before,
 [data-tooltip]:hover:after,
 [data-tooltip]:focus:before,
@@ -861,20 +912,18 @@ body.modal-open {
   opacity: 1;
 }
 
-/* Base styles for the tooltip's directional arrow */
 .tooltip:before,
 [data-tooltip]:before {
   z-index: 1001;
-  border: 6px solid transparent;
+  border: 8px solid transparent;
   background: transparent;
   content: '';
 }
 
-/* Base styles for the tooltip's content area */
 .tooltip:after,
 [data-tooltip]:after {
   z-index: 1000;
-  padding: 8px;
+  padding: 10px;
   width: 240px;
   background-color: #000;
   background-color: hsla(0, 0%, 20%, 0.9);
@@ -884,9 +933,6 @@ body.modal-open {
   line-height: 1.2;
 }
 
-/* Directions */
-
-/* Top (default) */
 [data-tooltip]:before,
 [data-tooltip]:after,
 .tooltip:before,
@@ -901,12 +947,11 @@ body.modal-open {
 .tooltip:before,
 .tooltip-top:before {
   margin-left: -6px;
-  margin-bottom: -12px;
+  margin-bottom: -16px;
   border-top-color: #000;
   border-top-color: hsla(0, 0%, 20%, 0.9);
 }
 
-/* Horizontally align top/bottom tooltips */
 [data-tooltip]:after,
 .tooltip:after,
 .tooltip-top:after {
@@ -930,7 +975,6 @@ body.modal-open {
   transform: translateY(-12px);
 }
 
-/* Left */
 .tooltip-left:before,
 .tooltip-left:after {
   right: 100%;
@@ -940,7 +984,7 @@ body.modal-open {
 
 .tooltip-left:before {
   margin-left: 0;
-  margin-right: -12px;
+  margin-right: -16px;
   margin-bottom: 0;
   border-top-color: transparent;
   border-left-color: #000;
@@ -956,7 +1000,6 @@ body.modal-open {
   transform: translateX(-12px);
 }
 
-/* Bottom */
 .tooltip-bottom:before,
 .tooltip-bottom:after {
   top: 100%;
@@ -965,7 +1008,7 @@ body.modal-open {
 }
 
 .tooltip-bottom:before {
-  margin-top: -12px;
+  margin-top: -16px;
   margin-bottom: 0;
   border-top-color: transparent;
   border-bottom-color: #000;
@@ -981,7 +1024,6 @@ body.modal-open {
   transform: translateY(12px);
 }
 
-/* Right */
 .tooltip-right:before,
 .tooltip-right:after {
   bottom: 50%;
@@ -990,7 +1032,7 @@ body.modal-open {
 
 .tooltip-right:before {
   margin-bottom: 0;
-  margin-left: -12px;
+  margin-left: -16px;
   border-top-color: transparent;
   border-right-color: #000;
   border-right-color: hsla(0, 0%, 20%, 0.9);
@@ -1005,18 +1047,16 @@ body.modal-open {
   transform: translateX(12px);
 }
 
-/* Move directional arrows down a bit for left/right tooltips */
 .tooltip-left:before,
 .tooltip-right:before {
   top: 3px;
 }
 
-/* Vertically center tooltip content for left/right tooltips */
 .tooltip-left:after,
 .tooltip-right:after {
   margin-left: 0;
   margin-bottom: -16px;
-}
+} */
 
 @media (min-width: 768px) {
   .usa-nav {

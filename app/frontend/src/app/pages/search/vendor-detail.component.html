@@ -78,15 +78,21 @@
                       <tr>
                         <!-- <th></th> -->
                         <th scope="col">Contract Membership</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Small Disadvantaged Business">SB</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Small Disadvantaged Business">SDB</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="8(A)">8(A)</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="HUBZone">HubZ</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Woman Owned">WO</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Veteran Owned">VO</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Service Disabled Veteran Owned">SDVO</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd tooltip-bottom" data-tooltip="Veterans Affair VIP">VA
-                          VIP</th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd"><span class="tooltip">SB<span class="tooltiptext">Small
+                              Business</span></span></th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd"><span class="tooltip">SDB<span class="tooltiptext">Small
+                              Disadvantaged Business</span></span></th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd"><span class="tooltip">8(A)<span class="tooltiptext">8(A)</span></span></th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd"><span class="tooltip">HubZ<span class="tooltiptext">HUBZone</span></span></th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd"><span class="tooltip">WO<span class="tooltiptext">Woman
+                              Owned</span></span></th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd"><span class="tooltip">VO<span class="tooltiptext">Veteran
+                              Owned</span></span></th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd"><span class="tooltip">SDVO<span class="tooltiptext">Service
+                              Disabled Veteran Owned</span></span></th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd"><span class="tooltip left">VA VIP<span
+                              class="tooltiptext">Veterans
+                              Affair VIP</span></span></th>
 
                       </tr>
                     </thead>
@@ -118,8 +124,8 @@
                             <div class="pad-top" *ngIf="item?.zones && item.zones.length>0">
                               <span class="uppercase db">Zone(s):</span>
                               <div class="pad-left">
-                                <a href="javascript://" (mouseover)="onTop($event.target)" [style.zIndex]="3" class="tooltip-right"
-                                  *ngFor="let zone of item?.zones" [attr.data-tooltip]="getZoneStates(zone.id)">{{zone.id}}</a>
+                                <a href="javascript://" (mouseover)="onTop($event.target)" [style.zIndex]="3" class="tooltip"
+                                  *ngFor="let zone of item?.zones">{{zone.id}}<span class="tooltiptext" [innerHTML]="getZoneStates(zone.id)"></span></a>
                               </div>
                             </div>
 

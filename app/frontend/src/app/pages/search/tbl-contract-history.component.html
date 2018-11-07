@@ -97,7 +97,7 @@
 </div>
 <discovery-spinner *ngIf="spinner"></discovery-spinner>
 <div class="pad-bottom" *ngIf="!history_no_results && !spinner">
-  <a href="contracts/{{duns}}/csv?{{params}}" class="pull-right" target="_blank">
+  <a href="csv/contracts/{{duns}}?{{params}}" class="pull-right" target="_blank">
     Download contracts data(CSV)</a>
   <span *ngIf="items_total>0">Total of <strong>{{items_total}}</strong> contract results.</span>
 </div>
@@ -114,33 +114,54 @@
     <thead>
       <tr>
         <th scope="col"></th>
-        <th scope="col" class="tooltip-bottom" data-tooltip="Sort by Date Signed">
-          <discovery-th-sort [label]="'Date Signed'" [width]="'auto'" [ordering]="'date_signed'"
-            [selectedParentOrdering]="ordering" (emmitOrdering)="orderBy($event)"></discovery-th-sort>
+        <th scope="col">
+          <span class="tooltip">
+            <discovery-th-sort [label]="'Date Signed'" [width]="'auto'" [ordering]="'date_signed'"
+              [selectedParentOrdering]="ordering" (emmitOrdering)="orderBy($event)"></discovery-th-sort>
+            <span class="tooltiptext">Sort by Date Signed</span>
+          </span>
         </th>
-        <th scope="col" class="tooltip-bottom" data-tooltip="Sort by RefID">
-          <discovery-th-sort [label]="'RefID & AwardID'" [width]="'auto'" [ordering]="'piid'" [selectedParentOrdering]="ordering"
-            (emmitOrdering)="orderBy($event)"></discovery-th-sort>
+        <th scope="col">
+          <span class="tooltip">
+            <discovery-th-sort [label]="'RefID & AwardID'" [width]="'auto'" [ordering]="'piid'"
+              [selectedParentOrdering]="ordering" (emmitOrdering)="orderBy($event)"></discovery-th-sort>
+            <span class="tooltiptext">Sort by RefID</span>
+          </span>
         </th>
-        <th scope="col" class="tooltip-bottom" data-tooltip="Sort by Agency">
-          <discovery-th-sort [label]="'Agency'" [width]="'auto'" [ordering]="'agency_name'" [selectedParentOrdering]="ordering"
-            (emmitOrdering)="orderBy($event)"></discovery-th-sort>
+        <th scope="col">
+          <span class="tooltip">
+            <discovery-th-sort [label]="'Agency'" [width]="'auto'" [ordering]="'agency_name'" [selectedParentOrdering]="ordering"
+              (emmitOrdering)="orderBy($event)"></discovery-th-sort>
+            <span class="tooltiptext">Sort by Agency</span>
+          </span>
         </th>
-        <th scope="col" class="tooltip-bottom" data-tooltip="Sort by Obligated Amount">
-          <discovery-th-sort [label]="'Value ($)'" [ordering]="'obligated_amount'" [selectedParentOrdering]="ordering"
-            (emmitOrdering)="orderBy($event)"></discovery-th-sort>
+        <th scope="col">
+          <span class="tooltip">
+            <discovery-th-sort [label]="'Value ($)'" [ordering]="'obligated_amount'" [selectedParentOrdering]="ordering"
+              (emmitOrdering)="orderBy($event)"></discovery-th-sort>
+            <span class="tooltiptext">Sort by Obligated Amount</span>
+          </span>
         </th>
-        <th scope="col" class="tooltip-bottom" data-tooltip="Sort by Place of Performance">
-          <discovery-th-sort [label]="'Place of Performance'" [width]="'auto'" [ordering]="'place_of_performance_location'"
-            [selectedParentOrdering]="ordering" (emmitOrdering)="orderBy($event)"></discovery-th-sort>
+        <th scope="col">
+          <span class="tooltip">
+            <discovery-th-sort [label]="'Place of Performance'" [width]="'auto'" [ordering]="'place_of_performance_location'"
+              [selectedParentOrdering]="ordering" (emmitOrdering)="orderBy($event)"></discovery-th-sort>
+            <span class="tooltiptext">Sort by Place of Performance</span>
+          </span>
         </th>
-        <th scope="col" class="tooltip-bottom col-small" data-tooltip="Sort by NAIC">
-          <discovery-th-sort [label]="'NAIC'" [width]="'40px'" [ordering]="'NAICS'" [selectedParentOrdering]="ordering"
-            (emmitOrdering)="orderBy($event)"></discovery-th-sort>
+        <th scope="col" class="col-small">
+          <span class="tooltip">
+            <discovery-th-sort [label]="'NAIC'" [width]="'40px'" [ordering]="'NAICS'" [selectedParentOrdering]="ordering"
+              (emmitOrdering)="orderBy($event)"></discovery-th-sort>
+            <span class="tooltiptext">Sort by NAIC</span>
+          </span>
         </th>
-        <th scope="col" class="tooltip-bottom col-small" data-tooltip="Sort by PSC">
-          <discovery-th-sort [label]="'PSC'" [width]="'40px'" [ordering]="'PSC'" [selectedParentOrdering]="ordering"
-            (emmitOrdering)="orderBy($event)"></discovery-th-sort>
+        <th scope="col" class="col-small">
+          <span class="tooltip">
+            <discovery-th-sort [label]="'PSC'" [width]="'40px'" [ordering]="'PSC'" [selectedParentOrdering]="ordering"
+              (emmitOrdering)="orderBy($event)"></discovery-th-sort>
+            <span class="tooltiptext">Sort by PSC</span>
+          </span>
         </th>
       </tr>
     </thead>

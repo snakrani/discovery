@@ -1,10 +1,12 @@
-<div class="tooltip-top" data-tooltip="Thanks for your interest! We haven't implemented this filter yet, but your clicks let us know if it would be worth including. Check back later to explore new features!">
+<div class="tooltip">
   <button [disabled]="disable" class="usa-accordion-button" [attr.aria-expanded]="opened" [attr.aria-controls]="id">
     <!-- <span class="info-tip db tooltip-right pull-right" data-tooltip="Select location to see only vendors that have
     performed work in the selected location. (FPDS
     Reported)"></span> -->
     {{name}}
   </button>
+  <span class="tooltiptext">Thanks for your interest! We haven't implemented this filter yet, but your clicks let us
+    know if it would be worth including. Check back later to explore new features!</span>
 </div>
 <div id="{{id}}" class="usa-accordion-content" [attr.aria-hidden]="!opened">
   <div class="usa-search form-horizontal">
