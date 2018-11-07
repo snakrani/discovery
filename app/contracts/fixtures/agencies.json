@@ -57,13 +57,6 @@
 },
 {
   "model": "contracts.agency",
-  "pk": "12G2",
-  "fields": {
-    "name": "FOOD SAFETY AND INSPECTION SERVICE"
-  }
-},
-{
-  "model": "contracts.agency",
   "pk": "12H2",
   "fields": {
     "name": "AGRICULTURAL RESEARCH SERVICE"
@@ -456,13 +449,6 @@
 },
 {
   "model": "contracts.agency",
-  "pk": "7004",
-  "fields": {
-    "name": "OFFICE OF THE INSPECTOR GENERAL"
-  }
-},
-{
-  "model": "contracts.agency",
   "pk": "7008",
   "fields": {
     "name": "U.S. COAST GUARD"
@@ -571,13 +557,6 @@
   "pk": "8000",
   "fields": {
     "name": "NATIONAL AERONAUTICS AND SPACE ADMINISTRATION"
-  }
-},
-{
-  "model": "contracts.agency",
-  "pk": "8300",
-  "fields": {
-    "name": "EXPORT-IMPORT BANK OF THE U.S."
   }
 },
 {
