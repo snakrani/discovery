@@ -1,7 +1,6 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <title>Discovery</title>
@@ -11,19 +10,7 @@
     <link rel="icon" type="image/x-icon" href="{% static 'frontend/favicon.ico' %}">
     <link rel="stylesheet" href="{% static 'frontend/assets/uswds/css/uswds.min.css' %}">
     <link rel="stylesheet" href="{% static 'frontend/styles.css' %}">
-
-    {% if GA_TRACKING_ID %}
-      <!-- Global Site Tag (gtag.js) - Google Analytics -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id={{GA_TRACKING_ID}}"></script>
-      <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', "{{GA_TRACKING_ID}}");
-      </script>
-    {% endif %}
 </head>
-
 <body>
     <discovery-root>Loading...</discovery-root>
 
@@ -34,11 +21,20 @@
         }
     </script>
 
+    {% if GA_TRACKING_ID %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{GA_TRACKING_ID}}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', "{{GA_TRACKING_ID}}");
+    </script>
+    {% endif %}
+
     <script type="text/javascript" src="{% static 'frontend/assets/uswds/js/uswds.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'frontend/runtime.js' %}"></script>
     <script type="text/javascript" src="{% static 'frontend/polyfills.js' %}"></script>
     <script type="text/javascript" src="{% static 'frontend/scripts.js' %}"></script>
     <script type="text/javascript" src="{% static 'frontend/main.js' %}"></script>
 </body>
-
 </html>
