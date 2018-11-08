@@ -2,16 +2,26 @@ from django.db.models import Q
 from django.db.models.query import QuerySet
 
 from rest_framework.fields import CharField, IntegerField
+from rest_framework.exceptions import ValidationError
 
 from rest_framework_filters.filterset import FilterSet, FilterSetMetaclass
 from rest_framework_filters.filters import BooleanFilter, NumberFilter, CharFilter, DateFilter, DateTimeFilter, RelatedFilter, BaseInFilter, BaseRangeFilter
 from rest_framework_filters.backends import ComplexFilterBackend
+from rest_framework_filters.complex_ops import combine_complex_queryset, decode_complex_ops
 
 from categories import models as categories
 from vendors import models as vendors
 from contracts import models as contracts
 
 import re
+
+
+def filter_operators():
+    return {
+        '&': QuerySet.intersection,
+        '|': QuerySet.union,
+        '-': QuerySet.difference,
+    }
 
 
 class CharInFilter(BaseInFilter, CharFilter):
@@ -28,11 +38,7 @@ class NumberRangeFilter(BaseRangeFilter, NumberFilter):
 
 
 class DiscoveryComplexFilterBackend(ComplexFilterBackend):
-    operators = {
-        '&': QuerySet.intersection,
-        '|': QuerySet.union,
-        '-': QuerySet.difference,
-    }
+    operators = filter_operators()
 
 
 class MetaFilterSet(FilterSetMetaclass):
@@ -256,11 +262,48 @@ class VendorFilter(FilterSet, metaclass = MetaFilterSet):
     
     contract = RelatedFilter("ContractBaseFilter")
     
+    membership = CharFilter(field_name='membership', method='filter_membership')
     setasides = CharFilter(field_name='setasides', method='filter_setasides')
     
     class Meta:
         model = vendors.Vendor
         fields = ()
+    
+    
+    def filter_membership(self, qs, name, value):
+        # Decode complex membership query
+        try:
+            complex_ops = decode_complex_ops(value, filter_operators(), True)
+        except ValidationError as exc:
+            raise ValidationError({'membership': exc.detail})
+        
+        # Collect the individual filtered membership querysets
+        querystrings = [op.querystring for op in complex_ops]
+        ms_queryset = vendors.PoolMembership.objects.all()
+        ms_querysets = []
+        errors = []
+        
+        for qstring in querystrings:
+            query = qstring.split('=')
+            
+            try:
+                ms_querysets.append(ms_queryset.filter(**{query[0]: query[1]}))
+            except ValidationError as exc:
+                errors[qstring] = exc.detail
+    
+        if errors:
+            raise ValidationError(errors)
+        
+        # Retrieve a list of membership ids matching query   
+        ms_queryset = combine_complex_queryset(ms_querysets, complex_ops)
+        ms_ids = list(ms_queryset.values_list('id', flat=True))
+        
+        # Filter vendors by membership
+        if len(ms_ids) > 0:
+            qs = qs.filter(pools__id__in=ms_ids)
+        
+        return qs
+
         
     def filter_setasides(self, qs, name, value):
         value_components = value.split(':')
