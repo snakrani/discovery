@@ -237,6 +237,7 @@ class PoolMembershipFilter(FilterSet, metaclass = MetaFilterSet):
     
     _fuzzy_text = ('piid',)
     _date_time = ('expiration_8a_date', 'contract_end_date')
+    _number = ('id',)
     
     pool = RelatedFilter(PoolFilter)
     setasides = RelatedFilter(SetAsideFilter)
