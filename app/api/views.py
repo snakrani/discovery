@@ -331,7 +331,7 @@ class MembershipViewSet(DiscoveryReadOnlyModelViewSet):
         'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter),
         'count': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
     }
-    filter_class = filters.PoolMembershipFilter
+    filter_class = filters.PoolMembershipVendorFilter
     search_fields = ['piid', 'vendor__name']
     ordering_fields = [
         'id', 'piid', 
