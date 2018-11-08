@@ -524,6 +524,6 @@ class MembershipTest(case.APITestCase, metaclass = case.MetaAPISchema):
         
     def validate_object(self, resp, base_key = []):
         resp.is_not_empty(base_key + ['piid'])
-        resp.is_int(base_key + ['vendor', 'duns'])
-        resp.is_int(base_key + ['pool', 'id'])
+        resp.is_not_empty(base_key + ['vendor', 'duns'])
+        resp.is_not_empty(base_key + ['pool', 'id'])
 
