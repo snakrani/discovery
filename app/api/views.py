@@ -313,6 +313,44 @@ class ZoneViewSet(DiscoveryReadOnlyModelViewSet):
     }
 
 
+class MembershipViewSet(DiscoveryReadOnlyModelViewSet):
+    """
+    API endpoint that allows for access to Discovery related vendor pool membership information.
+    
+    retrieve:
+    Returns information for a single vendor pool membership.
+    
+    list:
+    Returns all of the vendor pool memberships that are relevant to the acquisition vehicles in the Discovery universe.
+    """
+    queryset = vendors.PoolMembership.objects.all().distinct()
+    lookup_field = 'id'
+    
+    action_filters = {
+        'list': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter, OrderingFilter),
+        'values': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter),
+        'count': (filters.DiscoveryComplexFilterBackend, RestFrameworkFilterBackend, SearchFilter)
+    }
+    filter_class = filters.PoolMembershipVendorFilter
+    search_fields = ['piid', 'vendor__name']
+    ordering_fields = [
+        'id', 'piid', 
+        'vendor__duns', 'vendor__name', 
+        'pool__id', 'pool__name', 'pool__number', 'pool__threshold', 
+        'pool__vehicle__id', 'pool__vehicle__name'
+    ]
+    ordering = 'piid'
+    
+    pagination_class = pagination.ResultSetPagination
+    bypass_pagination = False
+    
+    action_serializers = {
+        'list': serializers.PoolMembershipSummaryVendorSerializer,
+        'retrieve': serializers.PoolMembershipSummaryVendorSerializer,
+        'test': serializers.PoolMembershipTestVendorSerializer
+    }
+
+
 class VendorViewSet(DiscoveryReadOnlyModelViewSet):
     """
     API endpoint that allows for access to vendor information in the Discovery universe.

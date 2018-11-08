@@ -297,7 +297,7 @@ class BasePoolMembershipSerializer(ModelSerializer):
     
     class Meta:
         model = vendors.PoolMembership
-        fields = ['piid', 'contacts', 'expiration_8a_date', 'contract_end_date', 'capability_statement']
+        fields = ['id', 'piid', 'contacts', 'expiration_8a_date', 'contract_end_date', 'capability_statement']
         
     def get_capability_statement(self, item):
         request = self.context.get('request')
@@ -396,6 +396,19 @@ class VendorTestSerializer(BaseVendorSerializer):
             'sam_location', 'pools',
             'url'
         ]
+
+    
+class PoolMembershipSummaryVendorSerializer(PoolMembershipSummarySerializer):
+    vendor = VendorLinkSerializer(many=False)
+    
+    class Meta(PoolMembershipSummarySerializer.Meta):
+        fields = PoolMembershipSummarySerializer.Meta.fields + ['vendor']
+   
+class PoolMembershipTestVendorSerializer(PoolMembershipTestSerializer):
+    vendor = VendorTestSerializer(many=False)
+    
+    class Meta(PoolMembershipTestSerializer.Meta):
+        fields = PoolMembershipTestSerializer.Meta.fields + ['vendor']
 
 
 class BaseAgencySerializer(HyperlinkedModelSerializer):
