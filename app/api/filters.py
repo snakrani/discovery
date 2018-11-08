@@ -250,7 +250,7 @@ class PoolMembershipFilter(FilterSet, metaclass = MetaFilterSet):
         fields = ()
 
 
-class VendorFilter(FilterSet, metaclass = MetaFilterSet):
+class VendorBaseFilter(FilterSet, metaclass = MetaFilterSet):
     
     _boolean = ('sam_exclusion',)
     _token_text = ('cage', 'sam_status')
@@ -261,16 +261,47 @@ class VendorFilter(FilterSet, metaclass = MetaFilterSet):
     sam_location = RelatedFilter(LocationFilter)
     pools = RelatedFilter(PoolMembershipFilter)
     
-    contract = RelatedFilter("ContractBaseFilter")
-    
-    membership = CharFilter(field_name='membership', method='filter_membership')
     setasides = CharFilter(field_name='setasides', method='filter_setasides')
-    
+   
     class Meta:
         model = vendors.Vendor
         fields = ()
+
+        
+    def filter_setasides(self, qs, name, value):
+        value_components = value.split(':')
+        setasides = value_components[0].split(',')
+        pool_ids = value_components[1].split(',') if len(value_components) > 1 else []
+
+        if len(pool_ids):
+            ids = list(vendors.PoolMembership.objects.filter(pool__id__in=pool_ids).values_list('id', flat=True))
+        else:
+            ids = []
+
+        for code in setasides:
+            if len(ids):
+                memberships = vendors.PoolMembership.objects.filter(setasides__code=code, id__in=ids)
+            else:
+                memberships = vendors.PoolMembership.objects.filter(setasides__code=code)
+
+            setaside_ids = list(memberships.values_list('id', flat=True))
+            ids = list(set(ids) & set(setaside_ids))
+
+        if len(ids) > 0:
+            qs = qs.filter(pools__id__in=ids)
+        else:
+            qs = qs.filter(pools__id=0)
+        
+        return qs
+      
+
+class VendorFilter(VendorBaseFilter):
+  
+    contract = RelatedFilter("ContractBaseFilter")
     
-    
+    membership = CharFilter(field_name='membership', method='filter_membership')
+
+        
     def filter_membership(self, qs, name, value):
         # Decode complex membership query
         try:
@@ -306,35 +337,8 @@ class VendorFilter(FilterSet, metaclass = MetaFilterSet):
         return qs
 
         
-    def filter_setasides(self, qs, name, value):
-        value_components = value.split(':')
-        setasides = value_components[0].split(',')
-        pool_ids = value_components[1].split(',') if len(value_components) > 1 else []
-
-        if len(pool_ids):
-            ids = list(vendors.PoolMembership.objects.filter(pool__id__in=pool_ids).values_list('id', flat=True))
-        else:
-            ids = []
-
-        for code in setasides:
-            if len(ids):
-                memberships = vendors.PoolMembership.objects.filter(setasides__code=code, id__in=ids)
-            else:
-                memberships = vendors.PoolMembership.objects.filter(setasides__code=code)
-
-            setaside_ids = list(memberships.values_list('id', flat=True))
-            ids = list(set(ids) & set(setaside_ids))
-
-        if len(ids) > 0:
-            qs = qs.filter(pools__id__in=ids)
-        else:
-            qs = qs.filter(pools__id=0)
-        
-        return qs
-
-        
 class PoolMembershipVendorFilter(PoolMembershipFilter):
-    vendor = RelatedFilter(VendorFilter)
+    vendor = RelatedFilter(VendorBaseFilter)
 
 
 class ContractStatusFilter(FilterSet, metaclass = MetaFilterSet):
