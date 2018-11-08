@@ -332,6 +332,10 @@ class VendorFilter(FilterSet, metaclass = MetaFilterSet):
         
         return qs
 
+        
+class PoolMembershipVendorFilter(PoolMembershipFilter):
+    vendor = RelatedFilter(VendorFilter)
+
 
 class ContractStatusFilter(FilterSet, metaclass = MetaFilterSet):
     
