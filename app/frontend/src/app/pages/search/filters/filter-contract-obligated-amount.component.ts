@@ -14,7 +14,14 @@ declare let document: any;
 @Component({
   selector: 'discovery-filter-contract-obligated-amount',
   templateUrl: './filter-contract-obligated-amount.component.html',
-  styles: []
+  styles: [
+    `
+      .tooltip .tooltiptext {
+        width: 200px;
+        margin-left: -100px;
+      }
+    `
+  ]
 })
 export class FilterContractObligatedAmountComponent implements OnInit {
   @ViewChild(FilterSelectedComponent)
