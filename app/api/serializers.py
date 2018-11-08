@@ -397,6 +397,19 @@ class VendorTestSerializer(BaseVendorSerializer):
             'url'
         ]
 
+    
+class PoolMembershipSummaryVendorSerializer(PoolMembershipSummarySerializer):
+    vendor = VendorLinkSerializer(many=False)
+    
+    class Meta(PoolMembershipSummarySerializer.Meta):
+        fields = PoolMembershipSummarySerializer.Meta.fields + ['vendor']
+   
+class PoolMembershipTestVendorSerializer(PoolMembershipTestSerializer):
+    vendor = VendorTestSerializer(many=False)
+    
+    class Meta(PoolMembershipTestSerializer.Meta):
+        fields = PoolMembershipTestSerializer.Meta.fields + ['vendor']
+
 
 class BaseAgencySerializer(HyperlinkedModelSerializer):
     url = HyperlinkedIdentityField(view_name="agency-detail", lookup_field='id')
