@@ -297,7 +297,7 @@ class BasePoolMembershipSerializer(ModelSerializer):
     
     class Meta:
         model = vendors.PoolMembership
-        fields = ['piid', 'contacts', 'expiration_8a_date', 'contract_end_date', 'capability_statement']
+        fields = ['id', 'piid', 'contacts', 'expiration_8a_date', 'contract_end_date', 'capability_statement']
         
     def get_capability_statement(self, item):
         request = self.context.get('request')
