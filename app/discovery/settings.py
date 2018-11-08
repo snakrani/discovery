@@ -49,6 +49,11 @@ VEHICLES = (
 #
 TEST_URL = config_value('TEST_URL', 'http://localhost:8080')
 
+#
+# Google Analytics
+#
+GA_TRACKING_ID = config_value('GA_TRACKING_ID', '')
+
 
 #-------------------------------------------------------------------------------
 # Core Django settings
@@ -183,6 +188,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'discovery.context_processors.api_host',
+                'discovery.context_processors.google_analytics',
             ],
         },
     },
