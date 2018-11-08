@@ -34,7 +34,7 @@ class MembershipTest(case.APITestCase, metaclass = case.MetaAPISchema):
             'search': {
                 'tags': ('membership_search',),
                 '*search1': ('piid', 'exact', 'GS00Q14OADU305'),
-                '*search2': ('vendor__name', 'exact', 'BALL AEROSPACE & TECHNOLOGIES CORPORATION')
+                '@search2': ('vendor__name', 'exact', 'BALL AEROSPACE & TECHNOLOGIES CORPORATION')
             },
             'fields': {
                 'id': {
