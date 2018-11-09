@@ -26,7 +26,11 @@
       window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
       ga('create', "{{GA_TRACKING_ID}}", 'auto');
 
-      ga('require', 'urlChangeTracker');
+      ga('require', 'urlChangeTracker', {
+        fieldsObj: {
+          dimension1: 'Page change'
+        }
+      });
       ga('require', 'outboundLinkTracker', {
         events: ['click', 'auxclick', 'contextmenu']
       });
@@ -34,7 +38,9 @@
         events: ['click', 'auxclick', 'contextmenu']
       });
 
-      ga('send', 'pageview');
+      ga('send', 'pageview', {
+        dimension1: 'Page load'
+      });
     </script>
     <script async src="https://www.google-analytics.com/analytics.js"></script>
     <script async src="{% static 'frontend/assets/autotrack/autotrack.js' %}"></script>
