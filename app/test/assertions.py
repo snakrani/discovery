@@ -175,7 +175,7 @@ class TestAssertions(object):
         if not date or not isinstance(date, str):
             raise AssertionError("Value ({}) must be passed as a date string".format(date))
         
-        for format in ('%Y-%m-%dT%H:%M:%SZ', '%Y-%m-%d'):
+        for format in ('%Y-%m-%dT%H:%M:%S.%fZ', '%Y-%m-%dT%H:%M:%SZ', '%Y-%m-%d'):
             date_obj = try_date_format(format)
             if date_obj: break
         
