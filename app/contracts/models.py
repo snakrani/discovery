@@ -64,9 +64,6 @@ class Contract(models.Model):
     
     status = models.ForeignKey(ContractStatus, null=True, on_delete=models.DO_NOTHING)
     
-    annual_revenue = models.BigIntegerField(null=True)
-    number_of_employees = models.IntegerField(null=True)
-    
     vendor_phone = models.CharField(null=True, max_length=128)
     vendor_location = models.ForeignKey(Location, null=True, on_delete=models.DO_NOTHING)
     
