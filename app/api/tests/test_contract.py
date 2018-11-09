@@ -366,7 +366,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
             },
             'vendor__sam_activation_date': {
                 'tags': ('contract_field', 'vendor_field', 'date_time'),
-                '@date': '2018-02-09',
+                '@date': '2018-02-08',
                 '@year': '2018',
                 '@month': '2',
                 '@day': '9',
@@ -376,7 +376,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
             },
             'vendor__sam_expiration_date': {
                 'tags': ('contract_field', 'vendor_field', 'date_time'),
-                '@date': '2019-02-09',
+                '@date': '2019-02-08',
                 '@year': '2019',
                 '@month': '2',
                 '@day': '9',
