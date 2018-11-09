@@ -36,12 +36,8 @@
                 <div class="usa-width-one-third">
                   <h6 class="us`a-heading-alt">CAGE Code:</h6>
                   <blockquote><strong>{{vendor?.cage}}</strong></blockquote>
-                  <h6 class="usa-heading-alt">Employees:</h6>
-                  <blockquote><strong>{{vendor?.number_of_employees}}</strong></blockquote>
                 </div>
                 <div class="usa-width-one-third">
-                  <h6 class="usa-heading-alt">Annual Revenue:</h6>
-                  <blockquote><strong>{{vendor?.annual_revenue | currency}}</strong></blockquote>
                   <div *ngIf="vendor.sam_location.address">
                     <h6 class="usa-heading-alt">Address:</h6>
                     <blockquote>
