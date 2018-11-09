@@ -14,6 +14,7 @@ router.register('pools', views.PoolViewSet)
 router.register('zones', views.ZoneViewSet)
 
 router.register('vendors', views.VendorViewSet)
+router.register('memberships', views.MembershipViewSet)
 
 router.register('agencies', views.AgencyViewSet)
 router.register('pricing', views.PricingViewSet)
