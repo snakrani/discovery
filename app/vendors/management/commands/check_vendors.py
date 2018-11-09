@@ -17,16 +17,16 @@ def vendor_logger():
 def vehicle_info(vehicle):
     field_map = {
         'oasis': {
-            'field_types': ('core',)
+            'field_types': ('core', 'zones')
         },
         'oasis_sb': {
-            'field_types': ('core', 'setasides')                  
+            'field_types': ('core', 'setasides', 'zones')                  
         },
         'hcats': {
-            'field_types': ('core',)                  
+            'field_types': ('core', 'zones')                  
         },
         'hcats_sb': {
-            'field_types': ('core', 'setasides')                  
+            'field_types': ('core', 'setasides', 'zones')                  
         },
         'bmo': {
             'field_types': ('core', 'zones')                  
@@ -35,7 +35,7 @@ def vehicle_info(vehicle):
             'field_types': ('core', 'setasides', 'zones')                  
         },
         'pss': {
-            'field_types': ('core', 'setasides')                  
+            'field_types': ('core', 'setasides', 'zones')                  
         }
     }
     return field_map[vehicle]
@@ -117,7 +117,7 @@ class Command(BaseCommand):
         for name in sheets:
             try:
                 pool = re.search(r'\(\s*([0-9a-zA-Z]+)\s*\)', name, re.IGNORECASE).group(1)
-                pool_data = Pool.objects.get(number=pool, vehicle__iexact=vehicle)
+                pool_data = Pool.objects.get(number=pool, vehicle__id__iexact=vehicle)
                 
                 print("\n > Pool [ {} ]".format(pool))
                 self.check_pool(vehicle, pool, wb.parse(name))
