@@ -117,16 +117,6 @@ def get_current_completion_date(award):
 
 
 @catch_key_error
-def get_annual_revenue(award):
-    return award['vendor']['vendorSiteDetails']['vendorOrganizationFactors']['annualRevenue']
-
-
-@catch_key_error
-def get_number_of_employees(award):
-    return award['vendor']['vendorSiteDetails']['vendorOrganizationFactors']['numberOfEmployees']
-
-
-@catch_key_error
 def get_last_modified_by(award):
     return award['transactionInformation']['lastModifiedBy']
 
@@ -380,8 +370,6 @@ class Command(BaseCommand):
             'agency_id': get_agency_id(award_id),
             'agency_name': get_agency_name(award_id),
             'obligated_amount': award['dollarValues']['obligatedAmount'],
-            'annual_revenue': get_annual_revenue(award),
-            'number_of_employees': get_number_of_employees(award),
             'last_modified_by': get_last_modified_by(award),
             'point_of_contact': get_point_of_contact(award),
             'reason_for_modification': get_reason_for_modification(award),
@@ -475,14 +463,6 @@ class Command(BaseCommand):
             con.PSC = mod.get('psc')
             con.NAICS = mod.get('naics')
 
-            ar = mod.get('annual_revenue') or None
-            ne = mod.get('number_of_employees') or None
-            
-            if ar:
-                con.annual_revenue = int(ar)
-            if ne:
-                con.number_of_employees = int(ne)
-        
         con.obligated_amount = total
         con.save()  
     
