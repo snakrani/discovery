@@ -194,26 +194,6 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': '^\d{3}-255-\d{4}$',
                 '@iregex': '(571|202)-\d{3}'
             },
-            'annual_revenue': {
-                'tags': ('contract_field', 'number'),
-                '@exact': 1200000,
-                '@lt': 500000,
-                '@lte': 300000, 
-                '@gt': 4000000, 
-                '@gte': 5500000,
-                '@range': (100000, 3000000),
-                '@in': (250000, 27019000, 15000000)
-            },
-            'number_of_employees': {
-                'tags': ('contract_field', 'number'),
-                '@exact': 210,
-                '@lt': 190,
-                '@lte': 200, 
-                '@gt': 100, 
-                '@gte': 500,
-                '@range': (300, 1000),
-                '@in': (580, 70, 900)
-            },
             'status__code': {
                 'tags': ('contract_field', 'status_field', 'token_text'),
                 '@exact': 'C1',
