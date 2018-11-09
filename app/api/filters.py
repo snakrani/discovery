@@ -385,7 +385,7 @@ class AgencyFilter(FilterSet, metaclass = MetaFilterSet):
 class ContractBaseFilter(FilterSet, metaclass = MetaFilterSet):
     
     _fuzzy_text = ('piid', 'base_piid', 'NAICS', 'PSC', 'point_of_contact', 'vendor_phone')
-    _number = ('id', 'obligated_amount', 'annual_revenue', 'number_of_employees')
+    _number = ('id', 'obligated_amount')
     _date_time = ('date_signed', 'completion_date')
     
     status = RelatedFilter(ContractStatusFilter)
