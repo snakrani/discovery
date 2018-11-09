@@ -26,9 +26,13 @@
       window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
       ga('create', "{{GA_TRACKING_ID}}", 'auto');
 
-      ga('require', 'eventTracker');
-      ga('require', 'outboundLinkTracker');
       ga('require', 'urlChangeTracker');
+      ga('require', 'outboundLinkTracker', {
+        events: ['click', 'auxclick', 'contextmenu']
+      });
+      ga('require', 'eventTracker', {
+        events: ['click', 'auxclick', 'contextmenu']
+      });
 
       ga('send', 'pageview');
     </script>
