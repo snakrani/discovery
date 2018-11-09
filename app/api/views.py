@@ -376,7 +376,7 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
         'sam_status', 'sam_exclusion', 'sam_url',
         'sam_location__address', 'sam_location__city', 'sam_location__state', 
         'sam_location__zipcode', 'sam_location__congressional_district',
-        'annual_revenue', 'number_of_employees', 'number_of_contracts'
+        'number_of_contracts'
     ]
     ordering = '-number_of_contracts'
     
@@ -392,14 +392,6 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
     def get_queryset(self):
         naics_param_name = 'contract_naics'
         
-        queryset = self.queryset.annotate(
-            annual_revenue=Subquery(
-                contracts.Contract.objects.filter(vendor=OuterRef('pk')).order_by('-date_signed').values('annual_revenue')[:1]
-            ),
-            number_of_employees=Subquery(
-                contracts.Contract.objects.filter(vendor=OuterRef('pk')).order_by('-date_signed').values('number_of_employees')[:1]
-            )
-        )
         if naics_param_name in self.request.query_params and self.request.query_params[naics_param_name]:
             naics_code = re.sub(r'[^\d]+$', '', self.request.query_params[naics_param_name])
             psc_codes = list(categories.PSC.objects.filter(naics__code=naics_code).distinct().values_list('code', flat=True))
@@ -408,7 +400,7 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
         else:
             contract_list = contracts.Contract.objects.filter(vendor=OuterRef('pk')).values('pk')
         
-        return queryset.annotate(number_of_contracts = query.QueryCount(contract_list))
+        return self.queryset.annotate(number_of_contracts = query.QueryCount(contract_list))
 
 
 class AgencyViewSet(DiscoveryReadOnlyModelViewSet):
@@ -577,8 +569,7 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
         'vendor_location__congressional_district', 
         'status__name', 'pricing_type__name',
         'place_of_performance__country_code', 'place_of_performance__country_name',
-        'place_of_performance__state',
-        'annual_revenue', 'number_of_employees'
+        'place_of_performance__state'
     ]
     ordering = '-date_signed'
     
