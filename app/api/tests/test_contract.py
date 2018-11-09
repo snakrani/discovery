@@ -11,8 +11,8 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
     schema = {
         'object': {
             'tags': ('contract_object',),
-            '&1': ('piid', 'exact', 'DAAE0703CS111'),
-            '&162': ('piid', 'exact', 'AG3198C120007'),
+            '&1': ('piid', 'exact', 'N0017812D6749_4Y01'),
+            '&162': ('piid', 'exact', 'GS00Q14OADS128_19AQMM18F1804'),
             '&828': ('name', 'exact', 'USZA2202D0015_0194'),
             '#345C': (),
             '#ABCDEFG': ()
@@ -194,26 +194,6 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': '^\d{3}-255-\d{4}$',
                 '@iregex': '(571|202)-\d{3}'
             },
-            'annual_revenue': {
-                'tags': ('contract_field', 'number'),
-                '@exact': 1200000,
-                '@lt': 500000,
-                '@lte': 300000, 
-                '@gt': 4000000, 
-                '@gte': 5500000,
-                '@range': (100000, 3000000),
-                '@in': (250000, 27019000, 15000000)
-            },
-            'number_of_employees': {
-                'tags': ('contract_field', 'number'),
-                '@exact': 210,
-                '@lt': 190,
-                '@lte': 200, 
-                '@gt': 100, 
-                '@gte': 500,
-                '@range': (300, 1000),
-                '@in': (580, 70, 900)
-            },
             'status__code': {
                 'tags': ('contract_field', 'status_field', 'token_text'),
                 '@exact': 'C1',
@@ -386,7 +366,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
             },
             'vendor__sam_activation_date': {
                 'tags': ('contract_field', 'vendor_field', 'date_time'),
-                '@date': '2018-02-09',
+                '@date': '2018-02-08',
                 '@year': '2018',
                 '@month': '2',
                 '@day': '9',
@@ -396,7 +376,7 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
             },
             'vendor__sam_expiration_date': {
                 'tags': ('contract_field', 'vendor_field', 'date_time'),
-                '@date': '2019-02-09',
+                '@date': '2019-02-08',
                 '@year': '2019',
                 '@month': '2',
                 '@day': '9',

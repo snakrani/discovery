@@ -359,9 +359,6 @@ class VendorLinkSerializer(BaseVendorSerializer):
 
 class AnnotatedVendorSerializer(BaseVendorSerializer):
     sam_location_citystate = CharField()
-    
-    annual_revenue = IntegerField()
-    number_of_employees = IntegerField()
     number_of_contracts = IntegerField()
 
 
@@ -370,7 +367,6 @@ class VendorSummarySerializer(AnnotatedVendorSerializer):
     
     class Meta(BaseVendorSerializer.Meta):
         fields = BaseVendorSerializer.Meta.fields + [
-            'annual_revenue', 'number_of_employees', 
             'number_of_contracts', 'pools',
             'url'
         ]
@@ -383,7 +379,6 @@ class VendorFullSerializer(AnnotatedVendorSerializer):
         fields = BaseVendorSerializer.Meta.fields + [
             'sam_location', 
             'pools',
-            'annual_revenue', 'number_of_employees', 
             'number_of_contracts'
         ]
 
@@ -515,8 +510,7 @@ class BaseContractSerializer(HyperlinkedModelSerializer):
         model = contracts.Contract
         fields = ['id', 'piid', 'base_piid', 'NAICS', 'PSC', 'agency', 'vendor',
                   'point_of_contact', 'vendor_phone', 'place_of_performance',
-                  'date_signed', 'completion_date', 'status', 'pricing_type', 'obligated_amount', 
-                  'annual_revenue', 'number_of_employees']
+                  'date_signed', 'completion_date', 'status', 'pricing_type', 'obligated_amount']
 
 class ContractLinkSerializer(BaseContractSerializer):
     class Meta(BaseContractSerializer.Meta):
