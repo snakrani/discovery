@@ -62,14 +62,14 @@
         <discovery-filter-certifications (emmitSelected)="activateSubmit($event)"></discovery-filter-certifications>
       </li> -->
 
-      <li>
+      <li ga-on="click" ga-event-category="Feature" ga-event-action="filter-obligated-amount">
         <discovery-filter-contract-obligated-amount [disable]="true" (emmitSelected)="activateSubmit($event)"
           (emmitLoaded)="getResults($event)"></discovery-filter-contract-obligated-amount>
       </li>
-      <li>
+      <li ga-on="click" ga-event-category="Feature" ga-event-action="filter-place-of-performance">
         <discovery-filter-place-of-performance [disable]="true" (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-place-of-performance>
       </li>
-      <li>
+      <li ga-on="click" ga-event-category="Feature" ga-event-action="filter-agency-performance">
         <discovery-filter-agency-performance [disable]="true" (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-agency-performance>
       </li>
 

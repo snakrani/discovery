@@ -1,7 +1,6 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <title>Discovery</title>
@@ -12,7 +11,6 @@
     <link rel="stylesheet" href="{% static 'frontend/assets/uswds/css/uswds.min.css' %}">
     <link rel="stylesheet" href="{% static 'frontend/styles.css' %}">
 </head>
-
 <body>
     <discovery-root>Loading...</discovery-root>
 
@@ -23,11 +21,35 @@
         }
     </script>
 
+    {% if GA_TRACKING_ID %}
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', "{{GA_TRACKING_ID}}", 'auto');
+
+      ga('require', 'urlChangeTracker', {
+        fieldsObj: {
+          dimension1: 'Page change'
+        }
+      });
+      ga('require', 'outboundLinkTracker', {
+        events: ['click', 'auxclick', 'contextmenu']
+      });
+      ga('require', 'eventTracker', {
+        events: ['click', 'auxclick', 'contextmenu']
+      });
+
+      ga('send', 'pageview', {
+        dimension1: 'Page load'
+      });
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+    <script async src="{% static 'frontend/assets/autotrack/autotrack.js' %}"></script>
+    {% endif %}
+
     <script type="text/javascript" src="{% static 'frontend/assets/uswds/js/uswds.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'frontend/runtime.js' %}"></script>
     <script type="text/javascript" src="{% static 'frontend/polyfills.js' %}"></script>
     <script type="text/javascript" src="{% static 'frontend/scripts.js' %}"></script>
     <script type="text/javascript" src="{% static 'frontend/main.js' %}"></script>
 </body>
-
 </html>
