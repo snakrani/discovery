@@ -304,6 +304,7 @@ ul.items-selected li a {
   display: inline-block;
   width: 25px;
   height: 23px;
+  text-decoration: none !important;
   margin-left: 5px;
   background-image: url('/frontend/assets/uswds/img/alerts/info.png');
   background-image: url('/frontend/assets/uswds/img/alerts/info.svg');

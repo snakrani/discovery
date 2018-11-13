@@ -148,14 +148,14 @@ export class SearchComponent implements OnInit {
           'width',
           w
         );
-        $('.scroll-view-topscroll').scroll(function() {
-          $('.scroll-view').scrollLeft(
-            $('.scroll-view-topscroll').scrollLeft()
+        $('#overflow-compare .scroll-view-topscroll').scroll(function() {
+          $('#overflow-compare .scroll-view').scrollLeft(
+            $('#overflow-compare .scroll-view-topscroll').scrollLeft()
           );
         });
-        $('.scroll-view').scroll(function() {
-          $('.scroll-view-topscroll').scrollLeft(
-            $('.scroll-view').scrollLeft()
+        $('#overflow-compare .scroll-view').scroll(function() {
+          $('#overflow-compare .scroll-view-topscroll').scrollLeft(
+            $('#overflow-compare .scroll-view').scrollLeft()
           );
         });
         clearInterval(this.interval);
@@ -527,6 +527,7 @@ export class SearchComponent implements OnInit {
       queryParams: { vendors: null },
       queryParamsHandling: 'merge'
     });
+    this.table_scroll_set = false;
     this.initScrollBars();
   }
   buildVendorByVehicle(obj: any[]) {
