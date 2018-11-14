@@ -17,4 +17,4 @@ apt-get update >>"$LOG_FILE" 2>&1
 
 #download and install PostgreSQL client if it does not exist
 echo "> Installing PostgreSQL client" | tee -a "$LOG_FILE"
-apt-get install -y postgresql-client-9.6 >"$LOG_FILE" 2>&1
+apt-get install -y postgresql-client-10 >"$LOG_FILE" 2>&1
