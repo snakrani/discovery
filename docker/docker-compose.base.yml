@@ -11,7 +11,7 @@ services:
       LOG_LEVEL: "info"
 
   db:
-    image: postgres:9.4
+    image: postgres:10.4
     restart: always
     environment:
       POSTGRES_USER: discovery
