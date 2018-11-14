@@ -331,7 +331,7 @@ class VendorFilter(VendorBaseFilter):
         ms_ids = list(ms_queryset.values_list('id', flat=True))
         
         # Filter vendors by membership
-        if len(ms_ids) > 0:
+        if len(querystrings) > 0:
             qs = qs.filter(pools__id__in=ms_ids)
         
         return qs
