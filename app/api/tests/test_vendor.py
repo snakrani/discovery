@@ -518,6 +518,14 @@ class VendorTest(case.APITestCase, metaclass = case.MetaAPISchema):
                         ('pools__pool__vehicle__id', 'exact', 'PSS'),
                         ('pools__setasides__code', 'in', ('A6', 'XX')),
                     )
+                },
+                '-membership2': {
+                    'tags': ('vendor_request',),
+                    'params': {'membership': '(pool__vehicle__id=BMO)&(setasides__code=A6)&(setasides__code=XX)'},
+                    'tests': (
+                        ('pools__pool__vehicle__id', 'exact', 'BMO'),
+                        ('pools__setasides__code', 'in', ('A6', 'XX')),
+                    )
                 }
             }
         }
