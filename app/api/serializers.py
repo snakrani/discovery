@@ -29,6 +29,10 @@ class BaseNaicsSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = categories.Naics
         fields = ['code', 'description']
+        
+    @classmethod    
+    def _load_sin(cls, queryset, prefix = ''):
+        return queryset.prefetch_related("{}sin".format(prefix))
 
 class NaicsLinkSerializer(BaseNaicsSerializer):
     class Meta(BaseNaicsSerializer.Meta):
@@ -39,12 +43,20 @@ class NaicsSummarySerializer(BaseNaicsSerializer):
     
     class Meta(BaseNaicsSerializer.Meta):
         fields = BaseNaicsSerializer.Meta.fields + ['sin', 'url']
+    
+    @classmethod    
+    def load_related(cls, queryset, prefix = ''):
+        return cls._load_sin(queryset, prefix)
 
 class NaicsFullSerializer(BaseNaicsSerializer):
     sin = SinSerializer(many=True)
     
     class Meta(BaseNaicsSerializer.Meta):
         fields = BaseNaicsSerializer.Meta.fields + ['sin']
+    
+    @classmethod    
+    def load_related(cls, queryset, prefix = ''):
+        return cls._load_sin(queryset, prefix)
 
 class NaicsTestSerializer(NaicsFullSerializer):
     sin = SinTestSerializer(many=True)
@@ -59,6 +71,10 @@ class BasePscSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = categories.PSC
         fields = ['code', 'description']
+        
+    @classmethod    
+    def _load_sin(cls, queryset, prefix = ''):
+        return queryset.prefetch_related("{}sin".format(prefix))
 
 class PscLinkSerializer(BasePscSerializer):
     class Meta(BasePscSerializer.Meta):
@@ -69,12 +85,20 @@ class PscSummarySerializer(BasePscSerializer):
     
     class Meta(BasePscSerializer.Meta):
         fields = BasePscSerializer.Meta.fields + ['sin', 'url']
+        
+    @classmethod    
+    def load_related(cls, queryset, prefix = ''):
+        return cls._load_sin(queryset, prefix)
 
 class PscFullSerializer(BasePscSerializer):
     sin = SinSerializer(many=True)
     
     class Meta(BasePscSerializer.Meta):
         fields = BasePscSerializer.Meta.fields + ['sin']
+        
+    @classmethod    
+    def load_related(cls, queryset, prefix = ''):
+        return cls._load_sin(queryset, prefix)
 
 class PscTestSerializer(PscFullSerializer):
     sin = SinTestSerializer(many=True)
@@ -102,6 +126,14 @@ class KeywordSummarySerializer(BaseKeywordSerializer):
     
     class Meta(BaseKeywordSerializer.Meta):
         fields = BaseKeywordSerializer.Meta.fields + ['parent', 'sin', 'naics', 'psc', 'calc', 'url']
+        
+    @classmethod    
+    def load_related(cls, queryset, prefix = ''):
+        return queryset.select_related(
+            "{}sin".format(prefix), 
+            "{}naics".format(prefix), 
+            "{}psc".format(prefix)
+        )
 
 class KeywordFullSerializer(KeywordSummarySerializer):
     naics = NaicsSummarySerializer()
@@ -137,6 +169,10 @@ class BaseVehicleSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = categories.Vehicle
         fields = ['id', 'name', 'tier', 'poc', 'ordering_guide', 'small_business', 'numeric_pool', 'display_number']
+        
+    @classmethod    
+    def load_related(cls, queryset, prefix = ''):
+        return queryset.select_related("{}tier".format(prefix))
 
 class VehicleLinkSerializer(BaseVehicleSerializer):
     class Meta(BaseVehicleSerializer.Meta):
@@ -147,8 +183,6 @@ class VehicleSummarySerializer(BaseVehicleSerializer):
         fields = BaseVehicleSerializer.Meta.fields + ['url']
 
 class VehicleFullSerializer(BaseVehicleSerializer):
-    
-
     class Meta(BaseVehicleSerializer.Meta):
         fields = BaseVehicleSerializer.Meta.fields
 
@@ -166,6 +200,25 @@ class BasePoolSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = categories.Pool
         fields = ['id', 'name', 'number', 'vehicle', 'threshold']
+        
+    @classmethod    
+    def load_related(cls, queryset, prefix = ''):
+        queryset = VehicleLinkSerializer.load_related(queryset, "{}vehicle__".format(prefix))
+        return queryset.select_related("{}vehicle".format(prefix))
+    
+    @classmethod    
+    def _load_summary(cls, queryset, prefix = ''):
+        queryset = VehicleSummarySerializer.load_related(queryset, "{}vehicle__".format(prefix))
+        queryset = NaicsSummarySerializer.load_related(queryset, "{}naics__".format(prefix))
+        queryset = PscSummarySerializer.load_related(queryset, "{}psc__".format(prefix))
+        queryset = queryset.select_related("{}vehicle".format(prefix))
+        return queryset.prefetch_related("{}naics".format(prefix), "{}psc".format(prefix))
+    
+    @classmethod    
+    def _load_full(cls, queryset, prefix = ''):
+        queryset = cls._load_summary(queryset, prefix)
+        queryset = KeywordSummarySerializer.load_related(queryset, "{}keywords__".format(prefix))
+        return queryset.prefetch_related("{}keywords".format(prefix))
 
 class PoolLinkSerializer(BasePoolSerializer):
     class Meta(BasePoolSerializer.Meta):
@@ -178,6 +231,10 @@ class PoolSummarySerializer(BasePoolSerializer):
     
     class Meta(BasePoolSerializer.Meta):
         fields = BasePoolSerializer.Meta.fields + ['naics', 'psc', 'url']
+        
+    @classmethod    
+    def load_related(cls, queryset, prefix = ''):
+        return cls._load_summary(queryset, prefix)
 
 class PoolFullSerializer(BasePoolSerializer):
     vehicle = VehicleSummarySerializer()
@@ -187,6 +244,10 @@ class PoolFullSerializer(BasePoolSerializer):
     
     class Meta(BasePoolSerializer.Meta):
         fields = BasePoolSerializer.Meta.fields + ['naics', 'psc', 'keywords']
+        
+    @classmethod    
+    def load_related(cls, queryset, prefix = ''):
+        return cls._load_full(queryset, prefix)
 
 class PoolTestSerializer(PoolFullSerializer):
     vehicle = VehicleTestSerializer()
@@ -242,6 +303,10 @@ class BaseZoneSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = categories.Zone
         fields = ['id']
+        
+    @classmethod    
+    def _load_states(cls, queryset, prefix = ''):
+        return queryset.prefetch_related("{}states".format(prefix))
     
 class ZoneLinkSerializer(BaseZoneSerializer):
     class Meta(BaseZoneSerializer.Meta):
@@ -252,12 +317,20 @@ class ZoneSummarySerializer(BaseZoneSerializer):
     
     class Meta(BaseZoneSerializer.Meta):
         fields = BaseZoneSerializer.Meta.fields + ['states', 'url']
+        
+    @classmethod    
+    def load_related(cls, queryset, prefix = ''):
+        return cls._load_states(queryset, prefix)
 
 class ZoneFullSerializer(BaseZoneSerializer):
     states = StateSerializer(many=True)
     
     class Meta(BaseZoneSerializer.Meta):
         fields = BaseZoneSerializer.Meta.fields + ['states']
+        
+    @classmethod    
+    def load_related(cls, queryset, prefix = ''):
+        return cls._load_states(queryset, prefix)
 
 class ZoneTestSerializer(ZoneFullSerializer):
     states = StateTestSerializer(many=True)
@@ -289,6 +362,10 @@ class ContactSerializer(ModelSerializer):
     class Meta:
         model = vendors.Contact
         fields = ['order', 'name', 'phones', 'emails']
+        
+    @classmethod    
+    def load_related(cls, queryset, prefix = ''):
+        return queryset.prefetch_related("{}phones".format(prefix), "{}emails".format(prefix))
 
 
 class BasePoolMembershipSerializer(ModelSerializer):
@@ -314,6 +391,11 @@ class BasePoolMembershipSerializer(ModelSerializer):
     def get_contacts(self, item):
         queryset = vendors.Contact.objects.filter(responsibility=item).order_by('order')
         return ContactSerializer(queryset, many=True, context=self.context).data
+    
+    @classmethod    
+    def _load_primary(cls, queryset, prefix = ''):
+        queryset = queryset.select_related("{}pool".format(prefix))
+        return queryset.prefetch_related("{}setasides".format(prefix), "{}zones".format(prefix))
         
     
 class PoolMembershipLinkSerializer(BasePoolMembershipSerializer):
@@ -324,6 +406,11 @@ class PoolMembershipLinkSerializer(BasePoolMembershipSerializer):
     
     class Meta(BasePoolMembershipSerializer.Meta):
         fields = BasePoolMembershipSerializer.Meta.fields + ['pool', 'setasides', 'zones']
+        
+    @classmethod    
+    def load_related(cls, queryset, prefix = ''):
+        queryset = PoolLinkSerializer.load_primary(queryset, "{}pool__".format(prefix))
+        return cls._load_primary(queryset, prefix)
     
 class PoolMembershipSummarySerializer(BasePoolMembershipSerializer):
     pool = PoolSummarySerializer(many=False)
@@ -333,6 +420,12 @@ class PoolMembershipSummarySerializer(BasePoolMembershipSerializer):
     
     class Meta(BasePoolMembershipSerializer.Meta):
         fields = BasePoolMembershipSerializer.Meta.fields + ['pool', 'setasides', 'zones']
+        
+    @classmethod    
+    def load_related(cls, queryset, prefix = ''):
+        queryset = PoolSummarySerializer.load_primary(queryset, "{}pool__".format(prefix))
+        queryset = ZoneSummarySerializer.load_primary(queryset, "{}zones__".format(prefix))
+        return cls._load_primary(queryset, prefix)
 
 class PoolMembershipTestSerializer(BasePoolMembershipSerializer):
     pool = PoolTestSerializer(many=False)
@@ -342,6 +435,12 @@ class PoolMembershipTestSerializer(BasePoolMembershipSerializer):
     
     class Meta(BasePoolMembershipSerializer.Meta):
         fields = BasePoolMembershipSerializer.Meta.fields + ['pool', 'setasides', 'zones']
+        
+    @classmethod    
+    def load_related(cls, queryset, prefix = ''):
+        queryset = PoolFullSerializer.load_primary(queryset, "{}pool__".format(prefix))
+        queryset = ZoneFullSerializer.load_primary(queryset, "{}zones__".format(prefix))
+        return cls._load_primary(queryset, prefix)
 
 
 class BaseVendorSerializer(HyperlinkedModelSerializer):
@@ -352,6 +451,17 @@ class BaseVendorSerializer(HyperlinkedModelSerializer):
         fields = ['name', 'duns', 'duns_4', 'cage', 
                   'sam_status', 'sam_expiration_date', 'sam_activation_date', 
                   'sam_exclusion', 'sam_url']
+        
+    @classmethod    
+    def _load_summary(cls, queryset, prefix = ''):
+        queryset = PoolMembershipLinkSerializer.load_related(queryset, "{}pools__".format(prefix))
+        return queryset.prefetch_related("{}pools".format(prefix))
+
+    @classmethod
+    def _load_full(clscls, queryset, prefix = ''):
+        queryset = PoolMembershipFullSerializer.load_related(queryset, "{}pools__".format(prefix))
+        queryset = queryset.select_related("{}sam_location".format(prefix))
+        return queryset.prefetch_related("{}pools".format(prefix))
 
 class VendorLinkSerializer(BaseVendorSerializer):
     class Meta(BaseVendorSerializer.Meta):
@@ -370,6 +480,10 @@ class VendorSummarySerializer(AnnotatedVendorSerializer):
             'number_of_contracts', 'pools',
             'url'
         ]
+        
+    @classmethod    
+    def load_related(cls, queryset, prefix = ''):
+        return cls._load_summary(queryset, prefix)
 
 class VendorFullSerializer(AnnotatedVendorSerializer):
     sam_location = LocationSerializer(many=False)
@@ -381,6 +495,10 @@ class VendorFullSerializer(AnnotatedVendorSerializer):
             'pools',
             'number_of_contracts'
         ]
+        
+    @classmethod
+    def load_related(cls, queryset, prefix = ''):
+        return cls._load_full(queryset, prefix)
 
 class VendorTestSerializer(BaseVendorSerializer):
     sam_location = LocationSerializer(many=False)
@@ -391,6 +509,10 @@ class VendorTestSerializer(BaseVendorSerializer):
             'sam_location', 'pools',
             'url'
         ]
+        
+    @classmethod
+    def load_related(cls, queryset, prefix = ''):
+        return cls._load_full(queryset, prefix)
 
     
 class PoolMembershipSummaryVendorSerializer(PoolMembershipSummarySerializer):
@@ -398,12 +520,22 @@ class PoolMembershipSummaryVendorSerializer(PoolMembershipSummarySerializer):
     
     class Meta(PoolMembershipSummarySerializer.Meta):
         fields = PoolMembershipSummarySerializer.Meta.fields + ['vendor']
+        
+    @classmethod
+    def load_related(cls, queryset, prefix = ''):
+        queryset = VendorLinkSerializer.load_related(queryset, "{}vendor__".format(prefix))
+        return queryset.select_related("{}vendor".format(prefix))
    
 class PoolMembershipTestVendorSerializer(PoolMembershipTestSerializer):
     vendor = VendorTestSerializer(many=False)
     
     class Meta(PoolMembershipTestSerializer.Meta):
         fields = PoolMembershipTestSerializer.Meta.fields + ['vendor']
+
+    @classmethod
+    def load_related(cls, queryset, prefix = ''):
+        queryset = VendorFullSerializer.load_related(queryset, "{}vendor__".format(prefix))
+        return queryset.select_related("{}vendor".format(prefix))
 
 
 class BaseAgencySerializer(HyperlinkedModelSerializer):
@@ -511,6 +643,29 @@ class BaseContractSerializer(HyperlinkedModelSerializer):
         fields = ['id', 'piid', 'base_piid', 'NAICS', 'PSC', 'agency', 'vendor',
                   'point_of_contact', 'vendor_phone', 'place_of_performance',
                   'date_signed', 'completion_date', 'status', 'pricing_type', 'obligated_amount']
+        
+    @classmethod
+    def _load_summary(cls, queryset, prefix = ''):
+        queryset = VendorLinkSerializer.load_related(queryset, "{}vendor__".format(prefix))
+        return queryset.select_related(
+            "{}vendor".format(prefix), 
+            "{}place_of_performance".format(prefix), 
+            "{}agency".format(prefix),
+            "{}status".format(prefix),
+            "{}pricing_type".format(prefix)
+        )
+    
+    @classmethod
+    def _load_full(cls, queryset, prefix = ''):
+        queryset = VendorFullSerializer.load_related(queryset, "{}vendor__".format(prefix))
+        return queryset.select_related(
+            "{}vendor".format(prefix),
+            "{}vendor_location".format(prefix),
+            "{}place_of_performance".format(prefix), 
+            "{}agency".format(prefix),
+            "{}status".format(prefix),
+            "{}pricing_type".format(prefix)
+        )
 
 class ContractLinkSerializer(BaseContractSerializer):
     class Meta(BaseContractSerializer.Meta):
@@ -526,6 +681,10 @@ class ContractSummarySerializer(BaseContractSerializer):
     
     class Meta(BaseContractSerializer.Meta):
         fields = BaseContractSerializer.Meta.fields + ['url']
+        
+    @classmethod    
+    def load_related(cls, queryset, prefix = ''):
+        return cls._load_summary(queryset, prefix)
    
 class ContractFullSerializer(BaseContractSerializer):
     vendor = VendorLinkSerializer(many=False)
@@ -538,6 +697,10 @@ class ContractFullSerializer(BaseContractSerializer):
         
     class Meta(BaseContractSerializer.Meta):
         fields = BaseContractSerializer.Meta.fields + ['vendor_location']
+        
+    @classmethod    
+    def load_related(cls, queryset, prefix = ''):
+        return cls._load_full(queryset, prefix)
 
 class ContractTestSerializer(BaseContractSerializer):
     vendor = VendorTestSerializer(many=False)
@@ -550,6 +713,10 @@ class ContractTestSerializer(BaseContractSerializer):
     
     class Meta(BaseContractSerializer.Meta):
         fields = BaseContractSerializer.Meta.fields + ['vendor_location', 'url']
+        
+    @classmethod    
+    def load_related(cls, queryset, prefix = ''):
+        return cls._load_full(queryset, prefix)
 
 
 class MetadataSerializer(Serializer):
