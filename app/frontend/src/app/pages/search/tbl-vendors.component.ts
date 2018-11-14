@@ -151,6 +151,7 @@ export class TblVendorsComponent implements OnInit, OnChanges {
           this.show_results = true;
           this.loading = false;
           this.showSpinner(false);
+
           this.setPreviousNext();
           this.enable_paging = true;
           window.scroll({
@@ -176,7 +177,7 @@ export class TblVendorsComponent implements OnInit, OnChanges {
     if (this.results['previous'] !== null) {
       const str = this.results['previous'];
       if (str.indexOf('&page=') !== -1) {
-        this.next = this.searchService.getPageNumber(str);
+        this.prev = this.searchService.getPageNumber(str);
       } else {
         this.prev = 1;
       }

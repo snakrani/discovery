@@ -212,23 +212,16 @@ export class SearchService {
 
   getVendors(filters: any[], page: string, vehicle: string): Observable<any[]> {
     let params = '';
-    if (page) {
-      params = page;
-    }
-    // for (const filter of filters) {
-    //   if (filter['name'] === 'vehicles') {
-    //     params +=
-    //       '&pools__pool__vehicle__id__in=' +
-    //       this.getSelectedFilterList(filter['selected'], ',');
-    //   }
-    // }
-
     if (vehicle) {
-      params += '&pools__pool__vehicle__id=' + vehicle;
+      params += '%28pool__vehicle__id=' + vehicle + '%29';
     }
     params += this.buildOtherParams(filters);
+    if (page) {
+      params += page;
+    }
+    console.log(this.apiUrl + 'vendors?membership=' + params);
     return this.http
-      .get<any[]>(this.apiUrl + 'vendors?' + params.substr(1))
+      .get<any[]>(this.apiUrl + 'vendors?membership=' + params)
       .pipe(
         tap(data => data),
         catchError(this.handleError)
@@ -238,56 +231,56 @@ export class SearchService {
     let params = '';
     for (const filter of filters) {
       if (filter['name'] === 'keywords') {
-        params +=
-          '&pools__pool__keywords__id__in=' +
-          this.getSelectedFilterList(filter['selected'], ',');
+        for (const keyword of filter['selected']) {
+          params += '%26%28pool__keywords__id=' + keyword['value'] + '%29';
+        }
       }
       if (filter['name'] === 'service_categories') {
-        params +=
-          '&pools__pool__id__in=' +
-          this.getSelectedFilterList(filter['selected'], ',');
+        for (const cat of filter['selected']) {
+          params += '%26%28pool__id=' + cat['value'] + '%29';
+        }
       }
       if (filter['name'] === 'setasides') {
-        // for (const setaside of filter['selected']) {
-        //   params += '&pools__setasides__code=' + setaside['value'];
-        // }
-        params +=
-          '&pools__setasides__code__in=' +
-          this.getSelectedFilterList(filter['selected'], ',');
+        for (const setaside of filter['selected']) {
+          params += '%26%28setasides__code=' + setaside['value'] + '%29';
+        }
       }
       if (filter['name'] === 'naics') {
-        params +=
-          '&pools__pool__naics__code__in=' +
-          this.getSelectedFilterList(filter['selected'], ',');
+        for (const naic of filter['selected']) {
+          params += '%26%28pool__naics__code=' + naic['value'] + '%29';
+        }
       }
       if (filter['name'] === 'pscs') {
-        params +=
-          '&pools__pool__psc__code__in=' +
-          this.getSelectedFilterList(filter['selected'], ',');
+        for (const psc of filter['selected']) {
+          params += '%26%28pool__psc__code=' + psc['value'] + '%29';
+        }
       }
       if (filter['name'] === 'zone') {
-        params +=
-          '&pools__zones__id__in=' +
-          this.getSelectedFilterList(filter['selected'], ',');
+        for (const zone of filter['selected']) {
+          params += '%26%28zones__id=' + zone['value'] + '%29';
+        }
       }
       if (filter['name'] === 'pop') {
         params +=
-          '&contract__place_of_performance__country_code=' +
-          filter['selected'][0].value;
+          '%26%28contract__place_of_performance__country_code=' +
+          filter['selected'][0].value +
+          '%29';
         if (filter['selected'][1]) {
           params +=
-            '&contract__place_of_performance__state=' +
-            filter['selected'][1].value;
+            '%26%28contract__place_of_performance__state=' +
+            filter['selected'][1].value +
+            '%29';
         }
       }
       if (filter['name'] === 'obligated_amount') {
         const threshold = filter['selected'][0].value;
-        params += '&contract__obligated_amount__range=0,' + threshold;
+        params +=
+          '%26%28contract__obligated_amount__range=0,' + threshold + '%29';
       }
       if (filter['name'] === 'agency_performance') {
-        params +=
-          '&contract__agency__id__in=' +
-          this.getSelectedFilterList(filter['selected'], ',');
+        for (const agency of filter['selected']) {
+          params += '%26%28contract__agency__id=' + agency['value'] + '%29';
+        }
       }
     }
     return params;
@@ -297,11 +290,11 @@ export class SearchService {
     vehicle: string
   ): Observable<any[]> {
     let params = '';
-    params += '&pools__pool__vehicle__id=' + vehicle;
+    params += '%28pool__vehicle__id=' + vehicle + '%29';
     params += this.buildOtherParams(filters);
-    console.log(this.apiUrl + 'vendors/count/duns?' + params.substr(1));
+    console.log(this.apiUrl + 'vendors/count/duns?membership=' + params);
     return this.http
-      .get<any[]>(this.apiUrl + 'vendors/count/duns?' + params.substr(1))
+      .get<any[]>(this.apiUrl + 'vendors/count/duns?membership=' + params)
       .pipe(
         tap(data => data),
         catchError(this.handleError)

@@ -14,7 +14,7 @@ fi
 
 echo "> Installing Python and CLI utilities" | tee -a "$LOG_FILE"
 apt-get update >>"$LOG_FILE" 2>&1
-apt-get install -y make gcc libdpkg-perl libpq-dev curl git ssh vim python3-dev python3-venv >>"$LOG_FILE" 2>&1
+apt-get install -y make g++ gcc libdpkg-perl libpq-dev curl git ssh vim python3-dev python3-venv >>"$LOG_FILE" 2>&1
 rm -rf /var/lib/apt/lists/* >>"$LOG_FILE" 2>&1
 
 curl -o /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py >>"$LOG_FILE" 2>&1
