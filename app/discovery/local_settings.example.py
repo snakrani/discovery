@@ -14,7 +14,12 @@ TEMPLATE_DEBUG = True
 if DEBUG:
     CACHES = {
         'default': {
-            'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+            'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+            'LOCATION': 'django_cache_table',
+            'TIMEOUT': 300,
+            'OPTIONS': {
+                'MAX_ENTRIES': 50
+            }
         }
     }
 
