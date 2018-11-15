@@ -37,18 +37,25 @@ class DiscoveryReadOnlyModelViewSet(
     mixins.SerializerViewSetMixin, 
     ReadOnlyModelViewSet
 ):
+    def get_queryset(self):
+        queryset = super(DiscoveryReadOnlyModelViewSet, self).get_queryset()
+        serializer_cls = self.get_serializer_class()
+        load_related = getattr(serializer_cls, "load_related", None)
+        
+        if callable(load_related):
+            return load_related(queryset)
+        return queryset
+
+
     def init_cache(self, request):
         page, created = system.CachePage.objects.get_or_create(url=request.build_absolute_uri())
         page.count += 1
         page.save()
-        
+
+
     def list(self, request, *args, **kwargs):
         self.init_cache(request)
-        
-        try:
-            return super(DiscoveryReadOnlyModelViewSet, self).list(request, *args, **kwargs)
-        except AssertionError:
-            return Response({'count': 0, 'previous': None, 'next': None, 'results': []})
+        return super(DiscoveryReadOnlyModelViewSet, self).list(request, *args, **kwargs)
         
     def retrieve(self, request, *args, **kwargs):
         self.init_cache(request)
@@ -80,7 +87,7 @@ class DiscoveryReadOnlyModelViewSet(
         
         field_lookup = kwargs['field_lookup']
         queryset = self.filter_queryset(self.get_queryset())
-        return Response({'count': queryset.values_list(field_lookup, flat=True).count()})
+        return Response({'count': queryset.count()})
    
 
 class NaicsViewSet(DiscoveryReadOnlyModelViewSet):
@@ -390,6 +397,7 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
     }
     
     def get_queryset(self):
+        queryset = super(VendorViewSet, self).get_queryset()
         naics_param_name = 'contract_naics'
         
         if naics_param_name in self.request.query_params and self.request.query_params[naics_param_name]:
@@ -400,7 +408,7 @@ class VendorViewSet(DiscoveryReadOnlyModelViewSet):
         else:
             contract_list = contracts.Contract.objects.filter(vendor=OuterRef('pk')).values('pk')
         
-        return self.queryset.annotate(number_of_contracts = query.QueryCount(contract_list))
+        return queryset.annotate(number_of_contracts = query.QueryCount(contract_list))
 
 
 class AgencyViewSet(DiscoveryReadOnlyModelViewSet):

@@ -29,8 +29,6 @@ class ContractCSV(BaseCSVView):
         
         # Filters
         self.vendor = None
-        self.number_of_employees = 'NA'
-        self.annual_revenue = 'NA'
         
         self.naics_param = 'naics'
         self.naics = []
@@ -55,8 +53,6 @@ class ContractCSV(BaseCSVView):
         writer.writerow(('', ))
         writer.writerow(('DUNS', self.vendor.duns))
         writer.writerow(('CAGE Code', self.vendor.cage))
-        writer.writerow(('Employees', self.number_of_employees))
-        writer.writerow(('Annual Revenue', self.annual_revenue))
         writer.writerow(('', ))
         writer.writerow(('Address',))
         writer.writerow((titlecase(self.vendor.sam_location.address),))
@@ -66,13 +62,6 @@ class ContractCSV(BaseCSVView):
 
     def _process_vendor(self, writer, duns):
         self.vendor = vendors.Vendor.objects.get(duns=duns)
-        contract_data = contracts.Contract.objects.filter(vendor=self.vendor).order_by('-date_signed')[:1]
-        
-        if contract_data.count() > 0:
-            latest_contract = contract_data[0]
-            self.number_of_employees = latest_contract.number_of_employees    
-            self.annual_revenue = latest_contract.annual_revenue
-        
         self.contract_data = self.contract_data.filter(vendor=self.vendor)
         self._render_vendor(writer)
 
