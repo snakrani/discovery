@@ -609,7 +609,6 @@ class ContractViewSet(DiscoveryReadOnlyModelViewSet):
     }
 
 
-@method_decorator(cache_page(60*60), name='get')
 class ListMetadataView(APIView):
     """
     This endpoint returns metadata for the most recent data loads of SAM and FPDS data. It takes no parameters.
