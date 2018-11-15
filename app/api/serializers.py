@@ -129,11 +129,13 @@ class KeywordSummarySerializer(BaseKeywordSerializer):
         
     @classmethod    
     def load_related(cls, queryset, prefix = ''):
-        return queryset.select_related(
-            "{}sin".format(prefix), 
-            "{}naics".format(prefix), 
-            "{}psc".format(prefix)
-        )
+        if prefix:
+            return queryset.prefetch_related(
+                "{}sin".format(prefix), 
+                "{}naics".format(prefix), 
+                "{}psc".format(prefix)
+            )
+        return queryset.select_related('sin', 'naics', 'psc')
 
 class KeywordFullSerializer(KeywordSummarySerializer):
     naics = NaicsSummarySerializer()
@@ -172,7 +174,9 @@ class BaseVehicleSerializer(HyperlinkedModelSerializer):
         
     @classmethod    
     def load_related(cls, queryset, prefix = ''):
-        return queryset.select_related("{}tier".format(prefix))
+        if prefix:
+            return queryset.prefetch_related("{}tier".format(prefix))
+        return queryset.select_related('tier')
 
 class VehicleLinkSerializer(BaseVehicleSerializer):
     class Meta(BaseVehicleSerializer.Meta):
@@ -204,14 +208,22 @@ class BasePoolSerializer(HyperlinkedModelSerializer):
     @classmethod    
     def load_related(cls, queryset, prefix = ''):
         queryset = VehicleLinkSerializer.load_related(queryset, "{}vehicle__".format(prefix))
-        return queryset.select_related("{}vehicle".format(prefix))
+        
+        if prefix:
+            return queryset.prefetch_related("{}vehicle".format(prefix))
+        return queryset.select_related('vehicle')
     
     @classmethod    
     def _load_summary(cls, queryset, prefix = ''):
         queryset = VehicleSummarySerializer.load_related(queryset, "{}vehicle__".format(prefix))
         queryset = NaicsSummarySerializer.load_related(queryset, "{}naics__".format(prefix))
         queryset = PscSummarySerializer.load_related(queryset, "{}psc__".format(prefix))
-        queryset = queryset.select_related("{}vehicle".format(prefix))
+        
+        if prefix:
+            queryset = queryset.prefetch_related("{}vehicle".format(prefix))
+        else:
+            queryset = queryset.select_related('vehicle')
+        
         return queryset.prefetch_related("{}naics".format(prefix), "{}psc".format(prefix))
     
     @classmethod    
@@ -394,7 +406,11 @@ class BasePoolMembershipSerializer(ModelSerializer):
     
     @classmethod    
     def _load_primary(cls, queryset, prefix = ''):
-        queryset = queryset.select_related("{}pool".format(prefix))
+        if prefix:
+            queryset = queryset.prefetch_related("{}pool".format(prefix))
+        else:
+            queryset = queryset.select_related('pool')
+        
         return queryset.prefetch_related("{}setasides".format(prefix), "{}zones".format(prefix))
         
     
@@ -409,7 +425,7 @@ class PoolMembershipLinkSerializer(BasePoolMembershipSerializer):
         
     @classmethod    
     def load_related(cls, queryset, prefix = ''):
-        queryset = PoolLinkSerializer.load_primary(queryset, "{}pool__".format(prefix))
+        queryset = PoolLinkSerializer.load_related(queryset, "{}pool__".format(prefix))
         return cls._load_primary(queryset, prefix)
     
 class PoolMembershipSummarySerializer(BasePoolMembershipSerializer):
@@ -423,8 +439,8 @@ class PoolMembershipSummarySerializer(BasePoolMembershipSerializer):
         
     @classmethod    
     def load_related(cls, queryset, prefix = ''):
-        queryset = PoolSummarySerializer.load_primary(queryset, "{}pool__".format(prefix))
-        queryset = ZoneSummarySerializer.load_primary(queryset, "{}zones__".format(prefix))
+        queryset = PoolSummarySerializer.load_related(queryset, "{}pool__".format(prefix))
+        queryset = ZoneSummarySerializer.load_related(queryset, "{}zones__".format(prefix))
         return cls._load_primary(queryset, prefix)
 
 class PoolMembershipTestSerializer(BasePoolMembershipSerializer):
@@ -438,8 +454,8 @@ class PoolMembershipTestSerializer(BasePoolMembershipSerializer):
         
     @classmethod    
     def load_related(cls, queryset, prefix = ''):
-        queryset = PoolFullSerializer.load_primary(queryset, "{}pool__".format(prefix))
-        queryset = ZoneFullSerializer.load_primary(queryset, "{}zones__".format(prefix))
+        queryset = PoolFullSerializer.load_related(queryset, "{}pool__".format(prefix))
+        queryset = ZoneFullSerializer.load_related(queryset, "{}zones__".format(prefix))
         return cls._load_primary(queryset, prefix)
 
 
@@ -459,8 +475,13 @@ class BaseVendorSerializer(HyperlinkedModelSerializer):
 
     @classmethod
     def _load_full(clscls, queryset, prefix = ''):
-        queryset = PoolMembershipFullSerializer.load_related(queryset, "{}pools__".format(prefix))
-        queryset = queryset.select_related("{}sam_location".format(prefix))
+        queryset = PoolMembershipSummarySerializer.load_related(queryset, "{}pools__".format(prefix))
+        
+        if prefix:
+            queryset = queryset.prefetch_related("{}sam_location".format(prefix))
+        else:
+            queryset = queryset.select_related('sam_location')
+        
         return queryset.prefetch_related("{}pools".format(prefix))
 
 class VendorLinkSerializer(BaseVendorSerializer):
@@ -524,7 +545,10 @@ class PoolMembershipSummaryVendorSerializer(PoolMembershipSummarySerializer):
     @classmethod
     def load_related(cls, queryset, prefix = ''):
         queryset = VendorLinkSerializer.load_related(queryset, "{}vendor__".format(prefix))
-        return queryset.select_related("{}vendor".format(prefix))
+        
+        if prefix:
+            return queryset.prefetch_related("{}vendor".format(prefix))
+        return queryset.select_related('vendor')
    
 class PoolMembershipTestVendorSerializer(PoolMembershipTestSerializer):
     vendor = VendorTestSerializer(many=False)
@@ -535,7 +559,10 @@ class PoolMembershipTestVendorSerializer(PoolMembershipTestSerializer):
     @classmethod
     def load_related(cls, queryset, prefix = ''):
         queryset = VendorFullSerializer.load_related(queryset, "{}vendor__".format(prefix))
-        return queryset.select_related("{}vendor".format(prefix))
+        
+        if prefix:
+            return queryset.prefetch_related("{}vendor".format(prefix))
+        return queryset.select_related('vendor')
 
 
 class BaseAgencySerializer(HyperlinkedModelSerializer):
@@ -647,25 +674,31 @@ class BaseContractSerializer(HyperlinkedModelSerializer):
     @classmethod
     def _load_summary(cls, queryset, prefix = ''):
         queryset = VendorLinkSerializer.load_related(queryset, "{}vendor__".format(prefix))
-        return queryset.select_related(
-            "{}vendor".format(prefix), 
-            "{}place_of_performance".format(prefix), 
-            "{}agency".format(prefix),
-            "{}status".format(prefix),
-            "{}pricing_type".format(prefix)
-        )
+        
+        if prefix:
+            return queryset.prefetch_related(
+                "{}vendor".format(prefix), 
+                "{}place_of_performance".format(prefix), 
+                "{}agency".format(prefix),
+                "{}status".format(prefix),
+                "{}pricing_type".format(prefix)
+            )
+        return queryset.select_related('vendor', 'place_of_performance', 'agency', 'status', 'pricing_type')
     
     @classmethod
     def _load_full(cls, queryset, prefix = ''):
         queryset = VendorFullSerializer.load_related(queryset, "{}vendor__".format(prefix))
-        return queryset.select_related(
-            "{}vendor".format(prefix),
-            "{}vendor_location".format(prefix),
-            "{}place_of_performance".format(prefix), 
-            "{}agency".format(prefix),
-            "{}status".format(prefix),
-            "{}pricing_type".format(prefix)
-        )
+        
+        if prefix:
+            return queryset.prefetch_related(
+                "{}vendor".format(prefix),
+                "{}vendor_location".format(prefix), 
+                "{}place_of_performance".format(prefix), 
+                "{}agency".format(prefix),
+                "{}status".format(prefix),
+                "{}pricing_type".format(prefix)
+            )
+        return queryset.select_related('vendor', 'vendor_location', 'place_of_performance', 'agency', 'status', 'pricing_type')
 
 class ContractLinkSerializer(BaseContractSerializer):
     class Meta(BaseContractSerializer.Meta):
