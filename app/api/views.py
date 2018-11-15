@@ -36,15 +36,17 @@ class DiscoveryReadOnlyModelViewSet(
     def get_queryset(self):
         queryset = super(DiscoveryReadOnlyModelViewSet, self).get_queryset()
         serializer_cls = self.get_serializer_class()
-        load_related = getattr(serializer_cls, "load_related", None)
         
-        if callable(load_related):
-            return load_related(queryset)
+        if serializer_cls:
+            load_related = getattr(serializer_cls, "load_related", None)
+            if callable(load_related):
+                return load_related(queryset)
+
         return queryset
 
 
     def cache_key(self, request):
-        return "{}{}".format(request.path, json.dumps(OrderedDict(request.query_params)))
+        return "{}:{}".format(request.path, re.sub(r'[\s\{\}\(\)\"\=]', '', json.dumps(OrderedDict(request.query_params))))
 
     def track_cache(self, page_id):
         page, created = system.CachePage.objects.get_or_create(url=page_id)
