@@ -105,7 +105,7 @@ class DiscoveryReadOnlyModelViewSet(
         def render_page():
             field_lookup = kwargs['field_lookup']
             queryset = self.filter_queryset(self.get_queryset())
-            return Response({'count': queryset.count()})
+            return Response({'count': queryset.values_list(field_lookup).count()})
         
         return self.respond(request, render_page)
    
