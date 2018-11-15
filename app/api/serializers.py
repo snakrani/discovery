@@ -544,8 +544,6 @@ class PoolMembershipSummaryVendorSerializer(PoolMembershipSummarySerializer):
         
     @classmethod
     def load_related(cls, queryset, prefix = ''):
-        queryset = VendorLinkSerializer.load_related(queryset, "{}vendor__".format(prefix))
-        
         if prefix:
             return queryset.prefetch_related("{}vendor".format(prefix))
         return queryset.select_related('vendor')
@@ -673,8 +671,6 @@ class BaseContractSerializer(HyperlinkedModelSerializer):
         
     @classmethod
     def _load_summary(cls, queryset, prefix = ''):
-        queryset = VendorLinkSerializer.load_related(queryset, "{}vendor__".format(prefix))
-        
         if prefix:
             return queryset.prefetch_related(
                 "{}vendor".format(prefix), 
