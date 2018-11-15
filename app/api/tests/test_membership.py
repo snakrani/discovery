@@ -131,30 +131,6 @@ class MembershipTest(case.APITestCase, metaclass = case.MetaAPISchema):
                     '@regex': 'Prof.*$',
                     '@iregex': 'prof.*$'
                 },
-                'pool__vehicle__tier__number': {
-                    'tags': ('membership_field', 'pool_field', 'vehicle_field', 'tier_field', 'number'),
-                    '@exact': 3,
-                    '@lt': 3,
-                    '@lte': 2, 
-                    '@gt': 2, 
-                    '@gte': 2,
-                    '@range': (2, 3),
-                    '@in': (1, 2, 3)
-                },
-                'pool__vehicle__tier__name': {
-                    'tags': ('membership_field', 'pool_field', 'vehicle_field', 'tier_field', 'fuzzy_text'),
-                    '@exact': 'Multi-Agency Solutions',
-                    '@iexact': 'multi-agency solutions',
-                    '@in': ("Multi-Agency Solutions", "Best-in-Class (BIC)"),
-                    '@contains': 'Agency',
-                    '@icontains': 'agency',
-                    '@startswith': 'Multi',
-                    '@istartswith': 'multi',
-                    '@endswith': 'Solutions',
-                    '@iendswith': 'solutions',
-                    '@regex': 'Best-in-Class.*$',
-                    '@iregex': '(multi|class)'
-                },
                 'pool__vehicle__poc': {
                     'tags': ('membership_field', 'pool_field', 'vehicle_field', 'fuzzy_text'),
                     '@exact': 'oasissb@gsa.gov',
@@ -226,20 +202,6 @@ class MembershipTest(case.APITestCase, metaclass = case.MetaAPISchema):
                     '@regex': 'Services$',
                     '@iregex': 'environment(al)?'
                 },
-                'pool__naics__sin__code': {
-                    'tags': ('membership_field', 'pool_field', 'naics_field', 'sin_field', 'fuzzy_text'),
-                    '@exact': '100-03',
-                    '@iexact': 'c871-202',
-                    '@in': ("100-03", "520-14", "541-4G", "51-B36-2A"),
-                    '@contains': '4B',
-                    '@icontains': '-4b',
-                    '@startswith': '51',
-                    '@istartswith': 'c132',
-                    '@endswith': '03',
-                    '@iendswith': '2a',
-                    '@regex': '[A-Z]\d+\-\d+$',
-                    '@iregex': '^(C87|51)'
-                },
                 'pool__psc__code': {
                     'tags': ('membership_field', 'pool_field', 'psc_field', 'fuzzy_text'),
                     '@exact': 'R413',
@@ -267,20 +229,6 @@ class MembershipTest(case.APITestCase, metaclass = case.MetaAPISchema):
                     '@iendswith': 'SERVICES',
                     '@regex': '[/]+',
                     '@iregex': '^air(craft)?'
-                },
-                'pool__psc__sin__code': {
-                    'tags': ('membership_field', 'pool_field', 'psc_field', 'sin_field', 'fuzzy_text'),
-                    '@exact': '520-19',
-                    '@iexact': 'c871-202',
-                    '@in': ("100-03", "520-14", "541-4G", "51-B36-2A"),
-                    '@contains': '1-5',
-                    '@icontains': 'c54',
-                    '@startswith': '51',
-                    '@istartswith': 'c5',
-                    '@endswith': 'C',
-                    '@iendswith': 'c',
-                    '@regex': '[A-Z]\d+\-\d+$',
-                    '@iregex': '^(C87|51)'
                 },
                 'setasides__code': {
                     'tags': ('membership_field', 'setaside_field', 'token_text'),
