@@ -227,14 +227,6 @@ export class SearchComponent implements OnInit {
     }
     return categories;
   }
-  checkZoneSelected(filters): boolean {
-    for (const item of filters) {
-      if (item.name === 'zone') {
-        return true;
-      }
-    }
-    return false;
-  }
   submitSelectedFilters(filters) {
     if (filters.length === 0) {
       this.filtersComponent.resetFilters();
@@ -269,30 +261,18 @@ export class SearchComponent implements OnInit {
           for (const item of data['results']) {
             for (const vehicle of this.contract_vehicles) {
               if (item === vehicle.id) {
-                const zone_selected = this.checkZoneSelected(filters);
-                if (zone_selected && vehicle.id.indexOf('BMO') !== -1) {
-                  vehicles.push(vehicle);
-                  vehicles_ids.push(vehicle.id);
-                }
-                if (!zone_selected) {
-                  vehicles.push(vehicle);
-                  vehicles_ids.push(vehicle.id);
-                  if (
-                    this.contract_vehicles.length !== data['results'].length
-                  ) {
-                    this.filtersComponent.setContractVehiclesInFilter(
-                      vehicle.id,
-                      vehicle.name
-                    );
-                  }
+                vehicles.push(vehicle);
+                vehicles_ids.push(vehicle.id);
+                if (this.contract_vehicles.length !== data['results'].length) {
+                  this.filtersComponent.setContractVehiclesInFilter(
+                    vehicle.id,
+                    vehicle.name
+                  );
                 }
               }
             }
           }
-          if (vehicles.length === 0) {
-            this.noResults();
-            return;
-          }
+
           this.filtersComponent.filterNaicsByVehiclesInFilter(vehicles_ids);
           this.filtersComponent.filterPscsByVehiclesInFilter(vehicles_ids);
           this.filtersComponent.filterServiceCategoriesByVehiclesInFilter(

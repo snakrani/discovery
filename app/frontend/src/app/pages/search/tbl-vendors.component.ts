@@ -225,7 +225,6 @@ export class TblVendorsComponent implements OnInit, OnChanges {
     const vehicles: any[] = [];
     for (const item of obj) {
       const vendor = {};
-      const asides_arr = [];
       const pools_ids_arr = [];
       vendor['name'] = item.name;
       vendor['duns'] = item.duns;
@@ -248,7 +247,12 @@ export class TblVendorsComponent implements OnInit, OnChanges {
         pools_ids_arr.push(pool.pool.id);
         for (const aside of pool.setasides) {
           if (
-            !this.searchService.existsIn(vendor['setasides'], aside['code'], '')
+            !this.searchService.existsIn(
+              vendor['setasides'],
+              aside['code'],
+              ''
+            ) &&
+            this.vehicle === pool.pool.vehicle.id
           ) {
             vendor['setasides'].push(aside['code']);
           }
