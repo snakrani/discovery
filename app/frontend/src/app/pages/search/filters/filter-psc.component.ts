@@ -40,11 +40,6 @@ export class FilterPscComponent implements OnInit, OnChanges {
   id = 'filter-pscs';
   placeholder;
   error_message;
-  /** Sample json
-  {
-
-  };
-  */
 
   json_value = 'id';
   json_description = 'text';

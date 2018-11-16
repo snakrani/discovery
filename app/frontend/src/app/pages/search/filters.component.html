@@ -3,79 +3,170 @@
   <div class="usa-width-one-whole">
     <div class="usa-alert usa-alert-warning" role="alert">
       <div class="usa-alert-body">
-        <h3 class="usa-alert-heading">This area is currently down for maintenance.</h3>
-        <p class="usa-alert-text">We expect to be back in a couple hours. Thanks for your patience.</p>
+        <h3 class="usa-alert-heading">
+          This area is currently down for maintenance.
+        </h3>
+        <p class="usa-alert-text">
+          We expect to be back in a couple hours. Thanks for your patience.
+        </p>
       </div>
     </div>
   </div>
 </div>
 <!-- Server Error Notification -->
-<div [hidden]="server_error" id="filters-container" class="usa-width-one-fourth usa-section-dark bordered sidenav">
+<div
+  [hidden]="server_error"
+  id="filters-container"
+  class="usa-width-one-fourth usa-section-dark bordered sidenav"
+>
   <div class="relative">
     <div class="overlay" *ngIf="spinner && !parentSpinner">
       <div class="spinner">
-        <img src="{{APP_ASSETS}}assets/images/loader.gif" alt="Loading" class="pull-left" />
+        <img
+          src="{{APP_ASSETS}}assets/images/loader.gif"
+          alt="Loading"
+          class="pull-left"
+        />
       </div>
     </div>
     <div class="text-right">
       <button class="filters-close" (click)="hideFilters()">
-        <img src="{{APP_ASSETS}}assets/uswds/img/close.svg" alt="close">
+        <img src="{{APP_ASSETS}}assets/uswds/img/close.svg" alt="close" />
       </button>
     </div>
-    <h3 class="underline alt">
-      <span class="icon-filter"></span>Filters</h3>
-    <button type="button" [disabled]="disabled_btn" class="primary" (click)="emmitSelectedFilters($event)">Submit</button>
-    <button type="button" class="link" (click)="resetFilters()" title="Clear all filters">Reset</button>
+    <h3 class="underline alt"><span class="icon-filter"></span>Filters</h3>
+    <button
+      type="button"
+      [disabled]="disabled_btn"
+      class="primary"
+      (click)="emmitSelectedFilters($event)"
+    >
+      Submit
+    </button>
+    <button
+      type="button"
+      class="link"
+      (click)="resetFilters()"
+      title="Clear all filters"
+    >
+      Reset
+    </button>
     <div class="cb" style="display: block;clear:both"></div>
     <ul class="usa-accordion" aria-multiselectable="true">
       <li>
-        <discovery-filter-keywords [opened]="true" (emitClearedSelected)="clearContractVehicles($event)"
-          (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-keywords>
+        <discovery-filter-keywords
+          [opened]="true"
+          (emitClearedSelected)="clearContractVehicles($event)"
+          (emmitSelected)="activateSubmit($event)"
+          (emmitLoaded)="getResults($event)"
+        ></discovery-filter-keywords>
       </li>
       <li>
-        <discovery-filter-naics [items]="pools" (emitClearedSelected)="clearContractVehicles($event)" (emmitSelected)="activateSubmit($event)"
-          (emmitLoaded)="getResults($event)"></discovery-filter-naics>
+        <discovery-filter-naics
+          [items]="pools"
+          (emitClearedSelected)="clearContractVehicles($event)"
+          (emmitSelected)="activateSubmit($event)"
+          (emmitLoaded)="getResults($event)"
+        ></discovery-filter-naics>
       </li>
       <li>
-        <discovery-filter-psc [items]="pools" (emitClearedSelected)="clearContractVehicles($event)" (emmitSelected)="activateSubmit($event)"
-          (emmitLoaded)="getResults($event)"></discovery-filter-psc>
+        <discovery-filter-psc
+          [items]="pools"
+          (emitClearedSelected)="clearContractVehicles($event)"
+          (emmitSelected)="activateSubmit($event)"
+          (emmitLoaded)="getResults($event)"
+        ></discovery-filter-psc>
       </li>
       <li>
-        <discovery-filter-contract-vehicles [items]="vehicles" (emmitSelected)="activateSubmit($event)" (emmitItem)="filterOthersByVehicles($event)"
-          (emmitLoaded)="getResults($event)"></discovery-filter-contract-vehicles>
+        <discovery-filter-contract-vehicles
+          [items]="vehicles"
+          (emmitSelected)="activateSubmit($event)"
+          (emmitItem)="filterOthersByVehicles($event)"
+          (emmitLoaded)="getResults($event)"
+        ></discovery-filter-contract-vehicles>
       </li>
       <li>
-        <discovery-filter-service-categories [items]="pools" (emitVehicleId)="selectContractVehicleInFilter($event)"
-          (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-service-categories>
+        <discovery-filter-service-categories
+          [items]="pools"
+          (emitVehicleId)="selectContractVehicleInFilter($event)"
+          (emmitSelected)="activateSubmit($event)"
+          (emmitLoaded)="getResults($event)"
+        ></discovery-filter-service-categories>
       </li>
       <li>
-        <discovery-filter-sbd (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-sbd>
+        <discovery-filter-sbd
+          (emmitSelected)="activateSubmit($event)"
+          (emmitLoaded)="getResults($event)"
+        ></discovery-filter-sbd>
       </li>
       <li>
-        <discovery-filter-zone (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-zone>
+        <discovery-filter-zone
+          (emmitSelected)="activateSubmit($event)"
+          (emmitLoaded)="getResults($event)"
+          (emitDisableNonBMO)="disableNonBMO($event)"
+        ></discovery-filter-zone>
       </li>
 
-      <!-- <li>
-        <discovery-filter-contract-pricing-type (emmitSelected)="activateSubmit($event)"></discovery-filter-contract-pricing-type>
-      </li> -->
-      <!-- <li>
-        <discovery-filter-certifications (emmitSelected)="activateSubmit($event)"></discovery-filter-certifications>
-      </li> -->
+      <!--
+        <li>
+          <discovery-filter-contract-pricing-type (emmitSelected)="activateSubmit($event)"></discovery-filter-contract-pricing-type>
+        </li>
+      -->
+      <!--
+        <li>
+          <discovery-filter-certifications (emmitSelected)="activateSubmit($event)"></discovery-filter-certifications>
+        </li>
+      -->
 
-      <li ga-on="click" ga-event-category="Feature" ga-event-action="filter-obligated-amount">
-        <discovery-filter-contract-obligated-amount [disable]="true" (emmitSelected)="activateSubmit($event)"
-          (emmitLoaded)="getResults($event)"></discovery-filter-contract-obligated-amount>
+      <li
+        ga-on="click"
+        ga-event-category="Feature"
+        ga-event-action="filter-obligated-amount"
+      >
+        <discovery-filter-contract-obligated-amount
+          [disable]="true"
+          (emmitSelected)="activateSubmit($event)"
+          (emmitLoaded)="getResults($event)"
+        ></discovery-filter-contract-obligated-amount>
       </li>
-      <li ga-on="click" ga-event-category="Feature" ga-event-action="filter-place-of-performance">
-        <discovery-filter-place-of-performance [disable]="true" (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-place-of-performance>
+      <li
+        ga-on="click"
+        ga-event-category="Feature"
+        ga-event-action="filter-place-of-performance"
+      >
+        <discovery-filter-place-of-performance
+          [disable]="true"
+          (emmitSelected)="activateSubmit($event)"
+          (emmitLoaded)="getResults($event)"
+        ></discovery-filter-place-of-performance>
       </li>
-      <li ga-on="click" ga-event-category="Feature" ga-event-action="filter-agency-performance">
-        <discovery-filter-agency-performance [disable]="true" (emmitSelected)="activateSubmit($event)" (emmitLoaded)="getResults($event)"></discovery-filter-agency-performance>
+      <li
+        ga-on="click"
+        ga-event-category="Feature"
+        ga-event-action="filter-agency-performance"
+      >
+        <discovery-filter-agency-performance
+          [disable]="true"
+          (emmitSelected)="activateSubmit($event)"
+          (emmitLoaded)="getResults($event)"
+        ></discovery-filter-agency-performance>
       </li>
-
-
     </ul>
-    <button type="button" [disabled]="disabled_btn" class="primary" (click)="emmitSelectedFilters($event)">Submit</button>
-    <button type="button" class="link" (click)="resetFilters()" title="Clear all filters">Reset</button>
+    <button
+      type="button"
+      [disabled]="disabled_btn"
+      class="primary"
+      (click)="emmitSelectedFilters($event)"
+    >
+      Submit
+    </button>
+    <button
+      type="button"
+      class="link"
+      (click)="resetFilters()"
+      title="Clear all filters"
+    >
+      Reset
+    </button>
   </div>
 </div>

@@ -165,7 +165,6 @@ export class VendorDetailComponent implements OnInit, OnChanges {
 
   buildPoolsInfo(data: any[]) {
     const vehicles: any[] = [];
-    // const contracts: any[] = [];
     for (const item of data['pools']) {
       const vehicle = {};
       if (
@@ -180,10 +179,7 @@ export class VendorDetailComponent implements OnInit, OnChanges {
         vehicle['piids'] = [{ piid: item.piid }];
         vehicle['service_categories'] = [{ pool_id: item.pool.id }];
         vehicle['capability'] = item.capability_statement;
-        vehicle['setasides'] = this.searchService.commaSeparatedList(
-          item.setasides,
-          'code'
-        );
+        vehicle['setasides'] = [];
         vehicle['zones'] = item.zones.sort(this.searchService.sortByIdAsc);
         vehicles.push(vehicle);
       }
@@ -201,10 +197,16 @@ export class VendorDetailComponent implements OnInit, OnChanges {
           ) {
             v['service_categories'].push({ pool_id: item.pool.id });
           }
+          for (const aside of item.setasides) {
+            if (
+              !this.searchService.existsIn(v['setasides'], aside['code'], '')
+            ) {
+              v['setasides'].push(aside['code']);
+            }
+          }
         }
       }
     }
-
     return vehicles;
   }
   addItem(num: string) {
