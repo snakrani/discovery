@@ -243,19 +243,18 @@ export class TblVendorsComponent implements OnInit, OnChanges {
           }
         }
       }
+      vendor['setasides'] = [];
       for (const pool of item.pools) {
         pools_ids_arr.push(pool.pool.id);
+        for (const aside of pool.setasides) {
+          if (
+            !this.searchService.existsIn(vendor['setasides'], aside['code'], '')
+          ) {
+            vendor['setasides'].push(aside['code']);
+          }
+        }
       }
       vendor['pools_ids'] = pools_ids_arr;
-
-      if (item.pools[0].setasides) {
-        for (const asides of item.pools[0].setasides) {
-          asides_arr.push(asides['code']);
-        }
-        vendor['setasides'] = asides_arr;
-      } else {
-        vendor['setasides'] = [];
-      }
 
       if (
         this.obligated_amounts_list.length > 0 &&

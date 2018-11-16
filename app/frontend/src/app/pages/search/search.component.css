@@ -162,6 +162,10 @@ td {
 .lnk-more {
   width: 60px !important;
 }
+.info-tip {
+  position: relative !important;
+  bottom: inherit !important;
+}
 @media (min-width: 1180px) {
   .usa-width-three-fourths {
     width: 72% !important;
@@ -172,16 +176,6 @@ td {
     width: 99%;
     margin: 0.4em;
   }
-}
-@media (min-width: 1040px) {
-  /* .usa-grid div.usa-width-one-fourth {
-    margin-right: 2.35765%;
-    width: 23.23176%;
-  }
-  .usa-grid div.usa-width-three-fourths {
-    margin-right: 0;
-    width: 74.31059%;
-  } */
 }
 @media (min-width: 1180px) {
   #btn-show-filters {
