@@ -347,7 +347,4 @@ export class FiltersComponent implements OnInit {
   hideFilters() {
     this.emitHideFilters.emit(1);
   }
-  disableNonBMO(bool) {
-    this.filterContractVehiclesComponent.disableNonBMO(bool);
-  }
 }
