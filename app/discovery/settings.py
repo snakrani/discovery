@@ -118,6 +118,7 @@ INSTALLED_APPS = [
     'contracts',
     
     'django.contrib.contenttypes',
+    'django.contrib.auth',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
