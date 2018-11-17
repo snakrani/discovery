@@ -798,7 +798,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                 }, {
                     1: ('SB', 'VO', 'SDVO')
                 }),
-                'vendor_sam': ('10/16/18',),
+                'vendor_sam': ('10/16/18', True),
                 'vendor_info': ('ADDX CORPORATION', '039872622', '1XPA3', '62', '$16,534,185'),
                 'vendor_address': ('4900 Seminary Rd Ste 700', 'Alexandria, VA 22311', True),
                 'vendor_badges': (True,),
@@ -1166,7 +1166,7 @@ class VendorTest(case.AcceptanceTestCase, metaclass = case.MetaAcceptanceSchema)
                     1: ('SB', 'VO', 'SDVO'),
                     2: ('SB', 'VO', 'SDVO')
                 }),
-                'vendor_sam': ('10/16/18',),
+                'vendor_sam': ('10/16/18', True),
                 'vendor_info': ('ADDX CORPORATION', '039872622', '1XPA3', '62', '$16,534,185'),
                 'vendor_address': ('4900 Seminary Rd Ste 700', 'Alexandria, VA 22311', True),
                 'vendor_badges': (True,),
