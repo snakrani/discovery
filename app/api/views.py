@@ -15,6 +15,7 @@ from rest_framework.response import Response
 from rest_framework_filters.backends import RestFrameworkFilterBackend
 
 from discovery.utils import check_api_test
+from discovery.cache import cached_response
 from discovery import query
 from discovery import metadata
 from discovery import models as system
@@ -45,39 +46,17 @@ class DiscoveryReadOnlyModelViewSet(
         return queryset
 
 
-    def cache_key(self, request):
-        return "{}:{}".format(request.path, re.sub(r'[\s\{\}\(\)\"\=]', '', json.dumps(OrderedDict(request.query_params))))
-
-    def track_cache(self, page_id):
-        page, created = system.CachePage.objects.get_or_create(url=page_id)
-        page.count += 1
-        page.save()
-
-    def respond(self, request, view_op):
-        page_id = self.cache_key(request)
-        
-        self.track_cache(page_id)
-        data = cache.get(page_id)
-        
-        if data:
-            return Response(data)
-        else:
-            response = view_op()
-            cache.set(page_id, response.data)
-            return response
-    
-    
     def list(self, request, *args, **kwargs):
         def render_page():
             return super(DiscoveryReadOnlyModelViewSet, self).list(request, *args, **kwargs)
         
-        return self.respond(request, render_page)
+        return cached_response(request, render_page)
         
     def retrieve(self, request, *args, **kwargs):
         def render_page():
             return super(DiscoveryReadOnlyModelViewSet, self).retrieve(request, *args, **kwargs)
         
-        return self.respond(request, render_page)
+        return cached_response(request, render_page)
         
     def values(self, request, *args, **kwargs):
         def render_page():
@@ -99,7 +78,7 @@ class DiscoveryReadOnlyModelViewSet(
                 ('results', values)
             ]))
         
-        return self.respond(request, render_page)
+        return cached_response(request, render_page)
     
     def count(self, request, *args, **kwargs):
         def render_page():
@@ -107,7 +86,7 @@ class DiscoveryReadOnlyModelViewSet(
             queryset = self.filter_queryset(self.get_queryset())
             return Response({'count': queryset.values_list(field_lookup).count()})
         
-        return self.respond(request, render_page)
+        return cached_response(request, render_page)
    
 
 class NaicsViewSet(DiscoveryReadOnlyModelViewSet):
