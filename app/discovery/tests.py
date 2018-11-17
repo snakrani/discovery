@@ -21,6 +21,3 @@ class SmokeTest(case.RequestTestCase):
         
     def test_docs_found_4(self):
         self.validated_temp_redirect('/developers/')
-        
-    def test_admin_found(self):
-        self.validated_temp_redirect('/admin/')
