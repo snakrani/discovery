@@ -15,7 +15,7 @@ if DEBUG:
     CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-            'LOCATION': 'django_cache_table',
+            'LOCATION': 'django_cachepage',
             'TIMEOUT': 300,
             'OPTIONS': {
                 'MAX_ENTRIES': 50
