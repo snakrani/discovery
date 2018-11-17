@@ -119,8 +119,6 @@ INSTALLED_APPS = [
     'vendors',
     'contracts',
     
-    'django.contrib.admin',
-    'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -131,7 +129,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'rest_framework_filters',
-    'crispy_forms',
     
     'django_celery_beat',
     'django_celery_results',
@@ -148,27 +145,8 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware'    
-]
-
-#
-# Authentication configuration
-#
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
 ]
 
 #
@@ -337,20 +315,6 @@ LOGGING = {
 DB_MUTEX_TTL_SECONDS = 86400 # 1 day (24 hours)
 
 #
-# Administrative session handling
-#
-SESSION_ENGINE = 'redis_sessions.session'
-
-SESSION_REDIS = {
-    'host': config_value('hostname', 'localhost', ['redis28', 'redis32'], 'discovery-auth'),
-    'port': config_value('port', '6379', ['redis28', 'redis32'], 'discovery-auth'),
-    'db': 0,
-    'password': config_value('password', 'discovery', ['redis28', 'redis32'], 'discovery-auth'),
-    'prefix': 'session',
-    'socket_timeout': 1
-}
-
-#
 # Celery processing and scheduling
 #
 CELERY_BROKER_URL = config_value('uri', 'redis://:discovery@localhost:6379', ['redis28', 'redis32'], 'discovery-tasks')
@@ -411,15 +375,6 @@ REST_FRAMEWORK = {
 REST_API_TEST = False
 
 #
-# Cloud.gov UAA authentication
-#
-UAA_AUTH = True
-UAA_CLIENT_ID = config_value('UAA_CLIENT_ID')
-UAA_CLIENT_SECRET = config_value('UAA_CLIENT_SECRET')
-UAA_AUTH_URL = config_value('UAA_AUTH_URL', 'https://login.fr.cloud.gov/oauth/authorize')
-UAA_TOKEN_URL = config_value('UAA_TOKEN_URL', 'https://uaa.fr.cloud.gov/oauth/token')
-
-#
 # Site policies
 #
 REFERRER_POLICY = 'origin'
@@ -453,13 +408,7 @@ except:
 #
 # Authentication configuration
 #
-if UAA_AUTH:
-    INSTALLED_APPS.append('uaa_client')
-    MIDDLEWARE.append('uaa_client.middleware.UaaRefreshMiddleware')
-    
-    AUTHENTICATION_BACKENDS = ['uaa_client.authentication.UaaBackend']
-    LOGIN_URL = 'uaa_client:login'
-    
+if not DEBUG:
     # Ensuring HTTPS
     SECURE_HSTS_PRELOAD = True
     SECURE_HSTS_SECONDS = 31536000
