@@ -16,14 +16,7 @@ WORKDIR /discovery
 #
 # Application base dependencies
 #
-RUN apt-get update -y && apt-get install -y git gcc
-
-#
-# Angular environment
-#
-COPY ./scripts/setup-angular.sh /usr/local/bin/setup-angular
-
-RUN setup-angular /dev/stdout
+RUN apt-get update -y && apt-get install -y git gcc g++
 
 #
 # Python environment

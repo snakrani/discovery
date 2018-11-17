@@ -25,11 +25,9 @@ services:
     scale: 3
     depends_on:
       - scheduler
-      - auth
     links:
       - data:discovery-db
       - tasks:discovery-tasks
-      - auth:discovery-auth
     extends:
       file: docker/docker-compose.base.yml
       service: django
@@ -43,7 +41,6 @@ services:
     links:
       - data:discovery-db
       - tasks:discovery-tasks
-      - auth:discovery-auth
     extends:
       file: docker/docker-compose.base.yml
       service: django
@@ -57,7 +54,6 @@ services:
     links:
       - data:discovery-db
       - tasks:discovery-tasks
-      - auth:discovery-auth
     extends:
       file: ./docker/docker-compose.base.yml
       service: django
@@ -80,21 +76,9 @@ services:
       file: docker/docker-compose.base.yml
       service: queue
 
-  auth:
-    ports:
-      - "6479:6379"
-    volumes:
-      - discovery-auth:/data
-    extends:
-      file: docker/docker-compose.base.yml
-      service: queue
-
 volumes:
   discovery-data:
     external: false
 
   discovery-tasks:
-    external: false
-
-  discovery-auth:
     external: false
