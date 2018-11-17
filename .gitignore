@@ -28,5 +28,3 @@ _*/
 /logs/celerybeat.pid
 /vagrant/config.yml
 celerybeat-schedule
-
-/app/front-end/node_modules
