@@ -14,8 +14,6 @@ Vagrant.configure("2") do |config|
   config.vm.box = vm_config["box_name"]
   config.vm.hostname = vm_config["server_name"]
 
-  # If you want to listen at a specific local IP address
-  # > add "ip_address: '###.###.###.###'" to your vagrant-config.yml
   if vm_config.has_key?("ip_address")
     config.vm.network :private_network, ip: vm_config["ip_address"]
   end
@@ -61,8 +59,6 @@ Vagrant.configure("2") do |config|
       then
         cat "${PROJECT_DIR}/scripts/vagrant-bash.sh" >> "${HOME}/.bashrc"
       fi
-      mkdir -p /usr/local/discovery-docker-root
-      cp -fR $HOME/. /usr/local/discovery-docker-root/
     SHELL
     s.env = { "HOME" => vagrant_home, "PROJECT_DIR" => project_directory }
   end
@@ -77,6 +73,5 @@ Vagrant.configure("2") do |config|
   config.vm.network :forwarded_port, guest: 8080, host: vm_config["web_port"]
   config.vm.network :forwarded_port, guest: 5432, host: vm_config["db_port"]
   config.vm.network :forwarded_port, guest: 6379, host: vm_config["queue_port"]
-  config.vm.network :forwarded_port, guest: 6479, host: vm_config["auth_port"]
   config.vm.network :forwarded_port, guest: 8089, host: vm_config['locust_port']
 end

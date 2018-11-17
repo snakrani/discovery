@@ -7,6 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('contenttypes', '__latest__'),
         ('vendors', '0025_auto_20180205_0342'),
         ('contracts', '0023_remove_fpdsload_initialized'),
     ]

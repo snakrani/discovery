@@ -21,6 +21,7 @@ __pycache__
 /logs/*.csv
 /logs/celerybeat.pid
 /vagrant/
+celerybeat-schedule
 
 /docker-compose-ha.yml
 /docker-compose.yml

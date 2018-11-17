@@ -27,5 +27,4 @@ _*/
 /logs/*.csv
 /logs/celerybeat.pid
 /vagrant/config.yml
-
-/app/front-end/node_modules
+celerybeat-schedule

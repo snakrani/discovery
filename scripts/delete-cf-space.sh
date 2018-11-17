@@ -61,7 +61,6 @@ cf delete -f discovery-web
 echo "Deleting Discovery services"
 cf delete-service -f discovery-config
 cf delete-service -f discovery-tasks
-cf delete-service -f discovery-auth
 cf delete-service -f discovery-db
 
 # Delete service account and service key
