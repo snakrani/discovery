@@ -36,6 +36,3 @@ python3 manage.py clear_cache >>"$LOG_FILE" 2>&1
 
 echo "> Clearing outdated locks" | tee -a "$LOG_FILE"
 python3 manage.py clear_locks >>"$LOG_FILE" 2>&1
-
-# Create admin user ONLY IF it doesn't exist yet
-"$SCRIPT_DIR/create-admin.sh" admin admin-changeme >>"$LOG_FILE" 2>&1
