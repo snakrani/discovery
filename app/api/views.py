@@ -5,6 +5,8 @@ from django.conf import settings
 from django.core.cache import cache
 from django.db.models import Subquery, OuterRef, Value, Q
 from django.db.models.functions import Concat, Coalesce
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.views import APIView
@@ -15,7 +17,7 @@ from rest_framework.response import Response
 from rest_framework_filters.backends import RestFrameworkFilterBackend
 
 from discovery.utils import check_api_test
-from discovery.cache import cached_response
+from discovery.cache import track_page_load
 from discovery import query
 from discovery import metadata
 from discovery import models as system
@@ -45,48 +47,44 @@ class DiscoveryReadOnlyModelViewSet(
 
         return queryset
 
-
+    @method_decorator(cache_page(settings.PAGE_CACHE_LIFETIME, cache='page_cache'))
     def list(self, request, *args, **kwargs):
-        def render_page():
-            return super(DiscoveryReadOnlyModelViewSet, self).list(request, *args, **kwargs)
-        
-        return cached_response(request, render_page, Response)
-        
-    def retrieve(self, request, *args, **kwargs):
-        def render_page():
-            return super(DiscoveryReadOnlyModelViewSet, self).retrieve(request, *args, **kwargs)
-        
-        return cached_response(request, render_page, Response)
-        
-    def values(self, request, *args, **kwargs):
-        def render_page():
-            field_lookup = kwargs['field_lookup']
-            queryset = self.filter_queryset(self.get_queryset().order_by(field_lookup))
-            values = []
-        
-            for value in queryset.values_list(field_lookup, flat=True):
-                if value is not None:
-                    if isinstance(value, (datetime, date)):
-                        value = value.isoformat()
-                        if value.endswith('+00:00'):
-                            value = value[:-6] + 'Z'
-                
-                    values.append(value)
-        
-            return Response(OrderedDict([
-                ('count', len(values)),
-                ('results', values)
-            ]))
-        
-        return cached_response(request, render_page, Response)
+        track_page_load(request)
+        return super(DiscoveryReadOnlyModelViewSet, self).list(request, *args, **kwargs)
     
-    def count(self, request, *args, **kwargs):
-        def render_page():
-            field_lookup = kwargs['field_lookup']
-            queryset = self.filter_queryset(self.get_queryset())
-            return Response({'count': queryset.values_list(field_lookup).count()})
+    @method_decorator(cache_page(settings.PAGE_CACHE_LIFETIME, cache='page_cache'))    
+    def retrieve(self, request, *args, **kwargs):
+        track_page_load(request)
+        return super(DiscoveryReadOnlyModelViewSet, self).retrieve(request, *args, **kwargs)
+    
+    @method_decorator(cache_page(settings.PAGE_CACHE_LIFETIME, cache='page_cache'))   
+    def values(self, request, *args, **kwargs):
+        field_lookup = kwargs['field_lookup']
+        queryset = self.filter_queryset(self.get_queryset().order_by(field_lookup))
+        values = []
         
-        return cached_response(request, render_page, Response)
+        for value in queryset.values_list(field_lookup, flat=True):
+            if value is not None:
+                if isinstance(value, (datetime, date)):
+                    value = value.isoformat()
+                    if value.endswith('+00:00'):
+                        value = value[:-6] + 'Z'
+                
+                values.append(value)
+        
+        track_page_load(request)
+        return Response(OrderedDict([
+            ('count', len(values)),
+            ('results', values)
+        ]))
+    
+    @method_decorator(cache_page(settings.PAGE_CACHE_LIFETIME, cache='page_cache'))
+    def count(self, request, *args, **kwargs):
+        field_lookup = kwargs['field_lookup']
+        queryset = self.filter_queryset(self.get_queryset())
+        
+        track_page_load(request)
+        return Response({'count': queryset.values_list(field_lookup).count()})
    
 
 class NaicsViewSet(DiscoveryReadOnlyModelViewSet):
