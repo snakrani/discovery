@@ -50,13 +50,13 @@ class DiscoveryReadOnlyModelViewSet(
         def render_page():
             return super(DiscoveryReadOnlyModelViewSet, self).list(request, *args, **kwargs)
         
-        return cached_response(request, render_page)
+        return cached_response(request, render_page, Response)
         
     def retrieve(self, request, *args, **kwargs):
         def render_page():
             return super(DiscoveryReadOnlyModelViewSet, self).retrieve(request, *args, **kwargs)
         
-        return cached_response(request, render_page)
+        return cached_response(request, render_page, Response)
         
     def values(self, request, *args, **kwargs):
         def render_page():
@@ -78,7 +78,7 @@ class DiscoveryReadOnlyModelViewSet(
                 ('results', values)
             ]))
         
-        return cached_response(request, render_page)
+        return cached_response(request, render_page, Response)
     
     def count(self, request, *args, **kwargs):
         def render_page():
@@ -86,7 +86,7 @@ class DiscoveryReadOnlyModelViewSet(
             queryset = self.filter_queryset(self.get_queryset())
             return Response({'count': queryset.values_list(field_lookup).count()})
         
-        return cached_response(request, render_page)
+        return cached_response(request, render_page, Response)
    
 
 class NaicsViewSet(DiscoveryReadOnlyModelViewSet):
