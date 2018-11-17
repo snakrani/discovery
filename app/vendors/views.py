@@ -1,9 +1,13 @@
 from titlecase import titlecase
 
+from django.conf import settings
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseBadRequest
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 from discovery.csv import format_duns, BaseCSVView
+from discovery.cache import track_page_load
 
 from categories import models as categories
 from vendors import models as vendors
@@ -41,7 +45,7 @@ class VendorCSV(BaseCSVView):
         self.naics_param = 'naics'
         self.naics = []
         
-        self.psc_param = 'psc'
+        self.psc_param = 'pscs'
         self.psc = []
         
         self.vehicles_param = 'vehicles'
@@ -72,6 +76,7 @@ class VendorCSV(BaseCSVView):
         # Queries
         self.setaside_data = categories.SetAside.objects.all().order_by('far_order')
         self.pool_data = categories.Pool.objects.all().distinct()
+        self.membership_data = vendors.PoolMembership.objects.all().distinct()
         self.vendor_data = vendors.Vendor.objects.all().distinct()
 
 
@@ -162,8 +167,9 @@ class VendorCSV(BaseCSVView):
         
         if len(self.pools) > 0:
             self.pool_data = self.pool_data.filter(id__in=self.pools)
-            self.vendor_data = self.vendor_data.filter(pools__pool__id__in=list(self.pool_data.values_list('id', flat=True)))
             self._render_pools(writer)
+            
+        self.membership_data = self.membership_data.filter(pool__id__in=list(self.pool_data.values_list('id', flat=True)))
 
   
     def _render_setasides(self, writer):
@@ -180,7 +186,9 @@ class VendorCSV(BaseCSVView):
         self.setasides = self.get_params(self.setasides_param)
         
         if len(self.setasides) > 0:
-            self.vendor_data = self.vendor_data.filter(pools__setasides__code__in=self.setasides)
+            for setaside_code in self.setasides:
+                self.membership_data = self.membership_data.filter(setasides__code=setaside_code)
+            
             self._render_setasides(writer)
 
   
@@ -198,10 +206,16 @@ class VendorCSV(BaseCSVView):
         self.zones = self.get_params(self.zones_param)
         
         if len(self.zones) > 0:
-            self.vendor_data = self.vendor_data.filter(pools__zones__id__in=self.zones)
+            for zone_id in self.zones:
+                self.membership_data = self.membership_data.filter(zones__id=zone_id)
+            
             self._render_zones(writer)
 
- 
+        
+    def _process_memberships(self, writer):
+        self.vendor_data = self.vendor_data.filter(pools__id__in=list(self.membership_data.values_list('id', flat=True)))
+
+
     def _render_amount(self, writer):
         writer.writerow(('Vendor contract obligated amounts:', 'Low', 'High'))
         writer.writerow(('', self.amount_low, self.amount_high))
@@ -320,6 +334,7 @@ class VendorCSV(BaseCSVView):
             writer.writerow(v_row)
 
 
+    @method_decorator(cache_page(settings.PAGE_CACHE_LIFETIME, cache='page_cache'))   
     def get(self, request, *args, **kwargs):
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="vendors.csv"'
@@ -333,12 +348,12 @@ class VendorCSV(BaseCSVView):
         self._process_keywords(writer)
         self._process_naics(writer)
         self._process_psc(writer)
-        
         self._process_vehicles(writer)
         self._process_pools(writer)
          
         self._process_setasides(writer)
         self._process_zones(writer)
+        self._process_memberships(writer)
                
         self._process_agencies(writer)
         self._process_amount(writer)
@@ -347,4 +362,5 @@ class VendorCSV(BaseCSVView):
         
         self._render_vendors(writer)
         
+        track_page_load(request)
         return response
