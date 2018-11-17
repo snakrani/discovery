@@ -7,6 +7,8 @@ https://docs.djangoproject.com/en/2.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
+from celery.schedules import crontab
+
 from discovery.utils import config_value
 
 import os
@@ -357,7 +359,28 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'UTC'
-CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+
+CELERY_BEAT_SCHEDULE = {
+    'populate_cache': {
+        'task': 'discovery.tasks.populate_cache',
+        'schedule': crontab(hour=23, minute=0)
+    },
+    'update_sam_vendors': {
+        'task': 'vendors.tasks.update_vendors_sam',
+        'args': (3, 1),
+        'schedule': crontab(hour=1, minute=30)
+    },
+    'update_fpds_contracts': {
+        'task': 'contracts.tasks.update_contracts',
+        'args': (260, 260, 500, 1),
+        'schedule': crontab(hour=4, minute=30)
+    },
+    'prune_contracts': {
+        'task': 'contracts.tasks.prune_contracts',
+        'args': (260,),
+        'schedule': crontab(hour=22, minute=0)
+    }
+}
 
 #
 # REST configuration 
