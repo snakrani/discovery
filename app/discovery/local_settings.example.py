@@ -12,7 +12,7 @@ TEMPLATE_DEBUG = True
 # Caching configuration
 #
 if DEBUG:
-    PAGE_CACHE_LIFETIME = 300 # 5 minutes in seconds
+    PAGE_CACHE_LIFETIME = 30 # seconds
     
     CACHES = {
         'default': {
