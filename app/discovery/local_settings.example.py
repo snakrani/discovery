@@ -12,11 +12,15 @@ TEMPLATE_DEBUG = True
 # Caching configuration
 #
 if DEBUG:
+    PAGE_CACHE_LIFETIME = 300 # 5 minutes in seconds
+    
     CACHES = {
         'default': {
+            'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        },
+        'page_cache': {
             'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
             'LOCATION': 'django_cachepage',
-            'TIMEOUT': 300,
             'OPTIONS': {
                 'MAX_ENTRIES': 50
             }

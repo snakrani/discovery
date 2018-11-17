@@ -24,8 +24,6 @@ PROJ_DIR = os.path.dirname(BASE_DIR)
 #
 # API settings
 #
-API_CACHE_LIFETIME = 24 # in hours
-
 API_HOST = config_value('API_HOST', '')
 
 SAM_API_URL = "https://api.data.gov/sam/v1/registrations/"
@@ -210,11 +208,15 @@ COMPRESS_PRECOMPILERS = (
 #
 # Caching configuration
 #
+PAGE_CACHE_LIFETIME = 86400 # 24 hours in seconds
+
 CACHES = {
     'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    },
+    'page_cache': {
         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
         'LOCATION': 'django_cachepage',
-        'TIMEOUT': 86400,
         'OPTIONS': {
             'MAX_ENTRIES': 5000
         }
