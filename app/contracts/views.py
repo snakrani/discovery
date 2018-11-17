@@ -1,9 +1,13 @@
 from titlecase import titlecase
 
+from django.conf import settings
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseBadRequest
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 from discovery.csv import get_memberships, get_membership_name, BaseCSVView
+from discovery.cache import track_page_load
 
 from categories import models as categories
 from vendors import models as vendors
@@ -185,6 +189,7 @@ class ContractCSV(BaseCSVView):
         writer.writerow(('', ))
 
 
+    @method_decorator(cache_page(settings.PAGE_CACHE_LIFETIME, cache='page_cache')) 
     def get(self, request, *args, **kwargs):
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="vendor_contracts.csv"'
@@ -203,4 +208,5 @@ class ContractCSV(BaseCSVView):
         
         self._render_contracts(writer)
         
+        track_page_load(request)
         return response
