@@ -30,8 +30,3 @@ if DEBUG:
 # REST configuration 
 #
 REST_API_TEST = True
-
-#
-# Cloud.gov UAA authentication
-#
-UAA_AUTH = False
