@@ -16,7 +16,7 @@ WORKDIR /discovery
 #
 # Application requirements
 #
-RUN apt-get update -y && apt-get install -y git gcc
+RUN apt-get update -y && apt-get install -y git gcc g++
 
 COPY ./requirements.txt /tmp/requirements.txt
 COPY ./requirements-dev.txt /tmp/requirements-dev.txt
