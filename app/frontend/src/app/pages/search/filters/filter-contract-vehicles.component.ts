@@ -76,9 +76,10 @@ export class FilterContractVehiclesComponent implements OnInit, OnChanges {
   reset() {
     this._items_selected = [];
     for (let i = 0; i < this.items.length; ++i) {
-      document.getElementById(
-        this.id + '-' + this.items[i][this.json_value]
-      ).checked = false;
+      $('#' + this.id + '-' + this.items[i][this.json_value]).prop(
+        'checked',
+        false
+      );
     }
     this.opened = false;
     this.emmitItem.emit(['All']);
@@ -96,6 +97,28 @@ export class FilterContractVehiclesComponent implements OnInit, OnChanges {
     const description = this.getItemDescription(vehicle);
     this.addItem(vehicle, description);
   }
+
+  disableNonBMO(bool) {
+    if (bool) {
+      for (let i = 0; i < this.items.length; ++i) {
+        const value = this.items[i][this.json_value];
+        if (value.indexOf('BMO') !== 0) {
+          this.removeItem(value);
+          $('#' + this.id + '-' + value).prop('checked', false);
+          $('#' + this.id + '-' + value).attr('disabled', true);
+        }
+      }
+    } else {
+      for (let i = 0; i < this.items.length; ++i) {
+        if (this.items[i][this.json_value].indexOf('BMO') !== 0) {
+          $('#' + this.id + '-' + this.items[i][this.json_value]).attr(
+            'disabled',
+            false
+          );
+        }
+      }
+    }
+  }
   addItem(key: string, title: string) {
     const item = {};
     item['description'] = title;
@@ -103,8 +126,9 @@ export class FilterContractVehiclesComponent implements OnInit, OnChanges {
     if (!this.searchService.existsIn(this._items_selected, key, 'value')) {
       this._items_selected.push(item);
       $('#' + this.id + '-' + key).prop('checked', true);
+      this.emmitSelected.emit(1);
     }
-    this.emmitSelected.emit(1);
+
     this.msgAddedItem.showMsg();
   }
   removeItem(key: string) {
@@ -112,10 +136,9 @@ export class FilterContractVehiclesComponent implements OnInit, OnChanges {
       if (this._items_selected[i]['value'] === key) {
         this._items_selected.splice(i, 1);
         $('#' + this.id + '-' + key).prop('checked', false);
+        this.emmitSelected.emit(0);
       }
     }
-
-    this.emmitSelected.emit(0);
   }
   onChange(key: string, title: string, isChecked: boolean) {
     if (isChecked) {

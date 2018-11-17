@@ -27,19 +27,13 @@ export class FilterZoneComponent implements OnInit {
   emmitSelected: EventEmitter<number> = new EventEmitter();
   @Output()
   emmitLoaded: EventEmitter<string> = new EventEmitter();
+  @Output()
+  emitDisableNonBMO: EventEmitter<boolean> = new EventEmitter();
   name = 'Zone';
   queryName = 'zone';
   id = 'filter-zone';
   error_message;
   zone = '0';
-  /** Sample json
-  {
-
-  };
-  */
-  /** Generate inputs labels & values
-   *  with these
-   */
   json_value = 'value';
   json_description = 'description';
   constructor(
@@ -66,6 +60,7 @@ export class FilterZoneComponent implements OnInit {
           }
           /** Open accordion */
           this.opened = true;
+          this.emitDisableNonBMO.emit(true);
         } else {
           this.opened = false;
         }
@@ -83,38 +78,23 @@ export class FilterZoneComponent implements OnInit {
         'Zone ' +
         prop['id'] +
         ' (' +
-        this.commaSeparatedList(prop['states'], '') +
+        this.searchService.commaSeparatedList(prop['states'], '') +
         ')';
       zones.push(item);
     }
     return zones;
   }
-  commaSeparatedList(obj: any[], key: string) {
-    let items = '';
-    for (const i of obj) {
-      if (key !== '') {
-        items += i[key] + ', ';
-      } else {
-        items += i + ', ';
-      }
-    }
-    return items.slice(0, -2);
-  }
   addZone() {
-    if (!this.exists(this.zone) && this.zone !== '0') {
+    if (
+      !this.searchService.existsIn(this.items_selected, this.zone, 'value') &&
+      this.zone !== '0'
+    ) {
       this.addItem(this.zone);
+      this.emitDisableNonBMO.emit(true);
     }
   }
   getItems() {
     return this.items;
-  }
-  exists(value: string): boolean {
-    for (let i = 0; i < this.items_selected.length; i++) {
-      if (this.items_selected[i]['value'] === value) {
-        return true;
-      }
-    }
-    return false;
   }
   getSelected(selectedOnly: boolean): any[] {
     const item = [];
@@ -132,6 +112,7 @@ export class FilterZoneComponent implements OnInit {
     this.items_selected = [];
     this.zone = '0';
     this.opened = false;
+    this.emitDisableNonBMO.emit(false);
   }
   getItemDescription(value: string): string {
     if (value) {
@@ -157,5 +138,8 @@ export class FilterZoneComponent implements OnInit {
       }
     }
     this.emmitSelected.emit(0);
+    if (this.items_selected.length === 0) {
+      this.emitDisableNonBMO.emit(false);
+    }
   }
 }

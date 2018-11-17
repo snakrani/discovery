@@ -207,23 +207,22 @@
 
                             <div
                               class="pad-top"
-                              *ngIf="item?.zones && item.zones.length > 0"
+                              *ngIf="
+                                item?.zones &&
+                                item.zones.length > 0 &&
+                                (item.vehicle_id === 'BMO' ||
+                                  item.vehicle_id === 'BMO_SB')
+                              "
                             >
                               <span class="uppercase db">Zone(s):</span>
-                              <div class="pad-left">
-                                <a
-                                  href="javascript://"
-                                  (mouseover)="onTop($event.target)"
-                                  [style.zIndex]="3"
-                                  class="tooltip"
-                                  *ngFor="let zone of item?.zones"
-                                  >{{ zone.id
-                                  }}<span
-                                    class="tooltiptext"
+
+                              <ul class="ul-no-bullets pad-left">
+                                <li *ngFor="let zone of item?.zones">
+                                  <strong
                                     [innerHTML]="getZoneStates(zone.id)"
-                                  ></span
-                                ></a>
-                              </div>
+                                  ></strong>
+                                </li>
+                              </ul>
                             </div>
                           </div>
                         </td>

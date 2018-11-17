@@ -272,6 +272,7 @@ export class SearchComponent implements OnInit {
               }
             }
           }
+
           this.filtersComponent.filterNaicsByVehiclesInFilter(vehicles_ids);
           this.filtersComponent.filterPscsByVehiclesInFilter(vehicles_ids);
           this.filtersComponent.filterServiceCategoriesByVehiclesInFilter(

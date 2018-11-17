@@ -146,8 +146,8 @@ export class VendorDetailComponent implements OnInit, OnChanges {
   getZoneStates(zone: number): string {
     let states = '';
     for (const item of this.zones) {
-      if (+item.id === zone) {
-        states = this.searchService.commaSeparatedList(item.states, '');
+      if (+item.value === zone) {
+        states = item.description;
       }
     }
     return states;
@@ -165,7 +165,6 @@ export class VendorDetailComponent implements OnInit, OnChanges {
 
   buildPoolsInfo(data: any[]) {
     const vehicles: any[] = [];
-    // const contracts: any[] = [];
     for (const item of data['pools']) {
       const vehicle = {};
       if (
@@ -180,11 +179,9 @@ export class VendorDetailComponent implements OnInit, OnChanges {
         vehicle['piids'] = [{ piid: item.piid }];
         vehicle['service_categories'] = [{ pool_id: item.pool.id }];
         vehicle['capability'] = item.capability_statement;
-        vehicle['setasides'] = this.searchService.commaSeparatedList(
-          item.setasides,
-          'code'
-        );
-        vehicle['zones'] = item.zones.sort(this.searchService.sortByIdAsc);
+        vehicle['setasides'] = [];
+        vehicle['zones'] = [];
+        // vehicle['zones'] = item.zones.sort(this.searchService.sortByIdAsc);
         vehicles.push(vehicle);
       }
       for (const v of vehicles) {
@@ -201,10 +198,25 @@ export class VendorDetailComponent implements OnInit, OnChanges {
           ) {
             v['service_categories'].push({ pool_id: item.pool.id });
           }
+          for (const aside of item.setasides) {
+            if (
+              !this.searchService.existsIn(v['setasides'], aside['code'], '')
+            ) {
+              v['setasides'].push(aside['code']);
+            }
+          }
+          for (const zone of item.zones) {
+            if (
+              !this.searchService.existsIn(v['zones'], zone['id'], 'id') &&
+              item.pool.vehicle.id === v.vehicle_id
+            ) {
+              v['zones'].push({ id: zone['id'] });
+            }
+          }
+          v['zones'] = v['zones'].sort(this.searchService.sortByIdAsc);
         }
       }
     }
-
     return vehicles;
   }
   addItem(num: string) {
