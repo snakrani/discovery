@@ -365,6 +365,11 @@ CELERY_BEAT_SCHEDULE = {
         'task': 'discovery.tasks.populate_cache',
         'schedule': crontab(hour=23, minute=0)
     },
+    'update_vendors': {
+        'task': 'vendors.tasks.update_vendors',
+        'args': (0,),
+        'schedule': crontab(hour=20, minute=0)
+    },
     'update_sam_vendors': {
         'task': 'vendors.tasks.update_vendors_sam',
         'args': (3, 1),
