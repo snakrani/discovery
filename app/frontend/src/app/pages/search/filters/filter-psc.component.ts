@@ -104,9 +104,7 @@ export class FilterPscComponent implements OnInit, OnChanges {
         item['description'] = psc.description;
         item['vehicle_id'] = pool.vehicle.id;
         item['pool_id'] = pool.id;
-        if (!this.searchService.existsIn(pscs, psc.code, 'id')) {
-          pscs.push(item);
-        }
+        pscs.push(item);
       }
     }
     pscs.sort(this.searchService.sortByIdAsc);
