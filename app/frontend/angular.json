@@ -48,7 +48,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "discovery:build"
+            "browserTarget": "discovery:build",
+            "host": "0.0.0.0"
           },
           "configurations": {
             "production": {

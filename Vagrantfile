@@ -71,6 +71,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.network :forwarded_port, guest: 1936, host: vm_config["haproxy_port"]
   config.vm.network :forwarded_port, guest: 8080, host: vm_config["web_port"]
+  config.vm.network :forwarded_port, guest: 4200, host: vm_config["angular_port"]
   config.vm.network :forwarded_port, guest: 5432, host: vm_config["db_port"]
   config.vm.network :forwarded_port, guest: 6379, host: vm_config["queue_port"]
   config.vm.network :forwarded_port, guest: 8089, host: vm_config['locust_port']

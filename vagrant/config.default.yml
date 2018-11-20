@@ -12,6 +12,7 @@ cpus: 2
 memory_size: 2048
 haproxy_port: 1936
 web_port: 8080
+angular_port: 4200
 db_port: 5432
 queue_port: 6379
 locust_port: 8089
