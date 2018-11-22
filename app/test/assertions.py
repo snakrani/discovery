@@ -24,8 +24,8 @@ class TestAssertions(object):
         if isinstance(value, QuerySet):
             value = list(value)
             
-        if not isinstance(value, (bool, str, list, dict)):
-            raise AssertionError("Value passed ({}) is not a boolean, string, list, or dictionary value".format(str(value)))
+        if not isinstance(value, (bool, int, float, str, list, dict)):
+            raise AssertionError("Value passed ({}) is not a boolean, int, float, string, list, or dictionary value".format(str(value)))
         
         if (isinstance(value, (str, list)) and len(value) == 0) or (isinstance(value, dict) and len(value.keys()) == 0):
             raise AssertionError("Value should not be empty")
@@ -175,7 +175,7 @@ class TestAssertions(object):
         if not date or not isinstance(date, str):
             raise AssertionError("Value ({}) must be passed as a date string".format(date))
         
-        for format in ('%Y-%m-%dT%H:%M:%SZ', '%Y-%m-%d'):
+        for format in ('%Y-%m-%dT%H:%M:%S.%fZ', '%Y-%m-%dT%H:%M:%SZ', '%Y-%m-%d'):
             date_obj = try_date_format(format)
             if date_obj: break
         

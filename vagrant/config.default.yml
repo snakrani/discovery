@@ -2,7 +2,7 @@
 # This file contains default settings for the Vagrant development environment.
 #
 # If you need to override any of these configurations on your own platform then
-# copy this file into a "vagrant-config.yml" in the root project directory
+# copy this file into a "vagrant/config.yml" in the root project directory
 # (directory of this file) and your overrides will take effect on the next
 # vagrant up or reload.
 #
@@ -12,9 +12,10 @@ cpus: 2
 memory_size: 2048
 haproxy_port: 1936
 web_port: 8080
+angular_port: 4200
 db_port: 5432
 queue_port: 6379
-auth_port: 6479
+locust_port: 8089
 copy_ssh: false
 copy_gitconfig: true
 copy_vimrc: false

@@ -5,7 +5,7 @@ from django.core.management import call_command
 import pandas as pd
 from xlrd import open_workbook
 
-from categories.models import Keyword, SetAside, Pool, SIN, Naics, PSC
+from categories.models import Keyword, SetAside, Tier, Vehicle, Pool, SIN, Naics, PSC
 
 import os
 import logging
@@ -19,8 +19,19 @@ import json
 def category_logger():
     return logging.getLogger('category')
 
+
+def format_bool(text):
+    if isinstance(text, str) and re.match(r'\s*x\s*', text, re.IGNORECASE):
+        return True
+    return False
+
+def format_text(text, default=''):
+    if isinstance(text, str) or (isinstance(text, (int, float)) and not math.isnan(text)):
+        return text
+    return default
+
 def format_sin(text):
-    return re.sub(r'\s+', '-', text)
+    return re.sub(r'\s+', '-', str(text))
 
 def format_label(text):
     description = text.strip().title() # Get somewhat normalized version of string
@@ -114,7 +125,7 @@ class Command(BaseCommand):
                     
                         # Save NAICS object
                         naics, created = Naics.objects.get_or_create(code=code)
-                        naics.description = title
+                        naics.description = title.strip()
                         naics.save()
                     
                     except Exception as e:
@@ -122,26 +133,13 @@ class Command(BaseCommand):
     
     def map_naics_code(self, sin, sin_label, naics_code):
         sin_obj, created = SIN.objects.get_or_create(code=sin)
-        keyword, created = Keyword.objects.get_or_create(name=sin_label)
         
-        # Ensure SIN label
-        if sin_label not in list(sin_obj.keywords.all().values_list('name')):
-            sin_obj.keywords.add(keyword)
-                
-        # Include SIN, keyword, and NAICS codes
+        # Include SIN on NAICS codes
         try:
             naics = Naics.objects.get(code=naics_code)
             
             if sin not in naics.sin.all():
                 naics.sin.add(sin)
-                
-            if sin_label not in list(naics.keywords.all().values_list('name')):
-                naics.keywords.add(keyword)
-                
-            # Include NAICS code
-            for psc in PSC.objects.filter(sin=sin):
-                if naics.code not in list(psc.naics.all().values_list('code')):
-                    psc.naics.add(naics)
 
         except Naics.DoesNotExist as error:
             pass    
@@ -178,7 +176,7 @@ class Command(BaseCommand):
                         
                         # Save PSC object
                         psc, created = PSC.objects.get_or_create(code=code)
-                        psc.description = title
+                        psc.description = title.strip()
                         psc.save()
                 
                 elif re.match(r'PSC', code, re.IGNORECASE):
@@ -186,21 +184,13 @@ class Command(BaseCommand):
     
     def map_psc_code(self, sin, sin_label, psc_code):
         sin_obj, created = SIN.objects.get_or_create(code=sin)
-        keyword, created = Keyword.objects.get_or_create(name=sin_label)
         
-        # Ensure SIN label
-        if sin_label not in list(sin_obj.keywords.all().values_list('name')):
-            sin_obj.keywords.add(keyword)
-                
-        # Include SIN and keyword
+        # Include SIN on PSC codes
         try:
             psc = PSC.objects.get(code=psc_code)
             
             if sin not in psc.sin.all():
                 psc.sin.add(sin)
-                
-            if sin_label not in list(psc.keywords.all().values_list('name')):
-                psc.keywords.add(keyword)
 
         except PSC.DoesNotExist as error:
             pass
@@ -216,6 +206,131 @@ class Command(BaseCommand):
                 self.parse_mapping(schedule, 'map_psc_code')
 
 
+    def load_vehicle_tiers(self, data):
+        print('Loading vehicle tiers')
+        for index, record in data.iterrows():
+            tier, created = Tier.objects.get_or_create(number=record['number'])
+            tier.name = format_text(record['name'])
+            tier.save()
+
+    def load_vehicles(self, data):
+        print('Loading vehicles')
+        for index, record in data.iterrows():
+            vehicle, created = Vehicle.objects.get_or_create(id=record['id'])
+            vehicle.name = format_text(record['name'])
+            vehicle.tier_id = format_text(record['tier'])
+            vehicle.poc = format_text(record['poc'])
+            vehicle.ordering_guide = format_text(record['ordering_guide'])
+            vehicle.small_business = format_bool(record['small_business'])
+            vehicle.numeric_pool = format_bool(record['numeric_pool'])
+            vehicle.display_number = format_bool(record['display_number'])
+            vehicle.save()
+
+    def load_pools(self, data):
+        print('Loading pools')
+        for index, record in data.iterrows():
+            pool, created = Pool.objects.get_or_create(id="{}_{}".format(record['vehicle'], record['number']))
+            pool.name = format_text(record['name'])
+            pool.vehicle_id = format_text(record['vehicle'])
+            pool.number = format_text(record['number'])
+            pool.threshold = format_text(record['threshold'])
+            pool.save()        
+
+    def load_pool_naics(self, pool_ids, data):
+        print('Loading pool NAICS')
+        for id in pool_ids:
+            pool = Pool.objects.get(id=id)
+            pool.naics.clear()
+            
+            for index, record in data.iterrows():
+                if format_bool(record[id]):
+                    pool.naics.add(record['NAICS'])
+
+    def load_pool_psc(self, pool_ids, data):
+        print('Loading pool PSC')
+        for id in pool_ids:
+            pool = Pool.objects.get(id=id)
+            pool.psc.clear()
+            
+            for index, record in data.iterrows():
+                if format_bool(record[id]):
+                    pool.psc.add(record['PSC'])
+
+    def load_pool_info(self):
+        index_file = os.path.join(settings.BASE_DIR, 'data/pool_index.xlsx')
+        wb = pd.ExcelFile(index_file)
+
+        self.load_vehicle_tiers(wb.parse('Tiers'))
+        self.load_vehicles(wb.parse('Vehicles'))
+        self.load_pools(wb.parse('Pools'))
+
+        pool_ids = list(Pool.objects.all().values_list('id', flat=True))
+
+        self.load_pool_naics(pool_ids, wb.parse('NAICS'))
+        self.load_pool_psc(pool_ids, wb.parse('PSC'))
+
+
+    def load_keywords(self, data):
+        keywords = {}
+        kw_map = {}
+
+        print('Loading keywords')
+
+        Keyword.objects.all().delete()
+
+        for index, record in data.iterrows():
+            kw, created = Keyword.objects.get_or_create(name=record['Keywords'])
+            cat_id = record['CatID']
+
+            sin = format_text(record['SIN'], None)
+            if sin:
+                sin = format_sin(sin)
+            
+            naics = format_text(record['NAICS'], None)
+            if naics:
+                naics = int(naics)
+            
+            psc = format_text(record['PSC'], None)
+            
+            kw.sin_id = sin
+            kw.naics_id = naics
+            kw.psc_id = psc
+            kw.calc = format_text(record['CALC'], None)
+
+            if cat_id in kw_map:
+                # Parent exists
+                kw.parent_id = kw_map[cat_id]
+            else:
+                # No parent
+                kw.parent_id = None
+                kw_map[cat_id] = kw.id
+            
+            kw.save()
+            keywords[kw.name] = kw
+        
+        return keywords
+
+    def load_pool_keywords(self, data, keywords):
+        print('Loading pool keywords')
+
+        for id in list(Pool.objects.all().values_list('id', flat=True)):
+            pool = Pool.objects.get(id=id)
+            pool.keywords.clear()
+            
+            for index, record in data.iterrows():
+                kw = keywords[record['Keywords']]
+                if id in record and format_bool(record[id]):
+                    pool.keywords.add(kw.id)
+
+    def load_keyword_info(self):
+        keyword_file = os.path.join(settings.BASE_DIR, 'data/keywords.xlsx')
+        wb = pd.ExcelFile(keyword_file)
+        data = wb.parse('MasterKey')
+                
+        keywords = self.load_keywords(data)
+        self.load_pool_keywords(data, keywords)
+
+
     def handle(self, *args, **options):
         # Code definitions
         self.load_naics_codes()
@@ -224,18 +339,17 @@ class Command(BaseCommand):
         # Code mappings
         self.map_psc_codes()
         self.map_naics_codes()
+
+        # Vehicle/pool information
+        self.load_pool_info()
+
+        # Keywords
+        self.load_keyword_info()
         
         # Other imports
         print("Loading vendor setasides")
         call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/setasides.json'))
                 
-        print('> Loading vendor vehicles')
-        call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/tiers.json'))
-        call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/vehicles.json'))
-                
-        print("Loading vendor pools")
-        call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/pools.json'))
-        
         print("Loading zones")
         call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/states.json'))
         call_command('loaddata', "{}/{}".format(settings.BASE_DIR, 'categories/fixtures/zones.json'))

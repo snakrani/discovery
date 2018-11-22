@@ -32,9 +32,7 @@ class PscTest(case.APITestCase, metaclass = case.MetaAPISchema):
             'tags': ('psc_search',),
             '*search1': ('code', 'regex', 'J041'),
             '*search2': ('description', 'iregex', 'Other housekeeping services'),
-            '@search3': ('naics__code', 'exact', '561210'),
-            '@search4': ('naics__description', 'regex', 'Testing Laboratories'),
-            '-search5': ('code', 'regex', '0000000000000')
+            '-search3': ('code', 'regex', '0000000000000')
         },
         'fields': {
             'code': {
@@ -65,71 +63,19 @@ class PscTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': '[/]+',
                 '@iregex': '^air(craft)?'
             },
-            'naics__code': {
-                'tags': ('psc_field', 'naics_field', 'fuzzy_text'),
-                '@exact': '541330',
-                '@iexact': '561710',
-                '@in': ("541711", "238290", "561730"),
-                '@contains': '622',
-                '@icontains': '622',
-                '@startswith': '54',
-                '@istartswith': '2382',
-                '@endswith': '30',
-                '@iendswith': '30',
-                '@regex': '^54\d+0$',
-                '@iregex': '^(23|56)'
-            },
-            'naics__description': {
-                'tags': ('psc_field', 'naics_field', 'fuzzy_text'),
-                '@exact': 'Outdoor Advertising',
-                '@iexact': 'outdoor advertising',
-                '@in': ("Payroll Services", "Commissioning Services", "Testing Laboratories"),
-                '@contains': 'Accounting',
-                '@icontains': 'heating',
-                '@startswith': 'Engineering',
-                '@istartswith': 'r',
-                '@endswith': 'Services',
-                '@iendswith': 'advertIsing',
-                '@regex': 'Services$',
-                '@iregex': 'apprentice(ship)?'
-            },
-            'naics__sin__code': {
-                'tags': ('psc_field', 'naics_field', 'sin_field', 'fuzzy_text'),
-                '@exact': '100-03',
+            'sin__code': {
+                'tags': ('psc_field', 'sin_field', 'fuzzy_text'),
+                '@exact': '520-19',
                 '@iexact': 'c871-202',
                 '@in': ("100-03", "520-14", "541-4G", "51-B36-2A"),
-                '@contains': '4B',
-                '@icontains': '-4b',
+                '@contains': '60E',
+                '@icontains': '-60e',
                 '@startswith': '51',
                 '@istartswith': 'c132',
                 '@endswith': '03',
-                '@iendswith': '2a',
+                '@iendswith': 'lsv',
                 '@regex': '[A-Z]\d+\-\d+$',
                 '@iregex': '^(C87|51)'
-            },
-            'keywords__id': {
-                'tags': ('psc_field', 'keyword_field', 'number'),
-                '@exact': 66,
-                '@lt': 500,
-                '@lte': 500, 
-                '@gt': 250, 
-                '@gte': 250,
-                '@range': (50, 100),
-                '@in': (7, 450, 916)
-            },
-            'keywords__name': {
-                'tags': ('psc_field', 'keyword_field', 'fuzzy_text'),
-                '@exact': 'Utility Trucks, Platform Trucks, Handtrucks And Mail Carts',
-                '@iexact': 'ancillary supplies and / or services',
-                '@in': ("Elemental Analyzers", "Energy Consulting Services", "Environmental Consulting Services"),
-                '@contains': 'Support',
-                '@icontains': 'support',
-                '@startswith': 'Plumbing',
-                '@istartswith': 'edu',
-                '@endswith': 'Services',
-                '@iendswith': 'services',
-                '@regex': '(Training|Consulting)',
-                '@iregex': '^(vocational|strategic)'
             }
         }
     }

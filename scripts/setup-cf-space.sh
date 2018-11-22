@@ -154,15 +154,12 @@ then
   fi
 
   # Create Discovery database
-  echo "Creating Discovery dayabase"
+  echo "Creating Discovery database"
   cf create-service aws-rds "$DB_PLAN" discovery-db
 
   # Create Discovery queues and key stores
   echo "Creating Discovery task queue"
   cf create-service redis32 "$REDIS_PLAN" discovery-tasks
-
-  echo "Creating Discovery authentication session storage"
-  cf create-service redis32 "$REDIS_PLAN" discovery-auth
 fi
 
 if [ -z "$ROLE_ONLY" ]

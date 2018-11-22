@@ -1,0 +1,151 @@
+<div *ngIf="!loading">
+  <div class="text-right pad-top-bottom">
+    <button class="usa-button-secondary" (click)="toggleSBD()">
+      {{ !sbd_col ? 'Show' : 'Hide' }} Small Business Designation
+    </button>
+  </div>
+  <div>
+    <h3 class="alt">
+      <a href="csv/vendors?{{params}}" class="pull-right" target="_blank">
+        Download vendor data(CSV)</a
+      ><strong>{{ items_total }} vendors</strong> meet your criteria.
+    </h3>
+  </div>
+  <table class="usa-table-borderless">
+    <thead>
+      <tr>
+        <th></th>
+        <th scope="col">Company</th>
+        <th scope="col" [hidden]="service_categories_selected.length === 0">
+          Eligible Service Categories
+        </th>
+        <th scope="col" class="sbd">
+          <span class="tooltip left"
+            >Contract Actions<span class="tooltiptext"
+              >Contract count for 5 years of work related to search</span
+            ></span
+          >
+        </th>
+        <th scope="col" [class.hide]="!sbd_col" class="sbd">
+          <span class="tooltip"
+            >SB<span class="tooltiptext">Small Business</span></span
+          >
+        </th>
+        <th scope="col" [class.hide]="!sbd_col" class="sbd">
+          <span class="tooltip"
+            >SDB<span class="tooltiptext"
+              >Small Disadvantaged Business</span
+            ></span
+          >
+        </th>
+        <th scope="col" [class.hide]="!sbd_col" class="sbd">
+          <span class="tooltip">8(A)<span class="tooltiptext">8(A)</span></span>
+        </th>
+        <th scope="col" [class.hide]="!sbd_col" class="sbd">
+          <span class="tooltip"
+            >HubZ<span class="tooltiptext">HUBZone</span></span
+          >
+        </th>
+        <th scope="col" [class.hide]="!sbd_col" class="sbd">
+          <span class="tooltip"
+            >WO<span class="tooltiptext">Woman Owned</span></span
+          >
+        </th>
+        <th scope="col" [class.hide]="!sbd_col" class="sbd">
+          <span class="tooltip"
+            >VO<span class="tooltiptext">Veteran Owned</span></span
+          >
+        </th>
+        <th scope="col" [class.hide]="!sbd_col" class="sbd">
+          <span class="tooltip"
+            >SDVO<span class="tooltiptext"
+              >Service Disabled Veteran Owned</span
+            ></span
+          >
+        </th>
+        <th scope="col" [class.hide]="!sbd_col" class="sbd">
+          <span class="tooltip left"
+            >VA VIP<span class="tooltiptext">Veterans Affair VIP</span></span
+          >
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of vendors.vendors; let i = index">
+        <td><span [innerHTML]="getRowNum(i)"></span>.</td>
+        <td scope="row">
+          <a (click)="showVendorDetails(item.duns)">{{
+            item.name | titlecase
+          }}</a>
+        </td>
+        <td [hidden]="service_categories_selected.length === 0">
+          <span [innerHTML]="poolMeetCriteria(item.pools_ids)"></span>
+        </td>
+        <td>{{ item.contracts }}</td>
+        <td
+          [class.hide]="!sbd_col"
+          class="sbd"
+          [innerHtml]="returnSetAside(item.setasides, 'SB') ? '&bull;' : ''"
+        ></td>
+        <td
+          [class.hide]="!sbd_col"
+          class="sbd"
+          [innerHtml]="returnSetAside(item.setasides, '27') ? '&bull;' : ''"
+        ></td>
+        <td
+          [class.hide]="!sbd_col"
+          class="sbd"
+          [innerHtml]="returnSetAside(item.setasides, 'A6') ? '&bull;' : ''"
+        ></td>
+        <td
+          [class.hide]="!sbd_col"
+          class="sbd"
+          [innerHtml]="returnSetAside(item.setasides, 'XX') ? '&bull;' : ''"
+        ></td>
+        <td
+          [class.hide]="!sbd_col"
+          class="sbd"
+          [innerHtml]="returnSetAside(item.setasides, 'A2') ? '&bull;' : ''"
+        ></td>
+        <td
+          [class.hide]="!sbd_col"
+          class="sbd"
+          [innerHtml]="returnSetAside(item.setasides, 'A5') ? '&bull;' : ''"
+        ></td>
+        <td
+          [class.hide]="!sbd_col"
+          class="sbd"
+          [innerHtml]="returnSetAside(item.setasides, 'QF') ? '&bull;' : ''"
+        ></td>
+        <td
+          [class.hide]="!sbd_col"
+          class="sbd"
+          [innerHtml]="returnSetAside(item.setasides, 'VIP') ? '&bull;' : ''"
+        ></td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="items_total > items_per_page">
+    <p>
+      Page <strong>{{ current_page }}</strong> of
+      <strong>{{ num_total_pages }}</strong>
+    </p>
+    <button
+      class="usa-button-secondary"
+      (click)="prevPage()"
+      title="Go to page {{prev}}"
+      style="margin-right:10px"
+      [disabled]="current_page === 1 || !enable_paging"
+    >
+      Previous
+    </button>
+    <button
+      class="usa-button-secondary"
+      (click)="nextPage()"
+      title="Go to page {{next}}"
+      [disabled]="current_page === num_total_pages"
+    >
+      Next
+    </button>
+  </div>
+</div>

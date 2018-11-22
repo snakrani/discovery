@@ -7,4 +7,3 @@ services:
   - discovery-config
   - discovery-db
   - discovery-tasks
-  - discovery-auth

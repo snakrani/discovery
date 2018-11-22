@@ -79,7 +79,7 @@ class VendorTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 },
                 'sam_activation_date': {
                     'tags': ('vendor_field', 'date_time'),
-                    '@date': '2018-02-09',
+                    '@date': '2018-02-08',
                     '@year': '2018',
                     '@month': '2',
                     '@day': '9',
@@ -89,7 +89,7 @@ class VendorTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 },
                 'sam_expiration_date': {
                     'tags': ('vendor_field', 'date_time'),
-                    '@date': '2019-02-09',
+                    '@date': '2019-02-08',
                     '@year': '2019',
                     '@month': '2',
                     '@day': '9',
@@ -234,159 +234,6 @@ class VendorTest(case.APITestCase, metaclass = case.MetaAPISchema):
                     '@regex': '^\d+\s+',
                     '@iregex': '(500 EMPLOYEE|MILLION)'
                 },
-                'pools__pool__vehicle__id': {
-                    'tags': ('vendor_field', 'membership_field', 'pool_field', 'vehicle_field', 'token_text'),
-                    '@exact': 'BMO_SB',
-                    '@iexact': 'hcaTs_Sb',
-                    '@in': ("BMO", "OASIS", "HCATS_SB")
-                },
-                'pools__pool__vehicle__name': {
-                    'tags': ('vendor_field', 'membership_field', 'pool_field', 'vehicle_field', 'fuzzy_text'),
-                    '@exact': 'HCATS Small Business',
-                    '@iexact': 'hcats small business',
-                    '@in': ("BMO Small Business", "OASIS Unrestricted"),
-                    '@contains': 'OASIS',
-                    '@icontains': 'bmo',
-                    '@startswith': 'HCATS',
-                    '@istartswith': 'hcats',
-                    '@endswith': 'Business',
-                    '@iendswith': 'unrestricted',
-                    '@regex': 'Prof.*$',
-                    '@iregex': 'prof.*$'
-                },
-                'pools__pool__vehicle__tier__number': {
-                    'tags': ('vendor_field', 'membership_field', 'pool_field', 'vehicle_field', 'tier_field', 'number'),
-                    '@exact': 3,
-                    '@lt': 3,
-                    '@lte': 2, 
-                    '@gt': 2, 
-                    '@gte': 2,
-                    '@range': (2, 3),
-                    '@in': (1, 2, 3)
-                },
-                'pools__pool__vehicle__tier__name': {
-                    'tags': ('vendor_field', 'membership_field', 'pool_field', 'vehicle_field', 'tier_field', 'fuzzy_text'),
-                    '@exact': 'Multi-Agency Solutions',
-                    '@iexact': 'multi-agency solutions',
-                    '@in': ("Multi-Agency Solutions", "Best-in-Class (BIC)"),
-                    '@contains': 'Agency',
-                    '@icontains': 'agency',
-                    '@startswith': 'Multi',
-                    '@istartswith': 'multi',
-                    '@endswith': 'Solutions',
-                    '@iendswith': 'solutions',
-                    '@regex': 'Best-in-Class.*$',
-                    '@iregex': '(multi|class)'
-                },
-                'pools__pool__vehicle__poc': {
-                    'tags': ('vendor_field', 'membership_field', 'pool_field', 'vehicle_field', 'fuzzy_text'),
-                    '@exact': 'oasissb@gsa.gov',
-                    '@iexact': 'OASIS@GSA.GOV',
-                    '@in': ("oasissb@gsa.gov", "sbhcats@gsa.gov", "fssi.bmo@gsa.gov"),
-                    '@contains': 'professionalservices',
-                    '@icontains': 'ProfessionalServices',
-                    '@startswith': 'oasis',
-                    '@istartswith': 'OASIS',
-                    '@endswith': 'gsa.gov',
-                    '@iendswith': 'GSA.GOV',
-                    '@regex': '\.gov$',
-                    '@iregex': '(OASIS|HCATS)'
-                },
-                'pools__pool__vehicle__ordering_guide': {
-                    'tags': ('vendor_field', 'membership_field', 'pool_field', 'vehicle_field', 'fuzzy_text'),
-                    '@exact': 'https://www.gsa.gov/cdnstatic/CONSOLIDATED_OASIS_U_SB_Ordering_Guide_8-15-2018.pdf',
-                    '@iexact': 'https://WWW.GSA.GOV/cdnstatic/CONSOLIDATED_OASIS_U_SB_Ordering_Guide_8-15-2018.pdf',
-                    '@in': ("https://www.gsa.gov/cdnstatic/CONSOLIDATED_OASIS_U_SB_Ordering_Guide_8-15-2018.pdf", "https://www.gsa.gov/cdnstatic/General_Supplies__Services/Ordering%20Guide%20V5_0.pdf"),
-                    '@contains': 'OASIS',
-                    '@icontains': 'oasis',
-                    '@startswith': 'https',
-                    '@istartswith': 'HTTPS',
-                    '@endswith': 'pdf',
-                    '@iendswith': 'PDF',
-                    '@regex': '(OASIS|HCaTS)',
-                    '@iregex': '(oasis|hcats)'
-                },
-                'pools__pool__vehicle__small_business': {
-                    'tags': ('vendor_field', 'membership_field', 'pool_field', 'vehicle_field', 'boolean'),
-                    '[1]@exact': True,
-                    '[2]@exact': False,
-                },
-                'pools__pool__vehicle__numeric_pool': {
-                    'tags': ('vendor_field', 'membership_field', 'pool_field', 'vehicle_field', 'boolean'),
-                    '[1]@exact': True,
-                    '[2]@exact': False,
-                },
-                'pools__pool__vehicle__display_number': {
-                    'tags': ('vendor_field', 'membership_field', 'pool_field', 'vehicle_field', 'boolean'),
-                    '[1]@exact': True,
-                    '[2]@exact': False,
-                },
-                'pools__pool__naics__code': {
-                    'tags': ('vendor_field', 'membership_field', 'pool_field', 'naics_field', 'fuzzy_text'),
-                    '@exact': '541330',
-                    '@iexact': '561710',
-                    '@in': ("541711", "238290", "561730"),
-                    '@contains': '622',
-                    '@icontains': '622',
-                    '@startswith': '54',
-                    '@istartswith': '2382',
-                    '@endswith': '30',
-                    '@iendswith': '30',
-                    '@regex': '^54\d+0$',
-                    '@iregex': '^(23|56)'
-                },
-                'pools__pool__naics__description': {
-                    'tags': ('vendor_field', 'membership_field', 'pool_field', 'naics_field', 'fuzzy_text'),
-                    '@exact': 'Outdoor Advertising',
-                    '@iexact': 'meDIA representatives',
-                    '@in': ("Payroll Services", "Commissioning Services", "Testing Laboratories"),
-                    '@contains': 'Accounting',
-                    '@icontains': 'heating',
-                    '@startswith': 'Engineering',
-                    '@istartswith': 'r',
-                    '@endswith': 'Services',
-                    '@iendswith': 'advertIsing',
-                    '@regex': 'Services$',
-                    '@iregex': 'apprentice(ship)?'
-                },
-                'pools__pool__naics__sin__code': {
-                    'tags': ('vendor_field', 'membership_field', 'pool_field', 'naics_field', 'sin_field', 'fuzzy_text'),
-                    '@exact': '100-03',
-                    '@iexact': 'c871-202',
-                    '@in': ("100-03", "520-14", "541-4G", "51-B36-2A"),
-                    '@contains': '4B',
-                    '@icontains': '-4b',
-                    '@startswith': '51',
-                    '@istartswith': 'c132',
-                    '@endswith': '03',
-                    '@iendswith': '2a',
-                    '@regex': '[A-Z]\d+\-\d+$',
-                    '@iregex': '^(C87|51)'
-                },
-                'pools__pool__naics__keywords__id': {
-                    'tags': ('vendor_field', 'membership_field', 'pool_field', 'naics_field', 'keyword_field', 'number'),
-                    '@exact': 66,
-                    '@lt': 250,
-                    '@lte': 250, 
-                    '@gt': 600, 
-                    '@gte': 600,
-                    '@range': (50, 100),
-                    '@in': (7, 450, 916)
-                },
-                'pools__pool__naics__keywords__name': {
-                    'tags': ('vendor_field', 'membership_field', 'pool_field', 'naics_field', 'keyword_field', 'fuzzy_text'),
-                    '@exact': 'Cooking Equipment',
-                    '@iexact': 'ancillary supplies and / or services',
-                    '@in': ("Elemental Analyzers", "Energy Consulting Services", "Environmental Consulting Services"),
-                    '@contains': 'Support',
-                    '@icontains': 'support',
-                    '@startswith': 'Marine',
-                    '@istartswith': 'edu',
-                    '@endswith': 'Services',
-                    '@iendswith': 'services',
-                    '@regex': '(Training|Consulting)',
-                    '@iregex': '^(vocational|strategic)'
-                },
                 'pools__setasides__code': {
                     'tags': ('vendor_field', 'membership_field', 'setaside_field', 'token_text'),
                     '@exact': 'QF',
@@ -433,12 +280,6 @@ class VendorTest(case.APITestCase, metaclass = case.MetaAPISchema):
                     '@range': (2, 5),
                     '@in': (2, 3, 5)
                 },
-                'pools__zones__states__code': {
-                    'tags': ('vendor_field', 'membership_field', 'zone_field', 'token_text'),
-                    '@exact': 'PA',
-                    '@iexact': 'mE',
-                    '@in': ('PA', 'NC', 'TX', 'NY')
-                },
                 'pools__contacts__name': {
                     'tags': ('vendor_field', 'membership_field', 'contact_field', 'fuzzy_text'),
                     '@exact': 'Ken Scott',
@@ -462,34 +303,24 @@ class VendorTest(case.APITestCase, metaclass = case.MetaAPISchema):
                     '@gte': 1,
                     '@range': (1, 2),
                     '@in': (1, 2)
+                }
+            },
+            'requests': {
+                '@membership1': {
+                    'tags': ('vendor_request',),
+                    'params': {'membership': '(pool__vehicle__id=PSS)&(setasides__code=A6)&(setasides__code=XX)'},
+                    'tests': (
+                        ('pools__pool__vehicle__id', 'exact', 'PSS'),
+                        ('pools__setasides__code', 'in', ('A6', 'XX')),
+                    )
                 },
-                'pools__contacts__phones__number': {
-                    'tags': ('vendor_field', 'membership_field', 'contact_field', 'fuzzy_text'),
-                    '@exact': '703-821-0678',
-                    '@iexact': '703-821-0678',
-                    '@in': ("703-821-0678", "571-262-3144", "937-912-6102"),
-                    '@contains': '-882-',
-                    '@icontains': '-882-',
-                    '@startswith': '757',
-                    '@istartswith': '757',
-                    '@endswith': '6551',
-                    '@iendswith': '6551',
-                    '@regex': 'x\s*\d+$',
-                    '@iregex': '(304|703)-\d{3}'
-                },
-                'pools__contacts__emails__address': {
-                    'tags': ('vendor_field', 'membership_field', 'contact_field', 'fuzzy_text'),
-                    '@exact': 'OASIS@act-i.com',
-                    '@iexact': 'oasis@act-i.com',
-                    '@in': ("OASIS@act-i.com", "hcats_sb@deepmile.com", "Finance@exemplarent.com"),
-                    '@contains': 'ibm',
-                    '@icontains': 'IbM',
-                    '@startswith': 'hcats',
-                    '@istartswith': 'HcAtS',
-                    '@endswith': 'com',
-                    '@iendswith': 'cOM',
-                    '@regex': '\d+',
-                    '@iregex': '\.(com|net)$'
+                '-membership2': {
+                    'tags': ('vendor_request',),
+                    'params': {'membership': '(pool__vehicle__id=BMO)&(setasides__code=A6)&(setasides__code=XX)'},
+                    'tests': (
+                        ('pools__pool__vehicle__id', 'exact', 'BMO'),
+                        ('pools__setasides__code', 'in', ('A6', 'XX')),
+                    )
                 }
             }
         }

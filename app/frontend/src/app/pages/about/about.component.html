@@ -1,0 +1,68 @@
+<section class="usa-hero" aria-label="Hero About us">
+  <div class="usa-grid">
+    <div class="usa-hero-callout usa-section-dark">
+      <h1>
+        <span class="usa-hero-callout-alt">About us</span>
+      </h1>
+      <p style="font-size:1.3em">Discovery is a market research tool for GSA Contract Vehicles.</p>
+    </div>
+  </div>
+</section>
+<section class="usa-section" aria-label="How to use Discovery and its features">
+  <div class="usa-grid">
+    <div class="usa-width-two-thirds">
+      <h2>How to use Discovery</h2>
+      <p class="usa-font-lead">Discovery lets you pick and choose different criteria in order to narrow down
+        contracts
+        to find one that suits your needs. Select any of the listed filters to view lists of vendors available based
+        on
+        the selected criteria. The other filters will update as you select certain fields. Select the “All” options
+        to
+        clear them. Once you’ve selected one or more options from the dropdowns, you can then click through to the
+        vendor’s pages to see contract history and registration data for each vendor.</p>
+      <h2>Discovery Features</h2>
+      <p class="usa-font-lead">GSA IDIQ vehicles, with more contracts coming in the future. Use Discovery to search
+        vendor history for the awarded contractors and NAICs of the various IDIQs. Some contracts are separated into
+        Unrestricted and Small Business (SB) based on their contract structure. For all other contracts, you can
+        apply
+        small business filters to narrow your results based on any set aside needs you have.</p>
+    </div>
+    <div class="usa-width-one-third">
+      <div class="bordered">
+        <h2 style="margin-top:0px">Data Sources</h2>
+        <h3>SAM</h3>
+        <p><em>last updated: <strong [innerHTML]="loading?'Loading...':sam_load_date|date:'MM/dd/yyyy'"></strong></em><br></p>
+
+        <p>We pull SAM data directly from the System for Award Management (SAM) to provide
+          supplemental information on
+          all
+          of the vendors on the included contracts, including their SAM registration date, any potential suspensions
+          or
+          debarments,
+          and the NAICS codes that a vendor may contract under. Set aside information is based on contract awarded
+          designations
+          and may not be consistent with the current SAM registration. Contract awarded designations are valid for
+          the
+          term
+          of the contract.</p>
+        <h3>FPDS</h3>
+        <p><em>last updated: <strong [innerHTML]="loading?'Loading...':fpds_load_date|date:'MM/dd/yyyy'"></strong></em>
+          <p>Discovery loads data from the Federal Procurement Data System (FPDS) to automatically
+            provide you with a
+            context-rich
+            contract history for each vendor, including the amount of the contract, the primary NAICS code and the
+            pricing
+            type.</p>
+          <p><strong>What are Service Categories?</strong></p>
+          <ul>
+            <li>Discovery’s IDIQs are divided into functional categories that are referred to as service categories</li>
+            <li>If your contracting need spans multiple categories, choose the one that contains the preponderance of
+              your
+              work.
+              Selecting the most relevant NAICS code above will guide you to the correct service category</li>
+          </ul>
+      </div>
+    </div>
+
+  </div>
+</section>

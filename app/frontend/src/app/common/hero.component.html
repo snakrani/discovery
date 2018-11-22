@@ -1,0 +1,48 @@
+<section id="search_hero" class="usa-hero" aria-label="Hero search area">
+  <div class="usa-grid">
+    <div class="usa-width-one-whole text-center">
+      <h1>
+        <span class="usa-hero-callout-alt">Search by NAICS, PSC, or Keywords to compare contracts</span>
+      </h1>
+      <!-- START Server Error Notification -->
+      <div class="usa-grid" *ngIf="server_error">
+        <div class="usa-width-one-whole">
+          <div class="usa-alert usa-alert-warning" role="alert">
+            <div class="usa-alert-body">
+              <h3 class="usa-alert-heading">This area is currently down for maintenance.</h3>
+              <p class="usa-alert-text">We expect to be back in a couple hours. Thanks for your patience.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END Server Error Notification -->
+      <div id="search-gen" role="search" *ngIf="!server_error">
+        <div class="pull-left">
+          <select [(ngModel)]="option" [disabled]="loading" title="Choose search type">
+            <option value="naic">NAICS</option>
+            <option value="psc">PSC</option>
+            <option value="keyword">Keyword</option>
+          </select>
+        </div>
+        <div class="autocomplete pull-left">
+          <div class="loader-container" [class.input-spinner]="loading" *ngIf="loading">Loading keywords...</div>
+          <select id="keyword" name="keywords" title="Enter keywords" class="autocomplete-drop select2-container--default"
+            tabindex="-1" aria-hidden="true" [disabled]="loading">
+            <option id="keyword-0" value="0">Enter your code or keywords...</option>
+          </select>
+
+        </div>
+        <div class="pull-left">
+          <button type="submit" (click)="searchKeywords()" [disabled]="loading">
+            <span class="usa-search-submit-text">Search</span>
+          </button>
+        </div>
+      </div>
+      <div class="db text-white pad-top" style="max-width:600px;margin:auto">
+        <p><strong>Discovery</strong> is a market research tool that helps you explore GSA services contracts, vendors,
+          and
+          vendor contract history to determine whether a GSA contract can meet your needs.</p>
+      </div>
+    </div>
+  </div>
+</section>

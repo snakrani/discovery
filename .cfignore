@@ -13,7 +13,6 @@ __pycache__
 /tmp/
 
 /app/discovery/local_settings.py
-/app/static/
 /cf/
 /db/
 /docker/
@@ -22,6 +21,7 @@ __pycache__
 /logs/*.csv
 /logs/celerybeat.pid
 /vagrant/
+celerybeat-schedule
 
 /docker-compose-ha.yml
 /docker-compose.yml

@@ -1,0 +1,314 @@
+<div class="well">
+  <div class="usa-grid col-container pad-top-bottom">
+    <div *ngIf="loading"><h3>Loading Vendor Information</h3></div>
+    <div *ngIf="vendor" class="usa-width-one-whole">
+      <div class="pad-all">
+        <a (click)="backToSearchResults()" class="back"
+          ><span class="icon-arrow-left pull-left"></span>Back to search
+          results</a
+        >
+        <h2>{{ vendor.name | titlecase }}</h2>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs margin-top" role="tablist">
+          <li role="presentation" [class.active]="vw_history">
+            <a
+              aria-controls="history"
+              role="tab"
+              data-toggle="tab"
+              (click)="viewHistory()"
+            >
+              <h3 class="alt">Contract History</h3>
+            </a>
+          </li>
+          <li role="presentation" [class.active]="vw_details">
+            <a
+              aria-controls="details"
+              role="tab"
+              data-toggle="tab"
+              (click)="viewDetails()"
+            >
+              <h3 class="alt">Vendor Details</h3>
+            </a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane">
+            <!-- Details content -->
+            <div *ngIf="vw_details">
+              <div class="usa-grid">
+                <div class="usa-width-one-third">
+                  <h6 class="usa-heading-alt">SAM Registration Expires on:</h6>
+                  <blockquote>
+                    <strong>{{ vendor?.sam_expiration_date | date }}</strong>
+                  </blockquote>
+                  <h6 class="usa-heading-alt">DUNS:</h6>
+                  <blockquote>
+                    <strong>{{ vendor?.duns }}</strong>
+                  </blockquote>
+                </div>
+                <div class="usa-width-one-third">
+                  <h6 class="us`a-heading-alt">CAGE Code:</h6>
+                  <blockquote>
+                    <strong>{{ vendor?.cage }}</strong>
+                  </blockquote>
+                </div>
+                <div class="usa-width-one-third">
+                  <div *ngIf="vendor.sam_location.address">
+                    <h6 class="usa-heading-alt">Address:</h6>
+                    <blockquote>
+                      <strong>{{ vendor?.sam_location?.address }}</strong
+                      ><br />
+                      <strong>{{ vendor?.sam_location?.city }}</strong
+                      ><br />
+                      <strong
+                        >{{ vendor?.sam_location?.state }}
+                        {{ vendor?.sam_location?.zipcode }}</strong
+                      >
+                    </blockquote>
+                  </div>
+                </div>
+              </div>
+              <div class="usa-grid" *ngIf="vendor.sam_url">
+                <div class="usa-width-one-whole">
+                  <h6 class="usa-heading-alt">Vendor website:</h6>
+                  <blockquote>
+                    <a href="//{{vendor?.sam_url}}" target="_blank">{{
+                      vendor?.sam_url
+                    }}</a>
+                  </blockquote>
+                </div>
+              </div>
+
+              <div class="usa-grid">
+                <div class="usa-width-one-whole pad-top">
+                  <div class="pull-right text-right pad-top">
+                    <a href="csv/vendors/{{vendor?.duns}}" target="_blank">
+                      Download vendor data(CSV)</a
+                    >
+                  </div>
+                  <button
+                    class="usa-button-secondary"
+                    (click)="toggleMoreInfo()"
+                  >
+                    {{ !more_info ? 'Show' : 'Hide' }} contract details
+                  </button>
+                  <button class="usa-button-secondary" (click)="toggleSBD()">
+                    {{ !sbd_col ? 'Show' : 'Hide' }} Small Business Designation
+                  </button>
+                  <table class="usa-table-borderless">
+                    <thead>
+                      <tr>
+                        <!-- <th></th> -->
+                        <th scope="col">Contract Membership</th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd">
+                          <span class="tooltip"
+                            >SB<span class="tooltiptext"
+                              >Small Business</span
+                            ></span
+                          >
+                        </th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd">
+                          <span class="tooltip"
+                            >SDB<span class="tooltiptext"
+                              >Small Disadvantaged Business</span
+                            ></span
+                          >
+                        </th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd">
+                          <span class="tooltip"
+                            >8(A)<span class="tooltiptext">8(A)</span></span
+                          >
+                        </th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd">
+                          <span class="tooltip"
+                            >HubZ<span class="tooltiptext">HUBZone</span></span
+                          >
+                        </th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd">
+                          <span class="tooltip"
+                            >WO<span class="tooltiptext"
+                              >Woman Owned</span
+                            ></span
+                          >
+                        </th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd">
+                          <span class="tooltip"
+                            >VO<span class="tooltiptext"
+                              >Veteran Owned</span
+                            ></span
+                          >
+                        </th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd">
+                          <span class="tooltip"
+                            >SDVO<span class="tooltiptext"
+                              >Service Disabled Veteran Owned</span
+                            ></span
+                          >
+                        </th>
+                        <th scope="col" [class.hide]="!sbd_col" class="sbd">
+                          <span class="tooltip left"
+                            >VA VIP<span class="tooltiptext"
+                              >Veterans Affair VIP</span
+                            ></span
+                          >
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of vendor.pools; let i = index">
+                        <td scope="row">
+                          <strong
+                            class="db"
+                            [innerHTML]="getVehicleDescription(item.vehicle_id)"
+                          ></strong>
+                          <div class="pad-top">
+                            <span class="uppercase db">Contract Numbers: </span>
+                            <ul class="ul-no-bullets pad-left">
+                              <li *ngFor="let p of item.piids">
+                                <strong>{{ p.piid }}</strong>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="other-info" [class.hide]="!more_info">
+                            <div class="pad-top">
+                              <span class="uppercase db">Contact info: </span>
+                              <div
+                                class="pad-left"
+                                [innerHTML]="getContactInfo(item.contacts)"
+                              ></div>
+                            </div>
+                            <div
+                              class="pad-top"
+                              *ngIf="item?.capability && item.capability !== ''"
+                            >
+                              <span class="uppercase db"
+                                >Capability Statement:
+                              </span>
+                              <div class="pad-left">
+                                <a href="{{item.capability}}" target="_blank"
+                                  >Download</a
+                                >
+                              </div>
+                            </div>
+                            <div class="pad-top">
+                              <span class="uppercase db"
+                                >Service Categories:
+                              </span>
+                              <ul class="ul-no-bullets pad-left">
+                                <li *ngFor="let cat of item.service_categories">
+                                  <strong
+                                    [innerHTML]="
+                                      getServiceCategoryDescription(cat.pool_id)
+                                    "
+                                  ></strong>
+                                </li>
+                              </ul>
+                            </div>
+
+                            <div
+                              class="pad-top"
+                              *ngIf="
+                                item?.zones &&
+                                item.zones.length > 0 &&
+                                (item.vehicle_id === 'BMO' ||
+                                  item.vehicle_id === 'BMO_SB')
+                              "
+                            >
+                              <span class="uppercase db">Zone(s):</span>
+
+                              <ul class="ul-no-bullets pad-left">
+                                <li *ngFor="let zone of item?.zones">
+                                  <strong
+                                    [innerHTML]="getZoneStates(zone.id)"
+                                  ></strong>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </td>
+
+                        <td
+                          [class.hide]="!sbd_col"
+                          class="sbd"
+                          [innerHtml]="
+                            returnSetAside(item.setasides, 'SB') ? '&bull;' : ''
+                          "
+                        ></td>
+                        <td
+                          [class.hide]="!sbd_col"
+                          class="sbd"
+                          [innerHtml]="
+                            returnSetAside(item.setasides, '27') ? '&bull;' : ''
+                          "
+                        ></td>
+                        <td
+                          [class.hide]="!sbd_col"
+                          class="sbd"
+                          [innerHtml]="
+                            returnSetAside(item.setasides, 'A6') ? '&bull;' : ''
+                          "
+                        ></td>
+                        <td
+                          [class.hide]="!sbd_col"
+                          class="sbd"
+                          [innerHtml]="
+                            returnSetAside(item.setasides, 'XX') ? '&bull;' : ''
+                          "
+                        ></td>
+                        <td
+                          [class.hide]="!sbd_col"
+                          class="sbd"
+                          [innerHtml]="
+                            returnSetAside(item.setasides, 'A2') ? '&bull;' : ''
+                          "
+                        ></td>
+                        <td
+                          [class.hide]="!sbd_col"
+                          class="sbd"
+                          [innerHtml]="
+                            returnSetAside(item.setasides, 'A5') ? '&bull;' : ''
+                          "
+                        ></td>
+                        <td
+                          [class.hide]="!sbd_col"
+                          class="sbd"
+                          [innerHtml]="
+                            returnSetAside(item.setasides, 'QF') ? '&bull;' : ''
+                          "
+                        ></td>
+                        <td
+                          [class.hide]="!sbd_col"
+                          class="sbd"
+                          [innerHtml]="
+                            returnSetAside(item.setasides, 'VIP')
+                              ? '&bull;'
+                              : ''
+                          "
+                        ></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <!-- End Details content -->
+            <!-- History content -->
+            <div *ngIf="vw_history">
+              <div class="usa-width-one-whole">
+                <!-- Contract History -->
+                <div>
+                  <discovery-tbl-contract-history
+                    [contract_vehicles]="contract_vehicles"
+                    [pools]="vendor.pools"
+                    [duns]="duns_number"
+                  ></discovery-tbl-contract-history>
+                </div>
+              </div>
+            </div>
+            <!-- End History content -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -10,6 +10,7 @@ __pycache__
 /.settings/
 /.code-workspace
 /.vscode/
+/app/frontend/.vscode/
 /_book/
 /.coverage
 /.vagrant/
@@ -18,7 +19,7 @@ _*/
 .~lock.*
 
 /app/discovery/local_settings.py
-/app/static/
+/app/frontend/node_modules
 /db/*.sql
 /docker/django-env.vars
 /docs/build
@@ -26,3 +27,4 @@ _*/
 /logs/*.csv
 /logs/celerybeat.pid
 /vagrant/config.yml
+celerybeat-schedule

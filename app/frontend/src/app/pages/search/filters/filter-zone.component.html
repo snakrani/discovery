@@ -1,0 +1,24 @@
+<button class="usa-accordion-button" [attr.aria-expanded]="opened" [attr.aria-controls]="id">
+  {{name}}
+</button>
+<div id="{{id}}" class="usa-accordion-content" [attr.aria-hidden]="!opened">
+  <div class="usa-search form-horizontal">
+    <discovery-spinner *ngIf="!items"></discovery-spinner>
+    <div>
+      <select id="select_zone" title="Select Zone" [disabled]="!items" [(ngModel)]="zone" class="items-input">
+        <option value="0" selected="selected">Select Zone --</option>
+        <option *ngFor="let item of items; let i = index" value="{{item.value}}">{{item.description}}</option>
+      </select>
+      <button class="btn-add" type="submit" (click)="addZone()" [disabled]="!items || zone === '0'">
+        <span>Add</span>
+      </button>
+    </div>
+  </div>
+  <ul *ngIf="items_selected" class="items-selected">
+    <li *ngFor="let zone of items_selected">
+      <a (click)="removeItem(zone.value)" title="Remove {{zone.description}}"><span class="usa-sr-only">Remove
+          {{zone.description}}</span></a>{{zone.description}}
+    </li>
+  </ul>
+  <discovery-filter-selected [id]="'msg-zone-selected'" [label]="'Added Zone'"></discovery-filter-selected>
+</div>

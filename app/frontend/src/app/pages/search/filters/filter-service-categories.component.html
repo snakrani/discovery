@@ -1,0 +1,26 @@
+<button class="usa-accordion-button" [attr.aria-expanded]="opened" [attr.aria-controls]="id">
+  {{name}}
+</button>
+<div id="{{id}}" class="usa-accordion-content" [attr.aria-hidden]="!opened">
+  <div class="usa-search form-horizontal">
+    <discovery-spinner *ngIf="!items"></discovery-spinner>
+
+    <div>
+      <select id="select_categories" title="Select Category" [disabled]="!items" [(ngModel)]="category" class="items-input">
+        <option value="0" selected="selected">Select Category --</option>
+        <option *ngFor="let item of items_filtered" value="{{item.id}}">{{item.vehicle + ' - ' +
+          item.name}}</option>
+      </select>
+      <button class="btn-add" type="submit" (click)="addCategory()" [disabled]="!items || category === '0'">
+        <span>Add</span>
+      </button>
+    </div>
+  </div>
+  <ul *ngIf="items_selected" class="items-selected">
+    <li *ngFor="let category of items_selected">
+      <a (click)="removeItem(category.value)" title="Remove {{category.description}}"><span class="usa-sr-only">Remove
+          {{category.description}}</span></a>{{category.description}}
+    </li>
+  </ul>
+  <discovery-filter-selected [id]="'msg-sev-cat-selected'" [label]="'Added service category'"></discovery-filter-selected>
+</div>

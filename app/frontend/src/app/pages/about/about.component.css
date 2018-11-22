@@ -1,0 +1,16 @@
+.usa-hero {
+  padding-top: 2em;
+  padding-bottom: 2em;
+  background-image: url(/frontend/assets/images/hero-about-us.jpg);
+}
+.usa-section-dark p {
+  color: #02bfe7 !important;
+}
+.usa-width-one-half p {
+  color: #fff !important;
+}
+@media screen and (min-width: 481px) {
+  .usa-hero-callout {
+    max-width: 50rem;
+  }
+}

@@ -2,16 +2,26 @@ from django.db.models import Q
 from django.db.models.query import QuerySet
 
 from rest_framework.fields import CharField, IntegerField
+from rest_framework.exceptions import ValidationError
 
 from rest_framework_filters.filterset import FilterSet, FilterSetMetaclass
 from rest_framework_filters.filters import BooleanFilter, NumberFilter, CharFilter, DateFilter, DateTimeFilter, RelatedFilter, BaseInFilter, BaseRangeFilter
 from rest_framework_filters.backends import ComplexFilterBackend
+from rest_framework_filters.complex_ops import combine_complex_queryset, decode_complex_ops
 
 from categories import models as categories
 from vendors import models as vendors
 from contracts import models as contracts
 
 import re
+
+
+def filter_operators():
+    return {
+        '&': QuerySet.intersection,
+        '|': QuerySet.union,
+        '-': QuerySet.difference,
+    }
 
 
 class CharInFilter(BaseInFilter, CharFilter):
@@ -28,11 +38,7 @@ class NumberRangeFilter(BaseRangeFilter, NumberFilter):
 
 
 class DiscoveryComplexFilterBackend(ComplexFilterBackend):
-    operators = {
-        '&': QuerySet.intersection,
-        '|': QuerySet.union,
-        '-': QuerySet.difference,
-    }
+    operators = filter_operators()
 
 
 class MetaFilterSet(FilterSetMetaclass):
@@ -130,8 +136,7 @@ class MetaFilterSet(FilterSetMetaclass):
 
 class NaicsFilter(FilterSet, metaclass = MetaFilterSet):
     
-    _number = ('keywords__id',)
-    _fuzzy_text = ('code', 'description', 'sin__code', 'keywords__name')
+    _fuzzy_text = ('code', 'description', 'sin__code')
     
     class Meta:
         model = categories.Naics
@@ -140,13 +145,23 @@ class NaicsFilter(FilterSet, metaclass = MetaFilterSet):
 
 class PscFilter(FilterSet, metaclass = MetaFilterSet):
     
-    _number = ('keywords__id',)
-    _fuzzy_text = ('code', 'description', 'sin__code', 'keywords__name')
-    
-    naics = RelatedFilter(NaicsFilter)
+    _fuzzy_text = ('code', 'description', 'sin__code')
     
     class Meta:
         model = categories.PSC
+        fields = ()
+
+
+class KeywordFilter(FilterSet, metaclass = MetaFilterSet):
+    
+    _number = ('id', 'parent__id')
+    _fuzzy_text = ('name', 'parent__name', 'calc', 'sin__code')
+
+    naics = RelatedFilter(NaicsFilter)
+    psc = RelatedFilter(PscFilter)
+    
+    class Meta:
+        model = categories.Keyword
         fields = ()
 
 
@@ -169,6 +184,8 @@ class PoolFilter(FilterSet, metaclass = MetaFilterSet):
     
     vehicle = RelatedFilter(VehicleFilter)
     naics = RelatedFilter(NaicsFilter)
+    psc = RelatedFilter(PscFilter)
+    keywords = RelatedFilter(KeywordFilter)
     
     class Meta:
         model = categories.Pool
@@ -220,6 +237,7 @@ class PoolMembershipFilter(FilterSet, metaclass = MetaFilterSet):
     
     _fuzzy_text = ('piid',)
     _date_time = ('expiration_8a_date', 'contract_end_date')
+    _number = ('id',)
     
     pool = RelatedFilter(PoolFilter)
     setasides = RelatedFilter(SetAsideFilter)
@@ -232,7 +250,7 @@ class PoolMembershipFilter(FilterSet, metaclass = MetaFilterSet):
         fields = ()
 
 
-class VendorFilter(FilterSet, metaclass = MetaFilterSet):
+class VendorBaseFilter(FilterSet, metaclass = MetaFilterSet):
     
     _boolean = ('sam_exclusion',)
     _token_text = ('cage', 'sam_status')
@@ -243,37 +261,55 @@ class VendorFilter(FilterSet, metaclass = MetaFilterSet):
     sam_location = RelatedFilter(LocationFilter)
     pools = RelatedFilter(PoolMembershipFilter)
     
-    setasides = CharFilter(field_name='setasides', method='filter_setasides')
-    
     class Meta:
         model = vendors.Vendor
         fields = ()
+      
+
+class VendorFilter(VendorBaseFilter):
+  
+    contract = RelatedFilter("ContractBaseFilter")
+    
+    membership = CharFilter(field_name='membership', method='filter_membership')
+
         
-    def filter_setasides(self, qs, name, value):
-        value_components = value.split(':')
-        setasides = value_components[0].split(',')
-        pool_ids = value_components[1].split(',') if len(value_components) > 1 else []
-
-        if len(pool_ids):
-            ids = list(vendors.PoolMembership.objects.filter(pool__id__in=pool_ids).values_list('id', flat=True))
-        else:
-            ids = []
-
-        for code in setasides:
-            if len(ids):
-                memberships = vendors.PoolMembership.objects.filter(setasides__code=code, id__in=ids)
-            else:
-                memberships = vendors.PoolMembership.objects.filter(setasides__code=code)
-
-            setaside_ids = list(memberships.values_list('id', flat=True))
-            ids = list(set(ids) & set(setaside_ids))
-
-        if len(ids) > 0:
-            qs = qs.filter(pools__id__in=ids)
-        else:
-            qs = qs.filter(pools__id=0)
+    def filter_membership(self, qs, name, value):
+        # Decode complex membership query
+        try:
+            complex_ops = decode_complex_ops(value, filter_operators(), True)
+        except ValidationError as exc:
+            raise ValidationError({'membership': exc.detail})
+        
+        # Collect the individual filtered membership querysets
+        querystrings = [op.querystring for op in complex_ops]
+        ms_queryset = vendors.PoolMembership.objects.all()
+        ms_querysets = []
+        errors = []
+        
+        for qstring in querystrings:
+            query = qstring.split('=')
+            
+            try:
+                ms_querysets.append(ms_queryset.filter(**{query[0]: query[1]}))
+            except ValidationError as exc:
+                errors[qstring] = exc.detail
+    
+        if errors:
+            raise ValidationError(errors)
+        
+        # Retrieve a list of membership ids matching query   
+        ms_queryset = combine_complex_queryset(ms_querysets, complex_ops)
+        ms_ids = list(ms_queryset.values_list('id', flat=True))
+        
+        # Filter vendors by membership
+        if len(querystrings) > 0:
+            qs = qs.filter(pools__id__in=ms_ids)
         
         return qs
+
+        
+class PoolMembershipVendorFilter(PoolMembershipFilter):
+    vendor = RelatedFilter(VendorBaseFilter)
 
 
 class ContractStatusFilter(FilterSet, metaclass = MetaFilterSet):
@@ -300,26 +336,44 @@ class PlaceOfPerformanceFilter(FilterSet, metaclass = MetaFilterSet):
     
     _token_text = ('country_code', 'state')
     _fuzzy_text = ('country_name', 'zipcode')
+    _number = ('id',)
     
     class Meta:
         model = contracts.PlaceOfPerformance
         fields = ()
 
 
-class ContractFilter(FilterSet, metaclass = MetaFilterSet):
+class AgencyFilter(FilterSet, metaclass = MetaFilterSet):
     
-    _token_text = ('agency_id',)
-    _fuzzy_text = ('piid', 'base_piid', 'agency_name', 'NAICS', 'PSC', 'point_of_contact', 'vendor_phone')
-    _number = ('id', 'obligated_amount', 'annual_revenue', 'number_of_employees')
+    _token_text = ('id',)
+    _fuzzy_text = ('name',)
+    
+    class Meta:
+        model = contracts.Agency
+        fields = ()
+
+
+class ContractBaseFilter(FilterSet, metaclass = MetaFilterSet):
+    
+    _fuzzy_text = ('piid', 'base_piid', 'NAICS', 'PSC', 'point_of_contact', 'vendor_phone')
+    _number = ('id', 'obligated_amount')
     _date_time = ('date_signed', 'completion_date')
     
     status = RelatedFilter(ContractStatusFilter)
     pricing_type = RelatedFilter(PricingStructureFilter)
-        
-    vendor = RelatedFilter(VendorFilter)
-    vendor_location = RelatedFilter(LocationFilter)
     
+    agency = RelatedFilter(AgencyFilter)
+    vendor_location = RelatedFilter(LocationFilter)
     place_of_performance = RelatedFilter(PlaceOfPerformanceFilter)
+    
+    class Meta:
+        model = contracts.Contract
+        fields = ()
+
+
+class ContractFilter(ContractBaseFilter, metaclass = MetaFilterSet):
+
+    vendor = RelatedFilter(VendorFilter)
     
     psc_naics = CharFilter(field_name='NAICS', method='filter_psc_naics')
         
@@ -329,6 +383,14 @@ class ContractFilter(FilterSet, metaclass = MetaFilterSet):
         
     def filter_psc_naics(self, qs, name, value):
         naics_code = re.sub(r'[^\d]+$', '', value)
-        psc_codes = list(categories.PSC.objects.filter(naics__code=naics_code).distinct().values_list('code', flat=True))
         
-        return qs.filter(Q(PSC__in=psc_codes) | Q(NAICS=naics_code))
+        try:
+            naics = categories.Naics.objects.get(code=naics_code)
+            sin_codes = list(naics.sin.all().values_list('code', flat=True))
+            psc_codes = list(categories.PSC.objects.filter(sin__code__in=sin_codes).distinct().values_list('code', flat=True))
+            return qs.filter(Q(PSC__in=psc_codes) | Q(NAICS=naics_code))
+        
+        except Exception:
+            pass
+        
+        return qs.filter(NAICS=naics_code)

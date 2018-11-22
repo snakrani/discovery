@@ -10,19 +10,19 @@ cd "$PROJ_DIR"
 
 #install basic dependencies
 echo "> Updating OS package repositories"
-sudo apt-get update >/dev/null
+sudo apt-get update >/dev/null 2>&1
 
-#install basic dependencies
-sudo apt-get install -y redis-tools
+echo "> Installing Redis client"
+sudo apt-get install -y redis-tools >/dev/null 2>&1
   
-if ! which git >/dev/null
-then
-  echo "> Installing Git version control"
-  sudo apt-get install -y git >/dev/null 2>&1
-fi
+echo "> Installing Git version control"
+sudo apt-get install -y git >/dev/null 2>&1
 
 #install Python with virtual environment
 ./scripts/setup-python.sh
+
+#install Angular environment
+./scripts/setup-angular.sh
 
 #install PostgreSQL client
 ./scripts/setup-postgresql.sh
@@ -36,8 +36,8 @@ fi
 #install Docker and Docker Compose
 ./scripts/setup-docker.sh
 
-#run Docker applications
-echo "> Running all Docker services"
+#build Docker applications
+echo "> Building all Docker services"
 
 # Remove any previously running containers and start fresh
 docker-compose rm --stop --force web scheduler worker

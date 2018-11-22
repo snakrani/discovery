@@ -1,0 +1,168 @@
+<div id="discovery">
+  <section class="usa-banner" aria-label="Official government website">
+    <a class="usa-skipnav" href="#main-content">Skip to main content</a>
+
+    <div class="usa-accordion">
+      <header class="usa-banner-header">
+        <div class="usa-grid usa-banner-inner">
+          <img src="{{APP_ASSETS}}assets/uswds/img/favicons/favicon-57.png" alt="U.S. flag">
+          <p>An official website of the United States government</p>
+          <button class="usa-accordion-button usa-banner-button" aria-expanded="false" aria-controls="gov-banner">
+            <span class="usa-banner-button-text">Here's how you know</span>
+          </button>
+        </div>
+      </header>
+      <div class="usa-banner-content usa-grid usa-accordion-content" id="gov-banner">
+        <div class="usa-banner-guidance-gov usa-width-one-half">
+          <img class="usa-banner-icon usa-media_block-img" src="{{APP_ASSETS}}assets/uswds/img/icon-dot-gov.svg" alt="Dot gov">
+          <div class="usa-media_block-body">
+            <p>
+              <strong>The .gov means it’s official.</strong>
+              <br> Federal government websites often end in .gov or .mil. Before sharing sensitive information, make
+              sure
+              you’re
+              on a federal government site.
+            </p>
+          </div>
+        </div>
+        <div class="usa-banner-guidance-ssl usa-width-one-half">
+          <img class="usa-banner-icon usa-media_block-img" src="{{APP_ASSETS}}assets/uswds/img/icon-https.svg" alt="Https">
+          <div class="usa-media_block-body">
+            <p>
+              <strong>The site is secure.</strong>
+              <br> The
+              <strong>https://</strong> ensures that you are connecting to the official website and that any
+              information
+              you
+              provide is encrypted and transmitted securely.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <header class="usa-header usa-header-basic usa-header-basic-megamenu" role="banner">
+    <div class="usa-nav-container">
+      <div class="usa-navbar">
+        <div class="discovery-logo">
+          <a href="/" title="Home" aria-label="Home">
+            <img src="{{APP_ASSETS}}assets/images/discovery-icon.png" width="95" height="95" alt="Discovery icon" />
+            <strong>Discovery</strong>
+            <em>Market Research Tool</em>
+          </a>
+        </div>
+        <button class="usa-menu-btn">Menu</button>
+      </div>
+      <nav class="usa-nav">
+        <div class="usa-nav-inner">
+          <button class="usa-nav-close">
+            <img src="{{APP_ASSETS}}assets/uswds/img/close.svg" alt="close">
+          </button>
+          <ul class="usa-nav-primary">
+            <li>
+              <button class="usa-nav-link" [routerLink]="['/']" routerLinkActive="usa-current"
+                [routerLinkActiveOptions]="{exact:true}">
+                <span>Home</span>
+              </button>
+            </li>
+            <li>
+              <button class="usa-nav-link" [routerLink]="['/search']" queryParamsHandling="preserve" routerLinkActive="usa-current">
+                <span>Advanced Search</span>
+              </button>
+            </li>
+            <li>
+              <button class="usa-nav-link" [routerLink]="['/about']" routerLinkActive="usa-current">
+                <span>About</span>
+              </button>
+            </li>
+            <li>
+              <button class="usa-nav-link" [routerLink]="['/contracts']" routerLinkActive="usa-current">
+                <span>Contracts</span>
+              </button>
+            </li>
+            <!-- <li>
+              <button class="usa-nav-link" [routerLink]="['/help']" routerLinkActive="usa-current">
+                <span>Help</span>
+              </button>
+            </li> -->
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <div class="usa-overlay"></div>
+
+  <main id="main-content">
+    <!-- {% verbatim %} -->
+    <router-outlet></router-outlet>
+    <!-- {% endverbatim %} -->
+  </main>
+
+  <footer class="usa-section usa-section-dark usa-graphic_list">
+    <div class="usa-grid">
+      <div class="usa-width-one-fourth">
+        <h3>Need Help?</h3>
+        <p>
+          For further assistance or to request information regarding GSA products and services go to <a href="https://ask.gsa.gov/eresolveLogin"
+            target="_blank">AskGSA</a>
+          <br>
+          Available: Sun 9:00pm EST to Friday 9:30pm EST
+
+        </p>
+      </div>
+      <div class="usa-width-one-fourth">
+        <h3>Discovery</h3>
+        <ul>
+          <li>
+            <a [routerLink]="['/about']">About</a>
+          </li>
+          <li>
+            <a [routerLink]="['/search']">Advanced Search</a>
+          </li>
+          <li>
+            <a [routerLink]="['/contracts']">Contracts</a>
+          </li>
+          <li>
+            <a href="mailto:pshc-dev@gsa.gov">Contact</a>
+          </li>
+
+        </ul>
+      </div>
+      <div class="usa-width-one-fourth">
+        <h3>Other GSA Tools</h3>
+        <ul>
+          <li>
+            <a href="https://CALC.gsa.gov" target="_blank">CALC</a>
+          </li>
+          <li>
+            <a href="https://hallways.cap.gsa.gov" target="_blank">Acquisition Gateway </a>
+          </li>
+          <li>
+            <a href="https://navigator.gsa.gov" target="_blank">IT Solutions Navigator</a>
+          </li>
+          <li>
+            <a href="https://gsaelibrary.gsa.gov" target="_blank">eLibrary</a>
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="usa-width-one-fourth">
+        <h3>Your Opinion Matters!</h3>
+        <p>Tell us what you think by submitting
+          <a href="mailto:pshc-dev@gsa.gov" aria-label="Send us your feedback">feedback</a>.</p>
+      </div>
+
+    </div>
+    <div class="usa-grid">
+      <div id="gsa" class="usa-width-one-whole">
+        <hr>
+        <div>
+          <img src="{{APP_ASSETS}}assets/images/gsa-logo.jpg" width="60" height="60px" alt="GSA">
+          <h2>U.S. General Services Administration</h2>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- END Footer -->
+</div>

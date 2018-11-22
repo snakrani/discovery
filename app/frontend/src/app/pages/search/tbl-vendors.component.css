@@ -1,0 +1,9 @@
+.usa-table-borderless thead th:first-child,
+.usa-table-borderless tbody td:first-child {
+  width: 50px;
+  max-width: auto !important;
+}
+h3.alt a {
+  font-size: 0.7em !important;
+  padding-top: 8px;
+}

@@ -14,10 +14,13 @@ VOLUME /discovery
 WORKDIR /discovery
 
 #
-# Application requirements
+# Application base dependencies
 #
 RUN apt-get update -y && apt-get install -y git gcc g++
 
+#
+# Python environment
+#
 COPY ./requirements.txt /tmp/requirements.txt
 COPY ./requirements-dev.txt /tmp/requirements-dev.txt
 

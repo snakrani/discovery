@@ -1,0 +1,23 @@
+<div class="tooltip">
+  <button [disabled]="disable" class="usa-accordion-button" [attr.aria-expanded]="opened" [attr.aria-controls]="id">
+    <!-- <span class="info-tip db tooltip-right pull-right" data-tooltip="Select agency to see only vendors that have
+    performed work for the selected agency(s). (FPDS
+    Reported)"></span> -->
+    {{name}}
+  </button>
+  <span class="tooltiptext">Thanks for your interest! We haven't implemented this filter yet, but your clicks let us
+    know if it would be worth including. Check back later to explore new features!</span>
+</div>
+<div id="{{id}}" class="usa-accordion-content" [attr.aria-hidden]="!opened">
+  <div class="usa-search tooltip-top">
+    <discovery-autocomplete (emitCode)="addKeywords($event)" [placeholder]="name" [id]="id" [keywords_results]="keywords_results"></discovery-autocomplete>
+  </div>
+
+  <ul *ngIf="items_selected" class="items-selected">
+    <li *ngFor="let agency of items_selected">
+      <a (click)="removeItem(agency.value)" title="Remove {{agency.value}}"><span class="usa-sr-only">Remove
+          {{agency.value}}</span></a>{{agency.description | titlecase}}
+    </li>
+  </ul>
+  <discovery-filter-selected [id]="'msg-agency-selected'" [label]="'Added agency'"></discovery-filter-selected>
+</div>

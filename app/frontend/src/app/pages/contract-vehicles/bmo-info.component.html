@@ -1,0 +1,55 @@
+<section class="usa-hero">
+  <div class="usa-grid text-center">
+    <h1>BMO</h1>
+    <h3>Building Maintenance and Operations</h3>
+  </div>
+</section>
+
+<section class="usa-section">
+  <div class="usa-grid">
+    <div class="usa-width-one-sixth best-in-class"></div>
+    <div class="usa-width-one-half">
+      <p class="usa-font-lead">Building Maintenance and Operations (BMO) strategic sourcing solution is a
+        comprehensive
+        and flexible solution covering all high-demand BMO services. It is an open market, multiple-award, indefinite
+        delivery, indefinite quantity (MA-IDIQ), government-wide contract vehicle supporting the strategic sourcing
+        initiative to reduce costs and drive efficient purchasing by federal agencies.
+      </p>
+      <ul class="usa-font-lead">
+        <li><strong>Best-in-Class</strong></li>
+        <li>Provides a broad and comprehensive range of BMO services for use throughout</li>
+        <li>Provides a regionally focused pool of highly qualified large and small contractors</li>
+        <li>Allows flexibility for contract types, including fixed price, labor hour, time and materials, and hybrids</li>
+        <li>Leverages spend in acquiring services in an effective, economical, and expedient manner resulting in both
+          significant cost and time savings</li>
+        <li>Following FAR Subpart 16.505 Ordering Procedures, all BMO vendors that can meet the exact specifications
+          of
+          your requirement should be notified (given Fair Opportunity to compete)</li>
+      </ul>
+      <h3><a href="https://discovery-dev.app.cloud.gov/static/discovery_site/files/BMO_Phase_II_Service_Category_Descriptions.pdf"
+          target="_blank">BMO Phase Service Category Descriptions
+        </a></h3>
+      <h3>BMO Service Categories</h3>
+      <div *ngIf="pools.length===0">Loading...</div>
+      <ul *ngIf="pools.length>0" class="usa-font-lead">
+        <li *ngFor="let pool of pools"><a [routerLink]="['/search']" [queryParams]="{vehicles: 'BMO', service_categories: pool.id}">
+            {{pool.number}} - {{pool.name}}</a></li>
+      </ul>
+    </div>
+    <div class="usa-width-one-fourth">
+      <h3>BMO Links:</h3>
+      <ul>
+        <li><a href="https://www.gsa.gov/acquisition/purchasing-programs/federal-strategic-sourcing-initiative/building-maintenance-and-operations"
+            target="_blank">BMO Home Page</a></li>
+        <li><a href="https://www.gsa.gov/cdnstatic/General_Supplies__Services/Ordering Guide V5_0.pdf" target="_blank">BMO
+            Ordering Guide</a></li>
+        <li><a href="https://www.gsa.gov/acquisition/purchasing-programs/federal-strategic-sourcing-initiative/building-maintenance-operations/bmo-training"
+            target="_blank">BMO Training</a></li>
+        <li><a href="https://www.gsa.gov/acquisition/purchasing-programs/federal-strategic-sourcing-initiative/building-maintenance-operations/fssi-bmo-faq"
+            target="_blank">BMO Contract(s)</a></li>
+        <li><a href="mailto:fssi.bmo@gsa.gov" target="_blank">Contact BMO</a></li>
+      </ul>
+    </div>
+
+  </div>
+</section>

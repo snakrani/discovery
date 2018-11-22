@@ -1,0 +1,17 @@
+<button class="usa-accordion-button" [attr.aria-expanded]="opened" [attr.aria-controls]="id">
+  {{name}}
+</button>
+<div id="{{id}}" class="usa-accordion-content" [attr.aria-hidden]="!opened">
+  <fieldset class="usa-fieldset-inputs usa-sans">
+    <discovery-spinner *ngIf="!items"></discovery-spinner>
+
+    <ul class="usa-unstyled-list">
+      <li *ngFor="let item of items">
+        <input id="{{id}}-{{item.id}}" (change)="onChange(item.id, item.name, $event.target.checked)" name="{{id}}-{{item.id}}"
+          type="checkbox" value="{{item.id}}" [checked]="item.checked">
+        <label for="{{id}}-{{item.id}}">{{item.name}}</label>
+      </li>
+    </ul>
+  </fieldset>
+  <discovery-filter-selected [id]="'msg-vehicles-selected'" [label]="'Filter selected'"></discovery-filter-selected>
+</div>

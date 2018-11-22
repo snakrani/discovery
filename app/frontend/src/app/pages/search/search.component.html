@@ -1,0 +1,500 @@
+<div class="mask">
+  <h1 id="h1-advanced">Advanced Search</h1>
+  <div id="slides-container">
+    <div id="slide-search" class="slide animated">
+      <div>
+        <div id="overlay-filter-mobile"></div>
+        <!-- START Spinner -->
+        <discovery-search-spinner [show]="spinner"></discovery-search-spinner>
+        <!-- End Spinner -->
+        <!-- START Server Error Notification -->
+        <div class="usa-grid" *ngIf="server_error">
+          <div class="usa-width-one-whole">
+            <div class="usa-alert usa-alert-warning" role="alert">
+              <div class="usa-alert-body">
+                <h3 class="usa-alert-heading">
+                  This area is currently down for maintenance.
+                </h3>
+                <p class="usa-alert-text">
+                  We expect to be back in a couple hours. Thanks for your
+                  patience.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- END Server Error Notification -->
+        <div
+          class="usa-grid col-container pad-top-bottom"
+          *ngIf="!server_error"
+        >
+          <div>
+            <!-- ///////////////// -->
+            <!-- FITLERS -->
+            <!-- ///////////////// -->
+            <discovery-filters
+              [parentSpinner]="spinner"
+              (emitServerError)="showServerError($event)"
+              (emitHideFilters)="hideSideNavFilters()"
+              (emmitFilters)="submitSelectedFilters($event)"
+              (emitReset)="reset($event)"
+            >
+            </discovery-filters>
+            <!-- ///////////////// -->
+            <!-- TABS AREA -->
+            <!-- ///////////////// -->
+            <div class="usa-width-three-fourths relative">
+              <button
+                id="btn-show-filters"
+                class="usa-button-secondary"
+                (click)="showSideNavFilters()"
+              >
+                <span class="icon-filter"></span>Show filters
+              </button>
+              <discovery-choose-filters
+                *ngIf="!show_results && !spinner"
+              ></discovery-choose-filters>
+
+              <div *ngIf="show_results">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                  <li role="presentation" [class.active]="vw_contracts">
+                    <a
+                      aria-controls="contracts"
+                      data-toggle="tab"
+                      (click)="viewContracts()"
+                    >
+                      <h3 class="alt">Contracts</h3>
+                    </a>
+                  </li>
+                  <li role="presentation" [class.active]="vw_vendors">
+                    <a
+                      aria-controls="vendors"
+                      data-toggle="tab"
+                      (click)="viewVendors()"
+                    >
+                      <h3 class="alt">Vendors</h3>
+                    </a>
+                  </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                  <div role="tabpanel" class="tab-pane bordered">
+                    <discovery-active-filters></discovery-active-filters>
+
+                    <!-- Contracts results -->
+                    <div *ngIf="vw_contracts">
+                      <div
+                        class="usa-alert usa-alert-info"
+                        *ngIf="
+                          vendors_no_results || total_vendors_met_criteria === 0
+                        "
+                      >
+                        <div class="usa-alert-body">
+                          <h3 class="usa-alert-heading">
+                            No results based on your criteria
+                          </h3>
+                          <p class="usa-alert-text">
+                            Please change your criteria and re-submit.
+                          </p>
+                        </div>
+                      </div>
+                      <h3 *ngIf="!vendors_no_results" class="alt">
+                        Comparing
+                        <strong>{{ compare_tbl.length }}</strong> Contract
+                        Vehicles with a total of
+                        <strong
+                          >{{ total_vendors_met_criteria }} vendors</strong
+                        >
+                      </h3>
+                      <div
+                        class="text-right pad-top-bottom hide animated scroll-tip"
+                      >
+                        <strong>Scroll right</strong> to see more
+                        <span class="icon-arrow-right pull-right"></span>
+                      </div>
+                      <div id="overflow-compare" *ngIf="!vendors_no_results">
+                        <!-- Start Scroll Window -->
+                        <div
+                          id="compare-scroll"
+                          class="scroll-view-topscroll scrollbar"
+                        >
+                          <div class="scroll-div1"></div>
+                        </div>
+                        <div class="scroll-view scrollbar">
+                          <div class="scroll-div2">
+                            <div
+                              class="usa-alert usa-alert-info"
+                              *ngIf="
+                                contracts_w_no_records.length > 0 &&
+                                total_vendors_met_criteria !== 0
+                              "
+                            >
+                              <div class="usa-alert-body">
+                                <h3 class="usa-alert-heading">
+                                  There are no vendor results for:
+                                </h3>
+                                <strong
+                                  class="db"
+                                  [innerHTML]="
+                                    commaSeparatedList(
+                                      contracts_w_no_records,
+                                      'name'
+                                    )
+                                  "
+                                ></strong>
+                                <p class="usa-alert-text">
+                                  Please change your criteria and re-submit.
+                                </p>
+                              </div>
+                            </div>
+                            <div
+                              *ngIf="compare_tbl.length > 0"
+                              [hidden]="total_vendors_met_criteria === 0"
+                              class="pad-top"
+                            >
+                              <div id="tbl-compare-container">
+                                <div id="col-white"></div>
+                                <table
+                                  id="tbl-compare"
+                                  class="usa-table-borderless margin-bottom"
+                                  *ngIf="compare_tbl.length > 0"
+                                >
+                                  <thead>
+                                    <tr>
+                                      <th scope="col">&nbsp;</th>
+                                      <th
+                                        scope="col"
+                                        class="th-vehicle"
+                                        *ngFor="let vehicle of compare_tbl"
+                                        [hidden]="
+                                          vehicle.vendors_results_total === 0
+                                        "
+                                      >
+                                        {{ vehicle.description }}
+                                      </th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <th scope="row">
+                                        Total Vendors in Vehicle
+                                      </th>
+                                      <td
+                                        *ngFor="let vehicle of compare_tbl"
+                                        [hidden]="
+                                          vehicle.vendors_results_total === 0
+                                        "
+                                      >
+                                        {{ vehicle.vendors_total }}
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">
+                                        Vendors that meet your criteria
+                                      </th>
+                                      <td
+                                        *ngFor="let vehicle of compare_tbl"
+                                        [hidden]="
+                                          vehicle.vendors_results_total === 0
+                                        "
+                                      >
+                                        <span
+                                          *ngIf="
+                                            vehicle.vendors_results_total === 0
+                                          "
+                                          >{{
+                                            vehicle.vendors_results_total
+                                          }}</span
+                                        ><button
+                                          *ngIf="
+                                            vehicle.vendors_results_total != 0
+                                          "
+                                          (click)="
+                                            viewVehicleVendors(vehicle.id)
+                                          "
+                                          class="tooltip-bottom"
+                                          data-tooltip="Select to see vendors"
+                                        >
+                                          {{ vehicle.vendors_results_total }}
+                                        </button>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">
+                                        Eligible Service Categories
+                                        <div
+                                          class="lnk-more tooltip-right"
+                                          data-tooltip="See all Service Categories / Pools /
+                                          SINs associated with this vehicle"
+                                        >
+                                          <discovery-lnk-toggle-heights
+                                            [toggle_id]="'row-serv-cat'"
+                                            (emitToggleId)="
+                                              toggleTDHeights($event)
+                                            "
+                                          ></discovery-lnk-toggle-heights>
+                                        </div>
+                                      </th>
+                                      <td
+                                        *ngFor="let vehicle of compare_tbl"
+                                        [hidden]="
+                                          vehicle.vendors_results_total === 0
+                                        "
+                                      >
+                                        <div
+                                          class="row-serv-cat toggle_more"
+                                          [class.show_all]="more_info"
+                                        >
+                                          <discovery-list
+                                            [hide_others]="true"
+                                            [selected]="
+                                              service_categories_selected
+                                            "
+                                            [show_all]="true"
+                                            [id]="vehicle.id"
+                                            [items_to_show]="num_show"
+                                            [items]="vehicle.service_categories"
+                                            [key]="'name'"
+                                          ></discovery-list>
+                                          <div class="gradient"></div>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">
+                                        NAICs in Vehicle
+                                        <div
+                                          class="lnk-more tooltip-right"
+                                          data-tooltip="See all NAICS considered in scope
+                                          of each vehicle. Highlighted numbers reflect your filters."
+                                        >
+                                          <discovery-lnk-toggle-heights
+                                            [toggle_id]="'row-naics'"
+                                            (emitToggleId)="
+                                              toggleTDHeights($event)
+                                            "
+                                          ></discovery-lnk-toggle-heights>
+                                        </div>
+                                      </th>
+                                      <td
+                                        *ngFor="let vehicle of compare_tbl"
+                                        [hidden]="
+                                          vehicle.vendors_results_total === 0
+                                        "
+                                      >
+                                        <div
+                                          class="row-naics toggle_more"
+                                          [class.show_all]="more_info"
+                                        >
+                                          <discovery-list
+                                            [selected]="naics_selected"
+                                            [columns]="'2'"
+                                            [show_all]="true"
+                                            [id]="vehicle.id"
+                                            [items_to_show]="num_show"
+                                            [items]="vehicle.naics"
+                                            [key]="'id'"
+                                          ></discovery-list>
+                                          <div class="gradient"></div>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">
+                                        PSCs in Vehicle
+                                        <div
+                                          class="lnk-more tooltip-right"
+                                          data-tooltip="See all PSCs considered in scope of
+                                          each vehicle."
+                                        >
+                                          <discovery-lnk-toggle-heights
+                                            [toggle_id]="'row-pscs'"
+                                            (emitToggleId)="
+                                              toggleTDHeights($event)
+                                            "
+                                          ></discovery-lnk-toggle-heights>
+                                        </div>
+                                      </th>
+                                      <td
+                                        *ngFor="let vehicle of compare_tbl"
+                                        [hidden]="
+                                          vehicle.vendors_results_total === 0
+                                        "
+                                      >
+                                        <div
+                                          class="row-pscs toggle_more"
+                                          [class.show_all]="more_info"
+                                        >
+                                          <discovery-list
+                                            [selected]="pscs_selected"
+                                            [columns]="'2'"
+                                            [show_all]="true"
+                                            [id]="vehicle.id"
+                                            [items_to_show]="num_show"
+                                            [items]="vehicle.pscs"
+                                            [key]="'id'"
+                                          ></discovery-list>
+                                          <div class="gradient"></div>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">
+                                        Spend Under Management Tier
+                                        <a
+                                          href="https://www.gsa.gov/cdnstatic/BIC_%26_SUM_One-pager_252018.pdf"
+                                          target="_blank"
+                                          class="info-tip db"
+                                        >
+                                          <div class="tooltip db">
+                                            &nbsp;
+                                            <span class="tooltiptext"
+                                              >Spend Under Management supports
+                                              OMB goals for agencies. Click to
+                                              learn more.</span
+                                            >
+                                          </div></a
+                                        >
+                                      </th>
+                                      <td
+                                        *ngFor="let vehicle of compare_tbl"
+                                        [hidden]="
+                                          vehicle.vendors_results_total === 0
+                                        "
+                                      >
+                                        <p class="min-h">{{ vehicle.tier }}</p>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Contract Details</th>
+                                      <td
+                                        *ngFor="let vehicle of compare_tbl"
+                                        [hidden]="
+                                          vehicle.vendors_results_total === 0
+                                        "
+                                      >
+                                        <a
+                                          href="mailto:{{vehicle.gsa}}"
+                                          *ngIf="vehicle.gsa !== ''"
+                                          class="min-h"
+                                          >Contract Point of Contact</a
+                                        >
+                                        <a
+                                          href="{{vehicle.ordering_guide}}"
+                                          title="Ordering guide for "
+                                          *ngIf="vehicle.ordering_guide !== ''"
+                                          target="_blank"
+                                          class="min-h db"
+                                          >Ordering Guide</a
+                                        >
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- End Scroll Window -->
+                      </div>
+                      <div
+                        class="text-right pad-top-bottom hide animated scroll-tip"
+                      >
+                        <strong>Scroll right</strong> to see more
+                        <span class="icon-arrow-right pull-right"></span>
+                      </div>
+                    </div>
+                    <!-- Vendors results -->
+                    <div *ngIf="vw_vendors">
+                      <div
+                        class="usa-alert usa-alert-info"
+                        *ngIf="vendors_no_results"
+                      >
+                        <div class="usa-alert-body">
+                          <h3 class="usa-alert-heading">
+                            No results based on your criteria
+                          </h3>
+                          <p class="usa-alert-text">
+                            Please change your criteria and re-submit.
+                          </p>
+                        </div>
+                      </div>
+                      <div *ngIf="!vendors_no_results">
+                        <div class="usa-grid-full">
+                          <div class="usa-width-one-whole" [hidden]="spinner">
+                            <fieldset
+                              class="usa-fieldset-inputs usa-sans inputs-inline"
+                              *ngIf="total_vendors_met_criteria > 0"
+                            >
+                              <legend>
+                                Showing all vendors based on your criteria for
+                                the following eligible contract:
+                              </legend>
+                              <ul class="usa-unstyled-list">
+                                <li
+                                  *ngFor="
+                                    let vehicle of compare_tbl;
+                                    let i = index
+                                  "
+                                  [hidden]="vehicle.vendors_results_total === 0"
+                                >
+                                  <input
+                                    id="r-{{vehicle.id}}"
+                                    type="radio"
+                                    [checked]="i === 0"
+                                    [(ngModel)]="sort_by"
+                                    name="sort_by"
+                                    value="{{vehicle.id}}"
+                                  />
+                                  <label for="r-{{vehicle.id}}">{{
+                                    vehicle.description
+                                  }}</label>
+                                </li>
+                              </ul>
+                            </fieldset>
+                          </div>
+                        </div>
+
+                        <div class="overflow">
+                          <discovery-tbl-vendors
+                            [params]="params"
+                            [service_categories_selected]="
+                              service_categories_selected
+                            "
+                            [total_vendors]="vehicle_vendors_total"
+                            [obligated_amounts_list]="obligated_amounts_list"
+                            [vehicle]="sort_by"
+                            (emitNoResults)="noResults($event)"
+                            (emitActivateSpinner)="showSpinner($event)"
+                            (emitDuns)="showVendorDetail($event)"
+                          ></discovery-tbl-vendors>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="slide-vendor" class="slide animated">
+      <div class="usa-grid">
+        <div class="usa-width-one-whole">
+          <discovery-vendor-detail
+            [duns]="selected_duns"
+            [contract_vehicles]="contract_vehicles"
+            [service_categories]="service_categories"
+            [zones]="zones"
+            (emitHideSpinner)="showSpinner($event)"
+            (emitBack)="hideVendorDetail($event)"
+          ></discovery-vendor-detail>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>

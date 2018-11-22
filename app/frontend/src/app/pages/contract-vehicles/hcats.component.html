@@ -1,0 +1,54 @@
+<section class="usa-hero">
+  <div class="usa-grid text-center">
+    <h1>HcaTS</h1>
+    <h3>Human Capital and Training Solutions</h3>
+  </div>
+</section>
+
+<section class="usa-section">
+  <div class="usa-grid">
+    <div class="usa-width-one-sixth best-in-class"></div>
+    <div class="usa-width-one-half">
+      <p class="usa-font-lead">The HCaTS Program is the result of partnership between Office of Personnel Management
+        (OPM) and General Services Administration (GSA). HCaTS is comprised of two indefinite-delivery
+        indefinite-quantity (IDIQ) governmentwide contract vehicles: HCaTS and HCaTS SB. These vehicles provide
+        reliable, flexible, fast and efficient ways to obtain the best value customized solutions for human capital
+        management and training requirements.
+
+      </p>
+      <ul class="usa-font-lead">
+        <li><strong>Best-in-Class</strong></li>
+        <li>Provides customized Training and Development, Human Capital Strategy, and Organizational Performance
+          Improvement Services</li>
+        <li>Highest Technically Rated with Fair and Reasonable (HTR-FRP) Contractors that have been pre-screened by
+          HC
+          specialists</li>
+        <li>Leveraged Category and Performance Management Strength</li>
+        <li>Allows ancillary services & other direct costs at the task order level
+        </li>
+      </ul>
+      <h3>HCaTS and HCaTS SB Pool Disciplines</h3>
+      <div *ngIf="pools.length===0">Loading...</div>
+      <ul *ngIf="pools.length>0" class="usa-font-lead">
+        <li *ngFor="let pool of pools"><a [routerLink]="['/search']" [queryParams]="{vehicles: 'HCATS', service_categories: pool.id}">
+            {{pool.number}} - {{pool.name}}</a></li>
+      </ul>
+    </div>
+    <div class="usa-width-one-fourth">
+      <h3>OASIS Links:</h3>
+      <ul>
+        <li><a href="https://www.gsa.gov/acquisition/products-services/human-capital/human-capital-and-training-solutions"
+            target="_blank">HCaTS Home Page</a></li>
+        <li><a href="https://www.gsa.gov/cdnstatic/HCaTS Ordering Guide - Rev 15  Aug 2018.pdf" target="_blank">HCaTS
+            Ordering Guide</a></li>
+        <li><a href="https://www.gsa.gov/acquisition/products-services/human-capital/hcats-and-hcats-small-business/hcats-training"
+            target="_blank">HCaTS Training</a></li>
+        <li><a href="https://www.gsa.gov/acquisition/products-services/human-capital/hcats-and-hcats-small-business/hcats-resource-directory"
+            target="_blank">HCaTS Contract(s)</a></li>
+        <li><a href="mailto:hcats@gsa.gov" target="_blank">Contact HCaTS</a></li>
+        <li><a href="mailto:sbhcats@gsa.gov" target="_blank">Contact HCaTS SB</a></li>
+      </ul>
+    </div>
+
+  </div>
+</section>

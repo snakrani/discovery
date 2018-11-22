@@ -1,0 +1,30 @@
+<div class="tooltip">
+  <button [disabled]="disable" class="usa-accordion-button" [attr.aria-expanded]="opened" [attr.aria-controls]="id">
+    <!-- <span class="info-tip db tooltip-right pull-right" data-tooltip="Select value to return only
+  vendors who have performed work
+  at the indicated contract value.
+  (FPDS Reported)"></span> -->
+    {{name}}
+  </button>
+  <span class="tooltiptext">Thanks for your interest! We haven't implemented this filter yet, but your clicks let us
+    know if it would be worth including. Check back later to explore new features!</span>
+</div>
+<div id="{{id}}" class="usa-accordion-content" [attr.aria-hidden]="!opened">
+  <input type="range" [min]="min" [max]="max" step="1000" [(ngModel)]="obligated_amount">
+  <span class="text-right pull-right">{{max | currency : 'USD' : 'symbol' : '1.0'}}</span>
+  <span>{{min | currency : 'USD' : 'symbol' : '1.0'}}</span>
+  <div class="text-center db bordered">
+    <strong>{{obligated_amount | currency}}</strong>
+  </div>
+  <!-- <fieldset class="usa-fieldset-inputs usa-sans">
+    <legend class="usa-sr-only">$0 to $100+ Million</legend>
+    <ul class="usa-unstyled-list">
+      <li *ngFor="let item of items; let i = index">
+        <input id="{{id + '-' + i}}" type="radio" [checked]="item.checked" value="{{item.id}}" [(ngModel)]="obligated_amount">
+        <label for="{{id + '-' + i}}">{{item.description}}</label>
+      </li>
+
+    </ul>
+  </fieldset> -->
+  <discovery-filter-selected [id]="'msg-oblicated-selected'" [label]="'Filter selected'"></discovery-filter-selected>
+</div>

@@ -11,7 +11,7 @@ services:
       LOG_LEVEL: "info"
 
   db:
-    image: postgres:9.4
+    image: postgres:10.4
     restart: always
     environment:
       POSTGRES_USER: discovery
@@ -65,20 +65,6 @@ services:
               },
               "label": "redis32",
               "name": "discovery-tasks",
-              "tags": [
-                "redis32",
-                "redis"
-              ]
-            },
-            {
-              "credentials": {
-                "uri": "redis://:discovery@discovery-auth:6379",
-                "hostname": "discovery-auth",
-                "port": "6379",
-                "password": "discovery"
-              },
-              "label": "redis32",
-              "name": "discovery-auth",
               "tags": [
                 "redis32",
                 "redis"

@@ -1,0 +1,17 @@
+<button class="usa-accordion-button" [attr.aria-expanded]="opened" [attr.aria-controls]="id">
+  {{name}}
+</button>
+<div id="{{id}}" class="usa-accordion-content" [attr.aria-hidden]="!opened">
+  <fieldset class="usa-fieldset-inputs usa-sans">
+    <discovery-spinner *ngIf="!items"></discovery-spinner>
+    <ul class="usa-unstyled-list">
+      <li *ngFor="let item of items; let i = index" id="li-{{id}}-{{i}}" [style.display]="i > qty_items_to_show ? 'none' : ''">
+        <input id="{{id}}-{{i}}" (change)="onChange(item.id, item.description, $event.target.checked)" name="{{id}}-{{i}}"
+          type="checkbox" value="{{item.id}}" [checked]="item.checked">
+        <label for="{{id}}-{{i}}">{{item.description}}</label>
+      </li>
+    </ul>
+  </fieldset>
+  <a (click)="toggleMore()" [title]="title_more" *ngIf="items.length > qty_items_to_show">{{title_more}}</a>
+  <discovery-filter-selected [id]="'msg-pricing-selected'" [label]="'Filter selected'"></discovery-filter-selected>
+</div>

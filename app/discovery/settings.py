@@ -7,6 +7,8 @@ https://docs.djangoproject.com/en/2.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
+from celery.schedules import crontab
+
 from discovery.utils import config_value
 
 import os
@@ -24,8 +26,6 @@ PROJ_DIR = os.path.dirname(BASE_DIR)
 #
 # API settings
 #
-API_CACHE_LIFETIME = 24 # in hours
-
 API_HOST = config_value('API_HOST', '')
 
 SAM_API_URL = "https://api.data.gov/sam/v1/registrations/"
@@ -48,6 +48,11 @@ VEHICLES = (
 # Test configuration
 #
 TEST_URL = config_value('TEST_URL', 'http://localhost:8080')
+
+#
+# Google Analytics
+#
+GA_TRACKING_ID = config_value('GA_TRACKING_ID', '')
 
 
 #-------------------------------------------------------------------------------
@@ -112,9 +117,8 @@ INSTALLED_APPS = [
     'vendors',
     'contracts',
     
-    'django.contrib.admin',
-    'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.auth',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -124,7 +128,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'rest_framework_filters',
-    'crispy_forms',
     
     'django_celery_beat',
     'django_celery_results',
@@ -147,24 +150,6 @@ MIDDLEWARE = [
 ]
 
 #
-# Authentication configuration
-#
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
-
-#
 # Templating configuration
 #
 TEMPLATES = [
@@ -183,6 +168,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'discovery.context_processors.api_host',
+                'discovery.context_processors.google_analytics',
             ],
         },
     },
@@ -204,10 +190,18 @@ COMPRESS_PRECOMPILERS = (
 #
 # Caching configuration
 #
+PAGE_CACHE_LIFETIME = 86400 # 24 hours in seconds
+
 CACHES = {
     'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    },
+    'page_cache': {
         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-        'LOCATION': 'django_cache_table',
+        'LOCATION': 'django_cachepage',
+        'OPTIONS': {
+            'MAX_ENTRIES': 5000
+        }
     }
 }
 
@@ -325,20 +319,6 @@ LOGGING = {
 DB_MUTEX_TTL_SECONDS = 86400 # 1 day (24 hours)
 
 #
-# Administrative session handling
-#
-SESSION_ENGINE = 'redis_sessions.session'
-
-SESSION_REDIS = {
-    'host': config_value('hostname', 'localhost', ['redis28', 'redis32'], 'discovery-auth'),
-    'port': config_value('port', '6379', ['redis28', 'redis32'], 'discovery-auth'),
-    'db': 0,
-    'password': config_value('password', 'discovery', ['redis28', 'redis32'], 'discovery-auth'),
-    'prefix': 'session',
-    'socket_timeout': 1
-}
-
-#
 # Celery processing and scheduling
 #
 CELERY_BROKER_URL = config_value('uri', 'redis://:discovery@localhost:6379', ['redis28', 'redis32'], 'discovery-tasks')
@@ -347,7 +327,33 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'UTC'
-CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+
+CELERY_BEAT_SCHEDULE = {
+    'populate_cache': {
+        'task': 'discovery.tasks.populate_cache',
+        'schedule': crontab(hour=23, minute=0)
+    },
+    'update_vendors': {
+        'task': 'vendors.tasks.update_vendors',
+        'args': (0,),
+        'schedule': crontab(hour=20, minute=0)
+    },
+    'update_sam_vendors': {
+        'task': 'vendors.tasks.update_vendors_sam',
+        'args': (3, 1),
+        'schedule': crontab(hour=1, minute=30)
+    },
+    'update_fpds_contracts': {
+        'task': 'contracts.tasks.update_contracts',
+        'args': (260, 260, 500, 1),
+        'schedule': crontab(hour=4, minute=30)
+    },
+    'prune_contracts': {
+        'task': 'contracts.tasks.prune_contracts',
+        'args': (260,),
+        'schedule': crontab(hour=22, minute=0)
+    }
+}
 
 #
 # REST configuration 
@@ -373,23 +379,14 @@ REST_FRAMEWORK = {
 REST_API_TEST = False
 
 #
-# Cloud.gov UAA authentication
-#
-UAA_AUTH = True
-UAA_CLIENT_ID = config_value('UAA_CLIENT_ID')
-UAA_CLIENT_SECRET = config_value('UAA_CLIENT_SECRET')
-UAA_AUTH_URL = config_value('UAA_AUTH_URL', 'https://login.fr.cloud.gov/oauth/authorize')
-UAA_TOKEN_URL = config_value('UAA_TOKEN_URL', 'https://uaa.fr.cloud.gov/oauth/token')
-
-#
 # Site policies
 #
 REFERRER_POLICY = 'origin'
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-CSP_DEFAULT_SRC = ("'self'",)
-CSP_SCRIPT_SRC = ("'self'", "'unsafe-inline'", 'www.google-analytics.com', 'dap.digitalgov.gov')
+CSP_DEFAULT_SRC = ("'self'", "'unsafe-eval'")
+CSP_SCRIPT_SRC = ("'self'", "'unsafe-inline'", "'unsafe-eval'", 'www.google-analytics.com', 'dap.digitalgov.gov')
 CSP_STYLE_SRC = ("'self'", "'unsafe-inline'", "fonts.googleapis.com")
 CSP_IMG_SRC = ("'self'", 'www.google-analytics.com')
 CSP_FONT_SRC = ("'self'", 'fonts.gstatic.com')
@@ -415,13 +412,7 @@ except:
 #
 # Authentication configuration
 #
-if UAA_AUTH:
-    INSTALLED_APPS.append('uaa_client')
-    MIDDLEWARE.append('uaa_client.middleware.UaaRefreshMiddleware')
-    
-    AUTHENTICATION_BACKENDS = ['uaa_client.authentication.UaaBackend']
-    LOGIN_URL = 'uaa_client:login'
-    
+if not DEBUG:
     # Ensuring HTTPS
     SECURE_HSTS_PRELOAD = True
     SECURE_HSTS_SECONDS = 31536000

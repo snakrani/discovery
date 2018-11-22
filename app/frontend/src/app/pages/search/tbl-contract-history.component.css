@@ -1,0 +1,30 @@
+/* .history th {
+  min-width: auto !important;
+} */
+table {
+  margin: 0px !important;
+  margin-bottom: 20px !important;
+  width: 100% !important;
+}
+tbody th {
+  vertical-align: top !important;
+}
+thead td:first-child,
+tbody td:first-child {
+  padding-right: 0px !important;
+}
+.filters-container {
+  padding: 20px 20px 20px 10px !important;
+}
+.col-small {
+  width: 50px !important;
+  min-width: auto !important;
+}
+select {
+  max-width: 250px !important;
+  float: left;
+  margin-right: 10px;
+}
+#select_state {
+  max-width: 120px !important;
+}

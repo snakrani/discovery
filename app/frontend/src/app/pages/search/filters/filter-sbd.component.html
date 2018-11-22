@@ -1,0 +1,16 @@
+<button class="usa-accordion-button" [attr.aria-expanded]="opened" [attr.aria-controls]="id">
+  {{name}}
+</button>
+<div id="{{id}}" class="usa-accordion-content" [attr.aria-hidden]="!opened">
+  <fieldset class="usa-fieldset-inputs usa-sans">
+    <discovery-spinner *ngIf="!items"></discovery-spinner>
+    <ul class="usa-unstyled-list" title="Select Set Asides">
+      <li *ngFor="let item of items">
+        <input (change)="onChange(item.code, item.description, $event.target.checked)" id="{{id}}-{{item.code}}" name="{{id}}-{{item.code}}"
+          type="checkbox" value="{{item.code}}" [checked]="item.checked">
+        <label for="{{id}}-{{item.code}}">{{item.description}}</label>
+      </li>
+    </ul>
+  </fieldset>
+  <discovery-filter-selected [id]="'msg-sbd-selected'" [label]="'Filter selected'"></discovery-filter-selected>
+</div>
