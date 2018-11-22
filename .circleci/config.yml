@@ -35,7 +35,7 @@ core: &core
   name: Install development tools
   command: |
     apt-get update
-    apt-get install -y git g++ gcc procps
+    apt-get install -y git g++ gcc make procps
 
 django: &django
   name: Install requirements
