@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+declare let API_HOST: string;
 // declare let $: any;
 @Component({
   templateUrl: './about.component.html',
@@ -14,7 +15,7 @@ export class AboutComponent implements OnInit {
 
   ngOnInit() {
     this.httpClient
-      .get('https://discovery-dev.app.cloud.gov/api/metadata/')
+      .get(API_HOST + '/api/metadata/')
       .subscribe(data => {
         this.loading = false;
         this.sam_load_date = data['sam_load_date'];
