@@ -22,6 +22,7 @@ Vagrant.configure("2") do |config|
     v.name = vm_config["server_name"]
     v.memory = vm_config["memory_size"]
     v.cpus = vm_config["cpus"]
+    v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
   end
 
   if vm_config["copy_ssh"]
