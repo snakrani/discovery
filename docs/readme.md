@@ -1,7 +1,7 @@
 
 # Discovery overview
 
-Discovery is a market research tool for GSA Contract Vehicles. Currently, it features GSA IDIQ vehicles, with more contracts coming in the future. Use Discovery to search vendor history for the awarded contractors and NAICs of the various IDIQs. Each contract is separated into Unrestricted and Small Business (SB) to make it easy to reserve task orders for small business categories.
+Discovery is a market research tool for GSA Contract Vehicles. Currently, it features GSA IDIQ vehicles, with more contracts coming in the future. Use Discovery to search vendor history for the awarded contractors and NAICs of the various IDIQs. Most contracts are separated into Unrestricted and Small Business (SB) to make it easy to search task orders for small business categories.
 
 <br/>
 
@@ -39,8 +39,6 @@ Discovery is a market research tool for GSA Contract Vehicles. Currently, it fea
 
 * [Development site](https://discovery-dev.app.cloud.gov)
 * [Production site](https://discovery.gsa.gov)
-* [Trello board](https://trello.com/b/AEoWtET7/discovery-20)
-* [OASIS information](https://www.gsa.gov/acquisition/products-services/professional-services/one-acquisition-solution-for-integrated-services-oasis)
 
 <br/>
 

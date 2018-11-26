@@ -5,47 +5,34 @@
 
 <br/>
 
-## User management
-
-When up and running with the Discovery application, the first thing you will need to do is to ensure there is at least one administrative user for the system that can handle scheduling data update tasks in the system, and monitor their progress over time.
-
-Both the local Docker environment and Cloud Foundry based buildpack deployments ensure an initial _super user_ with the username **admin**.  By default the password for this user is **admin-changeme**, but this can be reset through the administrative interface after logging in.  This account also has a dummy email by default, which should be changed.
-
-_Note:_ The Discovery application does not currently send emails, so the user email entry is not currently used.
-
 <br/>
 
-### User related scripts
+### Server initialization scripts
 
 * Runs automatically on Scheduler deployment
 * Run locally on any Django container top level project directory: **/discovery**, or through **docker exec**
 * Run on Cloud Foundry with **cf run-task**
 
 ```bash
-# Initialize the Django database and ensure an administrative user with the username admin
+# Initialize the Django database and application components
 #
 # This script is called on initialization of a new Django Celery Beat Scheduler, as there
 # should only ever be a single Scheduler for a Discovery application cluster
 #
 $ scripts/init-db.sh  # Has no options
 
-# Update or create an administrative user
-$ scripts/create-admin.sh --help
+# Initialize a Django web server
+#
+# This script is called on initialization of a new Waitress web container.  Mostly so far this script ust builds the static files.
+#
+$ scripts/init-webserver.sh # Has no options
 ```
-
-<br/>
-
-### User management interface
-
-The user management interface can be found at: http://localhost:8080/admin/auth/user _(change port if different)_
-
-![Discovery user management](../images/User-Management.png)
 
 <br/>
 
 ## Data loading
 
-After the site is running and you have an administrative user that can login, you need to populate the site with data.  For most purposes a limited set of data useful for debugging and development of new features is preferable to complete repositories of information spanning potentially 10 years or longer.
+After the site is running you need to populate the site with data.  For most purposes a limited set of data useful for debugging and development of new features is preferable to complete repositories of information spanning potentially 5 years or longer.
 
 When running the Discovery application you have two options; load data from packaged fixtures, or load data directly from the remote APIs that provide the source data for the production Discovery system.
 
@@ -118,15 +105,18 @@ $ scripts/fetch-fixture-data.sh  # Has no options
 
 # Load all classification information into Discovery (currently these are all local file based)
 # - included in fetch-data.sh
-$ manage.py load_categories  # Has no options
+$ ./run load_categories  # Has no options
+
+# Parse all category information into Discovery from spreadsheets in app/data directory
+$ ./run parse_categories # Has no options
 
 # Load all acquisition vehicle vendor information into Discovery
 # - included in fetch-data.sh
-$ manage.py load_vendors --help
+$ ./run load_vendors --help
 
 # Load all contract awards and modification for all vendors in the Discovery database
 # - included in fetch-data.sh
-$ manage.py load_fpds --help
+$ ./run load_fpds --help
 ```
 
 <br/>
@@ -135,35 +125,15 @@ $ manage.py load_fpds --help
 
 The Discovery application is built to periodically check for updates from remote sources based upon a schedule determined by a site administrator.  All data can be loaded initially through this mechanism as well, which is useful for testing the update mechanism.
 
-This Django application uses the well documented, extensible, and popular background task processor called [Celery](http://docs.celeryproject.org/en/latest/django/first-steps-with-django.html) and an addon scheduling application built on a Celery extension; [Celery Beat](http://django-celery-beat.readthedocs.io/en/latest/).  These libraries provide an administrative interface that allows us to change the periodic schedule of updates, and audit background task results.
+This Django application uses the well documented, extensible, and popular background task processor called [Celery](http://docs.celeryproject.org/en/latest/django/first-steps-with-django.html) and an addon scheduling application built on a Celery extension; [Celery Beat](http://django-celery-beat.readthedocs.io/en/latest/).  These libraries provide Djsngo settings configuration that allows us to change the periodic schedule of updates, and audit background task results, through version control.
 
-To schedule content updates, navigate to: http://localhost:8080/admin/django_celery_beat  _(change port if different)_
+See the **CELERY_BEAT_SCHEDULE** setting in the **app/discovery/settings.py** configuration.
 
-_You will notice four sections:_
+_You can schedule based on:_
 
  1. **Crontabs** - Very flexible schedule built on the [Cron scheduling format](https://en.wikipedia.org/wiki/Cron)
  2. **Intervals** - Simple scheduling format with an interval and unit of time _(e.g., 3 days)_
  3. **Solar Events** - Scheduling based on position of sun in relation to earth at geo coordinates _(you probably won't need this)_
-
- ---
-
- 4. **Periodic Tasks** - Management of scheduled tasks that use the periods scheduled above _(a task can only have one scheduling event)_
-
-<br/>
-
-#### Task scheduling interface
-
-The task scheduling interface can be found at: http://localhost:8080/admin/django_celery_beat/periodictask _(change port if different)_
-
-![Discovery scheduling interface](../images/Task-Scheduling.png)
-
-_Creating a new scheduled task that **updates contracts** at **10:05AM UTC** everyday_
-
-![Discovery periodic task interface](../images/Periodic-Task.png)
-
-You can check on the results of executed tasks at http://localhost:8080/admin/django_celery_results/taskresult _(change port if different)_
-
-![Discovery task result interface](../images/Task-Results.png)
 
 <br/>
 
@@ -187,11 +157,11 @@ $ scripts/setup-chrome.sh  # Has no options
 
 # Run all defined unit tests from Django api, vendors, and contract applications
 #  - See CircleCI configuration for full usage example
-$ manage.py test api vendors contract  # Has no options
+$ ./run test api vendors contract  # Has no options
 
-# Run all defined Selenium acceptance tests (must have a Discovery site running at localhost:8080)
+# Run all defined backend Selenium acceptance tests (must have a Discovery site running at localhost:8080)
 #  - See CircleCI configuration for full usage example
-$ manage.py test selenium_tests  # Has no options
+$ ./run test acceptance  # Has no options
 ```
 
 <br/>

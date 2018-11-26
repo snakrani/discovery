@@ -11,20 +11,16 @@ Welcome to the wonderful world of procurement, a mechanism by which the governme
 
 After researching the marketplace, procurement officers may decide to break their solicitation up into smaller chunks, or choose one vehicle or schedule over another. Procurement vehicles and schedules are large umbrella contracts, with a set of vendors that have "pre-competed" for work in a general category.
 
-To meet this need GSA is developing Discovery, a market research tool for GSA Contract Vehicles. Currently, it features GSA IDIQ vehicles, with more contracts coming in the future. Use Discovery to search vendor history for the awarded contractors and NAICs of the various IDIQs. Each contract is separated into Unrestricted and Small Business (SB) to make it easy to reserve task orders for small business categories.
+To meet this need GSA is developing Discovery, a market research tool for Government Contract Vehicles. Currently, it features GSA IDIQ vehicles, with more contracts coming in the future. Use Discovery to search vendors and contracts executed by keyword, NAICS, and PSC codes. Most contracts are separated into Unrestricted and Small Business (SB) to make it easy to search task orders for small business categories.
 
 <br/>
 
-## Where we're at
+## Where we're at (and where we're going)
 
-Discovery was developed to serve the [OASIS family of  vehicles](http://www.gsa.gov/portal/content/161367), which has many vendors capable of providing integrated professional services. OASIS is actually two vehicles, OASIS SB, which includes small businesses only, and OASIS unrestricted, which includes a wider array of vendors.
+Discovery was originally developed to serve the [OASIS family of  vehicles](http://www.gsa.gov/portal/content/161367), which has many vendors capable of providing integrated professional services. Over time contracts, such as HCATS, BMO, and PSS have been added.  The Discovery application has also undergone extensive improvements under the hood, with an extended API and a new Angular based user interface that integrates with the US Web Design System.
+
+In the future more contracts will be added and many improvements will be made to the filtering and search capabilities of the vendors and contracts that make up the Discovery universe.
 
 Discovery is currently live at (https://discovery.gsa.gov).
-
-<br/>
-
-## Future plans
-
-You can check out our [Trello board](https://trello.com/b/AEoWtET7/discovery-20), which contains our product backlog to see what we have planned in the future.
 
 <br/>

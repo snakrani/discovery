@@ -53,6 +53,10 @@ _See below for notes on the available configurations..._
 
     Sets a secret alpha-numeric key that is required by Django for certain operations.  This key can be anything you like but it should be lengthy and randomistic.
 
+ * **GA_TRACKING_ID** _default: **None**_
+
+    Sets a Google Analytics tracking id for the environment.  This is fed into the frontend HTML tracking snippet in the Discovery template.
+
 <br/>
 
 ## Running the Docker services
@@ -66,12 +70,12 @@ $ docker-compose up -d
 # You can verify all Docker services are running with
 $ docker-compose ps
 #
-# You should see 6 containers running
+# You should see 5 containers running
 #   1 web server
 #   1 scheduler
 #   1 worker
 #   1 PostgreSQL database
-#   2 Redis instances (tasks and shared sessions)
+#   1 Redis instance (tasks)
 
 # "SSH" into a Docker container and have a look around
 #
@@ -81,16 +85,20 @@ $ docker-compose ps
 #      vagrant_worker_1
 #
 $ docker exec -it {full-container-name} bash
+
+# Build frontend Angular application
+$ scripts/build-frontend.sh
+
+# Wait for database migration to complete (should see "beat: Starting")
+$ docker-compose logs --follow scheduler
+
+# Load data fixtures if migration complete
+$ scripts/load-fixtures.sh
 ```
 
 You are now in the shared project directory: **/discovery**
 
 * **/discovery** live at **localhost:8080**
-
-* **http://localhost:8080/admin**
-
-  * First user: **admin**
-  * Password:   **admin-changeme** (_please change!_)
 
 <br/>
 
