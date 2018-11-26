@@ -35,11 +35,15 @@ Keywords are assigned to contract vehicle pools and can be used to filter down r
 
 You can find a list of all the available keywords in the [keyword fixture data](https://github.com/PSHCDevOps/discovery/blob/master/app/categories/fixtures/keywords.json) or the [pool index spreadsheet](https://github.com/PSHCDevOps/discovery/blob/master/app/data/pool_index.xlsx).
 
+<br/>
+
 ##### NAICS codes
 
 NAICS codes allow vendors, contracts, and other meta information to be categorized in the Discovery system.
 
 You can find a list of all the available NAICS codes in the [NAICS fixture data](https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/naics.json) or the [NAICS 2012 spreadsheet](https://github.com/PSHCDevOps/discovery/blob/master/app/data/naics_2012.xls) and [NAICS 2017 spreadsheet](https://github.com/PSHCDevOps/discovery/blob/master/app/data/naics_2017.xlsx).
+
+<br/>
 
 ##### PSC codes
 
