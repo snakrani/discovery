@@ -128,8 +128,11 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Discovery data</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#classification-information">Classification information</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#keywords">Keywords</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#naics-codes">NAICS codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#psc-codes">PSC codes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#vendor-setaside-categories">Vendor setaside categories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#contract-vehicles">Contract vehicles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#vendor-pools">Vendor pools</a></li>
 </ul>
 </li>
@@ -227,8 +230,8 @@
 <p><br/></p>
 <div class="section" id="overview">
 <span id="overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p>The Discovery application system pulls in all available data from external API&#8217;s.  These API&#8217;s help us stay up to date with events happening in the federal contracting space related to vehicles that are followed by Discovery.  The updates occur on a periodic basis, at least once a day.</p>
-<p>Currently the OASIS and OASIS Small Business vehicles are supported but there are plans to add more vehicles in the near future.</p>
+<p>The Discovery application system pulls in all available data from bundled spreadsheets and external API&#8217;s.  These API&#8217;s help us stay up to date with events happening in the federal contracting space related to vehicles that are followed by Discovery.  The API updates occur on a periodic basis, at least once a day, and spreadsheet data is parsed from <strong>app/data</strong> spreadsheets on every deployment.</p>
+<p>Currently the OASIS, HCATS, BMO, and PSS vehicles are supported but there are plans to add more vehicles in the near future.</p>
 <p>Below is a diagram representing the flow of information for the Discovery system from the various API&#8217;s we fetch data from.</p>
 <p><img alt="Discovery data" src="../_images/Discovery-DataFlow-APIs.png" /></p>
 <p>As you can see an internal worker server constantly polls for tasks, the updates data from the appropriate API, and writes that data to the PostgreSQL database, as well as the task results for audit purposes.</p>
@@ -237,13 +240,25 @@
 <div class="section" id="classification-information">
 <span id="classification-information"></span><h2>Classification information<a class="headerlink" href="#classification-information" title="Permalink to this headline">¶</a></h2>
 <p>The basic information that holds everything together in the system is classification information.  This data is currently stored as fixtures in the application source code, and are updated with releases of the Discovery application.</p>
-<p>The <strong>manage.py load_categories</strong> command is executed on every deployment of the Discovery scheduler.</p>
+<p>The <strong>./run parse_categories</strong> command is executed on every deployment of the Discovery scheduler.</p>
 <p>There is a Celery task wrapper for this command in case it ever pulls data from a remote API on a periodic basis, but it also comes in handy for testing the scheduler and worker processes ocassionally, due to it&#8217;s speed of execution.</p>
 <p><br/></p>
+<div class="section" id="keywords">
+<span id="keywords"></span><h3>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h3>
+<p>Keywords are assigned to contract vehicle pools and can be used to filter down relevant vendors and contracts.</p>
+<p>You can find a list of all the available keywords in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/app/categories/fixtures/keywords.json">keyword fixture data</a> or the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/app/data/pool_index.xlsx">pool index spreadsheet</a>.</p>
+<p><br/></p>
+</div>
 <div class="section" id="naics-codes">
 <span id="naics-codes"></span><h3>NAICS codes<a class="headerlink" href="#naics-codes" title="Permalink to this headline">¶</a></h3>
-<p>NAICS codes are the foundation of how vendors and contracts are categorized in the Discovery system.</p>
-<p>You can find a list of all the available NAICS codes in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/naics.json">NAICS fixture data</a>.</p>
+<p>NAICS codes allow vendors, contracts, and other meta information to be categorized in the Discovery system.</p>
+<p>You can find a list of all the available NAICS codes in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/naics.json">NAICS fixture data</a> or the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/app/data/naics_2012.xls">NAICS 2012 spreadsheet</a> and <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/app/data/naics_2017.xlsx">NAICS 2017 spreadsheet</a>.</p>
+<p><br/></p>
+</div>
+<div class="section" id="psc-codes">
+<span id="psc-codes"></span><h3>PSC codes<a class="headerlink" href="#psc-codes" title="Permalink to this headline">¶</a></h3>
+<p>PSC codes allow vendors, contracts, and other meta information to be categorized in the Discovery system.</p>
+<p>You can find a list of all the available PSC codes in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/app/categories/fixtures/psc.json">PSC fixture data</a> or the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/app/data/psc.xls">PSC spreadsheet</a>.</p>
 <p><br/></p>
 </div>
 <div class="section" id="vendor-setaside-categories">
@@ -252,22 +267,28 @@
 <p>You can find a list of all the available setasides in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/setasides.json">setaside fixture data</a>.</p>
 <p><br/></p>
 </div>
+<div class="section" id="contract-vehicles">
+<span id="contract-vehicles"></span><h3>Contract vehicles<a class="headerlink" href="#contract-vehicles" title="Permalink to this headline">¶</a></h3>
+<p>The Discovery application maintains information on contract vehicles.  Vendors complete work for the government as members of vehicle pools.</p>
+<p>You can find a list of all the available contract vehicles in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/pools.json">contract vehicle fixture data</a> or the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/app/categories/fixtures/vehicles.json">pool index spreadsheet</a>.</p>
+<p><br/></p>
+</div>
 <div class="section" id="vendor-pools">
 <span id="vendor-pools"></span><h3>Vendor pools<a class="headerlink" href="#vendor-pools" title="Permalink to this headline">¶</a></h3>
 <p>The Discovery application maintains pools of vendors for each vehicle.  Each pool is then used to classify vendors in the system in filtered queries.</p>
-<p>You can find a list of all the available vendor pools in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/pools.json">vendor pool fixture data</a>.</p>
+<p>You can find a list of all the available vendor pools in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/pools.json">vendor pool fixture data</a> or the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/app/data/pool_index.xlsx">pool index spreadsheet</a>.</p>
 <p><br/></p>
 </div>
 </div>
 <div class="section" id="vendor-information">
 <span id="vendor-information"></span><h2>Vendor information<a class="headerlink" href="#vendor-information" title="Permalink to this headline">¶</a></h2>
 <p>Vendors make up the core data type in the Discovery system.  All related data displays are grouped around vendors currently.  Vendor information is provided both through CSV file information provided by GSA PSHC staff in the <strong>vendors/data</strong> directory and through SAM API registration data that is returned for the DUNS number of the vendor in the SAM system.</p>
-<p>You can find examples of vendor data elements in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/vendors.json">vendor fixture data</a>.</p>
+<p>You can find examples of vendor data elements in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/vendors.json">vendor fixture data</a> or the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/tree/master/app/data/pools">pool data spreadsheets</a>.</p>
 <p><br/></p>
 <div class="section" id="pool-membership">
 <span id="pool-membership"></span><h3>Pool membership<a class="headerlink" href="#pool-membership" title="Permalink to this headline">¶</a></h3>
 <p>Each vendor is classified into different pools using a PIID value which serves as a unique identifier for the vendor.</p>
-<p>You can find examples of vendor PIID mapping data elements in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/poolmemberships.json">vendor pool membership fixture data</a>.</p>
+<p>You can find examples of vendor PIID mapping data elements in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/poolmemberships.json">vendor pool membership fixture data</a> or the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/tree/master/app/data/pools">pool data spreadsheets</a>.</p>
 <p><br/></p>
 </div>
 <div class="section" id="sam-registrations">
@@ -278,7 +299,7 @@
 </div>
 <div class="section" id="capability-statements">
 <span id="capability-statements"></span><h3>Capability statements<a class="headerlink" href="#capability-statements" title="Permalink to this headline">¶</a></h3>
-<p>Any Vendor Capability Statements that are added to <a class="reference external" href="https://github.com/PSHCDevOps/discovery/tree/master/discovery_site/static/discovery_site/capability_statements">this folder</a> will automatically be linked to on the vendor&#8217;s page. The file must be a PDF, and its name must be only the vendor&#8217;s DUNS number.</p>
+<p>Any Vendor Capability Statements that are added to <a class="reference external" href="https://github.com/PSHCDevOps/discovery/tree/master/discovery_site/static/discovery_site/capability_statements">this folder</a> and will automatically be linked to on the vendor&#8217;s page. The file must be a PDF, and its name must be only the vendor&#8217;s DUNS number.</p>
 <p>There will be more work on tighter integration of vendor capability statements in future Discovery application development.</p>
 <p><br/></p>
 </div>
@@ -297,7 +318,7 @@
 </div>
 <div class="section" id="scheduling-updates-and-monitoring-progress">
 <span id="scheduling-updates-and-monitoring-progress"></span><h2>Scheduling updates and monitoring progress<a class="headerlink" href="#scheduling-updates-and-monitoring-progress" title="Permalink to this headline">¶</a></h2>
-<p>See the scheduling section in the <a class="reference internal" href="../start/setup.html"><span class="doc">Discovery setup documentation</span></a> for more information on how to schedule data updates in the Discovery system through the administrative interface.</p>
+<p>See the scheduling section in the <a class="reference internal" href="../start/setup.html"><span class="doc">Discovery setup documentation</span></a> for more information on how to schedule data updates in the Discovery system.</p>
 <p><br/></p>
 </div>
 <div class="section" id="a-look-at-how-discovery-data-fits-together">

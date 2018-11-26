@@ -259,6 +259,9 @@ $ cp docker/django-env.example.vars docker/django-env.vars
 <li><p class="first"><strong>SECRET_KEY</strong> <em>default: <strong>REQUIRED!!!</strong></em></p>
 <p>Sets a secret alpha-numeric key that is required by Django for certain operations.  This key can be anything you like but it should be lengthy and randomistic.</p>
 </li>
+<li><p class="first"><strong>GA_TRACKING_ID</strong> <em>default: <strong>None</strong></em></p>
+<p>Sets a Google Analytics tracking id for the environment.  This is fed into the frontend HTML tracking snippet in the Discovery template.</p>
+</li>
 </ul>
 <p><br/></p>
 </div>
@@ -273,12 +276,12 @@ $ docker-compose up -d
 <span class="c1"># You can verify all Docker services are running with</span>
 $ docker-compose ps
 <span class="c1">#</span>
-<span class="c1"># You should see 6 containers running</span>
+<span class="c1"># You should see 5 containers running</span>
 <span class="c1">#   1 web server</span>
 <span class="c1">#   1 scheduler</span>
 <span class="c1">#   1 worker</span>
 <span class="c1">#   1 PostgreSQL database</span>
-<span class="c1">#   2 Redis instances (tasks and shared sessions)</span>
+<span class="c1">#   1 Redis instance (tasks)</span>
 
 <span class="c1"># &quot;SSH&quot; into a Docker container and have a look around</span>
 <span class="c1">#</span>
@@ -288,16 +291,20 @@ $ docker-compose ps
 <span class="c1">#      vagrant_worker_1</span>
 <span class="c1">#</span>
 $ docker <span class="nb">exec</span> -it <span class="o">{</span>full-container-name<span class="o">}</span> bash
+
+<span class="c1"># Build frontend Angular application</span>
+$ scripts/build-frontend.sh
+
+<span class="c1"># Wait for database migration to complete (should see &quot;beat: Starting&quot;)</span>
+$ docker-compose logs --follow scheduler
+
+<span class="c1"># Load data fixtures if migration complete</span>
+$ scripts/load-fixtures.sh
 </pre></div>
 </div>
 <p>You are now in the shared project directory: <strong>/discovery</strong></p>
 <ul class="simple">
 <li><strong>/discovery</strong> live at <strong>localhost:8080</strong></li>
-<li><strong>http://localhost:8080/admin</strong><ul>
-<li>First user: <strong>admin</strong></li>
-<li>Password:   <strong>admin-changeme</strong> (<em>please change!</em>)</li>
-</ul>
-</li>
 </ul>
 <p><br/></p>
 </div>

@@ -339,6 +339,9 @@ $ cp docker/django-env.example.vars docker/django-env.vars
 <li><p class="first"><strong>SECRET_KEY</strong> <em>default: <strong>REQUIRED!!!</strong></em></p>
 <p>Sets a secret alpha-numeric key that is required by Django for certain operations.  This key can be anything you like but it should be lengthy and randomistic.</p>
 </li>
+<li><p class="first"><strong>GA_TRACKING_ID</strong> <em>default: <strong>None</strong></em></p>
+<p>Sets a Google Analytics tracking id for the environment.  This is fed into the frontend HTML tracking snippet in the Discovery template.</p>
+</li>
 </ul>
 <p><br/></p>
 </div>
@@ -352,20 +355,27 @@ $ vagrant up
 
 <span class="c1"># SSH into the Vagrant virtual machine to start working with the application cluster</span>
 $ vagrant ssh
+
+<span class="c1"># Build frontend Angular application</span>
+$ scripts/build-frontend.sh
+
+<span class="c1"># Start Docker containers if they are not already running</span>
+$ docker-compose up -d
+
+<span class="c1"># Wait for database migration to complete (should see &quot;beat: Starting&quot;)</span>
+$ docker-compose logs --follow scheduler
+
+<span class="c1"># Load data fixtures if migration complete</span>
+$ scripts/load-fixtures.sh
 </pre></div>
 </div>
 <p>You are now in the shared project directory: <strong>/vagrant</strong></p>
-<p>When the Vagrant machine is first created all Docker containers specified in the docker-compose configuration are created and started.  The Discovery application cluster consists of a <strong>HAProxy load balancer</strong>, <strong>Django web servers</strong>, a <strong>Celery scheduler</strong>, <strong>Celery workers</strong>, a <strong>PostgreSQL database</strong>, and two <strong>Redis queues</strong>.</p>
+<p>When the Vagrant machine is first created all Docker containers specified in the docker-compose configuration are created and started.  The Discovery application cluster consists of a <strong>Django web server</strong>, a <strong>Celery scheduler</strong>, <strong>Celery worker</strong>, <strong>PostgreSQL database</strong>, and a <strong>Redis queue</strong>.</p>
 <ul class="simple">
 <li><strong>/vagrant</strong> live at <strong>localhost:8080</strong> (<em>if you didn&#8217;t change <strong>web_port</strong> configuration</em>)</li>
-<li><strong>http://localhost:8080/admin</strong><ul>
-<li>First user: <strong>admin</strong></li>
-<li>Password:   <strong>admin-changeme</strong> (<em>please change!</em>)</li>
-</ul>
-</li>
 </ul>
 <p><br/></p>
-<p>Using Vagrant, when SSHing into the virtual machine, you will be automatically redirected to the project root directory (<strong>/vagrant</strong>) and <strong>docker-compose up</strong> will be run to ensure Docker application containers are up to date.</p>
+<p>Using Vagrant, when SSHing into the virtual machine, you will be automatically redirected to the project root directory (<strong>/vagrant</strong>).  To start the application you must run <strong>docker-compose up</strong> which will ensure Docker application containers are up to date.</p>
 <p><strong>Git</strong>, <strong>Cloud Foundry Client</strong> with the <strong>Autopilot</strong> and <strong>Service Connect</strong> plugins, <strong>Docker</strong>, and <strong>Docker Compose</strong> come installed on the Vagrant virtual environment initially.  The development environment is meant to bundle tooling necessary to running the Discovery application that might not make sense to install in the containers, and it provides a platform for running isolated Docker clusters in Docker Compose.</p>
 <p><br/></p>
 </div>

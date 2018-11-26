@@ -214,24 +214,27 @@
 <p><br/></p>
 <div class="section" id="asset-types">
 <span id="asset-types"></span><h2>Asset Types<a class="headerlink" href="#asset-types" title="Permalink to this headline">¶</a></h2>
-<p>In the Discovery application, currently all static assets are grouped under the directory: <a class="reference external" href="https://github.com/PSHCDevOps/discovery/tree/master/discovery_site/static/discovery_site">discovery_site/static/discovery_site</a></p>
+<p>In the Discovery application, currently all static assets are grouped under the directory: <a class="reference external" href="https://github.com/PSHCDevOps/discovery/tree/master/app/discovery/static/discovery_site">app/discovery/static/discovery_site</a></p>
 <p>There are currently four types of static assets served to the client from the Django web application.</p>
 <ol class="simple">
-<li><strong>images</strong> - <em>The Discovery image folder that contains various theme related imagery</em></li>
-<li><strong>css</strong> - <em>The central store for all Discovery related CSS files</em></li>
-<li><strong>javascript</strong> - <em>The central store for all Discovery related JS files</em></li>
+<li><strong>images</strong> - <em>Discovery image folder that contains various API docs theme related imagery</em></li>
+<li><strong>css</strong> - <em>A store for Discovery API docs related CSS files</em></li>
 <li><strong>capability_statements</strong> - <em>Directory of vendor capability statements that are available for download</em></li>
 </ol>
 <p><br/></p>
 </div>
 <div class="section" id="generating-static-assets">
 <span id="generating-static-assets"></span><h2>Generating static assets<a class="headerlink" href="#generating-static-assets" title="Permalink to this headline">¶</a></h2>
-<p>All static assets are served from the individual web servers.  Upon deployment on the web application cluster, the static files are transferred to a top level <strong>static</strong> directory that is available over the internet.</p>
+<p>All static assets are served from the individual web servers.  Upon deployment on the web application cluster, the static files are transferred to a top level <strong>app/static</strong> directory that is available over the internet.</p>
 <div class="section" id="static-asset-generation-scripts">
 <span id="static-asset-generation-scripts"></span><h3>Static asset generation scripts<a class="headerlink" href="#static-asset-generation-scripts" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Collect all static files into the top level static directory</span>
 <span class="c1">#  - This is run on every web container deployment before the site starts up</span>
 $ scripts/init-webserver.sh <span class="c1"># No options</span>
+
+<span class="c1"># Build Angular JS related assets and source files for web service</span>
+<span class="c1">#  - This is run on every environment deployment before the site starts up</span>
+$ scripts/build-frontend.sh <span class="c1"># No options</span>
 </pre></div>
 </div>
 <p><br/></p>
