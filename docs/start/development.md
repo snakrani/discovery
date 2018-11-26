@@ -7,9 +7,9 @@
 
 ## Overview
 
-So you've decided to try running your own copy of Discovery to play around with or contribute.  Great!  This document will walk you through the high level process to getting up and running with Discovery locally and point you in the direction of more specific information you might need during the process.
+So you've decided to try running your own copy of Discovery to play around with or contribute.  Great!  This document will walk you through the high level process of getting up and running with Discovery locally and point you in the direction of more specific information you might need during the process.
 
-You should find development through either of two options easy and straight forward.  If you encounter problems during setup or while managing your development environment please [file an issue](https://github.com/PSHCDevOps/discovery/issues) and we will do our best to help troubleshoot.
+You should find development through either of two options easy and straight forward.  If you encounter problems during setup, or while managing your development environment, please [file an issue](https://github.com/PSHCDevOps/discovery/issues) and we will do our best to help troubleshoot.
 
 <br/>
 
@@ -27,7 +27,7 @@ Vagrant has been a popular choice for many years in providing standardized devel
 
 The Vagrant development environment that ships with the Discovery project is a simple development machine designed to work with Git, Cloud Foundry, and Docker/Docker Compose to manage the Discovery application cluster, hosting environment, and Git project.
 
-While running Vagrant is not necessary because Docker comes in various OS installers it does provide some handy features which make it a useful tool in the development process.
+While running Vagrant is not necessary because Docker comes in various OS installers it does provide some handy features which make it a useful tool in the development process.  Using Vagrant is the recommended option for all developers contributing regularly on the project, so we can standardize working environments.
 
 ###### Vagrant Pros
 
@@ -53,7 +53,7 @@ If you are interested in learning more about how to set up the Discovery project
 
 ### 2. Docker running locally
 
-Running Docker locally can have it's advantages in speed and reduction in complexity if you already run Docker and Docker Compose locally, usually on Mac or Linux.  It is also probably advantageous to have a clear process for keeping Docker related project artifacts easily separated.  If this is a minimal development desktop that is not used for many projects then using Docker locally can make sense.
+Running Docker locally can have it's advantages in speed and reduction in complexity if you already run Docker and Docker Compose locally, usually on Mac or Linux.  It is also probably advantageous to have a clear process for keeping Docker related project artifacts easily separated.  If this is a minimal development desktop that is not used for multiple projects then using Docker locally can make sense.
 
 At the root of the project directory is a Docker Compose configuration that can be used to spin up the five node cluster that is the Discovery application currently.
 
@@ -74,7 +74,7 @@ At the root of the project directory is a Docker Compose configuration that can 
 
 <br/>
 
-It is best to use local Docker over Vagrant if you use Docker in a minimal desktop environment that does not have many clashing Docker projects to manage, if Vagrant is not a technology you want to install and update periodically, if you have very little in processing, memory, or harddisk resources on your machine, or if you already have your own flow with local Docker.
+It is best to use local Docker over Vagrant if you use Docker in a minimal desktop environment that does not have clashing Docker projects to manage, if Vagrant is not a technology you want to install and update periodically, if you have very little in processing, memory, or harddisk resources on your machine, or if you already have your own flow with local Docker.
 
 If you are interested in learning more about how to set up the Discovery project with local Docker then head on over to the [Docker guide](docker.md) to start getting Docker running and the Discovery project building on your machine.  This process should also not take long.
 
