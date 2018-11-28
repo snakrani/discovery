@@ -172,7 +172,7 @@ class ContractCSV(BaseCSVView):
         writer.writerow(("Work performed by a vendor is often reported under a different NAICS code due to FPDS restrictions.",))
         writer.writerow(('', ))
       
-        writer.writerow(('Date Signed', 'PIID', 'Agency', 'Type', 'Value ($)', 'Email POC', 'Status'))
+        writer.writerow(('Date Signed', 'PIID', 'Agency', 'Type', 'Value ($)', 'Email POC', 'Place of Performance', 'NAIC', 'PSC', 'Status'))
     
         for contract in self.contract_data.iterator():
             pricing_type = ''
@@ -184,7 +184,7 @@ class ContractCSV(BaseCSVView):
             if contract.status:
                 status = contract.status.name
                     
-            writer.writerow((contract.date_signed.strftime("%m/%d/%Y"), contract.piid, titlecase(contract.agency.name), pricing_type, contract.obligated_amount, (contract.point_of_contact or "").lower(), status))
+            writer.writerow((contract.date_signed.strftime("%m/%d/%Y"), contract.piid, titlecase(contract.agency.name), pricing_type, contract.obligated_amount, (contract.point_of_contact or "").lower(), contract.place_of_performance, contract.NAICS, contract.PSC, status))
     
         writer.writerow(('', ))
 
