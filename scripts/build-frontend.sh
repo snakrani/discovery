@@ -12,12 +12,34 @@ then
   rm -f "$LOG_FILE"
 fi
 
-cd frontend
-
+TEMP_DIR=/tmp/frontend
+FRONTEND_DIR="$SCRIPT_DIR/../app/frontend"
 
 echo "> Building node modules" | tee -a "$LOG_FILE"
+
+cd "$FRONTEND_DIR"
 rm -Rf node_modules
-npm install >>"$LOG_FILE" 2>&1
+
+if [ ! -z "$USER" -a "$USER" == 'vagrant' ]
+then
+  # This is needed to prevent build issues on Vagrant/Windows through
+  # default Virtualbox directory sharing
+  mkdir -p "$TEMP_DIR" >>"$LOG_FILE" 2>&1
+  cp -f package.json "$TEMP_DIR" >>"$LOG_FILE" 2>&1
+  cp -f package-lock.json "$TEMP_DIR" >>"$LOG_FILE" 2>&1
+  
+  cd "$TEMP_DIR"
+  npm install >>"$LOG_FILE" 2>&1
+  
+  echo "> Copying node modules" | tee -a "$LOG_FILE"
+  cp -Rf node_modules "$FRONTEND_DIR" >>"$LOG_FILE" 2>&1
+  
+  echo "> Copying package.lock" | tee -a "$LOG_FILE"
+  cp -f package-lock.json "$FRONTEND_DIR" >>"$LOG_FILE" 2>&1
+  cd "$FRONTEND_DIR"
+else
+  npm install >>"$LOG_FILE" 2>&1
+fi
 
 echo "> Building Angular files" | tee -a "$LOG_FILE"
 ng build --prod --output-hashing none >>"$LOG_FILE" 2>&1
@@ -25,3 +47,4 @@ ng build --prod --output-hashing none >>"$LOG_FILE" 2>&1
 echo "> Fixing file permissions" | tee -a "$LOG_FILE"
 find node_modules/.cache -type d -exec chmod 750 {} \; >>"$LOG_FILE" 2>&1
 find node_modules/.cache -type f -exec chmod 640 {} \; >>"$LOG_FILE" 2>&1
+

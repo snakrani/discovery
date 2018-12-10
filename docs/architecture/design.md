@@ -31,9 +31,9 @@ The local Docker configuration is passed to running Django containers from an in
 
 The PSHC CircleCI organization has a managed Discovery project that executes the CircleCI configuration in the **.circleci** directory.  This configuration defines some configuration parameters, which are then mixed with secure project defined environment variables and injected into the running application containers.
 
-The CircleCI project requires all variables defined in the **docker/django-en.example.vars** file to be defined in the CircleCI environment interface.
+The CircleCI project requires all variables defined in the **docker/django-env.example.vars** file to be defined in the CircleCI environment interface.
 
-It is also important when configuring CircleCI to deploy to a Cloud.gov environment that the proper credential variables are defined.  See the **deploy-dev.sh** and deploy-prod.sh** scripts for these variables.  All container based jobs must share the same environment defined in the project interface, so we prefix the credentials with **DEV** or **PROD**.  The variables that must be set include;
+It is also important when configuring CircleCI to deploy to a Cloud.gov environment that the proper credential variables are defined.  See the **deploy-dev.sh** and **deploy-prod.sh** scripts for these variables.  All container based jobs must share the same environment defined in the project interface, so we prefix the credentials with **DEV** or **PROD**.  The variables that must be set include;
 
  * (DEV/PROD)_SERVICE_ORG
  * (DEV/PROD)_SERVICE_SPACE
@@ -44,7 +44,7 @@ All deployments from CircleCI to Cloud.gov require a service account and key tha
 
 ### Cloud.gov configuration
 
-The Discovery application uses shared custom user provided service instances that define the environment variables listed in **docker/django-en.example.vars**.  These are then bound to all Django applications _(web, scheduler, workers)_.
+The Discovery application uses shared custom user provided service instances that define the environment variables listed in **docker/django-env.example.vars**.  These are then bound to all Django applications _(web, scheduler, workers)_.
 
 This environment can be set up with the **scripts/setup-cf-space.sh --help** command.  See the command help information and source code for more information.
 
@@ -62,7 +62,7 @@ For more information on the available endpoints see http://localhost:8080/docs.
 
 ## Website
 
-The Discovery frontend interface is a filtered search of vendor information based on contracts in certain NAICS codes pertaining to included Discovery vehicles.  All of the data that is served up to the frontend is available via the APIs discussed above.  The gateway to the website is: http://localhost:8080/ _(which should display a filter and overview information)_
+The Discovery frontend interface is a filtered search of vendor and contract information pertaining to included Discovery vehicles.  All of the data that is served up to the frontend is available via the APIs discussed above.  The gateway to the website is: http://localhost:8080/ _(which should display a filter and overview information)_
 
 ### Django views and templates
 
@@ -70,22 +70,11 @@ The foundation of the Discovery interface are custom views that render templates
 
 ### Jquery based Javascript application
 
-Most of the data you see rendered on the Discovery web page during the search process is rendered by a collection of Javascript files that attach to various elements of the HTML page and append information requested through the backend Discovery API.
+Most of the data you see rendered on the Discovery web page during the search process is rendered by an [Angular JS](https://angularjs.org/) application that accesses the backend Django Discovery API and provides a single page app experience to site users built with the [US Web Design System](https://designsystem.digital.gov/).
 
-The Django application passes two primary environment variables through to the client side Javascript; **API_HOST**, and **API_KEY**.
+The Django application passes a single environment variable through to the client side Javascript; **API_HOST**.
 
  * **API_HOST** - Full host of the discovery site providing the API _(e.g, http://localhost:8080)_
- * **API_KEY** - API key for API access _(to be honest I'm not sure this is actually used)_
-
-In the future this frontend Javascript system will probably be replaced with a more comprehensive [React](https://reactjs.org/) or [Angular](https://angularjs.org/) based Javascript client application.
-
-<br/>
-
-## Administration interface
-
-Django comes with a very simple administrative interface that can allow administrative users to manage other system users, content, and other assorted jobs.  We use administrative users to manage the scheduling of periodic background tasks.  For more information on getting started with the administrative interface, see the [Discovery setup documentation](../start/setup.md).
-
-Other than for managing users, scheduling of tasks, and monitoring the task results operations through the interface are discouraged because all of our content is automatically pulled from external sources.
 
 <br/>
 
@@ -107,6 +96,6 @@ Celery based task processors _(at least one)_ are constantly checking the Redis 
 
 Each task is a wrapper with special logic around a defined Django command.  The task provides a Celery registration, mutex lock, and output collection for reporting purposes.
 
-There are currently only data update tasks defined in the system, but this will most likely expand in the future.
+There are currently only data update and cache population tasks defined in the system, but this will most likely expand in the future.
 
 <br/>

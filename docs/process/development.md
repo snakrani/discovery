@@ -38,7 +38,7 @@ Pull requests should be clearly defined and follow general Discovery application
 
 All deployments to production and staging environments are expected to be the result of a CircleCI job, so there should be no manual deployments to either environment.  Staging deployments are triggered by merges to the **develop** branch, and production deployments are triggered by merges to the **master** branch.  Outside of testing, manual deployments are bad!
 
-It may be necessary to create temporary test Cloud.gov spaces using the **scripts/setup-cf-space.sh** script, but this should not affect the production or staging application hosting environments.
+It may be necessary to create temporary test Cloud.gov spaces using the **scripts/setup-cf-space.sh** script, but this should not affect the production or staging application hosting environments.  This would also require more Cloud Foundry resources, which may not be available on the hosting environment.
 
 All pull requests to the **develop** branch will be reviewed by the Discovery management team and current application maintainers.
 

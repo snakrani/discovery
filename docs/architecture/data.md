@@ -7,9 +7,9 @@
 
 ## Overview
 
-The Discovery application system pulls in all available data from external API's.  These API's help us stay up to date with events happening in the federal contracting space related to vehicles that are followed by Discovery.  The updates occur on a periodic basis, at least once a day.
+The Discovery application system pulls in all available data from bundled spreadsheets and external API's.  These API's help us stay up to date with events happening in the federal contracting space related to vehicles that are followed by Discovery.  The API updates occur on a periodic basis, at least once a day, and spreadsheet data is parsed from **app/data** spreadsheets on every deployment.
 
-Currently the OASIS and OASIS Small Business vehicles are supported but there are plans to add more vehicles in the near future.
+Currently the OASIS, HCATS, BMO, and PSS vehicles are supported but there are plans to add more vehicles in the near future.
 
 Below is a diagram representing the flow of information for the Discovery system from the various API's we fetch data from.
 
@@ -23,17 +23,33 @@ As you can see an internal worker server constantly polls for tasks, the updates
 
 The basic information that holds everything together in the system is classification information.  This data is currently stored as fixtures in the application source code, and are updated with releases of the Discovery application.
 
-The **manage.py load_categories** command is executed on every deployment of the Discovery scheduler.
+The **./run parse_categories** command is executed on every deployment of the Discovery scheduler.
 
 There is a Celery task wrapper for this command in case it ever pulls data from a remote API on a periodic basis, but it also comes in handy for testing the scheduler and worker processes ocassionally, due to it's speed of execution.
 
 <br/>
 
+##### Keywords
+
+Keywords are assigned to contract vehicle pools and can be used to filter down relevant vendors and contracts.
+
+You can find a list of all the available keywords in the [keyword fixture data](https://github.com/PSHCDevOps/discovery/blob/master/app/categories/fixtures/keywords.json) or the [pool index spreadsheet](https://github.com/PSHCDevOps/discovery/blob/master/app/data/pool_index.xlsx).
+
+<br/>
+
 ##### NAICS codes
 
-NAICS codes are the foundation of how vendors and contracts are categorized in the Discovery system.
+NAICS codes allow vendors, contracts, and other meta information to be categorized in the Discovery system.
 
-You can find a list of all the available NAICS codes in the [NAICS fixture data](https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/naics.json).
+You can find a list of all the available NAICS codes in the [NAICS fixture data](https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/naics.json) or the [NAICS 2012 spreadsheet](https://github.com/PSHCDevOps/discovery/blob/master/app/data/naics_2012.xls) and [NAICS 2017 spreadsheet](https://github.com/PSHCDevOps/discovery/blob/master/app/data/naics_2017.xlsx).
+
+<br/>
+
+##### PSC codes
+
+PSC codes allow vendors, contracts, and other meta information to be categorized in the Discovery system.
+
+You can find a list of all the available PSC codes in the [PSC fixture data](https://github.com/PSHCDevOps/discovery/blob/master/app/categories/fixtures/psc.json) or the [PSC spreadsheet](https://github.com/PSHCDevOps/discovery/blob/master/app/data/psc.xls).
 
 <br/>
 
@@ -45,11 +61,19 @@ You can find a list of all the available setasides in the [setaside fixture data
 
 <br/>
 
+##### Contract vehicles
+
+The Discovery application maintains information on contract vehicles.  Vendors complete work for the government as members of vehicle pools.
+
+You can find a list of all the available contract vehicles in the [contract vehicle fixture data](https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/pools.json) or the [pool index spreadsheet](https://github.com/PSHCDevOps/discovery/blob/master/app/categories/fixtures/vehicles.json).
+
+<br/>
+
 ##### Vendor pools
 
 The Discovery application maintains pools of vendors for each vehicle.  Each pool is then used to classify vendors in the system in filtered queries.
 
-You can find a list of all the available vendor pools in the [vendor pool fixture data](https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/pools.json).
+You can find a list of all the available vendor pools in the [vendor pool fixture data](https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/pools.json) or the [pool index spreadsheet](https://github.com/PSHCDevOps/discovery/blob/master/app/data/pool_index.xlsx).
 
 <br/>
 
@@ -57,7 +81,7 @@ You can find a list of all the available vendor pools in the [vendor pool fixtur
 
 Vendors make up the core data type in the Discovery system.  All related data displays are grouped around vendors currently.  Vendor information is provided both through CSV file information provided by GSA PSHC staff in the **vendors/data** directory and through SAM API registration data that is returned for the DUNS number of the vendor in the SAM system.
 
-You can find examples of vendor data elements in the [vendor fixture data](https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/vendors.json).
+You can find examples of vendor data elements in the [vendor fixture data](https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/vendors.json) or the [pool data spreadsheets](https://github.com/PSHCDevOps/discovery/tree/master/app/data/pools).
 
 <br/>
 
@@ -65,7 +89,7 @@ You can find examples of vendor data elements in the [vendor fixture data](https
 
 Each vendor is classified into different pools using a PIID value which serves as a unique identifier for the vendor.
 
-You can find examples of vendor PIID mapping data elements in the [vendor pool membership fixture data](https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/poolmemberships.json).
+You can find examples of vendor PIID mapping data elements in the [vendor pool membership fixture data](https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/poolmemberships.json) or the [pool data spreadsheets](https://github.com/PSHCDevOps/discovery/tree/master/app/data/pools).
 
 <br/>
 
@@ -79,7 +103,7 @@ See the **vendors/management/commands/load_sam.py** command for more detailed in
 
 ##### Capability statements
 
-Any Vendor Capability Statements that are added to [this folder](https://github.com/PSHCDevOps/discovery/tree/master/discovery_site/static/discovery_site/capability_statements) will automatically be linked to on the vendor's page. The file must be a PDF, and its name must be only the vendor's DUNS number.
+Any Vendor Capability Statements that are added to [this folder](https://github.com/PSHCDevOps/discovery/tree/master/discovery_site/static/discovery_site/capability_statements) and will automatically be linked to on the vendor's page. The file must be a PDF, and its name must be only the vendor's DUNS number.
 
 There will be more work on tighter integration of vendor capability statements in future Discovery application development.
 
@@ -103,7 +127,7 @@ See the **contract/management/commands/load_fpds.py** command for more detailed 
 
 ## Scheduling updates and monitoring progress
 
-See the scheduling section in the [Discovery setup documentation](../start/setup.md) for more information on how to schedule data updates in the Discovery system through the administrative interface.
+See the scheduling section in the [Discovery setup documentation](../start/setup.md) for more information on how to schedule data updates in the Discovery system.
 
 <br/>
 

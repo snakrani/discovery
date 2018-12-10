@@ -2,7 +2,7 @@ requests==2.20.0           # Outbound network requests
 coverage==4.5.1            # Test coverage analysis/reporting
 selenium==3.14.1           # Selenium test framework
 
-Sphinx==1.8.1              # Sphinx documentation generator
+Sphinx==1.5.1              # Sphinx documentation generator
 sphinx_rtd_theme==0.4.2    # Documentation site theme
 recommonmark==0.4.0        # Markdown to HTML processing for Sphinx
 

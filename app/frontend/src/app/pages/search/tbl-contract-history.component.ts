@@ -223,13 +223,16 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
   }
   setPoP(obj: any[]): string {
     let pop = '';
-    if (obj['country_name']) {
-      pop += obj['country_name'];
-    }
-    if (obj['state'] !== null) {
-      pop += ', ' + obj['state'];
+    if(obj) {
+      if (obj['country_name']) {
+        pop += obj['country_name'];
+      }
+      if (obj['state'] !== null) {
+        pop += ', ' + obj['state'];
+      }
     }
     return pop;
+
   }
   orderBy(ordering: any[]) {
     const order_by = ordering['sort'] + ordering['ordering'];

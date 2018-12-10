@@ -134,6 +134,10 @@ _See the sections below for notes on the available configurations..._
 
     Sets a secret alpha-numeric key that is required by Django for certain operations.  This key can be anything you like but it should be lengthy and randomistic.
 
+ * **GA_TRACKING_ID** _default: **None**_
+
+    Sets a Google Analytics tracking id for the environment.  This is fed into the frontend HTML tracking snippet in the Discovery template.
+
 <br/>
 
 ## Running the virtual machine
@@ -146,22 +150,29 @@ $ vagrant up
 
 # SSH into the Vagrant virtual machine to start working with the application cluster
 $ vagrant ssh
+
+# Build frontend Angular application
+$ scripts/build-frontend.sh
+
+# Start Docker containers if they are not already running
+$ docker-compose up -d
+
+# Wait for database migration to complete (should see "beat: Starting")
+$ docker-compose logs --follow scheduler
+
+# Load data fixtures if migration complete
+$ scripts/load-fixtures.sh
 ```
 
 You are now in the shared project directory: **/vagrant**
 
-When the Vagrant machine is first created all Docker containers specified in the docker-compose configuration are created and started.  The Discovery application cluster consists of a **HAProxy load balancer**, **Django web servers**, a **Celery scheduler**, **Celery workers**, a **PostgreSQL database**, and two **Redis queues**.
+When the Vagrant machine is first created all Docker containers specified in the docker-compose configuration are created and started.  The Discovery application cluster consists of a **Django web server**, a **Celery scheduler**, **Celery worker**, **PostgreSQL database**, and a **Redis queue**.
 
 * **/vagrant** live at **localhost:8080** (_if you didn't change **web_port** configuration_)
 
-* **http://localhost:8080/admin**
-
-  * First user: **admin**
-  * Password:   **admin-changeme** (_please change!_)
-
 <br/>
 
-Using Vagrant, when SSHing into the virtual machine, you will be automatically redirected to the project root directory (**/vagrant**) and **docker-compose up** will be run to ensure Docker application containers are up to date.
+Using Vagrant, when SSHing into the virtual machine, you will be automatically redirected to the project root directory (**/vagrant**).  To start the application you must run **docker-compose up** which will ensure Docker application containers are up to date.
 
 **Git**, **Cloud Foundry Client** with the **Autopilot** and **Service Connect** plugins, **Docker**, and **Docker Compose** come installed on the Vagrant virtual environment initially.  The development environment is meant to bundle tooling necessary to running the Discovery application that might not make sense to install in the containers, and it provides a platform for running isolated Docker clusters in Docker Compose.
 

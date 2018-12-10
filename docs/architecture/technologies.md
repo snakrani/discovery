@@ -31,7 +31,7 @@ Containers and the Docker engine allow us to reach for the goal of a unified arc
 
 ### How we use Docker
 
-We currently use Docker for local development through Docker Compose, a tool for creating easily managed clusters of Docker containers.  We then use the same base Debian Slim container images in our CircleCI environment and build our dependencies through setup scripts, housed in the [scripts directory](https://github.com/PSHCDevOps/discovery/tree/master/scripts).  This ensures that our local development environments and continuous integration and deployment environments are exactly the same, and easier to debug should issues arise.
+We currently use Docker for local development through Docker Compose, a tool for creating easily managed clusters of Docker containers.  We then use the same base Debian Stretch container images in our CircleCI environment and build our dependencies through setup scripts, housed in the [scripts directory](https://github.com/PSHCDevOps/discovery/tree/master/scripts).  This ensures that our local development environments and continuous integration and deployment environments are exactly the same, and easier to debug should issues arise.
 
 Right now for our hosted applications, we use [Cloud.gov](https://cloud.gov/) (built on Cloud Foundry) and use the popular Python buildpack, which gets installed on Cloud.gov managed base container images during deployment.  In the future, when we get access to a Docker image marketplace, we are going to switch to building and using Marketplace containers as our base images for local development, CI/CD, and remote hosting on Cloud.gov.  This will allow us to align all environments behind a common architecture through Docker images.
 
@@ -175,10 +175,6 @@ The [Redis datastore](https://redis.io/) is a popular structured in-memory data 
 
 ### How we use Redis
 
-We currently use Redis for two types of data storage that allow for different capabilities within the Discovery application.
-
-First, we use Redis as a task queue for storing tasks for Celery task processing servers to fetch and execute jobs.  Celery workers are constantly pulling tasks from this queue, and our Celery Beat scheduler adds them periodically based on configurations in the administrative interface for periodic tasks needing to be run during normal operations.
-
-We also use Redis as a session object store that allows for authentication across a load balanced collection of Django web servers.  All web servers store and retrieve session information from the Redis system so that state information for our administrative users can persist across connections in a round robin load balancing process.
+We currently use Redis as a task queue for storing tasks for Celery task processing servers to fetch and execute jobs.  Celery workers are constantly pulling tasks from this queue, and our Celery Beat scheduler adds them periodically based on configurations in the administrative interface for periodic tasks needing to be run during normal operations.
 
 <br/>
