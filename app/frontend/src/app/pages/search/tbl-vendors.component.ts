@@ -218,6 +218,7 @@ export class TblVendorsComponent implements OnInit, OnChanges {
     }
     return [];
   }
+
   buildVendorByVehicle(obj: any[]) {
     const vehicles_submitted = this.returnSubmittedVehicles();
     const results = {};
@@ -237,7 +238,8 @@ export class TblVendorsComponent implements OnInit, OnChanges {
         );
       } else {
         for (const i of item.pools) {
-          if (!results['vehicles'].includes(i.pool.vehicle.id)) {
+          var position = results['vehicles'].indexOf(i.pool.vehicle.id);
+          if (position === -1) {
             results['vehicles'].push(i.pool.vehicle.id);
           }
         }
@@ -272,6 +274,7 @@ export class TblVendorsComponent implements OnInit, OnChanges {
     results['vendors'] = vehicles;
     return results;
   }
+
   countVendorsByVehicle(vehicle: string) {
     const count = this.results.vendors.filter(
       item => item.vehicles.indexOf(vehicle) !== -1
@@ -286,23 +289,27 @@ export class TblVendorsComponent implements OnInit, OnChanges {
     }
     return arr.sort(this.searchService.sortByNameAsc);
   }
+
   returnVehicleVendors(obj: any[]) {
     const vendors = [];
     for (const item of obj) {
-      if (!vendors.includes(item.pool.vehicle.id)) {
+      var position = vendors.indexOf(item.pool.vehicle.id);
+      if (position === -1) {
         vendors.push(item.pool.vehicle.id);
       }
     }
     return vendors;
   }
+
   getViewingItems(): string {
     const start = this.getRowNum(this.current_page) - this.current_page;
     const end = start + this.num_results - 1;
     return start + ' - ' + end;
   }
+
   returnSetAside(arr: any[], code: string): boolean {
     if (arr.length > 0) {
-      return arr.includes(code);
+      return (arr.indexOf(code) >= 0) ? true : false;
     } else {
       return false;
     }
