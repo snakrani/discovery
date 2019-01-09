@@ -11,7 +11,7 @@ class PoolTest(case.APITestCase, metaclass = case.MetaAPISchema):
     schema = {
         'object': {
             'tags': ('pool_object',),
-            '&HCATS_1': ('name', 'iexact', 'HCATS Unrestricted Pool 1'),
+            '&HCATS_1': ('name', 'iexact', 'HCATS Pool 1'),
             '&BMO_4': ('name', 'iexact', 'Electrical Maintenance'),
             '&OASIS_SB_4': ('name', 'iexact', 'Scientific Research and Development'),
             '#345': (),

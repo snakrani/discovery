@@ -1349,7 +1349,7 @@
   "model": "categories.pool",
   "pk": "HCATS_1",
   "fields": {
-    "name": "HCATS Unrestricted Pool 1",
+    "name": "HCATS Pool 1",
     "number": "1",
     "vehicle": "HCATS",
     "threshold": "$11 million",
@@ -1548,7 +1548,7 @@
   "model": "categories.pool",
   "pk": "HCATS_2",
   "fields": {
-    "name": "HCATS Unrestricted Pool 2",
+    "name": "HCATS Pool 2",
     "number": "2",
     "vehicle": "HCATS",
     "threshold": "$15 million",

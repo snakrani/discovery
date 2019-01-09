@@ -175,8 +175,12 @@
               e-mail</a></span></td>
         <td><strong class="db">{{contract?.agency?.name | titlecase}}</strong></td>
 
-        <td>{{contract?.annual_revenue | currency: 'USD' : 'symbol' : '1.0'}}<br>{{contract.pricing_type?.name}}</td>
-
+        <td>{{contract?.annual_revenue | currency: 'USD' : 'symbol' : '1.0'}}
+          <div *ngIf="contract && contract.annual_revenue">
+              <br>
+          </div>
+          {{contract.pricing_type?.name}}
+        </td>
         <td [innerHTML]="setPoP(contract.place_of_performance)"></td>
         <td>
           {{contract?.NAICS}}
