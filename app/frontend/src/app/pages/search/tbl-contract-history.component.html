@@ -175,8 +175,8 @@
               e-mail</a></span></td>
         <td><strong class="db">{{contract?.agency?.name | titlecase}}</strong></td>
 
-        <td>{{contract?.annual_revenue | currency: 'USD' : 'symbol' : '1.0'}}
-          <div *ngIf="contract && contract.annual_revenue">
+        <td>{{contract?.obligated_amount | currency: 'USD' : 'symbol' : '1.0'}}
+          <div *ngIf="contract && contract.obligated_amount">
               <br>
           </div>
           {{contract.pricing_type?.name}}
