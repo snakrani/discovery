@@ -204,7 +204,7 @@ export class FilterServiceCategoriesComponent implements OnInit, OnChanges {
     if (this.items) {
       for (let i = 0; i < this.items.length; i++) {
         if (this.items[i][this.json_value] === value) {
-          return this.items[i][this.json_description];
+          return this.items[i]['vehicle'] + ' - ' +  this.items[i][this.json_description];
         }
       }
     }

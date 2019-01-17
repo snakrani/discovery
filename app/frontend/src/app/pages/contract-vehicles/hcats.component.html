@@ -30,8 +30,7 @@
       <h3>HCaTS and HCaTS SB Pool Disciplines</h3>
       <div *ngIf="pools.length===0">Loading...</div>
       <ul *ngIf="pools.length>0" class="usa-font-lead">
-        <li *ngFor="let pool of pools"><a [routerLink]="['/search']" [queryParams]="{vehicles: 'HCATS', service_categories: pool.id}">
-            {{pool.number}} - {{pool.name}}</a></li>
+        <li *ngFor="let pool of pools"><a (click)="routeToLink(pool, 'HCATS__HCATS_SB', 'HCATS_{pool_id}__HCATS_SB_{pool_id}')">{{pool.number}} - {{pool.name}}</a></li>
       </ul>
     </div>
     <div class="usa-width-one-fourth">
