@@ -135,7 +135,7 @@ export class FiltersComponent implements OnInit {
             .split('__');
 
           for (let i = 0; i < this.vehicles.length; i++) {
-            if (values.includes(this.vehicles[i]['id'])) {
+            if (values.indexOf(this.vehicles[i]['id']) !== -1) {
               this.vehicles[i]['checked'] = true;
               this.filterContractVehiclesComponent.addItem(
                 this.vehicles[i]['id'],
