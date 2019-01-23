@@ -18,7 +18,6 @@ import {
         display: block;
         padding-right: 25px;
         background-image: url(/frontend/assets/images/icon-sort-default.png);
-        background-image: url(/frontend/assets/images/icon-sort-default.svg);
         background-repeat: no-repeat;
         background-size: auto 20px;
         background-position: right center;
@@ -34,41 +33,35 @@ import {
     `
   ]
 })
-export class ThSortComponent implements OnChanges {
+export class ThSortComponent {
   @Input()
   label: string;
   @Input()
-  selectedParentOrdering: string;
+  table: any;
   @Input()
-  ordering: string;
+  orderBy: string;
   @Input()
   width = '90px';
   @Output()
   emmitOrdering: EventEmitter<any> = new EventEmitter();
   orderClass = '';
   constructor() {}
-  ngOnChanges() {
-    if (this.selectedParentOrdering !== this.ordering) {
-      this.reset();
-    }
-  }
+ 
   order() {
-    switch (this.orderClass) {
-      case '':
-        this.orderClass = 'asc';
-        this.emmitOrdering.emit({ ordering: this.ordering, sort: '' });
-        break;
+    if (this.table.orderBy !== this.orderBy) {
+      this.table.sortBy = 'asc';
+    }
+    switch (this.table.sortBy) {
       case 'asc':
         this.orderClass = 'desc';
-        this.emmitOrdering.emit({ ordering: this.ordering, sort: '-' });
+        this.table.sortBy = 'desc'
+        this.emmitOrdering.emit({ ordering: this.orderBy, sort: '' });
         break;
       case 'desc':
         this.orderClass = 'asc';
-        this.emmitOrdering.emit({ ordering: this.ordering, sort: '' });
+        this.table.sortBy = 'asc'
+        this.emmitOrdering.emit({ ordering: this.orderBy, sort: '-' });
         break;
     }
-  }
-  reset() {
-    this.orderClass = '';
   }
 }
