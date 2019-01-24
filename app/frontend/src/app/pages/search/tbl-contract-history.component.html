@@ -130,7 +130,7 @@
         </th>
         <th scope="col">
           <span class="tooltip">
-            <discovery-th-sort [label]="'Agency'" [width]="'auto'" [orderBy]="'agency_name'" 
+            <discovery-th-sort [label]="'Agency'" [width]="'auto'" [orderBy]="'agency__name'" 
              [table]="table" (emmitOrdering)="orderBy($event)"></discovery-th-sort>
             <span class="tooltiptext">Sort by Agency</span>
           </span>
@@ -145,7 +145,7 @@
         <th scope="col">
           <span class="tooltip">
             <discovery-th-sort [label]="'Place of Performance'" [width]="'auto'"
-             [orderBy]="'place_of_performance_location'" 
+             [orderBy]="'place_of_performance__state'" 
              [table]="table" (emmitOrdering)="orderBy($event)"></discovery-th-sort>
             <span class="tooltiptext">Sort by Place of Performance</span>
           </span>
