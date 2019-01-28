@@ -359,10 +359,12 @@ export class SearchComponent implements OnInit {
     let total_vendors = 0;
 
     for (const vehicle of vehicles) {
+      var selectedServiceCategory = this.getServiceCategoryFilterByVehicle(vehicle.id);
       this.searchService
         .getVehicleVendorsMeetCriteria(
           this.searchService.activeFilters,
-          vehicle.id
+          vehicle.id,
+          selectedServiceCategory
         )
         .subscribe(
           data => {
@@ -420,6 +422,32 @@ export class SearchComponent implements OnInit {
     }
   }
 
+  getServiceCategoryFilterByVehicle(vehicleId: any) {
+    let map = this.getCategoriesMap(vehicleId);
+    if(vehicleId.indexOf('SB') >= 0) {
+      return map.get('Small Business');
+    } else {
+      return map.get('Unrestricted');
+    }
+  }
+   
+  getCategoriesMap(vehicleId: any) {
+    let map = new Map()
+    for (const filter of this.searchService.activeFilters) {
+      if (filter['name'] === 'service_categories') {
+        for (const cat of filter['selected']) {
+          if(cat.value.indexOf('SB') >= 0) {
+            map.set('Small Business', cat['value'])
+          } else {
+            map.set('Unrestricted', cat['value'])
+          }
+        }
+      }
+    }
+    return map;
+  }
+  
+
   returnVehicleCountByVehicle(vehicle: string): any {
     let count = 0;
     for (const item of this.searchService.total_vendors_per_vehicle) {
@@ -434,7 +462,7 @@ export class SearchComponent implements OnInit {
     const vendor_totals = [];
     for (const vehicle of vehicles) {
       this.searchService
-        .getVehicleVendorsMeetCriteria([], vehicle.id)
+        .getVehicleVendorsMeetCriteria([], vehicle.id, '')
         .subscribe(
           data => {
             const item = {};
