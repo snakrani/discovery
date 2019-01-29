@@ -215,7 +215,7 @@ export class SearchService {
     if (vehicle) {
       params += '%28pool__vehicle__id=' + vehicle + '%29';
     }
-    params += this.buildOtherParams(filters, '');
+    params += this.buildOtherParams(filters);
     if (page) {
       params += page;
     }
@@ -227,7 +227,7 @@ export class SearchService {
         catchError(this.handleError)
       );
   }
-  buildOtherParams(filters, selectedServiceCategory): string {
+  buildOtherParams(filters): string {
     let params = '';
     for (const filter of filters) {
       if (filter['name'] === 'keywords') {
@@ -235,8 +235,10 @@ export class SearchService {
           params += '%26%28pool__keywords__id=' + keyword['value'] + '%29';
         }
       }
-      if (filter['name'] === 'service_categories' && selectedServiceCategory != '') {
-          params += '%26%28pool__id=' + selectedServiceCategory + '%29';
+      if (filter['name'] === 'service_categories') {
+        for (const cat of filter['selected']) {
+          params += '%26%28pool__id=' + cat['value'] + '%29';
+        }
       }
       if (filter['name'] === 'setasides') {
         for (const setaside of filter['selected']) {
@@ -285,12 +287,11 @@ export class SearchService {
   }
   getVehicleVendorsMeetCriteria(
     filters: any[],
-    vehicle: string,
-    selectedServiceCategory: string
+    vehicle: string
   ): Observable<any[]> {
     let params = '';
     params += '%28pool__vehicle__id=' + vehicle + '%29';
-    params += this.buildOtherParams(filters, selectedServiceCategory);
+    params += this.buildOtherParams(filters);
     console.log(this.apiUrl + 'vendors/count/duns?membership=' + params);
     return this.http
       .get<any[]>(this.apiUrl + 'vendors/count/duns?membership=' + params)
@@ -555,17 +556,6 @@ export class SearchService {
       return -1;
     }
   }
-  sortByNumberAsc(i1, i2) {
-    var number1 = parseInt(i1.number, 10);
-    var number2 = parseInt(i2.number, 10);
-    if (number1 > number2) {
-      return 1;
-    } else if (number1 === number2) {
-      return 0;
-    } else {
-      return -1;
-    }
-  }
   sortByCodeAsc(i1, i2) {
     if (i1.code > i2.code) {
       return 1;
@@ -601,8 +591,5 @@ export class SearchService {
     } else {
       return -1;
     }
-  }
-  formatServiceCategories(serviceCategories: string, poolNumber: any) {
-    return serviceCategories.replace(new RegExp('{pool_id}', 'g'), poolNumber);
   }
 }
