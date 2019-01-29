@@ -592,4 +592,15 @@ export class SearchService {
       return -1;
     }
   }
+  sortByNumberAsc(i1, i2) {	
+    var number1 = parseInt(i1.number, 10);	
+    var number2 = parseInt(i2.number, 10);	
+    if (number1 > number2) {	
+      return 1;	
+    } else if (number1 === number2) {	
+      return 0;	
+    } else {	
+      return -1;	
+    }	
+  }
 }
