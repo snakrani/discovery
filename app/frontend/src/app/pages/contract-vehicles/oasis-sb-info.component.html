@@ -28,7 +28,8 @@
       <h3>OASIS and OASIS SB Pool Disciplines</h3>
       <div *ngIf="pools.length===0">Loading...</div>
       <ul *ngIf="pools.length>0" class="usa-font-lead">
-        <li *ngFor="let pool of pools"><a (click)="routeToLink(pool, 'OASIS_SB__OASIS', 'OASIS_SB_{pool_id}__OASIS_{pool_id}')">{{pool.number}} - {{pool.name}}</a></li>
+        <li *ngFor="let pool of pools"><a [routerLink]="['/search']" [queryParams]="{vehicles: 'OASIS_SB', service_categories: pool.id}">
+            {{pool.number}} - {{pool.name}}</a></li>
       </ul>
     </div>
     <div class="usa-width-one-fourth">

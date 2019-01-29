@@ -23,7 +23,7 @@ export class PssComponent implements OnInit {
     this.searchService.getPoolsByVehicle(this.vehicle).subscribe(
       data => {
         this.pools = data['results'];
-        this.pools.sort(this.searchService.sortByNumberAsc);
+        this.pools.sort(this.searchService.sortByNameAsc);
       },
       error => (this.error_message = <any>error)
     );
