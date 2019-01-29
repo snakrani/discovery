@@ -215,7 +215,7 @@ export class SearchService {
     if (vehicle) {
       params += '%28pool__vehicle__id=' + vehicle + '%29';
     }
-    params += this.buildOtherParams(filters, '');
+    params += this.buildOtherParams(filters);
     if (page) {
       params += page;
     }
@@ -227,7 +227,7 @@ export class SearchService {
         catchError(this.handleError)
       );
   }
-  buildOtherParams(filters, selectedServiceCategory): string {
+  buildOtherParams(filters): string {
     let params = '';
     for (const filter of filters) {
       if (filter['name'] === 'keywords') {
@@ -235,8 +235,10 @@ export class SearchService {
           params += '%26%28pool__keywords__id=' + keyword['value'] + '%29';
         }
       }
-      if (filter['name'] === 'service_categories' && selectedServiceCategory != '') {
-          params += '%26%28pool__id=' + selectedServiceCategory + '%29';
+      if (filter['name'] === 'service_categories') {
+        for (const cat of filter['selected']) {
+          params += '%26%28pool__id=' + cat['value'] + '%29';
+        }
       }
       if (filter['name'] === 'setasides') {
         for (const setaside of filter['selected']) {
@@ -285,12 +287,11 @@ export class SearchService {
   }
   getVehicleVendorsMeetCriteria(
     filters: any[],
-    vehicle: string,
-    selectedServiceCategory: string
+    vehicle: string
   ): Observable<any[]> {
     let params = '';
     params += '%28pool__vehicle__id=' + vehicle + '%29';
-    params += this.buildOtherParams(filters, selectedServiceCategory);
+    params += this.buildOtherParams(filters);
     console.log(this.apiUrl + 'vendors/count/duns?membership=' + params);
     return this.http
       .get<any[]>(this.apiUrl + 'vendors/count/duns?membership=' + params)
