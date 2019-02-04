@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../search/search.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'discovery-oasis-sb-info',
@@ -17,7 +18,7 @@ export class OasisSbInfoComponent implements OnInit {
   pools: any[] = [];
   vehicle = 'OASIS_SB';
   error_message;
-  constructor(private searchService: SearchService) {}
+  constructor(private searchService: SearchService, private router: Router) {}
 
   ngOnInit() {
     this.searchService.getPoolsByVehicle(this.vehicle).subscribe(
@@ -27,5 +28,10 @@ export class OasisSbInfoComponent implements OnInit {
       },
       error => (this.error_message = <any>error)
     );
+  }
+
+  routeToLink(pool: any, vehicles: string, serviceCategories: string) {	
+    serviceCategories = this.searchService.formatServiceCategories(serviceCategories, pool.number);	
+    this.router.navigate(['/search'], { queryParams: { vehicles: vehicles, service_categories:serviceCategories }});	
   }
 }

@@ -603,4 +603,7 @@ export class SearchService {
       return -1;	
     }	
   }
+  formatServiceCategories(serviceCategories: string, poolNumber: any) {	
+    return serviceCategories.replace(new RegExp('{pool_id}', 'g'), poolNumber);	
+  }
 }
