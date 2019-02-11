@@ -359,10 +359,12 @@ export class SearchComponent implements OnInit {
     let total_vendors = 0;
 
     for (const vehicle of vehicles) {
+      var selectedServiceCategory = this.searchService.getServiceCategoryFilterByVehicle(vehicle.id);
       this.searchService
         .getVehicleVendorsMeetCriteria(
           this.searchService.activeFilters,
-          vehicle.id
+          vehicle.id,
+          selectedServiceCategory
         )
         .subscribe(
           data => {
@@ -433,8 +435,9 @@ export class SearchComponent implements OnInit {
     let count = 0;
     const vendor_totals = [];
     for (const vehicle of vehicles) {
+      var selectedServiceCategory = this.searchService.getServiceCategoryFilterByVehicle(vehicle.id);
       this.searchService
-        .getVehicleVendorsMeetCriteria([], vehicle.id)
+        .getVehicleVendorsMeetCriteria([], vehicle.id, selectedServiceCategory)
         .subscribe(
           data => {
             const item = {};
@@ -693,6 +696,7 @@ export class SearchComponent implements OnInit {
     return items.slice(0, -2);
   }
   viewVehicleVendors(vehicle: string) {
+    var filters = this.filters;
     this.sort_by = vehicle;
     this.viewVendors();
   }
