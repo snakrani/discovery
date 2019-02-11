@@ -215,7 +215,8 @@ export class SearchService {
     if (vehicle) {
       params += '%28pool__vehicle__id=' + vehicle + '%29';
     }
-    params += this.buildOtherParams(filters, '');
+    var selectedServiceCategory = this.getServiceCategoryFilterByVehicle(vehicle);
+    params += this.buildOtherParams(filters, selectedServiceCategory);
     if (page) {
       params += page;
     }
@@ -604,5 +605,29 @@ export class SearchService {
   }
   formatServiceCategories(serviceCategories: string, poolNumber: any) {	
     return serviceCategories.replace(new RegExp('{pool_id}', 'g'), poolNumber);	
+  }
+  getServiceCategoryFilterByVehicle(vehicleId: any) {
+    let map = this.getCategoriesMap(vehicleId);
+    if(vehicleId.indexOf('SB') >= 0) {
+      return map.get('Small Business');
+    } else {
+      return map.get('Unrestricted');
+    }
+  }
+   
+  getCategoriesMap(vehicleId: any) {
+    let map = new Map()
+    for (const filter of this.activeFilters) {
+      if (filter['name'] === 'service_categories') {
+        for (const cat of filter['selected']) {
+          if(cat.value.indexOf('SB') >= 0) {
+            map.set('Small Business', cat['value'])
+          } else {
+            map.set('Unrestricted', cat['value'])
+          }
+        }
+      }
+    }
+    return map;
   }
 }
