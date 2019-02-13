@@ -34,7 +34,7 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
   enable_paging = false;
   history_no_results = false;
   spinner = false;
-  ordering = '';
+  table = {orderBy:'', sortBy:'asc'};
   interval;
 
   constructor(private searchService: SearchService) {}
@@ -72,7 +72,7 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
         this.naic_code,
         this.country,
         this.state,
-        this.ordering
+        this.table.orderBy
       );
     }
   }
@@ -236,7 +236,7 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
   }
   orderBy(ordering: any[]) {
     const order_by = ordering['sort'] + ordering['ordering'];
-    this.ordering = ordering['ordering'];
+    this.table.orderBy = ordering['ordering'];
     this.getContracts(
       this.duns,
       1,
@@ -320,7 +320,7 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
       this.naic_code,
       this.country,
       this.state,
-      this.ordering
+      this.table.orderBy
     );
   }
   nextPage() {
@@ -331,7 +331,7 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
       this.naic_code,
       this.country,
       this.state,
-      this.ordering
+      this.table.orderBy
     );
   }
   getRowNum(n: number) {
@@ -390,7 +390,7 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
       this.naic_code,
       this.country,
       this.state,
-      this.ordering
+      this.table.orderBy
     );
     this.setParams();
   }
@@ -402,7 +402,7 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
       this.naic_code,
       this.country,
       this.state,
-      this.ordering
+      this.table.orderBy
     );
     this.setParams();
   }
@@ -417,7 +417,7 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
       this.naic_code,
       this.country,
       this.state,
-      this.ordering
+      this.table.orderBy
     );
     this.setParams();
   }

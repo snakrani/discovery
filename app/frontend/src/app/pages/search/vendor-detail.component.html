@@ -47,13 +47,13 @@
                   </blockquote>
                 </div>
                 <div class="usa-width-one-third">
-                  <h6 class="us`a-heading-alt">CAGE Code:</h6>
+                  <h6 class="usa-heading-alt">CAGE Code:</h6>
                   <blockquote>
                     <strong>{{ vendor?.cage }}</strong>
                   </blockquote>
                 </div>
                 <div class="usa-width-one-third">
-                  <div *ngIf="vendor.sam_location.address">
+                  <div *ngIf="vendor">
                     <h6 class="usa-heading-alt">Address:</h6>
                     <blockquote>
                       <strong>{{ vendor?.sam_location?.address }}</strong

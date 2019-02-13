@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../search/search.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'discovery-hcats',
@@ -17,15 +18,20 @@ export class HcatsComponent implements OnInit {
   pools: any[] = [];
   vehicle = 'HCATS';
   error_message;
-  constructor(private searchService: SearchService) {}
+  constructor(private searchService: SearchService, private router: Router) {}
 
   ngOnInit() {
     this.searchService.getPoolsByVehicle(this.vehicle).subscribe(
       data => {
         this.pools = data['results'];
-        this.pools.sort(this.searchService.sortByNameAsc);
+        this.pools.sort(this.searchService.sortByNumberAsc);
       },
       error => (this.error_message = <any>error)
     );
+  }
+
+  routeToLink(pool: any, vehicles: string, serviceCategories: string) {	
+    serviceCategories = this.searchService.formatServiceCategories(serviceCategories, pool.number);	
+    this.router.navigate(['/search'], { queryParams: { vehicles: vehicles, service_categories:serviceCategories }});	
   }
 }
