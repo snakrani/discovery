@@ -215,7 +215,8 @@ export class SearchService {
     if (vehicle) {
       params += '%28pool__vehicle__id=' + vehicle + '%29';
     }
-    params += this.buildOtherParams(filters);
+    var selectedServiceCategory = this.getServiceCategoryFilterByVehicle(vehicle);
+    params += this.buildOtherParams(filters, selectedServiceCategory);
     if (page) {
       params += page;
     }
@@ -227,7 +228,7 @@ export class SearchService {
         catchError(this.handleError)
       );
   }
-  buildOtherParams(filters): string {
+  buildOtherParams(filters, selectedServiceCategory): string {
     let params = '';
     for (const filter of filters) {
       if (filter['name'] === 'keywords') {
@@ -235,10 +236,8 @@ export class SearchService {
           params += '%26%28pool__keywords__id=' + keyword['value'] + '%29';
         }
       }
-      if (filter['name'] === 'service_categories') {
-        for (const cat of filter['selected']) {
-          params += '%26%28pool__id=' + cat['value'] + '%29';
-        }
+      if (filter['name'] === 'service_categories' && selectedServiceCategory != '') {
+          params += '%26%28pool__id=' + selectedServiceCategory + '%29';
       }
       if (filter['name'] === 'setasides') {
         for (const setaside of filter['selected']) {
@@ -287,11 +286,12 @@ export class SearchService {
   }
   getVehicleVendorsMeetCriteria(
     filters: any[],
-    vehicle: string
+    vehicle: string,
+    selectedServiceCategory: string
   ): Observable<any[]> {
     let params = '';
     params += '%28pool__vehicle__id=' + vehicle + '%29';
-    params += this.buildOtherParams(filters);
+    params += this.buildOtherParams(filters, selectedServiceCategory);
     console.log(this.apiUrl + 'vendors/count/duns?membership=' + params);
     return this.http
       .get<any[]>(this.apiUrl + 'vendors/count/duns?membership=' + params)
@@ -602,5 +602,32 @@ export class SearchService {
     } else {	
       return -1;	
     }	
+  }
+  formatServiceCategories(serviceCategories: string, poolNumber: any) {	
+    return serviceCategories.replace(new RegExp('{pool_id}', 'g'), poolNumber);	
+  }
+  getServiceCategoryFilterByVehicle(vehicleId: any) {
+    let map = this.getCategoriesMap(vehicleId);
+    if(vehicleId.indexOf('SB') >= 0) {
+      return map.get('Small Business');
+    } else {
+      return map.get('Unrestricted');
+    }
+  }
+   
+  getCategoriesMap(vehicleId: any) {
+    let map = new Map()
+    for (const filter of this.activeFilters) {
+      if (filter['name'] === 'service_categories') {
+        for (const cat of filter['selected']) {
+          if(cat.value.indexOf('SB') >= 0) {
+            map.set('Small Business', cat['value'])
+          } else {
+            map.set('Unrestricted', cat['value'])
+          }
+        }
+      }
+    }
+    return map;
   }
 }
