@@ -317,6 +317,7 @@ class VendorFilter(VendorBaseFilter):
             query = qstring.split('=')
             try:
                 queryParameters[query[0]] = query[1]
+                ms_querysets.append(ms_queryset.filter(**{query[0]: query[1]}))	
             except ValidationError as exc:
                 errors[qstring] = exc.detail
 
@@ -325,9 +326,6 @@ class VendorFilter(VendorBaseFilter):
 
         if(len(poolIds) <= 1):
             try:
-                for k, v in queryParameters.items():
-                    ms_querysets.append(ms_queryset.filter(**{k: v}))
-                    
                 ms_queryset = combine_complex_queryset(ms_querysets, complex_ops)
                 ms_ids = list(ms_queryset.values_list('id', flat=True))
             except ValidationError as exc:
