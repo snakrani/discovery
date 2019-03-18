@@ -14,7 +14,6 @@ from vendors import models as vendors
 from contracts import models as contracts
 
 import re
-import itertools
 import logging
 
 
