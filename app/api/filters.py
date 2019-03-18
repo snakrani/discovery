@@ -14,6 +14,8 @@ from vendors import models as vendors
 from contracts import models as contracts
 
 import re
+import itertools
+import logging
 
 
 def filter_operators():
@@ -272,9 +274,33 @@ class VendorFilter(VendorBaseFilter):
     
     membership = CharFilter(field_name='membership', method='filter_membership')
 
+    logger = logging.getLogger('django')
+
+    def getMebershipIds(self, poolIds):
+        ms_ids = list()
+        ms_queryset = vendors.PoolMembership.objects.filter(pool__id__in=poolIds)
+        self.logger.error(" first query {} ".format(ms_queryset.query))
+        vendorIds = {}
+        poolMembershipIdsByVendors = {}
+        for membership in ms_queryset:
+            if membership.vendor_id in vendorIds: 
+                vendorIds[membership.vendor_id] += 1
+                poolMembershipIdsByVendors[membership.vendor_id].append(membership.id)
+            else: 
+                vendorIds[membership.vendor_id] = 1
+                membershipIds = [membership.id]
+                poolMembershipIdsByVendors[membership.vendor_id] = membershipIds
+                
+        for key, value in vendorIds.items(): 
+            if value == len(poolIds):
+                for membershipId in poolMembershipIdsByVendors.get(key):
+                    ms_ids.append(membershipId)
         
+        return ms_ids
+
+
     def filter_membership(self, qs, name, value):
-        # Decode complex membership query
+        
         try:
             complex_ops = decode_complex_ops(value, filter_operators(), True)
         except ValidationError as exc:
@@ -285,26 +311,46 @@ class VendorFilter(VendorBaseFilter):
         ms_queryset = vendors.PoolMembership.objects.all()
         ms_querysets = []
         errors = []
-        
+        poolIds = []
+        queryParameters = {}
+
         for qstring in querystrings:
             query = qstring.split('=')
-            
             try:
-                ms_querysets.append(ms_queryset.filter(**{query[0]: query[1]}))
+                queryParameters[query[0]] = query[1]
             except ValidationError as exc:
                 errors[qstring] = exc.detail
-    
+
+        if 'pool__id' in queryParameters.keys(): 
+            poolIds = queryParameters.get('pool__id').split(",")
+
+        if(len(poolIds) <= 1):
+            try:
+                for k, v in queryParameters.items():
+                    ms_querysets.append(ms_queryset.filter(**{k: v}))
+                    
+                ms_queryset = combine_complex_queryset(ms_querysets, complex_ops)
+                ms_ids = list(ms_queryset.values_list('id', flat=True))
+            except ValidationError as exc:
+                errors[qstring] = exc.detail
+        else:       
+            try:
+                ms_ids = self.getMebershipIds(poolIds)
+                self.logger.error(" ids {} ".format(ms_ids))
+                if len(ms_ids) == 0:
+                    qs = qs.filter(pools__id=0)
+                    return qs
+
+            except ValidationError as exc:
+                errors[qstring] = exc.detail
+     
         if errors:
-            raise ValidationError(errors)
+            raise ValidationError(errors)           
         
-        # Retrieve a list of membership ids matching query   
-        ms_queryset = combine_complex_queryset(ms_querysets, complex_ops)
-        ms_ids = list(ms_queryset.values_list('id', flat=True))
-        
-        # Filter vendors by membership
         if len(querystrings) > 0:
             qs = qs.filter(pools__id__in=ms_ids)
-        
+            self.logger.error(" query {} ".format(qs.query))
+            
         return qs
 
         
