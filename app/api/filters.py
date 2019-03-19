@@ -275,9 +275,9 @@ class VendorFilter(VendorBaseFilter):
 
     logger = logging.getLogger('django')
 
-    def getMebershipIds(self, poolIds):
+    def getMebershipIds(self, poolVehcileId, poolIds):
         ms_ids = list()
-        ms_queryset = vendors.PoolMembership.objects.filter(pool__id__in=poolIds)
+        ms_queryset = vendors.PoolMembership.objects.filter(pool__id__in=poolIds, pool__vehicle__id=poolVehcileId)
         self.logger.error(" first query {} ".format(ms_queryset.query))
         vendorIds = {}
         poolMembershipIdsByVendors = {}
@@ -332,7 +332,8 @@ class VendorFilter(VendorBaseFilter):
                 errors[qstring] = exc.detail
         else:       
             try:
-                ms_ids = self.getMebershipIds(poolIds)
+                poolVehcileId = queryParameters.get('pool__vehicle__id')
+                ms_ids = self.getMebershipIds(poolVehcileId, poolIds)
                 self.logger.error(" ids {} ".format(ms_ids))
                 if len(ms_ids) == 0:
                     qs = qs.filter(pools__id=0)
