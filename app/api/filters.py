@@ -279,22 +279,38 @@ class VendorFilter(VendorBaseFilter):
         ms_ids = list()
         ms_queryset = vendors.PoolMembership.objects.filter(pool__id__in=poolIds, pool__vehicle__id=poolVehcileId)
         self.logger.error(" first query {} ".format(ms_queryset.query))
-        vendorIds = {}
+        vendorIdsByPool = {}
         poolMembershipIdsByVendors = {}
         for membership in ms_queryset:
-            if membership.vendor_id in vendorIds: 
-                vendorIds[membership.vendor_id] += 1
-                poolMembershipIdsByVendors[membership.vendor_id].append(membership.id)
+            if membership.pool_id in vendorIdsByPool: 
+                vendorIdsByPool[membership.pool_id].add(membership.vendor_id)
             else: 
-                vendorIds[membership.vendor_id] = 1
+                vendorIds = set()
+                vendorIds.add(membership.vendor_id)
+                vendorIdsByPool[membership.pool_id] = vendorIds
+
+            if membership.vendor_id in poolMembershipIdsByVendors:
+                poolMembershipIdsByVendors[membership.vendor_id].append(membership.id)
+            else:
                 membershipIds = [membership.id]
                 poolMembershipIdsByVendors[membership.vendor_id] = membershipIds
                 
-        for key, value in vendorIds.items(): 
-            if value == len(poolIds):
-                for membershipId in poolMembershipIdsByVendors.get(key):
-                    ms_ids.append(membershipId)
+        self.logger.error(" vendorIdsByPool {} ".format(vendorIdsByPool))   
+
+        vendorIdIntersections = set()
+        checkFirstIteration = True
+        for key in vendorIdsByPool: 
+            if checkFirstIteration:
+                vendorIdIntersections = vendorIdsByPool.get(key)
+                checkFirstIteration = False
+            else:
+                vendorIdIntersections = vendorIdIntersections & vendorIdsByPool.get(key)
+                
+        self.logger.error(" intersections {} ".format(vendorIdIntersections))
         
+        for vendorId in vendorIdIntersections:
+            ms_ids.extend(poolMembershipIdsByVendors.get(vendorId))
+
         return ms_ids
 
 
@@ -346,8 +362,9 @@ class VendorFilter(VendorBaseFilter):
             raise ValidationError(errors)           
         
         if len(querystrings) > 0:
-            qs = qs.filter(pools__id__in=ms_ids)
-            # self.logger.error(" query {} ".format(qs.query))
+            if ms_ids:
+                qs = qs.filter(pools__id__in=ms_ids)
+                self.logger.error(" query {} ".format(qs.query))
             
         return qs
 
