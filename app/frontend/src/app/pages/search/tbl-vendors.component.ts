@@ -93,16 +93,28 @@ export class TblVendorsComponent implements OnInit, OnChanges {
     return filters;
   }
 
+  getCategories(selectedCategories) {
+    let categories = {};
+    for (const category of selectedCategories) {
+      categories[category.value] = category.description;
+    }
+    return categories;
+  }
+
   poolMeetCriteria(pools: any[]): string {
     const categories = [];
     let str = '';
+    let vehicles = this.searchService.getServiceCategoryFilterByVehicle(this.vehicle);
+    let selectedCategories = this.getCategories(this.service_categories_selected);
+
     for (const pool of pools) {
-      for (const category of this.service_categories_selected) {
-        if (pool === category.value) {
+      for (const vehicle of vehicles) {
+        let serviceCategory = selectedCategories[vehicle];
+        if (pool === vehicle) {
           if (
-            !this.searchService.existsIn(categories, category.description, '')
+            !this.searchService.existsIn(categories, serviceCategory, '')
           ) {
-            categories.push(category.description);
+            categories.push(serviceCategory);
           }
         }
       }
