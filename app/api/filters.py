@@ -362,9 +362,8 @@ class VendorFilter(VendorBaseFilter):
             raise ValidationError(errors)           
         
         if len(querystrings) > 0:
-            if ms_ids:
-                qs = qs.filter(pools__id__in=ms_ids)
-                self.logger.error(" query {} ".format(qs.query))
+            qs = qs.filter(pools__id__in=ms_ids)
+            self.logger.error(" query {} ".format(qs.query))
             
         return qs
 
