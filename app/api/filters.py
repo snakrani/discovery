@@ -363,7 +363,7 @@ class VendorFilter(VendorBaseFilter):
         
         if len(querystrings) > 0:
             qs = qs.filter(pools__id__in=ms_ids)
-            self.logger.error(" query {} ".format(qs.query))
+            # self.logger.error(" query {} ".format(qs.query))
             
         return qs
 
