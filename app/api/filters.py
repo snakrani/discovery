@@ -277,7 +277,7 @@ class VendorFilter(VendorBaseFilter):
 
     def getMebershipIds(self, poolVehcileId, poolIds):
         ms_ids = list()
-        ms_queryset = vendors.PoolMembership.objects.filter(pool__id__in=poolIds, pool__vehicle__id=poolVehcileId)
+        ms_queryset = vendors.PoolMembership.objects.filter(pool__id__in=poolIds, pool__vehicle__id=poolVehcileId).only("vendor_id", "pool_id")
         self.logger.error(" first query {} ".format(ms_queryset.query))
         vendorIdsByPool = {}
         poolMembershipIdsByVendors = {}
