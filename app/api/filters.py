@@ -273,12 +273,10 @@ class VendorFilter(VendorBaseFilter):
     
     membership = CharFilter(field_name='membership', method='filter_membership')
 
-    logger = logging.getLogger('django')
-
     def getMebershipIds(self, poolVehcileId, poolIds):
         ms_ids = list()
         ms_queryset = vendors.PoolMembership.objects.filter(pool__id__in=poolIds, pool__vehicle__id=poolVehcileId).only("vendor_id", "pool_id")
-        self.logger.error(" first query {} ".format(ms_queryset.query))
+        
         vendorIdsByPool = {}
         poolMembershipIdsByVendors = {}
         for membership in ms_queryset:
@@ -295,8 +293,6 @@ class VendorFilter(VendorBaseFilter):
                 membershipIds = [membership.id]
                 poolMembershipIdsByVendors[membership.vendor_id] = membershipIds
                 
-        self.logger.error(" vendorIdsByPool {} ".format(vendorIdsByPool))   
-
         vendorIdIntersections = set()
         checkFirstIteration = True
         for key in vendorIdsByPool: 
@@ -306,8 +302,6 @@ class VendorFilter(VendorBaseFilter):
             else:
                 vendorIdIntersections = vendorIdIntersections & vendorIdsByPool.get(key)
                 
-        self.logger.error(" intersections {} ".format(vendorIdIntersections))
-        
         for vendorId in vendorIdIntersections:
             ms_ids.extend(poolMembershipIdsByVendors.get(vendorId))
 
@@ -350,7 +344,6 @@ class VendorFilter(VendorBaseFilter):
             try:
                 poolVehcileId = queryParameters.get('pool__vehicle__id')
                 ms_ids = self.getMebershipIds(poolVehcileId, poolIds)
-                self.logger.error(" ids {} ".format(ms_ids))
                 if len(ms_ids) == 0:
                     qs = qs.filter(pools__id=0)
                     return qs
