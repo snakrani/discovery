@@ -617,10 +617,12 @@ export class SearchService {
     for (const filter of this.activeFilters) {
       if (filter['name'] === 'service_categories') {
         for (const cat of filter['selected']) {
-          if(cat.value.indexOf('SB') >= 0) {
-            smallBusinessServiceCategories.push(cat['value']);
-          } else {
-            unrestrictedServiceCategories.push(cat['value']);
+          if(cat.value.indexOf(vehicleId) >= 0) {
+            if(cat.value.indexOf('SB') >= 0) {
+              smallBusinessServiceCategories.push(cat['value']);
+            } else {
+              unrestrictedServiceCategories.push(cat['value']);
+            }
           }
         }
       }
