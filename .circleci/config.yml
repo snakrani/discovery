@@ -262,7 +262,7 @@ jobs:
       - run:
           name: Deploy staging applications
           command: |
-            ./scripts/deploy-staging.sh
+            chmod +x ./scripts/deploy-staging.sh
 
       - store_artifacts:
           <<: *logging
