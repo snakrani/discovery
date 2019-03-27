@@ -249,6 +249,25 @@ jobs:
           <<: *logging
           destination: dev-deploy-reports
 
+  dep-stage:
+    <<: *deployer
+
+    steps:
+      - run: *core
+      - checkout
+      - run: *django
+      - run: *angular
+      - run: *cloudfoundry
+
+      - run:
+          name: Deploy staging applications
+          command: |
+            ./scripts/deploy-staging.sh
+
+      - store_artifacts:
+          <<: *logging
+          destination: staging-deploy-reports
+
   dep-prod:
     <<: *deployer
 
@@ -330,3 +349,16 @@ workflows:
               only:
                 - master
                 - docs
+      - dep-stage:
+          requires:
+            - ut-components
+            - ut-core-api
+            - ut-api-fields
+            - ut-api-values
+            - ut-frontend
+            - at-backend
+            - at-frontend
+          filters:
+            branches:
+              only:
+                - staging
