@@ -4,4 +4,4 @@ inherit: base-web-manifest.yml
 applications:
 - name: discovery-web
   host: discovery-dev
-  instances: 2
+  instances: 1
