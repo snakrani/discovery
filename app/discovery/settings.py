@@ -67,7 +67,7 @@ TEMPLATE_DEBUG = False
 #
 # General configurations
 #
-SECRET_KEY = config_value('SECRET_KEY', '')
+SECRET_KEY = config_value('SECRET_KEY', 'p0s8&fbl3s&w8iezdxay^yr3zrl82lne@c3(7)$zy&ctk&j-r8')
 APPEND_SLASH = True
 
 #
