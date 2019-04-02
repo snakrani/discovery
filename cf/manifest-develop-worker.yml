@@ -1,5 +1,5 @@
 ---
-inherit: base-worker-test-manifest.yml
+inherit: base-worker-manifest.yml
 
 applications:
 - name: discovery-worker
