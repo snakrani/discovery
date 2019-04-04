@@ -14,6 +14,7 @@ from vendors import models as vendors
 from contracts import models as contracts
 
 import re
+import logging
 
 
 def filter_operators():
@@ -272,9 +273,43 @@ class VendorFilter(VendorBaseFilter):
     
     membership = CharFilter(field_name='membership', method='filter_membership')
 
+    def getMebershipIds(self, poolVehcileId, poolIds):
+        ms_ids = list()
+        ms_queryset = vendors.PoolMembership.objects.filter(pool__id__in=poolIds, pool__vehicle__id=poolVehcileId).only("vendor_id", "pool_id")
         
+        vendorIdsByPool = {}
+        poolMembershipIdsByVendors = {}
+        for membership in ms_queryset:
+            if membership.pool_id in vendorIdsByPool: 
+                vendorIdsByPool[membership.pool_id].add(membership.vendor_id)
+            else: 
+                vendorIds = set()
+                vendorIds.add(membership.vendor_id)
+                vendorIdsByPool[membership.pool_id] = vendorIds
+
+            if membership.vendor_id in poolMembershipIdsByVendors:
+                poolMembershipIdsByVendors[membership.vendor_id].append(membership.id)
+            else:
+                membershipIds = [membership.id]
+                poolMembershipIdsByVendors[membership.vendor_id] = membershipIds
+                
+        vendorIdIntersections = set()
+        checkFirstIteration = True
+        for key in vendorIdsByPool: 
+            if checkFirstIteration:
+                vendorIdIntersections = vendorIdsByPool.get(key)
+                checkFirstIteration = False
+            else:
+                vendorIdIntersections = vendorIdIntersections & vendorIdsByPool.get(key)
+                
+        for vendorId in vendorIdIntersections:
+            ms_ids.extend(poolMembershipIdsByVendors.get(vendorId))
+
+        return ms_ids
+
+
     def filter_membership(self, qs, name, value):
-        # Decode complex membership query
+        
         try:
             complex_ops = decode_complex_ops(value, filter_operators(), True)
         except ValidationError as exc:
@@ -285,26 +320,43 @@ class VendorFilter(VendorBaseFilter):
         ms_queryset = vendors.PoolMembership.objects.all()
         ms_querysets = []
         errors = []
-        
+        poolIds = []
+        queryParameters = {}
+
         for qstring in querystrings:
             query = qstring.split('=')
-            
             try:
-                ms_querysets.append(ms_queryset.filter(**{query[0]: query[1]}))
+                queryParameters[query[0]] = query[1]
+                ms_querysets.append(ms_queryset.filter(**{query[0]: query[1]}))	
             except ValidationError as exc:
                 errors[qstring] = exc.detail
-    
+
+        if 'pool__id' in queryParameters.keys(): 
+            poolIds = queryParameters.get('pool__id').split(",")
+
+        if(len(poolIds) <= 1):
+            try:
+                ms_queryset = combine_complex_queryset(ms_querysets, complex_ops)
+                ms_ids = list(ms_queryset.values_list('id', flat=True))
+            except ValidationError as exc:
+                errors[qstring] = exc.detail
+        else:       
+            try:
+                poolVehcileId = queryParameters.get('pool__vehicle__id')
+                ms_ids = self.getMebershipIds(poolVehcileId, poolIds)
+                if len(ms_ids) == 0:
+                    qs = qs.filter(pools__id=0)
+                    return qs
+
+            except ValidationError as exc:
+                errors[qstring] = exc.detail
+     
         if errors:
-            raise ValidationError(errors)
+            raise ValidationError(errors)           
         
-        # Retrieve a list of membership ids matching query   
-        ms_queryset = combine_complex_queryset(ms_querysets, complex_ops)
-        ms_ids = list(ms_queryset.values_list('id', flat=True))
-        
-        # Filter vendors by membership
         if len(querystrings) > 0:
             qs = qs.filter(pools__id__in=ms_ids)
-        
+
         return qs
 
         

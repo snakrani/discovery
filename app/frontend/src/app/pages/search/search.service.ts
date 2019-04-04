@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, tap, delay } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PARAMETERS } from '@angular/core/src/util/decorators';
+import { stringify } from '@angular/compiler/src/util';
 declare let API_HOST: string;
 declare const $: any;
 @Injectable({
@@ -228,7 +229,7 @@ export class SearchService {
         catchError(this.handleError)
       );
   }
-  buildOtherParams(filters, selectedServiceCategory): string {
+  buildOtherParams(filters, selectedServiceCategories: string[]): string {
     let params = '';
     for (const filter of filters) {
       if (filter['name'] === 'keywords') {
@@ -236,8 +237,10 @@ export class SearchService {
           params += '%26%28pool__keywords__id=' + keyword['value'] + '%29';
         }
       }
-      if (filter['name'] === 'service_categories' && selectedServiceCategory != '') {
-          params += '%26%28pool__id=' + selectedServiceCategory + '%29';
+      if (filter['name'] === 'service_categories') {
+        if(selectedServiceCategories.length > 0) {
+          params += '%26%28pool__id=' + selectedServiceCategories.join() + '%29';
+        }
       }
       if (filter['name'] === 'setasides') {
         for (const setaside of filter['selected']) {
@@ -287,7 +290,7 @@ export class SearchService {
   getVehicleVendorsMeetCriteria(
     filters: any[],
     vehicle: string,
-    selectedServiceCategory: string
+    selectedServiceCategory: string[]
   ): Observable<any[]> {
     let params = '';
     params += '%28pool__vehicle__id=' + vehicle + '%29';
@@ -606,28 +609,28 @@ export class SearchService {
   formatServiceCategories(serviceCategories: string, poolNumber: any) {	
     return serviceCategories.replace(new RegExp('{pool_id}', 'g'), poolNumber);	
   }
-  getServiceCategoryFilterByVehicle(vehicleId: any) {
-    let map = this.getCategoriesMap(vehicleId);
-    if(vehicleId.indexOf('SB') >= 0) {
-      return map.get('Small Business');
-    } else {
-      return map.get('Unrestricted');
-    }
-  }
    
-  getCategoriesMap(vehicleId: any) {
-    let map = new Map()
+  getServiceCategoryFilterByVehicle(vehicleId: any) {
+    let smallBusinessServiceCategories:string[] = [];
+    let unrestrictedServiceCategories:string[] = [];
+    let isSmallBusiness = vehicleId.indexOf('SB') >= 0 ? true : false;
     for (const filter of this.activeFilters) {
       if (filter['name'] === 'service_categories') {
         for (const cat of filter['selected']) {
-          if(cat.value.indexOf('SB') >= 0) {
-            map.set('Small Business', cat['value'])
-          } else {
-            map.set('Unrestricted', cat['value'])
+          if(cat.value.indexOf(vehicleId) >= 0) {
+            if(cat.value.indexOf('SB') >= 0) {
+              smallBusinessServiceCategories.push(cat['value']);
+            } else {
+              unrestrictedServiceCategories.push(cat['value']);
+            }
           }
         }
       }
     }
-    return map;
+    if(isSmallBusiness) {
+      return smallBusinessServiceCategories;
+    } else {
+      return unrestrictedServiceCategories;
+    }
   }
 }
