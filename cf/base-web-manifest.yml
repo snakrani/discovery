@@ -2,7 +2,7 @@
 inherit: base-manifest.yml
 
 command: scripts/init-webserver.sh /dev/stderr && cd app && waitress-serve --expose-tracebacks --url-scheme=https --port=$PORT discovery.wsgi:application
-memory: 256M
+memory: 512M
 services:
   - discovery-config
   - discovery-db
