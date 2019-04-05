@@ -82,6 +82,7 @@
           [items]="vehicles"
           (emmitSelected)="activateSubmit($event)"
           (emmitItem)="filterOthersByVehicles($event)"
+          (emmitVehicle)="removeServiceCategories($event)"
           (emmitLoaded)="getResults($event)"
         ></discovery-filter-contract-vehicles>
       </li>
