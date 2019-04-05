@@ -218,6 +218,7 @@ export class FilterServiceCategoriesComponent implements OnInit, OnChanges {
     this.emmitSelected.emit(1);
     this.msgAddedItem.showMsg();
   }
+
   removeItem(key: string) {
     for (let i = 0; i < this.items_selected.length; i++) {
       if (this.items_selected[i]['value'] === key) {
@@ -226,4 +227,24 @@ export class FilterServiceCategoriesComponent implements OnInit, OnChanges {
     }
     this.emmitSelected.emit(0);
   }
+
+  removeItems(key: string) {
+    var isSmallBusiness = key.includes('SB');
+    if(isSmallBusiness) {
+      for (let i = this.items_selected.length -1; i>=0 ; i--) {
+        if (this.items_selected[i]['value'].includes(key)) {
+          this.items_selected.splice(i, 1);
+        }
+      }
+    }
+    else {
+      for (let i = this.items_selected.length -1; i>=0 ; i--) {
+        if (this.items_selected[i]['value'].includes(key) && !this.items_selected[i]['value'].includes('SB')) {
+          this.items_selected.splice(i, 1);
+        }
+      }
+    }
+    this.emmitSelected.emit(0);
+  }
+
 }

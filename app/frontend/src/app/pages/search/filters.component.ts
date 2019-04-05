@@ -224,9 +224,15 @@ export class FiltersComponent implements OnInit {
     this.filterNaicsComponent.setFilteredItems(arr);
     this.filterPscComponent.setFilteredItems(arr);
   }
+
   selectContractVehicleInFilter(vehicle: string) {
     this.filterContractVehiclesComponent.selectItem(vehicle);
   }
+
+  removeServiceCategories(vehicle: string) {
+    this.filterServiceCategories.removeItems(vehicle);
+  }
+
   getServiceCategories() {
     const service_categories = this.filterServiceCategories.getItems();
     return service_categories;
