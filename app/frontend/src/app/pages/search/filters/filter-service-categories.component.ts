@@ -245,6 +245,8 @@ export class FilterServiceCategoriesComponent implements OnInit, OnChanges {
       }
     }
     this.emmitSelected.emit(0);
+    if(this.items_selected.length == 0) {
+      this.category = '0';
+    }
   }
-
 }
