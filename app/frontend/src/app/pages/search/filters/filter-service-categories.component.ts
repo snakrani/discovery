@@ -234,6 +234,7 @@ export class FilterServiceCategoriesComponent implements OnInit, OnChanges {
       for (let i = this.items_selected.length -1; i>=0 ; i--) {
         if (this.items_selected[i]['value'].includes(key)) {
           this.items_selected.splice(i, 1);
+          this.emmitSelected.emit(0);
         }
       }
     }
@@ -241,12 +242,12 @@ export class FilterServiceCategoriesComponent implements OnInit, OnChanges {
       for (let i = this.items_selected.length -1; i>=0 ; i--) {
         if (this.items_selected[i]['value'].includes(key) && !this.items_selected[i]['value'].includes('SB')) {
           this.items_selected.splice(i, 1);
+          this.emmitSelected.emit(0);
         }
       }
     }
-    this.emmitSelected.emit(0);
     if(this.items_selected.length == 0) {
       this.category = '0';
-    }
+    } 
   }
 }
