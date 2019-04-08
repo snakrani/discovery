@@ -7,7 +7,7 @@
 
     <div>
       <select id="select_categories" title="Select Category" [disabled]="!items" [(ngModel)]="category" class="items-input">
-        <option value="0" selected="selected">Select Category --</option>
+        <option id="default" value="0" selected="selected">Select Category --</option>
         <option *ngFor="let item of items_filtered" value="{{item.id}}">{{item.vehicle + ' - ' +
           item.name}}</option>
       </select>
