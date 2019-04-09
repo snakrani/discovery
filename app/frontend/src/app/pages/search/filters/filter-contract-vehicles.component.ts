@@ -30,9 +30,12 @@ export class FilterContractVehiclesComponent implements OnInit, OnChanges {
   @Output()
   emmitSelected: EventEmitter<number> = new EventEmitter();
   @Output()
+  emmitVehicle: EventEmitter<string> = new EventEmitter();
+  @Output()
   emmitLoaded: EventEmitter<string> = new EventEmitter();
   @Output()
   emmitItem: EventEmitter<any> = new EventEmitter();
+
   name = 'Contract Vehicles';
   queryName = 'vehicles';
   id = 'filter-vehicles';
@@ -145,6 +148,7 @@ export class FilterContractVehiclesComponent implements OnInit, OnChanges {
       this.addItem(key, title);
     } else {
       this.removeItem(key);
+      this.emmitVehicle.emit(key);
     }
     if (this._items_selected.length === 0) {
       /** If none are selected, get All */
