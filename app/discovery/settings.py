@@ -28,7 +28,7 @@ PROJ_DIR = os.path.dirname(BASE_DIR)
 #
 API_HOST = config_value('API_HOST', '')
 
-SAM_API_URL = "https://api.data.gov/sam/v1/registrations/"
+SAM_API_URL = "https://api.data.gov/sam/v8/registrations/"
 SAM_API_KEY = config_value('SAM_API_KEY', '')
 
 #
