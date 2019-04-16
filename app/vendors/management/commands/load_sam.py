@@ -24,7 +24,8 @@ import re
 
 
 warnings.filterwarnings('ignore')
-
+successCount = 0
+failuresCount = 0
 
 def vendor_logger():
     return logging.getLogger('vendor')
@@ -159,8 +160,11 @@ class Command(BaseCommand):
     def update_vendor(self, vendor, options):
         logger = vendor_logger()
         sam_data, sam_loaded = self.load_sam_data(vendor.duns_4, options)
-        
+        global successCount
+        global failuresCount
+
         if 'registration' in sam_data:
+            
             print("[ {} ] - Updating SAM vendor: {}".format(vendor.id, vendor.name))
             log_memory("Starting vendor [ {} | {} ]".format(vendor.id, vendor.name))
         
@@ -188,12 +192,17 @@ class Command(BaseCommand):
                 vendor.sam_url = 'http://' + vendor.sam_url
 
             vendor.save()
-            
+
+            logger.error("record saved for {}".format(vendor.duns_4))
+            logger.error("{}".format(vendor.duns_4))
+
+            successCount = successCount + 1
             sam_load, created = SamLoad.objects.get_or_create(vendor = vendor)
             sam_load.load_time = datetime.now()
             sam_load.save()
                       
             log_memory("Final vendor [ {} | {} ]".format(vendor.id, vendor.name))
+            logger.error("SuccessCountInsideSuccess {}".format(successCount))
             log_data(vendor.name,
                 vendor.duns,
                 vendor.duns_4,
@@ -210,11 +219,18 @@ class Command(BaseCommand):
                 vendor.sam_url
             )
         else:
+            failuresCount = failuresCount + 1
             logger.error("'registration' key is missing for {} / {}".format(vendor.id, vendor.duns_4))
+            logger.error("FailureCount {}".format(failuresCount))
+            logger.error("SuccessCount {}".format(successCount))
+
         
 
     def handle(self, *args, **options):
         print("-------BEGIN LOAD_SAM PROCESS-------")
+        global successCount
+        global failuresCount
+        logger = vendor_logger()
         log_memory('Start')        
         log_data('Name', 
             'DUNS', 
@@ -244,6 +260,10 @@ class Command(BaseCommand):
         except Exception as e:
             display_error(e)
             raise
+        
+        finally:
+            logger.error("FailureCountLast {}".format(failuresCount))
+            logger.error("SuccessCountLast {}".format(successCount))
 
         print("-------END LOAD_SAM PROCESS-------")
         log_memory('End')
