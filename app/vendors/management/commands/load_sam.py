@@ -192,6 +192,10 @@ class Command(BaseCommand):
                 vendor.sam_url = 'http://' + vendor.sam_url
 
             vendor.save()
+
+            logger.error("record saved for {}".format(vendor.duns_4))
+            logger.error("{}".format(vendor.duns_4))
+
             successCount = successCount + 1
             sam_load, created = SamLoad.objects.get_or_create(vendor = vendor)
             sam_load.load_time = datetime.now()
