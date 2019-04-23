@@ -179,10 +179,10 @@ class Command(BaseCommand):
             addr = get_value(reg, 'samAddress', vendor)
             if addr:
                 location, created = Location.objects.get_or_create(
-                    address = get_value(addr, 'Line1', vendor, '').strip().title(),
-                    city = get_value(addr, 'City', vendor, '').strip().title(),
+                    address = get_value(addr, 'line1', vendor, '').strip().title(),
+                    city = get_value(addr, 'city', vendor, '').strip().title(),
                     state = get_value(addr, 'stateorProvince', vendor, '').strip().upper(),
-                    zipcode = get_value(addr, 'Zip', vendor).strip(),
+                    zipcode = get_value(addr, 'zip', vendor).strip(),
                     congressional_district = re.sub(r'[^\d]+', '', get_value(reg, 'congressionalDistrict', vendor, ''))
                 )                
                 vendor.sam_location = location
