@@ -4,7 +4,7 @@ waitress==1.1.0                     # Waitress web server
 django>=2.0.11                      # Django web framework
 psycopg2-binary==2.7.4              # PostgreSQL database library
 dj-database-url==0.5.0              # Django database connection configuration
-django-storages==1.6.5              # Django storage backend support
+django-storages==1.7              # Django storage backend support
 django-db-mutex==1.0.0              # Django mutex locking
 django-filter==2.0.0                # Django query filtering
 django-libsass==0.7                 # SASS integration and compilation
@@ -25,7 +25,7 @@ kombu==4.2.0                        # Python messaging library
 pandas==0.23.0                      # Data structures for tabular data
 pytz==2018.3                        # Timezones
 titlecase==0.12.0                   # String processing
-PyYAML==3.12                        # YAML parsing/generation
+PyYAML==4.2b1                       # YAML parsing/generation
 markdown==2.6.11                    # Markdown parsing/generation
 xlrd==1.1.0                         # Parsing of XLS* documents
 
