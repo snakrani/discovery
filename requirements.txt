@@ -13,7 +13,7 @@ django-referrer-policy==1.0         # Django referrer policy header support
 django-cors-headers==2.2.0          # Django CORS header support
 whitenoise==4.0b4                   # Static file handling
 
-djangorestframework==3.7.7          # Django REST framework
+djangorestframework==3.11.2          # Django REST framework
 coreapi==2.3.3                      # API schema generation (CoreAPI schema format)
 coreschema==0.0.4                   # API schema generation
 
