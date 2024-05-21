@@ -35,3 +35,4 @@ urllib3>=1.25
 
 -e git+https://github.com/PSHCDevOps/django-rest-framework-filters.git@ebda20733a88caf4202262de3f3bfe97a0d6d874#egg=djangorestframework-filters
 -e git+https://github.com/PSHCDevOps/pyfpds.git@integration#egg=pyfpds
+requests>=2.32.0 # not directly required, pinned by Snyk to avoid a vulnerability
