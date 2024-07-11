@@ -1,7 +1,7 @@
 redis==2.10.6                       # Redis object store library
 waitress==1.1.0                     # Waitress web server
 
-django>=2.0.11                      # Django web framework
+django>=4.2.14                      # Django web framework
 psycopg2-binary==2.7.4              # PostgreSQL database library
 dj-database-url==0.5.0              # Django database connection configuration
 django-storages==1.7              # Django storage backend support
