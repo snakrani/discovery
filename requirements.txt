@@ -1,7 +1,7 @@
 redis==2.10.6                       # Redis object store library
 waitress==1.1.0                     # Waitress web server
 
-django>=2.0.11                      # Django web framework
+django>=3.2.25                      # Django web framework
 psycopg2-binary==2.7.4              # PostgreSQL database library
 dj-database-url==0.5.0              # Django database connection configuration
 django-storages==1.7              # Django storage backend support
@@ -35,3 +35,7 @@ urllib3>=1.25
 
 -e git+https://github.com/PSHCDevOps/django-rest-framework-filters.git@ebda20733a88caf4202262de3f3bfe97a0d6d874#egg=djangorestframework-filters
 -e git+https://github.com/PSHCDevOps/pyfpds.git@integration#egg=pyfpds
+certifi>=2024.7.4 # not directly required, pinned by Snyk to avoid a vulnerability
+idna>=3.7 # not directly required, pinned by Snyk to avoid a vulnerability
+jinja2>=3.1.4 # not directly required, pinned by Snyk to avoid a vulnerability
+requests>=2.31.0 # not directly required, pinned by Snyk to avoid a vulnerability
